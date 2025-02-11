@@ -1,0 +1,84 @@
+.mtp {
+	&__document {
+		margin-top: 24px;
+		margin-bottom: 24px;
+		width: 100%;
+		@media (max-width: $media-s) {
+			margin: 16px 0;
+		}
+	}
+
+	&__document-header {
+		margin-bottom: 24px;
+		width: 100%;
+		@media (max-width: $media-s) {
+			margin-bottom: 16px;
+		}
+
+		h3 {
+			margin-bottom: 0;
+		}
+	}
+
+	&__document-item {
+		width: 100%;
+		display: flex;
+		align-items: flex-start;
+		padding: 16px;
+		text-decoration: none;
+		background: #FFFFFF;
+		border-radius: 16px;
+		margin-bottom: 16px;
+		@media (max-width: $media-s) {
+			padding: 12px;
+		}
+
+
+		&:hover {
+			text-decoration: none;
+
+			.name {
+				color: $typography-accent;
+			}
+		}
+	}
+
+
+	&__document-content {
+		width: 100%;
+		color: $typography-primary;
+		display: flex;
+		align-items: center;
+
+		.icon {
+			width: 24px;
+			height: 24px;
+			color: $icon-normal;
+			margin-right: 4px;
+			flex-shrink: 0;
+			@media (max-width: $media-s) {
+				width: 20px;
+				height: 20px;
+			}
+
+		}
+
+		.name {
+			font-size: 16px;
+			line-height: 24px;
+			font-weight: 400;
+			white-space: nowrap; /* Отменяем перенос текста */
+			overflow: hidden; /* Обрезаем содержимое */
+			text-overflow: ellipsis;
+			max-width: calc(100% - 120px);
+			@include transition();
+		}
+
+		.size {
+			font-size: 14px;
+			line-height: 20px;
+			color: $typography-secondary;
+			margin-left: auto;
+		}
+	}
+}

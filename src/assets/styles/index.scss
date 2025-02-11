@@ -1,0 +1,32 @@
+
+//стили страницы
+@import 'base/variables';
+@import 'base/mixins';
+
+
+
+
+.main {
+    padding-top: 119px;
+    display: flex;
+
+    .wrapper {
+        display: flex;
+        flex: 1 1 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    h1 {
+        max-width: 1000px;
+        text-align: center;
+        font-family: $font-family;
+        font-weight: $font-weight--500;
+        line-height: 1.22;
+        font-size: rem(72);
+        text-shadow: 2px 4px 10px rgba(32, 32, 32, 0.3);
+        color: $white-color;
+    }
+}

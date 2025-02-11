@@ -1,0 +1,12 @@
+.mtp__row-img {
+	margin-top: 32px;
+	margin-bottom: 56px;
+	width: 100%;
+
+	picture, img {
+		display: block;
+		max-width: 100%;
+		height: auto;
+		margin: auto;
+	}
+}

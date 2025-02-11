@@ -1,0 +1,180 @@
+//типографика
+b, strong {
+	font-weight: $font-weight--700;
+}
+
+p {
+	margin: 0;
+}
+
+a:not([class]) {
+	@include transition();
+	color: $link-base-text-normal;
+	text-decoration: underline;
+
+	&:hover, &:active, &:focus {
+		color: $link-base-text-hover;
+	}
+}
+
+//списки
+ol, ul, dl {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	ol, ul, dl {
+		margin: 0;
+		padding: 0;
+	}
+
+	dd, dt, li {
+		margin: 0;
+		padding: 0;
+	}
+}
+
+//заголовки
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+}
+
+h1 {
+	@include header-h-1;
+	@media (max-width: $media-l) {
+		font-size: 36px;
+		line-height: 1.3;
+	}
+	@media (max-width: $media-m) {
+		font-size: 32px;
+	}
+	@media (max-width: $media-s) {
+		font-size: 28px;
+	}
+}
+
+h2 {
+	@include header-h-2;
+
+	@media (max-width: $media-l) {
+		font-size: 28px;
+		line-height: 1.3;
+	}
+	@media (max-width: $media-m) {
+		font-size: 26px;
+	}
+	@media (max-width: $media-s) {
+		font-size: 24px;
+	}
+}
+
+h3 {
+	@include header-h-3;
+	@media (max-width: $media-l) {
+		font-size: 22px;
+		line-height: 1.3;
+	}
+	@media (max-width: $media-m) {
+		font-size: 20px;
+	}
+	@media (max-width: $media-s) {
+		font-size: 18px;
+	}
+}
+
+h4 {
+	@include header-h-4;
+}
+
+h5 {
+	@include header-h-5;
+
+	@media (max-width: $media-m) {
+		font-size: 17px;
+		line-height: 1.3;
+	}
+	@media (max-width: $media-s) {
+		font-size: 16px;
+	}
+}
+
+h6 {
+	@include header-h-6;
+	@media (max-width: $media-m) {
+		font-size: 15px;
+		line-height: 1.3;
+	}
+}
+
+//цитаты
+blockquote {
+	margin: 0;
+	padding: 0;
+}
+
+q, cite {
+	font-style: italic;
+}
+
+//исходный текст
+code {
+	display: block;
+	width: 100%;
+	margin: 0 0 2rem;
+	padding: 1rem 2rem;
+	font-family: $font-family--monospace;
+	white-space: break-word;
+}
+
+pre {
+	display: block;
+	width: 100%;
+	overflow: auto;
+	border-left: rem(2px) solid $theme-border;
+	font-family: $font-family--monospace;
+
+	& > code {
+		white-space: pre;
+	}
+}
+
+//подчеркивание
+hr {
+	margin: 2rem 0;
+	border: 0;
+	border-bottom: rem(1px) solid $theme-border;
+}
+
+//изображения
+picture {
+	display: block;
+
+	img {
+		display: block;
+		max-width: 100%;
+		margin: auto;
+	}
+}
+
+//таблицы
+table {
+	width: 100%;
+	margin: 0;
+	vertical-align: middle;
+	border-collapse: collapse;
+
+	th, td {
+		padding: 1rem;
+		border-bottom: 1px solid $theme-border;
+	}
+
+	tbody {
+		vertical-align: inherit;
+	}
+
+	thead th {
+		text-align: left;
+		vertical-align: inherit;
+		border-bottom-color: $theme-border;
+	}
+}

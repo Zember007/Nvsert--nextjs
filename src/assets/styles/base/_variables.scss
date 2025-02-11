@@ -1,0 +1,115 @@
+$white-color: #ffffff;
+
+$theme-primary: rgba(255, 120, 96, 1);
+$theme-border-light: rgba(244, 245, 245, 1);
+$theme-border: rgba(226, 227, 227, 1);
+$theme-border-dark: rgba(148, 150, 156, 1);
+$theme-disable: rgba(226, 227, 227, 1);
+
+$typography-primary: rgba(49, 62, 96, 1);
+$typography-secondary: rgba(183, 187, 199, 1);
+$typography-invert: rgba(255, 255, 255, 1);
+$typography-accent: rgba(255, 120, 96, 1);
+
+$bg-primary: rgba(255, 255, 255, 1);
+$bg-secondary: rgba(244, 247, 251, 1);
+$bg-invert: rgba(53, 69, 110, 1);
+// $bg-overlay: rgba(244,247,251,0.900);
+$bg-overlay: rgba(49, 47, 59, 0.35);
+$func-error: rgba(231, 101, 101, 1);
+
+$icon-normal: rgba(211, 213, 214, 1);
+$icon-hover: rgba(255, 120, 96, 0.8);
+$icon-active: rgba(255, 109, 83, 1);
+$icon-white: rgba(255, 255, 255, 1);
+$icon-disable: rgba(233, 234, 234, 1);
+$icon-accent: rgba(255, 120, 96, 1);
+$icon-dark: rgba(49, 62, 96, 1);
+
+$input-placeholder-normal: rgba(255, 255, 255, 0.8);
+$input-placeholder-hover: rgba(255, 255, 255, 1);
+$input-placeholder-focus: rgba(255, 255, 255, 1);
+$input-placeholder-active: rgba(108, 116, 117, 1);
+$input-placeholder-filled: rgba(255, 255, 255, 1);
+$input-placeholder-disable: rgba(131, 139, 160, 1);
+$input-placeholder-required: rgba(255, 120, 96, 1);
+
+$input-border-normal: rgba(226, 227, 227, 1);
+$input-border-focus: rgba(196, 199, 200, 1);
+$input-border-active: rgba(0, 120, 215, 1);
+$input-border-filled: rgba(223, 224, 225, 1);
+
+$input-bg-normal: rgba(255, 255, 255, 0.1);
+$input-bg-hover: rgba(255, 255, 255, 0.16);
+$input-bg-disable: rgba(255, 255, 255, 0.06);
+$input-bg-error: rgba(255, 255, 255, 0.05);
+
+$btn-text-primary: rgba(255, 255, 255, 1);
+$btn-text-disabled: rgba(212, 213, 216, 1);
+$btn-text-secondary: rgba(255, 255, 255, 1);
+$btn-text-dark: rgba(67, 68, 68, 1);
+
+$btn-primary-bg-normal: rgba(101, 118, 194, 1);
+$btn-primary-bg-hover: rgba(101, 118, 194, 0.8);
+$btn-primary-bg-disable: rgba(249, 249, 249, 1);
+$btn-primary-bg-active: rgba(77, 96, 178, 1);
+
+$btn-secondary-bg-normal: rgba(255, 120, 96, 1);
+$btn-secondary-bg-hover: rgba(255, 120, 96, 0.8);
+$btn-secondary-bg-active: rgba(255, 109, 83, 1);
+
+$link-base-text-normal: rgba(255, 120, 96, 1);
+$link-base-text-hover: rgba(255, 120, 96, 0.8);
+$link-base-text-white: rgba(255, 255, 255, 1);
+$link-base-icon-normal: rgba(57, 66, 72, 1);
+
+// Базовая типографика
+
+$font-size--root: 8px;
+$font-size: 16px; // rem(16px)
+$font-size--small: 80%;
+
+$font-path: "~assets/fonts";
+
+$font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+  "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-2: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
+  Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+  "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family--monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+  "Liberation Mono", "Courier New", monospace;
+$font-family--icon: "icomoon";
+
+$font-weight--100: 100;
+$font-weight--200: 200;
+$font-weight--300: 300;
+$font-weight--400: 400;
+$font-weight--500: 500;
+$font-weight--600: 600;
+$font-weight--700: 700;
+$font-weight--800: 800;
+$font-weight--900: 900;
+
+$font-weight: $font-weight--400;
+$line-height: normal;
+$letter-spacing: normal;
+
+//Медиа-запросы
+$media-xl: 1340px;
+$media-l: 1024px;
+$media-m: 768px;
+$media-s: 520px;
+
+//грид
+$content-size: 1344px;
+$content-size--min: 280px;
+$padding-size: 16px;
+$col-count: 12;
+$wrapper: (
+  "content-size": $content-size,
+  "content-size--min": $content-size--min,
+  "padding-size": $padding-size,
+  "col-count": $col-count
+);
+$grid-color: rgba(255, 0, 0, 0.1);

@@ -1,0 +1,42 @@
+button {
+  cursor: pointer;
+  font-family: $font-family;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.btn {
+  @include btn();
+
+  &--primary {
+    @include btn--primary();
+  }
+
+  &--secondary {
+    @include btn--secondary();
+  }
+
+  &--hollow {
+    @include btn--hollow();
+  }
+
+  &--l {
+    @include btn--l();
+    @media (max-width: $media-s) {
+      padding: 10px 16px;
+    }
+  }
+
+  &--m {
+    @include btn--m();
+  }
+
+  &--s {
+    @include btn--s();
+  }
+
+  @media (max-width: $media-s) {
+    font-size: 14px;
+    line-height: 16px;
+  }
+}

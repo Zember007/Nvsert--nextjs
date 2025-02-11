@@ -1,0 +1,106 @@
+.multiselect {
+  @include typography-primary;
+  max-height: 48px;
+
+  &--above {
+    .multiselect {
+      &__content-wrapper {
+        top: auto;
+        bottom: 56px;
+      }
+    }
+  }
+
+  &__tags {
+    max-height: 48px;
+    min-height: 48px;
+    background-color: $input-bg-normal;
+    border-radius: 8px !important;
+    border: none;
+    padding: 12px 60px 12px 20px;
+  }
+
+  &__placeholder {
+    color: $input-placeholder-normal;
+    @include typography-primary;
+    margin-bottom: 0;
+    padding-top: 0;
+  }
+
+  &__select {
+    top: 6px;
+    right: 20px;
+
+    &::before {
+      border: none;
+      display: block;
+      width: 24px;
+      height: 24px;
+      border: none;
+      background-image: url(~assets/images/svg/functional/arrow--dropdown.svg);
+      background-repeat: no-repeat;
+      background-size: contain;
+      margin-top: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  &__element {
+  }
+
+  &__single {
+    @include typography-primary;
+    background-color: transparent;
+    color: $typography-invert;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__option {
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    @include typography-primary;
+    white-space: normal;
+    color: $typography-primary;
+
+    &--highlight {
+      color: $typography-primary;
+      background: $white-color;
+    }
+
+    &--selected {
+      background-color: $input-border-active;
+      color: $white-color;
+
+      &:after {
+        color: $white-color !important;
+      }
+    }
+
+    &--highlight#{&}--selected {
+      // == multiselect__option--selected.multiselect__option--highlight
+      background-color: $theme-primary;
+
+      &:after {
+        color: $white-color;
+      }
+    }
+  }
+
+  &__content {
+    width: 100%;
+  }
+
+  &__content-wrapper {
+    background-color: $bg-primary;
+    @include card-normal;
+    border-radius: 8px;
+    top: 56px;
+    z-index: 120;
+    border: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    @include scrollbar($theme-border-light, $theme-border);
+  }
+}

@@ -1,0 +1,125 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 40px 0 64px;
+  width: 100%;
+  @media (max-width: $media-m) {
+    justify-content: center;
+    margin: 16px 0 32px 0;
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+  }
+
+  &__item {
+    margin: 0 1px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: rem(16);
+    line-height: 1.5;
+    width: 40px;
+    font-weight: $font-weight--400;
+    color: $typography-secondary;
+    list-style-type: none !important;
+
+    @media (max-width: $media-s) {
+      font-size: rem(13);
+      width: 32px;
+    }
+
+    &.active {
+      .pagination__link {
+        color: $typography-primary;
+      }
+    }
+  }
+
+  &__link {
+    width: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: rem(16);
+    line-height: 1.5;
+    color: $typography-secondary;
+    text-decoration: none;
+    font-family: $font-family;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    @include transition();
+    @media (max-width: $media-s) {
+      font-size: rem(13);
+      width: 32px;
+    }
+
+    &:hover {
+      color: $theme-primary;
+
+      path {
+        fill: $input-bg-hover;
+        //stroke: $typography-light-white;
+      }
+    }
+
+    &.active {
+      pointer-events: none;
+      color: $typography-accent;
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+      @media (max-width: $media-s) {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    path {
+      @include transition();
+    }
+  }
+
+  &__arrow {
+    width: 32px;
+    height: 48px;
+    @media (max-width: $media-s) {
+      display: none;
+    }
+
+    .pagination__link {
+      color: $input-border-normal;
+      width: 24px;
+      height: 24px;
+      &:hover {
+        color: $theme-border;
+        background-color: transparent;
+
+        .icon {
+          background-color: $icon-hover;
+        }
+      }
+    }
+
+    &--left {
+      .icon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+  .icon {
+    width: 24px;
+    height: 24px;
+    background-color: $icon-normal;
+    @include transition();
+  }
+}

@@ -1,0 +1,35 @@
+//cетка
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: map_get($wrapper, content-size--min);
+    max-width: map_get($wrapper, content-size);
+    margin: auto;
+    padding-left: map_get($wrapper, padding-size);
+    padding-right: map_get($wrapper, padding-size);
+
+    &--fluid {
+        max-width: none;
+    }
+}
+@mixin row {
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    margin-right: - map_get($wrapper, padding-size);
+    margin-left: - map_get($wrapper, padding-size);
+}
+
+@mixin col($size-count: map_get($wrapper, col-count)) {
+    // $size-coutn - число от 1 до 12
+    flex: 0 1 percentage($size-count / map_get($wrapper, col-count));
+    max-width: percentage($size-count / map_get($wrapper, col-count));
+    padding-left: map_get($wrapper, padding-size);
+    padding-right: map_get($wrapper, padding-size);
+}
+@mixin offset-col($size-offset: 1) {
+    // $size-offset - число от 1 до 12
+    margin-left: percentage($size-offset / map_get($wrapper, col-count));
+}
+

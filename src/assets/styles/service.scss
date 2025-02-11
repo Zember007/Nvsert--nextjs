@@ -1,0 +1,81 @@
+//стили страницы
+@import 'base/variables';
+@import 'base/mixins';
+
+.service {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 50px 0;
+	min-height: calc(100vh - 100px);
+	min-height: calc((var(--vh, 1vh) * 100) - 100px);
+	@media (max-width: $media-s) {
+		flex-direction: column-reverse;
+		justify-content: flex-end;
+		min-height: unset;
+		padding: 64px 0 100px;
+
+	}
+
+	&__desc {
+		max-width: 528px;
+
+		&-title {
+			font-size: 40px;
+			margin-bottom: 16px;
+			@media (max-width: $media-l) {
+				font-size: 32px;
+			}
+			@media (max-width: $media-m) {
+				font-size: 28px;
+			}
+			@media (max-width: $media-s) {
+				text-align: center;
+				font-size: 24px;
+				margin-top: 24px;
+			}
+		}
+
+		&-text {
+			margin-bottom: 56px;
+			font-size: 16px;
+			line-height: 24px;
+			@media (max-width: $media-m) {
+				font-size: 14px;
+			}
+			@media (max-width: $media-s) {
+				text-align: center;
+			}
+
+		}
+		&-btn {
+			@media (max-width: $media-s) {
+				margin: 0 auto;
+				display: block;
+				width: fit-content;
+			}
+		}
+	}
+
+	&__code {
+		font-size: 320px;
+		line-height: 1;
+		font-family: $font-family-2;
+		font-weight: 700;
+		color: $typography-accent;
+		margin-left: 24px;
+		@media (max-width: $media-xl) {
+			font-size: 250px;
+		}
+		@media (max-width: $media-l) {
+			font-size: 220px;
+		}
+		@media (max-width: $media-m) {
+			font-size: 130px;
+		}
+		@media (max-width: $media-s) {
+			margin-left: 0;
+			font-size: 100px;
+		}
+	}
+}

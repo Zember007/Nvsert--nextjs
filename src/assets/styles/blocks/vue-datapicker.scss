@@ -1,0 +1,144 @@
+$border-color: $theme-border;
+
+$input-border-color: $input-border-normal;
+
+$input-color: $input-bg-normal;
+
+$calendar-active-color: $bg-invert;
+$calendar-active-background-color: $bg-invert;
+
+@import 'node_modules/vue2-datepicker/scss/index.scss';
+
+.mx {
+  &-datepicker {
+    display: block;
+    width: 100%;
+
+    &-main {
+      font-family: $font-family;
+      color: $input-placeholder-normal;
+      background-color: $bg-invert;
+      border-radius: 8px;
+      border: none;
+    }
+
+    &-popup {
+      width: calc(100% - 16px);
+      max-width: 340px;
+      box-shadow: 0 4px 24px rgb(0 0 0 / 36%);
+      // left: 0 !important;
+    }
+  }
+
+  &-icon {
+    &-calendar {
+      color: $input-placeholder-normal;
+      font-size: 24px;
+      @media (max-width: $media-s) {
+        font-size: 18px;
+      }
+    }
+    &-clear {
+      color: $input-placeholder-normal;
+      font-size: 24px;
+      @media (max-width: $media-s) {
+        font-size: 18px;
+      }
+
+      &:hover {
+        color: $input-placeholder-hover;
+      }
+    }
+  }
+
+  &-btn {
+    transition: color 0.2s ease-in-out 0s;
+    &:hover {
+      color: $icon-hover;
+    }
+  }
+
+  &-calendar {
+    padding: 16px;
+    width: 100%;
+    min-width: 248px;
+
+    &-content {
+      height: 252px;
+
+      .cell {
+        transition: color 0.2s ease-in-out 0s,
+          background-color 0.2s ease-in-out 0s;
+        border-radius: 4px;
+
+        &:hover {
+          background-color: transparent;
+          color: $typography-accent;
+        }
+
+        &.active {
+          background-color: $theme-primary;
+          color: $typography-invert;
+        }
+      }
+    }
+  }
+
+  &-table {
+    th {
+      text-align: center;
+    }
+
+    th,
+    td {
+      font-size: 14px;
+      border: none;
+    }
+
+    &-date {
+      .cell.not-current-month {
+        color: $input-placeholder-disable;
+      }
+
+      .today {
+        background-color: $input-bg-normal;
+        color: $typography-invert;
+      }
+    }
+  }
+
+  &-input {
+    outline: none;
+    display: block;
+    height: 48px;
+    border: none;
+    border-radius: 8px;
+    background-color: $input-bg-normal;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    padding: 12px 20px;
+    color: $input-placeholder-filled;
+    resize: none;
+    @media (max-width: $media-s) {
+      font-size: 14px;
+      line-height: 20px;
+      padding: 12px 16px;
+    }
+
+    &::placeholder {
+      font-size: 16px;
+      line-height: 24px;
+      color: $input-placeholder-normal;
+      max-width: calc(100% - 40px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      @media (max-width: $media-s) {
+        font-size: 14px;
+        line-height: 20px;
+        top: 14px;
+        left: 16px;
+      }
+    }
+  }
+}

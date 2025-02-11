@@ -1,0 +1,22 @@
+//стили страницы
+@import 'base/variables';
+@import 'base/mixins';
+@import "node_modules/photoswipe/dist/photoswipe";
+
+@import 'blocks/modals/pswp.scss';
+
+@import 'sections/article/mtp-spoiler';
+@import 'sections/article/mtp-gallery';
+
+@import 'sections/main/main-adv';
+@import 'sections/main/main-spoiler';
+@import 'sections/main/main-gallery';
+
+
+.bg-secondary {
+  background-color: #F3F7FB;
+
+  .container {
+    background-color: #F3F7FB;
+  }
+}

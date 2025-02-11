@@ -1,0 +1,260 @@
+.cat-menu {
+  width: 304px;
+  margin-right: 32px;
+  position: sticky;
+  top: 16px;
+  z-index: 20;
+  flex-shrink: 0;
+  max-height: calc(100vh - 16px - 72px - 72px - 16px);
+  max-height: calc((var(--vh, 1vh) * 100) - 16px - 72px - 72px - 16px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  @include scrollbar($theme-border-light, $theme-border);
+
+  @media (max-width: $media-l) {
+    margin-bottom: 16px;
+    width: auto;
+  }
+
+  &-wrapper {
+    display: block;
+    margin: 0;
+    @include transition();
+
+    @media (max-width: $media-l) {
+      transform: translateX(-120%);
+      padding: 16px 16px 16px;
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      height: calc(var(--vh, 1vh) * 100);
+      max-width: 425px;
+      z-index: 200;
+      top: 0;
+      left: 0;
+      overflow-y: auto;
+      background-color: $bg-primary;
+      box-shadow: 0px 2px 14px rgba(57, 66, 72, 0.08);
+      @include scrollbar($theme-border-light, $theme-border);
+
+      &.active {
+        transform: translateX(0);
+        z-index: 801;
+        @media (max-width: $media-s) {
+          max-width: none;
+        }
+      }
+    }
+    @media (max-width: $media-s) {
+      padding: 16px;
+    }
+
+    .close-btn {
+      display: none;
+      @media (max-width: $media-l) {
+        margin-left: auto;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin-bottom: 30px;
+      }
+      @media (max-width: $media-s) {
+        margin-bottom: 16px;
+      }
+
+      span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background-color: $icon-normal;
+        transform: rotate(45deg);
+
+        &:after {
+          content: '';
+          display: block;
+          width: 24px;
+          height: 2px;
+          background-color: $icon-normal;
+          transform: rotate(90deg);
+        }
+      }
+    }
+  }
+
+  &__content {
+    // Стили для списка
+
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    background-color: transparent;
+    overflow: hidden;
+    @media (max-width: $media-l) {
+      box-shadow: none;
+    }
+
+    .cat-menu {
+      &__item {
+        margin: 0;
+        padding: 8px;
+        border-radius: 8px;
+        @include transition();
+
+        &:hover {
+          background: rgba(244, 247, 251, 0.6);
+        }
+
+        &.active {
+          background-color: $bg-primary;
+        }
+
+        .cat-menu__link {
+          display: block;
+        }
+
+        .cat-menu__list {
+          padding-top: 8px;
+        }
+
+        .cat-menu__item {
+          padding-left: 32px;
+        }
+      }
+
+      &__group {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 0;
+        @include transition();
+
+        &.active {
+          .cat-menu__btn {
+            background-image: url('~assets/images/svg/minus.svg');
+          }
+        }
+
+        svg {
+          @include transition();
+        }
+      }
+
+      &__link {
+        text-decoration: none;
+        font-size: rem(16);
+        line-height: rem(24);
+        color: $typography-primary;
+
+        &.active {
+          color: $link-base-text-normal;
+          pointer-events: none;
+        }
+      }
+
+      &__btn {
+        display: flex;
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+        border: none;
+        background-image: url('~assets/images/svg/plus.svg');
+        background-size: 8px;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin-right: 8px;
+        background-color: #ffffff;
+        border-radius: 8px;
+      }
+
+      &__list {
+        transition: 0.2s;
+        width: 100%;
+        visibility: hidden;
+        height: 0;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+
+        &.active {
+          visibility: visible;
+          height: auto;
+        }
+      }
+    }
+  }
+
+  &__btn {
+    display: none;
+
+    @media (max-width: $media-l) {
+      display: block;
+      margin-bottom: 8px;
+      position: sticky;
+      top: 16px;
+      z-index: 8;
+    }
+    @media (max-width: $media-l) {
+      font-size: rem(14);
+      line-height: 16px;
+    }
+  }
+
+  .inputs-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 16px;
+    margin-bottom: 16px;
+
+    .field__input {
+      width: calc(50% - 8px);
+    }
+  }
+
+  .cat-menu__subtitle {
+    padding: 8px 16px;
+    font-size: rem(14);
+    line-height: rem(20);
+    font-weight: $font-weight--500;
+  }
+
+  .field-check {
+    padding: 0 16px;
+    margin: 0 0 16px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+
+    &__name {
+      font-size: rem(14);
+      line-height: rem(16);
+
+      &:before {
+        top: 0 !important;
+      }
+
+      &:after {
+        top: 4px !important;
+      }
+    }
+  }
+
+  .btn-show-more {
+    padding: 0 16px;
+    font-size: rem(14);
+    line-height: rem(20);
+    color: $typography-accent;
+    margin: 12px 0 20px;
+  }
+}
+
+.sidebar {
+  @media (max-width: $media-l) {
+    display: flex;
+  }
+}
