@@ -23,7 +23,8 @@ import {
 
 const AppMainIntro = () => {
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
+    
     const searchResults = useSelector(selectSearchResults);
     const defaultResults = useSelector(selectSearchDefault);
     const isLoading = useSelector(selectIsLoading);
