@@ -1,15 +1,23 @@
-import NextI18Next from 'next-i18next';
-import path from 'path';
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
 
-const nextI18Next = new NextI18Next({
-  defaultLanguage: 'ru',
-  otherLanguages: [],
-  localeSubpaths: {
-    ru: 'ru',
-  },
-  localePath: path.resolve('../locales')
-});
+import { ru } from '@/locales/ru.js'
 
-export default nextI18Next;
+const resources = {
+  ru: {
+    translation: ru 
+  }
+};
 
-export const { appWithTranslation, withTranslation, i18n } = nextI18Next;
+i18n
+  .use(initReactI18next) 
+  .init({
+    resources,
+    lng: 'ru', 
+    fallbackLng: 'ru', 
+    interpolation: {
+      escapeValue: false 
+    }
+  });
+
+export default i18n;

@@ -1,48 +1,56 @@
-export const state = () => ({
-  configs: null,
-  file_configs: null,
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+export const updateActionConfigs = createAsyncThunk('configs/updateConfigs', async (_, { rejectWithValue }) => {
+  try {
+    const response = await axios.get('/api/configs');
+    return response.data;
+  } catch (error) {
+    return rejectWithValue(error.response?.data || error.message);
+  }
 });
 
-export const getters = {
-  getterConfigs: (state) => {
-    return state.configs;
-  },
-  getterFileConfigs: (state) => {
-    return state.file_configs;
-  },
-};
+export const updateActionFileConfigs = createAsyncThunk('configs/updateFileConfigs', async (_, { rejectWithValue }) => {
+  try {
+    const response = await axios.get('/api/file-configs');
+    return response.data;
+  } catch (error) {
+    return rejectWithValue(error.response?.data || error.message);
+  }
+});
 
-export const mutations = {
-  updateConfigs: (state, configs) => {
-    state.configs = configs;
+const configSlice = createSlice({
+  name: 'configs',
+  initialState: {
+    configs: null,
+    file_configs: null,
+    status: 'idle',
+    error: null,
   },
-  updateFileConfigs: (state, file_configs) => {
-    state.file_configs = file_configs;
+  reducers: {
+    updateConfigs: (state, action) => {
+      state.configs = action.payload;
+    },
+    updateFileConfigs: (state, action) => {
+      state.file_configs = action.payload;
+    },
   },
-};
-
-export const actions = {
-  async updateActionConfigs({ commit }) {
-    try {
-      await this.$axios.$get('/api/configs').then((res) => {
-        if (res) {
-          commit('updateConfigs', res);
-        }
+  extraReducers: (builder) => {
+    builder
+      .addCase(updateActionConfigs.fulfilled, (state, action) => {
+        state.configs = action.payload;
+      })
+      .addCase(updateActionConfigs.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(updateActionFileConfigs.fulfilled, (state, action) => {
+        state.file_configs = action.payload;
+      })
+      .addCase(updateActionFileConfigs.rejected, (state, action) => {
+        state.error = action.payload;
       });
-    } catch (error) {
-      console.error(error);
-    }
   },
+});
 
-  async updateActionFileConfigs({ commit }) {
-    try {
-      await this.$axios.$get('/api/file-configs').then((res) => {
-        if (res) {
-          commit('updateFileConfigs', res);
-        }
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  },
-};
+export const { updateConfigs, updateFileConfigs } = configSlice.actions;
+export default configSlice.reducer;

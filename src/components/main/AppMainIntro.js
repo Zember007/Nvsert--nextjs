@@ -19,9 +19,12 @@ import {
     selectIsLoading,
     selectError,
 } from '@/store/search';
+import { useTranslation } from 'react-i18next';
 
 
 const AppMainIntro = () => {
+
+    const {t} = useTranslation()
 
     // const dispatch = useDispatch();
     
@@ -46,20 +49,20 @@ const AppMainIntro = () => {
     const placeholderText = useMemo(() => {
         switch (placeholder) {
             case 'all':
-                // return $t('mainIntro.placeholder.all');
-                return ''
+                return t('mainIntro.placeholder.all');
+              
             case 'section':
-                // return $t('mainIntro.placeholder.section');
-                return ''
+                return t('mainIntro.placeholder.section');
+                
             case 'okp':
-                // return $t('mainIntro.placeholder.okp');
-                return ''
+                return t('mainIntro.placeholder.okp');
+              
             case 'tn':
-                // return $t('mainIntro.placeholder.tnved');
-                return ''
+                return t('mainIntro.placeholder.tnved');
+                
             default:
-                // return $t('mainIntro.placeholder.all');
-                return ''
+                return t('mainIntro.placeholder.all');
+            
         }
     }, [placeholder])
 
@@ -176,17 +179,14 @@ const AppMainIntro = () => {
         if (maxDifference > 0) {
             switch (true) {
                 case maxDifference === 1:
-                    // return $t('mainIntro.button.variant');
-                    return ''
+                    return t('mainIntro.button.variant');
+
                 case maxDifference > 1 && maxDifference < 5:
-                    // return $t('mainIntro.button.variants_s');
-                    return ''
+                    return t('mainIntro.button.variants_s');
                 case maxDifference > 5:
-                    // return $t('mainIntro.button.variants_l');
-                    return ''
+                    return t('mainIntro.button.variants_l');                   
                 default:
-                    // return $t('mainIntro.button.variant');
-                    return ''
+                    return t('mainIntro.button.variant');                   
             }
         } else {
             return '';
@@ -197,7 +197,7 @@ const AppMainIntro = () => {
         <>
             <section className="main-banner">
                 <div className="wrapper">
-                    {/* <h1 className="main-banner__title">{ $t('mainIntro.title') }</h1> */}
+                    <h1 className="main-banner__title">{ t('mainIntro.title') }</h1>
                     <div className="main-banner__content">
                         <div className="main-banner__img">
 
@@ -304,7 +304,7 @@ const AppMainIntro = () => {
                                         onClick={() => unfoldList}
                                         className="main-banner__tag-btn"
                                     >
-                                        {/* {$t('mainIntro.button.showMore')}  */}{maxDifference}
+                                        {t('mainIntro.button.showMore')}  {maxDifference}
                                         {getEnding}
                                     </button>}
                                 </ul>}
@@ -314,7 +314,7 @@ const AppMainIntro = () => {
                                 style={{ display: (operating || nothingFounded) && 'none' }}
                             >
                                 <span className="main-banner__subtitle">{
-                                    // $t('mainIntro.info')
+                                    t('mainIntro.info')
                                 }</span>
                                 <li>
                                     <label className="main-banner__type" type="button">
@@ -330,7 +330,7 @@ const AppMainIntro = () => {
                                                 width="40"
                                                 height="40"
                                             />
-                                            {/* {$t('mainIntro.button.section')} */}
+                                            {t('mainIntro.button.section')}
                                         </div>
                                     </label>
                                 </li>
@@ -348,7 +348,7 @@ const AppMainIntro = () => {
                                                 width="40"
                                                 height="40"
                                             />
-                                            {/* {$t('mainIntro.button.okp')} */}
+                                            {t('mainIntro.button.okp')}
                                         </div>
                                     </label>
                                 </li>
@@ -367,7 +367,7 @@ const AppMainIntro = () => {
                                                 width="40"
                                                 height="40"
                                             />
-                                            {/* {$t('mainIntro.button.tnved')} */}
+                                            {t('mainIntro.button.tnved')}
                                         </div>
                                     </label>
                                 </li>
@@ -387,7 +387,7 @@ const AppMainIntro = () => {
                                                 width="40"
                                                 height="40"
                                             />
-                                            {/* {$t('mainIntro.button.form')} */}
+                                            {t('mainIntro.button.form')}
                                         </div>
                                     </button>
                                 </li>
@@ -396,13 +396,13 @@ const AppMainIntro = () => {
 
                             {nothingFounded && <div className="main-banner__no-results" >
                                 <h3 className="no-results__title">
-                                    {/* {$t('mainIntro.unknown.title')} */}
+                                    {t('mainIntro.unknown.title')}
                                 </h3>
                                 <p className="no-results__text">
-                                    {/* {$t('mainIntro.unknown.text')} */}
+                                    {t('mainIntro.unknown.text')}
                                 </p>
                                 <p className="no-results__text">
-                                    {/* {$t('mainIntro.unknown.subtext')} */}
+                                    {t('mainIntro.unknown.subtext')}
                                 </p>
 
                                 <div className="no-results__controls">
@@ -415,7 +415,7 @@ const AppMainIntro = () => {
                                         }}
                                         className="btn btn--primary"
                                     >
-                                        {/* {$t('mainIntro.unknown.btn')} */}
+                                        {t('mainIntro.unknown.btn')}
                                     </button>
                                     <button
                                         type="button"
@@ -425,7 +425,7 @@ const AppMainIntro = () => {
                                         }}
                                         className="btn btn--hollow"
                                     >
-                                        {/* {$t('mainIntro.unknown.cancel')} */}
+                                        {t('mainIntro.unknown.cancel')}
                                     </button>
                                 </div>
                             </div >}
