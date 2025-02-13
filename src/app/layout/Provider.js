@@ -1,4 +1,4 @@
-'use client'; // This is a client component
+'use client'; 
 
 import '@/config/i18n';
 import { Provider } from 'react-redux';

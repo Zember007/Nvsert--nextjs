@@ -43,9 +43,9 @@ const AppIntroLink = ({ linkType, item }) => {
         }
     }, [linkType, item])
     return (
-        <li class="main-banner__tag-item list-complete-item">
+        <li className="main-banner__tag-item list-complete-item">
             <Link
-                to={linkObject.link}
+                href={linkObject.link}
                 className="main-banner__tag"
                 title={linkObject.title}
             >

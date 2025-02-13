@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { filterPhone } from "@/hook/filter";
 import AppLogo from "./AppLogo.js";
+import AppNavigation from "./AppNavigation.js";
 
 const AppHeader = () => {
   const [servicesMenuActive, setServicesMenuActive] = useState(false)
@@ -17,9 +18,57 @@ const AppHeader = () => {
   const moscowPhone = configs?.find((item) => item.key == 'PHONE_MOSCOW');
   const spbPhone = configs?.find((item) => item.key == 'PHONE_SPB');
 
-  
+
 
   const { t } = useTranslation();
+
+
+
+  function handleNavMenu() {
+    if (servicesMenuActive) {
+      setServicesMenuActive(false)
+   
+    } else {
+      setServicesMenuActive(true)
+      // $nuxt.$emit('enableOverflow');
+      
+    }
+  }
+
+  function closeNavMenues() {    
+    setServicesMenuActive(false)
+  
+    setBurgerMenuActive(false)
+    // $nuxt.$emit('disableOverflow');
+
+    // $nuxt.$emit('makeDefaultHeader');
+  
+  }
+
+  function burgerHandler() {
+    let headerIsTransparent = document
+      .querySelector('body')
+      .classList.contains('transparent-header');
+
+    let bodyTag = document.querySelector('body');
+    if (!burgerMenuActive) {
+      setBurgerMenuActive(true)
+      // $nuxt.$emit('enableOverflow');
+
+      if (headerIsTransparent === false) {
+        // $nuxt.$emit('makeTransparentHeader');
+      }
+    } else {
+      setBurgerMenuActive(false)
+
+
+      // $nuxt.$emit('disableOverflow');
+      if (headerIsTransparent === false) {
+        // $nuxt.$emit('makeDefaultHeader');
+      }
+    }
+  }
+
 
 
   return (
@@ -72,12 +121,12 @@ const AppHeader = () => {
               >{t('calculation.name')}</Link>
             </div>
             <div
-              class={`services-menu js-services-menu ${servicesMenuActive && 'active'}`}>
+              className={`services-menu js-services-menu ${servicesMenuActive && 'active'}`}>
               <div className="wrapper">
                 <div className="services-menu__header">
                   <h2 className="services-menu__title">Услуги</h2>
                   <button
-                    class={`services-menu__btn-close js-services-menu__btn ${servicesMenuActive && 'active'}`}
+                    className={`services-menu__btn-close js-services-menu__btn ${servicesMenuActive && 'active'}`}
                     onClick={(e) => {
                       e.preventDefault();
                       handleNavMenu()
@@ -88,42 +137,42 @@ const AppHeader = () => {
                   </button>
                 </div>
                 <div className="services-menu__wrapper">
-                  {/* <AppNavigation /> */}
+                  <AppNavigation />
                 </div>
               </div>
             </div>
           </div>
 
           <div className="header-phone">
-            <a
+            {headerPhone && <a
               href={filterPhone(headerPhone?.value)}
               className="header-phone__link"
-              v-if="headerPhone"
-            >{headerPhone?.value}</a
             >
-            <button type="button"
+              {headerPhone?.value}
+            </a>}
+            {(moscowPhone || spbPhone) && <button type="button"
               className={`header-phone__burger ${showPhonesDropdown && 'active'}`}
-              v-if="moscowPhone || spbPhone"
+
               onClick={() => {
-                showPhonesDropdown = !showPhonesDropdown
+                setShowPhonesDropdown(!showPhonesDropdown)
               }}
             >
 
-            </button>
+            </button>}
 
 
-            <div className="header-phone__dropdown"
-              v-show="showPhonesDropdown"
-              v-if="moscowPhone || spbPhone">
-              <a
-                href={filterPhone(moscowPhone?.value)}
-                v-if="moscowPhone"
-              >{moscowPhone?.value} (МСК)</a>
-              <a
-                href={filterPhone(spbPhone?.value)}
-                v-if="spbPhone"
-              >{spbPhone?.value} (СПБ)</a>
-            </div>
+            {(moscowPhone || spbPhone) &&
+              <div className="header-phone__dropdown"            
+                style={{ display: (!showPhonesDropdown) && 'none' }}
+              >
+                {moscowPhone && <a
+                  href={filterPhone(moscowPhone?.value)}
+                >{moscowPhone?.value} (МСК)</a>}
+                {spbPhone && <a
+                  href={filterPhone(spbPhone?.value)}
+                >{spbPhone?.value} (СПБ)</a>}
+              </div>
+            }
 
           </div>
           <button

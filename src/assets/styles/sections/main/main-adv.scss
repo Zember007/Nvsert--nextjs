@@ -64,8 +64,8 @@
     background: rgba(255, 255, 255, 0.7);
     border-radius: 16px;
     padding: 24px;
-    font-size: rem(16, 16);
-    line-height: rem(20, 16);
+    font-size: rem(16);
+    line-height: rem(20);
     font-weight: 500;
     font-family: $font-family-2;
     box-shadow: 0px 2px 10px rgba(49, 62, 96, 0.0);
@@ -76,7 +76,7 @@
       padding: 16px;
     }
     @media (max-width: $media-s) {
-      font-size: rem(14, 16);
+      font-size: rem(14);
       padding: 12px 24px;
     }
 
@@ -95,28 +95,28 @@
 
   &__right {
     width: calc(640 / 1312 * 100%);
-    font-size: rem(20, 16);
-    line-height: rem(32, 16);
+    font-size: rem(20);
+    line-height: rem(32);
     @media (max-width: $media-xl) {
       width: calc(50% - 16px);
     }
     @media (max-width: $media-l) {
-      font-size: rem(18, 16);
-      line-height: rem(28, 16);
+      font-size: rem(18);
+      line-height: rem(28);
     }
     @media (max-width: $media-m) {
       width: 100%;
       margin-bottom: 24px;
     }
     @media (max-width: $media-s) {
-      font-size: rem(16, 16);
-      line-height: rem(24, 16);
+      font-size: rem(16);
+      line-height: rem(24);
     }
   }
 
   &__link {
-    font-size: rem(16, 16);
-    line-height: rem(24, 16);
+    font-size: rem(16);
+    line-height: rem(24);
     text-decoration: none;
     display: flex;
     align-items: center;

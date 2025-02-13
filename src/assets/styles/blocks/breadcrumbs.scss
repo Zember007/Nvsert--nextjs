@@ -48,7 +48,7 @@
 			left: calc(100% + 7px);
 			width: 8px;
 			height: 8px;
-			background-image: url("~assets/images/svg/functional/breadcrumbs-marker.svg");
+			background-image: url("../../images/svg/functional/breadcrumbs-marker.svg");
 			background-position: center;
 			background-repeat: no-repeat;
 		}
@@ -58,10 +58,10 @@
 		display: block;
 		text-decoration: none;
 		color: $typography-secondary !important;
-		font-size: rem(14);
+		// font-size: rem(14);
 		line-height: rem(20);
 		@media (max-width: $media-s) {
-			font-size: rem(13);
+			// font-size: rem(13);
 		}
 
 		&:hover {

@@ -8,7 +8,7 @@ import Type4 from '@/assets/images/svg/type-4.svg'
 import Type3 from '@/assets/images/svg/type-3.svg'
 import Type2 from '@/assets/images/svg/type-2.svg'
 import Type1 from '@/assets/images/svg/type-1.svg'
-import { useMemo, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { useDispatch, useSelector } from 'react-redux';
 import {
     resetActionSearchResults,
@@ -24,10 +24,10 @@ import { useTranslation } from 'react-i18next';
 
 const AppMainIntro = () => {
 
-    const {t} = useTranslation()
+    const { t } = useTranslation()
 
-    // const dispatch = useDispatch();
-    
+    const dispatch = useDispatch();
+
     const searchResults = useSelector(selectSearchResults);
     const defaultResults = useSelector(selectSearchDefault);
     const isLoading = useSelector(selectIsLoading);
@@ -50,19 +50,19 @@ const AppMainIntro = () => {
         switch (placeholder) {
             case 'all':
                 return t('mainIntro.placeholder.all');
-              
+
             case 'section':
                 return t('mainIntro.placeholder.section');
-                
+
             case 'okp':
                 return t('mainIntro.placeholder.okp');
-              
+
             case 'tn':
                 return t('mainIntro.placeholder.tnved');
-                
+
             default:
                 return t('mainIntro.placeholder.all');
-            
+
         }
     }, [placeholder])
 
@@ -104,77 +104,76 @@ const AppMainIntro = () => {
         }
     }, [resultsToShow, resultsToShowFinal])
 
-    // focusInput() {
-    //     $refs.searchInput.focus();
-    // },
+    function focusInput() {
+        searchInput.current.focus();
+    }
 
-    // resetCategory() {
-    //     searchCategories = [];
-    //     placeholder = 'all';
-    //     currentSearchCategory = 'article';
-    //     searchValue = '';
-    //     operating = false;
-    //     listFolded = true;
-    //     nothingFounded = false;
-    //     $store.dispatch('search/resetActionSearchResults');
-    // },
+    function resetCategory() {
+        setSearchCategories([])
+        setPlaceholder('all')
+        setCurrentSearchCategory('article')
+        setSearchValue('')
+        setOperatin(false)
+        setListFolded(true)
+        setNothingFounded(false)
+        dispatch(resetActionSearchResults())
+    }
 
-    // chooseCategory(evt) {
-    //     searchCategories = searchCategories.filter(
-    //         (cat) => cat == evt.target.value
-    //     );
-    //     if (searchCategories.length > 0) {
-    //         searchValue = '';
-    //         placeholder = searchCategories[0];
-    //         currentSearchCategory = searchCategories[0];
-    //         operating = true;
-    //         focusInput();
-    //     } else {
-    //         placeholder = 'all';
-    //         currentSearchCategory = 'article';
-    //         operating = false;
-    //         focusInput();
-    //     }
-    //     $store.dispatch('search/resetActionSearchResults');
+    function chooseCategory(evt) {
+        setSearchCategories(searchCategories.filter(
+            (cat) => cat == evt.target.value
+        ))
+        if (searchCategories.length > 0) {
+            setSearchValue('')
+            setPlaceholder(searchCategories[0])
+            setCurrentSearchCategory(searchCategories[0])
+            setOperatin(true)
+            focusInput();
+        } else {
+            setPlaceholder('all')
+            setCurrentSearchCategory('article')
+            setOperatin(false)
+            focusInput();
+        }
 
-    // },
+        dispatch(resetActionSearchResults())
 
-    // performSearch() {
-    //     clearTimeout(delayTimer);
-    //     if (searchValue.length > 2) {
+    }
 
-    //         // operating = true;
+    function performSearch(value) {
+        clearTimeout(delayTimer);
+        if (value.length > 2) {
 
-    //         delayTimer = setTimeout(async () => {
-    //             // $store.dispatch('search/resetActionSearchResults');
-    //             await $store
-    //                 .dispatch('search/updateSearchResults', [
-    //                     currentSearchCategory,
-    //                     searchValue,
-    //                     limit,
-    //                 ])
-    //                 .then(() => {
-    //                     listFolded = true;
-    //                     searchResults.content?.length === 0
-    //                         ? (nothingFounded = true)
-    //                         : (nothingFounded = false);
-    //                 });
-    //                 dispatch(updateSearchResults({ search: searchQuery, limit: 10 }))
-    //         }, 500);
-    //     } else {
-    //         dispatch(resetActionSearchResults())
-    //         setNothingFounded(false)
-    //     }
-    // },
+            setDelayTimer(setTimeout(async () => {
+
+                dispatch(updateSearchResults({ slug: currentSearchCategory, search: value, limit: 10 })).then((res) => {             
+
+                    setListFolded(true)
+                    
+                    searchResults.content?.length === 0
+                        ? (setNothingFounded(true))
+                        : (setNothingFounded(false));
+                })
+            }, 500))
+
+        } else {
+            dispatch(resetActionSearchResults())
+            setNothingFounded(false)
+        }
+    }
 
     // function openIntroModal() {
     //     // $nuxt.$emit('defineModalContent', 'introForm');
     // }
 
-    // function unfoldList() {
-    //     setListFolded(false)
-    // }
+    function unfoldList() {
+        setListFolded(false)
+    }
 
+    useEffect(() => {
+        dispatch(updateDefaultResults(limit))
+        performSearch(searchValue)
+    }, [])
     const getEnding = useMemo(() => {
         if (maxDifference > 0) {
             switch (true) {
@@ -184,9 +183,9 @@ const AppMainIntro = () => {
                 case maxDifference > 1 && maxDifference < 5:
                     return t('mainIntro.button.variants_s');
                 case maxDifference > 5:
-                    return t('mainIntro.button.variants_l');                   
+                    return t('mainIntro.button.variants_l');
                 default:
-                    return t('mainIntro.button.variant');                   
+                    return t('mainIntro.button.variant');
             }
         } else {
             return '';
@@ -197,7 +196,7 @@ const AppMainIntro = () => {
         <>
             <section className="main-banner">
                 <div className="wrapper">
-                    <h1 className="main-banner__title">{ t('mainIntro.title') }</h1>
+                    <h1 className="main-banner__title">{t('mainIntro.title')}</h1>
                     <div className="main-banner__content">
                         <div className="main-banner__img">
 
@@ -271,7 +270,7 @@ const AppMainIntro = () => {
                                     <input
                                         type="text"
                                         className="field__input search__input js-search-input"
-                                        onInput={(e) => { performSearch(e); searchValue = e.target.value }}
+                                        onInput={(e) => { setSearchValue(e.target.value); performSearch(e.target.value); }}
                                         ref={searchInput}
                                         placeholder={placeholderText}
                                     />
@@ -291,21 +290,22 @@ const AppMainIntro = () => {
                                 <ul
                                     className={`main-banner__tags ${!listFolded && 'opened'} `}
                                 >
-                                    <AppIntroLink
-                                        v-for="item in resultsToShowFinal"
-                                        key={JSON.stringify(item)}
-                                        item={item}
-                                        linkType={currentSearchCategory}
-                                    />
+                                    {resultsToShowFinal.map(item => (
+                                        <AppIntroLink
+                                            key={JSON.stringify(item)}
+                                            item={item}
+                                            linkType={currentSearchCategory}
+                                        />
+                                    ))
+                                    }
 
                                     {maxDifference > 0 && <button
                                         key={maxDifference}
                                         type="button"
-                                        onClick={() => unfoldList}
+                                        onClick={() => unfoldList()}
                                         className="main-banner__tag-btn"
                                     >
-                                        {t('mainIntro.button.showMore')}  {maxDifference}
-                                        {getEnding}
+                                        {t('mainIntro.button.showMore')}  {maxDifference} {getEnding}
                                     </button>}
                                 </ul>}
 
@@ -321,7 +321,7 @@ const AppMainIntro = () => {
                                         <input
                                             type="checkbox"
                                             value="section"
-                                            onChange={(event) => { chooseCategory(event); searchCategories = event.target.value }}
+                                            onChange={(event) => {chooseCategory(event);  }}
                                         />
                                         <div className="main-banner__type-content">
                                             <Image
@@ -339,7 +339,7 @@ const AppMainIntro = () => {
                                         <input
                                             type="checkbox"
                                             value="okp"
-                                            onChange={(event) => { chooseCategory(event); searchCategories = event.target.value }}
+                                            onChange={(event) => { chooseCategory(event); }}
                                         />
                                         <div className="main-banner__type-content">
                                             <Image
@@ -357,7 +357,7 @@ const AppMainIntro = () => {
                                         <input
                                             type="checkbox"
                                             value="tn"
-                                            onChange={(event) => { chooseCategory(event); searchCategories = event.target.value }}
+                                            onChange={(event) => { chooseCategory(event);  }}
 
                                         />
                                         <div className="main-banner__type-content">

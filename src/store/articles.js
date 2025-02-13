@@ -1,41 +1,17 @@
-const defaultState = () => {
-  return {
-    articles: {},
-  };
-};
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-export const state = () => ({
-  articles: {},
-});
+const defaultState = { articles: {} };
 
-export const getters = {
-  getterArticles: (state) => {
-    return state.articles;
-  },
-};
-
-export const mutations = {
-  updateArticles: (state, articles) => {
-    state.articles = articles;
-  },
-  resetArticles: (state) => {
-    Object.assign(state, defaultState());
-  },
-};
-
-export const actions = {
-  resetActionArticles({ commit }) {
-    commit('resetArticles');
-  },
-
-  async updateActionArticles(
-    { commit },
-    [id, ordering = '', page, pageSize = '', search = '', okp = '', tnved = '']
-  ) {
-    let url = id ? '/api/articles/' + id : '/api/articles';
-
-    await this.$axios
-      .$get(url, {
+export const updateActionArticles = createAsyncThunk(
+  'articles/updateArticles',
+  async (
+    { id, ordering = '', page, pageSize = '', search = '', okp = '', tnved = '' },
+    { rejectWithValue }
+  ) => {
+    let url = id ? `/api/articles/${id}` : '/api/articles';
+    try {
+      const response = await axios.get(url, {
         params: {
           ordering: ordering,
           page: page,
@@ -44,9 +20,41 @@ export const actions = {
           okp,
           tnved,
         },
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+const articlesSlice = createSlice({
+  name: 'articles',
+  initialState: {
+    articles: {},
+    status: 'idle',
+    error: null,
+  },
+  reducers: {
+    resetArticles: (state) => {
+      Object.assign(state, defaultState);
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(updateActionArticles.pending, (state) => {
+        state.status = 'loading';
       })
-      .then((response) => {
-        commit('updateArticles', response);
+      .addCase(updateActionArticles.fulfilled, (state, action) => {
+        state.articles = action.payload;
+        state.status = 'succeeded';
+      })
+      .addCase(updateActionArticles.rejected, (state, action) => {
+        state.error = action.payload;
+        state.status = 'failed';
       });
   },
-};
+});
+
+export const { resetArticles } = articlesSlice.actions;
+export default articlesSlice.reducer;

@@ -1,24 +1,22 @@
-export const state = () => ({
-  overflow: false,
+import { createSlice } from '@reduxjs/toolkit';
+
+const overflowSlice = createSlice({
+  name: 'overflow',
+  initialState: {
+    overflow: false,
+  },
+  reducers: {
+    enableOverflow: (state) => {
+      state.overflow = true;
+    },
+    disableOverflow: (state) => {
+      state.overflow = false;
+    },
+    updateOverflow: (state, action) => {
+      state.overflow = action.payload;
+    }
+  },
 });
 
-export const getters = {
-  getterOverflow: (state) => {
-    return state.overflow;
-  },
-};
-
-export const mutations = {
-  updateOverflow: (state, payload) => {
-    state.overflow = payload;
-  },
-};
-
-export const actions = {
-  enableOverflow({ commit }) {
-    commit('updateOverflow', true);
-  },
-  disableOverflow({ commit }) {
-    commit('updateOverflow', false);
-  },
-};
+export const { enableOverflow, disableOverflow, updateOverflow } = overflowSlice.actions;
+export default overflowSlice.reducer;

@@ -1,3 +1,6 @@
+@import '../base/variables';
+@import '../base/mixins';
+
 .cat-menu {
   width: 304px;
   margin-right: 32px;
@@ -133,7 +136,7 @@
 
         &.active {
           .cat-menu__btn {
-            background-image: url('~assets/images/svg/minus.svg');
+            background-image: url('../../images/svg/minus.svg');
           }
         }
 
@@ -144,8 +147,7 @@
 
       &__link {
         text-decoration: none;
-        font-size: rem(16);
-        line-height: rem(24);
+     
         color: $typography-primary;
 
         &.active {
@@ -160,7 +162,7 @@
         height: 24px;
         flex-shrink: 0;
         border: none;
-        background-image: url('~assets/images/svg/plus.svg');
+        background-image: url('../../images/svg/plus.svg');
         background-size: 8px;
         background-position: center;
         background-repeat: no-repeat;
@@ -198,7 +200,7 @@
       z-index: 8;
     }
     @media (max-width: $media-l) {
-      font-size: rem(14);
+     
       line-height: 16px;
     }
   }
@@ -217,8 +219,7 @@
 
   .cat-menu__subtitle {
     padding: 8px 16px;
-    font-size: rem(14);
-    line-height: rem(20);
+  
     font-weight: $font-weight--500;
   }
 
@@ -231,8 +232,7 @@
     }
 
     &__name {
-      font-size: rem(14);
-      line-height: rem(16);
+     
 
       &:before {
         top: 0 !important;
@@ -246,8 +246,7 @@
 
   .btn-show-more {
     padding: 0 16px;
-    font-size: rem(14);
-    line-height: rem(20);
+  
     color: $typography-accent;
     margin: 12px 0 20px;
   }
@@ -256,5 +255,12 @@
 .sidebar {
   @media (max-width: $media-l) {
     display: flex;
+  }
+}
+
+.cat-menu__link {
+  &.nuxt-link-exact-active {
+    color: $typography-accent;
+    pointer-events: none;
   }
 }

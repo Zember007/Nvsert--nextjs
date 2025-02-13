@@ -1,58 +1,64 @@
-export const state = () => ({
-  navigation: [],
-  services: [],
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+export const updateActionNavigation = createAsyncThunk(
+  'navigation/updateNavigation',
+  async (ordering = '', { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`/api/sections/tree?ordering=${ordering}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+export const updateActionServices = createAsyncThunk(
+  'services/updateServices',
+  async (ordering = '', { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`/api/section-services?ordering=${ordering}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+const navigationSlice = createSlice({
+  name: 'navigation',
+  initialState: {
+    navigation: [],
+    services: [],
+    status: 'idle',
+    error: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(updateActionNavigation.fulfilled, (state, action) => {
+        state.navigation = action.payload;
+        state.status = 'succeeded';
+      })
+      .addCase(updateActionNavigation.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(updateActionNavigation.rejected, (state, action) => {
+        state.error = action.payload;
+        state.status = 'failed';
+      })
+      .addCase(updateActionServices.fulfilled, (state, action) => {
+        state.services = action.payload;
+        state.status = 'succeeded';
+      })
+       .addCase(updateActionServices.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(updateActionServices.rejected, (state, action) => {
+        state.error = action.payload;
+        state.status = 'failed';
+      });
+  },
 });
 
-export const getters = {
-  getterNavigation: (state) => {
-    return state.navigation;
-  },
-  getterServices: (state) => {
-    return state.services;
-  },
-};
-
-export const mutations = {
-  updateNavigation: (state, navigation) => {
-    state.navigation = navigation;
-  },
-
-  updateServices: (state, services) => {
-    state.services = services;
-  },
-};
-
-export const actions = {
-  async updateActionNavigation({ commit }, [ordering = '']) {
-    try {
-      await this.$axios
-        .$get('/api/sections/tree', {
-          params: {
-            ordering: ordering,
-          },
-        })
-        .then((response) => {
-          // console.log("🚀 ~ file: navigation.js ~ line 25 ~ .then ~ response", response);
-          commit('updateNavigation', response);
-        });
-    } catch (error) {
-      console.error(error);
-    }
-  },
-
-  async updateActionServices({ commit }, [ordering = '']) {
-    try {
-      await this.$axios
-        .$get('/api/section-services', {
-          params: {
-            ordering: ordering,
-          },
-        })
-        .then((response) => {
-          commit('updateServices', response);
-        });
-    } catch (error) {
-      console.error(error);
-    }
-  },
-};
+export default navigationSlice.reducer;

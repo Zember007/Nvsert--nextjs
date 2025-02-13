@@ -28,11 +28,10 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}  # Optional: If using a non-standard SSH port, store it in a secret
           script: |
-            # Ensure the directory exists (replace with your actual path)
-            mkdir -p /path/to/your/deployment/directory
+
 
             # Navigate to the directory
-            cd /path/to/your/deployment/directory
+            cd /home/user_test11/test11/
 
             # Clone the repository (if it's not already there)
             # If it exists, just pull the changes.
