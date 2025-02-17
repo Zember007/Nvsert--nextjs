@@ -46,7 +46,7 @@ const AppHeader = () => {
 
     setBurgerMenuActive(false)
 
-    document.body.style.overflow = 'hidden'
+    document.body.style = '' 
 
     makeDefaultHeader()
 

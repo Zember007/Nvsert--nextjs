@@ -13,7 +13,6 @@ import AppBreadcrumbs from '@/components/general/AppBreadcrumbs.js';
 import AppSidebar from '@/components/general/AppSidebar.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetPages } from '@/store/pages'
-import { updateActionNavigation } from '@/store/navigation'
 import { useEffect, useState } from 'react';
 
 const AboutCompany = () => {
@@ -27,9 +26,7 @@ const AboutCompany = () => {
 
     useEffect(() => {
         dispatch(resetPages())
-        if (navigation.length === 0) {
-            dispatch(updateActionNavigation())
-        }
+       
     }, [])
 
 

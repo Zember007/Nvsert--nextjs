@@ -38,12 +38,6 @@ const Page = () => {
     const init = async () => {
         dispatch(resetPages())
 
-
-        if (navigation.length === 0) {
-            dispatch(updateActionNavigation())
-        }
-
-
         dispatch(updateActionPages({ route, ordering, page, search, okp, tnved }))
 
     }

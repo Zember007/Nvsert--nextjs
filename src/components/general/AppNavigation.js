@@ -1,8 +1,11 @@
+import { updateActionNavigation } from "@/store/navigation";
 import Link from "next/link"
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const AppNavigation = () => {
+
+    const dispatch = useDispatch()
 
     const { navigation } = useSelector(state => state.navigation)
 
@@ -20,6 +23,12 @@ const AppNavigation = () => {
 
     }, [navigation])
 
+    useEffect(() => {        
+        if (navigation.length === 0) {
+            dispatch(updateActionNavigation())
+        }
+    }, [])
+
     return (
         <ul className="services-menu__list">
 
@@ -33,8 +42,8 @@ const AppNavigation = () => {
                             <ul
                                 className="services-menu__list"
                             >
-                                {item.children.map((item,index) => <li
-                                    className="services-menu__item"                                    
+                                {item.children.map((item, index) => <li
+                                    className="services-menu__item"
                                     key={index}
                                 >
                                     <Link href={defineUrl(item)} className="services-menu__link">
