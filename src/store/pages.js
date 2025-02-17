@@ -6,7 +6,7 @@ const defaultState = { pages: {} };
 export const updateActionPages = createAsyncThunk(
   'pages/updatePages',
   async (
-    { route, ordering = '', page, pageSize = '', search = '', okp = '', tnved = '' },
+    { route, ordering = '', page, pageSize = 12, search = '', okp = '', tnved = '' },
     { rejectWithValue }
   ) => {
     const url = route ? `/api/pages/${route}` : '/api/pages';

@@ -1,13 +1,20 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import '@/assets/styles/sections/_header.scss'
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { filterPhone } from "@/hook/filter";
 import AppLogo from "./AppLogo.js";
 import AppNavigation from "./AppNavigation.js";
+import { usePathname } from "next/navigation.js";
+import { disableOverflow, enableOverflow } from "@/store/body.js";
+import { useHeaderContext } from "../contexts/HeaderContext.js";
 
 const AppHeader = () => {
+
+  const { makeDefaultHeader, makeTransparentHeader } = useHeaderContext()
+
+  const pathname = usePathname()
   const [servicesMenuActive, setServicesMenuActive] = useState(false)
   const [burgerMenuActive, setBurgerMenuActive] = useState(false)
   const [showPhonesDropdown, setShowPhonesDropdown] = useState(false)
@@ -22,52 +29,53 @@ const AppHeader = () => {
 
   const { t } = useTranslation();
 
-
+  const dispatch = useDispatch()
 
   function handleNavMenu() {
     if (servicesMenuActive) {
       setServicesMenuActive(false)
-   
+      document.body.style = '' 
     } else {
       setServicesMenuActive(true)
-      // $nuxt.$emit('enableOverflow');
-      
+      document.body.style.overflow = 'hidden'     
     }
   }
 
-  function closeNavMenues() {    
+  function closeNavMenues() {
     setServicesMenuActive(false)
-  
-    setBurgerMenuActive(false)
-    // $nuxt.$emit('disableOverflow');
 
-    // $nuxt.$emit('makeDefaultHeader');
-  
+    setBurgerMenuActive(false)
+
+    document.body.style.overflow = 'hidden'
+
+    makeDefaultHeader()
+
   }
 
   function burgerHandler() {
-    let headerIsTransparent = document
-      .querySelector('body')
-      .classList.contains('transparent-header');
-
-    let bodyTag = document.querySelector('body');
+    let headerIsTransparent = document.querySelector('body').classList.contains('transparent-header');
+    
     if (!burgerMenuActive) {
       setBurgerMenuActive(true)
-      // $nuxt.$emit('enableOverflow');
+      document.body.style = '' 
 
       if (headerIsTransparent === false) {
-        // $nuxt.$emit('makeTransparentHeader');
+        makeTransparentHeader()
       }
     } else {
       setBurgerMenuActive(false)
 
 
-      // $nuxt.$emit('disableOverflow');
+      dispatch(disableOverflow())
       if (headerIsTransparent === false) {
-        // $nuxt.$emit('makeDefaultHeader');
+        makeDefaultHeader()
       }
     }
   }
+
+  useEffect(() => {
+    closeNavMenues()
+  }, [pathname])
 
 
 
@@ -162,7 +170,7 @@ const AppHeader = () => {
 
 
             {(moscowPhone || spbPhone) &&
-              <div className="header-phone__dropdown"            
+              <div className="header-phone__dropdown"
                 style={{ display: (!showPhonesDropdown) && 'none' }}
               >
                 {moscowPhone && <a

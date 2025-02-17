@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AppFooter from '@/components/general/AppFooter.js';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import { updateActionConfigs, updateActionFileConfigs } from '@/store/configs';
+import useHeadLayout from '@/hook/useHeadLayout';
 
 const Layout_wrapper = ({ children }) => {
 
@@ -13,8 +14,8 @@ const Layout_wrapper = ({ children }) => {
     const [modalContentName, setModalContentName] = useState('')
 
     const { transparent } = useHeaderContext();
-    const {overflow} = useSelector((state) => state.body);
-    const {calcPageBodyClass} = useSelector((state) => state.documents);
+    const { overflow } = useSelector((state) => state.body);
+    const { calcPageBodyClass } = useSelector((state) => state.documents);
 
     const { configs: configsPure, file_configs: fileConfigsPure, status, error } = useSelector((state) => state.config);
 
@@ -61,31 +62,31 @@ const Layout_wrapper = ({ children }) => {
     useEffect(() => {
         dispatch(updateActionConfigs())
         dispatch(updateActionFileConfigs())
-        
+
         function set100Vh() {
             let vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
         }
-    
+
         set100Vh();
-    
+
         window.addEventListener('resize', set100Vh);
-    
+
     }, [])
-    return (        
- 
-            <main className={`${transparent && 'transparent-header'}  ${overflow && 'overflow'} ${calcPageBodyClass && 'cost-calc-page'}`}>
+    return (
 
-                <div className="container">
-                    <div className="content">
-                        <AppHeader />
-                        {children}
-                    </div>
-
-                    <AppFooter />
+        <main className={`${transparent && 'transparent-header'}  ${calcPageBodyClass && 'cost-calc-page'}`}>
+            {useHeadLayout(configs, file_configs)}
+            <div className="container">
+                <div className="content">
+                    <AppHeader />
+                    {children}
                 </div>
-            </main >
-       
+
+                <AppFooter />
+            </div>
+        </main >
+
     );
 };
 

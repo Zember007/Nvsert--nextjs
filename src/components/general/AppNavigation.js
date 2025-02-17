@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const AppNavigation = () => {
@@ -13,29 +14,35 @@ const AppNavigation = () => {
         }
     }
 
+    useEffect(() => {
+
+        console.log(navigation, 'asd');
+
+    }, [navigation])
+
     return (
         <ul className="services-menu__list">
+
             {
-                navigation?.map(item => {
-                    <li className="services-menu__item" key={item.id}>
+                navigation.map((item, index) => (
+                    <li className="services-menu__item" key={index}>
                         <Link href={defineUrl(item)} className="services-menu__link">
                             {item.title}
                         </Link>
-                        <ul
-                            className="services-menu__list"
-                            v-if="item.children && item.children.length > 0"
-                        >
-                            <li
-                                className="services-menu__item"
-                                v-for="item in item.children"
-                                key={item.i}
+                        {item.children && item.children.length > 0 &&
+                            <ul
+                                className="services-menu__list"
                             >
-                                <Link href={defineUrl(item)} className="services-menu__link">
-                                    {item.title}</Link>
-                            </li>
-                        </ul>
+                                {item.children.map((item,index) => <li
+                                    className="services-menu__item"                                    
+                                    key={index}
+                                >
+                                    <Link href={defineUrl(item)} className="services-menu__link">
+                                        {item.title}</Link>
+                                </li>)}
+                            </ul>}
                     </li>
-                })
+                ))
             }
         </ul>
     );

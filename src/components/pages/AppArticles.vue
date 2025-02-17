@@ -78,14 +78,7 @@ export default {
         },
     },
 
-/*     async fetch() {
-        this.$store.dispatch('articles/resetActionArticles');
 
-        await this.$store.dispatch('navigation/updateActionNavigation', [
-            this.navigationOrdering,
-        ]);
-    },
- */
     components: {
         AppArticlesCard,
         AppArticlesPagination,

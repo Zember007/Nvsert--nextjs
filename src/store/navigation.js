@@ -6,6 +6,7 @@ export const updateActionNavigation = createAsyncThunk(
   async (ordering = '', { rejectWithValue }) => {
     try {
       const response = await axios.get(`/api/sections/tree?ordering=${ordering}`);
+      
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);

@@ -1,13 +1,17 @@
 import Link from "next/link";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+
+import { useEffect, useState } from "react";
 
 
 const AppSidebarItem = ({ navItem }) => {
 
+    const pathname = usePathname()
+
     const [itemActive, setItemActive] = useState(false)
 
     function calcActive() {
-        $route.path.startsWith(`/${navItem.full_slug}`)
+        pathname.startsWith(`/${navItem.full_slug}`)
             ? (setItemActive(true))
             : '';
     }
@@ -27,6 +31,12 @@ const AppSidebarItem = ({ navItem }) => {
 
         }
     }
+
+    useEffect(() => {
+        
+        calcActive(pathname)
+
+    }, [pathname])
     return (
         <li
             className={`cat-menu__item js-dropdown ${itemActive ? 'active' : ''}`}
