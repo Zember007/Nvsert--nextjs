@@ -11,6 +11,7 @@ import pagesReducer from '@/store/pages';
 import sessionReducer from '@/store/session';
 import staffReducer from '@/store/staff';
 import documentsReducer from '@/store/documents';
+import metadataReducer from '@/store/metadata';
 
 const store = configureStore({
   reducer: {
@@ -25,7 +26,8 @@ const store = configureStore({
     pages: pagesReducer,
     session: sessionReducer,
     staff: staffReducer,
-    documents: documentsReducer
+    documents: documentsReducer,
+    metadata: metadataReducer
   },
 });
 

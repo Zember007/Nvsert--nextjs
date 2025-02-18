@@ -57,19 +57,16 @@ const AppHeader = () => {
     
     if (!burgerMenuActive) {
       setBurgerMenuActive(true)
-      document.body.style = '' 
+     
+      document.body.style.overflow = 'hidden'  
 
-      if (headerIsTransparent === false) {
-        makeTransparentHeader()
-      }
+      makeTransparentHeader()
     } else {
       setBurgerMenuActive(false)
 
-
+      document.body.style = '' 
       dispatch(disableOverflow())
-      if (headerIsTransparent === false) {
-        makeDefaultHeader()
-      }
+      makeDefaultHeader()
     }
   }
 
@@ -80,7 +77,7 @@ const AppHeader = () => {
 
 
   return (
-    <>
+    <div className={`${burgerMenuActive && 'transparent-header'}`}>
       <header className="header">
         <div className="wrapper header__wrapper">
           <AppLogo />
@@ -199,7 +196,7 @@ const AppHeader = () => {
           >{t('calculation.name')}</Link>
         </div >
       </header >
-    </>
+    </div>
   );
 };
 

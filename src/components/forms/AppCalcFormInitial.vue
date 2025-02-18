@@ -154,9 +154,6 @@ export default {
   },
 
   methods: {
-    async getSession() {
-      await this.$store.dispatch('session/updateActionSessionId');
-    },
 
     nextStep() {
       this.$nuxt.$emit('stepChange');
@@ -207,13 +204,6 @@ export default {
 
     },
 
-    getCookieValueByName(name) {
-      let matches = document.cookie.match(new RegExp(
-        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-      ));
-
-      return matches ? decodeURIComponent(matches[1]) : undefined;
-    },
 
     async onSubmit() {
       const vm = this;

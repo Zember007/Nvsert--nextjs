@@ -14,7 +14,9 @@ export const updateActionСlass = createAsyncThunk(
           pageSize: pageSize,
         },
       });
-      return { type, data: response };
+      console.log(response,'response.data');
+      
+      return { type, data: response.data };
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }
@@ -34,7 +36,7 @@ export const updateActionMoreСlass = createAsyncThunk(
           pageSize: pageSize,
         },
       });
-      return { type, response };
+      return { type, data: response.data };
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }

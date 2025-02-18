@@ -19,7 +19,6 @@ const Page = () => {
 
     const dispatch = useDispatch()
 
-    const { navigation } = useSelector(state => state.navigation)
     const { pages: pageData, error } = useSelector(state => state.pages)
 
     const page = searchParams.page ? searchParams.page : 1
@@ -81,9 +80,9 @@ const Page = () => {
 
                                 :
 
-                                <>
-                                    <AppArticle />
-                                </>
+
+                                <AppArticle />
+
 
                             }
                         </div>

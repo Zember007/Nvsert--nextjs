@@ -16,8 +16,7 @@
         :keep-alive-props="{ max: 10 }"
       />
     </div>
-  </main>
-  <!-- {% include 'includes/modals/modal-form.html' %} -->
+  </main>  
 </template>
 
 <script>
@@ -43,8 +42,7 @@ export default {
     documents() {
       return this.$store.getters['documents/getterDocuments'];
     },
-
-    // currentStep() {},
+    
   },
 
   methods: {

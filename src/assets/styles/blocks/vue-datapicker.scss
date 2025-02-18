@@ -1,3 +1,6 @@
+@import '../base/variables';
+@import '../base/mixins';
+
 $border-color: $theme-border;
 
 $input-border-color: $input-border-normal;
@@ -6,6 +9,8 @@ $input-color: $input-bg-normal;
 
 $calendar-active-color: $bg-invert;
 $calendar-active-background-color: $bg-invert;
+
+
 
 @import 'node_modules/vue2-datepicker/scss/index.scss';
 

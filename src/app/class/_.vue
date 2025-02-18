@@ -62,9 +62,6 @@ export default {
       }
     },
 
-    // page() {
-    //   return this.$route.query.page ? this.$route.query.page : 1;
-    // },
     ordering() {
       return this.$route.query.ordering ? this.$route.query.ordering : '';
     },

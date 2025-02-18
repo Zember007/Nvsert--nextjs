@@ -1,27 +1,89 @@
-<template>
-    <div>
-        <main class="article">
-            <div class="wrapper">
-                <AppBreadcrumbs :root="'/'"
-                    :breadcrumbs='[{ full_slug: "about", id: 2, seo_h1: "О компании", title: "О компании" }]' />
+'use client';
 
-                <div class="article__wrapper">
-                    <!-- <transition name="fade" appear> -->
-                    <button @click.prevent="toogleMobileSidebar"
-                        class="cat-menu__btn js-cat-menu-btn btn btn--l btn--primary" type="button">
-                        <span class="btn-text">Категории</span>
+import '@/assets/styles/about.scss';
+import Image from 'next/image';
+import RobotImg from '@/assets/images/robot-4.gif'
+import Adv1Img from '@/assets/images/svg/adv-1.svg'
+import Adv2Img from '@/assets/images/svg/adv-2.svg'
+import Adv3Img from '@/assets/images/svg/adv-3.svg'
+import Adv4Img from '@/assets/images/svg/adv-4.svg'
+import Adv5Img from '@/assets/images/svg/adv-5.svg'
+import Adv6Img from '@/assets/images/svg/adv-6.svg'
+import AppBreadcrumbs from '@/components/general/AppBreadcrumbs.js';
+import AppSidebar from '@/components/general/AppSidebar.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { resetPages } from '@/store/pages'
+import { useEffect, useMemo, useState } from 'react';
+import { setMetadata } from '@/store/metadata';
+import {generateMetadata} from '@/hook/useHead'
+
+const AboutCompany = () => {
+
+    const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        dispatch(resetPages())
+
+    }, [])
+
+    const { configs: configsPure } = useSelector((state) => state.config);
+
+
+
+
+    const configs = useMemo(() => {
+
+        let parsedConf = {};
+        configsPure?.forEach((item) => {
+            let key = item.key;
+            let value = item.value;
+            parsedConf[key] = value;
+        });
+
+        return parsedConf;
+    }, [configsPure])
+
+
+    const SEO = {
+        title: 'О компании - NVSERT - Сертификация продукции и оборудования',
+        og_description: 'сертификация, сертификаты, декларации, техническая документация, технические условия, свидетельства, регистрация, ИСО, экспертное заключение, СЕ',
+        seo_description: 'В Российской Федерации, странах Евразийского Экономического Союза, странах Евросоюза и в любой другой стране,наличие документов, подтверждающих качество продукции, является неотъемлемым условием веден',
+        seo_h1: 'О компании - NVSERT - Сертификация продукции и оборудования',
+        seo_keywords: 'сертификация, сертификаты, декларации, техническая документация, технические условия, свидетельства, регистрация, ИСО, экспертное заключение, СЕ',
+        seo_title: 'О компании - NVSERT - Сертификация продукции и оборудования',
+    }
+
+    useEffect(() => {
+       
+            
+            dispatch(setMetadata(generateMetadata(configs, SEO)))
+        
+    }, [configs])
+
+    return (
+        <main className="article">
+            <div className="wrapper">
+                <AppBreadcrumbs root="/"
+                    breadcrumbs={[{ full_slug: "about", id: 2, seo_h1: "О компании", title: "О компании" }]} />
+
+                <div className="article__wrapper">
+
+                    <button
+                        onClick={() => { toogleMobileSidebar() }}
+                        className="cat-menu__btn js-cat-menu-btn btn btn--l btn--primary">
+                        <span className="btn-text">Категории</span>
                     </button>
-                    <div class="cat-menu js-cat-menu">
-                        <AppSidebar :navigation="navigation" :mobileOpened="sidebarOpened" />
+                    <div className="cat-menu js-cat-menu">
+                        <AppSidebar />
                     </div>
-                    <!-- </transition> -->
 
-                    <div class="mtp">
-                        <div class="about">
-                            <h1 class="about__title">О компании</h1>
+                    <div className="mtp">
+                        <div className="about">
+                            <h1 className="about__title">О компании</h1>
 
-                            <div class="about__text">
-                                <h3 class="about__text-title">«Центр стандартизации»</h3>
+                            <div className="about__text">
+                                <h3 className="about__text-title">«Центр стандартизации»</h3>
                                 <p>Более чем 12 лет мы занимается предоставлением услуг в сфере сертификации. За длительный
                                     период
                                     деятельность NVSERT по достоинству оценили тысячи промышленных предприятий Российской
@@ -50,38 +112,43 @@
                                     организации.</p>
                             </div>
 
-                            <div class="about__adv">
-                                <div class="about__adv-item">
-                                    <img src="~/assets/images/svg/adv-1.svg" width="80" height="80" />
-                                    <span class="about__adv-desc">12 лет работы</span>
+                            <div className="about__adv">
+                                <div className="about__adv-item">
+                                    <Image src={Adv1Img} alt='adv' width="80" height="80" />
+                                    <span className="about__adv-desc">12 лет работы</span>
                                 </div>
-                                <div class="about__adv-item">
-                                    <img src="~/assets/images/svg/adv-2.svg" width="80" height="80" />
-                                    <span class="about__adv-desc">Представлены во всех регионах ТС ЕАЭС</span>
+                                <div className="about__adv-item">
+                                    <Image src={Adv2Img} alt='adv' width="80" height="80" />
+
+                                    <span className="about__adv-desc">Представлены во всех регионах ТС ЕАЭС</span>
                                 </div>
-                                <div class="about__adv-item">
-                                    <img src="~/assets/images/svg/adv-3.svg" width="80" height="80" />
-                                    <span class="about__adv-desc">Собственные лаборатории</span>
+                                <div className="about__adv-item">
+                                    <Image src={Adv3Img} alt='adv' width="80" height="80" />
+
+                                    <span className="about__adv-desc">Собственные лаборатории</span>
                                 </div>
-                                <div class="about__adv-item">
-                                    <img src="~/assets/images/svg/adv-4.svg" width="80" height="80" />
-                                    <span class="about__adv-desc">Более 100000 сделанных документов</span>
+                                <div className="about__adv-item">
+                                    <Image src={Adv4Img} alt='adv' width="80" height="80" />
+
+                                    <span className="about__adv-desc">Более 100000 сделанных документов</span>
                                 </div>
-                                <div class="about__adv-item">
-                                    <img src="~/assets/images/svg/adv-5.svg" width="80" height="80" />
-                                    <span class="about__adv-desc">75 сотрудников</span>
+                                <div className="about__adv-item">
+                                    <Image src={Adv5Img} alt='adv' width="80" height="80" />
+
+                                    <span className="about__adv-desc">75 сотрудников</span>
                                 </div>
-                                <div class="about__adv-item">
-                                    <img src="~/assets/images/svg/adv-6.svg" width="80" height="80" />
-                                    <span class="about__adv-desc">Возможна постоплата или рассрочка</span>
+                                <div className="about__adv-item">
+                                    <Image src={Adv6Img} alt='adv' width="80" height="80" />
+
+                                    <span className="about__adv-desc">Возможна постоплата или рассрочка</span>
                                 </div>
                             </div>
 
-                            <h3 class="about__subtitle">Реквизиты </h3>
+                            <h3 className="about__subtitle">Реквизиты </h3>
                             <table>
                                 <thead>
                                     <tr>
-                                        <th colspan="2">ООО «Центр стандартизации»</th>
+                                        <th colSpan="2">ООО «Центр стандартизации»</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -122,7 +189,7 @@
                                 </tbody>
                                 <thead>
                                     <tr>
-                                        <th colspan="2">Банковские реквизиты Альфа-Банк</th>
+                                        <th colSpan="2">Банковские реквизиты Альфа-Банк</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -149,89 +216,22 @@
                                 </tbody>
                             </table>
 
-                            <div class="form">
-                                <div class="form__img">
-                                    <img class="logo" src="~/assets/images/robot-4.gif" alt="logo" width="416" height="546">
+                            <div className="form">
+                                <div className="form__img">
+                                    <Image className="logo" src={RobotImg} alt="logo" width="416" height="546" />
                                 </div>
-                                <div class="form__wrapper">
-                                    <h2 class="form-title">Остались вопросы?</h2>
-                                    <p class="form-subtitle">Оставь свои контактные данные, мы подготовимся и на все ответим</p>
-                                    <AppDefaultForm :btnText="$t('form.help.btn')" />
+                                <div className="form__wrapper">
+                                    <h2 className="form-title">Остались вопросы?</h2>
+                                    <p className="form-subtitle">Оставь свои контактные данные, мы подготовимся и на все ответим</p>
+                                    {/* <AppDefaultForm:btnText="$t('form.help.btn')" /> */}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </main>
-    </div>
-</template>
-  
-<script>
-import head from '@/mixins/head.js';
-
-import AppArticle from '@/components/pages/AppArticle.vue';
-
-import articleMobileSidebar from '@/mixins/articleMobileSidebar.js';
-import AppBreadcrumbs from '@/components/general/AppBreadcrumbs.vue';
-import AppSidebar from '@/components/general/AppSidebar.vue';
-import AppDefaultForm from "@/components/forms/AppDefaultForm";
-
-export default {
-    name: 'AppPage',
-    watch: {
-        '$route.query': function (newQuery, oldQuery) {
-            if (JSON.stringify(newQuery) !== JSON.stringify(oldQuery)) {
-                // console.log("Query changed");
-                this.$fetch();
-            }
-        },
-    },
-    mixins: [articleMobileSidebar, head],
-
-    computed: {
-        SEO() {
-            return {
-                title: 'О компании - NVSERT - Сертификация продукции и оборудования',
-                og_description: 'сертификация, сертификаты, декларации, техническая документация, технические условия, свидетельства, регистрация, ИСО, экспертное заключение, СЕ',
-                // og_image: article.og_image,
-                // og_title: article.og_title,
-                seo_description: 'В Российской Федерации, странах Евразийского Экономического Союза, странах Евросоюза и в любой другой стране,наличие документов, подтверждающих качество продукции, является неотъемлемым условием веден',
-                seo_h1: 'О компании - NVSERT - Сертификация продукции и оборудования',
-                seo_keywords: 'сертификация, сертификаты, декларации, техническая документация, технические условия, свидетельства, регистрация, ИСО, экспертное заключение, СЕ',
-                seo_title: 'О компании - NVSERT - Сертификация продукции и оборудования',
-            }
-        },
-
-        navigation() {
-            return this.$store.getters['navigation/getterNavigation'];
-        },
-    },
-
-    async fetch() {
-
-        this.$store.dispatch('pages/resetActionPages');
-
-        if (this.$store.getters['navigation/getterNavigation'].length === 0) {
-            await this.$store.dispatch('navigation/updateActionNavigation', [
-                this.navigationOrdering,
-            ]);
-        }
-
-    },
-
-    components: {
-        AppArticle,
-        AppBreadcrumbs,
-        AppSidebar,
-        AppDefaultForm,
-    },
+        </main >
+    );
 };
-</script>
-    
-<style lang="scss">
 
-
-@import '~/assets/styles/about.scss';
-</style>
-  
+export default AboutCompany;

@@ -2,8 +2,8 @@
   <div
     class="mtp__spoiler-item js-spoiler-item"
     :class="{
-      empty: this.spoiler.is_leaf_node,
-      loading: this.loading,
+      empty: spoiler.is_leaf_node,
+      loading: loading,
     }"
   >
     <div class="mtp__spoiler-item-header">

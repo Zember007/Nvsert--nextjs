@@ -17,12 +17,6 @@ const AppNavigation = () => {
         }
     }
 
-    useEffect(() => {
-
-        console.log(navigation, 'asd');
-
-    }, [navigation])
-
     useEffect(() => {        
         if (navigation.length === 0) {
             dispatch(updateActionNavigation())

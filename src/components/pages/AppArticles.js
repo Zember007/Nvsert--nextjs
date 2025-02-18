@@ -1,8 +1,10 @@
 import { useParams, useSearchParams } from "next/navigation";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import AppArticlesCard from "../articles/AppArticlesCard.js";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AppArticlesPagination from "../articles/AppArticlesPagination.js";
+import { setMetadata } from "@/store/metadata.js";
+import { generateMetadata } from "@/hook/useHead.js";
 
 const AppArticles = () => {
 
@@ -34,6 +36,30 @@ const AppArticles = () => {
             pageSize: articles.pageSize ?? null,
         };
     }, [page, articles])
+
+    const { configs: configsPure } = useSelector((state) => state.config);
+
+
+    const dispatch = useDispatch();
+
+    const configs = useMemo(() => {
+
+        let parsedConf = {};
+        configsPure?.forEach((item) => {
+            let key = item.key;
+            let value = item.value;
+            parsedConf[key] = value;
+        });
+
+        return parsedConf;
+    }, [configsPure])
+
+    useEffect(() => {
+
+
+        dispatch(setMetadata(generateMetadata(configs, SEO)))
+
+    }, [configs, SEO])
     return (
         <div>
             <h1>{articles.seo_h1 ? articles.seo_h1 : articles.title}</h1>
