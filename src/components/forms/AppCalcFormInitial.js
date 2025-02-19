@@ -2,23 +2,52 @@ import { useTranslation } from "react-i18next";
 import AppValidationObserver from "./AppValidationObserver";
 import AppInput from "./elements/AppInput";
 import AppInputDate from "./elements/AppInputDate";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateActionSessionId } from "@/store/session";
 import AppInputFile from "./elements/AppInputFile";
 import Link from "next/link";
+import axios from "axios";
+import { useForm } from "react-hook-form";
+import { nextStep, setDiscount } from "@/store/find_out_cost";
 
 const AppCalcFormInitial = ({ discount }) => {
     const { t } = useTranslation()
-    const onSubmit = () => { }
+    
+    const onSubmit = (e) => {
+
+        try {
+
+            const formData = new FormData();
+            for (const key in e) {
+                if (e.hasOwnProperty(key)) {
+                    formData.append(key, e[key]);
+                }
+            }
+          
+            formData.append('sessionid', sessionKey);
+            const response = axios.post('/api/order/data', formData);
+       
+            if (response.status == 200 || 201) {                
+                dispatch(nextStep())
+            } else {
+                response.errors ?? Object.keys(response.errors).length > 0
+                    ? setServerErrors(response.errors)
+                    : false;
+            }
+
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
     const dispatch = useDispatch()
 
     const [serverErrors, setServerErrors] = useState(null);
-    const [formData, setFormData] = useState([]);
+    const formData = []
     const [salesUsed, setSalesUsed] = useState([]);
     const [companyHints, setCompanyHints] = useState([]);
     const [showCompanyHints, setShowCompanyHints] = useState(false);
-    const [hintsTimeout, setHintsTimeout] = useState(null);
 
     useEffect(() => {
         dispatch(updateActionSessionId())
@@ -52,57 +81,76 @@ const AppCalcFormInitial = ({ discount }) => {
         }, 0);
     }, [discount, formData]);
 
-    function nextStep() {
-        $nuxt.$emit('stepChange');
-    }
+    useEffect(() => {
+        dispatch(setDiscount(salesUsedSum))
+    },[salesUsedSum])
 
-    async function getCompanyHints (inputValue) {
+    async function getCompanyHints(inputValue) {
 
-        await $axios.$get('/api/order/companies', {
+        await axios.get('/api/order/companies', {
             params: {
                 query: inputValue,
                 count: 10
             },
         })
             .then((response) => {
-                companyHints = response;                
-                setShowCompanyHints(true)
+                // setCompanyHints(response.data)
+                // setShowCompanyHints(true)
             });
     }
 
-    function inputListener() {
-        $nuxt.$on('inputChange', (inputName, inputValue) => {
-            formData.find((item) => item.name === inputName)
-                ? (formData.find((item) => item.name === inputName).value =
-                    inputValue)
-                : formData.push({ name: inputName, value: inputValue });         
+    let hintsTimeout = null
 
-            if (inputName === 'company') {
+    function inputListener(inputName, inputValue) {
+        formData.find((item) => item.name === inputName)
+            ? (formData.find((item) => item.name === inputName).value =
+                inputValue)
+            : formData.push({ name: inputName, value: inputValue });
 
-                clearTimeout(hintsTimeout);
+        if (inputName === 'company') {
 
-                if (inputValue.length >= 3) {
+            clearTimeout(hintsTimeout);
 
-                    setHintsTimeout(setTimeout(function () {
-                        getCompanyHints(inputValue);
-                    }, 600))
+            if (inputValue.length >= 3) {
 
+                hintsTimeout = setTimeout(function () {
+                    getCompanyHints(inputValue);
+                }, 600)
 
-                } else {
-                    showCompanyHints = false;
-                    companyHints.length = 0;
+            } else {
+                setShowCompanyHints(false)
+                companyHints.length = 0;
+            }
+        }
+    }
+
+    const methods = useForm({ mode: "onTouched" });
+
+    const { watch, formState: { isDirty, dirtyFields } } = methods;
+
+    const watchedValues = watch(); // Подписываемся на все изменения полей формы
+
+    useEffect(() => {
+        if (isDirty) {
+            // Обходим все измененные поля, чтобы получить их имена и значения
+            for (const fieldName in dirtyFields) {
+                if (dirtyFields.hasOwnProperty(fieldName)) {
+                    const fieldValue = watchedValues[fieldName];
+
+                    inputListener(fieldName, fieldValue)
                 }
             }
-        });
+        }
+    }, [isDirty, dirtyFields, watchedValues]);
 
-    }
+    const companyInput = useRef(null)
 
     return (
         < div >
 
             {fields.length && <>
 
-                <AppValidationObserver onSubmit={onSubmit}>
+                <AppValidationObserver methods={methods} onSubmit={onSubmit}>
                     {({ register, errors }) => (
                         <>
                             <div className="cost-calc__group">
@@ -129,18 +177,19 @@ const AppCalcFormInitial = ({ discount }) => {
 
                             <div className="cost-calc__group">
                                 <AppInput inputName={fields[4]} title={t('calculation.form.placeholder.company_name')}
-                                    autocomplete="off" />
+                                    autocomplete="off" ref={companyInput} />
                                 {sales[4] > 0 && <span className="discount" >+{sales[4]}%</span>}
 
                                 <ul className={`cost-calc__dropdown ${showCompanyHints && companyHints.length > 0 && 'active'}`}>
 
-                                    {/* <div className="cost-calc__hint"
-                @click="$refs.companyInput.changeValue(`${hint.value} ${hint.city !== null ? ', ' + hint.city : ''}`); showCompanyHints = false;"
-                v-for="hint in     companyHints    " :key="JSON.stringify(hint)">
-                                {{ hint.value }}
-                                <span v-if=" hint.city !== null ">, {{ hint.city }}</span>
-                                <span v-if=" hint.inn !== null "> - ИНН: {{ hint.inn }}</span>
-                            </div> */}
+                                    {companyHints.map((hint, index) =>
+                                        <div className="cost-calc__hint"
+                                            // onClick={() => { companyInput.current.value = `${hint.value} ${hint.city !== null ? ', ' + hint.city : ''}`; setShowCompanyHints(false); }}
+                                            key={index}>
+                                            {hint.value}
+                                            <span v-if=" hint.city !== null ">, {hint.city}</span>
+                                            <span v-if=" hint.inn !== null "> - ИНН: {hint.inn}</span>
+                                        </div>)}
 
                                 </ul>
 
@@ -166,10 +215,10 @@ const AppCalcFormInitial = ({ discount }) => {
                                 </button>
                                 <div className="policy">
                                     <label className="field-check">
-                                        <input className="field-check__input" required={true}  type="checkbox" />
+                                        <input className="field-check__input" required={true} type="checkbox" />
                                         <span className="field-check__name">
                                             {t('privacy.btn.next')}
-                                            <Link href="/soglashenie/polzovatelskoe-soglashenie/" target="_blank"> { t('privacy.btn.link') }
+                                            <Link href="/soglashenie/polzovatelskoe-soglashenie/" target="_blank"> {t('privacy.btn.link')}
                                             </Link>
                                         </span>
                                     </label>

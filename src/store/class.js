@@ -7,16 +7,15 @@ export const updateActionСlass = createAsyncThunk(
     if (type !== 'okp' && type !== 'tn') return rejectWithValue('Invalid type');
 
     try {
-      const response = await axios.get(`api/${type}`, {
+      const response = await axios.get(`/api/${type}`, {
         params: {
           ordering: ordering,
           page: page,
           pageSize: pageSize,
         },
       });
-      console.log(response,'response.data');
       
-      return { type, data: response.data };
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }
@@ -29,14 +28,15 @@ export const updateActionMoreСlass = createAsyncThunk(
     if (type !== 'okp' && type !== 'tn') return rejectWithValue('Invalid type');
 
     try {
-      const response = await axios.get(`api/${type}`, {
+      const response = await axios.get(`/api/${type}`, {
         params: {
           ordering: ordering,
           page: page,
           pageSize: pageSize,
         },
-      });
-      return { type, data: response.data };
+      });      
+      
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }
@@ -64,7 +64,7 @@ const classSlice = createSlice({
       })
       .addCase(updateActionСlass.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.class = action.payload.data;
+        state.class = action.payload;
 
       })
       .addCase(updateActionСlass.rejected, (state, action) => {
@@ -76,8 +76,8 @@ const classSlice = createSlice({
       })
       .addCase(updateActionMoreСlass.fulfilled, (state, action) => {
          state.status = 'succeeded';
-         state.class.page = action.payload.data.page;
-         state.class.content = state.class.content.concat(action.payload.data.content);
+         state.class.page = action.payload.page;
+         state.class.content = state.class.content.concat(action.payload.content);
       })
       .addCase(updateActionMoreСlass.rejected, (state, action) => {
         state.status = 'failed';

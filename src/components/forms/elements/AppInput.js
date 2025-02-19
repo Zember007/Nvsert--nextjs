@@ -4,9 +4,8 @@ import { useFormContext } from "react-hook-form";
 const AppInput = ({ title, inputName, type, required, autocomplete, mask }) => {
     const { register, formState: { errors } } = useFormContext();
 
-    const [value, setValue] = useState('')
-
-    const formatPhoneNumber = (value) => {
+    const formatPhoneNumber = (e) => {
+        const value = e.target.value
         let cleaned = value.replace(/\D/g, '');
     
         if (cleaned[0] === '8') {
@@ -29,7 +28,7 @@ const AppInput = ({ title, inputName, type, required, autocomplete, mask }) => {
             formatted += `-${cleaned.substring(9, 11)}`;
         }
     
-        return formatted;
+        e.target.value = formatted;
     };
 
     const changeInput = (value) => {
@@ -55,8 +54,7 @@ const AppInput = ({ title, inputName, type, required, autocomplete, mask }) => {
                 name={inputName}                
                 placeholder={title}
                 autoComplete={autocomplete}
-                value={value}
-                onInput={(e) => {setValue(changeInput(e.currentTarget.value))}}
+                onInput={(e) => {changeInput(e)}}
             />
             <span className="field__title">
                 { title }

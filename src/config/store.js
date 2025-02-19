@@ -12,6 +12,7 @@ import sessionReducer from '@/store/session';
 import staffReducer from '@/store/staff';
 import documentsReducer from '@/store/documents';
 import metadataReducer from '@/store/metadata';
+import find_out_costReducer from '@/store/find_out_cost';
 
 const store = configureStore({
   reducer: {
@@ -27,7 +28,8 @@ const store = configureStore({
     session: sessionReducer,
     staff: staffReducer,
     documents: documentsReducer,
-    metadata: metadataReducer
+    metadata: metadataReducer,
+    find_out_cost: find_out_costReducer
   },
 });
 

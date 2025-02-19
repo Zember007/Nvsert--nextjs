@@ -41,7 +41,7 @@ const AppArticle = () => {
 
     return (
         <div>
-            <h1>{pageTitle}</h1>
+            {pageTitle && <h1>{pageTitle}</h1>}
 
             {article.full_text &&
                 <div dangerouslySetInnerHTML={{ __html: article.full_text }}></div>

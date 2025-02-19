@@ -20,22 +20,22 @@ const AppFooter = () => {
     const email = configs?.find((item) => item.key == 'email')
 
     const companyRequsites = useMemo(() => {
-        
-            return [
-                // {
-                //     name: configs?.find((item) => item?.key && (item?.key == 'company1')).value ?? '',
-                //     inn: configs?.find((item) => item?.key && item?.key == 'inn1').value ?? '',
-                //     attestation:
-                //         configs?.find((item) => item?.key && item?.key == 'attestation1').value ?? '',
-                // },
-                // {
-                //     name: configs?.find((item) => item?.key && item?.key === 'company2').value ?? '',
-                //     inn: configs?.find((item) => item?.key && item?.key === 'inn2').value ?? '',
-                //     attestation:
-                //         configs?.find((item) => item?.key && item?.key === 'attestation2').value ?? '',
-                // },
-            ];
-      
+
+        return [
+            // {
+            //     name: configs?.find((item) => item?.key && (item?.key == 'company1')).value ?? '',
+            //     inn: configs?.find((item) => item?.key && item?.key == 'inn1').value ?? '',
+            //     attestation:
+            //         configs?.find((item) => item?.key && item?.key == 'attestation1').value ?? '',
+            // },
+            // {
+            //     name: configs?.find((item) => item?.key && item?.key === 'company2').value ?? '',
+            //     inn: configs?.find((item) => item?.key && item?.key === 'inn2').value ?? '',
+            //     attestation:
+            //         configs?.find((item) => item?.key && item?.key === 'attestation2').value ?? '',
+            // },
+        ];
+
     }, [configs])
     return (
         <footer className="footer">
@@ -136,18 +136,14 @@ const AppFooter = () => {
                     </div>
                     <div className="footer-bottom__developer">
                         <div className="title">{t('designed')}</div>
-                        <a
-                            href="https://coffeestudio.ru/"
+                        <a href="https://coffeestudio.ru/"
                             target="_blank"
                             rel="noopener"
-                            className="logo"
-                        >
-                            <Image src={CoffeeLogo} alt="Coffee Studio" />
-                        </a>
+                            className="logo"><Image src={CoffeeLogo} alt="Coffee Studio" /></a>
                     </div>
                 </div>
-            </div >
-        </footer >
+            </div>
+        </footer>
     );
 };
 

@@ -1,6 +1,7 @@
+import axios from "axios";
 import { useState } from "react";
 
-const AppClassSpoiler = ({spoiler, slug}) => {
+const AppClassSpoiler = ({ spoiler, slug }) => {
 
     const [childs, setChilds] = useState([]);
     const [contentLoaded, setContentLoaded] = useState(false);
@@ -10,7 +11,7 @@ const AppClassSpoiler = ({spoiler, slug}) => {
 
 
 
-    async function getChilds() {
+    async function getChilds(evt) {
         if (spoiler.id && !spoiler.is_leaf_node) {
             if (slug !== 'okp/' && slug !== 'tnved/') return false;
 
@@ -23,21 +24,22 @@ const AppClassSpoiler = ({spoiler, slug}) => {
                 url = 'okp'
             }
             try {
-                await $axios
-                    .$get('api/' + url, {
-                        params: {
-                            parent_id: spoiler.id,
-                        },
-                    })
-                    .then((response) => {
-                        console.log(
-                            '🚀 ~ file: class.js ~ line 48 ~ .then ~ response',
-                            response
-                        );
-                        if (response && response.content.length > 0) {                            
-                            setChilds(response.content)
-                        }
-                    });
+                const response = await axios.get('/api/' + url, {
+                    params: {
+                        parent_id: spoiler.id,
+                    },
+                })
+
+                if (response.data && response.data.content && response.data.content.length > 0) {
+                    setChilds(response.data.content)
+                    setContentLoaded(true)
+                    setLoading(false)
+                    setTimeout(() => {
+                        toggleOpen(evt);
+                    }, 100)
+
+                }
+
             } catch (error) {
                 if (error instanceof Error) {
                     console.error(error);
@@ -46,23 +48,15 @@ const AppClassSpoiler = ({spoiler, slug}) => {
             }
         }
     }
-  
-      async function classBtnHandler(evt) {
+
+    function classBtnHandler(evt) {
         if (spoiler.is_leaf_node) return;
         try {
             if (contentLoaded) {
                 toggleOpen(evt);
+
             } else {
-                await getChilds()
-                    .then((response) => {
-                        setContentLoaded(true)
-                    })
-                    .then(() => {
-                        setLoading(false)
-                    })
-                    .then(() => {
-                        toggleOpen(evt);
-                    });
+                getChilds(evt)
             }
         } catch (error) {
             if (error instanceof Error) console.error(error);
@@ -71,6 +65,7 @@ const AppClassSpoiler = ({spoiler, slug}) => {
 
     function toggleOpen(evt) {
         evt.preventDefault();
+
         let target = evt.target.closest('.js-spoiler-button');
 
         const spoiler = target.closest('.js-spoiler-item');
@@ -130,13 +125,15 @@ const AppClassSpoiler = ({spoiler, slug}) => {
             </div >
             <div className="mtp__spoiler-item-content js-spoiler-content">
 
-                <div className="mtp__spoiler-text" v-if="childs && childs.length > 0">
-                    {childs.map((spoiler, i) => <AppClassSpoiler
-                        key={i}
-                        spoiler={spoiler}
-                        slug={slug}
-                    />)}
-                </div>
+                {childs && childs.length > 0 &&
+                    <div className="mtp__spoiler-text">
+                        {childs.map((spoiler, i) => <AppClassSpoiler
+                            key={i}
+                            spoiler={spoiler}
+                            slug={slug}
+                        />)}
+                    </div>
+                }
 
             </div>
         </div >

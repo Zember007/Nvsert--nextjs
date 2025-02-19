@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 
-const AppValidationObserver = ({ children, onSubmit }) => {
-  const methods = useForm({ mode: "onTouched" });
+const AppValidationObserver = ({ children, onSubmit, methods }) => {
+  
 
   return (
     <FormProvider {...methods}>

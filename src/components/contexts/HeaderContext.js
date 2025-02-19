@@ -8,6 +8,8 @@ export function useHeaderContext() {
 
 export function HeaderContextProvider({ children }) {
     const [transparent, setTransparent] = useState(false)
+    const [defaultModalActive, setDefaultModalActive] = useState(false)
+    const [defaultModalName, setDefaultModalName] = useState('')
 
 
     const makeTransparentHeader = useCallback(() => {
@@ -18,8 +20,17 @@ export function HeaderContextProvider({ children }) {
         setTransparent(false)
     }, []);
 
+    const openDefaultModal = (value) => {
+        setDefaultModalName(value)
+        setDefaultModalActive(true)
+    }
+
     const contextValue = {
         transparent,
+        defaultModalActive,
+        openDefaultModal,
+        defaultModalName,
+        setDefaultModalActive,
         makeDefaultHeader,
         makeTransparentHeader
     };

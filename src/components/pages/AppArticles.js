@@ -62,7 +62,7 @@ const AppArticles = () => {
     }, [configs, SEO])
     return (
         <div>
-            <h1>{articles.seo_h1 ? articles.seo_h1 : articles.title}</h1>
+            {(articles.seo_h1 || articles.title) && <h1>{articles.seo_h1 ? articles.seo_h1 : articles.title}</h1>}
 
             <div className="mtp__news">
                 {articles.content && articles.content.length > 0 &&

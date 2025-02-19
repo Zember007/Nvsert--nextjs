@@ -15,7 +15,7 @@ export default function Home() {
     };
   }, []);
   return (
-    <main className="main">
+    <div className="main">
        <AppMainIntro />
 
       {/*<AppMainAbout />
@@ -23,7 +23,7 @@ export default function Home() {
       <AppMainQuestions />
 
       <AppMainGallery /> */}
-    </main>
+    </div>
   );
 }
 

@@ -55,7 +55,7 @@ const Page = () => {
     }, [error])
     return (
         <div>
-            <main className="article">
+            <div className="article">
                 <div className="wrapper">
                     <AppBreadcrumbs root="/" breadcrumbs={breadcrumbs} />
 
@@ -88,7 +88,7 @@ const Page = () => {
                         </div>
                     </div>
                 </div>
-            </main >
+            </div >
         </div >
     );
 };

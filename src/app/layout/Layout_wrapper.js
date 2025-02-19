@@ -8,6 +8,7 @@ import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import { updateActionConfigs, updateActionFileConfigs } from '@/store/configs';
 import { generateMetadata } from '@/hook/useHeadLayout';
 import { setMetadata } from '@/store/metadata';
+import AppModalWrapper from '@/components/general/AppModalWrapper';
 
 
 const Layout_wrapper = ({ children }) => {
@@ -110,6 +111,8 @@ const Layout_wrapper = ({ children }) => {
                         <AppFooter />
                     </div>
                 </main >
+
+                <AppModalWrapper />
             </body>
         </>
 

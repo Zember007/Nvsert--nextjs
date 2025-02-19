@@ -62,7 +62,7 @@ const AboutCompany = () => {
     }, [configs])
 
     return (
-        <main className="article">
+        <div className="article">
             <div className="wrapper">
                 <AppBreadcrumbs root="/"
                     breadcrumbs={[{ full_slug: "about", id: 2, seo_h1: "О компании", title: "О компании" }]} />
@@ -230,7 +230,7 @@ const AboutCompany = () => {
                     </div>
                 </div>
             </div>
-        </main >
+        </div >
     );
 };
 

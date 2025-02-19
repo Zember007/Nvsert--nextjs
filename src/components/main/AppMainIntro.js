@@ -20,6 +20,7 @@ import {
     selectError,
 } from '@/store/search';
 import { useTranslation } from 'react-i18next';
+import {useHeaderContext} from '@/components/contexts/HeaderContext'
 
 
 const AppMainIntro = () => {
@@ -27,6 +28,8 @@ const AppMainIntro = () => {
     const { t } = useTranslation()
 
     const dispatch = useDispatch();
+
+    const {openDefaultModal} = useHeaderContext()
 
     const searchResults = useSelector(selectSearchResults);
     const defaultResults = useSelector(selectSearchDefault);
@@ -162,9 +165,9 @@ const AppMainIntro = () => {
         }
     }
 
-    // function openIntroModal() {
-    //     // $nuxt.$emit('defineModalContent', 'introForm');
-    // }
+    function openIntroModal() {
+        openDefaultModal('introForm')
+    }
 
     function unfoldList() {
         setListFolded(false)

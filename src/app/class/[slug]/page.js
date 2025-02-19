@@ -114,12 +114,8 @@ const Page = () => {
 
     }, [])
 
-    useEffect(() => {
-        console.log(documents.content);
-    },[documents])
-
     return (
-        <main className="article">
+        <div className="article">
             <div className="wrapper">
 
                 <AppBreadcrumbs root="/type/" title={title} />
@@ -139,7 +135,7 @@ const Page = () => {
                     </div>
                 </div>
             </div>
-        </main>
+        </div>
     );
 };
 
