@@ -2,8 +2,8 @@
 import '@/assets/styles/sections/main/main-banner.scss';
 import Image from "next/image"
 import AppIntroLink from "./AppIntroLink"
-import searchIcon from '@/assets/images/search-icon.gif'
-import searchIcon2 from '@/assets/images/search-icon-2.gif'
+import searchIcon from '@/assets/images/search-icon.mp4'
+import searchIcon2 from '@/assets/images/search-icon-2.mp4'
 import Type4 from '@/assets/images/svg/type-4.svg'
 import Type3 from '@/assets/images/svg/type-3.svg'
 import Type2 from '@/assets/images/svg/type-2.svg'
@@ -20,7 +20,7 @@ import {
     selectError,
 } from '@/store/search';
 import { useTranslation } from 'react-i18next';
-import {useHeaderContext} from '@/components/contexts/HeaderContext'
+import { useHeaderContext } from '@/components/contexts/HeaderContext'
 
 
 const AppMainIntro = () => {
@@ -29,7 +29,7 @@ const AppMainIntro = () => {
 
     const dispatch = useDispatch();
 
-    const {openDefaultModal} = useHeaderContext()
+    const { openDefaultModal } = useHeaderContext()
 
     const searchResults = useSelector(selectSearchResults);
     const defaultResults = useSelector(selectSearchDefault);
@@ -149,10 +149,10 @@ const AppMainIntro = () => {
 
             setDelayTimer(setTimeout(async () => {
 
-                dispatch(updateSearchResults({ slug: currentSearchCategory, search: value, limit: 10 })).then((res) => {             
+                dispatch(updateSearchResults({ slug: currentSearchCategory, search: value, limit: 10 })).then((res) => {
 
                     setListFolded(true)
-                    
+
                     searchResults.content?.length === 0
                         ? (setNothingFounded(true))
                         : (setNothingFounded(false));
@@ -204,9 +204,21 @@ const AppMainIntro = () => {
                         <div className="main-banner__img">
 
                             {operating ?
-                                <Image alt='search' src={searchIcon} width={'370'} height={'485'} />
+                                <video
+                                    src={searchIcon}
+                                    autoPlay
+                                    loop
+                                    muted
+                                    style={{ maxWidth: '100%', height: '485px', width: '370px' }}
+                                />
                                 :
-                                <Image alt='search' src={searchIcon2} width={'370'} height={'485'} />
+                                <video
+                                    src={searchIcon2}
+                                    autoPlay
+                                    loop
+                                    muted
+                                    style={{ maxWidth: '100%', height: '485px', width: '370px' }}
+                                />
                             }
 
 
@@ -224,7 +236,7 @@ const AppMainIntro = () => {
 
 
                             <div className="form">
-                                <label className="field search__label">
+                                <div className="field search__label">
 
 
                                     {operating &&
@@ -286,7 +298,7 @@ const AppMainIntro = () => {
                                     <button type="submit" className="field__btn">
                                         <i className="icon icon--search"></i>
                                     </button>
-                                </label>
+                                </div>
                             </div>
 
                             {resultsToShow && !nothingFounded &&
@@ -312,7 +324,7 @@ const AppMainIntro = () => {
                                     </button>}
                                 </ul>}
 
-                            <ul
+                            <div
                                 className="main-banner__types"
                                 style={{ display: (operating || nothingFounded) && 'none' }}
                             >
@@ -320,11 +332,11 @@ const AppMainIntro = () => {
                                     t('mainIntro.info')
                                 }</span>
                                 <li>
-                                    <label className="main-banner__type" type="button">
+                                    <div className="main-banner__type" >
                                         <input
                                             type="checkbox"
                                             value="section"
-                                            onChange={(event) => {chooseCategory(event);  }}
+                                            onChange={(event) => { chooseCategory(event); }}
                                         />
                                         <div className="main-banner__type-content">
                                             <Image
@@ -335,10 +347,10 @@ const AppMainIntro = () => {
                                             />
                                             {t('mainIntro.button.section')}
                                         </div>
-                                    </label>
+                                    </div>
                                 </li>
                                 <li>
-                                    <label className="main-banner__type" type="button">
+                                    <div className="main-banner__type" >
                                         <input
                                             type="checkbox"
                                             value="okp"
@@ -353,14 +365,14 @@ const AppMainIntro = () => {
                                             />
                                             {t('mainIntro.button.okp')}
                                         </div>
-                                    </label>
+                                    </div>
                                 </li>
                                 <li>
-                                    <label className="main-banner__type" type="button">
+                                    <div className="main-banner__type" >
                                         <input
                                             type="checkbox"
                                             value="tn"
-                                            onChange={(event) => { chooseCategory(event);  }}
+                                            onChange={(event) => { chooseCategory(event); }}
 
                                         />
                                         <div className="main-banner__type-content">
@@ -372,7 +384,7 @@ const AppMainIntro = () => {
                                             />
                                             {t('mainIntro.button.tnved')}
                                         </div>
-                                    </label>
+                                    </div>
                                 </li>
                                 <li>
                                     <button
@@ -394,7 +406,7 @@ const AppMainIntro = () => {
                                         </div>
                                     </button>
                                 </li>
-                            </ul>
+                            </div>
 
 
                             {nothingFounded && <div className="main-banner__no-results" >

@@ -2,7 +2,7 @@
 
 import '@/assets/styles/about.scss';
 import Image from 'next/image';
-import RobotImg from '@/assets/images/robot-4.gif'
+import RobotImg from '@/assets/images/robot-4.mp4'
 import Adv1Img from '@/assets/images/svg/adv-1.svg'
 import Adv2Img from '@/assets/images/svg/adv-2.svg'
 import Adv3Img from '@/assets/images/svg/adv-3.svg'
@@ -15,11 +15,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { resetPages } from '@/store/pages'
 import { useEffect, useMemo, useState } from 'react';
 import { setMetadata } from '@/store/metadata';
-import {generateMetadata} from '@/hook/useHead'
+import { generateMetadata } from '@/hook/useHead'
+import AppDefaultForm from '@/components/forms/AppDefaultForm';
+import { useTranslation } from 'react-i18next';
 
 const AboutCompany = () => {
 
     const dispatch = useDispatch();
+
+    const {t} = useTranslation()
 
 
     useEffect(() => {
@@ -55,10 +59,10 @@ const AboutCompany = () => {
     }
 
     useEffect(() => {
-       
-            
-            dispatch(setMetadata(generateMetadata(configs, SEO)))
-        
+
+
+        dispatch(setMetadata(generateMetadata(configs, SEO)))
+
     }, [configs])
 
     return (
@@ -187,6 +191,8 @@ const AboutCompany = () => {
                                         </td>
                                     </tr>
                                 </tbody>
+                            </table>
+                            <table>
                                 <thead>
                                     <tr>
                                         <th colSpan="2">Банковские реквизиты Альфа-Банк</th>
@@ -218,12 +224,19 @@ const AboutCompany = () => {
 
                             <div className="form">
                                 <div className="form__img">
-                                    <Image className="logo" src={RobotImg} alt="logo" width="416" height="546" />
+                                    <video
+                                        src={RobotImg}
+                                        className="logo"
+                                        autoPlay
+                                        loop
+                                        muted                                      
+                                        style={{ maxWidth: '100%', height: '416px', width: '546px' }}
+                                    />
                                 </div>
                                 <div className="form__wrapper">
                                     <h2 className="form-title">Остались вопросы?</h2>
                                     <p className="form-subtitle">Оставь свои контактные данные, мы подготовимся и на все ответим</p>
-                                    {/* <AppDefaultForm:btnText="$t('form.help.btn')" /> */}
+                                    <AppDefaultForm btnText={t('form.help.btn')} />
                                 </div>
                             </div>
                         </div>
