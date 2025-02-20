@@ -16,8 +16,6 @@ import {
     updateSearchResults,
     selectSearchResults,
     selectSearchDefault,
-    selectIsLoading,
-    selectError,
 } from '@/store/search';
 import { useTranslation } from 'react-i18next';
 import { useHeaderContext } from '@/components/contexts/HeaderContext'
@@ -33,9 +31,6 @@ const AppMainIntro = () => {
 
     const searchResults = useSelector(selectSearchResults);
     const defaultResults = useSelector(selectSearchDefault);
-    const isLoading = useSelector(selectIsLoading);
-    const error = useSelector(selectError);
-
 
     const [limit, setLimit] = useState(25)
     const [placeholder, setPlaceholder] = useState('all')
@@ -199,7 +194,8 @@ const AppMainIntro = () => {
         <>
             <section className="main-banner">
                 <div className="wrapper">
-                    <h1 className="main-banner__title">{t('mainIntro.title')}</h1>
+                    {/* <h1 className="main-banner__title">{t('mainIntro.title')}</h1> */}
+                    <h1 className="main-banner__title">Сертификация продукции и оборудования</h1>
                     <div className="main-banner__content">
                         <div className="main-banner__img">
 
