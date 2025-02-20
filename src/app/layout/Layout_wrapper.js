@@ -17,10 +17,8 @@ const Layout_wrapper = ({ children }) => {
 
     const metadata = useSelector((state) => state.metadata);
 
-    const [modalContentName, setModalContentName] = useState('')
 
     const { transparent } = useHeaderContext();
-    const { overflow } = useSelector((state) => state.body);
     const { calcPageBodyClass } = useSelector((state) => state.documents);
 
     const { configs: configsPure, file_configs: fileConfigsPure, status, error } = useSelector((state) => state.config);

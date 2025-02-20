@@ -7,10 +7,12 @@
 
   background: #465476;
   min-height: calc((var(--vh, 1vh) * 100) + 96px);
+
   @media (max-width: varibles.$media-l) {
     padding-top: 100px;
     padding-bottom: 112px;
   }
+
   @media (max-width: varibles.$media-s) {
     padding-top: 90px;
   }
@@ -22,14 +24,17 @@
     font-size: 56px;
     line-height: 68px;
     margin-bottom: 72px;
+
     @media (max-width: varibles.$media-l) {
       font-size: 40px;
       line-height: 1.2;
       margin-bottom: 40px;
     }
+
     @media (max-width: varibles.$media-m) {
       font-size: 32px;
     }
+
     @media (max-width: varibles.$media-s) {
       font-size: 24px;
       margin-bottom: 32px;
@@ -40,6 +45,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+
     @media (max-width: varibles.$media-m) {
       flex-direction: column-reverse;
     }
@@ -51,7 +57,9 @@
 
     //фикс гифки start
     position: relative;
-    &::before, &::after {
+
+    &::before,
+    &::after {
       content: '';
       position: absolute;
       left: 0;
@@ -60,17 +68,21 @@
       height: 2px;
       background: #465476;
     }
+
     &::before {
       top: 0;
     }
+
     &::after {
       bottom: 0;
     }
+
     //фикс гифки end
 
     @media (max-width: varibles.$media-l) {
       width: calc(370 / 1312 * 100%);
     }
+
     @media (max-width: varibles.$media-m) {
       width: 90%;
       max-width: 370px;
@@ -102,6 +114,7 @@
     &.operating {
       .search__input {
         padding-left: 80px;
+
         @media (max-width: varibles.$media-s) {
           padding-left: 54px;
         }
@@ -109,6 +122,7 @@
 
       .search__input-title {
         padding-left: 56px;
+
         @media (max-width: varibles.$media-s) {
           padding-left: 40px;
         }
@@ -127,11 +141,13 @@
         font-size: 24px;
         line-height: 32px;
         height: auto;
+
         @media (max-width: varibles.$media-l) {
           padding: 12px 16px;
           font-size: 20px;
           line-height: 28px;
         }
+
         @media (max-width: varibles.$media-s) {
           padding: 12px 16px;
           font-size: 16px;
@@ -145,12 +161,14 @@
         font-weight: 400;
         top: 16px;
         left: 24px;
+
         @media (max-width: varibles.$media-l) {
           font-size: 20px;
           line-height: 28px;
           top: 12px;
           left: 16px;
         }
+
         @media (max-width: varibles.$media-s) {
           font-size: 16px;
           line-height: 22px;
@@ -183,10 +201,12 @@
           width: 100%;
           height: 100%;
           color: varibles.$white-color;
+
           @media (max-width: varibles.$media-l) {
             width: 24px;
             height: 24px;
           }
+
           @media (max-width: varibles.$media-s) {
             width: 20px;
             height: 20px;
@@ -207,10 +227,12 @@
         font-size: 24px;
         line-height: 32px;
         font-family: varibles.$font-family-2;
+
         @media (max-width: varibles.$media-l) {
           font-size: 20px;
           line-height: 28px;
         }
+
         @media (max-width: varibles.$media-s) {
           font-size: 16px;
           line-height: 22px;
@@ -241,6 +263,7 @@
       &__input {
         transition: padding 0.2s ease-in-out 0s;
         padding: 24px;
+
         @media (max-width: varibles.$media-s) {
           padding: 16px 24px;
         }
@@ -327,6 +350,7 @@
     @media (max-width: varibles.$media-m) {
       line-height: 20px;
     }
+
     @media (max-width: varibles.$media-s) {
       font-size: 13px;
       line-height: 18px;
@@ -337,8 +361,15 @@
     display: flex;
     flex-wrap: wrap;
     gap: 32px;
+
     @media (max-width: varibles.$media-l) {
       gap: 16px;
+    }
+
+    li {
+      @media (max-width: varibles.$media-s) {
+        width: 100%;
+      }
     }
   }
 
@@ -363,6 +394,10 @@
     text-align: left;
     cursor: pointer;
 
+    @media (max-width: varibles.$media-s) {
+      width: 100%;
+    }
+
     &-content {
       background-color: varibles.$input-bg-normal;
       padding: 16px;
@@ -378,7 +413,7 @@
       opacity: 0;
       visibility: hidden;
 
-      &:checked ~ .main-banner__type-content {
+      &:checked~.main-banner__type-content {
         border-color: varibles.$white-color;
       }
     }
@@ -387,6 +422,7 @@
       display: block;
       margin-bottom: 16px;
       width: 40px;
+
       @media (max-width: varibles.$media-s) {
         width: 30px;
         margin-bottom: 8px;
@@ -408,6 +444,7 @@
         color: varibles.$white-color;
         margin: 0 0 16px 0;
       }
+
       &__text {
         color: varibles.$white-color;
         margin: 0 0 8px 0;
@@ -433,8 +470,7 @@
 }
 
 .list-complete-enter,
-.list-complete-leave-to
-{
+.list-complete-leave-to {
   opacity: 0;
   transform: translateX(30px);
 }
