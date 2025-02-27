@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useMemo } from "react";
 
-const AppIntroLink = ({ linkType, item }) => {
+const AppIntroLink = ({ linkType, item }:{ linkType: string, item:any }) => {
 
     const linkObject = useMemo(() => {
         switch (linkType) {

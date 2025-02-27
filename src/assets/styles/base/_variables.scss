@@ -31,7 +31,7 @@ $icon-disable: rgba(233, 234, 234, 1);
 $icon-accent: rgba(255, 120, 96, 1);
 $icon-dark: rgba(49, 62, 96, 1);
 
-$input-placeholder-normal: rgba(255, 255, 255, 0.8);
+$input-placeholder-normal:#FFFFFF;
 $input-placeholder-hover: rgba(255, 255, 255, 1);
 $input-placeholder-focus: rgba(255, 255, 255, 1);
 $input-placeholder-active: rgba(108, 116, 117, 1);
@@ -76,12 +76,8 @@ $font-size--small: 80%;
 
 $font-path: "~assets/fonts";
 
-$font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-  "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
-  "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-$font-family-2: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
-  Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
-  "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family: Arial, sans-serif;
+$font-family-2: Arial, sans-serif;
 $font-family--monospace: SFMono-Regular, Menlo, Monaco, Consolas,
   "Liberation Mono", "Courier New", monospace;
 $font-family--icon: "icomoon";

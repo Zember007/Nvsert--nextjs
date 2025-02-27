@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import AppValidationObserver from "./AppValidationObserver";
-import AppInput from "./elements/AppInput";
+import AppInput from "./elements/AppInput.tsx";
 import AppInputDate from "./elements/AppInputDate";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

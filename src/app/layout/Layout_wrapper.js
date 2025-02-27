@@ -100,14 +100,14 @@ const Layout_wrapper = ({ children }) => {
             <body>
                 <main className={`${transparent && 'transparent-header'}  ${calcPageBodyClass && 'cost-calc-page'}`}>
 
-                    <div className="container">
+                 
                         <div className="content">
                             <AppHeader />
                             {children}
                         </div>
 
                         <AppFooter />
-                    </div>
+                   
                 </main >
 
                 <AppModalWrapper />

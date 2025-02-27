@@ -1,5 +1,5 @@
 import React from 'react';
-import AppInput from './elements/AppInput';
+import AppInput from './elements/AppInput.tsx';
 import AppValidationObserver from './AppValidationObserver';
 import { useHeaderContext } from '../contexts/HeaderContext';
 import { useTranslation } from 'react-i18next';

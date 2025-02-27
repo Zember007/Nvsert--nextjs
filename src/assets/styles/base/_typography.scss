@@ -9,12 +9,12 @@ p {
 
 a:not([class]) {
 	@include transition();
-	color: $link-base-text-normal;
+	// color: $link-base-text-normal;
 	text-decoration: underline;
 
-	&:hover, &:active, &:focus {
-		color: $link-base-text-hover;
-	}
+	// &:hover, &:active, &:focus {
+	// 	color: $link-base-text-hover;
+	// }
 }
 
 //списки

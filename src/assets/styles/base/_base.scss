@@ -145,6 +145,7 @@ button,
 }
 
 .wrapper {
+  height: 100%;
   position: relative;
   width: 100%;
   min-width: map_get($wrapper, content-size--min);

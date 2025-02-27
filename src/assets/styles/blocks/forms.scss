@@ -10,22 +10,25 @@ select {
   position: relative;
   cursor: pointer;
   margin: 0;
+  z-index: 0;
 
   &__input,
   &__textarea {
-    @include transition;
-    outline: none;
+    margin-top: 25px;
+    z-index: 1;
+    @include transition();
     display: block;
     height: 48px;
     border: none;
-    border-radius: 8px;
-    background-color: $input-bg-normal;
+    background: #2a2a2a;
+    border-radius: 5px;
     font-size: 16px;
     line-height: 24px;
     font-weight: 400;
     padding: 12px 20px;
     color: $input-placeholder-filled;
     resize: none;
+
     @media (max-width: $media-s) {
       font-size: 14px;
       line-height: 20px;
@@ -41,18 +44,29 @@ select {
         display: block;
       }
     } */
-    &:placeholder-shown {
-      & ~ .field__title {
-        display: block;
+    &:not(:placeholder-shown):not(:focus) {
+      &~.field__title {
+        z-index: -1;
       }
     }
 
     &:hover {
-      background-color: $input-bg-hover;
+      &:not(:focus) {
+        &~.field__title {
+          opacity: 0;
+        }
+      }
     }
 
     &:focus {
-      background-color: $input-bg-hover;
+      background: #20272a;
+      box-shadow: inset 2px 2px 2px #071a2680, inset -2px -2px 2px #071a2680;
+      outline: 1px solid #737373;
+
+      &~.field__title {
+        z-index: -1;
+        top: 0px;
+      }
     }
 
     &:disabled {
@@ -61,7 +75,7 @@ select {
     }
 
     &:required {
-      & ~ .field__title {
+      &~.field__title {
         &::after {
           content: '\00A0*';
           color: $input-placeholder-required;
@@ -78,16 +92,18 @@ select {
 
   &__title {
     @include transition();
-    display: none;
+
     position: absolute;
-    top: 12px;
+    top: 35px;
     left: 20px;
+    z-index: 1;
     font-size: 16px;
     line-height: 24px;
     color: $input-placeholder-normal;
     max-width: calc(100% - 40px);
     overflow: hidden;
     text-overflow: ellipsis;
+
     @media (max-width: $media-s) {
       font-size: 14px;
       line-height: 20px;
@@ -121,6 +137,7 @@ select {
   margin: 0;
 
   &__input {
+
     position: absolute;
     top: 5px;
     left: 5px;
@@ -130,7 +147,7 @@ select {
     opacity: 0;
 
     &:checked {
-      & ~ .field-check__name {
+      &~.field-check__name {
         &::before {
           border-color: $icon-accent;
         }
@@ -142,7 +159,7 @@ select {
     }
 
     &[type='checkbox'] {
-      & ~ .field-check__name {
+      &~.field-check__name {
         &::before {
           border-radius: 4px;
         }
@@ -161,7 +178,7 @@ select {
     }
 
     &[type='radio'] {
-      & ~ .field-check__name {
+      &~.field-check__name {
         &::before {
           border-radius: 20px;
         }
@@ -267,4 +284,10 @@ select {
 input:-webkit-autofill,
 input:-webkit-autofill:focus {
   transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+.border-main {
+  border: 1px solid #727272;
+
+
 }
