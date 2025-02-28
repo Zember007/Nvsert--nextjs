@@ -14,7 +14,7 @@ import documentsReducer from '@/store/documents';
 import metadataReducer from '@/store/metadata';
 import find_out_costReducer from '@/store/find_out_cost';
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
     search: searchReducer,
     config: configReducer,
@@ -33,4 +33,5 @@ const store = configureStore({
   },
 });
 
-export default store;
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;

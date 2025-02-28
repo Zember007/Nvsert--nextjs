@@ -3,22 +3,25 @@ import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
 const AppKnowCostForm = dynamic(() => import('@/components/forms/AppKnowCostForm'), {
-    suspense: true,
+    loading: () => <p>Loading...</p>,
 });
 
 const AppIntroForm = dynamic(() => import('@/components/forms/AppIntroForm'), {
-    suspense: true,
+    loading: () => <p>Loading...</p>,
 });
 
 const AppSuccessMessage = dynamic(() => import('@/components/modals/AppSuccessMessage'), {
-    suspense: true,
+    loading: () => <p>Loading...</p>,
 }); 
 
-const AppModalWrapper = () => {
-    const { setDefaultModalActive, defaultModalActive, defaultModalName } = useHeaderContext()
+interface AppModalWrapperProps {
+    setDefaultModalActive: (active: boolean) => void;
+    defaultModalActive: boolean;
+    defaultModalName: string;
+}
 
+const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive, defaultModalActive, defaultModalName }) => {
     return (
-
         <>
             <div className={`modal__wrapper ${defaultModalActive && 'active'}`}
                 onClick={() => {

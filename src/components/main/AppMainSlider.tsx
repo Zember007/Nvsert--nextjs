@@ -3,6 +3,7 @@ import { initSlider } from '@/scripts/slider'
 import { useEffect } from 'react';
 import ArrowImg from '@/assets/images/svg/arrow-slider.svg'
 import Image from 'next/image';
+import ImgSlider from '@/assets/images/slider/1.webp'
 
 
 const Slider = () => {
@@ -57,7 +58,10 @@ const Slider = () => {
                         <div className="slider-wrap">
                             <div data-slider="list" className="slider-list">
                                 <div data-slider="slide" className="slider-slide">
-                                    <div className="slide-inner"><img src="https://cdn.prod.website-files.com/674d847bf8e817966d307714/674d90f74ff2fe8b0b912b97_slide-1.avif" loading="lazy" sizes="(max-width: 479px) 100vw, 560px" alt="Abstract layout By FAKURIANDESIGN through Unsplash" />
+                                    <div className="slide-inner">
+                                        
+                                    <Image src={ImgSlider} alt='asdasd'sizes="(max-width: 479px) 100vw, 560px"/>
+                                    
                                         <div className="slide-caption">
                                             <div className="caption-dot"></div>
                                             <p className="caption">Layout nº001</p>
@@ -65,7 +69,8 @@ const Slider = () => {
                                     </div>
                                 </div>
                                 <div data-slider="slide" className="slider-slide active">
-                                    <div className="slide-inner"><img src="https://cdn.prod.website-files.com/674d847bf8e817966d307714/674d90f7cf52dd961b48a1e2_slide-2.avif" loading="lazy" alt="Abstract layout By FAKURIANDESIGN through Unsplash" />
+                                    <div className="slide-inner">
+                                    <Image src={ImgSlider} alt='asdasd'sizes="(max-width: 479px) 100vw, 560px"/>
                                         <div className="slide-caption">
                                             <div className="caption-dot"></div>
                                             <p className="caption">Layout nº002</p>
@@ -73,7 +78,8 @@ const Slider = () => {
                                     </div>
                                 </div>
                                 <div data-slider="slide" className="slider-slide">
-                                    <div className="slide-inner"><img src="https://cdn.prod.website-files.com/674d847bf8e817966d307714/674d90f7f7cce73267703347_slide-3.avif" loading="lazy" sizes="(max-width: 479px) 100vw, 560px" alt="Abstract layout By FAKURIANDESIGN through Unsplash" />
+                                    <div className="slide-inner">
+                                    <Image src={ImgSlider} alt='asdasd'sizes="(max-width: 479px) 100vw, 560px"/>
                                         <div className="slide-caption">
                                             <div className="caption-dot"></div>
                                             <p className="caption">Layout nº003</p>
@@ -81,7 +87,8 @@ const Slider = () => {
                                     </div>
                                 </div>
                                 <div data-slider="slide" className="slider-slide">
-                                    <div className="slide-inner"><img src="https://cdn.prod.website-files.com/674d847bf8e817966d307714/674d90f7ccfd203c82a46798_slide-4.avif" loading="lazy" sizes="(max-width: 479px) 100vw, 560px" alt="Abstract layout By FAKURIANDESIGN through Unsplash" />
+                                    <div className="slide-inner">
+                                    <Image src={ImgSlider} alt='asdasd'sizes="(max-width: 479px) 100vw, 560px"/>
                                         <div className="slide-caption">
                                             <div className="caption-dot"></div>
                                             <p className="caption">Layout nº004</p>

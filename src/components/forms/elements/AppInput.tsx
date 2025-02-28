@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormContext } from "react-hook-form";
 
-const AppInput = ({ title, inputName, type, required, autocomplete, mask } : { title: string, inputName: string, type?: string, required?: boolean, autocomplete?: string, mask?: string }) => {
+const AppInput = ({ title, inputName, type, required, autocomplete, mask, className, classNameTitle } : { title: string, inputName: string, type?: string, required?: boolean, autocomplete?: string, mask?: string, className?:string , classNameTitle?:string }) => {
     const { register, formState: { errors } } = useFormContext();
 
     const formatPhoneNumber = (e:React.FormEvent<HTMLInputElement>) => {
@@ -50,13 +50,13 @@ const AppInput = ({ title, inputName, type, required, autocomplete, mask } : { t
             <input
                 {...register(inputName, { required })}
                 type={type}
-                className="field__input"
+                className={`field__input ${className}`}
                 name={inputName}
                 placeholder={title}
                 autoComplete={autocomplete}
                 onInput={(e) => { changeInput(e) }}
             />
-            <span className="field__title">
+            <span className={`field__title ${classNameTitle}`}>
                 {title}
             </span>
         </label>

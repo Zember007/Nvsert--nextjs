@@ -6,15 +6,15 @@ import AppTextarea from "./elements/AppTextarea";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useHeaderContext } from "../contexts/HeaderContext";
-import MessageImg from '@/assets/images/svg/message-flight.svg'
+import MessageImg from '@/assets/images/svg/Phone.svg'
 import Image from "next/image";
 
-const AppMainForm = ({ btnText }: { btnText:string }) => {
+const AppMainFormSecondary = () => {
 
     const { t } = useTranslation()
     const { openDefaultModal } = useHeaderContext()
 
-    const onSubmit = async(e:any) => {
+    const onSubmit = async (e: any) => {
         const formData = new FormData();
         for (const key in e) {
             if (e.hasOwnProperty(key)) {
@@ -42,25 +42,21 @@ const AppMainForm = ({ btnText }: { btnText:string }) => {
             {({ register, errors }) => (
 
                 <div className="flex flex-col gap-[10px]">
-                    <AppInput className="!bg-[#2a2a2a] focus:!bg-[#20272a]" title={t('form.input.titles.name')} inputName="name" required={true} />
+                    <AppInput classNameTitle="!text-[#000000]" className="!text-[#000000] !bg-[#cccccc]" title={t('form.input.titles.name')} inputName="name" required={true} />
 
-                    <AppInput className="!bg-[#2a2a2a] focus:!bg-[#20272a]" title={t('form.input.titles.phone')} inputName="phone" mask="phone"
+                    <AppInput classNameTitle="!text-[#000000]" className="!text-[#000000] !bg-[#cccccc]" title={t('form.input.titles.phone')} inputName="phone" mask="phone"
                         type="phone" required={true} />
 
-                    <AppTextarea className="!bg-[#2a2a2a] focus:!bg-[#20272a]" title={'Комментарий'} inputName="comment" />
-                    <button type="submit" className="mt-[20px] text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[20px] justify-center p-[5px] rounded-[4px]">
-                        {btnText}
-                        <div className="translate-y-[5px]">
-                            <Image alt="message" src={MessageImg} width={40} height={40}/>
-                        </div>
-
-
-
+                    <button type="submit" className="mt-[40px] text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] bg-[#000000] flex items-center gap-[20px] justify-center p-[5px] rounded-[4px]">
+                        Заказать звонок
+                       
+                            <Image alt="message" src={MessageImg} width={35} height={35} />
+                        
                     </button>
 
 
                     <span className=" mt-[10px] text-[#A4A4A4] text-[13px]">
-                    Согласен на обработку моих персональных данных в соответствии с <Link href="/soglashenie/polzovatelskoe-soglashenie/" target="_blank">Пользовательским соглашением</Link>
+                        Нажимая на кнопку «Связаться» вы соглашаетесь с <Link href="/soglashenie/polzovatelskoe-soglashenie/" target="_blank">политикой конфиденциальности</Link>
                     </span>
 
                 </div>
@@ -69,4 +65,4 @@ const AppMainForm = ({ btnText }: { btnText:string }) => {
     );
 };
 
-export default AppMainForm;
+export default AppMainFormSecondary;

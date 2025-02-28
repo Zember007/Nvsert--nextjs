@@ -1,34 +1,30 @@
-
 import '@/assets/styles/base.scss'
-import AppHeader from '@/components/general/AppHeader.js';
-import { useEffect, useMemo, useState } from 'react';
+import AppHeader from '@/components/general/AppHeader';
+import { ReactNode, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import AppFooter from '@/components/general/AppFooter.js';
+import AppFooter from '@/components/general/AppFooter';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import { updateActionConfigs, updateActionFileConfigs } from '@/store/configs';
 import { generateMetadata } from '@/hook/useHeadLayout';
 import { setMetadata } from '@/store/metadata';
 import AppModalWrapper from '@/components/general/AppModalWrapper';
+import { AppDispatch, RootState } from '@/config/store';
 
 
-const Layout_wrapper = ({ children }) => {
+const Layout_wrapper = ({ children }:{ children:ReactNode }) => {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
 
-    const metadata = useSelector((state) => state.metadata);
-
-
-    const { transparent } = useHeaderContext();
-    const { calcPageBodyClass } = useSelector((state) => state.documents);
-
-    const { configs: configsPure, file_configs: fileConfigsPure, status, error } = useSelector((state) => state.config);
+    const metadata = useSelector((state:RootState) => state.metadata);
 
 
+    const { transparent, setDefaultModalActive, defaultModalActive, defaultModalName } = useHeaderContext();
+    const { calcPageBodyClass } = useSelector((state:RootState) => state.documents);
 
+    const { configs: configsPure, file_configs: fileConfigsPure, status, error } = useSelector((state:RootState) => state.config);
 
     const configs = useMemo(() => {
-
-        let parsedConf = {};
+        let parsedConf:any = {};
         configsPure?.forEach((item) => {
             let key = item.key;
             let value = item.value;
@@ -39,7 +35,7 @@ const Layout_wrapper = ({ children }) => {
     }, [configsPure])
 
     const file_configs = useMemo(() => {
-        let parsedConf = {};
+        let parsedConf:any = {};
         fileConfigsPure?.forEach((item) => {
             let key = item.key;
             let value = item.value;
@@ -53,7 +49,7 @@ const Layout_wrapper = ({ children }) => {
         if (configs.length && file_configs.length) {
             dispatch(setMetadata(generateMetadata(configs, file_configs)))
         }
-    }, [configs, file_configs])
+    }, [configs, file_configs,dispatch])
 
     useEffect(() => {
         dispatch(updateActionConfigs())
@@ -99,23 +95,20 @@ const Layout_wrapper = ({ children }) => {
             </head>
             <body>
                 <main className={`${transparent && 'transparent-header'}  ${calcPageBodyClass && 'cost-calc-page'}`}>
-
-                 
-                        <div className="content">
-                            <AppHeader />
-                            {children}
-                        </div>
-
-                        <AppFooter />
-                   
-                </main >
-
-                <AppModalWrapper />
+                    <div className="content">
+                        <AppHeader />
+                        {children}
+                    </div>
+                    <AppFooter />
+                </main>
+                <AppModalWrapper 
+                    setDefaultModalActive={setDefaultModalActive} 
+                    defaultModalActive={defaultModalActive} 
+                    defaultModalName={defaultModalName} 
+                />
             </body>
         </>
-
     );
-
 };
 
 export default Layout_wrapper;

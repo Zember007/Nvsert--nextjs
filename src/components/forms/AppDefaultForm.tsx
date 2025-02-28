@@ -1,18 +1,18 @@
 import Link from "next/link";
 import AppValidationObserver from "./AppValidationObserver";
-import AppInput from "./elements/AppInput.tsx";
+import AppInput from "./elements/AppInput";
 import { useTranslation } from "react-i18next";
 import AppTextarea from "./elements/AppTextarea";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useHeaderContext } from "../contexts/HeaderContext";
 
-const AppDefaultForm = ({ btnText }) => {
+const AppDefaultForm = ({ btnText }:{ btnText:string }) => {
 
     const { t } = useTranslation()
     const { openDefaultModal } = useHeaderContext()
 
-    const onSubmit = (e) => {
+    const onSubmit = async(e:any) => {
         const formData = new FormData();
         for (const key in e) {
             if (e.hasOwnProperty(key)) {
@@ -22,7 +22,7 @@ const AppDefaultForm = ({ btnText }) => {
 
         try {
 
-            const response = axios.post('/api/feedback', formData);
+            const response = await axios.post('/api/feedback', formData);
 
             if (response.status == 200 || 201) {
                 reset()

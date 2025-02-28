@@ -9,8 +9,8 @@ import Adv3Img from '@/assets/images/svg/adv-3.svg'
 import Adv4Img from '@/assets/images/svg/adv-4.svg'
 import Adv5Img from '@/assets/images/svg/adv-5.svg'
 import Adv6Img from '@/assets/images/svg/adv-6.svg'
-import AppBreadcrumbs from '@/components/general/AppBreadcrumbs.js';
-import AppSidebar from '@/components/general/AppSidebar.js';
+import AppBreadcrumbs from '@/components/general/AppBreadcrumbs';
+import AppSidebar from '@/components/general/AppSidebar';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetPages } from '@/store/pages'
 import { useEffect, useMemo, useState } from 'react';
@@ -18,6 +18,7 @@ import { setMetadata } from '@/store/metadata';
 import { generateMetadata } from '@/hook/useHead'
 import AppDefaultForm from '@/components/forms/AppDefaultForm';
 import { useTranslation } from 'react-i18next';
+import { RootState } from '@/config/store';
 
 const AboutCompany = () => {
 
@@ -31,14 +32,14 @@ const AboutCompany = () => {
 
     }, [])
 
-    const { configs: configsPure } = useSelector((state) => state.config);
+    const { configs: configsPure } = useSelector((state:RootState) => state.config);
 
 
 
 
     const configs = useMemo(() => {
 
-        let parsedConf = {};
+        let parsedConf:any = {};
         configsPure?.forEach((item) => {
             let key = item.key;
             let value = item.value;
@@ -74,7 +75,7 @@ const AboutCompany = () => {
                 <div className="article__wrapper">
 
                     <button
-                        onClick={() => { toogleMobileSidebar() }}
+                        // onClick={() => { toogleMobileSidebar() }}
                         className="cat-menu__btn js-cat-menu-btn btn btn--l btn--primary">
                         <span className="btn-text">Категории</span>
                     </button>
@@ -152,7 +153,7 @@ const AboutCompany = () => {
                             <table>
                                 <thead>
                                     <tr>
-                                        <th colSpan="2">ООО «Центр стандартизации»</th>
+                                        <th colSpan={2}>ООО «Центр стандартизации»</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -195,7 +196,7 @@ const AboutCompany = () => {
                             <table>
                                 <thead>
                                     <tr>
-                                        <th colSpan="2">Банковские реквизиты Альфа-Банк</th>
+                                        <th colSpan={2}>Банковские реквизиты Альфа-Банк</th>
                                     </tr>
                                 </thead>
                                 <tbody>

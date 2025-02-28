@@ -20,7 +20,7 @@ select {
     display: block;
     height: 48px;
     border: none;
-    background: #2a2a2a;
+    background:  #4a587d;
     border-radius: 5px;
     font-size: 16px;
     line-height: 24px;
@@ -59,7 +59,7 @@ select {
     }
 
     &:focus {
-      background: #20272a;
+      // background: #20272a;
       box-shadow: inset 2px 2px 2px #071a2680, inset -2px -2px 2px #071a2680;
       outline: 1px solid #737373;
 
@@ -103,6 +103,7 @@ select {
     max-width: calc(100% - 40px);
     overflow: hidden;
     text-overflow: ellipsis;
+    pointer-events: none;
 
     @media (max-width: $media-s) {
       font-size: 14px;

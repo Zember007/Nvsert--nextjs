@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 
-const AppTextarea = ({ title, inputName, required }) => {
+const AppTextarea = ({ title, inputName, required, className }:{ title:string, inputName:string, required?:boolean, className?:string }) => {
 
     const { register, formState: { errors } } = useFormContext();
     return (
@@ -16,7 +16,7 @@ const AppTextarea = ({ title, inputName, required }) => {
 
             <textarea
                 {...register(inputName, { required })}          
-                className="field__textarea"
+                className={`field__textarea ${className}`}
                 name={inputName}              
                 placeholder={title}             
             ></textarea>

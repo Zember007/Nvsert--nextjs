@@ -1,4 +1,4 @@
-import MainDocumentItem from "./MainDocumentItem";
+import MainDocumentItem from "./elements/MainDocumentItem";
 import ImdDoc from '@/assets/images/main-gallery/1.webp'
 import ImdDoc1 from '@/assets/images/main-gallery/1.webp'
 

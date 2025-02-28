@@ -11,18 +11,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { filterEmail, filterPhone } from '@/hook/filter';
+import { AppDispatch, RootState } from '@/config/store';
+
 
 const Page = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
 
     const { t } = useTranslation()
 
-    const { contacts } = useSelector(state => state.contacts)
+    const { contacts } = useSelector((state:RootState) => state.contacts)
 
     useEffect(() => {
         dispatch(updateActionContacts())
-    }, [])
+    }, [dispatch])
 
     return (
         <div className="article contacts">

@@ -1,18 +1,25 @@
+import React, { ReactNode } from 'react';
 
-const AppSpoilerItem = ({title, preopened, children}) => {
+interface AppSpoilerItemProps {
+    title: string;
+    preopened?: boolean;
+    children: ReactNode;
+}
 
-    function toggleOpen(evt) {
+const AppSpoilerItem: React.FC<AppSpoilerItemProps> = ({ title, preopened = false, children }) => {
+
+    function toggleOpen(evt: React.MouseEvent<HTMLButtonElement>) {
         evt.preventDefault();
-        let target = evt.target.closest('.js-spoiler-button');
+        let target = evt.currentTarget.closest('.js-spoiler-button');
 
-        const spoiler = target.closest('.js-spoiler-item');
-        const spoilerContent = spoiler.querySelector('.js-spoiler-content');
+        const spoiler = target?.closest('.js-spoiler-item');
+        const spoilerContent = spoiler?.querySelector('.js-spoiler-content') as HTMLElement;
         let parentContent = spoilerContent
             .closest('.js-spoiler-item')
-            .closest('.js-spoiler-content');
+            ?.closest('.js-spoiler-content');
 
-        if (!spoiler.classList.contains('active')) {
-            spoiler.classList.add('active');
+        if (!spoiler?.classList.contains('active')) {
+            spoiler?.classList.add('active');
             spoilerContent.style.height = 'auto';
 
             let height = spoilerContent.clientHeight + 'px';
@@ -37,7 +44,7 @@ const AppSpoilerItem = ({title, preopened, children}) => {
             spoilerContent.addEventListener(
                 'transitionend',
                 function () {
-                    spoiler.classList.remove('active');
+                    spoiler?.classList.remove('active');
                 },
                 {
                     once: true,
@@ -51,20 +58,18 @@ const AppSpoilerItem = ({title, preopened, children}) => {
     }
 
     return (
-        <div className={`mtp__spoiler-item js-spoiler-item ${preopened && 'active'}`}>
+        <div className={`mtp__spoiler-item js-spoiler-item ${preopened ? 'active' : ''}`}>
             <div className="mtp__spoiler-item-header">
                 <button
                     className="mtp__spoiler-button js-spoiler-button"
-                    onClick={(e) => {
-                        toggleOpen(e)
-                    }}
+                    onClick={toggleOpen}
                 >
                     {title}
                 </button>
             </div>
             <div
                 className="mtp__spoiler-item-content js-spoiler-content"
-                style={{ height: preopened && 'auto' }}
+                style={{ height: preopened ? 'auto' : undefined }}
             >
                 <div className="mtp__spoiler-text">
                     {children}
