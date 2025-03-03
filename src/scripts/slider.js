@@ -44,6 +44,7 @@ export function initSlider() {
             const nextSibling = element.nextElementSibling || slides[0];
             nextSibling.classList.add("active");
             activeElement = nextSibling;
+            activeIndex.index = index
 
             // Move the number to the correct spot
             gsap.to(allSteps, { y: `${-100 * index}%`, ease: "power3", duration: 0.45 });
@@ -57,6 +58,8 @@ export function initSlider() {
     prevButton.addEventListener("click", () => loop.previous({ ease: "power3", duration: 0.725 }));
 
 }
+
+export const activeIndex = {index: 0}
 
 function horizontalLoop(items, config) {
     let timeline;

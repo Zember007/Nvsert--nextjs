@@ -9,14 +9,7 @@ import AppMainSkills from '../components/main/AppMainSkills';
 import '@/assets/styles/main.scss'
 import AppMainFeedback from '@/components/main/AppMainFeedback';
 
-export default function Home() {
-
-  useEffect(() => {
-    document.body.className = 'transparent-header bg-secondary';
-    return () => {
-      document.body.className = '';
-    };
-  }, []);
+export default function Home() { 
   return (
     <div className="main text-[#000]">
       <AppMainIntro />
