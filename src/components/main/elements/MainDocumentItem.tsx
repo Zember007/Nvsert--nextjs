@@ -36,8 +36,10 @@ const MainDocumentItem = ({ img, title, content, content1 }: props) => {
                         <p className="text-[20px] text-[#000] font-bold">{title}</p>
                         <Image className={`${!active && 'rotate-[180deg]'} transition-all duration-300`} alt='arrow' src={ArrowImg} width={24} height={24} />
                     </div>
-                    <div className={` flex justify-between items-stretch gap-[10px] transition-all duration-300 overflow-hidden max-h-0 ${active && '!max-h-[500px] pb-[23px]'}`}>
-                        {img && <Image alt='document' src={img} />}
+                    <div className={` flex justify-between items-stretch gap-[10px] transition-all duration-300 overflow-hidden max-h-0 ${active && '!max-h-[1200px] pb-[23px]'}`}>
+                        <div>
+                            {img && <Image alt='document' src={img} />}
+                        </div>
 
                         <div className=" flex flex-col justify-between  items-start">
                             <div className="flex flex-col gap-[40px]">
@@ -72,8 +74,8 @@ const MainDocumentItem = ({ img, title, content, content1 }: props) => {
 
 
                                         {
-                                            listHidden && <button 
-                                            onClick={() => setListHidden(false)}
+                                            listHidden && <button
+                                                onClick={() => setListHidden(false)}
                                             >Показать полный список документов 🡣</button>
                                         }
                                     </div>

@@ -72,6 +72,11 @@ const AppHeader = () => {
             <nav className="header-nav">
               <ul className="header-nav__list">
                 <li className="header-nav__item">
+                  <Link href="/" className="header-nav__link">
+                    Главная
+                  </Link>
+                </li>
+                <li className="header-nav__item">
                   <button
                     type="button"
                     className={`header-nav__link services-menu__btn js-services-menu__btn ${servicesMenuActive && 'active'}`}
@@ -183,7 +188,7 @@ const AppHeader = () => {
           </button>
           <Link
             href="/find-out-cost/"
-            className="btn btn--primary btn--m header__calc-link"
+            className="py-[13px] px-[24px] bg-[#000000] rounded-[4px] border-solid border border-[#727272] ml-[70px] text-[#FFF] text-[20px] font-bold"
           >
             {t('calculation.name')}
           </Link>

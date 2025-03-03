@@ -5,8 +5,7 @@
   padding-top: 120px;
   padding-bottom: 75px;
 
-  background: #3C3D3E;
-  // min-height: calc((var(--vh, 1vh) * 100) + 96px);
+  background: url('../../../images/noise.png');
 
   @media (max-width: varibles.$media-l) {
     padding-top: 100px;
@@ -21,8 +20,11 @@
     max-width: 792px;
     width: 100%;
     color: varibles.$white-color;
-    font-size: 56px;
-    line-height: 68px;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 73.59px;
+    letter-spacing: -4%;
+
     margin-bottom: 72px;
 
     @media (max-width: varibles.$media-l) {

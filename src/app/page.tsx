@@ -4,6 +4,7 @@ import AppMainIntro from '../components/main/AppMainIntro';
 import AppMainSlider from '@/components/main/AppMainSlider';
 import AppMainDocuments from '../components/main/AppMainDocuments';
 import AppMainQuestions from '../components/main/AppMainQuestions';
+import AppMainSkills from '../components/main/AppMainSkills';
 
 import '@/assets/styles/main.scss'
 import AppMainFeedback from '@/components/main/AppMainFeedback';
@@ -21,6 +22,8 @@ export default function Home() {
       <AppMainIntro />
 
       <AppMainDocuments />
+
+      <AppMainSkills />
 
       <AppMainSlider />
 

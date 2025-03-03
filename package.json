@@ -30,6 +30,7 @@
     "react-input-mask": "^2.0.4",
     "react-lazy-load-image-component": "^1.6.3",
     "react-multi-date-picker": "^4.5.2",
+    "react-photo-view": "^1.2.7",
     "react-portal": "^4.3.0",
     "react-redux": "^9.2.0",
     "react-slick": "^0.30.3",
