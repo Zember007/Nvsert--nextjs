@@ -16,6 +16,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   useEffect(() => {
     if(pathname === '/') {
       document.body.className = 'transparent-header bg-secondary';
+      document.body.sc
     } else {
       document.body.className = '';
     }

@@ -9,7 +9,21 @@ import AppMainSkills from '../components/main/AppMainSkills';
 import '@/assets/styles/main.scss'
 import AppMainFeedback from '@/components/main/AppMainFeedback';
 
-export default function Home() { 
+export default function Home() {
+
+  useEffect(() => {
+
+    document.body.className = 'transparent-header bg-secondary';
+
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+
+
+    return () => {
+      document.body.className = '';
+    }
+
+  }, []);
   return (
     <div className="main text-[#000]">
       <AppMainIntro />

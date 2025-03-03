@@ -191,11 +191,7 @@ const Slider = () => {
                                     items.map((item, index) => (
                                         <div key={index} data-slider="slide" className="slider-slide active">
                                             <div className="slide-inner">
-                                                <Image src={item.img} alt='asdasd' sizes="(max-width: 479px) 100vw, 560px" />
-                                                <div className="slide-caption">
-                                                    <div className="caption-dot"></div>
-                                                    <p className="caption">Layout nº002</p>
-                                                </div>
+                                                <Image src={item.img} alt='asdasd' sizes="(max-width: 479px) 100vw, 560px" />                                   
                                             </div>
                                         </div>
                                     ))
