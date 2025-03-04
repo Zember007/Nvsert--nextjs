@@ -4,6 +4,7 @@
   padding-bottom: 30px;
 
   &-top {
+    background: url('../../../images/noise.png');
     display: flex;
     gap: 8px;
 
@@ -167,6 +168,7 @@
   }
 
   &-nav {
+    background: url('../../../images/noise.png');
     @media (max-width: $media-m) {
       display: none;
     }

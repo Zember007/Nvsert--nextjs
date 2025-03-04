@@ -1,12 +1,43 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const defaultState = { pages: {} };
+interface Page {
+  title: string;
+  og_description: string;
+  og_image: string;
+  og_title: string;
+  seo_description: string;
+  seo_h1: string;
+  seo_keywords: string;
+  seo_title: string;
+}
+
+interface Article {
+  id?: string;
+  seo_h1?: string;
+  title?: string;
+  content?: { id: string }[];
+  next?: string;
+  previous?: string;
+  totalElements?: number;
+  totalPages?: number;
+  pageSize?: number;
+}
+
+interface PagesState {
+  pages: Article;
+  SEO: Partial<Page>;
+  status: 'idle' | 'loading' | 'succeeded' | 'failed';
+  error: string | null;
+}
+
+const defaultState: PagesState = { pages: {}, SEO: {}, status: 'idle', error: null };
 
 export const updateActionPages = createAsyncThunk(
   'pages/updatePages',
   async (
-    { route, ordering = '', page, pageSize = 12, search = '', okp = '', tnved = '' },
+    { route, ordering = '', page, pageSize = 12, search = '', okp = '', tnved = '' }: 
+    { route: string; ordering?: string; page: number; pageSize?: number; search?: string; okp?: string; tnved?: string },
     { rejectWithValue }
   ) => {
     const url = route ? `/api/pages/${route}` : '/api/pages';
@@ -23,7 +54,7 @@ export const updateActionPages = createAsyncThunk(
         },
       });
       return response.data;
-    } catch (error) {
+    } catch (error:any) {
       return rejectWithValue(error.response?.data || error.message);
     }
   }
@@ -31,12 +62,7 @@ export const updateActionPages = createAsyncThunk(
 
 const pagesSlice = createSlice({
   name: 'pages',
-  initialState: {
-    pages: {},
-    SEO: {},
-    status: 'idle',
-    error: null,
-  },
+  initialState: defaultState,
   reducers: {
     resetPages: (state) => {
       Object.assign(state, defaultState);
@@ -47,7 +73,7 @@ const pagesSlice = createSlice({
       .addCase(updateActionPages.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(updateActionPages.fulfilled, (state, action) => {
+      .addCase(updateActionPages.fulfilled, (state, action: PayloadAction<any>) => {
         state.pages = action.payload;
         state.SEO = {
           title: action.payload.title,
@@ -61,7 +87,7 @@ const pagesSlice = createSlice({
         };
         state.status = 'succeeded';
       })
-      .addCase(updateActionPages.rejected, (state, action) => {
+      .addCase(updateActionPages.rejected, (state, action: PayloadAction<any>) => {
         state.error = action.payload;
         state.status = 'failed';
       });

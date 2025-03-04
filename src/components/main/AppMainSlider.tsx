@@ -154,7 +154,7 @@ const Slider = () => {
                                     </span>
                                 </div>
                             </div>
-                            <p className="text-[16px]">
+                            <p className="text-[16px] tracking-normal">
 
                                 {
                                     items[active].text
@@ -190,8 +190,10 @@ const Slider = () => {
                                 {
                                     items.map((item, index) => (
                                         <div key={index} data-slider="slide" className="slider-slide active">
-                                            <div className="slide-inner">
-                                                <Image src={item.img} alt='asdasd' sizes="(max-width: 479px) 100vw, 560px" />                                   
+                                            <div className="slide-inner relative bg-[#FFF]">
+                                                <Image src={item.img} className='' alt='asdasd' sizes="(max-width: 479px) 100vw, 560px" />
+                                                <div className="absolute top-0 left-0 right-0 bottom-0 bg-[#34446D] mix-blend-hue"></div>
+
                                             </div>
                                         </div>
                                     ))

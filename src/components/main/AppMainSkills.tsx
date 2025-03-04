@@ -1,5 +1,6 @@
 import FolderImg from '@/assets/images/folder.webp'
 import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
 
 
 const AppMainSkills = () => {
@@ -85,8 +86,31 @@ const AppMainSkills = () => {
             folder: false
         },
     ]
+
+    const [isVisible, setIsVisible] = useState(false);
+    const divRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsVisible(entry.isIntersecting);
+            },
+            { threshold: 0.5 } // 50% элемента должно быть видно
+        );
+
+        if (divRef.current) {
+            observer.observe(divRef.current);
+        }
+
+        return () => {
+            if (divRef.current) {
+                observer.unobserve(divRef.current);
+            }
+        };
+    }, []);
     return (
-        <section className="py-[75px]">
+        <section
+            className="py-[75px] relative">
             <div className="wrapper flex flex-col gap-[50px]">
                 <h2 className="text-[56px]">Наши основные преимущества</h2>
 
@@ -96,8 +120,9 @@ const AppMainSkills = () => {
                             <div key={index}>
                                 {skill.empty ? (<div></div>)
                                     : skill.folder ? (
-                                        <div className={`rounded-[4px] overflow-hidden bg-[#FFF] w-full h-[280px]`}>
+                                        <div className={`relative rounded-[4px] overflow-hidden bg-[#FFF] w-full h-[280px]`}>
                                             <Image alt='folder' src={FolderImg} height={280} />
+<div className="absolute top-0 left-0 right-0 bottom-0 bg-[#34446D] mix-blend-hue"></div>
                                         </div>
                                     )
                                         :
@@ -106,7 +131,7 @@ const AppMainSkills = () => {
                                                 {skill.title}
                                             </span>
                                             <div className='grow'>
-                                                <p className={`group-hover:translate-y-[0px] translate-y-[10px] group-hover:opacity-100 opacity-0 transition-all duration-500`}>
+                                                <p className={` ${!isVisible && 'translate-y-[10px] opacity-0'}  transition-all duration-500`}>
                                                     {skill.text}
                                                 </p>
                                             </div>
@@ -125,6 +150,7 @@ const AppMainSkills = () => {
                     }
                 </div>
             </div>
+            <div ref={divRef} className='top-[50%] absolute'></div>
         </section >
     );
 };

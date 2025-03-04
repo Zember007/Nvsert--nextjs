@@ -1,5 +1,7 @@
 
+import { PhotoProvider } from 'react-photo-view';
 import Feedback from './elements/Feedback';
+import 'react-photo-view/dist/react-photo-view.css';
 
 const feedback = [
     {
@@ -35,12 +37,13 @@ const AppMainFeedback = () => {
         <section className="py-[75px]">
             <div className="wrapper flex flex-col gap-[50px]">
                 <h2 className="text-[56px]">Реальные отзывы клиентов</h2>
-
+                <PhotoProvider maskOpacity={0.4}>
                 <div className="flex gap-[20px]">
                     {feedback.map((item, index) => (
                         <Feedback key={index} {...item} />
                     ))}
                 </div>
+                </PhotoProvider>
             </div>
         </section>
     );

@@ -33,7 +33,7 @@ const MainDocumentItem = ({ img, title, content, content1 }: props) => {
                             setActive(!active)
                         }}
                         className="flex items-center justify-between py-[23px]">
-                        <p className="text-[20px] text-[#000] font-bold">{title}</p>
+                        <p className="text-[20px] text-[#000] font-bold tracking-normal">{title}</p>
                         <Image className={`${!active && 'rotate-[180deg]'} transition-all duration-300`} alt='arrow' src={ArrowImg} width={24} height={24} />
                     </div>
                     <div className={` flex justify-between items-stretch gap-[10px] transition-all duration-300 overflow-hidden max-h-0 ${active && '!max-h-[1200px] pb-[23px]'}`}>
@@ -59,7 +59,7 @@ const MainDocumentItem = ({ img, title, content, content1 }: props) => {
 
                             {
                                 content1.map((cont, contIndex) => (
-                                    <div key={contIndex}>
+                                    <div key={contIndex} className='flex gap-[10px] flex-col'>
                                         <p className='text-[20px] font-bold'>{cont.title}</p>
 
                                         <ul className=' list-disc pl-[20px] flex flex-col gap-[6px]'>

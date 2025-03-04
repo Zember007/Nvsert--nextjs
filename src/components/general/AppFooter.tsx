@@ -42,7 +42,7 @@ const AppFooter = () => {
   return (
     <footer className="footer">
       <div className="wrapper footer__wrapper">
-        <div className="footer-top bg-[#3C3D3E] rounded-[8px] py-[30px] px-[18px]">
+        <div className="footer-top rounded-[8px] py-[30px] px-[18px]">
           <div className="footer-top__col footer-top__col--info">
             <AppLogo className="!w-[192px] !h-[40px] !text-[#FFF]" />
 
@@ -107,7 +107,7 @@ const AppFooter = () => {
             </div>
           </div>
         </div>
-        <nav className="footer-nav bg-[#3C3D3E] rounded-[8px] mt-[4px] py-[30px] px-[18px]">
+        <nav className="footer-nav rounded-[8px] mt-[4px] py-[30px] px-[18px]">
           <AppNavigation />
           <div className="w-full relative mt-[60px] ">
             <div className=" flex flex-col gap-[40px] max-w-[290px]">
