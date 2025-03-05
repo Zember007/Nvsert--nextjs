@@ -11,14 +11,11 @@ interface Article {
     seo_h1?: string;
     title: string;
     full_text?: string;
-    media?: { image_webp: string }[];
+    media?: { image_webp: string, image?: string }[];
     files_list?: { file: string; title: string }[];
     show_staff?: boolean;
 }
 
-interface SEO {
-    // Define the structure of SEO object if available
-}
 
 
 

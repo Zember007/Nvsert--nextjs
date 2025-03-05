@@ -15,6 +15,7 @@ interface Page {
 interface Article {
   id?: string;
   seo_h1?: string;
+  full_text?: string
   title?: string;
   content?: { id: string }[];
   next?: string;
@@ -22,6 +23,9 @@ interface Article {
   totalElements?: number;
   totalPages?: number;
   pageSize?: number;
+  media?: { image_webp: string, image?: string }[];
+  files_list?: { file: string; title: string }[];
+  show_staff?: boolean;
 }
 
 interface PagesState {
@@ -36,8 +40,8 @@ const defaultState: PagesState = { pages: {}, SEO: {}, status: 'idle', error: nu
 export const updateActionPages = createAsyncThunk(
   'pages/updatePages',
   async (
-    { route, ordering = '', page, pageSize = 12, search = '', okp = '', tnved = '' }: 
-    { route: string; ordering?: string; page: number; pageSize?: number; search?: string; okp?: string; tnved?: string },
+    { route, ordering = '', page, pageSize = 12, search = '', okp = '', tnved = '' }:
+      { route: string; ordering?: string; page: number; pageSize?: number; search?: string; okp?: string; tnved?: string },
     { rejectWithValue }
   ) => {
     const url = route ? `/api/pages/${route}` : '/api/pages';
@@ -54,7 +58,7 @@ export const updateActionPages = createAsyncThunk(
         },
       });
       return response.data;
-    } catch (error:any) {
+    } catch (error: any) {
       return rejectWithValue(error.response?.data || error.message);
     }
   }
