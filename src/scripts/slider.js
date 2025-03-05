@@ -1,8 +1,9 @@
 import gsap from "gsap";
 import Draggable from "gsap/dist/Draggable";
+import InertiaPlugin from "./InertiaPlugin";
 
 
-gsap.registerPlugin(Draggable)
+gsap.registerPlugin(Draggable, InertiaPlugin)
 
 export function initSlider() {
 
@@ -196,7 +197,7 @@ function horizontalLoop(items, config) {
         if (config.draggable && typeof (Draggable) === "function") {
             proxy = document.createElement("div")
             let wrap = gsap.utils.wrap(0, 1),
-                ratio, startProgress, draggable, dragSnap, lastSnap, initChangeX, wasPlaying,
+                ratio, startProgress, draggable,  lastSnap, initChangeX, wasPlaying,
                 align = () => tl.progress(wrap(startProgress + (draggable.startX - draggable.x) * ratio)),
                 syncIndex = () => tl.closestIndex(true);
             typeof (InertiaPlugin) === "undefined" && console.warn("InertiaPlugin required for momentum-based scrolling and snapping. https://greensock.com/club");
