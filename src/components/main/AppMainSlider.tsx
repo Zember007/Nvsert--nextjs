@@ -131,18 +131,18 @@ const Slider = () => {
     return (
         <section className='py-[75px] text-[#000]'>
             <div className="wrapper flex flex-col gap-[50px]">
-                <h2 className='text-[56px]'>Мы помогаем с документами по отраслям:</h2>
+                <h2 className='leading-[1] text-center l:text-left text-[24px] xs:text-[40px] l:text-[56px]'>Мы помогаем с документами по отраслям:</h2>
                 <div className="cloneable">
                     <div className="overlay pr-[20px]">
                         <div className="flex flex-col justify-between h-full">
                             <div className="flex items-center gap-[10px]">
                                 <div className="flex item-center text-[32px] font-bold">
                                     <div className="count-column">
-                                        <h2 data-slide-count="step" className="count-heading">01</h2>
+                                        <h3 data-slide-count="step" className="count-heading">01</h3>
                                     </div>
                                     <span className='translate-y-[2px]'>/</span>
                                     <div className="count-column">
-                                        <h2 data-slide-count="total" className="count-heading">{items.length}</h2>
+                                        <h3 data-slide-count="total" className="count-heading">{items.length}</h3>
                                     </div>
                                 </div>
 

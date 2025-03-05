@@ -32,30 +32,32 @@ const MainDocumentItem = ({ img, title, content, content1 }: props) => {
                         onClick={() => {
                             setActive(!active)
                         }}
-                        className="flex items-center justify-between py-[23px]">
-                        <p className="text-[20px] text-[#000] font-bold tracking-normal">{title}</p>
+                        className="flex items-center justify-between py-[15px] s:py-[23px]">
+                        <p className="text-[16px] s:text-[18px] m:text-[20px] text-[#000] font-bold tracking-normal">{title}</p>
                         <Image className={`${!active && 'rotate-[180deg]'} transition-all duration-300`} alt='arrow' src={ArrowImg} width={24} height={24} />
                     </div>
-                    <div className={` flex justify-between items-stretch gap-[10px] transition-all duration-300 overflow-hidden max-h-0 ${active && '!max-h-[1200px] pb-[23px]'}`}>
-                        <div>
-                            {img && <Image alt='document' src={img} />}
-                        </div>
-
-                        <div className=" flex flex-col justify-between  items-start">
-                            <div className="flex flex-col gap-[40px]">
-                                <p className='text-[16px] text-[#000000] max-w-[360px]'>
-                                    {content.text}
-                                </p>
-                                <p className='text-[16px] text-[#000000] max-w-[300px]'>
-                                    {content.text1}
-                                </p>
+                    <div className={` flex flex-col l:flex-row justify-between m:items-stretch gap-[10px] transition-all duration-300 overflow-hidden max-h-0 ${active && '!max-h-[1200px] s:pb-[23px] pb-[15px]'}`}>
+                        <div className="s:gap-[40px] gap-[20px] justify-between flex flex-col m:flex-row m:items-stretch">
+                            <div className='m:m-0 m-auto'>
+                                {img && <Image alt='document' src={img} />}
                             </div>
-                            <button className='px-[30px] py-[18px] text-[20px] font-bold rounded-[4px] bg-[#000000] leading-[1] text-[#FFF]'>
-                                Оформить заявку
-                            </button>
+
+                            <div className=" flex flex-col justify-between  items-start">
+                                <div className="flex flex-col gap-[40px]">
+                                    <p className='text-[16px] text-[#000000] m:max-w-[360px]'>
+                                        {content.text}
+                                    </p>
+                                    <p className='text-[16px] text-[#000000] m:max-w-[300px]'>
+                                        {content.text1}
+                                    </p>
+                                </div>
+                                <button className='m:block hidden px-[30px] py-[18px] text-[20px] font-bold rounded-[4px] bg-[#000000] leading-[1] text-[#FFF]'>
+                                    Оформить заявку
+                                </button>
+                            </div>
                         </div>
 
-                        <div className="flex gap-[10px] flex-col max-w-[500px] text-[#000]">
+                        <div className="flex gap-[10px] flex-col m:max-w-[500px] text-[#000]">
 
                             {
                                 content1.map((cont, contIndex) => (
@@ -83,6 +85,11 @@ const MainDocumentItem = ({ img, title, content, content1 }: props) => {
                             }
 
                         </div>
+
+                        <button className='m:hidden  py-[18px] text-[20px] font-bold rounded-[4px] bg-[#000000] leading-[1] text-[#FFF]'>
+                                    Оформить заявку
+                                </button>
+
                     </div>
                 </div>
 

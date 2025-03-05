@@ -25,21 +25,18 @@
     line-height: 73.59px;
     letter-spacing: -4%;
 
-    margin-bottom: 72px;
-
     @media (max-width: varibles.$media-l) {
-      font-size: 40px;
-      line-height: 1.2;
-      margin-bottom: 40px;
-    }
-
-    @media (max-width: varibles.$media-m) {
-      font-size: 32px;
+      margin: 0 auto;
+      font-size: 44px;
+      max-width: 550px;
+      line-height: 50px;
+     
     }
 
     @media (max-width: varibles.$media-s) {
-      font-size: 24px;
-      margin-bottom: 32px;
+      font-size: 26px;
+      max-width: 340px;
+      line-height: 30px;
     }
   }
 
@@ -48,6 +45,17 @@
     align-items: center;
     justify-content: space-between;
     gap: 20px;
+
+    @media (max-width: varibles.$media-l) {
+      gap: 40px;
+      flex-direction: column;
+     
+    }
+
+    @media (max-width: varibles.$media-s) {
+      gap: 20px;      
+     
+    }
   }
 
 }

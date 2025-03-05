@@ -95,7 +95,7 @@ const AppMainSkills = () => {
             ([entry]) => {
                 setIsVisible(entry.isIntersecting);
             },
-            { threshold: 0.5 } // 50% элемента должно быть видно
+            { threshold: 0.3 }
         );
 
         if (divRef.current) {
@@ -112,7 +112,7 @@ const AppMainSkills = () => {
         <section
             className="py-[75px] relative">
             <div className="wrapper flex flex-col gap-[50px]">
-                <h2 className="text-[56px]">Наши основные преимущества</h2>
+                <h2 className="leading-[1] text-center l:text-left text-[24px] xs:text-[40px] l:text-[56px]">Наши основные преимущества</h2>
 
                 <div className="grid grid-cols-4 gap-[20px]">
                     {
@@ -150,7 +150,7 @@ const AppMainSkills = () => {
                     }
                 </div>
             </div>
-            <div ref={divRef} className='top-[50%] absolute'></div>
+            <div ref={divRef} className='top-0 bottom-0 left-0 right-0 absolute pointer-events-none'></div>
         </section >
     );
 };

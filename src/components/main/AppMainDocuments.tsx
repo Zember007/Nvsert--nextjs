@@ -415,7 +415,7 @@ const AppMainDocuments = () => {
         <section className="py-[75px] flex flex-col gap-[50px]">
             <div className="wrapper">
 
-                <h2 className="text-[56px] text-[#000000]">Мы оформляем следующие документы</h2>
+                <h2 className="leading-[1] text-center l:text-left text-[24px] xs:text-[40px] l:text-[56px] text-[#000000]">Мы оформляем следующие документы</h2>
 
             </div>
             <div className="flex flex-col">
