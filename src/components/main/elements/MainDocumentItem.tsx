@@ -18,11 +18,12 @@ interface props {
     title: string,
     content: content,
     content1: content1[],
+    active:boolean, 
+    setActive:() => void
 }
 
-const MainDocumentItem = ({ img, title, content, content1 }: props) => {
+const MainDocumentItem = ({ img, title, content, content1, active, setActive }: props) => {
 
-    const [active, setActive] = useState(false)
     const [listHidden, setListHidden] = useState(true)
     return (
         <div className={`${active && 'bg-[#FFF]'} hover:bg-[#FFF] transition-all duration-300 cursor-pointer`}>
@@ -30,7 +31,7 @@ const MainDocumentItem = ({ img, title, content, content1 }: props) => {
                 <div className="border-0 border-t border-b border-solid border-[#00000033]  flex flex-col">
                     <div
                         onClick={() => {
-                            setActive(!active)
+                            setActive()
                         }}
                         className="flex items-center justify-between py-[15px] s:py-[23px]">
                         <p className="text-[16px] s:text-[18px] m:text-[20px] text-[#000] font-bold tracking-normal">{title}</p>
@@ -57,11 +58,11 @@ const MainDocumentItem = ({ img, title, content, content1 }: props) => {
                             </div>
                         </div>
 
-                        <div className="flex gap-[10px] flex-col m:max-w-[500px] text-[#000]">
+                        <div className="flex gap-[10px] flex-col  m:max-w-[500px] text-[#000]">
 
                             {
                                 content1.map((cont, contIndex) => (
-                                    <div key={contIndex} className='flex gap-[10px] flex-col'>
+                                    <div key={contIndex} className='flex gap-[10px] flex-col items-start'>
                                         <p className='text-[20px] font-bold'>{cont.title}</p>
 
                                         <ul className=' list-disc pl-[20px] flex flex-col gap-[6px]'>

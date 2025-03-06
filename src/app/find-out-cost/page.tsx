@@ -5,20 +5,21 @@ import AppCalcProgress from '@/components/calculation/AppCalcProgress';
 import { updateActionDiscounts, updateActionDocuments } from '@/store/documents';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/config/store'
 
 const Page = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
 
 
-    const { discounts, documents } = useSelector(state => state.documents)
+    const { discounts, documents } = useSelector((state: RootState) => state.documents)
 
     useEffect(() => {
         dispatch(updateActionDocuments())
         dispatch(updateActionDiscounts())
     }, [])
 
-    const { discountSum, currentStep } = useSelector(state => state.find_out_cost)
+    const { discountSum, currentStep } = useSelector((state: RootState) => state.find_out_cost)
 
 
     return (

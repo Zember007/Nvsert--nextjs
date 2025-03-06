@@ -12,7 +12,7 @@ const Feedback = (item: props) => {
     return (
     
             <PhotoView src={item.img}>
-                <div className="relative z-[0] h-[280px] w-[310px] cursor-pointer group hover:text-[#FFF]">
+                <div className="relative z-[0] h-[280px] w-full min-w-[300px] cursor-pointer group hover:text-[#FFF]">
                     <div className="group-hover:translate-y-[-35px] group-hover:rotate-[-4.29deg] absolute z-[-1] top-0 bottom-0 left-0 right-0 overflow-hidden rounded-[10px] transition-all duration-300">
 
 

@@ -62,7 +62,7 @@ export function initSlider() {
 
 export const activeIndex = {index: 0}
 
-function horizontalLoop(items, config) {
+export function horizontalLoop(items, config) {
     let timeline;
     items = gsap.utils.toArray(items);
     config = config || {};

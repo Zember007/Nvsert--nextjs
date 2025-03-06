@@ -1,6 +1,7 @@
 import MainDocumentItem from "./elements/MainDocumentItem";
 import ImdDoc from '@/assets/images/main-gallery/1.webp'
 import ImdDoc1 from '@/assets/images/main-gallery/1.webp'
+import { useState } from "react";
 
 const documents = [
     {
@@ -411,6 +412,8 @@ const documents = [
 
 
 const AppMainDocuments = () => {
+
+    const [activeIndex, setActive] = useState<number | null>(null)
     return (
         <section className="py-[75px] flex flex-col gap-[50px]">
             <div className="wrapper">
@@ -421,7 +424,7 @@ const AppMainDocuments = () => {
             <div className="flex flex-col">
                 {
                     documents.map((item, index) =>
-                        <MainDocumentItem key={index} {...item} />
+                        <MainDocumentItem setActive={() => setActive(index)} active={index === activeIndex} key={index} {...item} />
                     )
                 }
             </div>
