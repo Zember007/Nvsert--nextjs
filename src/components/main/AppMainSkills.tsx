@@ -1,96 +1,21 @@
 import FolderImg from '@/assets/images/folder.webp'
+import ArrowImg from '@/assets/images/svg/arrow-small.svg'
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from "gsap";
 import { Draggable } from "gsap/Draggable";
 import { horizontalLoop } from '@/scripts/slider';
 import Link from 'next/link';
+import { skills } from './utils';
+import AppSkillBlock from './elements/AppSkillBlock';
+import '@/assets/styles/sections/main/animation/skills.scss'
+
 
 gsap.registerPlugin(Draggable);
 
 const AppMainSkills = () => {
 
-    const data = [
-        {
-            title: 'Гибкие условия оплаты',
-            text: 'Возможность оплаты по факту оказания услуг, рассрочка и индивидуальный подход к каждому клиенту.',
-            btn: 'Оформить заявку',
-            action: '',
-            bg: 'secondary',
-            empty: false,
-            folder: false
-        },
-        {
-            title: 'Индивидуальные условия работы',
-            text: 'Предлагаем персональное сопровождение на всех этапах — от консультации до доставки готовых документов.',
-            btn: 'Оставить заявку',
-            action: '',
-            bg: 'primary',
-            empty: false,
-            folder: false
-        },
-        {
-            empty: true,
-            folder: false
-        },
-        {
-            empty: false,
-            folder: true
-        },
-        {
-            empty: true,
-            folder: false
-        },
-        {
-            title: 'Работаем по договору',
-            text: 'Предлагаем прозрачные условия сотрудничества. Минимальный пакет документов, необходимый для старта сертификации, чтобы максимально ускорить процесс получения необходимых разрешений.',
-            btn: 'Заказать обратный звонок',
-            action: '',
-            bg: 'primary',
-            empty: false,
-            folder: false
-        },
-        {
-            title: 'Широкая область аккредитации',
-            text: 'Охватываем производственные, медицинские, строительные, технологические, пищевые и многие другие отрасли.',
-            btn: 'Все услуги по отраслям',
-            action: '',
-            bg: 'primary',
-            empty: false,
-            folder: false
-        },
-        {
-            empty: true,
-            folder: false
-        },
-        {
-            empty: false,
-            folder: true
-        },
-
-        {
-            title: 'Оперативность',
-            text: 'Получение документов в кратчайшие сроки, без задержек. Многие документы оформляются уже в течение 1–3 дней.',
-            btn: 'Перейти к услугам',
-            action: '',
-            bg: 'primary',
-            empty: false,
-            folder: false
-        },
-        {
-            empty: true,
-            folder: false
-        },
-        {
-            title: 'Более 15 лет опыта',
-            text: 'Имеем безупречную репутацию Оформили более 1 млн документов',
-            btn: 'Подробнее о компании',
-            action: '',
-            bg: 'secondary',
-            empty: false,
-            folder: false
-        },
-    ]
+   
 
 
 
@@ -101,7 +26,7 @@ const AppMainSkills = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isMobile, setIsMobile] = useState<boolean>(false);
 
-    const skills = !isMobile ? data : data.filter((item) => !item.empty);
+    const skillsData = !isMobile ? skills : skills.filter((item) => !item.empty);
 
     useEffect(() => {
         if (typeof window === "undefined") return
@@ -147,7 +72,7 @@ const AppMainSkills = () => {
         });
 
 
-    }, [isMobile, skills.length]);
+    }, [isMobile, skillsData.length]);
 
     // const goToSlide = (index:number) => {
     //     if (!isMobile || !sliderRef.current) return;
@@ -166,7 +91,7 @@ const AppMainSkills = () => {
                 <div className="flex flex-col">
                     <div ref={sliderRef} className="flex xl:grid grid-cols-4 l:gap-[20px]">
                         {
-                            skills.map((skill, index) => (
+                            skillsData.map((skill, index) => (
                                 <div key={index}>
                                     {(skill.empty) ? (
                                         <div></div>
@@ -178,24 +103,7 @@ const AppMainSkills = () => {
                                             </div>
                                         )
                                             :
-                                            <div className={`l:mr-0 mr-[20px] rounded-[4px] flex  group flex-col gap-[20px] justify-between p-[20px] text-[${skill.bg !== 'secondary' ? '#000' : '#FFF'}] bg-[${skill.bg === 'secondary' ? '#00000099' : '#FFF'}] h-[250px] min-w-[300px] w-full`}>
-                                                <span className={`font-bold text-[20px]`}>
-                                                    {skill.title}
-                                                </span>
-                                                <div className='grow'>
-                                                    <p className={` ${!isVisible && 'translate-y-[10px] opacity-0'}  transition-all duration-500`}>
-                                                        {skill.text}
-                                                    </p>
-                                                </div>
-                                                <button className="rebound-box group/item w-full flex items-center text-left">
-                                                    <span className="text-[18px] group-hover/item:w-full overflow-hidden whitespace-nowrap  w-0 transition-all duration-300">{skill.btn}</span>
-                                                    <svg className="rebound" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M3 12H21" stroke={`${skill.bg !== 'secondary' ? '#000' : '#FFF'}`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                                        <path d="M16 7L21 12L16 17" stroke={`${skill.bg !== 'secondary' ? '#000' : '#FFF'}`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                                    </svg>
-
-                                                </button>
-                                            </div >
+                                         <AppSkillBlock {...skill} isVisible={isVisible} />
                                     }
                                 </div>
                             ))
@@ -204,7 +112,7 @@ const AppMainSkills = () => {
 
                     {isMobile &&
                         <li className='flex gap-[2px] mt-[20px] mx-[20px]'>
-                            {skills.map((_, index) =>
+                            {skillsData.map((_, index) =>
                                 <ul key={index}
                                     className={`${index === currentIndex && 'bg-[#34446D]'} h-[10px] w-[10px] rounded-[50%] border border-solid border-[#34446D]`}></ul>
                             )}
@@ -218,7 +126,7 @@ const AppMainSkills = () => {
                         className='flex items-center gap-[8px] mt-[32px]'
                     >
                         <span className='text-[20px] font-bold'>Подробнее о компании</span>                        
-
+                            <Image src={ArrowImg} alt='arrow' width={24} height={24} />
                     </Link>
                 </div>
             </div>

@@ -26,18 +26,20 @@ const MainDocumentItem = ({ img, title, content, content1, active, setActive }: 
 
     const [listHidden, setListHidden] = useState(true)
     return (
-        <div className={`${active && 'bg-[#FFF]'} hover:bg-[#FFF] transition-all duration-300 cursor-pointer`}>
-            <div className="wrapper">
-                <div className="border-0 border-t border-b border-solid border-[#00000033]  flex flex-col">
+        <div tabIndex={0}
+        onClick={() => {
+            setActive()
+        }}
+        className={`${active && 'active'} item group  cursor-pointer`}>
+            <div className="wrapper !px-[50px]">
+                <div className=" item-border flex flex-col">
                     <div
-                        onClick={() => {
-                            setActive()
-                        }}
+                      
                         className="flex items-center justify-between py-[15px] s:py-[23px]">
-                        <p className="text-[16px] s:text-[18px] m:text-[20px] text-[#000] font-bold tracking-normal">{title}</p>
-                        <Image className={`${!active && 'rotate-[180deg]'} transition-all duration-300`} alt='arrow' src={ArrowImg} width={24} height={24} />
+                        <p className="text-[16px] s:text-[18px] m:text-[20px] text-[#000] font-bold tracking-normal align-middle leading-tight">{title}</p>
+                        <Image className={`${!active && '!rotate-[180deg]'} transition-all duration-300`} alt='arrow' src={ArrowImg} width={24} height={24} />
                     </div>
-                    <div className={` flex flex-col l:flex-row justify-between m:items-stretch gap-[10px] transition-all duration-300 overflow-hidden max-h-0 ${active && '!max-h-[1200px] s:pb-[23px] pb-[15px]'}`}>
+                    <div className={` flex flex-col l:flex-row justify-between m:items-stretch gap-[10px] transition-all duration-300 overflow-hidden max-h-0 group-focus:!max-h-[1200px] group-focus:s:pb-[23px] group-focus:pb-[15px] ${active && '!max-h-[1200px] s:pb-[23px] pb-[15px]'}`}>
                         <div className="s:gap-[40px] gap-[20px] justify-between flex flex-col m:flex-row m:items-stretch">
                             <div className='m:m-0 m-auto'>
                                 {img && <Image alt='document' src={img} />}
