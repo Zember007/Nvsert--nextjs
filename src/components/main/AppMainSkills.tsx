@@ -99,11 +99,13 @@ const AppMainSkills = () => {
 
     const sliderRef = useRef<HTMLDivElement | null>(null);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const [isMobile, setIsMobile] = useState<boolean>(false);
 
     const skills = !isMobile ? data : data.filter((item) => !item.empty);
 
     useEffect(() => {
+        if (typeof window === "undefined") return
+
         const observer = new IntersectionObserver(
             ([entry]) => {
                 setIsVisible(entry.isIntersecting);

@@ -40,10 +40,11 @@ const AppMainFeedback = () => {
 
     const sliderRef = useRef<HTMLDivElement | null>(null);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 1240);
+    const [isMobile, setIsMobile] = useState<boolean>(false);
 
     useEffect(() => {
 
+        if (typeof window === "undefined") return
 
         const handleResize = () => {
             setIsMobile(window.innerWidth < 1240);

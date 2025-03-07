@@ -28,7 +28,7 @@ const AppArticlesPagination = ({ pagination }) => {
 
 
     function pageRedirect(num) {
-
+        if (typeof window === "undefined") return
         const params = new URLSearchParams(searchParams.toString());
 
         if (params.get('page') && params.get('page') == num) return;
