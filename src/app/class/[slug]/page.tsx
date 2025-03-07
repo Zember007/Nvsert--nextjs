@@ -5,15 +5,16 @@ import AppBreadcrumbs from "@/components/general/AppBreadcrumbs";
 import { notFound, usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateActionMoreСlass, updateActionСlass } from '@/store/class'
+import { updateActionClass, updateActionMoreClass } from '@/store/class'
+import { AppDispatch, RootState } from '@/config/store';
 
 const Page = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
 
     const [pageSize, setPageSize] = useState(20);
     const [page, setPage] = useState(1);
-    const [observer, setObserver] = useState(null);
+    const [observer, setObserver] = useState<IntersectionObserver | null>(null);
 
     const searchParams = useSearchParams()
     const pathname = usePathname()
@@ -31,10 +32,10 @@ const Page = () => {
         }
     }, [type])
 
-    const ordering = searchParams.ordering ? searchParams.ordering : '';
-    const search = searchParams.search ? searchParams.search : '';
+    const ordering = searchParams.get('ordering') || '';
+    const search = searchParams.get('search') || '';
 
-    const { class: documents } = useSelector(state => state.class)
+    const { class: documents } = useSelector((state: RootState) => state.class)
 
     function fetchData() {
 
@@ -49,9 +50,7 @@ const Page = () => {
             url = 'okp'
         }
 
-
-
-        dispatch(updateActionСlass({
+        dispatch(updateActionClass({
             type: url,
             ordering: ordering,
             page: page,
@@ -69,7 +68,7 @@ const Page = () => {
         } else {
             url = 'okp'
         }
-        dispatch(updateActionMoreСlass({
+        dispatch(updateActionMoreClass({
             type: url,
             ordering,
             page,
@@ -78,7 +77,7 @@ const Page = () => {
     }
 
     async function showMore() {
-        if (page < documents.totalPages) {
+        if (documents.totalPages && page < documents.totalPages) {
             console.log(
                 '🚀 ~ file: _.vue ~ line 83 ~ showMore ~ showMore',
                 'showMore'
@@ -92,6 +91,7 @@ const Page = () => {
         setObserver(new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (
+                    documents.totalPages &&
                     entry.intersectionRatio > 0 &&
                     page < documents.totalPages
                 ) {
@@ -99,12 +99,12 @@ const Page = () => {
                 }
             });
         }))
-        if (observer) {
+        if (observer && observerTarget.current) {
             observer.observe(observerTarget.current);
         }
     }
 
-    const observerTarget = useRef(null)
+    const observerTarget = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
         onElementObserved()
