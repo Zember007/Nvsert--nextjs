@@ -120,21 +120,23 @@ const AppHeader = () => {
             </div>
             <div className={`services-menu js-services-menu ${servicesMenuActive && 'active'}`}>
               <div className="wrapper">
-                <div className="services-menu__header">
-                  <h2 className="services-menu__title">Услуги</h2>
-                  <button
-                    className={`services-menu__btn-close js-services-menu__btn ${servicesMenuActive && 'active'}`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavMenu();
-                    }}
-                    type="button"
-                  >
-                    <i className="icon icon--close"></i>
-                  </button>
-                </div>
-                <div className="services-menu__wrapper">
-                  <AppNavigation />
+                <div className=" py-[30px] px-[18px]  services-menu-bg rounded-[8px]">
+                  <div className="services-menu__header">
+                    <h2 className="services-menu__title">Услуги</h2>
+                    <button
+                      className={`services-menu__btn-close js-services-menu__btn ${servicesMenuActive && 'active'}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleNavMenu();
+                      }}
+                      type="button"
+                    >
+                      <i className="icon icon--close"></i>
+                    </button>
+                  </div>
+                  <div className="services-menu__wrapper">
+                    <AppNavigation />
+                  </div>
                 </div>
               </div>
             </div>

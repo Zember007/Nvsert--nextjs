@@ -2,6 +2,9 @@ import ImdDoc from '@/assets/images/main-gallery/1.webp'
 import ImdDoc1 from '@/assets/images/main-gallery/1.webp'
 import ImgSlider from '@/assets/images/slider/1.png'
 
+import FolderImg from '@/assets/images/folder.webp'
+import Folder1Img from '@/assets/images/floder1.webp'
+
 export const documents = [
     {
         title: 'Сертификат соответствия ГОСТ Р',
@@ -433,7 +436,8 @@ export const skills = [
         },
         {
             empty: false,
-            folder: true
+            folder: true,
+            img: Folder1Img
         },
         {
             empty: true,
@@ -463,7 +467,8 @@ export const skills = [
         },
         {
             empty: false,
-            folder: true
+            folder: true,
+            img: FolderImg
         },
 
         {

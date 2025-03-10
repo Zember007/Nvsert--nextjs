@@ -1,4 +1,4 @@
-import FolderImg from '@/assets/images/folder.webp'
+
 import ArrowImg from '@/assets/images/svg/arrow-small.svg'
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
@@ -96,13 +96,8 @@ const AppMainSkills = () => {
                                     {(skill.empty) ? (
                                         <div></div>
                                     )
-                                        : skill.folder ? (
-                                            <div className={`l:mr-0 mr-[20px] relative rounded-[4px] overflow-hidden bg-[#FFF] w-full min-w-[300px] h-[250px]`}>
-                                                <Image alt='folder' src={FolderImg} height={280} />
-                                                <div className="absolute top-0 left-0 right-0 bottom-0 bg-[#34446D] mix-blend-hue"></div>
-                                            </div>
-                                        )
-                                            :
+                                        : 
+                                            
                                          <AppSkillBlock {...skill} isVisible={isVisible} />
                                     }
                                 </div>

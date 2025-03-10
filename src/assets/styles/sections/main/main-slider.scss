@@ -105,7 +105,6 @@
   align-items: stretch;
   display: flex;
   position: relative;
-  
 }
 
 .slider-slide {
@@ -141,14 +140,9 @@
   height: .5em;
 }
 
-.caption {
-  font-size: .75em;
-  font-family: arial;
-  margin: 0px;
+
+.overlay-slider {
+  background: linear-gradient(270deg, rgba(245, 245, 245, 0) 0%, #F5F5F5 75%);
 }
-
-
-
-
 
 

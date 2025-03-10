@@ -474,10 +474,12 @@
 	}
 }
 
+.services-menu-bg{
+	background: url('../../images/noise.png');
+}
 
 .services-menu {
-	//background: linear-gradient(180deg, #34446D 0%, rgba(63, 77, 112, 0.92) 100%);
-	background: linear-gradient(180deg, #34446D 0%, #4E5B7B 100%);
+	background: #141414;
 	width: 100vw;
 	height: 100vh;
 	height: calc(var(--vh, 1vh) * 100);
@@ -485,7 +487,7 @@
 	top: 0;
 	left: 0;
 	z-index: 21;
-	padding-top: 96px;
+	padding-top: 60px;
 	transform: translateY(-100%);
 	transition: all 0.3s ease-in-out 0s;
 	@media (max-width: $media-s) {

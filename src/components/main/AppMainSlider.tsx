@@ -27,15 +27,14 @@ const Slider = () => {
                 <h2 className='leading-[1] tracking-[-0.04em] text-center l:text-left text-[24px] xs:text-[40px] l:text-[56px]'>Мы помогаем с документами по отраслям:</h2>
                 <div className="cloneable l:h-[550px] h-[710px]">
                     <div className="overlay l:w-[45%] w-full p-[30px] relative z-[0]  rounded-[8px] border border-solid border-[#CCCCCC] overflow-hidden">
-                        <div className="absolute top-0 right-0 left-0 bottom-0 bg-[#F5F5F580] z-[-1] backdrop-blur-[10px] ">
-
+                        <div className="absolute overlay-slider top-0 right-0 left-0 bottom-0 bg-[#F5F5F580] z-[-1] backdrop-blur-[10px] ">
                         </div>
                         <div className="flex flex-col justify-between h-full l:items-start items-center">
                             <div className="flex flex-col grow l:gap-[10px] gap-[30px]">
                                 <div className="flex items-center gap-[10px]">
 
 
-                                    <div className="p-[10px] rounded-[4px] bg-[#0000001A]">
+                                    <div className="py-[6.2px] px-[10px] rounded-[4px] bg-[#0000001A]">
                                         <span className='text-[28px] font-bold'>
                                             {
                                                 slides[active].title
@@ -95,7 +94,7 @@ const Slider = () => {
                                         <div key={index} data-slider="slide" className="slider-slide active l:w-[710px] l:h-[550px] w-[415px] h-[306px]">
                                             <div className="slide-inner relative bg-[#FFF]">
                                                 <Image src={item.img} alt='slide' fill
-    style={{ objectFit: 'cover' }} />
+                                                    style={{ objectFit: 'cover' }} />
                                                 <div className="absolute top-0 left-0 right-0 bottom-0 bg-[#34446D] mix-blend-hue"></div>
 
                                             </div>

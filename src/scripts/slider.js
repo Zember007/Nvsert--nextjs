@@ -38,7 +38,7 @@ export function initSlider() {
         paused: true,
         draggable: true,
         center: false,
-        
+
         onChange: (element, index) => {
 
             // We add the active class to the 'next' element because our design is offset slightly.
@@ -61,7 +61,7 @@ export function initSlider() {
 
 }
 
-export const activeIndex = {index: 0}
+export const activeIndex = { index: 0 }
 
 export function horizontalLoop(items, config) {
     let timeline;
@@ -80,7 +80,7 @@ export function horizontalLoop(items, config) {
                 }, paused: config.paused, defaults: { ease: "none" }, onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100)
             }),
             length = items.length,
-            startX = items[0].offsetLeft,
+            startX = items[0].offsetLeft - 150,
             times = [],
             widths = [],
             spaceBefore = [],
@@ -156,7 +156,7 @@ export function horizontalLoop(items, config) {
             },
             onResize = () => refresh(true),
             proxy;
-        gsap.set(items, { x: 0 });
+        gsap.set(items, { x: startX + 70 });
         populateWidths();
         populateTimeline();
         populateOffsets();
@@ -198,7 +198,7 @@ export function horizontalLoop(items, config) {
         if (config.draggable && typeof (Draggable) === "function") {
             proxy = document.createElement("div")
             let wrap = gsap.utils.wrap(0, 1),
-                ratio, startProgress, draggable,  lastSnap, initChangeX, wasPlaying,
+                ratio, startProgress, draggable, lastSnap, initChangeX, wasPlaying,
                 align = () => tl.progress(wrap(startProgress + (draggable.startX - draggable.x) * ratio)),
                 syncIndex = () => tl.closestIndex(true);
             typeof (InertiaPlugin) === "undefined" && console.warn("InertiaPlugin required for momentum-based scrolling and snapping. https://greensock.com/club");
