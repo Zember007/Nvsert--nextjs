@@ -103,7 +103,7 @@ const AppMainQuestions = () => {
 return (
     <section className="py-[75px]">
         <div className="wrapper flex flex-col gap-[50px]">
-            <h2 className="leading-[1] text-center l:text-left text-[24px] xs:text-[40px] l:text-[56px]">Часто задаваемые вопросы</h2>
+            <h2 className="leading-[1] tracking-[-0.04em] text-center l:text-left text-[24px] xs:text-[40px] l:text-[56px]">Часто задаваемые вопросы</h2>
             <div className="flex justify-between gap-[100px] l:items-start l:flex-row flex-col items-center">
                 <div className="flex flex-col grow">
                     {questions.map((item, index) => <AppMainDropdown key={index} title={ item.title} node={ item.node} />)}

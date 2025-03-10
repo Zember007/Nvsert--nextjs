@@ -69,7 +69,7 @@
 
 .items .item:hover + * + * + * + *{
     filter: inherit;
-    transform: translateZ(calc(var(--index) * .1)) rotateX(-5deg);
+    transform: translateZ(calc(var(--index) * 0)) rotateX(-5deg);
     z-index: -4;
 }
 
@@ -96,10 +96,10 @@
     transform: translateZ(calc(var(--index) * 0)) rotateX(5deg);
 }
 
-.items .item.active, .items .item:focus {
+.items .item.active {
 	
 	z-index: 100;
-	transform: translateZ(calc(var(--index) ));
+	transform: translateZ(calc(var(--index) * 2));
 
     background-color: #FFF;
 

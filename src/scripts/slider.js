@@ -38,6 +38,7 @@ export function initSlider() {
         paused: true,
         draggable: true,
         center: false,
+        
         onChange: (element, index) => {
 
             // We add the active class to the 'next' element because our design is offset slightly.
