@@ -117,7 +117,7 @@ const AppFooter = () => {
               </Link>
             </div>
 
-            <div className="py-[20px] px-[25px] bg-[#00000033] rounded-[4px] border border-solid border-[#A4A4A4] absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] flex items-center gap-[10px]">
+            <div className="py-[19px] px-[25px] bg-[#00000033] rounded-[4px] border border-solid border-[#A4A4A4] absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] flex items-center gap-[10px]">
               <Image src={AudioLogo} alt='logo' width={100} height={38} />
               <hr className="h-[62px] w-[1px] bg-[#FFFFFF] !m-[0]" />
               <p className="text-[#FFF]">Помогаем бизнесу <br /> переводить аудио в текст</p>
