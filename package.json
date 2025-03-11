@@ -36,6 +36,7 @@
     "react-redux": "^9.2.0",
     "react-slick": "^0.30.3",
     "sass": "^1.84.0",
+    "vanilla-tilt": "^1.8.1",
     "vue": "^2.7.16",
     "vue-custom-element": "^3.3.0",
     "vue2-datepicker": "^3.11.1",

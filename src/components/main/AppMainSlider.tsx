@@ -9,16 +9,11 @@ const Slider = () => {
 
 
     const [active, setActive] = useState<number>(activeIndex.index)
+    const [changeBg, setChangeBg] = useState(false)
 
     useEffect(() => {
         initSlider()
     }, [])
-
-
-
-
-
-
 
 
     return (
@@ -26,24 +21,26 @@ const Slider = () => {
             <div className="wrapper flex flex-col gap-[50px]">
                 <h2 className='leading-[1] tracking-[-0.04em] text-center l:text-left text-[24px] xs:text-[40px] l:text-[56px]'>Мы помогаем с документами по отраслям:</h2>
                 <div className="cloneable l:h-[550px] h-[710px]">
-                    <div className="overlay l:w-[45%] w-full p-[30px] relative z-[0]  rounded-[8px] border border-solid border-[#CCCCCC] overflow-hidden">
-                        <div className="absolute overlay-slider top-0 right-0 left-0 bottom-0 bg-[#F5F5F580] z-[-1] backdrop-blur-[10px] ">
+                    <div className="overlay l:w-[45%] w-full p-[30px] relative z-[0]  rounded-[8px] border border-solid border-[#737373] overflow-hidden">
+                        <div className={`overlay-slider absolute  top-0 right-0 left-0 bottom-0 z-[-2]  ${!changeBg && '!bg-[#F5F5F5] transition-all duration-1000'}`}></div>
+                        <div className="absolute  top-0 right-0 left-0 bottom-0 bg-[#F5F5F580] z-[-1] backdrop-blur-[10px] ">
                         </div>
                         <div className="flex flex-col justify-between h-full l:items-start items-center">
                             <div className="flex flex-col grow l:gap-[10px] gap-[30px]">
                                 <div className="flex items-center gap-[10px]">
 
 
-                                    <div className="py-[6.2px] px-[10px] rounded-[4px] bg-[#0000001A] border-[#CCCCCC] border-solid border">
-                                        <span className='text-[28px] font-bold'>
+                                    <div className="py-[6.2px] px-[10px] rounded-[4px] bg-[#0000001A] w-full text-center border-[#CCCCCC] border-solid border">
+                                        <span className='text-[24px] font-bold '>
                                             {
                                                 slides[active].title
                                             }
                                         </span>
                                     </div>
                                 </div>
-                                <div className="l:grow">
-                                    <p className="text-[16px] l:my-auto tracking-normal">
+                                <div className="l:grow relative w-full h-full">
+
+                                    <p className={` text-[16px] l:my-auto tracking-normal translate-y-[15px] opacity-0   ${!changeBg && ' !opacity-100 !translate-y-[0px] duration-500 transition-all'} `}>
 
                                         {
                                             slides[active].text
@@ -56,21 +53,25 @@ const Slider = () => {
                                 <div className="flex gap-[10px]">
                                     <button
                                         onClick={() => {
+                                            setChangeBg(true)
                                             setTimeout(() => {
                                                 setActive(activeIndex.index)
+                                                setChangeBg(false)
                                             }, 300)
                                         }}
-                                        aria-label="previous slide" data-slider="button-prev" className="w-[100px] h-[50px] rounded-[4px] bg-[#000000] flex items-center justify-center">
-                                        <Image src={ArrowImg} alt='prev' width={34} height={45} />
+                                        aria-label="previous slide" data-slider="button-prev" className="w-[100px] h-[50px] rounded-[4px] bg-[#0000001A] border-[#34446D] border border-solid flex items-center justify-center">
+                                        <Image src={ArrowImg} alt='prev' width={20} height={34} className='rotate-[180deg]' />
                                     </button>
                                     <button
                                         onClick={() => {
+                                            setChangeBg(true)
                                             setTimeout(() => {
                                                 setActive(activeIndex.index)
+                                                setChangeBg(false)
                                             }, 300)
                                         }}
-                                        aria-label="previous slide" data-slider="button-next" className="w-[100px] h-[50px] rounded-[4px] bg-[#000000] flex items-center justify-center">
-                                        <Image src={ArrowImg} alt='next' className='rotate-[180deg]' width={34} height={45} />
+                                        aria-label="previous slide" data-slider="button-next" className="w-[100px] h-[50px] rounded-[4px] bg-[#0000001A] border-[#34446D] border border-solid flex items-center justify-center">
+                                        <Image src={ArrowImg} alt='next' width={20} height={34} />
                                     </button>
                                 </div>
                                 <div className="flex item-center text-[32px] font-bold leading-[1]">
