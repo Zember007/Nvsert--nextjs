@@ -34,7 +34,7 @@ const Slider = () => {
                                 <div className="flex items-center gap-[10px]">
 
 
-                                    <div className="py-[6.2px] px-[10px] rounded-[4px] bg-[#0000001A]">
+                                    <div className="py-[6.2px] px-[10px] rounded-[4px] bg-[#0000001A] border-[#CCCCCC] border-solid border">
                                         <span className='text-[28px] font-bold'>
                                             {
                                                 slides[active].title
