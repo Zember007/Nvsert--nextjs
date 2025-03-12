@@ -98,7 +98,7 @@ const AppMainSkills = () => {
                                     )
                                         : 
                                             
-                                         <AppSkillBlock {...skill} isVisible={isVisible} />
+                                         <AppSkillBlock index={index} {...skill} isVisible={isVisible} />
                                     }
                                 </div>
                             ))

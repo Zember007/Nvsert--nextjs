@@ -1,7 +1,7 @@
 import ArrowImg from '@/assets/images/svg/arrow-main.svg'
 import Image from 'next/image';
 import { useState } from 'react';
-import { StaticImageData, StaticImport } from 'next/dist/shared/lib/get-img-props';
+import { StaticImageData } from 'next/dist/shared/lib/get-img-props';
 
 interface content {
     text: string,
@@ -14,7 +14,7 @@ interface content1 {
 }
 
 interface props {
-    img:  StaticImageData,
+    img: StaticImageData,
     title: string,
     content: content,
     content1: content1[],
@@ -25,9 +25,35 @@ interface props {
     borderb: boolean
 }
 
+interface pulse {
+    width: string;
+    height: string;
+    top: string;
+    left: string;
+}
+
 const MainDocumentItem = ({ img, title, content, content1, active, setActive, borderb, bordert, setHover }: props) => {
 
-    const [listHidden, setListHidden] = useState(true)
+    const [listHidden, setListHidden] = useState(true);
+    const [pulseStyle, setPulseStyle] = useState<null | pulse>(null);
+
+    const handleItemClick = (event: any) => {
+        console.log(event);
+
+        if (window.innerWidth >= 1008) {
+            const maxWidthHeight = Math.max(event.target.offsetWidth, event.target.offsetHeight);
+            const pulse = {
+                width: `${maxWidthHeight}px`,
+                height: `${maxWidthHeight}px`,
+                top: `${event.pageY - event.target.offsetTop - maxWidthHeight / 2}px`,
+                left: `${event.pageX - event.target.offsetLeft - maxWidthHeight / 2}px`,
+            };
+            setPulseStyle(pulse);
+            setTimeout(() => {
+                setPulseStyle(null); // Убираем пульсацию через 300мс
+            }, 300);
+        }
+    };
 
     return (
         <div
@@ -37,10 +63,14 @@ const MainDocumentItem = ({ img, title, content, content1, active, setActive, bo
             <div className="  flex flex-col">
                 <div className="wrapper">
                     <div
-                        onClick={() => {
-                            setActive(true)
+                        onClick={(event) => {
+              
+                            setActive(true);
                         }}
                         className={`flex items-center border-0   border-solid border-[#00000033] ${!bordert && 'border-t-[transparent]'} border-t-[0.5px] ${(!borderb || active) && 'border-b-[transparent]'} border-b-[0.5px]  justify-between py-[15px] s:py-[23px] ${active && 'text-[#34446D]'} hover:text-[#34446D] text-[#000] transition-all duration-300 relative ${!active && 'pl-[63px] hover:border-[transparent] '}`}>
+
+      
+
                         <div className={`transition-all duration-300 absolute top-1/2 left-0 translate-y-[-50%] ${active && 'translate-y-[60px]'}`}>
                             <Image alt='document' src={img}
                                 width="0"
@@ -55,9 +85,9 @@ const MainDocumentItem = ({ img, title, content, content1, active, setActive, bo
                             <button
                                 onClick={() => {
                                     setTimeout(() => {
-                                        if (!active) return
-                                        setActive(false)
-                                    }, 100)
+                                        if (!active) return;
+                                        setActive(false);
+                                    }, 100);
                                 }}>
                                 <Image
                                     className={`${!active && 'rotate-[180deg]'} transition-all duration-700`} alt='arrow' src={ArrowImg} width={24} height={24} />
@@ -70,11 +100,11 @@ const MainDocumentItem = ({ img, title, content, content1, active, setActive, bo
                         <div className={` flex flex-col l:flex-row justify-between m:items-stretch gap-[10px] transition-all easy-in duration-500 overflow-hidden max-h-0 ${active && '!duration-700 !max-h-[1200px] s:py-[23px] py-[15px]'}`}>
                             <div className="s:gap-[40px] gap-[20px] justify-between flex flex-col m:flex-row m:items-stretch">
                                 <div className='m:m-0 m-auto'>
-                                    <div 
-                                    style={{
-                                        width: img.width + 'px',
-                                        height: img.height + 'px'
-                                    }}
+                                    <div
+                                        style={{
+                                            width: img.width + 'px',
+                                            height: img.height + 'px'
+                                        }}
                                     ></div>
                                 </div>
 
@@ -113,7 +143,7 @@ const MainDocumentItem = ({ img, title, content, content1, active, setActive, bo
 
                                             {
                                                 listHidden && cont.list.length > 5 && <button
-                                                className='text-[#34446D] font-bold'
+                                                    className='text-[#34446D] font-bold'
                                                     onClick={() => setListHidden(false)}
                                                 >Показать полный список документов 🡣</button>
                                             }
@@ -131,7 +161,7 @@ const MainDocumentItem = ({ img, title, content, content1, active, setActive, bo
                     </div>
                 </div>
             </div>
-        </div >
+        </div>
     );
 };
 

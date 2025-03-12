@@ -22,12 +22,13 @@ const AppSkillBlock = (skill: any) => {
   const mousePY = mouseY / dimensions.height;
 
   const cardStyle = {
-    transform: `rotateY(${mousePX * 30}deg) rotateX(${mousePY * -30}deg)`
+    transform: `rotateY(${mousePX * 30}deg) rotateX(${mousePY * -30}deg)`,
+    perspective: (skill.index == 1 || skill.index === 6) ?  '1200px' : '0'
   };
 
   const textStyle = {
-    transform: `translate3d(${mousePX * 20}px, ${mousePY * 20}px, 0)`, // Текст будет двигаться на 20px в зависимости от мыши
-    transition: 'transform 0.1s ease-out' // Плавный переход
+    transform: `translate3d(${mousePX * 20 * ((skill.index === 1 || skill.index === 6) ? 2 : 1)}px, ${mousePY * 20 * ((skill.index == 1 || skill.index === 6) ? 2 : 1)}px, 0) scale(${(skill.index === 5 || skill.index === 6) ? 1.1 : 1})`,
+    transition: 'transform 0.1s ease-out',
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -70,15 +71,15 @@ const AppSkillBlock = (skill: any) => {
             </>
             :
             <>
-              <span className={`font-bold text-[20px]`} style={textStyle}>
+              <span className={`font-bold text-[20px] transition-all duration-500`} style={mousePX ? textStyle : {}}>
                 {skill.title}
               </span>
               <div className='grow'>
-                <p className={`${!skill.isVisible && 'translate-y-[10px] opacity-0'} transition-all duration-500`}  style={textStyle}>
+                <p className={`${!skill.isVisible && 'translate-y-[10px] opacity-0'} transition-all duration-500`}  style={mousePX ? textStyle : {}}>
                   {skill.text}
                 </p>
               </div>
-              <button className="rebound-box w-full flex items-center text-left" style={textStyle}>
+              <button className="rebound-box w-full flex items-center text-left transition-all duration-500" style={mousePX ? textStyle : {}}>
                 <span className="text-[18px] group-hover/item:w-full overflow-hidden whitespace-nowrap w-0 transition-all duration-300">{skill.btn}</span>
                 <svg className="rebound" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M3 12H21" stroke={`${skill.bg !== 'secondary' ? '#000' : '#FFF'}`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
