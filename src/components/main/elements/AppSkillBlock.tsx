@@ -30,8 +30,7 @@ const AppSkillBlock = (skill: any) => {
   const textStyle = {
     transform: `translate3d(${mousePX * 20 * 2}px, ${mousePY * 20 * 2}px, 0) scale(1.1)`,
     transition: 'transform 0.3s ease-out', // Плавное возвращение текста
-    willChange: 'transform',
-    textRendering: 'optimizeLegibility',
+    willChange: 'transform'
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
