@@ -6,6 +6,7 @@ const AppSkillBlock = (skill: any) => {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [mouseX, setMouseX] = useState(0);
   const [mouseY, setMouseY] = useState(0);
+  const [oldMousePX, setOldMousePX] = useState(0);
   const [mouseLeaveDelay, setMouseLeaveDelay] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -39,6 +40,9 @@ const AppSkillBlock = (skill: any) => {
       const rect = card.getBoundingClientRect();
       setMouseX(e.clientX - rect.left - dimensions.width / 2);
       setMouseY(e.clientY - rect.top - dimensions.height / 2);
+
+      setOldMousePX(e.clientX - rect.left - dimensions.width / 2)
+
     }
   };
 
@@ -52,6 +56,9 @@ const AppSkillBlock = (skill: any) => {
     setMouseLeaveDelay(setTimeout(() => {
       setMouseX(0);
       setMouseY(0);
+      setTimeout(() => {
+        setOldMousePX(0)
+      }, 500)
     }, 1000));
   };
 
@@ -86,7 +93,7 @@ const AppSkillBlock = (skill: any) => {
                 </ul>
               </div>
               <button className="rebound-box w-full flex items-center text-left transition-all duration-500" style={mousePX ? textStyle : {}}>
-                <span className="text-[18px] group-hover/item:w-full overflow-hidden whitespace-nowrap w-0 transition-all duration-300">{skill.btn}</span>
+                <span className={`text-[18px] group-hover/item:w-full ${skill.index === 6 && oldMousePX && 'w-full'} overflow-hidden whitespace-nowrap w-0 transition-all duration-300`}>{skill.btn}</span>
                 <svg className="rebound" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M3 12H21" stroke={`${skill.bg !== 'secondary' ? '#000' : '#FFF'}`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   <path d="M16 7L21 12L16 17" stroke={`${skill.bg !== 'secondary' ? '#000' : '#FFF'}`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

@@ -13,6 +13,14 @@ const Slider = () => {
 
     useEffect(() => {
         initSlider()
+        const listElement = document.querySelector('.slider-list')
+        listElement?.addEventListener('mousemove', () => {
+            setChangeBg(true)
+            setTimeout(() => {
+                setActive(activeIndex.index)
+                setChangeBg(false)
+            }, 300)
+        })
     }, [])
 
 
@@ -86,13 +94,19 @@ const Slider = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="slide-main l:inset-[0%] l:h-full h-[300px] l:bottom-0 bottom-[80px] l:z-0 z-[]">
+                    <div
+
+                        className="slide-main l:inset-[0%] l:h-full h-[300px] l:bottom-0 bottom-[80px] l:z-0 z-[]">
                         <div className="slider-wrap">
-                            <div data-slider="list" className="slider-list">
+                            <div data-slider="list" className="slider-list"
+
+
+                            >
 
                                 {
                                     slides.map((item, index) => (
-                                        <div key={index} data-slider="slide" className="slider-slide active l:w-[710px] l:h-[550px] w-[415px] h-[306px]">
+                                        <div
+                                            key={index} data-slider="slide" className="slider-slide active l:w-[710px] l:h-[550px] w-[415px] h-[306px]">
                                             <div className="slide-inner relative bg-[#FFF]">
                                                 <Image src={item.img} alt='slide' fill
                                                     style={{ objectFit: 'cover' }} />
