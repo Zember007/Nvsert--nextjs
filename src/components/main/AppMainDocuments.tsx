@@ -1,6 +1,7 @@
 import MainDocumentItem from "./elements/MainDocumentItem";
 import { documents } from "./utils";
 import { useState } from "react";
+import '@/assets/styles/sections/main/animation/documents.scss'
 
 
 
