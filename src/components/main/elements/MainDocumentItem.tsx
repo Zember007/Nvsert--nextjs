@@ -65,30 +65,24 @@ const MainDocumentItem = ({ img, title, content, content1, active, setActive, bo
                     <div
                         onClick={(event) => {
               
-                            setActive(true);
+                            setActive(!active);
                         }}
-                        className={`flex items-center border-0   border-solid border-[#00000033] ${!bordert && 'border-t-[transparent]'} border-t-[0.5px] ${(!borderb || active) && 'border-b-[transparent]'} border-b-[0.5px]  justify-between py-[15px] s:py-[23px] ${active && 'text-[#34446D]'} hover:text-[#34446D] text-[#000] transition-all duration-300 relative ${!active && 'pl-[63px] hover:border-[transparent] '}`}>
+                        className={`flex items-center border-0   border-solid border-[#00000033] ${!bordert && 'border-t-[transparent]'} border-t-[0.5px] ${(!borderb || active) && 'border-b-[transparent]'} border-b-[0.5px]  justify-between py-[15px] s:py-[23px] ${active && 'text-[#34446D]'} hover:text-[#34446D] text-[#000] transition-all duration-300 relative pl-[63px] ${!active && ' hover:border-[transparent] '}`}>
 
       
 
-                        <div className={`transition-all duration-300 absolute top-1/2 left-0 translate-y-[-50%] ${active && 'translate-y-[60px]'}`}>
+                        <div className={`transition-all duration-500 absolute top-1/2 left-0 translate-y-[-50%] ${active && '!duration-700 translate-y-[60px]'}`}>
                             <Image alt='document' src={img}
                                 width="0"
                                 height="0"
                                 sizes="100vw"
-                                className={`transition-all duration-300 ${!active && 'w-[43px]'} h-auto`} />
+                                className={`transition-all duration-700 ${!active && '!duration-500 w-[43px]'} h-auto`} />
                         </div>
                         <p className="w-1/2 text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{title}</p>
                         <div className="w-1/2 flex items-center justify-between">
                             <p className="text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">от 2-х дней</p>
                             <p className="text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">от 6 800 ₽</p>
-                            <button
-                                onClick={() => {
-                                    setTimeout(() => {
-                                        if (!active) return;
-                                        setActive(false);
-                                    }, 100);
-                                }}>
+                            <button>
                                 <Image
                                     className={`${!active && 'rotate-[180deg]'} transition-all duration-700`} alt='arrow' src={ArrowImg} width={24} height={24} />
                             </button>
@@ -117,7 +111,7 @@ const MainDocumentItem = ({ img, title, content, content1, active, setActive, bo
                                             {content.text1}
                                         </p>
                                     </div>
-                                    <button className='text-[20px]  font-bold tracking-normal m:block hidden px-[30px] py-[14px] text-[#34446D] rounded-[4px] bg-[#2D2F2F1A] border-[#34446D] border border-solid leading-[1] text-[#FFF]'>
+                                    <button className='text-[20px]  font-bold tracking-normal m:block hidden px-[30px] py-[14px] text-[#34446D] rounded-[4px] bg-[#2D2F2F1A] border-[#34446D] border border-solid leading-[1]'>
                                         Оформить заявку
                                     </button>
                                 </div>
