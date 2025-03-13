@@ -23,12 +23,15 @@ const AppSkillBlock = (skill: any) => {
 
   const cardStyle = {
     transform: `rotateY(${mousePX * 30}deg) rotateX(${mousePY * -30}deg)`,
-    perspective: (skill.index == 1 || skill.index === 6) ?  '1200px' : '0'
+    perspective: '1200px',
+    transition: 'transform 0.3s ease-out', // Плавное возвращение
   };
 
   const textStyle = {
-    transform: `translate3d(${mousePX * 20 * ((skill.index === 1 || skill.index === 6) ? 2 : 1)}px, ${mousePY * 20 * ((skill.index == 1 || skill.index === 6) ? 2 : 1)}px, 0) scale(${(skill.index === 5 || skill.index === 6) ? 1.1 : 1})`,
-    transition: 'transform 0.1s ease-out',
+    transform: `translate3d(${mousePX * 20 * 2}px, ${mousePY * 20 * 2}px, 0) scale(1.1)`,
+    transition: 'transform 0.3s ease-out', // Плавное возвращение текста
+    willChange: 'transform',
+    textRendering: 'optimizeLegibility',
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -53,6 +56,8 @@ const AppSkillBlock = (skill: any) => {
     }, 1000));
   };
 
+  const list: string[] = skill.text;
+
   return (
     <div className="card-wrap"
       onMouseMove={handleMouseMove}
@@ -75,9 +80,11 @@ const AppSkillBlock = (skill: any) => {
                 {skill.title}
               </span>
               <div className='grow'>
-                <p className={`${!skill.isVisible && 'translate-y-[10px] opacity-0'} transition-all duration-500`}  style={mousePX ? textStyle : {}}>
-                  {skill.text}
-                </p>
+                <ul className={`list-disc pl-[17px] ${!skill.isVisible && 'translate-y-[10px] opacity-0'} transition-all duration-500 flex flex-col gap-[5px]`} style={mousePX ? textStyle : {}}>
+                  {list.map((item, index) =>
+                    <li key={index}>{item}</li>
+                  )}
+                </ul>
               </div>
               <button className="rebound-box w-full flex items-center text-left transition-all duration-500" style={mousePX ? textStyle : {}}>
                 <span className="text-[18px] group-hover/item:w-full overflow-hidden whitespace-nowrap w-0 transition-all duration-300">{skill.btn}</span>
