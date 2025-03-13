@@ -1,6 +1,6 @@
 import ArrowImg from '@/assets/images/svg/arrow-main.svg'
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { StaticImageData } from 'next/dist/shared/lib/get-img-props';
 
 interface content {
@@ -35,25 +35,81 @@ interface pulse {
 const MainDocumentItem = ({ img, title, content, content1, active, setActive, borderb, bordert, setHover }: props) => {
 
     const [listHidden, setListHidden] = useState(true);
-    const [pulseStyle, setPulseStyle] = useState<null | pulse>(null);
 
-    const handleItemClick = (event: any) => {
-        console.log(event);
+    const elementRef = useRef<HTMLButtonElement | null>(null);
+    const wrapperRef = useRef<HTMLDivElement | null>(null);
 
-        if (window.innerWidth >= 1008) {
-            const maxWidthHeight = Math.max(event.target.offsetWidth, event.target.offsetHeight);
-            const pulse = {
-                width: `${maxWidthHeight}px`,
-                height: `${maxWidthHeight}px`,
-                top: `${event.pageY - event.target.offsetTop - maxWidthHeight / 2}px`,
-                left: `${event.pageX - event.target.offsetLeft - maxWidthHeight / 2}px`,
+    useEffect(() => {
+        const element = elementRef.current;
+        const wrapper = wrapperRef.current;
+
+        if (!element || !wrapper) return;
+
+        // Начальный стиль
+        element.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
+        element.style.transition = 'transform 0.5s ease-out';
+
+        const handleMouseMove = (e: any) => {
+            const rect = element.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            const rotateX = (mouseY / rect.height) * 30 - 15;
+            const rotateY = (mouseX / rect.width) * -30 + 15;
+
+            element.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+        };
+
+        const handleMouseLeave = () => {
+            element.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
+        };
+
+        const handleFocus = () => {
+            if (element.matches(':focus-visible')) {
+                if (element.classList.contains('tariff')) {
+                    element.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
+                } else {
+                    element.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(10px)';
+                }
+            }
+        };
+
+        const handleBlur = () => {
+            element.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
+        };
+
+        wrapper.addEventListener('mousemove', handleMouseMove);
+        wrapper.addEventListener('mouseleave', handleMouseLeave);
+        element.addEventListener('focus', handleFocus);
+        element.addEventListener('blur', handleBlur);
+
+        return () => {
+            wrapper.removeEventListener('mousemove', handleMouseMove);
+            wrapper.removeEventListener('mouseleave', handleMouseLeave);
+            element.removeEventListener('focus', handleFocus);
+            element.removeEventListener('blur', handleBlur);
+        };
+    }, []);
+
+    const addMouseEffect = (elements: HTMLElement[]) => {
+        const elementsArray = Array.from(elements);
+        elementsArray.forEach((element) => {
+            element.onmousemove = (e) => {
+                const rect = element.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                element.style.setProperty('--mouse-x', `${x}px`);
+                element.style.setProperty('--mouse-y', `${y}px`);
             };
-            setPulseStyle(pulse);
-            setTimeout(() => {
-                setPulseStyle(null); // Убираем пульсацию через 300мс
-            }, 300);
-        }
+        });
     };
+
+    useEffect(() => {
+        if (elementRef.current) {
+            addMouseEffect([elementRef.current]);
+        }
+    }, []);
 
     return (
         <div
@@ -112,9 +168,11 @@ const MainDocumentItem = ({ img, title, content, content1, active, setActive, bo
                                                 {content.text1}
                                             </p>
                                         </div>
-                                        <button className='text-[20px]  font-bold tracking-normal m:block hidden px-[30px] py-[14px] text-[#34446D] rounded-[4px] bg-[#2D2F2F1A] border-[#34446D] border border-solid leading-[1]'>
-                                            Оформить заявку
-                                        </button>
+                                        <div className="tariff-wrap" ref={wrapperRef}>
+                                            <button ref={elementRef} id="open-tariff" className='tariff text-[20px]  font-bold tracking-normal m:block hidden px-[30px] py-[14px] text-[#34446D] rounded-[4px] bg-[#2D2F2F1A] border-[#34446D] border border-solid leading-[1]'>
+                                                Оформить заявку
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -148,9 +206,12 @@ const MainDocumentItem = ({ img, title, content, content1, active, setActive, bo
 
                                 </div>
 
-                                <button className='m:hidden  py-[18px] text-[20px] font-bold rounded-[4px] bg-[#000000] leading-[1] text-[#FFF]'>
-                                    Оформить заявку
-                                </button>
+
+                                <div className="tariff-wrap" ref={wrapperRef}>
+                                    <button ref={elementRef} id="open-tariff" className='tariff m:hidden  py-[18px] text-[20px] font-bold rounded-[4px] bg-[#000000] leading-[1] text-[#FFF]'>
+                                        Оформить заявку
+                                    </button>
+                                </div>
                             </div>
 
                         </div>
