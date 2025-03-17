@@ -146,3 +146,22 @@
 }
 
 
+.animation-content {
+  animation: float 3s ease-in-out infinite;
+
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes float {
+  0% {
+      transform: translateY(0);
+  }
+  50% {
+      transform: translateY(-5px); 
+  }
+  100% {
+      transform: translateY(0); /* Возвращение в исходное положение */
+  }
+}

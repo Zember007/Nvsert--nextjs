@@ -5,7 +5,7 @@ import InertiaPlugin from "./InertiaPlugin";
 
 gsap.registerPlugin(Draggable, InertiaPlugin)
 
-export function initSlider() {
+export function initSlider(gap) {
 
     const wrapper = document.querySelector('[data-slider="list"]')
     const slides = gsap.utils.toArray('[data-slider="slide"]');
@@ -38,6 +38,7 @@ export function initSlider() {
         paused: true,
         draggable: true,
         center: false,
+        gap: gap || 0,
 
         onChange: (element, index) => {
 
@@ -80,7 +81,7 @@ export function horizontalLoop(items, config) {
                 }, paused: config.paused, defaults: { ease: "none" }, onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100)
             }),
             length = items.length,
-            startX = items[0].offsetLeft - 150,
+            startX = items[0].offsetLeft + config.gap,
             times = [],
             widths = [],
             spaceBefore = [],
@@ -156,7 +157,7 @@ export function horizontalLoop(items, config) {
             },
             onResize = () => refresh(true),
             proxy;
-        gsap.set(items, { x: startX + 70 });
+        gsap.set(items, { x: startX + config.gap });
         populateWidths();
         populateTimeline();
         populateOffsets();
