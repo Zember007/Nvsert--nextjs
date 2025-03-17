@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { StaticImageData } from 'next/dist/shared/lib/get-img-props';
 import { filterPrepositions } from '@/hook/filter';
+import { PhotoView } from 'react-photo-view';
 
 interface content {
     text: string,
@@ -109,14 +110,18 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
                             className={`border-group flex items-center   ${!bordert && '!border-t-[transparent]'}  ${(!borderb || active) && '!border-b-[transparent]'}   justify-between py-[15px] s:py-[23px] ${active && 'text-[#FFF]'}  text-[#000] transition-all duration-300 relative pl-[63px] ${!active && ' hover:!border-[transparent] hover:text-[#34446D]'}`}>
 
 
+                            <PhotoView src={img.src}>
+                                <div className={`transition-all duration-300 absolute z-[100] top-1/2 left-0 translate-y-[-50%] ${active && ' translate-y-[60px]'}`}>
 
-                            <div className={`transition-all duration-300 absolute top-1/2 left-0 translate-y-[-50%] ${active && ' translate-y-[60px]'}`}>
-                                <Image alt='document' src={img}
-                                    width="0"
-                                    height="0"
-                                    sizes="100vw"
-                                    className={`transition-all duration-300 w-[190px] ${!active && ' !w-[43px]'} h-auto`} />
-                            </div>
+                                    <Image alt='document' src={img}
+                                        width="0"
+                                        height="0"
+                                        sizes="100vw"
+                                        className={`transition-all duration-300 w-[190px] ${!active && ' !w-[43px]'} h-auto`} />
+
+
+                                </div>
+                            </PhotoView>
                             <p className="w-1/2 text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{title}</p>
                             <div className="w-1/2 grid grid-cols-[1fr_1fr_auto] items-center justify-between">
                                 <p className="text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{duration}</p>
@@ -136,7 +141,8 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
                 </div>
                 <div className={`${active && 'bg-[#FFF] shadow-[0px_2px_4px_0px_#00000040_inset,_0px_-2px_4px_0px_#00000040_inset]'}`}>
                     <div className="wrapper">
-                        <div className={`transition-all easy-in duration-300 overflow-hidden max-h-0  ${active && '!duration-700 !max-h-[1200px] '}`}>
+                        <div className={`transition-all easy-in duration-300 overflow-hidden max-h-0  ${active && '!duration-700 !max-h-[1200px] '}`}
+                        >
                             <div className="s:py-[23px] py-[15px]  flex flex-col l:flex-row justify-between m:items-start gap-[10px] ">
                                 <div className="s:gap-[40px] gap-[20px] justify-between flex flex-col m:flex-row m:items-stretch">
                                     <div className='m:m-0 m-auto'>
