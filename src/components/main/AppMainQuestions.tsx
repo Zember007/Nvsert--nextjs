@@ -1,3 +1,4 @@
+import { filterPrepositions } from '@/hook/filter';
 import AppMainFormSecondary from '../forms/AppMainFormSecondary';
 import AppMainDropdown from './elements/AppMainDropdown'
 const AppMainQuestions = () => {
@@ -106,7 +107,7 @@ return (
             <h2 className="leading-[1] tracking-[-0.04em] text-center l:text-left text-[24px] xs:text-[40px] l:text-[56px]">Часто задаваемые вопросы</h2>
             <div className="flex justify-between gap-[100px] l:items-start l:flex-row flex-col items-center">
                 <div className="flex flex-col grow">
-                    {questions.map((item, index) => <AppMainDropdown key={index} title={ item.title} node={ item.node} />)}
+                    {questions.map((item, index) => <AppMainDropdown key={index} title={filterPrepositions(item.title)} node={filterPrepositions(item.node)} />)}
                 </div>
 
                 <div className="p-[32px] rounded-[6px] bg-[#FFFFFF] max-w-[420px] min-w-[420px] flex flex-col gap-[20px]">

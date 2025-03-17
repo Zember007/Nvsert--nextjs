@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import ArrowImg from '@/assets/images/svg/arrow-slider.svg'
 import Image from 'next/image';
 import { slides } from './utils';
+import { filterPrepositions } from '@/hook/filter';
 
 const Slider = () => {
 
@@ -54,7 +55,7 @@ return (
                                 <div className="py-[6.2px] px-[10px] rounded-[4px] bg-[#0000001A] w-full text-center border-[#CCCCCC] border-solid border">
                                     <span className='text-[24px] font-bold '>
                                         {
-                                            slides[active].title
+                                           filterPrepositions(slides[active].title) 
                                         }
                                     </span>
                                 </div>
@@ -64,7 +65,7 @@ return (
                                 <p className={` text-[16px] l:my-auto tracking-normal translate-y-[15px] opacity-0   ${!changeBg && ' !opacity-100 !translate-y-[0px] duration-500 transition-all'} `}>
 
                                     {
-                                        slides[active].text
+                                       filterPrepositions(slides[active].text)
                                     }
 
                                 </p>

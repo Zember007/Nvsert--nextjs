@@ -1,3 +1,4 @@
+import { filterPrepositions } from "@/hook/filter";
 import Image from "next/image";
 import {  PhotoView } from 'react-photo-view';
 interface props {
@@ -24,11 +25,11 @@ const Feedback = (item: props) => {
                     </div>
                     <div className="p-[20px] bg-[#FFF] h-full rounded-[10px] flex flex-col justify-between group-hover:translate-y-[45px] group-hover:rotate-[4.29deg]  group-hover:bg-[#00000099] transition-all duration-300 backdrop-blur-[3px]">
                         <span className="text-[18px] font-bold">
-                            {item.title}
+                            {filterPrepositions(item.title) }
                         </span>
 
                         <p className='whitespace-pre-wrap text-[16px] '>
-                            {item.text}
+                            {filterPrepositions(item.text)}
                         </p>
 
                     </div>

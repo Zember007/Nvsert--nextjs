@@ -2,6 +2,7 @@ import ArrowImg from '@/assets/images/svg/arrow-main.svg'
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { StaticImageData } from 'next/dist/shared/lib/get-img-props';
+import { filterPrepositions } from '@/hook/filter';
 
 interface content {
     text: string,
@@ -36,81 +37,60 @@ const MainDocumentItem = ({ img, title, content, content1, active, setActive, bo
 
     const [listHidden, setListHidden] = useState(true);
 
-    const elementRef = useRef<HTMLButtonElement | null>(null);
-    const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const buttonRefs = useRef<HTMLButtonElement[]>([]);
+  const wrapperRefs = useRef<HTMLDivElement[]>([]);
 
-    useEffect(() => {
-        const element = elementRef.current;
-        const wrapper = wrapperRef.current;
+  const setWrapperRef = (el: HTMLDivElement | null) => {
+    if(!el) return
+    wrapperRefs.current.push(el)
+  }
 
-        if (!element || !wrapper) return;
+  const setButtonRef = (el: HTMLButtonElement | null) => {
+    if(!el) return
+    buttonRefs.current.push(el)
+  }
 
-        // Начальный стиль
-        element.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
-        element.style.transition = 'transform 0.5s ease-out';
+  useEffect(() => {
+      const buttons = buttonRefs.current;
+      const wrappers = wrapperRefs.current;
 
-        const handleMouseMove = (e: any) => {
-            const rect = element.getBoundingClientRect();
-            const mouseX = e.clientX - rect.left;
-            const mouseY = e.clientY - rect.top;
+      if (!buttons.length || !wrappers.length) return;
 
-            const rotateX = (mouseY / rect.height) * 30 - 15;
-            const rotateY = (mouseX / rect.width) * -30 + 15;
+      const handleMouseMove = (e: MouseEvent, element: HTMLElement) => {
+          const rect = element.getBoundingClientRect();
+          const mouseX = e.clientX - rect.left;
+          const mouseY = e.clientY - rect.top;
+          const rotateX = (mouseY / rect.height) * 30 - 15;
+          const rotateY = (mouseX / rect.width) * -30 + 15;
+          element.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+      };
 
-            element.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
-        };
+      const resetTransform = (element: HTMLElement) => {
+          element.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
+      };
 
-        const handleMouseLeave = () => {
-            element.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
-        };
+      buttons.forEach((button, index) => {
+          const wrapper = wrappers[index];
+          if (!button || !wrapper) return;
 
-        const handleFocus = () => {
-            if (element.matches(':focus-visible')) {
-                if (element.classList.contains('tariff')) {
-                    element.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
-                } else {
-                    element.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(10px)';
-                }
-            }
-        };
+          wrapper.addEventListener('mousemove', (e) => handleMouseMove(e, button));
+          wrapper.addEventListener('mouseleave', () => resetTransform(button));
+          button.addEventListener('focus', () => button.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(10px)');
+          button.addEventListener('blur', () => resetTransform(button));
+      });
 
-        const handleBlur = () => {
-            element.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
-        };
+      return () => {
+          buttons.forEach((button, index) => {
+              const wrapper = wrappers[index];
+              if (!button || !wrapper) return;
 
-        wrapper.addEventListener('mousemove', handleMouseMove);
-        wrapper.addEventListener('mouseleave', handleMouseLeave);
-        element.addEventListener('focus', handleFocus);
-        element.addEventListener('blur', handleBlur);
-
-        return () => {
-            wrapper.removeEventListener('mousemove', handleMouseMove);
-            wrapper.removeEventListener('mouseleave', handleMouseLeave);
-            element.removeEventListener('focus', handleFocus);
-            element.removeEventListener('blur', handleBlur);
-        };
-    }, []);
-
-    const addMouseEffect = (elements: HTMLElement[]) => {
-        const elementsArray = Array.from(elements);
-        elementsArray.forEach((element) => {
-            element.onmousemove = (e) => {
-                const rect = element.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-
-                element.style.setProperty('--mouse-x', `${x}px`);
-                element.style.setProperty('--mouse-y', `${y}px`);
-            };
-        });
-    };
-
-    useEffect(() => {
-        if (elementRef.current) {
-            addMouseEffect([elementRef.current]);
-        }
-    }, []);
-
+              wrapper.removeEventListener('mousemove', (e) => handleMouseMove(e, button));
+              wrapper.removeEventListener('mouseleave', () => resetTransform(button));
+              button.removeEventListener('focus', () => button.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(10px)');
+              button.removeEventListener('blur', () => resetTransform(button));
+          });
+      };
+  }, []);
     return (
         <div
             onMouseEnter={() => { setHover(true) }}
@@ -127,12 +107,12 @@ const MainDocumentItem = ({ img, title, content, content1, active, setActive, bo
 
 
 
-                        <div className={`transition-all duration-500 absolute top-1/2 left-0 translate-y-[-50%] ${active && '!duration-700 translate-y-[60px]'}`}>
+                        <div className={`transition-all duration-500 absolute top-1/2 left-0 translate-y-[-50%] ${active && ' translate-y-[60px]'}`}>
                             <Image alt='document' src={img}
                                 width="0"
                                 height="0"
                                 sizes="100vw"
-                                className={`transition-all duration-700 ${!active && '!duration-500 w-[43px]'} h-auto`} />
+                                className={`transition-all duration-500 w-[190px] ${!active && ' !w-[43px]'} h-auto`} />
                         </div>
                         <p className="w-1/2 text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{title}</p>
                         <div className="w-1/2 flex items-center justify-between">
@@ -145,31 +125,31 @@ const MainDocumentItem = ({ img, title, content, content1, active, setActive, bo
                         </div>
                     </div>
                 </div>
-                <div className={`${active && 'bg-[#FFF] shadow-[0px_2px_4px_0px_#00000040,_0px_-2px_4px_0px_#00000040]'}`}>
+                <div className={`${active && 'bg-[#FFF] shadow-[0px_2px_4px_0px_#00000040_inset,_0px_-2px_4px_0px_#00000040_inset]'}`}>
                     <div className="wrapper">
                         <div className={`transition-all easy-in duration-500 overflow-hidden max-h-0  ${active && '!duration-700 !max-h-[1200px] '}`}>
-                            <div className="s:py-[23px] py-[15px]  flex flex-col l:flex-row justify-between m:items-stretch gap-[10px] ">
+                            <div className="s:py-[23px] py-[15px]  flex flex-col l:flex-row justify-between m:items-start gap-[10px] ">
                                 <div className="s:gap-[40px] gap-[20px] justify-between flex flex-col m:flex-row m:items-stretch">
                                     <div className='m:m-0 m-auto'>
                                         <div
-                                            style={{
-                                                width: img.width + 'px',
-                                                height: img.height + 'px'
-                                            }}
+                                        className='w-[190px]' 
+                                        style={{                                           
+                                            height:(190 / img.width * img.height) + 'px'
+                                        }}                                           
                                         ></div>
                                     </div>
 
                                     <div className=" flex flex-col justify-between  items-start">
                                         <div className="flex flex-col gap-[40px]">
                                             <p className='text-[16px] text-[#000000] m:max-w-[360px]'>
-                                                {content.text}
+                                                {filterPrepositions(content.text)}
                                             </p>
                                             <p className='text-[16px] text-[#000000] m:max-w-[300px]'>
-                                                {content.text1}
+                                                {content.text1 && filterPrepositions(content.text1)}
                                             </p>
                                         </div>
-                                        <div className="tariff-wrap" ref={wrapperRef}>
-                                            <button ref={elementRef} id="open-tariff" className='tariff text-[20px]  font-bold tracking-normal m:block hidden px-[30px] py-[14px] text-[#34446D] rounded-[4px] bg-[#2D2F2F1A] border-[#34446D] border border-solid leading-[1]'>
+                                        <div className="tariff-wrap" ref={setWrapperRef}>
+                                            <button ref={setButtonRef} id="open-tariff" className='tariff text-[20px]  font-bold tracking-normal m:block hidden px-[30px] py-[14px] text-[#34446D] rounded-[4px] bg-[#2D2F2F1A] border-[#34446D] border border-solid leading-[1]'>
                                                 Оформить заявку
                                             </button>
                                         </div>
@@ -181,13 +161,13 @@ const MainDocumentItem = ({ img, title, content, content1, active, setActive, bo
                                     {
                                         content1.map((cont, contIndex) => (
                                             <div key={contIndex} className='flex gap-[10px] flex-col items-start'>
-                                                <p className='text-[20px] font-bold'>{cont.title}</p>
+                                                <p className='text-[20px] font-bold'>{filterPrepositions(cont.title)}</p>
 
                                                 <ul className=' list-disc pl-[20px] flex flex-col gap-[6px]'>
 
                                                     {
                                                         cont.list.map((list, index) => (
-                                                            <li className={`${listHidden && index > 4 && 'hidden'}`} key={index}>{list}</li>
+                                                            <li className={`${listHidden && index > 4 && 'hidden'}`} key={index}>{filterPrepositions(list)}</li>
                                                         ))
                                                     }
 
@@ -207,8 +187,8 @@ const MainDocumentItem = ({ img, title, content, content1, active, setActive, bo
                                 </div>
 
 
-                                <div className="tariff-wrap" ref={wrapperRef}>
-                                    <button ref={elementRef} id="open-tariff" className='tariff m:hidden  py-[18px] text-[20px] font-bold rounded-[4px] bg-[#000000] leading-[1] text-[#FFF]'>
+                                <div className="tariff-wrap" ref={setWrapperRef}>
+                                    <button ref={setButtonRef} id="open-tariff" className='tariff m:hidden  py-[18px] text-[20px] font-bold rounded-[4px] bg-[#000000] leading-[1] text-[#FFF]'>
                                         Оформить заявку
                                     </button>
                                 </div>
