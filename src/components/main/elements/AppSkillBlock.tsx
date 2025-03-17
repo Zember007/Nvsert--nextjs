@@ -78,8 +78,13 @@ const AppSkillBlock = (skill: any) => {
       onMouseLeave={handleMouseLeave}
       ref={cardRef}>
       <div
-        className={`card relative group/item l:mr-0 mr-[20px] rounded-[4px] flex flex-col gap-[14px] justify-between ${skill.folder ? '!items-center !justify-center' : 'p-[20px]'} text-[#000] bg-[${skill.bg === 'secondary' ? '#CCCCCC' : '#FFF'}] h-[250px] min-w-[300px] w-full`}
-        style={cardStyle}
+        className={`card relative group/item l:mr-0 mr-[20px] rounded-[4px] flex flex-col gap-[14px] justify-between ${skill.folder ? '!items-center !justify-center' : 'p-[20px]'} text-[#000] h-[250px] min-w-[300px] w-full`}
+        style={
+          {
+            ...cardStyle,
+            background:`${skill.bg === 'secondary' ? '#CCCCCC' : '#FFF'}`
+          }
+        }
       >
 
         {
