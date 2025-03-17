@@ -78,7 +78,7 @@ const AppSkillBlock = (skill: any) => {
       onMouseLeave={handleMouseLeave}
       ref={cardRef}>
       <div
-        className={`card relative group/item l:mr-0 mr-[20px] rounded-[4px] flex flex-col gap-[14px] justify-between ${skill.folder ? '!items-center !justify-center' : 'p-[20px]'} text-[#000] h-[250px] min-w-[300px] w-full`}
+        className={`card relative z-[0] group/item l:mr-0 mr-[20px] rounded-[4px] flex flex-col gap-[14px] justify-between ${skill.folder ? '!items-center !justify-center' : 'p-[20px]'} text-[#000] h-[250px] min-w-[300px] w-full`}
         style={
           {
             ...cardStyle,
@@ -101,7 +101,7 @@ const AppSkillBlock = (skill: any) => {
                   borderColor: `${skill.bg === 'secondary' ? '#FFFFFF' : '#CCCCCC'}`,
                   ...(mousePX && {...textStyle})
                 }}
-                className={`absolute transition-all duration-500 rounded-[4px] top-0 left-0 right-0 bottom-0 border border-solid`}
+                className={`absolute z-[-1] group-hover/item:backdrop-blur-md transition-all duration-500 rounded-[4px] top-0 left-0 right-0 bottom-0 border border-solid`}
                 ></div>
               <span className={`font-bold text-[20px] transition-all duration-500`} style={mousePX ? textStyle : {}}>
                 {filterPrepositions(skill.title)}
@@ -113,8 +113,8 @@ const AppSkillBlock = (skill: any) => {
                   )}
                 </ul>
               </div>
-              <button className="rebound-box w-full flex items-center text-left group-hover/item:transition-all group-hover/item:duration-500" style={mousePX ? textStyle : {}}>
-                <span className={`text-[18px] group-hover/item:w-full overflow-hidden whitespace-nowrap w-0 group-hover/item:transition-all group-hover/item:duration-300`}>{skill.btn}</span>
+              <button className="rebound-box w-full flex items-center text-left transition-all duration-500" style={mousePX ? textStyle : {}}>
+                <span className={`text-[18px] group-hover/item:w-full ${oldMousePX && 'w-full'} overflow-hidden whitespace-nowrap w-0 transition-all group-hover/item:duration-300`}>{skill.btn}</span>
                 <svg className="rebound" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M3 12H21" stroke={`#000`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   <path d="M16 7L21 12L16 17" stroke={`#000`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

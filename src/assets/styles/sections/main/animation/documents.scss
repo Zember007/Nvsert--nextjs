@@ -1,9 +1,16 @@
 .document-wrapper-border:first-child .border-group {
-    border-top-width: 0.5px;
+    border-top-width: 2px ;
+}
+
+.document-wrapper-border .border-group {
+    border-top-width: 0.5px ;
+    border-bottom-width: 0.5px ; 
+    border-color: #00000033;
+    border-style: solid;
 }
 
 .document-wrapper-border:last-child .border-group {
-    border-bottom-width: 0.5px;
+    border-bottom-width: 2px ;
 }
 
 .tariff-wrap {
@@ -54,3 +61,7 @@
     transition: all 0.3s ease;
     transform: translateZ(0);
 }
+
+.tariff:active, .tariff.fast-click{
+    transform: scale(0.97) !important;
+  }
