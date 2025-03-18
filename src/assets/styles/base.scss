@@ -64,7 +64,8 @@
     left: 25% !important;
 }
 
-.PhotoView-Slider__ArrowLeft svg, .PhotoView-Slider__ArrowRight svg {
+.PhotoView-Slider__ArrowLeft svg,
+.PhotoView-Slider__ArrowRight svg {
     fill: #34446D !important;
     background: #E1E1E1 !important;
     box-sizing: content-box;
@@ -75,9 +76,11 @@
 }
 
 .blurred-mask {
-    backdrop-filter: blur(5px); /* Размытие фона под маской */
-    -webkit-backdrop-filter: blur(5px); /* Поддержка для Webkit-браузеров */
-  }
+    backdrop-filter: blur(5px);
+    /* Размытие фона под маской */
+    -webkit-backdrop-filter: blur(5px);
+    /* Поддержка для Webkit-браузеров */
+}
 
 .tariff-wrap {
     perspective: 200px;
@@ -105,7 +108,7 @@
 
 .tariff {
     overflow: hidden;
-
+    width: 100%;
 
     z-index: 1;
     cursor: pointer;
@@ -120,7 +123,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
- 
+
 
     backface-visibility: hidden;
     transition: none;
@@ -129,5 +132,7 @@
 }
 
 .tariff:active, .tariff.fast-click{
-    transform: scale(0.97) !important;
-  }
+  box-shadow: inset 2px 2px 4px 0 rgba(27, 27, 27, 0.5),
+    inset -2px -2px 4px 0 rgba(27, 27, 27, 0.5)  !important;
+  transform: scale(0.97) !important;
+}
