@@ -1,67 +1,27 @@
 .document-wrapper-border:first-child .border-group {
-    border-top-width: 2px ;
+    border-top-width: 1px ;
 }
 
 .document-wrapper-border .border-group {
-    border-top-width: 0.5px ;
-    border-bottom-width: 0.5px ; 
-    border-color: #00000033;
+    border-bottom-width: 1px ; 
     border-style: solid;
+    
+}
+
+.document-wrapper-selector {
+    perspective: 1000px;
+    perspective-origin: 50% 50%;
+    transform-style: preserve-3d;
+    transform-origin: top center;
+    will-change: transform;
+    
+
+    &:hover {
+        transform: rotateX(7deg) translateY(-6px);
+    }
 }
 
 .document-wrapper-border:last-child .border-group {
-    border-bottom-width: 2px ;
+    border-bottom-width: 1px ;
 }
 
-.tariff-wrap {
-    perspective: 200px;
-}
-
-.tariff::before {
-    background: radial-gradient(250px circle at var(--mouse-x) var(--mouse-y),
-            #c7c7c738,
-            transparent 30%);
-    border-radius: inherit;
-    content: "";
-    height: 100%;
-    left: 0px;
-    position: absolute;
-    top: 0px;
-    width: 100%;
-    opacity: 0;
-    transition: opacity 300ms ease;
-    z-index: 20;
-}
-
-.tariff:hover::before {
-    opacity: 1;
-}
-
-.tariff {
-    overflow: hidden;
-
-
-    z-index: 1;
-    cursor: pointer;
-    box-sizing: border-box;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-
-    transition: transform 0.3s ease, box-shadow 150ms ease;
-
-    backface-visibility: hidden;
-    will-change: transform;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
- 
-
-    backface-visibility: hidden;
-    transition: none;
-    transition: all 0.3s ease;
-    transform: translateZ(0);
-}
-
-.tariff:active, .tariff.fast-click{
-    transform: scale(0.97) !important;
-  }

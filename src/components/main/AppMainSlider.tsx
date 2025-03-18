@@ -1,7 +1,7 @@
 import '@/assets/styles/sections/main/main-slider.scss'
 import { initSlider, activeIndex } from '@/scripts/slider'
 import { useEffect, useState } from 'react';
-import ArrowImg from '@/assets/images/svg/arrow-slider.svg'
+import ArrowImg from '@/assets/images/svg/right-arrow-slider.svg'
 import Image from 'next/image';
 import { slides } from './utils';
 import { filterPrepositions } from '@/hook/filter';
@@ -13,7 +13,7 @@ const Slider = () => {
     const [changeBg, setChangeBg] = useState(false)
 
     useEffect(() => {
-        initSlider()
+        initSlider(100)
     }, [])
 
 
@@ -61,7 +61,7 @@ const Slider = () => {
                                             }, 300)
                                         }}
                                         aria-label="previous slide" data-slider="button-prev" className="w-[100px] h-[50px] rounded-[4px] bg-[#0000001A] border-[#34446D] border border-solid flex items-center justify-center">
-                                        <Image src={ArrowImg} alt='prev' width={20} height={34} className='rotate-[180deg]' />
+                                        <Image src={ArrowImg} alt='prev' width={45} height={34}  />
                                     </button>
                                     <button
                                         onClick={() => {
@@ -72,7 +72,7 @@ const Slider = () => {
                                             }, 300)
                                         }}
                                         aria-label="previous slide" data-slider="button-next" className="w-[100px] h-[50px] rounded-[4px] bg-[#0000001A] border-[#34446D] border border-solid flex items-center justify-center">
-                                        <Image src={ArrowImg} alt='next' width={20} height={34} />
+                                        <Image src={ArrowImg} alt='next' width={45} height={34} className='rotate-[180deg]'/>
                                     </button>
                                 </div>
                                 <div className="flex item-center text-[32px] font-bold leading-[1]">

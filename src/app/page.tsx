@@ -24,7 +24,7 @@ export default function Home() {
 
   }, []);
   return (
-    <div className="main text-[#000] overflow-hidden">
+    <div className="main text-[#000] overflow-hidden select-none">
       <AppMainIntro />
 
       <AppMainDocuments />

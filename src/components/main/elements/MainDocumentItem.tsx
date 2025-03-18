@@ -42,6 +42,7 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
 
     const buttonRefs = useRef<HTMLButtonElement[]>([]);
     const wrapperRefs = useRef<HTMLDivElement[]>([]);
+    const photoRef = useRef<HTMLDivElement | null>(null);
 
     const setWrapperRef = (el: HTMLDivElement | null) => {
         if (!el) return
@@ -98,20 +99,27 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
         <div
             onMouseEnter={() => { setHover(true) }}
             onMouseLeave={() => { setHover(false) }}
-            className={` ${!active ? 'document-wrapper-border hover:shadow-[0px_2px_4px_0px_#00000040,_0px_-2px_4px_0px_#00000040] hover:bg-[#FFF]' : ''}  transition-all duration-300 cursor-pointer`}>
+            className={` document-wrapper-border ${!active ? ' hover:shadow-[0px_2px_4px_0px_#00000040,_0px_-2px_4px_0px_#00000040] hover:bg-[#FFF]' : ''}  transition-all duration-300 cursor-pointer`}>
             <div className="  flex flex-col">
-                <div className={`w-full transition-all duration-300 ${active && 'bg-[#34446D]'}`}>
-                    <div className="wrapper w-full">
+                <div
+                    onClick={(event) => {
+
+                        if (photoRef.current?.contains(event.target as Node)) return;
+
+                        setActive(!active);
+                    }}
+                    className={` w-full transition-all duration-300 ${active ? 'bg-[#34446D]' : 'document-wrapper-selector'}`}>
+                    <div className="wrapper w-full group/wrapper">
                         <div
-                            onClick={(event) => {
-
-                                setActive(!active);
+                            className={`border-group flex items-center justify-between py-[15px] s:py-[23px] ${active && 'text-[#FFF]'}  text-[#000] transition-all duration-300 relative pl-[63px] ${!active && ' group-hover/wrapper:!border-[transparent] hover:text-[#34446D]'}`}
+                            style={{
+                                borderTopColor: !bordert ? 'transparent' : '#00000033',
+                                borderBottomColor: (!borderb || active) ? 'transparent' : '#00000033'
                             }}
-                            className={`border-group flex items-center   ${!bordert && '!border-t-[transparent]'}  ${(!borderb || active) && '!border-b-[transparent]'}   justify-between py-[15px] s:py-[23px] ${active && 'text-[#FFF]'}  text-[#000] transition-all duration-300 relative pl-[63px] ${!active && ' hover:!border-[transparent] hover:text-[#34446D]'}`}>
-
+                        >
 
                             <PhotoView src={img.src}>
-                                <div className={`transition-all duration-300 absolute z-[100] top-1/2 left-0 translate-y-[-50%] ${active && ' translate-y-[60px]'}`}>
+                                <div ref={photoRef} className={`transition-all duration-300 absolute z-[100] top-1/2 left-0 translate-y-[-50%] ${active && ' translate-y-[60px]'}`}>
 
                                     <Image alt='document' src={img}
                                         width="0"
@@ -136,6 +144,7 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
 
                                 </button>
                             </div>
+
                         </div>
                     </div>
                 </div>

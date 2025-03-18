@@ -157,7 +157,7 @@ export function horizontalLoop(items, config) {
             },
             onResize = () => refresh(true),
             proxy;
-        gsap.set(items, { x: startX + config.gap });
+        gsap.set(items, { x: startX - 50 });
         populateWidths();
         populateTimeline();
         populateOffsets();

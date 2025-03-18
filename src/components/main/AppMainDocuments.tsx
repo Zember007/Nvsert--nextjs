@@ -19,7 +19,11 @@ const AppMainDocuments = () => {
                 <h2 className="leading-[1] text-center l:text-left text-[24px] xs:text-[40px] l:text-[56px] text-[#000000] tracking-[-0.04em]">Мы оформляем следующие документы</h2>
 
             </div>
-            <PhotoProvider maskOpacity={0.4}>
+            <PhotoProvider maskOpacity={0.4} maskClassName="blurred-mask"
+            onIndexChange={(index) => {
+                setActive(index);
+              }}
+            >
 
                 <div className="flex flex-col">
                     {
