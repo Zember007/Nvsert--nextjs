@@ -11,8 +11,6 @@ $returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95);
 .card-wrap {
     transform: perspective(800px);
     transform-style: preserve-3d;
-    cursor: pointer;
-    pointer-events: auto;
     z-index: 999;
     will-change: transform;
 

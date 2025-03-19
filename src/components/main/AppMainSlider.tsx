@@ -10,6 +10,7 @@ const Slider = () => {
 
 
     const [active, setActive] = useState<number>(activeIndex.index)
+    const [oldActive, setOldActive] = useState<number>(activeIndex.index)
     const [changeBg, setChangeBg] = useState(false)
 
     useEffect(() => {
@@ -31,7 +32,7 @@ const Slider = () => {
                                 <div className="flex items-center gap-[10px] mr-[30px]">
 
 
-                                    <div className="py-[6.2px] px-[10px] pl-[30px]  rounded-r-[4px] bg-[#0000001A] w-full border-[#34446D] border-solid border border-l-0">
+                                    <div className="h-[50px] p-[10px] pl-[30px]  rounded-r-[4px] bg-[#0000001A] w-full border-[#34446D] border-solid border border-l-0">
                                         <span className='text-[24px] font-bold text-[#34446D]'>
                                             {
                                                 filterPrepositions(slides[active].title)
@@ -40,8 +41,7 @@ const Slider = () => {
                                     </div>
                                 </div>
                                 <div className="l:grow relative w-full h-full px-[30px]">
-
-                                    <p className={` text-[16px] l:my-auto tracking-normal translate-y-[15px] opacity-0   ${!changeBg && ' !opacity-100 !translate-y-[0px] duration-500 transition-all'} `}>
+                                    <p className={` text-[16px] l:my-auto tracking-normal ${((oldActive < active || (oldActive + 1 === slides.length && active === 0)) && !(oldActive === 0 && active + 1 === slides.length))? 'translate-x-[15px]' : 'translate-x-[-15px]'} opacity-0   ${!changeBg && ' !opacity-100 !translate-x-[0px] duration-500 transition-all'} `}>
 
                                         {
                                             filterPrepositions(slides[active].text)
@@ -52,28 +52,36 @@ const Slider = () => {
                             </div>
                             <div className="flex justify-between items-end w-full px-[30px]">
                                 <div className="flex gap-[10px]">
-                                    <button
+
+                                <button
                                         onClick={() => {
+                                            setOldActive(active)
                                             setChangeBg(true)
                                             setTimeout(() => {
                                                 setActive(activeIndex.index)
-                                                setChangeBg(false)
-                                            }, 300)
-                                        }}
-                                        aria-label="previous slide" data-slider="button-prev" className="w-[100px] h-[50px] rounded-[4px] bg-[#0000001A] border-[#34446D] border border-solid flex items-center justify-center">
-                                        <Image src={ArrowImg} alt='prev' width={45} height={34}  />
-                                    </button>
-                                    <button
-                                        onClick={() => {
-                                            setChangeBg(true)
-                                            setTimeout(() => {
-                                                setActive(activeIndex.index)
-                                                setChangeBg(false)
+                                                setTimeout(() => {
+                                                    setChangeBg(false)
+                                                },100)
                                             }, 300)
                                         }}
                                         aria-label="previous slide" data-slider="button-next" className="w-[100px] h-[50px] rounded-[4px] bg-[#0000001A] border-[#34446D] border border-solid flex items-center justify-center">
-                                        <Image src={ArrowImg} alt='next' width={45} height={34} className='rotate-[180deg]'/>
+                                        <Image src={ArrowImg} alt='next' width={45} height={34} />
                                     </button>
+                                    <button
+                                        onClick={() => {
+                                            setOldActive(active)
+                                            setChangeBg(true)
+                                            setTimeout(() => {
+                                                setActive(activeIndex.index)
+                                                setTimeout(() => {
+                                                    setChangeBg(false)
+                                                },100)
+                                            }, 300)
+                                        }}
+                                        aria-label="previous slide" data-slider="button-prev" className="w-[100px] h-[50px] rounded-[4px] bg-[#0000001A] border-[#34446D] border border-solid flex items-center justify-center">
+                                        <Image src={ArrowImg} alt='prev' width={45} height={34} className='rotate-[180deg]' />
+                                    </button>
+                                    
                                 </div>
                                 <div className="flex item-center text-[32px] font-bold leading-[1]">
                                     <div className="count-column">
@@ -94,17 +102,23 @@ const Slider = () => {
                             <div data-slider="list" className="slider-list"
                                 onMouseMove={() => {
                                     if (activeIndex.index !== active) {
+                                        setOldActive(active)
                                         setChangeBg(true)
                                         setTimeout(() => {
                                             setActive(activeIndex.index)
-                                            setChangeBg(false)
+                                            setTimeout(() => {
+                                                setChangeBg(false)
+                                            },100)
                                         }, 1000)
                                     }
                                 }}
                                 onMouseLeave={() => {
+                                    setOldActive(active)
                                     setTimeout(() => {
                                         setActive(activeIndex.index)
-                                        setChangeBg(false)
+                                        setTimeout(() => {
+                                            setChangeBg(false)
+                                        },100)
                                     }, 300)
                                 }}
                             >
@@ -116,7 +130,7 @@ const Slider = () => {
                                             <div className="slide-inner overflow-hidden relative bg-[#FFF]">
                                                 <Image src={item.img} alt='slide' fill
                                                     style={{ objectFit: 'cover' }} />
-                                                <div className="absolute scale-[1.01] w-full h-full bg-[#34446D] mix-blend-hue"></div>
+                                                <div className="absolute scale-[-0.9] w-full h-full bg-[#34446D] mix-blend-hue"></div>
 
                                             </div>
                                         </div>

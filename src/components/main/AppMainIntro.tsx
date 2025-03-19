@@ -27,8 +27,8 @@ const AppMainIntro = () => {
                 <div className="wrapper">
                     <div className='main-banner__content'>
                         <h1 className="main-banner__title">{filterPrepositions(t('mainIntro.title'))}</h1>
-                        <div className='border-main main-form p-[32px] max-w-[420px] bg-[#00000099] flex flex-col gap-[20px] rounded-[6px]'>
-                            <span className='text-[#FFF] text-[32px]'>Оставить заявку</span>
+                        <div className='border-main main-form p-[32px] max-w-[420px] flex flex-col gap-[20px] rounded-[6px]'>
+                            <span className='text-[#FFF] text-[32px] ml-[10px]'>Оставить заявку</span>
                             <AppMainForm btnText={'Отправить заявку'} />                            
                         </div>
                     </div>

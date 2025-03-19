@@ -101,14 +101,14 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
             {({ register, errors }) => (
 
                 <div className="flex flex-col s:gap-[10px] gap-[5px]">
-                    <AppInput className="!bg-[#2a2a2a] focus:!bg-[#20272a]" title={t('form.input.titles.name')} inputName="name" required={true} />
+                    <AppInput className="!bg-[#2a2a2a] focus:!bg-[#20272a]" title={'ФИО'} inputName="name" required={true} />
 
-                    <AppInput className="!bg-[#2a2a2a] focus:!bg-[#20272a]" title={t('form.input.titles.phone')} inputName="phone" mask="phone"
+                    <AppInput className="!bg-[#2a2a2a] focus:!bg-[#20272a]" title={'Телефон'} inputName="phone" mask="phone"
                         type="phone" required={true} />
 
                     <AppTextarea className="!bg-[#2a2a2a] focus:!bg-[#20272a]" title={'Комментарий'} inputName="comment" />
                     <div ref={setWrapperRef} className="tariff-wrap">
-                        <button type="submit" ref={setButtonRef} className="tariff s:mt-[20px] mt-[15px] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[20px] justify-center p-[5px] rounded-[4px]">
+                        <button type="submit" ref={setButtonRef} className="tariff s:mt-[20px] mt-[15px] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[20px] justify-center p-[4px] rounded-[4px]">
                             {btnText}
                             <div className="translate-y-[5px]">
                                 <Image alt="message" src={MessageImg} width="0"
@@ -124,7 +124,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
 
 
                     <span className=" mt-[10px] text-[#A4A4A4] text-[10px] s:text-[13px]">
-                        Согласен на обработку моих персональных данных в соответствии с <Link href="/soglashenie/polzovatelskoe-soglashenie/" target="_blank">Пользовательским соглашением</Link>
+                        Согласен на обработку моих персональных данных <span className="whitespace-nowrap">в соответствии</span> с <Link href="/soglashenie/polzovatelskoe-soglashenie/" target="_blank">Пользовательским соглашением</Link>
                     </span>
 
                 </div>

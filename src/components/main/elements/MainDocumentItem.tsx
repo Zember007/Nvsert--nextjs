@@ -153,27 +153,78 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
         };
     }, []);
 
+    const buttonRef = useRef<HTMLDivElement | null>(null);
+
+    const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
+        const button = buttonRef.current;
+        if (!button) return;
+
+        const opacity = parseFloat(window.getComputedStyle(button).opacity);
+        const windowWidth = window.innerWidth;
+
+        // Условие активации эффекта
+        if (opacity > 0 && windowWidth >= 1008) {
+            const rect = button.getBoundingClientRect();
+            const maxWidthHeight = Math.max(rect.width, rect.height);
+
+            // Проверяем наличие существующего .drop
+            let drop = button.querySelector('.drop') as HTMLElement | null;
+            if (!drop || window.getComputedStyle(drop).opacity !== '1') {
+                // Создаем новый элемент .drop
+                drop = document.createElement('b');
+                drop.className = 'drop';
+                drop.style.width = `${maxWidthHeight}px`;
+                drop.style.height = `${maxWidthHeight}px`;
+                button.insertBefore(drop, button.firstChild);
+            } else {
+                // Сбрасываем состояние существующего .drop
+                drop.classList.remove('animate');
+                // Небольшая задержка для сброса анимации
+                requestAnimationFrame(() => {
+                    drop!.style.opacity = '1'; // Сбрасываем opacity
+                    drop!.style.transform = 'scale(0)'; // Сбрасываем масштаб
+                });
+            }
+
+            // Вычисляем координаты клика относительно кнопки
+            const x = event.pageX - rect.left - maxWidthHeight / 2;
+            const y = event.pageY - rect.top - maxWidthHeight / 2;
+
+            // Позиционируем и запускаем анимацию
+            drop.style.top = `${y}px`;
+            drop.style.left = `${x}px`;
+            drop.classList.add('animate');
+
+            // Удаляем элемент после завершения анимации (опционально)
+            drop.addEventListener('animationend', () => {
+                drop.remove(); // Удаляем элемент после анимации
+            }, { once: true });
+        }
+    };
+
 
     return (
         <div
             onMouseEnter={() => { setHover(true) }}
             onMouseLeave={() => { setHover(false) }}
-            className={` document-wrapper-border ${!active ? ' hover:shadow-[0px_2px_4px_0px_#00000040,_0px_-2px_4px_0px_#00000040] hover:bg-[#FFF]' : ''}  transition-all duration-300 cursor-pointer`}>
+            className={` document-wrapper-border overflow-hidden ${!active ? ' hover:shadow-[0px_2px_4px_0px_#00000040,_0px_-2px_4px_0px_#00000040] hover:bg-[#FFF]' : ''}  transition-all duration-300 cursor-pointer`}>
             <div className="  flex flex-col">
                 <div className="relative">
 
                     <div
+                        ref={buttonRef}
+                        onMouseDown={handleMouseDown}
                         onClick={(event) => {
 
                             if (photoRef.current?.contains(event.target as Node)) return;
 
                             setActive(!active);
                         }}
-                        className={` w-full transition-all duration-300 ${index === 0 && active && 'document-wrapper-selector'} ${active ? 'bg-[#34446D]' : ''}`}>
+                        className={`materialBtn relative w-full transition-all duration-300 ${active ? 'bg-[#34446D]' : ''}`}>
                         <div className="wrapper w-full group/wrapper">
 
                             <div
-                                className={`border-group flex items-center justify-between py-[15px] s:py-[23px] ${active && 'text-[#FFF]'}  text-[#000] transition-all duration-300 relative pl-[63px] ${!active && ' group-hover/wrapper:!border-[transparent] hover:text-[#34446D]'}`}
+                                className={`border-group gap-[10px]  flex items-center justify-between py-[15px] s:py-[23px] ${active && 'text-[#FFF]'}  text-[#000] transition-all duration-300 relative ${!active && ' group-hover/wrapper:!border-[transparent] hover:text-[#34446D]'}`}
                                 style={{
                                     borderTopColor: !bordert ? 'transparent' : '#00000033',
                                     borderBottomColor: (!borderb || active) ? 'transparent' : '#00000033'
@@ -185,7 +236,7 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
                                         style={{
                                             transform: `perspective(800px) translateY(${active ? '60px' : '-50%'})`,
                                         }}
-                                        className={`pointer-events-auto card-wrap transition-all duration-300 absolute z-[100] top-1/2 left-0`}>
+                                        className={`${!active && 'pointer-events-none'} card-wrap transition-all duration-300 absolute z-[100] top-1/2 left-0`}>
 
                                         <Image
                                             onMouseMove={handleMouseMove}
@@ -203,7 +254,7 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
 
                                     </div>
                                 </PhotoView>
-                                <p className="w-1/2 text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{title}</p>
+                                <p className="leading-[11px] w-1/2 pl-[63px]  text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{title}</p>
                                 <div className="w-1/2 grid grid-cols-[1fr_1fr_auto] items-center justify-between">
                                     <p className="text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{duration}</p>
                                     <p className="text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{price}</p>
@@ -226,8 +277,8 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
                     <div className="wrapper">
                         <div className={`transition-all easy-in duration-300 overflow-hidden max-h-0  ${active && '!duration-700 !max-h-[1200px] '}`}
                         >
-                            <div className="s:py-[23px] py-[15px]  flex flex-col l:flex-row justify-between m:items-start gap-[10px] ">
-                                <div className="s:gap-[40px] gap-[20px] justify-between flex flex-col m:flex-row m:items-stretch">
+                            <div className="s:py-[23px] py-[15px]  flex flex-col l:flex-row m:items-start gap-[10px] ">
+                                <div className="w-1/2 s:gap-0 gap-[20px] flex flex-col m:flex-row m:items-stretch">
                                     <div className='m:m-0 m-auto pointer-events-none'>
                                         <div
                                             className='w-[190px] pointer-events-none'
@@ -237,56 +288,60 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
                                         ></div>
                                     </div>
 
-                                    <div className=" flex flex-col justify-between  items-start">
-                                        <div className="flex flex-col gap-[40px]">
-                                            <p className='text-[16px] text-[#000000] m:max-w-[360px]'>
-                                                {filterPrepositions(content.text)}
-                                            </p>
-                                            <p className='text-[16px] text-[#000000] m:max-w-[300px]'>
-                                                {content.text1 && filterPrepositions(content.text1)}
-                                            </p>
-                                        </div>
-                                        <div className="tariff-wrap" ref={setWrapperRef}>
-                                            <button ref={setButtonRef} id="open-tariff" className='tariff text-[20px]  font-bold tracking-normal m:block hidden px-[30px] py-[14px] text-[#34446D] rounded-[4px] bg-[#2D2F2F1A] border-[#34446D] border border-solid leading-[1]'>
-                                                Оформить заявку
-                                            </button>
+                                    <div className="grow flex justify-center">
+                                        <div className=" flex flex-col justify-between  items-start">
+                                            <div className="flex flex-col gap-[40px]">
+                                                <p className='text-[16px] text-[#000000] m:max-w-[360px]'>
+                                                    {filterPrepositions(content.text)}
+                                                </p>
+                                                <p className='text-[16px] text-[#000000] m:max-w-[300px]'>
+                                                    {content.text1 && filterPrepositions(content.text1)}
+                                                </p>
+                                            </div>
+                                            <div className="tariff-wrap" ref={setWrapperRef}>
+                                                <button ref={setButtonRef} id="open-tariff" className='tariff text-[20px]  font-bold tracking-normal m:block hidden px-[30px] py-[14px] text-[#34446D] rounded-[4px] bg-[#2D2F2F1A] border-[#34446D] border border-solid leading-[1]'>
+                                                    Оформить заявку
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="flex gap-[10px] flex-col  m:max-w-[500px] text-[#000]">
+                                <div className="w-1/2">
+                                    <div className=" flex gap-[10px] flex-col  m:max-w-[500px] text-[#000]">
 
-                                    {
-                                        content1.map((cont, contIndex) => (
-                                            <div key={contIndex} className='flex gap-[10px] flex-col items-start'>
-                                                <p className='text-[20px] font-bold'>{filterPrepositions(cont.title)}</p>
+                                        {
+                                            content1.map((cont, contIndex) => (
+                                                <div key={contIndex} className='flex gap-[10px] flex-col items-start'>
+                                                    <p className='text-[20px] font-bold'>{filterPrepositions(cont.title)}</p>
 
-                                                <ul className=' list-disc pl-[20px] flex flex-col gap-[6px]'>
+                                                    <ul className=' list-disc pl-[20px] flex flex-col gap-[6px]'>
+
+                                                        {
+                                                            cont.list.map((list, index) => (
+                                                                <li className={`${listHidden && index > 4 && 'hidden'}`} key={index}>{filterPrepositions(list)}</li>
+                                                            ))
+                                                        }
+
+                                                    </ul>
+
 
                                                     {
-                                                        cont.list.map((list, index) => (
-                                                            <li className={`${listHidden && index > 4 && 'hidden'}`} key={index}>{filterPrepositions(list)}</li>
-                                                        ))
+                                                        listHidden && cont.list.length > 5 && <button
+                                                            className='text-[#34446D] font-bold'
+                                                            onClick={() => setListHidden(false)}
+                                                        >Показать полный список документов 🡣</button>
                                                     }
+                                                </div>
+                                            ))
+                                        }
 
-                                                </ul>
-
-
-                                                {
-                                                    listHidden && cont.list.length > 5 && <button
-                                                        className='text-[#34446D] font-bold'
-                                                        onClick={() => setListHidden(false)}
-                                                    >Показать полный список документов 🡣</button>
-                                                }
-                                            </div>
-                                        ))
-                                    }
-
+                                    </div>
                                 </div>
 
 
-                                <div className="tariff-wrap" ref={setWrapperRef}>
-                                    <button ref={setButtonRef} id="open-tariff" className='tariff m:hidden  py-[18px] text-[20px] font-bold rounded-[4px] bg-[#000000] leading-[1] text-[#FFF]'>
+                                <div className="tariff-wrap m:hidden" ref={setWrapperRef}>
+                                    <button ref={setButtonRef} id="open-tariff" className='tariff   py-[18px] text-[20px] font-bold rounded-[4px] bg-[#000000] leading-[1] text-[#FFF]'>
                                         Оформить заявку
                                     </button>
                                 </div>

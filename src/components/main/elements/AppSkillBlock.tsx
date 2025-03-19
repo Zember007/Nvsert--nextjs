@@ -72,7 +72,7 @@ const AppSkillBlock = (skill: any) => {
   const list: string[] = skill.text;
 
   return (
-    <div className={`hover:z-[10000] relative card-wrap `}
+    <div className={`hover:z-[10000] relative card-wrap ${!skill.folder && 'cursor-pointer'}`}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

@@ -19,7 +19,7 @@ select {
     z-index: 1;
     @include transition();
     display: block;
-    height: 40px;
+    height: 50px;
     border: none;
     background:  #4a587d;
     border-radius: 5px;
@@ -103,8 +103,8 @@ select {
     @include transition();
 
     position: absolute;
-    top: 35px;
-    left: 20px;
+    top: 40px;
+    left: 10px;
     z-index: 1;
     font-size: 16px;
     color: $input-placeholder-normal;
