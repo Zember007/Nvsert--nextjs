@@ -101,7 +101,7 @@ const AppSkillBlock = (skill: any) => {
                   borderColor: `${skill.bg === 'secondary' ? '#FFFFFF' : '#CCCCCC'}`,
                   ...(mousePX && {...textStyle})
                 }}
-                className={`absolute z-[-1] group-hover/item:backdrop-blur-[4px] transition-all duration-500 rounded-[4px] top-0 left-0 right-0 bottom-0 border border-solid`}
+                className={`absolute z-[-1] ${oldMousePX && 'backdrop-blur-[2px]'} transition-all duration-500 rounded-[4px] top-0 left-0 right-0 bottom-0 border border-solid`}
                 ></div>
               <span className={`font-bold text-[20px] transition-all duration-500`} style={mousePX ? textStyle : {}}>
                 {filterPrepositions(skill.title)}

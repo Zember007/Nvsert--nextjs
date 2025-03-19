@@ -2,6 +2,7 @@ import MainDocumentItem from "./elements/MainDocumentItem";
 import { documents } from "./utils";
 import { useState } from "react";
 import '@/assets/styles/sections/main/animation/documents.scss'
+import '@/assets/styles/sections/main/animation/skills.scss'
 import { PhotoProvider } from "react-photo-view";
 
 
@@ -20,9 +21,9 @@ const AppMainDocuments = () => {
 
             </div>
             <PhotoProvider maskOpacity={0.4} maskClassName="blurred-mask"
-            onIndexChange={(index) => {
-                setActive(index);
-              }}
+                onIndexChange={(index) => {
+                    setActive(index);
+                }}
             >
 
                 <div className="flex flex-col">
@@ -30,6 +31,7 @@ const AppMainDocuments = () => {
                         documents.map((item, index) =>
 
                             <MainDocumentItem
+                                index={index}
                                 bordert={(index - 1 !== hoverIndex && index - 1 !== activeIndex)}
                                 borderb={index + 1 !== hoverIndex || activeIndex === hoverIndex}
                                 setHover={(value) => { setHover(value ? index : null) }} setActive={(value) => setActive(value ? index : null)} active={index === activeIndex} key={index} {...item} />

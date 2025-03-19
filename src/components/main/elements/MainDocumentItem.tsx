@@ -26,7 +26,8 @@ interface props {
     setActive: (value: boolean) => void,
     setHover: (value: boolean) => void,
     bordert: boolean,
-    borderb: boolean
+    borderb: boolean,
+    index: number
 }
 
 interface pulse {
@@ -36,9 +37,10 @@ interface pulse {
     left: string;
 }
 
-const MainDocumentItem = ({ img, title, content, content1, price, duration, active, setActive, borderb, bordert, setHover }: props) => {
+const MainDocumentItem = ({ index, img, title, content, content1, price, duration, active, setActive, borderb, bordert, setHover }: props) => {
 
     const [listHidden, setListHidden] = useState(true);
+    const [cardVisible, setCardVisible] = useState(false);
 
     const buttonRefs = useRef<HTMLButtonElement[]>([]);
     const wrapperRefs = useRef<HTMLDivElement[]>([]);
@@ -53,6 +55,61 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
         if (!el) return
         buttonRefs.current.push(el)
     }
+
+    const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+    const [mouseX, setMouseX] = useState(0);
+    const [mouseY, setMouseY] = useState(0);
+    const [mouseLeaveDelay, setMouseLeaveDelay] = useState<NodeJS.Timeout | null>(null);
+
+    useEffect(() => {
+        const card = photoRef.current;
+        if (card) {
+            setDimensions({
+                width: card.offsetWidth,
+                height: card.offsetHeight
+            });
+        }
+    }, [photoRef.current]);
+
+    useEffect(() => {
+        if (active) {
+            setTimeout(() => {
+                setCardVisible(active)
+            }, 500)
+        } else {
+            setCardVisible(active)
+        }
+    }, [active])
+
+    const mousePX = mouseX / dimensions.width;
+    const mousePY = mouseY / dimensions.height;
+
+    const cardStyle = {
+        transform: `rotateY(${mousePX * 10}deg) rotateX(${mousePY * -10}deg)`,
+        perspective: '1200px'
+    };
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        const card = photoRef.current;
+        if (card) {
+            const rect = card.getBoundingClientRect();
+            setMouseX(e.clientX - rect.left - dimensions.width / 2);
+            setMouseY(e.clientY - rect.top - dimensions.height / 2);
+        }
+    };
+
+    const handleMouseEnter = () => {
+        if (mouseLeaveDelay) {
+            clearTimeout(mouseLeaveDelay);
+        }
+    };
+
+    const handleMouseLeave = () => {
+        setMouseLeaveDelay(setTimeout(() => {
+            setMouseX(0);
+            setMouseY(0);
+        }, 1000));
+    };
 
     useEffect(() => {
         const buttons = buttonRefs.current;
@@ -95,56 +152,73 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
             });
         };
     }, []);
+
+
     return (
         <div
             onMouseEnter={() => { setHover(true) }}
             onMouseLeave={() => { setHover(false) }}
             className={` document-wrapper-border ${!active ? ' hover:shadow-[0px_2px_4px_0px_#00000040,_0px_-2px_4px_0px_#00000040] hover:bg-[#FFF]' : ''}  transition-all duration-300 cursor-pointer`}>
             <div className="  flex flex-col">
-                <div
-                    onClick={(event) => {
+                <div className="relative">
 
-                        if (photoRef.current?.contains(event.target as Node)) return;
+                    <div
+                        onClick={(event) => {
 
-                        setActive(!active);
-                    }}
-                    className={` w-full transition-all duration-300 ${active ? 'bg-[#34446D]' : 'document-wrapper-selector'}`}>
-                    <div className="wrapper w-full group/wrapper">
-                        <div
-                            className={`border-group flex items-center justify-between py-[15px] s:py-[23px] ${active && 'text-[#FFF]'}  text-[#000] transition-all duration-300 relative pl-[63px] ${!active && ' group-hover/wrapper:!border-[transparent] hover:text-[#34446D]'}`}
-                            style={{
-                                borderTopColor: !bordert ? 'transparent' : '#00000033',
-                                borderBottomColor: (!borderb || active) ? 'transparent' : '#00000033'
-                            }}
-                        >
+                            if (photoRef.current?.contains(event.target as Node)) return;
 
-                            <PhotoView src={img.src}>
-                                <div ref={photoRef} className={`transition-all duration-300 absolute z-[100] top-1/2 left-0 translate-y-[-50%] ${active && ' translate-y-[60px]'}`}>
+                            setActive(!active);
+                        }}
+                        className={` w-full transition-all duration-300 ${index === 0 && active && 'document-wrapper-selector'} ${active ? 'bg-[#34446D]' : ''}`}>
+                        <div className="wrapper w-full group/wrapper">
 
-                                    <Image alt='document' src={img}
-                                        width="0"
-                                        height="0"
-                                        sizes="100vw"
-                                        className={`transition-all duration-300 w-[190px] ${!active && ' !w-[43px]'} h-auto`} />
+                            <div
+                                className={`border-group flex items-center justify-between py-[15px] s:py-[23px] ${active && 'text-[#FFF]'}  text-[#000] transition-all duration-300 relative pl-[63px] ${!active && ' group-hover/wrapper:!border-[transparent] hover:text-[#34446D]'}`}
+                                style={{
+                                    borderTopColor: !bordert ? 'transparent' : '#00000033',
+                                    borderBottomColor: (!borderb || active) ? 'transparent' : '#00000033'
+                                }}
+                            >
+
+                                <PhotoView src={img.src}>
+                                    <div ref={photoRef}
+                                        style={{
+                                            transform: `perspective(800px) translateY(${active ? '60px' : '-50%'})`,
+                                        }}
+                                        className={`pointer-events-auto card-wrap transition-all duration-300 absolute z-[100] top-1/2 left-0`}>
+
+                                        <Image
+                                            onMouseMove={handleMouseMove}
+                                            onMouseEnter={handleMouseEnter}
+                                            onMouseLeave={handleMouseLeave}
+                                            style={active ? cardStyle : {}}
+                                            alt='document' src={img}
+                                            width="0"
+                                            height="0"
+                                            sizes="100vw"
+                                            className={`card transition-all duration-300 w-[190px] ${!active && ' !w-[43px]'} h-auto`} />
 
 
+
+
+                                    </div>
+                                </PhotoView>
+                                <p className="w-1/2 text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{title}</p>
+                                <div className="w-1/2 grid grid-cols-[1fr_1fr_auto] items-center justify-between">
+                                    <p className="text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{duration}</p>
+                                    <p className="text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{price}</p>
+                                    <button>
+                                        <svg
+                                            className={`${!active && 'rotate-[180deg]'} transition-all duration-700`}
+                                            width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M19 19L5 5" stroke={`${active ? 'white' : 'black'}`} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M5 13L5 5L13 5" stroke={`${active ? 'white' : 'black'}`} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+
+                                    </button>
                                 </div>
-                            </PhotoView>
-                            <p className="w-1/2 text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{title}</p>
-                            <div className="w-1/2 grid grid-cols-[1fr_1fr_auto] items-center justify-between">
-                                <p className="text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{duration}</p>
-                                <p className="text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{price}</p>
-                                <button>
-                                    <svg
-                                        className={`${!active && 'rotate-[180deg]'} transition-all duration-700`}
-                                        width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M19 19L5 5" stroke={`${active ? 'white' : 'black'}`} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M5 13L5 5L13 5" stroke={`${active ? 'white' : 'black'}`} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
 
-                                </button>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -154,9 +228,9 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
                         >
                             <div className="s:py-[23px] py-[15px]  flex flex-col l:flex-row justify-between m:items-start gap-[10px] ">
                                 <div className="s:gap-[40px] gap-[20px] justify-between flex flex-col m:flex-row m:items-stretch">
-                                    <div className='m:m-0 m-auto'>
+                                    <div className='m:m-0 m-auto pointer-events-none'>
                                         <div
-                                            className='w-[190px]'
+                                            className='w-[190px] pointer-events-none'
                                             style={{
                                                 height: (190 / img.width * img.height) + 'px'
                                             }}

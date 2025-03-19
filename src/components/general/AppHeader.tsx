@@ -248,12 +248,12 @@ const AppHeader = () => {
           </button>
 
 
-          <div ref={setWrapperRef} className="tariff-wrap">
+          <div ref={setWrapperRef} className="tariff-wrap ml-[70px]">
 
             <Link
               ref={setButtonRef}
               href="/find-out-cost/"
-              className="tariff py-[13px] px-[24px] bg-[#000000] rounded-[4px] border-solid border border-[#727272] ml-[70px] text-[#FFF] text-[20px] font-bold"
+              className="tariff block py-[13px] px-[24px] bg-[#000000] rounded-[4px] border-solid border border-[#727272] text-[#FFF] text-[20px] font-bold"
             >
               {t('calculation.name')}
             </Link>

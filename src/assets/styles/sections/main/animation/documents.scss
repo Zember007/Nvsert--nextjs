@@ -1,11 +1,11 @@
 .document-wrapper-border:first-child .border-group {
-    border-top-width: 1px ;
+    border-top-width: 1px;
 }
 
 .document-wrapper-border .border-group {
-    border-bottom-width: 1px ; 
+    border-bottom-width: 1px;
     border-style: solid;
-    
+
 }
 
 .document-wrapper-selector {
@@ -14,14 +14,13 @@
     transform-style: preserve-3d;
     transform-origin: top center;
     will-change: transform;
-    
 
-    &:hover {
-        transform: rotateX(7deg) translateY(-6px);
-    }
+    transform: rotateX(7deg) translateY(-6px);
+    position: relative;
+    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.5);
+
 }
 
 .document-wrapper-border:last-child .border-group {
-    border-bottom-width: 1px ;
+    border-bottom-width: 1px;
 }
-

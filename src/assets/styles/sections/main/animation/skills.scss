@@ -2,8 +2,7 @@ $hoverEasing: cubic-bezier(0.23, 1, 0.32, 1);
 $returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95);
 
 .card {
-    position: relative;
-    transition: 1s $returnEasing;
+    // transition: 1s $returnEasing;
     box-shadow: 0px 0px 4px 0px #00000033;    
     text-rendering: optimizeLegibility;
     transform-style: preserve-3d;
@@ -13,13 +12,16 @@ $returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95);
     transform: perspective(800px);
     transform-style: preserve-3d;
     cursor: pointer;
+    pointer-events: auto;
+    z-index: 999;
+    will-change: transform;
 
     &:hover {
 
         .card {
-            transition:
-                0.6s $hoverEasing,
-                box-shadow 2s $hoverEasing;
+            // transition:
+            //     0.6s $hoverEasing,
+            //     box-shadow 2s $hoverEasing;
      
         }
     }
