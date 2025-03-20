@@ -32,16 +32,16 @@ const Slider = () => {
                                 <div className="flex items-center gap-[10px] mr-[30px]">
 
 
-                                    <div className="h-[50px] p-[10px] pl-[30px]  rounded-r-[4px] bg-[#0000001A] w-full border-[#34446D] border-solid border border-l-0">
-                                        <span className='text-[24px] font-bold text-[#34446D]'>
+                                    <div className="h-[50px] p-[10px] pl-[30px]  rounded-r-[4px] bg-[#34446D] w-full border-[#34446D] border-solid border border-l-0">
+                                        <span className='text-[24px] font-bold text-[#FFF]'>
                                             {
                                                 filterPrepositions(slides[active].title)
                                             }
                                         </span>
                                     </div>
                                 </div>
-                                <div className="l:grow relative w-full h-full px-[30px]">
-                                    <p className={` text-[16px] l:my-auto tracking-normal ${((oldActive < active || (oldActive + 1 === slides.length && active === 0)) && !(oldActive === 0 && active + 1 === slides.length))? 'translate-x-[15px]' : 'translate-x-[-15px]'} opacity-0   ${!changeBg && ' !opacity-100 !translate-x-[0px] duration-500 transition-all'} `}>
+                                <div className={`l:grow relative w-full h-full px-[30px] ${((oldActive < active || (oldActive + 1 === slides.length && active === 0)) && !(oldActive === 0 && active + 1 === slides.length))? 'translate-x-[15px]' : 'translate-x-[-15px]'} will-change-transform opacity-0   ${!changeBg && ' !opacity-100 !translate-x-[0px] duration-500 transition-all'}`}>
+                                    <p className={` text-[16px] l:my-auto tracking-normal  `}>
 
                                         {
                                             filterPrepositions(slides[active].text)

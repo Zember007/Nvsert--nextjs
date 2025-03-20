@@ -86,10 +86,13 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
 
     const cardStyle = {
         transform: `rotateY(${mousePX * 10}deg) rotateX(${mousePY * -10}deg)`,
-        perspective: '1200px'
+        perspective: '1200px',
+        transition: 'all 0.3s ease-out'
     };
 
     const handleMouseMove = (e: React.MouseEvent) => {
+        console.log('move');
+
         const card = photoRef.current;
         if (card) {
             const rect = card.getBoundingClientRect();
@@ -99,12 +102,16 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
     };
 
     const handleMouseEnter = () => {
+        console.log('enter');
+
         if (mouseLeaveDelay) {
             clearTimeout(mouseLeaveDelay);
         }
     };
 
     const handleMouseLeave = () => {
+        console.log('leave');
+
         setMouseLeaveDelay(setTimeout(() => {
             setMouseX(0);
             setMouseY(0);
@@ -237,17 +244,20 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
                                             transform: `perspective(800px) translateY(${active ? '60px' : '-50%'})`,
                                         }}
                                         className={`${!active && 'pointer-events-none'} card-wrap transition-all duration-300 absolute z-[100] top-1/2 left-0`}>
-
-                                        <Image
+                                        <div
                                             onMouseMove={handleMouseMove}
                                             onMouseEnter={handleMouseEnter}
                                             onMouseLeave={handleMouseLeave}
                                             style={active ? cardStyle : {}}
-                                            alt='document' src={img}
-                                            width="0"
-                                            height="0"
-                                            sizes="100vw"
-                                            className={`card transition-all duration-300 w-[190px] ${!active && ' !w-[43px]'} h-auto`} />
+                                            className="card transition-all duration-300">
+                                            <Image
+
+                                                alt='document' src={img}
+                                                width="0"
+                                                height="0"
+                                                sizes="100vw"
+                                                className={`card transition-all duration-300 w-[190px] ${!active && ' !w-[43px]'} h-auto`} />
+                                        </div>
 
 
 
