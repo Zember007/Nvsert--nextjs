@@ -3,11 +3,11 @@ import { useFormContext } from 'react-hook-form';
 
 const AppTextarea = ({ title, inputName, required, className }:{ title:string, inputName:string, required?:boolean, className?:string }) => {
 
-    const { register, formState: { errors } } = useFormContext();
+    const { register, formState: { errors, isSubmitted } } = useFormContext();
     return (
         <label className='field'>
 
-            {errors[inputName] && <ul className="error-list" >
+            {isSubmitted && errors[inputName] && <ul className="error-list" >
                 <li className="error-item">
                     Это поле обязательно
                 </li>

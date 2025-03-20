@@ -62,8 +62,8 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
             const rect = element.getBoundingClientRect();
             const mouseX = e.clientX - rect.left;
             const mouseY = e.clientY - rect.top;
-            const rotateX = (mouseY / rect.height) * 30 - 15;
-            const rotateY = (mouseX / rect.width) * -30 + 15;
+            const rotateX = (mouseY / rect.height) * 15 - 7;
+            const rotateY = (mouseX / rect.width) * -15 + 7;
             element.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
             element.style.setProperty("--mouse-x", `${mouseX}px`);
             element.style.setProperty("--mouse-y", `${mouseY}px`);
@@ -77,6 +77,8 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
         buttons.forEach((button, index) => {
             const wrapper = wrappers[index];
             if (!button || !wrapper) return;
+
+            button.style.transition = 'transform 0.5s ease-out'
 
             wrapper.addEventListener('mousemove', (e) => handleMouseMove(e, button));
             wrapper.addEventListener('mouseleave', () => resetTransform(button));

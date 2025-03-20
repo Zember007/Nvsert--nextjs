@@ -287,7 +287,7 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
                     <div className="wrapper">
                         <div className={`transition-all easy-in duration-300 overflow-hidden max-h-0  ${active && '!duration-700 !max-h-[1200px] '}`}
                         >
-                            <div className="s:py-[23px] py-[15px]  flex flex-col l:flex-row m:items-start gap-[10px] ">
+                            <div className="s:py-[23px] py-[15px]  flex flex-col l:flex-row gap-[10px] ">
                                 <div className="w-1/2 s:gap-0 gap-[20px] flex flex-col m:flex-row m:items-stretch">
                                     <div className='m:m-0 m-auto pointer-events-none'>
                                         <div
@@ -309,44 +309,61 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
                                                 </p>
                                             </div>
                                             <div className="tariff-wrap" ref={setWrapperRef}>
-                                                <button ref={setButtonRef} id="open-tariff" className='tariff text-[20px]  font-bold tracking-normal m:block hidden px-[30px] py-[14px] text-[#34446D] rounded-[4px] bg-[#2D2F2F1A] border-[#34446D] border border-solid leading-[1]'>
-                                                    Оформить заявку
+                                                <button ref={setButtonRef} id="open-tariff" className='tariff text-[20px]  font-bold tracking-normal m:flex items-center gap-[10px] hidden px-[16px] py-[9px] text-[#34446D] rounded-[4px] bg-[#2D2F2F1A] border-[#34446D] border border-solid leading-[1]'>
+                                                    <span>Оформить заявку</span>
+                                                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M29.0627 0.9375L0.930664 12.1875L11.426 16.9336L26.2502 3.75L13.0666 18.5742L17.8127 29.0625L29.0627 0.9375Z" fill="#34446D" />
+                                                    </svg>
+
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="w-1/2">
-                                    <div className=" flex gap-[10px] flex-col  m:max-w-[500px] text-[#000]">
+                                <div className="w-1/2 h-full items-start flex gap-[20px] flex-col   text-[#000]">
+                                 
+                                        <div className="flex gap-[10px] flex-col grow  m:max-w-[500px]">
+                                            {
+                                                content1.map((cont, contIndex) => (
+                                                    <div key={contIndex} className='flex gap-[10px] flex-col items-start'>
+                                                        <p className='text-[20px] font-bold'>{filterPrepositions(cont.title)}</p>
 
-                                        {
-                                            content1.map((cont, contIndex) => (
-                                                <div key={contIndex} className='flex gap-[10px] flex-col items-start'>
-                                                    <p className='text-[20px] font-bold'>{filterPrepositions(cont.title)}</p>
+                                                        <ul className=' list-disc pl-[20px] flex flex-col gap-[6px]'>
 
-                                                    <ul className=' list-disc pl-[20px] flex flex-col gap-[6px]'>
+                                                            {
+                                                                cont.list.map((list, index) => (
+                                                                    <li className={`${listHidden && index > 4 && 'hidden'}`} key={index}>{filterPrepositions(list)}</li>
+                                                                ))
+                                                            }
+
+                                                        </ul>
+
 
                                                         {
-                                                            cont.list.map((list, index) => (
-                                                                <li className={`${listHidden && index > 4 && 'hidden'}`} key={index}>{filterPrepositions(list)}</li>
-                                                            ))
+                                                            listHidden && cont.list.length > 5 && <button
+                                                                className='text-[#34446D] font-bold'
+                                                                onClick={() => setListHidden(false)}
+                                                            >Показать полный список документов 🡣</button>
                                                         }
+                                                    </div>
+                                                ))
+                                            }
+                                        </div>
 
-                                                    </ul>
+                                        <div className="tariff-wrap" ref={setWrapperRef}>
+                                            <button ref={setButtonRef} id="open-tariff" className='tariff text-[20px]  font-bold tracking-normal m:flex items-center gap-[10px] hidden px-[16px] py-[12px] text-[#34446D] rounded-[4px] bg-[#2D2F2F1A] border-[#34446D] border border-solid leading-[1]'>
+                                                <span>Оформить заявку</span>
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M3 12H21" stroke="#34446D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M16 7L21 12L16 17" stroke="#34446D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
 
 
-                                                    {
-                                                        listHidden && cont.list.length > 5 && <button
-                                                            className='text-[#34446D] font-bold'
-                                                            onClick={() => setListHidden(false)}
-                                                        >Показать полный список документов 🡣</button>
-                                                    }
-                                                </div>
-                                            ))
-                                        }
+                                            </button>
+                                        </div>
 
-                                    </div>
+                                    
                                 </div>
 
 

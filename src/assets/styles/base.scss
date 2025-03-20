@@ -153,5 +153,6 @@
         right: 0;
         background: #00000099 url('../images/noise1.png');
         background-blend-mode: overlay;
+        filter: brightness(0.5) contrast(1) saturate(2);
     }
 }

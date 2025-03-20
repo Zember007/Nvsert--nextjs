@@ -350,6 +350,8 @@
 	}
 
 	&__menu {
+		position: relative;
+		z-index: 10;
 		@media (max-width: $media-l) {
 			position: fixed;
 			width: 100vw;
@@ -488,7 +490,7 @@
 	left: 0;
 	z-index: 21;
 	padding-top: 60px;
-	transform: translateY(-100%);
+	transform: translateY(-120%);
 	transition: all 0.3s ease-in-out 0s;
 	@media (max-width: $media-s) {
 		top: 100px;

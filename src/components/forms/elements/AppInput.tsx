@@ -2,7 +2,7 @@ import React from 'react';
 import { useFormContext } from "react-hook-form";
 
 const AppInput = ({ title, inputName, type, required, autocomplete, mask, className, classNameTitle } : { title: string, inputName: string, type?: string, required?: boolean, autocomplete?: string, mask?: string, className?:string , classNameTitle?:string }) => {
-    const { register, formState: { errors } } = useFormContext();
+    const { register, formState: { errors, isSubmitted } } = useFormContext();
 
     const formatPhoneNumber = (e:React.FormEvent<HTMLInputElement>) => {
         const value = e.currentTarget.value
@@ -40,7 +40,7 @@ const AppInput = ({ title, inputName, type, required, autocomplete, mask, classN
     return (
         <label className='field'>
 
-            {errors[inputName] && <ul className="error-list" >
+            {isSubmitted && errors[inputName] && <ul className="error-list" >
                 <li className="error-item">
                     Это поле обязательно
                 </li>
