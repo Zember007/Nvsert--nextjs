@@ -40,11 +40,12 @@ interface pulse {
 const MainDocumentItem = ({ index, img, title, content, content1, price, duration, active, setActive, borderb, bordert, setHover }: props) => {
 
     const [listHidden, setListHidden] = useState(true);
-    const [cardVisible, setCardVisible] = useState(false);
+    const [bgActive, setBgActive] = useState(false);
 
     const buttonRefs = useRef<HTMLButtonElement[]>([]);
     const wrapperRefs = useRef<HTMLDivElement[]>([]);
     const photoRef = useRef<HTMLDivElement | null>(null);
+    const photoContainerRef = useRef<HTMLDivElement | null>(null);
 
     const setWrapperRef = (el: HTMLDivElement | null) => {
         if (!el) return
@@ -63,23 +64,29 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
 
     useEffect(() => {
         const card = photoRef.current;
+        const container = photoContainerRef.current
         if (card) {
             setDimensions({
                 width: card.offsetWidth,
                 height: card.offsetHeight
             });
+
+            if (container) {
+                const rect = container.getBoundingClientRect();
+                console.log(rect.left, rect.right);
+
+                card.style.left = rect.left + 'px';
+            }
         }
-    }, [photoRef.current]);
+    }, [photoRef.current, photoContainerRef.current]);
 
     useEffect(() => {
-        if (active) {
-            setTimeout(() => {
-                setCardVisible(active)
-            }, 500)
-        } else {
-            setCardVisible(active)
+        if(!active) {
+            setBgActive(false)
         }
-    }, [active])
+    },[active])
+
+
 
     const mousePX = mouseX / dimensions.width;
     const mousePY = mouseY / dimensions.height;
@@ -162,7 +169,8 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
 
     const buttonRef = useRef<HTMLDivElement | null>(null);
 
-    const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
+    const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>, active:boolean) => {
+        if (active) return;
         const button = buttonRef.current;
         if (!button) return;
 
@@ -204,7 +212,9 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
 
             // Удаляем элемент после завершения анимации (опционально)
             drop.addEventListener('animationend', () => {
-                drop.remove(); // Удаляем элемент после анимации
+                setBgActive(true)
+
+                drop.remove();
             }, { once: true });
         }
     };
@@ -217,20 +227,53 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
             className={` document-wrapper-border overflow-hidden ${!active ? ' hover:shadow-[0px_2px_4px_0px_#00000040,_0px_-2px_4px_0px_#00000040] hover:bg-[#FFF]' : ''}  transition-all duration-300 cursor-pointer`}>
             <div className="  flex flex-col">
                 <div className="relative">
+                    <PhotoView src={img.src}>
+                        <div ref={photoRef}
+                            style={{
+                                transform: `perspective(800px) translateY(${active ? '60px' : '-50%'})`,
+                            }}
+                            className={`${!active && 'pointer-events-none'} card-wrap transition-all duration-300 absolute z-[100] top-1/2 left-0`}>
+                            <div
+                                onMouseMove={handleMouseMove}
+                                onMouseEnter={handleMouseEnter}
+                                onMouseLeave={handleMouseLeave}
+                                style={active ? cardStyle : {}}
+                                className="card transition-all duration-300">
+                                <Image
 
+                                    alt='document' src={img}
+                                    width="0"
+                                    height="0"
+                                    sizes="100vw"
+                                    className={`card transition-all duration-300 w-[190px] ${!active && ' !w-[43px]'} h-auto`} />
+                            </div>
+
+
+
+
+                        </div>
+                    </PhotoView>
                     <div
                         ref={buttonRef}
-                        onMouseDown={handleMouseDown}
+                        onMouseDown={(e) => {handleMouseDown(e, active)}}
                         onClick={(event) => {
-
                             if (photoRef.current?.contains(event.target as Node)) return;
 
                             setActive(!active);
+
+                            if(active) {
+                                setBgActive(false)
+                            }
+                            
+                            
                         }}
-                        className={`materialBtn relative w-full transition-all duration-300 ${active ? 'bg-[#34446D]' : ''}`}>
-                        <div className="wrapper w-full group/wrapper">
+                        className={`materialBtn overflow-hidden relative w-full transition-all duration-300  ${bgActive ? 'bg-[#34446D]' : ''}`}>
+                        <div
+
+                            className="wrapper w-full group/wrapper">
 
                             <div
+                                ref={photoContainerRef}
                                 className={`border-group gap-[10px]  flex items-center justify-between py-[15px] s:py-[23px] ${active && 'text-[#FFF]'}  text-[#000] transition-all duration-300 relative ${!active && ' group-hover/wrapper:!border-[transparent] hover:text-[#34446D]'}`}
                                 style={{
                                     borderTopColor: !bordert ? 'transparent' : '#00000033',
@@ -238,33 +281,8 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
                                 }}
                             >
 
-                                <PhotoView src={img.src}>
-                                    <div ref={photoRef}
-                                        style={{
-                                            transform: `perspective(800px) translateY(${active ? '60px' : '-50%'})`,
-                                        }}
-                                        className={`${!active && 'pointer-events-none'} card-wrap transition-all duration-300 absolute z-[100] top-1/2 left-0`}>
-                                        <div
-                                            onMouseMove={handleMouseMove}
-                                            onMouseEnter={handleMouseEnter}
-                                            onMouseLeave={handleMouseLeave}
-                                            style={active ? cardStyle : {}}
-                                            className="card transition-all duration-300">
-                                            <Image
-
-                                                alt='document' src={img}
-                                                width="0"
-                                                height="0"
-                                                sizes="100vw"
-                                                className={`card transition-all duration-300 w-[190px] ${!active && ' !w-[43px]'} h-auto`} />
-                                        </div>
-
-
-
-
-                                    </div>
-                                </PhotoView>
-                                <p className="leading-[11px] w-1/2 pl-[63px]  text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{title}</p>
+                                <p
+                                    className="leading-[11px] w-1/2 pl-[63px]  text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{title}</p>
                                 <div className="w-1/2 grid grid-cols-[1fr_1fr_auto] items-center justify-between">
                                     <p className="text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{duration}</p>
                                     <p className="text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{price}</p>
@@ -322,48 +340,48 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
                                 </div>
 
                                 <div className="w-1/2 h-full items-start flex gap-[20px] flex-col   text-[#000]">
-                                 
-                                        <div className="flex gap-[10px] flex-col grow  m:max-w-[500px]">
-                                            {
-                                                content1.map((cont, contIndex) => (
-                                                    <div key={contIndex} className='flex gap-[10px] flex-col items-start'>
-                                                        <p className='text-[20px] font-bold'>{filterPrepositions(cont.title)}</p>
 
-                                                        <ul className=' list-disc pl-[20px] flex flex-col gap-[6px]'>
+                                    <div className="flex gap-[10px] flex-col grow  m:max-w-[500px]">
+                                        {
+                                            content1.map((cont, contIndex) => (
+                                                <div key={contIndex} className='flex gap-[10px] flex-col items-start'>
+                                                    <p className='text-[20px] font-bold'>{filterPrepositions(cont.title)}</p>
 
-                                                            {
-                                                                cont.list.map((list, index) => (
-                                                                    <li className={`${listHidden && index > 4 && 'hidden'}`} key={index}>{filterPrepositions(list)}</li>
-                                                                ))
-                                                            }
-
-                                                        </ul>
-
+                                                    <ul className=' list-disc pl-[20px] flex flex-col gap-[6px]'>
 
                                                         {
-                                                            listHidden && cont.list.length > 5 && <button
-                                                                className='text-[#34446D] font-bold'
-                                                                onClick={() => setListHidden(false)}
-                                                            >Показать полный список документов 🡣</button>
+                                                            cont.list.map((list, index) => (
+                                                                <li className={`${listHidden && index > 4 && 'hidden'}`} key={index}>{filterPrepositions(list)}</li>
+                                                            ))
                                                         }
-                                                    </div>
-                                                ))
-                                            }
-                                        </div>
 
-                                        <div className="tariff-wrap" ref={setWrapperRef}>
-                                            <button ref={setButtonRef} id="open-tariff" className='tariff text-[20px]  font-bold tracking-normal m:flex items-center gap-[10px] hidden px-[16px] py-[12px] text-[#34446D] rounded-[4px] bg-[#2D2F2F1A] border-[#34446D] border border-solid leading-[1]'>
-                                                <span>Оформить заявку</span>
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3 12H21" stroke="#34446D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                    <path d="M16 7L21 12L16 17" stroke="#34446D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
+                                                    </ul>
 
 
-                                            </button>
-                                        </div>
+                                                    {
+                                                        listHidden && cont.list.length > 5 && <button
+                                                            className='text-[#34446D] font-bold'
+                                                            onClick={() => setListHidden(false)}
+                                                        >Показать полный список документов 🡣</button>
+                                                    }
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
 
-                                    
+                                    <div className="tariff-wrap" ref={setWrapperRef}>
+                                        <button ref={setButtonRef} id="open-tariff" className='tariff text-[20px]  font-bold tracking-normal m:flex items-center gap-[10px] hidden px-[16px] py-[12px] text-[#34446D] rounded-[4px] bg-[#2D2F2F1A] border-[#34446D] border border-solid leading-[1]'>
+                                            <span>Оформить заявку</span>
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M3 12H21" stroke="#34446D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M16 7L21 12L16 17" stroke="#34446D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+
+
+                                        </button>
+                                    </div>
+
+
                                 </div>
 
 

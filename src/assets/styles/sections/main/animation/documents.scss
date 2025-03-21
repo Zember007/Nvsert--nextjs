@@ -1,37 +1,36 @@
 .document-wrapper-border:first-child .border-group {
-    border-top-width: 1px;
+  border-top-width: 1px;
 }
 
 .document-wrapper-border .border-group {
-    border-bottom-width: 1px;
-    border-style: solid;
+  border-bottom-width: 1px;
+  border-style: solid;
 
 }
 
 .drop {
-    display: block;
-    position: absolute;
-    background: #34446D;
-    border-radius: 100%;
-    transform: scale(0);
-    pointer-events: none;
+  display: block;
+  position: absolute;
+  background: #34446D;
+  border-radius: 100%;
+  transform: scale(0);
+  pointer-events: none;
+}
+
+.drop.animate {
+  animation: drop 1s ease-out;
+}
+
+@keyframes drop {
+  100% {
+    transform: scale(2.5);
   }
-  
-  .drop.animate {
-    animation: drop 1s ease-out;
-  }
-  
-  @keyframes drop {
-    100% {
-      opacity: 0;
-      transform: scale(2.5);
-    }
-  }
-  
-  .materialBtn {
-    position: relative;
-  }
+}
+
+.materialBtn {
+  position: relative;
+}
 
 .document-wrapper-border:last-child .border-group {
-    border-bottom-width: 1px;
+  border-bottom-width: 1px;
 }

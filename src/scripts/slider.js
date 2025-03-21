@@ -5,7 +5,7 @@ import InertiaPlugin from "./InertiaPlugin";
 
 gsap.registerPlugin(Draggable, InertiaPlugin)
 
-export function initSlider(gap) {
+export function initSlider(gap, onChangeFunction) {
 
     const wrapper = document.querySelector('[data-slider="list"]')
     const slides = gsap.utils.toArray('[data-slider="slide"]');
@@ -33,7 +33,6 @@ export function initSlider(gap) {
 
     // Dynamically generated steps
     const allSteps = stepsParent.querySelectorAll('[data-slide-count="step"]');
-
     const loop = horizontalLoop(slides, {
         paused: true,
         draggable: true,
@@ -51,8 +50,11 @@ export function initSlider(gap) {
 
             // Move the number to the correct spot
             gsap.to(allSteps, { y: `${-100 * index}%`, ease: "power3", duration: 0.45 });
+
+            {onChangeFunction && onChangeFunction(index)}
         }
     });
+    
 
     // Similar to above, we substract 1 from our clicked index on click because our design is offset
     slides.forEach((slide, i) => slide.addEventListener("click", () => loop.toIndex(i - 1, { ease: "power3", duration: 0.725 })));
