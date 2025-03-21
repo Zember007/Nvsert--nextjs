@@ -282,8 +282,8 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
                             >
 
                                 <p
-                                    className="leading-[11px] w-1/2 pl-[63px]  text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{title}</p>
-                                <div className="w-1/2 grid grid-cols-[1fr_1fr_auto] items-center justify-between">
+                                    className="leading-[11px] w-[60%] pl-[63px]  text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{title}</p>
+                                <div className="w-[40%] grid grid-cols-[1fr_1fr_auto] items-center justify-between">
                                     <p className="text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{duration}</p>
                                     <p className="text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{price}</p>
                                     <button>
@@ -306,7 +306,7 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
                         <div className={`transition-all easy-in duration-300 overflow-hidden max-h-0  ${active && '!duration-700 !max-h-[1200px] '}`}
                         >
                             <div className="s:py-[23px] py-[15px]  flex flex-col l:flex-row gap-[10px] ">
-                                <div className="w-1/2 s:gap-0 gap-[20px] flex flex-col m:flex-row m:items-stretch">
+                                <div className="w-[60%] s:gap-0 gap-[20px] flex flex-col m:flex-row m:items-stretch">
                                     <div className='m:m-0 m-auto pointer-events-none'>
                                         <div
                                             className='w-[190px] pointer-events-none'
@@ -339,7 +339,7 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
                                     </div>
                                 </div>
 
-                                <div className="w-1/2 h-full items-start flex gap-[20px] flex-col   text-[#000]">
+                                <div className="w-[40%] h-full items-start flex gap-[20px] flex-col   text-[#000]">
 
                                     <div className="flex gap-[10px] flex-col grow  m:max-w-[500px]">
                                         {

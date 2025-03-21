@@ -21,13 +21,23 @@ const Slider = () => {
             setTimeout(() => {
                 setChangeBg(false)
             }, 100)
+
+            const myElement = document.getElementById("title-block") as HTMLElement;
+            if (myElement) {
+                bounceElement(myElement, {
+                    startPosition: "0",
+                    endPosition: "-5px",
+                    duration: 100,
+                    easing: "ease-in",
+                });
+            }
         })
     }, [])
 
     useEffect(() => {
         if (oldActive !== active) {
             const element = document.querySelector('.slide-text') as HTMLElement
-            
+
             gsap.to(".slide-text", {
                 x: (element.offsetWidth + (element.offsetWidth / 100 * 10) - 67) * direction,
                 duration: 0.5,
@@ -40,13 +50,67 @@ const Slider = () => {
     }, [active]);
 
     useEffect(() => {
-        if (oldActive === active) {           
+        if (oldActive === active) {
             gsap.to(".slide-text", {
                 x: 0,
                 duration: 0
             })
         }
     }, [oldActive])
+
+    interface BounceOptions {
+        startPosition?: string;
+        endPosition?: string;
+        duration?: number;
+        easing?: string;
+    }
+
+    function bounceElement(
+        element: HTMLElement,
+        {
+            startPosition = "0",
+            endPosition = "72px",
+            duration = 500,
+            easing = "ease-out",
+        }: BounceOptions = {}
+    ): void {
+        // Останавливаем текущую анимацию и сбрасываем состояние
+        element.style.animation = "none";
+        element.style.top = startPosition;
+        element.style.position = "relative";
+
+        // Запускаем новую анимацию
+        requestAnimationFrame(() => {
+            element.style.animation = `bounce ${duration}ms ${easing} forwards`;
+
+            // Добавляем keyframes динамически
+            const keyframes = `
+            @keyframes bounce {
+              from { top: ${startPosition}; }
+              to { top: ${endPosition}; }
+            }
+          `;
+
+            // Удаляем существующий стиль анимации, если есть
+            const existingStyle = document.getElementById("bounce-keyframes");
+            if (existingStyle) existingStyle.remove();
+
+            // Создаем новый стиль
+            const styleSheet = document.createElement("style");
+            styleSheet.id = "bounce-keyframes";
+            styleSheet.textContent = keyframes;
+            document.head.appendChild(styleSheet);
+        });
+
+        // Очищаем анимацию после завершения
+        element.addEventListener(
+            "animationend",
+            () => {
+                element.style.animation = "";
+            },
+            { once: true }
+        );
+    }
 
 
     return (
@@ -64,7 +128,7 @@ const Slider = () => {
                                 <div className="flex items-center gap-[10px] mr-[30px] relative z-[10]">
 
 
-                                    <div className="h-[50px] p-[10px] pl-[30px]  rounded-r-[4px] bg-[#34446D] w-full border-[#34446D] border-solid border border-l-0">
+                                    <div id='title-block' className="h-[50px] p-[10px] pl-[30px]  rounded-r-[4px] bg-[#34446D] w-full border-[#34446D] border-solid border border-l-0">
                                         <span className='text-[24px] font-bold text-[#FFF]'>
                                             {
                                                 filterPrepositions(slides[active].title)
