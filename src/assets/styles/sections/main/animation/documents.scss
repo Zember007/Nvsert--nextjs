@@ -18,6 +18,10 @@
   
 }
 
+.drop-reverse {
+  z-index: 1;
+}
+
 .drop.animate {
   background: #34446D;
   animation: drop 1s ease-out;

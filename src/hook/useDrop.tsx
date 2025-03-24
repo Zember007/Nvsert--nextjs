@@ -1,13 +1,15 @@
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, useState } from 'react';
 
 // Кастомный хук для управления эффектом "drop"
 export const useDropEffect = () => {
     const buttonRef = useRef<HTMLDivElement | null>(null);
 
+
     const handleMouseDown = useCallback(
         (active: boolean, event?: React.MouseEvent<HTMLDivElement>) => {
             const button = buttonRef.current;
             if (!button) return;
+
 
             const opacity = parseFloat(window.getComputedStyle(button).opacity);
             const windowWidth = window.innerWidth;
@@ -47,16 +49,16 @@ export const useDropEffect = () => {
 
                 if (active) {
                     drop_reverse.classList.add('animate');
-                    setTimeout(() => {
-                        drop.classList.remove('animate');
-                    }, 1000)
-                } else {
-                    drop_reverse.classList.remove('animate');
+
+                } else {                    
+                    drop_reverse.removeEventListener('animationend',() => {})
+                    drop_reverse.remove()
                     drop.classList.add('animate');
                 }
 
                 drop_reverse.addEventListener('animationend', () => {
                     drop_reverse.classList.remove('animate');
+                    drop.classList.remove('animate');
                 }, { once: true });
 
 

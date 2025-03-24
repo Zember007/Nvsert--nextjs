@@ -17,19 +17,27 @@ const Slider = () => {
 
     useEffect(() => {
         initSlider(70, (index: number) => {
-            setActive(index)
+
             setTimeout(() => {
                 setChangeBg(false)
             }, 100)
 
             const myElement = document.getElementById("title-block") as HTMLElement;
             if (myElement) {
-                bounceElement(myElement, {
-                    startPosition: "0",
-                    endPosition: "-5px",
-                    duration: 100,
-                    easing: "ease-in",
-                });
+
+                
+                setActive(prev => {
+                    let direct = ((prev < index || (prev + 1 === slides.length && index === 0)) && !(prev === 0 && index + 1 === slides.length)) ? -1 : 1;
+                    
+                    bounceElement(myElement, {
+                        startPosition: "0",
+                        endPosition: `${5 * direct}px`,
+                        duration: 200,
+                        easing: "ease-in",
+                    });
+
+                    return index
+                })
             }
         })
     }, [])
@@ -86,8 +94,8 @@ const Slider = () => {
             // Добавляем keyframes динамически
             const keyframes = `
             @keyframes bounce {
-              from { top: ${startPosition}; }
-              to { top: ${endPosition}; }
+              from { left: ${startPosition}; }
+              to { left: ${endPosition}; }
             }
           `;
 
@@ -128,8 +136,8 @@ const Slider = () => {
                                 <div className="flex items-center gap-[10px] mr-[30px] relative z-[10]">
 
 
-                                    <div id='title-block' className="h-[50px] p-[10px] pl-[30px]  rounded-r-[4px] bg-[#34446D] w-full border-[#34446D] border-solid border border-l-0">
-                                        <span className='text-[24px] font-bold text-[#FFF]'>
+                                    <div className="h-[50px] p-[10px] pl-[30px]  rounded-r-[4px] bg-[#34446D] w-full border-[#34446D] border-solid border border-l-0">
+                                        <span id='title-block' className='text-[24px] font-bold text-[#FFF]'>
                                             {
                                                 filterPrepositions(slides[active].title)
                                             }

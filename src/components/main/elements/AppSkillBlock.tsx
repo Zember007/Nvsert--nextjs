@@ -36,9 +36,16 @@ const AppSkillBlock = (skill: any) => {
   };
 
   const imageStyle = {
-    transform: `translate3d(${mousePX * -20}px, ${mousePY * -20}px, 0) scale(0.9)`,
+    transform: `translate3d(${mousePX * -30}px, ${mousePY * -30}px, 0) scale(${skill.index === 3 ? '0.75' : '0.65'})`,
     transition: 'transform 0.3s ease-out',
     willChange: 'transform'
+  }
+
+  const imageBorderStyle = {
+    transform: `translate3d(${mousePX * -30}px, ${mousePY * -30}px, 0) scale(0.9)`,
+    transition: 'transform 0.3s ease-out',
+    willChange: 'transform',
+    opacity: '1'
   }
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -72,7 +79,7 @@ const AppSkillBlock = (skill: any) => {
   const list: string[] = skill.text;
 
   return (
-    <div className={`hover:z-[10000] relative card-wrap ${!skill.folder && 'cursor-pointer'}`}
+    <div className={`hover:z-[10000] relative card-wrap ${!skill.folder && 'cursor-pointer overflow-hidden'}`}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -82,7 +89,7 @@ const AppSkillBlock = (skill: any) => {
         style={
           {
             ...cardStyle,
-            background:`${skill.bg === 'secondary' ? '#CCCCCC' : '#FFF'}`
+            background: `${skill.bg === 'secondary' ? '#CCCCCC' : '#FFF'}`
           }
         }
       >
@@ -93,18 +100,23 @@ const AppSkillBlock = (skill: any) => {
               <Image alt="folder" className='transition-all duration-300' src={skill.img} height={280} style={mousePX ? imageStyle : {}} />
               <div className="absolute rounded-[10px] top-0 left-0 right-0 bottom-0 bg-[#34446D] mix-blend-hue"></div>
               <div
-              style={mousePX ? imageStyle : {}}
-              className="absolute rounded-[4px] transition-all duration-500 top-0 left-0 right-0 bottom-0 border border-solid border-[#CCCCCC]"></div>
+                style={mousePX ? imageStyle : {}}
+                className="absolute rounded-[4px] transition-all duration-500 top-0 left-0 right-0 bottom-0 border border-solid border-[#CCCCCC]"></div>
+              { skill.index === 8 &&
+                <div
+                  style={mousePX ? imageBorderStyle : {}}
+                  className="absolute rounded-[4px] opacity-0 transition-all duration-500 top-0 left-0 right-0 bottom-0 border border-solid border-[#CCCCCC]"></div>
+              }
             </>
             :
             <>
               <div
                 style={{
                   borderColor: `${skill.bg === 'secondary' ? '#FFFFFF' : '#CCCCCC'}`,
-                  ...(mousePX && {...textStyle})
+                  ...(mousePX && { ...textStyle })
                 }}
                 className={`absolute z-[-1] ${oldMousePX && 'backdrop-blur-[2px]'} transition-all duration-500 rounded-[4px] top-0 left-0 right-0 bottom-0 border border-solid`}
-                ></div>
+              ></div>
               <span className={`font-bold text-[20px] transition-all duration-500`} style={mousePX ? textStyle : {}}>
                 {filterPrepositions(skill.title)}
               </span>

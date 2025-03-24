@@ -109,16 +109,18 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
         }, 1000));
     };
 
-    // useEffect(() => {
-    //     if (!active && buttonRef.current) {
-    //         const drop = buttonRef.current.querySelector('.drop.animate')
-    //         if (drop) {
-    //             handleMouseDown()
-    //         }
-    //     }
+    useEffect(() => {
+        if (!active && buttonRef.current) {
+            const drop = buttonRef.current.querySelector('.drop.animate')
+            const drop_reverse = buttonRef.current.querySelector('.drop-reverse.animate')
+            if(drop && !drop_reverse) {
+                drop.classList.remove('animate')
+                // handleMouseDown(!active)
+            }
+        }
 
       
-    // }, [active])
+    }, [active])
 
 
 
@@ -158,7 +160,6 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
                     </PhotoView>
                     <div
                         ref={buttonRef}
-                        // onMouseDown={(e) => {  }}
                         onClick={(event) => {
                             if (photoRef.current?.contains(event.target as Node)) return;
 
@@ -169,7 +170,7 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
                         className={`materialBtn overflow-hidden relative w-full transition-all duration-300 z-[0]`}>
                         <div
 
-                            className="wrapper w-full group/wrapper">
+                            className="wrapper w-full group/wrapper relative z-[2]">
 
                             <div
                                 ref={photoContainerRef}
