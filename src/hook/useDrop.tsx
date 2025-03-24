@@ -5,7 +5,7 @@ export const useDropEffect = () => {
     const buttonRef = useRef<HTMLDivElement | null>(null);
 
     const handleMouseDown = useCallback(
-        (event: React.MouseEvent<HTMLDivElement>) => {
+        (event?: React.MouseEvent<HTMLDivElement>) => {
             const button = buttonRef.current;
             if (!button) return;
 
@@ -25,8 +25,8 @@ export const useDropEffect = () => {
                     button.insertBefore(drop, button.firstChild);
                 }
 
-                const x = event.clientX - rect.left - maxWidthHeight / 2;
-                const y = event.clientY - rect.top - maxWidthHeight / 2;
+                const x = event ? event.clientX - rect.left - maxWidthHeight / 2 : rect.left - maxWidthHeight / 2
+                const y = event ? event.clientY - rect.top - maxWidthHeight / 2 : rect.top - maxWidthHeight / 2;
 
                 drop.style.top = `${y}px`;
                 drop.style.left = `${x}px`;

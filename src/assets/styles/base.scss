@@ -137,7 +137,7 @@
 .tariff.fast-click {
     box-shadow: inset 2px 2px 4px 0 rgba(52, 68, 109, 0.5),
         inset -2px -2px 4px 0 rgba(52, 68, 109, 0.5) !important;
-    transform: scale(0.97) !important;
+    transform: scale(0.9) rotateX(var(--x)) rotateY(var(--y)) translateZ(10px) !important;
 }
 
 .main-form {

@@ -5,6 +5,7 @@ import { StaticImageData } from 'next/dist/shared/lib/get-img-props';
 import { filterPrepositions } from '@/hook/filter';
 import { PhotoView } from 'react-photo-view';
 import { useDropEffect } from '@/hook/useDrop';
+import { useButton } from '@/hook/useButton';
 
 interface content {
     text: string,
@@ -42,22 +43,12 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
 
     const [listHidden, setListHidden] = useState(true);
 
-    const {buttonRef, handleMouseDown} = useDropEffect()
+    const { buttonRef, handleMouseDown } = useDropEffect()
+    const { setButtonRef, setWrapperRef } = useButton()
 
-    const buttonRefs = useRef<HTMLButtonElement[]>([]);
-    const wrapperRefs = useRef<HTMLDivElement[]>([]);
     const photoRef = useRef<HTMLDivElement | null>(null);
     const photoContainerRef = useRef<HTMLDivElement | null>(null);
 
-    const setWrapperRef = (el: HTMLDivElement | null) => {
-        if (!el) return
-        wrapperRefs.current.push(el)
-    }
-
-    const setButtonRef = (el: HTMLButtonElement | null) => {
-        if (!el) return
-        buttonRefs.current.push(el)
-    }
 
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
     const [mouseX, setMouseX] = useState(0);
@@ -69,13 +60,12 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
         const container = photoContainerRef.current
         if (card) {
             setDimensions({
-                width: card.offsetWidth,
-                height: card.offsetHeight
+                width: 190,
+                height: 190 / img.width * img.height
             });
 
             if (container) {
                 const rect = container.getBoundingClientRect();
-                console.log(rect.left, rect.right);
 
                 card.style.left = rect.left + 'px';
             }
@@ -89,13 +79,12 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
     const mousePY = mouseY / dimensions.height;
 
     const cardStyle = {
-        transform: `rotateY(${mousePX * 10}deg) rotateX(${mousePY * -10}deg)`,
+        transform: `rotateY(${mousePX * 30}deg) rotateX(${mousePY * -30}deg) scale(1.1)`,
         perspective: '1200px',
         transition: 'all 0.3s ease-out'
     };
 
     const handleMouseMove = (e: React.MouseEvent) => {
-        console.log('move');
 
         const card = photoRef.current;
         if (card) {
@@ -106,7 +95,6 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
     };
 
     const handleMouseEnter = () => {
-        console.log('enter');
 
         if (mouseLeaveDelay) {
             clearTimeout(mouseLeaveDelay);
@@ -114,7 +102,6 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
     };
 
     const handleMouseLeave = () => {
-        console.log('leave');
 
         setMouseLeaveDelay(setTimeout(() => {
             setMouseX(0);
@@ -123,48 +110,17 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
     };
 
     useEffect(() => {
-        const buttons = buttonRefs.current;
-        const wrappers = wrapperRefs.current;
+        if (!active && buttonRef.current) {
+            const drop = buttonRef.current.querySelector('.drop.animate')
+            if (drop) {
+                handleMouseDown()
+            }
+        }
 
-        if (!buttons.length || !wrappers.length) return;
+      
+    }, [active])
 
-        const handleMouseMove = (e: MouseEvent, element: HTMLElement) => {
-            const rect = element.getBoundingClientRect();
-            const mouseX = e.clientX - rect.left;
-            const mouseY = e.clientY - rect.top;
-            const rotateX = (mouseY / rect.height) * 30 - 15;
-            const rotateY = (mouseX / rect.width) * -30 + 15;
-            element.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
-        };
 
-        const resetTransform = (element: HTMLElement) => {
-            element.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
-        };
-
-        buttons.forEach((button, index) => {
-            const wrapper = wrappers[index];
-            if (!button || !wrapper) return;
-
-            wrapper.addEventListener('mousemove', (e) => handleMouseMove(e, button));
-            wrapper.addEventListener('mouseleave', () => resetTransform(button));
-            button.addEventListener('focus', () => button.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(10px)');
-            button.addEventListener('blur', () => resetTransform(button));
-        });
-
-        return () => {
-            buttons.forEach((button, index) => {
-                const wrapper = wrappers[index];
-                if (!button || !wrapper) return;
-
-                wrapper.removeEventListener('mousemove', (e) => handleMouseMove(e, button));
-                wrapper.removeEventListener('mouseleave', () => resetTransform(button));
-                button.removeEventListener('focus', () => button.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(10px)');
-                button.removeEventListener('blur', () => resetTransform(button));
-            });
-        };
-    }, []);
-
- 
 
 
     return (
@@ -184,7 +140,7 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
                                 onMouseMove={handleMouseMove}
                                 onMouseEnter={handleMouseEnter}
                                 onMouseLeave={handleMouseLeave}
-                                style={active ? cardStyle : {}}
+                                style={active && (mouseX || mouseY) ? cardStyle : {}}
                                 className="card transition-all duration-300">
                                 <Image
 
@@ -202,13 +158,13 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
                     </PhotoView>
                     <div
                         ref={buttonRef}
-                        onMouseDown={(e) => {handleMouseDown(e)}}
+                        onMouseDown={(e) => { handleMouseDown(e) }}
                         onClick={(event) => {
                             if (photoRef.current?.contains(event.target as Node)) return;
 
                             setActive(!active);
-                            
-                            
+
+
                         }}
                         className={`materialBtn overflow-hidden relative w-full transition-all duration-300 `}>
                         <div

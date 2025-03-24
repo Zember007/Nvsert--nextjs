@@ -8,12 +8,13 @@ import axios from "axios";
 import { useHeaderContext } from "../contexts/HeaderContext";
 import MessageImg from '@/assets/images/svg/message-flight.svg'
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useButton } from "@/hook/useButton";
 
 const AppMainForm = ({ btnText }: { btnText: string }) => {
 
     const { t } = useTranslation()
     const { openDefaultModal } = useHeaderContext()
+    const {setButtonRef, setWrapperRef} = useButton()
 
     const onSubmit = async (e: any) => {
         const formData = new FormData();
@@ -39,65 +40,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
     const methods = useForm({ mode: "onTouched" });
     const { reset } = methods
 
-    const buttonRefs = useRef<HTMLButtonElement[]>([]);
-    const wrapperRefs = useRef<HTMLDivElement[]>([]);
 
-    const setWrapperRef = (el: HTMLDivElement | null) => {
-        if (!el) return
-        wrapperRefs.current.push(el)
-    }
-
-    const setButtonRef = (el: HTMLButtonElement | null) => {
-        if (!el) return
-        buttonRefs.current.push(el)
-    }
-
-    useEffect(() => {
-        const buttons = buttonRefs.current;
-        const wrappers = wrapperRefs.current;
-
-        if (!buttons.length || !wrappers.length) return;
-
-        const handleMouseMove = (e: MouseEvent, element: HTMLElement) => {
-            const rect = element.getBoundingClientRect();
-            const mouseX = e.clientX - rect.left;
-            const mouseY = e.clientY - rect.top;
-            const rotateX = (mouseY / rect.height) * 15 - 7;
-            const rotateY = (mouseX / rect.width) * -15 + 7;
-            element.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
-            element.style.setProperty("--mouse-x", `${mouseX}px`);
-            element.style.setProperty("--mouse-y", `${mouseY}px`);
-        };
-
-
-        const resetTransform = (element: HTMLElement) => {
-            element.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
-        };
-
-        buttons.forEach((button, index) => {
-            const wrapper = wrappers[index];
-            if (!button || !wrapper) return;
-
-            button.style.transition = 'transform 0.5s ease-out'
-
-            wrapper.addEventListener('mousemove', (e) => handleMouseMove(e, button));
-            wrapper.addEventListener('mouseleave', () => resetTransform(button));
-            button.addEventListener('focus', () => button.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(10px)');
-            button.addEventListener('blur', () => resetTransform(button));
-        });
-
-        return () => {
-            buttons.forEach((button, index) => {
-                const wrapper = wrappers[index];
-                if (!button || !wrapper) return;
-
-                wrapper.removeEventListener('mousemove', (e) => handleMouseMove(e, button));
-                wrapper.removeEventListener('mouseleave', () => resetTransform(button));
-                button.removeEventListener('focus', () => button.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(10px)');
-                button.removeEventListener('blur', () => resetTransform(button));
-            });
-        };
-    }, []);
     return (
         <AppValidationObserver methods={methods} onSubmit={onSubmit}>
             {({ register, errors }) => (
