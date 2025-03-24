@@ -5,7 +5,7 @@ export const useDropEffect = () => {
     const buttonRef = useRef<HTMLDivElement | null>(null);
 
     const handleMouseDown = useCallback(
-        (event?: React.MouseEvent<HTMLDivElement>) => {
+        (active: boolean, event?: React.MouseEvent<HTMLDivElement>) => {
             const button = buttonRef.current;
             if (!button) return;
 
@@ -14,10 +14,20 @@ export const useDropEffect = () => {
 
             if (opacity > 0 && windowWidth >= 1008) {
                 const rect = button.getBoundingClientRect();
-                const maxWidthHeight = Math.max(rect.width, rect.height) ;
+                const maxWidthHeight = Math.max(rect.width, rect.height);
 
                 let drop = button.querySelector('.drop') as HTMLElement | null;
-                if (!drop || window.getComputedStyle(drop).opacity !== '1') {
+                let drop_reverse = button.querySelector('.drop-reverse') as HTMLElement | null;
+
+                if (!drop_reverse) {
+                    drop_reverse = document.createElement('b');
+                    drop_reverse.className = 'drop-reverse';
+                    drop_reverse.style.width = `${maxWidthHeight}px`;
+                    drop_reverse.style.height = `${maxWidthHeight}px`;
+                    button.insertBefore(drop_reverse, button.firstChild);
+                }
+
+                if (!drop) {
                     drop = document.createElement('b');
                     drop.className = 'drop';
                     drop.style.width = `${maxWidthHeight}px`;
@@ -25,21 +35,29 @@ export const useDropEffect = () => {
                     button.insertBefore(drop, button.firstChild);
                 }
 
+
+
                 const x = event ? event.clientX - rect.left - maxWidthHeight / 2 : rect.left - maxWidthHeight / 2
                 const y = event ? event.clientY - rect.top - maxWidthHeight / 2 : rect.top - maxWidthHeight / 2;
 
                 drop.style.top = `${y}px`;
                 drop.style.left = `${x}px`;
+                drop_reverse.style.top = `${y}px`;
+                drop_reverse.style.left = `${x}px`;
 
-                if (drop.classList.contains('animate')) {
-                    drop.classList.remove('animate');
-                    drop.classList.add('animate-reverse');
-
+                if (active) {
+                    drop_reverse.classList.add('animate');
+                    setTimeout(() => {
+                        drop.classList.remove('animate');
+                    }, 1000)
                 } else {
-                    drop.classList.remove('animate-reverse');
-
+                    drop_reverse.classList.remove('animate');
                     drop.classList.add('animate');
                 }
+
+                drop_reverse.addEventListener('animationend', () => {
+                    drop_reverse.classList.remove('animate');
+                }, { once: true });
 
 
             }

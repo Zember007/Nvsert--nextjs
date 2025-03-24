@@ -109,16 +109,16 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
         }, 1000));
     };
 
-    useEffect(() => {
-        if (!active && buttonRef.current) {
-            const drop = buttonRef.current.querySelector('.drop.animate')
-            if (drop) {
-                handleMouseDown()
-            }
-        }
+    // useEffect(() => {
+    //     if (!active && buttonRef.current) {
+    //         const drop = buttonRef.current.querySelector('.drop.animate')
+    //         if (drop) {
+    //             handleMouseDown()
+    //         }
+    //     }
 
       
-    }, [active])
+    // }, [active])
 
 
 
@@ -158,15 +158,15 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
                     </PhotoView>
                     <div
                         ref={buttonRef}
-                        onMouseDown={(e) => { handleMouseDown(e) }}
+                        // onMouseDown={(e) => {  }}
                         onClick={(event) => {
                             if (photoRef.current?.contains(event.target as Node)) return;
 
                             setActive(!active);
-
+                            handleMouseDown(active, event)
 
                         }}
-                        className={`materialBtn overflow-hidden relative w-full transition-all duration-300 `}>
+                        className={`materialBtn overflow-hidden relative w-full transition-all duration-300 z-[0]`}>
                         <div
 
                             className="wrapper w-full group/wrapper">

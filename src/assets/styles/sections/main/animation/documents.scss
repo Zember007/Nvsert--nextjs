@@ -8,10 +8,10 @@
 
 }
 
-.drop {
+.drop,
+.drop-reverse {
   display: block;
   position: absolute;
-  background: #34446D;
   border-radius: 100%;
   transform: scale(0);
   pointer-events: none;
@@ -19,12 +19,14 @@
 }
 
 .drop.animate {
+  background: #34446D;
   animation: drop 1s ease-out;
   animation-fill-mode: forwards;
 }
 
-.drop.animate-reverse {
-  animation: drop_reverse 1s ease-out;
+.drop-reverse.animate {
+  background: #FFF;
+  animation: drop 1s ease-out;
   animation-fill-mode: forwards;
 }
 
@@ -34,15 +36,6 @@
   }
   100% {
     transform: scale(2.5);
-  }
-}
-
-@keyframes drop_reverse {
-  0% {
-    transform: scale(2.5);
-  }
-  100% {
-    transform: scale(0);
   }
 }
 

@@ -56,23 +56,52 @@
     }
 }
 
+.PhotoView__Photo {
+    box-shadow: 0px 0px 10px 0px #000000CC;
+}
+
+.PhotoView-Slider__BannerWrap {
+    background-color: transparent !important;
+}
+
+
+.PhotoView-Slider__ArrowLeft,
+.PhotoView-Slider__ArrowRight {
+    background: #E1E1E1 !important;
+    box-sizing: content-box;
+    height: 100px !important;
+    border-radius: 4px !important;
+    width: 50px !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #34446D !important;
+
+    &::before {
+        content: '';
+        background-image: url(../images/svg/right-arrow-slider.svg);
+        background-position: center center;
+        width: 45px;
+        height: 34px;
+    }
+}
+
 .PhotoView-Slider__ArrowRight {
     right: 25% !important;
+    &::before {
+        transform: rotate(180deg);
+    }
 }
 
 .PhotoView-Slider__ArrowLeft {
     left: 25% !important;
+    
 }
 
 .PhotoView-Slider__ArrowLeft svg,
 .PhotoView-Slider__ArrowRight svg {
-    fill: #34446D !important;
-    background: #E1E1E1 !important;
-    box-sizing: content-box;
-    height: 24px;
-    padding: 20px 10px !important;
-    border-radius: 4px;
-    width: 24px;
+    display: none !important;
+   
 }
 
 .blurred-mask {
@@ -155,6 +184,6 @@
         right: 0;
         background: #00000099 url('../images/noise1.png');
         background-blend-mode: overlay;
-        filter: brightness(0.6) contrast(1) saturate(2);
+        filter: hue-rotate(50deg);
     }
 }
