@@ -15,15 +15,34 @@
   border-radius: 100%;
   transform: scale(0);
   pointer-events: none;
+  
 }
 
 .drop.animate {
   animation: drop 1s ease-out;
+  animation-fill-mode: forwards;
+}
+
+.drop.animate-reverse {
+  animation: drop_reverse 1s ease-out;
+  animation-fill-mode: forwards;
 }
 
 @keyframes drop {
+  0% {
+    transform: scale(0);
+  }
   100% {
     transform: scale(2.5);
+  }
+}
+
+@keyframes drop_reverse {
+  0% {
+    transform: scale(2.5);
+  }
+  100% {
+    transform: scale(0);
   }
 }
 

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { StaticImageData } from 'next/dist/shared/lib/get-img-props';
 import { filterPrepositions } from '@/hook/filter';
 import { PhotoView } from 'react-photo-view';
+import { useDropEffect } from '@/hook/useDrop';
 
 interface content {
     text: string,
@@ -40,7 +41,8 @@ interface pulse {
 const MainDocumentItem = ({ index, img, title, content, content1, price, duration, active, setActive, borderb, bordert, setHover }: props) => {
 
     const [listHidden, setListHidden] = useState(true);
-    const [bgActive, setBgActive] = useState(false);
+
+    const {buttonRef, handleMouseDown} = useDropEffect()
 
     const buttonRefs = useRef<HTMLButtonElement[]>([]);
     const wrapperRefs = useRef<HTMLDivElement[]>([]);
@@ -80,11 +82,6 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
         }
     }, [photoRef.current, photoContainerRef.current]);
 
-    useEffect(() => {
-        if(!active) {
-            setBgActive(false)
-        }
-    },[active])
 
 
 
@@ -167,57 +164,7 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
         };
     }, []);
 
-    const buttonRef = useRef<HTMLDivElement | null>(null);
-
-    const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>, active:boolean) => {
-        if (active) return;
-        const button = buttonRef.current;
-        if (!button) return;
-
-        const opacity = parseFloat(window.getComputedStyle(button).opacity);
-        const windowWidth = window.innerWidth;
-
-        // Условие активации эффекта
-        if (opacity > 0 && windowWidth >= 1008) {
-            const rect = button.getBoundingClientRect();
-            const maxWidthHeight = Math.max(rect.width, rect.height);
-
-            // Проверяем наличие существующего .drop
-            let drop = button.querySelector('.drop') as HTMLElement | null;
-            if (!drop || window.getComputedStyle(drop).opacity !== '1') {
-                // Создаем новый элемент .drop
-                drop = document.createElement('b');
-                drop.className = 'drop';
-                drop.style.width = `${maxWidthHeight}px`;
-                drop.style.height = `${maxWidthHeight}px`;
-                button.insertBefore(drop, button.firstChild);
-            } else {
-                // Сбрасываем состояние существующего .drop
-                drop.classList.remove('animate');
-                // Небольшая задержка для сброса анимации
-                requestAnimationFrame(() => {
-                    drop!.style.opacity = '1'; // Сбрасываем opacity
-                    drop!.style.transform = 'scale(0)'; // Сбрасываем масштаб
-                });
-            }
-
-            // Вычисляем координаты клика относительно кнопки
-            const x = event.pageX - rect.left - maxWidthHeight / 2;
-            const y = event.pageY - rect.top - maxWidthHeight / 2;
-
-            // Позиционируем и запускаем анимацию
-            drop.style.top = `${y}px`;
-            drop.style.left = `${x}px`;
-            drop.classList.add('animate');
-
-            // Удаляем элемент после завершения анимации (опционально)
-            drop.addEventListener('animationend', () => {
-                setBgActive(true)
-
-                drop.remove();
-            }, { once: true });
-        }
-    };
+ 
 
 
     return (
@@ -255,19 +202,15 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
                     </PhotoView>
                     <div
                         ref={buttonRef}
-                        onMouseDown={(e) => {handleMouseDown(e, active)}}
+                        onMouseDown={(e) => {handleMouseDown(e)}}
                         onClick={(event) => {
                             if (photoRef.current?.contains(event.target as Node)) return;
 
                             setActive(!active);
-
-                            if(active) {
-                                setBgActive(false)
-                            }
                             
                             
                         }}
-                        className={`materialBtn overflow-hidden relative w-full transition-all duration-300  ${bgActive ? 'bg-[#34446D]' : ''}`}>
+                        className={`materialBtn overflow-hidden relative w-full transition-all duration-300 `}>
                         <div
 
                             className="wrapper w-full group/wrapper">
