@@ -9,12 +9,13 @@ import { useHeaderContext } from "../contexts/HeaderContext";
 import MessageImg from '@/assets/images/svg/message-flight.svg'
 import Image from "next/image";
 import { useButton } from "@/hook/useButton";
+import '@/assets/styles/sections/main/animation/form.scss'
 
 const AppMainForm = ({ btnText }: { btnText: string }) => {
 
     const { t } = useTranslation()
     const { openDefaultModal } = useHeaderContext()
-    const {setButtonRef, setWrapperRef} = useButton()
+    const { setButtonRef, setWrapperRef } = useButton()
 
     const onSubmit = async (e: any) => {
         const formData = new FormData();
@@ -37,7 +38,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
         }
     }
 
-    const methods = useForm({ mode: "onTouched" });
+    const methods = useForm({ mode: "onTouched", shouldFocusError: false });
     const { reset } = methods
 
 
@@ -53,15 +54,15 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
 
                     <AppTextarea className="!bg-[#2a2a2a] focus:!bg-[#20272a]" title={'Комментарий'} inputName="comment" />
                     <div ref={setWrapperRef} className="tariff-wrap">
-                        <button type="submit" ref={setButtonRef} className="tariff bg-[#35456E80] s:mt-[20px] mt-[15px] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[20px] justify-center p-[4px] rounded-[4px]">
+                        <button type="submit" ref={setButtonRef} className="shiny-cta tariff bg-[#35456e66] s:mt-[20px] mt-[15px] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[10px] justify-center p-[9px] rounded-[4px]">
                             {btnText}
 
-                            <div className="translate-y-[5px]">
-                                <Image alt="message" src={MessageImg} width="0"
-                                    height="0"
-                                    sizes="100vw"
-                                    className="h-[30px] w-[30px] s:h-[40px] s:w-[40px]" />
-                            </div>
+
+                            <Image alt="message" src={MessageImg} width="0"
+                                height="0"
+                                sizes="100vw"
+                                className="h-[30px] w-[30px]" />
+
 
 
 

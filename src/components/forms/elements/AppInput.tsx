@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormContext } from "react-hook-form";
 
-const AppInput = ({ title, inputName, type, required, autocomplete, mask, className, classNameTitle } : { title: string, inputName: string, type?: string, required?: boolean, autocomplete?: string, mask?: string, className?:string , classNameTitle?:string }) => {
-    const { register, formState: { errors, isSubmitted } } = useFormContext();
+const AppInput = ({ title, inputName, type, required, autocomplete, mask, className, classNameTitle }: { title: string, inputName: string, type?: string, required?: boolean, autocomplete?: string, mask?: string, className?: string, classNameTitle?: string }) => {
+    const { register, formState: { errors, isSubmitted, submitCount } } = useFormContext();
 
-    const formatPhoneNumber = (e:React.FormEvent<HTMLInputElement>) => {
+    const formatPhoneNumber = (e: React.FormEvent<HTMLInputElement>) => {
         const value = e.currentTarget.value
         let cleaned = value.replace(/\D/g, '');
 
@@ -31,35 +31,50 @@ const AppInput = ({ title, inputName, type, required, autocomplete, mask, classN
         e.currentTarget.value = formatted;
     };
 
-    const changeInput = (value:React.FormEvent<HTMLInputElement>) => {
+    const changeInput = (value: React.FormEvent<HTMLInputElement>) => {
         if (mask === 'phone') {
             return formatPhoneNumber(value)
         }
         return value
     }
-    return (
-        <label className='field'>
 
+    const [visibleError, setVisibleError] = useState(false)
+
+    useEffect(() => {
+        setVisibleError(false)
+        setTimeout(() => {
+            setVisibleError(true)
+        }, 50)
+    }, [submitCount])
+    return (
+        <div className="relative">
+            <label className={`field ${visibleError && errors[inputName] && isSubmitted && 'bounce'}`}>
+
+
+
+
+                <input
+                    {...register(inputName, { required })}
+                    type={type}
+                    className={`field__input ${className} `}
+                    name={inputName}
+                    placeholder={title}
+                    autoComplete={autocomplete}
+                    onInput={(e) => { changeInput(e) }}
+                />
+                <span className={`field__title ${classNameTitle}`}>
+                    {title}
+                </span>
+                <span className={`field__title-top ${classNameTitle}`}>
+                    {title}
+                </span>
+            </label>
             {isSubmitted && errors[inputName] && <ul className="error-list" >
-                <li className="error-item">
+                <li className={`error-item ${visibleError && 'bounce'}`}>
                     Это поле обязательно
                 </li>
             </ul>}
-
-
-            <input
-                {...register(inputName, { required })}
-                type={type}
-                className={`field__input ${className}`}
-                name={inputName}
-                placeholder={title}
-                autoComplete={autocomplete}
-                onInput={(e) => { changeInput(e) }}
-            />
-            <span className={`field__title ${classNameTitle}`}>
-                {title}
-            </span>
-        </label>
+        </div>
     );
 };
 

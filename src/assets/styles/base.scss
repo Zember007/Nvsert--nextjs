@@ -26,35 +26,7 @@
 
 @import 'base/print';
 
-.rebound {
-    transition: transform 0.2s ease;
-}
 
-.rebound-box:hover .rebound {
-    animation: bounce 0.6s ease;
-}
-
-@keyframes bounce {
-    0% {
-        transform: translateX(0);
-    }
-
-    30% {
-        transform: translateX(-10px);
-    }
-
-    50% {
-        transform: translateX(5px);
-    }
-
-    70% {
-        transform: translateX(-5px);
-    }
-
-    100% {
-        transform: translateX(0);
-    }
-}
 
 .PhotoView__Photo {
     box-shadow: 0px 0px 10px 0px #000000CC;
@@ -168,3 +140,7 @@
         inset -2px -2px 4px 0 rgba(52, 68, 109, 0.5) !important;
     transform: scale(0.9)  rotateY(var(--y)) translateZ(10px) !important;
 }
+
+body::-webkit-scrollbar {
+    display: none;
+  }

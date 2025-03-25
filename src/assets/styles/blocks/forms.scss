@@ -12,6 +12,11 @@ select {
   margin: 0;
   z-index: 0;
 
+  &.bounce {
+    animation: bounce-input 0.4s ease;
+    transition: transform 0.2s ease;
+  }
+
   &__input,
   &__textarea {
     margin-top: 25px;
@@ -19,7 +24,7 @@ select {
     @include transition();
     display: block;
     height: 50px;
-    background:  #4a587d;
+    background: #4a587d;
     border-radius: 4px;
     font-size: 16px;
     line-height: 24px;
@@ -28,6 +33,7 @@ select {
     color: $input-placeholder-filled;
     border: 1px solid #737373;
     resize: none;
+
 
     @media (max-width: $media-s) {
       font-size: 14px;
@@ -49,24 +55,26 @@ select {
     &:not(:placeholder-shown):not(:focus) {
       &~.field__title {
         z-index: -1;
+
       }
     }
 
-    &:hover {
-      &:not(:focus) {
-        &~.field__title {
-          opacity: 0;
-        }
+    &:hover,
+    &:focus {
+
+      &~.field__title {
+        opacity: 0;
       }
+
     }
 
     &:focus {
       // background: #20272a;
       box-shadow: inset 2px 2px 2px #071a2680, inset -2px -2px 2px #071a2680;
       outline: 1px solid #737373;
+      z-index: 1;
 
-      &~.field__title {
-        z-index: -1;
+      &~.field__title-top {
         top: 0px;
 
         // @media (max-width: $media-s) {
@@ -112,6 +120,19 @@ select {
     text-overflow: ellipsis;
     pointer-events: none;
 
+    &-top {
+      @include transition();
+      position: absolute;
+      top: 40px;
+      left: 10px;
+      z-index: -1;
+      font-size: 16px;
+      color: $input-placeholder-normal;
+      max-width: calc(100% - 40px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     @media (max-width: $media-s) {
       font-size: 14px;
       top: 26px;
@@ -119,24 +140,7 @@ select {
     }
   }
 
-  .error-list {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    transform: translateY(110%);
-    margin: 8px 0 0;
-    list-style: none;
-    font-size: 12px;
-    line-height: 14px;
-    color: $func-error;
 
-    li {
-      margin: 0;
-      list-style: none;
-      font-size: 12px;
-      line-height: 14px;
-    }
-  }
 }
 
 /*Стили чекбоксов и радиокнопок*/
@@ -300,4 +304,75 @@ input:-webkit-autofill:focus {
   border: 1px solid #727272;
 
 
+}
+
+@keyframes bounce-error {
+  0% {
+    transform: translateY(0);
+  }
+
+  30% {
+    transform: translateY(-10px);
+  }
+
+  50% {
+    transform: translateY(5px);
+  }
+
+  70% {
+    transform: translateY(-5px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce-input {
+  0% {
+    transform: translateX(0);
+  }
+
+  30% {
+    transform: translateX(5px);
+  }
+
+  50% {
+    transform: translateX(-2px);
+  }
+
+  70% {
+    transform: translateX(2px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.error-list {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translateY(110%);
+  padding-top: 4px;
+  list-style: none;
+  font-size: 12px;
+  line-height: 14px;
+  color: $func-error;
+  transition: transform 0.2s ease;
+
+
+  li {
+    margin: 0;
+
+    list-style: none;
+    font-size: 12px;
+    line-height: 14px;
+
+    &.bounce {
+      animation: bounce-error 0.4s ease;
+      transition: transform 0.2s ease;
+    }
+  }
 }

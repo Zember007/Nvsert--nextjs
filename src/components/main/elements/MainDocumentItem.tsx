@@ -239,7 +239,7 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
                                     </div>
                                 </div>
 
-                                <div className="w-[40%] h-full items-start flex gap-[20px] flex-col   text-[#000]">
+                                <div className="w-[40%] items-start flex gap-[20px] flex-col   text-[#000]">
 
                                     <div className="flex gap-[10px] flex-col grow  m:max-w-[500px]">
                                         {
@@ -271,7 +271,7 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
 
                                     <div className="tariff-wrap" ref={setWrapperRef}>
                                         <button ref={setButtonRef} id="open-tariff" className='tariff text-[20px]  font-bold tracking-normal m:flex items-center gap-[10px] hidden px-[16px] py-[12px] text-[#34446D] rounded-[4px] bg-[#2D2F2F1A] border-[#34446D] border border-solid leading-[1]'>
-                                            <span>Оформить заявку</span>
+                                            <span>Перейти в услугу</span>
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M3 12H21" stroke="#34446D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                 <path d="M16 7L21 12L16 17" stroke="#34446D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

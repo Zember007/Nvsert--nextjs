@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { slides } from './utils';
 import { filterPrepositions } from '@/hook/filter';
 import gsap from 'gsap';
+import { BounceEffect } from '@/hook/useBounce';
 
 const Slider = () => {
 
@@ -25,11 +26,11 @@ const Slider = () => {
             const myElement = document.getElementById("title-block") as HTMLElement;
             if (myElement) {
 
-                
+
                 setActive(prev => {
                     let direct = ((prev < index || (prev + 1 === slides.length && index === 0)) && !(prev === 0 && index + 1 === slides.length)) ? -1 : 1;
-                    
-                    bounceElement(myElement, {
+
+                    BounceEffect(myElement, {
                         startPosition: "0",
                         endPosition: `${5 * direct}px`,
                         duration: 200,
@@ -66,59 +67,7 @@ const Slider = () => {
         }
     }, [oldActive])
 
-    interface BounceOptions {
-        startPosition?: string;
-        endPosition?: string;
-        duration?: number;
-        easing?: string;
-    }
 
-    function bounceElement(
-        element: HTMLElement,
-        {
-            startPosition = "0",
-            endPosition = "72px",
-            duration = 500,
-            easing = "ease-out",
-        }: BounceOptions = {}
-    ): void {
-        // Останавливаем текущую анимацию и сбрасываем состояние
-        element.style.animation = "none";
-        element.style.top = startPosition;
-        element.style.position = "relative";
-
-        // Запускаем новую анимацию
-        requestAnimationFrame(() => {
-            element.style.animation = `bounce ${duration}ms ${easing} forwards`;
-
-            // Добавляем keyframes динамически
-            const keyframes = `
-            @keyframes bounce {
-              from { left: ${startPosition}; }
-              to { left: ${endPosition}; }
-            }
-          `;
-
-            // Удаляем существующий стиль анимации, если есть
-            const existingStyle = document.getElementById("bounce-keyframes");
-            if (existingStyle) existingStyle.remove();
-
-            // Создаем новый стиль
-            const styleSheet = document.createElement("style");
-            styleSheet.id = "bounce-keyframes";
-            styleSheet.textContent = keyframes;
-            document.head.appendChild(styleSheet);
-        });
-
-        // Очищаем анимацию после завершения
-        element.addEventListener(
-            "animationend",
-            () => {
-                element.style.animation = "";
-            },
-            { once: true }
-        );
-    }
 
 
     return (
@@ -137,7 +86,7 @@ const Slider = () => {
 
 
                                     <div className="h-[50px] p-[10px] pl-[30px]  rounded-r-[4px] bg-[#34446D] w-full border-[#34446D] border-solid border border-l-0">
-                                        <span id='title-block' className='text-[24px] font-bold text-[#FFF]'>
+                                        <span id='title-block' className='text-[24px] font-bold text-[#FFF] block'>
                                             {
                                                 filterPrepositions(slides[active].title)
                                             }
