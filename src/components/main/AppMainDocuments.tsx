@@ -31,7 +31,6 @@ const AppMainDocuments = () => {
                         documents.map((item, index) =>
 
                             <MainDocumentItem
-                                index={index}
                                 bordert={(index - 1 !== hoverIndex && index - 1 !== activeIndex)}
                                 borderb={index + 1 !== hoverIndex || activeIndex === hoverIndex}
                                 setHover={(value) => { setHover(value ? index : null) }} setActive={(value) => setActive(value ? index : null)} active={index === activeIndex} key={index} {...item} />

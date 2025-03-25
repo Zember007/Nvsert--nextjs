@@ -14,6 +14,7 @@ interface content {
 
 interface content1 {
     title: string
+    subtitle?: string
     list: string[]
 }
 
@@ -29,7 +30,6 @@ interface props {
     setHover: (value: boolean) => void,
     bordert: boolean,
     borderb: boolean,
-    index: number
 }
 
 interface pulse {
@@ -39,7 +39,7 @@ interface pulse {
     left: string;
 }
 
-const MainDocumentItem = ({ index, img, title, content, content1, price, duration, active, setActive, borderb, bordert, setHover }: props) => {
+const MainDocumentItem = ({  img, title, content, content1, price, duration, active, setActive, borderb, bordert, setHover }: props) => {
 
     const [listHidden, setListHidden] = useState(true);
 
@@ -105,7 +105,8 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
     };
 
     useEffect(() => {
-        if (!active && buttonRef.current) {
+        if (!buttonRef.current) return
+        if (!active) {
             const drop = buttonRef.current.querySelector('.drop.animate')
             const drop_reverse = buttonRef.current.querySelector('.drop-reverse.animate')
             if (drop && !drop_reverse) {
@@ -114,6 +115,18 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
             }
 
             setListHidden(true)
+        } else {
+            setTimeout(() => {
+                if (!buttonRef.current) return
+                const drop = buttonRef.current.querySelector('.drop.animate')
+
+                if (!drop) {
+
+
+                    handleMouseDown(!active)
+
+                }
+            }, 100)
         }
 
 
@@ -171,7 +184,7 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
                                 className="w-full group/wrapper relative z-[2]">
 
                                 <div
-                            
+
                                     className={`border-group gap-[10px]  flex items-center justify-between py-[15px] s:py-[23px] ${active && 'text-[#FFF]'}  text-[#000] transition-all duration-300 relative ${!active && ' group-hover/wrapper:!border-[transparent] hover:text-[#34446D]'}`}
                                     style={{
                                         borderTopColor: !bordert ? 'transparent' : '#00000033',
@@ -244,6 +257,8 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
                                             content1.map((cont, contIndex) => (
                                                 <div key={contIndex} className='flex gap-[10px] flex-col items-start'>
                                                     <p className='text-[20px] font-bold'>{filterPrepositions(cont.title)}</p>
+
+                                                    {cont.subtitle && <span>{cont.subtitle}</span>}
 
                                                     <ul className=' list-disc pl-[20px] flex flex-col gap-[6px]'>
 
