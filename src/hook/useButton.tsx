@@ -33,10 +33,10 @@ export const useButton = () => {
         const rect = button.getBoundingClientRect();
         const mouseX = e.clientX - rect.left;
         const mouseY = e.clientY - rect.top;
-        const rotateX = (mouseY / rect.height) * 15 - 7;
+        // const rotateX = (mouseY / rect.height) * 15 - 7;
         const rotateY = (mouseX / rect.width) * -15 + 7;
 
-        button.style.setProperty('--x', `${-rotateX}deg`);
+        // button.style.setProperty('--x', `${-rotateX}deg`);
         button.style.setProperty('--y', `${-rotateY}deg`);
         
         button.style.setProperty("--mouse-x", `${mouseX}px`);

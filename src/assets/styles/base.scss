@@ -166,24 +166,5 @@
 .tariff.fast-click {
     box-shadow: inset 2px 2px 4px 0 rgba(52, 68, 109, 0.5),
         inset -2px -2px 4px 0 rgba(52, 68, 109, 0.5) !important;
-    transform: scale(0.9) rotateX(var(--x)) rotateY(var(--y)) translateZ(10px) !important;
-}
-
-.main-form {
-    position: relative;
-    z-index: 0;
-
-    &::before {
-        border-radius: 6px;
-        content: '';
-        z-index: -1;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: #00000099 url('../images/noise1.png');
-        background-blend-mode: overlay;
-        filter: hue-rotate(50deg);
-    }
+    transform: scale(0.9)  rotateY(var(--y)) translateZ(10px) !important;
 }

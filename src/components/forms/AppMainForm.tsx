@@ -53,8 +53,9 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
 
                     <AppTextarea className="!bg-[#2a2a2a] focus:!bg-[#20272a]" title={'Комментарий'} inputName="comment" />
                     <div ref={setWrapperRef} className="tariff-wrap">
-                        <button type="submit" ref={setButtonRef} className="tariff s:mt-[20px] mt-[15px] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[20px] justify-center p-[4px] rounded-[4px]">
+                        <button type="submit" ref={setButtonRef} className="tariff bg-[#35456E80] s:mt-[20px] mt-[15px] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[20px] justify-center p-[4px] rounded-[4px]">
                             {btnText}
+
                             <div className="translate-y-[5px]">
                                 <Image alt="message" src={MessageImg} width="0"
                                     height="0"
