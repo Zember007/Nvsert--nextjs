@@ -311,15 +311,15 @@ input:-webkit-autofill:focus {
   }
 
   30% {
-    transform: translateY(-10px);
+    transform: translateY(10px);
   }
 
   50% {
-    transform: translateY(5px);
+    transform: translateY(-5px);
   }
 
   70% {
-    transform: translateY(-5px);
+    transform: translateY(5px);
   }
 
   100% {
