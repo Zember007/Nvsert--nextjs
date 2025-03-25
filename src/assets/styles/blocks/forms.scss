@@ -19,7 +19,6 @@ select {
     @include transition();
     display: block;
     height: 50px;
-    border: none;
     background:  #4a587d;
     border-radius: 4px;
     font-size: 16px;
@@ -27,7 +26,7 @@ select {
     font-weight: 400;
     padding: 12px 20px;
     color: $input-placeholder-filled;
-    border: 1px solid #000000;
+    border: 1px solid #737373;
     resize: none;
 
     @media (max-width: $media-s) {
