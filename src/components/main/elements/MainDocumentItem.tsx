@@ -113,13 +113,15 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
         if (!active && buttonRef.current) {
             const drop = buttonRef.current.querySelector('.drop.animate')
             const drop_reverse = buttonRef.current.querySelector('.drop-reverse.animate')
-            if(drop && !drop_reverse) {
+            if (drop && !drop_reverse) {
                 drop.classList.remove('animate')
                 // handleMouseDown(!active)
             }
+
+            setListHidden(true)
         }
 
-      
+
     }, [active])
 
 
@@ -227,9 +229,9 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
                                                 </p>
                                             </div>
                                             <div className="tariff-wrap" ref={setWrapperRef}>
-                                                <button ref={setButtonRef} id="open-tariff" className='tariff text-[20px]  font-bold tracking-normal m:flex items-center gap-[10px] hidden px-[16px] py-[9px] text-[#34446D] rounded-[4px] bg-[#2D2F2F1A] border-[#34446D] border border-solid leading-[1]'>
+                                                <button ref={setButtonRef} id="open-tariff" className='tariff text-[20px] transition-all duration-300 font-bold tracking-normal m:flex items-center gap-[10px] hidden px-[16px] py-[9px] text-[#34446D] hover:text-[#FFF] rounded-[4px] bg-[#2D2F2F1A] border-[#34446D] group hover:bg-[#34446D] border border-solid leading-[1]'>
                                                     <span>Оформить заявку</span>
-                                                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <svg className='group-hover:*:fill-[#FFF] *:transition-all *:duration-300' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M29.0627 0.9375L0.930664 12.1875L11.426 16.9336L26.2502 3.75L13.0666 18.5742L17.8127 29.0625L29.0627 0.9375Z" fill="#34446D" />
                                                     </svg>
 
@@ -259,10 +261,10 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
 
 
                                                     {
-                                                        listHidden && cont.list.length > 5 && <button
+                                                        cont.list.length > 5 && <button
                                                             className='text-[#34446D] font-bold'
-                                                            onClick={() => setListHidden(false)}
-                                                        >Показать полный список документов 🡣</button>
+                                                            onClick={() => setListHidden(!listHidden)}
+                                                        >{listHidden ? 'Показать полный список документов 🡣' : 'Скрыть 🡡'}</button>
                                                     }
                                                 </div>
                                             ))
@@ -270,9 +272,9 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
                                     </div>
 
                                     <div className="tariff-wrap" ref={setWrapperRef}>
-                                        <button ref={setButtonRef} id="open-tariff" className='tariff text-[20px]  font-bold tracking-normal m:flex items-center gap-[10px] hidden px-[16px] py-[12px] text-[#34446D] rounded-[4px] bg-[#2D2F2F1A] border-[#34446D] border border-solid leading-[1]'>
+                                        <button ref={setButtonRef} id="open-tariff" className='tariff text-[20px] group hover:bg-[#34446D] hover:text-[#FFF] font-bold tracking-normal m:flex items-center gap-[10px] hidden px-[16px] py-[12px] text-[#34446D] rounded-[4px] bg-[#2D2F2F1A] border-[#34446D] border border-solid leading-[1]'>
                                             <span>Перейти в услугу</span>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg className=' group-hover:*:stroke-[#FFF] *:transition-all *:duration-300' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M3 12H21" stroke="#34446D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                 <path d="M16 7L21 12L16 17" stroke="#34446D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
