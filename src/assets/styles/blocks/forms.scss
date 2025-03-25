@@ -307,19 +307,19 @@ input:-webkit-autofill:focus {
 
 @keyframes bounce-error {
   0% {
-    transform: translateY(0);
+    transform: translateY(-15px);
   }
 
   30% {
-    transform: translateY(10px);
+    transform: translateY(-10px);
   }
 
   50% {
-    transform: translateY(-5px);
+    transform: translateY(5px);
   }
 
   70% {
-    transform: translateY(5px);
+    transform: translateY(-5px);
   }
 
   100% {
@@ -360,6 +360,7 @@ input:-webkit-autofill:focus {
   line-height: 14px;
   color: $func-error;
   transition: transform 0.2s ease;
+  z-index: -1;
 
 
   li {

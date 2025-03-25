@@ -47,7 +47,7 @@ const AppInput = ({ title, inputName, type, required, autocomplete, mask, classN
         }, 50)
     }, [submitCount])
     return (
-        <div className="relative">
+        <div className="relative z-[0]">
             <label className={`field ${visibleError && errors[inputName] && isSubmitted && 'bounce'}`}>
 
 
@@ -69,7 +69,7 @@ const AppInput = ({ title, inputName, type, required, autocomplete, mask, classN
                     {title}
                 </span>
             </label>
-            {isSubmitted && errors[inputName] && <ul className="error-list" >
+            { isSubmitted && errors[inputName] && <ul className="error-list" >
                 <li className={`error-item ${visibleError && 'bounce'}`}>
                     Это поле обязательно
                 </li>
