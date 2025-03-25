@@ -1,6 +1,6 @@
 import '@/assets/styles/base.scss'
 import AppHeader from '@/components/general/AppHeader';
-import { ReactNode, useEffect, useMemo } from 'react';
+import { ReactNode, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AppFooter from '@/components/general/AppFooter';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
@@ -9,22 +9,25 @@ import { generateMetadata } from '@/hook/useHeadLayout';
 import { setMetadata } from '@/store/metadata';
 import AppModalWrapper from '@/components/general/AppModalWrapper';
 import { AppDispatch, RootState } from '@/config/store';
+import { usePathname } from 'next/navigation';
 
 
-const Layout_wrapper = ({ children }:{ children:ReactNode }) => {
+
+const Layout_wrapper = ({ children }: { children: ReactNode }) => {
 
     const dispatch = useDispatch<AppDispatch>()
+    const pathname = usePathname()
 
-    const metadata = useSelector((state:RootState) => state.metadata);
+    const metadata = useSelector((state: RootState) => state.metadata);
 
 
     const { transparent, setDefaultModalActive, defaultModalActive, defaultModalName } = useHeaderContext();
-    const { calcPageBodyClass } = useSelector((state:RootState) => state.documents);
+    const { calcPageBodyClass } = useSelector((state: RootState) => state.documents);
 
-    const { configs: configsPure, file_configs: fileConfigsPure, status, error } = useSelector((state:RootState) => state.config);
+    const { configs: configsPure, file_configs: fileConfigsPure, status, error } = useSelector((state: RootState) => state.config);
 
     const configs = useMemo(() => {
-        let parsedConf:any = {};
+        let parsedConf: any = {};
         configsPure?.forEach((item) => {
             let key = item.key;
             let value = item.value;
@@ -35,7 +38,7 @@ const Layout_wrapper = ({ children }:{ children:ReactNode }) => {
     }, [configsPure])
 
     const file_configs = useMemo(() => {
-        let parsedConf:any = {};
+        let parsedConf: any = {};
         fileConfigsPure?.forEach((item) => {
             let key = item.key;
             let value = item.value;
@@ -49,10 +52,10 @@ const Layout_wrapper = ({ children }:{ children:ReactNode }) => {
         if (configs.length && file_configs.length) {
             dispatch(setMetadata(generateMetadata(configs, file_configs)))
         }
-    }, [configs, file_configs,dispatch])
+    }, [configs, file_configs, dispatch])
 
     useEffect(() => {
-        
+
         if (typeof window === "undefined") return
 
         dispatch(updateActionConfigs())
@@ -68,6 +71,20 @@ const Layout_wrapper = ({ children }:{ children:ReactNode }) => {
         window.addEventListener('resize', set100Vh);
 
     }, [])
+
+    const [classBody, setClassBody] = useState('transparent-header bg-secondary')
+
+    useEffect(() => {
+        if (pathname !== '/' && classBody !== '') {
+
+            setClassBody('')
+
+        }
+
+        if(pathname === '/' &&  classBody === '') {
+            setClassBody('transparent-header bg-secondary')
+        }
+    }, [pathname])
     return (
         <>
             <head>
@@ -96,7 +113,7 @@ const Layout_wrapper = ({ children }:{ children:ReactNode }) => {
                 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png" />
                 <link rel="apple-touch-icon" sizes="1024x1024" href="/apple-touch-icon-1024x1024.png" />
             </head>
-            <body>
+            <body className={classBody}>
                 <main className={`${transparent && 'transparent-header'}  ${calcPageBodyClass && 'cost-calc-page'}`}>
                     <div className="content">
                         <AppHeader />
@@ -104,10 +121,10 @@ const Layout_wrapper = ({ children }:{ children:ReactNode }) => {
                     </div>
                     <AppFooter />
                 </main>
-                <AppModalWrapper 
-                    setDefaultModalActive={setDefaultModalActive} 
-                    defaultModalActive={defaultModalActive} 
-                    defaultModalName={defaultModalName} 
+                <AppModalWrapper
+                    setDefaultModalActive={setDefaultModalActive}
+                    defaultModalActive={defaultModalActive}
+                    defaultModalName={defaultModalName}
                 />
             </body>
         </>

@@ -33,6 +33,7 @@ select {
     color: $input-placeholder-filled;
     border: 1px solid #737373;
     resize: none;
+    outline: none;
 
 
     @media (max-width: $media-s) {
@@ -71,7 +72,8 @@ select {
     &:focus {
       // background: #20272a;
       box-shadow: inset 2px 2px 2px #071a2680, inset -2px -2px 2px #071a2680;
-      outline: 1px solid #737373;
+     
+      border: 1px solid #737373;
       z-index: 1;
 
       &~.field__title-top {
@@ -284,13 +286,10 @@ select {
     padding: 12px 16px;
     border: 1px solid $input-border-active;
     border-radius: 4px;
+    outline: none;
 
     &::placeholder {
       color: $typography-secondary;
-    }
-
-    &:focus {
-      outline: none;
     }
   }
 }

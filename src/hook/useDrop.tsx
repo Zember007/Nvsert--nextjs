@@ -53,7 +53,15 @@ export const useDropEffect = () => {
                 } else {                    
                     drop_reverse.removeEventListener('animationend',() => {})
                     drop_reverse.remove()
-                    drop.classList.add('animate');
+                    if(drop.classList.contains('animate')) {
+                        drop.classList.remove('animate');
+                        setTimeout(() => {
+                            drop.classList.add('animate');
+                        },50)
+                    } else {
+
+                        drop.classList.add('animate');
+                    }
                 }
 
                 drop_reverse.addEventListener('animationend', () => {

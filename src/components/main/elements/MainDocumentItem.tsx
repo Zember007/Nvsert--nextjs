@@ -57,20 +57,15 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
 
     useEffect(() => {
         const card = photoRef.current;
-        const container = photoContainerRef.current
         if (card) {
             setDimensions({
                 width: 190,
                 height: 190 / img.width * img.height
             });
 
-            if (container) {
-                const rect = container.getBoundingClientRect();
 
-                card.style.left = rect.left + 'px';
-            }
         }
-    }, [photoRef.current, photoContainerRef.current]);
+    }, [photoRef.current]);
 
 
 
@@ -128,84 +123,85 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
 
 
     return (
-        <div
-            onMouseEnter={() => { setHover(true) }}
-            onMouseLeave={() => { setHover(false) }}
-            className={` document-wrapper-border overflow-hidden ${!active ? ' hover:shadow-[0px_2px_4px_0px_#00000040,_0px_-2px_4px_0px_#00000040] hover:bg-[#FFF]' : ''}  transition-all duration-300 cursor-pointer`}>
-            <div className="  flex flex-col">
-                <div className="relative">
-                    <PhotoView src={img.src}>
-                        <div ref={photoRef}
-                            style={{
-                                transform: `perspective(800px) translateY(${active ? '60px' : '-50%'})`,
-                            }}
-                            className={`${!active && 'pointer-events-none'} card-wrap transition-all duration-300 absolute z-[100] top-1/2 left-0`}>
-                            <div
-                                onMouseMove={handleMouseMove}
-                                onMouseEnter={handleMouseEnter}
-                                onMouseLeave={handleMouseLeave}
-                                style={active && (mouseX || mouseY) ? cardStyle : {}}
-                                className="card transition-all duration-300">
-                                <Image
-
-                                    alt='document' src={img}
-                                    width="0"
-                                    height="0"
-                                    sizes="100vw"
-                                    className={`card transition-all duration-300 w-[190px] ${!active && ' !w-[43px]'} h-auto`} />
-                            </div>
-
-
-
-
-                        </div>
-                    </PhotoView>
-                    <div
-                        ref={buttonRef}
-                        onClick={(event) => {
-                            if (photoRef.current?.contains(event.target as Node)) return;
-
-                            setActive(!active);
-                            handleMouseDown(active, event)
-
-                        }}
-                        className={`materialBtn overflow-hidden relative w-full transition-all duration-300 z-[0]`}>
-                        <div
-
-                            className="wrapper w-full group/wrapper relative z-[2]">
-
-                            <div
-                                ref={photoContainerRef}
-                                className={`border-group gap-[10px]  flex items-center justify-between py-[15px] s:py-[23px] ${active && 'text-[#FFF]'}  text-[#000] transition-all duration-300 relative ${!active && ' group-hover/wrapper:!border-[transparent] hover:text-[#34446D]'}`}
+        <div className="wrapper document-wrapper-border ">
+            <div
+                onMouseEnter={() => { setHover(true) }}
+                onMouseLeave={() => { setHover(false) }}
+                className={` overflow-hidden transition-all duration-300 cursor-pointer ${!active ? 'hover:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[transparent] hover:bg-[#FFF] rounded-[4px]`}>
+                <div className="  flex flex-col">
+                    <div className="relative ">
+                        <PhotoView src={img.src}>
+                            <div ref={photoRef}
                                 style={{
-                                    borderTopColor: !bordert ? 'transparent' : '#00000033',
-                                    borderBottomColor: (!borderb || active) ? 'transparent' : '#00000033'
+                                    transform: `perspective(800px) translateY(${active ? '60px' : '-50%'})`,
                                 }}
-                            >
+                                className={`${!active && 'pointer-events-none'} card-wrap transition-all duration-300 absolute z-[100] top-1/2 left-[20px]`}>
+                                <div
+                                    onMouseMove={handleMouseMove}
+                                    onMouseEnter={handleMouseEnter}
+                                    onMouseLeave={handleMouseLeave}
+                                    style={active && (mouseX || mouseY) ? cardStyle : {}}
+                                    className="card transition-all duration-300">
+                                    <Image
 
-                                <p
-                                    className="leading-[11px] w-[60%] pl-[63px]  text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{title}</p>
-                                <div className="w-[40%] grid grid-cols-[1fr_1fr_auto] items-center justify-between">
-                                    <p className="text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{duration}</p>
-                                    <p className="text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{price}</p>
-                                    <button>
-                                        <svg
-                                            className={`${!active && 'rotate-[180deg]'} transition-all duration-700`}
-                                            width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M19 19L5 5" stroke={`${active ? 'white' : 'black'}`} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M5 13L5 5L13 5" stroke={`${active ? 'white' : 'black'}`} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-
-                                    </button>
+                                        alt='document' src={img}
+                                        width="0"
+                                        height="0"
+                                        sizes="100vw"
+                                        className={`card transition-all duration-300 w-[190px] ${!active && ' !w-[43px]'} h-auto`} />
                                 </div>
 
+
+
+
+                            </div>
+                        </PhotoView>
+                        <div
+                            ref={buttonRef}
+                            onClick={(event) => {
+                                if (photoRef.current?.contains(event.target as Node)) return;
+
+                                setActive(!active);
+                                handleMouseDown(active, event)
+
+                            }}
+                            className={`materialBtn ${!active ? 'hover:bg-[#FFF]' : ''}  px-[20px]   overflow-hidden relative w-full transition-all duration-300 z-[0]`}>
+                            <div
+
+                                className="w-full group/wrapper relative z-[2]">
+
+                                <div
+                            
+                                    className={`border-group gap-[10px]  flex items-center justify-between py-[15px] s:py-[23px] ${active && 'text-[#FFF]'}  text-[#000] transition-all duration-300 relative ${!active && ' group-hover/wrapper:!border-[transparent] hover:text-[#34446D]'}`}
+                                    style={{
+                                        borderTopColor: !bordert ? 'transparent' : '#00000033',
+                                        borderBottomColor: (!borderb || active) ? 'transparent' : '#00000033'
+                                    }}
+                                >
+
+                                    <p
+                                        className="leading-[11px] w-[60%] pl-[63px]  text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{title}</p>
+                                    <div className="w-[40%] grid grid-cols-[1fr_1fr_auto] items-center justify-between">
+                                        <p className="text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{duration}</p>
+                                        <p className="text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{price}</p>
+                                        <button>
+                                            <svg
+                                                className={`${!active && 'rotate-[180deg]'} transition-all duration-700`}
+                                                width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M19 19L5 5" stroke={`${active ? 'white' : 'black'}`} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M5 13L5 5L13 5" stroke={`${active ? 'white' : 'black'}`} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+
+                                        </button>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className={`${active && 'bg-[#FFF] shadow-[0px_2px_4px_0px_#00000040_inset,_0px_-2px_4px_0px_#00000040_inset]'}`}>
-                    <div className="wrapper">
-                        <div className={`transition-all easy-in duration-300 overflow-hidden max-h-0  ${active && '!duration-700 !max-h-[1200px] '}`}
+                    <div className={`${active && 'bg-[#FFF]'}`}>
+
+                        <div className={`transition-all easy-in duration-300 overflow-hidden max-h-0  ${active && '!duration-700 !max-h-[1400px] '}`}
                         >
                             <div className="s:py-[23px] py-[15px]  flex flex-col l:flex-row gap-[10px] ">
                                 <div className="w-[60%] s:gap-0 gap-[20px] flex flex-col m:flex-row m:items-stretch">
@@ -295,6 +291,7 @@ const MainDocumentItem = ({ index, img, title, content, content1, price, duratio
                             </div>
 
                         </div>
+
                     </div>
                 </div>
             </div>
