@@ -85,7 +85,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
     return (
         <AppValidationObserver methods={methods} onSubmit={onSubmit}>
             {({ register, errors }) => (
-                <div className="flex flex-col s:gap-[10px] gap-[5px]">
+                <div className="flex flex-col s:gap-[19px] gap-[5px]">
                     <AppInput
                         className="!bg-[#2a2a2a] focus:!bg-[#20272a]"
                         title={'ФИО'}
