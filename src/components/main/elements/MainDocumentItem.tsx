@@ -48,6 +48,7 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
 
     const photoRef = useRef<HTMLDivElement | null>(null);
     const containerPhotoRef = useRef<HTMLDivElement | null>(null);
+    const LinkServiceRef = useRef<HTMLAnchorElement | null>(null);
 
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
     const [photoWidth, setPhotoWidth] = useState(0);
@@ -58,14 +59,14 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
     useEffect(() => {
         const container = containerPhotoRef.current
 
-        if(!container) return
+        if (!container) return
 
         const width = container.offsetHeight / img.height * img.width
 
         setPhotoWidth(width >= 190 ? width : 190)
 
 
-    },[containerPhotoRef.current])
+    }, [containerPhotoRef.current])
 
     useEffect(() => {
         const card = photoRef.current;
@@ -159,7 +160,7 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
                         <button
                             onClick={(event) => {
                                 if (photoRef.current?.contains(event.target as Node)) return;
-
+                                if (LinkServiceRef.current?.contains(event.target as Node) && active) return;
                                 setActive(!active);
 
 
@@ -208,7 +209,13 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
                                 >
 
                                     <p
-                                        className="leading-[11px] w-[60%] pl-[63px]  text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{title}</p>
+                                        
+                                        className="leading-[11px] w-[60%] pl-[63px]  text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">
+                                           
+                                           
+                                                <a ref={LinkServiceRef} className={`${!active && 'pointer-events-none'}`} href='#'>{title}</a>
+                                        
+                                        </p>
                                     <div className="w-[40%] grid grid-cols-[1fr_1fr_auto] items-center justify-between">
                                         <p className="text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{duration}</p>
                                         <p className="text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{price}</p>
