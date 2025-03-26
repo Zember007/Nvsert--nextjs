@@ -107,26 +107,25 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                         title={'Комментарий'}
                         inputName="comment"
                     />
-                    <div className="relative w-full">
-                        <div className="absolute top-1/2 left-0 translate-x-[-90%] translate-y-[-50%] bg-[#34446D] w-[200px] h-[200px]"></div>
-                        <div ref={setWrapperRef} className="tariff-wrap relative">
-                            <button
-                                type="submit"
-                                ref={setButtonRef}
-                                className="shiny-cta tariff s:mt-[20px] mt-[15px] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[10px] justify-center p-[9px] rounded-[4px]"
-                            >
-                                {btnText}
-                                <Image
-                                    alt="message"
-                                    src={MessageImg}
-                                    width="0"
-                                    height="0"
-                                    sizes="100vw"
-                                    className="h-[30px] w-[30px]"
-                                />
-                            </button>
-                        </div>
+
+                    <div ref={setWrapperRef} className="tariff-wrap relative">
+                        <button
+                            type="submit"
+                            ref={setButtonRef}
+                            className="shiny-cta tariff s:mt-[20px] mt-[15px] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[10px] justify-center p-[9px] rounded-[4px]"
+                        >
+                            {btnText}
+                            <Image
+                                alt="message"
+                                src={MessageImg}
+                                width="0"
+                                height="0"
+                                sizes="100vw"
+                                className="h-[30px] w-[30px]"
+                            />
+                        </button>
                     </div>
+
 
                     <span className="mt-[10px] text-[#A4A4A4] text-[10px] s:text-[13px]">
                         Согласен на обработку моих персональных данных{' '}
