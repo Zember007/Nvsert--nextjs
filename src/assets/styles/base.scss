@@ -136,8 +136,8 @@
 
 .tariff:active,
 .tariff.fast-click {
-    box-shadow: inset 2px 2px 4px 0 rgba(52, 68, 109, 0.5),
-        inset -2px -2px 4px 0 rgba(52, 68, 109, 0.5) !important;
+    box-shadow: inset 2px 2px 4px 0 #34446D,
+        inset -2px -2px 4px 0 #34446D !important;
     transform: scale(0.9)  rotateY(var(--y)) translateZ(10px) !important;
 }
 

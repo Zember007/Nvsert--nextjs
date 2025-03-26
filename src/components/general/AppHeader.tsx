@@ -150,12 +150,12 @@ const AppHeader = () => {
           </div>
 
           <div className="header-phone">
-            {headerPhone && (
-              <a href={filterPhone('8 (800) 700-33-75')} className="header-phone__link">
-                {/* {headerPhone.value} */}
-                8 (800) 700-33-75
-              </a>
-            )}
+
+            <a href={filterPhone('8 (800) 700-33-75')} className="header-phone__link">
+              {/* {headerPhone.value} */}
+              8 (800) 700-33-75
+            </a>
+
             {/* {(moscowPhone || spbPhone) && (
               <button
                 type="button"
