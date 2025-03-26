@@ -108,7 +108,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                         inputName="comment"
                     />
                     <div className="relative w-full">
-                        <div className="absolute top-1/2 left-0 translate-x-[-110%] translate-y-[-50%] bg-[#34446D] w-[200px] h-[200px]"></div>
+                        <div className="absolute top-1/2 left-0 translate-x-[-100%] translate-y-[-50%] bg-[#34446D] w-[200px] h-[200px]"></div>
                         <div ref={setWrapperRef} className="tariff-wrap relative">
                             <button
                                 type="submit"
