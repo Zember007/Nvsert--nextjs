@@ -3,10 +3,10 @@ import AppMainFormSecondary from '../forms/AppMainFormSecondary';
 import AppMainDropdown from './elements/AppMainDropdown'
 const AppMainQuestions = () => {
 
-    const questions = [
-        {
-            title: 'Как происходит сертификационный процесс?',
-            node: `
+  const questions = [
+    {
+      title: 'Как происходит сертификационный процесс?',
+      node: `
             <div class="mtp__spoiler-text" data-v-f1aecbbe=""><div data-v-f1aecbbe="" data-v-c30a5ed0=""><p>Оформление разрешительной документации осуществляется в несколько этапов:</p>
           <ul>
             <li>Предприниматель подаёт заявку и пакет необходимой документации в центр сертификации;</li>
@@ -15,32 +15,32 @@ const AppMainQuestions = () => {
           </ul>
         </div></div>
             `
-        },
-        {
-            title: 'В чём отличие сертификата ТР ТС от декларации соответствия ТРТС?',
-            node: `
+    },
+    {
+      title: 'В чём отличие сертификата ТР ТС от декларации соответствия ТРТС?',
+      node: `
             <div class="mtp__spoiler-text" data-v-f1aecbbe=""><div data-v-f1aecbbe="" data-v-c30a5ed0=""><p>Каждый Техрегламент содержит информацию о списках продукции, в них и указано для каких изделий требуется получение декларации, а для каких сертификата.
           При оформлении сертификата ответственность несёт орган, выдавший документ, в случае с декларацией соответствия – заявитель.
           При всём при этом два этих разрешения имеют одинаковую юридическую силу.</p></div></div>
             `
-        },
-        {
-            title: 'В планах импортировать товары, с чего начать?',
-            node: `
+    },
+    {
+      title: 'В планах импортировать товары, с чего начать?',
+      node: `
             <div class="mtp__spoiler-text" data-v-f1aecbbe=""><div data-v-f1aecbbe="" data-v-c30a5ed0=""><p>Первоначально Вам потребуется разобраться с определением нормативных документов – разработать ТУ или подобрать ГОСТ.
            Стоит учитывать, что если производство подразумевает изготовление пищевой продукции, то ТУ необходимо будет
            зарегистрировать, после чего будет осуществлена сертификация на основе соответствующего норматива.</p></div></div>
             `
-        },
-        {
-            title: 'На какие товары оформляется сертификат по ГОСТР?',
-            node: `
+    },
+    {
+      title: 'На какие товары оформляется сертификат по ГОСТР?',
+      node: `
             <div class="mtp__spoiler-text" data-v-f1aecbbe=""><div data-v-f1aecbbe="" data-v-c30a5ed0=""><p>Сертификат ГОСТР оформляется на все товары приведённые в Постановлении Правительства РФ N 2425. Также возможно получить добровольный сертификат на продукцию, включая ту, которая не содержится в постановлении.</p></div></div>
             `
-        },
-        {
-            title: 'Какие штрафы предусмотрены за неверно оформленную Декларацию ТР ЕАЭС?',
-            node: `
+    },
+    {
+      title: 'Какие штрафы предусмотрены за неверно оформленную Декларацию ТР ЕАЭС?',
+      node: `
             <div class="mtp__spoiler-text" data-v-f1aecbbe=""><div data-v-f1aecbbe="" data-v-c30a5ed0=""><p>Декларация ТР ЕАЭС– обязательный документ, подтверждающий соответствие и безопасность продукции по требованиям
         Технических регламентов Евразийского экономического союза.
         С 1 января 2021 года обязанность по декларированию полностью возложена на заявителя
@@ -73,10 +73,10 @@ const AppMainQuestions = () => {
         </p>
         </div></div>
             `
-        },
-        {
-            title: 'Требуется ли сертифицировать товар, изготавливаемый по индивидуальному заказу?',
-            node: `
+    },
+    {
+      title: 'Требуется ли сертифицировать товар, изготавливаемый по индивидуальному заказу?',
+      node: `
             <div class="mtp__spoiler-text" data-v-f1aecbbe=""><div data-v-f1aecbbe="" data-v-c30a5ed0="">
           <p>
             В соответствии с законом обязательной сертификации подлежит определенный тип продукции,
@@ -87,10 +87,10 @@ const AppMainQuestions = () => {
           </p>
         </div></div>
             `
-        },
-        {
-            title: 'У изготовителя (который прописан в сер-те) изменился адрес. Нужно ли в этом случае переделывать все сертификаты или есть другой вариант?',
-            node: `
+    },
+    {
+      title: 'У изготовителя (который прописан в сер-те) изменился адрес. Нужно ли в этом случае переделывать все сертификаты или есть другой вариант?',
+      node: `
             <div class="mtp__spoiler-text" data-v-f1aecbbe=""><div data-v-f1aecbbe="" data-v-c30a5ed0="">
           <p>
             Да, по причине изменения данных об изготовителе, необходимо проходить процедуру сертификации заново.
@@ -98,26 +98,25 @@ const AppMainQuestions = () => {
           </p>
         </div></div>
             `
-        }
-        
-    ]
-return (
-    <section className="py-[75px]">
-        <div className="wrapper flex flex-col gap-[50px]">
-            <h2 className="leading-[1] tracking-[-0.04em] text-center l:text-left text-[24px] xs:text-[40px] l:text-[56px]">Часто задаваемые вопросы</h2>
-            <div className="flex justify-between gap-[100px] l:items-start l:flex-row flex-col items-center">
-                <div className="flex flex-col grow">
-                    {questions.map((item, index) => <AppMainDropdown key={index} title={filterPrepositions(item.title)} node={filterPrepositions(item.node)} />)}
-                </div>
+    }
 
-                <div className="p-[32px] rounded-[6px] bg-[#FFFFFF] max-w-[420px] min-w-[420px] flex flex-col gap-[20px]">
-                    <h3 className='text-[32px]'>Заказать обратный звонок</h3>
-                    <AppMainFormSecondary />
-                </div>
-            </div>
+  ]
+  return (
+    <section className="py-[75px]">
+      <div className="wrapper flex flex-col gap-[20px]">
+        <h2 className="leading-[1] tracking-[-0.04em] text-center l:text-left text-[24px] xs:text-[40px] l:text-[56px]">Гарантии и безупречный сервис</h2>
+        <div className="flex gap-[20px]">
+          <div className="bg-[#F5F5F580] border-[#34446D] border border-solid rounded-[8px] p-[30px] backdrop-blur-[10px]"></div>
         </div>
+        {/* <div className="flex">
+          <div className="p-[32px] rounded-[6px] bg-[#FFFFFF] max-w-[420px] min-w-[420px] flex flex-col gap-[20px]">
+            <h3 className='text-[32px]'>Заказать обратный звонок</h3>
+            <AppMainFormSecondary />
+          </div>
+        </div> */}
+      </div>
     </section>
-);
+  );
 };
 
 export default AppMainQuestions;
