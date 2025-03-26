@@ -54,7 +54,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
 
                     <AppTextarea className="!bg-[#2a2a2a] focus:!bg-[#20272a]" title={'Комментарий'} inputName="comment" />
                     <div ref={setWrapperRef} className="tariff-wrap">
-                        <button type="submit" ref={setButtonRef} className="shiny-cta tariff bg-[#35456e66] s:mt-[20px] mt-[15px] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[10px] justify-center p-[9px] rounded-[4px]">
+                        <button type="submit" ref={setButtonRef} className="shiny-cta tariff s:mt-[20px] mt-[15px] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[10px] justify-center p-[9px] rounded-[4px]">
                             {btnText}
 
 

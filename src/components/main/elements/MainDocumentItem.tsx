@@ -39,33 +39,45 @@ interface pulse {
     left: string;
 }
 
-const MainDocumentItem = ({  img, title, content, content1, price, duration, active, setActive, borderb, bordert, setHover }: props) => {
+const MainDocumentItem = ({ img, title, content, content1, price, duration, active, setActive, borderb, bordert, setHover }: props) => {
 
     const [listHidden, setListHidden] = useState(true);
 
-    const { buttonRef, handleMouseDown } = useDropEffect()
+    // const { buttonRef, handleMouseDown } = useDropEffect()
     const { setButtonRef, setWrapperRef } = useButton()
 
     const photoRef = useRef<HTMLDivElement | null>(null);
-    const photoContainerRef = useRef<HTMLDivElement | null>(null);
-
+    const containerPhotoRef = useRef<HTMLDivElement | null>(null);
 
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+    const [photoWidth, setPhotoWidth] = useState(0);
     const [mouseX, setMouseX] = useState(0);
     const [mouseY, setMouseY] = useState(0);
     const [mouseLeaveDelay, setMouseLeaveDelay] = useState<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
+        const container = containerPhotoRef.current
+
+        if(!container) return
+
+        const width = container.offsetHeight / img.height * img.width
+
+        setPhotoWidth(width >= 190 ? width : 190)
+
+
+    },[containerPhotoRef.current])
+
+    useEffect(() => {
         const card = photoRef.current;
-        if (card) {
+        if (card && photoWidth) {
             setDimensions({
-                width: 190,
-                height: 190 / img.width * img.height
+                width: photoWidth,
+                height: photoWidth / img.width * img.height
             });
 
 
         }
-    }, [photoRef.current]);
+    }, [photoRef.current, photoWidth]);
 
 
 
@@ -104,33 +116,33 @@ const MainDocumentItem = ({  img, title, content, content1, price, duration, act
         }, 1000));
     };
 
-    useEffect(() => {
-        if (!buttonRef.current) return
-        if (!active) {
-            const drop = buttonRef.current.querySelector('.drop.animate')
-            const drop_reverse = buttonRef.current.querySelector('.drop-reverse.animate')
-            if (drop && !drop_reverse) {
-                drop.classList.remove('animate')
-                // handleMouseDown(!active)
-            }
+    // useEffect(() => {
+    //     if (!buttonRef.current) return
+    //     if (!active) {
+    //         const drop = buttonRef.current.querySelector('.drop.animate')
+    //         const drop_reverse = buttonRef.current.querySelector('.drop-reverse.animate')
+    //         if (drop && !drop_reverse) {
+    //             drop.classList.remove('animate')
+    //             // handleMouseDown(!active)
+    //         }
 
-            setListHidden(true)
-        } else {
-            setTimeout(() => {
-                if (!buttonRef.current) return
-                const drop = buttonRef.current.querySelector('.drop.animate')
+    //         setListHidden(true)
+    //     } else {
+    //         setTimeout(() => {
+    //             if (!buttonRef.current) return
+    //             const drop = buttonRef.current.querySelector('.drop.animate')
 
-                if (!drop) {
-
-
-                    handleMouseDown(!active)
-
-                }
-            }, 100)
-        }
+    //             if (!drop) {
 
 
-    }, [active])
+    //                 handleMouseDown(!active)
+
+    //             }
+    //         }, 100)
+    //     }
+
+
+    // }, [active])
 
 
 
@@ -143,49 +155,52 @@ const MainDocumentItem = ({  img, title, content, content1, price, duration, act
                 className={` overflow-hidden transition-all duration-300 cursor-pointer ${!active ? 'hover:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[transparent] hover:bg-[#FFF] rounded-[4px]`}>
                 <div className="  flex flex-col">
                     <div className="relative ">
-                        <PhotoView src={img.src}>
-                            <div ref={photoRef}
-                                style={{
-                                    transform: `perspective(800px) translateY(${active ? '60px' : '-50%'})`,
-                                }}
-                                className={`${!active && 'pointer-events-none'} card-wrap transition-all duration-300 absolute z-[100] top-1/2 left-[20px]`}>
-                                <div
-                                    onMouseMove={handleMouseMove}
-                                    onMouseEnter={handleMouseEnter}
-                                    onMouseLeave={handleMouseLeave}
-                                    style={active && (mouseX || mouseY) ? cardStyle : {}}
-                                    className="card transition-all duration-300">
-                                    <Image
 
-                                        alt='document' src={img}
-                                        width="0"
-                                        height="0"
-                                        sizes="100vw"
-                                        className={`card transition-all duration-300 w-[190px] ${!active && ' !w-[43px]'} h-auto`} />
-                                </div>
-
-
-
-
-                            </div>
-                        </PhotoView>
-                        <div
-                            ref={buttonRef}
+                        <button
                             onClick={(event) => {
                                 if (photoRef.current?.contains(event.target as Node)) return;
 
                                 setActive(!active);
-                                handleMouseDown(active, event)
+
 
                             }}
-                            className={`materialBtn ${!active ? 'hover:bg-[#FFF]' : ''}  px-[20px]   overflow-hidden relative w-full transition-all duration-300 z-[0]`}>
+                            className={`materialBtn text-left group active:shadow-[inset_2px_2px_2px_#071a2680,_inset_-2px_-2px_2px_#071a2680] ${!active ? 'hover:bg-[#FFF] active:bg-[#34446D]' : 'active:bg-[#FFF] bg-[#34446D]'}  px-[20px]  relative w-full transition-all duration-300 z-[0]`}>
+                            <PhotoView src={img.src}>
+                                <div ref={photoRef}
+                                    style={{
+                                        transform: `perspective(800px) translateY(${active ? '60px' : '-50%'})`,
+                                    }}
+                                    className={`${!active && 'pointer-events-none'}  card-wrap transition-all duration-300 absolute z-[100] top-1/2 left-[20px]`}>
+                                    <div
+                                        onMouseMove={handleMouseMove}
+                                        onMouseEnter={handleMouseEnter}
+                                        onMouseLeave={handleMouseLeave}
+                                        style={active && (mouseX || mouseY) ? cardStyle : {}}
+                                        className=" card transition-all duration-300">
+                                        <Image
+
+                                            alt='document' src={img}
+                                            width="0"
+                                            height="0"
+                                            sizes="100vw"
+                                            style={{
+                                                width: (photoWidth || 190) + 'px'
+                                            }}
+                                            className={`card transition-all duration-300 ${!active && ' !w-[43px] group-active:scale-[.95]'} h-auto`} />
+                                    </div>
+
+
+
+
+                                </div>
+                            </PhotoView>
                             <div
 
-                                className="w-full group/wrapper relative z-[2]">
+                                className="w-full group/wrapper relative z-[2] group-active:scale-[.95] transition-all duration-300">
 
                                 <div
 
-                                    className={`border-group gap-[10px]  flex items-center justify-between py-[15px] s:py-[23px] ${active && 'text-[#FFF]'}  text-[#000] transition-all duration-300 relative ${!active && ' group-hover/wrapper:!border-[transparent] hover:text-[#34446D]'}`}
+                                    className={`border-group gap-[10px]  flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] group-active:text-[#000]' : 'group-active:text-[#FFF]'}  text-[#000] transition-all duration-300 relative ${!active && ' group-hover/wrapper:!border-[transparent] hover:text-[#34446D]'}`}
                                     style={{
                                         borderTopColor: !bordert ? 'transparent' : '#00000033',
                                         borderBottomColor: (!borderb || active) ? 'transparent' : '#00000033'
@@ -199,7 +214,7 @@ const MainDocumentItem = ({  img, title, content, content1, price, duration, act
                                         <p className="text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{price}</p>
                                         <button>
                                             <svg
-                                                className={`${!active && 'rotate-[180deg]'} transition-all duration-700`}
+                                                className={`${!active && 'rotate-[180deg]'} ${active ? 'group-active:*:stroke-[#000]' : 'group-active:*:stroke-[#FFF]'} transition-all duration-700`}
                                                 width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M19 19L5 5" stroke={`${active ? 'white' : 'black'}`} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                 <path d="M5 13L5 5L13 5" stroke={`${active ? 'white' : 'black'}`} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -210,7 +225,7 @@ const MainDocumentItem = ({  img, title, content, content1, price, duration, act
 
                                 </div>
                             </div>
-                        </div>
+                        </button>
                     </div>
                     <div className={`${active && 'bg-[#FFF]'}`}>
 
@@ -220,14 +235,15 @@ const MainDocumentItem = ({  img, title, content, content1, price, duration, act
                                 <div className="w-[60%] s:gap-0 gap-[20px] flex flex-col m:flex-row m:items-stretch">
                                     <div className='m:m-0 m-auto pointer-events-none'>
                                         <div
-                                            className='w-[190px] pointer-events-none'
+                                            className=' pointer-events-none'
                                             style={{
-                                                height: (190 / img.width * img.height) + 'px'
+                                                width: (photoWidth || 190) + 'px',
+                                                height: ((photoWidth || 190) / img.width * img.height) + 'px'
                                             }}
                                         ></div>
                                     </div>
 
-                                    <div className="grow flex justify-center">
+                                    <div ref={containerPhotoRef} className="grow flex justify-center">
                                         <div className=" flex flex-col justify-between  items-start">
                                             <div className="flex flex-col gap-[40px]">
                                                 <p className='text-[16px] text-[#000000] m:max-w-[360px]'>
@@ -264,7 +280,7 @@ const MainDocumentItem = ({  img, title, content, content1, price, duration, act
 
                                                         {
                                                             cont.list.map((list, index) => (
-                                                                <li className={`${listHidden && index > 4 && 'hidden'}`} key={index}>{filterPrepositions(list)}</li>
+                                                                <li className={`${listHidden && index > 3 && 'hidden'}`} key={index}>{filterPrepositions(list)}</li>
                                                             ))
                                                         }
 
@@ -272,7 +288,7 @@ const MainDocumentItem = ({  img, title, content, content1, price, duration, act
 
 
                                                     {
-                                                        cont.list.length > 5 && <button
+                                                        cont.list.length > 3 && <button
                                                             className='text-[#34446D] font-bold'
                                                             onClick={() => setListHidden(!listHidden)}
                                                         >{listHidden ? 'Показать полный список документов 🡣' : 'Скрыть 🡡'}</button>

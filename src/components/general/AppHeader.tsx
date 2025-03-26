@@ -151,11 +151,12 @@ const AppHeader = () => {
 
           <div className="header-phone">
             {headerPhone && (
-              <a href={filterPhone(headerPhone.value)} className="header-phone__link">
-                {headerPhone.value}
+              <a href={filterPhone('8 (800) 700-33-75')} className="header-phone__link">
+                {/* {headerPhone.value} */}
+                8 (800) 700-33-75
               </a>
             )}
-            {(moscowPhone || spbPhone) && (
+            {/* {(moscowPhone || spbPhone) && (
               <button
                 type="button"
                 className={`header-phone__burger ${showPhonesDropdown && 'active'}`}
@@ -181,7 +182,7 @@ const AppHeader = () => {
                   </a>
                 )}
               </div>
-            )}
+            )} */}
           </div>
           <button
             type="button"
