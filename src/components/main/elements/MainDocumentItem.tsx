@@ -187,7 +187,7 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
                                             style={{
                                                 width: (photoWidth || 190) + 'px'
                                             }}
-                                            className={`card transition-all duration-300 ${!active && ' !w-[43px] group-active:scale-[.95]'} h-auto`} />
+                                            className={`card transition-all duration-300 ${!active && ' !w-[43px] group-active:scale-[0.98]'} h-auto`} />
                                     </div>
 
 
@@ -197,7 +197,7 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
                             </PhotoView>
                             <div
 
-                                className="w-full group/wrapper relative z-[2] group-active:scale-[.95] transition-all duration-300">
+                                className="w-full group/wrapper relative z-[2] group-active:scale-[.98] transition-all duration-300">
 
                                 <div
 

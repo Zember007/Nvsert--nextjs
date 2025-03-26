@@ -73,7 +73,7 @@ const AppHeader = () => {
   return (
     <div className={`${burgerMenuActive && 'transparent-header'}`}>
       <header className="header">
-        <div className="wrapper header__wrapper">
+        <div className="wrapper header__wrapper !h-[50px]">
           <AppLogo />
           <div className={`header__menu js-header-menu ${burgerMenuActive && 'active'}`}>
             <nav className="header-nav">
@@ -198,7 +198,7 @@ const AppHeader = () => {
           </button>
 
 
-          <div ref={setWrapperRef} className="tariff-wrap ml-[70px]">
+          {/* <div ref={setWrapperRef} className="tariff-wrap ml-[70px]">
             <button ref={setButtonRef} className="tariff block  rounded-[4px] border-solid border border-[#737373] text-[#FFF] text-[20px] font-bold">
               <Link
                 href="/find-out-cost/"
@@ -207,7 +207,7 @@ const AppHeader = () => {
                 {t('calculation.name')}
               </Link>
             </button>
-          </div>
+          </div> */}
         </div>
       </header>
     </div>

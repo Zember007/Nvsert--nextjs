@@ -11,6 +11,7 @@ select {
   cursor: pointer;
   margin: 0;
   z-index: 0;
+  vertical-align: middle;	
 
   &.bounce {
     animation: bounce-input 0.4s ease;
@@ -72,7 +73,7 @@ select {
     &:focus {
       // background: #20272a;
       box-shadow: inset 2px 2px 2px #071a2680, inset -2px -2px 2px #071a2680;
-     
+
       border: 1px solid #737373;
       z-index: 1;
 
@@ -307,19 +308,21 @@ input:-webkit-autofill:focus {
 
 @keyframes bounce-error {
   0% {
-    transform: translateY(-15px);
+    transform: translateY(-50px);
   }
 
-  30% {
-    transform: translateY(-10px);
-  }
 
-  50% {
+
+  40% {
     transform: translateY(5px);
   }
 
-  70% {
+  60% {
     transform: translateY(-5px);
+  }
+
+  80% {
+    transform: translateY(5px);
   }
 
   100% {
@@ -369,9 +372,11 @@ input:-webkit-autofill:focus {
     list-style: none;
     font-size: 12px;
     line-height: 14px;
+    transform: translateY(-50px);
 
     &.bounce {
-      animation: bounce-error 0.4s ease;
+      animation: bounce-error 0.5s ease;
+      animation-fill-mode: forwards;
       transition: transform 0.2s ease;
     }
   }

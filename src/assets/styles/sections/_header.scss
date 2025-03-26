@@ -81,7 +81,8 @@
 			display: flex;
 			align-items: center;
 			font-size: 16px;
-			line-height: 24px;			
+			line-height: 24px;	
+			vertical-align: middle;		
 			color: $typography-primary;
 			text-decoration: none;
 			font-family: $font-family-2;
@@ -91,7 +92,7 @@
 			}
 
 			&:hover, &:active {
-				color: $typography-accent;
+				// color: $typography-accent;
 			}
 
 			.icon {
@@ -193,7 +194,7 @@
 		}
 
 		&:hover, &:active {
-			color: $typography-accent;
+			// color: $typography-accent;
 		}
 
 		&__link {
@@ -201,7 +202,7 @@
 			color: $typography-primary;
 			text-decoration: none;
 			&:hover {
-				color: $typography-accent;
+				// color: $typography-accent;
 			}
 		}
 		&__burger {
@@ -253,7 +254,7 @@
 				text-decoration: none;
 				white-space: nowrap;
 				&:hover {
-					color: $typography-accent;
+					// color: $typography-accent;
 				}
 			}
 		}
@@ -445,7 +446,7 @@
 			&__link {
 				color: $typography-invert;
 				&:hover {
-					color: $typography-accent;
+					// color: $typography-accent;
 				}
 			}
 			&__burger {
@@ -632,7 +633,7 @@
 		text-decoration: none;
 
 		&:hover, &:active, &:focus {
-			color: $white-color;
+			// color: $white-color;
 		}
 	}
 }

@@ -13,14 +13,12 @@ import MessageImg from '@/assets/images/svg/message-flight.svg';
 import Image from "next/image";
 import { useButton } from "@/hook/useButton";
 import '@/assets/styles/sections/main/animation/form.scss';
-import GUI from 'lil-gui';
 import { useEffect, useRef } from 'react';
 
 const AppMainForm = ({ btnText }: { btnText: string }) => {
     const { t } = useTranslation();
     const { openDefaultModal } = useHeaderContext();
     const { setButtonRef, setWrapperRef } = useButton();
-    const guiRef = useRef<GUI | null>(null);
 
     const onSubmit = async (e: any) => {
         const formData = new FormData();
@@ -44,43 +42,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
     const methods = useForm({ mode: "onTouched", shouldFocusError: false });
     const { reset } = methods;
 
-    useEffect(() => {
-
-        // Инициализация lil-gui
-        const gui = new GUI({
-            title: 'Настройки кнопки',
-        });
-
-        // Объект настроек для кнопки
-        const buttonSettings = {
-            background: '#27324e', // начальное значение для --shiny-cta-bg
-
-        };
-
-        // Добавляем контроллеры
-        gui
-            .addColor(buttonSettings, 'background')
-            .name('Фон кнопки')
-            .onChange((value: any) => {
-                document.documentElement.style.setProperty('--shiny-cta-bg', value);
-            });
-
-
-
-
-
-
-
-        // Позиционируем GUI в правом нижнем углу
-
-
-        guiRef.current = gui;
-
-        // Очистка при размонтировании
-        return () => {
-            gui.destroy();
-        };
-    }, [guiRef.current]);
+ 
 
     return (
         <AppValidationObserver methods={methods} onSubmit={onSubmit}>
@@ -112,7 +74,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                         <button
                             type="submit"
                             ref={setButtonRef}
-                            className="shiny-cta tariff s:mt-[20px] mt-[15px] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[10px] justify-center p-[9px] rounded-[4px]"
+                            className="shiny-cta tariff s:mt-[1px] mt-[15px] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[10px] justify-center p-[9px] rounded-[4px]"
                         >
                             {btnText}
                             <Image
@@ -127,7 +89,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                     </div>
 
 
-                    <span className="mt-[10px] text-[#A4A4A4] text-[10px] s:text-[13px]">
+                    <span className="mt-[1px] text-[#A4A4A4] text-[10px] s:text-[13px]">
                         Согласен на обработку моих персональных данных{' '}
                         <span className="whitespace-nowrap">в соответствии</span> с{' '}
                         <Link href="/soglashenie/polzovatelskoe-soglashenie/" target="_blank">

@@ -44,7 +44,7 @@ const AppInput = ({ title, inputName, type, required, autocomplete, mask, classN
         setVisibleError(false)
         setTimeout(() => {
             setVisibleError(true)
-        }, 50)
+        }, 30)
     }, [submitCount])
     return (
         <div className="relative z-[0]">
@@ -69,7 +69,7 @@ const AppInput = ({ title, inputName, type, required, autocomplete, mask, classN
                     {title}
                 </span>
             </label>
-            { isSubmitted && errors[inputName] && <ul className="error-list" >
+            { visibleError && isSubmitted && errors[inputName] && <ul className="error-list" >
                 <li className={`error-item ${visibleError && 'bounce'}`}>
                     Это поле обязательно
                 </li>
