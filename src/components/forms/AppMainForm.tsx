@@ -42,7 +42,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
     const methods = useForm({ mode: "onTouched", shouldFocusError: false });
     const { reset } = methods;
 
- 
+
 
     return (
         <AppValidationObserver methods={methods} onSubmit={onSubmit}>
@@ -75,6 +75,9 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                             type="submit"
                             ref={setButtonRef}
                             className="shiny-cta tariff s:mt-[1px] mt-[15px] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[10px] justify-center p-[9px] rounded-[4px]"
+                            style={{                                
+                                verticalAlign: 'middle'
+                            }}
                         >
                             {btnText}
                             <Image
@@ -97,8 +100,9 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                         </Link>
                     </span>
                 </div>
-            )}
-        </AppValidationObserver>
+    )
+}
+        </AppValidationObserver >
     );
 };
 
