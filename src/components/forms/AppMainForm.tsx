@@ -49,14 +49,14 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
             {({ register, errors }) => (
                 <div className="flex flex-col s:gap-[19px] gap-[5px]">
                     <AppInput
-                        className="!bg-[#2a2a2a] focus:!bg-[#20272a]"
+                        className="!bg-[#2a2a2a] focus:!bg-[#21262F]"
                         title={'ФИО'}
                         inputName="name"
                         required={true}
                     />
 
                     <AppInput
-                        className="!bg-[#2a2a2a] focus:!bg-[#20272a]"
+                        className="!bg-[#2a2a2a] focus:!bg-[#21262F]"
                         title={'Телефон'}
                         inputName="phone"
                         mask="phone"
@@ -65,7 +65,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                     />
 
                     <AppTextarea
-                        className="!bg-[#2a2a2a] focus:!bg-[#20272a]"
+                        className="!bg-[#2a2a2a] focus:!bg-[#21262F]"
                         title={'Комментарий'}
                         inputName="comment"
                     />
