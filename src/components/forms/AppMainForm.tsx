@@ -13,7 +13,7 @@ import MessageImg from '@/assets/images/svg/message-flight.svg';
 import Image from "next/image";
 import { useButton } from "@/hook/useButton";
 import '@/assets/styles/sections/main/animation/form.scss';
-import { useEffect, useRef } from 'react';
+
 
 const AppMainForm = ({ btnText }: { btnText: string }) => {
     const { t } = useTranslation();
