@@ -32,7 +32,7 @@ const AppMainDocuments = () => {
 
                             <MainDocumentItem
                                 bordert={(index - 1 !== hoverIndex && index - 1 !== activeIndex)}
-                                borderb={index + 1 !== hoverIndex || activeIndex === hoverIndex}
+                                borderb={index + 1 !== hoverIndex || activeIndex !== index + 1}
                                 setHover={(value) => { setHover(value ? index : null) }} setActive={(value) => setActive(value ? index : null)} active={index === activeIndex} key={index} {...item} />
 
                         )
