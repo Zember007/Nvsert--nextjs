@@ -13,12 +13,15 @@ import MessageImg from '@/assets/images/svg/message-flight.svg';
 import Image from "next/image";
 import { useButton } from "@/hook/useButton";
 import '@/assets/styles/sections/main/animation/form.scss';
+import GUI from 'lil-gui'
+import { useEffect, useRef } from "react";
 
 
 const AppMainForm = ({ btnText }: { btnText: string }) => {
     const { t } = useTranslation();
     const { openDefaultModal } = useHeaderContext();
     const { setButtonRef, setWrapperRef } = useButton();
+    const guiRef = useRef<GUI | null>(null);
 
     const onSubmit = async (e: any) => {
         const formData = new FormData();
@@ -41,6 +44,21 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
 
     const methods = useForm({ mode: "onTouched", shouldFocusError: false });
     const { reset } = methods;
+
+    useEffect(() => {
+        const settings = {
+            color: '#0000ff'
+        }
+        const gui = new GUI();
+        gui.addColor(settings, 'color').name('Цвет текста').onChange((value: any) => {
+            const el = document.querySelector('.shiny-cta') as HTMLElement | null
+            if (!el) return
+            el.style.setProperty('--shiny-cta-highlight',value );
+        });
+
+        guiRef.current = gui;
+
+    }, [])
 
 
 
@@ -75,7 +93,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                             type="submit"
                             ref={setButtonRef}
                             className="shiny-cta group tariff s:mt-[1px] mt-[15px] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[10px] justify-center p-[9px] rounded-[4px]"
-                            style={{                                
+                            style={{
                                 verticalAlign: 'middle'
                             }}
                         >
@@ -101,8 +119,8 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                         </Link>
                     </span>
                 </div>
-    )
-}
+            )
+            }
         </AppValidationObserver >
     );
 };
