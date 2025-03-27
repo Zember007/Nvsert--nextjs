@@ -157,7 +157,7 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
                                             onMouseEnter={handleMouseEnter}
                                             onMouseLeave={handleMouseLeave}
                                             style={active && (mouseX || mouseY) ? cardStyle : {}}
-                                            className=" card transition-all duration-300">
+                                            className="!shadow-none card border-[0.2px] solid border-[#A4A4A4] overflow-hidden rounded-[5px] transition-all duration-300">
                                             <Image
 
                                                 alt='document' src={img}
