@@ -153,7 +153,7 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
             <div
                 onMouseEnter={() => { setHover(true) }}
                 onMouseLeave={() => { setHover(false) }}
-                className={` overflow-hidden transition-all duration-300 cursor-pointer ${!active ? 'hover:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[transparent] hover:bg-[#FFF] rounded-[4px]`}>
+                className={`mx-[-20px] overflow-hidden transition-all duration-300 cursor-pointer ${!active ? 'hover:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[transparent] hover:bg-[#FFF] rounded-[4px]`}>
                 <div className="  flex flex-col">
                     <div className="relative ">
 
