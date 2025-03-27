@@ -117,42 +117,13 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
         }, 1000));
     };
 
-    // useEffect(() => {
-    //     if (!buttonRef.current) return
-    //     if (!active) {
-    //         const drop = buttonRef.current.querySelector('.drop.animate')
-    //         const drop_reverse = buttonRef.current.querySelector('.drop-reverse.animate')
-    //         if (drop && !drop_reverse) {
-    //             drop.classList.remove('animate')
-    //             // handleMouseDown(!active)
-    //         }
-
-    //         setListHidden(true)
-    //     } else {
-    //         setTimeout(() => {
-    //             if (!buttonRef.current) return
-    //             const drop = buttonRef.current.querySelector('.drop.animate')
-
-    //             if (!drop) {
-
-
-    //                 handleMouseDown(!active)
-
-    //             }
-    //         }, 100)
-    //     }
-
-
-    // }, [active])
-
-
 
 
     return (
         <div className={`wrapper document-wrapper-border group/wrapper`}
 
         >
-            <div className={`border-group ${!active && ' group-hover/wrapper:!border-[transparent]'}`}
+            <div className={` border-group ${!active && ' group-hover/wrapper:!border-[transparent]'}`}
                 style={{
                     borderTopColor: (!bordert || active) ? 'transparent' : '#00000033',
                     borderBottomColor: (!borderb || active) ? 'transparent' : '#00000033'
@@ -162,7 +133,7 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
                 <div
                     onMouseEnter={() => { setHover(true) }}
                     onMouseLeave={() => { setHover(false) }}
-                    className={`mx-[-20px] overflow-hidden transition-all duration-300 cursor-pointer ${!active ? 'hover:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[transparent] hover:bg-[#FFF] rounded-[4px]`}>
+                    className={`mx-[-30px] overflow-hidden transition-all duration-300 cursor-pointer ${!active ? 'hover:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[transparent] hover:bg-[#FFF] rounded-[4px]`}>
                     <div className="  flex flex-col">
                         <div className="relative ">
 
@@ -180,7 +151,7 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
                                         style={{
                                             transform: `perspective(800px) translateY(${active ? '60px' : '-50%'})`,
                                         }}
-                                        className={`${!active && 'pointer-events-none'}  card-wrap transition-all duration-300 absolute z-[100] top-1/2 left-[20px]`}>
+                                        className={`${!active && 'pointer-events-none'}  card-wrap transition-all duration-300 absolute z-[100] top-1/2 left-[30px]`}>
                                         <div
                                             onMouseMove={handleMouseMove}
                                             onMouseEnter={handleMouseEnter}
