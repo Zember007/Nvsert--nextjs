@@ -74,11 +74,12 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                         <button
                             type="submit"
                             ref={setButtonRef}
-                            className="shiny-cta tariff s:mt-[1px] mt-[15px] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[10px] justify-center p-[9px] rounded-[4px]"
+                            className="shiny-cta group tariff s:mt-[1px] mt-[15px] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[10px] justify-center p-[9px] rounded-[4px]"
                             style={{                                
                                 verticalAlign: 'middle'
                             }}
                         >
+                            <div className="absolute z-[1] top-[1px] right-[1px] left-[1px] bottom-[1px] group-active:shadow-[inset_2px_2px_4px_0_#34446D,inset_-2px_-2px_4px_0_#34446D]"></div>
                             {btnText}
                             <Image
                                 alt="message"
