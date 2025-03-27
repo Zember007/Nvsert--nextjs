@@ -53,11 +53,16 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
         gui.addColor(settings, 'color').name('Цвет текста').onChange((value: any) => {
             const el = document.querySelector('.shiny-cta') as HTMLElement | null
             if (!el) return
-            el.style.setProperty('--shiny-cta-highlight',value );
+            el.style.setProperty('--shiny-cta-highlight', value);
         });
 
         guiRef.current = gui;
-
+        return () => {
+            if (guiRef.current) {
+                guiRef.current.destroy(); // Уничтожаем GUI
+                guiRef.current = null;
+            }
+        };
     }, [])
 
 
