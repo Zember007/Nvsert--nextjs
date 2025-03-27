@@ -190,7 +190,7 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
                                             className="leading-[11px] w-[60%] pl-[63px]  text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">
 
 
-                                            <a ref={LinkServiceRef} className={`${!active && 'pointer-events-none'}`} href='#'>{title}</a>
+                                            {title}
 
                                         </p>
                                         <div className="w-[40%] grid grid-cols-[1fr_1fr_auto] items-center justify-between">
