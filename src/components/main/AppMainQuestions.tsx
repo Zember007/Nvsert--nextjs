@@ -1,6 +1,5 @@
 import { filterPrepositions } from '@/hook/filter';
 import AppMainFormSecondary from '../forms/AppMainFormSecondary';
-import AppMainDropdown from './elements/AppMainDropdown'
 const AppMainQuestions = () => {
 
   const questions = [
@@ -102,11 +101,154 @@ const AppMainQuestions = () => {
 
   ]
   return (
-    <section className="py-[75px]">
-      <div className="wrapper flex flex-col gap-[20px]">
+    <section className="py-[75px] ">
+      <div className="wrapper flex flex-col gap-[20px] ">
+
         <h2 className="leading-[1] tracking-[-0.04em] text-center l:text-left text-[24px] xs:text-[40px] l:text-[56px]">Гарантии и безупречный сервис</h2>
-        <div className="flex gap-[20px]">
-          <div className="bg-[#F5F5F580] border-[#34446D] border border-solid rounded-[8px] p-[30px] backdrop-blur-[10px]"></div>
+        <div className="grid grid-cols-3 gap-x-[22px] gap-y-[100px] relative z-[0]">
+          <div className='logo !w-[800px] !h-[160px] !z-[-1] pointer-events-none absolute top-1/2 left-[-10px] translate-y-[-50%]' >
+            <i className="icon icon--logo"></i>
+
+          </div>
+
+          <div className="bg-[#F5F5F580] border-[#34446D] border border-solid rounded-[8px] p-[30px] backdrop-blur-[4px] flex flex-col gap-[19px]">
+            <p className='text-[24px] text-[#34446D] font-bold'>Надёжность и защита</p>
+            <ul className="list-disc leading-[140%] space-y-[10px] pl-[18px] *:*:text-[16px]">
+
+              <li>
+                <h3 className="font-bold">
+                  Соответствие стандартам
+                </h3>
+                <p>
+                  Сертификация проводится в полном соответствии с российскими государственными стандартами.
+                </p>
+              </li>
+
+
+              <li>
+                <h3 className="font-bold">
+                  Официальность документов
+                </h3>
+                <p>
+                  Все сертификаты оформляются легитимно, регистрируются в государственных реестрах Российской Федерации.
+                </p>
+              </li>
+
+
+              <li>
+                <h3 className="font-bold">
+                  Защита данных
+                </h3>
+                <p>
+                  Мы гарантируем конфиденциальность и надёжную защиту ваших данных.
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div className="bg-[#F5F5F580] border-[#34446D] border border-solid rounded-[8px] p-[30px] backdrop-blur-[4px] flex flex-col gap-[19px]">
+            <p className='text-[24px] text-[#34446D] font-bold'>Надёжность и защита</p>
+            <ul className="list-disc leading-[140%] space-y-[10px] pl-[18px] *:*:text-[16px]">
+
+              <li>
+                <h3 className="font-bold">
+                  Соответствие стандартам
+                </h3>
+                <p>
+                  Сертификация проводится в полном соответствии с российскими государственными стандартами.
+                </p>
+              </li>
+
+
+              <li>
+                <h3 className="font-bold">
+                  Официальность документов
+                </h3>
+                <p>
+                  Все сертификаты оформляются легитимно, регистрируются в государственных реестрах Российской Федерации.
+                </p>
+              </li>
+
+
+              <li>
+                <h3 className="font-bold">
+                  Защита данных
+                </h3>
+                <p>
+                  Мы гарантируем конфиденциальность и надёжную защиту ваших данных.
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div className=""></div>
+          <div className=""></div>
+          <div className="bg-[#F5F5F580] border-[#34446D] border border-solid rounded-[8px] p-[30px] backdrop-blur-[4px] flex flex-col gap-[19px]">
+            <p className='text-[24px] text-[#34446D] font-bold'>Надёжность и защита</p>
+            <ul className="list-disc leading-[140%] space-y-[10px] pl-[18px] *:*:text-[16px]">
+
+              <li>
+                <h3 className="font-bold">
+                  Соответствие стандартам
+                </h3>
+                <p>
+                  Сертификация проводится в полном соответствии с российскими государственными стандартами.
+                </p>
+              </li>
+
+
+              <li>
+                <h3 className="font-bold">
+                  Официальность документов
+                </h3>
+                <p>
+                  Все сертификаты оформляются легитимно, регистрируются в государственных реестрах Российской Федерации.
+                </p>
+              </li>
+
+
+              <li>
+                <h3 className="font-bold">
+                  Защита данных
+                </h3>
+                <p>
+                  Мы гарантируем конфиденциальность и надёжную защиту ваших данных.
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div className="bg-[#F5F5F580] border-[#34446D] border border-solid rounded-[8px] p-[30px] backdrop-blur-[4px] flex flex-col gap-[19px]">
+            <p className='text-[24px] text-[#34446D] font-bold'>Надёжность и защита</p>
+            <ul className="list-disc leading-[140%] space-y-[10px] pl-[18px] *:*:text-[16px]">
+
+              <li>
+                <h3 className="font-bold">
+                  Соответствие стандартам
+                </h3>
+                <p>
+                  Сертификация проводится в полном соответствии с российскими государственными стандартами.
+                </p>
+              </li>
+
+
+              <li>
+                <h3 className="font-bold">
+                  Официальность документов
+                </h3>
+                <p>
+                  Все сертификаты оформляются легитимно, регистрируются в государственных реестрах Российской Федерации.
+                </p>
+              </li>
+
+
+              <li>
+                <h3 className="font-bold">
+                  Защита данных
+                </h3>
+                <p>
+                  Мы гарантируем конфиденциальность и надёжную защиту ваших данных.
+                </p>
+              </li>
+            </ul>
+          </div>
         </div>
         {/* <div className="flex">
           <div className="p-[32px] rounded-[6px] bg-[#FFFFFF] max-w-[420px] min-w-[420px] flex flex-col gap-[20px]">

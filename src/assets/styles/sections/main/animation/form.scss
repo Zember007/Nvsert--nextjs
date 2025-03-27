@@ -1,6 +1,7 @@
 :root {
   --shiny-cta-bg: #34446D;
   --shiny-cta-highlight: #0000ff;
+  --shiny-cta-highlight-subtle: #8484ff;
 }
 
 @property --gradient-angle {
@@ -27,7 +28,13 @@
   inherits: false;
 }
 
+
+
 .shiny-cta {
+  
+  --gradient-percent: 20%;
+  --gradient-angle-offset: 95deg;
+  --gradient-shine: var(--shiny-cta-highlight-subtle);
   letter-spacing: 0.01em;
   --animation: gradient-angle linear infinite;
   --duration: 4s;
@@ -36,7 +43,7 @@
   position: relative;
   overflow: hidden;
   border: 1px solid transparent;
-  background: linear-gradient(var(--shiny-cta-bg), var(--shiny-cta-bg)) padding-box, conic-gradient(from calc(var(--gradient-angle) - var(--gradient-angle-offset)), transparent, var(--shiny-cta-highlight) var(--gradient-percent), var(--gradient-shine) calc(var(--gradient-percent)* 2), var(--shiny-cta-highlight) calc(var(--gradient-percent)* 3), transparent calc(var(--gradient-percent)* 4)) border-box;
+  // background: linear-gradient(var(--shiny-cta-bg), var(--shiny-cta-bg)) padding-box, conic-gradient(from calc(var(--gradient-angle) - var(--gradient-angle-offset)), transparent, var(--shiny-cta-highlight) var(--gradient-percent), var(--gradient-shine) calc(var(--gradient-percent)* 2), var(--shiny-cta-highlight) calc(var(--gradient-percent)* 3), transparent calc(var(--gradient-percent)* 4)) border-box;
   box-shadow: inset 0 0 0 1px #5a5a5a !important;
 
   &::before,
@@ -49,6 +56,7 @@
     inset-block-start: 50%;
     translate: -50% -50%;
     z-index: -1;
+    opacity: 1 !important;
   }
 
 
@@ -56,6 +64,7 @@
 
 /* Dots pattern */
 .shiny-cta::before {
+ 
   --size: calc(100% - var(--shadow-size) * 3);
   --position: 2px;
   --space: calc(var(--position) * 2);
