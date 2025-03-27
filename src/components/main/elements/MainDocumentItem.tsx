@@ -236,7 +236,7 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
                     </div>
                     <div className={`${active && 'bg-[#FFF]'}`}>
 
-                        <div className={`transition-all easy-in duration-300 overflow-hidden max-h-0  ${active && '!duration-700 !max-h-[1400px] '}`}
+                        <div className={`transition-all easy-in duration-300 overflow-hidden max-h-0  ${active && '!max-h-[1400px] '}`}
                         >
                             <div className="s:py-[23px] py-[15px]  flex flex-col l:flex-row gap-[10px] ">
                                 <div className="w-[60%] s:gap-0 gap-[20px] flex flex-col m:flex-row m:items-stretch">
