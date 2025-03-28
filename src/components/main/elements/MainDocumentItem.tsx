@@ -1,11 +1,13 @@
 
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { StaticImageData } from 'next/dist/shared/lib/get-img-props';
 import { filterPrepositions } from '@/hook/filter';
 import { PhotoView } from 'react-photo-view';
 import { useDropEffect } from '@/hook/useDrop';
 import { useButton } from '@/hook/useButton';
+import { BounceEffect } from '@/hook/useBounce';
+import { v4 as uuidv4 } from 'uuid';
 
 interface content {
     text: string,
@@ -30,6 +32,8 @@ interface props {
     setHover: (value: boolean) => void,
     bordert: boolean,
     borderb: boolean,
+    settings: any;
+
 }
 
 interface pulse {
@@ -39,7 +43,7 @@ interface pulse {
     left: string;
 }
 
-const MainDocumentItem = ({ img, title, content, content1, price, duration, active, setActive, borderb, bordert, setHover }: props) => {
+const MainDocumentItem = ({ img, settings, title, content, content1, price, duration, active, setActive, borderb, bordert, setHover }: props) => {
 
     const [listHidden, setListHidden] = useState(true);
 
@@ -47,6 +51,7 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
     const { setButtonRef, setWrapperRef } = useButton()
 
     const photoRef = useRef<HTMLDivElement | null>(null);
+    const bounceEl = useRef<HTMLDivElement | null>(null);
     const containerPhotoRef = useRef<HTMLDivElement | null>(null);
     const LinkServiceRef = useRef<HTMLAnchorElement | null>(null);
 
@@ -119,6 +124,31 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
 
 
 
+
+
+    useEffect(() => {
+        if (!active) return
+
+
+        setTimeout(() => {
+            if (!bounceEl.current) return
+
+            BounceEffect(bounceEl.current, {
+                startPosition: "0",
+                endPosition: `-${settings.length}px`,
+                duration: settings.duration,
+                easing: "ease-in",
+                direction: 'vertical'
+            });
+        }, settings.timeout)
+
+    }, [active])
+
+
+
+
+
+
     return (
         <div className={`wrapper document-wrapper-border group/wrapper relative`}
 
@@ -152,7 +182,7 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
                                     style={{
                                         transform: `perspective(800px) translateY(${active ? '60px' : '-50%'})`,
                                     }}
-                                    className={`${!active && 'pointer-events-none'}  card-wrap transition-all duration-300 absolute z-[100] top-1/2 left-[30px]`}>
+                                    className={`${!active && 'pointer-events-none'}  card-wrap transition-all duration-200 absolute z-[100] top-1/2 left-[30px]`}>
                                     <div
                                         onMouseMove={handleMouseMove}
                                         onMouseEnter={handleMouseEnter}
@@ -168,7 +198,7 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
                                             style={{
                                                 width: (photoWidth || 190) + 'px'
                                             }}
-                                            className={`card transition-all duration-300 ${!active && ' !w-[43px] group-active:scale-[0.98]'} h-auto`} />
+                                            className={`card transition-all duration-200 ${!active && ' !w-[43px] group-active:scale-[0.98]'} h-auto`} />
                                     </div>
 
 
@@ -214,9 +244,9 @@ const MainDocumentItem = ({ img, title, content, content1, price, duration, acti
                     </div>
                     <div className={`${active && 'bg-[#FFF]'}`}>
 
-                        <div className={`transition-all easy-in duration-300 overflow-hidden max-h-0  ${active && '!max-h-[1400px] '}`}
+                        <div className={`transition-all easy-in duration-200 overflow-hidden max-h-0  ${active && '!max-h-[1400px] '}`}
                         >
-                            <div className="s:py-[23px] py-[15px]  flex flex-col l:flex-row gap-[10px] ">
+                            <div ref={bounceEl} className="s:py-[23px] py-[15px]  flex flex-col l:flex-row gap-[10px] ">
                                 <div className="w-[60%] s:gap-0 gap-[20px] flex flex-col m:flex-row m:items-stretch">
                                     <div className='m:m-0 m-auto pointer-events-none'>
                                         <div
