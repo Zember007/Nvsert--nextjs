@@ -66,6 +66,7 @@ export function BounceEffect(
         "animationend",
         () => {
             element.style.animation = "";
+            element.style.transform = "";
         },
         { once: true }
     );
