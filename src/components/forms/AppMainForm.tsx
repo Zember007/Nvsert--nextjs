@@ -45,9 +45,9 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
             const response = await axios.post('/api/feedback', formData);
             if (response.status === 200 || 201) {
                 reset();
+                setIsPhone(false);
+                setIsEmail(false);
                 openDefaultModal('successMessage');
-                setIsEmail{false}
-                setIsPhone(false)
             }
         } catch (error) {
             console.log(error);
@@ -78,25 +78,25 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                     />
                     <div className="flex flex-col gap-[12px]">
                         <div
-                         onClick={() => {
-                            if (!isEmail && !isPhone) {
-                                const myElement = document.getElementById('bounce-checkbox')
-                                if (myElement) {
-                                    BounceEffect(myElement, {
-                                        startPosition: "0",
-                                        endPosition: `${5}px`,
-                                        duration: 200,
-                                        easing: "ease-in",
-                                    });
+                            onClick={() => {
+                                if (!isEmail && !isPhone) {
+                                    const myElement = document.getElementById('bounce-checkbox')
+                                    if (myElement) {
+                                        BounceEffect(myElement, {
+                                            startPosition: "0",
+                                            endPosition: `${5}px`,
+                                            duration: 200,
+                                            easing: "ease-in",
+                                        });
+
+                                    }
+                                    setFailCheck(true)
+                                } else {
+                                    setFailCheck(false)
 
                                 }
-                                setFailCheck(true)
-                            } else {
-                                setFailCheck(false)
-
-                            }
-                        }}
-                        className="w-full">
+                            }}
+                            className="w-full">
                             <AppInput
                                 className="!bg-[#2a2a2a] focus:!bg-[#21262F]"
                                 title={isPhone ? 'Телефон' : isEmail ? 'Email' : ''}
