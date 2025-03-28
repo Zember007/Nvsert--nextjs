@@ -91,17 +91,17 @@
 }
 
 .tariff::before {
-    background: radial-gradient(250px circle at var(--mouse-x) var(--mouse-y),
-    #c7c7c738,
-    transparent 30%);
-    // background-image: 
-    //     url('../images/svg/functional/bg-dots.svg');
-
-    // background-size:74px 89px;
-    // background-repeat: 
-    //     no-repeat;
-    // background-position: 
-    //     calc(var(--mouse-x, 50%) - 25px) calc(var(--mouse-y, 50%) - 25px);
+    // background: radial-gradient(250px circle at var(--mouse-x) var(--mouse-y),
+    // #c7c7c738,
+    // transparent 30%);
+    --position: 2px;
+    --space: calc(var(--position) * 2);
+    width: var(--size);
+    height: var(--size);
+    background: radial-gradient(circle at var(--position) var(--position),
+            white calc(var(--position) / 4),
+            transparent 0) padding-box;
+    background-size: var(--space) var(--space);
 
     border-radius: inherit;
     content: "";
