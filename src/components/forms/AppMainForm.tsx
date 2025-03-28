@@ -45,13 +45,10 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
 
     const [isPhone, setIsPhone] = useState(false);
 
-
-
-
     return (
         <AppValidationObserver methods={methods} onSubmit={onSubmit}>
             {({ register, errors }) => (
-                <div className="flex flex-col s:gap-[16px] gap-[5px]">
+                <div className="flex flex-col s:gap-[19px] gap-[5px]">
                     <AppInput
                         className="!bg-[#2a2a2a] focus:!bg-[#21262F]"
                         title={'ФИО'}
@@ -68,7 +65,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                             type={isPhone ? "phone" : 'email'}
                             required={true}
                         />
-                        <div className="pl-[10px] flex items-center gap-[30px]">
+                        <div className="pl-[10px] flex items-center gap-[30px] translate-y-[5px]">
                             <AppCheckbox checked={!isPhone} onChange={() => {console.log(123123);
                              setIsPhone(false)}} label="Email"/>
                             <AppCheckbox checked={isPhone} onChange={() => {console.log(1);setIsPhone(true)}} label="Телефон"/>
