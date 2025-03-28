@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useFormContext } from "react-hook-form";
 
 const AppInput = ({ title, inputName, type, required, autocomplete, mask, className, classNameTitle }: { title: string, inputName: string, type?: string, required?: boolean, autocomplete?: string, mask?: string, className?: string, classNameTitle?: string }) => {
-    const { register, formState: { errors, isSubmitted, submitCount } } = useFormContext();
+    const { register, formState: { errors, isSubmitted, submitCount }, setValue } = useFormContext();
 
     const formatPhoneNumber = (e: React.FormEvent<HTMLInputElement>) => {
         const value = e.currentTarget.value
@@ -46,6 +46,10 @@ const AppInput = ({ title, inputName, type, required, autocomplete, mask, classN
             setVisibleError(true)
         }, 30)
     }, [submitCount])
+
+    useEffect(()    => {
+        setValue(inputName, '')
+    },[title])
     return (
         <div className="relative z-[0]">
             <label className={`field ${visibleError && errors[inputName] && isSubmitted && 'bounce'}`}>

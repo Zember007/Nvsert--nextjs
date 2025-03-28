@@ -3,29 +3,30 @@ import ImgSlider from '@/assets/images/slider/1.png'
 import FolderImg from '@/assets/images/folder.webp'
 import Folder1Img from '@/assets/images/floder1.webp'
 
-import CertificateofConformityGOST_R from '@/assets/images/main-gallery/CertificateofConformityGOST_R.webp';
-import DeclarationofConformityGOST_R from '@/assets/images/main-gallery/DeclarationofConformityGOST_R.webp';
-import CertificateofConformity_SeismicResistance_ from '@/assets/images/main-gallery/CertificateofConformity_SeismicResistance_.webp';
-import CertificateofConformityoftheCustomsUnion from '@/assets/images/main-gallery/CertificateofConformityoftheCustomsUnion(SSTRCU).webp';
-import Passingtheannualinspectioncontrol from '@/assets/images/main-gallery/Passingtheannualinspectioncontrol(IC).webp';
-import DeclarationofConformityoftheCustomsUnion from '@/assets/images/main-gallery/DeclarationofConformityoftheCustomsUnion(DSTRCU).webp';
-import CertificateofConformityFireSafety from '@/assets/images/main-gallery/CertificateofConformityFireSafety.webp';
-import Certificateforthetypeofproduct from '@/assets/images/main-gallery/Certificateforthetypeofproduct.webp';
-import TestreportPI from '@/assets/images/main-gallery/Test(research)reportPI.webp';
-import Informationrefusalletter from '@/assets/images/main-gallery/Informationrefusalletter.webp';
-import Technicalconditions from '@/assets/images/main-gallery/Technicalconditions(TU).webp';
-import Certificateofstateregistration from '@/assets/images/main-gallery/Certificateofstateregistration(SGR).webp';
-import Expertopinion from '@/assets/images/main-gallery/Expertopinion(EZ).webp';
-import GOSTRISO9001 from '@/assets/images/main-gallery/GOSTRISO9001-2015(Organizationstandard).webp';
-import GOSTRISO14001 from '@/assets/images/main-gallery/GOSTRISO14001-2016(Environmentalmanagement).webp';
-import GOSTRISO22000 from '@/assets/images/main-gallery/GOSTRISO22000-2007(Foodmanagement).webp';
-import Chemicalproductsafetydatasheet from '@/assets/images/main-gallery/Chemicalproductsafetydatasheet.webp';
-import Certificateontheoriginofgoods from '@/assets/images/main-gallery/Certificateontheoriginofgoods(ST-1).webp';
+import Image01 from '@/assets/images/main-gallery/01.webp';
+import Image02 from '@/assets/images/main-gallery/02.webp';
+import Image03 from '@/assets/images/main-gallery/03.webp';
+import Image04 from '@/assets/images/main-gallery/04.webp';
+import Image05 from '@/assets/images/main-gallery/05.webp';
+import Image06 from '@/assets/images/main-gallery/06.webp';
+import Image07 from '@/assets/images/main-gallery/07.webp';
+import Image08 from '@/assets/images/main-gallery/08.webp';
+import Image09 from '@/assets/images/main-gallery/09.webp';
+import Image10 from '@/assets/images/main-gallery/10.webp';
+import Image11 from '@/assets/images/main-gallery/11.webp';
+import Image12 from '@/assets/images/main-gallery/12.webp';
+import Image13 from '@/assets/images/main-gallery/13.webp';
+import Image14 from '@/assets/images/main-gallery/14.webp';
+import Image15 from '@/assets/images/main-gallery/15.webp';
+import Image16 from '@/assets/images/main-gallery/16.webp';
+import Image17 from '@/assets/images/main-gallery/17.webp';
+import Image18 from '@/assets/images/main-gallery/18.webp';
+import Image19 from '@/assets/images/main-gallery/19.webp';
 
 export const documents = [
     {
         title: 'Сертификат соответствия ГОСТ Р',
-        img: CertificateofConformityGOST_R,
+        img: Image01,
         content: {
             text: 'Подтверждает соответствие продукции российским национальным стандартам. Обязателен для реализации определённых товаров на рынке РФ.',
             text1: 'Полный перечень технических регламентов ТС'
@@ -43,12 +44,12 @@ export const documents = [
                 ]
             }
         ],
-        price : 'от 6 800 ₽',
+        price: 'от 6 800 ₽',
         duration: 'от 2-х дней'
     },
     {
         title: 'Декларация соответствия ГОСТ Р',
-        img: DeclarationofConformityGOST_R,
+        img: Image02,
         content: {
             text: 'Подтверждает соответствие продукции установленным стандартам и техническим условиям. Облегчает вывод товара на рынок и формирует доверие у потребителей.',
             text1: 'Полный перечень технических регламентов ДС'
@@ -72,7 +73,7 @@ export const documents = [
     },
     {
         title: 'Сертификат соответствия «Сейсмостойкости»',
-        img: CertificateofConformity_SeismicResistance_,
+        img: Image03,
         content: {
             text: 'Подтверждает соответствие продукции установленным стандартам и техническим условиям. Облегчает вывод товара на рынок и формирует доверие у потребителей.',
             text1: 'Полный перечень технических регламентов ДС'
@@ -96,7 +97,7 @@ export const documents = [
     },
     {
         title: 'Сертификат соответствия Таможенного Союза (СС ТР ТС)',
-        img: CertificateofConformityoftheCustomsUnion,
+        img: Image04,
         content: {
             text: 'Подтверждает соответствие продукции требованиям технических регламентов государств ЕАЭС. Ключевой элемент для торговли в рамках Евразийского экономического союза.',
         },
@@ -119,7 +120,7 @@ export const documents = [
     },
     {
         title: 'Прохождение ежегодного инспекционного контроля (ИК)',
-        img: Passingtheannualinspectioncontrol,
+        img: Image05,
         content: {
             text: 'Регулярная проверка соответствия сертифицированной продукции заявленным стандартам. Обеспечивает стабильное качество и надёжность товаров в долгосрочной перспективе.',
         },
@@ -138,7 +139,7 @@ export const documents = [
     },
     {
         title: 'Декларация соответствия Таможенного Союза (ДС ТР ТС)',
-        img: DeclarationofConformityoftheCustomsUnion,
+        img: Image06,
         content: {
             text: 'Заявление производителя о соответствии продукции требованиям ТР ТС. Снижает бюрократические барьеры и облегчает выход на рынок Таможенного Союза.',
         },
@@ -161,7 +162,7 @@ export const documents = [
     },
     {
         title: 'Сертификат соответствия Пожарной Безопасности',
-        img: CertificateofConformityFireSafety,
+        img: Image07,
         content: {
             text: 'Подтверждает соответствие продукции нормам противопожарной безопасности. Обеспечивает надёжность эксплуатации товаров, защищая жизнь и имущество.',
         },
@@ -211,7 +212,7 @@ export const documents = [
     },
     {
         title: 'Сертификат на тип продукции',
-        img: Certificateforthetypeofproduct,
+        img: Image08,
         content: {
             text: 'Удостоверяет соответствие продукции конкретного типа установленным стандартам. Является основным нормативным документом для серийного производства.',
         },
@@ -234,7 +235,7 @@ export const documents = [
     },
     {
         title: 'Протокол испытаний (исследований) ПИ',
-        img: TestreportPI,
+        img: Image09,
         content: {
             text: 'Фиксирует результаты лабораторных исследований продукции. Служит доказательством её качества и безопасности.',
         },
@@ -257,7 +258,7 @@ export const documents = [
     },
     {
         title: 'Информационное отказное письмо',
-        img: Informationrefusalletter,
+        img: Image10,
         content: {
             text: 'Подтверждает, что товар не требует обязательной сертификации. Позволяет избежать лишних административных процедур при выходе на рынок.'
         },
@@ -275,7 +276,7 @@ export const documents = [
     },
     {
         title: 'Технические условия (ТУ)',
-        img: Technicalconditions,
+        img: Image11,
         content: {
             text: 'Устанавливает технические параметры продукции. Гарантирует соответствие товара требованиям отрасли и ожиданиям клиентов.'
         },
@@ -292,7 +293,7 @@ export const documents = [
     },
     {
         title: 'Свидетельство о государственной регистрации (СГР)',
-        img: Certificateofstateregistration,
+        img: Image12,
         content: {
             text: 'Подтверждает регистрацию продукции в государственных органах. Необходим для законного оборота и использования на территории России.'
         },
@@ -316,7 +317,7 @@ export const documents = [
     },
     {
         title: 'Экспертное заключение (ЭЗ)',
-        img: Expertopinion,
+        img: Image13,
         content: {
             text: 'Содержит мнение специалиста о качестве и безопасности продукции. Необходимо для подтверждения соответствия сложных или специфических товаров'
         },
@@ -340,7 +341,7 @@ export const documents = [
     },
     {
         title: 'ГОСТ Р ИСО 9001–2015 (Стандарт организации)',
-        img: GOSTRISO9001,
+        img: Image14,
         content: {
             text: 'Удостоверяет соответствие системы менеджмента качества установленным требованиям. Способствует повышению эффективности работы, улучшению продукции и удовлетворённости клиентов'
         },
@@ -361,7 +362,7 @@ export const documents = [
     },
     {
         title: 'ГОСТ Р ИСО 14001–2016 (Экологический менеджмент)',
-        img: GOSTRISO14001,
+        img: Image15,
         content: {
             text: 'Подтверждает внедрение системы управления окружающей средой, соответствующей мировым стандартам. Укрепляет экологическую ответственность и доверие клиентов и партнёров'
         },
@@ -382,7 +383,7 @@ export const documents = [
     },
     {
         title: 'ГОСТ Р ИСО 22000–2007 (Пищевой менеджмент)',
-        img: GOSTRISO22000,
+        img: Image16,
         content: {
             text: 'Регулирует соблюдение норм безопасности пищевых продуктов на всех этапах производства. Важен для пищевой отрасли, укрепляя доверие потребителей.'
         },
@@ -403,7 +404,7 @@ export const documents = [
     },
     {
         title: 'Сертификат о происхождении товара (СТ-1)',
-        img: Certificateontheoriginofgoods,
+        img: Image17,
         content: {
             text: 'Документ, подтверждающий страну производства продукции для таможенного оформления и торговли. Предоставляет льготы при уплате пошлин и упрощает экспортные операции.'
         },
@@ -439,7 +440,7 @@ export const documents = [
     },
     {
         title: 'Паспорт безопасности химической продукции',
-        img: Chemicalproductsafetydatasheet,
+        img: Image18,
         content: {
             text: 'Содержит сведения о свойствах и методах безопасного использования химических веществ. Обеспечивает защиту здоровья пользователей, работников и окружающей среды.'
         },
@@ -455,14 +456,30 @@ export const documents = [
                 ]
             }
         ],
-        
-
-
-
         price: 'от 15 000 ₽',
         duration: 'от 1-й недели'
     },
-    
+    {
+        title: 'Химический паспорт безопасности продукции',
+        img: Image19,
+        content: {
+            text: 'Содержит сведения о свойствах и методах безопасного использования химических веществ. Обеспечивает защиту здоровья пользователей, работников и окружающей среды.'
+        },
+        content1: [
+            {
+                title: 'Необходимые документы для оформления',
+                subtitle: 'Оформляется двух образцов:',
+                list: [
+                    'РФ паспорт с последующей  регистрацией (Регистрируем после разработки под ключ)',
+                    'MSDS европейского образца',
+                    'Заявка по форме(форма заявки предоставляется нами)',
+                    'Состав в % с указанием компонентов и указанием всех номеров CAS каждого компонента(если нет номеров CAS помогаем подобрать бесплатно)'
+                ]
+            }
+        ],
+        price: 'от 15 000 ₽',
+        duration: 'от 1-й недели'
+    }
 ];
 
 export const skills = [

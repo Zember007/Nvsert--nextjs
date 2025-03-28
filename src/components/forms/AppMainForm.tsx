@@ -12,7 +12,8 @@ import { useHeaderContext } from "../contexts/HeaderContext";
 import MessageImg from '@/assets/images/svg/message-flight.svg';
 import Image from "next/image";
 import { useButton } from "@/hook/useButton";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import AppCheckbox from './elements/AppCheckbox';
 
 
 const AppMainForm = ({ btnText }: { btnText: string }) => {
@@ -42,6 +43,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
     const methods = useForm({ mode: "onTouched", shouldFocusError: false });
     const { reset } = methods;
 
+    const [isPhone, setIsPhone] = useState(false);
 
 
 
@@ -57,14 +59,22 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                         required={true}
                     />
 
-                    <AppInput
-                        className="!bg-[#2a2a2a] focus:!bg-[#21262F]"
-                        title={'Телефон'}
-                        inputName="phone"
-                        mask="phone"
-                        type="phone"
-                        required={true}
-                    />
+                    <div className="flex flex-col gap-[12px]">
+                        <AppInput
+                            className="!bg-[#2a2a2a] focus:!bg-[#21262F]"
+                            title={isPhone ? 'Телефон' : 'Email'}
+                            inputName="Contact"
+                            mask={isPhone ? "phone" : ''}
+                            type={isPhone ? "phone" : 'email'}
+                            required={true}
+                        />
+                        <div className="pl-[10px] flex items-center gap-[30px]">
+                            <AppCheckbox checked={!isPhone} onChange={() => {console.log(123123);
+                             setIsPhone(false)}} label="Email"/>
+                            <AppCheckbox checked={isPhone} onChange={() => {console.log(1);setIsPhone(true)}} label="Телефон"/>
+                                
+                        </div>
+                    </div>
 
                     <AppTextarea
                         className="!bg-[#2a2a2a] focus:!bg-[#21262F]"

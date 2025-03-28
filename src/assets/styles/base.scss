@@ -60,6 +60,7 @@
 
 .PhotoView-Slider__ArrowRight {
     right: 25% !important;
+
     &::before {
         transform: rotate(180deg);
     }
@@ -67,13 +68,13 @@
 
 .PhotoView-Slider__ArrowLeft {
     left: 25% !important;
-    
+
 }
 
 .PhotoView-Slider__ArrowLeft svg,
 .PhotoView-Slider__ArrowRight svg {
     display: none !important;
-   
+
 }
 
 .blurred-mask {
@@ -91,8 +92,17 @@
 
 .tariff::before {
     background: radial-gradient(250px circle at var(--mouse-x) var(--mouse-y),
-            #c7c7c738,
-            transparent 30%);
+    #c7c7c738,
+    transparent 30%);
+    // background-image: 
+    //     url('../images/svg/functional/bg-dots.svg');
+
+    // background-size:74px 89px;
+    // background-repeat: 
+    //     no-repeat;
+    // background-position: 
+    //     calc(var(--mouse-x, 50%) - 25px) calc(var(--mouse-y, 50%) - 25px);
+
     border-radius: inherit;
     content: "";
     height: 100%;
@@ -119,7 +129,7 @@
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
 
-    transition: transform 0.3s ease, box-shadow 150ms ease;
+    transition: transform 0.5s ease, box-shadow 150ms ease;
 
     backface-visibility: hidden;
     will-change: transform;
@@ -138,9 +148,9 @@
 .tariff.fast-click {
     box-shadow: inset 2px 2px 4px 0 #34446D,
         inset -2px -2px 4px 0 #34446D;
-    transform: scale(0.9)  rotateY(var(--y)) translateZ(10px) !important;
+    transform: scale(0.9) rotateY(var(--y)) translateZ(10px) !important;
 }
 
 body::-webkit-scrollbar {
     display: none;
-  }
+}
