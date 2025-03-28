@@ -14,6 +14,7 @@ import Image from "next/image";
 import { useButton } from "@/hook/useButton";
 import { useEffect, useRef, useState } from "react";
 import AppCheckbox from './elements/AppCheckbox';
+import { BounceEffect } from "@/hook/useBounce";
 
 
 const AppMainForm = ({ btnText }: { btnText: string }) => {
@@ -22,7 +23,18 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
     const { setButtonRef, setWrapperRef } = useButton();
 
     const onSubmit = async (e: any) => {
+
+        console.log(e);
+
+
         const formData = new FormData();
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailRegex.test(e.Contact) && isEmail) {
+            setEmailError(true)
+            return;
+        } else {
+            setEmailError(false)
+        }
         for (const key in e) {
             if (e.hasOwnProperty(key)) {
                 formData.append(key, e[key]);
@@ -34,6 +46,8 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
             if (response.status === 200 || 201) {
                 reset();
                 openDefaultModal('successMessage');
+                setIsEmail{false}
+                setIsPhone(false)
             }
         } catch (error) {
             console.log(error);
@@ -44,6 +58,13 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
     const { reset } = methods;
 
     const [isPhone, setIsPhone] = useState(false);
+    const [isEmail, setIsEmail] = useState(false);
+    const [emailError, setEmailError] = useState(false);
+    const [failCheck, setFailCheck] = useState(false);
+
+    useEffect(() => {
+        setFailCheck(false)
+    }, [isPhone, isEmail])
 
     return (
         <AppValidationObserver methods={methods} onSubmit={onSubmit}>
@@ -55,21 +76,42 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                         inputName="name"
                         required={true}
                     />
-
                     <div className="flex flex-col gap-[12px]">
-                        <AppInput
-                            className="!bg-[#2a2a2a] focus:!bg-[#21262F]"
-                            title={isPhone ? 'Телефон' : 'Email'}
-                            inputName="Contact"
-                            mask={isPhone ? "phone" : ''}
-                            type={isPhone ? "phone" : 'email'}
-                            required={true}
-                        />
-                        <div className="pl-[10px] flex items-center gap-[30px] translate-y-[5px]">
-                            <AppCheckbox checked={!isPhone} onChange={() => {console.log(123123);
-                             setIsPhone(false)}} label="Email"/>
-                            <AppCheckbox checked={isPhone} onChange={() => {console.log(1);setIsPhone(true)}} label="Телефон"/>
-                                
+                        <div
+                         onClick={() => {
+                            if (!isEmail && !isPhone) {
+                                const myElement = document.getElementById('bounce-checkbox')
+                                if (myElement) {
+                                    BounceEffect(myElement, {
+                                        startPosition: "0",
+                                        endPosition: `${5}px`,
+                                        duration: 200,
+                                        easing: "ease-in",
+                                    });
+
+                                }
+                                setFailCheck(true)
+                            } else {
+                                setFailCheck(false)
+
+                            }
+                        }}
+                        className="w-full">
+                            <AppInput
+                                className="!bg-[#2a2a2a] focus:!bg-[#21262F]"
+                                title={isPhone ? 'Телефон' : isEmail ? 'Email' : ''}
+                                inputName="Contact"
+                                mask={isPhone ? "phone" : ''}
+                                type={isPhone ? "phone" : isEmail ? 'text' : ''}
+                                fail={emailError}
+                                required={true}
+                                message={false}
+                                disable={!isPhone && !isEmail}
+                            />
+                        </div>
+                        <div id='bounce-checkbox' className="pl-[10px] flex items-center gap-[30px]">
+                            <AppCheckbox fail={failCheck} checked={isEmail} onChange={(value) => { setIsEmail(value); if (value) { setIsPhone(false) } }} label="Email" />
+                            <AppCheckbox fail={failCheck} checked={isPhone} onChange={(value) => { setIsPhone(value); if (value) { setIsEmail(false) } }} label="Телефон" />
                         </div>
                     </div>
 
@@ -86,6 +128,24 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                             className=" group tariff s:mt-[1px] mt-[15px] bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[10px] justify-center p-[9px] rounded-[4px]"
                             style={{
                                 verticalAlign: 'middle'
+                            }}
+                            onClick={() => {
+                                if (!isEmail && !isPhone) {
+                                    const myElement = document.getElementById('bounce-checkbox')
+                                    if (myElement) {
+                                        BounceEffect(myElement, {
+                                            startPosition: "0",
+                                            endPosition: `${5}px`,
+                                            duration: 200,
+                                            easing: "ease-in",
+                                        });
+
+                                    }
+                                    setFailCheck(true)
+                                } else {
+                                    setFailCheck(false)
+
+                                }
                             }}
                         >
                             {btnText}

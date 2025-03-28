@@ -5,12 +5,14 @@ interface CustomCheckboxProps {
     checked: boolean;
     onChange: (checked: boolean) => void;
     label?: string;
+    fail?:boolean;
 }
 
 const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
     checked,
     onChange,
-    label = 'Custom Checkbox'
+    label = 'Custom Checkbox',
+    fail    
 }) => {
     // Генерируем уникальный id один раз при создании компонента
     const uniqueId = React.useMemo(() => `custom-checkbox-${uuidv4()}`, []);
@@ -30,10 +32,11 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
             />
             <label
                 htmlFor={uniqueId}
-                className="w-[20px] h-[20px] flex items-center justify-center border-[1.2px] border-[#5F5F5F] rounded-[1.8px]
+                className={`w-[20px] h-[20px] flex items-center justify-center border-[1.2px] border-[#5F5F5F] rounded-[1.8px]
                   peer-checked:border-[#34C759]
                   peer-checked:*:block
-                  cursor-pointer transition-colors duration-200"
+                  cursor-pointer transition-colors duration-200 ${fail && '!border-[#FF3030]'}`}
+                  
             >
                 <span className="hidden">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -41,7 +44,7 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
                     </svg>
                 </span>
             </label>
-            <span className='text-[#CCCCCC80]'>{label}</span>
+            <span className={`text-[#CCCCCC80] ${fail && 'text-[#FF3030]'}`}>{label}</span>
         </div>
     );
 };

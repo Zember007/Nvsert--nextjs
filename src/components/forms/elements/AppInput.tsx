@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from "react-hook-form";
 
-const AppInput = ({ title, inputName, type, required, autocomplete, mask, className, classNameTitle }: { title: string, inputName: string, type?: string, required?: boolean, autocomplete?: string, mask?: string, className?: string, classNameTitle?: string }) => {
+const AppInput = ({ title,disable,fail,message = true, inputName, type, required, autocomplete, mask, className, classNameTitle }: { disable?:boolean,fail?:boolean, message?:boolean, title: string, inputName: string, type?: string, required?: boolean, autocomplete?: string, mask?: string, className?: string, classNameTitle?: string }) => {
     const { register, formState: { errors, isSubmitted, submitCount }, setValue } = useFormContext();
 
     const formatPhoneNumber = (e: React.FormEvent<HTMLInputElement>) => {
@@ -47,20 +47,24 @@ const AppInput = ({ title, inputName, type, required, autocomplete, mask, classN
         }, 30)
     }, [submitCount])
 
-    useEffect(()    => {
+
+
+    useEffect(() => {
         setValue(inputName, '')
-    },[title])
+    }, [title])
     return (
-        <div className="relative z-[0]">
-            <label className={`field ${visibleError && errors[inputName] && isSubmitted && 'bounce'}`}>
+        <div className={`relative z-[0] ${disable && 'active:scale-[0.95]'} transition-all duration-300 `}>
+            <label className={`field ${disable && 'pointer-events-none'} ${visibleError && ((errors[inputName]  ) || fail) && isSubmitted && 'bounce'}`}>
 
 
 
 
                 <input
-                    {...register(inputName, { required })}
+                    {...register(inputName, {
+                        required
+                    })}
                     type={type}
-                    className={`field__input ${className} `}
+                    className={`field__input ${className} ${(fail) && 'error'} `}
                     name={inputName}
                     placeholder={title}
                     autoComplete={autocomplete}
@@ -73,9 +77,9 @@ const AppInput = ({ title, inputName, type, required, autocomplete, mask, classN
                     {title}
                 </span>
             </label>
-            { visibleError && isSubmitted && errors[inputName] && <ul className="error-list" >
+            {message && visibleError && isSubmitted && errors[inputName] && <ul className="error-list" >
                 <li className={`error-item ${visibleError && 'bounce'}`}>
-                    Это поле обязательно
+                    Заполните ФИО!
                 </li>
             </ul>}
         </div>
