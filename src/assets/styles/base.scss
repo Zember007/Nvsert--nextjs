@@ -90,39 +90,31 @@
     z-index: 10;
 }
 
+
 .tariff::before {
 
-
-    // background: radial-gradient(
-    //     circle at 50% 50%,
-    //     #FFFFFF 1px,         
-    //     transparent 0px     
-    // );
     --position: 2px;
     background: radial-gradient(circle at var(--position) var(--position),
             white calc(var(--position) / 2.5),
             transparent 0) padding-box;
+
+
+    mask-image: radial-gradient(circle at var(--mouse-x) var(--mouse-y),
+            white 0,
+            rgba(255, 255, 255, 0.8) 30px,
+            transparent 50px);
     --space: calc(var(--position) * 2);
     background-size: var(--space) var(--space);
     background-repeat: space;
 
-    mask-image: radial-gradient(circle at center,
-            white 0%,
-            /* Полная видимость в центре */
-            rgba(255, 255, 255, 0.8) 30%,
-            /* Начало рассеивания */
-            transparent 80%
-            /* Полная прозрачность у краёв */
-        );
 
     border-radius: inherit;
     content: "";
-    height: 70px;
-    left: var(--mouse-x);
+    height: 100%;
+    left: 0;
     position: absolute;
-    top: var(--mouse-y);
-    transform: translate(-50%, -50%);
-    width: 70px;
+    top: 0;
+    width: 100%;
     opacity: 0;
     transition: opacity 300ms ease;
     z-index: 20;

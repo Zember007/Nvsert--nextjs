@@ -1,7 +1,7 @@
 import { useRef, useCallback, useEffect } from 'react';
 
 export const useButton = () => {
-  const buttonRefs = useRef<HTMLButtonElement[]>([]);
+  const buttonRefs = useRef<Array<HTMLButtonElement | HTMLDivElement>>([]);
   const wrapperRefs = useRef<HTMLDivElement[]>([]);
 
   // Функции для добавления элементов в массивы рефов
@@ -10,7 +10,7 @@ export const useButton = () => {
     wrapperRefs.current.push(el);
   }, []);
 
-  const setButtonRef = useCallback((el: HTMLButtonElement | null) => {
+  const setButtonRef = useCallback((el: HTMLButtonElement | null | HTMLDivElement) => {
     if (!el || buttonRefs.current.includes(el)) return;
     buttonRefs.current.push(el);
   }, []);
