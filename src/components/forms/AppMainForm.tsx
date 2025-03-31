@@ -71,7 +71,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
         if (myElement) {
             setTimeout(() => {
                 BounceEffect(myElement, {
-                    startPosition: "-30px",
+                    startPosition: "-50px",
                     endPosition: `${5}px`,
                     duration: 500,
                     easing: "ease",
@@ -150,8 +150,8 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                             />
                         </div>
                         <div id='bounce-checkbox' className="pl-[10px] flex items-center gap-[30px]">
-                            <AppCheckbox fail={failCheck} checked={isEmail} onChange={(value) => { setIsEmail(value); if (value) { setIsPhone(false) } }} label="Email" />
                             <AppCheckbox fail={failCheck} checked={isPhone} onChange={(value) => { setIsPhone(value); if (value) { setIsEmail(false) } }} label="Телефон" />
+                            <AppCheckbox fail={failCheck} checked={isEmail} onChange={(value) => { setIsEmail(value); if (value) { setIsPhone(false) } }} label="Email" />
                         </div>
                     </div>
 

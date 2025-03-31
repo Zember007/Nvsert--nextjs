@@ -72,18 +72,18 @@ const AppInput = ({ title,disable,fail,message = true, inputName, type, required
                     autoComplete={autocomplete}
                     onInput={(e) => { changeInput(e) }}
                 />
-                <span className={`field__title ${classNameTitle}`}>
+                <span className={`field__title ${(errors[inputName]) && '!text-[#FF3030]'} ${classNameTitle}`}>
                     {title}
                 </span>
                 <span className={`field__title-top ${classNameTitle}`}>
                     {title}
                 </span>
             </label>
-            {message && visibleError && isSubmitted && errors[inputName] && <ul className="error-list" >
+            {/* {message && visibleError && isSubmitted && errors[inputName] && <ul className="error-list" >
                 <li className={`error-item ${visibleError && 'bounce'}`}>
                     Заполните ФИО!
                 </li>
-            </ul>}
+            </ul>} */}
         </div>
     );
 };
