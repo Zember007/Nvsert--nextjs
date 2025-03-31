@@ -73,7 +73,7 @@ const AppInput = ({ title,disable,fail,message = true, inputName, type, required
                     onInput={(e) => { changeInput(e) }}
                     onFocus={() => {clearErrors(inputName)}}
                 />
-                <span className={`field__title ${(errors[inputName] && message) && '!text-[#FF3030]'} ${classNameTitle}`}>
+                <span className={`field__title ${(errors[inputName] ) && '!text-[#FF3030]'} ${classNameTitle}`}>
                     {title}
                 </span>
                 <span className={`field__title-top ${classNameTitle}`}>
