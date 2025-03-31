@@ -50,6 +50,7 @@ const MainDocumentItem = ({ img, settings, title, content, content1, price, dura
     // const { buttonRef, handleMouseDown } = useDropEffect()
     const { setButtonRef, setWrapperRef } = useButton()
 
+    const borderBounce = useRef<HTMLDivElement | null>(null);
     const photoRef = useRef<HTMLDivElement | null>(null);
     const bounceEl = useRef<HTMLDivElement[]>([]);
     const containerPhotoRef = useRef<HTMLDivElement | null>(null);
@@ -133,9 +134,14 @@ const MainDocumentItem = ({ img, settings, title, content, content1, price, dura
     useEffect(() => {
         if (!active) return
 
-
+        if (borderBounce.current) {
+            borderBounce.current.style.setProperty('--duration', `${settings.duration}ms`)
+            borderBounce.current.style.setProperty('--length', settings.length)
+            borderBounce.current.classList.remove('border-bounce')
+        }
         setTimeout(() => {
-            if (!bounceEl.current.length) return
+            if (!bounceEl.current.length || !borderBounce.current) return
+            borderBounce.current.classList.add('border-bounce')
             bounceEl.current.forEach((el) => {
                 BounceEffect(el, {
                     startPosition: "0",
@@ -167,9 +173,11 @@ const MainDocumentItem = ({ img, settings, title, content, content1, price, dura
             </div>
 
             <div
+                ref={borderBounce}
                 onMouseEnter={() => { setHover(true) }}
                 onMouseLeave={() => { setHover(false) }}
-                className={`mx-[-30px] overflow-hidden transition-all duration-300 cursor-pointer ${!active ? 'hover:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[transparent] hover:bg-[#FFF] rounded-[4px]`}>
+                className={`mx-[-30px] overflow-hidden transition-all duration-300 group cursor-pointer  hover:bg-[#FFF] rounded-[4px] relative`}>
+                <div className={`transition-all duration-300 pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[10] rounded-[4px] ${!active ? 'group-hover:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[transparent]`}></div>
                 <div className="  flex flex-col">
                     <div className="relative ">
 

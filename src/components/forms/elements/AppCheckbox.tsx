@@ -21,8 +21,15 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
         onChange(e.target.checked);
     };
 
+    const labelRef = React.useRef<HTMLLabelElement>(null);
+
     return (
-        <div className="flex items-center gap-[6px]">
+        <div className="flex items-center gap-[6px]"
+            onClick={(e) => {
+                if (labelRef.current?.contains(e.target as Node)) return;
+                onChange(!checked)
+            }
+            }>
             <input
                 type="checkbox"
                 id={uniqueId}
@@ -31,6 +38,7 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
                 className="hidden peer"
             />
             <label
+                ref={labelRef}
                 htmlFor={uniqueId}
                 className={`
                     before:content-['']

@@ -91,34 +91,52 @@
 }
 
 
+// .tariff::before {
+
+//     --position: 2px;
+//     background: radial-gradient(circle at var(--position) var(--position),
+//             white calc(var(--position) / 2.5),
+//             transparent 0) padding-box;
+
+
+//     mask-image: radial-gradient(circle at var(--mouse-x) var(--mouse-y),
+//             white 0,
+//             rgba(255, 255, 255, 0.8) 30px,
+//             transparent 50px);
+//     --space: calc(var(--position) * 2);
+//     background-size: var(--space) var(--space);
+//     background-repeat: space;
+
+
+//     border-radius: inherit;
+//     content: "";
+//     height: 100%;
+//     left: 0;
+//     position: absolute;
+//     top: 0;
+//     width: 100%;
+//     opacity: 0;
+//     transition: opacity 300ms ease;
+//     z-index: 20;
+// }
+
 .tariff::before {
-
-    --position: 2px;
-    background: radial-gradient(circle at var(--position) var(--position),
-            white calc(var(--position) / 2.5),
-            transparent 0) padding-box;
-
-
-    mask-image: radial-gradient(circle at var(--mouse-x) var(--mouse-y),
-            white 0,
-            rgba(255, 255, 255, 0.8) 30px,
-            transparent 50px);
-    --space: calc(var(--position) * 2);
-    background-size: var(--space) var(--space);
-    background-repeat: space;
-
-
+    background: radial-gradient(
+      250px circle at var(--mouse-x) var(--mouse-y),
+      #c7c7c738,
+      transparent 30%
+    );
     border-radius: inherit;
     content: "";
     height: 100%;
-    left: 0;
+    left: 0px;
     position: absolute;
-    top: 0;
+    top: 0px;
     width: 100%;
     opacity: 0;
     transition: opacity 300ms ease;
     z-index: 20;
-}
+  }
 
 .tariff:hover::before {
     opacity: 1;

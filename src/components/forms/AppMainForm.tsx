@@ -62,7 +62,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
 
     const methods = useForm({ mode: "onTouched", shouldFocusError: false });
 
-    const { reset, formState: { submitCount }, watch } = methods;
+    const { reset, formState: { submitCount }, watch, clearErrors } = methods;
 
     const contactValue = watch("Contact") || "";
 
@@ -135,6 +135,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                                     setFailCheck(false)
 
                                 }
+                                setEmailError(false)
                             }}
                             className="w-full relative z-[1]">
                             <AppInput
@@ -149,7 +150,9 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                                 disable={!isPhone && !isEmail}
                             />
                         </div>
-                        <div id='bounce-checkbox' className="pl-[10px] flex items-center gap-[30px]">
+                        <div id='bounce-checkbox' className="pl-[10px] flex items-center gap-[30px]"
+                        onClick={() => {clearErrors('Contact')}}
+                        >
                             <AppCheckbox fail={failCheck} checked={isPhone} onChange={(value) => { setIsPhone(value); if (value) { setIsEmail(false) } }} label="Телефон" />
                             <AppCheckbox fail={failCheck} checked={isEmail} onChange={(value) => { setIsEmail(value); if (value) { setIsPhone(false) } }} label="Email" />
                         </div>
