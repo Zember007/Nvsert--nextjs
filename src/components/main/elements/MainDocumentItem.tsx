@@ -163,7 +163,7 @@ const MainDocumentItem = ({ img, settings, title, content, content1, price, dura
         <div className={`wrapper document-wrapper-border group/wrapper relative`}
 
         >
-            <div className={`absolute top-[-1px] bottom-[-1px] border-group transition-all duration-300 right-[20px] left-[20px] ${!active && ' group-hover/wrapper:!border-[transparent]'}`}
+            <div className={`absolute top-[-1px] bottom-[-1px] border-group transition-all duration-300 right-[16px] left-[16px] ${!active && ' group-hover/wrapper:!border-[transparent]'}`}
                 style={{
                     borderTopColor: (!bordert || active) ? 'transparent' : '#00000033',
                     borderBottomColor: (!borderb || active) ? 'transparent' : '#00000033'
@@ -188,7 +188,7 @@ const MainDocumentItem = ({ img, settings, title, content, content1, price, dura
 
 
                             }}
-                            className={`materialBtn text-left group active:shadow-[inset_2px_2px_2px_#071a2680,_inset_-2px_-2px_2px_#071a2680] ${!active ? 'hover:bg-[#FFF] active:bg-[#34446D]' : 'active:bg-[#FFF] bg-[#34446D] active:border-[#34446D]'}  px-[20px]  relative w-full transition-all duration-300 z-[0]`}>
+                            className={`materialBtn text-left group active:shadow-[inset_2px_2px_2px_#071a2680,_inset_-2px_-2px_2px_#071a2680] ${!active ? 'hover:bg-[#FFF] active:bg-[#34446D]' : 'active:bg-[#FFF] bg-[#34446D] active:border-[#34446D] active:border active:border-solid'}  px-[30px]  relative w-full transition-all duration-300 z-[0]`}>
                             <PhotoView src={img.src}>
                                 <div ref={photoRef}
                                     style={{
