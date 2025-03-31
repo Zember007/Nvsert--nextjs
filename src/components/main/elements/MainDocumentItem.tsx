@@ -51,7 +51,7 @@ const MainDocumentItem = ({ img, settings, title, content, content1, price, dura
     const { setButtonRef, setWrapperRef } = useButton()
 
     const photoRef = useRef<HTMLDivElement | null>(null);
-    const bounceEl = useRef<HTMLDivElement | null>(null);
+    const bounceEl = useRef<HTMLDivElement[]>([]);
     const containerPhotoRef = useRef<HTMLDivElement | null>(null);
     const LinkServiceRef = useRef<HTMLAnchorElement | null>(null);
 
@@ -60,6 +60,10 @@ const MainDocumentItem = ({ img, settings, title, content, content1, price, dura
     const [mouseX, setMouseX] = useState(0);
     const [mouseY, setMouseY] = useState(0);
     const [mouseLeaveDelay, setMouseLeaveDelay] = useState<NodeJS.Timeout | null>(null);
+
+    const setBounceEl = (el: HTMLDivElement) => {
+        bounceEl.current.push(el)
+    }
 
     useEffect(() => {
         const container = containerPhotoRef.current
@@ -131,15 +135,16 @@ const MainDocumentItem = ({ img, settings, title, content, content1, price, dura
 
 
         setTimeout(() => {
-            if (!bounceEl.current) return
-
-            BounceEffect(bounceEl.current, {
-                startPosition: "0",
-                endPosition: `-${settings.length}px`,
-                duration: settings.duration,
-                easing: "ease-in",
-                direction: 'vertical'
-            });
+            if (!bounceEl.current.length) return
+            bounceEl.current.forEach((el) => {
+                BounceEffect(el, {
+                    startPosition: "0",
+                    endPosition: `-${settings.length}px`,
+                    duration: settings.duration,
+                    easing: "ease-in",
+                    direction: 'vertical'
+                });
+            })
         }, settings.timeout)
 
     }, [active])
@@ -176,7 +181,7 @@ const MainDocumentItem = ({ img, settings, title, content, content1, price, dura
 
 
                             }}
-                            className={`materialBtn text-left group active:shadow-[inset_2px_2px_2px_#071a2680,_inset_-2px_-2px_2px_#071a2680] ${!active ? 'hover:bg-[#FFF] active:bg-[#34446D]' : 'active:bg-[#FFF] bg-[#34446D]'}  px-[20px]  relative w-full transition-all duration-300 z-[0]`}>
+                            className={`materialBtn text-left group active:shadow-[inset_2px_2px_2px_#071a2680,_inset_-2px_-2px_2px_#071a2680] ${!active ? 'hover:bg-[#FFF] active:bg-[#34446D]' : 'active:bg-[#FFF] bg-[#34446D] active:border-[#34446D]'}  px-[20px]  relative w-full transition-all duration-300 z-[0]`}>
                             <PhotoView src={img.src}>
                                 <div ref={photoRef}
                                     style={{
@@ -184,6 +189,7 @@ const MainDocumentItem = ({ img, settings, title, content, content1, price, dura
                                     }}
                                     className={`${!active && 'pointer-events-none'}  card-wrap transition-all duration-200 absolute z-[100] top-1/2 left-[30px]`}>
                                     <div
+                                        ref={setBounceEl}
                                         onMouseMove={handleMouseMove}
                                         onMouseEnter={handleMouseEnter}
                                         onMouseLeave={handleMouseLeave}
@@ -246,7 +252,7 @@ const MainDocumentItem = ({ img, settings, title, content, content1, price, dura
 
                         <div className={`transition-all easy-in duration-200 overflow-hidden max-h-0  ${active && '!max-h-[1400px] '}`}
                         >
-                            <div ref={bounceEl} className="s:py-[23px] py-[15px]  flex flex-col l:flex-row gap-[10px] ">
+                            <div className="s:py-[23px] py-[15px]  flex flex-col l:flex-row gap-[10px] ">
                                 <div className="w-[60%] s:gap-0 gap-[20px] flex flex-col m:flex-row m:items-stretch">
                                     <div className='m:m-0 m-auto pointer-events-none'>
                                         <div
@@ -268,17 +274,18 @@ const MainDocumentItem = ({ img, settings, title, content, content1, price, dura
                                                     {content.text1 && filterPrepositions(content.text1)}
                                                 </p>
                                             </div>
+                                            <div ref={setBounceEl} className="w-full">
+                                                <div className="tariff-wrap w-[250px] " ref={setWrapperRef}>
+                                                    <button ref={setButtonRef} className='tariff justify-center text-[20px] group hover:bg-[#34446D] hover:text-[#FFF] font-bold tracking-normal m:flex items-center gap-[10px] hidden px-[16px] py-[9px] text-[#34446D] rounded-[4px] border-[#34446D] border border-solid leading-[1]'>
+                                                        <span>Перейти в услугу</span>
+                                                        <svg className=' group-hover:*:fill-[#FFF] *:transition-all *:duration-300' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M17.2857 8.875V1H9.25C8.5396 1 7.85829 1.27656 7.35596 1.76884C6.85363 2.26113 6.57143 2.92881 6.57143 3.625V16.75H16.3929C17.1033 16.75 17.7846 17.0266 18.2869 17.5188C18.7892 18.0111 19.0714 18.6788 19.0714 19.375C19.0714 20.0712 18.7892 20.7389 18.2869 21.2312C17.7846 21.7234 17.1033 22 16.3929 22H6.57143V26.375C6.57143 27.0712 6.85363 27.7389 7.35596 28.2312C7.85829 28.7234 8.5396 29 9.25 29H25.3214C26.0318 29 26.7131 28.7234 27.2155 28.2312C27.7178 27.7389 28 27.0712 28 26.375V11.5H19.9643C19.2539 11.5 18.5726 11.2234 18.0702 10.7312C17.5679 10.2389 17.2857 9.57119 17.2857 8.875ZM10.1429 14.125C10.1429 13.8929 10.2369 13.6704 10.4044 13.5063C10.5718 13.3422 10.7989 13.25 11.0357 13.25H23.5357C23.7725 13.25 23.9996 13.3422 24.1671 13.5063C24.3345 13.6704 24.4286 13.8929 24.4286 14.125C24.4286 14.3571 24.3345 14.5796 24.1671 14.7437C23.9996 14.9078 23.7725 15 23.5357 15H11.0357C10.7989 15 10.5718 14.9078 10.4044 14.7437C10.2369 14.5796 10.1429 14.3571 10.1429 14.125ZM10.1429 24.625C10.1429 24.3929 10.2369 24.1704 10.4044 24.0063C10.5718 23.8422 10.7989 23.75 11.0357 23.75H23.5357C23.7725 23.75 23.9996 23.8422 24.1671 24.0063C24.3345 24.1704 24.4286 24.3929 24.4286 24.625C24.4286 24.8571 24.3345 25.0796 24.1671 25.2437C23.9996 25.4078 23.7725 25.5 23.5357 25.5H11.0357C10.7989 25.5 10.5718 25.4078 10.4044 25.2437C10.2369 25.0796 10.1429 24.8571 10.1429 24.625ZM19.0714 8.875V1.4375L27.5536 9.75H19.9643C19.7275 9.75 19.5004 9.65781 19.3329 9.49372C19.1655 9.32962 19.0714 9.10706 19.0714 8.875ZM3.89286 18.5C3.65606 18.5 3.42896 18.5922 3.26151 18.7563C3.09407 18.9204 3 19.1429 3 19.375C3 19.6071 3.09407 19.8296 3.26151 19.9937C3.42896 20.1578 3.65606 20.25 3.89286 20.25H16.3929C16.6297 20.25 16.8568 20.1578 17.0242 19.9937C17.1916 19.8296 17.2857 19.6071 17.2857 19.375C17.2857 19.1429 17.1916 18.9204 17.0242 18.7563C16.8568 18.5922 16.6297 18.5 16.3929 18.5H3.89286Z" fill="#34446D" />
+                                                        </svg>
 
-                                            <div className="tariff-wrap w-[250px] " ref={setWrapperRef}>
-                                                <button ref={setButtonRef} className='tariff justify-center text-[20px] group hover:bg-[#34446D] hover:text-[#FFF] font-bold tracking-normal m:flex items-center gap-[10px] hidden px-[16px] py-[9px] text-[#34446D] rounded-[4px] border-[#34446D] border border-solid leading-[1]'>
-                                                    <span>Перейти в услугу</span>
-                                                    <svg className=' group-hover:*:fill-[#FFF] *:transition-all *:duration-300' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M17.2857 8.875V1H9.25C8.5396 1 7.85829 1.27656 7.35596 1.76884C6.85363 2.26113 6.57143 2.92881 6.57143 3.625V16.75H16.3929C17.1033 16.75 17.7846 17.0266 18.2869 17.5188C18.7892 18.0111 19.0714 18.6788 19.0714 19.375C19.0714 20.0712 18.7892 20.7389 18.2869 21.2312C17.7846 21.7234 17.1033 22 16.3929 22H6.57143V26.375C6.57143 27.0712 6.85363 27.7389 7.35596 28.2312C7.85829 28.7234 8.5396 29 9.25 29H25.3214C26.0318 29 26.7131 28.7234 27.2155 28.2312C27.7178 27.7389 28 27.0712 28 26.375V11.5H19.9643C19.2539 11.5 18.5726 11.2234 18.0702 10.7312C17.5679 10.2389 17.2857 9.57119 17.2857 8.875ZM10.1429 14.125C10.1429 13.8929 10.2369 13.6704 10.4044 13.5063C10.5718 13.3422 10.7989 13.25 11.0357 13.25H23.5357C23.7725 13.25 23.9996 13.3422 24.1671 13.5063C24.3345 13.6704 24.4286 13.8929 24.4286 14.125C24.4286 14.3571 24.3345 14.5796 24.1671 14.7437C23.9996 14.9078 23.7725 15 23.5357 15H11.0357C10.7989 15 10.5718 14.9078 10.4044 14.7437C10.2369 14.5796 10.1429 14.3571 10.1429 14.125ZM10.1429 24.625C10.1429 24.3929 10.2369 24.1704 10.4044 24.0063C10.5718 23.8422 10.7989 23.75 11.0357 23.75H23.5357C23.7725 23.75 23.9996 23.8422 24.1671 24.0063C24.3345 24.1704 24.4286 24.3929 24.4286 24.625C24.4286 24.8571 24.3345 25.0796 24.1671 25.2437C23.9996 25.4078 23.7725 25.5 23.5357 25.5H11.0357C10.7989 25.5 10.5718 25.4078 10.4044 25.2437C10.2369 25.0796 10.1429 24.8571 10.1429 24.625ZM19.0714 8.875V1.4375L27.5536 9.75H19.9643C19.7275 9.75 19.5004 9.65781 19.3329 9.49372C19.1655 9.32962 19.0714 9.10706 19.0714 8.875ZM3.89286 18.5C3.65606 18.5 3.42896 18.5922 3.26151 18.7563C3.09407 18.9204 3 19.1429 3 19.375C3 19.6071 3.09407 19.8296 3.26151 19.9937C3.42896 20.1578 3.65606 20.25 3.89286 20.25H16.3929C16.6297 20.25 16.8568 20.1578 17.0242 19.9937C17.1916 19.8296 17.2857 19.6071 17.2857 19.375C17.2857 19.1429 17.1916 18.9204 17.0242 18.7563C16.8568 18.5922 16.6297 18.5 16.3929 18.5H3.89286Z" fill="#34446D" />
-                                                    </svg>
 
 
-
-                                                </button>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -315,16 +322,18 @@ const MainDocumentItem = ({ img, settings, title, content, content1, price, dura
                                             ))
                                         }
                                     </div>
+                                    <div ref={setBounceEl} className="w-full">
+                                        <div className="tariff-wrap w-[250px]" ref={setWrapperRef}>
+                                            <button ref={setButtonRef} className='justify-center border-[#34446D] border border-solid tariff text-[20px] transition-all duration-300 font-bold tracking-normal m:flex items-center gap-[6px] px-[16px] py-[9px] text-[#34446D] hover:text-[#FFF] rounded-[4px]  group hover:bg-[#34446D]  leading-[1]'>
+                                                <span>Оформить заявку</span>
+                                                <svg className='group-hover:*:fill-[#FFF] *:transition-all *:duration-300' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M29.0627 0.9375L0.930664 12.1875L11.426 16.9336L26.2502 3.75L13.0666 18.5742L17.8127 29.0625L29.0627 0.9375Z" fill="#34446D" />
+                                                </svg>
 
-                                    <div className="tariff-wrap w-[250px]" ref={setWrapperRef}>
-                                        <button ref={setButtonRef} className='justify-center border-[#34446D] border border-solid tariff text-[20px] transition-all duration-300 font-bold tracking-normal m:flex items-center gap-[6px] px-[16px] py-[9px] text-[#34446D] hover:text-[#FFF] rounded-[4px]  group hover:bg-[#34446D]  leading-[1]'>
-                                            <span>Оформить заявку</span>
-                                            <svg className='group-hover:*:fill-[#FFF] *:transition-all *:duration-300' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M29.0627 0.9375L0.930664 12.1875L11.426 16.9336L26.2502 3.75L13.0666 18.5742L17.8127 29.0625L29.0627 0.9375Z" fill="#34446D" />
-                                            </svg>
-
-                                        </button>
+                                            </button>
+                                        </div>
                                     </div>
+
 
 
                                 </div>

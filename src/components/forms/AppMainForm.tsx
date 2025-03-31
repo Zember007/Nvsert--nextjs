@@ -24,17 +24,11 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
 
     const onSubmit = async (e: any) => {
 
-        console.log(e);
-
 
         const formData = new FormData();
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        if (!emailRegex.test(e.Contact) && isEmail) {
-            setEmailError(true)
-            return;
-        } else {
-            setEmailError(false)
-        }
+
+        validContact(e.Contact);
+
         for (const key in e) {
             if (e.hasOwnProperty(key)) {
                 formData.append(key, e[key]);
@@ -54,8 +48,23 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
         }
     };
 
+    const validContact = (value: string) => {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const phoneRegex = /^(?:\+7|8)?[\s(-]*\d[\s(-]*\d{2}[\s)-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}$/;
+
+        if ((!emailRegex.test(value) && isEmail) || (!phoneRegex.test(value) && isPhone)) {
+            setEmailError(true)
+            return;
+        } else {
+            setEmailError(false)
+        }
+    }
+
     const methods = useForm({ mode: "onTouched", shouldFocusError: false });
-    const { reset, formState: { submitCount } } = methods;
+
+    const { reset, formState: { submitCount }, watch } = methods;
+
+    const contactValue = watch("Contact") || "";
 
     const bounceCheckbox = () => {
         const myElement = document.getElementById('bounce-checkbox')
@@ -66,7 +75,8 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                     endPosition: `${5}px`,
                     duration: 500,
                     easing: "ease",
-                    direction: 'vertical'
+                    direction: 'vertical',
+                    distanceCoficent: -1
                 });
                 console.log('bounce-checkbox');
 
@@ -81,11 +91,20 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
         if (!isEmail && !isPhone) {
             bounceCheckbox()
             setFailCheck(true)
+            
         } else {
             setFailCheck(false)
+            validContact(contactValue)
+
 
         }
     }, [submitCount])
+
+    useEffect(() => {
+        if(emailError && contactValue.length > 0){
+            setEmailError(false)
+        }
+    },[contactValue])
 
     const [isPhone, setIsPhone] = useState(false);
     const [isEmail, setIsEmail] = useState(false);

@@ -4,6 +4,7 @@ interface BounceOptions {
     duration?: number;
     easing?: string;
     direction?: 'vertical' | 'horizontal';
+    distanceCoficent?: number;
 }
 
 export function BounceEffect(
@@ -13,7 +14,8 @@ export function BounceEffect(
         endPosition = "72px",
         duration = 500,
         easing = "ease-out",
-        direction = 'horizontal'
+        direction = 'horizontal',
+        distanceCoficent = 0.5
     }: BounceOptions = {}
 ): void {
     // Останавливаем текущую анимацию и сбрасываем состояние
@@ -36,10 +38,10 @@ export function BounceEffect(
                 transform: translate${direction === "vertical" ? "Y" : "X"}(${endPosition});
             }
             50% { 
-                transform: translate${direction === "vertical" ? "Y" : "X"}(-${endPosition});
+                transform: translate${direction === "vertical" ? "Y" : "X"}(${distance * distanceCoficent}px);
             }
             70% { 
-                transform: translate${direction === "vertical" ? "Y" : "X"}(${endPosition});
+                transform: translate${direction === "vertical" ? "Y" : "X"}(${distance * -distanceCoficent}px);
             }
             100% { 
                 transform: translate${direction === "vertical" ? "Y" : "X"}(0);
