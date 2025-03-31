@@ -7,7 +7,6 @@ import { PhotoView } from 'react-photo-view';
 import { useDropEffect } from '@/hook/useDrop';
 import { useButton } from '@/hook/useButton';
 import { BounceEffect } from '@/hook/useBounce';
-import { v4 as uuidv4 } from 'uuid';
 
 interface content {
     text: string,
