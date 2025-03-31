@@ -55,7 +55,33 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
     };
 
     const methods = useForm({ mode: "onTouched", shouldFocusError: false });
-    const { reset } = methods;
+    const { reset, formState: { submitCount } } = methods;
+
+
+    useEffect(() => {
+        if (!submitCount) return;
+
+        if (!isEmail && !isPhone) {
+            const myElement = document.getElementById('bounce-checkbox')
+            if (myElement) {
+                setTimeout(() => {
+                    BounceEffect(myElement, {
+                        startPosition: "0",
+                        endPosition: `${5}px`,
+                        duration: 400,
+                        easing: "ease",
+                    });
+                    console.log('bounce-checkbox');
+
+                }, 30)
+
+            }
+            setFailCheck(true)
+        } else {
+            setFailCheck(false)
+
+        }
+    }, [submitCount])
 
     const [isPhone, setIsPhone] = useState(false);
     const [isEmail, setIsEmail] = useState(false);
@@ -84,9 +110,10 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                                     if (myElement) {
                                         BounceEffect(myElement, {
                                             startPosition: "0",
-                                            endPosition: `${5}px`,
+                                            endPosition: `-${5}px`,
                                             duration: 200,
                                             easing: "ease-in",
+                                            direction: "vertical"
                                         });
 
                                     }
@@ -128,24 +155,6 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                             className=" group tariff s:mt-[1px] mt-[15px] bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[10px] justify-center p-[9px] rounded-[4px]"
                             style={{
                                 verticalAlign: 'middle'
-                            }}
-                            onClick={() => {
-                                if (!isEmail && !isPhone) {
-                                    const myElement = document.getElementById('bounce-checkbox')
-                                    if (myElement) {
-                                        BounceEffect(myElement, {
-                                            startPosition: "0",
-                                            endPosition: `${5}px`,
-                                            duration: 200,
-                                            easing: "ease-in",
-                                        });
-
-                                    }
-                                    setFailCheck(true)
-                                } else {
-                                    setFailCheck(false)
-
-                                }
                             }}
                         >
                             {btnText}
