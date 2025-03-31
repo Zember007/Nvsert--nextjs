@@ -97,7 +97,7 @@ const MainDocumentItem = ({ img, settings, title, content, content1, price, dura
     const mousePY = mouseY / dimensions.height;
 
     const cardStyle = {
-        transform: `rotateY(${mousePX * 30}deg) rotateX(${mousePY * -30}deg) scale(1.1)`,
+        transform: `rotateY(${mousePX * 30}deg) rotateX(${mousePY * -30}deg)`,
         perspective: '1200px',
         transition: 'all 0.3s ease-out'
     };
@@ -232,15 +232,15 @@ const MainDocumentItem = ({ img, settings, title, content, content1, price, dura
 
                                     <p
 
-                                        className="leading-[11px] w-[60%] pl-[63px]  text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">
+                                        className="translate-y-[-1px] leading-[11px] w-[60%] pl-[63px]  text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">
 
 
                                         {title}
 
                                     </p>
                                     <div className="w-[40%] grid grid-cols-[1fr_1fr_auto] items-center justify-between">
-                                        <p className="text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{duration}</p>
-                                        <p className="text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{price}</p>
+                                        <p className="translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{duration}</p>
+                                        <p className="translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{price}</p>
                                         <button>
                                             <svg
                                                 className={`${!active && 'rotate-[180deg]'} ${active ? 'group-active:*:stroke-[#000]' : 'group-active:*:stroke-[#FFF]'} transition-all duration-700`}
