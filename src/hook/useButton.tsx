@@ -33,14 +33,31 @@ export const useButton = () => {
         const rect = button.getBoundingClientRect();
         const mouseX = e.clientX - rect.left;
         const mouseY = e.clientY - rect.top;
-        // const rotateX = (mouseY / rect.height) * 15 - 7;
-        const rotateY = (mouseX / rect.width) * -15 + 7;
 
-        // button.style.setProperty('--x', `${-rotateX}deg`);
-        button.style.setProperty('--y', `${-rotateY}deg`);
-        
+
+
         button.style.setProperty("--mouse-x", `${mouseX}px`);
         button.style.setProperty("--mouse-y", `${mouseY}px`);
+
+        // Вычисляем центр элемента
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        // Вектор от центра к мыши
+        const dx = mouseX - centerX;
+        const dy = mouseY - centerY;
+
+        // Вычисляем угол в градусах
+        const angleRad = Math.atan2(dy, dx);
+        const angleDeg = angleRad * (180 / Math.PI);
+
+        // Устанавливаем угол градиента
+        button.style.setProperty('--gradient-angle', `${angleDeg}deg`);
+
+        // const rotateX = (mouseY / rect.height) * 15 - 7;
+        const rotateY = (mouseX / rect.width) * -15 + 7;
+        // button.style.setProperty('--x', `${-rotateX}deg`);
+        button.style.setProperty('--y', `${-rotateY}deg`);
       };
 
       const handleMouseLeave = () => resetTransform(button);

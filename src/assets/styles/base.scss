@@ -92,35 +92,28 @@
 
 .tariff::before {
 
+
     // background: radial-gradient(
-    //     circle at center,
-    //     #FFFFFF 0%,          /* Белые точки в центре */
-    //     rgba(255, 255, 255, 0.7) 30%, /* Уменьшение плотности */
-    //     rgba(255, 255, 255, 0.3) 60%, /* Ещё большее рассеивание */
-    //     transparent 80%      /* Полная прозрачность у краёв */
+    //     circle at 50% 50%,
+    //     #FFFFFF 1px,         
+    //     transparent 0px     
     // );
-    // background-size: 4px 4px;
-    // /* Размер каждой ячейки сетки */
-    // background-repeat: space;
+    --position: 2px;
+    background: radial-gradient(circle at var(--position) var(--position),
+            white calc(var(--position) / 2.5),
+            transparent 0) padding-box;
+    --space: calc(var(--position) * 2);
+    background-size: var(--space) var(--space);
+    background-repeat: space;
 
-    // background: url(../images/svg/functional/bg-dots.) ;
-    // background-size: cover;
-    // background-repeat: no-repeat;
-
-    background: radial-gradient(
-        circle at 50% 50%,
-        #FFFFFF 1px,          /* Точки */
-        transparent 0px     /* Прозрачность между точками */
-    );
-    background-size: 4px 4px;    /* Размер ячеек точек */
-    background-repeat: space;    /* Равномерное распределение */
-    
-    mask-image: radial-gradient(
-        circle at center,
-        white 0%,            /* Полная видимость в центре */
-        rgba(255, 255, 255, 0.5) 30%, /* Начало рассеивания */
-        transparent 80%      /* Полная прозрачность у краёв */
-    );
+    mask-image: radial-gradient(circle at center,
+            white 0%,
+            /* Полная видимость в центре */
+            rgba(255, 255, 255, 0.8) 30%,
+            /* Начало рассеивания */
+            transparent 80%
+            /* Полная прозрачность у краёв */
+        );
 
     border-radius: inherit;
     content: "";
