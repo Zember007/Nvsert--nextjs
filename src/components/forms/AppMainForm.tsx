@@ -57,25 +57,29 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
     const methods = useForm({ mode: "onTouched", shouldFocusError: false });
     const { reset, formState: { submitCount } } = methods;
 
+    const bounceCheckbox = () => {
+        const myElement = document.getElementById('bounce-checkbox')
+        if (myElement) {
+            setTimeout(() => {
+                BounceEffect(myElement, {
+                    startPosition: "-30px",
+                    endPosition: `${5}px`,
+                    duration: 500,
+                    easing: "ease",
+                    direction: 'vertical'
+                });
+                console.log('bounce-checkbox');
+
+            }, 30)
+
+        }
+    }
 
     useEffect(() => {
         if (!submitCount) return;
 
         if (!isEmail && !isPhone) {
-            const myElement = document.getElementById('bounce-checkbox')
-            if (myElement) {
-                setTimeout(() => {
-                    BounceEffect(myElement, {
-                        startPosition: "0",
-                        endPosition: `${5}px`,
-                        duration: 400,
-                        easing: "ease",
-                    });
-                    console.log('bounce-checkbox');
-
-                }, 30)
-
-            }
+            bounceCheckbox()
             setFailCheck(true)
         } else {
             setFailCheck(false)
@@ -106,24 +110,14 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                         <div
                             onClick={() => {
                                 if (!isEmail && !isPhone) {
-                                    const myElement = document.getElementById('bounce-checkbox')
-                                    if (myElement) {
-                                        BounceEffect(myElement, {
-                                            startPosition: "0",
-                                            endPosition: `-${5}px`,
-                                            duration: 200,
-                                            easing: "ease-in",
-                                            direction: "vertical"
-                                        });
-
-                                    }
+                                    bounceCheckbox()
                                     setFailCheck(true)
                                 } else {
                                     setFailCheck(false)
 
                                 }
                             }}
-                            className="w-full">
+                            className="w-full relative z-[1]">
                             <AppInput
                                 className="!bg-[#2a2a2a] focus:!bg-[#21262F]"
                                 title={isPhone ? 'Телефон' : isEmail ? 'Email' : ''}

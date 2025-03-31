@@ -36,13 +36,13 @@ export function BounceEffect(
                 transform: translate${direction === "vertical" ? "Y" : "X"}(${endPosition});
             }
             50% { 
-                transform: translate${direction === "vertical" ? "Y" : "X"}(${distance * 0.5}px);
+                transform: translate${direction === "vertical" ? "Y" : "X"}(-${endPosition});
             }
             70% { 
-                transform: translate${direction === "vertical" ? "Y" : "X"}(${distance * -0.5}px);
+                transform: translate${direction === "vertical" ? "Y" : "X"}(${endPosition});
             }
             100% { 
-                transform: translate${direction === "vertical" ? "Y" : "X"}(${startPosition});
+                transform: translate${direction === "vertical" ? "Y" : "X"}(0);
             }
         }
     `;
