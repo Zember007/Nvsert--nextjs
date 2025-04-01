@@ -132,29 +132,29 @@ const MainDocumentItem = ({ activePhoto, setPhoto, img, settings, title, content
 
 
 
-    useEffect(() => {
-        if (!active) return
+    // useEffect(() => {
+    //     if (!active) return
 
-        if (borderBounce.current) {
-            borderBounce.current.style.setProperty('--duration', `${settings.duration}ms`)
-            borderBounce.current.style.setProperty('--length', settings.length)
-            borderBounce.current.classList.remove('border-bounce')
-        }
-        setTimeout(() => {
-            if (!bounceEl.current.length || !borderBounce.current) return
-            borderBounce.current.classList.add('border-bounce')
-            bounceEl.current.forEach((el) => {
-                BounceEffect(el, {
-                    startPosition: "0",
-                    endPosition: `-${settings.length}px`,
-                    duration: settings.duration,
-                    easing: "ease-in",
-                    direction: 'vertical'
-                });
-            })
-        }, settings.timeout)
+    //     if (borderBounce.current) {
+    //         borderBounce.current.style.setProperty('--duration', `${settings.duration}ms`)
+    //         borderBounce.current.style.setProperty('--length', settings.length)
+    //         borderBounce.current.classList.remove('border-bounce')
+    //     }
+    //     setTimeout(() => {
+    //         if (!bounceEl.current.length || !borderBounce.current) return
+    //         borderBounce.current.classList.add('border-bounce')
+    //         bounceEl.current.forEach((el) => {
+    //             BounceEffect(el, {
+    //                 startPosition: "0",
+    //                 endPosition: `-${settings.length}px`,
+    //                 duration: settings.duration,
+    //                 easing: "ease-in",
+    //                 direction: 'vertical'
+    //             });
+    //         })
+    //     }, settings.timeout)
 
-    }, [active])
+    // }, [active])
 
 
 
