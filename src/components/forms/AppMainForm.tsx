@@ -27,7 +27,15 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
 
         const formData = new FormData();
 
-        validContact(e.Contact);
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const phoneRegex = /^(?:\+7|8)?[\s(-]*\d[\s(-]*\d{2}[\s)-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}$/;
+
+        if ((!emailRegex.test(e.Contact) && isEmail) || (!phoneRegex.test(e.Contact) && isPhone)) {
+            setEmailError(true)
+            return;
+        } else {
+            setEmailError(false)
+        }
 
         for (const key in e) {
             if (e.hasOwnProperty(key)) {
