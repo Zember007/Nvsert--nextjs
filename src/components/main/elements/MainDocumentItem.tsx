@@ -27,11 +27,13 @@ interface props {
     content: content,
     content1: content1[],
     active: boolean,
+    activePhoto: boolean,
     setActive: (value: boolean) => void,
     setHover: (value: boolean) => void,
     bordert: boolean,
     borderb: boolean,
     settings: any;
+    setPhoto: () => void
 
 }
 
@@ -42,7 +44,7 @@ interface pulse {
     left: string;
 }
 
-const MainDocumentItem = ({ img, settings, title, content, content1, price, duration, active, setActive, borderb, bordert, setHover }: props) => {
+const MainDocumentItem = ({activePhoto, setPhoto, img, settings, title, content, content1, price, duration, active, setActive, borderb, bordert, setHover }: props) => {
 
     const [listHidden, setListHidden] = useState(true);
 
@@ -175,8 +177,8 @@ const MainDocumentItem = ({ img, settings, title, content, content1, price, dura
                 ref={borderBounce}
                 onMouseEnter={() => { setHover(true) }}
                 onMouseLeave={() => { setHover(false) }}
-                className={`mx-[-30px] overflow-hidden transition-all duration-300 group cursor-pointer  hover:bg-[#FFF] rounded-[4px] relative`}>
-                <div className={`transition-all duration-300 pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[10] rounded-[4px] ${!active ? 'group-hover:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[transparent]`}></div>
+                className={`mx-[-30px] overflow-hidden transition-all duration-300 group/main cursor-pointer  hover:bg-[#FFF] rounded-[4px] relative`}>
+                <div className={`transition-all duration-300 pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[10] rounded-[4px] ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[transparent]`}></div>
                 <div className="  flex flex-col">
                     <div className="relative ">
 
@@ -188,13 +190,15 @@ const MainDocumentItem = ({ img, settings, title, content, content1, price, dura
 
 
                             }}
-                            className={`materialBtn text-left group active:shadow-[inset_2px_2px_2px_#071a2680,_inset_-2px_-2px_2px_#071a2680] ${!active ? 'hover:bg-[#FFF] active:bg-[#34446D]' : 'active:bg-[#FFF] bg-[#34446D] active:border-[#34446D] active:border active:border-solid'}  px-[30px]  relative w-full transition-all duration-300 z-[0]`}>
-                            <PhotoView src={img.src}>
+                            className={`materialBtn text-left group/window active:shadow-[inset_2px_2px_2px_#071a2680,_inset_-2px_-2px_2px_#071a2680] ${!active ? 'hover:bg-[#FFF] active:bg-[#34446D]' : 'active:bg-[#FFF] bg-[#34446D] active:border-[#34446D] active:border active:border-solid'}  px-[30px]  relative w-full transition-all duration-300 z-[0]`}>
+                            <PhotoView src={img.src}                        
+                            >
                                 <div ref={photoRef}
+                                onClick={() => setPhoto()}
                                     style={{
                                         transform: `perspective(800px) translateY(${active ? '60px' : '-50%'})`,
                                     }}
-                                    className={`${!active && 'pointer-events-none'}  card-wrap transition-all duration-200 absolute z-[100] top-1/2 left-[30px]`}>
+                                    className={`${!active && 'pointer-events-none'} ${activePhoto && '!opacity-0'} card-wrap transition-all duration-200 absolute z-[100] top-1/2 left-[30px]`}>
                                     <div
                                         ref={setBounceEl}
                                         onMouseMove={handleMouseMove}
@@ -211,7 +215,7 @@ const MainDocumentItem = ({ img, settings, title, content, content1, price, dura
                                             style={{
                                                 width: (photoWidth || 190) + 'px'
                                             }}
-                                            className={`card transition-all duration-200 ${!active && ' !w-[43px] group-active:scale-[0.98]'} h-auto`} />
+                                            className={`card transition-all duration-200 ${!active && ' !w-[43px] group-active/window:scale-[0.98]'} h-auto`} />
                                     </div>
 
 
@@ -221,11 +225,11 @@ const MainDocumentItem = ({ img, settings, title, content, content1, price, dura
                             </PhotoView>
                             <div
 
-                                className="w-full  relative z-[2] group-active:scale-[.98] transition-all duration-300">
+                                className="w-full  relative z-[2] group-active/window:scale-[.98] transition-all duration-300">
 
                                 <div
 
-                                    className={` gap-[10px]  flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] group-active:text-[#000]' : 'group-active:text-[#FFF]'}  text-[#000] transition-all duration-300 relative ${!active && ' hover:text-[#34446D]'}`}
+                                    className={` gap-[10px]  flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] group-active/window:text-[#000]' : 'group-active/window:text-[#FFF]'}  text-[#000] transition-all duration-300 relative ${!active && ' hover:text-[#34446D]'}`}
 
                                 >
 
@@ -242,7 +246,7 @@ const MainDocumentItem = ({ img, settings, title, content, content1, price, dura
                                         <p className="translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{price}</p>
                                         <button>
                                             <svg
-                                                className={`${!active && 'rotate-[180deg]'} ${active ? 'group-active:*:stroke-[#000]' : 'group-active:*:stroke-[#FFF]'} transition-all duration-700`}
+                                                className={`${!active && 'rotate-[180deg]'} ${active ? 'group-active/window:*:stroke-[#000]' : 'group-active/window:*:stroke-[#FFF]'} transition-all duration-700`}
                                                 width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M19 19L5 5" stroke={`${active ? 'white' : 'black'}`} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                 <path d="M5 13L5 5L13 5" stroke={`${active ? 'white' : 'black'}`} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

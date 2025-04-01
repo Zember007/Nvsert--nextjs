@@ -124,11 +124,9 @@
 
 
 .tariff::before {
-    background: radial-gradient(
-      250px circle at var(--mouse-x) var(--mouse-y),
-      #c7c7c738,
-      transparent 30%
-    );
+    background: radial-gradient(250px circle at var(--mouse-x) var(--mouse-y),
+            #c7c7c738,
+            transparent 30%);
     border-radius: inherit;
     content: "";
     height: 100%;
@@ -139,7 +137,7 @@
     opacity: 0;
     transition: opacity 300ms ease;
     z-index: 20;
-  }
+}
 
 .tariff:hover::before {
     opacity: 1;
@@ -179,4 +177,28 @@
 
 body::-webkit-scrollbar {
     display: none;
+}
+
+.PhotoView__PhotoWrap.animate {
+    animation: bounce-photowrap 200ms ease-in forwards;
+}
+
+@keyframes bounce-photowrap {
+    
+        0% { 
+            top: (0);
+        }
+        30% { 
+            top: 40px;
+        }
+        50% { 
+            top: 20px;
+        }
+        70% { 
+            top: -20px;
+        }
+        100% { 
+            top: 0;
+        }
+    
 }
