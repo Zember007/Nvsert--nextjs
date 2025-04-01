@@ -8,7 +8,40 @@ import { filterPrepositions } from '@/hook/filter';
 import gsap from 'gsap';
 import { BounceEffect } from '@/hook/useBounce';
 
-const Slider = () => {
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+
+const settings = {
+    dots: false,
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: false,
+    autoplaySpeed: 4000,
+    cssEase: "cubic-bezier(0.7, 0, 0.3, 1)"
+};
+
+const images = [
+    {
+        src: "https://images.unsplash.com/photo-1467093378883-9684de425866?dpr=1&auto=compress,format&crop=entropy&fit=crop&w=700&h=500&q=80",
+        title: "Far far away",
+        text: "Behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean."
+    },
+    {
+        src: "https://images.unsplash.com/photo-1467093378883-9684de425866?dpr=1&auto=compress,format&crop=entropy&fit=crop&w=700&h=500&q=80",
+        title: "A small river",
+        text: "Named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth."
+    },
+    {
+        src: "https://images.unsplash.com/photo-1467092650124-c9c93cc63877?dpr=1&auto=compress,format&crop=entropy&fit=crop&w=700&h=500&q=80",
+        title: "Even the all-powerful",
+        text: "Pointing has no control about the blind texts it is an almost unorthographic life. One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar."
+    }
+];
+
+const SliderMain = () => {
 
 
     const [active, setActive] = useState<number>(0)
@@ -16,32 +49,32 @@ const Slider = () => {
     const [changeBg, setChangeBg] = useState(false)
     const direction = ((oldActive < active || (oldActive + 1 === slides.length && active === 0)) && !(oldActive === 0 && active + 1 === slides.length)) ? -1 : 1;
 
-    useEffect(() => {
-        initSlider(70, (index: number) => {
+    // useEffect(() => {
+    //     initSlider(70, (index: number) => {
 
-            setTimeout(() => {
-                setChangeBg(false)
-            }, 100)
+    //         setTimeout(() => {
+    //             setChangeBg(false)
+    //         }, 100)
 
-            const myElement = document.getElementById("title-block") as HTMLElement;
-            if (myElement) {
+    //         const myElement = document.getElementById("title-block") as HTMLElement;
+    //         if (myElement) {
 
 
-                setActive(prev => {
-                    let direct = ((prev < index || (prev + 1 === slides.length && index === 0)) && !(prev === 0 && index + 1 === slides.length)) ? -1 : 1;
+    //             setActive(prev => {
+    //                 let direct = ((prev < index || (prev + 1 === slides.length && index === 0)) && !(prev === 0 && index + 1 === slides.length)) ? -1 : 1;
 
-                    BounceEffect(myElement, {
-                        startPosition: "0",
-                        endPosition: `${5 * direct}px`,
-                        duration: 200,
-                        easing: "ease-in",
-                    });
+    //                 BounceEffect(myElement, {
+    //                     startPosition: "0",
+    //                     endPosition: `${5 * direct}px`,
+    //                     duration: 200,
+    //                     easing: "ease-in",
+    //                 });
 
-                    return index
-                })
-            }
-        })
-    }, [])
+    //                 return index
+    //             })
+    //         }
+    //     })
+    // }, [])
 
     useEffect(() => {
         if (oldActive !== active) {
@@ -78,7 +111,7 @@ const Slider = () => {
                     <div className="overlay l:w-[590px] w-full py-[30px] relative z-[0]  rounded-[8px] border border-solid border-[#34446D] overflow-hidden">
                         <div className={`absolute top-0 bottom-0 right-0 left-0 blurred-element z-[10]   ${!changeBg && 'opacity-0 invisible transition-all duration-300'}`}></div>
                         <div className={`overlay-slider absolute  top-0 right-0 left-0 bottom-0 z-[-2]  ${!changeBg && '!bg-[#F5F5F5] transition-all duration-1000'}`}></div>
-                        <div className="absolute  top-0 right-0 left-0 bottom-0 bg-[#F5F5F580] z-[-1] backdrop-blur-[10px] ">
+                        {/* <div className="absolute  top-0 right-0 left-0 bottom-0 bg-[#F5F5F580] z-[-1] backdrop-blur-[10px] ">
                         </div>
                         <div className="flex flex-col justify-between h-full l:items-start items-center w-full">
                             <div className="flex flex-col grow l:gap-[15px] gap-[30px] w-full">
@@ -139,7 +172,33 @@ const Slider = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
+                        {[...Array(5)].map((_, i) => (
+                            <div
+                                style={{
+                                    zIndex: i
+                                }}
+                                key={i} className={`absolute wrapper-slide top-0  w-1/5 h-full pointer-events-none z-`}>
+
+                                <Slider {
+                                    ...{
+                                        ...settings,
+                                        autoplaySpeed: 1000 / i
+                                    }
+                                }
+                                    className="w-[500%] slider">
+                                    {images.map((image, index) => (
+                                        <div key={index} className="relative">
+                                            <img src={image.src} alt={image.title} className="w-full h-auto rounded-lg shadow-lg" />
+                                            <div className="absolute top-5 left-5 bg-black bg-opacity-50 p-4 rounded-lg text-white">
+                                                <h2 className="text-2xl font-bold">{image.title}</h2>
+                                                <p className="text-sm mt-2">{image.text}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </Slider>
+                            </div>
+                        ))}
                     </div>
                     <div
 
@@ -180,4 +239,7 @@ const Slider = () => {
     );
 };
 
-export default Slider;
+export default SliderMain;
+
+
+

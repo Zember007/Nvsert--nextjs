@@ -132,29 +132,29 @@ const MainDocumentItem = ({ activePhoto, setPhoto, img, settings, title, content
 
 
 
-    // useEffect(() => {
-    //     if (!active) return
+    useEffect(() => {
+        if (!active) return
 
-    //     if (borderBounce.current) {
-    //         borderBounce.current.style.setProperty('--duration', `${settings.duration}ms`)
-    //         borderBounce.current.style.setProperty('--length', settings.length)
-    //         borderBounce.current.classList.remove('border-bounce')
-    //     }
-    //     setTimeout(() => {
-    //         if (!bounceEl.current.length || !borderBounce.current) return
-    //         borderBounce.current.classList.add('border-bounce')
-    //         bounceEl.current.forEach((el) => {
-    //             BounceEffect(el, {
-    //                 startPosition: "0",
-    //                 endPosition: `-${settings.length}px`,
-    //                 duration: settings.duration,
-    //                 easing: "ease-in",
-    //                 direction: 'vertical'
-    //             });
-    //         })
-    //     }, settings.timeout)
+        if (borderBounce.current) {
+            borderBounce.current.style.setProperty('--duration', `${settings.duration}ms`)
+            borderBounce.current.style.setProperty('--length', settings.length)
+            borderBounce.current.classList.remove('border-bounce')
+        }
+        setTimeout(() => {
+            if (!bounceEl.current.length || !borderBounce.current) return
+            borderBounce.current.classList.add('border-bounce')
+            bounceEl.current.forEach((el) => {
+                BounceEffect(el, {
+                    startPosition: "0",
+                    endPosition: `-${settings.length}px`,
+                    duration: settings.duration,
+                    easing: "ease-in",
+                    direction: 'vertical'
+                });
+            })
+        }, settings.timeout)
 
-    // }, [active])
+    }, [active])
 
 
 
@@ -191,20 +191,14 @@ const MainDocumentItem = ({ activePhoto, setPhoto, img, settings, title, content
 
                             }}
                             className={`materialBtn text-left group/window active:shadow-[inset_2px_2px_2px_#071a2680,_inset_-2px_-2px_2px_#071a2680] ${!active ? 'hover:bg-[#FFF]  active:bg-[#FFF]' : ' bg-[#34446D] active:bg-[#34446D] '}   px-[30px]  relative w-full transition-all duration-300 z-[0]`}>
-                            <PhotoView src={img.src}
-                            >
-                                <div ref={photoRef}
-                                    onClick={() => setPhoto()}
-                                    style={{
-                                        transform: `perspective(800px) translateY(${active ? '60px' : '-50%'})`,
-                                    }}
-                                    className={`${!active && 'pointer-events-none'} ${activePhoto && '!opacity-0'} card-wrap transition-all duration-200 absolute z-[100] top-1/2 left-[30px]`}>
+
+
+                            <div
+
+                                className="w-full  relative z-[2]  transition-all duration-300">
+
+                                <div className={`pointer-events-none ${active && 'opacity-0'} transition-all duration-200 absolute top-1/2 translate-y-[-50%] left-0`}>
                                     <div
-                                        ref={setBounceEl}
-                                        onMouseMove={handleMouseMove}
-                                        onMouseEnter={handleMouseEnter}
-                                        onMouseLeave={handleMouseLeave}
-                                        style={active && (mouseX || mouseY) ? cardStyle : {}}
                                         className="!shadow-none card border-[0.2px] solid border-[#A4A4A4] overflow-hidden rounded-[5px] transition-all duration-300">
                                         <Image
 
@@ -212,23 +206,13 @@ const MainDocumentItem = ({ activePhoto, setPhoto, img, settings, title, content
                                             width="0"
                                             height="0"
                                             sizes="100vw"
-                                            style={{
-                                                width: (photoWidth || 190) + 'px'
-                                            }}
-                                            className={`card transition-all duration-200 ${!active && ' !w-[43px] '} h-auto`} />
+                                            className={` transition-all duration-200 h-auto !w-[43px]`} />
                                     </div>
 
-
-
-
                                 </div>
-                            </PhotoView>
-                            <div
-                        
-                                className="w-full  relative z-[2]  transition-all duration-300">
 
                                 <div
-                                
+
                                     className={` gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] group-active/window:text-[#FFF]' : 'group-active/window:text-[#000]'}  text-[#000] transition-all duration-300 relative ${!active && ' hover:text-[#34446D]'}`}
 
                                 >
@@ -263,16 +247,35 @@ const MainDocumentItem = ({ activePhoto, setPhoto, img, settings, title, content
 
                         <div className={`transition-all easy-in duration-200 overflow-hidden max-h-0  ${active && '!max-h-[1400px] '}`}
                         >
-                            <div className="s:py-[23px] py-[15px]  flex flex-col l:flex-row gap-[10px] ">
+                            <div className="s:p-[23px] p-[15px]  flex flex-col l:flex-row gap-[10px] ">
                                 <div className="w-[60%] s:gap-0 gap-[20px] flex flex-col m:flex-row m:items-stretch">
-                                    <div className='m:m-0 m-auto pointer-events-none'>
-                                        <div
-                                            className=' pointer-events-none'
-                                            style={{
-                                                width: (photoWidth || 190) + 'px',
-                                                height: ((photoWidth || 190) / img.width * img.height) + 'px'
-                                            }}
-                                        ></div>
+                                    <div className='m:m-0 m-auto'>
+                                        <PhotoView src={img.src}
+                                        >
+                                            <div ref={photoRef}
+                                                onClick={() => setPhoto()}
+                                                className={`${!active && 'pointer-events-none'} card-wrap transition-all duration-200`}>
+                                                <div
+                                                    ref={setBounceEl}
+                                                    onMouseMove={handleMouseMove}
+                                                    onMouseEnter={handleMouseEnter}
+                                                    onMouseLeave={handleMouseLeave}
+                                                    style={active && (mouseX || mouseY) ? cardStyle : {}}
+                                                    className="!shadow-none card border-[0.2px] solid border-[#A4A4A4] overflow-hidden rounded-[5px] transition-all duration-300">
+                                                    <Image
+
+                                                        alt='document' src={img}
+                                                        width="0"
+                                                        height="0"
+                                                        sizes="100vw"
+                                                        style={{
+                                                            width: (photoWidth || 190) + 'px'
+                                                        }}
+                                                        className={`card transition-all duration-200 h-auto`} />
+                                                </div>
+
+                                            </div>
+                                        </PhotoView>
                                     </div>
 
                                     <div ref={containerPhotoRef} className="grow flex justify-center">
