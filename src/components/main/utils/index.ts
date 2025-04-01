@@ -1,7 +1,7 @@
 import ImgSlider from '@/assets/images/slider/1.png'
 
-import FolderImg from '@/assets/images/folder.webp'
-import Folder1Img from '@/assets/images/floder1.webp'
+import FolderImg from '@/assets/images/folder.png'
+import Folder1Img from '@/assets/images/floder1.png'
 
 import Image01 from '@/assets/images/main-gallery/01.webp';
 import Image02 from '@/assets/images/main-gallery/02.webp';

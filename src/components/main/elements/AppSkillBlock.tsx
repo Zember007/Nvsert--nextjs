@@ -87,7 +87,6 @@ const AppSkillBlock = (skill: any) => {
           skill.folder ?
             <>
               <Image alt="folder" className='transition-all duration-300' src={skill.img} height={280} style={mousePX ? textStyle : {}} />
-              <div className="absolute rounded-[10px] top-0 left-0 right-0 transition-all duration-300 bottom-0 bg-[#34446D] mix-blend-hue"></div>
               <div
                 style={{
                   borderColor: `#CCCCCC`,

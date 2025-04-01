@@ -16,10 +16,6 @@ gsap.registerPlugin(Draggable);
 
 const AppMainSkills = () => {
 
-   
-
-
-
     const [isVisible, setIsVisible] = useState(false);
     const divRef = useRef(null);
 
