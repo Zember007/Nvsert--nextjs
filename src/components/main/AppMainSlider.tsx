@@ -183,7 +183,7 @@ const SliderMain = () => {
                                 <Slider {
                                     ...{
                                         ...settings,
-                                        autoplaySpeed: 1000 / i
+                                        autoplaySpeed: 1000 
                                     }
                                 }
                                     className="w-[500%] slider">
