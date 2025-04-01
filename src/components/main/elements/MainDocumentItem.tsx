@@ -183,23 +183,23 @@ const MainDocumentItem = ({ activePhoto, setPhoto, img, settings, title, content
                     <div className="relative ">
 
                         <div
-                            onMouseDown={(event: any) => {
+                            onClick={(event: any) => {
                                 if (photoRef.current?.contains(event.target as Node)) return;
                                 if (LinkServiceRef.current?.contains(event.target as Node) && active) return;
                                 setActive(!active);
 
 
                             }}
-                            className={`materialBtn text-left group/window active:shadow-[inset_2px_2px_2px_#071a2680,_inset_-2px_-2px_2px_#071a2680] ${!active ? 'hover:bg-[#FFF]  active:bg-[#FFF]' : ' bg-[#34446D] active:bg-[#34446D] '}   px-[30px]  relative w-full transition-all duration-300 z-[0]`}>
+                            className={`materialBtn text-left group/window active:shadow-[inset_2px_2px_2px_#071a2680,_inset_-2px_-2px_2px_#071a2680] ${!active ? 'hover:bg-[#FFF]  active:bg-[#FFF]' : ' bg-[#34446D] active:bg-[#5B6788] '}   px-[30px]  relative w-full transition-all duration-300 z-[0]`}>
 
 
                             <div
 
-                                className="w-full  relative z-[2]  transition-all duration-300">
+                                className="w-full  relative z-[2]  transition-all duration-300 group-active/window:scale-[0.98] transition-all duration-300 will-change-transform">
 
                                 <div className={`pointer-events-none ${active && 'opacity-0'} transition-all duration-200 absolute top-1/2 translate-y-[-50%] left-0`}>
                                     <div
-                                        className="!shadow-none card border-[0.2px] solid border-[#A4A4A4] overflow-hidden rounded-[5px] transition-all duration-300">
+                                        className="!shadow-none card border-[0.2px] solid border-[#A4A4A4] group-active/window:opacity-0 overflow-hidden rounded-[5px] transition-all duration-300">
                                         <Image
 
                                             alt='document' src={img}
@@ -213,21 +213,21 @@ const MainDocumentItem = ({ activePhoto, setPhoto, img, settings, title, content
 
                                 <div
 
-                                    className={` gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] group-active/window:text-[#FFF]' : 'group-active/window:text-[#000]'}  text-[#000] transition-all duration-300 relative ${!active && ' hover:text-[#34446D]'}`}
+                                    className={` gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] ' : ''}  text-[#000] transition-all duration-300 relative ${!active && ' hover:text-[#34446D]'}`}
 
                                 >
 
                                     <p
 
-                                        className="translate-y-[-1px] leading-[11px] w-[60%] pl-[63px] group-active/window:scale-[0.98] transition-all duration-300 will-change-transform text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">
+                                        className="translate-y-[-1px] leading-[11px] w-[60%] pl-[63px]  text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">
 
 
                                         {title}
 
                                     </p>
                                     <div className="w-[40%] grid grid-cols-[1fr_1fr_auto] items-center justify-between">
-                                        <p className="translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px] group-active/window:scale-[0.98] transition-all duration-300 will-change-transform font-bold tracking-normal">{duration}</p>
-                                        <p className="translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px] group-active/window:scale-[0.98] transition-all duration-300 will-change-transform font-bold tracking-normal">{price}</p>
+                                        <p className="translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{duration}</p>
+                                        <p className="translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{price}</p>
                                         <button>
                                             <svg
                                                 className={`${!active && 'rotate-[180deg]'} ${active ? 'group-active/window:*:stroke-[#FFF]' : 'group-active/window:*:stroke-[#000]'} transition-all duration-700`}
