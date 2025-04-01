@@ -117,19 +117,35 @@ const AppMainDocuments = () => {
                                             setActivePhoto(null)
                                             document.querySelector('.PhotoView-Slider__toolbarIcon')?.removeEventListener('click', () => { })
                                         })
-                                        
+
                                     }, 100)
 
                                     setTimeout(() => {
                                         setFunctionPhoto('cubic-bezier(0.25, 0.8, 0.25, 1)')
-                                    },1000)
+                                    }, 1000)
                                 }}
 
                                 activePhoto={activePhoto === index}
                                 settings={settings}
                                 bordert={(index - 1 !== hoverIndex && index - 1 !== activeIndex)}
                                 borderb={index + 1 !== hoverIndex && activeIndex !== index + 1}
-                                setHover={(value) => { setHover(value ? index : null) }} setActive={(value) => setActive(value ? index : null)} active={index === activeIndex} key={index} {...item} />
+                                setHover={(value) => { setHover(value ? index : null) }} setActive={(value) => {
+
+                                    if (value && activeIndex && activeIndex !== index && activeIndex < index) {
+                                        const rect = document.querySelectorAll('.document-item')[index].getBoundingClientRect();
+                                        const scrollY = window.scrollY;
+
+                                        console.log(scrollY , rect.height);
+                                        
+
+                                        window.scrollTo({
+                                            top: scrollY - rect.height,
+                                            behavior: 'instant',
+                                        });
+                                    }
+                                    setActive(value ? index : null)
+
+                                }} active={index === activeIndex} key={index} {...item} />
 
                         )
                     }
