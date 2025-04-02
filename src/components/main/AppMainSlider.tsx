@@ -37,7 +37,7 @@ const SliderMain = () => {
                 setChangeBg(false)
             }, 100)
             setActive(index)
-          
+
         })
     }, [])
 
@@ -47,13 +47,14 @@ const SliderMain = () => {
 
     const sliderRef = useRef<Slider[]>([])
 
-    const setSliderRef = (el:Slider) => {        
+    const setSliderRef = (el: Slider | null) => {
+        if (!el) return
         sliderRef.current.push(el)
     }
 
     useEffect(() => {
-        sliderRef.current.forEach((slider) => slider?.slickGoTo(active));
-    },[active])
+        sliderRef.current.forEach((slider) => slider.slickGoTo(active));
+    }, [active])
 
 
     return (
@@ -66,8 +67,8 @@ const SliderMain = () => {
                         <div className={`overlay-slider absolute  top-0 right-0 left-0 bottom-0 z-[-2]  ${!changeBg && '!bg-[#F5F5F5] transition-all duration-1000'}`}></div>
                         <div className="absolute  top-0 right-0 left-0 bottom-0 bg-[#F5F5F580] z-[-1] backdrop-blur-[10px] ">
                         </div>
-                        <div className="flex flex-col justify-between h-full l:items-start items-center w-full">
-                            <div className=" grow relative w-full">
+                        <div className="flex flex-col justify-between h-full l:items-start items-center w-full px-[30px]">
+                            <div className=" grow relative w-full overflow-hidden">
 
                                 {[...Array(5)].map((_, i) => (
                                     <div
@@ -77,22 +78,22 @@ const SliderMain = () => {
                                         key={i} className={`absolute wrapper-slide wrapper-slide${i} top-0  w-1/5 h-full pointer-events-none z-`}>
 
                                         <Slider
-                                        ref={setSliderRef}
-                                        {
+                                            ref={setSliderRef}
+                                            {
                                             ...{
                                                 ...settings,
                                                 autoplaySpeed: 1000,
-                                                speed: 2000 - i * 200
+                                                speed: 1500 - i * 100
                                             }
-                                        }
+                                            }
                                             className="w-[500%] slider">
                                             {slides.map((slide, index) => (
                                                 <div key={index} >
-                                                    <div className="flex flex-col l:gap-[15px] gap-[30px] w-full">
-                                                        <div className="flex items-center gap-[10px] mr-[30px] relative z-[10]">
+                                                    <div className="flex flex-col l:gap-[15px] gap-[30px]  w-full">
+                                                        <div className="flex items-center gap-[10px]  relative z-[10]">
 
 
-                                                            <div className="h-[50px] p-[10px] pl-[30px]  rounded-r-[4px] bg-[#34446D] w-full border-[#34446D] border-solid border border-l-0">
+                                                            <div className="h-[50px] p-[10px] text-center  rounded-[4px] bg-[#34446D] w-full border-[#34446D] border-solid border">
                                                                 <span id='title-block' className='text-[24px] font-bold text-[#FFF] block'>
                                                                     {
                                                                         filterPrepositions(slide.title)
@@ -100,7 +101,7 @@ const SliderMain = () => {
                                                                 </span>
                                                             </div>
                                                         </div>
-                                                        <div className={`l:grow slide-text relative w-full h-full px-[30px] ${changeBg && 'transition-all duration-500'}`}>
+                                                        <div className={`l:grow slide-text relative w-full h-full  ${changeBg && 'transition-all duration-500'}`}>
 
                                                             <p className="text-[16px] bg-[#F5F5F5]">
                                                                 {filterPrepositions(slide.text)}
@@ -115,14 +116,14 @@ const SliderMain = () => {
                                     </div>
                                 ))}
                             </div>
-                            <div className="flex justify-between items-end w-full px-[30px] relative z-[10]">
+                            <div className="flex justify-between items-end w-full relative z-[10]">
                                 <div className="flex gap-[10px]">
 
                                     <button
                                         onClick={() => {
                                             setOldActive(active)
                                             setChangeBg(true)
-                                            sliderRef.current.forEach((slider) => slider?.slickPrev());
+                                            sliderRef.current.forEach((slider) => slider.slickPrev());
                                         }}
                                         aria-label="previous slide" data-slider="button-next" className="w-[100px] h-[50px] rounded-[4px] bg-[#0000001A] border-[#34446D] border border-solid flex items-center justify-center">
                                         <Image src={ArrowImg} alt='next' width={45} height={34} />
@@ -131,7 +132,7 @@ const SliderMain = () => {
                                         onClick={() => {
                                             setOldActive(active)
                                             setChangeBg(true)
-                                            sliderRef.current.forEach((slider) => slider?.slickNext());
+                                            sliderRef.current.forEach((slider) => slider.slickNext());
                                         }}
                                         aria-label="previous slide" data-slider="button-prev" className="w-[100px] h-[50px] rounded-[4px] bg-[#0000001A] border-[#34446D] border border-solid flex items-center justify-center">
                                         <Image src={ArrowImg} alt='prev' width={45} height={34} className='rotate-[180deg]' />
@@ -154,6 +155,32 @@ const SliderMain = () => {
                     <div
 
                         className="slide-main l:inset-[0%] l:h-full h-[300px] l:bottom-0 bottom-[80px] l:z-0 z-[]">
+                        <div className="slide-blur">
+                            <span></span>
+                            {/* <svg width="80" height="387" viewBox="0 0 80 387" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="28.2419" height="387" fill="url(#paint0_linear_1966_742)" fill-opacity="0.6" style={{mixBlendMode:'overlay'}} />
+                                <rect width="28.2419" height="387" transform="translate(25.8799)" fill="url(#paint1_linear_1966_742)" fill-opacity="0.6" style={{mixBlendMode:'overlay'}} />
+                                <rect width="28.2419" height="387" transform="translate(51.7583)" fill="url(#paint2_linear_1966_742)" fill-opacity="0.6" style={{mixBlendMode:'overlay'}} />
+                                <defs>
+                                    <linearGradient id="paint0_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="white" />
+                                        <stop offset="0.833333" />
+                                        <stop offset="1" stop-color="white" />
+                                    </linearGradient>
+                                    <linearGradient id="paint1_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="white" />
+                                        <stop offset="0.833333" />
+                                        <stop offset="1" stop-color="white" />
+                                    </linearGradient>
+                                    <linearGradient id="paint2_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="white" />
+                                        <stop offset="0.833333" />
+                                        <stop offset="1" stop-color="white" />
+                                    </linearGradient>
+                                </defs>
+                            </svg> */}
+
+                        </div>
                         <div className="slider-wrap">
                             <div data-slider="list" className="slider-list"
                                 onMouseMove={() => {
