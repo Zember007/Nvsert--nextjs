@@ -302,7 +302,8 @@
 }
 
 .wrapper-slide {
-  &:nth-child(1) {
+  overflow: hidden;
+  &.wrapper-slide4 {
     
     pointer-events: all;
     width: 100%;  
@@ -312,7 +313,7 @@
     }
   }
 
-  &:nth-child(2) {
+  &.wrapper-slide3 {
     left: 20%;
 
     .slider {
@@ -320,7 +321,7 @@
     }
   }
 
-  &:nth-child(3) {
+  &.wrapper-slide2 {
     left: 40%;
 
     .slider {
@@ -328,7 +329,7 @@
     }
   }
 
-  &:nth-child(4) {
+  &.wrapper-slide1 {
     left: 60%;
 
     .slider {
@@ -337,7 +338,7 @@
     }
   }
 
-  &:nth-child(5) {
+  &.wrapper-slide0 {
     left: 80%;
 
     .slider {

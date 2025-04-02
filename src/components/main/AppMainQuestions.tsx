@@ -76,7 +76,7 @@ const AppMainQuestions = () => {
 
   return (
     <section className="py-[75px]">
-      <div className="wrapper flex flex-col gap-[20px]">
+      <div className="wrapper flex flex-col gap-[40px]">
         <h2 className="leading-[1] tracking-[-0.04em] text-center l:text-left text-[24px] xs:text-[40px] l:text-[56px]">
           Гарантии и безупречный сервис
         </h2>

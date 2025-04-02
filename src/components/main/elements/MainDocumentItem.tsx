@@ -91,9 +91,6 @@ const MainDocumentItem = ({ activePhoto, setPhoto, img, settings, title, content
         }
     }, [photoRef.current, photoWidth]);
 
-
-
-
     const mousePX = mouseX / dimensions.width;
     const mousePY = mouseY / dimensions.height;
 
@@ -128,10 +125,6 @@ const MainDocumentItem = ({ activePhoto, setPhoto, img, settings, title, content
         }, 1000));
     };
 
-
-
-
-
     useEffect(() => {
         if (!active) return
 
@@ -155,9 +148,6 @@ const MainDocumentItem = ({ activePhoto, setPhoto, img, settings, title, content
         }, settings.timeout)
 
     }, [active])
-
-
-
 
 
 
@@ -188,9 +178,10 @@ const MainDocumentItem = ({ activePhoto, setPhoto, img, settings, title, content
                                 if (LinkServiceRef.current?.contains(event.target as Node) && active) return;
                                 setActive(!active);
 
-
+  
+                                
                             }}
-                            className={`materialBtn text-left group/window active:shadow-[inset_2px_2px_2px_#071a2680,_inset_-2px_-2px_2px_#071a2680] ${!active ? 'hover:bg-[#FFF]  active:bg-[#FFF]' : ' bg-[#34446D] active:bg-[#5B6788] '}   px-[30px]  relative w-full transition-all duration-300 z-[0]`}>
+                            className={`materialBtn text-left group/window active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] ${!active ? 'hover:bg-[#FFF]' : ' bg-[#34446D]  '} active:bg-[#5B6788]  px-[30px]  relative w-full transition-all duration-300 z-[0]`}>
 
 
                             <div
@@ -213,7 +204,7 @@ const MainDocumentItem = ({ activePhoto, setPhoto, img, settings, title, content
 
                                 <div
 
-                                    className={` gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] ' : ''}  text-[#000] transition-all duration-300 relative ${!active && ' hover:text-[#34446D]'}`}
+                                    className={` gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] ' : ''} group-active/window:text-[#FFF]  text-[#000] transition-all duration-300 relative ${!active && ' hover:text-[#34446D]'}`}
 
                                 >
 
@@ -230,7 +221,7 @@ const MainDocumentItem = ({ activePhoto, setPhoto, img, settings, title, content
                                         <p className="translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{price}</p>
                                         <button>
                                             <svg
-                                                className={`${!active && 'rotate-[180deg]'} ${active ? 'group-active/window:*:stroke-[#FFF]' : 'group-active/window:*:stroke-[#000]'} transition-all duration-700`}
+                                                className={`${!active && 'rotate-[180deg]'} group-active/window:*:stroke-[#FFF] ${active ? '' : 'group-active/window:*:stroke-[#000]'} transition-all duration-700`}
                                                 width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M19 19L5 5" stroke={`${active ? 'white' : 'black'}`} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                 <path d="M5 13L5 5L13 5" stroke={`${active ? 'white' : 'black'}`} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

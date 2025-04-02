@@ -87,7 +87,7 @@ const AppMainDocuments = () => {
     const [functionPhoto, setFunctionPhoto] = useState<string>('none')
 
     return (
-        <section className="py-[75px] flex flex-col gap-[50px]">
+        <section className="py-[75px] flex flex-col gap-[40px]">
             <div className="wrapper ">
 
                 <h2 className=" leading-[1] text-center l:text-left text-[24px] xs:text-[40px] l:text-[56px] text-[#000000] tracking-[-0.04em]">Мы оформляем следующие документы</h2>
@@ -129,9 +129,10 @@ const AppMainDocuments = () => {
                                 settings={settings}
                                 bordert={(index - 1 !== hoverIndex && index - 1 !== activeIndex)}
                                 borderb={index + 1 !== hoverIndex && activeIndex !== index + 1}
-                                setHover={(value) => { setHover(value ? index : null) }} setActive={(value) => {
-
-                                    if (value && activeIndex && activeIndex !== index && activeIndex < index) {
+                                setHover={(value) => { setHover(value ? index : null) }} 
+                                setActive={(value) => {                                    
+                                    
+                                    if (value && typeof activeIndex === 'number' && activeIndex !== index && activeIndex < index) {
                                         const rect = document.querySelectorAll('.document-item')[index].getBoundingClientRect();
                                         const scrollY = window.scrollY;
 

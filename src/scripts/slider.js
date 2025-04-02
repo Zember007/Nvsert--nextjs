@@ -5,7 +5,7 @@ import InertiaPlugin from "./InertiaPlugin";
 
 gsap.registerPlugin(Draggable, InertiaPlugin)
 
-export function initSlider(gap, onChangeFunction) {
+export function initSlider(onChangeFunction) {
 
     const wrapper = document.querySelector('[data-slider="list"]')
     const slides = gsap.utils.toArray('[data-slider="slide"]');
@@ -35,9 +35,9 @@ export function initSlider(gap, onChangeFunction) {
     const allSteps = stepsParent.querySelectorAll('[data-slide-count="step"]');
     const loop = horizontalLoop(slides, {
         paused: true,
-        draggable: true,
+        draggable: false,
         center: false,
-        gap: gap || 0,
+        gap:  0,
 
         onChange: (element, index) => {
 
@@ -82,8 +82,7 @@ export function horizontalLoop(items, config) {
                     }
                 }, paused: config.paused, defaults: { ease: "none" }, onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100)
             }),
-            length = items.length,
-            startX = items[0].offsetLeft + config.gap,
+            length = items.length,            
             times = [],
             widths = [],
             spaceBefore = [],
@@ -94,7 +93,8 @@ export function horizontalLoop(items, config) {
             pixelsPerSecond = (config.speed || 1) * 100,
             snap = config.snap === false ? v => v : gsap.utils.snap(config.snap || 1), // some browsers shift by a pixel to accommodate flex layouts, so for example if width is 20% the first element's width might be 242px, and the next 243px, alternating back and forth. So we snap to 5 percentage points to make things look more natural
             timeOffset = 0,
-            container = center === true ? items[0].parentNode : gsap.utils.toArray(center)[0] || items[0].parentNode,
+            container = center === true ? items[0].parentNode : gsap.utils.toArray(center)[0] || items[0].parentNode,        
+            startX = items[0].offsetLeft,
             totalWidth,
             getTotalWidth = () => items[length - 1].offsetLeft + xPercents[length - 1] / 100 * widths[length - 1] - startX + spaceBefore[0] + items[length - 1].offsetWidth * gsap.getProperty(items[length - 1], "scaleX") + (parseFloat(config.paddingRight) || 0),
             populateWidths = () => {
@@ -159,7 +159,6 @@ export function horizontalLoop(items, config) {
             },
             onResize = () => refresh(true),
             proxy;
-        gsap.set(items, { x: startX - 50 });
         populateWidths();
         populateTimeline();
         populateOffsets();

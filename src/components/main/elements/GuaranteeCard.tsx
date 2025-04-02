@@ -35,12 +35,6 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items }) => {
     transition: 'transform 0.3s ease-out'
   };
 
-  const textStyle = {
-    transform: `translate3d(${mousePX * 20 * 2}px, ${mousePY * 20 * 2}px, 0) scale(1.1)`,
-    transition: 'transform 0.3s ease-out',
-    willChange: 'transform'
-  };
-
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const card = cardRef.current;
@@ -68,7 +62,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items }) => {
 
 
   return (
-    <div className={`hover:z-[10000] relative card-wrap`}
+    <div className={`hover:z-[10000] relative card-wrap h-full`}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -79,7 +73,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items }) => {
             ...cardStyle
           }
         }
-        className="bg-[#F5F5F580] card border-[#34446D] border border-solid rounded-[8px] p-[30px] backdrop-blur-[4px] flex flex-col gap-[19px]">
+        className="bg-[#F5F5F580] card border-[#34446D] h-full border border-solid rounded-[8px] p-[30px] backdrop-blur-[4px] flex flex-col gap-[19px]">
         <p className="text-[24px] text-[#34446D] font-bold">{title}</p>
         <ul className="list-disc leading-[140%] space-y-[10px] pl-[18px] *:*:text-[16px]">
           {items.map((item, index) => (

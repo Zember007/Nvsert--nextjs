@@ -83,7 +83,7 @@ const AppMainSkills = () => {
     return (
         <section
             className="py-[75px] relative">
-            <div className="wrapper flex flex-col gap-[50px]">
+            <div className="wrapper flex flex-col gap-[40px]">
                 <h2 className="leading-[1] tracking-[-0.04em] text-center l:text-left text-[24px] xs:text-[40px] l:text-[56px]">Наши основные преимущества</h2>
                 <div className="flex flex-col">
                     <div ref={sliderRef} className="flex xl:grid grid-cols-4 l:gap-[20px]">
