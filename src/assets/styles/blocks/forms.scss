@@ -4,6 +4,10 @@ select {
   font-family: $font-family;
 }
 
+input:auto-fill {
+    -webkit-text-fill-color: inherit;
+}
+
 .field {
   display: flex;
   flex-direction: column-reverse;
@@ -38,7 +42,7 @@ select {
     caret-color: #fff;
 
     &.error {
-      color: #FF3030 !important;
+      color: #FF3030;
     }
 
     @media (max-width: $media-s) {

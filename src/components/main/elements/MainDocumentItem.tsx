@@ -183,7 +183,7 @@ const MainDocumentItem = ({ activePhoto, setPhoto, img, settings, title, content
                             }}
                             className={`materialBtn text-left group/window active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] ${!active ? 'hover:bg-[#FFF]' : ' bg-[#34446D]  '} active:bg-[#5B6788]  px-[30px]  relative w-full transition-all duration-300 z-[0]`}>
 
-                            <div className={`pointer-events-none ${active && 'opacity-0'} group-hover/window:opacity-0 transition-all duration-200 absolute top-1/2 translate-y-[-50%] left-[30px]`}>
+                            <div className={`pointer-events-none ${active && 'opacity-0'} group-hover/window:opacity-0 transition-all duration-100 absolute top-1/2 translate-y-[-50%] left-[30px]`}>
                                 <div
                                     className="!shadow-none card border-[0.2px] solid border-[#A4A4A4] overflow-hidden rounded-[5px] transition-all duration-300">
                                     <Image
