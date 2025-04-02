@@ -1,7 +1,7 @@
 .cloneable {
   padding: var(--container-padding);
-  justify-content: center;
-  align-items: center;
+  justify-content: end;
+  align-items: end;
   display: flex;
   position: relative;
   font-size: 1.1vw;
@@ -100,7 +100,7 @@
 
 .slider-list {
   flex-flow: row;
-  gap: 80px;
+  gap: 100px;
   justify-content: flex-end;
   align-items: stretch;
   display: flex;
@@ -139,45 +139,47 @@
   bottom: 0;
   height: 80%;
 
+  background-blend-mode: overlay;
+
   // border: 1px solid rgba(255, 255, 255, 0.4);
   // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  width: 100px;
+  // width: 100px;
   z-index: 1;
   display: flex;
-  transform: translateX(5px) rotateY(20deg);
+  // transform: translateX(5px) rotateY(20deg);
 
 
-  &::before,
-  &::after,
-  span {
-    background: rgba(255, 255, 255, 0.1);
-display: block;
-    backdrop-filter: blur(5px);
+  //   &::before,
+  //   &::after,
+  //   span {
+  //     background: rgba(255, 255, 255, 0.1);
+  // display: block;
+  //     backdrop-filter: blur(5px);
 
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 0px 6px rgba(0, 0, 0, 0.2);
-    height: 100%;
-    width: 100%; 
-  }
-  &::before {
-    transform: translateX(16px) rotateY(40deg);
+  //     -webkit-backdrop-filter: blur(5px);
+  //     border: 1px solid rgba(255, 255, 255, 0.4);
+  //     box-shadow: 0 0px 6px rgba(0, 0, 0, 0.2);
+  //     height: 100%;
+  //     width: 100%; 
+  //   }
+  //   &::before {
+  //     transform: translateX(16px) rotateY(40deg);
 
-  }
+  //   }
 
-  span {
-    transform: translateX(8px) rotateY(40deg);
+  //   span {
+  //     transform: translateX(8px) rotateY(40deg);
 
-  }
+  //   }
 
-  &::after {
-    transform: translateX(0) rotateY(40deg);
-  }
+  //   &::after {
+  //     transform: translateX(0) rotateY(40deg);
+  //   }
 
-  &::before,
-  &::after {
-    content: '';
-  }
+  //   &::before,
+  //   &::after {
+  //     content: '';
+  //   }
 }
 
 .caption-dot {
@@ -190,7 +192,7 @@ display: block;
 
 
 .overlay-slider {
-  background: linear-gradient(270deg, rgba(245, 245, 245, 0) 0%, #F5F5F5 75%);
+  background: linear-gradient(270deg, rgba(245, 245, 245, 0) 0%, #F5F5F5 10%);
 }
 
 
