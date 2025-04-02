@@ -178,29 +178,30 @@ const MainDocumentItem = ({ activePhoto, setPhoto, img, settings, title, content
                                 if (LinkServiceRef.current?.contains(event.target as Node) && active) return;
                                 setActive(!active);
 
-  
-                                
+
+
                             }}
                             className={`materialBtn text-left group/window active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] ${!active ? 'hover:bg-[#FFF]' : ' bg-[#34446D]  '} active:bg-[#5B6788]  px-[30px]  relative w-full transition-all duration-300 z-[0]`}>
 
+                            <div className={`pointer-events-none ${active && 'opacity-0'} transition-all duration-200 absolute top-1/2 translate-y-[-50%] left-[30px]`}>
+                                <div
+                                    className="!shadow-none card border-[0.2px] solid border-[#A4A4A4] overflow-hidden rounded-[5px] transition-all duration-300">
+                                    <Image
+
+                                        alt='document' src={img}
+                                        width="0"
+                                        height="0"
+                                        sizes="100vw"
+                                        className={` transition-all duration-200 h-auto !w-[43px]`} />
+                                </div>
+
+                            </div>
 
                             <div
 
                                 className="w-full  relative z-[2]  transition-all duration-300 group-active/window:scale-[0.98] transition-all duration-300 will-change-transform">
 
-                                <div className={`pointer-events-none ${active && 'opacity-0'} transition-all duration-200 absolute top-1/2 translate-y-[-50%] left-0`}>
-                                    <div
-                                        className="!shadow-none card border-[0.2px] solid border-[#A4A4A4] group-active/window:opacity-0 overflow-hidden rounded-[5px] transition-all duration-300">
-                                        <Image
 
-                                            alt='document' src={img}
-                                            width="0"
-                                            height="0"
-                                            sizes="100vw"
-                                            className={` transition-all duration-200 h-auto !w-[43px]`} />
-                                    </div>
-
-                                </div>
 
                                 <div
 

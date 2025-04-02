@@ -6,13 +6,15 @@ interface CustomCheckboxProps {
     onChange: (checked: boolean) => void;
     label?: string;
     fail?: boolean;
+    successful?: boolean;
 }
 
 const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
     checked,
     onChange,
     label = 'Custom Checkbox',
-    fail
+    fail,
+    successful
 }) => {
     // Генерируем уникальный id один раз при создании компонента
     const uniqueId = React.useMemo(() => `custom-checkbox-${uuidv4()}`, []);
@@ -47,13 +49,13 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
                     peer-checked:before:shadow-[0px_0px_2.4px_0px_#000000CC]
                     group active:scale-[0.9] transition-all duration-300 active:!border-[#5F5F5F]
                     w-[20px] h-[20px] flex items-center justify-center border-[1.2px] border-[#5F5F5F] rounded-[1.8px]
-                  peer-checked:border-[#34C759]
+                  ${successful && 'peer-checked:border-[#34C759]'}
                   peer-checked:*:block
                   cursor-pointer ${fail && '!border-[#FF3030]'}`}
 
             >
                 <span className="hidden group-active:block">
-                    <svg className='group-active:*:fill-[#FFF] transition-all duration-300' width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg className={`group-active:*:fill-[#FFF] ${!successful && '*:fill-[#FFF]'} transition-all duration-300`} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M8.30294 11.2728L5.75736 8.72718L4.0603 10.4242L8.30294 14.6669L15.9397 7.03013L14.2426 5.33307L8.30294 11.2728Z" fill="#34C759" />
                     </svg>
                 </span>

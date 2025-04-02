@@ -62,9 +62,12 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
 
         if ((!emailRegex.test(value) && isEmail) || (!phoneRegex.test(value) && isPhone)) {
             setEmailError(true)
+            setEmailSuccessful(false)
+
             return;
         } else {
             setEmailError(false)
+            setEmailSuccessful(true)
         }
     }
 
@@ -85,7 +88,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                 direction: 'vertical',
                 distanceCoficent: -1
             });
-           
+
 
 
         }
@@ -115,6 +118,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
     const [isPhone, setIsPhone] = useState(false);
     const [isEmail, setIsEmail] = useState(false);
     const [emailError, setEmailError] = useState(false);
+    const [emailSuccessful, setEmailSuccessful] = useState(false);
     const [failCheck, setFailCheck] = useState(false);
 
     useEffect(() => {
@@ -154,13 +158,14 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                                 required={true}
                                 message={false}
                                 disable={!isPhone && !isEmail}
+                                onBlur={() => {validContact(contactValue)}}
                             />
                         </div>
                         <div id='bounce-checkbox' className="pl-[10px] flex items-center gap-[30px]"
                             onClick={() => { clearErrors('Contact') }}
                         >
-                            <AppCheckbox fail={failCheck} checked={isPhone} onChange={(value) => { setIsPhone(value); if (value) { setIsEmail(false); setFocus('Contact') } }} label="Телефон" />
-                            <AppCheckbox fail={failCheck} checked={isEmail} onChange={(value) => { setIsEmail(value); if (value) { setIsPhone(false); setFocus('Contact') } }} label="Email" />
+                            <AppCheckbox successful={emailSuccessful} fail={failCheck} checked={isPhone} onChange={(value) => { setIsPhone(value); if (value) { setIsEmail(false); setFocus('Contact'); setEmailSuccessful(false) } }} label="Телефон" />
+                            <AppCheckbox successful={emailSuccessful} fail={failCheck} checked={isEmail} onChange={(value) => { setIsEmail(value); if (value) { setIsPhone(false); setFocus('Contact'); setEmailSuccessful(false) } }} label="Email" />
                         </div>
                     </div>
 

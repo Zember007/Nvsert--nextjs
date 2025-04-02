@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from "react-hook-form";
 
-const AppInput = ({ title,disable,fail,message = true, inputName, type, required, autocomplete, mask, className, classNameTitle }: { disable?:boolean,fail?:boolean, message?:boolean, title: string, inputName: string, type?: string, required?: boolean, autocomplete?: string, mask?: string, className?: string, classNameTitle?: string }) => {
+const AppInput = ({ title,disable,fail,message = true, inputName, type, required, autocomplete, mask, className, classNameTitle, onBlur }: { onBlur?:() => void ,disable?:boolean,fail?:boolean, message?:boolean, title: string, inputName: string, type?: string, required?: boolean, autocomplete?: string, mask?: string, className?: string, classNameTitle?: string }) => {
     const { register, formState: { errors, isSubmitted, submitCount }, setValue, clearErrors } = useFormContext();
 
     const formatPhoneNumber = (e: React.FormEvent<HTMLInputElement>) => {
@@ -72,6 +72,7 @@ const AppInput = ({ title,disable,fail,message = true, inputName, type, required
                     autoComplete={autocomplete}
                     onInput={(e) => { changeInput(e) }}
                     onFocus={() => {clearErrors(inputName)}}
+                    onBlur={onBlur}
                 />
                 <span className={`field__title ${(errors[inputName] ) && '!text-[#FF3030]'} ${classNameTitle}`}>
                     {title}
