@@ -37,7 +37,7 @@ select {
     outline: none;
 
     &.error {
-      color: #FF3030;
+      color: #FF3030 !important;
     }
 
     @media (max-width: $media-s) {

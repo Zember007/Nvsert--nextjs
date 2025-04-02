@@ -52,8 +52,18 @@ const SliderMain = () => {
         sliderRef.current.push(el)
     }
 
+    const [timeSlick, setTimeSlick] = useState<NodeJS.Timeout | null>(null)
+
     useEffect(() => {
-        sliderRef.current.forEach((slider) => slider.slickGoTo(active));
+        if(timeSlick){
+            clearTimeout(timeSlick)
+        }
+        setTimeSlick(
+            setTimeout(() => {
+                sliderRef.current.forEach((slider) => slider.slickGoTo(active));
+                setTimeSlick(null)
+            }, 1000)
+        )
     }, [active])
 
 

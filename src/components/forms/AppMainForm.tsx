@@ -32,10 +32,14 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
 
         if ((!emailRegex.test(e.Contact) && isEmail) || (!phoneRegex.test(e.Contact) && isPhone)) {
             setEmailError(true)
+            setEmailSuccessful(false)
             return;
         } else {
             setEmailError(false)
         }
+
+        console.log(123123);
+        
 
         for (const key in e) {
             if (e.hasOwnProperty(key)) {
