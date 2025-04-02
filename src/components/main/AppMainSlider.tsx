@@ -102,7 +102,7 @@ const SliderMain = () => {
                                                         </div>
                                                         <div className={`l:grow slide-text relative w-full h-full px-[30px] ${changeBg && 'transition-all duration-500'}`}>
 
-                                                            <p className="text-[16px]">
+                                                            <p className="text-[16px] bg-[#F5F5F5]">
                                                                 {filterPrepositions(slide.text)}
                                                             </p>
 
