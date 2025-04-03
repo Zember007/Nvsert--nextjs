@@ -102,17 +102,16 @@
 
 .slider-list {
   flex-flow: row;
-  gap: 100px;
+  gap: 76px;
   justify-content: flex-end;
   align-items: stretch;
   display: flex;
   position: relative;
+  transform: translateX(740px);
 }
 
 .slider-slide {
   flex: none;
-  padding-left: 10px;
-  padding-right: 10px;
   transition: opacity .4s;
   position: relative;
 }

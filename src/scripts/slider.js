@@ -55,9 +55,9 @@ export function initSlider(onChangeFunction) {
     // Инициализируем горизонтальный цикл с дополнительным смещением
     const loop = horizontalLoop(slides, {
         paused: true,
-        draggable: true,
+        draggable: false,
         center: false,
-        offset: 80,  // Сдвиг всех слайдов
+        offset: 0,
         onChange: (element, index) => {
             // Удаляем активный класс с предыдущего элемента
             if (activeElement) {
@@ -143,12 +143,12 @@ export function horizontalLoop(items, config) {
     let timeline;
     items = gsap.utils.toArray(items);
     config = config || {};
-const offset = config.offset || 0;  
+    const offset = config.offset || 0;
     const cleanup = gsap.context(() => {
         let onChange = config.onChange,
             lastIndex = 0,
             tl = gsap.timeline({
-                repeat: config.repeat,
+                repeat: -1,
                 onUpdate: onChange && function () {
                     let i = tl.closestIndex();
                     if (lastIndex !== i) {
@@ -177,7 +177,7 @@ const offset = config.offset || 0;
 
 
         const getTotalWidth = () => {
-            const gap = 100; // Фиксированный отступ между последним и первым слайдом (можно настроить)
+            const gap = 76; // Фиксированный отступ между последним и первым слайдом (можно настроить)
             const baseWidth = items[length - 1].offsetLeft +
                 (xPercents[length - 1] / 100 * widths[length - 1]) -
                 startX +
@@ -200,7 +200,7 @@ const offset = config.offset || 0;
             //     xPercent: i => xPercents[i]
             // });
             gsap.set(items, {
-                xPercent: i => xPercents[i] + (offset) 
+                xPercent: i => xPercents[i] + (offset)
             });
             totalWidth = getTotalWidth();
         };
@@ -242,6 +242,8 @@ const offset = config.offset || 0;
                     index = i;
                 }
             }
+            console.log(index);
+            
             return index;
         };
 
@@ -305,7 +307,7 @@ const offset = config.offset || 0;
 
         tl.previous = function (vars) {
             // Обновляем индекс с использованием wrap
-            curIndex = gsap.utils.wrap(0, items.length, curIndex - 1); 
+            curIndex = gsap.utils.wrap(0, items.length, curIndex - 1);
             tl.toIndex(curIndex, vars);
         };
         tl.times = times;

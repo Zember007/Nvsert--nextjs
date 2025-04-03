@@ -34,19 +34,19 @@ const SliderMain = () => {
 
     useEffect(() => {
         if (sliders.length < 5) return
-        let timeoutId:NodeJS.Timeout | null = null;
+        let timeoutId: NodeJS.Timeout | null = null;
         initSlider((index: number) => {
 
             setTimeout(() => {
                 setChangeBg(false)
             }, 100)
 
-            if(timeoutId) {
+            if (timeoutId) {
                 clearTimeout(timeoutId)
             }
 
             timeoutId = setTimeout(() => {
-                sliders.forEach((slider) => {                    
+                sliders.forEach((slider) => {
                     slider.slickGoTo(index)
                 });
             }, 500)
@@ -272,7 +272,7 @@ const SliderMain = () => {
                                             <div className="slide-inner overflow-hidden relative bg-[#FFF] ">
                                                 <Image src={item.img} alt='slide' fill
                                                     style={{ objectFit: 'cover' }} />
-                                                <div className="absolute scale-[-0.9] w-full h-full bg-[#34446D] mix-blend-hue"></div>
+                                                <div className="absolute scale-[-0.9] w-full h-auto bg-[#34446D] mix-blend-hue"></div>
 
                                             </div>
                                         </div>
