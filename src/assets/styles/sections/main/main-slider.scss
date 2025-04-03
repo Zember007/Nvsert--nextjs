@@ -96,6 +96,8 @@
   width: 100%;
   height: 100%;
   display: flex;
+  position: relative;
+  background: #FFF;
 }
 
 .slider-list {
@@ -137,49 +139,16 @@
   right: 0;
   top: 0;
   bottom: 0;
-  height: 80%;
+  height: 120%;
 
-  background-blend-mode: overlay;
 
-  // border: 1px solid rgba(255, 255, 255, 0.4);
-  // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  // width: 100px;
   z-index: 1;
   display: flex;
-  // transform: translateX(5px) rotateY(20deg);
 
+  mix-blend-mode: overlay;
+  backdrop-filter: blur(2px);
 
-  //   &::before,
-  //   &::after,
-  //   span {
-  //     background: rgba(255, 255, 255, 0.1);
-  // display: block;
-  //     backdrop-filter: blur(5px);
-
-  //     -webkit-backdrop-filter: blur(5px);
-  //     border: 1px solid rgba(255, 255, 255, 0.4);
-  //     box-shadow: 0 0px 6px rgba(0, 0, 0, 0.2);
-  //     height: 100%;
-  //     width: 100%; 
-  //   }
-  //   &::before {
-  //     transform: translateX(16px) rotateY(40deg);
-
-  //   }
-
-  //   span {
-  //     transform: translateX(8px) rotateY(40deg);
-
-  //   }
-
-  //   &::after {
-  //     transform: translateX(0) rotateY(40deg);
-  //   }
-
-  //   &::before,
-  //   &::after {
-  //     content: '';
-  //   }
+ 
 }
 
 .caption-dot {
@@ -192,7 +161,7 @@
 
 
 .overlay-slider {
-  background: linear-gradient(270deg, rgba(245, 245, 245, 0) 0%, #F5F5F5 10%);
+  background: linear-gradient(270deg, rgba(245, 245, 245, 0) 0%, #F5F5F5 15%);
 }
 
 

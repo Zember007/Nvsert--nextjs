@@ -1,5 +1,5 @@
 import '@/assets/styles/sections/main/main-slider.scss'
-import { initSlider, activeIndex } from '@/scripts/slider'
+import { initSlider } from '@/scripts/slider'
 import { useEffect, useRef, useState } from 'react';
 import ArrowImg from '@/assets/images/svg/right-arrow-slider.svg'
 import Image from 'next/image';
@@ -45,27 +45,50 @@ const SliderMain = () => {
 
 
 
-    const sliderRef = useRef<Slider[]>([])
+    const [sliders, setSliders] = useState<Slider[]>([]);
 
-    const setSliderRef = (el: Slider | null) => {
-        if (!el) return
-        sliderRef.current.push(el)
-    }
+    // useEffect(() => {
+    //     setSliders(sliders.filter(slider => slider));
+    // }, [sliders]);
 
     const [timeSlick, setTimeSlick] = useState<NodeJS.Timeout | null>(null)
+    const [activeIndexes, setActiveIndexes] = useState(Array(5).fill(0));
+
+    const handleBeforeChange = (sliderIndex: number, newIndex: number) => {
+
+        setActiveIndexes(prevIndexes => {
+            const updatedIndexes = [...prevIndexes];
+            updatedIndexes[sliderIndex] = newIndex;
+            return updatedIndexes;
+        });
+
+        if (sliderIndex !== 0 && newIndex !== activeIndexes[0]) {
+            sliders[sliderIndex].slickGoTo(activeIndexes[0])
+        }
+    };
+
+    const { setButtonRef, setWrapperRef } = useButton()
+
+    const activeAll = [...activeIndexes, active].every(index => index === activeIndexes[0])
 
     useEffect(() => {
-        if (timeSlick) {
-            clearTimeout(timeSlick)
-        }
-        setTimeSlick(
-            setTimeout(() => {
-                sliderRef.current.forEach((slider) => slider.slickGoTo(active));
-                setTimeSlick(null)
-            }, 1000)
-        )
-    }, [active])
-    const { setButtonRef, setWrapperRef } = useButton()
+
+        if (activeAll) return
+
+        // if (timeSlick) {
+        //     clearTimeout(timeSlick)
+        // }
+
+        // setTimeSlick(
+        //     setTimeout(() => {
+
+        //     }, 3000)
+        // )
+
+        // sliders.forEach((slider) => slider.slickGoTo(active));
+        // setTimeSlick(null)
+
+    }, [activeAll])
 
     return (
         <section className='py-[75px] text-[#000] bg-[#FFF]'>
@@ -84,9 +107,37 @@ const SliderMain = () => {
                     </div>
 
                     <div className="overlay l:w-[640px] w-full p-[30px] pr-[80px] relative z-[0]  rounded-[8px] border border-solid border-[#34446D] overflow-hidden">
-                        <div className={`absolute top-0 bottom-0 right-0 left-0 blurred-element z-[10]   ${!changeBg && 'opacity-0 invisible transition-all duration-300'}`}></div>
                         <div className={`overlay-slider absolute  top-0 right-0 left-0 bottom-0 z-[-2]  ${!changeBg && '!bg-[#F5F5F5] transition-all duration-1000'}`}></div>
-                        <div className="absolute  top-0 right-0 left-0 bottom-0 bg-[#F5F5F580] z-[-1] backdrop-blur-[10px] ">
+                        {/* <div className="absolute  top-0 right-0 left-0 bottom-0 bg-[#F5F5F580] z-[-1] backdrop-blur-[10px] "> */}
+                        {/* </div> */}
+                        <div className="slide-blur">
+
+                            <svg width="80" height="387" viewBox="0 0 80 387" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)', opacity: '0.8' }}>
+                                <rect width="28.2419" height="387" fill="url(#paint0_linear_1966_742)" fill-opacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
+                                <rect width="28.2419" height="387" transform="translate(25.8799)" fill="url(#paint1_linear_1966_742)" fill-opacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
+                                <rect width="28.2419" height="387" transform="translate(51.7583)" fill="url(#paint2_linear_1966_742)" fill-opacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
+                                <defs>
+                                    <linearGradient id="paint0_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="white" />
+                                        <stop offset="0.9" />
+                                        <stop offset="1" stop-color="white" />
+                                    </linearGradient>
+                                    <linearGradient id="paint1_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="white" />
+                                        <stop offset="0.833333" />
+                                        <stop offset="1" stop-color="white" />
+                                    </linearGradient>
+                                    <linearGradient id="paint2_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="white" />
+                                        <stop offset="0.833333" />
+                                        <stop offset="1" stop-color="white" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+
+
+
+
                         </div>
                         <div className="flex flex-col justify-between h-full l:items-start items-center w-full">
                             <div className=" grow relative w-full overflow-hidden">
@@ -99,13 +150,19 @@ const SliderMain = () => {
                                         key={i} className={`absolute wrapper-slide wrapper-slide${i} top-0  w-1/5 h-full pointer-events-none z-`}>
 
                                         <Slider
-                                            ref={setSliderRef}
+                                            ref={el => {
+                                                if (el && !sliders.includes(el)) {
+                                                    setSliders(prev => [...prev, el]);
+                                                }
+                                            }}
                                             {
                                             ...{
                                                 ...settings,
-                                                autoplaySpeed: 1000,
-                                                speed: 1500 - i * 100
+                                                speed: 1000 - i * 100
                                             }
+                                            }
+                                            beforeChange={(_, newIndex) =>
+                                                handleBeforeChange(i, newIndex)
                                             }
                                             className="w-[500%] slider">
                                             {slides.map((slide, index) => (
@@ -145,8 +202,9 @@ const SliderMain = () => {
                                         onClick={() => {
                                             setOldActive(active)
                                             setChangeBg(true)
-                                            sliderRef.current.forEach((slider) => slider.slickPrev());
+                                            sliders.forEach((slider) => slider.slickPrev());
                                         }}
+                                        // disabled={!activeAll}
                                         aria-label="previous slide" data-slider="button-prev" className="w-[100px] h-[50px] rounded-[4px] bg-[#0000001A] border-[#34446D] border border-solid flex items-center justify-center">
                                         <Image src={ArrowImg} alt='next' width={45} height={34} />
 
@@ -156,8 +214,9 @@ const SliderMain = () => {
                                         onClick={() => {
                                             setOldActive(active)
                                             setChangeBg(true)
-                                            sliderRef.current.forEach((slider) => slider.slickNext());
+                                            sliders.forEach((slider) => slider.slickNext());
                                         }}
+                                        // disabled={!activeAll}
                                         aria-label="previous slide" data-slider="button-next" className="w-[100px] h-[50px] rounded-[4px] bg-[#0000001A] border-[#34446D] border border-solid flex items-center justify-center">
                                         <Image src={ArrowImg} alt='prev' width={45} height={34} className='rotate-[180deg]' />
 
@@ -182,42 +241,41 @@ const SliderMain = () => {
                     <div
 
                         className="slide-main l:inset-[0%] l:h-[80%] h-[300px] l:bottom-0 bottom-[80px] l:z-0 z-[]">
-                        {/* <div className="slide-blur">
-                            
-                            <svg width="80" height="387" viewBox="0 0 80 387" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="28.2419" height="387" fill="url(#paint0_linear_1966_742)" fill-opacity="0.6" style={{ mixBlendMode: 'overlay' }} />
-                                <rect width="28.2419" height="387" transform="translate(25.8799)" fill="url(#paint1_linear_1966_742)" fill-opacity="0.6" style={{ mixBlendMode: 'overlay' }} />
-                                <rect width="28.2419" height="387" transform="translate(51.7583)" fill="url(#paint2_linear_1966_742)" fill-opacity="0.6" style={{ mixBlendMode: 'overlay' }} />
-                                <defs>
-                                    <linearGradient id="paint0_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="white" />
-                                        <stop offset="0.9" />
-                                        <stop offset="1" stop-color="white" />
-                                    </linearGradient>
-                                    <linearGradient id="paint1_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="white" />
-                                        <stop offset="0.833333" />
-                                        <stop offset="1" stop-color="white" />
-                                    </linearGradient>
-                                    <linearGradient id="paint2_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="white" />
-                                        <stop offset="0.833333" />
-                                        <stop offset="1" stop-color="white" />
-                                    </linearGradient>
-                                </defs>
-                            </svg>
 
-
-
-                        </div> */}
                         <div className="slider-wrap">
-                            <div data-slider="list" className="slider-list"
-                                onMouseMove={() => {
-                                    if (activeIndex.index !== active) {
-                                        setOldActive(active)
-                                        setChangeBg(true)
+                            <div className="slide-blur">
 
-                                    }
+                                <svg width="80" height="387" viewBox="0 0 80 387" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)', opacity: '0.8' }}>
+                                    <rect width="28.2419" height="387" fill="url(#paint0_linear_1966_742)" fill-opacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
+                                    <rect width="28.2419" height="387" transform="translate(25.8799)" fill="url(#paint1_linear_1966_742)" fill-opacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
+                                    <rect width="28.2419" height="387" transform="translate(51.7583)" fill="url(#paint2_linear_1966_742)" fill-opacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
+                                    <defs>
+                                        <linearGradient id="paint0_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="white" />
+                                            <stop offset="0.9" />
+                                            <stop offset="1" stop-color="white" />
+                                        </linearGradient>
+                                        <linearGradient id="paint1_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="white" />
+                                            <stop offset="0.833333" />
+                                            <stop offset="1" stop-color="white" />
+                                        </linearGradient>
+                                        <linearGradient id="paint2_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="white" />
+                                            <stop offset="0.833333" />
+                                            <stop offset="1" stop-color="white" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+
+
+
+
+                            </div>
+
+                            <div data-slider="list" className="slider-list "
+                                onMouseMove={() => {
+                                    setChangeBg(true)
                                 }}
                                 onMouseLeave={() => {
                                     setOldActive(active)

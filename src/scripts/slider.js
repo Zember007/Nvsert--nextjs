@@ -55,7 +55,7 @@ export function initSlider(onChangeFunction) {
     // Инициализируем горизонтальный цикл
     const loop = horizontalLoop(slides, {
         paused: true,
-        draggable: false,
+        draggable: true,
         center: false,
         onChange: (element, index) => {
             // Удаляем активный класс с предыдущего элемента
@@ -67,7 +67,6 @@ export function initSlider(onChangeFunction) {
             const nextSibling = element.nextElementSibling || slides[0];
             nextSibling.classList.add("active");
             activeElement = nextSibling;
-            activeIndex.index = index;
 
             // Анимируем шаги
             try {
@@ -120,7 +119,6 @@ export function initSlider(onChangeFunction) {
     return loop;
 }
 
-export const activeIndex = { index: 0 };
 
 export function horizontalLoop(items, config) {
     // Проверяем входные данные
@@ -252,6 +250,7 @@ export function horizontalLoop(items, config) {
 
         // Методы таймлайна
         tl.toIndex = (index, vars) => {
+            gsap.killTweensOf(tl);
             vars = vars || {};
             (Math.abs(index - curIndex) > length / 2) && (index += index > curIndex ? -length : length);
             let newIndex = gsap.utils.wrap(0, length, index),
@@ -276,9 +275,23 @@ export function horizontalLoop(items, config) {
             return index;
         };
 
-        tl.current = () => indexIsDirty ? tl.closestIndex(true) : curIndex;
-        tl.next = vars => tl.toIndex(tl.current() + 1, vars);
-        tl.previous = vars => tl.toIndex(tl.current() - 1, vars);
+        tl.current = function () {
+            // Возвращаем индекс через closestIndex или curIndex в зависимости от состояния indexIsDirty
+            return indexIsDirty ? tl.closestIndex(true) : curIndex;
+        };
+
+        // Используем gsap.utils.wrap, чтобы корректно переходить по индексам
+        tl.next = function (vars) {
+            // Обновляем индекс с использованием wrap
+            curIndex = gsap.utils.wrap(0, items.length, curIndex + 1);
+            tl.toIndex(curIndex, vars);
+        };
+
+        tl.previous = function (vars) {
+            // Обновляем индекс с использованием wrap
+            curIndex = gsap.utils.wrap(0, items.length, curIndex - 1); 
+            tl.toIndex(curIndex, vars);
+        };
         tl.times = times;
 
         // Предварительный рендеринг для производительности
