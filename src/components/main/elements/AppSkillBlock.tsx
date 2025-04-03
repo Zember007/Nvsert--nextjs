@@ -73,56 +73,57 @@ const AppSkillBlock = (skill: any) => {
       onMouseLeave={handleMouseLeave}
       ref={cardRef}>
       <div
-        className={`card rebound-box relative z-[0] group/item l:mr-0 mr-[20px] rounded-[4px] flex flex-col gap-[14px] justify-between ${skill.folder ? '!items-center !justify-center' : 'p-[20px]'} text-[#000] h-[226px] min-w-[300px] w-full`}
+        className={`card rebound-box relative z-[0] group/item l:mr-0 mr-[20px] rounded-[4px]  text-[#000] h-[226px] min-w-[300px] w-full`}
         style={
           {
             ...cardStyle,
             background: `${skill.bg === 'secondary' ? '#CCCCCC' : '#FFF'}`
-            
+
           }
         }
       >
+        <div
+          style={{
+            borderColor: `${skill.bg === 'secondary' ? '#FFFFFF' : '#CCCCCC'}`,
+            ...(mousePX && { ...textStyle })
+          }}
+          className={`absolute z-[-1] ${oldMousePX && 'backdrop-blur-[2px]'} transition-all duration-500 rounded-[4px] top-0 left-0 right-0 bottom-0 border border-solid`}
+        ></div>
+        <div
+          style={{
+            ...(mousePX && { ...textStyle })
+          }}
+          className={`flex flex-col gap-[14px] justify-between h-full ${skill.folder ? '!items-center !justify-center' : 'p-[20px]'}`}
+        >
+          {
+            skill.folder ?
+              <>
+                <Image alt="folder" className='transition-all duration-300' src={skill.img} height={280} />
 
-        {
-          skill.folder ?
-            <>
-              <Image alt="folder" className='transition-all duration-300' src={skill.img} height={280} style={mousePX ? textStyle : {}} />
-              <div
-                style={{
-                  borderColor: `#CCCCCC`,
-                  ...(mousePX && { ...textStyle })
-                }}
-                className={`absolute z-[-1] ${oldMousePX && 'backdrop-blur-[2px]'} transition-all duration-500 rounded-[4px] top-0 left-0 right-0 bottom-0 border border-solid`}
-              ></div>
-            </>
-            :
-            <>
-              <div
-                style={{
-                  borderColor: `${skill.bg === 'secondary' ? '#FFFFFF' : '#CCCCCC'}`,
-                  ...(mousePX && { ...textStyle })
-                }}
-                className={`absolute z-[-1] ${oldMousePX && 'backdrop-blur-[2px]'} transition-all duration-500 rounded-[4px] top-0 left-0 right-0 bottom-0 border border-solid`}
-              ></div>
-              <span className={`font-bold text-[20px] transition-all duration-500`} style={mousePX ? textStyle : {}}>
-                {filterPrepositions(skill.title)}
-              </span>
-              <div className='grow'>
-                <ul className={`list-disc pl-[17px] ${!skill.isVisible && 'translate-y-[10px] opacity-0'} transition-all duration-500 flex flex-col gap-[5px]`} style={mousePX ? textStyle : {}}>
-                  {list.map((item, index) =>
-                    <li key={index}>{filterPrepositions(item)}</li>
-                  )}
-                </ul>
-              </div>
-              {/* <button className=" w-full flex items-center text-left transition-all duration-500" style={mousePX ? textStyle : {}}>
+              </>
+              :
+              <>
+
+                <span className={`font-bold text-[20px] transition-all duration-500`} >
+                  {filterPrepositions(skill.title)}
+                </span>
+                <div className='grow'>
+                  <ul className={`list-disc pl-[17px] ${!skill.isVisible && 'translate-y-[10px] opacity-0'} transition-all duration-500 flex flex-col gap-[5px]`} >
+                    {list.map((item, index) =>
+                      <li key={index}>{filterPrepositions(item)}</li>
+                    )}
+                  </ul>
+                </div>
+                {/* <button className=" w-full flex items-center text-left transition-all duration-500" style={mousePX ? textStyle : {}}>
                 <span className={`text-[18px] group-hover/item:w-full ${oldMousePX && 'w-full'} overflow-hidden whitespace-nowrap w-0 transition-all group-hover/item:duration-300`}>{skill.btn}</span>
                 <svg className="rebound" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M3 12H21" stroke={`#000`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   <path d="M16 7L21 12L16 17" stroke={`#000`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button> */}
-            </>
-        }
+              </>
+          }
+        </div>
       </div>
     </div>
   );
