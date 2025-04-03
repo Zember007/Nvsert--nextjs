@@ -303,7 +303,7 @@ const MainDocumentItem = ({ activePhoto, setPhoto, img, settings, title, content
                                         {
                                             content1.map((cont, contIndex) => (
                                                 <div key={contIndex} className='flex gap-[10px] flex-col items-start'>
-                                                    <p className='text-[20px] font-bold'>{filterPrepositions(cont.title)}</p>
+                                                    <p className='text-[19px] font-bold'>{filterPrepositions(cont.title)}</p>
 
                                                     {cont.subtitle && <span>{cont.subtitle}</span>}
 
@@ -311,7 +311,7 @@ const MainDocumentItem = ({ activePhoto, setPhoto, img, settings, title, content
 
                                                         {
                                                             cont.list.map((list, index) => (
-                                                                <li className={`${listHidden && index > 3 && 'hidden'}`} key={index}>{filterPrepositions(list)}</li>
+                                                                <li className={`${listHidden && (index > 2 || contIndex > 0) && 'hidden'}`} key={index}>{filterPrepositions(list)}</li>
                                                             ))
                                                         }
 
