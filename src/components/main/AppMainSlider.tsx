@@ -105,7 +105,8 @@ const SliderMain = () => {
     return (
         <section className='py-[75px] text-[#000] bg-[#FFF]'>
             <div className="wrapper flex flex-col gap-[40px]">
-                <h2 className='leading-[1] tracking-[-0.04em] text-center l:text-left text-[24px] xs:text-[40px] l:text-[56px]'>Мы помогаем с документами по отраслям:</h2>
+
+                <h2 className='leading-[1] tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px]'>Помогаем с документами по отраслям</h2>
                 <div className="cloneable l:h-[470px] h-[710px]">
 
                     <div className="tariff-wrap w-[250px]" ref={setWrapperRef}>
@@ -181,30 +182,76 @@ const SliderMain = () => {
                                 <div className="flex gap-[10px]">
 
 
-                                    <button
-                                        onClick={() => {
-                                            setOldActive(active)
-                                            setChangeBg(true)
-                                            // sliders.forEach((slider) => slider.slickPrev());
-                                        }}
-                                        // disabled={!activeAll}
-                                        aria-label="previous slide" data-slider="button-prev" className="w-[100px] h-[50px] rounded-[4px] bg-[#0000001A] border-[#34446D] border border-solid flex items-center justify-center">
-                                        <Image src={ArrowImg} alt='next' width={45} height={34} />
+                                    <div
+                                        ref={setWrapperRef}
+                                        className="tariff-wrap w-[100px]">
+                                        <button
+                                            ref={setButtonRef}
+                                            onClick={() => {
+                                                setOldActive(active)
+                                                setChangeBg(true)
+                                                // sliders.forEach((slider) => slider.slickPrev());
+                                            }}
+                                            // disabled={!activeAll}
+                                            aria-label="previous slide" data-slider="button-prev"
+                                            className="tariff hover:bg-[#34446D] group h-[50px] rounded-[4px] border-[#34446D] border border-solid flex items-center justify-center">
 
-                                    </button>
-
-                                    <button
-                                        onClick={() => {
-                                            setOldActive(active)
-                                            setChangeBg(true)
-                                            // sliders.forEach((slider) => slider.slickNext());
-                                        }}
-                                        // disabled={!activeAll}
-                                        aria-label="previous slide" data-slider="button-next" className="w-[100px] h-[50px] rounded-[4px] bg-[#0000001A] border-[#34446D] border border-solid flex items-center justify-center">
-                                        <Image src={ArrowImg} alt='prev' width={45} height={34} className='rotate-[180deg]' />
-
-                                    </button>
-
+                                            <svg className='group-hover:*:*:fill-[#FFF] *:*:transition-all *:*:duration-300' xmlns="http://www.w3.org/2000/svg" width="46" height="38" viewBox="0 0 46 38" fill="none">
+                                                <path d="M24.4482 34.9009H28.7887" stroke="#424242" stroke-width="0.600425" stroke-linecap="round" />
+                                                <path d="M24.4482 3.02588L28.7887 3.02588" stroke="#424242" stroke-width="0.600425" stroke-linecap="round" />
+                                                <g filter="url(#filter0_d_1459_613)">
+                                                    <path d="M30.1421 2H23.8391L10.1421 18.962L23.8391 35.9239H30.1421L16.4451 18.962L30.1421 2Z" fill="#34446D" />
+                                                </g>
+                                                <defs>
+                                                    <filter id="filter0_d_1459_613" x="7" y="0" width="27" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5 0" result="hardAlpha" />
+                                                        <feOffset dx="1" dy="0" />
+                                                        <feGaussianBlur stdDeviation="0.723404" />
+                                                        <feComposite in2="hardAlpha" operator="out" />
+                                                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0" />
+                                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1459_613" />
+                                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1459_613" result="shape" />
+                                                    </filter>
+                                                </defs>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div
+                                        ref={setWrapperRef}
+                                        className="tariff-wrap w-[100px]">
+                                        <button
+                                            ref={setButtonRef}
+                                            onClick={() => {
+                                                setOldActive(active)
+                                                setChangeBg(true)
+                                                // sliders.forEach((slider) => slider.slickNext());
+                                            }}
+                                            // disabled={!activeAll}
+                                            aria-label="previous slide" data-slider="button-next" 
+                                            className=" tariff group hover:bg-[#34446D] h-[50px] rounded-[4px] border-[#34446D] border border-solid flex items-center justify-center">
+                                            
+                                            <svg className='rotate-[180deg] group-hover:*:*:fill-[#FFF] *:*:transition-all *:*:duration-300' xmlns="http://www.w3.org/2000/svg" width="46" height="38" viewBox="0 0 46 38" fill="none">
+                                                <path d="M24.4482 34.9009H28.7887" stroke="#424242" stroke-width="0.600425" stroke-linecap="round" />
+                                                <path d="M24.4482 3.02588L28.7887 3.02588" stroke="#424242" stroke-width="0.600425" stroke-linecap="round" />
+                                                <g filter="url(#filter0_d_1459_613)">
+                                                    <path d="M30.1421 2H23.8391L10.1421 18.962L23.8391 35.9239H30.1421L16.4451 18.962L30.1421 2Z" fill="#34446D" />
+                                                </g>
+                                                <defs>
+                                                    <filter id="filter0_d_1459_613" x="7" y="0" width="27" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5 0" result="hardAlpha" />
+                                                        <feOffset dx="1" dy="0" />
+                                                        <feGaussianBlur stdDeviation="0.723404" />
+                                                        <feComposite in2="hardAlpha" operator="out" />
+                                                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0" />
+                                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1459_613" />
+                                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1459_613" result="shape" />
+                                                    </filter>
+                                                </defs>
+                                            </svg>
+                                        </button>
+                                    </div>
                                 </div>
                                 <div className="flex item-center text-[32px] font-bold leading-[1]">
                                     <div className="count-column">
@@ -268,7 +315,7 @@ const SliderMain = () => {
                                 {
                                     slides.map((item, index) => (
                                         <div
-                                            key={index} data-slider="slide" className="slider-slide overflow-hidden active l:w-[317px] l:h-[317px] w-[317px] h-[317px]">
+                                            key={index} data-slider="slide" className="slider-slide overflow-hidden active l:w-[337px] l:h-[337px] w-[337px] h-[337px] shadow-[0px_0px_4px_0px_#00000033] rounded-[8px] border border-solid border-[#CCCCCC]">
                                             <div className="slide-inner overflow-hidden relative bg-[#FFF] ">
                                                 <Image src={item.img} alt='slide' fill
                                                     style={{ objectFit: 'cover' }} />
