@@ -83,18 +83,7 @@ const AppMainDocuments = () => {
                                 setHover={(value) => { setHover(value ? index : null) }} 
                                 setActive={(value) => {                                    
                                     
-                                    if (value && typeof activeIndex === 'number' && activeIndex !== index && activeIndex < index) {
-                                        const rect = document.querySelectorAll('.document-item')[index].getBoundingClientRect();
-                                        const scrollY = window.scrollY;
-
-                                        console.log(scrollY , rect.height);
-                                        
-
-                                        window.scrollTo({
-                                            top: scrollY - rect.height,
-                                            behavior: 'instant',
-                                        });
-                                    }
+                                    
                                     setActive(value ? index : null)
 
                                 }} active={index === activeIndex} key={index} {...item} />

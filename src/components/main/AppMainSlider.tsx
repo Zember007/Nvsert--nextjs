@@ -30,26 +30,38 @@ const SliderMain = () => {
     const [oldActive, setOldActive] = useState<number>(0)
     const [changeBg, setChangeBg] = useState(false)
 
+    const [sliders, setSliders] = useState<Slider[]>([]);
+
     useEffect(() => {
+        if (sliders.length < 5) return
+        let timeoutId:NodeJS.Timeout | null = null;
         initSlider((index: number) => {
 
             setTimeout(() => {
                 setChangeBg(false)
             }, 100)
+
+            if(timeoutId) {
+                clearTimeout(timeoutId)
+            }
+
+            timeoutId = setTimeout(() => {
+                sliders.forEach((slider) => {                    
+                    slider.slickGoTo(index)
+                });
+            }, 500)
+
             setActive(index)
 
         })
-    }, [])
+    }, [sliders])
 
 
 
 
 
-    const [sliders, setSliders] = useState<Slider[]>([]);
 
-    // useEffect(() => {
-    //     setSliders(sliders.filter(slider => slider));
-    // }, [sliders]);
+
 
     const [timeSlick, setTimeSlick] = useState<NodeJS.Timeout | null>(null)
     const [activeIndexes, setActiveIndexes] = useState(Array(5).fill(0));
@@ -108,36 +120,7 @@ const SliderMain = () => {
 
                     <div className="overlay l:w-[640px] w-full p-[30px] pr-[80px] relative z-[0]  rounded-[8px] border border-solid border-[#34446D] overflow-hidden">
                         <div className={`overlay-slider absolute  top-0 right-0 left-0 bottom-0 z-[-2]  ${!changeBg && '!bg-[#F5F5F5] transition-all duration-1000'}`}></div>
-                        {/* <div className="absolute  top-0 right-0 left-0 bottom-0 bg-[#F5F5F580] z-[-1] backdrop-blur-[10px] "> */}
-                        {/* </div> */}
-                        <div className="slide-blur">
-
-                            <svg width="80" height="387" viewBox="0 0 80 387" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)', opacity: '0.8' }}>
-                                <rect width="28.2419" height="387" fill="url(#paint0_linear_1966_742)" fill-opacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
-                                <rect width="28.2419" height="387" transform="translate(25.8799)" fill="url(#paint1_linear_1966_742)" fill-opacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
-                                <rect width="28.2419" height="387" transform="translate(51.7583)" fill="url(#paint2_linear_1966_742)" fill-opacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
-                                <defs>
-                                    <linearGradient id="paint0_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="white" />
-                                        <stop offset="0.9" />
-                                        <stop offset="1" stop-color="white" />
-                                    </linearGradient>
-                                    <linearGradient id="paint1_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="white" />
-                                        <stop offset="0.833333" />
-                                        <stop offset="1" stop-color="white" />
-                                    </linearGradient>
-                                    <linearGradient id="paint2_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="white" />
-                                        <stop offset="0.833333" />
-                                        <stop offset="1" stop-color="white" />
-                                    </linearGradient>
-                                </defs>
-                            </svg>
-
-
-
-
+                        <div className="absolute  top-0 right-0 left-0 bottom-0 bg-[#F5F5F580] z-[-1] backdrop-blur-[10px] ">
                         </div>
                         <div className="flex flex-col justify-between h-full l:items-start items-center w-full">
                             <div className=" grow relative w-full overflow-hidden">
@@ -202,7 +185,7 @@ const SliderMain = () => {
                                         onClick={() => {
                                             setOldActive(active)
                                             setChangeBg(true)
-                                            sliders.forEach((slider) => slider.slickPrev());
+                                            // sliders.forEach((slider) => slider.slickPrev());
                                         }}
                                         // disabled={!activeAll}
                                         aria-label="previous slide" data-slider="button-prev" className="w-[100px] h-[50px] rounded-[4px] bg-[#0000001A] border-[#34446D] border border-solid flex items-center justify-center">
@@ -214,7 +197,7 @@ const SliderMain = () => {
                                         onClick={() => {
                                             setOldActive(active)
                                             setChangeBg(true)
-                                            sliders.forEach((slider) => slider.slickNext());
+                                            // sliders.forEach((slider) => slider.slickNext());
                                         }}
                                         // disabled={!activeAll}
                                         aria-label="previous slide" data-slider="button-next" className="w-[100px] h-[50px] rounded-[4px] bg-[#0000001A] border-[#34446D] border border-solid flex items-center justify-center">

@@ -52,11 +52,12 @@ export function initSlider(onChangeFunction) {
 
     const allSteps = stepsParent.querySelectorAll('[data-slide-count="step"]');
 
-    // Инициализируем горизонтальный цикл
+    // Инициализируем горизонтальный цикл с дополнительным смещением
     const loop = horizontalLoop(slides, {
         paused: true,
         draggable: true,
         center: false,
+        offset: 80,  // Сдвиг всех слайдов
         onChange: (element, index) => {
             // Удаляем активный класс с предыдущего элемента
             if (activeElement) {
@@ -86,38 +87,50 @@ export function initSlider(onChangeFunction) {
         }
     });
 
+    // Убедитесь, что loop существует, перед тем как добавлять destroy
+    if (loop) {
+        loop.destroy = () => {
+            loop.kill();
+            if (nextButton) nextButton.removeEventListener("click", loop.next);
+            if (prevButton) prevButton.removeEventListener("click", loop.previous);
+            slides.forEach(slide => slide.removeEventListener("click"));
+        };
+    } else {
+        console.error("Ошибка: loop не был инициализирован.");
+    }
 
     // Добавляем обработчики событий с проверками
     if (nextButton) {
         nextButton.addEventListener("click", () => {
-            loop.next({ ease: "power3", duration: 0.725 });
+            if (loop) {
+                loop.next({ ease: "power3", duration: 0.725 });
+            }
         });
     }
 
     if (prevButton) {
         prevButton.addEventListener("click", () => {
-            loop.previous({ ease: "power3", duration: 0.725 });
+            if (loop) {
+                loop.previous({ ease: "power3", duration: 0.725 });
+            }
         });
     }
 
     // Исправляем обработчик кликов по слайдам
     slides.forEach((slide, i) => {
         slide.addEventListener("click", () => {
-            const targetIndex = i === 0 ? 0 : i - 1;
-            loop.toIndex(targetIndex, { ease: "power3", duration: 0.725 });
+            if (loop) {
+                const targetIndex = i === 0 ? 0 : i - 1;
+                loop.toIndex(targetIndex, { ease: "power3", duration: 0.725 });
+            }
         });
     });
 
-    // Добавляем метод уничтожения
-    loop.destroy = () => {
-        loop.kill();
-        if (nextButton) nextButton.removeEventListener("click", loop.next);
-        if (prevButton) prevButton.removeEventListener("click", loop.previous);
-        slides.forEach(slide => slide.removeEventListener("click"));
-    };
-
-    return loop;
+    return loop;  // Возвращаем loop, чтобы убедиться, что он существует
 }
+
+
+
 
 
 export function horizontalLoop(items, config) {
@@ -130,7 +143,7 @@ export function horizontalLoop(items, config) {
     let timeline;
     items = gsap.utils.toArray(items);
     config = config || {};
-
+const offset = config.offset || 0;  
     const cleanup = gsap.context(() => {
         let onChange = config.onChange,
             lastIndex = 0,
@@ -183,8 +196,11 @@ export function horizontalLoop(items, config) {
                 spaceBefore[i] = b2.left - (i ? b1.right : b1.left);
                 b1 = b2;
             });
+            // gsap.set(items, {
+            //     xPercent: i => xPercents[i]
+            // });
             gsap.set(items, {
-                xPercent: i => xPercents[i]
+                xPercent: i => xPercents[i] + (offset) 
             });
             totalWidth = getTotalWidth();
         };

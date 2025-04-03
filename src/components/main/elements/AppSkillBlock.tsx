@@ -73,7 +73,7 @@ const AppSkillBlock = (skill: any) => {
       onMouseLeave={handleMouseLeave}
       ref={cardRef}>
       <div
-        className={`card rebound-box relative z-[0] group/item l:mr-0 mr-[20px] rounded-[4px] flex flex-col gap-[14px] justify-between ${skill.folder ? '!items-center !justify-center' : 'p-[20px]'} text-[#000] h-[250px] min-w-[300px] w-full`}
+        className={`card rebound-box relative z-[0] group/item l:mr-0 mr-[20px] rounded-[4px] flex flex-col gap-[14px] justify-between ${skill.folder ? '!items-center !justify-center' : 'p-[20px]'} text-[#000] h-[226px] min-w-[300px] w-full`}
         style={
           {
             ...cardStyle,
@@ -114,13 +114,13 @@ const AppSkillBlock = (skill: any) => {
                   )}
                 </ul>
               </div>
-              <button className=" w-full flex items-center text-left transition-all duration-500" style={mousePX ? textStyle : {}}>
+              {/* <button className=" w-full flex items-center text-left transition-all duration-500" style={mousePX ? textStyle : {}}>
                 <span className={`text-[18px] group-hover/item:w-full ${oldMousePX && 'w-full'} overflow-hidden whitespace-nowrap w-0 transition-all group-hover/item:duration-300`}>{skill.btn}</span>
                 <svg className="rebound" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M3 12H21" stroke={`#000`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   <path d="M16 7L21 12L16 17" stroke={`#000`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </button>
+              </button> */}
             </>
         }
       </div>

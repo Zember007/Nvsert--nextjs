@@ -142,13 +142,13 @@
   height: 120%;
 
 
+
   z-index: 1;
   display: flex;
 
   mix-blend-mode: overlay;
   backdrop-filter: blur(2px);
 
- 
 }
 
 .caption-dot {
@@ -161,7 +161,7 @@
 
 
 .overlay-slider {
-  background: linear-gradient(270deg, rgba(245, 245, 245, 0) 0%, #F5F5F5 15%);
+  background: linear-gradient(270deg, rgba(245, 245, 245, 0) 0%, #F5F5F5 80px);
 }
 
 
