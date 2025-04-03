@@ -66,13 +66,17 @@ const AppInput = ({ title,disable,fail,message = true, inputName, type, required
                         required
                     })}
                     type={type}
-                    className={`field__input ${className} ${(fail) && 'error'} `}
+                    className={`field__input ${className} ${(fail) && 'error !text-[red]'} `}
                     name={inputName}
                     placeholder={title}
                     autoComplete={autocomplete}
                     onInput={(e) => { changeInput(e) }}
                     onFocus={() => {clearErrors(inputName)}}
-                    onBlur={onBlur}
+                    onBlur={(e) => {
+                        if(onBlur) {
+                            onBlur();
+                        }
+                        e.target.value = e.target.value+' '}}
                 />
                 <span className={`field__title ${(errors[inputName] ) && '!text-[#FF3030]'} ${classNameTitle}`}>
                     {title}

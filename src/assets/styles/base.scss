@@ -202,3 +202,11 @@ body::-webkit-scrollbar {
         }
     
 }
+
+input:-internal-autofill-selected {
+    color: inherit !important; 
+}
+
+input:-webkit-autofill {
+    color: inherit !important; 
+}
