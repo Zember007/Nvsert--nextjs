@@ -18,7 +18,7 @@ const AppMainDocuments = () => {
     const settings = {
         timeout: 0,
         duration: 300,
-        length: 20
+        length: 30
     }
 
     const bouncePhoto = () => {
