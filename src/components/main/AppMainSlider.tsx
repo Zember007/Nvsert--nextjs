@@ -5,8 +5,8 @@ import ArrowImg from '@/assets/images/svg/right-arrow-slider.svg'
 import Image from 'next/image';
 import { slides } from './utils';
 import { filterPrepositions } from '@/hook/filter';
-import gsap from 'gsap';
-import { BounceEffect } from '@/hook/useBounce';
+// import gsap from 'gsap';
+// import { BounceEffect } from '@/hook/useBounce';
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -29,7 +29,6 @@ const SliderMain = () => {
     const [active, setActive] = useState<number>(0)
     const [oldActive, setOldActive] = useState<number>(0)
     const [changeBg, setChangeBg] = useState(false)
-    const direction = ((oldActive < active || (oldActive + 1 === slides.length && active === 0)) && !(oldActive === 0 && active + 1 === slides.length)) ? -1 : 1;
 
     useEffect(() => {
         initSlider((index: number) => {
@@ -229,7 +228,7 @@ const SliderMain = () => {
                                     slides.map((item, index) => (
                                         <div
                                             key={index} data-slider="slide" className="slider-slide overflow-hidden active l:w-[317px] l:h-[317px] w-[317px] h-[317px]">
-                                            <div className="slide-inner overflow-hidden relative bg-[#FFF]">
+                                            <div className="slide-inner overflow-hidden relative bg-[#FFF] ">
                                                 <Image src={item.img} alt='slide' fill
                                                     style={{ objectFit: 'cover' }} />
                                                 <div className="absolute scale-[-0.9] w-full h-full bg-[#34446D] mix-blend-hue"></div>

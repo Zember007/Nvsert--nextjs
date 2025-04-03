@@ -2,87 +2,154 @@ import gsap from "gsap";
 import Draggable from "gsap/dist/Draggable";
 import InertiaPlugin from "./InertiaPlugin";
 
-
-gsap.registerPlugin(Draggable, InertiaPlugin)
+gsap.registerPlugin(Draggable, InertiaPlugin);
 
 export function initSlider(onChangeFunction) {
+    // Проверяем наличие основных элементов DOM
+    const wrapper = document.querySelector('[data-slider="list"]');
+    if (!wrapper) {
+        console.error("Контейнер слайдера не найден");
+        return null;
+    }
 
-    const wrapper = document.querySelector('[data-slider="list"]')
     const slides = gsap.utils.toArray('[data-slider="slide"]');
+    if (!slides.length) {
+        console.error("Слайды не найдены");
+        return null;
+    }
 
-    const nextButton = document.querySelector('[data-slider="button-next"]')
-    const prevButton = document.querySelector('[data-slider="button-prev"]')
-
+    const nextButton = document.querySelector('[data-slider="button-next"]');
+    const prevButton = document.querySelector('[data-slider="button-prev"]');
     const totalElement = document.querySelector('[data-slide-count="total"]');
     const stepElement = document.querySelector('[data-slide-count="step"]');
+
+    if (!stepElement) {
+        console.error("Элемент шага не найден");
+        return null;
+    }
+
     const stepsParent = stepElement.parentElement;
+    if (!stepsParent) {
+        console.error("Родительский элемент шагов не найден");
+        return null;
+    }
 
     let activeElement;
     const totalSlides = slides.length;
 
-    // Update total slides text, prepend 0 if less than 10
-    totalElement.textContent = totalSlides < 10 ? `0${totalSlides}` : totalSlides;
+    // Обновляем общее количество слайдов
+    if (totalElement) {
+        totalElement.textContent = totalSlides < 10 ? `0${totalSlides}` : totalSlides;
+    }
 
-    // Create step elements dynamically
-    stepsParent.innerHTML = ''; // Clear any existing steps
+    // Создаем элементы шагов динамически
+    stepsParent.innerHTML = '';
     slides.forEach((_, index) => {
-        const stepClone = stepElement.cloneNode(true); // Clone the single step
+        const stepClone = stepElement.cloneNode(true);
         stepClone.textContent = index + 1 < 10 ? `0${index + 1}` : index + 1;
-        stepsParent.appendChild(stepClone); // Append to the parent container
+        stepsParent.appendChild(stepClone);
     });
 
-    // Dynamically generated steps
     const allSteps = stepsParent.querySelectorAll('[data-slide-count="step"]');
+
+    // Инициализируем горизонтальный цикл
     const loop = horizontalLoop(slides, {
         paused: true,
         draggable: false,
         center: false,
-        gap:  0,
-
         onChange: (element, index) => {
+            // Удаляем активный класс с предыдущего элемента
+            if (activeElement) {
+                activeElement.classList.remove("active");
+            }
 
-            // We add the active class to the 'next' element because our design is offset slightly.
-            activeElement && activeElement.classList.remove("active");
+            // Обрабатываем следующий элемент с учетом зацикливания
             const nextSibling = element.nextElementSibling || slides[0];
             nextSibling.classList.add("active");
             activeElement = nextSibling;
-            activeIndex.index = index
+            activeIndex.index = index;
 
-            // Move the number to the correct spot
-            gsap.to(allSteps, { y: `${-100 * index}%`, ease: "power3", duration: 0.45 });
+            // Анимируем шаги
+            try {
+                gsap.to(allSteps, {
+                    y: `${-100 * index}%`,
+                    ease: "power3",
+                    duration: 0.45
+                });
+            } catch (error) {
+                console.error("Ошибка анимации шагов:", error);
+            }
 
-            {onChangeFunction && onChangeFunction(index)}
+            // Вызываем callback-функцию если она передана
+            if (onChangeFunction) {
+                onChangeFunction(index);
+            }
         }
     });
-    
 
-    // Similar to above, we substract 1 from our clicked index on click because our design is offset
-    slides.forEach((slide, i) => slide.addEventListener("click", () => loop.toIndex(i - 1, { ease: "power3", duration: 0.725 })));
 
-    nextButton.addEventListener("click", () => loop.next({ ease: "power3", duration: 0.725 }));
-    prevButton.addEventListener("click", () => loop.previous({ ease: "power3", duration: 0.725 }));
+    // Добавляем обработчики событий с проверками
+    if (nextButton) {
+        nextButton.addEventListener("click", () => {
+            loop.next({ ease: "power3", duration: 0.725 });
+        });
+    }
 
+    if (prevButton) {
+        prevButton.addEventListener("click", () => {
+            loop.previous({ ease: "power3", duration: 0.725 });
+        });
+    }
+
+    // Исправляем обработчик кликов по слайдам
+    slides.forEach((slide, i) => {
+        slide.addEventListener("click", () => {
+            const targetIndex = i === 0 ? 0 : i - 1;
+            loop.toIndex(targetIndex, { ease: "power3", duration: 0.725 });
+        });
+    });
+
+    // Добавляем метод уничтожения
+    loop.destroy = () => {
+        loop.kill();
+        if (nextButton) nextButton.removeEventListener("click", loop.next);
+        if (prevButton) prevButton.removeEventListener("click", loop.previous);
+        slides.forEach(slide => slide.removeEventListener("click"));
+    };
+
+    return loop;
 }
 
-export const activeIndex = { index: 0 }
+export const activeIndex = { index: 0 };
 
 export function horizontalLoop(items, config) {
+    // Проверяем входные данные
+    if (!items || !items.length) {
+        console.error("Не предоставлены элементы для горизонтального цикла");
+        return null;
+    }
+
     let timeline;
     items = gsap.utils.toArray(items);
     config = config || {};
-    gsap.context(() => {
+
+    const cleanup = gsap.context(() => {
         let onChange = config.onChange,
             lastIndex = 0,
             tl = gsap.timeline({
-                repeat: config.repeat, onUpdate: onChange && function () {
+                repeat: config.repeat,
+                onUpdate: onChange && function () {
                     let i = tl.closestIndex();
                     if (lastIndex !== i) {
                         lastIndex = i;
                         onChange(items[i], i);
                     }
-                }, paused: config.paused, defaults: { ease: "none" }, onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100)
+                },
+                paused: config.paused,
+                defaults: { ease: "none" },
+                onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100)
             }),
-            length = items.length,            
+            length = items.length,
             times = [],
             widths = [],
             spaceBefore = [],
@@ -91,84 +158,105 @@ export function horizontalLoop(items, config) {
             indexIsDirty = false,
             center = config.center,
             pixelsPerSecond = (config.speed || 1) * 100,
-            snap = config.snap === false ? v => v : gsap.utils.snap(config.snap || 1), // some browsers shift by a pixel to accommodate flex layouts, so for example if width is 20% the first element's width might be 242px, and the next 243px, alternating back and forth. So we snap to 5 percentage points to make things look more natural
+            snap = config.snap === false ? v => v : gsap.utils.snap(config.snap || 1),
             timeOffset = 0,
-            container = center === true ? items[0].parentNode : gsap.utils.toArray(center)[0] || items[0].parentNode,        
+            container = center === true ? items[0].parentNode : gsap.utils.toArray(center)[0] || items[0].parentNode,
             startX = items[0].offsetLeft,
-            totalWidth,
-            getTotalWidth = () => items[length - 1].offsetLeft + xPercents[length - 1] / 100 * widths[length - 1] - startX + spaceBefore[0] + items[length - 1].offsetWidth * gsap.getProperty(items[length - 1], "scaleX") + (parseFloat(config.paddingRight) || 0),
-            populateWidths = () => {
-                let b1 = container.getBoundingClientRect(), b2;
-                items.forEach((el, i) => {
-                    widths[i] = parseFloat(gsap.getProperty(el, "width", "px"));
-                    xPercents[i] = snap(parseFloat(gsap.getProperty(el, "x", "px")) / widths[i] * 100 + gsap.getProperty(el, "xPercent"));
-                    b2 = el.getBoundingClientRect();
-                    spaceBefore[i] = b2.left - (i ? b1.right : b1.left);
-                    b1 = b2;
-                });
-                gsap.set(items, { // convert "x" to "xPercent" to make things responsive, and populate the widths/xPercents Arrays to make lookups faster.
-                    xPercent: i => xPercents[i]
-                });
-                totalWidth = getTotalWidth();
-            },
-            timeWrap,
-            populateOffsets = () => {
-                timeOffset = center ? tl.duration() * (container.offsetWidth / 2) / totalWidth : 0;
-                center && times.forEach((t, i) => {
-                    times[i] = timeWrap(tl.labels["label" + i] + tl.duration() * widths[i] / 2 / totalWidth - timeOffset);
-                });
-            },
-            getClosest = (values, value, wrap) => {
-                let i = values.length,
-                    closest = 1e10,
-                    index = 0, d;
-                while (i--) {
-                    d = Math.abs(values[i] - value);
-                    if (d > wrap / 2) {
-                        d = wrap - d;
-                    }
-                    if (d < closest) {
-                        closest = d;
-                        index = i;
-                    }
+            totalWidth;
+
+
+        const getTotalWidth = () => {
+            const gap = 100; // Фиксированный отступ между последним и первым слайдом (можно настроить)
+            const baseWidth = items[length - 1].offsetLeft +
+                (xPercents[length - 1] / 100 * widths[length - 1]) -
+                startX +
+                spaceBefore[0] +
+                items[length - 1].offsetWidth * gsap.getProperty(items[length - 1], "scaleX") +
+                (parseFloat(config.paddingRight) || 0);
+            return baseWidth + gap;
+        };
+
+        const populateWidths = () => {
+            let b1 = container.getBoundingClientRect(), b2;
+            items.forEach((el, i) => {
+                widths[i] = parseFloat(gsap.getProperty(el, "width", "px"));
+                xPercents[i] = snap(parseFloat(gsap.getProperty(el, "x", "px")) / widths[i] * 100 + gsap.getProperty(el, "xPercent"));
+                b2 = el.getBoundingClientRect();
+                spaceBefore[i] = b2.left - (i ? b1.right : b1.left);
+                b1 = b2;
+            });
+            gsap.set(items, {
+                xPercent: i => xPercents[i]
+            });
+            totalWidth = getTotalWidth();
+        };
+
+        const populateTimeline = () => {
+            let i, item, curX, distanceToStart, distanceToLoop;
+            tl.clear();
+            for (i = 0; i < length; i++) {
+                item = items[i];
+                curX = xPercents[i] / 100 * widths[i];
+                distanceToStart = item.offsetLeft + curX - startX + spaceBefore[0];
+                distanceToLoop = distanceToStart + widths[i] * gsap.getProperty(item, "scaleX");
+                tl.to(item, { xPercent: snap((curX - distanceToLoop) / widths[i] * 100), duration: distanceToLoop / pixelsPerSecond }, 0)
+                    .fromTo(item, { xPercent: snap((curX - distanceToLoop + totalWidth) / widths[i] * 100) }, { xPercent: xPercents[i], duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond, immediateRender: false }, distanceToLoop / pixelsPerSecond)
+                    .add("label" + i, distanceToStart / pixelsPerSecond);
+                times[i] = distanceToStart / pixelsPerSecond;
+                console.log(`Slide ${i}: distanceToStart=${distanceToStart}, distanceToLoop=${distanceToLoop}, totalWidth=${totalWidth}`);
+            }
+        };
+
+        const populateOffsets = () => {
+            timeOffset = center ? tl.duration() * (container.offsetWidth / 2) / totalWidth : 0;
+            center && times.forEach((t, i) => {
+                times[i] = timeWrap(tl.labels["label" + i] + tl.duration() * widths[i] / 2 / totalWidth - timeOffset);
+            });
+        };
+
+        const getClosest = (values, value, wrap) => {
+            let i = values.length,
+                closest = 1e10,
+                index = 0, d;
+            while (i--) {
+                d = Math.abs(values[i] - value);
+                if (d > wrap / 2) {
+                    d = wrap - d;
                 }
-                return index;
-            },
-            populateTimeline = () => {
-                let i, item, curX, distanceToStart, distanceToLoop;
-                tl.clear();
-                for (i = 0; i < length; i++) {
-                    item = items[i];
-                    curX = xPercents[i] / 100 * widths[i];
-                    distanceToStart = item.offsetLeft + curX - startX + spaceBefore[0];
-                    distanceToLoop = distanceToStart + widths[i] * gsap.getProperty(item, "scaleX");
-                    tl.to(item, { xPercent: snap((curX - distanceToLoop) / widths[i] * 100), duration: distanceToLoop / pixelsPerSecond }, 0)
-                        .fromTo(item, { xPercent: snap((curX - distanceToLoop + totalWidth) / widths[i] * 100) }, { xPercent: xPercents[i], duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond, immediateRender: false }, distanceToLoop / pixelsPerSecond)
-                        .add("label" + i, distanceToStart / pixelsPerSecond);
-                    times[i] = distanceToStart / pixelsPerSecond;
+                if (d < closest) {
+                    closest = d;
+                    index = i;
                 }
-                timeWrap = gsap.utils.wrap(0, tl.duration());
-            },
-            refresh = (deep) => {
-                let progress = tl.progress();
-                tl.progress(0, true);
-                populateWidths();
-                deep && populateTimeline();
-                populateOffsets();
-                deep && tl.draggable ? tl.time(times[curIndex], true) : tl.progress(progress, true);
-            },
-            onResize = () => refresh(true),
-            proxy;
+            }
+            return index;
+        };
+
+        const timeWrap = gsap.utils.wrap(0, tl.duration());
+
+        const refresh = (deep) => {
+            let progress = tl.progress();
+            tl.progress(0, true);
+            populateWidths();
+            if (deep) populateTimeline();
+            populateOffsets();
+            deep && tl.draggable ? tl.time(times[curIndex], true) : tl.progress(progress, true);
+        };
+
+        const onResize = () => refresh(true);
+
+        // Инициализация
         populateWidths();
         populateTimeline();
         populateOffsets();
         window.addEventListener("resize", onResize);
-        function toIndex(index, vars) {
+
+        // Методы таймлайна
+        tl.toIndex = (index, vars) => {
             vars = vars || {};
-            (Math.abs(index - curIndex) > length / 2) && (index += index > curIndex ? -length : length); // always go in the shortest direction
+            (Math.abs(index - curIndex) > length / 2) && (index += index > curIndex ? -length : length);
             let newIndex = gsap.utils.wrap(0, length, index),
                 time = times[newIndex];
-            if (time > tl.time() !== index > curIndex && index !== curIndex) { // if we're wrapping the timeline's playhead, make the proper adjustments
+            if (time > tl.time() !== index > curIndex && index !== curIndex) {
                 time += tl.duration() * (index > curIndex ? 1 : -1);
             }
             if (time < 0 || time > tl.duration()) {
@@ -176,10 +264,9 @@ export function horizontalLoop(items, config) {
             }
             curIndex = newIndex;
             vars.overwrite = true;
-            gsap.killTweensOf(proxy);
             return vars.duration === 0 ? tl.time(timeWrap(time)) : tl.tweenTo(time, vars);
-        }
-        tl.toIndex = (index, vars) => toIndex(index, vars);
+        };
+
         tl.closestIndex = setCurrent => {
             let index = getClosest(times, tl.time(), tl.duration());
             if (setCurrent) {
@@ -188,22 +275,29 @@ export function horizontalLoop(items, config) {
             }
             return index;
         };
+
         tl.current = () => indexIsDirty ? tl.closestIndex(true) : curIndex;
-        tl.next = vars => toIndex(tl.current() + 1, vars);
-        tl.previous = vars => toIndex(tl.current() - 1, vars);
+        tl.next = vars => tl.toIndex(tl.current() + 1, vars);
+        tl.previous = vars => tl.toIndex(tl.current() - 1, vars);
         tl.times = times;
-        tl.progress(1, true).progress(0, true); // pre-render for performance
+
+        // Предварительный рендеринг для производительности
+        tl.progress(1, true).progress(0, true);
+
         if (config.reversed) {
             tl.vars.onReverseComplete();
             tl.reverse();
         }
+
+        // Добавляем поддержку перетаскивания
         if (config.draggable && typeof (Draggable) === "function") {
-            proxy = document.createElement("div")
+            const proxy = document.createElement("div");
             let wrap = gsap.utils.wrap(0, 1),
-                ratio, startProgress, draggable, lastSnap, initChangeX, wasPlaying,
-                align = () => tl.progress(wrap(startProgress + (draggable.startX - draggable.x) * ratio)),
-                syncIndex = () => tl.closestIndex(true);
-            typeof (InertiaPlugin) === "undefined" && console.warn("InertiaPlugin required for momentum-based scrolling and snapping. https://greensock.com/club");
+                ratio, startProgress, draggable, lastSnap, initChangeX, wasPlaying;
+
+            const align = () => tl.progress(wrap(startProgress + (draggable.startX - draggable.x) * ratio));
+            const syncIndex = () => tl.closestIndex(true);
+
             draggable = Draggable.create(proxy, {
                 trigger: items[0].parentNode,
                 type: "x",
@@ -224,7 +318,7 @@ export function horizontalLoop(items, config) {
                 inertia: true,
                 snap(value) {
                     if (Math.abs(startProgress / -ratio - this.x) < 10) {
-                        return lastSnap + initChangeX
+                        return lastSnap + initChangeX;
                     }
                     let time = -(value * ratio) * tl.duration(),
                         wrappedTime = timeWrap(time),
@@ -245,13 +339,19 @@ export function horizontalLoop(items, config) {
             })[0];
             tl.draggable = draggable;
         }
+
         tl.closestIndex(true);
         lastIndex = curIndex;
         onChange && onChange(items[curIndex], curIndex);
+
         timeline = tl;
-        return () => window.removeEventListener("resize", onResize);
+        refresh(true); // Вызываем refresh после полной инициализации
+
+        return () => {
+            window.removeEventListener("resize", onResize);
+            tl.kill();
+        };
     });
+
     return timeline;
 }
-
-

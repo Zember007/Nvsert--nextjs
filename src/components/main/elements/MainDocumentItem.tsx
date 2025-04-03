@@ -239,7 +239,7 @@ const MainDocumentItem = ({ activePhoto, setPhoto, img, settings, title, content
 
                         <div className={`transition-all easy-in duration-200 overflow-hidden max-h-0   ${active && '!max-h-[1400px] '}`}
                         >
-                            <div className="s:p-[23px] p-[15px] document-item  flex flex-col l:flex-row gap-[10px] ">
+                            <div className="s:p-[30px] p-[15px] document-item  flex flex-col l:flex-row gap-[10px] ">
                                 <div className="w-[60%] s:gap-0 gap-[20px] flex flex-col m:flex-row m:items-stretch">
                                     <div className='m:m-0 m-auto'>
                                         <PhotoView src={img.src}

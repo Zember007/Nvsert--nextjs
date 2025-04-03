@@ -4,8 +4,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import '@/assets/styles/sections/main/animation/documents.scss'
 import '@/assets/styles/sections/main/animation/skills.scss'
 import { PhotoProvider } from "react-photo-view";
-import GUI from "lil-gui";
-import { BounceEffect } from "@/hook/useBounce";
 
 
 
@@ -17,58 +15,11 @@ const AppMainDocuments = () => {
     const [hoverIndex, setHover] = useState<number | null>(null)
 
 
-    const [settings, setSettings] = useState({
+    const settings = {
         timeout: 0,
         duration: 300,
         length: 20
-    })
-    const guiRef = useRef<GUI | null>(null)
-
-
-    useEffect(() => {
-        // Создаем экземпляр GUI
-        const gui = new GUI();
-
-        // Добавляем контроллеры для каждого параметра
-        gui.add(settings, 'timeout', 0, 1000, 10) // Мин: 0, Макс: 1000, Шаг: 10
-            .name('Задержка анимации')                  // Название в интерфейсе
-            .onChange((value: any) => {                 // Обработчик изменения               
-                setSettings({
-                    ...settings,
-                    timeout: value
-                })
-
-            });
-
-        gui.add(settings, 'duration', 100, 1000, 50) // Мин: 100, Макс: 1000, Шаг: 50
-            .name('Длина анимации')
-            .onChange((value: any) => {
-                setSettings({
-                    ...settings,
-                    duration: value
-                })
-            });
-
-        gui.add(settings, 'length', 10, 100, 1) // Мин: 10, Макс: 100, Шаг: 1
-            .name('Длина отскока')
-            .onChange((value: any) => {
-                setSettings({
-                    ...settings,
-                    length: value
-                })
-                console.log(123123, value, settings);
-
-                // Здесь можно обновить размер или длину
-            });
-
-        guiRef.current = gui
-
-        // Очистка при размонтировании компонента
-        return () => {
-            if (!guiRef.current) return
-            guiRef.current.destroy(); // Удаляем GUI, чтобы избежать утечек памяти
-        };
-    }, [])
+    }
 
     const bouncePhoto = () => {
         setTimeout(() => {
