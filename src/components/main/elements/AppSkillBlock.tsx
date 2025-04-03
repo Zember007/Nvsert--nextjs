@@ -93,7 +93,7 @@ const AppSkillBlock = (skill: any) => {
           style={{
             ...(mousePX && { ...textStyle })
           }}
-          className={`flex flex-col gap-[14px] justify-between h-full ${skill.folder ? '!items-center !justify-center' : 'p-[20px]'}`}
+          className={`flex flex-col gap-[14px] justify-between h-full transition-all duration-500 ${skill.folder ? '!items-center !justify-center' : 'p-[20px]'}`}
         >
           {
             skill.folder ?
