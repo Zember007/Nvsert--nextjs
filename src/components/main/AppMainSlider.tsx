@@ -2,7 +2,7 @@ import '@/assets/styles/sections/main/main-slider.scss'
 import { initSlider } from '@/scripts/slider'
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { slide } from './utils';
+import { slides } from './utils';
 import { filterPrepositions } from '@/hook/filter';
 
 import Slider from "react-slick";
@@ -21,8 +21,6 @@ const settings = {
 
 
 const SliderMain = () => {
-
-    const slides = slide.reverse()
 
 
     const [active, setActive] = useState<number>(0)
