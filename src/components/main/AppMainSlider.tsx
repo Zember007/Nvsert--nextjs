@@ -291,8 +291,8 @@ const SliderMain = () => {
                                 {
                                     slides.map((item, index) => (
                                         <div
-                                            key={index} data-slider="slide" className="slider-slide overflow-hidden active l:w-[337px] l:h-[337px] w-[337px] h-[337px] shadow-[0px_0px_4px_0px_#00000033] rounded-[8px] border border-solid border-[#CCCCCC]">
-                                            <div className="slide-inner relative bg-[#FFF] ">
+                                            key={index} data-slider="slide" className="slider-slide  active l:w-[337px] l:h-[337px] w-[337px] h-[337px] shadow-[0px_0px_4px_0px_#00000033] rounded-[8px] border border-solid border-[#CCCCCC]">
+                                            <div className="slide-inner relative bg-[#FFF] overflow-hidden rounded-[8px]">
                                                 <Image src={item.img} alt='slide' fill
                                                     style={{ objectFit: 'cover' }} />
                                                 <div className="absolute scale-[-0.9] w-full h-auto bg-[#34446D] mix-blend-hue"></div>
