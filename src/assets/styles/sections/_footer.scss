@@ -1,7 +1,23 @@
 .footer {
   background-color: #141414;
   padding-top: 40px;
-  padding-bottom: 30px;
+  padding-bottom: 60px;
+  position: relative;
+
+  &-descirption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #FFF;
+    opacity: 0.5;
+    gap: 15px;    
+  }
 
   &-top {
     background: url('../../images/noise.png');
@@ -54,7 +70,7 @@
       }
 
       &-item {
-        margin: 32px 0 0;
+        margin: 20px 0 0;
 
         @media (max-width: $media-m) {
           margin-top: 16px;
@@ -180,16 +196,16 @@
       &>.services-menu__item {
         &>.services-menu__link {
           font-size: 16px;
-          line-height: 24px;
+          line-height: 1;
           font-weight: 600;
           color: $typography-invert;
-          margin-bottom: 16px;
+          margin-bottom: 15px;
         }
       }
     }
 
     .services-menu__list {
-      margin-bottom: 32px;
+      margin-bottom: 25px;
     }
 
     .services-menu__item {

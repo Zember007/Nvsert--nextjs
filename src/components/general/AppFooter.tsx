@@ -41,6 +41,10 @@ const AppFooter = () => {
 
   return (
     <footer className="footer">
+      <div className="footer-descirption">
+        <span>ООО «ЦЕНТР СТАНДАРТИЗАЦИИ»</span>
+        <span>ИНН 6027189146</span>
+      </div>
       <div className="wrapper footer__wrapper">
         <div className="footer-top rounded-[8px] py-[30px] px-[18px]">
           <div className="footer-top__col footer-top__col--info">
@@ -111,9 +115,9 @@ const AppFooter = () => {
           <AppNavigation />
           <div className="w-full relative mt-[60px] ">
             <div className=" flex flex-col gap-[40px] max-w-[290px]">
-              <p className="text-[14px] text-[#FFF]">{t('privacy.description')}</p>
+              <p className="text-[14px] text-[#FFF]">Использование материалов сайта без разрешения владельцев запрещено. Все права защищены.</p>
               <Link href="/soglashenie/polzovatelskoe-soglashenie/" className="text-[14px] text-[#FFF]">
-                {t('privacy.policy')}
+              Политика конфиденциальности
               </Link>
             </div>
 

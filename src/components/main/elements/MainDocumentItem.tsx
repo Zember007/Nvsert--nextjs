@@ -303,7 +303,7 @@ const MainDocumentItem = ({ activePhoto, setPhoto, img, settings, title, content
                                         {
                                             content1.map((cont, contIndex) => (
                                                 <div key={contIndex} className='flex gap-[10px] flex-col items-start'>
-                                                    <p className='text-[19px] font-bold'>{filterPrepositions(cont.title)}</p>
+                                                    <p className={`${contIndex === 0 ? 'text-[19px]' : 'text-[16px]'} font-bold`}>{filterPrepositions(cont.title)}</p>
 
                                                     {cont.subtitle && <span>{cont.subtitle}</span>}
 
