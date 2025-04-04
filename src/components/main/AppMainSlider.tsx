@@ -45,11 +45,17 @@ const SliderMain = () => {
                 clearTimeout(timeoutId)
             }
 
+
+
             timeoutId = setTimeout(() => {
                 sliders.forEach((slider) => {
                     slider.slickGoTo(index)
                 });
-            }, 500)
+            }, 800)
+
+            sliders.forEach((slider) => {
+                slider.slickGoTo(index)
+            });
 
             setActive(index)
 
@@ -63,44 +69,16 @@ const SliderMain = () => {
 
 
 
-    const [timeSlick, setTimeSlick] = useState<NodeJS.Timeout | null>(null)
-    const [activeIndexes, setActiveIndexes] = useState(Array(5).fill(0));
 
     const handleBeforeChange = (sliderIndex: number, newIndex: number) => {
-
-        setActiveIndexes(prevIndexes => {
-            const updatedIndexes = [...prevIndexes];
-            updatedIndexes[sliderIndex] = newIndex;
-            return updatedIndexes;
-        });
-
-        if (sliderIndex !== 0 && newIndex !== activeIndexes[0]) {
-            sliders[sliderIndex].slickGoTo(activeIndexes[0])
+        if (newIndex !== active) {
+            sliders[sliderIndex].slickGoTo(active)
         }
     };
 
     const { setButtonRef, setWrapperRef } = useButton()
 
-    const activeAll = [...activeIndexes, active].every(index => index === activeIndexes[0])
 
-    useEffect(() => {
-
-        if (activeAll) return
-
-        // if (timeSlick) {
-        //     clearTimeout(timeSlick)
-        // }
-
-        // setTimeSlick(
-        //     setTimeout(() => {
-
-        //     }, 3000)
-        // )
-
-        // sliders.forEach((slider) => slider.slickGoTo(active));
-        // setTimeSlick(null)
-
-    }, [activeAll])
 
     return (
         <section className='py-[75px] text-[#000] bg-[#FFF]'>
@@ -142,7 +120,7 @@ const SliderMain = () => {
                                             {
                                             ...{
                                                 ...settings,
-                                                speed: 1000 - i * 100
+                                                speed: 800 - i * 100
                                             }
                                             }
                                             beforeChange={(_, newIndex) =>
@@ -192,7 +170,6 @@ const SliderMain = () => {
                                                 setChangeBg(true)
                                                 // sliders.forEach((slider) => slider.slickPrev());
                                             }}
-                                            // disabled={!activeAll}
                                             aria-label="previous slide" data-slider="button-prev"
                                             className="tariff hover:bg-[#34446D] group h-[50px] rounded-[4px] border-[#34446D] border border-solid flex items-center justify-center">
 
@@ -227,10 +204,9 @@ const SliderMain = () => {
                                                 setChangeBg(true)
                                                 // sliders.forEach((slider) => slider.slickNext());
                                             }}
-                                            // disabled={!activeAll}
-                                            aria-label="previous slide" data-slider="button-next" 
+                                            aria-label="previous slide" data-slider="button-next"
                                             className=" tariff group hover:bg-[#34446D] h-[50px] rounded-[4px] border-[#34446D] border border-solid flex items-center justify-center">
-                                            
+
                                             <svg className='rotate-[180deg] group-hover:*:*:fill-[#FFF] *:*:transition-all *:*:duration-300' xmlns="http://www.w3.org/2000/svg" width="46" height="38" viewBox="0 0 46 38" fill="none">
                                                 <path d="M24.4482 34.9009H28.7887" stroke="#424242" stroke-width="0.600425" stroke-linecap="round" />
                                                 <path d="M24.4482 3.02588L28.7887 3.02588" stroke="#424242" stroke-width="0.600425" stroke-linecap="round" />
@@ -316,7 +292,7 @@ const SliderMain = () => {
                                     slides.map((item, index) => (
                                         <div
                                             key={index} data-slider="slide" className="slider-slide overflow-hidden active l:w-[337px] l:h-[337px] w-[337px] h-[337px] shadow-[0px_0px_4px_0px_#00000033] rounded-[8px] border border-solid border-[#CCCCCC]">
-                                            <div className="slide-inner overflow-hidden relative bg-[#FFF] ">
+                                            <div className="slide-inner relative bg-[#FFF] ">
                                                 <Image src={item.img} alt='slide' fill
                                                     style={{ objectFit: 'cover' }} />
                                                 <div className="absolute scale-[-0.9] w-full h-auto bg-[#34446D] mix-blend-hue"></div>

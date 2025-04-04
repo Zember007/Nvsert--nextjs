@@ -58,6 +58,7 @@ export function initSlider(onChangeFunction) {
         draggable: false,
         center: false,
         offset: 0,
+        onChangeFunction: onChangeFunction,
         onChange: (element, index) => {
             // Удаляем активный класс с предыдущего элемента
             if (activeElement) {
@@ -78,12 +79,7 @@ export function initSlider(onChangeFunction) {
                 });
             } catch (error) {
                 console.error("Ошибка анимации шагов:", error);
-            }
-
-            // Вызываем callback-функцию если она передана
-            if (onChangeFunction) {
-                onChangeFunction(index);
-            }
+            }           
         }
     });
 
@@ -303,12 +299,14 @@ export function horizontalLoop(items, config) {
             // Обновляем индекс с использованием wrap
             curIndex = gsap.utils.wrap(0, items.length, curIndex + 1);
             tl.toIndex(curIndex, vars);
+            config.onChangeFunction && config.onChangeFunction(curIndex)
         };
 
         tl.previous = function (vars) {
             // Обновляем индекс с использованием wrap
             curIndex = gsap.utils.wrap(0, items.length, curIndex - 1);
             tl.toIndex(curIndex, vars);
+            config.onChangeFunction && config.onChangeFunction(curIndex)
         };
         tl.times = times;
 
