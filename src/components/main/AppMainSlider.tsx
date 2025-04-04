@@ -100,9 +100,7 @@ const SliderMain = () => {
                     </div>
 
                     <div className="overlay l:w-[640px] w-full p-[30px] pr-[80px] relative z-[0]  rounded-[8px] border border-solid border-[#34446D] overflow-hidden">
-                        <div className={`overlay-slider absolute  top-0 right-0 left-0 bottom-0 z-[-2]  ${!changeBg && '!bg-[#F5F5F5] transition-all duration-1000'}`}></div>
-                        <div className="absolute  top-0 right-0 left-0 bottom-0 bg-[#F5F5F580] z-[-1] backdrop-blur-[10px] ">
-                        </div>
+                        <div className={`overlay-slider absolute  top-0 right-0 left-0 bottom-0 z-[-2]`}></div>
                         <div className="flex flex-col justify-between h-full l:items-start items-center w-full">
                             <div className=" grow relative w-full overflow-hidden">
 
@@ -167,7 +165,7 @@ const SliderMain = () => {
                                         className="tariff-wrap w-[100px]">
                                         <button
                                             ref={setButtonRef}
-                                            
+
                                             onClick={() => {
                                                 setOldActive(active)
                                                 setChangeBg(true)
@@ -244,13 +242,41 @@ const SliderMain = () => {
 
                     </div>
 
-                    <div className=""></div>
                     <div
 
                         className="slide-main l:inset-[0%] l:h-[80%] h-[300px] l:bottom-0 bottom-[80px] l:z-0 z-[]">
 
                         <div className="slider-wrap">
-                            <div className="slide-blur">
+                            <div className="slide-blur left-[560px] ">
+
+                                <svg width="80" height="387" viewBox="0 0 80 387" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)', opacity: '0.8' }}>
+                                    <rect width="28.2419" height="387" fill="url(#paint0_linear_1966_742)" fill-opacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
+                                    <rect width="28.2419" height="387" transform="translate(25.8799)" fill="url(#paint1_linear_1966_742)" fill-opacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
+                                    <rect width="28.2419" height="387" transform="translate(51.7583)" fill="url(#paint2_linear_1966_742)" fill-opacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
+                                    <defs>
+                                        <linearGradient id="paint0_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="white" />
+                                            <stop offset="0.9" />
+                                            <stop offset="1" stop-color="white" />
+                                        </linearGradient>
+                                        <linearGradient id="paint1_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="white" />
+                                            <stop offset="0.833333" />
+                                            <stop offset="1" stop-color="white" />
+                                        </linearGradient>
+                                        <linearGradient id="paint2_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="white" />
+                                            <stop offset="0.833333" />
+                                            <stop offset="1" stop-color="white" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+
+
+
+
+                            </div>
+                            <div className="slide-blur right-[0]">
 
                                 <svg width="80" height="387" viewBox="0 0 80 387" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)', opacity: '0.8' }}>
                                     <rect width="28.2419" height="387" fill="url(#paint0_linear_1966_742)" fill-opacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
@@ -288,6 +314,7 @@ const SliderMain = () => {
                                     setOldActive(active)
                                 }}
                             >
+
 
                                 {
                                     slides.map((item, index) => (
