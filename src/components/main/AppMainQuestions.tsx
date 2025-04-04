@@ -86,7 +86,7 @@ const AppMainQuestions = () => {
           </div>
 
           {guarantees.map((guarantee, index) => (
-            <>
+            <div key={index}>
 
               {
                 guarantee.title ?
@@ -99,7 +99,7 @@ const AppMainQuestions = () => {
                   <div></div>
               }
 
-            </>
+            </div>
 
           ))}
         </div>

@@ -5,8 +5,6 @@ import ArrowImg from '@/assets/images/svg/right-arrow-slider.svg'
 import Image from 'next/image';
 import { slide } from './utils';
 import { filterPrepositions } from '@/hook/filter';
-// import gsap from 'gsap';
-// import { BounceEffect } from '@/hook/useBounce';
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -29,8 +27,6 @@ const SliderMain = () => {
 
 
     const [active, setActive] = useState<number>(0)
-    const [oldActive, setOldActive] = useState<number>(0)
-    const [changeBg, setChangeBg] = useState(false)
 
     const [sliders, setSliders] = useState<Slider[]>([]);
 
@@ -39,10 +35,7 @@ const SliderMain = () => {
         let timeoutId: NodeJS.Timeout | null = null;
         initSlider((index: number) => {
 
-            setTimeout(() => {
-                setChangeBg(false)
-            }, 100)
-
+                       
             if (timeoutId) {
                 clearTimeout(timeoutId)
             }
@@ -141,7 +134,7 @@ const SliderMain = () => {
                                                                 </span>
                                                             </div>
                                                         </div>
-                                                        <div className={`l:grow slide-text relative w-full h-full  ${changeBg && 'transition-all duration-500'}`}>
+                                                        <div className={`l:grow slide-text relative w-full h-full  `}>
 
                                                             <p className="text-[16px] bg-[#F5F5F5]">
                                                                 {filterPrepositions(slide.text)}
@@ -166,22 +159,19 @@ const SliderMain = () => {
                                         <button
                                             ref={setButtonRef}
 
-                                            onClick={() => {
-                                                setOldActive(active)
-                                                setChangeBg(true)
-                                            }}
+                                        
                                             aria-label="previous slide" data-slider="button-next"
                                             className="tariff hover:bg-[#34446D] group h-[50px] rounded-[4px] border-[#34446D] border border-solid flex items-center justify-center">
 
                                             <svg className='group-hover:*:*:fill-[#FFF] *:*:transition-all *:*:duration-300' xmlns="http://www.w3.org/2000/svg" width="46" height="38" viewBox="0 0 46 38" fill="none">
-                                                <path d="M24.4482 34.9009H28.7887" stroke="#424242" stroke-width="0.600425" stroke-linecap="round" />
-                                                <path d="M24.4482 3.02588L28.7887 3.02588" stroke="#424242" stroke-width="0.600425" stroke-linecap="round" />
+                                                <path d="M24.4482 34.9009H28.7887" stroke="#424242" strokeWidth="0.600425" strokeLinecap="round" />
+                                                <path d="M24.4482 3.02588L28.7887 3.02588" stroke="#424242" strokeWidth="0.600425" strokeLinecap="round" />
                                                 <g filter="url(#filter0_d_1459_613)">
                                                     <path d="M30.1421 2H23.8391L10.1421 18.962L23.8391 35.9239H30.1421L16.4451 18.962L30.1421 2Z" fill="#34446D" />
                                                 </g>
                                                 <defs>
-                                                    <filter id="filter0_d_1459_613" x="7" y="0" width="27" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                    <filter id="filter0_d_1459_613" x="7" y="0" width="27" height="38" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                                        <feFlood floodOpacity="0" result="BackgroundImageFix" />
                                                         <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5 0" result="hardAlpha" />
                                                         <feOffset dx="1" dy="0" />
                                                         <feGaussianBlur stdDeviation="0.723404" />
@@ -198,23 +188,19 @@ const SliderMain = () => {
                                         ref={setWrapperRef}
                                         className="tariff-wrap w-[100px]">
                                         <button
-                                            ref={setButtonRef}
-                                            onClick={() => {
-                                                setOldActive(active)
-                                                setChangeBg(true)
-                                            }}
+                                            ref={setButtonRef}                                      
                                             aria-label="previous slide" data-slider="button-prev"
                                             className=" tariff group hover:bg-[#34446D] h-[50px] rounded-[4px] border-[#34446D] border border-solid flex items-center justify-center">
 
                                             <svg className='rotate-[180deg] group-hover:*:*:fill-[#FFF] *:*:transition-all *:*:duration-300' xmlns="http://www.w3.org/2000/svg" width="46" height="38" viewBox="0 0 46 38" fill="none">
-                                                <path d="M24.4482 34.9009H28.7887" stroke="#424242" stroke-width="0.600425" stroke-linecap="round" />
-                                                <path d="M24.4482 3.02588L28.7887 3.02588" stroke="#424242" stroke-width="0.600425" stroke-linecap="round" />
+                                                <path d="M24.4482 34.9009H28.7887" stroke="#424242" strokeWidth="0.600425" strokeLinecap="round" />
+                                                <path d="M24.4482 3.02588L28.7887 3.02588" stroke="#424242" strokeWidth="0.600425" strokeLinecap="round" />
                                                 <g filter="url(#filter0_d_1459_613)">
                                                     <path d="M30.1421 2H23.8391L10.1421 18.962L23.8391 35.9239H30.1421L16.4451 18.962L30.1421 2Z" fill="#34446D" />
                                                 </g>
                                                 <defs>
-                                                    <filter id="filter0_d_1459_613" x="7" y="0" width="27" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                    <filter id="filter0_d_1459_613" x="7" y="0" width="27" height="38" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                                        <feFlood floodOpacity="0" result="BackgroundImageFix" />
                                                         <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5 0" result="hardAlpha" />
                                                         <feOffset dx="1" dy="0" />
                                                         <feGaussianBlur stdDeviation="0.723404" />
@@ -250,24 +236,24 @@ const SliderMain = () => {
                             <div className="slide-blur left-[560px] ">
 
                                 <svg width="80" height="387" viewBox="0 0 80 387" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)', opacity: '0.8' }}>
-                                    <rect width="28.2419" height="387" fill="url(#paint0_linear_1966_742)" fill-opacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
-                                    <rect width="28.2419" height="387" transform="translate(25.8799)" fill="url(#paint1_linear_1966_742)" fill-opacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
-                                    <rect width="28.2419" height="387" transform="translate(51.7583)" fill="url(#paint2_linear_1966_742)" fill-opacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
+                                    <rect width="28.2419" height="387" fill="url(#paint0_linear_1966_742)" fillOpacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
+                                    <rect width="28.2419" height="387" transform="translate(25.8799)" fill="url(#paint1_linear_1966_742)" fillOpacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
+                                    <rect width="28.2419" height="387" transform="translate(51.7583)" fill="url(#paint2_linear_1966_742)" fillOpacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
                                     <defs>
                                         <linearGradient id="paint0_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
-                                            <stop stop-color="white" />
+                                            <stop stopColor="white" />
                                             <stop offset="0.9" />
-                                            <stop offset="1" stop-color="white" />
+                                            <stop offset="1" stopColor="white" />
                                         </linearGradient>
                                         <linearGradient id="paint1_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
-                                            <stop stop-color="white" />
+                                            <stop stopColor="white" />
                                             <stop offset="0.833333" />
-                                            <stop offset="1" stop-color="white" />
+                                            <stop offset="1" stopColor="white" />
                                         </linearGradient>
                                         <linearGradient id="paint2_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
-                                            <stop stop-color="white" />
+                                            <stop stopColor="white" />
                                             <stop offset="0.833333" />
-                                            <stop offset="1" stop-color="white" />
+                                            <stop offset="1" stopColor="white" />
                                         </linearGradient>
                                     </defs>
                                 </svg>
@@ -279,24 +265,24 @@ const SliderMain = () => {
                             <div className="slide-blur right-[0]">
 
                                 <svg width="80" height="387" viewBox="0 0 80 387" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)', opacity: '0.8' }}>
-                                    <rect width="28.2419" height="387" fill="url(#paint0_linear_1966_742)" fill-opacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
-                                    <rect width="28.2419" height="387" transform="translate(25.8799)" fill="url(#paint1_linear_1966_742)" fill-opacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
-                                    <rect width="28.2419" height="387" transform="translate(51.7583)" fill="url(#paint2_linear_1966_742)" fill-opacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
+                                    <rect width="28.2419" height="387" fill="url(#paint0_linear_1966_742)" fillOpacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
+                                    <rect width="28.2419" height="387" transform="translate(25.8799)" fill="url(#paint1_linear_1966_742)" fillOpacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
+                                    <rect width="28.2419" height="387" transform="translate(51.7583)" fill="url(#paint2_linear_1966_742)" fillOpacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
                                     <defs>
                                         <linearGradient id="paint0_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
-                                            <stop stop-color="white" />
+                                            <stop stopColor="white" />
                                             <stop offset="0.9" />
-                                            <stop offset="1" stop-color="white" />
+                                            <stop offset="1" stopColor="white" />
                                         </linearGradient>
                                         <linearGradient id="paint1_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
-                                            <stop stop-color="white" />
+                                            <stop stopColor="white" />
                                             <stop offset="0.833333" />
-                                            <stop offset="1" stop-color="white" />
+                                            <stop offset="1" stopColor="white" />
                                         </linearGradient>
                                         <linearGradient id="paint2_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
-                                            <stop stop-color="white" />
+                                            <stop stopColor="white" />
                                             <stop offset="0.833333" />
-                                            <stop offset="1" stop-color="white" />
+                                            <stop offset="1" stopColor="white" />
                                         </linearGradient>
                                     </defs>
                                 </svg>
@@ -308,11 +294,7 @@ const SliderMain = () => {
 
                             <div data-slider="list" className="slider-list "
                                 onMouseMove={() => {
-                                    setChangeBg(true)
-                                }}
-                                onMouseLeave={() => {
-                                    setOldActive(active)
-                                }}
+                                }}                               
                             >
 
 
