@@ -134,7 +134,7 @@ export function initSlider(onChangeFunction) {
 
 
 
-function horizontalLoop(items, config) {
+export function horizontalLoop(items, config) {
     let timeline;
     items = gsap.utils.toArray(items);
     config = config || {};
