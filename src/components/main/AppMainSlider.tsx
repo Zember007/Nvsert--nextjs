@@ -1,7 +1,6 @@
 import '@/assets/styles/sections/main/main-slider.scss'
 import { initSlider } from '@/scripts/slider'
-import { useEffect, useRef, useState } from 'react';
-import ArrowImg from '@/assets/images/svg/right-arrow-slider.svg'
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { slide } from './utils';
 import { filterPrepositions } from '@/hook/filter';
