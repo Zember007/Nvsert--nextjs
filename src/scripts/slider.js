@@ -71,8 +71,9 @@ export function initSlider(onChangeFunction) {
 
             // Анимируем шаги
             try {
+                
                 gsap.to(allSteps, {
-                    y: `${-100 * index}%`,
+                    y: `${-100 * (slides.length - (index || 21) )}%`,
                     ease: "power3",
                     duration: 0.45
                 });

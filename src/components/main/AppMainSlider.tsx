@@ -3,7 +3,7 @@ import { initSlider } from '@/scripts/slider'
 import { useEffect, useRef, useState } from 'react';
 import ArrowImg from '@/assets/images/svg/right-arrow-slider.svg'
 import Image from 'next/image';
-import { slides } from './utils';
+import { slide } from './utils';
 import { filterPrepositions } from '@/hook/filter';
 // import gsap from 'gsap';
 // import { BounceEffect } from '@/hook/useBounce';
@@ -24,6 +24,8 @@ const settings = {
 
 
 const SliderMain = () => {
+
+    const slides = slide.reverse()
 
 
     const [active, setActive] = useState<number>(0)
@@ -165,12 +167,12 @@ const SliderMain = () => {
                                         className="tariff-wrap w-[100px]">
                                         <button
                                             ref={setButtonRef}
+                                            
                                             onClick={() => {
                                                 setOldActive(active)
                                                 setChangeBg(true)
-                                                // sliders.forEach((slider) => slider.slickPrev());
                                             }}
-                                            aria-label="previous slide" data-slider="button-prev"
+                                            aria-label="previous slide" data-slider="button-next"
                                             className="tariff hover:bg-[#34446D] group h-[50px] rounded-[4px] border-[#34446D] border border-solid flex items-center justify-center">
 
                                             <svg className='group-hover:*:*:fill-[#FFF] *:*:transition-all *:*:duration-300' xmlns="http://www.w3.org/2000/svg" width="46" height="38" viewBox="0 0 46 38" fill="none">
@@ -202,9 +204,8 @@ const SliderMain = () => {
                                             onClick={() => {
                                                 setOldActive(active)
                                                 setChangeBg(true)
-                                                // sliders.forEach((slider) => slider.slickNext());
                                             }}
-                                            aria-label="previous slide" data-slider="button-next"
+                                            aria-label="previous slide" data-slider="button-prev"
                                             className=" tariff group hover:bg-[#34446D] h-[50px] rounded-[4px] border-[#34446D] border border-solid flex items-center justify-center">
 
                                             <svg className='rotate-[180deg] group-hover:*:*:fill-[#FFF] *:*:transition-all *:*:duration-300' xmlns="http://www.w3.org/2000/svg" width="46" height="38" viewBox="0 0 46 38" fill="none">

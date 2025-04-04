@@ -590,7 +590,7 @@ import ImgSlider18 from '@/assets/images/slider/Sredstva_individual\'noy_zashchi
 import ImgSlider19 from '@/assets/images/slider/Transport_i_spetstekhnika.png';
 import ImgSlider20 from '@/assets/images/slider/DeWatermark.ai_1740631645043-Photoroom.png'; // Замена для "Высоковольтное оборудование"
 
-export const slides = [
+export const slide = [
 
     {
         title: 'Услуги',
