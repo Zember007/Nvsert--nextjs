@@ -23,33 +23,41 @@ const settings = {
 const SliderMain = () => {
 
 
-    const [active, setActive] = useState<number>(0)
+    // const [active, setActive] = useState<number>(0)
 
     const [sliders, setSliders] = useState<Slider[]>([]);
 
     useEffect(() => {
         if (sliders.length < 5) return
         let timeoutId: NodeJS.Timeout | null = null;
+        let enableList = true
         initSlider((index: number) => {
 
-                       
             if (timeoutId) {
                 clearTimeout(timeoutId)
             }
 
 
 
-            timeoutId = setTimeout(() => {
+
+
+            if (enableList) {
                 sliders.forEach((slider) => {
                     slider.slickGoTo(index)
                 });
-            }, 800)
+                enableList = false
+                timeoutId = setTimeout(() => {
+                    enableList = true
+                }, 800)
+            } else {
+                timeoutId = setTimeout(() => {
+                    enableList = true
+                    sliders.forEach((slider) => {
+                        slider.slickGoTo(index)
+                    });
+                }, 800)
+            }
 
-            sliders.forEach((slider) => {
-                slider.slickGoTo(index)
-            });
-
-            setActive(index)
 
         })
     }, [sliders])
@@ -63,9 +71,9 @@ const SliderMain = () => {
 
 
     const handleBeforeChange = (sliderIndex: number, newIndex: number) => {
-        if (newIndex !== active) {
-            sliders[sliderIndex].slickGoTo(active)
-        }
+        // if (newIndex !== active) {
+        //     sliders[sliderIndex].slickGoTo(active)
+        // }
     };
 
     const { setButtonRef, setWrapperRef } = useButton()
@@ -154,7 +162,7 @@ const SliderMain = () => {
                                         ref={setWrapperRef}
                                         className="tariff-wrap w-[100px]">
                                         <button
-                                            ref={setButtonRef}                                        
+                                            ref={setButtonRef}
                                             aria-label="previous slide" data-slider="button-prev"
                                             className="tariff hover:bg-[#34446D] group h-[50px] rounded-[4px] border-[#34446D] border border-solid flex items-center justify-center">
 
@@ -183,7 +191,7 @@ const SliderMain = () => {
                                         ref={setWrapperRef}
                                         className="tariff-wrap w-[100px]">
                                         <button
-                                            ref={setButtonRef}                                      
+                                            ref={setButtonRef}
                                             aria-label="previous slide" data-slider="button-next"
                                             className=" tariff group hover:bg-[#34446D] h-[50px] rounded-[4px] border-[#34446D] border border-solid flex items-center justify-center">
 
@@ -289,7 +297,7 @@ const SliderMain = () => {
 
                             <div data-slider="list" className="slider-list "
                                 onMouseMove={() => {
-                                }}                               
+                                }}
                             >
 
 
