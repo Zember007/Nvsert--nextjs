@@ -118,7 +118,10 @@
   position: relative;
   transition: margin 0.3s ease;
   &.active {
-    margin-left: 76px;
+    margin-left: 76px !important;
+  }
+  &:first-child {
+    margin-left: 75px;
   }
 }
 
