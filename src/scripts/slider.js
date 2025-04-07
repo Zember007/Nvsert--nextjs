@@ -46,15 +46,15 @@ export function initSlider(onChangeFunction) {
         stepsArray.push(stepClone);
     });
 
-let oldIndex = 0
 
+    let oldIndex = 0;
     function updateSteps(index) {
 
 
         gsap.to(stepsArray, {
             y: `${-100 * (index)}%`,
-            duration: ((oldIndex == 0 && index === 20) || (oldIndex == 20 && index === 0))? 0 : 0.25,
-            ease: "none",           
+            duration: ((oldIndex == 0 && index === 20) || (oldIndex == 20 && index === 0)) ? 0 : 0.25,
+            ease: "none"
         });
         oldIndex = index
     }

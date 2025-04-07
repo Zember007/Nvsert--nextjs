@@ -46,6 +46,12 @@ const AppMainSkills = () => {
         window.addEventListener("resize", handleResize);
         handleResize()
 
+        const img = document.querySelector('img');
+
+        img?.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
         return () => {
             if (divRef.current) {
                 observer.unobserve(divRef.current);
@@ -93,9 +99,9 @@ const AppMainSkills = () => {
                                     {(skill.empty) ? (
                                         <div></div>
                                     )
-                                        : 
-                                            
-                                         <AppSkillBlock index={index} {...skill} isVisible={isVisible} />
+                                        :
+
+                                        <AppSkillBlock index={index} {...skill} isVisible={isVisible} />
                                     }
                                 </div>
                             ))
@@ -111,14 +117,14 @@ const AppMainSkills = () => {
                         </li>}
 
                     <p className='text-[18px] leading-[1.5] mt-[40px]'>
-                        {filterPrepositions('Наша компания признана одной из ведущих на рынке сертификации в Российской Федерации и стран Евразийского Экономического Союза. Специалисты NVSERT предоставляют широкий спектр услуг, направленный на оформление обязательной и добровольной сертификации, декларирования, соответствия требованиям технических регламентов и других документов, подтверждающих качество выпускаемой продукции.')}                        
+                        {filterPrepositions('Наша компания признана одной из ведущих на рынке сертификации в Российской Федерации и стран Евразийского Экономического Союза. Специалисты NVSERT предоставляют широкий спектр услуг, направленный на оформление обязательной и добровольной сертификации, декларирования, соответствия требованиям технических регламентов и других документов, подтверждающих качество выпускаемой продукции.')}
                     </p>
                     <Link
                         href={'/about'}
                         className='flex items-center gap-[8px] mt-[28px]'
                     >
-                        <span className='text-[20px] font-bold'>Подробнее о компании</span>                        
-                            <Image src={ArrowImg} alt='arrow' width={24} height={24} />
+                        <span className='text-[20px] font-bold'>Подробнее о компании</span>
+                        <Image src={ArrowImg} alt='arrow' width={24} height={24} />
                     </Link>
                 </div>
             </div>
