@@ -5,7 +5,6 @@ import InertiaPlugin from "./InertiaPlugin";
 gsap.registerPlugin(Draggable, InertiaPlugin);
 
 export function initSlider(onChangeFunction) {
-    // Проверяем наличие основных элементов DOM
     const wrapper = document.querySelector('[data-slider="list"]');
     if (!wrapper) {
         console.error("Контейнер слайдера не найден");
@@ -23,112 +22,88 @@ export function initSlider(onChangeFunction) {
     const prevButton = document.querySelector('[data-slider="button-prev"]');
     const totalElement = document.querySelector('[data-slide-count="total"]');
     const stepElement = document.querySelector('[data-slide-count="step"]');
-
-    if (!stepElement) {
-        console.error("Элемент шага не найден");
-        return null;
-    }
-
     const stepsParent = stepElement.parentElement;
-    if (!stepsParent) {
-        console.error("Родительский элемент шагов не найден");
+
+    if (!stepsParent || !stepElement) {
+        console.error("Элементы шагов не найдены");
         return null;
     }
 
     let activeElement;
     const totalSlides = slides.length;
 
-    // Обновляем общее количество слайдов
     if (totalElement) {
         totalElement.textContent = totalSlides < 10 ? `0${totalSlides}` : totalSlides;
     }
 
-    // Создаем элементы шагов динамически
+    // Создаем шаги и сразу дублируем их
     stepsParent.innerHTML = '';
+    const stepsArray = [];
     slides.forEach((_, index) => {
         const stepClone = stepElement.cloneNode(true);
         stepClone.textContent = index + 1 < 10 ? `0${index + 1}` : index + 1;
         stepsParent.appendChild(stepClone);
+        stepsArray.push(stepClone);
     });
 
-    const allSteps = stepsParent.querySelectorAll('[data-slide-count="step"]');
+let oldIndex = 0
 
-    // Инициализируем горизонтальный цикл с дополнительным смещением
+    function updateSteps(index) {
+
+
+        gsap.to(stepsArray, {
+            y: `${-100 * (index)}%`,
+            duration: ((oldIndex == 0 && index === 20) || (oldIndex == 20 && index === 0))? 0 : 0.25,
+            ease: "none",           
+        });
+        oldIndex = index
+    }
+
     const loop = horizontalLoop(slides, {
         paused: true,
         draggable: true,
         center: false,
-        offset: 0,
         onChange: (element, index) => {
-            // Удаляем активный класс с предыдущего элемента
             if (activeElement) {
                 activeElement.classList.remove("active");
             }
-
-            // Обрабатываем следующий элемент с учетом зацикливания
             const nextSibling = slidesHtml[index];
             nextSibling.classList.add("active");
             activeElement = nextSibling;
 
-            // Анимируем шаги
             try {
-
-                gsap.to(allSteps, {
-                    y: `${-100 * index}%`,
-                    ease: "power3",
-                    duration: 0.45,
-                   
-                });
-
-
+                updateSteps(index);
             } catch (error) {
                 console.error("Ошибка анимации шагов:", error);
             }
 
-            onChangeFunction && onChangeFunction(index)
+            onChangeFunction && onChangeFunction(index);
         }
     });
 
-    // Убедитесь, что loop существует, перед тем как добавлять destroy
-    if (loop) {
-        loop.destroy = () => {
-            loop.kill();
-            if (nextButton) nextButton.removeEventListener("click", loop.next);
-            if (prevButton) prevButton.removeEventListener("click", loop.previous);
-            slides.forEach(slide => slide.removeEventListener("click"));
-        };
-    } else {
-        console.error("Ошибка: loop не был инициализирован.");
-    }
-
-    // Добавляем обработчики событий с проверками
     if (nextButton) {
-        nextButton.addEventListener("click", () => {
-            if (loop) {
-                loop.next({ ease: "power3", duration: 0.725 });
-            }
-        });
+        nextButton.addEventListener("click", () => loop.next({ ease: "power3", duration: 0.725 }));
     }
-
     if (prevButton) {
-        prevButton.addEventListener("click", () => {
-            if (loop) {
-                loop.previous({ ease: "power3", duration: 0.725 });
-            }
-        });
+        prevButton.addEventListener("click", () => loop.previous({ ease: "power3", duration: 0.725 }));
     }
-
-    // Исправляем обработчик кликов по слайдам
     slides.forEach((slide, i) => {
         slide.addEventListener("click", () => {
-            if (loop) {
-                const targetIndex = i === 0 ? 0 : i - 1;
-                loop.toIndex(targetIndex, { ease: "power3", duration: 0.725 });
-            }
+            loop.toIndex(i === 0 ? 0 : i - 1, { ease: "power3", duration: 0.725 });
         });
     });
 
-    return loop;  // Возвращаем loop, чтобы убедиться, что он существует
+    loop.destroy = () => {
+        loop.kill();
+        if (nextButton) nextButton.removeEventListener("click", loop.next);
+        if (prevButton) prevButton.removeEventListener("click", loop.previous);
+        slides.forEach(slide => slide.removeEventListener("click"));
+    };
+
+    // Инициализируем первый шаг
+    updateSteps(0);
+
+    return loop;
 }
 
 
