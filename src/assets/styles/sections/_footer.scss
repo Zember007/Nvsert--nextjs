@@ -71,6 +71,7 @@
 
       &-item {
         margin: 20px 0 0;
+        line-height: 1;
 
         @media (max-width: $media-m) {
           margin-top: 16px;
@@ -84,7 +85,7 @@
       &-link {
         @include transition();
         font-size: 18px;
-        line-height: 24px;
+        
         font-weight: 600;
         color: $typography-invert;
         text-decoration: none;
@@ -224,7 +225,8 @@
       display: block;
       font-weight: 400;
       font-size: 16px;    
-      line-height: 22px;
+      line-height: 1;
+      height: 11px;
       letter-spacing: 0%;
       color: #FFF;
       text-decoration: none;
