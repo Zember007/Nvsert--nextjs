@@ -89,6 +89,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
         <>
             <head>
                 <title>{metadata.title}</title>
+                <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;1,300&display=swap" rel="stylesheet"></link>
                 <meta name="description" content={metadata.description} />
                 <meta name="keywords" content={metadata.keywords} />
                 <meta property="og:title" content={metadata.openGraph?.title} />
