@@ -104,18 +104,22 @@
 
 .slider-list {
   flex-flow: row;
-  gap: 76px;
+  gap: 75px;
   justify-content: flex-end;
   align-items: stretch;
   display: flex;
   position: relative;
-  transform: translateX(690px);
+  transform: translateX(640px);
 }
 
 .slider-slide {
   flex: none;
   transition: opacity .4s;
   position: relative;
+  transition: margin 0.3s ease;
+  &.active {
+    margin-left: 76px;
+  }
 }
 
 

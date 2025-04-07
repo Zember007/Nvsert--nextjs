@@ -13,6 +13,7 @@ export function initSlider(onChangeFunction) {
     }
 
     const slides = gsap.utils.toArray('[data-slider="slide"]');
+    const slidesHtml = document.querySelectorAll('[data-slider="slide"]');
     if (!slides.length) {
         console.error("Слайды не найдены");
         return null;
@@ -65,7 +66,7 @@ export function initSlider(onChangeFunction) {
             }
 
             // Обрабатываем следующий элемент с учетом зацикливания
-            const nextSibling = element.nextElementSibling || slides[0];
+            const nextSibling = slidesHtml[index];
             nextSibling.classList.add("active");
             activeElement = nextSibling;
 
