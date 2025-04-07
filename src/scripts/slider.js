@@ -57,7 +57,7 @@ export function initSlider(onChangeFunction) {
         paused: true,
         draggable: true,
         center: false,
-        offset: 0,       
+        offset: 0,
         onChange: (element, index) => {
             // Удаляем активный класс с предыдущего элемента
             if (activeElement) {
@@ -71,12 +71,15 @@ export function initSlider(onChangeFunction) {
 
             // Анимируем шаги
             try {
-                
+
                 gsap.to(allSteps, {
-                    y: `${-100 * (slides.length - (index || 21) )}%`,
+                    y: `${-100 * index}%`,
                     ease: "power3",
-                    duration: 0.45
+                    duration: 0.45,
+                   
                 });
+
+
             } catch (error) {
                 console.error("Ошибка анимации шагов:", error);
             }
@@ -258,7 +261,7 @@ export function horizontalLoop(items, config) {
             return index;
         };
         tl.current = () => indexIsDirty ? tl.closestIndex(true) : curIndex;
-        tl.next = vars => {toIndex(tl.current() + 1, vars)};
+        tl.next = vars => { toIndex(tl.current() + 1, vars) };
         tl.previous = vars => toIndex(tl.current() - 1, vars);
         tl.times = times;
         tl.progress(1, true).progress(0, true); // pre-render for performance

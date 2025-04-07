@@ -26,13 +26,15 @@
 }
 
 .count-column {
-  height: 32px;
+  height: 40px;
   overflow: hidden;
 }
 
 .count-heading {
-  font-weight: 700;
-  font-size: 32px;
+  font-weight: 300;
+  line-height: 1;
+  color: #34446D;
+  font-size: 40px;
 
 }
 
@@ -144,8 +146,9 @@
   z-index: 1;
   display: flex;
 
-  mix-blend-mode: overlay;
+  mix-blend-mode: color-burn;
   backdrop-filter: blur(2px);
+  transform: translateX(4px);
 
 }
 

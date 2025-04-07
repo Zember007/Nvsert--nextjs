@@ -154,10 +154,8 @@ const SliderMain = () => {
                                         ref={setWrapperRef}
                                         className="tariff-wrap w-[100px]">
                                         <button
-                                            ref={setButtonRef}
-
-                                        
-                                            aria-label="previous slide" data-slider="button-next"
+                                            ref={setButtonRef}                                        
+                                            aria-label="previous slide" data-slider="button-prev"
                                             className="tariff hover:bg-[#34446D] group h-[50px] rounded-[4px] border-[#34446D] border border-solid flex items-center justify-center">
 
                                             <svg className='group-hover:*:*:fill-[#FFF] *:*:transition-all *:*:duration-300' xmlns="http://www.w3.org/2000/svg" width="46" height="38" viewBox="0 0 46 38" fill="none">
@@ -186,7 +184,7 @@ const SliderMain = () => {
                                         className="tariff-wrap w-[100px]">
                                         <button
                                             ref={setButtonRef}                                      
-                                            aria-label="previous slide" data-slider="button-prev"
+                                            aria-label="previous slide" data-slider="button-next"
                                             className=" tariff group hover:bg-[#34446D] h-[50px] rounded-[4px] border-[#34446D] border border-solid flex items-center justify-center">
 
                                             <svg className='rotate-[180deg] group-hover:*:*:fill-[#FFF] *:*:transition-all *:*:duration-300' xmlns="http://www.w3.org/2000/svg" width="46" height="38" viewBox="0 0 46 38" fill="none">
@@ -211,11 +209,11 @@ const SliderMain = () => {
                                         </button>
                                     </div>
                                 </div>
-                                <div className="flex item-center text-[32px] font-bold leading-[1]">
+                                <div className="flex item-center text-[40px] font-[300] text-[#34446D] ">
                                     <div className="count-column">
                                         <h3 data-slide-count="step" className="count-heading">01</h3>
                                     </div>
-                                    <span>/</span>
+                                    <span className='leading-[1]'>/</span>
                                     <div className="count-column">
                                         <h3 data-slide-count="total" className="count-heading">{slides.length}</h3>
                                     </div>
