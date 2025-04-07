@@ -169,7 +169,7 @@
   z-index: 1;
   display: flex;
 
-  mix-blend-mode: color-burn;
+  mix-blend-mode: overlay;
   backdrop-filter: blur(2px);
   transform: translateX(4px);
 
