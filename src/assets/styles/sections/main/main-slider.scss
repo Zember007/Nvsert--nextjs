@@ -30,10 +30,14 @@
   overflow: hidden;
 }
 
+.rubik ,
+.rubik *{
+  font-family: "Rubik", sans-serif;
+}
+
 .count-heading {
 
   font-weight: 300;
-  font-family: "Rubik", sans-serif;
   line-height: 1;
   color: #34446D;
   font-size: 40px;

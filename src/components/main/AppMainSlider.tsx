@@ -210,12 +210,12 @@ const SliderMain = () => {
                                     </div>
                                 </div>
                                 <div className="flex item-center text-[40px] font-[300] text-[#34446D] ">
-                                    <div className="count-column">
-                                        <h3 data-slide-count="step" className="count-heading">01</h3>
+                                    <div className="count-column rubik">
+                                        <h3 data-slide-count="step" className="count-heading ">01</h3>
                                     </div>
-                                    <span className='leading-[1]'>/</span>
-                                    <div className="count-column">
-                                        <h3 data-slide-count="total" className="count-heading">{slides.length}</h3>
+                                    <span className='leading-[1] rubik'>/</span>
+                                    <div className="count-column ">
+                                        <h3 data-slide-count="total" className="count-heading rubik">{slides.length}</h3>
                                     </div>
                                 </div>
                             </div>
