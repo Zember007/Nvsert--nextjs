@@ -72,7 +72,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
 
     }, [])
 
-    const [classBody, setClassBody] = useState('transparent-header bg-secondary')
+    const [classBody, setClassBody] = useState('transparent-header')
 
     useEffect(() => {
         if (pathname !== '/' && classBody !== '') {
@@ -82,7 +82,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
         }
 
         if(pathname === '/' &&  classBody === '') {
-            setClassBody('transparent-header bg-secondary')
+            setClassBody('transparent-header')
         }
     }, [pathname])
     return (

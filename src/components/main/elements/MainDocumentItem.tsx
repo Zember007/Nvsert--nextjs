@@ -167,7 +167,7 @@ const MainDocumentItem = ({ activePhoto, setPhoto, img, settings, title, content
                 ref={borderBounce}
                 onMouseEnter={() => { setHover(true) }}
                 onMouseLeave={() => { setHover(false) }}
-                className={`mx-[-30px] overflow-hidden transition-all duration-300 group/main cursor-pointer  hover:bg-[#FFF] rounded-[4px] relative`}>
+                className={`mx-[-30px] overflow-hidden transition-all duration-300 group/main cursor-pointer  hover:bg-[#F5F5F5] rounded-[4px] relative`}>
                 <div className={`transition-all duration-300 pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[10] rounded-[4px] ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[transparent]`}></div>
                 <div className="  flex flex-col">
                     <div className="relative ">
@@ -181,7 +181,7 @@ const MainDocumentItem = ({ activePhoto, setPhoto, img, settings, title, content
 
 
                             }}
-                            className={`materialBtn text-left group/window active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] ${!active ? 'hover:bg-[#FFF]' : ' bg-[#34446D]  '} active:bg-[#5B6788]  px-[30px]  relative w-full transition-all duration-300 z-[0]`}>
+                            className={`materialBtn text-left group/window active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] ${!active ? 'hover:bg-[#F5F5F5]' : ' bg-[#34446D]  '} active:bg-[#5B6788]  px-[30px]  relative w-full transition-all duration-300 z-[0]`}>
 
                             <div className={`pointer-events-none ${active && 'opacity-0'} transition-all duration-100 absolute top-1/2 translate-y-[-50%] left-[30px]`}>
                                 <div
