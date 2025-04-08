@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import AppMainIntro from '../components/main/AppMainIntro';
 import AppMainSlider from '@/components/main/AppMainSlider';
+import AppMainSafeguards from '@/components/main/AppMainSafeguards';
 import AppMainDocuments from '../components/main/AppMainDocuments';
 import AppMainQuestions from '../components/main/AppMainQuestions';
 import AppMainSkills from '../components/main/AppMainSkills';
@@ -20,6 +21,8 @@ export default function Home() {
       <AppMainSkills />
 
       <AppMainSlider />
+
+      <AppMainSafeguards />
 
       <AppMainQuestions />
 

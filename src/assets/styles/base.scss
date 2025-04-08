@@ -39,19 +39,18 @@
 
 .PhotoView-Slider__ArrowLeft,
 .PhotoView-Slider__ArrowRight {
-    background: #E1E1E1 !important;
+    background: transparent !important;
     box-sizing: content-box;
-    height: 100px !important;
-    border-radius: 4px !important;
-    width: 50px !important;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #34446D !important;
+    width: 45px !important;
+    height: 34px !important;
+    opacity: 1 !important;
+    top: auto !important;
+    margin: 0 !important;
+    bottom: 20px !important;
 
     &::before {
         content: '';
-        background-image: url(../images/svg/right-arrow-slider.svg);
+        background-image: url(../images/svg/right-arrow-modalphoto.svg);
         background-position: center center;
         width: 45px;
         height: 34px;
@@ -59,7 +58,7 @@
 }
 
 .PhotoView-Slider__ArrowRight {
-    right: 25% !important;
+    right: 40% !important;
 
     &::before {
         transform: rotate(180deg);
@@ -67,7 +66,7 @@
 }
 
 .PhotoView-Slider__ArrowLeft {
-    left: 25% !important;
+    left: 40% !important;
 
 }
 
@@ -78,10 +77,46 @@
 }
 
 .blurred-mask {
-    backdrop-filter: blur(5px);
-    /* Размытие фона под маской */
-    -webkit-backdrop-filter: blur(5px);
-    /* Поддержка для Webkit-браузеров */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background: #000000CC !important;
+}
+
+.PhotoView-Slider__BannerWrap {
+    max-width: 1200px;
+    top: 20px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+
+    &::before {
+        content: attr(data-before);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 20px;
+        height: 70px;
+        padding: 0 25px;
+        font-size: 28px;
+        font-weight: 700;
+        border: 1px solid var(--Color-3, #FFFFFF);
+        background: #000;
+        border-radius: 4px; 
+        white-space: nowrap;
+        display: flex;       
+        align-items: center;
+    }
+}
+
+.PhotoView-Slider__Counter {
+    opacity: 0 !important;
+}
+
+.PhotoView-Slider__toolbarIcon {
+    width: 40px;
+    height: 40px;
+    opacity: 1 !important;
+    padding: 0 !important;
 }
 
 .tariff-wrap {
@@ -179,34 +214,13 @@ body::-webkit-scrollbar {
     display: none;
 }
 
-.PhotoView__PhotoWrap.animate {
-    animation: bounce-photowrap 200ms ease-in forwards;
-}
 
-@keyframes bounce-photowrap {
-    
-        0% { 
-            top: (0);
-        }
-        30% { 
-            top: 40px;
-        }
-        50% { 
-            top: 20px;
-        }
-        70% { 
-            top: -20px;
-        }
-        100% { 
-            top: 0;
-        }
-    
-}
+
 
 input:-internal-autofill-selected {
-    color: inherit !important; 
+    color: inherit !important;
 }
 
 input:-webkit-autofill {
-    color: inherit !important; 
+    color: inherit !important;
 }
