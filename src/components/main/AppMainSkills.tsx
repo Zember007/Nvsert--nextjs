@@ -46,11 +46,7 @@ const AppMainSkills = () => {
         window.addEventListener("resize", handleResize);
         handleResize()
 
-        const img = document.querySelector('img');
-
-        img?.addEventListener('contextmenu', function (e) {
-            e.preventDefault();
-        });
+        
 
         return () => {
             if (divRef.current) {

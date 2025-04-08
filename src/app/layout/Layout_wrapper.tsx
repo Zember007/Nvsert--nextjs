@@ -70,6 +70,12 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
 
         window.addEventListener('resize', set100Vh);
 
+        const img = document.querySelector('img');
+
+        img?.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
     }, [])
 
     const [classBody, setClassBody] = useState('transparent-header')
@@ -81,7 +87,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
 
         }
 
-        if(pathname === '/' &&  classBody === '') {
+        if (pathname === '/' && classBody === '') {
             setClassBody('transparent-header')
         }
     }, [pathname])
