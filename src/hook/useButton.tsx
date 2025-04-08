@@ -76,5 +76,5 @@ export const useButton = () => {
     });
   }, []);
 
-  return { setButtonRef, setWrapperRef };
+  return { setButtonRef, setWrapperRef, wrapperRefs };
 };
