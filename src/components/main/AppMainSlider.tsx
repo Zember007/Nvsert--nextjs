@@ -240,10 +240,10 @@ const SliderMain = () => {
 
                         <div className="slider-wrap">
                         <div className="slide-blur left-[557px]">
-                                <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
-                                <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
-                                <span className="line" style={{ '--blur': '8px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className="line" style={{ '--blur': '8px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className="line" style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>
                             </div>
                             {/* <div className="slide-blur right-[0]">
 
@@ -276,7 +276,7 @@ const SliderMain = () => {
                             </div> */}
 
                             <div className="slide-blur right-0">
-                                <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className="line" style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '8px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
