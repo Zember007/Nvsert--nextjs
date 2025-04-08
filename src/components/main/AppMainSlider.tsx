@@ -87,8 +87,8 @@ const SliderMain = () => {
                 <h2 className='leading-[1] tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px]'>Помогаем с документами по отраслям</h2>
                 <div className="cloneable l:h-[458px] h-[710px]">
 
-                    <div className="tariff-wrap w-[250px]" ref={setWrapperRef}>
-                        <button ref={setButtonRef} className='justify-center border-[#34446D] border border-solid tariff text-[20px] transition-all duration-300 font-bold tracking-normal m:flex items-center gap-[6px] px-[16px] py-[9px] text-[#34446D] hover:text-[#FFF] rounded-[4px]  group hover:bg-[#34446D]  leading-[1]'>
+                    <div className="tariff-wrap w-[245px]" ref={setWrapperRef}>
+                        <button ref={setButtonRef} className='justify-center border-[#34446D] border border-solid tariff text-[20px] transition-all duration-300 font-bold tracking-normal m:flex items-center gap-[6px] px-[10px] py-[9px] text-[#34446D] hover:text-[#FFF] rounded-[4px]  group hover:bg-[#34446D]  leading-[1]'>
                             <span>Оформить заявку</span>
                             <svg className='group-hover:*:fill-[#FFF] *:transition-all *:duration-300' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M29.0627 0.9375L0.930664 12.1875L11.426 16.9336L26.2502 3.75L13.0666 18.5742L17.8127 29.0625L29.0627 0.9375Z" fill="#34446D" />
@@ -236,7 +236,12 @@ const SliderMain = () => {
                         className="slide-main l:inset-[0%] l:h-[80%] h-[300px] l:bottom-0 bottom-[80px] l:z-0 z-[]">
 
                         <div className="slider-wrap">
-                            <div className="slide-blur left-[560px] ">
+                        <div className="slide-blur left-[557px]">
+                                <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className="line" style={{ '--blur': '7px', '--lightness': '100%' } as React.CSSProperties}></span>
+                            </div>
+                            {/* <div className="slide-blur right-[0]">
 
                                 <svg width="80" height="387" viewBox="0 0 80 387" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)', opacity: '0.8' }}>
                                     <rect width="28.2419" height="387" fill="url(#paint0_linear_1966_742)" fillOpacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
@@ -264,37 +269,13 @@ const SliderMain = () => {
 
 
 
+                            </div> */}
+
+                            <div className="slide-blur right-0">
+                                <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className="line" style={{ '--blur': '7px', '--lightness': '100%' } as React.CSSProperties}></span>
                             </div>
-                            <div className="slide-blur right-[0]">
-
-                                <svg width="80" height="387" viewBox="0 0 80 387" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)', opacity: '0.8' }}>
-                                    <rect width="28.2419" height="387" fill="url(#paint0_linear_1966_742)" fillOpacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
-                                    <rect width="28.2419" height="387" transform="translate(25.8799)" fill="url(#paint1_linear_1966_742)" fillOpacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
-                                    <rect width="28.2419" height="387" transform="translate(51.7583)" fill="url(#paint2_linear_1966_742)" fillOpacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
-                                    <defs>
-                                        <linearGradient id="paint0_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
-                                            <stop stopColor="white" />
-                                            <stop offset="0.9" />
-                                            <stop offset="1" stopColor="white" />
-                                        </linearGradient>
-                                        <linearGradient id="paint1_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
-                                            <stop stopColor="white" />
-                                            <stop offset="0.833333" />
-                                            <stop offset="1" stopColor="white" />
-                                        </linearGradient>
-                                        <linearGradient id="paint2_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
-                                            <stop stopColor="white" />
-                                            <stop offset="0.833333" />
-                                            <stop offset="1" stopColor="white" />
-                                        </linearGradient>
-                                    </defs>
-                                </svg>
-
-
-
-
-                            </div>
-
                             <div data-slider="list" className="slider-list "
                                 onMouseMove={() => {
                                 }}

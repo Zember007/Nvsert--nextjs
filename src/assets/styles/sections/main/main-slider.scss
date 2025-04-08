@@ -30,8 +30,8 @@
   overflow: hidden;
 }
 
-.rubik ,
-.rubik *{
+.rubik,
+.rubik * {
   font-family: "Rubik", sans-serif;
 }
 
@@ -107,7 +107,8 @@
 
 .slider-wrap {
   justify-content: flex-start;
-  padding-top: 30px;
+  margin-top: 30px;
+  overflow: hidden;
   width: 100%;
   height: 100%;
   display: flex;
@@ -131,9 +132,7 @@
   position: relative;
   transition: margin 0.3s ease;
 
-  &.active {
-    margin-left: 76px !important;
-  }
+
 
   &:first-child {
     margin-left: 75px;
@@ -157,23 +156,42 @@
   overflow: hidden;
 }
 
+:root {
+  --cr-white: 0, 0%, 100%;
+  --cr-malachite: 133, 79%, 51%;
+  --cr-java: 180, 87%, 38%;
+  --cr-mirage: 240, 25%, 12%;
+}
+
+$gradient-1: hsl(var(--cr-malachite)), hsl(var(--cr-java));
+$wall__line_bd-cr: hsla(0, 0%, var(--lightness), 0.1);
+$wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
+
 .slide-blur {
   position: absolute;
   top: 0;
   bottom: 0;
   height: 120%;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.6) 0%, rgba(0, 0, 0, 0.6) 83.33%, rgba(255, 255, 255, 0.6) 100%);
 
 
 
   z-index: 1;
   display: flex;
 
-  mix-blend-mode: overlay;
-  backdrop-filter: blur(2px);
 
-  svg {
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.6) 0%, rgba(0, 0, 0, 0.6) 83.33%, rgba(255, 255, 255, 0.6) 100%);
+
+
+  .line {
+    background-color: $wall__line_bd-cr;
+    width: 28px;
+    backdrop-filter: blur(var(--blur));
+    box-shadow: $wall__line_box-sw;
+    &:nth-child(1) {
+      transform: translateX(4px);
+    }
+    &:nth-child(2) {
+      transform: translateX(2px);
+    }
   }
 
 }
