@@ -171,7 +171,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   position: absolute;
   top: 0;
   bottom: 0;
-  height: 120%;
+  height: 100%;
 
 
 
@@ -183,9 +183,9 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
 
   .line {
     background-color: $wall__line_bd-cr;
-    width: 28px;
+    width: 20px;
     backdrop-filter: blur(var(--blur));
-    box-shadow: $wall__line_box-sw;
+    // box-shadow: $wall__line_box-sw;
     &:nth-child(1) {
       transform: translateX(4px);
     }
