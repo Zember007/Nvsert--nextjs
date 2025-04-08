@@ -31,6 +31,7 @@ const SliderMain = () => {
         if (sliders.length < 5) return
         let timeoutId: NodeJS.Timeout | null = null;
         let enableList = true
+
         initSlider((index: number) => {
 
             if (timeoutId) {
@@ -45,6 +46,7 @@ const SliderMain = () => {
                 sliders.forEach((slider) => {
                     slider.slickGoTo(index)
                 });
+            
                 enableList = false
                 timeoutId = setTimeout(() => {
                     enableList = true
@@ -55,6 +57,7 @@ const SliderMain = () => {
                     sliders.forEach((slider) => {
                         slider.slickGoTo(index)
                     });
+                 
                 }, 800)
             }
 
