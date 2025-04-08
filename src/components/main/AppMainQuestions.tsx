@@ -1,6 +1,6 @@
 import { filterPrepositions } from '@/hook/filter';
 import AppMainFormSecondary from '../forms/AppMainFormSecondary';
-import GuaranteeCard from './elements/GuaranteeCard'; // Импортируем новый компонент
+import GuaranteeCard from './elements/AppSafeguardBlock'; // Импортируем новый компонент
 
 const AppMainQuestions = () => {
 
@@ -88,7 +88,7 @@ const AppMainQuestions = () => {
           {guarantees.map((guarantee, index) => (
             <div key={index}>
 
-              {
+              {/* {
                 guarantee.title ?
                   <GuaranteeCard
                     key={index}
@@ -97,7 +97,7 @@ const AppMainQuestions = () => {
                   />
                   :
                   <div></div>
-              }
+              } */}
 
             </div>
 
