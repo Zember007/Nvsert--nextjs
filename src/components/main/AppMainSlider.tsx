@@ -236,7 +236,7 @@ const SliderMain = () => {
 
                     <div
 
-                        className="slide-main l:inset-[0%] l:h-[80%] h-[300px] l:bottom-0 bottom-[80px] l:z-0 z-[]">
+                        className="slide-main l:inset-[0%] l:h-[100%] h-[300px] l:bottom-0 bottom-[80px] l:z-0 z-[]">
 
                         <div className="slider-wrap">
                             <div className="slide-blur left-[564px]">
@@ -262,7 +262,7 @@ const SliderMain = () => {
                                 {
                                     slides.map((item, index) => (
                                         <div
-                                            key={index} data-slider="slide" className="slider-slide l:w-[337px] l:h-[337px] w-[337px] h-[337px] shadow-[0px_0px_4px_0px_#00000033] rounded-[8px] border border-solid border-[#CCCCCC]">
+                                            key={index} data-slider="slide" className="slider-slide min-w-[337px] h-[337px] shadow-[0px_0px_4px_0px_#00000033] rounded-[8px] border border-solid border-[#CCCCCC]">
                                             <div className="slide-inner relative bg-[#FFF] overflow-hidden rounded-[8px]">
                                                 <Image src={item.img} alt='slide' fill
                                                     style={{ objectFit: 'cover' }} />

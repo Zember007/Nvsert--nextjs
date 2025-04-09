@@ -61,7 +61,7 @@ export function initSlider(onChangeFunction) {
 
     const loop = horizontalLoop(slides, {
         paused: true,
-        draggable: true,
+        draggable: false,
         center: false,
         offsetLeft: 76,
         gap: 75,

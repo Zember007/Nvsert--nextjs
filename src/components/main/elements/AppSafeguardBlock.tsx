@@ -10,11 +10,12 @@ interface GuaranteeCardProps {
     subtitle: string;
     text: string;
   }[];
-  isVisible: boolean
+  isVisible: boolean,
+  index: number
 
 }
 
-const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible }) => {
+const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, index }) => {
   const { setButtonRef, setWrapperRef, wrapperRefs } = useButton();
 
   // const cardRef = useRef<null | HTMLDivElement>(null);
@@ -54,21 +55,21 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible }
   //   }
   // };
 
-  // const handleMouseEnter = () => {
-  //   if (mouseLeaveDelay) {
-  //     clearTimeout(mouseLeaveDelay);
-  //   }
+  const handleMouseEnter = () => {
+    // if (mouseLeaveDelay) {
+    //   clearTimeout(mouseLeaveDelay);
+    // }
 
-  //   wrapperRefs.current.forEach((wrapper) => {
-  //     BounceEffect(wrapper, {
-  //       startPosition: "0",
-  //       endPosition: `-${30}px`,
-  //       duration: 300,
-  //       easing: "ease-in",
-  //       direction: 'vertical'
-  //     });
-  //   })
-  // };
+    wrapperRefs.current.forEach((wrapper) => {
+      BounceEffect(wrapper, {
+        startPosition: "0",
+        endPosition: `-${30}px`,
+        duration: 300,
+        easing: "ease-in",
+        direction: 'vertical'
+      });
+    })
+  };
 
   // const handleMouseLeave = () => {
   //   setMouseLeaveDelay(setTimeout(() => {
@@ -81,7 +82,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible }
   return (
     <div className={`hover:z-[10000] relative card-wrap h-full w-full translate-y-[0] ${!isVisible && '!translate-y-[30px] opacity-0'} transition-all duration-500 `}
       // onMouseMove={handleMouseMove}
-      // onMouseEnter={handleMouseEnter}
+      onMouseEnter={handleMouseEnter}
       // onMouseLeave={handleMouseLeave}
       // ref={cardRef}
       >
@@ -93,10 +94,14 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible }
         // }
 
 
-        className="bg-[#FFF] card border-[#34446D] group h-full border border-solid rounded-[8px] p-[30px] backdrop-blur-[4px] flex flex-col gap-[30px] justify-between">
+        className="bg-[#FFF] card border-[#34446D] group h-full border border-solid rounded-[8px] p-[30px] backdrop-blur-[4px] flex flex-col gap-[29px] justify-between">
         <div className="flex flex-col gap-[30px]">
           <div className="overflow-hidden rounded-[4px]  w-full relative">
-            <p className="text-[24px] z-[2] text-[#FFF] backdrop-blur-[4px] p-[10px] rounded-[4px] shadow-[0px_0px_4px_0px_#00000033] bg-[#FFFFFF1A] font-bold absolute top-[15px] left-[15px] max-w-[297px]">{filterPrepositions(title)}</p>
+            <p className="text-[24px] z-[2] text-[#FFF] backdrop-blur-[4px] p-[10px] rounded-[4px] shadow-[0px_0px_4px_0px_#00000033] bg-[#FFFFFF1A] font-bold absolute top-[15px] left-[15px]"
+            style={{
+              maxWidth: (index === 0 ? '300' :index === 1? '200' : '220')+'px'
+            }}
+            >{filterPrepositions(title)}</p>
             <Image
               className='w-full h-auto scale-[1.2] group-hover:scale-[1.1] transition-all duration-[2s] ease-in-out'
               alt='document' src={Img}
@@ -105,11 +110,11 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible }
               sizes="100vw"
             />
           </div>
-          <ul className={`list-disc leading-[140%] space-y-[10px] pl-[18px] *:*:text-[16px]`}>
+          <ul className={`list-disc leading-[140%] pl-[18px] *:*:text-[16px]`}>
             {items.map((item, index) => (
               <li key={index}>
                 <h3 className="font-bold">{filterPrepositions(item.subtitle)}</h3>
-                <p>{filterPrepositions(item.text)}</p>
+                <p className='leading-[1.22]'>{filterPrepositions(item.text)}</p>
               </li>
             ))}
           </ul>
