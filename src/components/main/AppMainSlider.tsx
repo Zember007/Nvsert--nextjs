@@ -46,7 +46,7 @@ const SliderMain = () => {
                 sliders.forEach((slider) => {
                     slider.slickGoTo(index)
                 });
-            
+
                 enableList = false
                 timeoutId = setTimeout(() => {
                     enableList = true
@@ -57,7 +57,7 @@ const SliderMain = () => {
                     sliders.forEach((slider) => {
                         slider.slickGoTo(index)
                     });
-                 
+
                 }, 800)
             }
 
@@ -239,41 +239,13 @@ const SliderMain = () => {
                         className="slide-main l:inset-[0%] l:h-[80%] h-[300px] l:bottom-0 bottom-[80px] l:z-0 z-[]">
 
                         <div className="slider-wrap">
-                        <div className="slide-blur left-[557px]">
+                            <div className="slide-blur left-[560px]">
                                 <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '8px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>
                             </div>
-                            {/* <div className="slide-blur right-[0]">
 
-                                <svg width="80" height="387" viewBox="0 0 80 387" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)', opacity: '0.8' }}>
-                                    <rect width="28.2419" height="387" fill="url(#paint0_linear_1966_742)" fillOpacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
-                                    <rect width="28.2419" height="387" transform="translate(25.8799)" fill="url(#paint1_linear_1966_742)" fillOpacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
-                                    <rect width="28.2419" height="387" transform="translate(51.7583)" fill="url(#paint2_linear_1966_742)" fillOpacity="0.6" style={{ mixBlendMode: 'lighten', filter: 'blur(2px)' }} />
-                                    <defs>
-                                        <linearGradient id="paint0_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
-                                            <stop stopColor="white" />
-                                            <stop offset="0.9" />
-                                            <stop offset="1" stopColor="white" />
-                                        </linearGradient>
-                                        <linearGradient id="paint1_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
-                                            <stop stopColor="white" />
-                                            <stop offset="0.833333" />
-                                            <stop offset="1" stopColor="white" />
-                                        </linearGradient>
-                                        <linearGradient id="paint2_linear_1966_742" x1="-4.20838e-07" y1="193.5" x2="28.2419" y2="193.5" gradientUnits="userSpaceOnUse">
-                                            <stop stopColor="white" />
-                                            <stop offset="0.833333" />
-                                            <stop offset="1" stopColor="white" />
-                                        </linearGradient>
-                                    </defs>
-                                </svg>
-
-
-
-
-                            </div> */}
 
                             <div className="slide-blur right-0">
                                 <span className="line" style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>

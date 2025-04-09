@@ -24,7 +24,7 @@ export default function Home() {
 
       <AppMainSafeguards />
 
-      <AppMainQuestions />
+      {/* <AppMainQuestions /> */}
 
       <AppMainFeedback />
     </div>

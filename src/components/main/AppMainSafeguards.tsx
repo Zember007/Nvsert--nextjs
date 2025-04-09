@@ -76,7 +76,7 @@ const AppMainSafeguards = () => {
             ([entry]) => {
                 setIsVisible(entry.isIntersecting);
             },
-            { threshold: 0.3 }
+            { threshold: 0.5 }
         );
 
         if (divRef.current) {
@@ -103,7 +103,7 @@ const AppMainSafeguards = () => {
         <section
             className="py-[75px] relative">
             <div className="wrapper flex flex-col gap-[40px]">
-                <h2 className="leading-[1] tracking-[-0.04em] text-center  text-[24px] xs:text-[40px] l:text-[56px]">Наши основные преимущества</h2>
+                <h2 className="leading-[1] tracking-[-0.04em] text-center  text-[24px] xs:text-[40px] l:text-[56px]">Гарантии и безупречный сервис</h2>
                 <div className="grid grid-cols-3 gap-[20px]">
                     {
                         guarantees.map((item, index) => (

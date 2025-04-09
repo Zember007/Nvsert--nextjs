@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Img from '@/assets/images/safeguarde-img.png';
 import { useButton } from '@/hook/useButton';
 import { BounceEffect } from '@/hook/useBounce';
+import { filterPrepositions } from '@/hook/filter';
 interface GuaranteeCardProps {
   title: string;
   items: {
@@ -16,85 +17,86 @@ interface GuaranteeCardProps {
 const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible }) => {
   const { setButtonRef, setWrapperRef, wrapperRefs } = useButton();
 
-  const cardRef = useRef<null | HTMLDivElement>(null);
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  const [mouseX, setMouseX] = useState(0);
-  const [mouseY, setMouseY] = useState(0);
-  const [mouseLeaveDelay, setMouseLeaveDelay] = useState<NodeJS.Timeout | null>(null);
+  // const cardRef = useRef<null | HTMLDivElement>(null);
+  // const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  // const [mouseX, setMouseX] = useState(0);
+  // const [mouseY, setMouseY] = useState(0);
+  // const [mouseLeaveDelay, setMouseLeaveDelay] = useState<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    const card = cardRef.current;
-    if (card) {
-      setDimensions({
-        width: card.offsetWidth,
-        height: card.offsetHeight
-      });
-    }
-  }, [cardRef.current]);
+  // useEffect(() => {
+  //   const card = cardRef.current;
+  //   if (card) {
+  //     setDimensions({
+  //       width: card.offsetWidth,
+  //       height: card.offsetHeight
+  //     });
+  //   }
+  // }, [cardRef.current]);
 
-  const mousePX = mouseX / dimensions.width;
-  const mousePY = mouseY / dimensions.height;
+  // const mousePX = mouseX / dimensions.width;
+  // const mousePY = mouseY / dimensions.height;
 
-  const cardStyle = {
-    transform: `rotateY(${mousePX * 30}deg) rotateX(${mousePY * -30}deg)`,
-    perspective: '1200px',
-    transition: 'transform 0.3s ease-out'
-  };
-
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const card = cardRef.current;
-    if (card) {
-      const rect = card.getBoundingClientRect();
-      setMouseX(e.clientX - rect.left - dimensions.width / 2);
-      setMouseY(e.clientY - rect.top - dimensions.height / 2);
+  // const cardStyle = {
+  //   transform: `rotateY(${mousePX * 30}deg) rotateX(${mousePY * -30}deg)`,
+  //   perspective: '1200px',
+  //   transition: 'transform 0.3s ease-out'
+  // };
 
 
-    }
-  };
+  // const handleMouseMove = (e: React.MouseEvent) => {
+  //   const card = cardRef.current;
+  //   if (card) {
+  //     const rect = card.getBoundingClientRect();
+  //     setMouseX(e.clientX - rect.left - dimensions.width / 2);
+  //     setMouseY(e.clientY - rect.top - dimensions.height / 2);
 
-  const handleMouseEnter = () => {
-    if (mouseLeaveDelay) {
-      clearTimeout(mouseLeaveDelay);
-    }
 
-    wrapperRefs.current.forEach((wrapper) => {
-      BounceEffect(wrapper, {
-        startPosition: "0",
-        endPosition: `-${30}px`,
-        duration: 300,
-        easing: "ease-in",
-        direction: 'vertical'
-    });
-    })
-  };
+  //   }
+  // };
 
-  const handleMouseLeave = () => {
-    setMouseLeaveDelay(setTimeout(() => {
-      setMouseX(0);
-      setMouseY(0);
-    }, 1000));
-  };
+  // const handleMouseEnter = () => {
+  //   if (mouseLeaveDelay) {
+  //     clearTimeout(mouseLeaveDelay);
+  //   }
+
+  //   wrapperRefs.current.forEach((wrapper) => {
+  //     BounceEffect(wrapper, {
+  //       startPosition: "0",
+  //       endPosition: `-${30}px`,
+  //       duration: 300,
+  //       easing: "ease-in",
+  //       direction: 'vertical'
+  //     });
+  //   })
+  // };
+
+  // const handleMouseLeave = () => {
+  //   setMouseLeaveDelay(setTimeout(() => {
+  //     setMouseX(0);
+  //     setMouseY(0);
+  //   }, 1000));
+  // };
 
 
   return (
-    <div className={`hover:z-[10000] relative card-wrap h-full w-full`}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      ref={cardRef}>
+    <div className={`hover:z-[10000] relative card-wrap h-full w-full translate-y-[0] ${!isVisible && '!translate-y-[30px] opacity-0'} transition-all duration-500 `}
+      // onMouseMove={handleMouseMove}
+      // onMouseEnter={handleMouseEnter}
+      // onMouseLeave={handleMouseLeave}
+      // ref={cardRef}
+      >
       <div
-        style={
-          {
-            ...cardStyle
-          }
-        }
+        // style={
+        //   {
+        //     ...cardStyle
+        //   }
+        // }
 
 
         className="bg-[#FFF] card border-[#34446D] group h-full border border-solid rounded-[8px] p-[30px] backdrop-blur-[4px] flex flex-col gap-[30px] justify-between">
         <div className="flex flex-col gap-[30px]">
           <div className="overflow-hidden rounded-[4px]  w-full relative">
-            <p className="text-[24px] z-[2] text-[#FFF] backdrop-blur-[4px] p-[10px] rounded-[4px] shadow-[0px_0px_4px_0px_#00000033] bg-[#FFFFFF1A] font-bold absolute top-[15px] left-[15px]">{title}</p>
+            <p className="text-[24px] z-[2] text-[#FFF] backdrop-blur-[4px] p-[10px] rounded-[4px] shadow-[0px_0px_4px_0px_#00000033] bg-[#FFFFFF1A] font-bold absolute top-[15px] left-[15px] max-w-[297px]">{filterPrepositions(title)}</p>
             <Image
               className='w-full h-auto scale-[1.2] group-hover:scale-[1.1] transition-all duration-[2s] ease-in-out'
               alt='document' src={Img}
@@ -103,11 +105,11 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible }
               sizes="100vw"
             />
           </div>
-          <ul className={`list-disc leading-[140%] ${!isVisible && 'translate-y-[10px] opacity-0'} transition-all duration-500 space-y-[10px] pl-[18px] *:*:text-[16px]`}>
+          <ul className={`list-disc leading-[140%] space-y-[10px] pl-[18px] *:*:text-[16px]`}>
             {items.map((item, index) => (
               <li key={index}>
-                <h3 className="font-bold">{item.subtitle}</h3>
-                <p>{item.text}</p>
+                <h3 className="font-bold">{filterPrepositions(item.subtitle)}</h3>
+                <p>{filterPrepositions(item.text)}</p>
               </li>
             ))}
           </ul>

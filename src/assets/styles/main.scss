@@ -20,3 +20,44 @@
     background-color: #F5F5F5;
   }
 }
+
+
+:root {
+  --cr-white: 0, 0%, 100%;
+  --cr-malachite: 133, 79%, 51%;
+  --cr-java: 180, 87%, 38%;
+  --cr-mirage: 240, 25%, 12%;
+}
+
+$gradient-1: hsl(var(--cr-malachite)), hsl(var(--cr-java));
+$wall__line_bd-cr: hsla(0, 0%, var(--lightness), 0.1);
+$wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
+
+.slide-blur {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+
+
+
+  z-index: 1;
+  display: flex;
+
+  transform: translateX(-4px);
+
+
+  .line {
+    background-color: $wall__line_bd-cr;
+    width: 20px;
+    backdrop-filter: blur(var(--blur));
+    // box-shadow: $wall__line_box-sw;
+    &:nth-child(1) {
+      transform: translateX(4px);
+    }
+    &:nth-child(2) {
+      transform: translateX(2px);
+    }
+  }
+
+}
