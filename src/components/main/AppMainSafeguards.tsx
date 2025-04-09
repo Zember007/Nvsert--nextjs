@@ -76,7 +76,7 @@ const AppMainSafeguards = () => {
             ([entry]) => {
                 setIsVisible(entry.isIntersecting);
             },
-            { threshold: 0.5 }
+            { threshold: 0.3 }
         );
 
         if (divRef.current) {

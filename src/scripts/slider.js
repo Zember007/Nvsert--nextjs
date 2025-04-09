@@ -63,7 +63,9 @@ export function initSlider(onChangeFunction) {
         paused: true,
         draggable: true,
         center: false,
-        onChange: (element, index) => {
+        offsetLeft: 76,
+        gap: 75,
+        onChange: (index) => {
             if (activeElement) {
                 activeElement.classList.remove("active");
             }
@@ -117,6 +119,7 @@ export function horizontalLoop(items, config) {
     let timeline;
     items = gsap.utils.toArray(items);
     config = config || {};
+    const offsetLeft = config.offsetLeft || 0
     gsap.context(() => {
         let onChange = config.onChange,
             lastIndex = 0,
@@ -125,7 +128,7 @@ export function horizontalLoop(items, config) {
                     let i = tl.closestIndex();
                     if (lastIndex !== i) {
                         lastIndex = i;
-                        onChange(items[i], i);
+                        onChange(i);
                     }
                 }, paused: config.paused, defaults: { ease: "none" }, onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100)
             }),
@@ -143,7 +146,7 @@ export function horizontalLoop(items, config) {
             timeOffset = 0,
             container = center === true ? items[0].parentNode : gsap.utils.toArray(center)[0] || items[0].parentNode,
             totalWidth,
-            getTotalWidth = () => items[length - 1].offsetLeft + xPercents[length - 1] / 100 * widths[length - 1] - startX + spaceBefore[0] + items[length - 1].offsetWidth * gsap.getProperty(items[length - 1], "scaleX") + (parseFloat(config.paddingRight) || 0) + 75,
+            getTotalWidth = () => items[length - 1].offsetLeft + xPercents[length - 1] / 100 * widths[length - 1] - startX + spaceBefore[0] + items[length - 1].offsetWidth * gsap.getProperty(items[length - 1], "scaleX") + (parseFloat(config.paddingRight) || 0) + (config.gap || 0),
             populateWidths = () => {
                 let b1 = container.getBoundingClientRect(), b2;
                 items.forEach((el, i) => {
@@ -187,8 +190,8 @@ export function horizontalLoop(items, config) {
                 for (i = 0; i < length; i++) {
                     item = items[i];
                     curX = xPercents[i] / 100 * (widths[i]);
-                    distanceToStart = item.offsetLeft + curX - startX + spaceBefore[0] - 76;
-                    distanceToLoop = distanceToStart + 74 + widths[i] * gsap.getProperty(item, "scaleX");
+                    distanceToStart = item.offsetLeft + curX - startX + spaceBefore[0] - offsetLeft;
+                    distanceToLoop = distanceToStart + (offsetLeft ? offsetLeft - 2 : 0) + widths[i] * gsap.getProperty(item, "scaleX");
                     tl.to(item, { xPercent: snap((curX - distanceToLoop) / widths[i] * 100), duration: distanceToLoop / pixelsPerSecond }, 0)
                         .fromTo(item, { xPercent: snap((curX - distanceToLoop + totalWidth) / widths[i] * 100) }, { xPercent: xPercents[i], duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond, immediateRender: false }, distanceToLoop / pixelsPerSecond)
                         .add("label" + i, distanceToStart / pixelsPerSecond);
@@ -295,7 +298,7 @@ export function horizontalLoop(items, config) {
         }
         tl.closestIndex(true);
         lastIndex = curIndex;
-        onChange && onChange(items[curIndex], curIndex);
+        onChange && onChange(curIndex);
         timeline = tl;
         return () => window.removeEventListener("resize", onResize);
     });
