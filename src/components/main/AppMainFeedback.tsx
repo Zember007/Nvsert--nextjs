@@ -182,7 +182,7 @@ const AppMainFeedback = () => {
                         </div>
                     </div>
 
-                    <div className="relative h-[722px] flex flex-col gap-[10px] overflow-hidden feedback-slider-box">
+                    <div className="relative h-[602px] flex flex-col gap-[10px] overflow-hidden feedback-slider-box">
 
                         <div className="slide-blur left-0">
                             <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
@@ -192,14 +192,14 @@ const AppMainFeedback = () => {
                         </div>
 
                         <div className="slide-main">
-                            <div className="slider-wrap !mt-0">
+                            <div className="slider-wrap !pt-0">
 
 
                                 <div className="flex gap-[10px]">
                                     {[...Array(10)].map((_, index) =>
-                                        <div data-slider="slide-feedback" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[250px] h-[356px] rounded-[4px]">
+                                        <div data-slider="slide-feedback" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[208px] h-[296px] rounded-[4px]">
                                             <PhotoView src={'/feedback/1.webp'}>
-                                                <Image src={'/feedback/1.webp'} alt='feedback' width={250} height={356} />
+                                                <Image src={'/feedback/1.webp'} alt='feedback' width={208} height={296} />
                                             </PhotoView>
                                         </div>)}
                                 </div>
@@ -211,14 +211,14 @@ const AppMainFeedback = () => {
                         </div>
 
                         <div className="slide-main bottom-0">
-                            <div className="slider-wrap !mt-0">
+                            <div className="slider-wrap !pt-0">
 
 
                                 <div className="flex gap-[10px]">
                                     {[...Array(10)].map((_, index) =>
-                                        <div data-slider="slide-feedback1" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[250px] h-[356px] rounded-[4px]">
+                                        <div data-slider="slide-feedback1" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[208px] h-[296px] rounded-[4px]">
                                             <PhotoView src={'/feedback/1.webp'}>
-                                                <Image src={'/feedback/1.webp'} alt='feedback' width={250} height={356} />
+                                                <Image src={'/feedback/1.webp'} alt='feedback' width={208} height={296} />
                                             </PhotoView>
                                         </div>)}
                                 </div>
