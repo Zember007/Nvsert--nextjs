@@ -65,7 +65,8 @@ export function initSlider(onChangeFunction) {
         currentIndex = newIndex;
         // Текущая позиция
         let currentY = gsap.getProperty(stepsParent, "y") || 0;
-
+        console.log();
+        
         gsap.to(stepsParent, {
             y: currentY - (height * direction),
             duration: 0.25,
