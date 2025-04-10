@@ -60,9 +60,9 @@ export function initSlider(onChangeFunction) {
         isAnimating = true;
 
         const height = stepsArray[0].offsetHeight;
-        const maxOffset = (totalSlides - 1) * height;
-        const direction = newIndex > currentIndex ? 1 : -1;
-
+        const maxOffset = (totalSlides) * height;
+        const direction = (newIndex > currentIndex  || (currentIndex == totalSlides - 1 && newIndex === 0)) ? 1 : -1;
+        currentIndex = newIndex;
         // Текущая позиция
         let currentY = gsap.getProperty(stepsParent, "y") || 0;
 
@@ -78,8 +78,7 @@ export function initSlider(onChangeFunction) {
                 } else if (direction === -1 && currentY >= 0) {
                     gsap.set(stepsParent, { y: -maxOffset + height });
                 }
-                currentIndex = newIndex % (totalSlides - 1);
-                if (currentIndex < 0) currentIndex += (totalSlides - 1);
+
                 isAnimating = false;
             }
         });
@@ -111,11 +110,7 @@ export function initSlider(onChangeFunction) {
     if (prevButton) {
         prevButton.addEventListener("click", () => loop.previous({ ease: "power3", duration: 0.725 }));
     }
-    slides.forEach((slide, i) => {
-        slide.addEventListener("click", () => {
-            loop.toIndex(i === 0 ? 0 : i - 1, { ease: "power3", duration: 0.725 });
-        });
-    });
+
 
     loop.destroy = () => {
         loop.kill();
@@ -124,8 +119,7 @@ export function initSlider(onChangeFunction) {
         slides.forEach(slide => slide.removeEventListener("click"));
     };
 
-    // Инициализируем первый шаг
-    updateSteps(0);
+ 
 
     return loop;
 }
