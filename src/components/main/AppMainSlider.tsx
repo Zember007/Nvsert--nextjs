@@ -31,7 +31,7 @@ const SliderMain = () => {
         if (sliders.length < 5) return
         let timeoutId: NodeJS.Timeout | null = null;
         let enableList = true
-
+        let oldIndex = 0
         initSlider((index: number) => {
 
             if (timeoutId) {
@@ -44,23 +44,36 @@ const SliderMain = () => {
 
             if (enableList) {
                 sliders.forEach((slider) => {
-                    slider.slickGoTo(index)
+                    // Проверяем переломные точки
+                    if (index === 20 && oldIndex === 0) {
+                        slider.slickPrev();
+                    } else if (index === 0 && oldIndex === 20) {
+                        slider.slickNext();
+                    } else {
+                        slider.slickGoTo(index);
+                    }
                 });
 
-                enableList = false
+                enableList = false;
                 timeoutId = setTimeout(() => {
-                    enableList = true
-                }, 800)
+                    enableList = true;
+                }, 800);
             } else {
                 timeoutId = setTimeout(() => {
-                    enableList = true
+                    enableList = true;
                     sliders.forEach((slider) => {
-                        slider.slickGoTo(index)
+                        // Проверяем переломные точки
+                        if (index === 20 && oldIndex === 0) {
+                            slider.slickPrev();
+                        } else if (index === 0 && oldIndex === 20) {
+                            slider.slickNext();
+                        } else {
+                            slider.slickGoTo(index);
+                        }
                     });
-
-                }, 800)
+                }, 800);
             }
-
+            oldIndex = index
 
         })
     }, [sliders])

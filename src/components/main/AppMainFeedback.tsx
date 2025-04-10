@@ -49,6 +49,47 @@ const AppMainFeedback = () => {
         loop.next({ ease: "power3", duration: 0.725 })
         loop1.next({ ease: "power3", duration: 0.725 })
 
+        let flag = true;
+
+        const handleMouseMove = (e: any, container: HTMLElement) => {
+            const rect = container.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const centerX = rect.width / 2;
+
+            if (mouseX > centerX - 50 && mouseX < centerX + 50) {
+                flag = true
+            }
+
+            if (!flag) return;
+
+            if (mouseX > centerX + 50) {
+                loop.previous({ ease: "power3", duration: 0.725 });
+                loop1.previous({ ease: "power3", duration: 1.2 });
+                flag = false;
+            } else if (mouseX < centerX - 50) {
+
+
+                loop.next({ ease: "power3", duration: 1.2 });
+                loop1.next({ ease: "power3", duration: 0.725 });
+                flag = false;
+            }
+
+            
+        };
+
+        const wrapper = document.querySelector('.feedback-slider-box');
+
+        if (wrapper) {
+            wrapper.addEventListener("mousemove", (e) => {
+                handleMouseMove(e, wrapper as HTMLElement);
+            })
+
+            wrapper.addEventListener("mouseenter", (e) => {
+                flag = true;
+            })
+        }
+
+
 
         if (nextButton) {
             nextButton.addEventListener("click", () => {
@@ -141,7 +182,7 @@ const AppMainFeedback = () => {
                         </div>
                     </div>
 
-                    <div className="relative h-[722px] flex flex-col gap-[10px] overflow-hidden">
+                    <div className="relative h-[722px] flex flex-col gap-[10px] overflow-hidden feedback-slider-box">
 
                         <div className="slide-blur left-0">
                             <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
