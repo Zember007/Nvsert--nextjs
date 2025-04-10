@@ -3,8 +3,7 @@ import { documents } from "./utils";
 import { useEffect, useMemo, useRef, useState } from "react";
 import '@/assets/styles/sections/main/animation/documents.scss'
 import '@/assets/styles/sections/main/animation/skills.scss'
-import { PhotoProvider } from "react-photo-view";
-
+import { PhotoProvider } from 'react-photo-view';
 
 
 

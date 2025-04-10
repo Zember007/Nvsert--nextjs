@@ -78,6 +78,10 @@ const AppMainSafeguards = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
+        if (divRef.current && entry.isIntersecting) {
+          observer.unobserve(divRef.current);
+        }
+
       },
       { threshold: 0.3 }
     );

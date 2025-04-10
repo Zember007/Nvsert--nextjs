@@ -63,7 +63,7 @@ export function initSlider(onChangeFunction) {
         paused: true,
         draggable: true,
         center: false,
-        offsetLeft: 76,
+        offsetLeft: 75,
         gap: 0,
         onChange: (index) => {
             if (activeElement) {
@@ -191,7 +191,7 @@ export function horizontalLoop(items, config) {
                     item = items[i];
                     curX = xPercents[i] / 100 * (widths[i]);
                     distanceToStart = item.offsetLeft + curX - startX + spaceBefore[0] - offsetLeft;
-                    distanceToLoop = distanceToStart + (offsetLeft ? offsetLeft - 2 : 0) + widths[i] * gsap.getProperty(item, "scaleX");
+                    distanceToLoop = distanceToStart + (offsetLeft ? offsetLeft : 0) + widths[i] * gsap.getProperty(item, "scaleX");
                     tl.to(item, { xPercent: snap((curX - distanceToLoop) / widths[i] * 100), duration: distanceToLoop / pixelsPerSecond }, 0)
                         .fromTo(item, { xPercent: snap((curX - distanceToLoop + totalWidth) / widths[i] * 100) }, { xPercent: xPercents[i], duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond, immediateRender: false }, distanceToLoop / pixelsPerSecond)
                         .add("label" + i, distanceToStart / pixelsPerSecond);
