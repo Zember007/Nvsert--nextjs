@@ -31,6 +31,43 @@ const SliderMain = () => {
         if (sliders.length < 5) return
         let timeoutId: NodeJS.Timeout | null = null;
         let enableList = true
+
+        function getSlideTransition(oldIndex: number, index: number, slidesLength: number) {
+            // Прямое расстояние
+            const directDistance = Math.abs(index - oldIndex);
+            // Расстояние через цикл
+            const loopDistance = slidesLength - directDistance;
+            // Минимальное расстояние
+            const distance = Math.min(directDistance, loopDistance);
+
+
+            let direction;
+
+            let boundaryPoint = null;
+
+            if (distance === directDistance) {
+
+                direction = index > oldIndex ? 'next' : 'prev';
+
+            } else {
+
+
+                if (index > oldIndex) {
+                    direction = 'prev';
+                    boundaryPoint = 0; // Переход назад через начало
+                } else {
+                    direction = 'next';
+                    boundaryPoint = slidesLength - 1; // Переход вперёд через конец
+                }
+            }
+
+            return {
+                direction,             // Направление: 'forward' или 'backward'   
+                boundaryPoint,         // Номер пограничной точки (0 или slidesLength - 1, null если нет перехода)
+                endPoint: index        // Конечная точка (index)
+            };
+        }
+
         let oldIndex = 0
         initSlider((index: number) => {
 
@@ -39,40 +76,55 @@ const SliderMain = () => {
             }
 
 
-
+            const { boundaryPoint, direction, endPoint } = getSlideTransition(oldIndex, index, slides.length)
 
 
             if (enableList) {
-                sliders.forEach((slider) => {
-                    // Проверяем переломные точки
-                    if (index === 20 && oldIndex === 0) {
-                        slider.slickPrev();
-                    } else if (index === 0 && oldIndex === 20) {
-                        slider.slickNext();
-                    } else {
-                        slider.slickGoTo(index);
-                    }
-                });
+                console.log(enableList, boundaryPoint);
+                if (boundaryPoint) {
+                    sliders.forEach((slider) => {
+                        slider.slickGoTo(boundaryPoint);
+                    });
+                    setTimeout(() => {
+                        sliders.forEach((slider) => {
+                            if (direction === 'next') {
+                                slider.slickNext()
+                            } else {
+                                slider.slickPrev()
+                            }
+                        });
+
+                        setTimeout(() => {
+                            sliders.forEach((slider) => {
+                                slider.slickGoTo(endPoint);
+                            });
+
+                            enableList = true;
+                        }, 800)
+                    }, 800)
+                } else {
+
+                    sliders.forEach((slider) => {
+                        slider.slickGoTo(endPoint);
+                    });
+                    setTimeout(() => {
+                        enableList = true;
+                    }, 800)
+                }
+
 
                 enableList = false;
-                timeoutId = setTimeout(() => {
-                    enableList = true;
-                }, 800);
-            } else {
-                timeoutId = setTimeout(() => {
-                    enableList = true;
-                    sliders.forEach((slider) => {
-                        // Проверяем переломные точки
-                        if (index === 20 && oldIndex === 0) {
-                            slider.slickPrev();
-                        } else if (index === 0 && oldIndex === 20) {
-                            slider.slickNext();
-                        } else {
-                            slider.slickGoTo(index);
-                        }
-                    });
-                }, 800);
             }
+            // } else {
+            //     timeoutId = setTimeout(() => {
+            //         enableList = true;
+            //         sliders.forEach((slider) => {
+
+            //             slider.slickGoTo(index);
+
+            //         });
+            //     }, 800);
+            // }
             oldIndex = index
 
         })
@@ -234,8 +286,10 @@ const SliderMain = () => {
                                     </div>
                                 </div>
                                 <div className="flex item-center text-[40px] font-[300] text-[#34446D] ">
-                                    <div className="count-column rubik">
-                                        <h3 data-slide-count="step" className="count-heading ">01</h3>
+                                    <div className="h-[40px] overflow-hidden">
+                                        <div className="count-column rubik">
+                                            <h3 data-slide-count="step" className="count-heading ">01</h3>
+                                        </div>
                                     </div>
                                     <span className='leading-[1] rubik'>/</span>
                                     <div className="count-column ">

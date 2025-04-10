@@ -46,17 +46,43 @@ export function initSlider(onChangeFunction) {
         stepsArray.push(stepClone);
     });
 
+    stepsArray.forEach(step => {
+        const clone = step.cloneNode(true);
+        stepsParent.appendChild(clone);
+        stepsArray.push(clone);
+    });
 
-    let oldIndex = 0;
-    function updateSteps(index) {
 
+    let currentIndex = 0;
+    let isAnimating = false;
+    function updateSteps(newIndex) {
+        if (isAnimating) return;
+        isAnimating = true;
 
-        gsap.to(stepsArray, {
-            y: `${-100 * (index)}%`,
-            duration: ((oldIndex == 0 && index === 20) || (oldIndex == 20 && index === 0)) ? 0 : 0.25,
-            ease: "none"
+        const height = stepsArray[0].offsetHeight;
+        const maxOffset = (totalSlides - 1) * height;
+        const direction = newIndex > currentIndex ? 1 : -1;
+
+        // Текущая позиция
+        let currentY = gsap.getProperty(stepsParent, "y") || 0;
+
+        gsap.to(stepsParent, {
+            y: currentY - (height * direction),
+            duration: 0.25,
+            ease: "none",
+            onComplete: () => {
+                // Корректируем позицию для бесшовности
+                currentY = gsap.getProperty(stepsParent, "y");
+                if (direction === 1 && Math.abs(currentY) >= maxOffset) {
+                    gsap.set(stepsParent, { y: 0 });
+                } else if (direction === -1 && currentY >= 0) {
+                    gsap.set(stepsParent, { y: -maxOffset + height });
+                }
+                currentIndex = newIndex % (totalSlides - 1);
+                if (currentIndex < 0) currentIndex += (totalSlides - 1);
+                isAnimating = false;
+            }
         });
-        oldIndex = index
     }
 
     const loop = horizontalLoop(slides, {
@@ -73,11 +99,7 @@ export function initSlider(onChangeFunction) {
             nextSibling.classList.add("active");
             activeElement = nextSibling;
 
-            try {
-                updateSteps(index);
-            } catch (error) {
-                console.error("Ошибка анимации шагов:", error);
-            }
+            updateSteps(index);
 
             onChangeFunction && onChangeFunction(index);
         }
