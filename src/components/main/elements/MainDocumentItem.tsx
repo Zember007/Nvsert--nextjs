@@ -27,7 +27,6 @@ interface props {
     content: content,
     content1: content1[],
     active: boolean,
-    activePhoto: boolean,
     setActive: (value: boolean) => void,
     setHover: (value: boolean) => void,
     bordert: boolean,
@@ -44,7 +43,7 @@ interface pulse {
     left: string;
 }
 
-const MainDocumentItem = ({ activePhoto, setPhoto, img, settings, title, content, content1, price, duration, active, setActive, borderb, bordert, setHover }: props) => {
+const MainDocumentItem = ({  setPhoto, img, settings, title, content, content1, price, duration, active, setActive, borderb, bordert, setHover }: props) => {
 
     const [listHidden, setListHidden] = useState(true);
 

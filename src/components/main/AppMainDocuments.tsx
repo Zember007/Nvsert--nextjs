@@ -11,7 +11,6 @@ import { PhotoProvider } from "react-photo-view";
 const AppMainDocuments = () => {
 
     const [activeIndex, setActive] = useState<number | null>(null)
-    const [activePhoto, setActivePhoto] = useState<number | null>(null)
     const [hoverIndex, setHover] = useState<number | null>(null)
 
 
@@ -37,7 +36,6 @@ const AppMainDocuments = () => {
                 onIndexChange={(index) => {
 
                     setActive(index);
-                    setActivePhoto(index);
 
                     const box = document.querySelector('.PhotoView-Slider__BannerWrap') as HTMLImageElement;
                     if (!box) return
@@ -54,7 +52,6 @@ const AppMainDocuments = () => {
 
                             <MainDocumentItem
                                 setPhoto={() => {
-                                    setActivePhoto(index);
                                     setTimeout(() => {
                                         const box = document.querySelector('.PhotoView-Slider__BannerWrap') as HTMLImageElement;
                                         if (!box) return
@@ -112,7 +109,6 @@ const AppMainDocuments = () => {
                                         
 
                                         closeBtn.addEventListener('click', (e) => {
-                                            setActivePhoto(null)
                                             portal.removeEventListener('click',() => {})
                                             portal.removeEventListener('mouseleave',() => {})
                                             portal.removeEventListener('mousemove',() => {})
@@ -122,7 +118,6 @@ const AppMainDocuments = () => {
                                     }, 100)
                                 }}
 
-                                activePhoto={activePhoto === index}
                                 settings={settings}
                                 bordert={(index - 1 !== hoverIndex && index - 1 !== activeIndex)}
                                 borderb={index + 1 !== hoverIndex && activeIndex !== index + 1}

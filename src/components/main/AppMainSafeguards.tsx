@@ -105,9 +105,9 @@ const AppMainSafeguards = () => {
   return (
     <section
       className="py-[75px] relative">
-      <div className="wrapper flex flex-col gap-[40px]">
+      <div className="wrapper flex flex-col gap-[50px]">
         <h2 className="leading-[1] tracking-[-0.04em] text-center  text-[24px] xs:text-[40px] l:text-[56px]">Гарантии и безупречный сервис</h2>
-        <div className="grid grid-cols-3 gap-[20px]">
+        <div className="grid grid-cols-3 gap-[15px]">
           {
             guarantees.map((item, index) => (
               <SafeguardBlock

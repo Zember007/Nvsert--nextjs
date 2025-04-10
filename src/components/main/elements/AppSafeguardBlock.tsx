@@ -94,7 +94,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
         // }
 
 
-        className="bg-[#FFF] card border-[#34446D] group h-full border border-solid rounded-[8px] p-[30px] backdrop-blur-[4px] flex flex-col gap-[29px] justify-between">
+        className="bg-[#FFF] card border-[#CCCCCC] group h-full border border-solid rounded-[8px] p-[30px] backdrop-blur-[4px] flex flex-col gap-[29px] justify-between">
         <div className="flex flex-col gap-[30px]">
           <div className="overflow-hidden rounded-[4px]  w-full relative">
             <p className="text-[24px] z-[2] text-[#FFF] backdrop-blur-[4px] p-[10px] rounded-[4px] shadow-[0px_0px_4px_0px_#00000033] bg-[#FFFFFF1A] font-bold absolute top-[15px] left-[15px]"

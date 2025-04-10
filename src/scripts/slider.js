@@ -61,10 +61,10 @@ export function initSlider(onChangeFunction) {
 
     const loop = horizontalLoop(slides, {
         paused: true,
-        draggable: false,
+        draggable: true,
         center: false,
         offsetLeft: 76,
-        gap: 75,
+        gap: 0,
         onChange: (index) => {
             if (activeElement) {
                 activeElement.classList.remove("active");
