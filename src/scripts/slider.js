@@ -83,7 +83,7 @@ export function initSlider(onChangeFunction) {
 
         gsap.to(stepsParent, {
             y: currentY - (height * direction),
-            duration: 0.2,
+            duration: 0.18,
             ease: "power3",
             onComplete: () => {
                 // Корректируем позицию для бесшовности
