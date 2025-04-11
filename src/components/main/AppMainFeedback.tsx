@@ -185,8 +185,7 @@ const AppMainFeedback = () => {
                     <div className="relative h-[602px] flex flex-col gap-[10px] overflow-hidden feedback-slider-box">
 
                         <div className="slide-blur left-0">
-                            <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
-                            <span className="line" style={{ '--blur': '8px', '--lightness': '100%' } as React.CSSProperties}></span>
+                            <span className="line" style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
                             <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
                             <span className="line" style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>
                         </div>
@@ -234,8 +233,7 @@ const AppMainFeedback = () => {
                         <div className="slide-blur right-0 !translate-x-[0]">
                             <span className="line" style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>
                             <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
-                            <span className="line" style={{ '--blur': '8px', '--lightness': '100%' } as React.CSSProperties}></span>
-                            <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
+                            <span className="line" style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
                         </div>
 
                     </div>

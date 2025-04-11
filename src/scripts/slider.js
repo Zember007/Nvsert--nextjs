@@ -61,12 +61,12 @@ export function initSlider(onChangeFunction) {
 
         const height = stepsArray[0].offsetHeight;
         const maxOffset = (totalSlides) * height;
-        const direction = (newIndex > currentIndex  || (currentIndex == totalSlides - 1 && newIndex === 0)) ? 1 : -1;
+        const direction = (newIndex > currentIndex || (currentIndex == totalSlides - 1 && newIndex === 0)) ? 1 : -1;
         currentIndex = newIndex;
-        // Текущая позиция
+      
         let currentY = gsap.getProperty(stepsParent, "y") || 0;
-        console.log();
-        
+        console.log(direction);
+
         gsap.to(stepsParent, {
             y: currentY - (height * direction),
             duration: 0.25,
@@ -120,7 +120,7 @@ export function initSlider(onChangeFunction) {
         slides.forEach(slide => slide.removeEventListener("click"));
     };
 
- 
+
 
     return loop;
 }
@@ -209,8 +209,25 @@ export function horizontalLoop(items, config) {
                     curX = xPercents[i] / 100 * (widths[i]);
                     distanceToStart = item.offsetLeft + curX - startX + spaceBefore[0] - offsetLeft;
                     distanceToLoop = distanceToStart + (offsetLeft ? offsetLeft : 0) + widths[i] * gsap.getProperty(item, "scaleX");
-                    tl.to(item, { xPercent: snap((curX - distanceToLoop) / widths[i] * 100), duration: distanceToLoop / pixelsPerSecond }, 0)
-                        .fromTo(item, { xPercent: snap((curX - distanceToLoop + totalWidth) / widths[i] * 100) }, { xPercent: xPercents[i], duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond, immediateRender: false }, distanceToLoop / pixelsPerSecond)
+                    tl.to(item, {
+                        xPercent: snap((curX - distanceToLoop) / widths[i] * 100),
+                        duration: distanceToLoop / pixelsPerSecond
+                    }, 0)
+
+                        // Вторая анимация: возврат в начало с затуханием перед прыжком
+                        .to(item, {
+                            opacity: 0, // Плавное затухание перед перемещением
+                            duration: 0.3 // Короткая длительность для затухания
+                        }, distanceToLoop / pixelsPerSecond - 0.3) // Начинаем затухание чуть раньше конца первой анимации
+                        .fromTo(item, {
+                            xPercent: snap((curX - distanceToLoop + totalWidth) / widths[i] * 100),
+                            opacity: 0 // Начинаем с прозрачности 0
+                        }, {
+                            xPercent: xPercents[i],
+                            opacity: 1, // Возвращаем полную видимость
+                            duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond,
+                            immediateRender: false
+                        }, distanceToLoop / pixelsPerSecond)
                         .add("label" + i, distanceToStart / pixelsPerSecond);
                     times[i] = distanceToStart / pixelsPerSecond;
                 }

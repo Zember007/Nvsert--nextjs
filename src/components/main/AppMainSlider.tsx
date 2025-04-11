@@ -306,9 +306,8 @@ const SliderMain = () => {
                         className="slide-main l:inset-[0%] l:h-[100%] h-[300px] l:bottom-0 bottom-[80px] l:z-0 z-[]">
 
                         <div className="slider-wrap">
-                            <div className="slide-blur left-[564px]">
-                                <span className="line" style={{ '--blur': '4px', '--lightness': '100%' } as React.CSSProperties}></span>
-                                <span className="line" style={{ '--blur': '8px', '--lightness': '100%' } as React.CSSProperties}></span>
+                            <div className="slide-blur left-[584px]">
+                                <span className="line" style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>
                             </div>
@@ -317,8 +316,7 @@ const SliderMain = () => {
                             <div className="slide-blur right-0 !translate-x-[0]">
                                 <span className="line" style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
-                                <span className="line" style={{ '--blur': '8px', '--lightness': '100%' } as React.CSSProperties}></span>
-                                <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className="line" style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
                             </div>
                             <div data-slider="list" className="slider-list "
                                 onMouseMove={() => {
@@ -329,7 +327,7 @@ const SliderMain = () => {
                                 {
                                     slides.map((item, index) => (
                                         <div
-                                            key={index} data-slider="slide" className="slider-slide min-w-[337px] h-[337px] shadow-[0px_0px_4px_0px_#00000033] rounded-[8px] border border-solid border-[#CCCCCC]">
+                                            key={index} data-slider="slide" className="slider-slide min-w-[336px] h-[336px] shadow-[0px_0px_4px_0px_#00000033] rounded-[8px] border border-solid border-[#CCCCCC]">
                                             <div className="slide-inner relative bg-[#FFF] overflow-hidden rounded-[8px]">
                                                 <Image src={item.img} alt='slide' fill
                                                     style={{ objectFit: 'cover' }} />

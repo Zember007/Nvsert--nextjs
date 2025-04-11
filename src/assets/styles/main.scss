@@ -30,7 +30,7 @@
 }
 
 $gradient-1: hsl(var(--cr-malachite)), hsl(var(--cr-java));
-$wall__line_bd-cr: hsla(0, 0%, var(--lightness), 0.1);
+$wall__line_bd-cr: hsl(0deg 0% 100% / 0%);
 $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
 
 .slide-blur {
