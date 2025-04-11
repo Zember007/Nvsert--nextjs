@@ -155,7 +155,7 @@ const SliderMain = () => {
                 <h2 className='leading-[1] tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px]'>Помогаем с документами по отраслям</h2>
                 <div className="cloneable l:h-[447px] h-[710px]">
 
-                    <div className="tariff-wrap w-[245px]" ref={setWrapperRef}>
+                    <div className="tariff-wrap w-[249px]" ref={setWrapperRef}>
                         <button ref={setButtonRef} className='justify-center border-[#34446D] border border-solid tariff text-[20px] transition-all duration-300 font-bold tracking-normal m:flex items-center gap-[6px] px-[10px] py-[9px] text-[#34446D] hover:text-[#FFF] rounded-[4px]  group hover:bg-[#34446D]  leading-[1]'>
                             <span>Оформить заявку</span>
                             <svg className='group-hover:*:fill-[#FFF] *:transition-all *:duration-300' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -306,7 +306,7 @@ const SliderMain = () => {
                         className="slide-main l:inset-[0%] l:h-[100%] h-[300px] l:bottom-0 bottom-[80px] l:z-0 z-[]">
 
                         <div className="slider-wrap">
-                        <div className="slide-blur left-[564px]">
+                            <div className="slide-blur left-[564px]">
                                 <span className="line" style={{ '--blur': '4px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '8px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
