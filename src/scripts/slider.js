@@ -61,26 +61,38 @@ export function initSlider(onChangeFunction) {
 
         const height = stepsArray[0].offsetHeight;
         const maxOffset = (totalSlides) * height;
-        const direction = (newIndex > currentIndex || (currentIndex == totalSlides - 1 && newIndex === 0)) ? 1 : -1;
-        console.log(direction, newIndex, currentIndex);
-        
-        currentIndex = newIndex;
-        
-      
+        // Определяем направление и учитываем переход через границы
+        let delta = newIndex - currentIndex;
+        if (newIndex === 0 && currentIndex === totalSlides - 1) {
+            delta = 1; // Переход с конца на начало
+        } else if (newIndex === totalSlides - 1 && currentIndex === 0) {
+            delta = -1; // Переход с начала на конец
+        }
+        const direction = delta >= 0 ? 1 : -1;
+
+
+
         let currentY = gsap.getProperty(stepsParent, "y") || 0;
-        console.log(direction);
+        if (newIndex === totalSlides - 1 && currentIndex === 0) {
+            gsap.set(stepsParent, { y: -(maxOffset ) });
+            currentY = -(maxOffset); 
+        }
+
+        currentIndex = newIndex;
+
 
         gsap.to(stepsParent, {
             y: currentY - (height * direction),
-            duration: 0.25,
-            ease: "none",
+            duration: 0.2,
+            ease: "power3",
             onComplete: () => {
                 // Корректируем позицию для бесшовности
                 currentY = gsap.getProperty(stepsParent, "y");
-                if (direction === 1 && Math.abs(currentY) >= maxOffset) {
-                    gsap.set(stepsParent, { y: 0 });
-                } else if (direction === -1 && currentY >= 0) {
-                    gsap.set(stepsParent, { y: -maxOffset  });
+
+                if (Math.abs(currentY) >= maxOffset) {
+                    gsap.set(stepsParent, { y: currentY % maxOffset });
+                } else if (currentY > 0) {
+                    gsap.set(stepsParent, { y: currentY - maxOffset });
                 }
 
                 isAnimating = false;
@@ -109,10 +121,14 @@ export function initSlider(onChangeFunction) {
     });
 
     if (nextButton) {
-        nextButton.addEventListener("click", () => loop.next({ ease: "power3", duration: 0.725 }));
+        nextButton.addEventListener("click", () => {
+            if(isAnimating) return;
+            loop.next({ ease: "power3", duration: 0.725 })});
     }
     if (prevButton) {
-        prevButton.addEventListener("click", () => loop.previous({ ease: "power3", duration: 0.725 }));
+        prevButton.addEventListener("click", () => {
+            if(isAnimating) return;
+            loop.previous({ ease: "power3", duration: 0.725 })});
     }
 
 
