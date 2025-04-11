@@ -62,7 +62,10 @@ export function initSlider(onChangeFunction) {
         const height = stepsArray[0].offsetHeight;
         const maxOffset = (totalSlides) * height;
         const direction = (newIndex > currentIndex || (currentIndex == totalSlides - 1 && newIndex === 0)) ? 1 : -1;
+        console.log(direction, newIndex, currentIndex);
+        
         currentIndex = newIndex;
+        
       
         let currentY = gsap.getProperty(stepsParent, "y") || 0;
         console.log(direction);
@@ -77,7 +80,7 @@ export function initSlider(onChangeFunction) {
                 if (direction === 1 && Math.abs(currentY) >= maxOffset) {
                     gsap.set(stepsParent, { y: 0 });
                 } else if (direction === -1 && currentY >= 0) {
-                    gsap.set(stepsParent, { y: -maxOffset + height });
+                    gsap.set(stepsParent, { y: -maxOffset  });
                 }
 
                 isAnimating = false;
@@ -332,7 +335,7 @@ export function horizontalLoop(items, config) {
         }
         tl.closestIndex(true);
         lastIndex = curIndex;
-        onChange && onChange(curIndex);
+        // onChange && onChange(curIndex);
         timeline = tl;
         return () => window.removeEventListener("resize", onResize);
     });
