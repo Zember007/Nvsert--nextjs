@@ -3,7 +3,7 @@ import { documents } from "./utils";
 import { useEffect, useMemo, useRef, useState } from "react";
 import '@/assets/styles/sections/main/animation/documents.scss'
 import '@/assets/styles/sections/main/animation/skills.scss'
-import { PhotoProvider } from 'react-photo-view';
+import { PhotoProvider } from '@/assets/lib/react-photo-view';
 
 
 
@@ -120,8 +120,8 @@ const AppMainDocuments = () => {
                                 settings={settings}
                                 bordert={(index - 1 !== hoverIndex && index - 1 !== activeIndex)}
                                 borderb={index + 1 !== hoverIndex && activeIndex !== index + 1}
-                                setHover={(value) => { setHover(value ? index : null) }}
-                                setActive={(value) => {
+                                setHover={(value:any) => { setHover(value ? index : null) }}
+                                setActive={(value:any) => {
 
 
                                     setActive(value ? index : null)

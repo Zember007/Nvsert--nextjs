@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx", // Обязательно для React 19
+    "module": "esnext",
+    "target": "es6",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "declaration": true,
+    "skipLibCheck": true, // Помогает с конфликтами типов
+    "noImplicitAny": false, // Для обхода строгих проверок
+    "strict": false,
+    "lib": ["dom", "esnext"] // Для JSX и DOM
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
