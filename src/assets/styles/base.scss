@@ -53,10 +53,52 @@
     //     height: 32px;
     // }
 
-    .close {
+
+      
+      .close {
+        display: block;
         width: 32px;
         height: 32px;
-    }
+        float: right;
+        cursor: pointer;
+        right: 0;
+        top: 0;
+        margin-top: 8px;
+        margin-right: 8px;
+        position: absolute;
+        overflow: hidden;
+        z-index: 3000;
+      }
+      
+      .close > div {
+        position: relative;
+      }
+      
+      .close-button-block {
+        width: 32px;
+        height: 16px;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .close-button-block:before,
+      .close-button-block:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+      
+        left: calc(50% - 1px);
+        display: block;
+        width: 2px;
+        height: 20px;
+        transform-origin: bottom center;
+        background: #FFF;
+        transition: all ease-out 280ms;
+      }
+      
+      .close-button-block:last-of-type {
+        transform: rotate(180deg);
+      }
 
     .close .in .close-button-block:before {
         transition-delay: 280ms;

@@ -195,8 +195,7 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
         lastCX: undefined,
         lastCY: undefined,
         x: -singlePageWidth * nextVirtualIndex,
-        pause: isPause,
-        scale: 1,  
+        pause: isPause,  
       });
       
 

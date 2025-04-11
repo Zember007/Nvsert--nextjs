@@ -55,22 +55,25 @@ const AppMainFeedback = () => {
             const rect = container.getBoundingClientRect();
             const mouseX = e.clientX - rect.left;
             const centerX = rect.width / 2;
+            const gap = 20
 
-            if (mouseX > centerX - 50 && mouseX < centerX + 50) {
+            if (mouseX > centerX - gap && mouseX < centerX + gap) {
+               
                 flag = true
             }
 
             if (!flag) return;
 
-            if (mouseX > centerX + 50) {
+            if (mouseX > centerX + gap) {
                 loop.previous({ ease: "power3", duration: 0.725 });
                 loop1.previous({ ease: "power3", duration: 1.2 });
-                flag = false;
-            } else if (mouseX < centerX - 50) {
+                flag = false;                
+            } else if (mouseX < centerX - gap) {
 
 
                 loop.next({ ease: "power3", duration: 1.2 });
                 loop1.next({ ease: "power3", duration: 0.725 });
+
                 flag = false;
             }
 
