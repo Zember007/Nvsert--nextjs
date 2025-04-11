@@ -198,7 +198,7 @@ const MainDocumentItem = ({  setPhoto, img, settings, title, content, content1, 
 
                             <div
 
-                                className="w-full  relative z-[2]  transition-all duration-300 group-active/window:scale-[0.95] transition-all duration-300 will-change-transform">
+                                className="w-full  relative z-[2]  transition-all duration-300 group-active/window:scale-[0.98] transition-all duration-300 will-change-transform">
 
 
 
