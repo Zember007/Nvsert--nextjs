@@ -55,9 +55,9 @@ export interface PhotoBoxProps {
   // Mask 点击事件
   onMaskTap: PhotoTapFunction;
   // 到达边缘滑动事件
-  onReachMove: ReachMoveFunction;
+  onReachMove?: ReachMoveFunction;
   // 触摸解除事件
-  onReachUp: ReachFunction;
+  onReachUp?: ReachFunction;
   // Resize 事件
   onPhotoResize: () => void;
   // 向父组件导出属性

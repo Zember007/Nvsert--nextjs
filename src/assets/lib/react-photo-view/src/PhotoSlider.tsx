@@ -171,7 +171,7 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
       onClose(evt);
     },
     changeIndex(nextIndex: number, isPause: boolean = false) {
-      // 当前索引
+
       const currentIndex = enableLoop ? virtualIndexRef.current + (nextIndex - index) : nextIndex;
       const max = imageLength - 1;
       // 虚拟 index
@@ -180,24 +180,30 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
       const nextVirtualIndex = enableLoop ? currentIndex : limitIndex;
       // 单个屏幕宽度
       const singlePageWidth = innerWidth + horizontalOffset;
+
+      const currentTranslateX = -singlePageWidth * virtualIndexRef.current;
+
+
+      updateState({
+        touched: false,
+        x: currentTranslateX,
+        lastCX: undefined,
+        lastCY: undefined,
+        bg: maskOpacity,
+        overlay: overlay
+      });
+      // 当前索引
+
       console.log('changeIndex');
-      
-      // updateState({
-      //   touched: false,
-      //   lastCX: undefined,
-      //   lastCY: undefined,
-      //   x: -singlePageWidth * nextVirtualIndex,
-      //   pause: isPause,
-      // });
 
       updateState({
         touched: false,
         lastCX: undefined,
         lastCY: undefined,
         x: -singlePageWidth * nextVirtualIndex,
-        pause: isPause,  
+        pause: isPause,
       });
-      
+
 
       virtualIndexRef.current = nextVirtualIndex;
       // 更新真实的 index
@@ -302,6 +308,7 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
     const offsetClientY = clientY - (lastCY ?? clientY);
     let willClose = false;
     // 下一张
+    console.log('handleReachUp');
     if (offsetClientX < -maxMoveOffset) {
       changeIndex(index + 1);
       return;
@@ -319,7 +326,7 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
       willClose = true;
       close();
     }
-    console.log('handleReachUp');
+
     updateState({
       touched: false,
       x: currentTranslateX,
@@ -342,18 +349,18 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
   // 覆盖物参数
   const overlayParams: OverlayRenderProps | undefined = onScale &&
     onRotate && {
-      images,
-      index,
-      visible,
-      onClose: close,
-      onIndexChange: changeIndex,
-      overlayVisible: currentOverlayVisible,
-      overlay: currentImage && currentImage.overlay,
-      scale,
-      rotate,
-      onScale,
-      onRotate,
-    };
+    images,
+    index,
+    visible,
+    onClose: close,
+    onIndexChange: changeIndex,
+    overlayVisible: currentOverlayVisible,
+    overlay: currentImage && currentImage.overlay,
+    scale,
+    rotate,
+    onScale,
+    onRotate,
+  };
   // 动画时间
   const currentSpeed = speedFn ? speedFn(activeAnimation) : defaultSpeed;
   const currentEasing = easingFn ? easingFn(activeAnimation) : defaultEasing;
@@ -362,22 +369,20 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
 
   return (
     <SlidePortal
-      className={`PhotoView-Portal${!currentOverlayVisible ? ' PhotoView-Slider__clean' : ''}${
-        !visible ? ' PhotoView-Slider__willClose' : ''
-      }${className ? ` ${className}` : ''}`}
+      className={`PhotoView-Portal${!currentOverlayVisible ? ' PhotoView-Slider__clean' : ''}${!visible ? ' PhotoView-Slider__willClose' : ''
+        }${className ? ` ${className}` : ''}`}
       role="dialog"
       onClick={(e) => e.stopPropagation()}
       container={portalContainer}
     >
       {visible && <PreventScroll />}
       <div
-        className={`PhotoView-Slider__Backdrop${maskClassName ? ` ${maskClassName}` : ''}${
-          activeAnimation === 1
-            ? ' PhotoView-Slider__fadeIn'
-            : activeAnimation === 2
-              ? ' PhotoView-Slider__fadeOut'
-              : ''
-        }`}
+        className={`PhotoView-Slider__Backdrop${maskClassName ? ` ${maskClassName}` : ''}${activeAnimation === 1
+          ? ' PhotoView-Slider__fadeIn'
+          : activeAnimation === 2
+            ? ' PhotoView-Slider__fadeOut'
+            : ''
+          }`}
         style={{
           background: currentOpacity ? `rgba(0, 0, 0, ${currentOpacity})` : undefined,
           transitionTimingFunction: currentEasing,

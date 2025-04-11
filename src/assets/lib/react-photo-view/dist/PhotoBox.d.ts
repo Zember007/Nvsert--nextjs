@@ -13,8 +13,8 @@ export interface PhotoBoxProps {
     brokenElement?: React.ReactElement | ((photoProps: BrokenElementParams) => React.ReactElement);
     onPhotoTap: PhotoTapFunction;
     onMaskTap: PhotoTapFunction;
-    onReachMove: ReachMoveFunction;
-    onReachUp: ReachFunction;
+    onReachMove?: ReachMoveFunction;
+    onReachUp?: ReachFunction;
     onPhotoResize: () => void;
     expose: (state: ExposedProperties) => void;
     isActive: boolean;

@@ -76,55 +76,28 @@ const SliderMain = () => {
             }
 
 
-            const { boundaryPoint, direction, endPoint } = getSlideTransition(oldIndex, index, slides.length)
+            // const { boundaryPoint, direction, endPoint } = getSlideTransition(oldIndex, index, slides.length)
 
 
             if (enableList) {
-                console.log(enableList, boundaryPoint);
-                if (boundaryPoint) {
+                sliders.forEach((slider) => {
+                    slider.slickGoTo(index)
+                });
+
+                enableList = false
+                timeoutId = setTimeout(() => {
+                    enableList = true
+                }, 800)
+            } else {
+                timeoutId = setTimeout(() => {
+                    enableList = true
                     sliders.forEach((slider) => {
-                        slider.slickGoTo(boundaryPoint);
+                        slider.slickGoTo(index)
                     });
-                    setTimeout(() => {
-                        sliders.forEach((slider) => {
-                            if (direction === 'next') {
-                                slider.slickNext()
-                            } else {
-                                slider.slickPrev()
-                            }
-                        });
 
-                        setTimeout(() => {
-                            sliders.forEach((slider) => {
-                                slider.slickGoTo(endPoint);
-                            });
-
-                            enableList = true;
-                        }, 800)
-                    }, 800)
-                } else {
-
-                    sliders.forEach((slider) => {
-                        slider.slickGoTo(endPoint);
-                    });
-                    setTimeout(() => {
-                        enableList = true;
-                    }, 800)
-                }
-
-
-                enableList = false;
+                }, 800)
             }
-            // } else {
-            //     timeoutId = setTimeout(() => {
-            //         enableList = true;
-            //         sliders.forEach((slider) => {
 
-            //             slider.slickGoTo(index);
-
-            //         });
-            //     }, 800);
-            // }
             oldIndex = index
 
         })
