@@ -219,14 +219,9 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
                                                     style={active && (mouseX || mouseY) ? cardStyle : {}}
                                                     className="!shadow-none card border-[0.2px] solid border-[#A4A4A4] overflow-hidden rounded-[5px] transition-all duration-300">
                                                     <Image
-
                                                         alt='document' src={img}
-                                                        width="0"
-                                                        height="0"
-                                                        sizes="100vw"
-                                                        style={{
-                                                            width: (photoWidth || 190) + 'px'
-                                                        }}
+                                                        width={photoWidth || 190}
+                                                        height={photoWidth / img.width * img.height || 267}                                                       
                                                         className={`card transition-all duration-200 h-auto`} />
                                                 </div>
 
