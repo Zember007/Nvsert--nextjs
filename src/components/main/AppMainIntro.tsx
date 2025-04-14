@@ -1,16 +1,6 @@
 'use client'
 import '@/assets/styles/sections/main/main-banner.scss';
-import { useEffect, useMemo, useRef, useState } from "react"
-import { useDispatch, useSelector } from 'react-redux';
-import {
-    resetActionSearchResults,
-    updateDefaultResults,
-    updateSearchResults,
-    selectSearchResults,
-    selectSearchDefault,
-} from '@/store/search';
 import { useTranslation } from 'react-i18next';
-import { useHeaderContext } from '@/components/contexts/HeaderContext'
 import AppMainForm from '../forms/AppMainForm';
 import { filterPrepositions } from '@/hook/filter';
 

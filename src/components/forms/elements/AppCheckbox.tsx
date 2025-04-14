@@ -1,5 +1,4 @@
 import React, { ChangeEvent } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 interface CustomCheckboxProps {
     checked: boolean;
@@ -7,6 +6,7 @@ interface CustomCheckboxProps {
     label?: string;
     fail?: boolean;
     successful?: boolean;
+    id: string;
 }
 
 const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
@@ -14,10 +14,10 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
     onChange,
     label = 'Custom Checkbox',
     fail,
-    successful
+    successful,
+    id
 }) => {
     // Генерируем уникальный id один раз при создании компонента
-    const uniqueId = React.useMemo(() => `custom-checkbox-${uuidv4()}`, []);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         onChange(e.target.checked);
@@ -34,14 +34,14 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
             }>
             <input
                 type="checkbox"
-                id={uniqueId}
+                id={id}
                 checked={checked}
                 onChange={handleChange}
                 className="hidden peer"
             />
             <label
                 ref={labelRef}
-                htmlFor={uniqueId}
+                htmlFor={id}
                 className={`
                     before:content-['']
                     before:absolute before:top-[-2.4px] before:left-[-2.4px] before:right-[-2.4px] before:bottom-[-2.4px]  before:z-[-1]

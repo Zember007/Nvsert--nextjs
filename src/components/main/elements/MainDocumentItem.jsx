@@ -1,53 +1,17 @@
 
 import Image from 'next/image';
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { StaticImageData } from 'next/dist/shared/lib/get-img-props';
+import { useEffect, useRef, useState } from 'react';
 import { filterPrepositions } from '@/hook/filter';
 import { PhotoView } from '@/assets/lib/react-photo-view';
-import { useDropEffect } from '@/hook/useDrop';
 import { useButton } from '@/hook/useButton';
 import { BounceEffect } from '@/hook/useBounce';
 
-// interface content {
-//     text: string,
-//     text1?: string
-// }
 
-// interface content1 {
-//     title: string
-//     subtitle?: string
-//     list: string[]
-// }
-
-// interface props {
-//     img: StaticImageData,
-//     title: string,
-//     price: string,
-//     duration: string,
-//     content: content,
-//     content1: content1[],
-//     active: boolean,
-//     setActive: (value: boolean) => void,
-//     setHover: (value: boolean) => void,
-//     bordert: boolean,
-//     borderb: boolean,
-//     settings: any;
-//     setPhoto: () => void
-
-// }
-
-// interface pulse {
-//     width: string;
-//     height: string;
-//     top: string;
-//     left: string;
-// }
 
 const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, price, duration, active, setActive, borderb, bordert, setHover }) => {
 
     const [listHidden, setListHidden] = useState(true);
 
-    // const { buttonRef, handleMouseDown } = useDropEffect()
     const { setButtonRef, setWrapperRef } = useButton()
 
     const borderBounce = useRef(null);
