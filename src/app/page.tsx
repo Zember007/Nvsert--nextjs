@@ -1,32 +1,38 @@
 'use client'
-import { useEffect } from 'react';
-import AppMainIntro from '../components/main/AppMainIntro';
-import AppMainSlider from '@/components/main/AppMainSlider';
-import AppMainSafeguards from '@/components/main/AppMainSafeguards';
-import AppMainDocuments from '../components/main/AppMainDocuments';
-import AppMainQuestions from '../components/main/AppMainQuestions';
-import AppMainSkills from '../components/main/AppMainSkills';
+import dynamic from 'next/dynamic';
 
 import '@/assets/styles/main.scss'
-import AppMainFeedback from '@/components/main/AppMainFeedback';
+import LazyLoadSection from '@/hook/LazyLoadSection';
+
+import AppMainIntro from '../components/main/AppMainIntro'
+import AppMainDocuments from '../components/main/AppMainDocuments'
 
 export default function Home() {
+
+  const DynamicAppMainSkills = dynamic(() => import('../components/main/AppMainSkills'), {
+    ssr: false,
+  });
+
+  const DynamicAppMainSlider = dynamic(() => import('../components/main/AppMainSlider'), {
+    ssr: false,
+  });
+
+  const DynamicAppMainSafeguards = dynamic(() => import('../components/main/AppMainSafeguards'), {
+    ssr: false,
+  });
+
+  const DynamicAppMainFeedback = dynamic(() => import('../components/main/AppMainFeedback'), {
+    ssr: false,
+  });
 
   return (
     <div className="main text-[#000] overflow-hidden select-none">
       <AppMainIntro />
-
       <AppMainDocuments />
-
-      <AppMainSkills />
-
-      <AppMainSlider />
-
-      <AppMainSafeguards />
-
-      {/* <AppMainQuestions /> */}
-
-      <AppMainFeedback />
+      <LazyLoadSection component={DynamicAppMainSkills} />
+      <LazyLoadSection component={DynamicAppMainSlider} />
+      <LazyLoadSection component={DynamicAppMainSafeguards} />
+      <LazyLoadSection component={DynamicAppMainFeedback} />
     </div>
   );
 }

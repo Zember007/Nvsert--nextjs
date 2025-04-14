@@ -23,7 +23,6 @@ const settings = {
 const SliderMain = () => {
 
 
-    // const [active, setActive] = useState<number>(0)
 
     const [sliders, setSliders] = useState<Slider[]>([]);
 
@@ -32,41 +31,6 @@ const SliderMain = () => {
         let timeoutId: NodeJS.Timeout | null = null;
         let enableList = true
 
-        function getSlideTransition(oldIndex: number, index: number, slidesLength: number) {
-            // Прямое расстояние
-            const directDistance = Math.abs(index - oldIndex);
-            // Расстояние через цикл
-            const loopDistance = slidesLength - directDistance;
-            // Минимальное расстояние
-            const distance = Math.min(directDistance, loopDistance);
-
-
-            let direction;
-
-            let boundaryPoint = null;
-
-            if (distance === directDistance) {
-
-                direction = index > oldIndex ? 'next' : 'prev';
-
-            } else {
-
-
-                if (index > oldIndex) {
-                    direction = 'prev';
-                    boundaryPoint = 0; // Переход назад через начало
-                } else {
-                    direction = 'next';
-                    boundaryPoint = slidesLength - 1; // Переход вперёд через конец
-                }
-            }
-
-            return {
-                direction,             // Направление: 'forward' или 'backward'   
-                boundaryPoint,         // Номер пограничной точки (0 или slidesLength - 1, null если нет перехода)
-                endPoint: index        // Конечная точка (index)
-            };
-        }
 
         let oldIndex = 0
         initSlider((index: number) => {
@@ -76,7 +40,6 @@ const SliderMain = () => {
             }
 
 
-            // const { boundaryPoint, direction, endPoint } = getSlideTransition(oldIndex, index, slides.length)
 
 
             if (enableList) {
@@ -111,11 +74,7 @@ const SliderMain = () => {
 
 
 
-    const handleBeforeChange = (sliderIndex: number, newIndex: number) => {
-        // if (newIndex !== active) {
-        //     sliders[sliderIndex].slickGoTo(active)
-        // }
-    };
+
 
     const { setButtonRef, setWrapperRef } = useButton()
 
@@ -161,10 +120,7 @@ const SliderMain = () => {
                                                 ...settings,
                                                 speed: 800 - i * 100
                                             }
-                                            }
-                                            beforeChange={(_, newIndex) =>
-                                                handleBeforeChange(i, newIndex)
-                                            }
+                                            }                                            
                                             className="w-[500%] slider">
                                             {slides.map((slide, index) => (
                                                 <div key={index} >
