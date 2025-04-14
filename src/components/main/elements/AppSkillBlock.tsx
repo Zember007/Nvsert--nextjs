@@ -24,13 +24,13 @@ const AppSkillBlock = (skill: any) => {
   const mousePY = mouseY / dimensions.height;
 
   const cardStyle = {
-    transform: `rotateY(${mousePX * 30}deg) rotateX(${mousePY * -30}deg)`,
+    transform: `rotateY(${(mousePX || 0) * 30}deg) rotateX(${(mousePY || 0) * -30}deg)`,
     perspective: '1200px',
     transition: 'transform 0.3s ease-out'
   };
 
   const textStyle = {
-    transform: `translate3d(${mousePX * 20 * 2}px, ${mousePY * 20 * 2}px, 0) scale(1.1)`,
+    transform: `translate3d(${(mousePX || 0) * 20 * 2}px, ${(mousePY || 0) * 20 * 2}px, 0) scale(1.1)`,
     transition: 'transform 0.3s ease-out',
     willChange: 'transform'
   };
