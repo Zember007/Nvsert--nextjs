@@ -111,9 +111,9 @@ const AppHeader = () => {
               </ul>
             </nav>
             <div className="header__menu-content">
-              <h4 className="title">
+              <p className="title">
                 Зачем искать что-то самому, если можно заказать расчет?
-              </h4>
+              </p>
               <p className="subtitle">
                 Оставьте свои контактные данные, и мы сформируем для вас предложение
                 по документу или пакету документов
@@ -129,7 +129,7 @@ const AppHeader = () => {
               <div className="wrapper">
                 <div className=" py-[30px] px-[18px]  services-menu-bg rounded-[8px]">
                   <div className="services-menu__header">
-                    <h2 className="services-menu__title">Услуги</h2>
+                    <p className="services-menu__title">Услуги</p>
                     <button
                       className={`services-menu__btn-close js-services-menu__btn ${servicesMenuActive && 'active'}`}
                       onClick={(e) => {
