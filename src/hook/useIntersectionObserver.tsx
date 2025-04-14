@@ -31,7 +31,7 @@ export function useIntersectionObserver(options: IntersectionObserverInit = {}) 
         }
       },
       {
-        rootMargin: '500px',
+        rootMargin: '900px',
         ...options,
       },
     );
