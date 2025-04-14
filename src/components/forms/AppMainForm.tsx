@@ -157,7 +157,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                                 title={isPhone ? 'Телефон' : isEmail ? 'Email' : ''}
                                 inputName="Contact"
                                 mask={isPhone ? "phone" : ''}
-                                type={isPhone ? "phone" : isEmail ? 'text' : ''}
+                                type={isPhone ? "phone" : 'text'}
                                 fail={emailError}
                                 required={true}
                                 message={false}

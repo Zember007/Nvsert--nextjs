@@ -349,7 +349,7 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
 
 
                                 <div className="tariff-wrap m:hidden" ref={setWrapperRef}>
-                                    <button ref={setButtonRef} id="open-tariff" className='tariff justify-center  py-[18px] text-[20px] font-bold rounded-[4px] bg-[#000000] leading-[1] text-[#FFF]'>
+                                    <button ref={setButtonRef}  className='tariff justify-center  py-[18px] text-[20px] font-bold rounded-[4px] bg-[#000000] leading-[1] text-[#FFF]'>
                                         Оформить заявку
                                     </button>
                                 </div>

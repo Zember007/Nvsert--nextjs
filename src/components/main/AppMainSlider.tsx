@@ -173,7 +173,7 @@ const SliderMain = () => {
 
 
                                                             <div className="h-[50px] p-[10px] text-center  rounded-[4px] bg-[#34446D] w-full border-[#34446D] border-solid border">
-                                                                <span id='title-block' className='text-[24px] font-bold text-[#FFF] block'>
+                                                                <span className='text-[24px] font-bold text-[#FFF] block'>
                                                                     {
                                                                         filterPrepositions(slide.title)
                                                                     }
@@ -210,11 +210,11 @@ const SliderMain = () => {
                                             <svg className='group-hover:*:*:fill-[#FFF] *:*:transition-all *:*:duration-300' xmlns="http://www.w3.org/2000/svg" width="46" height="38" viewBox="0 0 46 38" fill="none">
                                                 <path d="M24.4482 34.9009H28.7887" stroke="#424242" strokeWidth="0.600425" strokeLinecap="round" />
                                                 <path d="M24.4482 3.02588L28.7887 3.02588" stroke="#424242" strokeWidth="0.600425" strokeLinecap="round" />
-                                                <g filter="url(#filter0_d_1459_613)">
+                                                <g filter="url(#filter0_d_1459_643)">
                                                     <path d="M30.1421 2H23.8391L10.1421 18.962L23.8391 35.9239H30.1421L16.4451 18.962L30.1421 2Z" fill="#34446D" />
                                                 </g>
                                                 <defs>
-                                                    <filter id="filter0_d_1459_613" x="7" y="0" width="27" height="38" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                                    <filter id="filter0_d_1459_643" x="7" y="0" width="27" height="38" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
                                                         <feFlood floodOpacity="0" result="BackgroundImageFix" />
                                                         <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5 0" result="hardAlpha" />
                                                         <feOffset dx="1" dy="0" />
