@@ -146,17 +146,14 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
                             }}
                             className={`materialBtn text-left group/window active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] ${!active ? '' : ' bg-[#34446D]  '} active:bg-[#5B6788]  px-[30px]  relative w-full transition-all duration-300 z-[0]`}>
 
-                            <div className={`pointer-events-none ${active && 'opacity-0'} transition-all duration-100 absolute top-1/2 translate-y-[-50%] left-[30px]`}>
-                                <div
-                                    className="!shadow-none card border-[0.2px] solid border-[#A4A4A4] overflow-hidden rounded-[5px] transition-all duration-300">
-                                    <Image
+                            <div className={`pointer-events-none ${active && 'opacity-0'} transition-all duration-100 !shadow-none card border-[0.2px] solid border-[#A4A4A4] overflow-hidden rounded-[5px] absolute top-1/2 translate-y-[-50%] left-[30px]`}>
+                            
+                                <Image
 
-                                        alt='document' src={img}
-                                        width="0"
-                                        height="0"
-                                        sizes="100vw"
-                                        className={` transition-all duration-200 h-auto !w-[43px]`} />
-                                </div>
+                                    alt='document' src={img}
+                                    width="43"
+                                    height="60"
+                                />
 
                             </div>
 
@@ -205,7 +202,7 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
                             <div className="s:p-[30px] p-[15px] document-item  flex flex-col l:flex-row gap-[10px] ">
                                 <div className="w-[60%] s:gap-0 gap-[20px] flex flex-col m:flex-row m:items-stretch">
                                     <div className='m:m-0 m-auto'>
-                                       
+
                                         <PhotoView
                                             src={img.src}
                                             width={475}
@@ -313,7 +310,7 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
 
 
                                 <div className="tariff-wrap m:hidden" ref={setWrapperRef}>
-                                    <button ref={setButtonRef}  className='tariff justify-center  py-[18px] text-[20px] font-bold rounded-[4px] bg-[#000000] leading-[1] text-[#FFF]'>
+                                    <button ref={setButtonRef} className='tariff justify-center  py-[18px] text-[20px] font-bold rounded-[4px] bg-[#000000] leading-[1] text-[#FFF]'>
                                         Оформить заявку
                                     </button>
                                 </div>
