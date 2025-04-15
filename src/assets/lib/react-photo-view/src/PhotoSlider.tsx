@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import type { DataType, PhotoProviderBase, OverlayRenderProps, ReachType } from './types';
 import { defaultEasing, defaultSpeed, defaultOpacity, horizontalOffset, maxMoveOffset } from './variables';
 import isTouchDevice from './utils/isTouchDevice';
@@ -16,6 +16,7 @@ import ArrowRight from './components/ArrowRight';
 import PreventScroll from './components/PreventScroll';
 import PhotoBox from './PhotoBox';
 import './PhotoSlider.less';
+import { init } from './hooks/webgl';
 
 export interface IPhotoSliderProps extends PhotoProviderBase {
   // 图片列表
@@ -106,6 +107,9 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
 
   const [state, updateState] = useSetState(initialState);
   const [innerIndex, updateInnerIndex] = useState(0);
+  const [indexController, setIndexController] = useState<any>(null);
+
+  
 
   const {
     x,
@@ -210,6 +214,7 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
       const realLoopIndex = nextIndex < 0 ? max : nextIndex > max ? 0 : nextIndex;
       if (onIndexChange) {
         onIndexChange(enableLoop ? realLoopIndex : limitIndex);
+        indexController?.goToIndex(enableLoop ? realLoopIndex : limitIndex);
       }
     },
   });
@@ -339,6 +344,16 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
   // 截取相邻的图片
   const adjacentImages = useAdjacentImages(images, index, enableLoop);
 
+  useEffect(() => {
+    const plane = document.querySelector('.plane')
+    if (plane || !images) return
+
+    const webgl = init(images.map((item: DataType) => item.src));
+
+    setIndexController(webgl);
+
+  }, [images]);
+
   if (!realVisible) {
     return null;
   }
@@ -362,10 +377,15 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
     onRotate,
   };
   // 动画时间
+
+  
   const currentSpeed = speedFn ? speedFn(activeAnimation) : defaultSpeed;
   const currentEasing = easingFn ? easingFn(activeAnimation) : defaultEasing;
   const slideSpeed = speedFn ? speedFn(3) : defaultSpeed + 200;
   const slideEasing = easingFn ? easingFn(3) : defaultEasing;
+
+
+
 
   return (
     <SlidePortal
@@ -402,7 +422,14 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
           </div>
         </div>
       )}
-      {adjacentImages.map((item: DataType, currentIndex) => {
+      <div id="wrap-texture">
+
+        <div id="canvas"></div>
+
+
+
+      </div>
+      {/* {adjacentImages.map((item: DataType, currentIndex) => {
         // 截取之前的索引位置
         const nextIndex =
           !enableLoop && index === 0 ? index + currentIndex : virtualIndexRef.current - 1 + currentIndex;
@@ -432,24 +459,28 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
             expose={updateState}
           />
         );
-      })}
-      {!isTouchDevice && bannerVisible && (
-        <>
-          {(enableLoop || index !== 0) && (
-            <div className="PhotoView-Slider__ArrowLeft" onClick={() => changeIndex(index - 1)}>
-              <ArrowLeft />
-            </div>
-          )}
-          {(enableLoop || index + 1 < imageLength) && (
-            <div className="PhotoView-Slider__ArrowRight" onClick={() => changeIndex(index + 1)}>
-              <ArrowRight />
-            </div>
-          )}
-        </>
-      )}
-      {overlayRender && overlayParams && (
-        <div className="PhotoView-Slider__Overlay">{overlayRender(overlayParams)}</div>
-      )}
-    </SlidePortal>
+      })} */}
+      {
+        !isTouchDevice && bannerVisible && (
+          <>
+            {(enableLoop || index !== 0) && (
+              <div className="PhotoView-Slider__ArrowLeft" onClick={() => changeIndex(index - 1)}>
+                <ArrowLeft />
+              </div>
+            )}
+            {(enableLoop || index + 1 < imageLength) && (
+              <div className="PhotoView-Slider__ArrowRight" onClick={() => changeIndex(index + 1)}>
+                <ArrowRight />
+              </div>
+            )}
+          </>
+        )
+      }
+      {
+        overlayRender && overlayParams && (
+          <div className="PhotoView-Slider__Overlay">{overlayRender(overlayParams)}</div>
+        )
+      }
+    </SlidePortal >
   );
 }

@@ -32,9 +32,7 @@
     box-shadow: 0px 0px 10px 0px #000000CC;
 }
 
-.PhotoView-Slider__BannerWrap {
-    background-color: transparent !important;
-}
+
 
 .PhotoView-Slider__BannerRight {
     // svg {
@@ -170,7 +168,8 @@
     opacity: 1 !important;
     top: auto !important;
     margin: 0 !important;
-    bottom: 20px !important;
+    bottom: 50% !important;
+    transform: translateY(400px) !important;
 
     &::before {
         content: '';
@@ -209,9 +208,11 @@
 
 .PhotoView-Slider__BannerWrap {
     max-width: 1200px;
-    top: 20px !important;
+    top: 50% !important;
     left: 50% !important;
-    transform: translateX(-50%) !important;
+    transform: translate(-50%,-410px) !important;
+    background-color: transparent !important;
+    opacity: 1 !important;
 
     &::before {
         content: attr(data-before);
@@ -352,3 +353,38 @@ input:-internal-autofill-selected {
 input:-webkit-autofill {
     color: inherit !important;
 }
+
+#wrap-texture {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+  
+  #canvas {
+    /* make the canvas wrapper fits the document */
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  
+  .plane {
+    /* define the size of your plane */
+    width: 50%;
+    max-width: 400px;
+    min-width: 250px;
+    height: 80vh;
+    z-index: 100;
+  }
+  
+  .plane img {
+    /* hide the img element */
+    display: none;
+  }
