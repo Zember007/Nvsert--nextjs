@@ -19,6 +19,7 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
     const bounceEl = useRef([]);
     const containerPhotoRef = useRef(null);
     const LinkServiceRef = useRef(null);
+    const smallPhotoRef = useRef(null);
 
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
     const [photoWidth, setPhotoWidth] = useState(0);
@@ -88,14 +89,32 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
         }, 1000));
     };
 
-    useEffect(() => {
-        if (!active) return
+    const [flag, setFlag] = useState(false)
 
-        if (borderBounce.current) {
-            borderBounce.current.style.setProperty('--duration', `${settings.duration}ms`)
-            borderBounce.current.style.setProperty('--length', settings.length)
-            borderBounce.current.classList.remove('border-bounce')
+    useEffect(() => {
+        if (!active) {
+            if (!smallPhotoRef.current || !flag) return
+
+
+            BounceEffect(smallPhotoRef.current, {
+                startPosition: "0",
+                endPosition: `-10px`,
+                duration: 300,
+                easing: "ease-in",
+                direction: 'horizontal'
+            });
+
+
+            return
+        } 
+
+        if(!flag) {
+            setFlag(true)
         }
+
+        
+
+
         setTimeout(() => {
             if (!bounceEl.current.length || !borderBounce.current) return
             borderBounce.current.classList.add('border-bounce')
@@ -130,71 +149,75 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
                 ref={borderBounce}
                 onMouseEnter={() => { setHover(true) }}
                 onMouseLeave={() => { setHover(false) }}
-                className={`mx-[-30px] overflow-hidden  group/main cursor-pointer  hover:bg-[#F5F5F5] rounded-[4px] relative`}>
-                <div className={`pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[10] rounded-[4px] ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[transparent]`}></div>
-                <div className="  flex flex-col">
-                    <div className="relative ">
+                className={`mx-[-30px]  flex flex-col  group/main cursor-pointer  hover:bg-[#F5F5F5] rounded-[4px] relative`}>
+                <div className={`pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[0] rounded-[4px] ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[transparent]`}></div>
+                
+
+
+                    <div
+                        onClick={(event) => {
+                            if (photoRef.current?.contains(event.target)) return;
+                            if (LinkServiceRef.current?.contains(event.target) && active) return;
+                            setActive(!active);
+
+
+
+                        }}
+                        className={`materialBtn rounded-[4px] text-left group/window active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] ${!active ? '' : ' bg-[#34446D]  '} active:bg-[#5B6788]  px-[30px]  relative w-full transition-all duration-500 z-[0]`}>
+
+                        <div className={`border-[transparent] border-solid border ${active && '!border-[#000]'} absolute top-[-1px] bottom-[-1px] right-[0] z-[1000] rounded-[4px] left-[0] transition-all duration-500`}></div>
 
                         <div
-                            onClick={(event) => {
-                                if (photoRef.current?.contains(event.target)) return;
-                                if (LinkServiceRef.current?.contains(event.target) && active) return;
-                                setActive(!active);
+                            className={`pointer-events-none ${active && 'opacity-0'} group-active/window:!opacity-[1] transition-all duration-100 !shadow-none card  absolute top-1/2 translate-y-[-50%] left-[30px]`}>
+
+                            <Image
+                                className='border-[0.2px] solid border-[#A4A4A4] overflow-hidden rounded-[5px]'
+                                ref={smallPhotoRef}
+                                alt='document' src={img}
+                                width="43"
+                                height="60"
+                            />
+
+                        </div>
+
+                        <div
+
+                            className="w-full  relative z-[2]  transition-all duration-500 group-active/window:scale-[0.98] transition-all duration-300 will-change-transform">
 
 
-
-                            }}
-                            className={`materialBtn text-left group/window active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] ${!active ? '' : ' bg-[#34446D]  '} active:bg-[#5B6788]  px-[30px]  relative w-full transition-all duration-300 z-[0]`}>
-
-                            <div className={`pointer-events-none ${active && 'opacity-0'} transition-all duration-100 !shadow-none card border-[0.2px] solid border-[#A4A4A4] overflow-hidden rounded-[5px] absolute top-1/2 translate-y-[-50%] left-[30px]`}>
-                            
-                                <Image
-
-                                    alt='document' src={img}
-                                    width="43"
-                                    height="60"
-                                />
-
-                            </div>
 
                             <div
 
-                                className="w-full  relative z-[2]  transition-all duration-300 group-active/window:scale-[0.98] transition-all duration-300 will-change-transform">
+                                className={` gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] ' : ''} group-active/window:text-[#FFF]  text-[#000] transition-all duration-300 relative ${!active && ' hover:text-[#34446D]'}`}
+
+                            >
+
+                                <p
+
+                                    className="translate-y-[-1px] leading-[11px] w-[60%] pl-[63px]  text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">
 
 
+                                    {title}
 
-                                <div
+                                </p>
+                                <div className="w-[40%] grid grid-cols-[1fr_1fr_auto] items-center justify-between">
+                                    <p className="translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{duration}</p>
+                                    <p className="translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{price}</p>
+                                    <button>
+                                        <svg
+                                            className={`${!active && 'rotate-[180deg]'} group-active/window:*:transition-all group-active/window:*:duration-300 group-active/window:*:stroke-[#FFF] ${active ? '' : 'group-active/window:*:stroke-[#000]'} transition-all duration-300`}
+                                            width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M19 19L5 5" stroke={`${active ? 'white' : 'black'}`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                            <path d="M5 13L5 5L13 5" stroke={`${active ? 'white' : 'black'}`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
 
-                                    className={` gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] ' : ''} group-active/window:text-[#FFF]  text-[#000] transition-all duration-300 relative ${!active && ' hover:text-[#34446D]'}`}
-
-                                >
-
-                                    <p
-
-                                        className="translate-y-[-1px] leading-[11px] w-[60%] pl-[63px]  text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">
-
-
-                                        {title}
-
-                                    </p>
-                                    <div className="w-[40%] grid grid-cols-[1fr_1fr_auto] items-center justify-between">
-                                        <p className="translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{duration}</p>
-                                        <p className="translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{price}</p>
-                                        <button>
-                                            <svg
-                                                className={`${!active && 'rotate-[180deg]'} group-active/window:*:stroke-[#FFF] ${active ? '' : 'group-active/window:*:stroke-[#000]'} transition-all duration-300`}
-                                                width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M19 19L5 5" stroke={`${active ? 'white' : 'black'}`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                                <path d="M5 13L5 5L13 5" stroke={`${active ? 'white' : 'black'}`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                            </svg>
-
-                                        </button>
-                                    </div>
-
+                                    </button>
                                 </div>
+
                             </div>
                         </div>
                     </div>
+
                     <div className={`${active && 'bg-[#FFF]'}`}>
 
                         <div className={`transition-all easy-in duration-200 overflow-hidden max-h-0   ${active && '!max-h-[1400px] '}`}
@@ -221,7 +244,7 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
                                                     <Image
                                                         alt='document' src={img}
                                                         width={photoWidth || 190}
-                                                        height={photoWidth / img.width * img.height || 267}                                                       
+                                                        height={photoWidth / img.width * img.height || 267}
                                                         className={`card transition-all duration-200 h-auto`} />
                                                 </div>
 
@@ -314,7 +337,7 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
                         </div>
 
                     </div>
-                </div>
+                
             </div>
 
         </div>
