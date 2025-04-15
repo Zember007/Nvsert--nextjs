@@ -109,7 +109,7 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
   const [innerIndex, updateInnerIndex] = useState(0);
   const [indexController, setIndexController] = useState<any>(null);
 
-  
+
 
   const {
     x,
@@ -345,14 +345,19 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
   const adjacentImages = useAdjacentImages(images, index, enableLoop);
 
   useEffect(() => {
-    const plane = document.querySelector('.plane')
-    if (plane || !images) return
+    if (!realVisible || !images) return;
 
-    const webgl = init(images.map((item: DataType) => item.src));
+    requestAnimationFrame(() => {
+      const canvasEl = document.getElementById('canvas');
+      if (!canvasEl) return;
 
-    setIndexController(webgl);
+      const plane = document.querySelector('.plane');
+      if (plane) return;
 
-  }, [images]);
+      const webgl = init(images.map((item: DataType) => item.src));
+      setIndexController(webgl);
+    });
+  }, [realVisible, images]);
 
   if (!realVisible) {
     return null;
@@ -378,7 +383,7 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
   };
   // 动画时间
 
-  
+
   const currentSpeed = speedFn ? speedFn(activeAnimation) : defaultSpeed;
   const currentEasing = easingFn ? easingFn(activeAnimation) : defaultEasing;
   const slideSpeed = speedFn ? speedFn(3) : defaultSpeed + 200;
