@@ -26,7 +26,7 @@ const AppMainFeedback = () => {
             draggable: true,
             center: false,
             offsetLeft: 0,
-            gap: 10,
+            gap: 10, 
             onChange: (index: number) => {
 
             }
@@ -58,7 +58,7 @@ const AppMainFeedback = () => {
             const gap = 10
 
             if (mouseX > centerX - gap && mouseX < centerX + gap) {
-               
+
                 flag = true
             }
 
@@ -67,7 +67,7 @@ const AppMainFeedback = () => {
             if (mouseX > centerX + gap) {
                 loop.previous({ ease: "sine.inOut", duration: 0.6 });
                 loop1.previous({ ease: "sine.inOut", duration: 1 });
-                flag = false;                
+                flag = false;
             } else if (mouseX < centerX - gap) {
 
 
@@ -77,19 +77,36 @@ const AppMainFeedback = () => {
                 flag = false;
             }
 
-            
+
         };
 
         const wrapper = document.querySelector('.feedback-slider-box');
 
         if (wrapper) {
-            wrapper.addEventListener("mousemove", (e) => {
-                handleMouseMove(e, wrapper as HTMLElement);
-            })
 
-            wrapper.addEventListener("mouseenter", (e) => {
-                flag = true;
-            })
+
+            let bounds = wrapper.getBoundingClientRect();
+
+            wrapper.addEventListener("mousemove", (e:any) => {
+                const x = e.clientX - bounds.left;
+                const ratio = 1 - (x / bounds.width);
+                const time = ratio * loop1.duration();
+
+                gsap.to(loop1, {
+                    time,
+                    duration: 1.5, 
+                    ease: "sing.inOut" 
+                });
+                gsap.to(loop, {
+                    time,
+                    duration: 2, 
+                    ease: "sing.inOut" 
+                });
+            });
+
+            window.addEventListener("resize", () => {
+                bounds = wrapper.getBoundingClientRect();
+            });
         }
 
 

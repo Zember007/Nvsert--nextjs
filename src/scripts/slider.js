@@ -58,10 +58,10 @@ export function initSlider(onChangeFunction) {
     function updateSteps(newIndex) {
         // if (isAnimating) return;
         // isAnimating = true;
-    
+
         const height = stepsArray[0].offsetHeight;
         const maxOffset = totalSlides * height;
-    
+
         // Определяем направление для плавной анимации
         let delta = newIndex - currentIndex;
         if (newIndex === 0 && currentIndex === totalSlides - 1) {
@@ -70,29 +70,29 @@ export function initSlider(onChangeFunction) {
             delta = -1; // Переход с начала на конец
         }
         const direction = delta >= 0 ? 1 : -1;
-    
+
         // Текущая позиция
         let currentY = gsap.getProperty(stepsParent, "y") || 0;
-    
+
         // Предварительная установка для перехода с начала на конец
         if (newIndex === totalSlides - 1 && currentIndex === 0) {
             gsap.set(stepsParent, { y: -maxOffset });
             currentY = -maxOffset;
         }
-    
+
         // Сохраняем новый индекс
         currentIndex = newIndex;
-    
+
         // Вычисляем целевую позицию на основе индекса
         let targetY = newIndex * height;
-    
+
         // Корректируем targetY для бесшовности
         if (targetY >= maxOffset) {
             targetY -= maxOffset;
         } else if (targetY < 0) {
             targetY += maxOffset;
         }
-    
+
         // Если текущая позиция сильно отклоняется, подстраиваем её для плавной анимации
         if (Math.abs(currentY + targetY) > maxOffset / 2 && direction !== 0) {
             gsap.set(stepsParent, {
@@ -100,21 +100,21 @@ export function initSlider(onChangeFunction) {
             });
             currentY = gsap.getProperty(stepsParent, "y");
         }
-    
+
         gsap.to(stepsParent, {
             y: -targetY,
             duration: 0.18,
             ease: "power3",
             onComplete: () => {
                 currentY = gsap.getProperty(stepsParent, "y");
-    
+
                 // Финальная корректировка для бесшовности
                 if (Math.abs(currentY) >= maxOffset) {
                     gsap.set(stepsParent, { y: currentY % maxOffset });
                 } else if (currentY > 0) {
                     gsap.set(stepsParent, { y: currentY - maxOffset });
                 }
-    
+
                 // isAnimating = false;
             }
         });
@@ -143,12 +143,14 @@ export function initSlider(onChangeFunction) {
     if (nextButton) {
         nextButton.addEventListener("click", () => {
             // if(isAnimating) return;
-            loop.next({ ease: "power3", duration: 0.725 })});
+            loop.next({ ease: "power3", duration: 0.725 })
+        });
     }
     if (prevButton) {
         prevButton.addEventListener("click", () => {
             // if(isAnimating) return;
-            loop.previous({ ease: "power3", duration: 0.725 })});
+            loop.previous({ ease: "power3", duration: 0.725 })
+        });
     }
 
 
@@ -369,6 +371,7 @@ export function horizontalLoop(items, config) {
             })[0];
             tl.draggable = draggable;
         }
+        
         tl.closestIndex(true);
         lastIndex = curIndex;
         // onChange && onChange(curIndex);
@@ -377,3 +380,4 @@ export function horizontalLoop(items, config) {
     });
     return timeline;
 }
+
