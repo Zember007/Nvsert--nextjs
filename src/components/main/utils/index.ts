@@ -568,27 +568,27 @@ export const skills = [
 ]
 
 
-import ImgSlider1 from '@/assets/images/slider/Kantselyariya.png';
-import ImgSliderUslugi from '@/assets/images/slider/uslugi.png';
-import ImgSlider2 from '@/assets/images/slider/Stroitel\'nyye_materialy.png';
-import ImgSlider3 from '@/assets/images/slider/Household_goods.png';
-import ImgSlider4 from '@/assets/images/slider/Bytovaya_khimiya.png';
-import ImgSlider5 from '@/assets/images/slider/Food_products.png';
-import ImgSlider6 from '@/assets/images/slider/Smazochnyye_materialy.png';
-import ImgSlider7 from '@/assets/images/slider/Logkaya_promyshlennost\'.png';
-import ImgSlider8 from '@/assets/images/slider/Upakovka.png';
-import ImgSlider9 from '@/assets/images/slider/Mebel\'.png';
-import ImgSlider10 from '@/assets/images/slider/Tovary_dlya_detey_i_igrushki.png';
-import ImgSlider11 from '@/assets/images/slider/Kosmetika_sredstva_gigiyeny.png';
-import ImgSlider12 from '@/assets/images/slider/Meditsinskiye_izdeliya.png';
-import ImgSlider13 from '@/assets/images/slider/Napitki.png';
-import ImgSlider14 from '@/assets/images/slider/Tovary_dlya_zhivotnykh.png';
-import ImgSlider15 from '@/assets/images/slider/Setevoye_oborudovaniye.png';
-import ImgSlider16 from '@/assets/images/slider/Nizkovol\'tnoye_oborudovaniye.png';
-import ImgSlider17 from '@/assets/images/slider/Promyshlennoye_oborudovaniye.png';
-import ImgSlider18 from '@/assets/images/slider/Sredstva_individual\'noy_zashchity.png';
-import ImgSlider19 from '@/assets/images/slider/Transport_i_spetstekhnika.png';
-import ImgSlider20 from '@/assets/images/slider/DeWatermark.ai_1740631645043-Photoroom.png'; // Замена для "Высоковольтное оборудование"
+import ImgSliderUslugi from '@/assets/images/slider/img01.png';
+import ImgSlider1 from '@/assets/images/slider/img02.png';
+import ImgSlider2 from '@/assets/images/slider/img03.png';
+import ImgSlider3 from '@/assets/images/slider/img04.png';
+import ImgSlider4 from '@/assets/images/slider/img05.png';
+import ImgSlider5 from '@/assets/images/slider/img06.png';
+import ImgSlider6 from '@/assets/images/slider/img07.png';
+import ImgSlider7 from '@/assets/images/slider/img08.png';
+import ImgSlider8 from '@/assets/images/slider/img09.png';
+import ImgSlider9 from '@/assets/images/slider/img10.png';
+import ImgSlider10 from '@/assets/images/slider/img11.png';
+import ImgSlider11 from '@/assets/images/slider/img12.png';
+import ImgSlider12 from '@/assets/images/slider/img13.png';
+import ImgSlider13 from '@/assets/images/slider/img14.png';
+import ImgSlider14 from '@/assets/images/slider/img15.png';
+import ImgSlider15 from '@/assets/images/slider/img16.png';
+import ImgSlider16 from '@/assets/images/slider/img17.png';
+import ImgSlider17 from '@/assets/images/slider/img18.png';
+import ImgSlider18 from '@/assets/images/slider/img19.png';
+import ImgSlider19 from '@/assets/images/slider/img20.png';
+import ImgSlider20 from '@/assets/images/slider/img21.png';
 
 export const slides = [
     {

@@ -15,6 +15,7 @@ const settings = {
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
+    draggable: false,
     cssEase: "cubic-bezier(0.7, 0, 0.3, 1)"
 };
 

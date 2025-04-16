@@ -35,6 +35,10 @@ export default function Home() {
       <LazyLoadSection component={DynamicAppMainSlider} />
       <LazyLoadSection component={DynamicAppMainSafeguards} />
       <LazyLoadSection component={DynamicAppMainFeedback} /> */}
+      <DynamicAppMainSkills />
+      <DynamicAppMainSlider />
+      <DynamicAppMainSafeguards />
+      <DynamicAppMainFeedback />
     </div>
   );
 }
