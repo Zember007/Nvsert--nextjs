@@ -69,3 +69,16 @@
     transform: scaleY(1);
   }
 }
+
+.box-scale:active {
+  .container-scale {
+    --scale:0.99;
+    transform: scale(var(--scale));
+  }
+}
+
+.container-scale {
+  transform-origin: center;
+  --duration: 300ms;
+  transition: all var(--duration);
+}

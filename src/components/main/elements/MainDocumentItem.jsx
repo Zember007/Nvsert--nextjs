@@ -7,7 +7,6 @@ import { useButton } from '@/hook/useButton';
 import { BounceEffect } from '@/hook/useBounce';
 
 
-
 const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, price, duration, active, setActive, borderb, bordert, setHover }) => {
 
     const [listHidden, setListHidden] = useState(true);
@@ -71,6 +70,9 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
 
     }, [active])
 
+    const containerScale = useRef(null)
+
+
 
 
     return (
@@ -103,7 +105,7 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
 
 
                     }}
-                    className={`materialBtn rounded-[4px] overflow-hidden text-left group/window active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] ${!active ? '' : ' bg-[#34446D]  '} active:bg-[#5B6788]  px-[30px]  relative w-full transition-all duration-300 z-[0]`}>
+                    className={`materialBtn rounded-[4px] overflow-hidden text-left group/window box-scale active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] ${!active ? '' : ' bg-[#34446D]  '} active:bg-[#5B6788]  px-[30px]  relative w-full transition-all duration-300 z-[0]`}>
 
                     <div className={`border-[transparent] border-solid border ${active && '!border-[#000]'} absolute top-[-1px] bottom-[-1px] right-[0] z-[1000] rounded-[4px] left-[0] transition-all duration-300`}></div>
 
@@ -124,7 +126,7 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
                         style={{
                             textRendering: 'geometricPrecision'
                         }}
-                        className={`w-full  relative z-[2] group-active/window:scale-[0.99] will-change-transform ease-[ease] transalte-z-0 backface-hidden gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] ' : ''} group-active/window:text-[#FFF]  text-[#000] transition-all duration-300 relative ${!active && ' hover:text-[#34446D]'}`}
+                        className={`w-full  relative z-[2] container-scale  backface-hidden gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] ' : ''} group-active/window:text-[#FFF]  text-[#000]  relative ${!active && ' hover:text-[#34446D]'}`}
 
                     >
 

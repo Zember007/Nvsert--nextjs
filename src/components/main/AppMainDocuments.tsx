@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import '@/assets/styles/sections/main/animation/documents.scss'
 import '@/assets/styles/sections/main/animation/skills.scss'
 import { PhotoProvider } from '@/assets/lib/react-photo-view';
+import GUI from 'lil-gui';
 
 
 
@@ -19,6 +20,33 @@ const AppMainDocuments = () => {
         length: 30
     }
 
+
+    useEffect(() => {
+        const gui = new GUI();
+        const scaleSettings = {
+            scale: 0.98,
+            duration: 300
+        };
+
+        gui.add(scaleSettings, 'scale', 0.5, 2, 0.01).onChange((value:any) => {
+            const els = document.querySelectorAll<HTMLElement>('.container-scale')
+            els.forEach((element) => {
+                element.style.setProperty("--scale", value);
+            });
+        });
+
+        gui.add(scaleSettings, 'duration', 100, 700, 50).onChange((value:any) => {
+            const els = document.querySelectorAll<HTMLElement>('.container-scale')
+            els.forEach((element) => {
+                element.style.setProperty("--duration", `${value}ms`);
+            });
+        });
+
+        // Очистка GUI при размонтировании/деактивации
+        return () => {
+            gui.destroy();
+        };
+    }, [])
 
 
 
@@ -60,7 +88,7 @@ const AppMainDocuments = () => {
                                         const arrowLeft = document.querySelector('.PhotoView-Slider__ArrowLeft') as HTMLDivElement;
                                         const arrowRight = document.querySelector('.PhotoView-Slider__ArrowRight') as HTMLDivElement;
                                         const closeBtn = document.querySelector('.PhotoView-Slider__BannerRight') as HTMLDivElement;
-                                        
+
 
                                         if (!portal || !arrowLeft || !arrowRight) {
                                             console.error('Один из необходимых элементов не найден');
@@ -92,7 +120,7 @@ const AppMainDocuments = () => {
                                         // Обработка клика
                                         portal.addEventListener('click', (e) => {
                                             const target = e.target as Element;
-                                            if(target?.closest('.PhotoView-Slider__BannerRight') || target?.closest('.PhotoView__Photo') || target?.closest('.PhotoView-Slider__ArrowLeft') || target?.closest('.PhotoView-Slider__ArrowRight')) return
+                                            if (target?.closest('.PhotoView-Slider__BannerRight') || target?.closest('.PhotoView__Photo') || target?.closest('.PhotoView-Slider__ArrowLeft') || target?.closest('.PhotoView-Slider__ArrowRight')) return
 
                                             const rect = portal.getBoundingClientRect();
                                             const cursorX = e.clientX - rect.left;
@@ -105,23 +133,23 @@ const AppMainDocuments = () => {
                                                 arrowRight.click();
                                             }
                                         });
-                                        
+
 
                                         closeBtn.addEventListener('click', (e) => {
-                                            portal.removeEventListener('click',() => {})
-                                            portal.removeEventListener('mouseleave',() => {})
-                                            portal.removeEventListener('mousemove',() => {})
-                                            closeBtn.removeEventListener('click',() => {})
+                                            portal.removeEventListener('click', () => { })
+                                            portal.removeEventListener('mouseleave', () => { })
+                                            portal.removeEventListener('mousemove', () => { })
+                                            closeBtn.removeEventListener('click', () => { })
                                         });
-                                        
+
                                     }, 100)
                                 }}
 
                                 settings={settings}
                                 bordert={(index - 1 !== hoverIndex && index - 1 !== activeIndex)}
                                 borderb={index + 1 !== hoverIndex && activeIndex !== index + 1}
-                                setHover={(value:any) => { setHover(value ? index : null) }}
-                                setActive={(value:any) => {
+                                setHover={(value: any) => { setHover(value ? index : null) }}
+                                setActive={(value: any) => {
 
 
                                     setActive(value ? index : null)
