@@ -107,7 +107,7 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
 
 
                     }}
-                    className={`materialBtn rounded-[4px] overflow-hidden text-left group/window active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] ${!active ? '' : ' bg-[#34446D]  '} active:bg-[#5B6788]  px-[30px]  relative w-full transition-all duration-500 z-[0]`}>
+                    className={`materialBtn rounded-[4px] overflow-hidden text-left group/window active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] ${!active ? '' : ' bg-[#34446D]  '} active:bg-[#5B6788]  px-[30px]  relative w-full transition-all duration-300 z-[0]`}>
 
                     <div className={`border-[transparent] border-solid border ${active && '!border-[#000]'} absolute top-[-1px] bottom-[-1px] right-[0] z-[1000] rounded-[4px] left-[0] transition-all duration-300`}></div>
 
@@ -128,19 +128,19 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
                         style={{
                             textRendering: 'geometricPrecision'
                         }}
-                        className={`w-full  relative z-[2] group-active/window:scale-[0.99] transition-all duration-300 will-change-transform ease-[ease] transalte-z-0 backface-hidden gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] ' : ''} group-active/window:text-[#FFF]  text-[#000] transition-all duration-300 relative ${!active && ' hover:text-[#34446D]'}`}
+                        className={`w-full  relative z-[2] group-active/window:scale-[0.99] will-change-transform ease-[ease] transalte-z-0 backface-hidden gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] ' : ''} group-active/window:text-[#FFF]  text-[#000] transition-all duration-300 relative ${!active && ' hover:text-[#34446D]'}`}
 
                     >
 
-                        <p className="translate-y-[-1px] leading-[11px] will-change-transform w-[60%] pl-[63px]  text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">
+                        <p className="translate-y-[-1px] transition-all duration-500 leading-[11px] will-change-transform w-[60%] pl-[63px]  text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">
 
 
                             {title}
 
                         </p>
                         <div className="will-change-transform *:will-change-transform w-[40%] grid grid-cols-[1fr_1fr_auto] items-center justify-between">
-                            <p className="translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{duration}</p>
-                            <p className="translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{price}</p>
+                            <p className="translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px] transition-all duration-500 font-bold tracking-normal">{duration}</p>
+                            <p className="translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px] transition-all duration-500 font-bold tracking-normal">{price}</p>
                             <button>
                                 <svg
                                     className={`${!active && 'rotate-[180deg]'} group-active/window:*:transition-all group-active/window:*:duration-300 group-active/window:*:stroke-[#FFF] ${active ? '' : 'group-active/window:*:stroke-[#000]'} transition-all duration-300`}
