@@ -28,7 +28,7 @@ const AppMainDocuments = () => {
             duration: 300
         };
 
-        gui.add(scaleSettings, 'scale', 0.5, 2, 0.01).onChange((value:any) => {
+        gui.add(scaleSettings, 'scale', 0.8, 0.99, 0.01).onChange((value:any) => {
             const els = document.querySelectorAll<HTMLElement>('.container-scale')
             els.forEach((element) => {
                 element.style.setProperty("--scale", value);
