@@ -217,8 +217,8 @@ const AppMainFeedback = () => {
                                 <div className="flex gap-[10px]">
                                     {[...Array(10)].map((_, index) =>
                                         <div data-slider="slide-feedback" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[208px] h-[296px] rounded-[4px]">
-                                            <PhotoView src={'/feedback/1.webp'}>
-                                                <Image src={'/feedback/1.webp'} alt='feedback' width={208} height={296} />
+                                            <PhotoView src={`/feedback/${index}.png`}>
+                                                <Image src={`/feedback/${index}.png`} alt='feedback' width={208} height={296} />
                                             </PhotoView>
                                         </div>)}
                                 </div>
@@ -236,8 +236,8 @@ const AppMainFeedback = () => {
                                 <div className="flex gap-[10px]">
                                     {[...Array(10)].map((_, index) =>
                                         <div data-slider="slide-feedback1" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[208px] h-[296px] rounded-[4px]">
-                                            <PhotoView src={'/feedback/1.webp'}>
-                                                <Image src={'/feedback/1.webp'} alt='feedback' width={208} height={296} />
+                                            <PhotoView src={`/feedback/${index}.png`}>
+                                                <Image src={`/feedback/${index}.png`} alt='feedback' width={208} height={296} />
                                             </PhotoView>
                                         </div>)}
                                 </div>

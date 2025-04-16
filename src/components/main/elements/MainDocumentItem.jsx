@@ -20,12 +20,8 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
     const containerPhotoRef = useRef(null);
     const LinkServiceRef = useRef(null);
     const smallPhotoRef = useRef(null);
-
-    const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
     const [photoWidth, setPhotoWidth] = useState(0);
-    const [mouseX, setMouseX] = useState(0);
-    const [mouseY, setMouseY] = useState(0);
-    const [mouseLeaveDelay, setMouseLeaveDelay] = useState(null);
+
 
     const setBounceEl = (el) => {
         bounceEl.current.push(el)
