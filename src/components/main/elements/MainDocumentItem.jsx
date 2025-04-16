@@ -128,7 +128,7 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
                         style={{
                             textRendering: 'geometricPrecision'
                         }}
-                        className={`w-full  relative z-[2] group-active/window:scale-[0.98] transition-all duration-300 will-change-transform ease-[ease] transalte-z-0 backface-hidden gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] ' : ''} group-active/window:text-[#FFF]  text-[#000] transition-all duration-300 relative ${!active && ' hover:text-[#34446D]'}`}
+                        className={`w-full  relative z-[2] group-active/window:scale-[0.99] transition-all duration-300 will-change-transform ease-[ease] transalte-z-0 backface-hidden gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] ' : ''} group-active/window:text-[#FFF]  text-[#000] transition-all duration-300 relative ${!active && ' hover:text-[#34446D]'}`}
 
                     >
 
@@ -139,7 +139,7 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
 
                         </p>
                         <div className="will-change-transform *:will-change-transform w-[40%] grid grid-cols-[1fr_1fr_auto] items-center justify-between">
-                            <p  className="translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{duration}</p>
+                            <p className="translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{duration}</p>
                             <p className="translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">{price}</p>
                             <button>
                                 <svg
@@ -172,6 +172,7 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
                                             onClick={() => setPhoto()}
                                             className={`${!active && 'pointer-events-none'} transition-all duration-200 `}>
                                             <div
+                                                ref={setBounceEl}
                                                 className="!shadow-none border-[0.2px] solid border-[#A4A4A4] overflow-hidden rounded-[5px] transition-all duration-300">
                                                 <Image
                                                     alt='document' src={img}
