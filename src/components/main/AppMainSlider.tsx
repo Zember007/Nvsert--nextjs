@@ -34,6 +34,61 @@ const SliderMain = () => {
 
 
         let oldIndex = 0
+
+        const changeSlides = async (slider: Slider, index: number, oldIndex: number) => {
+            if (oldIndex == 20 && index == 0) {
+                slider.slickNext()
+            } else if (index == 20 && oldIndex == 0) {
+                slider.slickPrev()
+            } else {
+                const delta = slides.length - Math.abs(index - oldIndex)
+
+                console.log(delta, index - oldIndex);
+                if (delta < (slides.length / 2)) {
+                    if (index - oldIndex < 0) {
+
+                        if (oldIndex !== slides.length - 1) {
+                            slider.slickGoTo(slides.length - 1)
+                            timeoutId = setTimeout(() => {
+                                slider.slickNext()
+                                setTimeout(() => {
+                                    slider.slickGoTo(index)
+                                }, 800)
+                            }, 800)
+                        } else {
+                            slider.slickNext()
+                            timeoutId = setTimeout(() => {
+                                slider.slickGoTo(index)
+                            }, 800)
+                        }
+
+
+                    } else {
+
+                        if (oldIndex !== 0) {
+                            slider.slickGoTo(0)
+
+                            timeoutId = setTimeout(() => {
+                                slider.slickPrev()
+                                setTimeout(() => {
+                                    slider.slickGoTo(index)
+                                }, 800)
+                            }, 800)
+                        } else {
+                            slider.slickPrev()
+                            timeoutId = setTimeout(() => {
+                                slider.slickGoTo(index)
+                            }, 800)
+                        }
+
+                    }
+                } else {
+                    slider.slickGoTo(index)
+                }
+
+            }
+        }
+
         initSlider((index: number) => {
 
             if (timeoutId) {
@@ -45,8 +100,9 @@ const SliderMain = () => {
 
             if (enableList) {
                 sliders.forEach((slider) => {
-                    slider.slickGoTo(index)
+                    changeSlides(slider, index, oldIndex)
                 });
+                oldIndex = index
 
                 enableList = false
                 timeoutId = setTimeout(() => {
@@ -56,13 +112,13 @@ const SliderMain = () => {
                 timeoutId = setTimeout(() => {
                     enableList = true
                     sliders.forEach((slider) => {
-                        slider.slickGoTo(index)
+                        changeSlides(slider, index, oldIndex)
                     });
-
+                    oldIndex = index
                 }, 800)
             }
 
-            oldIndex = index
+
 
         })
     }, [sliders])
@@ -121,7 +177,7 @@ const SliderMain = () => {
                                                 ...settings,
                                                 speed: 800 - i * 100
                                             }
-                                            }                                            
+                                            }
                                             className="w-[500%] slider">
                                             {slides.map((slide, index) => (
                                                 <div key={index} >
@@ -258,7 +314,7 @@ const SliderMain = () => {
                                 {
                                     slides.map((item, index) => (
                                         <div
-                                            key={index} data-slider="slide" className="slider-slide min-w-[336px] h-[336px] shadow-[0px_0px_4px_0px_#00000033] rounded-[8px] border border-solid border-[#CCCCCC]">
+                                            key={index} data-slider="slide" className="slider-slide min-w-[336px] h-[336px] shadow-[0px_0px_4px_0px_#00000080] rounded-[8px] border border-solid border-[#FFF]">
                                             <div className="slide-inner relative bg-[#FFF] overflow-hidden rounded-[8px]">
                                                 <Image src={item.img} alt='slide' fill
                                                     style={{ objectFit: 'cover' }} />

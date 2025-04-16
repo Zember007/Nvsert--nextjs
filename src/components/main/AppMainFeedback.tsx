@@ -26,10 +26,7 @@ const AppMainFeedback = () => {
             draggable: true,
             center: false,
             offsetLeft: 0,
-            gap: 10, 
-            onChange: (index: number) => {
-
-            }
+            gap: 10
         });
 
         const loop1: any = horizontalLoop(slides1, {
@@ -37,10 +34,7 @@ const AppMainFeedback = () => {
             draggable: true,
             center: true,
             offsetLeft: 0,
-            gap: 10,
-            onChange: (index: number) => {
-
-            }
+            gap: 10
         });
 
 
@@ -49,36 +43,8 @@ const AppMainFeedback = () => {
         loop.next({ ease: "power3", duration: 0.725 })
         loop1.next({ ease: "power3", duration: 0.725 })
 
-        let flag = true;
-
-        const handleMouseMove = (e: any, container: HTMLElement) => {
-            const rect = container.getBoundingClientRect();
-            const mouseX = e.clientX - rect.left;
-            const centerX = rect.width / 2;
-            const gap = 10
-
-            if (mouseX > centerX - gap && mouseX < centerX + gap) {
-
-                flag = true
-            }
-
-            if (!flag) return;
-
-            if (mouseX > centerX + gap) {
-                loop.previous({ ease: "sine.inOut", duration: 0.6 });
-                loop1.previous({ ease: "sine.inOut", duration: 1 });
-                flag = false;
-            } else if (mouseX < centerX - gap) {
-
-
-                loop.next({ ease: "sine.inOut", duration: 1 });
-                loop1.next({ ease: "sine.inOut", duration: 0.6 });
-
-                flag = false;
-            }
-
-
-        };
+        let flag = false;
+       
 
         const wrapper = document.querySelector('.feedback-slider-box');
 
@@ -87,7 +53,11 @@ const AppMainFeedback = () => {
 
             let bounds = wrapper.getBoundingClientRect();
 
+            wrapper.addEventListener("mouseenter",() => {flag = true})
+            wrapper.addEventListener("mouseleave",() => {flag = false})
+
             wrapper.addEventListener("mousemove", (e:any) => {
+                if(!flag) return
                 const x = e.clientX - bounds.left;
                 const ratio = 1 - (x / bounds.width);
                 const time = ratio * loop1.duration();
@@ -113,12 +83,14 @@ const AppMainFeedback = () => {
 
         if (nextButton) {
             nextButton.addEventListener("click", () => {
+                flag = false
                 loop.next({ ease: "power3", duration: 0.725 })
                 loop1.next({ ease: "power3", duration: 0.725 })
             });
         }
         if (prevButton) {
             prevButton.addEventListener("click", () => {
+                flag = false
                 loop.previous({ ease: "power3", duration: 0.725 })
                 loop1.previous({ ease: "power3", duration: 0.725 })
             });
@@ -126,6 +98,7 @@ const AppMainFeedback = () => {
 
         return () => {
             loop.kill();
+            loop1.kill();
             if (nextButton) nextButton.removeEventListener("click", loop.next);
             if (prevButton) prevButton.removeEventListener("click", loop.previous);
         }
