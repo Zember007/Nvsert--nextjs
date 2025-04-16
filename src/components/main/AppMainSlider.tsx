@@ -35,11 +35,15 @@ const SliderMain = () => {
 
         let oldIndex = 0
 
-        const changeSlides = async (slider: Slider, index: number, oldIndex: number) => {
+        const changeSlides = async (index: number, oldIndex: number) => {
             if (oldIndex == 20 && index == 0) {
-                slider.slickNext()
+                sliders.forEach((slider) => {
+                    slider.slickNext()
+                })
             } else if (index == 20 && oldIndex == 0) {
-                slider.slickPrev()
+                sliders.forEach((slider) => {
+                    slider.slickPrev()
+                })
             } else {
                 const delta = slides.length - Math.abs(index - oldIndex)
 
@@ -48,42 +52,64 @@ const SliderMain = () => {
                     if (index - oldIndex < 0) {
 
                         if (oldIndex !== slides.length - 1) {
-                            slider.slickGoTo(slides.length - 1)
+                            sliders.forEach((slider) => {
+                                slider.slickGoTo(slides.length - 1)
+                            })
                             timeoutId = setTimeout(() => {
-                                slider.slickNext()
+                                sliders.forEach((slider) => {
+                                    slider.slickNext()
+                                })
                                 setTimeout(() => {
-                                    slider.slickGoTo(index)
-                                }, 800)
-                            }, 800)
+                                    sliders.forEach((slider) => {
+                                        slider.slickGoTo(index)
+                                    })
+                                }, 820)
+                            }, 820)
                         } else {
-                            slider.slickNext()
+                            sliders.forEach((slider) => {
+                                slider.slickNext()
+                            })
                             timeoutId = setTimeout(() => {
-                                slider.slickGoTo(index)
-                            }, 800)
+                                sliders.forEach((slider) => {
+                                    slider.slickGoTo(index)
+                                })
+                            }, 820)
                         }
 
 
                     } else {
 
                         if (oldIndex !== 0) {
-                            slider.slickGoTo(0)
+                            sliders.forEach((slider) => {
+                                slider.slickGoTo(0)
+                            })
 
                             timeoutId = setTimeout(() => {
-                                slider.slickPrev()
+                                sliders.forEach((slider) => {
+                                    slider.slickPrev()
+                                })
                                 setTimeout(() => {
-                                    slider.slickGoTo(index)
-                                }, 800)
-                            }, 800)
+                                    sliders.forEach((slider) => {
+                                        slider.slickGoTo(index)
+                                    })
+                                }, 820)
+                            }, 820)
                         } else {
-                            slider.slickPrev()
+                            sliders.forEach((slider) => {
+                                slider.slickPrev()
+                            })
                             timeoutId = setTimeout(() => {
-                                slider.slickGoTo(index)
-                            }, 800)
+                                sliders.forEach((slider) => {
+                                    slider.slickGoTo(index)
+                                })
+                            }, 820)
                         }
 
                     }
                 } else {
-                    slider.slickGoTo(index)
+                    sliders.forEach((slider) => {
+                        slider.slickGoTo(index) 
+                    })
                 }
 
             }
@@ -99,23 +125,20 @@ const SliderMain = () => {
 
 
             if (enableList) {
-                sliders.forEach((slider) => {
-                    changeSlides(slider, index, oldIndex)
-                });
+
+                changeSlides(index, oldIndex)
                 oldIndex = index
 
                 enableList = false
                 timeoutId = setTimeout(() => {
                     enableList = true
-                }, 800)
+                }, 820)
             } else {
                 timeoutId = setTimeout(() => {
                     enableList = true
-                    sliders.forEach((slider) => {
-                        changeSlides(slider, index, oldIndex)
-                    });
+                    changeSlides(index, oldIndex)
                     oldIndex = index
-                }, 800)
+                }, 820)
             }
 
 
