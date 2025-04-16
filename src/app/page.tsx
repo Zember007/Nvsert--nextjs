@@ -31,10 +31,10 @@ export default function Home() {
     <div className="main text-[#000] overflow-hidden select-none">
       <AppMainIntro />
       <AppMainDocuments />
-      <LazyLoadSection component={DynamicAppMainSkills} />
+      {/* <LazyLoadSection component={DynamicAppMainSkills} />
       <LazyLoadSection component={DynamicAppMainSlider} />
       <LazyLoadSection component={DynamicAppMainSafeguards} />
-      <LazyLoadSection component={DynamicAppMainFeedback} />
+      <LazyLoadSection component={DynamicAppMainFeedback} /> */}
     </div>
   );
 }
