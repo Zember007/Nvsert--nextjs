@@ -32,7 +32,6 @@ const AppMainFeedback = () => {
         const loop1: any = horizontalLoop(slides1, {
             paused: true,
             draggable: true,
-            center: true,
             offsetLeft: 0,
             gap: 10
         });
@@ -206,7 +205,7 @@ const AppMainFeedback = () => {
                             <div className="slider-wrap !pt-0">
 
 
-                                <div className="flex gap-[10px]">
+                                <div className="flex gap-[10px] translate-x-[-104px]">
                                     {[...Array(10)].map((_, index) =>
                                         <div data-slider="slide-feedback1" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[208px] h-[296px] rounded-[4px]">
                                             <PhotoView src={`/feedback/${index}.png`}>
