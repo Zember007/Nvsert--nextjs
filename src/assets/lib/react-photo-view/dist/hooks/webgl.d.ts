@@ -1,4 +1,4 @@
-export function init(imagesSrc: any, initialIndex?: number): {
+export function init(imagesSrc: any, index?: number): {
     canvas: any;
     imagesSrc: any;
     webGLCurtain: Curtains;
@@ -8,7 +8,7 @@ export function init(imagesSrc: any, initialIndex?: number): {
         texture1: any;
         map: any;
     };
-    currentIndex: any;
+    currentIndex: number;
     isTransitioning: boolean;
     params: {
         vertexShader: string;
@@ -39,7 +39,7 @@ export function init(imagesSrc: any, initialIndex?: number): {
         };
     };
     loadTexture(url: any, samplerName: any): Promise<Texture>;
-    initPlane(): Promise<void>;
+    initPlane(index?: number): Promise<void>;
     update(): void;
     goToIndex(index: any): Promise<void>;
 };

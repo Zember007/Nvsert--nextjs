@@ -1,7 +1,7 @@
 import { Curtains, Plane, Texture } from "curtainsjs";
 import gsap from "gsap";
 
-export const init = (imagesSrc, initialIndex = 0) => {
+export const init = (imagesSrc, index = 0) => {
     class WEBGL {
         constructor(set) {
             this.canvas = set.canvas;
@@ -15,7 +15,7 @@ export const init = (imagesSrc, initialIndex = 0) => {
                 map: null
             };
 
-            this.currentIndex = set.initialIndex || 0;
+            this.currentIndex = 0;
             this.isTransitioning = false;
 
             this.params = {
@@ -62,18 +62,18 @@ export const init = (imagesSrc, initialIndex = 0) => {
             return texture;
         }
 
-        async initPlane() {
+        async initPlane(index = 0) {
             const div = document.createElement("div");
             div.className = "plane";
             document.getElementById('wrap-texture').appendChild(div);
 
             const img0 = document.createElement("img");
             img0.setAttribute("data-sampler", "texture0");
-            img0.src = this.imagesSrc[this.currentIndex];
+            img0.src = this.imagesSrc[index];
 
             const img1 = document.createElement("img");
             img1.setAttribute("data-sampler", "texture1");
-            img1.src = this.imagesSrc[this.currentIndex];
+            img1.src = this.imagesSrc[1] || this.imagesSrc[0];
 
             const mapImg = document.createElement("img");
             mapImg.setAttribute("data-sampler", "map");
@@ -89,6 +89,7 @@ export const init = (imagesSrc, initialIndex = 0) => {
                 this.textures.texture0 = this.plane.textures[0];
                 this.textures.texture1 = this.plane.textures[1];
                 this.textures.map = this.plane.textures[2];
+
                 this.update();
             });
         }
@@ -135,11 +136,10 @@ export const init = (imagesSrc, initialIndex = 0) => {
 
     const webgl = new WEBGL({
         canvas: document.getElementById("canvas"),
-        imagesSrc,
-        initialIndex
+        imagesSrc
     });
 
-    webgl.initPlane();
+    webgl.initPlane(index);
 
     return webgl;
 };
