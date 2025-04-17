@@ -108,24 +108,32 @@ export const init = (imagesSrc, index = 0) => {
                 index === this.currentIndex ||
                 this.isTransitioning
             ) return;
-
+        
             this.isTransitioning = true;
-
+        
             const nextImage = this.imagesSrc[index];
-
+        
             const img = new Image();
             img.crossOrigin = "anonymous";
             img.src = nextImage;
             await img.decode();
-
-            this.textures.texture1.setSource(img);
+        
+            this.textures.texture1.setSource(img, () => {
+                this.plane.textures[1].resize();
+                this.plane.updatePosition();
+            });
+        
             this.plane.uniforms.progress.value = 0;
-
+        
             await gsap.to(this.plane.uniforms.progress, {
                 value: 1,
                 duration: 0.7,
                 onComplete: () => {
-                    this.textures.texture0.setSource(img);
+                    this.textures.texture0.setSource(img, () => {
+                        this.plane.textures[0].resize();
+                        this.plane.updatePosition();
+                    });
+        
                     this.plane.uniforms.progress.value = 0;
                     this.currentIndex = index;
                     this.isTransitioning = false;
