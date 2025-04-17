@@ -9,6 +9,7 @@ export function init(imagesSrc: any): {
         map: any;
     };
     currentIndex: number;
+    isTransitioning: boolean;
     params: {
         vertexShader: string;
         fragmentShader: string;
