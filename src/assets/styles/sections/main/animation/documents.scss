@@ -78,7 +78,9 @@
 }
 
 .container-scale {
-  transform-origin: center;
-  --duration: 300ms;
-  transition: all var(--duration);
+  transition: all .3s ease;
+}
+
+.transition-scale {
+  transition: background .3s ease, transform .15s ease, box-shadow .15s ease;
 }
