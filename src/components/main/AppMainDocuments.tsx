@@ -4,7 +4,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import '@/assets/styles/sections/main/animation/documents.scss'
 import '@/assets/styles/sections/main/animation/skills.scss'
 import { PhotoProvider } from '@/assets/lib/react-photo-view';
-import GUI from 'lil-gui';
 
 
 
@@ -20,33 +19,6 @@ const AppMainDocuments = () => {
         length: 30
     }
 
-
-    useEffect(() => {
-        const gui = new GUI();
-        const scaleSettings = {
-            scale: 0.98,
-            duration: 300
-        };
-
-        gui.add(scaleSettings, 'scale', 0.8, 0.99, 0.01).onChange((value:any) => {
-            const els = document.querySelectorAll<HTMLElement>('.container-scale')
-            els.forEach((element) => {
-                element.style.setProperty("--scale", value);
-            });
-        });
-
-        gui.add(scaleSettings, 'duration', 100, 700, 50).onChange((value:any) => {
-            const els = document.querySelectorAll<HTMLElement>('.container-scale')
-            els.forEach((element) => {
-                element.style.setProperty("--duration", `${value}ms`);
-            });
-        });
-
-        // Очистка GUI при размонтировании/деактивации
-        return () => {
-            gui.destroy();
-        };
-    }, [])
 
 
 

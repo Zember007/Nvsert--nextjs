@@ -255,11 +255,11 @@ export function horizontalLoop(items, config) {
                         duration: distanceToLoop / pixelsPerSecond
                     }, 0)
 
-                        // Вторая анимация: возврат в начало с затуханием перед прыжком
+                       
                         .to(item, {
-                            opacity: 0, // Плавное затухание перед перемещением
-                            duration: 0.3 // Короткая длительность для затухания
-                        }, distanceToLoop / pixelsPerSecond - 0.3) // Начинаем затухание чуть раньше конца первой анимации
+                            opacity: 0, 
+                            duration: 0.1 
+                        }, distanceToLoop / pixelsPerSecond - 0.1) // Начинаем затухание чуть раньше конца первой анимации
                         .fromTo(item, {
                             xPercent: snap((curX - distanceToLoop + totalWidth) / widths[i] * 100),
                             opacity: 0 // Начинаем с прозрачности 0
@@ -274,6 +274,7 @@ export function horizontalLoop(items, config) {
                 }
                 timeWrap = gsap.utils.wrap(0, tl.duration());
             },
+            
             refresh = (deep) => {
                 let progress = tl.progress();
                 tl.progress(0, true);
@@ -284,6 +285,7 @@ export function horizontalLoop(items, config) {
             },
             onResize = () => refresh(true),
             proxy;
+        
         gsap.set(items, { x: 0 });
         populateWidths();
         populateTimeline();

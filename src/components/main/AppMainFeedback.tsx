@@ -58,7 +58,7 @@ const AppMainFeedback = () => {
                     flag = true;
                     const bounds = wrapper.getBoundingClientRect();
                     initialCursorX = e.clientX - bounds.left;
-                    initialSliderTime = loop1.time(); // сохраняем текущую позицию анимации
+                    initialSliderTime = loop1.time(); 
                   })
                 wrapper.addEventListener("mouseleave", () => { flag = false })
 
@@ -70,7 +70,7 @@ const AppMainFeedback = () => {
                   
                     const deltaX = currentX - initialCursorX;
                     const ratioDelta = -deltaX / bounds.width;
-                    const deltaTime = ratioDelta * loop1.duration(); // насколько двигать по анимации
+                    const deltaTime = ratioDelta * loop1.duration(); 
                   
                     const time = initialSliderTime + deltaTime;
 
@@ -191,23 +191,23 @@ const AppMainFeedback = () => {
                         </div>
                     </div>
 
-                    <div className="relative h-[602px] flex flex-col gap-[10px] overflow-hidden ">
+                    <div className="relative h-[554px] flex flex-col gap-[10px] overflow-hidden ">
 
                         <div className="slide-blur left-0">
-                            <span className="line" style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
-                            <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
-                            <span className="line" style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>
+                            <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
+                            <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
+                            <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
                         </div>
 
                         <div className="slide-main">
                             <div className="slider-wrap !pt-0 ">
 
 
-                                <div className="flex gap-[10px] feedback-slider-box">
+                                <div className="flex gap-[20px] feedback-slider-box translate-x-[-95px]">
                                     {[...Array(10)].map((_, index) =>
-                                        <div data-slider="slide-feedback" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[208px] h-[296px] rounded-[4px]">
+                                        <div data-slider="slide-feedback" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] h-[267px] rounded-[4px]">
                                             <PhotoView src={`/feedback/${index}.png`}>
-                                                <Image src={`/feedback/${index}.png`} alt='feedback' width={208} height={296} />
+                                                <Image src={`/feedback/${index}.png`} alt='feedback' width={190} height={267} />
                                             </PhotoView>
                                         </div>)}
                                 </div>
@@ -222,11 +222,11 @@ const AppMainFeedback = () => {
                             <div className="slider-wrap !pt-0">
 
 
-                                <div className="flex gap-[10px] translate-x-[-104px] feedback-slider-box">
+                                <div className="flex gap-[20px] translate-x-[-95px] feedback-slider-box">
                                     {[...Array(10)].map((_, index) =>
-                                        <div data-slider="slide-feedback1" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[208px] h-[296px] rounded-[4px]">
+                                        <div data-slider="slide-feedback1" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] h-[267px] rounded-[4px]">
                                             <PhotoView src={`/feedback/${index}.png`}>
-                                                <Image src={`/feedback/${index}.png`} alt='feedback' width={208} height={296} />
+                                                <Image src={`/feedback/${index}.png`} alt='feedback' width={190} height={267} />
                                             </PhotoView>
                                         </div>)}
                                 </div>
@@ -240,9 +240,9 @@ const AppMainFeedback = () => {
 
 
                         <div className="slide-blur right-0 !translate-x-[0]">
-                            <span className="line" style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>
-                            <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
-                            <span className="line" style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
+                            <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
+                            <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
+                            <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
                         </div>
 
                     </div>

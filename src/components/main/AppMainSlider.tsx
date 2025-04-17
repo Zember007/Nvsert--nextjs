@@ -47,7 +47,6 @@ const SliderMain = () => {
             } else {
                 const delta = slides.length - Math.abs(index - oldIndex)
 
-                console.log(delta, index - oldIndex);
                 if (delta < (slides.length / 2)) {
                     if (index - oldIndex < 0) {
 

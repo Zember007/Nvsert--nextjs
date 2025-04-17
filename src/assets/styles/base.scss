@@ -35,25 +35,16 @@
 
 
 .PhotoView-Slider__BannerRight {
-    // svg {
-    //     opacity: 0 !important;
-    // }
-    position: relative !important;
 
-    // &::before {
-    //     position: absolute;
-    //     top: 50%;
-    //     left: 50%;
-    //     transform: translate(-50%, -50%);
-    //     pointer-events: none;
-    //     content: url(../images/svg/functional/close.svg);
-    //     width: 32px;
-    //     height: 32px;
-    // }
+    position: absolute !important;
+
+    top: 90px;
+    right: 50%;
+    transform: translateX(400px);
 
 
-      
-      .close {
+
+    .close {
         display: block;
         width: 32px;
         height: 32px;
@@ -66,25 +57,25 @@
         position: absolute;
         overflow: hidden;
         z-index: 3000;
-      }
-      
-      .close > div {
+    }
+
+    .close>div {
         position: relative;
-      }
-      
-      .close-button-block {
+    }
+
+    .close-button-block {
         width: 32px;
         height: 16px;
         position: relative;
         overflow: hidden;
-      }
-      
-      .close-button-block:before,
-      .close-button-block:after {
+    }
+
+    .close-button-block:before,
+    .close-button-block:after {
         content: "";
         position: absolute;
         bottom: 0;
-      
+
         left: calc(50% - 1px);
         display: block;
         width: 2px;
@@ -92,11 +83,11 @@
         transform-origin: bottom center;
         background: #FFF;
         transition: all ease-out 280ms;
-      }
-      
-      .close-button-block:last-of-type {
+    }
+
+    .close-button-block:last-of-type {
         transform: rotate(180deg);
-      }
+    }
 
     .close .in .close-button-block:before {
         transition-delay: 280ms;
@@ -159,40 +150,6 @@
 
 
 
-.PhotoView-Slider__ArrowLeft,
-.PhotoView-Slider__ArrowRight {
-    background: transparent !important;
-    box-sizing: content-box;
-    width: 45px !important;
-    height: 34px !important;
-    opacity: 1 !important;
-    top: auto !important;
-    margin: 0 !important;
-    bottom: 50% !important;
-    transform: translateY(400px) !important;
-
-    &::before {
-        content: '';
-        background-image: url(../images/svg/right-arrow-modalphoto.svg);
-        background-position: center center;
-        width: 45px;
-        height: 34px;
-    }
-}
-
-.PhotoView-Slider__ArrowRight {
-    right: 46% !important;
-
-
-}
-
-.PhotoView-Slider__ArrowLeft {
-    left: 46% !important;
-
-    &::before {
-        transform: rotate(180deg);
-    }
-}
 
 .PhotoView-Slider__ArrowLeft svg,
 .PhotoView-Slider__ArrowRight svg {
@@ -207,19 +164,18 @@
 }
 
 .PhotoView-Slider__BannerWrap {
-    max-width: 1200px;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%,-410px) !important;
+    top: 0 !important;
     background-color: transparent !important;
     opacity: 1 !important;
 
     &::before {
+        justify-content: center;
         content: attr(data-before);
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        top: 0;
+        left: 0;
+        text-align: center;
+        right: 0;
         font-size: 20px;
         height: 60px;
         padding: 0 30px;
@@ -364,27 +320,27 @@ input:-webkit-autofill {
     right: 0;
     left: 0;
     bottom: 0;
-  }
-  
-  #canvas {
+}
+
+#canvas {
     /* make the canvas wrapper fits the document */
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-  }
-  
-  .plane {
+}
+
+.plane {
     /* define the size of your plane */
     width: 50%;
     max-width: 475px;
     min-width: 250px;
     height: 677px;
     z-index: 100;
-  }
-  
-  .plane img {
+}
+
+.plane img {
     /* hide the img element */
     display: none;
-  }
+}
