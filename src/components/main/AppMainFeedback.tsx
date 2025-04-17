@@ -71,6 +71,8 @@ const AppMainFeedback = () => {
                     initialCursorX = e.clientX -  bounds[index].left;
                     initialSliderTime[0] = loop.time();
                     initialSliderTime[1] = loop1.time();
+                    loop.pause()
+                    loop1.pause()
                 })
 
                 wrapper.addEventListener("mousemove", (e: any) => {
