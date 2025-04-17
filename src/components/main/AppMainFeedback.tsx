@@ -26,14 +26,22 @@ const AppMainFeedback = () => {
             draggable: true,
             center: false,
             offsetLeft: 0,
-            gap: 10
+            gap: 20,
+            onChange: (index: number) => {
+                console.log(index);
+
+            }
         });
 
         const loop1: any = horizontalLoop(slides1, {
             paused: true,
             draggable: true,
             offsetLeft: 0,
-            gap: 10
+            gap: 20,
+            onChange: (index: number) => {
+                console.log(index);
+
+            }
         });
 
 
@@ -45,53 +53,72 @@ const AppMainFeedback = () => {
         let flag = false;
 
 
-        const wrappers = document.querySelectorAll('.feedback-slider-box');
+        const wrappers = document.querySelectorAll('.feedback-slider-container');
+        const wrapper = document.querySelector('.feedback-slider-box');
 
-        if (wrappers.length) {
+        if (wrappers.length && wrapper) {
 
-            wrappers.forEach(wrapper => {
-                let bounds = wrapper.getBoundingClientRect();
-                let initialCursorX = 0;
-                let initialSliderTime = 0;
-                           
+            let bounds: any = [];
+            let initialCursorX = 0;
+            let initialSliderTime = [0, 0];
+            let isDragging = false
+            wrappers.forEach((wrapper, index) => {
+
+                bounds[index] = wrapper.getBoundingClientRect()
+
                 wrapper.addEventListener("mouseenter", (e: any) => {
-                    flag = true;
-                    const bounds = wrapper.getBoundingClientRect();
-                    initialCursorX = e.clientX - bounds.left;
-                    initialSliderTime = loop1.time(); 
-                  })
-                wrapper.addEventListener("mouseleave", () => { flag = false })
+                    bounds[index] = wrapper.getBoundingClientRect();
+                    initialCursorX = e.clientX -  bounds[index].left;
+                    initialSliderTime[0] = loop.time();
+                    initialSliderTime[1] = loop1.time();
+                })
 
                 wrapper.addEventListener("mousemove", (e: any) => {
                     const cursor = getComputedStyle(wrapper).cursor;
-                    if (!flag || cursor === 'grabbing') return;
-                    const bounds = wrapper.getBoundingClientRect();
-                    const currentX = e.clientX - bounds.left;
-                  
-                    const deltaX = currentX - initialCursorX;
-                    const ratioDelta = -deltaX / bounds.width;
-                    const deltaTime = ratioDelta * loop1.duration(); 
-                  
-                    const time = initialSliderTime + deltaTime;
+                    if(cursor === 'grabbing') {
+                        isDragging = true
+                    } else {
+                        isDragging = false
 
+                    }
+                })
 
-                    gsap.to(loop1, {
-                        time,
-                        duration: 1.2,
-                        ease: "power4"
-                    });
-
-                    gsap.to(loop, {
-                        time,
-                        duration: 2,
-                        ease: "power4"
-                    });
-                });
 
                 window.addEventListener("resize", () => {
-                    bounds = wrapper.getBoundingClientRect();
+                    bounds[index] = wrapper.getBoundingClientRect();
                 });
             })
+
+            wrapper.addEventListener("mousemove", (e: any) => {
+
+                
+                if (isDragging || !bounds[0] || !bounds[1] || !initialCursorX || !initialSliderTime[0] || !initialSliderTime[1]) return;
+                const currentX = e.clientX - bounds[0].left;
+                const currentX1 = e.clientX - bounds[1].left;
+
+                const deltaX = currentX - initialCursorX;
+                const ratioDelta = -deltaX / bounds[0].width;
+                const deltaTime = ratioDelta * loop.duration();
+                const deltaX1 = currentX1 - initialCursorX;
+                const ratioDelta1 = -deltaX1 / bounds[1].width;
+                const deltaTime1 = ratioDelta1 * loop1.duration();
+
+                const time = initialSliderTime[0] + deltaTime;
+                const time1 = initialSliderTime[1] + deltaTime1;
+
+
+                gsap.to(loop1, {
+                    time:time1,
+                    duration: 1.2,
+                    ease: "power4"
+                });
+
+                gsap.to(loop, {
+                    time,
+                    duration: 2,
+                    ease: "power4"
+                });
+            });
 
         }
 
@@ -191,7 +218,7 @@ const AppMainFeedback = () => {
                         </div>
                     </div>
 
-                    <div className="relative h-[554px] flex flex-col gap-[10px] overflow-hidden ">
+                    <div className="relative h-[554px] flex flex-col gap-[10px] overflow-hidden feedback-slider-box">
 
                         <div className="slide-blur left-0">
                             <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
@@ -203,7 +230,7 @@ const AppMainFeedback = () => {
                             <div className="slider-wrap !pt-0 ">
 
 
-                                <div className="flex gap-[20px] feedback-slider-box translate-x-[-95px]">
+                                <div className="flex gap-[20px] feedback-slider-container translate-x-[-95px]">
                                     {[...Array(10)].map((_, index) =>
                                         <div data-slider="slide-feedback" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] h-[267px] rounded-[4px]">
                                             <PhotoView src={`/feedback/${index}.png`}>
@@ -222,7 +249,7 @@ const AppMainFeedback = () => {
                             <div className="slider-wrap !pt-0">
 
 
-                                <div className="flex gap-[20px] translate-x-[-95px] feedback-slider-box">
+                                <div className="flex gap-[20px] translate-x-[-95px] feedback-slider-container">
                                     {[...Array(10)].map((_, index) =>
                                         <div data-slider="slide-feedback1" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] h-[267px] rounded-[4px]">
                                             <PhotoView src={`/feedback/${index}.png`}>
