@@ -1,4 +1,4 @@
-export function init(imagesSrc: any): {
+export function init(imagesSrc: any, initialIndex?: number): {
     canvas: any;
     imagesSrc: any;
     webGLCurtain: Curtains;
@@ -8,7 +8,7 @@ export function init(imagesSrc: any): {
         texture1: any;
         map: any;
     };
-    currentIndex: number;
+    currentIndex: any;
     isTransitioning: boolean;
     params: {
         vertexShader: string;

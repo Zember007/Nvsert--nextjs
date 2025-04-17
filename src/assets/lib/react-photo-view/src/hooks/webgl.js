@@ -1,7 +1,7 @@
 import { Curtains, Plane, Texture } from "curtainsjs";
 import gsap from "gsap";
 
-export const init = (imagesSrc) => {
+export const init = (imagesSrc, initialIndex = 0) => {
     class WEBGL {
         constructor(set) {
             this.canvas = set.canvas;
@@ -15,7 +15,7 @@ export const init = (imagesSrc) => {
                 map: null
             };
 
-            this.currentIndex = 0;
+            this.currentIndex = set.initialIndex || 0;
             this.isTransitioning = false;
 
             this.params = {
@@ -69,11 +69,11 @@ export const init = (imagesSrc) => {
 
             const img0 = document.createElement("img");
             img0.setAttribute("data-sampler", "texture0");
-            img0.src = this.imagesSrc[0];
+            img0.src = this.imagesSrc[this.currentIndex];
 
             const img1 = document.createElement("img");
             img1.setAttribute("data-sampler", "texture1");
-            img1.src = this.imagesSrc[1] || this.imagesSrc[0];
+            img1.src = this.imagesSrc[this.currentIndex];
 
             const mapImg = document.createElement("img");
             mapImg.setAttribute("data-sampler", "map");
@@ -89,7 +89,6 @@ export const init = (imagesSrc) => {
                 this.textures.texture0 = this.plane.textures[0];
                 this.textures.texture1 = this.plane.textures[1];
                 this.textures.map = this.plane.textures[2];
-
                 this.update();
             });
         }
@@ -136,7 +135,8 @@ export const init = (imagesSrc) => {
 
     const webgl = new WEBGL({
         canvas: document.getElementById("canvas"),
-        imagesSrc
+        imagesSrc,
+        initialIndex
     });
 
     webgl.initPlane();
