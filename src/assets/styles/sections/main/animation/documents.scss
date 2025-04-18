@@ -73,15 +73,13 @@
 
 .box-scale:active {
   .container-scale {
-    transform: scale(.97);
+    transform: scale(.98);
     transform-origin: center;
-    will-change: transform, color, border-color;
+    will-change: transform;
   }
 }
 
 
 .transition-scale {
-  
-
-  transition: background .3s ease,  transform .2s ease, color .5s ease, border-color .5s ease, box-shadow .2s ease;
+  transition: background .3s ease,  transform .2s ease-in, color .3s ease, box-shadow .2s ease;
 }
