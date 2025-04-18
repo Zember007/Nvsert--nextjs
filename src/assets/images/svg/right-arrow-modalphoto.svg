@@ -3,7 +3,7 @@
         stroke-linecap="round" />
     <path d="M21.2188 3.02539L16.8783 3.02539" stroke="#424242" stroke-width="0.600425"
         stroke-linecap="round" />
-    <g filter="url(#filter0_d_2036_717)">
+    <g >
         <path
             d="M15.5251 2H21.8282L35.5251 18.962L21.8282 35.9239H15.5251L29.2221 18.962L15.5251 2Z"
             fill="white" />
