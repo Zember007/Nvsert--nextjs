@@ -15,7 +15,7 @@
   border-radius: 100%;
   transform: scale(0);
   pointer-events: none;
-  
+
 }
 
 .drop-reverse {
@@ -38,6 +38,7 @@
   0% {
     transform: scale(0);
   }
+
   100% {
     transform: scale(2.5);
   }
@@ -62,9 +63,9 @@
   0% {
     transform: scaleY(0);
   }
-  50% {
-    
-  }
+
+  50% {}
+
   100% {
     transform: scaleY(1);
   }
@@ -72,14 +73,15 @@
 
 .box-scale:active {
   .container-scale {
-    --scale:0.99;
-    transform: scale(var(--scale));
+    transform: scale(.97);
+    transform-origin: center;
+    will-change: transform, color, border-color;
   }
 }
 
 
 .transition-scale {
-  --mode: ease-in;
-  --duration: .15s;
-  transition: background .3s ease, transform  var(--duration) var(--mode), box-shadow .2s ease;
+  
+
+  transition: background .3s ease,  transform .2s ease, color .5s ease, border-color .5s ease, box-shadow .2s ease;
 }

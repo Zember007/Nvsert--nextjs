@@ -48,16 +48,9 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
 
     useEffect(() => {
 
-        if (index === 0) {
-            if (timeActive) {
-                clearTimeout(timeActive)
-            }
-            setTimeActive(setTimeout(() => {
-                setActiveOpen(isOpen)
-            }, 200))
-        } else {
-            setActiveOpen(isOpen)
-        }
+
+        setActiveOpen(isOpen)
+
 
     }, [isOpen])
 
@@ -89,29 +82,6 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
         }
     }, [active]);
 
-
-    useEffect(() => {
-        const transitions = document.querySelectorAll('.transition-scale')
-        transitions.forEach((el) => {
-           if(index === 1) {
-            el.style.setProperty('--mode', 'ease-out')
-            el.style.setProperty('--duration', '.15s')
-           }
-           if(index === 2) {
-            el.style.setProperty('--mode', 'ease-in-out')
-            el.style.setProperty('--duration', '.2s')
-           }
-    
-           if(index === 3) {
-            el.style.setProperty('--mode', 'linear')
-            el.style.setProperty('--duration', '.3s')
-           }
-         
-          
-           
-           
-        })
-    }, [])
 
 
 
