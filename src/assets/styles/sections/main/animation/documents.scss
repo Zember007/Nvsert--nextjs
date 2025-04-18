@@ -77,10 +77,9 @@
   }
 }
 
-.container-scale {
-  transition: background .3s ease, transform .15s ease, box-shadow .15s ease;
-}
 
 .transition-scale {
-  transition: background .3s ease, transform .15s ease, box-shadow .15s ease;
+  --mode: ease-in;
+  --duration: .15s
+  transition: background .3s ease, transform  var(--duration) var(--mode), box-shadow .2s ease;
 }

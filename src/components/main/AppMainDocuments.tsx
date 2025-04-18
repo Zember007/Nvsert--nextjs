@@ -50,6 +50,7 @@ const AppMainDocuments = () => {
                         documents.map((item, index) =>
 
                             <MainDocumentItem
+                                index={index}
                                 setPhoto={() => {
                                     setTimeout(() => {
                                         const box = document.querySelector('.PhotoView-Slider__BannerWrap') as HTMLImageElement;
@@ -117,7 +118,6 @@ const AppMainDocuments = () => {
                                     }, 100)
                                 }}
 
-                                settings={settings}
                                 bordert={(index - 1 !== hoverIndex && index - 1 !== activeIndex)}
                                 borderb={index + 1 !== hoverIndex && activeIndex !== index + 1}
                                 setHover={(value: any) => { setHover(value ? index : null) }}
@@ -126,7 +126,7 @@ const AppMainDocuments = () => {
 
                                     setActive(value ? index : null)
 
-                                }} active={index === activeIndex} key={index} {...item} />
+                                }} isOpen={index === activeIndex} key={index} {...item} />
 
                         )
                     }

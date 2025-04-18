@@ -9,7 +9,7 @@ import { useAnimation, motion } from "framer-motion";
 
 
 
-const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, price, duration, active, setActive, borderb, bordert, setHover }) => {
+const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, price, duration, isOpen, setActive, borderb, bordert, setHover }) => {
     const controls = useAnimation();
 
     const [listHidden, setListHidden] = useState(true);
@@ -42,36 +42,24 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
     }, [containerPhotoRef.current])
 
 
-
+    const [active, setActiveOpen] = useState(false)
+    const [timeActive, setTimeActive] = useState(null)
 
 
     useEffect(() => {
-        if (!active) {
 
-
-
-            return
+        if (index === 0) {
+            if (timeActive) {
+                clearTimeout(timeActive)
+            }
+            setTimeActive(setTimeout(() => {
+                setActiveOpen(isOpen)
+            }, 200))
+        } else {
+            setActiveOpen(isOpen)
         }
 
-
-
-
-
-        setTimeout(() => {
-            if (!bounceEl.current.length || !borderBounce.current) return
-            borderBounce.current.classList.add('border-bounce')
-            bounceEl.current.forEach((el) => {
-                BounceEffect(el, {
-                    startPosition: "0",
-                    endPosition: `-${settings.length}px`,
-                    duration: settings.duration,
-                    easing: "ease-in",
-                    direction: 'vertical'
-                });
-            })
-        }, settings.timeout)
-
-    }, [active])
+    }, [isOpen])
 
 
 
@@ -101,6 +89,29 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
         }
     }, [active]);
 
+
+    useEffect(() => {
+        const transitions = document.querySelectorAll('.transition-scale')
+        transitions.forEach((el) => {
+           if(index === 1) {
+            el.style.setProperty('--mode', 'ease-out')
+            el.style.setProperty('--duration', '.15s')
+           }
+           if(index === 2) {
+            el.style.setProperty('--mode', 'ease-in-out')
+            el.style.setProperty('--duration', '.2s')
+           }
+    
+           if(index === 3) {
+            el.style.setProperty('--mode', 'linear')
+            el.style.setProperty('--duration', '.3s')
+           }
+         
+          
+           
+           
+        })
+    }, [])
 
 
 
@@ -157,7 +168,7 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
                         style={{
                             textRendering: 'geometricPrecision'
                         }}
-                        className={`w-full  relative z-[2] container-scale transition-all duration-200 backface-hidden gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] ' : 'text-[#000]'} group-active/window:text-[#FFF]    relative ${!active && ' group-hover/window:text-[#34446D]'}`}
+                        className={`w-full  relative z-[2] container-scale  transition-scale transition-all duration-200 backface-hidden gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] ' : 'text-[#000]'} group-active/window:text-[#FFF]    relative ${!active && ' group-hover/window:text-[#34446D]'}`}
 
                     >
 
