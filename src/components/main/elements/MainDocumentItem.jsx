@@ -213,7 +213,6 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
                                             <motion.div                                               
                                                 initial={{y: 20, opacity: 0}}
                                                 animate={controls}
-                                                style={{display: active ? 'block' : 'none'}}
                                                 className="!shadow-none border-[0.2px] solid border-[#A4A4A4] overflow-hidden rounded-[5px] transition-all duration-300">
                                                 <Image
                                                     alt='document' src={img}
@@ -242,7 +241,6 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
                                             animate={controls}
                                                 initial={{ y: 20, opacity: 0 }}
                                                 ref={setButtonRef}
-                                                style={{display: active ? 'flex' : 'none'}}
                                                 className='tariff justify-center text-[20px] group hover:bg-[#34446D] hover:text-[#FFF] font-bold tracking-normal m:flex items-center gap-[10px] hidden px-[16px] py-[9px] text-[#34446D] rounded-[4px] border-[#34446D] border border-solid leading-[1]'>
                                                 <span>Перейти в услугу</span>
                                                 <svg className=' group-hover:*:fill-[#FFF] *:transition-all *:duration-300' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
