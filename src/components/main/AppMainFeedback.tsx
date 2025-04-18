@@ -24,7 +24,7 @@ const AppMainFeedback = () => {
         const loop: any = horizontalLoop(slides, {
             paused: true,
             offsetLeft: 0,
-            gap: 0            
+            gap: 0
         });
 
         const loop1: any = horizontalLoop(slides1, {
@@ -55,12 +55,14 @@ const AppMainFeedback = () => {
 
                 wrapper.addEventListener("mouseenter", (e: any) => {
                     bounds[index] = wrapper.getBoundingClientRect();
-                    initialCursorX = e.clientX -  bounds[index].left;
+                    initialCursorX = e.clientX - bounds[index].left;
+                    loop.kill()
+                    loop1.kill()
                     initialSliderTime[0] = loop.time();
                     initialSliderTime[1] = loop1.time();
-                    loop.pause()
-                    loop1.pause()
+
                 })
+
 
 
 
@@ -68,11 +70,10 @@ const AppMainFeedback = () => {
                     bounds[index] = wrapper.getBoundingClientRect();
                 });
             })
-
             wrapper.addEventListener("mousemove", (e: any) => {
 
-                
-                if ( !bounds[0] || !bounds[1] || !initialCursorX || !initialSliderTime[0] || !initialSliderTime[1]) return;
+
+                if (!bounds[0] || !bounds[1] || !initialCursorX || !initialSliderTime[0] || !initialSliderTime[1]) return;
                 const currentX = e.clientX - bounds[0].left;
                 const currentX1 = e.clientX - bounds[1].left;
 
@@ -88,7 +89,7 @@ const AppMainFeedback = () => {
 
 
                 gsap.to(loop1, {
-                    time:time1,
+                    time: time1,
                     duration: 1.2,
                     ease: "power4"
                 });
