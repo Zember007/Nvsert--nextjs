@@ -23,15 +23,14 @@ const AppMainFeedback = () => {
         const slides1 = gsap.utils.toArray('[data-slider="slide-feedback1"]');
         const loop: any = horizontalLoop(slides, {
             paused: true,
-            center: false,
             offsetLeft: 0,
-            gap: 10            
+            gap: 0            
         });
 
         const loop1: any = horizontalLoop(slides1, {
             paused: true,
             offsetLeft: 0,
-            gap: 10
+            gap: 0
         });
 
 
