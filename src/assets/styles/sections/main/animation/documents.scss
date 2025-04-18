@@ -72,7 +72,7 @@
 
 .box-scale:active {
   .container-scale {
-    --scale:0.99;
+    --scale:0.98;
     transform: scale(var(--scale));
   }
 }
