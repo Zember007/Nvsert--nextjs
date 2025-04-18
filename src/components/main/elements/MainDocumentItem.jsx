@@ -76,7 +76,7 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
 
 
     const defaultSettings = {
-        duration: 0.3,
+        duration: 0.6,
         bounce: 5,
         delay: 0,
         ease: [0.34, 1.56, 0.64, 1], // Кастомная cubic-bezier кривая
@@ -98,16 +98,6 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
                     times: defaultSettings.times
                 }
             });
-        } else {
-            controls.start({
-                y: defaultSettings.closeY, // Используем closeY для отскока
-                opacity: [1, 1, 1, 1, 0],
-                transition: {
-                    duration: defaultSettings.duration,
-                    ease: defaultSettings.ease,
-                    times: defaultSettings.times
-                }
-            })
         }
     }, [active]);
 
@@ -210,10 +200,10 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
                                         <div ref={photoRef}
                                             onClick={() => setPhoto()}
                                             className={`${!active && 'pointer-events-none'} transition-all duration-200 `}>
-                                            <motion.div                                               
-                                                initial={{y: 20, opacity: 0}}
+                                            <motion.div
+                                                initial={{ y: 20, opacity: 0 }}
                                                 animate={controls}
-                                                className="!shadow-none border-[0.2px] solid border-[#A4A4A4] overflow-hidden rounded-[5px] transition-all duration-300">
+                                                className="!shadow-none border-[0.2px] solid border-[#A4A4A4] overflow-hidden rounded-[5px]">
                                                 <Image
                                                     alt='document' src={img}
                                                     width={photoWidth || 190}
@@ -234,12 +224,14 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
                                             <p className='text-[16px] text-[#000000] m:max-w-[300px]'>
                                                 {content.text1 && filterPrepositions(content.text1)}
                                             </p>
-                                        </div>                                      
+                                        </div>
 
-                                        <div className="tariff-wrap w-[250px] " ref={setWrapperRef}>
-                                            <motion.button
+                                        <motion.div
                                             animate={controls}
-                                                initial={{ y: 20, opacity: 0 }}
+                                            initial={{ y: 20, opacity: 0 }}
+                                            className="tariff-wrap w-[250px] " ref={setWrapperRef}>
+                                            <button
+
                                                 ref={setButtonRef}
                                                 className='tariff justify-center text-[20px] group hover:bg-[#34446D] hover:text-[#FFF] font-bold tracking-normal m:flex items-center gap-[10px] hidden px-[16px] py-[9px] text-[#34446D] rounded-[4px] border-[#34446D] border border-solid leading-[1]'>
                                                 <span>Перейти в услугу</span>
@@ -249,8 +241,8 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
 
 
 
-                                            </motion.button>
-                                        </div>
+                                            </button>
+                                        </motion.div>
 
                                     </div>
                                 </div>
@@ -287,17 +279,20 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
                                         ))
                                     }
                                 </div>
-                                <div ref={setBounceEl} className="w-full">
-                                    <div className="tariff-wrap w-[250px]" ref={setWrapperRef}>
-                                        <button ref={setButtonRef} className='justify-center border-[#34446D] border border-solid tariff text-[20px] transition-all duration-300 font-bold tracking-normal m:flex items-center gap-[6px] px-[16px] py-[9px] text-[#34446D] hover:text-[#FFF] rounded-[4px]  group hover:bg-[#34446D]  leading-[1]'>
-                                            <span>Оформить заявку</span>
-                                            <svg className='group-hover:*:fill-[#FFF] *:transition-all *:duration-300' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M29.0627 0.9375L0.930664 12.1875L11.426 16.9336L26.2502 3.75L13.0666 18.5742L17.8127 29.0625L29.0627 0.9375Z" fill="#34446D" />
-                                            </svg>
 
-                                        </button>
-                                    </div>
-                                </div>
+                                <motion.div
+                                    animate={controls}
+                                    initial={{ y: 20, opacity: 0 }}
+                                    className="tariff-wrap w-[250px]" ref={setWrapperRef}>
+                                    <button ref={setButtonRef} className='justify-center border-[#34446D] border border-solid tariff text-[20px] transition-all duration-300 font-bold tracking-normal m:flex items-center gap-[6px] px-[16px] py-[9px] text-[#34446D] hover:text-[#FFF] rounded-[4px]  group hover:bg-[#34446D]  leading-[1]'>
+                                        <span>Оформить заявку</span>
+                                        <svg className='group-hover:*:fill-[#FFF] *:transition-all *:duration-300' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M29.0627 0.9375L0.930664 12.1875L11.426 16.9336L26.2502 3.75L13.0666 18.5742L17.8127 29.0625L29.0627 0.9375Z" fill="#34446D" />
+                                        </svg>
+
+                                    </button>
+                                </motion.div>
+
 
 
 
@@ -317,7 +312,7 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
 
             </div>
 
-        </div>
+        </div >
     );
 };
 
