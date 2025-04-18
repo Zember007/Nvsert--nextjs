@@ -179,7 +179,7 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
     },
     changeIndex(nextIndex: number, isPause: boolean = false) {
 
-      if(timeoutIdChange) {
+      if (timeoutIdChange) {
         clearTimeout(timeoutIdChange);
       }
 
@@ -221,7 +221,7 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
       const realLoopIndex = nextIndex < 0 ? max : nextIndex > max ? 0 : nextIndex;
       if (onIndexChange) {
         onIndexChange(enableLoop ? realLoopIndex : limitIndex);
-        if(enableChange) {
+        if (enableChange) {
           indexController?.goToIndex(enableLoop ? realLoopIndex : limitIndex);
           setEnableChange(false)
           setTimeoutIdChange(setTimeout(() => {
@@ -449,7 +449,7 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
 
         <div id="canvas"></div>
 
-
+        <div id="wrap-texture-box"></div>
 
       </div>
       {/* {adjacentImages.map((item: DataType, currentIndex) => {

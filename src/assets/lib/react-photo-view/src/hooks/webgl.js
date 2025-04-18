@@ -65,7 +65,7 @@ export const init = (imagesSrc, index = 0) => {
         async initPlane(index = 0) {
             const div = document.createElement("div");
             div.className = "plane";
-            document.getElementById('wrap-texture').appendChild(div);
+            document.getElementById('wrap-texture-box').appendChild(div);
 
             const img0 = document.createElement("img");
             img0.setAttribute("data-sampler", "texture0");
