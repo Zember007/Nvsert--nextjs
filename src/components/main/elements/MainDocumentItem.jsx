@@ -167,7 +167,7 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
                         style={{
                             textRendering: 'geometricPrecision'
                         }}
-                        className={`w-full  relative z-[2] container-scale transition-all duration-200 backface-hidden gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] ' : 'text-[#000]'} group-active/window:text-[#FFF]    relative ${!active && ' hover:text-[#34446D]'}`}
+                        className={`w-full  relative z-[2] container-scale transition-all duration-200 backface-hidden gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] ' : 'text-[#000]'} group-active/window:text-[#FFF]    relative ${!active && ' group-hover/window:text-[#34446D]'}`}
 
                     >
 
@@ -182,7 +182,7 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
                             <p className="translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px] transition-all duration-200 font-bold tracking-normal">{price}</p>
                             <button>
                                 <svg
-                                    className={`${!active && 'rotate-[180deg]'} group-active/window:*:transition-all group-active/window:*:duration-200 group-active/window:*:stroke-[#FFF] ${active ? '' : 'group-active/window:*:stroke-[#000]'} transition-all duration-300`}
+                                    className={`${!active && 'rotate-[180deg] group-hover/window:*:stroke-[#34446D]'} group-active/window:*:transition-all group-active/window:*:duration-200 group-active/window:*:stroke-[#FFF] ${active ? '' : 'group-active/window:*:stroke-[#000]'} transition-all duration-300`}
                                     width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M19 19L5 5" stroke={`${active ? 'white' : 'black'}`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                     <path d="M5 13L5 5L13 5" stroke={`${active ? 'white' : 'black'}`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
