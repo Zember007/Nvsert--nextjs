@@ -168,7 +168,7 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
                         style={{
                             textRendering: 'geometricPrecision'
                         }}
-                        className={`w-full  relative z-[2] container-scale  transition-scale transition-all duration-200 backface-hidden gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] ' : 'text-[#000]'} group-active/window:text-[#FFF]    relative ${!active && ' group-hover/window:text-[#34446D]'}`}
+                        className={`w-full  relative z-[2] container-scale  transition-scale backface-hidden gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] ' : 'text-[#000]'} group-active/window:text-[#FFF]    relative ${!active && ' group-hover/window:text-[#34446D]'}`}
 
                     >
 
