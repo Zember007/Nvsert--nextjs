@@ -330,13 +330,19 @@ export function horizontalLoop(items, config) {
                 duration: 0
             })
 
+            // const item2 = items[index === 0 ? items.length - 1 : index - 1]
+            // gsap.to(item2, {
+            //     opacity: 1,
+            //     duration: 0.2
+            // })
+
             timeoutId = setTimeout(() => {
                 const item = items[index === 0 ? items.length - 1 : index - 1]
                 gsap.to(item, {
                     opacity: 0,
                     duration: 0.2
                 })
-            }, 50)
+            }, 100)
 
             return index;
         };
