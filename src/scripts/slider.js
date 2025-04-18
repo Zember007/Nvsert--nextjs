@@ -255,26 +255,22 @@ export function horizontalLoop(items, config) {
                         duration: distanceToLoop / pixelsPerSecond
                     }, 0)
 
-                       
-                        .to(item, {
-                            opacity: 0, 
-                            duration: 0.1 
-                        }, distanceToLoop / pixelsPerSecond - 0.1) // Начинаем затухание чуть раньше конца первой анимации
+
+                        // Начинаем затухание чуть раньше конца первой анимации
                         .fromTo(item, {
                             xPercent: snap((curX - distanceToLoop + totalWidth) / widths[i] * 100),
-                            opacity: 0 // Начинаем с прозрачности 0
+
                         }, {
                             xPercent: xPercents[i],
-                            opacity: 1, // Возвращаем полную видимость
                             duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond,
                             immediateRender: false
-                        }, distanceToLoop / pixelsPerSecond)
+                        }, distanceToLoop / pixelsPerSecond + 0.3)
                         .add("label" + i, distanceToStart / pixelsPerSecond);
                     times[i] = distanceToStart / pixelsPerSecond;
                 }
                 timeWrap = gsap.utils.wrap(0, tl.duration());
             },
-            
+
             refresh = (deep) => {
                 let progress = tl.progress();
                 tl.progress(0, true);
@@ -285,7 +281,7 @@ export function horizontalLoop(items, config) {
             },
             onResize = () => refresh(true),
             proxy;
-        
+
         gsap.set(items, { x: 0 });
         populateWidths();
         populateTimeline();
@@ -308,12 +304,40 @@ export function horizontalLoop(items, config) {
             return vars.duration === 0 ? tl.time(timeWrap(time)) : tl.tweenTo(time, vars);
         }
         tl.toIndex = (index, vars) => toIndex(index, vars);
+        let timeoutId = null
         tl.closestIndex = setCurrent => {
+            if (timeoutId) clearTimeout(timeoutId)
             let index = getClosest(times, tl.time(), tl.duration());
             if (setCurrent) {
                 curIndex = index;
                 indexIsDirty = false;
             }
+
+            gsap.to(items[index], {
+                opacity: 1,
+                duration: 0.2
+            })
+
+            const item = items[index <= 1 ? items.length - 2 : index - 2]
+            gsap.to(item, {
+                opacity: 0,
+                duration: 0
+            })
+
+            const item1 = items[index >= items.length - 2 ? items.length - 3 : index + 2]
+            gsap.to(item1, {
+                opacity: 1,
+                duration: 0
+            })
+
+            timeoutId = setTimeout(() => {
+                const item = items[index === 0 ? items.length - 1 : index - 1]
+                gsap.to(item, {
+                    opacity: 0,
+                    duration: 0.2
+                })
+            }, 50)
+
             return index;
         };
         tl.current = () => indexIsDirty ? tl.closestIndex(true) : curIndex;
@@ -373,7 +397,7 @@ export function horizontalLoop(items, config) {
             })[0];
             tl.draggable = draggable;
         }
-        
+
         tl.closestIndex(true);
         lastIndex = curIndex;
         // onChange && onChange(curIndex);

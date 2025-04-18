@@ -76,7 +76,7 @@ const MainDocumentItem = ({ setPhoto, img, settings, title, content, content1, p
 
 
     const defaultSettings = {
-        duration: 0.6,
+        duration: 0.3,
         bounce: 5,
         delay: 0,
         ease: [0.34, 1.56, 0.64, 1], // Кастомная cubic-bezier кривая
