@@ -80,6 +80,6 @@
 
 .transition-scale {
   --mode: ease-in;
-  --duration: .15s
+  --duration: .15s;
   transition: background .3s ease, transform  var(--duration) var(--mode), box-shadow .2s ease;
 }
