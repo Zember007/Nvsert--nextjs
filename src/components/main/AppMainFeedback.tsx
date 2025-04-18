@@ -25,13 +25,13 @@ const AppMainFeedback = () => {
             paused: true,
             center: false,
             offsetLeft: 0,
-            gap: 20            
+            gap: 10            
         });
 
         const loop1: any = horizontalLoop(slides1, {
             paused: true,
             offsetLeft: 0,
-            gap: 20
+            gap: 10
         });
 
 

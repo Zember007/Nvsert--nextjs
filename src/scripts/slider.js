@@ -126,6 +126,7 @@ export function initSlider(onChangeFunction) {
         center: false,
         offsetLeft: 75,
         gap: 0,
+        opacity: true,
         onChange: (index) => {
             if (activeElement) {
                 activeElement.classList.remove("active");
@@ -313,36 +314,34 @@ export function horizontalLoop(items, config) {
                 indexIsDirty = false;
             }
 
-            gsap.to(items[index], {
-                opacity: 1,
-                duration: 0.2
-            })
 
-            const item = items[index <= 1 ? items.length - 2 : index - 2]
-            gsap.to(item, {
-                opacity: 0,
-                duration: 0
-            })
-
-            const item1 = items[index >= items.length - 2 ? items.length - 3 : index + 2]
-            gsap.to(item1, {
-                opacity: 1,
-                duration: 0
-            })
-
-            // const item2 = items[index === 0 ? items.length - 1 : index - 1]
-            // gsap.to(item2, {
-            //     opacity: 1,
-            //     duration: 0.2
-            // })
-
-            timeoutId = setTimeout(() => {
-                const item = items[index === 0 ? items.length - 1 : index - 1]
-                gsap.to(item, {
-                    opacity: 0,
+            if (config.opacity) {
+                gsap.to(items[index], {
+                    opacity: 1,
                     duration: 0.2
                 })
-            }, 100)
+
+                const item = items[index <= 1 ? items.length - 2 : index - 2]
+                gsap.to(item, {
+                    opacity: 0,
+                    duration: 0
+                })
+
+                const item1 = items[index >= items.length - 2 ? items.length - 3 : index + 2]
+                gsap.to(item1, {
+                    opacity: 1,
+                    duration: 0
+                })
+
+                timeoutId = setTimeout(() => {
+                    const item = items[index === 0 ? items.length - 1 : index - 1]
+                    gsap.to(item, {
+                        opacity: 0,
+                        duration: 0.2
+                    })
+                }, 100)
+
+            }
 
             return index;
         };
