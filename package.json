@@ -15,6 +15,7 @@
     "core-js": "^3.40.0",
     "curtainsjs": "^8.1.6",
     "dom-parser": "^1.1.5",
+    "framer-motion": "^12.7.4",
     "gsap": "^3.12.7",
     "gsap-trial": "^3.12.7",
     "i18next": "^24.2.2",

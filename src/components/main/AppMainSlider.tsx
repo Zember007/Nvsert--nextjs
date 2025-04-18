@@ -148,13 +148,6 @@ const SliderMain = () => {
 
 
 
-
-
-
-
-
-
-
     const { setButtonRef, setWrapperRef } = useButton()
 
 
