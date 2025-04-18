@@ -1,6 +1,6 @@
 import '@/assets/styles/sections/main/main-slider.scss'
 import { initSlider } from '@/scripts/slider'
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { slides } from './utils';
 import { filterPrepositions } from '@/hook/filter';
@@ -27,9 +27,12 @@ const SliderMain = () => {
 
     const [sliders, setSliders] = useState<Slider[]>([]);
 
+    const whiteBgRef = useRef<HTMLDivElement | null>(null)
+
     useEffect(() => {
-        if (sliders.length < 5) return
+        if (sliders.length < 5 || !whiteBgRef.current) return
         let timeoutId: NodeJS.Timeout | null = null;
+        let timeoutIdBg: NodeJS.Timeout | null = null;
         let enableList = true
 
 
@@ -116,9 +119,20 @@ const SliderMain = () => {
 
         initSlider((index: number) => {
 
+            whiteBgRef.current?.classList.remove('white')
+
+
             if (timeoutId) {
                 clearTimeout(timeoutId)
             }
+
+            if (timeoutIdBg) {
+                clearTimeout(timeoutIdBg)
+            }
+
+            timeoutIdBg = setTimeout(() => {
+                whiteBgRef.current?.classList.add('white')
+            },300)
 
 
 
@@ -143,7 +157,7 @@ const SliderMain = () => {
 
 
         })
-    }, [sliders])
+    }, [sliders, whiteBgRef])
 
 
 
@@ -307,7 +321,7 @@ const SliderMain = () => {
                         className="slide-main l:inset-[0%] l:h-[100%] h-[300px] l:bottom-0 bottom-[80px] l:z-0 z-[]">
 
                         <div className="slider-wrap">
-                            <div className="slide-blur left-[564px]">
+                            <div ref={whiteBgRef} className="slide-blur left-[560px]">
                                 <span className="line" style={{ '--blur': '4px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '8px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>

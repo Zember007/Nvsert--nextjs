@@ -126,7 +126,6 @@ export function initSlider(onChangeFunction) {
         center: false,
         offsetLeft: 75,
         gap: 0,
-        opacity: true,
         onChange: (index) => {
             if (activeElement) {
                 activeElement.classList.remove("active");
@@ -257,12 +256,16 @@ export function horizontalLoop(items, config) {
                     }, 0)
 
 
-                        // Начинаем затухание чуть раньше конца первой анимации
+                        .to(item, {
+                            opacity: 0,
+                            duration: 0.3
+                        }, distanceToLoop / pixelsPerSecond) // Начинаем затухание чуть раньше конца первой анимации
                         .fromTo(item, {
                             xPercent: snap((curX - distanceToLoop + totalWidth) / widths[i] * 100),
-
+                            opacity: 0 // Начинаем с прозрачности 0
                         }, {
                             xPercent: xPercents[i],
+                            opacity: 1, // Возвращаем полную видимость
                             duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond,
                             immediateRender: false
                         }, distanceToLoop / pixelsPerSecond + 0.3)
@@ -315,33 +318,6 @@ export function horizontalLoop(items, config) {
             }
 
 
-            if (config.opacity) {
-                gsap.to(items[index], {
-                    opacity: 1,
-                    duration: 0.2
-                })
-
-                const item = items[index <= 1 ? items.length - 2 : index - 2]
-                gsap.to(item, {
-                    opacity: 0,
-                    duration: 0
-                })
-
-                const item1 = items[index >= items.length - 2 ? items.length - 3 : index + 2]
-                gsap.to(item1, {
-                    opacity: 1,
-                    duration: 0
-                })
-
-                timeoutId = setTimeout(() => {
-                    const item = items[index === 0 ? items.length - 1 : index - 1]
-                    gsap.to(item, {
-                        opacity: 0,
-                        duration: 0.2
-                    })
-                }, 100)
-
-            }
 
             return index;
         };
