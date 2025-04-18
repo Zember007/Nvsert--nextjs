@@ -23,25 +23,15 @@ const AppMainFeedback = () => {
         const slides1 = gsap.utils.toArray('[data-slider="slide-feedback1"]');
         const loop: any = horizontalLoop(slides, {
             paused: true,
-            draggable: true,
             center: false,
             offsetLeft: 0,
-            gap: 20,
-            onChange: (index: number) => {
-                console.log(index);
-
-            }
+            gap: 20            
         });
 
         const loop1: any = horizontalLoop(slides1, {
             paused: true,
-            draggable: true,
             offsetLeft: 0,
-            gap: 20,
-            onChange: (index: number) => {
-                console.log(index);
-
-            }
+            gap: 20
         });
 
 
@@ -50,7 +40,6 @@ const AppMainFeedback = () => {
         loop.next({ ease: "power3", duration: 0.725 })
         loop1.next({ ease: "power3", duration: 0.725 })
 
-        let flag = false;
 
 
         const wrappers = document.querySelectorAll('.feedback-slider-container');
@@ -61,7 +50,6 @@ const AppMainFeedback = () => {
             let bounds: any = [];
             let initialCursorX = 0;
             let initialSliderTime = [0, 0];
-            let isDragging = false
             wrappers.forEach((wrapper, index) => {
 
                 bounds[index] = wrapper.getBoundingClientRect()
@@ -75,15 +63,6 @@ const AppMainFeedback = () => {
                     loop1.pause()
                 })
 
-                wrapper.addEventListener("mousemove", (e: any) => {
-                    const cursor = getComputedStyle(wrapper).cursor;
-                    if(cursor === 'grabbing') {
-                        isDragging = true
-                    } else {
-                        isDragging = false
-
-                    }
-                })
 
 
                 window.addEventListener("resize", () => {
@@ -94,7 +73,7 @@ const AppMainFeedback = () => {
             wrapper.addEventListener("mousemove", (e: any) => {
 
                 
-                if (isDragging || !bounds[0] || !bounds[1] || !initialCursorX || !initialSliderTime[0] || !initialSliderTime[1]) return;
+                if ( !bounds[0] || !bounds[1] || !initialCursorX || !initialSliderTime[0] || !initialSliderTime[1]) return;
                 const currentX = e.clientX - bounds[0].left;
                 const currentX1 = e.clientX - bounds[1].left;
 
@@ -128,14 +107,12 @@ const AppMainFeedback = () => {
 
         if (nextButton) {
             nextButton.addEventListener("click", () => {
-                flag = false
                 loop.next({ ease: "power3", duration: 0.725 })
                 loop1.next({ ease: "power3", duration: 0.725 })
             });
         }
         if (prevButton) {
             prevButton.addEventListener("click", () => {
-                flag = false
                 loop.previous({ ease: "power3", duration: 0.725 })
                 loop1.previous({ ease: "power3", duration: 0.725 })
             });
