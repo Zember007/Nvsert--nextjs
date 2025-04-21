@@ -24,13 +24,18 @@ const AppMainFeedback = () => {
         const loop: any = horizontalLoop(slides, {
             paused: true,
             offsetLeft: 0,
+            repeat: -1,
             gap: 0
         });
 
         const loop1: any = horizontalLoop(slides1, {
             paused: true,
             offsetLeft: 0,
-            gap: 0
+            repeat: -1,
+            gap: 0,
+            onDragFunction: () => {
+
+            }
         });
 
 
@@ -82,26 +87,41 @@ const AppMainFeedback = () => {
                 const deltaX1 = currentX1 - initialCursorX;
                 const ratioDelta1 = -deltaX1 / bounds[1].width;
                 const deltaTime1 = ratioDelta1 * loop1.duration();
+;
 
-      
+                const totalDuration = loop.duration();
+                const current = loop.totalTime();
+                let target = initialSliderTime[0] + deltaTime;
 
-                const wrappedTime = gsap.utils.wrap(0, loop.duration());
-                const wrappedTime1 = gsap.utils.wrap(0, loop1.duration());
+                target = gsap.utils.wrap(0, totalDuration, target);
 
-                const time = initialSliderTime[0] + deltaTime;
-                const time1 = initialSliderTime[1] + deltaTime1;            
-                
+                let diff = target - (current % totalDuration);
+                if (Math.abs(diff) > totalDuration / 2) {
+                    diff += (diff < 0 ? totalDuration : -totalDuration);
+                }
+                target = current + diff;
 
-
-                gsap.to(loop1, {
-                    time: time1,
-                    duration: 1.2,
+                gsap.to(loop, {
+                    totalTime: target,
+                    duration: 2,
                     ease: "power4"
                 });
 
-                gsap.to(loop, {
-                    time,
-                    duration: 2,
+                const totalDuration1 = loop1.duration();
+                const current1 = loop1.totalTime();
+                let target1 = initialSliderTime[1] + deltaTime1;
+
+                target1 = gsap.utils.wrap(0, totalDuration1, target1);
+
+                let diff1 = target1 - (current1 % totalDuration1);
+                if (Math.abs(diff1) > totalDuration1 / 2) {
+                    diff1 += (diff1 < 0 ? totalDuration1 : -totalDuration1);
+                }
+                target1 = current1 + diff1;
+
+                gsap.to(loop1, {
+                    totalTime: target,
+                    duration: 1.2,
                     ease: "power4"
                 });
             });

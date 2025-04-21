@@ -188,11 +188,11 @@ export function horizontalLoop(items, config) {
             tl = gsap.timeline({
                 repeat: config.repeat, onUpdate: function () {
                     onDragFunction && onDragFunction()
-                    
+
                     let i = tl.closestIndex();
                     if (lastIndex !== i) {
                         lastIndex = i;
-                        onChange &&  onChange(i);
+                        onChange && onChange(i);
                     }
                 }, paused: config.paused, defaults: { ease: "none" }, onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100)
             }),
@@ -277,10 +277,10 @@ export function horizontalLoop(items, config) {
                         }, distanceToLoop / pixelsPerSecond + 0.3)
                         .add("label" + i, distanceToStart / pixelsPerSecond);
                     times[i] = distanceToStart / pixelsPerSecond;
-                }                
+                }
                 timeWrap = gsap.utils.wrap(0, tl.duration());
-                 
-                
+
+
             },
 
             refresh = (deep) => {
@@ -290,7 +290,7 @@ export function horizontalLoop(items, config) {
                 deep && populateTimeline();
                 populateOffsets();
                 deep && tl.draggable ? tl.time(times[curIndex], true) : tl.progress(progress, true);
-                
+
             },
             onResize = () => refresh(true),
             proxy;
@@ -342,7 +342,7 @@ export function horizontalLoop(items, config) {
         if (config.draggable && typeof (Draggable) === "function") {
             proxy = document.createElement("div")
             let wrap = gsap.utils.wrap(0, 1),
-                ratio, startProgress, draggable, dragSnap, lastSnap, initChangeX, wasPlaying,
+                ratio, startProgress, draggable, lastSnap, initChangeX, wasPlaying,
                 align = () => tl.progress(wrap(startProgress + (draggable.startX - draggable.x) * ratio)),
                 syncIndex = () => tl.closestIndex(true);
             typeof (InertiaPlugin) === "undefined" && console.warn("InertiaPlugin required for momentum-based scrolling and snapping. https://greensock.com/club");

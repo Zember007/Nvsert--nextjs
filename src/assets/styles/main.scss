@@ -38,7 +38,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   top: 0;
   bottom: 0;
   height: 100%;
-
+  pointer-events: none;
 
 
   z-index: 1;
