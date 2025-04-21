@@ -110,7 +110,7 @@ const SliderMain = () => {
                     }
                 } else {
                     sliders.forEach((slider) => {
-                        slider.slickGoTo(index) 
+                        slider.slickGoTo(index)
                     })
                 }
 
@@ -119,20 +119,14 @@ const SliderMain = () => {
 
         initSlider((index: number) => {
 
-            whiteBgRef.current?.classList.remove('white')
+
 
 
             if (timeoutId) {
                 clearTimeout(timeoutId)
             }
 
-            if (timeoutIdBg) {
-                clearTimeout(timeoutIdBg)
-            }
 
-            timeoutIdBg = setTimeout(() => {
-                whiteBgRef.current?.classList.add('white')
-            },300)
 
 
 
@@ -156,7 +150,18 @@ const SliderMain = () => {
 
 
 
-        })
+        },
+            () => {
+                
+                whiteBgRef.current?.classList.remove('white')
+                if (timeoutIdBg) {
+                    clearTimeout(timeoutIdBg)
+                }
+
+                timeoutIdBg = setTimeout(() => {
+                    whiteBgRef.current?.classList.add('white')
+                }, 300)
+            })
     }, [sliders, whiteBgRef])
 
 

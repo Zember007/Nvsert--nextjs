@@ -4,7 +4,7 @@ import InertiaPlugin from "./InertiaPlugin";
 
 gsap.registerPlugin(Draggable, InertiaPlugin);
 
-export function initSlider(onChangeFunction) {
+export function initSlider(onChangeFunction, onDragFunction) {
     const wrapper = document.querySelector('[data-slider="list"]');
     if (!wrapper) {
         console.error("Контейнер слайдера не найден");
@@ -137,6 +137,9 @@ export function initSlider(onChangeFunction) {
             updateSteps(index);
 
             onChangeFunction && onChangeFunction(index);
+        },
+        onDragFunction: () => {
+            onDragFunction && onDragFunction();
         }
     });
 
@@ -180,13 +183,16 @@ export function horizontalLoop(items, config) {
     const offsetLeft = config.offsetLeft || 0
     gsap.context(() => {
         let onChange = config.onChange,
+            onDragFunction = config.onDragFunction,
             lastIndex = 0,
             tl = gsap.timeline({
-                repeat: config.repeat, onUpdate: onChange && function () {
+                repeat: config.repeat, onUpdate: function () {
+                    onDragFunction && onDragFunction()
+                    
                     let i = tl.closestIndex();
                     if (lastIndex !== i) {
                         lastIndex = i;
-                        onChange(i);
+                        onChange &&  onChange(i);
                     }
                 }, paused: config.paused, defaults: { ease: "none" }, onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100)
             }),
@@ -271,8 +277,10 @@ export function horizontalLoop(items, config) {
                         }, distanceToLoop / pixelsPerSecond + 0.3)
                         .add("label" + i, distanceToStart / pixelsPerSecond);
                     times[i] = distanceToStart / pixelsPerSecond;
-                }
+                }                
                 timeWrap = gsap.utils.wrap(0, tl.duration());
+                 
+                
             },
 
             refresh = (deep) => {
@@ -282,6 +290,7 @@ export function horizontalLoop(items, config) {
                 deep && populateTimeline();
                 populateOffsets();
                 deep && tl.draggable ? tl.time(times[curIndex], true) : tl.progress(progress, true);
+                
             },
             onResize = () => refresh(true),
             proxy;

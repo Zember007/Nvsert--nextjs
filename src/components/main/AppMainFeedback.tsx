@@ -88,8 +88,9 @@ const AppMainFeedback = () => {
                 const wrappedTime = gsap.utils.wrap(0, loop.duration());
                 const wrappedTime1 = gsap.utils.wrap(0, loop1.duration());
 
-                const time = wrappedTime(initialSliderTime[0] + deltaTime);
-                const time1 = wrappedTime1(initialSliderTime[1] + deltaTime1);
+                const time = initialSliderTime[0] + deltaTime;
+                const time1 = initialSliderTime[1] + deltaTime1;            
+                
 
 
                 gsap.to(loop1, {
