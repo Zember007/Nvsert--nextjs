@@ -63,25 +63,13 @@ export const init = (imagesSrc, index = 0) => {
         }
 
         async initPlane(index = 0) {
-            const div = document.createElement("div");
-            div.className = "plane";
-            document.getElementById('wrap-texture-box').appendChild(div);
+            const div = document.querySelector(".plane");
 
-            const img0 = document.createElement("img");
-            img0.setAttribute("data-sampler", "texture0");
+            const img0 = div.querySelector('[data-sampler="texture0"]');
             img0.src = this.imagesSrc[index];
 
-            const img1 = document.createElement("img");
-            img1.setAttribute("data-sampler", "texture1");
-            img1.src = this.imagesSrc[1] || this.imagesSrc[0];
-
-            const mapImg = document.createElement("img");
-            mapImg.setAttribute("data-sampler", "map");
-            mapImg.src = "https://i.ibb.co/n8MjCrk/seed129873123-scale10-fbm-worley-quintic-octaves2.jpg";
-
-            div.appendChild(img0);
-            div.appendChild(img1);
-            div.appendChild(mapImg);
+            const img1 = div.querySelector('[data-sampler="texture1"]');
+            img1.src = this.imagesSrc[index + 1] || this.imagesSrc[0];
 
             this.plane = new Plane(this.webGLCurtain, div, this.params);
 
@@ -89,7 +77,6 @@ export const init = (imagesSrc, index = 0) => {
                 this.textures.texture0 = this.plane.textures[0];
                 this.textures.texture1 = this.plane.textures[1];
                 this.textures.map = this.plane.textures[2];
-
                 this.update();
             });
         }
@@ -107,38 +94,28 @@ export const init = (imagesSrc, index = 0) => {
                 index >= this.imagesSrc.length ||
                 index === this.currentIndex
             ) return;
-        
-        
+
             const nextImage = this.imagesSrc[index];
-        
+
             const img = new Image();
             img.crossOrigin = "anonymous";
             img.src = nextImage;
             await img.decode();
-        
-            this.textures.texture1.setSource(img, () => {
-                this.plane.textures[1].resize();
-                this.plane.updatePosition();
-            });
-        
+
+            this.textures.texture1.setSource(img);
+
             this.plane.uniforms.progress.value = 0;
 
-            if (this.gsapAnimation) {
-                this.gsapAnimation.kill(); 
-            }
-        
+            if (this.gsapAnimation) this.gsapAnimation.kill();
+
             this.gsapAnimation = gsap.to(this.plane.uniforms.progress, {
                 value: 1,
                 duration: 0.7,
                 onComplete: () => {
-                    this.textures.texture0.setSource(img, () => {
-                        this.plane.textures[0].resize();
-                        this.plane.updatePosition();
-                    });
-        
+                    this.textures.texture0.setSource(img);
                     this.plane.uniforms.progress.value = 0;
-                    this.currentIndex = index;   
-                    this.gsapAnimation = null;              
+                    this.currentIndex = index;
+                    this.gsapAnimation = null;
                 }
             });
         }

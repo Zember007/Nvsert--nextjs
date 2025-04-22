@@ -355,9 +355,6 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
       const canvasEl = document.getElementById('canvas');
       if (!canvasEl) return;
 
-      const plane = document.querySelector('.plane');
-      if (plane) return;
-
       const webgl = init(images.map((item: DataType) => item.src), index);
       setIndexController(webgl);
     });
@@ -432,11 +429,14 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
         </div>
       )}
       <div id="wrap-texture">
-
         <div id="canvas"></div>
-
-        <div id="wrap-texture-box"></div>
-
+        <div id="wrap-texture-box">
+          <div className="plane">
+            <img data-sampler="texture0" />
+            <img data-sampler="texture1" />
+            <img data-sampler="map" src="https://i.ibb.co/n8MjCrk/seed129873123-scale10-fbm-worley-quintic-octaves2.jpg" />
+          </div>
+        </div>
       </div>
       {/* {adjacentImages.map((item: DataType, currentIndex) => {
         // 截取之前的索引位置

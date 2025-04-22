@@ -309,32 +309,30 @@ input:-webkit-autofill {
 
 #wrap-texture {
     position: fixed;
+    inset: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100%;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
+    height: 100vh;
 }
 
 #canvas {
-    /* make the canvas wrapper fits the document */
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
+    z-index: 0;
+}
+
+#wrap-texture-box {
+    position: relative;
+    z-index: 1;
 }
 
 .plane {
-    width: 475px;;
+    width: 475px;
     height: 677px;
-    z-index: 100;
+    overflow: hidden;
 }
 
 .plane img {
-    /* hide the img element */
     display: none;
 }
