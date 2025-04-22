@@ -6,6 +6,7 @@ import LazyLoadSection from '@/hook/LazyLoadSection';
 
 import AppMainIntro from '../components/main/AppMainIntro'
 import AppMainDocuments from '../components/main/AppMainDocuments'
+import AppMainSafeguards from '../components/main/AppMainSafeguards'
 
 export default function Home() {
 
@@ -29,16 +30,16 @@ export default function Home() {
 
   return (
     <div className="main text-[#000] overflow-hidden select-none">
-      <AppMainIntro />
-      <AppMainDocuments />
+      {/* <AppMainIntro />
+      <AppMainDocuments /> */}
       {/* <LazyLoadSection component={DynamicAppMainSkills} />
       <LazyLoadSection component={DynamicAppMainSlider} />
       <LazyLoadSection component={DynamicAppMainSafeguards} />
       <LazyLoadSection component={DynamicAppMainFeedback} /> */}
-      <DynamicAppMainSkills />
-      <DynamicAppMainSlider />
-      <DynamicAppMainSafeguards />
-      <DynamicAppMainFeedback />
+      {/* <DynamicAppMainSkills />
+      <DynamicAppMainSlider /> */}
+      <AppMainSafeguards />
+      {/* <DynamicAppMainFeedback /> */}
     </div>
   );
 }
