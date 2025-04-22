@@ -34,7 +34,7 @@ const AppMainDocuments = () => {
             <PhotoProvider maskOpacity={0.4} maskClassName="blurred-mask"
                 onIndexChange={(index) => {
 
-                    setActive(index);
+                    // setActive(index);
 
                     const box = document.querySelector('.PhotoView-Slider__BannerWrap') as HTMLImageElement;
                     if (!box) return

@@ -107,10 +107,7 @@ export const init = async (imagesSrc, index = 0) => {
             img.src = nextImage;
             await img.decode();
 
-            this.textures.texture1.setSource(img, () => {
-                this.plane.textures[1].resize();
-                this.textures.texture1.setScale(1, 1);
-            });
+            this.textures.texture1.setSource(img);
 
             this.plane.uniforms.progress.value = 0;
 
@@ -120,10 +117,8 @@ export const init = async (imagesSrc, index = 0) => {
                 value: 1,
                 duration: 0.7,
                 onComplete: () => {
-                    this.textures.texture0.setSource(img, () => {
-                        this.plane.textures[0].resize();
-                        this.textures.texture0.setScale(1, 1);
-                    });
+                    this.textures.texture0.setSource(img);
+                    this.plane.uniforms.resolution.value = [innerWidth, innerHeight];
 
                     this.plane.uniforms.progress.value = 0;
                     this.currentIndex = index;

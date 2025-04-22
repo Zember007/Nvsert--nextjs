@@ -320,11 +320,15 @@ input:-webkit-autofill {
     position: absolute;
     inset: 0;
     z-index: 0;
+    height: 100vh;
 }
 
 #wrap-texture-box {
     position: relative;
     z-index: 1;
+    width: 475px;
+    height: 677px;
+    overflow: hidden;
 }
 
 .plane {
