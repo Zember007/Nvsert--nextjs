@@ -109,6 +109,7 @@ export const init = async (imagesSrc, index = 0) => {
 
             this.textures.texture1.setSource(img, () => {
                 this.plane.textures[1].resize();
+                this.textures.texture1.setScale(1, 1);
             });
 
             this.plane.uniforms.progress.value = 0;
@@ -121,6 +122,7 @@ export const init = async (imagesSrc, index = 0) => {
                 onComplete: () => {
                     this.textures.texture0.setSource(img, () => {
                         this.plane.textures[0].resize();
+                        this.textures.texture0.setScale(1, 1);
                     });
 
                     this.plane.uniforms.progress.value = 0;
