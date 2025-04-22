@@ -35,7 +35,7 @@ const AppMainDocuments = () => {
             speed={() => 300}
                 onIndexChange={(index) => {
 
-
+                    setActive(index)
 
                     const box = document.querySelector('.PhotoView-Slider__BannerWrap') as HTMLImageElement;
                     if (!box) return
