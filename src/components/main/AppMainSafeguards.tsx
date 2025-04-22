@@ -4,6 +4,10 @@ import { gsap } from "gsap";
 
 import SafeguardBlock from './elements/AppSafeguardBlock';
 import '@/assets/styles/sections/main/animation/skills.scss'
+import Img4 from '@/assets/images/safeguard/1.png'
+import Img3 from '@/assets/images/safeguard/2.png'
+import Img2 from '@/assets/images/safeguard/3.png'
+import Img1 from '@/assets/images/safeguard/4.png'
 
 
 
@@ -16,6 +20,7 @@ const AppMainSafeguards = () => {
   const guarantees = [
 
     {
+      img: Img1,
       title: 'Гарантии и честность',
       items: [
         {
@@ -34,6 +39,7 @@ const AppMainSafeguards = () => {
     },
 
     {
+      img: Img2,
       title: 'Надёжность и защита',
       items: [
         {
@@ -52,6 +58,7 @@ const AppMainSafeguards = () => {
     },
 
     {
+      img: Img3,
       title: 'Оперативность и удобство',
       items: [
         {
@@ -69,6 +76,7 @@ const AppMainSafeguards = () => {
       ]
     },
     {
+      img: Img4,
       title: 'Поддержка после сертификации',
       items: [
         {
@@ -133,6 +141,7 @@ const AppMainSafeguards = () => {
             guarantees.map((item, index) => (
               <SafeguardBlock
                 key={index}
+                img={item.img}
                 index={index}
                 title={item.title}
                 items={item.items}

@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import { filterPrepositions } from '@/hook/filter';
 import { PhotoView } from '@/assets/lib/react-photo-view';
 import { useButton } from '@/hook/useButton';
-import { BounceEffect } from '@/hook/useBounce';
 import { useAnimation, motion } from "framer-motion";
 
 
@@ -18,16 +17,12 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
 
     const borderBounce = useRef(null);
     const photoRef = useRef(null);
-    const bounceEl = useRef([]);
+
     const containerPhotoRef = useRef(null);
     const LinkServiceRef = useRef(null);
     const smallPhotoRef = useRef(null);
     const [photoWidth, setPhotoWidth] = useState(0);
 
-
-    const setBounceEl = (el) => {
-        bounceEl.current.push(el)
-    }
 
     useEffect(() => {
         const container = containerPhotoRef.current

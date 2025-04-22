@@ -1,7 +1,7 @@
 import { Curtains, Plane, Texture } from "curtainsjs";
 import gsap from "gsap";
 
-export const init = (imagesSrc, index = 0) => {
+export const init = async (imagesSrc, index = 0) => {
     class WEBGL {
         constructor(set) {
             this.canvas = set.canvas;
@@ -23,27 +23,13 @@ export const init = (imagesSrc, index = 0) => {
                 fragmentShader: fs,
                 widthSegments: 40,
                 heightSegments: 40,
+                width: 475, // ← фиксированные размеры
+                height: 677,
                 uniforms: {
-                    time: {
-                        name: "uTime",
-                        type: "1f",
-                        value: 0
-                    },
-                    mousepos: {
-                        name: "uMouse",
-                        type: "2f",
-                        value: [0, 0]
-                    },
-                    resolution: {
-                        name: "uReso",
-                        type: "2f",
-                        value: [innerWidth, innerHeight]
-                    },
-                    progress: {
-                        name: "uProgress",
-                        type: "1f",
-                        value: 0
-                    }
+                    time: { name: "uTime", type: "1f", value: 0 },
+                    mousepos: { name: "uMouse", type: "2f", value: [0, 0] },
+                    resolution: { name: "uReso", type: "2f", value: [innerWidth, innerHeight] },
+                    progress: { name: "uProgress", type: "1f", value: 0 }
                 }
             };
         }
@@ -54,22 +40,39 @@ export const init = (imagesSrc, index = 0) => {
             img.src = url;
             await img.decode();
 
-            const texture = new Texture(this.webGLCurtain, {
+            return new Texture(this.webGLCurtain, {
                 sampler: samplerName,
                 fromTexture: img
             });
-
-            return texture;
         }
 
         async initPlane(index = 0) {
-            const div = document.querySelector(".plane");
+            const box = document.getElementById('wrap-texture-box');
+            box.innerHTML = ""; // ← очищаем перед созданием новой плоскости
 
-            const img0 = div.querySelector('[data-sampler="texture0"]');
+            const div = document.createElement("div");
+            div.className = "plane";
+            box.appendChild(div);
+
+            const texture0 = await this.loadTexture(this.imagesSrc[index], "texture0");
+            const texture1 = await this.loadTexture(this.imagesSrc[index + 1] || this.imagesSrc[0], "texture1");
+            const map = await this.loadTexture("https://i.ibb.co/n8MjCrk/seed129873123-scale10-fbm-worley-quintic-octaves2.jpg", "map");
+
+            const img0 = document.createElement("img");
+            img0.setAttribute("data-sampler", "texture0");
             img0.src = this.imagesSrc[index];
 
-            const img1 = div.querySelector('[data-sampler="texture1"]');
+            const img1 = document.createElement("img");
+            img1.setAttribute("data-sampler", "texture1");
             img1.src = this.imagesSrc[index + 1] || this.imagesSrc[0];
+
+            const mapImg = document.createElement("img");
+            mapImg.setAttribute("data-sampler", "map");
+            mapImg.src = "https://i.ibb.co/n8MjCrk/seed129873123-scale10-fbm-worley-quintic-octaves2.jpg";
+
+            div.appendChild(img0);
+            div.appendChild(img1);
+            div.appendChild(mapImg);
 
             this.plane = new Plane(this.webGLCurtain, div, this.params);
 
@@ -77,6 +80,9 @@ export const init = (imagesSrc, index = 0) => {
                 this.textures.texture0 = this.plane.textures[0];
                 this.textures.texture1 = this.plane.textures[1];
                 this.textures.map = this.plane.textures[2];
+                this.textures.texture0.setScale(1, 1);
+                this.textures.texture1.setScale(1, 1);
+                this.textures.map.setScale(1, 1);
                 this.update();
             });
         }
@@ -86,23 +92,24 @@ export const init = (imagesSrc, index = 0) => {
                 this.plane.uniforms.time.value += 0.01;
                 this.plane.uniforms.resolution.value = [innerWidth, innerHeight];
             });
+
+            window.addEventListener("resize", () => {
+                this.plane.uniforms.resolution.value = [innerWidth, innerHeight];
+            });
         }
 
         async goToIndex(index) {
-            if (
-                index < 0 ||
-                index >= this.imagesSrc.length ||
-                index === this.currentIndex
-            ) return;
+            if (index < 0 || index >= this.imagesSrc.length || index === this.currentIndex) return;
 
             const nextImage = this.imagesSrc[index];
-
             const img = new Image();
             img.crossOrigin = "anonymous";
             img.src = nextImage;
             await img.decode();
 
-            this.textures.texture1.setSource(img);
+            this.textures.texture1.setSource(img, () => {
+                this.plane.textures[1].resize();
+            });
 
             this.plane.uniforms.progress.value = 0;
 
@@ -112,7 +119,10 @@ export const init = (imagesSrc, index = 0) => {
                 value: 1,
                 duration: 0.7,
                 onComplete: () => {
-                    this.textures.texture0.setSource(img);
+                    this.textures.texture0.setSource(img, () => {
+                        this.plane.textures[0].resize();
+                    });
+
                     this.plane.uniforms.progress.value = 0;
                     this.currentIndex = index;
                     this.gsapAnimation = null;
@@ -126,10 +136,12 @@ export const init = (imagesSrc, index = 0) => {
         imagesSrc
     });
 
-    webgl.initPlane(index);
+    await webgl.initPlane(index);
+
 
     return webgl;
 };
+
 
 const fs = `
    #ifdef GL_ES

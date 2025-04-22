@@ -331,6 +331,11 @@ input:-webkit-autofill {
     width: 475px;
     height: 677px;
     overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
 }
 
 .plane img {

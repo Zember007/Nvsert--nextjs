@@ -1,4 +1,4 @@
-export function init(imagesSrc: any, index?: number): {
+export function init(imagesSrc: any, index?: number): Promise<{
     canvas: any;
     imagesSrc: any;
     webGLCurtain: Curtains;
@@ -15,6 +15,8 @@ export function init(imagesSrc: any, index?: number): {
         fragmentShader: string;
         widthSegments: number;
         heightSegments: number;
+        width: number;
+        height: number;
         uniforms: {
             time: {
                 name: string;
@@ -42,7 +44,7 @@ export function init(imagesSrc: any, index?: number): {
     initPlane(index?: number): Promise<void>;
     update(): void;
     goToIndex(index: any): Promise<void>;
-};
+}>;
 import { Curtains } from "curtainsjs";
 import { Plane } from "curtainsjs";
 import { Texture } from "curtainsjs";

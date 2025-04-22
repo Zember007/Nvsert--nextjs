@@ -218,6 +218,7 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
         onIndexChange(enableLoop ? realLoopIndex : limitIndex);
 
         indexController?.goToIndex(enableLoop ? realLoopIndex : limitIndex);
+        
 
       }
     },
@@ -351,11 +352,11 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
   useEffect(() => {
     if (!realVisible || !images) return;
 
-    requestAnimationFrame(() => {
+    requestAnimationFrame(async() => {
       const canvasEl = document.getElementById('canvas');
       if (!canvasEl) return;
 
-      const webgl = init(images.map((item: DataType) => item.src), index);
+      const webgl = await init(images.map((item: DataType) => item.src), index);
       setIndexController(webgl);
     });
   }, [realVisible, images]);
@@ -431,11 +432,6 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
       <div id="wrap-texture">
         <div id="canvas"></div>
         <div id="wrap-texture-box">
-          <div className="plane">
-            <img data-sampler="texture0" />
-            <img data-sampler="texture1" />
-            <img data-sampler="map" src="https://i.ibb.co/n8MjCrk/seed129873123-scale10-fbm-worley-quintic-octaves2.jpg" />
-          </div>
         </div>
       </div>
       {/* {adjacentImages.map((item: DataType, currentIndex) => {
