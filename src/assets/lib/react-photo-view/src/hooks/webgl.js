@@ -16,7 +16,7 @@ export const init = (imagesSrc, index = 0) => {
             };
 
             this.currentIndex = 0;
-            this.isTransitioning = false;
+            this.gsapAnimation = null;
 
             this.params = {
                 vertexShader: vs,
@@ -105,11 +105,9 @@ export const init = (imagesSrc, index = 0) => {
             if (
                 index < 0 ||
                 index >= this.imagesSrc.length ||
-                index === this.currentIndex ||
-                this.isTransitioning
+                index === this.currentIndex
             ) return;
         
-            this.isTransitioning = true;
         
             const nextImage = this.imagesSrc[index];
         
@@ -124,8 +122,12 @@ export const init = (imagesSrc, index = 0) => {
             });
         
             this.plane.uniforms.progress.value = 0;
+
+            if (this.gsapAnimation) {
+                this.gsapAnimation.kill(); 
+            }
         
-            await gsap.to(this.plane.uniforms.progress, {
+            this.gsapAnimation = gsap.to(this.plane.uniforms.progress, {
                 value: 1,
                 duration: 0.7,
                 onComplete: () => {
@@ -135,8 +137,8 @@ export const init = (imagesSrc, index = 0) => {
                     });
         
                     this.plane.uniforms.progress.value = 0;
-                    this.currentIndex = index;
-                    this.isTransitioning = false;
+                    this.currentIndex = index;   
+                    this.gsapAnimation = null;              
                 }
             });
         }

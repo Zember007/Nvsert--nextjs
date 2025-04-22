@@ -162,8 +162,7 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
     updateState(initialState);
   }, [realVisible]);
 
-  const [enableChange, setEnableChange] = useState(true);
-  const [timeoutIdChange, setTimeoutIdChange] = useState<NodeJS.Timeout | null>(null);
+
 
   const { close, changeIndex } = useMethods({
     close(evt?: React.MouseEvent | React.TouchEvent) {
@@ -178,10 +177,6 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
       onClose(evt);
     },
     changeIndex(nextIndex: number, isPause: boolean = false) {
-
-      if (timeoutIdChange) {
-        clearTimeout(timeoutIdChange);
-      }
 
       const currentIndex = enableLoop ? virtualIndexRef.current + (nextIndex - index) : nextIndex;
       const max = imageLength - 1;
@@ -221,18 +216,9 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
       const realLoopIndex = nextIndex < 0 ? max : nextIndex > max ? 0 : nextIndex;
       if (onIndexChange) {
         onIndexChange(enableLoop ? realLoopIndex : limitIndex);
-        if (enableChange) {
-          indexController?.goToIndex(enableLoop ? realLoopIndex : limitIndex);
-          setEnableChange(false)
-          setTimeoutIdChange(setTimeout(() => {
-            setEnableChange(true)
-          }, 700))
-        } else {
-          setTimeoutIdChange(setTimeout(() => {
-            indexController?.goToIndex(enableLoop ? realLoopIndex : limitIndex);
-            setEnableChange(true)
-          }, 700))
-        }
+
+        indexController?.goToIndex(enableLoop ? realLoopIndex : limitIndex);
+
       }
     },
   });

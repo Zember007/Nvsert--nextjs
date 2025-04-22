@@ -9,7 +9,7 @@ export function init(imagesSrc: any, index?: number): {
         map: any;
     };
     currentIndex: number;
-    isTransitioning: boolean;
+    gsapAnimation: any;
     params: {
         vertexShader: string;
         fragmentShader: string;
