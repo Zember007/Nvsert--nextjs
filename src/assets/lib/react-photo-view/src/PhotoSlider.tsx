@@ -200,7 +200,6 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
       });
       // 当前索引
 
-      console.log('changeIndex');
 
       updateState({
         touched: false,
@@ -216,11 +215,8 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
       const realLoopIndex = nextIndex < 0 ? max : nextIndex > max ? 0 : nextIndex;
       if (onIndexChange) {
         onIndexChange(enableLoop ? realLoopIndex : limitIndex);
-
-        indexController?.goToIndex(enableLoop ? realLoopIndex : limitIndex);
-        
-
       }
+      // indexController?.goToIndex(enableLoop ? realLoopIndex : limitIndex);
     },
   });
 
@@ -349,17 +345,23 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
   // 截取相邻的图片
   const adjacentImages = useAdjacentImages(images, index, enableLoop);
 
+  // useEffect(() => {
+  //   if (!realVisible || !images) return;
+
+  //   requestAnimationFrame(async() => {
+  //     const canvasEl = document.getElementById('canvas');
+  //     if (!canvasEl) return;
+
+  //     const webgl = await init(images.map((item: DataType) => item.src), index);
+  //     setIndexController(webgl);
+  //   });
+  // }, [realVisible, images]);
+
   useEffect(() => {
-    if (!realVisible || !images) return;
-
-    requestAnimationFrame(async() => {
-      const canvasEl = document.getElementById('canvas');
-      if (!canvasEl) return;
-
-      const webgl = await init(images.map((item: DataType) => item.src), index);
-      setIndexController(webgl);
-    });
-  }, [realVisible, images]);
+    // document.querySelectorAll('.PhotoView__Photo').forEach((el) => {
+    //   el.classList.remove('slider-transitions')
+    // })
+  },[index])
 
   if (!realVisible) {
     return null;
@@ -429,12 +431,12 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
           </div>
         </div>
       )}
-      <div id="wrap-texture">
+      {/* <div id="wrap-texture">
         <div id="canvas"></div>
         <div id="wrap-texture-box">
         </div>
-      </div>
-      {/* {adjacentImages.map((item: DataType, currentIndex) => {
+      </div> */}
+      {adjacentImages.map((item: DataType, currentIndex) => {
         // 截取之前的索引位置
         const nextIndex =
           !enableLoop && index === 0 ? index + currentIndex : virtualIndexRef.current - 1 + currentIndex;
@@ -464,17 +466,27 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
             expose={updateState}
           />
         );
-      })} */}
+      })}
       {
         !isTouchDevice && bannerVisible && (
           <>
             {(enableLoop || index !== 0) && (
-              <div className="PhotoView-Slider__ArrowLeft" onClick={() => changeIndex(index - 1)}>
+              <div className="PhotoView-Slider__ArrowLeft" onClick={() => {
+                document.querySelectorAll('.PhotoView__Photo').forEach((el) => {
+                  el.classList.add('slider-transitions')
+                })
+                changeIndex(index - 1)
+              }}>
                 <ArrowLeft />
               </div>
             )}
             {(enableLoop || index + 1 < imageLength) && (
-              <div className="PhotoView-Slider__ArrowRight" onClick={() => changeIndex(index + 1)}>
+              <div className="PhotoView-Slider__ArrowRight" onClick={() => {
+                document.querySelectorAll('.PhotoView__Photo').forEach((el) => {
+                  el.classList.add('slider-transitions')
+                })
+                changeIndex(index + 1)
+              }}>
                 <ArrowRight />
               </div>
             )}
