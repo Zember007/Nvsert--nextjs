@@ -28,7 +28,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
           <div className="overflow-hidden rounded-[4px]  w-full relative">
             <p className="text-[24px] z-[2] text-[#FFF] backdrop-blur-[4px] p-[10px] rounded-[4px] shadow-[0px_0px_4px_0px_#00000033] bg-[#FFFFFF1A] font-bold absolute top-[15px] left-[15px]"
               style={{
-                maxWidth: (index === 0 ? '300' : index === 1 ? '200' : '220') + 'px'
+                maxWidth: (index === 3 ? '230' : '207') + 'px'
               }}
             >{filterPrepositions(title)}</p>
             <Image
