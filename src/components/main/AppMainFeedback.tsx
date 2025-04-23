@@ -58,6 +58,9 @@ const AppMainFeedback = () => {
 
                 bounds[index] = wrapper.getBoundingClientRect()
 
+                initialSliderTime[0] = loop.time();
+                initialSliderTime[1] = loop1.time();
+
                 wrapper.addEventListener("mouseenter", (e: any) => {
                     bounds[index] = wrapper.getBoundingClientRect();
                     initialCursorX = e.clientX - bounds[index].left;
@@ -120,7 +123,7 @@ const AppMainFeedback = () => {
                 target1 = current1 + diff1;
 
                 gsap.to(loop1, {
-                    totalTime: target,
+                    totalTime: target1,
                     duration: 1.2,
                     ease: "power4"
                 });
