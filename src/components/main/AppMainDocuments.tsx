@@ -33,6 +33,7 @@ const AppMainDocuments = () => {
             </div>
             <PhotoProvider maskOpacity={0.4} maskClassName="blurred-mask"
                 speed={() => 50}
+                easing={() => 'linear'}
                 onIndexChange={(index) => {
 
                     setActive(index)
