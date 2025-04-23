@@ -314,6 +314,21 @@ input:-webkit-autofill:focus {
 
 }
 
+.main-form {
+  position: relative;
+  overflow: hidden;
+  .active {
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+    background: #202020;
+  }
+}
+
 @keyframes bounce-error {
   0% {
     transform: translateY(-50px);
