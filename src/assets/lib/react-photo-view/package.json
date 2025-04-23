@@ -44,6 +44,8 @@
   ],
   "dependencies": {
     "curtainsjs": "^8.1.6",
-    "gsap": "^3.12.7"
+    "gsap": "^3.12.7",
+    "react-slick": "^0.30.3",
+    "slick-carousel": "^1.8.1"
   }
 }

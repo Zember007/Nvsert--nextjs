@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import { filterPrepositions } from '@/hook/filter';
-import { BounceEffect } from '@/hook/useBounce';
+
 interface GuaranteeCardProps {
   img: StaticImageData;
   title: string;
@@ -23,18 +23,18 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
     bounceEl.current.push(el)
   }
 
-  const MouseEnter = (index: any) => {
-    const el = bounceEl.current[index]
-    if (!el) return
+  // const MouseEnter = (index: any) => {
+  //   const el = bounceEl.current[index]
+  //   if (!el) return
 
-    BounceEffect(el, {
-      startPosition: "0",
-      endPosition: `${10}px`,
-      duration: 300,
-      easing: "ease",
-      direction: 'vertical'
-    });
-  }
+  //   BounceEffect(el, {
+  //     startPosition: "0",
+  //     endPosition: `${10}px`,
+  //     duration: 300,
+  //     easing: "ease",
+  //     direction: 'vertical'
+  //   });
+  // }
 
   return (
     <div className={`hover:z-[10000] relative card-wrap h-[540px] w-full translate-y-[0] ${!isVisible && '!translate-y-[30px] opacity-0'} transition-all duration-500 `}>
@@ -58,7 +58,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
           <div className="px-[15px] flex flex-col gap-[20px]">
             {items.map((item, index) =>
               <div
-                onMouseEnter={() => { MouseEnter(index) }}
+                // onMouseEnter={() => { MouseEnter(index) }}
                 key={index} className="group/stroke flex flex-col">
                 <div className="flex gap-[5px]">
                   <svg

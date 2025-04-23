@@ -32,7 +32,7 @@ const AppMainDocuments = () => {
 
             </div>
             <PhotoProvider maskOpacity={0.4} maskClassName="blurred-mask"
-            speed={() => 300}
+                speed={() => 300}
                 onIndexChange={(index) => {
 
                     setActive(index)
@@ -94,7 +94,7 @@ const AppMainDocuments = () => {
                                         // Обработка клика
                                         portal.addEventListener('click', (e) => {
                                             const target = e.target as Element;
-                                            if (target?.closest('.PhotoView-Slider__BannerRight') || target?.closest('.PhotoView__Photo') || target?.closest('.PhotoView-Slider__ArrowLeft') || target?.closest('.PhotoView-Slider__ArrowRight') ) return
+                                            if (target?.closest('.PhotoView-Slider__BannerRight') || target?.closest('.PhotoView__Photo') || target?.closest('.PhotoView-Slider__ArrowLeft') || target?.closest('.PhotoView-Slider__ArrowRight')) return
 
                                             const rect = portal.getBoundingClientRect();
                                             const cursorX = e.clientX - rect.left;
@@ -102,10 +102,10 @@ const AppMainDocuments = () => {
 
                                             // Симулируем клик на соответствующую стрелку
                                             if (cursorX <= halfWidth) {
-                                                arrowLeft.click();                                            
+                                                arrowLeft.click();
                                             } else {
-                                                arrowRight.click();                                        
-                                                
+                                                arrowRight.click();
+
                                             }
                                         });
 

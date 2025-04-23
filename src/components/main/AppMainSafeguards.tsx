@@ -4,10 +4,10 @@ import { gsap } from "gsap";
 
 import SafeguardBlock from './elements/AppSafeguardBlock';
 import '@/assets/styles/sections/main/animation/skills.scss'
-import Img4 from '@/assets/images/safeguard/1.png'
-import Img3 from '@/assets/images/safeguard/2.png'
-import Img2 from '@/assets/images/safeguard/3.png'
-import Img1 from '@/assets/images/safeguard/4.png'
+import Img1 from '@/assets/images/safeguard/1.png'
+import Img2 from '@/assets/images/safeguard/2.png'
+import Img3 from '@/assets/images/safeguard/3.png'
+import Img4 from '@/assets/images/safeguard/4.png'
 
 
 
