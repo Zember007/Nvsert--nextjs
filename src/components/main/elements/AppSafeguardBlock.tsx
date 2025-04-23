@@ -40,11 +40,11 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
     <div className={`hover:z-[10000] relative card-wrap h-[540px] w-full translate-y-[0] ${!isVisible && '!translate-y-[30px] opacity-0'} transition-all duration-500 `}>
       <div
         className="bg-[#FFF] hover:bg-[#F5F5F5] card border-[#CCCCCC] hover:border-[#34446D] group h-full border border-solid rounded-[8px] backdrop-blur-[4px] flex flex-col gap-[29px] justify-between transition-all duration-300">
-        <div className="flex flex-col gap-[30px] h-full">
+        <div className="flex flex-col gap-[20px] h-full">
           <div className="overflow-hidden rounded-[4px] h-[200px]  w-full relative">
-            <p className="text-[24px] z-[2] text-[#FFF] backdrop-blur-[4px] p-[10px] rounded-[4px] shadow-[0px_0px_4px_0px_#00000033] bg-[#FFFFFF1A] font-bold absolute top-[15px] left-[15px]"
+            <p className="text-[22px] z-[2] text-[#FFF] backdrop-blur-[4px] p-[10px] rounded-[4px] shadow-[0px_0px_4px_0px_#00000033] bg-[#FFFFFF1A] font-bold absolute top-[15px] left-[15px]"
               style={{
-                maxWidth: (index === 3 ? '230' : '207') + 'px'
+                maxWidth: (index === 3 ? '220' : '200') + 'px'
               }}
             >{filterPrepositions(title)}</p>
             <Image
@@ -61,7 +61,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
                 // onMouseEnter={() => { MouseEnter(index) }}
                 key={index} className={`group/stroke flex flex-col ${index == items.length - 1 ? 'grow' : 'pb-[20px]'}`}>
                 <div className="flex justify-between gap-[5px]">
-                  <p className='text-[20px] font-bold  group-hover/stroke:text-[#34446D] transition-all duration-300'>{filterPrepositions(item.subtitle)}</p>
+                  <p className='text-[18px] font-bold  group-hover/stroke:text-[#34446D] transition-all duration-300'>{filterPrepositions(item.subtitle)}</p>
                   <div className="min-w-[16px] h-[20px] flex items-end">
                     <svg
                       className={`rotate-[180deg] group-hover/stroke:rotate-[0deg] group-hover/stroke:*:stroke-[#34446D] *:transition-all *:duration-300 transition-all duration-300`}
