@@ -95,7 +95,7 @@ const AppMainDocuments = () => {
                                         // Обработка клика
                                         portal.addEventListener('click', (e) => {
                                             const target = e.target as Element;
-                                            if (target?.closest('.PhotoView-Slider__BannerRight') || target?.closest('.PhotoView__Photo') || target?.closest('.PhotoView-Slider__ArrowLeft') || target?.closest('.PhotoView-Slider__ArrowRight')) return
+                                            if (target?.closest('.PhotoView-Slider__BannerRight') || target?.closest('.PhotoView-Slider__ArrowLeft') || target?.closest('.PhotoView-Slider__ArrowRight')) return
 
                                             const rect = portal.getBoundingClientRect();
                                             const cursorX = e.clientX - rect.left;

@@ -59,7 +59,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
             {items.map((item, index) =>
               <div
                 // onMouseEnter={() => { MouseEnter(index) }}
-                key={index} className={`group/stroke flex flex-col ${index == items.length - 1 ? 'grow' : 'mb-[20px]'}`}>
+                key={index} className={`group/stroke flex flex-col ${index == items.length - 1 ? 'grow' : 'pb-[20px]'}`}>
                 <div className="flex justify-between gap-[5px]">
                   <p className='text-[20px] font-bold  group-hover/stroke:text-[#34446D] transition-all duration-300'>{filterPrepositions(item.subtitle)}</p>
                   <div className="min-w-[16px] h-[20px] flex items-end">
@@ -77,7 +77,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
                     ref={(el) => setBounceEl(el)}
                     className={`list-disc leading-[140%] pl-[35px] *:*:text-[16px] pt-[5px] overflow-hidden transition-all duration-300`}>
 
-                    <li className='duration-500 transition-all opacity-0 translate-y-[20px] group-hover/stroke:opacity-100 group-hover/stroke:translate-y-[0] ' key={index}>
+                    <li className='will-change-transform duration-500 transition-all opacity-0 translate-y-[20px] group-hover/stroke:opacity-100 group-hover/stroke:translate-y-[0] ' key={index}>
                       <p >{filterPrepositions(item.text)}</p>
                     </li>
 
