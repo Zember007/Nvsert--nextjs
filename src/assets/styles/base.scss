@@ -358,30 +358,30 @@ input:-webkit-autofill {
 
     30% {
         filter: url(#blur2);
-        transform: scale(1, 0.93);
+        transform: scale(1, 0.95);
     }
 
     45% {
         filter: url(#blur3);
-        transform: scale(1.1, 0.9);
+        transform: scale(1.1, 0.93);
     }
 
     60% {
         filter: url(#blur4);
-        transform: scale(1.2, 0.88);
+        transform: scale(1.15, 0.91);
     }
 
     75%,
     100% {
         filter: url(#blur5);
-        transform: scale(1.35, 0.85);
+        transform: scale(1.2, 0.9);
     }
 }
 
 .slider-transitions {
     animation:
-        motion-blur 0.2s linear forwards,
-        motion-blur 0.2s linear reverse forwards 0.2s;
+        motion-blur 0.1s linear forwards,
+        motion-blur 0.1s linear reverse forwards 0.1s;
 }
 
 
