@@ -60,7 +60,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
               <div
                 // onMouseEnter={() => { MouseEnter(index) }}
                 key={index} className={`group/stroke flex flex-col ${index == items.length - 1 && 'grow'}`}>
-                <div className="flex justify-between">
+                <div className="flex justify-between gap-[5px]">
                   <p className='text-[20px] font-bold  group-hover/stroke:text-[#34446D] transition-all duration-300'>{filterPrepositions(item.subtitle)}</p>
                   <div className="min-w-[16px] h-[20px] flex items-end">
                     <svg
