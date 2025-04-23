@@ -76,7 +76,9 @@ const AppInput = ({ title,disable,fail,message = true, inputName, type, required
                         if(onBlur) {
                             onBlur();
                         }
-                        e.target.value = e.target.value+' '}}
+                        if(e.target.value && e.target.value !== '') {
+                            e.target.value = e.target.value+' '
+                        }}}
                 />
                 <span className={`field__title ${(errors[inputName] ) && '!text-[#FF3030]'} ${classNameTitle}`}>
                     {title}

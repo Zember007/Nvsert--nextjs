@@ -450,8 +450,8 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
               speed={currentSpeed}
               easing={currentEasing}
               visible={visible}
-              onReachMove={handleReachMove}
-              onReachUp={handleReachUp}
+              // onReachMove={handleReachMove}
+              // onReachUp={handleReachUp}
               onPhotoTap={() => handlePhotoTap(photoClosable)}
               onMaskTap={() => handlePhotoTap(maskClosable)}
               wrapClassName={photoWrapClassName}
