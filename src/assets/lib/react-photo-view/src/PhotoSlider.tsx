@@ -357,11 +357,12 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
   //   });
   // }, [realVisible, images]);
 
-  // useEffect(() => {
-  //   document.querySelectorAll('.PhotoView__Photo').forEach((el) => {
-  //     el.classList.remove('slider-transitions')
-  //   })
-  // },[index])
+  useEffect(() => {
+    setTimeout(() => {
+      document.querySelector('.Slider_scale')?.classList.remove('slider-transitions')
+    },100)
+
+  },[index])
 
   if (!realVisible) {
     return null;
@@ -436,45 +437,45 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
         <div id="wrap-texture-box">
         </div>
       </div> */}
-      {adjacentImages.map((item: DataType, currentIndex) => {
-        // 截取之前的索引位置
-        const nextIndex =
-          !enableLoop && index === 0 ? index + currentIndex : virtualIndexRef.current - 1 + currentIndex;
+      <div className="Slider_scale">
+        {adjacentImages.map((item: DataType, currentIndex) => {
+          // 截取之前的索引位置
+          const nextIndex =
+            !enableLoop && index === 0 ? index + currentIndex : virtualIndexRef.current - 1 + currentIndex;
 
-        return (
-          <PhotoBox
-            key={enableLoop ? `${item.key}/${item.src}/${nextIndex}` : item.key}
-            item={item}
-            speed={currentSpeed}
-            easing={currentEasing}
-            visible={visible}
-            onReachMove={handleReachMove}
-            onReachUp={handleReachUp}
-            onPhotoTap={() => handlePhotoTap(photoClosable)}
-            onMaskTap={() => handlePhotoTap(maskClosable)}
-            wrapClassName={photoWrapClassName}
-            className={photoClassName}
-            style={{
-              left: `${(innerWidth + horizontalOffset) * nextIndex}px`,
-              transform: `translate3d(${x}px, 0px, 0)`,
-              transition: touched || pause ? undefined : `transform ${slideSpeed}ms ${slideEasing}`,
-            }}
-            loadingElement={loadingElement}
-            brokenElement={brokenElement}
-            onPhotoResize={handleResize}
-            isActive={virtualIndexRef.current === nextIndex}
-            expose={updateState}
-          />
-        );
-      })}
+          return (
+            <PhotoBox
+              key={enableLoop ? `${item.key}/${item.src}/${nextIndex}` : item.key}
+              item={item}
+              speed={currentSpeed}
+              easing={currentEasing}
+              visible={visible}
+              onReachMove={handleReachMove}
+              onReachUp={handleReachUp}
+              onPhotoTap={() => handlePhotoTap(photoClosable)}
+              onMaskTap={() => handlePhotoTap(maskClosable)}
+              wrapClassName={photoWrapClassName}
+              className={photoClassName}
+              style={{
+                left: `${(innerWidth + horizontalOffset) * nextIndex}px`,
+                transform: `translate3d(${x}px, 0px, 0)`,
+                transition: touched || pause ? undefined : `transform ${slideSpeed}ms ${slideEasing}`,
+              }}
+              loadingElement={loadingElement}
+              brokenElement={brokenElement}
+              onPhotoResize={handleResize}
+              isActive={virtualIndexRef.current === nextIndex}
+              expose={updateState}
+            />
+          );
+        })}
+      </div>
       {
         !isTouchDevice && bannerVisible && (
           <>
             {(enableLoop || index !== 0) && (
               <div className="PhotoView-Slider__ArrowLeft" onClick={() => {
-                document.querySelectorAll('.PhotoView__Photo').forEach((el) => {
-                  el.classList.add('slider-transitions')
-                })
+                document.querySelector('.Slider_scale')?.classList.add('slider-transitions')
                 changeIndex(index - 1)
               }}>
                 <ArrowLeft />
@@ -482,9 +483,7 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
             )}
             {(enableLoop || index + 1 < imageLength) && (
               <div className="PhotoView-Slider__ArrowRight" onClick={() => {
-                document.querySelectorAll('.PhotoView__Photo').forEach((el) => {
-                  el.classList.add('slider-transitions')
-                })
+                document.querySelector('.Slider_scale')?.classList.add('slider-transitions')
                 changeIndex(index + 1)
               }}>
                 <ArrowRight />

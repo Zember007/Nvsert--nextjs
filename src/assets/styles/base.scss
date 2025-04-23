@@ -32,6 +32,10 @@
     box-shadow: 0px 0px 10px 0px #000000CC;
 }
 
+.PhotoView__PhotoWrap {
+    height: 100vh !important;
+}
+
 
 
 .PhotoView-Slider__BannerRight {
@@ -378,10 +382,15 @@ input:-webkit-autofill {
     }
 }
 
-.slider-transitions {
-    animation:
-        motion-blur 0.1s linear forwards,
-        motion-blur 0.1s linear reverse forwards 0.1s;
+// .slider-transitions {
+//     animation:
+//         motion-blur 0.1s linear forwards,
+//         motion-blur 0.4s linear reverse forwards 0.1s;
+// }
+
+.Slider_scale {
+    will-change: transform;
+
 }
 
 
