@@ -380,43 +380,9 @@ input:-webkit-autofill {
 
 .slider-transitions {
     animation:
-        motion-blur 0.1s linear forwards,
-        motion-blur 0.3s linear reverse forwards 0.1s;
+        motion-blur 0.08s linear forwards,
+        motion-blur 0.08s linear reverse forwards 0.08s;
 }
 
 
-.fullscreen-slider {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #000;
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .slick-list {
-    height: 100%;
-    display: flex;
-    align-items: center;
-  }
-  
-  .slick-slide {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    padding: 0 20px;
-  }
-  
-  .slide {
-    background: #333;
-    color: #fff;
-    padding: 40px;
-    border-radius: 12px;
-    min-width: 300px;
-  }
   

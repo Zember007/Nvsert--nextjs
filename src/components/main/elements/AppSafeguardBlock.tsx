@@ -60,14 +60,14 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
               <div
                 // onMouseEnter={() => { MouseEnter(index) }}
                 key={index} className={`group/stroke flex flex-col ${index == items.length - 1 && 'grow'}`}>
-                <div className="flex gap-[5px]">
+                <div className="flex justify-between">
+                  <p className='text-[20px] font-bold  group-hover/stroke:text-[#34446D] transition-all duration-300'>{filterPrepositions(item.subtitle)}</p>
                   <svg
                     className={`rotate-[180deg] group-hover/stroke:rotate-[0deg] group-hover/stroke:*:stroke-[#34446D] *:transition-all *:duration-300 transition-all duration-300`}
-                    width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19 19L5 5" stroke={`black`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M5 13L5 5L13 5" stroke={`black`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    width="16" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 19L5 5" stroke={`#93969D`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M5 13L5 5L13 5" stroke={`#93969D`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <p className='text-[20px] font-bold  group-hover/stroke:text-[#34446D] transition-all duration-300'>{filterPrepositions(item.subtitle)}</p>
                 </div>
 
                 <div className="overflow-hidden transition-all duration-300 group-hover/stroke:max-h-[95px] max-h-0">

@@ -357,11 +357,11 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
   //   });
   // }, [realVisible, images]);
 
-  useEffect(() => {
-    document.querySelectorAll('.PhotoView__Photo').forEach((el) => {
-      el.classList.remove('slider-transitions')
-    })
-  },[index])
+  // useEffect(() => {
+  //   document.querySelectorAll('.PhotoView__Photo').forEach((el) => {
+  //     el.classList.remove('slider-transitions')
+  //   })
+  // },[index])
 
   if (!realVisible) {
     return null;
