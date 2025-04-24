@@ -1,15 +1,35 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { BounceEffect } from "@/hook/useBounce";
 import FlyingPlane from './elements/FlyingPlane';
 
-const FlightSuccess = ({close, small = false}: {close: () => void; small?:boolean}) => {
+const FlightSuccess = ({ close, small = false }: { close: () => void; small?: boolean }) => {
 
     const [time, setTime] = React.useState(10);
+    const bounceContent = useRef<HTMLDivElement | null >(null)
+    const bounceContent1 = useRef<HTMLDivElement | null >(null)
 
     useEffect(() => {
+        if (!bounceContent.current || !bounceContent1.current) return
+
+        BounceEffect(bounceContent.current, {
+            startPosition: "-100px",
+            endPosition: `-20px`,
+            duration: 300,
+            easing: "ease-in",
+            direction: 'vertical'
+        });
+        BounceEffect(bounceContent1.current, {
+            startPosition: "-100px",
+            endPosition: `-20px`,
+            duration: 300,
+            easing: "ease-in",
+            direction: 'vertical'
+        });
+
         const timer = setInterval(() => {
             setTime(prev => {
                 const num = prev - 1
-                if(num === 0) {
+                if (num === 0) {
                     clearInterval(timer)
                     close()
                 }
@@ -17,13 +37,13 @@ const FlightSuccess = ({close, small = false}: {close: () => void; small?:boolea
             });
         }, 1000);
         return () => clearInterval(timer);
-    },[])
+    }, [bounceContent])
 
     return (
-        <div className="active flex flex-col pt-[100px] items-center">
+        <div className="active  pt-[100px]">
             <button
-            onClick={() => {close()}}
-            className="close !top-[30px] !right-[30px]">
+                onClick={() => { close() }}
+                className="close !top-[30px] !right-[30px]">
                 <div className="in">
                     <div className="close-button-block"></div>
                     <div className="close-button-block"></div>
@@ -33,12 +53,19 @@ const FlightSuccess = ({close, small = false}: {close: () => void; small?:boolea
                     <div className="close-button-block"></div>
                 </div>
             </button>
-            <div className="flex flex-col gap-[20px] text-white text-center items-center">
-                <p className="text-[32px] tracking-[-0.03em]">Спасибо</p>
-                <p className="text-[20px]">Мы свяжемся с Вами <br /> в течение 10 минут!</p>
-            </div>
-            <div className={`${small ? 'top-[220px]' : 'top-[256px]'} left-0 right-0 absolute`}>
-                <FlyingPlane />
+            <div                
+                className="flex flex-col items-center">
+                <div
+                ref={bounceContent}
+                className="flex flex-col gap-[20px] text-white text-center items-center">
+                    <p className="text-[32px] tracking-[-0.03em]">Спасибо</p>
+                    <p className="text-[20px]">Мы свяжемся с Вами <br /> в течение 10 минут!</p>
+                </div>
+                <div
+                ref={bounceContent1}
+                className={`${small ? 'top-[220px]' : 'top-[256px]'} left-0 right-0 absolute`}>
+                    <FlyingPlane />
+                </div>
             </div>
             <p className={`text-[#A4A4A4] font-light text-[44px] rubik absolute ${small ? 'top-[30px] left-[30px]' : 'bottom-[30px] left-[50%] translate-x-[-50%]'}`}>{time}</p>
         </div>

@@ -52,26 +52,30 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                 setIsPhone(false);
                 setIsEmail(false);
                 // openDefaultModal('successMessage');
-                const myElement = document.getElementById('form-main')
-                if (myElement) {
-                    BounceEffect(myElement, {
-                        startPosition: "-0",
-                        endPosition: `${20}px`,
-                        duration: 300,
-                        easing: "ease-in-out",
-                        direction: 'vertical'
-                    });
-
-
-                    setSuccessMessageVisible(true)
-
-                }
+                successVisible()
 
             }
         } catch (error) {
             console.log(error);
         }
     };
+
+    const successVisible = () => {
+        const myElement = document.getElementById('form-main')
+        if (myElement) {
+            BounceEffect(myElement, {
+                startPosition: "-0",
+                endPosition: `${20}px`,
+                duration: 300,
+                easing: "ease-in-out",
+                direction: 'vertical'
+            });
+
+
+            setSuccessMessageVisible(true)
+
+        }
+    }
 
     const validContact = (value: string) => {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -198,6 +202,9 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
 
                         <div ref={setWrapperRef} className="tariff-wrap relative">
                             <button
+                                onClick={() => {
+                                    successVisible()
+                                }}
                                 type="submit"
                                 ref={setButtonRef}
                                 className=" group tariff s:mt-[1px] mt-[15px] bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[10px] justify-center p-[9px] rounded-[4px]"
