@@ -148,8 +148,8 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
     }, [isPhone, isEmail])
 
     return (
-        <div id="form-main" className='border-main main-form bg-[#00000080] py-[27px] pb-[30px] px-[48px] max-w-[420px] flex flex-col gap-[12px] rounded-[6px]'>
-            {successMessageVisible && <FlightSuccess  bg={'#202020'} close={() => { setSuccessMessageVisible(false) }} />}
+        <div id="form-main" className='border-main main-form bg-[#4b4b4b] py-[27px] pb-[30px] px-[48px] max-w-[420px] flex flex-col gap-[12px] rounded-[6px]'>
+            {successMessageVisible && <FlightSuccess  bg={'#4b4b4b'} close={() => { setSuccessMessageVisible(false) }} />}
             <span className='leading-[1] text-[#FFF] text-[32px] text-center tracking-[-0.03em]'>Оформить заявку</span>
             <AppValidationObserver methods={methods} onSubmit={onSubmit}>
                 {({ register, errors }) => (
