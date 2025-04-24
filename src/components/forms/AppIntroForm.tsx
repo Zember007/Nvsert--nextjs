@@ -59,12 +59,18 @@ const AppIntroForm = () => {
 
     const { reset } = methods;
 
-
-
-
     const [successMessageVisible, setSuccessMessageVisible] = useState(true);
 
+    const validContact = (value: string) => {
+        const phoneRegex = /^(?:\+7|8)?[\s(-]*\d[\s(-]*\d{2}[\s)-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}$/;
 
+        if ((!phoneRegex.test(value) )) {
+            setContactError(true)
+        } else {
+            setContactError(false)
+        }
+    }
+    const [contactError, setContactError] = useState(false);
     return (
         <div className='flex flex-col gap-[12px]'>
             {successMessageVisible && <FlightSuccess small={true} close={() => { setSuccessMessageVisible(false) }} />}
@@ -84,6 +90,8 @@ const AppIntroForm = () => {
                             title={'Телефон'}
                             inputName="Contact"
                             required={true}
+                            fail={contactError}
+                            onBlur={(value) => { validContact(value) }}
                         />
 
                         <div ref={setWrapperRef} className="tariff-wrap relative  mt-[24px]">

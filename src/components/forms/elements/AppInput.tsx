@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from "react-hook-form";
 
-const AppInput = ({ title,disable,fail,message = true, inputName, type, required, autocomplete, mask, className, classNameTitle, onBlur }: { onBlur?:() => void ,disable?:boolean,fail?:boolean, message?:boolean, title: string, inputName: string, type?: string, required?: boolean, autocomplete?: string, mask?: string, className?: string, classNameTitle?: string }) => {
+const AppInput = ({ title,disable,fail,message = true, inputName, type, required, autocomplete, mask, className, classNameTitle, onBlur }: { onBlur?:(value:string) => void ,disable?:boolean,fail?:boolean, message?:boolean, title: string, inputName: string, type?: string, required?: boolean, autocomplete?: string, mask?: string, className?: string, classNameTitle?: string }) => {
     const { register, formState: { errors, isSubmitted, submitCount }, setValue, clearErrors } = useFormContext();
 
     const formatPhoneNumber = (e: React.FormEvent<HTMLInputElement>) => {
@@ -74,7 +74,7 @@ const AppInput = ({ title,disable,fail,message = true, inputName, type, required
                     onFocus={() => {clearErrors(inputName)}}
                     onBlur={(e) => {
                         if(onBlur) {
-                            onBlur();
+                            onBlur(e.currentTarget.value);
                         }
                         if(e.target.value && e.target.value !== '') {
                             e.target.value = e.target.value+' '
