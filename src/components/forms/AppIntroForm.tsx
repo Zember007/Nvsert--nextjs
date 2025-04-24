@@ -90,7 +90,7 @@ const AppIntroForm = () => {
     }, [formRef, defaultModalActive])
     return (
         <div className='flex flex-col gap-[12px]'>
-            {successMessageVisible && <FlightSuccess small={true} close={() => { setSuccessMessageVisible(false) }} />}
+            {successMessageVisible && <FlightSuccess bg={'#4b4b4b'} small={true} close={() => { setSuccessMessageVisible(false) }} />}
             <span className='leading-[1] text-[#FFF] text-[32px] text-center tracking-[-0.03em]'>Заказать звонок</span>
             <div ref={formRef}>
                 <AppValidationObserver methods={methods} onSubmit={onSubmit}>

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { BounceEffect } from "@/hook/useBounce";
 import FlyingPlane from './elements/FlyingPlane';
 
-const FlightSuccess = ({ close, small = false }: { close: () => void; small?: boolean }) => {
+const FlightSuccess = ({bg, close, small = false }: { bg:string; close: () => void; small?: boolean }) => {
 
     const [time, setTime] = React.useState(10);
     const bounceContent = useRef<HTMLDivElement | null >(null)
@@ -40,7 +40,9 @@ const FlightSuccess = ({ close, small = false }: { close: () => void; small?: bo
     }, [bounceContent])
 
     return (
-        <div className="active  pt-[100px]">
+        <div className="active  pt-[100px]"
+        style={{background: bg}}
+        >
             <button
                 onClick={() => { close() }}
                 className="close !top-[30px] !right-[30px]">
