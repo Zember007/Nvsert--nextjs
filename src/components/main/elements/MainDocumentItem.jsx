@@ -95,7 +95,7 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
             if (!el) return;
 
             if (!isInViewport(el)) {
-                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                el.scrollIntoView({ behavior: 'smooth', block: index < 3 ? 'start' :index>13?'end' : 'center' });
               }
         }
     }, [active]);

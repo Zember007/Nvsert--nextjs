@@ -22,114 +22,113 @@ const AppMainFeedback = () => {
         const slides = gsap.utils.toArray('[data-slider="slide-feedback"]');
         const slides1 = gsap.utils.toArray('[data-slider="slide-feedback1"]');
         const loop: any = horizontalLoop(slides, {
-            paused: true,
+            paused: false,
+            draggable: true,
             offsetLeft: 0,
             repeat: -1,
             gap: 0
         });
 
         const loop1: any = horizontalLoop(slides1, {
-            paused: true,
+            paused: false,
+            draggable: true,
             offsetLeft: 0,
             repeat: -1,
             gap: 0,
-            onDragFunction: () => {
-
-            }
+            reversed: true
         });
+
 
 
         const nextButton = document.querySelector('[data-slider="feedback-next"]');
         const prevButton = document.querySelector('[data-slider="feedback-prev"]');
-        loop.next({ ease: "power3", duration: 0.725 })
-        loop1.next({ ease: "power3", duration: 0.725 })
 
 
 
-        const wrappers = document.querySelectorAll('.feedback-slider-container');
-        const wrapper = document.querySelector('.feedback-slider-box');
+//         const wrappers = document.querySelectorAll('.feedback-slider-container');
+//         const wrapper = document.querySelector('.feedback-slider-box');
 
-        if (wrappers.length && wrapper) {
+//         if (wrappers.length && wrapper) {
 
-            let bounds: any = [];
-            let initialCursorX = 0;
-            let initialSliderTime = [0, 0];
-            wrappers.forEach((wrapper, index) => {
+//             let bounds: any = [];
+//             let initialCursorX = 0;
+//             let initialSliderTime = [0, 0];
+//             wrappers.forEach((wrapper, index) => {
 
-                bounds[index] = wrapper.getBoundingClientRect()
+//                 bounds[index] = wrapper.getBoundingClientRect()
 
-                initialSliderTime[0] = loop.time();
-                initialSliderTime[1] = loop1.time();
+//                 initialSliderTime[0] = loop.time();
+//                 initialSliderTime[1] = loop1.time();
 
-                wrapper.addEventListener("mouseenter", (e: any) => {
-                    bounds[index] = wrapper.getBoundingClientRect();
-                    initialCursorX = e.clientX - bounds[index].left;
+//                 wrapper.addEventListener("mouseenter", (e: any) => {
+//                     bounds[index] = wrapper.getBoundingClientRect();
+//                     initialCursorX = e.clientX - bounds[index].left;
 
-                    initialSliderTime[0] = loop.time();
-                    initialSliderTime[1] = loop1.time();
+//                     initialSliderTime[0] = loop.time();
+//                     initialSliderTime[1] = loop1.time();
 
-                })
+//                 })
 
 
 
 
-                window.addEventListener("resize", () => {
-                    bounds[index] = wrapper.getBoundingClientRect();
-                });
-            })
-            wrapper.addEventListener("mousemove", (e: any) => {
+//                 window.addEventListener("resize", () => {
+//                     bounds[index] = wrapper.getBoundingClientRect();
+//                 });
+//             })
+//             wrapper.addEventListener("mousemove", (e: any) => {
 
 
-                if (!bounds[0] || !bounds[1] || !initialCursorX || !initialSliderTime[0] || !initialSliderTime[1]) return;
-                const currentX = e.clientX - bounds[0].left;
-                const currentX1 = e.clientX - bounds[1].left;
+//                 if (!bounds[0] || !bounds[1] || !initialCursorX || !initialSliderTime[0] || !initialSliderTime[1]) return;
+//                 const currentX = e.clientX - bounds[0].left;
+//                 const currentX1 = e.clientX - bounds[1].left;
 
-                const deltaX = currentX - initialCursorX;
-                const ratioDelta = -deltaX / bounds[0].width;
-                const deltaTime = ratioDelta * loop.duration();
-                const deltaX1 = currentX1 - initialCursorX;
-                const ratioDelta1 = -deltaX1 / bounds[1].width;
-                const deltaTime1 = ratioDelta1 * loop1.duration();
-;
+//                 const deltaX = currentX - initialCursorX;
+//                 const ratioDelta = -deltaX / bounds[0].width;
+//                 const deltaTime = ratioDelta * loop.duration();
+//                 const deltaX1 = currentX1 - initialCursorX;
+//                 const ratioDelta1 = -deltaX1 / bounds[1].width;
+//                 const deltaTime1 = ratioDelta1 * loop1.duration();
+// ;
 
-                const totalDuration = loop.duration();
-                const current = loop.totalTime();
-                let target = initialSliderTime[0] + deltaTime;
+//                 const totalDuration = loop.duration();
+//                 const current = loop.totalTime();
+//                 let target = initialSliderTime[0] + deltaTime;
 
-                target = gsap.utils.wrap(0, totalDuration, target);
+//                 target = gsap.utils.wrap(0, totalDuration, target);
 
-                let diff = target - (current % totalDuration);
-                if (Math.abs(diff) > totalDuration / 2) {
-                    diff += (diff < 0 ? totalDuration : -totalDuration);
-                }
-                target = current + diff;
+//                 let diff = target - (current % totalDuration);
+//                 if (Math.abs(diff) > totalDuration / 2) {
+//                     diff += (diff < 0 ? totalDuration : -totalDuration);
+//                 }
+//                 target = current + diff;
 
-                gsap.to(loop, {
-                    totalTime: target,
-                    duration: 2,
-                    ease: "power4"
-                });
+//                 gsap.to(loop, {
+//                     totalTime: target,
+//                     duration: 2,
+//                     ease: "power4"
+//                 });
 
-                const totalDuration1 = loop1.duration();
-                const current1 = loop1.totalTime();
-                let target1 = initialSliderTime[1] + deltaTime1;
+//                 const totalDuration1 = loop1.duration();
+//                 const current1 = loop1.totalTime();
+//                 let target1 = initialSliderTime[1] + deltaTime1;
 
-                target1 = gsap.utils.wrap(0, totalDuration1, target1);
+//                 target1 = gsap.utils.wrap(0, totalDuration1, target1);
 
-                let diff1 = target1 - (current1 % totalDuration1);
-                if (Math.abs(diff1) > totalDuration1 / 2) {
-                    diff1 += (diff1 < 0 ? totalDuration1 : -totalDuration1);
-                }
-                target1 = current1 + diff1;
+//                 let diff1 = target1 - (current1 % totalDuration1);
+//                 if (Math.abs(diff1) > totalDuration1 / 2) {
+//                     diff1 += (diff1 < 0 ? totalDuration1 : -totalDuration1);
+//                 }
+//                 target1 = current1 + diff1;
 
-                gsap.to(loop1, {
-                    totalTime: target1,
-                    duration: 1.2,
-                    ease: "power4"
-                });
-            });
+//                 gsap.to(loop1, {
+//                     totalTime: target1,
+//                     duration: 1.2,
+//                     ease: "power4"
+//                 });
+//             });
 
-        }
+//         }
 
 
 

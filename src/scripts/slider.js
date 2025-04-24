@@ -182,6 +182,8 @@ export function horizontalLoop(items, config) {
     config = config || {};
     const offsetLeft = config.offsetLeft || 0
     gsap.context(() => {
+
+
         let onChange = config.onChange,
             onDragFunction = config.onDragFunction,
             lastIndex = 0,
@@ -335,9 +337,12 @@ export function horizontalLoop(items, config) {
         tl.previous = vars => toIndex(tl.current() - 1, vars);
         tl.times = times;
         tl.progress(1, true).progress(0, true); // pre-render for performance
-        if (config.reversed) {
-            tl.vars.onReverseComplete();
-            tl.reverse();
+        if (!config.paused) {
+            if (config.reversed) {
+                tl.progress(1).reverse(); // запуск с конца в обратную сторону
+            } else {
+                tl.play(); // обычный запуск
+            }
         }
         if (config.draggable && typeof (Draggable) === "function") {
             proxy = document.createElement("div")
