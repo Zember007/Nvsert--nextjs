@@ -26,11 +26,7 @@ export default function Home() {
   const DynamicAppMainFeedback = dynamic(() => import('../components/main/AppMainFeedback'), {
     ssr: false,
   });
-    const { openDefaultModal } = useHeaderContext();
-
-  // useEffect(() => {
-  //   openDefaultModal('introForm')
-  // },[])
+  
 
 
   return (
