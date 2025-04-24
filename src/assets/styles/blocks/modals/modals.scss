@@ -87,8 +87,7 @@
   }
 
   &__box {
-    max-width: 512px;
-    padding-top: 44px;
+    max-width: 420px;
     position: relative;
     
     transition: all .3s;
@@ -102,11 +101,11 @@
   &__content {
     width: 100%;
     position: relative;
-    background: $bg-invert;
+    background: #202020;
     display: flex;
     flex-direction: column;
-    padding: 32px 40px;
-    border-radius: 16px;
+    padding: 48px;
+    border-radius: 6px;
 
     max-height: 90vh;
     overflow-y: auto;
@@ -193,10 +192,6 @@
       font-size: 12px;
       line-height: 16px;
     }
-  }
-
-  .field {
-    margin-bottom: 32px;
   }
 
   .btn--primary {

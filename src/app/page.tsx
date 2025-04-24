@@ -6,6 +6,8 @@ import LazyLoadSection from '@/hook/LazyLoadSection';
 
 import AppMainIntro from '../components/main/AppMainIntro'
 import AppMainDocuments from '../components/main/AppMainDocuments'
+import { useEffect } from 'react';
+import { useHeaderContext } from '@/components/contexts/HeaderContext';
 
 export default function Home() {
 
@@ -24,7 +26,11 @@ export default function Home() {
   const DynamicAppMainFeedback = dynamic(() => import('../components/main/AppMainFeedback'), {
     ssr: false,
   });
+    const { openDefaultModal } = useHeaderContext();
 
+  // useEffect(() => {
+  //   openDefaultModal('introForm')
+  // },[])
 
 
   return (

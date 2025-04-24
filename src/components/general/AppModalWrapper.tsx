@@ -1,18 +1,17 @@
 import { useHeaderContext } from '@/components/contexts/HeaderContext'
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
+import AppIntroForm from '@/components/forms/AppIntroForm'
 
 const AppKnowCostForm = dynamic(() => import('@/components/forms/AppKnowCostForm'), {
     loading: () => <p>Loading...</p>,
 });
 
-const AppIntroForm = dynamic(() => import('@/components/forms/AppIntroForm'), {
-    loading: () => <p>Loading...</p>,
-});
+
 
 const AppSuccessMessage = dynamic(() => import('@/components/modals/AppSuccessMessage'), {
     loading: () => <p>Loading...</p>,
-}); 
+});
 
 interface AppModalWrapperProps {
     setDefaultModalActive: (active: boolean) => void;
@@ -29,19 +28,10 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
                 }}
             >
                 <div className={`modal__box modal ${defaultModalActive && 'active'}`} onClick={(e) => { e.stopPropagation() }}>
-                    <div className="modal__close--wrapper">
-                        <button className="btn modal__close"
-                            onClick={() => {
-                                setDefaultModalActive(false)
-                            }}
-                        >
-                            <i className="icon icon--close"></i>
-                        </button>
-                    </div>
                     <div className="modal__content">
                         {
                             defaultModalName === 'successMessage' &&
-                            <>                              
+                            <>
                                 <Suspense fallback={<p></p>}>
                                     <AppSuccessMessage />
                                 </Suspense>
@@ -49,20 +39,18 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
                         }
                         {
                             defaultModalName === 'introForm' &&
-                            <>                                
-                                <Suspense fallback={<p></p>}>
+                            <>
+                               
                                     <AppIntroForm />
-                                </Suspense>
+                           
                             </>
                         }
 
                         {
                             defaultModalName === 'knowCost' &&
-                            <>
-                                <Suspense fallback={<p></p>}>
-                                    <AppKnowCostForm />
-                                </Suspense>
-                            </>
+
+                            <AppKnowCostForm />
+
                         }
                     </div>
                 </div>
