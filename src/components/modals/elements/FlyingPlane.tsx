@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
 
 export default function FlyingPlane() {
 
     const lineAnimation = {
         x: "-417px",
-        y: "220px",
+        y: "213px",
     };
 
     const lineTransitions = {
@@ -18,7 +17,7 @@ export default function FlyingPlane() {
 
 
     return (
-        <div className="relative w-full overflow-hidden h-[220px] flex items-center justify-center">
+        <div className="relative w-full overflow-hidden h-[213px] flex items-center justify-center">
  
            
                     {[...Array(3)].map((_, i) => (

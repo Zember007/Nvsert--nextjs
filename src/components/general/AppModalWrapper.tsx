@@ -28,7 +28,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
                 }}
             >
                 <div className={`modal__box modal ${defaultModalActive && 'active'}`} onClick={(e) => { e.stopPropagation() }}>
-                    <div className="modal__content">
+                    <div id='modal-default' className="modal__content main-form">
                         {
                             defaultModalName === 'successMessage' &&
                             <>

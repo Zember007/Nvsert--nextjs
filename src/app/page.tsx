@@ -28,23 +28,23 @@ export default function Home() {
   });
     const { openDefaultModal } = useHeaderContext();
 
-  // useEffect(() => {
-  //   openDefaultModal('introForm')
-  // },[])
+  useEffect(() => {
+    openDefaultModal('introForm')
+  },[])
 
 
   return (
     <div className="main text-[#000] overflow-hidden select-none">
       <AppMainIntro />
-      <AppMainDocuments /> 
+      {/* <AppMainDocuments />  */}
       {/* <LazyLoadSection component={DynamicAppMainSkills} />
       <LazyLoadSection component={DynamicAppMainSlider} />
       <LazyLoadSection component={DynamicAppMainSafeguards} />
       <LazyLoadSection component={DynamicAppMainFeedback} /> */}
-      <DynamicAppMainSkills />
+      {/* <DynamicAppMainSkills />
       <DynamicAppMainSlider />
       <DynamicAppMainSafeguards />
-      <DynamicAppMainFeedback />
+      <DynamicAppMainFeedback /> */}
     </div>
   );
 }
