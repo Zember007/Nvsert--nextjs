@@ -74,7 +74,26 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
         rect.right <= (window.innerWidth || document.documentElement.clientWidth)
       );
     };
-
+    const scrollToElement = (el, index) => {
+        const rect = el.getBoundingClientRect();
+      
+        if (index < 3) {
+          window.scrollTo({
+            top: rect.top + window.pageYOffset - 200, 
+            behavior: 'smooth'
+          });
+        } else if (index > 13) {
+          window.scrollTo({
+            top: rect.bottom + window.pageYOffset - window.innerHeight + 100,
+            behavior: 'smooth'
+          });
+        } else {
+          window.scrollTo({
+            top: rect.top + window.pageYOffset - window.innerHeight / 2,
+            behavior: 'smooth'
+          });
+        }
+      };
    
 
 
@@ -95,7 +114,8 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
             if (!el) return;
 
             if (!isInViewport(el)) {
-                el.scrollIntoView({ behavior: 'smooth', block: index < 3 ? 'start' :index>13?'end' : 'center' });
+                scrollToElement(el, index);
+         
               }
         }
     }, [active]);
