@@ -59,12 +59,12 @@ const AppIntroForm = () => {
 
     const { reset } = methods;
 
-    const [successMessageVisible, setSuccessMessageVisible] = useState(true);
+    const [successMessageVisible, setSuccessMessageVisible] = useState(false);
 
     const validContact = (value: string) => {
         const phoneRegex = /^(?:\+7|8)?[\s(-]*\d[\s(-]*\d{2}[\s)-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}$/;
 
-        if ((!phoneRegex.test(value) )) {
+        if ((!phoneRegex.test(value))) {
             setContactError(true)
         } else {
             setContactError(false)
@@ -89,6 +89,8 @@ const AppIntroForm = () => {
                             className="!bg-[#2a2a2a] focus:!bg-[#21262F]"
                             title={'Телефон'}
                             inputName="Contact"
+                            mask={"phone"}
+                            type={"phone"}
                             required={true}
                             fail={contactError}
                             onBlur={(value) => { validContact(value) }}
