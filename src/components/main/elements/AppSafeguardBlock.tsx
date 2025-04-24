@@ -37,7 +37,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
   // }
 
   return (
-    <div className={`hover:z-[10000] relative card-wrap h-[540px] w-full translate-y-[0] ${!isVisible && '!translate-y-[30px] opacity-0'} transition-all duration-500 `}>
+    <div className={`hover:z-[10000] relative card-wrap h-[517px] w-full translate-y-[0] ${!isVisible && '!translate-y-[30px] opacity-0'} transition-all duration-500 `}>
       <div
         className="bg-[#FFF] hover:bg-[#F5F5F5] card border-[#CCCCCC] hover:border-[#34446D] group h-full border border-solid rounded-[8px] backdrop-blur-[4px] flex flex-col gap-[29px] justify-between transition-all duration-300">
         <div className="flex flex-col gap-[20px] h-full">
@@ -60,8 +60,13 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
               <div
                 // onMouseEnter={() => { MouseEnter(index) }}
                 key={index} className={`group/stroke flex flex-col ${index == items.length - 1 ? 'grow' : 'pb-[20px]'}`}>
-                <div className="flex justify-between gap-[5px]">
-                  <p className='text-[18px] font-bold  group-hover/stroke:text-[#34446D] transition-all duration-300'>{filterPrepositions(item.subtitle)}</p>
+                <div className="flex justify-between gap-[20px]">
+                  <p className='text-[18px] font-bold  group-hover/stroke:text-[#34446D] transition-all duration-300'>{item.subtitle.split(' ').length === 2 ? 
+                  <>
+                  {item.subtitle.split(' ')[0]  } <br />
+                  {item.subtitle.split(' ')[1]}
+                  </>
+                  :filterPrepositions(item.subtitle)}</p>
                   <div className="min-w-[16px] h-[20px] flex items-end">
                     <svg
                       className={`rotate-[180deg] group-hover/stroke:rotate-[0deg] group-hover/stroke:*:stroke-[#34446D] *:transition-all *:duration-300 transition-all duration-300`}
