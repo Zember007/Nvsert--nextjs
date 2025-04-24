@@ -13,17 +13,6 @@ const AppMainDocuments = () => {
     const [hoverIndex, setHover] = useState<number | null>(null)
 
 
-    const settings = {
-        timeout: 0,
-        duration: 300,
-        length: 30
-    }
-
-
-
-
-
-
     return (
         <section className="py-[75px] flex flex-col gap-[40px]">
             <div className="wrapper ">
@@ -32,15 +21,20 @@ const AppMainDocuments = () => {
 
             </div>
             <PhotoProvider maskOpacity={0.4} maskClassName="blurred-mask"
-                speed={() => 50}
-                easing={() => 'linear'}
+                speed={() => 0}
                 onIndexChange={(index) => {
 
                     setActive(index)
 
-                    const box = document.querySelector('.PhotoView-Slider__BannerWrap') as HTMLImageElement;
+                    const box = document.querySelector('.PhotoView-Slider__BannerWrap') as HTMLDivElement;
                     if (!box) return
                     box.dataset.before = documents[index].title;
+
+                    const photos = document.querySelectorAll<HTMLDivElement>('.PhotoView__Photo__attr');
+                    photos.forEach((photo) => {
+                        photo.dataset.price = documents[index].price;
+                        photo.dataset.duration = documents[index].duration;
+                    })
                 }}
 
                 maskClosable={false}
@@ -55,9 +49,14 @@ const AppMainDocuments = () => {
                                 index={index}
                                 setPhoto={() => {
                                     setTimeout(() => {
-                                        const box = document.querySelector('.PhotoView-Slider__BannerWrap') as HTMLImageElement;
+                                        const box = document.querySelector('.PhotoView-Slider__BannerWrap') as HTMLDivElement;
                                         if (!box) return
                                         box.dataset.before = item.title;
+                                        const photos = document.querySelectorAll<HTMLDivElement>('.PhotoView__Photo__attr');
+                                        photos.forEach((photo) => {
+                                            photo.dataset.price = documents[index].price;
+                                            photo.dataset.duration = documents[index].duration;
+                                        })
 
                                         const portal = document.querySelector('.PhotoView-Portal') as HTMLDivElement;
                                         const arrowLeft = document.querySelector('.PhotoView-Slider__ArrowLeft') as HTMLDivElement;

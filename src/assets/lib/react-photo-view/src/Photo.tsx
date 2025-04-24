@@ -54,15 +54,17 @@ export default function Photo({
   if (src && !broken) {
     return (
       <>
-        <img
-          className={`PhotoView__Photo${className ? ` ${className}` : ''}`}
-          src={src}
-          onLoad={handleImageLoaded}
-          onError={handleImageBroken}
-          draggable={false}
-          alt=""
-          {...restProps}
-        />
+        <div className="PhotoView__Photo__attr">
+          <img
+            className={`PhotoView__Photo${className ? ` ${className}` : ''}`}
+            src={src}
+            onLoad={handleImageLoaded}
+            onError={handleImageBroken}
+            draggable={false}
+            alt="document"
+            {...restProps}
+          />
+        </div>
         {!loaded &&
           (loadingElement ? (
             <span className="PhotoView__icon">{loadingElement}</span>

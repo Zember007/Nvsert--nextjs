@@ -30,7 +30,7 @@ export default function Home() {
   return (
     <div className="main text-[#000] overflow-hidden select-none">
       <AppMainIntro />
-      <AppMainDocuments />
+      <AppMainDocuments /> 
       {/* <LazyLoadSection component={DynamicAppMainSkills} />
       <LazyLoadSection component={DynamicAppMainSlider} />
       <LazyLoadSection component={DynamicAppMainSafeguards} />

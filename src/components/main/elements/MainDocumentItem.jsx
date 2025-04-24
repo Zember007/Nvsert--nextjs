@@ -15,7 +15,7 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
 
     const { setButtonRef, setWrapperRef } = useButton()
 
-    const borderBounce = useRef(null);
+    const wrapperRef = useRef(null);
     const photoRef = useRef(null);
 
     const containerPhotoRef = useRef(null);
@@ -62,6 +62,21 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
         opacity: [0, 1, 1, 1, 1],
     };
 
+
+
+    const isInViewport = (el) => {
+      const rect = el.getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
+    };
+
+   
+
+
     // Применение анимации в useEffect:
     useEffect(() => {
         if (active) {
@@ -74,6 +89,13 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
                     times: defaultSettings.times
                 }
             });
+
+            const el = wrapperRef.current;
+            if (!el) return;
+
+            if (!isInViewport(el)) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
         }
     }, [active]);
 
@@ -84,7 +106,7 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
 
     return (
         <div className={`wrapper document-wrapper-border group/wrapper relative`}
-
+        ref={wrapperRef}
         >
             <div className={`absolute top-[-1px] bottom-[-1px] border-group transition-all duration-300 right-[16px] left-[16px] ${!active && ' group-hover/wrapper:!border-[transparent]'}`}
                 style={{
@@ -95,7 +117,7 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
             </div>
 
             <div
-                ref={borderBounce}
+                
                 onMouseEnter={() => { setHover(true) }}
                 onMouseLeave={() => { setHover(false) }}
                 className={`mx-[-30px]  flex flex-col  group/main cursor-pointer  hover:bg-[#F5F5F5] rounded-[4px] relative`}>

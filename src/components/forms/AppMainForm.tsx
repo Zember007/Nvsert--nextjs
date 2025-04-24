@@ -14,11 +14,10 @@ import { useButton } from "@/hook/useButton";
 import { useEffect, useRef, useState } from "react";
 import AppCheckbox from './elements/AppCheckbox';
 import { BounceEffect } from "@/hook/useBounce";
-import FlyingPlane from "./elements/FlyingPlane";
+import FlightSuccess from "../modals/FlightSuccess";
 
 
 const AppMainForm = ({ btnText }: { btnText: string }) => {
-    const { t } = useTranslation();
     const { setButtonRef, setWrapperRef } = useButton();
 
     const onSubmit = async (e: any) => {
@@ -57,15 +56,17 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                 if (myElement) {
                     BounceEffect(myElement, {
                         startPosition: "-0",
-                        endPosition: `${5}px`,
+                        endPosition: `${20}px`,
                         duration: 300,
-                        easing: "ease",
+                        easing: "ease-in-out",
                         direction: 'vertical'
                     });
-        
-        
-        
+
+
+                    setSuccessMessageVisible(true)
+
                 }
+
             }
         } catch (error) {
             console.log(error);
@@ -136,6 +137,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
     const [emailError, setEmailError] = useState(false);
     const [emailSuccessful, setEmailSuccessful] = useState(false);
     const [failCheck, setFailCheck] = useState(false);
+    const [successMessageVisible, setSuccessMessageVisible] = useState(false);
 
     useEffect(() => {
         setFailCheck(false)
@@ -143,21 +145,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
 
     return (
         <div id="form-main" className='border-main main-form bg-[#00000080] py-[27px] pb-[30px] px-[48px] max-w-[420px] flex flex-col gap-[12px] rounded-[6px]'>
-            <div className="active">
-                <button className="close !top-[30px] !right-[30px]">
-                    <div className="in">
-                        <div className="close-button-block"></div>
-                        <div className="close-button-block"></div>
-                    </div>
-                    <div className="out">
-                        <div className="close-button-block"></div>
-                        <div className="close-button-block"></div>
-                    </div>
-                </button>
-                <div className="top-[50%] left-0 right-0 translate-y-[-50%] absolute">
-                <FlyingPlane />
-                </div>
-            </div>
+            {successMessageVisible && <FlightSuccess close={() => { setSuccessMessageVisible(false) }} />}
             <span className='leading-[1] text-[#FFF] text-[32px] text-center tracking-[-0.03em]'>Оформить заявку</span>
             <AppValidationObserver methods={methods} onSubmit={onSubmit}>
                 {({ register, errors }) => (

@@ -15,8 +15,7 @@ export default function getSuitableImageSize(naturalWidth: number, naturalHeight
   const autoWidth = (naturalWidth / naturalHeight) * currentHeight;
   const autoHeight = (naturalHeight / naturalWidth) * currentWidth;
 
-  // Применение максимальной ширины 290px
-  const maxWidth = 475;
+  const maxWidth = 448;
 
   if (naturalWidth < currentWidth && naturalHeight < currentHeight) {
     width = naturalWidth;
