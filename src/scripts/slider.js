@@ -351,7 +351,7 @@ export function horizontalLoop(items, config) {
                 align = () => tl.progress(wrap(startProgress + (draggable.startX - draggable.x) * ratio)),
                 syncIndex = () => tl.closestIndex(true);
             typeof (InertiaPlugin) === "undefined" && console.warn("InertiaPlugin required for momentum-based scrolling and snapping. https://greensock.com/club");
-            let dragDirection = 0;
+            let dragDirection = 0; 
 
             draggable = Draggable.create(proxy, {
                 trigger: items[0].parentNode,
@@ -387,25 +387,22 @@ export function horizontalLoop(items, config) {
                     return lastSnap;
                 },
                 onRelease() {
-                    syncIndex();
+                    syncIndex();                    
                     if (draggable.isThrowing) {
                         indexIsDirty = true;
                         if (wasPlaying) {
-                            const direction = dragDirection < 0 ? 1 : -1;
-                            tl.timeScale(2 * direction); // ➡️ или ⬅️ быстрее
-                            tl.play(); // play/reverse зависит от timeScale знака
+                            gsap.killTweensOf(tl);
+                            if (dragDirection < 0) {
+                                tl.play();
+                            } else if (dragDirection > 0) {
+                                tl.reverse();
+                            }
                         }
                     }
                 },
                 onThrowComplete: () => {
                     syncIndex();
-                    if (wasPlaying) {
-                        gsap.to(tl, {
-                            timeScale: dragDirection < 0 ? 1 : -1, // нормальная скорость в нужную сторону
-                            duration: 0.6,
-                            ease: "power2.out"
-                        });
-                    }
+                   
                 }
             })[0];
             tl.draggable = draggable;
