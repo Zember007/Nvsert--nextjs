@@ -359,7 +359,7 @@ export function horizontalLoop(items, config) {
                 onPressInit() {
                     let x = this.x;
                     gsap.killTweensOf(tl);
-                    // wasPlaying = !tl.paused();
+                    wasPlaying = !tl.paused();
                     tl.pause();
                     startProgress = tl.progress();
                     refresh();
@@ -389,7 +389,6 @@ export function horizontalLoop(items, config) {
                 onRelease() {
                     syncIndex();                    
                     if (draggable.isThrowing) {
-                        indexIsDirty = true
                         if (wasPlaying) {
                             if (dragDirection < 0) {
                                 tl.play();
