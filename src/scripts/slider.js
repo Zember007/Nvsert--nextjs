@@ -390,6 +390,7 @@ export function horizontalLoop(items, config) {
                     syncIndex();                    
                     if (draggable.isThrowing) {
                         if (wasPlaying) {
+                            gsap.killTweensOf(tl);
                             if (dragDirection < 0) {
                                 tl.play();
                             } else if (dragDirection > 0) {
