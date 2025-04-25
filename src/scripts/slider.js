@@ -393,9 +393,9 @@ export function horizontalLoop(items, config) {
                 onThrowComplete: () => {
                     syncIndex();
                     if (wasPlaying) {
-                        if (dragDirection > 0) {
+                        if (dragDirection < 0) {
                             tl.play();
-                        } else if (dragDirection < 0) {
+                        } else if (dragDirection > 0) {
                             tl.reverse();
                         }
                     }
