@@ -65,7 +65,7 @@ const AppIntroForm = () => {
     const validContact = (value: string) => {
         const phoneRegex = /^(?:\+7|8)?[\s(-]*\d[\s(-]*\d{2}[\s)-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}$/;
 
-        if ((!phoneRegex.test(value))) {
+        if ((!phoneRegex.test(value.trimEnd()))) {
             setContactError(true)
         } else {
             setContactError(false)
