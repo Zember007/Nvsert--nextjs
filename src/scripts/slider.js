@@ -354,7 +354,7 @@ export function horizontalLoop(items, config) {
                 syncIndex = () => tl.closestIndex(true);
             typeof (InertiaPlugin) === "undefined" && console.warn("InertiaPlugin required for momentum-based scrolling and snapping. https://greensock.com/club");
             let dragDirection = 0; 
-
+            const velocityTolerance = 0.15;
             draggable = Draggable.create(proxy, {
                 trigger: items[0].parentNode,
                 type: "x",
@@ -392,14 +392,25 @@ export function horizontalLoop(items, config) {
                     syncIndex();                    
                     if (draggable.isThrowing) {
                         indexIsDirty = true;
-                        if (wasPlaying) {
-                            gsap.killTweensOf(tl);
-                            if (dragDirection < 0) {
-                                tl.play();
-                            } else if (dragDirection > 0) {
-                                tl.reverse();
+                
+                        const velocity = draggable.getVelocity().x;
+                        const normalizedVelocity = Math.abs(velocity * ratio * tl.duration() * totalWidth); // px/sec
+                
+                        if (Math.abs(normalizedVelocity - pixelsPerSecond) < velocityTolerance * pixelsPerSecond) {
+                            // Скорость близка к autoplay -> выключаем бросок, включаем autoplay
+                            draggable.endDrag(); // отменяем инерцию
+                            if (wasPlaying) {
+                                gsap.killTweensOf(tl);
+                                if (dragDirection < 0) {
+                                    tl.play();
+                                } else {
+                                    tl.reverse();
+                                }
                             }
+                            return;
                         }
+                
+                        
                     }
                 },
                 onThrowComplete: () => {
