@@ -379,17 +379,12 @@ export function horizontalLoop(items, config) {
                 },
                 onThrowUpdate() {
                     align();
-
-                    const minSpeed = 50; // Установите минимальную скорость
-                    const decelerationRate = 0.95; // Снижение скорости при замедлении
-
-                    // Если скорость ниже минимальной, установить её на минимальное значение
-                    if (Math.abs(draggable.velocity) < minSpeed) {
-                        draggable.velocity = minSpeed * Math.sign(draggable.velocity); // Применение минимальной скорости
-                    } else {
-                        // В противном случае продолжаем снижение с учетом коэффициента замедления
-                        draggable.velocity *= decelerationRate;
+                    
+                    const Velocity = InertiaPlugin.getVelocity(proxy, "x")
+                    if(Velocity <= 100) {
+                        gsap.killTweensOf(proxy);
                     }
+                   
                 },
                 overshootTolerance: 0,
                 inertia: true, // Включаем инерцию
@@ -425,6 +420,7 @@ export function horizontalLoop(items, config) {
                     syncIndex();
                 }
             })[0];
+            InertiaPlugin.track(proxy, "x");
             tl.draggable = draggable;
         }
 

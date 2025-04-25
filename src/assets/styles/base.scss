@@ -197,9 +197,9 @@
 
 }
 
-.blurred-mask {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+.PhotoView-Slider__Backdrop {
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
     background: #000000CC !important;
 }
 
