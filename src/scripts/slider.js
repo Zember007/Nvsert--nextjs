@@ -353,7 +353,7 @@ export function horizontalLoop(items, config) {
                 align = () => tl.progress(wrap(startProgress + (draggable.startX - draggable.x) * ratio)),
                 syncIndex = () => tl.closestIndex(true);
             typeof (InertiaPlugin) === "undefined" && console.warn("InertiaPlugin required for momentum-based scrolling and snapping. https://greensock.com/club");
-            let dragDirection = 0; 
+            let dragDirection = 0;
             const velocityTolerance = 0.15;
             draggable = Draggable.create(proxy, {
                 trigger: items[0].parentNode,
@@ -389,16 +389,20 @@ export function horizontalLoop(items, config) {
                     return lastSnap;
                 },
                 onRelease() {
-                    syncIndex();                    
+                    syncIndex();
                     if (draggable.isThrowing) {
                         indexIsDirty = true;
-                
-                        const velocity = draggable.getVelocity().x;
-                        const normalizedVelocity = Math.abs(velocity * ratio * tl.duration() * totalWidth); // px/sec
-                
+
+                        const velocity = draggable.endX - draggable.startX; // смещение
+                        const time = draggable.endTime - draggable.startTime || 1; // время в ms (защита от деления на 0)
+                        const speed = Math.abs(velocity / time * 1000); // px/sec
+
+                        // Перевод скорости в эквивалент timeline
+                        const normalizedVelocity = speed * ratio * tl.duration() * totalWidth;
+
                         if (Math.abs(normalizedVelocity - pixelsPerSecond) < velocityTolerance * pixelsPerSecond) {
-                            // Скорость близка к autoplay -> выключаем бросок, включаем autoplay
-                            draggable.endDrag(); // отменяем инерцию
+                            // Скорость броска близка к autoplay — отключаем инерцию, продолжаем autoplay
+                            draggable.endDrag(); // прерывает бросок/инерцию
                             if (wasPlaying) {
                                 gsap.killTweensOf(tl);
                                 if (dragDirection < 0) {
@@ -418,13 +422,13 @@ export function horizontalLoop(items, config) {
                                 tl.reverse();
                             }
                         }
-                
-                        
+
+
                     }
                 },
                 onThrowComplete: () => {
                     syncIndex();
-                   
+
                 }
             })[0];
             tl.draggable = draggable;
@@ -432,7 +436,6 @@ export function horizontalLoop(items, config) {
 
         tl.closestIndex(true);
         lastIndex = curIndex;
-        // onChange && onChange(curIndex);
         timeline = tl;
         return () => window.removeEventListener("resize", onResize);
     });
