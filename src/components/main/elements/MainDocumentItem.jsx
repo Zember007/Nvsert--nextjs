@@ -66,35 +66,31 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
 
 
     const isInViewport = (el) => {
-      const rect = el.getBoundingClientRect();
-      return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-      );
-    };
-    const scrollToElement = (el, index) => {
         const rect = el.getBoundingClientRect();
-      
-        if (index < 3) {
-          window.scrollTo({
-            top: rect.top + window.pageYOffset - 200, 
-            behavior: 'smooth'
-          });
-        } else if (index > 13) {
-          window.scrollTo({
-            top: rect.bottom + window.pageYOffset - window.innerHeight + 100,
-            behavior: 'smooth'
-          });
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    };
+    const scrollToElement = (el) => {
+
+        const documents_box = document.getElementById('documents_box')
+        if (!documents_box || !el) return
+
+        if (index === 0) {
+            documents_box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        } else if (index === 17) {
+            documents_box.scrollIntoView({ behavior: 'smooth', block: 'end' });
         } else {
-          window.scrollTo({
-            top: rect.top + window.pageYOffset - window.innerHeight / 2,
-            behavior: 'smooth'
-          });
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
-      };
-   
+
+
+    };
+
 
 
     // Применение анимации в useEffect:
@@ -114,9 +110,9 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
             if (!el) return;
 
             if (!isInViewport(el)) {
-                scrollToElement(el, index);
-         
-              }
+                scrollToElement(el);
+
+            }
         }
     }, [active]);
 
@@ -128,7 +124,7 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
 
     return (
         <div className={`wrapper document-wrapper-border group/wrapper relative`}
-        ref={wrapperRef}
+            ref={wrapperRef}
         >
             <div className={`absolute top-[-1px] bottom-[-1px] border-group transition-all duration-300 right-[16px] left-[16px] ${!active && ' group-hover/wrapper:!border-[transparent]'}`}
                 style={{
@@ -139,7 +135,7 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
             </div>
 
             <div
-                
+
                 onMouseEnter={() => { setHover(true) }}
                 onMouseLeave={() => { setHover(false) }}
                 className={`mx-[-30px]  flex flex-col  group/main cursor-pointer  hover:bg-[#F5F5F5] rounded-[4px] relative`}>
@@ -304,9 +300,9 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
                                     animate={controls}
                                     initial={{ y: 20, opacity: 0 }}
                                     className="tariff-wrap w-[250px]" ref={setWrapperRef}>
-                                    <button 
-                                    onClick={() => {openDefaultModal('introForm')}}
-                                    ref={setButtonRef} className='justify-center border-[#34446D] border border-solid tariff text-[20px] transition-all duration-300 font-bold tracking-normal m:flex items-center gap-[6px] px-[16px] py-[9px] text-[#34446D] hover:text-[#FFF] rounded-[4px]  group hover:bg-[#34446D]  leading-[1]'>
+                                    <button
+                                        onClick={() => { openDefaultModal('introForm') }}
+                                        ref={setButtonRef} className='justify-center border-[#34446D] border border-solid tariff text-[20px] transition-all duration-300 font-bold tracking-normal m:flex items-center gap-[6px] px-[16px] py-[9px] text-[#34446D] hover:text-[#FFF] rounded-[4px]  group hover:bg-[#34446D]  leading-[1]'>
                                         <span>Оформить заявку</span>
                                         <svg className='group-hover:*:fill-[#FFF] *:transition-all *:duration-300' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M29.0627 0.9375L0.930664 12.1875L11.426 16.9336L26.2502 3.75L13.0666 18.5742L17.8127 29.0625L29.0627 0.9375Z" fill="#34446D" />
