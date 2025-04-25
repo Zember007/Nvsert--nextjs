@@ -395,7 +395,15 @@ export function horizontalLoop(items, config) {
 
                         if (wasPlaying) {
                             draggable.endDrag();
-                            tl.time(tl.totalTime() - tl.time()); 
+
+                            // Обновляем время анимации с учетом инерции, не перезапуская её
+                            let currentTime = tl.time();
+                            let diff = currentTime - tl.totalTime();
+                            gsap.to(tl, {
+                                time: currentTime + diff, // Устанавливаем текущее время
+                                duration: 0.6, // Плавно продолжаем
+                                ease: "power2.out" // Плавное замедление
+                            });
                             if (dragDirection < 0) {
                                 tl.play();
                             } else if (dragDirection > 0) {
