@@ -62,6 +62,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
                     </svg>
                   </div>
                 </div>
+                
 
                 <div className="overflow-hidden transition-all duration-100 group-hover/stroke:max-h-[95px] max-h-0">
                   <ul
