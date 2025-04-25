@@ -393,28 +393,12 @@ export function horizontalLoop(items, config) {
                     if (draggable.isThrowing) {
                         indexIsDirty = true;
 
-                        const velocity = draggable.endX - draggable.startX; // смещение
-                        const time = draggable.endTime - draggable.startTime || 1; // время в ms (защита от деления на 0)
-                        const speed = Math.abs(velocity / time * 1000); // px/sec
-
-                        // Перевод скорости в эквивалент timeline
-                        const normalizedVelocity = speed * ratio * tl.duration() * totalWidth;
-
-                        if (Math.abs(normalizedVelocity - pixelsPerSecond) < velocityTolerance * pixelsPerSecond) {
-                            // Скорость броска близка к autoplay — отключаем инерцию, продолжаем autoplay
-                            draggable.endDrag(); // прерывает бросок/инерцию
-                            if (wasPlaying) {
-                                gsap.killTweensOf(tl);
-                                if (dragDirection < 0) {
-                                    tl.play();
-                                } else {
-                                    tl.reverse();
-                                }
-                            }
-                            return;
-                        }
+                       
+                
+                   
 
                         if (wasPlaying) {
+                            draggable.endDrag();
                             gsap.killTweensOf(tl);
                             if (dragDirection < 0) {
                                 tl.play();
