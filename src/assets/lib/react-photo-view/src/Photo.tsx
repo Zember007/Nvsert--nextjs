@@ -54,7 +54,7 @@ export default function Photo({
   if (src && !broken) {
     return (
       <>
-        <div className="PhotoView__Photo__attr">
+        <div className={`PhotoView__Photo__attr ${!loaded && 'loaded'}`}>
           <img
             className={`PhotoView__Photo${className ? ` ${className}` : ''}`}
             src={src}

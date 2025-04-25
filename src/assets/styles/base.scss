@@ -37,6 +37,12 @@
 .PhotoView__Photo__attr {
     position: relative;
     width: 448px;
+    &.loaded {
+        &::before ,
+        &::after {
+            display: none;
+        }
+    }
     &::before ,
     &::after {
         position: absolute;        
@@ -205,18 +211,14 @@
     &::before {
         justify-content: center;
         content: attr(data-before);
-        position: absolute;
-        top: 0;
+        position: fixed;
+        top: 50%;
+        transform: translate(0, -368px);
         left: 0;
         text-align: center;
         right: 0;
         font-size: 20px;
-        height: 70px;
-        padding: 20px 30px;
-        font-size: 20px;
         font-weight: 700;
-        background: #000;
-        border-bottom: 1px solid #FFF;
         white-space: nowrap;
         display: flex;
         align-items: end;

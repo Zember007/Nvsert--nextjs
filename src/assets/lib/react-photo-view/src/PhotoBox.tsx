@@ -448,7 +448,7 @@ export default function PhotoBox({
       <div
         className="PhotoView__PhotoBox"
         style={{
-          transform: `matrix(${currentScale}, 0, 0, ${currentScale}, ${translateX}, 100)`,
+          transform: `matrix(${currentScale}, 0, 0, ${currentScale}, ${translateX}, ${translateY})`,
           transition: touched || pause ? undefined : transitionCSS,
           willChange: isActive ? 'transform' : undefined,
         }}

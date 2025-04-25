@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { BounceEffect } from "@/hook/useBounce";
 import FlyingPlane from './elements/FlyingPlane';
 
-const FlightSuccess = ({bg, close, small = false }: { bg:string; close: () => void; small?: boolean }) => {
+const FlightSuccess = ({bg, close, small = false, text }: { bg:string; close: () => void; small?: boolean; text:string }) => {
 
     const [time, setTime] = React.useState(10);
     const bounceContent = useRef<HTMLDivElement | null >(null)
@@ -60,7 +60,7 @@ const FlightSuccess = ({bg, close, small = false }: { bg:string; close: () => vo
                 <div
                 ref={bounceContent}
                 className="flex flex-col gap-[20px] text-white text-center items-center">
-                    <p className="text-[32px] tracking-[-0.03em]">Спасибо</p>
+                    <p className="text-[32px] tracking-[-0.03em]">{text}</p>
                     <p className="text-[20px]">Мы свяжемся с Вами <br /> в течение 10 минут!</p>
                 </div>
                 <div

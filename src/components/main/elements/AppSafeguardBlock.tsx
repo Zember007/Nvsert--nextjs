@@ -23,32 +23,19 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
     bounceEl.current.push(el)
   }
 
-  // const MouseEnter = (index: any) => {
-  //   const el = bounceEl.current[index]
-  //   if (!el) return
-
-  //   BounceEffect(el, {
-  //     startPosition: "0",
-  //     endPosition: `${10}px`,
-  //     duration: 300,
-  //     easing: "ease",
-  //     direction: 'vertical'
-  //   });
-  // }
-
   return (
     <div className={`hover:z-[10000] relative card-wrap h-[517px] w-full translate-y-[0] ${!isVisible && '!translate-y-[30px] opacity-0'} transition-all duration-500 `}>
       <div
-        className="bg-[#FFF] hover:bg-[#F5F5F5] card border-[#CCCCCC] hover:border-[#34446D] group h-full border border-solid rounded-[8px] backdrop-blur-[4px] flex flex-col gap-[29px] justify-between transition-all duration-300">
+        className="bg-[#FFF] hover:bg-[#F5F5F5] card border-[#CCCCCC] overflow-hidden hover:border-[#34446D] group h-full border border-solid rounded-[8px] backdrop-blur-[4px] flex flex-col gap-[29px] justify-between ">
         <div className="flex flex-col gap-[20px] h-full">
-          <div className="overflow-hidden rounded-[4px] h-[200px]  w-full relative">
+          <div className="overflow-hidden h-[200px]  w-full relative">
             <p className="text-[22px] z-[2] text-[#FFF] backdrop-blur-[4px] p-[10px] rounded-[4px] shadow-[0px_0px_4px_0px_#00000033] bg-[#FFFFFF1A] font-bold absolute top-[15px] left-[15px]"
               style={{
                 maxWidth: (index === 3 ? '220' : '200') + 'px'
               }}
             >{filterPrepositions(title)}</p>
             <Image
-              className='w-auto h-full group-hover:scale-[1.1] scale-[1] transition-all duration-[2s] ease-in-out'
+              className='w-auto h-full group-hover:scale-[1.1] scale-[1] transition-all duration-[0.4s] ease-in-out'
               alt='document' src={img}
               width="0"
               height="0"
@@ -58,7 +45,6 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
           <div className="px-[15px] flex flex-col grow">
             {items.map((item, index) =>
               <div
-                // onMouseEnter={() => { MouseEnter(index) }}
                 key={index} className={`group/stroke flex flex-col ${index == items.length - 1 ? 'grow' : 'pb-[20px]'}`}>
                 <div className="flex justify-between gap-[20px]">
                   <p className='text-[18px] font-bold  group-hover/stroke:text-[#34446D] transition-all duration-300'>{item.subtitle.split(' ').length === 2 ? 
@@ -77,12 +63,12 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
                   </div>
                 </div>
 
-                <div className="overflow-hidden transition-all duration-300 group-hover/stroke:max-h-[95px] max-h-0">
+                <div className="overflow-hidden transition-all duration-100 group-hover/stroke:max-h-[95px] max-h-0">
                   <ul
                     ref={(el) => setBounceEl(el)}
                     className={`list-disc leading-[140%] pl-[35px] *:*:text-[16px] pt-[5px] overflow-hidden transition-all duration-300`}>
 
-                    <li className='will-change-transform duration-500 transition-all opacity-0 translate-y-[20px] group-hover/stroke:opacity-100 group-hover/stroke:translate-y-[0] ' key={index}>
+                    <li className='will-change-transform duration-100 transition-all opacity-0 translate-x-[-20rem] group-hover/stroke:opacity-100 group-hover/stroke:translate-x-[0] ' key={index}>
                       <p >{filterPrepositions(item.text)}</p>
                     </li>
 
