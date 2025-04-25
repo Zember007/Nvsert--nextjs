@@ -110,7 +110,10 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
             if (!el) return;
 
             if (!isInViewport(el)) {
-                scrollToElement(el);
+
+                setTimeout(() => {
+                    scrollToElement(el);
+                }, 200)
 
             }
         }
