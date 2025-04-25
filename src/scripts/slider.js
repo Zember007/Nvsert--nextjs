@@ -189,6 +189,7 @@ export function horizontalLoop(items, config) {
             onDragFunction = config.onDragFunction,
             lastIndex = 0,
             tl = gsap.timeline({
+                duration:0.75,
                 repeat: config.repeat, onUpdate: function () {
                     onDragFunction && onDragFunction()
 
