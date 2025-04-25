@@ -360,7 +360,7 @@ export function horizontalLoop(items, config) {
                     let x = this.x;
                     gsap.killTweensOf(tl);
                     // wasPlaying = !tl.paused();
-                    // tl.pause();
+                    tl.pause();
                     startProgress = tl.progress();
                     refresh();
                     ratio = 1 / totalWidth;
@@ -387,18 +387,21 @@ export function horizontalLoop(items, config) {
                     return lastSnap;
                 },
                 onRelease() {
-                    syncIndex();
-                    draggable.isThrowing && (indexIsDirty = true);
+                    syncIndex();                    
+                    if (draggable.isThrowing) {
+                        indexIsDirty = true
+                        if (wasPlaying) {
+                            if (dragDirection < 0) {
+                                tl.play();
+                            } else if (dragDirection > 0) {
+                                tl.reverse();
+                            }
+                        }
+                    }
                 },
                 onThrowComplete: () => {
                     syncIndex();
-                    if (wasPlaying) {
-                        if (dragDirection < 0) {
-                            tl.play();
-                        } else if (dragDirection > 0) {
-                            tl.reverse();
-                        }
-                    }
+                   
                 }
             })[0];
             tl.draggable = draggable;
