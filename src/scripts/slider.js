@@ -361,7 +361,8 @@ export function horizontalLoop(items, config) {
                 onPressInit() {
                     let x = this.x;
                     gsap.killTweensOf(tl);
-                    
+                    wasPlaying = !tl.paused();
+                    tl.pause();
                     startProgress = tl.progress();
                     refresh();
                     ratio = 1 / totalWidth;
@@ -393,10 +394,9 @@ export function horizontalLoop(items, config) {
                         indexIsDirty = true;
 
                         if (wasPlaying) {
-                            draggable.endDrag();
+                            align();
 
-                            wasPlaying = !tl.paused();
-                            tl.pause();
+                          
                             
                             if (dragDirection < 0) {
                                 tl.play();
