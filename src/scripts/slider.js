@@ -394,6 +394,7 @@ export function horizontalLoop(items, config) {
                         indexIsDirty = true;
 
                         if (wasPlaying) {
+                            draggable.endDrag();
                             tl.time(tl.totalTime() - tl.time()); 
                             if (dragDirection < 0) {
                                 tl.play();
