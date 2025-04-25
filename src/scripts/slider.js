@@ -409,6 +409,15 @@ export function horizontalLoop(items, config) {
                             }
                             return;
                         }
+
+                        if (wasPlaying) {
+                            gsap.killTweensOf(tl);
+                            if (dragDirection < 0) {
+                                tl.play();
+                            } else if (dragDirection > 0) {
+                                tl.reverse();
+                            }
+                        }
                 
                         
                     }
