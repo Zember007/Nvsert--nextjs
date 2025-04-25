@@ -347,14 +347,18 @@ export function horizontalLoop(items, config) {
             }
         }
         if (config.draggable && typeof (Draggable) === "function") {
-            proxy = document.createElement("div")
+            proxy = document.createElement("div");
             let wrap = gsap.utils.wrap(0, 1),
                 ratio, startProgress, draggable, lastSnap, initChangeX, wasPlaying,
                 align = () => tl.progress(wrap(startProgress + (draggable.startX - draggable.x) * ratio)),
                 syncIndex = () => tl.closestIndex(true);
-            typeof (InertiaPlugin) === "undefined" && console.warn("InertiaPlugin required for momentum-based scrolling and snapping. https://greensock.com/club");
+
+            if (typeof InertiaPlugin === "undefined") {
+                console.warn("InertiaPlugin required for velocity tracking. https://greensock.com/club");
+            }
+
             let dragDirection = 0;
-            const velocityTolerance = 0.15;
+
             draggable = Draggable.create(proxy, {
                 trigger: items[0].parentNode,
                 type: "x",
@@ -373,9 +377,22 @@ export function horizontalLoop(items, config) {
                     align();
                     dragDirection = this.getDirection("start") === "left" ? -1 : 1;
                 },
-                onThrowUpdate: align,
+                onThrowUpdate() {
+                    align();
+
+                    const minSpeed = 50; // Установите минимальную скорость
+                    const decelerationRate = 0.95; // Снижение скорости при замедлении
+
+                    // Если скорость ниже минимальной, установить её на минимальное значение
+                    if (Math.abs(draggable.velocity) < minSpeed) {
+                        draggable.velocity = minSpeed * Math.sign(draggable.velocity); // Применение минимальной скорости
+                    } else {
+                        // В противном случае продолжаем снижение с учетом коэффициента замедления
+                        draggable.velocity *= decelerationRate;
+                    }
+                },
                 overshootTolerance: 0,
-                inertia: true,
+                inertia: true, // Включаем инерцию
                 snap(value) {
                     if (Math.abs(startProgress / -ratio - this.x) < 10) {
                         return lastSnap + initChangeX;
@@ -389,6 +406,7 @@ export function horizontalLoop(items, config) {
                     return lastSnap;
                 },
                 onDragEnd() {
+
                     if (wasPlaying) {
                         if (dragDirection < 0) {
                             tl.play();
@@ -396,22 +414,15 @@ export function horizontalLoop(items, config) {
                             tl.reverse();
                         }
                     }
+                    syncIndex();
+
                 },
                 onRelease() {
                     syncIndex();
-                    if (draggable.isThrowing) {
-                        indexIsDirty = true;
-
-                        draggable.endDrag();
-                        console.log('end');
-                        
-
-
-                    }
+                    indexIsDirty = true;
                 },
                 onThrowComplete: () => {
                     syncIndex();
-
                 }
             })[0];
             tl.draggable = draggable;
