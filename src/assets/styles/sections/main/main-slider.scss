@@ -128,11 +128,6 @@
   flex: none;
   transition: opacity .4s;
   position: relative;
-  transition: margin 0.3s ease;
-
-  &:first-child:not(.active) {
-    
-  }
 }
 
 

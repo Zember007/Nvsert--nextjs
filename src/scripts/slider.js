@@ -125,6 +125,7 @@ export function initSlider(onChangeFunction, onDragFunction) {
         draggable: true,
         center: false,
         offsetLeft: 75,
+        opacity: true,
         gap: 0,
         onChange: (index) => {
             if (activeElement) {
@@ -212,7 +213,7 @@ export function horizontalLoop(items, config) {
             timeOffset = 0,
             container = center === true ? items[0].parentNode : gsap.utils.toArray(center)[0] || items[0].parentNode,
             totalWidth,
-            getTotalWidth = () => items[length - 1].offsetLeft + xPercents[length - 1] / 100 * widths[length - 1] - startX + spaceBefore[0] + items[length - 1].offsetWidth * gsap.getProperty(items[length - 1], "scaleX") + (parseFloat(config.paddingRight) || 0) + (config.gap || 0),
+            getTotalWidth = () => items[length - 1].offsetLeft + xPercents[length - 1] / 100 * widths[length - 1] - startX + spaceBefore[0] + items[length - 1].offsetWidth * gsap.getProperty(items[length - 1], "scaleX") + (config.gap || 0),
             populateWidths = () => {
                 let b1 = container.getBoundingClientRect(), b2;
                 items.forEach((el, i) => {
@@ -275,8 +276,9 @@ export function horizontalLoop(items, config) {
                             xPercent: xPercents[i],
                             opacity: 1, // Возвращаем полную видимость
                             duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond,
-                            immediateRender: false
-                        }, distanceToLoop / pixelsPerSecond + 0.3)
+                            immediateRender: false,
+                            delay: config.opacity ? 0.3 : 0,
+                        }, distanceToLoop / pixelsPerSecond)
                         .add("label" + i, distanceToStart / pixelsPerSecond);
                     times[i] = distanceToStart / pixelsPerSecond;
                 }
