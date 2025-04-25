@@ -351,6 +351,8 @@ export function horizontalLoop(items, config) {
                 align = () => tl.progress(wrap(startProgress + (draggable.startX - draggable.x) * ratio)),
                 syncIndex = () => tl.closestIndex(true);
             typeof (InertiaPlugin) === "undefined" && console.warn("InertiaPlugin required for momentum-based scrolling and snapping. https://greensock.com/club");
+            let dragDirection = 0; 
+
             draggable = Draggable.create(proxy, {
                 trigger: items[0].parentNode,
                 type: "x",
@@ -365,13 +367,16 @@ export function horizontalLoop(items, config) {
                     initChangeX = (startProgress / -ratio) - x;
                     gsap.set(proxy, { x: startProgress / -ratio });
                 },
-                onDrag: align,
+                onDrag() {
+                    align();
+                    dragDirection = this.getDirection("start") === "left" ? -1 : 1;
+                },
                 onThrowUpdate: align,
                 overshootTolerance: 0,
                 inertia: true,
                 snap(value) {
                     if (Math.abs(startProgress / -ratio - this.x) < 10) {
-                        return lastSnap + initChangeX
+                        return lastSnap + initChangeX;
                     }
                     let time = -(value * ratio) * tl.duration(),
                         wrappedTime = timeWrap(time),
@@ -387,7 +392,13 @@ export function horizontalLoop(items, config) {
                 },
                 onThrowComplete: () => {
                     syncIndex();
-                    wasPlaying && tl.play();
+                    if (wasPlaying) {
+                        if (dragDirection > 0) {
+                            tl.play();
+                        } else if (dragDirection < 0) {
+                            tl.reverse();
+                        }
+                    }
                 }
             })[0];
             tl.draggable = draggable;
