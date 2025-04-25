@@ -28,7 +28,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const phoneRegex = /^(?:\+7|8)?[\s(-]*\d[\s(-]*\d{2}[\s)-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}$/;
 
-        if ((!emailRegex.test(e.Contact) && isEmail) || (!phoneRegex.test(e.Contact) && isPhone)) {
+        if ((!emailRegex.test(e.Contact.trim()) && isEmail) || (!phoneRegex.test(e.Contact.trim()) && isPhone)) {
             setEmailError(true)
             setEmailSuccessful(false)
             return;
@@ -81,7 +81,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const phoneRegex = /^(?:\+7|8)?[\s(-]*\d[\s(-]*\d{2}[\s)-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}$/;
 
-        if ((!emailRegex.test(value.trimEnd()) && isEmail) || (!phoneRegex.test(value.trimEnd()) && isPhone)) {
+        if ((!emailRegex.test(value.trim()) && isEmail) || (!phoneRegex.test(value.trim()) && isPhone)) {
             setEmailError(true)
             setEmailSuccessful(false)
 
