@@ -393,13 +393,8 @@ export function horizontalLoop(items, config) {
                     if (draggable.isThrowing) {
                         indexIsDirty = true;
 
-                       
-                
-                   
-
                         if (wasPlaying) {
-                            draggable.endDrag();
-                            gsap.killTweensOf(tl);
+                            tl.time(tl.totalTime() - tl.time()); 
                             if (dragDirection < 0) {
                                 tl.play();
                             } else if (dragDirection > 0) {
