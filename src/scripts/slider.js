@@ -388,22 +388,23 @@ export function horizontalLoop(items, config) {
                     lastSnap = (time + dif) / tl.duration() / -ratio;
                     return lastSnap;
                 },
+                onDragEnd() {
+                    if (wasPlaying) {
+                        if (dragDirection < 0) {
+                            tl.play();
+                        } else if (dragDirection > 0) {
+                            tl.reverse();
+                        }
+                    }
+                },
                 onRelease() {
                     syncIndex();
                     if (draggable.isThrowing) {
                         indexIsDirty = true;
 
-                        if (wasPlaying) {
-                            align();
-
-                          
-                            
-                            if (dragDirection < 0) {
-                                tl.play();
-                            } else if (dragDirection > 0) {
-                                tl.reverse();
-                            }
-                        }
+                        draggable.endDrag();
+                        console.log('end');
+                        
 
 
                     }
