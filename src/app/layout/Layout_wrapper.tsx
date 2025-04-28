@@ -1,6 +1,6 @@
 import '@/assets/styles/base.scss'
 import AppHeader from '@/components/general/AppHeader';
-import { ReactNode, useEffect, useMemo, useState } from 'react';
+import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AppFooter from '@/components/general/AppFooter';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
@@ -10,7 +10,7 @@ import { setMetadata } from '@/store/metadata';
 import AppModalWrapper from '@/components/general/AppModalWrapper';
 import { AppDispatch, RootState } from '@/config/store';
 import { usePathname } from 'next/navigation';
-
+import Lenis from '@studio-freight/lenis';
 
 
 const Layout_wrapper = ({ children }: { children: ReactNode }) => {
@@ -54,6 +54,8 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
         }
     }, [configs, file_configs, dispatch])
 
+    const lenis = useRef<Lenis>(null);
+
     useEffect(() => {
 
         if (typeof window === "undefined") return
@@ -66,6 +68,8 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
             document.documentElement.style.setProperty('--vh', `${vh}px`);
         }
 
+
+
         set100Vh();
 
         window.addEventListener('resize', set100Vh);
@@ -75,6 +79,20 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
         img?.addEventListener('contextmenu', function (e) {
             e.preventDefault();
         });
+
+        lenis.current = new Lenis({
+            duration: 1.2, // Длительность анимации скролла (в секундах)
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+        });
+
+        const animate = (time: any) => {
+            if (!lenis.current) return
+            lenis.current.raf(time);
+            requestAnimationFrame(animate);
+        };
+
+        requestAnimationFrame(animate);
+
 
     }, [])
 

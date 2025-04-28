@@ -197,6 +197,7 @@
 
 }
 
+
 .PhotoView-Slider__Backdrop {
     backdrop-filter: blur(10px) !important;
     -webkit-backdrop-filter: blur(10px) !important;
@@ -312,8 +313,8 @@
 
     backface-visibility: hidden;
     will-change: transform;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    // -webkit-font-smoothing: antialiased;
+    // -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
 
 
