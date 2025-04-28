@@ -124,7 +124,7 @@ const AppMainSafeguards = () => {
     // Добавляем контроллер цвета в формате HEX
     const settings = {
       'цвет оттенка': color,
-      'яркость оттенка': color,
+      'яркость оттенка': opacity,
     }
     gui.addColor(settings, 'цвет оттенка').onChange((value:any) => setColor(value));
     gui.add(settings, 'яркость оттенка', 0, 1, 0.01).onChange((value:any) => setOpacity(value));
