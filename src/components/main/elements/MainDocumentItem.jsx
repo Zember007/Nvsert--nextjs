@@ -129,10 +129,10 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
         <div className={`wrapper document-wrapper-border group/wrapper relative`}
             ref={wrapperRef}
         >
-            <div className={`absolute top-[-1px] bottom-[-1px] border-group transition-all duration-300 right-[16px] left-[16px] ${!active && ' group-hover/wrapper:!border-[transparent]'}`}
+            <div className={`absolute top-[-1px] bottom-[-1px] border-group right-[16px] left-[16px] ${!active && ' group-hover/wrapper:!border-[transparent]'}`}
                 style={{
-                    borderTopColor: (!bordert || active) ? 'transparent' : '#00000033',
-                    borderBottomColor: (!borderb || active) ? 'transparent' : '#00000033'
+                    borderTopColor: (!bordert || active) ? 'transparent' : '#93969D',
+                    borderBottomColor: (!borderb || active) ? 'transparent' : '#93969D'
                 }}
             >
             </div>

@@ -35,7 +35,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
               }}
             >{filterPrepositions(title)}</p>
             <Image
-              className='w-auto h-full group-hover:scale-[1.1] group-hover:rotate-[4deg] scale-[1] transition-all duration-[0.4s] ease-in-out'
+              className='w-auto h-full group-hover:scale-[1.1] group-hover:rotate-[4deg] scale-[1] transition-all duration-100 ease-in-out'
               alt='document' src={img}
               width="0"
               height="0"
@@ -52,7 +52,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
               <div
                 key={index} className={`group/stroke flex flex-col ${index == items.length - 1 ? 'grow' : 'pb-[20px]'}`}>
                 <div className="flex justify-between gap-[20px]">
-                  <p className='text-[18px] font-bold  group-hover/stroke:text-[#34446D] transition-all duration-300'>{item.subtitle.split(' ').length === 2 ? 
+                  <p className='text-[18px] font-bold  group-hover/stroke:text-[#34446D] transition-all duration-100'>{item.subtitle.split(' ').length === 2 ? 
                   <>
                   {item.subtitle.split(' ')[0]  } <br />
                   {item.subtitle.split(' ')[1]}
@@ -72,7 +72,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
                 <div className="overflow-hidden transition-all duration-100 group-hover/stroke:max-h-[95px] max-h-0">
                   <ul
                     ref={(el) => setBounceEl(el)}
-                    className={`list-disc leading-[140%] pl-[35px] *:*:text-[16px] pt-[5px] overflow-hidden transition-all duration-300`}>
+                    className={`list-disc leading-[140%] pl-[35px] *:*:text-[16px] pt-[5px] overflow-hidden`}>
 
                     <li className='will-change-transform duration-100 transition-all opacity-0 translate-x-[-20rem] group-hover/stroke:opacity-100 group-hover/stroke:translate-x-[0] ' key={index}>
                       <p >{filterPrepositions(item.text)}</p>
