@@ -35,12 +35,13 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
               }}
             >{filterPrepositions(title)}</p>
             <Image
-              className='w-auto h-full group-hover:scale-[1.1] scale-[1] transition-all duration-[0.4s] ease-in-out'
+              className='w-auto h-full group-hover:scale-[1.1] group-hover:rotate-[4deg] scale-[1] transition-all duration-[0.4s] ease-in-out'
               alt='document' src={img}
               width="0"
               height="0"
               sizes="100vw"
             />
+            <div className="absolute top-0 left-0 z-[2]  w-full h-full bg-[#34446D] mix-blend-hue"></div>
           </div>
           <div className="px-[15px] flex flex-col grow">
             {items.map((item, index) =>

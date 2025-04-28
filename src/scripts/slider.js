@@ -383,7 +383,7 @@ export function horizontalLoop(items, config) {
                     if (wasPlaying) {
                         const Velocity = Math.abs(InertiaPlugin.getVelocity(proxy, "x"))                        
                         
-                        if (Velocity <= 100) {
+                        if (Velocity <= 200) {
                             gsap.killTweensOf(proxy);
                         }
                     }
