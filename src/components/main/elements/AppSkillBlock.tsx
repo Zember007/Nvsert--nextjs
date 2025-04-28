@@ -87,7 +87,7 @@ const AppSkillBlock = (skill: any) => {
             borderColor: `${'#CCCCCC'}`,
             ...(mousePX && { ...textStyle })
           }}
-          className={`absolute z-[-1] ${oldMousePX && 'backdrop-blur-[2px]'} transition-all duration-500 rounded-[4px] top-0 left-0 right-0 bottom-0 border border-solid`}
+          className={`absolute z-[-1] ${oldMousePX && ''} transition-all duration-500 rounded-[4px] top-0 left-0 right-0 bottom-0 border border-solid`}
         ></div>
         <div
           style={{

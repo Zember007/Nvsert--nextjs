@@ -96,6 +96,7 @@ const AppMainSafeguards = () => {
   ];
 
   const [color, setColor] = useState('#34446D')
+  const [opacity, setOpacity] = useState(1)
 
 
 
@@ -121,7 +122,12 @@ const AppMainSafeguards = () => {
     const gui = new GUI();
 
     // Добавляем контроллер цвета в формате HEX
-    gui.addColor({ color }, 'color').onChange((value:any) => setColor(value));
+    const settings = {
+      'цвет оттенка': color,
+      'яркость оттенка': color,
+    }
+    gui.addColor(settings, 'цвет оттенка').onChange((value:any) => setColor(value));
+    gui.add(settings, 'яркость оттенка', 0, 1, 0.01).onChange((value:any) => setOpacity(value));
 
  
     return () => {
@@ -148,6 +154,7 @@ const AppMainSafeguards = () => {
             guarantees.map((item, index) => (
               <SafeguardBlock
                 color={color}
+                opacity={opacity}
                 key={index}
                 img={item.img}
                 index={index}

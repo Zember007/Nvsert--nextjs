@@ -12,9 +12,10 @@ interface GuaranteeCardProps {
   isVisible: boolean,
   index: number
   color: string
+  opacity: number
 }
 
-const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, index, img, color }) => {
+const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, index, img, color, opacity }) => {
 
   const bounceEl = useRef<HTMLElement[]>([])
 
@@ -43,7 +44,8 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
             />
             <div className="absolute top-0 left-0 z-[2]  w-full h-full mix-blend-hue"
             style={{
-              background: color
+              background: color,
+              opacity: opacity
             }}
             ></div>
           </div>
