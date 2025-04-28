@@ -141,7 +141,7 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
 
                 onMouseEnter={() => { setHover(true) }}
                 onMouseLeave={() => { setHover(false) }}
-                className={`mx-[-30px]  flex flex-col  group/main cursor-pointer  hover:bg-[#F5F5F5] rounded-[4px] relative`}>
+                className={`mx-[-30px]  flex flex-col  group/main cursor-pointer  hover:bg-[#CCCCCC26] backdrop-blur-[2px] rounded-[4px] relative`}>
                 <div className={`pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[0] rounded-[4px] ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[transparent]`}></div>
 
 
@@ -203,7 +203,7 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
                     </div>
                 </div>
 
-                <div className={`${active && 'bg-[#FFF]'}`}>
+                <div className={`${active && 'bg-[#FFFFFF26] backdrop-blur-[2px]'}`}>
 
                     <div className={`transition-all easy-in duration-200 overflow-hidden max-h-0   ${active && '!max-h-[1400px] '}`}
                     >
