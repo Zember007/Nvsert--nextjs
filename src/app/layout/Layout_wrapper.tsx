@@ -10,9 +10,7 @@ import { setMetadata } from '@/store/metadata';
 import AppModalWrapper from '@/components/general/AppModalWrapper';
 import { AppDispatch, RootState } from '@/config/store';
 import { usePathname } from 'next/navigation';
-
-import smoothscroll from 'smoothscroll-polyfill';
-smoothscroll.polyfill();
+import Lenis from '@studio-freight/lenis';
 
 
 const Layout_wrapper = ({ children }: { children: ReactNode }) => {
@@ -58,6 +56,15 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
     }, [configs, file_configs, dispatch])
 
     useEffect(() => {
+
+        const lenis = new Lenis();
+      
+          // Анимационный цикл
+          const raf = (time:number) => {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+          };
+          requestAnimationFrame(raf);
 
         if (typeof window === "undefined") return
 
