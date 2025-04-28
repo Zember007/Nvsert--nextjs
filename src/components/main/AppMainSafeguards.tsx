@@ -8,7 +8,6 @@ import Img1 from '@/assets/images/safeguard/1.webp'
 import Img2 from '@/assets/images/safeguard/2.webp'
 import Img3 from '@/assets/images/safeguard/3.webp'
 import Img4 from '@/assets/images/safeguard/4.webp'
-import GUI from 'lil-gui';
 
 
 
@@ -95,8 +94,6 @@ const AppMainSafeguards = () => {
     },
   ];
 
-  const [color, setColor] = useState('#34446D')
-  const [opacity, setOpacity] = useState(1)
 
 
 
@@ -118,23 +115,11 @@ const AppMainSafeguards = () => {
       observer.observe(divRef.current);
     }
 
-
-    const gui = new GUI();
-
-    // Добавляем контроллер цвета в формате HEX
-    const settings = {
-      'цвет оттенка': color,
-      'яркость оттенка': opacity,
-    }
-    gui.addColor(settings, 'цвет оттенка').onChange((value:any) => setColor(value));
-    gui.add(settings, 'яркость оттенка', 0, 1, 0.01).onChange((value:any) => setOpacity(value));
-
  
     return () => {
       if (divRef.current) {
         observer.unobserve(divRef.current);
       }
-      gui.destroy();
 
     };
   }, []);
@@ -153,8 +138,6 @@ const AppMainSafeguards = () => {
           {
             guarantees.map((item, index) => (
               <SafeguardBlock
-                color={color}
-                opacity={opacity}
                 key={index}
                 img={item.img}
                 index={index}

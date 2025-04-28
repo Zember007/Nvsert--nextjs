@@ -10,10 +10,12 @@ import { setMetadata } from '@/store/metadata';
 import AppModalWrapper from '@/components/general/AppModalWrapper';
 import { AppDispatch, RootState } from '@/config/store';
 import { usePathname } from 'next/navigation';
-import Lenis from '@studio-freight/lenis';
+import smoothscroll from 'smoothscroll-polyfill';
+smoothscroll.polyfill();
 
 
 const Layout_wrapper = ({ children }: { children: ReactNode }) => {
+
 
     const dispatch = useDispatch<AppDispatch>()
     const pathname = usePathname()
@@ -54,8 +56,6 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
         }
     }, [configs, file_configs, dispatch])
 
-    const lenis = useRef<Lenis>(null);
-
     useEffect(() => {
 
         if (typeof window === "undefined") return
@@ -80,21 +80,10 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
             e.preventDefault();
         });
 
-        lenis.current = new Lenis({
-            duration: 1.2, // Длительность анимации скролла (в секундах)
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-        });
-
-        const animate = (time: any) => {
-            if (!lenis.current) return
-            lenis.current.raf(time);
-            requestAnimationFrame(animate);
-        };
-
-        requestAnimationFrame(animate);
-
 
     }, [])
+
+
 
     const [classBody, setClassBody] = useState('transparent-header')
 
