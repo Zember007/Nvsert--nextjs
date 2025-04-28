@@ -10,7 +10,6 @@ import { setMetadata } from '@/store/metadata';
 import AppModalWrapper from '@/components/general/AppModalWrapper';
 import { AppDispatch, RootState } from '@/config/store';
 import { usePathname } from 'next/navigation';
-import Lenis from '@studio-freight/lenis';
 
 
 const Layout_wrapper = ({ children }: { children: ReactNode }) => {
@@ -57,14 +56,33 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
 
-        const lenis = new Lenis();
-      
-          // Анимационный цикл
-          const raf = (time:number) => {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-          };
-          requestAnimationFrame(raf);
+        let targetScroll = window.scrollY;
+        let currentScroll = window.scrollY;
+        let isScrolling = false;
+
+        // Функция для плавной прокрутки
+        const smoothScroll = () => {
+            if (Math.abs(currentScroll - targetScroll) < 1) {
+                isScrolling = false;
+                return;
+            }
+            currentScroll += (targetScroll - currentScroll) * 0.1; // Коэффициент смягчения
+            window.scrollTo(0, currentScroll);
+            requestAnimationFrame(smoothScroll);
+        };
+
+        // Обработчик события прокрутки
+        const handleWheel = (e:any) => {
+            e.preventDefault();
+            targetScroll += e.deltaY; // Изменяем целевую позицию
+            if (!isScrolling) {
+                isScrolling = true;
+                requestAnimationFrame(smoothScroll);
+            }
+        };
+
+        // Добавляем обработчик с пассивным режимом
+        window.addEventListener('wheel', handleWheel, { passive: false });
 
         if (typeof window === "undefined") return
 
