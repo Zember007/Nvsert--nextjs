@@ -44,8 +44,6 @@ const AppInput = ({ title,disable,fail,message = true, inputName, type, required
         setVisibleError(false)
         setTimeout(() => {
             setVisibleError(true)
-            console.log('bounce');
-
         }, 30)
     }, [submitCount])
 
