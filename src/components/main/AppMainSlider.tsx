@@ -175,7 +175,7 @@ const SliderMain = () => {
 
 
     return (
-        <section className='py-[75px] text-[#000] bg-[#FFF]'>
+        <section className='py-[75px] text-[#000]'>
             <div className="wrapper flex flex-col gap-[40px]">
 
                 <h2 className='leading-[1] tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px]'>Помогаем с документами по отраслям</h2>
