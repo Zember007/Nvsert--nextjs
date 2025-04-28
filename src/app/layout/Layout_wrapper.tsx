@@ -151,12 +151,6 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
                     defaultModalActive={defaultModalActive}
                     defaultModalName={defaultModalName}
                 />
-
-                <AppModalWrapper
-                    setDefaultModalActive={setDefaultModalActive}
-                    defaultModalActive={defaultModalActive}
-                    defaultModalName={defaultModalName}
-                />
             </body>
         </>
     );

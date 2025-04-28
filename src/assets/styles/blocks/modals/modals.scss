@@ -74,26 +74,28 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(49,47,59,.35);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.8);
     transition: all .3s;
     opacity: 0;
     visibility: hidden;
 
     &.active {
-      
+
       opacity: 1;
       visibility: visible;
     }
   }
 
   &__box {
-    max-width: 420px;
+    max-width: 320px;
     position: relative;
-    
+
     transition: all .3s;
     transform: translateY(-50px);
 
-    &.active {      
+    &.active {
       transform: translateY(0);
     }
   }
@@ -101,10 +103,10 @@
   &__content {
     width: 100%;
     position: relative;
-    background: #1e1e1f;
+    background: #00000080;
     display: flex;
     flex-direction: column;
-    padding: 48px;
+    padding: 30px 40px;
     border-radius: 6px;
 
     max-height: 90vh;

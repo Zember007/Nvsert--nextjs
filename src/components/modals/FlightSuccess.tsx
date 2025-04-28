@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { BounceEffect } from "@/hook/useBounce";
 import FlyingPlane from './elements/FlyingPlane';
 
-const FlightSuccess = ({bg, close, small = false, text }: { bg:string; close: () => void; small?: boolean; text:string }) => {
+const FlightSuccess = ({bg, close, small = false, text }: { bg?:string; close: () => void; small?: boolean; text:string }) => {
 
     const [time, setTime] = React.useState(10);
     const bounceContent = useRef<HTMLDivElement | null >(null)
