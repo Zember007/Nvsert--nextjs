@@ -4,11 +4,11 @@ import { gsap } from "gsap";
 
 import SafeguardBlock from './elements/AppSafeguardBlock';
 import '@/assets/styles/sections/main/animation/skills.scss'
-import Img1 from '@/assets/images/safeguard/1.png'
-import Img2 from '@/assets/images/safeguard/2.png'
-import Img3 from '@/assets/images/safeguard/3.png'
-import Img4 from '@/assets/images/safeguard/4.png'
-
+import Img1 from '@/assets/images/safeguard/1.webp'
+import Img2 from '@/assets/images/safeguard/2.webp'
+import Img3 from '@/assets/images/safeguard/3.webp'
+import Img4 from '@/assets/images/safeguard/4.webp'
+import GUI from 'lil-gui';
 
 
 
@@ -95,6 +95,8 @@ const AppMainSafeguards = () => {
     },
   ];
 
+  const [color, setColor] = useState('#34446D')
+
 
 
   useEffect(() => {
@@ -116,12 +118,17 @@ const AppMainSafeguards = () => {
     }
 
 
+    const gui = new GUI();
 
+    // Добавляем контроллер цвета в формате HEX
+    gui.addColor({ color }, 'color').onChange((value:any) => setColor(value));
 
+ 
     return () => {
       if (divRef.current) {
         observer.unobserve(divRef.current);
       }
+      gui.destroy();
 
     };
   }, []);
@@ -140,6 +147,7 @@ const AppMainSafeguards = () => {
           {
             guarantees.map((item, index) => (
               <SafeguardBlock
+                color={color}
                 key={index}
                 img={item.img}
                 index={index}
