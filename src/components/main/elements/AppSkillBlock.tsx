@@ -77,7 +77,7 @@ const AppSkillBlock = (skill: any) => {
         style={
           {
             ...cardStyle,
-            background: `${skill.bg === 'secondary' ? '#CCCCCC26' : '#FFFFFF26'}`
+            background: `${skill.bg === 'secondary' ? '#FFFFFF0D' : '#FFFFFF26'}`
 
           }
         }
