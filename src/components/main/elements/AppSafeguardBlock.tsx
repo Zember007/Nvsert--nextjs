@@ -70,7 +70,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
                     ref={(el) => setBounceEl(el)}
                     className={`list-disc leading-[140%] pl-[35px] *:*:text-[16px] pt-[5px] overflow-hidden`}>
 
-                    <li className='will-change-transform duration-100 transition-all opacity-0 translate-x-[-20rem] group-hover/stroke:opacity-100 group-hover/stroke:translate-x-[0] ' key={index}>
+                    <li className='will-change-transform duration-100 transition-all opacity-0 translate-x-[-100%] group-hover/stroke:opacity-100 group-hover/stroke:translate-x-[0] ' key={index}>
                       <p >{filterPrepositions(item.text)}</p>
                     </li>
 
