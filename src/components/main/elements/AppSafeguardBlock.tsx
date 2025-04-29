@@ -25,7 +25,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
   return (
     <div className={`hover:z-[10000] relative card-wrap h-[517px] w-full translate-y-[0] ${!isVisible && '!translate-y-[30px] opacity-0'} transition-all duration-500 `}>
       <div
-        className="bg-[#FFFFFF26] backdrop-blur-[1px] hover:bg-[#93969D26] !shadow-none card border-[#CCCCCC] overflow-hidden hover:border-[#34446D] group h-full border border-solid rounded-[8px] flex flex-col gap-[29px] justify-between ">
+        className="bg-[#FFFFFF26] backdrop-blur-[1px] hover:bg-[#93969D26] !shadow-none card border-[#CCCCCC] overflow-hidden group h-full border border-solid rounded-[8px] flex flex-col gap-[29px] justify-between ">
         <div className="flex flex-col gap-[20px] h-full">
           <div className="overflow-hidden h-[200px]  w-full relative">
             <p className="text-[22px] z-[2] text-[#FFF] backdrop-blur-[4px] p-[10px] rounded-[4px] shadow-[0px_0px_4px_0px_#00000033] bg-[#FFFFFF1A] font-bold absolute top-[15px] left-[15px]"
@@ -48,7 +48,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
               <div
                 key={index} className={`group/stroke flex flex-col ${index == items.length - 1 ? 'grow' : 'pb-[20px]'}`}>
                 <div className="flex justify-between gap-[20px]">
-                  <p className='text-[18px] font-bold  group-hover/stroke:text-[#34446D] transition-all duration-100'>{item.subtitle.split(' ').length === 2 ? 
+                  <p className='text-[18px] font-bold  transition-all duration-100'>{item.subtitle.split(' ').length === 2 ? 
                   <>
                   {item.subtitle.split(' ')[0]  } <br />
                   {item.subtitle.split(' ')[1]}
@@ -56,7 +56,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
                   :filterPrepositions(item.subtitle)}</p>
                   <div className="min-w-[16px] h-[20px] flex items-end">
                     <svg
-                      className={`rotate-[180deg] group-hover/stroke:rotate-[0deg] group-hover/stroke:*:stroke-[#34446D] *:transition-all *:duration-300 transition-all duration-300`}
+                      className={`rotate-[180deg] group-hover/stroke:rotate-[0deg] *:transition-all *:duration-100 transition-all duration-100`}
                       width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M19 19L5 5" stroke={`#93969D`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                       <path d="M5 13L5 5L13 5" stroke={`#93969D`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

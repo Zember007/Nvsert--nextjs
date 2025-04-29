@@ -95,6 +95,12 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
 
         initScroll();
         window.addEventListener('wheel', handleWheel, { passive: false });
+        window.addEventListener('scroll', () => {
+            if (!isScrolling) {
+                currentScroll = window.scrollY;
+                targetScroll = currentScroll;
+            }
+        });
 
 
         dispatch(updateActionConfigs())
