@@ -188,7 +188,7 @@ export function horizontalLoop(items, config) {
         let onChange = config.onChange,
             onDragFunction = config.onDragFunction,
             lastIndex = 0,
-            tl = gsap.timeline({                
+            tl = gsap.timeline({
                 repeat: config.repeat, onUpdate: function () {
                     onDragFunction && onDragFunction()
 
@@ -330,6 +330,8 @@ export function horizontalLoop(items, config) {
                 indexIsDirty = false;
             }
 
+            items[index === 0 ? items.length - 1 : index - 1].classList.add('closestSlide')
+
 
 
             return index;
@@ -380,8 +382,8 @@ export function horizontalLoop(items, config) {
                 onThrowUpdate() {
                     align();
                     if (wasPlaying) {
-                        const Velocity = Math.abs(InertiaPlugin.getVelocity(proxy, "x"))                        
-                        
+                        const Velocity = Math.abs(InertiaPlugin.getVelocity(proxy, "x"))
+
                         if (Velocity <= 150) {
                             gsap.killTweensOf(proxy);
                         }

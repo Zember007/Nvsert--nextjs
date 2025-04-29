@@ -166,32 +166,22 @@ const SliderMain = () => {
     }, [sliders, whiteBgRef])
 
     const divRef = useRef(null);
-    const [isVisible, setIsVisible] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
 
     useEffect(() => {
-        if (typeof window === "undefined") return
-
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                setIsVisible(entry.isIntersecting);
-                
-
-            },
-            { threshold: 0.6 }
-        );
-
-        if (divRef.current) {
-            observer.observe(divRef.current);
-        }
-
+        let timeoutId: NodeJS.Timeout | null = null
+        window.addEventListener('scroll', () => {
+            setIsVisible(false)
+            if (timeoutId) clearTimeout(timeoutId)
+            timeoutId = setTimeout(() => {
+                setIsVisible(true)
+            }, 300)
+        })
 
         return () => {
-            if (divRef.current) {
-                observer.unobserve(divRef.current);
-            }
-
-        };
-    }, []);
+            window.removeEventListener('scroll', () => { })
+        }
+    }, [])
 
 
     const { setButtonRef, setWrapperRef } = useButton()
@@ -202,7 +192,7 @@ const SliderMain = () => {
 
     return (
         <section className='py-[75px] text-[#000] relative'>
-             <div ref={divRef} className='top-0 bottom-0 left-0 right-0 absolute pointer-events-none'></div>
+            <div ref={divRef} className='top-0 bottom-0 left-0 right-0 absolute pointer-events-none'></div>
             <div className="wrapper flex flex-col gap-[40px]">
 
                 <h2 className='leading-[1] tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px]'>Помогаем с документами по отраслям</h2>
@@ -221,10 +211,10 @@ const SliderMain = () => {
                     </div>
 
                     <div className={`overlay l:w-[642px] w-full p-[30px] pr-[80px] relative z-[0]  rounded-[8px] border border-solid border-[#34446D] overflow-hidden `}>
-                        <div className={`overlay-slider absolute top-0 right-0 left-0 bottom-0 z-[-2] ${!isVisible && ' backdrop-blur-[1px]'}`}
-                        style={{
-                            background: !isVisible ? '#FFFFFF26' : ''
-                        }}
+                        <div className={`overlay-slider absolute top-0 right-0 left-0 bottom-0 z-[-2] transition-all duration-300 ${!isVisible && ' backdrop-blur-[1px]'}`}
+                            style={{
+                                background: !isVisible ? '#FFFFFF26' : ''
+                            }}
                         ></div>
                         <div className="flex flex-col justify-between h-full l:items-start items-center w-full">
                             <div className=" grow relative w-full overflow-hidden">
@@ -362,7 +352,7 @@ const SliderMain = () => {
                         className="slide-main l:inset-[0%] l:h-[100%] h-[300px] l:bottom-0 bottom-[80px] l:z-0 z-[]">
 
                         <div className="slider-wrap">
-                            <div ref={whiteBgRef} className="slide-blur left-[562px]">
+                            <div ref={whiteBgRef} className={`slide-blur left-[562px] ${!isVisible ? '!bg-[transparent]' : 'white'}`}>
                                 <span className="line" style={{ '--blur': '4px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '8px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
@@ -375,7 +365,7 @@ const SliderMain = () => {
                                 <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
                             </div>
-                            <div data-slider="list" className="slider-list "
+                            <div data-slider="list" className={`slider-list ${!isVisible && 'unvisible'}`}
                                 onMouseMove={() => {
                                 }}
                             >

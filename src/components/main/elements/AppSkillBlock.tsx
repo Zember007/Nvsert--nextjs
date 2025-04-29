@@ -73,7 +73,7 @@ const AppSkillBlock = (skill: any) => {
       onMouseLeave={handleMouseLeave}
       ref={cardRef}>
       <div
-        className={`card rebound-box relative z-[0] group/item l:mr-0 mr-[20px] rounded-[4px]  text-[#000] h-[226px] min-w-[300px] w-full`}
+        className={`card rebound-box relative z-[0] group/item l:mr-0 mr-[20px] backdrop-blur-[1px] rounded-[4px]  text-[#000] h-[226px] min-w-[300px] w-full`}
         style={
           {
             ...cardStyle,

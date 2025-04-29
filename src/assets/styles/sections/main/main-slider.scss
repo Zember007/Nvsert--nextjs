@@ -125,7 +125,6 @@
 
 .slider-slide {
   flex: none;
-  transition: opacity .4s;
   position: relative;
 }
 
@@ -296,4 +295,8 @@
 
     }
   }
+}
+
+.unvisible .closestSlide {
+  opacity: 0 !important;
 }
