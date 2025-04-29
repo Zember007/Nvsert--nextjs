@@ -75,7 +75,8 @@ const AppInput = ({ title,disable,fail,message = true, inputName, type, required
                             onBlur(e.currentTarget.value);
                         }
                         if(e.target.value && e.target.value !== '') {
-                            e.target.value = e.target.value+' '
+                            e.target.value = e.target.value.trimEnd() + ' '
+                            e.target.setSelectionRange(e.target.value.length, e.target.value.length);
                         }}}
                 />
                 <span className={`field__title ${(errors[inputName] ) && '!text-[#FF3030]'} ${classNameTitle}`}>
