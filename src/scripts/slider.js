@@ -330,6 +330,10 @@ export function horizontalLoop(items, config) {
                 indexIsDirty = false;
             }
 
+            items.forEach((el) => {
+                el.classList.remove('closestSlide')
+            })
+
             items[index === 0 ? items.length - 1 : index - 1].classList.add('closestSlide')
 
 
