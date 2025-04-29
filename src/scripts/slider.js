@@ -267,12 +267,12 @@ export function horizontalLoop(items, config) {
 
 
                         .to(item, {
-                            opacity: 0,
+                            opacity: config.opacity ? 0 : 1,
                             duration: 0.3
                         }, distanceToLoop / pixelsPerSecond) // Начинаем затухание чуть раньше конца первой анимации
                         .fromTo(item, {
                             xPercent: snap((curX - distanceToLoop + totalWidth) / widths[i] * 100),
-                            opacity: 0 // Начинаем с прозрачности 0
+                            opacity: config.opacity ? 0 : 1
                         }, {
                             xPercent: xPercents[i],
                             opacity: 1, // Возвращаем полную видимость

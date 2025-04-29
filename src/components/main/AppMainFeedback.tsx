@@ -26,7 +26,8 @@ const AppMainFeedback = () => {
             draggable: true,
             offsetLeft: 0,
             repeat: -1,
-            gap: 20
+            gap: 20,
+            opacity: false
         });
 
         const loop1: any = horizontalLoop(slides1, {
@@ -35,7 +36,8 @@ const AppMainFeedback = () => {
             offsetLeft: 0,
             repeat: -1,
             gap: 20,
-            reversed: true
+            reversed: true,
+            opacity: false
         });
 
 
