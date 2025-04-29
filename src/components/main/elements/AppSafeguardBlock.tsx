@@ -25,7 +25,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
   return (
     <div className={`hover:z-[10000] relative card-wrap h-[517px] w-full translate-y-[0] ${!isVisible && '!translate-y-[30px] opacity-0'} transition-all duration-500 `}>
       <div
-        className="bg-[#FFFFFF26] backdrop-blur-[1px] hover:bg-[#F5F5F5] card border-[#CCCCCC] overflow-hidden hover:border-[#34446D] group h-full border border-solid rounded-[8px] flex flex-col gap-[29px] justify-between ">
+        className="bg-[#FFFFFF26] backdrop-blur-[1px] hover:bg-[#93969D26] !shadow-none card border-[#CCCCCC] overflow-hidden hover:border-[#34446D] group h-full border border-solid rounded-[8px] flex flex-col gap-[29px] justify-between ">
         <div className="flex flex-col gap-[20px] h-full">
           <div className="overflow-hidden h-[200px]  w-full relative">
             <p className="text-[22px] z-[2] text-[#FFF] backdrop-blur-[4px] p-[10px] rounded-[4px] shadow-[0px_0px_4px_0px_#00000033] bg-[#FFFFFF1A] font-bold absolute top-[15px] left-[15px]"
@@ -40,7 +40,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
               height="0"
               sizes="100vw"
             />
-            <div className="absolute top-0 left-0 z-[2] bg-[#00bfff]  w-full h-full mix-blend-hue"    
+            <div className="absolute top-0 left-0 z-[2] transition-all duration-100 group-hover:opacity-100 opacity-0 bg-[#00bfff]  w-full h-full mix-blend-hue"    
             ></div>
           </div>
           <div className="px-[15px] flex flex-col grow">
