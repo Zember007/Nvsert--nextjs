@@ -24,6 +24,7 @@ const AppMainFeedback = () => {
         const loop: any = horizontalLoop(slides, {
             paused: false,
             draggable: true,
+            speed: 0.5,
             offsetLeft: 0,
             repeat: -1,
             gap: 20,
@@ -33,6 +34,7 @@ const AppMainFeedback = () => {
         const loop1: any = horizontalLoop(slides1, {
             paused: false,
             draggable: true,
+            speed: 0.5,
             offsetLeft: 0,
             repeat: -1,
             gap: 20,
