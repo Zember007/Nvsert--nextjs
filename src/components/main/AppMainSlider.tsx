@@ -179,7 +179,7 @@ const SliderMain = () => {
                 }
 
             },
-            { threshold: 0.3 }
+            { threshold: 0.6 }
         );
 
         if (divRef.current) {
