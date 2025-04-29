@@ -153,7 +153,7 @@ const SliderMain = () => {
 
         },
             () => {
-                
+
                 whiteBgRef.current?.classList.remove('white')
                 if (timeoutIdBg) {
                     clearTimeout(timeoutIdBg)
@@ -165,7 +165,35 @@ const SliderMain = () => {
             })
     }, [sliders, whiteBgRef])
 
+    const divRef = useRef(null);
+    const [isVisible, setIsVisible] = useState(false);
 
+    useEffect(() => {
+        if (typeof window === "undefined") return
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsVisible(entry.isIntersecting);
+                if (divRef.current && entry.isIntersecting) {
+                    observer.unobserve(divRef.current);
+                }
+
+            },
+            { threshold: 0.3 }
+        );
+
+        if (divRef.current) {
+            observer.observe(divRef.current);
+        }
+
+
+        return () => {
+            if (divRef.current) {
+                observer.unobserve(divRef.current);
+            }
+
+        };
+    }, []);
 
 
     const { setButtonRef, setWrapperRef } = useButton()
@@ -183,8 +211,8 @@ const SliderMain = () => {
 
                     <div className="tariff-wrap w-[252px]" ref={setWrapperRef}>
                         <button
-                        onClick={() => {openDefaultModal('introForm')}}
-                        ref={setButtonRef} className='justify-center border-[#34446D] border border-solid tariff text-[20px] transition-all duration-300 font-bold tracking-normal m:flex items-center gap-[6px] px-[10px] py-[9px] text-[#34446D] hover:text-[#FFF] rounded-[4px]  group hover:bg-[#34446D]  leading-[1]'>
+                            onClick={() => { openDefaultModal('introForm') }}
+                            ref={setButtonRef} className='justify-center border-[#34446D] border border-solid tariff text-[20px] transition-all duration-300 font-bold tracking-normal m:flex items-center gap-[6px] px-[10px] py-[9px] text-[#34446D] hover:text-[#FFF] rounded-[4px]  group hover:bg-[#34446D]  leading-[1]'>
                             <span>Оформить заявку</span>
                             <svg className='group-hover:*:fill-[#FFF] *:transition-all *:duration-300' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M29.0627 0.9375L0.930664 12.1875L11.426 16.9336L26.2502 3.75L13.0666 18.5742L17.8127 29.0625L29.0627 0.9375Z" fill="#34446D" />
@@ -193,8 +221,12 @@ const SliderMain = () => {
                         </button>
                     </div>
 
-                    <div className="overlay l:w-[642px] w-full p-[30px] pr-[80px] relative z-[0]  rounded-[8px] border border-solid border-[#34446D] overflow-hidden">
-                        <div className={`overlay-slider absolute  top-0 right-0 left-0 bottom-0 z-[-2]`}></div>
+                    <div className={`overlay l:w-[642px] w-full p-[30px] pr-[80px] relative z-[0]  rounded-[8px] border border-solid border-[#34446D] overflow-hidden `}>
+                        <div className={`overlay-slider absolute top-0 right-0 left-0 bottom-0 z-[-2] ${!isVisible && ' backdrop-blur-[1px]'}`}
+                        style={{
+                            background: !isVisible ? '#FFFFFF26' : ''
+                        }}
+                        ></div>
                         <div className="flex flex-col justify-between h-full l:items-start items-center w-full">
                             <div className=" grow relative w-full overflow-hidden">
 
@@ -203,7 +235,7 @@ const SliderMain = () => {
                                         style={{
                                             zIndex: 5 - i
                                         }}
-                                        key={i} className={`absolute wrapper-slide wrapper-slide${i} top-0  w-1/5 h-full pointer-events-none z-`}>
+                                        key={i} className={`absolute wrapper-slide wrapper-slide${i} ${i !== 4 && !isVisible && 'opacity-0'} top-0  w-1/5 h-full pointer-events-none`}>
 
                                         <Slider
                                             ref={el => {
@@ -234,7 +266,7 @@ const SliderMain = () => {
                                                         </div>
                                                         <div className={`l:grow slide-text relative w-full h-full  `}>
 
-                                                            <p className="text-[16px] bg-[#FFF]">
+                                                            <p className={`text-[16px] ${isVisible && 'bg-[#FFF]'}`}>
                                                                 {filterPrepositions(slide.text)}
                                                             </p>
 
