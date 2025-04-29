@@ -10,7 +10,6 @@ import { PhotoProvider } from '@/assets/lib/react-photo-view';
 const AppMainDocuments = () => {
 
     const [activeIndex, setActive] = useState<number | null>(null)
-    const [hoverIndex, setHover] = useState<number | null>(null)
 
 
     return (
@@ -119,17 +118,8 @@ const AppMainDocuments = () => {
 
                                     }, 100)
                                 }}
-
-                                bordert={(index - 1 !== hoverIndex && index - 1 !== activeIndex)}
-                                borderb={index + 1 !== hoverIndex && activeIndex !== index + 1}
-                                setHover={(value: any) => { setHover(value ? index : null) }}
-                                setActive={(value: any) => {
-
-
-                                    setActive(value ? index : null)
-
-                                }} isOpen={index === activeIndex} key={index} {...item} />
-
+                                setActive={(value: any) => {setActive(value ? index : null)}} 
+                                active={index === activeIndex} key={index} {...item} />
                         )
                     }
 

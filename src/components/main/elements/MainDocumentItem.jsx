@@ -9,7 +9,7 @@ import { useHeaderContext } from '@/components/contexts/HeaderContext';
 
 
 
-const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, price, duration, isOpen, setActive, borderb, bordert, setHover }) => {
+const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, price, duration, active, setActive }) => {
     const controls = useAnimation();
 
     const [listHidden, setListHidden] = useState(true);
@@ -38,17 +38,7 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
     }, [containerPhotoRef.current])
 
 
-    const [active, setActiveOpen] = useState(false)
-    const [timeActive, setTimeActive] = useState(null)
 
-
-    useEffect(() => {
-
-
-        setActiveOpen(isOpen)
-
-
-    }, [isOpen])
 
 
 
@@ -131,17 +121,14 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
         >
             <div className={`absolute top-[-1px] bottom-[-1px] border-group right-[16px] left-[16px] ${!active && ' group-hover/wrapper:!border-[transparent]'}`}
                 style={{
-                    borderTopColor: (!bordert || active) ? 'transparent' : '#93969D',
-                    borderBottomColor: (!borderb || active) ? 'transparent' : '#93969D'
+                    borderTopColor: (active) ? 'transparent' : '#93969D',
+                    borderBottomColor: (active) ? 'transparent' : '#93969D'
                 }}
             >
             </div>
 
             <div
-
-                onMouseEnter={() => { setHover(true) }}
-                onMouseLeave={() => { setHover(false) }}
-                className={`mx-[-30px]  flex flex-col  group/main cursor-pointer ${!active && 'hover:bg-[#34446D33 hover:backdrop-blur-[1px]]'} rounded-[4px] relative`}>
+                className={`mx-[-30px]  flex flex-col  group/main cursor-pointer ${!active && 'hover:bg-[#34446D33] hover:backdrop-blur-[1px]]'} rounded-[4px] relative`}>
                 <div className={`pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[0] rounded-[4px] ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[transparent]`}></div>
 
 
