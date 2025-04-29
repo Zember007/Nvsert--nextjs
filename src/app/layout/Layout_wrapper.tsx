@@ -56,35 +56,46 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
 
-        let targetScroll = window.scrollY;
-        let currentScroll = window.scrollY;
+        if (typeof window === "undefined") return
+
+        let currentScroll = 0;
+        let targetScroll = 0;
         let isScrolling = false;
 
-        // Функция для плавной прокрутки
+        // Инициализируем текущую прокрутку
+        const initScroll = () => {
+            currentScroll = window.scrollY;
+            targetScroll = currentScroll;
+        };
+
         const smoothScroll = () => {
-            if (Math.abs(currentScroll - targetScroll) < 1) {
+            const diff = targetScroll - currentScroll;
+            if (Math.abs(diff) < 0.5) {
                 isScrolling = false;
                 return;
             }
-            currentScroll += (targetScroll - currentScroll) * 0.1; // Коэффициент смягчения
+            currentScroll += diff * 0.1;
             window.scrollTo(0, currentScroll);
             requestAnimationFrame(smoothScroll);
         };
 
-        // Обработчик события прокрутки
-        const handleWheel = (e:any) => {
+        const handleWheel = (e: WheelEvent) => {
             e.preventDefault();
-            targetScroll += e.deltaY; // Изменяем целевую позицию
+            targetScroll += e.deltaY;
+
+            // Ограничим targetScroll в пределах документа
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            targetScroll = Math.max(0, Math.min(targetScroll, maxScroll));
+
             if (!isScrolling) {
                 isScrolling = true;
                 requestAnimationFrame(smoothScroll);
             }
         };
 
-        // Добавляем обработчик с пассивным режимом
+        initScroll();
         window.addEventListener('wheel', handleWheel, { passive: false });
 
-        if (typeof window === "undefined") return
 
         dispatch(updateActionConfigs())
         dispatch(updateActionFileConfigs())
