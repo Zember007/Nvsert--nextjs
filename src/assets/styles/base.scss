@@ -438,11 +438,11 @@ input:-webkit-autofill {
     opacity: 1 !important;
 }
 
-.simplebar-scrollbar.simplebar-visible.simplebar-hover:before {
+.simplebar-scrollbar.simplebar-hover:before {
     background: rgba(52, 68, 109, 0.5) !important;
 }
 
-.simplebar-hover .simplebar-scrollbar.simplebar-visible:before {
+.simplebar-hover .simplebar-scrollbar:before {
     background: rgba(52, 68, 109, 0.5) !important;
 }
 
