@@ -25,8 +25,6 @@ const settings = {
 
 const SliderMain = () => {
 
-    const { simpleBar } = useSimpleBar();
-
     const [sliders, setSliders] = useState<Slider[]>([]);
 
     const whiteBgRef = useRef<HTMLDivElement | null>(null)
@@ -167,27 +165,6 @@ const SliderMain = () => {
     }, [sliders, whiteBgRef])
 
     const divRef = useRef(null);
-    const [isVisible, setIsVisible] = useState(true);
-
-    useEffect(() => {
-        
-        if(!simpleBar) return
-
-        const scrollContainer = simpleBar.getScrollElement();
-
-        let timeoutId: NodeJS.Timeout | null = null
-        scrollContainer.addEventListener('scroll', () => {
-            setIsVisible(false)
-            if (timeoutId) clearTimeout(timeoutId)
-            timeoutId = setTimeout(() => {
-                setIsVisible(true)
-            }, 300)
-        })
-
-        return () => {
-            scrollContainer.removeEventListener('scroll', () => { })
-        }
-    }, [simpleBar])
 
 
     const { setButtonRef, setWrapperRef } = useButton()
@@ -217,11 +194,7 @@ const SliderMain = () => {
                     </div>
 
                     <div className={`overlay l:w-[642px] w-full p-[30px] pr-[80px] relative z-[0]  rounded-[8px] border border-solid border-[#34446D] overflow-hidden `}>
-                        <div className={`overlay-slider absolute top-0 right-0 left-0 bottom-0 z-[-2] transition-all duration-300 ${!isVisible && ' backdrop-blur-[1px]'}`}
-                            style={{
-                                background: !isVisible ? '#FFFFFF26' : ''
-                            }}
-                        ></div>
+                        <div className={`overlay-slider absolute top-0 right-0 left-0 bottom-0 z-[-2] transition-all duration-300 `}></div>
                         <div className="flex flex-col justify-between h-full l:items-start items-center w-full">
                             <div className=" grow relative w-full overflow-hidden">
 
@@ -230,7 +203,7 @@ const SliderMain = () => {
                                         style={{
                                             zIndex: 5 - i
                                         }}
-                                        key={i} className={`absolute wrapper-slide wrapper-slide${i} ${i !== 4 && !isVisible && 'opacity-0'} top-0  w-1/5 h-full pointer-events-none`}>
+                                        key={i} className={`absolute wrapper-slide wrapper-slide${i}  top-0  w-1/5 h-full pointer-events-none`}>
 
                                         <Slider
                                             ref={el => {
@@ -261,7 +234,7 @@ const SliderMain = () => {
                                                         </div>
                                                         <div className={`l:grow slide-text relative w-full h-full  `}>
 
-                                                            <p className={`text-[16px] ${isVisible && 'bg-[#FFF]'}`}>
+                                                            <p className={`text-[16px] bg-[#FFF]`}>
                                                                 {filterPrepositions(slide.text)}
                                                             </p>
 
@@ -358,7 +331,7 @@ const SliderMain = () => {
                         className="slide-main l:inset-[0%] l:h-[100%] h-[300px] l:bottom-0 bottom-[80px] l:z-0 z-[]">
 
                         <div className="slider-wrap">
-                            <div ref={whiteBgRef} className={`slide-blur left-[562px] ${!isVisible ? '!bg-[transparent]' : 'white'}`}>
+                            <div ref={whiteBgRef} className={`slide-blur left-[562px]`}>
                                 <span className="line" style={{ '--blur': '4px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '8px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
@@ -371,7 +344,7 @@ const SliderMain = () => {
                                 <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
                             </div>
-                            <div data-slider="list" className={`slider-list ${!isVisible && 'unvisible'}`}
+                            <div data-slider="list" className={`slider-list`}
                                 onMouseMove={() => {
                                 }}
                             >

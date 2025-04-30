@@ -83,14 +83,6 @@ const AppSkillBlock = (skill: any) => {
         }
       >
 
-        {!skill.folder &&
-          <div
-            style={{      
-              ...(mousePX && { ...textStyle })
-            }}
-            className={`absolute z-[-10] backdrop-blur-[1px]  transition-all duration-500 rounded-[4px] top-0 left-0 right-0 bottom-0 border border-solid`}
-          ></div>
-        }
         <div
           style={{
             ...(!skill.folder && {
@@ -99,7 +91,7 @@ const AppSkillBlock = (skill: any) => {
             }),
             ...(mousePX && { ...textStyle })
           }}
-          className={`flex   ${!skill.folder && 'border border-solid'} flex-col gap-[14px] relative z-[1] justify-between h-full transition-all duration-500 ${skill.folder ? '!items-center !justify-center' : 'p-[20px]'}`}
+          className={`flex   ${!skill.folder && 'border border-solid'} backdrop-blur-[1px] rounded-[4px] overflow-hidden flex-col gap-[14px] relative z-[1] justify-between h-full transition-all duration-500 ${skill.folder ? '!items-center !justify-center' : 'p-[20px]'}`}
         >
           {
             skill.folder ?

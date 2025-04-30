@@ -39,19 +39,13 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   bottom: 0;
   height: 100%;
   pointer-events: none;
-
-
   z-index: 1;
   display: flex;
-
-
-
   .line {
     background-color: $wall__line_bd-cr;
     width: 20px;
-    backdrop-filter: blur(var(--blur));
+    backdrop-filter: blur(var(--blur));    
 
-    // box-shadow: $wall__line_box-sw;
     &:nth-child(1) {
       transition: all .2s ease;
     }
