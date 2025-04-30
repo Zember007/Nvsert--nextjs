@@ -12,6 +12,7 @@ import { setMetadata } from '@/store/metadata';
 import AppModalWrapper from '@/components/general/AppModalWrapper';
 import { AppDispatch, RootState } from '@/config/store';
 import { usePathname } from 'next/navigation';
+import { SimpleBarContext } from '@/components/contexts/SimpleBarContext';
 
 const Layout_wrapper = ({ children }: { children: ReactNode }) => {
     const dispatch = useDispatch<AppDispatch>();
@@ -184,15 +185,17 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
                 <link rel="apple-touch-icon" sizes="1024x1024" href="/apple-touch-icon-1024x1024.png" />
             </head>
             <body className={classBody}>
-                <SimpleBar className="max-h-[100vh]" ref={simpleBarRef}>
-                    <main className={`${transparent && 'transparent-header'} ${calcPageBodyClass && 'cost-calc-page'}`}>
-                        <div className="content">
-                            <AppHeader />
-                            {children}
-                        </div>
-                        <AppFooter />
-                    </main>
-                </SimpleBar>
+                <SimpleBarContext.Provider value={{ simpleBar: simpleBarRef.current }}>
+                    <SimpleBar className="max-h-[100vh]" ref={simpleBarRef} id='scrollSimple'>
+                        <main className={`${transparent && 'transparent-header'} ${calcPageBodyClass && 'cost-calc-page'}`}>
+                            <div className="content">
+                                <AppHeader />
+                                {children}
+                            </div>
+                            <AppFooter />
+                        </main>
+                    </SimpleBar>
+                </SimpleBarContext.Provider>
                 <AppModalWrapper
                     setDefaultModalActive={setDefaultModalActive}
                     defaultModalActive={defaultModalActive}

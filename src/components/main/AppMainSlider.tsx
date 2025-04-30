@@ -10,6 +10,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useButton } from '@/hook/useButton';
 import { useHeaderContext } from '../contexts/HeaderContext';
+import { useSimpleBar } from '../contexts/SimpleBarContext';
 
 
 const settings = {
@@ -24,7 +25,7 @@ const settings = {
 
 const SliderMain = () => {
 
-
+    const { simpleBar } = useSimpleBar();
 
     const [sliders, setSliders] = useState<Slider[]>([]);
 
@@ -169,8 +170,13 @@ const SliderMain = () => {
     const [isVisible, setIsVisible] = useState(true);
 
     useEffect(() => {
+        
+        if(!simpleBar) return
+
+        const scrollContainer = simpleBar.getScrollElement();
+
         let timeoutId: NodeJS.Timeout | null = null
-        window.addEventListener('scroll', () => {
+        scrollContainer.addEventListener('scroll', () => {
             setIsVisible(false)
             if (timeoutId) clearTimeout(timeoutId)
             timeoutId = setTimeout(() => {
@@ -179,9 +185,9 @@ const SliderMain = () => {
         })
 
         return () => {
-            window.removeEventListener('scroll', () => { })
+            scrollContainer.removeEventListener('scroll', () => { })
         }
-    }, [])
+    }, [simpleBar])
 
 
     const { setButtonRef, setWrapperRef } = useButton()

@@ -438,7 +438,7 @@ input:-webkit-autofill {
     opacity: 1 !important;
 }
 
-.simplebar-scrollbar.simplebar-visible:before {
+.simplebar-scrollbar.simplebar-visible.simplebar-hover:before {
     background: rgba(52, 68, 109, 0.5) !important;
 }
 
