@@ -149,7 +149,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
 
     return (
         <div id="form-main" className='border-main main-form bg-[#00000050] py-[27px] pb-[30px] px-[48px] max-w-[420px] flex flex-col gap-[12px] rounded-[6px]'>
-            {successMessageVisible && <FlightSuccess text="Спасибо за заявку"  bg={'#2d2f31'} close={() => { setSuccessMessageVisible(false) }} />}
+            {successMessageVisible && <FlightSuccess text="Спасибо за заявку" bg={'#2d2f31'} close={() => { setSuccessMessageVisible(false) }} />}
             <span className='leading-[1] text-[#FFF] text-[32px] text-center tracking-[-0.03em]'>Оформить заявку</span>
             <AppValidationObserver methods={methods} onSubmit={onSubmit}>
                 {({ register, errors }) => (
@@ -202,25 +202,37 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
 
                         <div ref={setWrapperRef} className="tariff-wrap relative">
                             <button
-                                // onClick={() => {
-                                //     successVisible()
-                                // }}
                                 type="submit"
                                 ref={setButtonRef}
-                                className=" group tariff s:mt-[1px] mt-[15px] bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[10px] justify-center p-[9px] rounded-[4px]"
+                                className="btnIconAn group tariff s:mt-[1px] mt-[15px] bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[20px] justify-center p-[9px] rounded-[4px]"
                                 style={{
                                     verticalAlign: 'middle'
                                 }}
                             >
-                                {btnText}
-                                <Image
-                                    alt="message"
-                                    src={MessageImg}
-                                    width="0"
-                                    height="0"
-                                    sizes="100vw"
-                                    className="h-[30px] w-[30px]"
-                                />
+
+                                <div className="sendIconLeft transition-all duration-300 ease-in">
+                                    <Image
+                                        alt="message"
+                                        src={MessageImg}
+                                        width="0"
+                                        height="0"
+                                        sizes="100vw"
+                                        className="h-[30px] w-[30px] rotate-[45deg] translate-x-[-5px]"
+                                    />
+                                </div>
+                                <span
+                                    className="transition-all duration-200 ease-in"
+                                >{btnText}</span>
+                                <div className="sendIconRight transition-all duration-300 ease-in">
+                                    <Image
+                                        alt="message"
+                                        src={MessageImg}
+                                        width="0"
+                                        height="0"
+                                        sizes="100vw"
+                                        className="h-[30px] w-[30px] rotate-[45deg] translate-x-[-5px]"
+                                    />
+                                </div>
                             </button>
                         </div>
 

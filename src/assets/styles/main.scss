@@ -78,3 +78,30 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   }
 
 }
+
+.btnIconAn {
+  .sendIconLeft {
+    position: absolute;
+    left: 50px;
+    transform: translateX(-82px);
+    // opacity: 0;
+  }
+
+  &:hover {
+
+    span {
+      transform: translateX(40px);
+    }
+
+
+    .sendIconLeft {
+      transform: translateX(0);
+      left: 40px;
+      opacity: 1;
+    }
+
+    .sendIconRight {
+      transform: translateX(80px);
+    }
+  }
+}
