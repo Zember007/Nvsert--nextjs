@@ -9,11 +9,6 @@ import Image from "next/image";
 import AudioLogo from '@/assets/images/svg/audio-selector.svg';
 import { RootState } from "@/config/store";
 
-interface Config {
-  key: string;
-  value: string;
-}
-
 const AppFooter = () => {
   const { t } = useTranslation();
 
@@ -24,111 +19,75 @@ const AppFooter = () => {
   const spbPhone = configs?.find((item) => item.key === 'PHONE_SPB');
   const email = configs?.find((item) => item.key === 'email');
 
-  const companyRequsites = useMemo(() => {
-    return [
-      {
-        name: configs?.find((item) => item?.key === 'company1')?.value ?? '',
-        inn: configs?.find((item) => item?.key === 'inn1')?.value ?? '',
-        attestation: configs?.find((item) => item?.key === 'attestation1')?.value ?? '',
-      },
-      {
-        name: configs?.find((item) => item?.key === 'company2')?.value ?? '',
-        inn: configs?.find((item) => item?.key === 'inn2')?.value ?? '',
-        attestation: configs?.find((item) => item?.key === 'attestation2')?.value ?? '',
-      },
-    ];
-  }, [configs]);
-
   return (
-    <footer className="footer">
-      <div className="footer-descirption">
-        <span>ООО «ЦЕНТР СТАНДАРТИЗАЦИИ»</span>
-        <span>ИНН 6027189146</span>
-      </div>
-      <div className="wrapper footer__wrapper">
-        <div className="footer-top rounded-[8px] py-[30px] px-[18px]">
-          <div className="footer-top__col footer-top__col--info">
-            <AppLogo className="!w-[192px] !h-[40px] !text-[#FFF]" />
-
-            {companyRequsites && companyRequsites.length > 0 && (
-              <>
-                {companyRequsites.map((company) => (
-                  <div className="footer-company" key={company.name}>
-                    {company.name && <h6 className="footer-company__title">{company.name}</h6>}
-                    {company.inn && <div className="footer-company__requisite">{company.inn}</div>}
-                    {company.attestation && <div className="footer-company__requisite">{company.attestation}</div>}
-                  </div>
-                ))}
-              </>
-            )}
-          </div>
-          <nav className="footer-top__col footer-top__col--nav footer-top__nav">
-            <ul className="footer-top__nav-list">
-              <li className="footer-top__nav-item">
-                <Link href="/class/okp/" className="footer-top__nav-link">{t('navigation.okp')}</Link>
-              </li>
-              <li className="footer-top__nav-item">
-                <Link href="/class/tnved/" className="footer-top__nav-link">{t('navigation.tnved')}</Link>
-              </li>
-              <li className="footer-top__nav-item">
-                <Link href="/contacts/" className="footer-top__nav-link">{t('navigation.contacts')}</Link>
-              </li>
-            </ul>
-          </nav>
-          <div className="footer-top__col footer-top__col--contacts">
-            <div className="footer-contacts">
-              <ul className="flex flex-col gap-[15px]">
-                {email && (
-                  <li className="footer-contacts__item">
-                    <a href={filterEmail(email.value)} className="footer-contacts__link">
-                      {email.value}
-                    </a>
-                  </li>
-                )}
-                {moscowPhone && (
-                  <li className="footer-contacts__item">
-                    <a href={filterPhone(moscowPhone.value)} className="footer-contacts__link">
-                      {moscowPhone.value} (МСК)
-                    </a>
-                  </li>
-                )}
-                {spbPhone && (
-                  <li className="footer-contacts__item">
-                    <a href={filterPhone(spbPhone.value)} className="footer-contacts__link">
-                      {spbPhone.value} (СПБ)
-                    </a>
-                  </li>
-                )}
-                {RussiaPhone && (
-                  <li className="footer-contacts__item">
-                    <a href={filterPhone(RussiaPhone.value)} className="footer-contacts__link">
-                      {RussiaPhone.value}
-                    </a>
-                  </li>
-                )}
-
-              </ul>
-            </div>
+    <footer className="h-[190px] flex justify-between p-[30px] bg-[#3C4049] text-[#FFFFFF99] text-[18px]">
+      <div className="flex gap-[120px]">
+        <div className="flex flex-col justify-between">
+          <AppLogo className="!w-[192px] !h-[40px] !text-[#FFF]" />
+          <div className="flex flex-col gap-[20px]">
+            <span>ООО «ЦЕНТР СТАНДАРТИЗАЦИИ»</span>
+            <span>ИНН 6027189146</span>
           </div>
         </div>
-        <nav className="footer-nav rounded-[8px] mt-[4px] py-[30px] px-[18px]">
-          <AppNavigation />
-          <div className="w-full relative mt-[60px] ">
-            <div className=" flex flex-col gap-[40px] max-w-[290px]">
-              <p className="text-[14px] text-[#FFF]">Использование материалов сайта без разрешения владельцев запрещено. Все права защищены.</p>
-              <Link href="/soglashenie/polzovatelskoe-soglashenie/" className="text-[14px] text-[#FFF]">
-              Политика конфиденциальности
-              </Link>
-            </div>
-
-            <div className="py-[19px] px-[25px] bg-[#00000033] rounded-[4px] border border-solid border-[#A4A4A4] absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] flex items-center gap-[10px]">
-              <Image src={AudioLogo} alt='logo' width={100} height={38} />
-              <hr className="h-[62px] w-[1px] bg-[#FFFFFF] !m-[0]" />
-              <p className="text-[#FFF]">Помогаем бизнесу <br /> переводить аудио в текст</p>
-            </div>
+        <div className="flex flex-col justify-between">
+          <div className="flex flex-col gap-[10px]">
+            <ul className="flex gap-[50px] py-[10px] *:*:!no-underline list-none">
+              <li>
+                <Link href={'#'}>Блог</Link>
+              </li>
+              <li>
+                <Link href={'#'}>FAQ</Link>
+              </li>
+              <li>
+                <Link href={'#'}>Отзывы</Link>
+              </li>
+              <li>
+                <Link href="/class/tnved/">{t('navigation.tnved')}</Link>
+              </li>
+            </ul>
+            {email && RussiaPhone && moscowPhone && spbPhone &&
+              <ul className="flex gap-[50px] py-[10px] *:*:!no-underline list-none">
+                <li>
+                  <a href={filterPhone(email.value)}>
+                    {email.value}
+                  </a>
+                </li>
+                <li>
+                  <a href={filterPhone(RussiaPhone.value)}>
+                    {RussiaPhone.value}
+                  </a>
+                </li>
+                <li>
+                  <a href={filterPhone(moscowPhone.value)}>
+                    {moscowPhone.value}
+                  </a>
+                </li>
+                <li>
+                  <a href={filterPhone(spbPhone.value)}>
+                    {spbPhone.value}
+                  </a>
+                </li>
+              </ul>
+            }
           </div>
-        </nav>
+          <Link href="/soglashenie/polzovatelskoe-soglashenie/" className="!no-underline">
+            Политика конфиденциальности
+          </Link>
+        </div>
       </div>
+
+      <div className="flex flex-col justify-between">
+        <div className="flex justify-between w-[400px]">
+          <a href="#">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12.2676 18.8833C15.9735 17.9416 18.7776 14.7408 19.1293 10.8333H14.9785C14.8235 13.7891 13.8485 16.5391 12.2676 18.8833ZM19.1293 9.16664C18.7776 5.25831 15.971 2.05664 12.2643 1.11497C13.846 3.45997 14.8226 6.20997 14.9785 9.16664H19.1293ZM7.73678 1.11497C4.02845 2.05664 1.22345 5.25831 0.870117 9.16664H5.02178C5.17762 6.20997 6.15428 3.45997 7.73678 1.11497ZM0.87095 10.8333C1.04402 12.7192 1.79645 14.5054 3.02497 15.9466C4.2535 17.3879 5.89793 18.4137 7.73262 18.8833C6.15178 16.5391 5.17678 13.7891 5.02178 10.8333H0.87095ZM10.0001 19.135C8.07762 16.8141 6.87345 13.9508 6.69178 10.8333H13.3093C13.126 13.95 11.9226 16.8141 10.001 19.135M10.0001 0.869141C11.9226 3.18914 13.1251 6.05164 13.3085 9.16664H6.69178C6.87512 6.05164 8.07845 3.18914 10.0001 0.869141Z" fill="white" fill-opacity="0.6" />
+            </svg>
+          </a>
+
+          <p className="text-[16px]">© 2025 NVSERT</p>
+        </div>
+      </div>
+
     </footer>
   );
 };
