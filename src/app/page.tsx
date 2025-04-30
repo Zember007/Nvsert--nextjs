@@ -26,13 +26,13 @@ export default function Home() {
   const DynamicAppMainFeedback = dynamic(() => import('../components/main/AppMainFeedback'), {
     ssr: false,
   });
-  
 
+ 
 
   return (
-    <div className="main text-[#000] overflow-hidden select-none">
+    <div className="main text-[#000] overflow-hidden select-none ">
       <AppMainIntro />
-      <AppMainDocuments /> 
+      <AppMainDocuments />
       <DynamicAppMainSkills />
       <DynamicAppMainSlider />
       <DynamicAppMainSafeguards />
