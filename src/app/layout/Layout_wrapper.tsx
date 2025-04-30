@@ -201,6 +201,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
                     defaultModalActive={defaultModalActive}
                     defaultModalName={defaultModalName}
                 />
+                <div className="bg-noise"></div>
             </body>
         </>
     );
