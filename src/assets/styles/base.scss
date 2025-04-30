@@ -442,6 +442,10 @@ input:-webkit-autofill {
     background: rgba(52, 68, 109, 0.5) !important;
 }
 
+.simplebar-hover .simplebar-scrollbar.simplebar-visible:before {
+    background: rgba(52, 68, 109, 0.5) !important;
+}
+
 .simplebar-track.simplebar-vertical {
     width: 13px !important
 }
