@@ -204,13 +204,13 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                             <button
                                 type="submit"
                                 ref={setButtonRef}
-                                className="btnIconAn group tariff s:mt-[1px] mt-[15px] bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[20px] justify-center p-[9px] rounded-[4px]"
+                                className="btnIconAn group tariff s:mt-[1px] mt-[15px] bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[20px] justify-between p-[9px] px-[20px] rounded-[4px]"
                                 style={{
                                     verticalAlign: 'middle'
                                 }}
                             >
 
-                                <div className="sendIconLeft transition-all duration-300 ease-in">
+                                <div className="sendIconLeft transition-all duration-200 ease-in">
                                     <Image
                                         alt="message"
                                         src={MessageImg}
@@ -223,7 +223,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                                 <span
                                     className="transition-all duration-200 ease-in"
                                 >{btnText}</span>
-                                <div className="sendIconRight transition-all duration-300 ease-in">
+                                <div className="sendIconRight transition-all duration-200 ease-in">
                                     <Image
                                         alt="message"
                                         src={MessageImg}
