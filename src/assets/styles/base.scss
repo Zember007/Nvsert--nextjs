@@ -430,3 +430,18 @@ input:-webkit-autofill {
 
 
   
+.simplebar-scrollbar:before {
+    background: rgba(52, 68, 109, 0.2) !important;
+    border: 1px solid #93969D !important;
+    border-radius: 2px !important;
+    transition: background .2s .5s linear !important;
+    opacity: 1 !important;
+}
+
+.simplebar-scrollbar.simplebar-visible:before {
+    background: rgba(52, 68, 109, 0.5) !important;
+}
+
+.simplebar-track.simplebar-vertical {
+    width: 13px !important
+}
