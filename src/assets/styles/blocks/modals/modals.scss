@@ -110,9 +110,6 @@
     border-radius: 6px;
     border: 1px solid #737373;
     max-height: 90vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-
 
     @media (max-width: $media-m) {
       padding: 24px 16px;

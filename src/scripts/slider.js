@@ -386,13 +386,13 @@ export function horizontalLoop(items, config) {
                 onThrowUpdate() {
                     align();
                     if (wasPlaying) {
-                        const Velocity = Math.abs(InertiaPlugin.getVelocity(proxy, "x"))
-
-                        if (Velocity <= 150) {
+                        const currentVelocity = Math.abs(InertiaPlugin.getVelocity(proxy, "x"));
+                
+                        if (currentVelocity <= pixelsPerSecond) {
+                            console.log("Достигли обычной скорости:", currentVelocity);
                             gsap.killTweensOf(proxy);
                         }
                     }
-
                 },
                 overshootTolerance: 0,
                 inertia: true, // Включаем инерцию

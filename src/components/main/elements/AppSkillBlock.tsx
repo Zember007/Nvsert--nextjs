@@ -26,7 +26,8 @@ const AppSkillBlock = (skill: any) => {
   const cardStyle = {
     transform: `rotateY(${(mousePX || 0) * 30}deg) rotateX(${(mousePY || 0) * -30}deg)`,
     perspective: '1200px',
-    transition: 'transform 0.3s ease-out'
+    transition: 'transform 0.3s ease-out',
+    willChange: 'transform'
   };
 
   const textStyle = {
@@ -84,24 +85,26 @@ const AppSkillBlock = (skill: any) => {
 
         {!skill.folder &&
           <div
-            style={{
-              borderColor: `${'#CCCCCC'}`,
-              background: `${skill.bg === 'secondary' ? '#93969D26' : '#FFFFFF26'}`,
+            style={{      
               ...(mousePX && { ...textStyle })
             }}
-            className={`absolute z-[-1] ${oldMousePX && '!backdrop-blur-[1px]'} backdrop-blur-[2px]  transition-all duration-500 rounded-[4px] top-0 left-0 right-0 bottom-0 border border-solid`}
+            className={`absolute z-[-10] backdrop-blur-[1px]  transition-all duration-500 rounded-[4px] top-0 left-0 right-0 bottom-0 border border-solid`}
           ></div>
         }
         <div
           style={{
+            ...(!skill.folder && {
+              borderColor: `${'#CCCCCC'}`,
+              background: `${skill.bg === 'secondary' ? '#93969D26' : '#FFFFFF26'}`,
+            }),
             ...(mousePX && { ...textStyle })
           }}
-          className={`flex flex-col gap-[14px] justify-between h-full transition-all duration-500 ${skill.folder ? '!items-center !justify-center' : 'p-[20px]'}`}
+          className={`flex   ${!skill.folder && 'border border-solid'} flex-col gap-[14px] relative z-[1] justify-between h-full transition-all duration-500 ${skill.folder ? '!items-center !justify-center' : 'p-[20px]'}`}
         >
           {
             skill.folder ?
               <>
-                <Image alt="folder" className='transition-all duration-300 rounded-[4px]' src={skill.img} height={280} />
+                <Image alt="folder" className={`transition-all duration-300 rounded-[4px] ${mousePX && 'opacity-[70%]'}`} src={skill.img} height={280} />
 
               </>
               :

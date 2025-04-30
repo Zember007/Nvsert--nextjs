@@ -77,6 +77,7 @@ const AppIntroForm = () => {
     const [contactError, setContactError] = useState(false);
     const { defaultModalActive } = useHeaderContext();
     useEffect(() => {
+        
         if (!formRef.current || !defaultModalActive) return
 
         BounceEffect(formRef.current, {
@@ -116,6 +117,9 @@ const AppIntroForm = () => {
 
                             <div ref={setWrapperRef} className="tariff-wrap relative  mt-[24px]">
                                 <button
+                                onClick={() => {
+                                    setSuccessMessageVisible(true)
+                                }}
                                     type="submit"
                                     ref={setButtonRef}
                                     className=" group tariff  bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[10px] justify-center p-[9px] rounded-[4px]"
