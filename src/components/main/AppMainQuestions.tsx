@@ -1,6 +1,7 @@
 import { filterPrepositions } from '@/hook/filter';
 import AppMainFormSecondary from '../forms/AppMainFormSecondary';
 import GuaranteeCard from './elements/AppSafeguardBlock'; // Импортируем новый компонент
+import QuestionsBlock from './elements/QuestionsBlock';
 
 const AppMainQuestions = () => {
 
@@ -77,32 +78,14 @@ const AppMainQuestions = () => {
   return (
     <section className="py-[75px]">
       <div className="wrapper flex flex-col gap-[40px]">
-        <h2 className="leading-[1] tracking-[-0.04em] text-center l:text-left text-[24px] xs:text-[40px] l:text-[56px]">
-          Гарантии и безупречный сервис
+        <h2 className="leading-[1] tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px]">
+          FAQ: Часто задаваемые вопросы
         </h2>
-        <div className="grid grid-cols-3 gap-x-[22px] gap-y-[100px] relative z-[0]">
-          <div className="logo !w-[800px] !h-[160px] !z-[-1] pointer-events-none absolute top-1/2 left-[-10px] translate-y-[-50%]">
-            <i className="icon icon--logo"></i>
-          </div>
 
-          {guarantees.map((guarantee, index) => (
-            <div key={index}>
-
-              {/* {
-                guarantee.title ?
-                  <GuaranteeCard
-                    key={index}
-                    title={guarantee.title}
-                    items={guarantee.items}
-                  />
-                  :
-                  <div></div>
-              } */}
-
-            </div>
-
-          ))}
+        <div className="flex flex-col gap-[10px]">
+          <QuestionsBlock />
         </div>
+
       </div>
     </section>
   );
