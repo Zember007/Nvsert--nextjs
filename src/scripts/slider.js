@@ -388,8 +388,7 @@ export function horizontalLoop(items, config) {
                     if (wasPlaying) {
                         const currentVelocity = Math.abs(InertiaPlugin.getVelocity(proxy, "x"));
                 
-                        if (currentVelocity <= pixelsPerSecond) {
-                            console.log("Достигли обычной скорости:", currentVelocity);
+                        if (currentVelocity <= pixelsPerSecond + 10) {
                             gsap.killTweensOf(proxy);
                         }
                     }
