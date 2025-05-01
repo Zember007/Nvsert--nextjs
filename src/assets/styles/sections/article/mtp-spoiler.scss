@@ -165,7 +165,8 @@
   }
 }
 
-.mtp__spoiler-text :deep(ul, ol) {
+.mtp__spoiler-text ul,
+.mtp__spoiler-text ol {
   margin-top: 16px;
   padding-left: 32px;
   list-style: none;
@@ -188,7 +189,7 @@
   }
 }
 
-.mtp__spoiler-text :deep(ul) {
+.mtp__spoiler-text ul {
   li {
     display: list-item;
     list-style-type: disc;
@@ -204,7 +205,7 @@
   }
 }
 
-.mtp__spoiler-text :deep(ol) {
+.mtp__spoiler-text ol {
   li {
     list-style-type: decimal;
     display: list-item;
