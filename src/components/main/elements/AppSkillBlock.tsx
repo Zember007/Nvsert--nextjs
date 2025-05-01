@@ -24,17 +24,18 @@ const AppSkillBlock = (skill: any) => {
   const mousePY = mouseY / dimensions.height;
 
   const cardStyle = {
-    transform: `rotateY(${(mousePX || 0) * 30}deg) rotateX(${(mousePY || 0) * -30}deg)`,
+    transform: `rotateY(${(mousePX || 0) * 30}deg) rotateX(${(mousePY || 0) * -30}deg) translate3d(${(mousePX || 0) * 20 * 2}px, ${(mousePY || 0) * 20 * 2}px, 0) scale(1.1)`,
+    
     perspective: '1200px',
     transition: 'transform 0.3s ease-out',
     willChange: 'transform'
   };
 
-  const textStyle = {
-    transform: `translate3d(${(mousePX || 0) * 20 * 2}px, ${(mousePY || 0) * 20 * 2}px, 0) scale(1.1)`,
-    transition: 'transform 0.3s ease-out',
-    willChange: 'transform'
-  };
+  // const textStyle = {
+  //   transform: `translate3d(${(mousePX || 0) * 20 * 2}px, ${(mousePY || 0) * 20 * 2}px, 0) scale(1.1)`,
+  //   transition: 'transform 0.3s ease-out',
+  //   willChange: 'transform'
+  // };
 
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -75,12 +76,12 @@ const AppSkillBlock = (skill: any) => {
       ref={cardRef}>
       <div
         className={`card rebound-box relative z-[0] group/item l:mr-0 mr-[20px] rounded-[4px]  text-[#000] h-[226px] min-w-[300px] w-full`}
-        style={
-          {
-            ...cardStyle,
+        // style={
+        //   {
+        //     ...cardStyle,
 
-          }
-        }
+        //   }
+        // }
       >
 
         <div
@@ -89,7 +90,7 @@ const AppSkillBlock = (skill: any) => {
               borderColor: `${'#CCCCCC'}`,
               background: `${skill.bg === 'secondary' ? '#93969D26' : '#FFFFFF26'}`,
             }),
-            ...(mousePX && { ...textStyle })
+            ...(mousePX && { ...cardStyle })
           }}
           className={`flex   ${!skill.folder && 'border border-solid'} backdrop-blur-[2px] rounded-[4px] overflow-hidden flex-col gap-[14px] relative z-[1] justify-between h-full transition-all duration-500 ${skill.folder ? '!items-center !justify-center' : 'p-[20px]'}`}
         >
