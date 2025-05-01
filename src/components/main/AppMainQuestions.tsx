@@ -1,7 +1,5 @@
-import { filterPrepositions } from '@/hook/filter';
-import AppMainFormSecondary from '../forms/AppMainFormSecondary';
-import GuaranteeCard from './elements/AppSafeguardBlock'; // Импортируем новый компонент
 import QuestionsBlock from './elements/QuestionsBlock';
+import { useState } from 'react';
 
 const AppMainQuestions = () => {
 
@@ -75,6 +73,8 @@ const AppMainQuestions = () => {
     }
   ];
 
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+
   return (
     <section className="py-[75px]">
       <div className="wrapper flex flex-col gap-[40px]">
@@ -83,7 +83,16 @@ const AppMainQuestions = () => {
         </h2>
 
         <div className="flex flex-col gap-[10px]">
-          <QuestionsBlock />
+          <QuestionsBlock 
+          active={activeIndex === 0}
+          setActive={(value) => {
+            if(value) {
+              setActiveIndex(0)
+            } else {
+              setActiveIndex(null)
+            }
+          }}
+          />
         </div>
 
       </div>

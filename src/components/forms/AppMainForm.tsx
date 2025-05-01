@@ -210,7 +210,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                                 }}
                             >
 
-                                <div className="sendIconLeft transition-all duration-200 ease-in">
+                                <div className="sendIconLeft transition-all ease-in">
                                     <Image
                                         alt="message"
                                         src={MessageImg}
@@ -221,9 +221,9 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                                     />
                                 </div>
                                 <span
-                                    className="transition-all duration-200 ease-in"
+                                    className="transition-all ease-in"
                                 >{btnText}</span>
-                                <div className="sendIconRight transition-all duration-200 ease-in">
+                                <div className="sendIconRight transition-all ease-in">
                                     <Image
                                         alt="message"
                                         src={MessageImg}
