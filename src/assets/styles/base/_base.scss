@@ -13,6 +13,7 @@ html {
 }
 
 .bg-noise {
+  --opacity: 0.7;
   position: fixed;
   z-index: -1;
   top: 0;
@@ -21,7 +22,7 @@ html {
   height: 100%;
   background: url('../../images/150.png');
   pointer-events: none;
-  opacity: .7;
+  opacity: var(--opacity);
 }
 
 .mask-custom {

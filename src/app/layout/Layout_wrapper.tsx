@@ -13,6 +13,7 @@ import AppModalWrapper from '@/components/general/AppModalWrapper';
 import { AppDispatch, RootState } from '@/config/store';
 import { usePathname } from 'next/navigation';
 import { SimpleBarContext } from '@/components/contexts/SimpleBarContext';
+import GUI from 'lil-gui'
 
 const Layout_wrapper = ({ children }: { children: ReactNode }) => {
     const dispatch = useDispatch<AppDispatch>();
@@ -154,6 +155,16 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
             setClassBody('transparent-header');
         }
     }, [pathname]);
+
+    useEffect(() => {
+        const gui = new GUI()
+
+        gui.add({ 'контрастность фона': 0.7 }, 'контрастность фона', 0, 1, 0.1)
+            .onChange((value:number) => {
+                const el = document.querySelector('.bg-noise') as HTMLElement
+                el.style.setProperty("--opacity", `${value}`);
+            });
+    }, [])
 
     return (
         <>
