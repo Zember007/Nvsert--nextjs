@@ -438,6 +438,7 @@ input:-webkit-autofill {
     opacity: 1 !important;
 }
 
+.simplebar-dragging .simplebar-scrollbar:before,
 .simplebar-hover .simplebar-scrollbar:before {
     background: rgba(52, 68, 109, 0.5) !important;
 }
