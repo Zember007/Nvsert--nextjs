@@ -7,7 +7,10 @@
 	backdrop-filter: blur(50px);
 	box-shadow: 0px 2px 2px 0px #00000040;
     z-index: 100000;
+	.header-phone svg path{
+		@include transition();
 
+	}
 	&.black {
 		.header-phone__link {
 			color: #000;
