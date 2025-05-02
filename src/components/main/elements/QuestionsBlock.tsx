@@ -1,6 +1,6 @@
 import React from 'react';
 
-const QuestionsBlock = ({ setActive, active, number, title, node }: { setActive: (value: boolean) => void, active: boolean, number:number, title:string, node:string }) => {
+const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive: (value: boolean) => void, active: boolean, number: number, title: string, text: string }) => {
     return (
         <div className={`relative flex flex-col rounded-[4px] bg-[#FFFFFF26] backdrop-blur-[1px] z-[0]`}>
             <div className={`absolute top-0 left-0 right-0 bottom-0 rounded-[4px] z-[-1] border border-solid border-[transparent] ${active && '!border-[#34446D]'}`}></div>
@@ -9,7 +9,7 @@ const QuestionsBlock = ({ setActive, active, number, title, node }: { setActive:
                     setActive(!active)
                 }}
                 className={`${active && ' !bg-[#34446D] !border-[#000]'} hover:bg-[#34446D33] h-[70px] relative active:transition-all active:duration-200 active:bg-[#5B6788] active:shadow-[inset_-2px_-2px_4px_#000,inset_2px_2px_4px_#000] hover:border-[#34446D]  group border-[#CCCCCC] cursor-pointer border-solid border rounded-[4px]  flex items-center gap-[40px] pr-[10px]`}>
-                <div className="w-[70px] h-[70px] flex items-center justify-center">
+                <div className="w-[70px] min-w-[70px] h-[70px] flex items-center justify-center">
                     <p className={`${active && 'text-[50px] text-[#FFF]'} text-[22px] rubik group-hover:text-[50px] group-active:duration-[0] ease transition-all duration-100 group-active:text-[#FFF]`}>{number}</p>
                 </div>
                 <div className="group-active:scale-[0.99] grow will-change-transform ease transition-all duration-100  flex items-center gap-[40px]">
@@ -26,7 +26,11 @@ const QuestionsBlock = ({ setActive, active, number, title, node }: { setActive:
                 </div>
             </div>
             <div className={`max-h-[0px] transition-all duration-200 delay-100 overflow-hidden ${active && '!max-h-[1000px]'}`}>
-                <div className="pl-[110px] pr-[34px] py-[30px]" dangerouslySetInnerHTML={{ __html: node }}></div>
+                <div className="pl-[110px] pr-[34px] py-[30px]">
+                    <div className="mtp__spoiler-text" >
+                        <div dangerouslySetInnerHTML={{ __html: text }}></div>
+                    </div>
+                </div>
             </div>
         </div>
     );
