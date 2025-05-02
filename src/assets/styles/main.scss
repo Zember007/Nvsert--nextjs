@@ -41,10 +41,11 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   pointer-events: none;
   z-index: 1;
   display: flex;
+
   .line {
     background-color: $wall__line_bd-cr;
     width: 20px;
-    backdrop-filter: blur(var(--blur));    
+    backdrop-filter: blur(var(--blur));
 
     &:nth-child(1) {
       transition: all .2s ease;
@@ -78,7 +79,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
     position: absolute;
     left: 20px;
     transform: translateX(-52px);
-    // opacity: 0;
+    opacity: 0;
   }
 
   &:hover {
@@ -96,6 +97,8 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
 
     .sendIconRight {
       transform: translateX(50px);
+      opacity: 0;
+
     }
   }
 }

@@ -200,8 +200,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                             inputName="comment"
                         />
 
-                        <div ref={setWrapperRef} className="tariff-wrap relative">
-                            <div className="overflow-hidden">
+                        <div ref={setWrapperRef} className="tariff-wrap relative">                          
                                 <button
                                     type="submit"
                                     ref={setButtonRef}
@@ -235,7 +234,6 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                                         />
                                     </div>
                                 </button>
-                            </div>
                         </div>
 
 
