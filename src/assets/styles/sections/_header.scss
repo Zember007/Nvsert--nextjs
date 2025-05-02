@@ -9,8 +9,20 @@
     z-index: 100000;
 
 	&.black {
-		color: #000 !important;
+		.header-phone__link {
+			color: #000;
+		}
+
+		.header-phone svg {
+			fill:#000;
+		}
+
+		.logo {
+			color: #000;
+
+		}
 	}
+
 	&__wrapper {
 		display: flex;
 		flex-direction: row;

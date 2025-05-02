@@ -54,6 +54,10 @@
   -moz-osx-font-smoothing: grayscale;
   border: 1px solid transparent;
 }
+.header.black .menu-item{
+  color: #00000099;
+
+}
 
 .menu-item-active span {
   display: flex;
