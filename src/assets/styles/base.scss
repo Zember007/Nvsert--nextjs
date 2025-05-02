@@ -244,7 +244,9 @@
     perspective: 200px;
     position: relative;
     z-index: 10;
-
+    &.bg-p {
+        background: url('../../images/150.png');
+    }
 }
 
 

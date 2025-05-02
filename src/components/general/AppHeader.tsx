@@ -10,8 +10,11 @@ import { usePathname } from "next/navigation";
 import { disableOverflow, enableOverflow } from "@/store/body";
 import { useHeaderContext } from "../contexts/HeaderContext";
 import AppMenuItem from "./AppMenuItem";
-import html2canvas from 'html2canvas';
 import { useSimpleBar } from "../contexts/SimpleBarContext";
+import html2canvas from 'html2canvas';
+
+let snapshotCanvas = null;
+
 
 
 
@@ -65,70 +68,71 @@ const AppHeader = () => {
   }, [pathname]);
 
 
-  // const { simpleBar } = useSimpleBar()
+  const { simpleBar } = useSimpleBar()
 
-  // useEffect(() => {
-  //   const element = headerRef.current;
-  //   if (!element || !simpleBar) return;
-  //   async function updateTextColor() {
-  //     const element = headerRef.current;
-  //     if (!element) return;
+  useEffect(() => {
+    const element = headerRef.current;
+    if (!element || !simpleBar) return;
+    let snapshotCanvas:any = null;
+    async function takeSnapshot() {
+      const canvas = await html2canvas(document.body, {
+        backgroundColor: null,
+        logging: false,
+        scale: 1,
+        useCORS: true,
+      });
+      snapshotCanvas = canvas;
+    }
 
-  //     const canvas = await html2canvas(document.body, {
-  //       backgroundColor: null,
-  //       scale: 1,
-  //       x: element.offsetLeft,
-  //       y: element.offsetTop,
-  //       width: element.offsetWidth,
-  //       height: element.offsetHeight,
-  //     });
+    takeSnapshot()
 
-  //     const context = canvas.getContext('2d');
-  //     if (!context) return;
+    async function updateTextColor() {
+      const el = headerRef.current
+      if (!snapshotCanvas || !el) return;
 
-  //     const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-  //     let brightnessSum = 0;
+      const rect = el.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
 
-  //     for (let i = 0; i < imageData.data.length; i += 4) {
-  //       const r = imageData.data[i];
-  //       const g = imageData.data[i + 1];
-  //       const b = imageData.data[i + 2];
-  //       // Формула относительной яркости
-  //       const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
-  //       brightnessSum += brightness;
-  //     }
+      const ctx = snapshotCanvas.getContext('2d');
+      const pixel = ctx.getImageData(x, y, 1, 1).data;
 
-  //     const avgBrightness = brightnessSum / (imageData.data.length / 4);
-  //     if (avgBrightness > 128) {
-  //       element.classList.add('black')
-  //     } else {
-  //       element.classList.remove('black')
-  //     }
-  //   }
+      const [r, g, b] = pixel;
+      const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
 
-  //   const scrollContainer = simpleBar.getScrollElement();
-  //   let timeoutId:null | NodeJS.Timeout = null
-  //   let enableChange = true
+      if(brightness > 128) {
+        el.classList.add('black')
+      } else {
+        el.classList.remove('black')
+      }
+      return
+    }
 
-  //   scrollContainer.addEventListener('scroll', () => {
-  //     if(timeoutId) clearTimeout(timeoutId)
-  //     if (enableChange) {
-  //       enableChange = false
-  //       updateTextColor().then(() => {
-  //         setTimeout(() => {
-  //           enableChange = true
-  //         }, 1000)
-  //       })
 
-  //     } else {
-  //       timeoutId = setTimeout(() => {
-  //         updateTextColor().then(() => {
-  //           enableChange = true
-  //         })
-  //       }, 1000)
-  //     }
-  //   });
-  // }, [headerRef, simpleBar])
+
+    const scrollContainer = simpleBar.getScrollElement();
+    let timeoutId: null | NodeJS.Timeout = null
+    let enableChange = true
+
+    scrollContainer.addEventListener('scroll', () => {
+      if (timeoutId) clearTimeout(timeoutId)
+      if (enableChange) {
+        enableChange = false
+        updateTextColor().then(() => {
+          setTimeout(() => {
+            enableChange = true
+          }, 1000)
+        })
+
+      } else {
+        timeoutId = setTimeout(() => {
+          updateTextColor().then(() => {
+            enableChange = true
+          })
+        }, 1000)
+      }
+    });
+  }, [headerRef, simpleBar])
 
 
 
