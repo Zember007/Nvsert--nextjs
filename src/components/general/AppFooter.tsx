@@ -8,6 +8,7 @@ import { filterEmail, filterPhone } from "@/hook/filter";
 import Image from "next/image";
 import AudioLogo from '@/assets/images/svg/audio-selector.svg';
 import { RootState } from "@/config/store";
+import AppMenuItem from "./AppMenuItem";
 
 const AppFooter = () => {
   const { t } = useTranslation();
@@ -19,6 +20,13 @@ const AppFooter = () => {
   const spbPhone = configs?.find((item) => item.key === 'PHONE_SPB');
   const email = configs?.find((item) => item.key === 'email');
 
+  const menuItems = [
+    { label: "Блог", href: "#" },
+    { label: "FAQ", href: "#" },
+    { label: "Отзывы", href: "#" },
+    { label: t('navigation.tnved'), href: "/class/tnved/" }
+  ]
+
   return (
     <footer className="h-[190px] flex justify-between p-[30px] bg-[#3C4049] text-[#FFFFFF99] text-[18px]">
       <div className="flex gap-[120px]">
@@ -29,50 +37,27 @@ const AppFooter = () => {
             <span>ИНН 6027189146</span>
           </div>
         </div>
-        <div className="flex flex-col justify-between">
+        <div className="flex flex-col justify-between items-start">
           <div className="flex flex-col gap-[10px]">
-            <ul className="flex gap-[50px] py-[10px] *:*:!no-underline list-none">
-              <li>
-                <Link href={'#'}>Блог</Link>
-              </li>
-              <li>
-                <Link href={'#'}>FAQ</Link>
-              </li>
-              <li>
-                <Link href={'#'}>Отзывы</Link>
-              </li>
-              <li>
-                <Link href="/class/tnved/">{t('navigation.tnved')}</Link>
-              </li>
-            </ul>
+            <div className="flex gap-[10px]">
+              {menuItems.map((item, i) => (
+                <AppMenuItem key={i} item={item} isActive={false} />
+              ))}
+
+            </div>
             {email && RussiaPhone && moscowPhone && spbPhone &&
-              <ul className="flex gap-[50px] py-[10px] *:*:!no-underline list-none">
-                <li>
-                  <a href={filterPhone(email.value)}>
-                    {email.value}
-                  </a>
-                </li>
-                <li>
-                  <a href={filterPhone(RussiaPhone.value)}>
-                    {RussiaPhone.value}
-                  </a>
-                </li>
-                <li>
-                  <a href={filterPhone(moscowPhone.value)}>
-                    {moscowPhone.value}
-                  </a>
-                </li>
-                <li>
-                  <a href={filterPhone(spbPhone.value)}>
-                    {spbPhone.value}
-                  </a>
-                </li>
-              </ul>
+              <div className="flex gap-[10px]">
+                <AppMenuItem item={{ href: filterPhone(email.value), label: email.value }} isActive={false} />
+                <AppMenuItem item={{ href: filterPhone(RussiaPhone.value), label: RussiaPhone.value }} isActive={false} />
+                <AppMenuItem item={{ href: filterPhone(moscowPhone.value), label: moscowPhone.value }} isActive={false} />
+                <AppMenuItem item={{ href: filterPhone(spbPhone.value), label: spbPhone.value }} isActive={false} />
+              </div>
             }
           </div>
-          <Link href="/soglashenie/polzovatelskoe-soglashenie/" className="!no-underline">
-            Политика конфиденциальности
-          </Link>
+
+          <div>
+            <AppMenuItem item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: 'Политика конфиденциальности' }} isActive={false} />
+          </div>
         </div>
       </div>
 

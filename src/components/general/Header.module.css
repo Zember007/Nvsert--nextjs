@@ -1,0 +1,390 @@
+.header {
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+  position: relative;
+  display: inline-block;
+  -webkit-mask-image: linear-gradient(
+    60deg,
+    #000 25%,
+    rgba(0, 0, 0, 0.2) 50%,
+    #000 75%
+  );
+  mask-image: linear-gradient(
+    60deg,
+    #000 25%,
+    rgba(0, 0, 0, 0.2) 50%,
+    #000 75%
+  );
+  -webkit-mask-size: 400%;
+  mask-size: 400%;
+  -webkit-mask-position: 0;
+  mask-position: 0;
+  pointer-events: none;
+  transition: mask-position 1s ease, -webkit-mask-position 1s ease;
+}
+
+.logo-wrapper:hover .logo {
+  -webkit-mask-position: 100%;
+  mask-position: 100%;
+}
+
+.menu-item {
+  align-items: center;
+  color: #878787;
+  display: flex;
+  flex: 1 0 auto;
+  font-size: 18px;
+  font-weight: 400;
+  justify-content: center;
+  line-height: 19px;
+  overflow: visible;
+  position: relative;
+  text-align: center;
+  transition: transform 0.2s ease, color 0.5s ease;
+  border-radius: 4px;
+  padding: 10px 15px;
+  height: 36px;
+  will-change: transform, color, border-color, opacity;
+  background: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  border: 1px solid transparent;
+}
+
+.menu-item-active span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  transition: color 0.6s ease;
+  will-change: color;
+  color: inherit;
+}
+
+.menu-item:hover {
+  color: #ccc;
+  border-color: #353535;
+}
+
+.menu-item::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: radial-gradient(
+    150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.1),
+    transparent 60%
+  );
+  mask-image: radial-gradient(
+    150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    white,
+    transparent 60%
+  );
+  -webkit-mask-image: radial-gradient(
+    150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    white,
+    transparent 60%
+  );
+  opacity: 0;
+  pointer-events: none;
+}
+
+.menu-item:hover::after,
+.menu-item-active::after {
+  opacity: 1;
+}
+
+.highlight {
+  background: radial-gradient(
+    250px circle at var(--mouse-x) var(--mouse-y),
+    #c7c7c714,
+    transparent 30%
+  );
+  border-radius: inherit;
+  content: "";
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transition: opacity 0.3s ease;
+  width: 100%;
+  z-index: 20;
+  will-change: opacity;
+  pointer-events: none;
+}
+
+.login-button:hover + .highlight {
+  opacity: 1;
+}
+
+.login-button span {
+  color: inherit;
+  transition: color 0.2s ease;
+  line-height: 19px;
+}
+
+.menu-item-active {
+  color: var(--siniy);
+  font-size: 18px;
+  font-weight: 400;
+  display: flex;
+  flex: 1 0 auto;
+  justify-content: center;
+  overflow: visible;
+  text-align: center;
+  transition: transform 0.2s ease, color 1.5s ease;
+  will-change: transform, color, border-color;
+  transform-origin: center;
+  backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  border-radius: 4px;
+  padding: 7px 20px;
+  height: 36px;
+  background: none;
+  border: 1px solid transparent;
+}
+
+.menu-item-active:active {
+  color: #4a738c;
+}
+
+.menu-item-active .highlight {
+  background: radial-gradient(
+    250px circle at var(--last-mouse-x, var(--click-x, 50%))
+      var(--last-mouse-y, var(--click-y, 50%)),
+    #c7c7c714,
+    transparent 30%
+  );
+  border-radius: inherit;
+  content: "";
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transition: opacity 0.3s ease;
+  width: 100%;
+  z-index: 20;
+  will-change: opacity;
+  pointer-events: none;
+}
+
+.menu-item-active::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: radial-gradient(
+    150px circle at var(--last-mouse-x, var(--click-x, 50%))
+      var(--last-mouse-y, var(--click-y, 50%)),
+    rgba(255, 255, 255, 0.1),
+    transparent 60%
+  );
+  mask-image: radial-gradient(
+    150px circle at var(--last-mouse-x, var(--click-x, 50%))
+      var(--last-mouse-y, var(--click-y, 50%)),
+    white,
+    transparent 60%
+  );
+  -webkit-mask-image: radial-gradient(
+    150px circle at var(--last-mouse-x, var(--click-x, 50%))
+      var(--last-mouse-y, var(--click-y, 50%)),
+    white,
+    transparent 60%
+  );
+  opacity: 0;
+  pointer-events: none;
+}
+
+.menu-item-active:hover .highlight {
+  background: radial-gradient(
+    250px circle at var(--mouse-x, var(--last-mouse-x, var(--click-x, 50%)))
+      var(--mouse-y, var(--last-mouse-y, var(--click-y, 50%))),
+    #c7c7c714,
+    transparent 30%
+  );
+  opacity: 1;
+}
+
+.menu-item:active,
+.menu-item.fast-click {
+  transform: scale(0.95);
+  transform-origin: center;
+  will-change: transform, color, border-color;
+  transition: transform 0.2s ease, border-color 0.5s ease;
+  color: #4a738c;
+  border-color: #4a738c;
+  background: none;
+  box-shadow: none;
+}
+
+.menu-item:active::after,
+.menu-item.fast-click::after {
+  border-color: #4a738c;
+  transition: border-color 0.5s ease;
+  opacity: 1;
+}
+
+.login-button {
+  align-items: center;
+  color: #878787;
+  display: flex;
+  font-size: 18px;
+  font-weight: 400;
+  justify-content: center;
+  line-height: 19px;
+  overflow: visible;
+  padding: 7px 20px;
+  position: relative;
+  text-align: center;
+  transition: transform 0.2s ease, color 0.5s ease;
+  border: 1px solid #353535;
+  border-radius: 4px;
+  will-change: transform, color;
+  height: 36px;
+}
+
+.login-button::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  color: #878787;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: transform 0.2s ease, color 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 19px;
+  padding: 7px 20px;
+  transform-origin: center;
+  will-change: transform, color;
+}
+
+.login-button:hover::before {
+  color: #ccc;
+}
+
+.login-button::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: radial-gradient(
+    150px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.1),
+    transparent 60%
+  );
+  mask-image: radial-gradient(
+    150px circle at var(--mouse-x) var(--mouse-y),
+    white,
+    transparent 60%
+  );
+  -webkit-mask-image: radial-gradient(
+    150px circle at var(--mouse-x) var(--mouse-y),
+    white,
+    transparent 60%
+  );
+  opacity: 0;
+  pointer-events: none;
+}
+
+.login-button:hover::after {
+  opacity: 1;
+  transition: opacity 0.1s ease;
+}
+
+.login-button:active::after,
+.login-button.fast-click::after {
+  border-color: #4a738c;
+  transition: border-color 0.5s ease;
+  opacity: 1;
+}
+
+.login-button:active,
+.login-button.fast-click {
+  transform: scale(0.95);
+  transform-origin: center;
+  will-change: transform;
+  transition: transform 0.2s ease, color 0.5s ease;
+  color: #4a738c;
+  box-shadow: inset 2px 2px 2px 0 rgba(7, 26, 38, 0.5),
+    inset -2px -2px 2px 0 rgba(7, 26, 38, 0.5);
+}
+
+.login-button:active::before,
+.login-button.fast-click::before {
+  clip-path: inset(0 0 0 0);
+  color: #4a738c;
+}
+
+.menu-item-active:active,
+.menu-item-active.fast-click {
+  transform: scale(0.95);
+  transform-origin: center;
+  will-change: transform, color, border-color;
+  transition: transform 0.2s ease, color 0.5s ease, border-color 0.5s ease;
+  color: #4a738c !important;
+  border-color: #4a738c;
+  background: none;
+  box-shadow: none;
+}
+
+.menu-item-active:active span,
+.menu-item-active.fast-click span {
+  color: #4a738c !important;
+  transition: color 0.5s ease, -webkit-text-fill-color 0.5s ease;
+  will-change: color, -webkit-text-fill-color;
+  background: none !important;
+  -webkit-background-clip: none !important;
+  background-clip: none !important;
+  -webkit-text-fill-color: #4a738c !important;
+}
+
+.menu-item-active:active::before,
+.menu-item-active.fast-click::before {
+  color: #4a738c !important;
+  transition: color 0.5s ease, -webkit-text-fill-color 0.5s ease;
+  will-change: color, -webkit-text-fill-color;
+  background: none !important;
+  -webkit-background-clip: none !important;
+  background-clip: none !important;
+  -webkit-text-fill-color: #4a738c !important;
+}
+
+.menu-item-active:active::after,
+.menu-item-active.fast-click::after {
+  border-color: #4a738c;
+  transition: border-color 0.5s ease;
+  opacity: 1;
+}
+
+.menu-item-active:hover {
+  color: var(--siniy);
+  border-color: #353535;
+}
