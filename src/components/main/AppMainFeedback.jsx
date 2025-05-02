@@ -177,14 +177,7 @@ const AppMainFeedback = () => {
                                                 <Image
                                                     onClick={() => {
                                                         setTimeout(() => {
-                                                            const box = document.querySelector('.PhotoView-Slider__BannerWrap');
-                                                            if (!box) return
-                                                            box.dataset.before = item.title;
-                                                            const photos = document.querySelectorAl > ('.PhotoView__Photo__attr');
-                                                            photos.forEach((photo) => {
-                                                                photo.dataset.price = documents[index].price;
-                                                                photo.dataset.duration = documents[index].duration;
-                                                            })
+                                                            
 
                                                             const portal = document.querySelector('.PhotoView-Portal');
                                                             const arrowLeft = document.querySelector('.PhotoView-Slider__ArrowLeft');
