@@ -244,6 +244,8 @@
     perspective: 200px;
     position: relative;
     z-index: 10;
+    overflow: hidden;
+
 }
 
 
@@ -273,7 +275,7 @@
         white,
         transparent 60%
       );
-    border: 1px solid #737373;
+    border: 1px solid #FFF;
     border-radius: 4px;
 
 }
@@ -283,7 +285,6 @@
 }
 
 .tariff {
-    overflow: hidden;
     width: 100%;
 
     z-index: 1;
