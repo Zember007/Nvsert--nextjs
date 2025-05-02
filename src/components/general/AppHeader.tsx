@@ -12,6 +12,7 @@ import { useHeaderContext } from "../contexts/HeaderContext";
 import AppMenuItem from "./AppMenuItem";
 import { useSimpleBar } from "../contexts/SimpleBarContext";
 import html2canvas from 'html2canvas';
+import useBackgroundBrightness from "@/hook/useBackgroundBrightness";
 
 let snapshotCanvas = null;
 
@@ -25,7 +26,7 @@ const AppHeader = () => {
   const [servicesMenuActive, setServicesMenuActive] = useState(false);
   const [burgerMenuActive, setBurgerMenuActive] = useState(false);
 
-  const headerRef = useRef<null | HTMLHeadingElement>(null)
+  const headerRef = useRef<null | HTMLElement>(null)
 
 
 
@@ -70,69 +71,9 @@ const AppHeader = () => {
 
   const { simpleBar } = useSimpleBar()
 
-  useEffect(() => {
-    const element = headerRef.current;
-    if (!element || !simpleBar) return;
-    let snapshotCanvas:any = null;
-    async function takeSnapshot() {
-      const canvas = await html2canvas(document.body, {
-        backgroundColor: null,
-        logging: false,
-        scale: 1,
-        useCORS: true,
-      });
-      snapshotCanvas = canvas;
-    }
-
-    takeSnapshot()
-
-    async function updateTextColor() {
-      const el = headerRef.current
-      if (!snapshotCanvas || !el) return;
-
-      const rect = el.getBoundingClientRect();
-      const x = rect.left + rect.width / 2;
-      const y = rect.top + rect.height / 2;
-
-      const ctx = snapshotCanvas.getContext('2d');
-      const pixel = ctx.getImageData(x, y, 1, 1).data;
-
-      const [r, g, b] = pixel;
-      const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
-
-      if(brightness > 128) {
-        el.classList.add('black')
-      } else {
-        el.classList.remove('black')
-      }
-      return
-    }
 
 
-
-    const scrollContainer = simpleBar.getScrollElement();
-    let timeoutId: null | NodeJS.Timeout = null
-    let enableChange = true
-
-    scrollContainer.addEventListener('scroll', () => {
-      if (timeoutId) clearTimeout(timeoutId)
-      if (enableChange) {
-        enableChange = false
-        updateTextColor().then(() => {
-          setTimeout(() => {
-            enableChange = true
-          }, 1000)
-        })
-
-      } else {
-        timeoutId = setTimeout(() => {
-          updateTextColor().then(() => {
-            enableChange = true
-          })
-        }, 1000)
-      }
-    });
-  }, [headerRef, simpleBar])
+  useBackgroundBrightness({simpleBar, headerRef })
 
 
 

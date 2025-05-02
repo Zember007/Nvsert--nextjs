@@ -8,6 +8,9 @@
 	box-shadow: 0px 2px 2px 0px #00000040;
     z-index: 100000;
 
+	&.black {
+		color: #000 !important;
+	}
 	&__wrapper {
 		display: flex;
 		flex-direction: row;
