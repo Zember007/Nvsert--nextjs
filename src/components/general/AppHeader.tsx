@@ -65,70 +65,70 @@ const AppHeader = () => {
   }, [pathname]);
 
 
-  const { simpleBar } = useSimpleBar()
+  // const { simpleBar } = useSimpleBar()
 
-  useEffect(() => {
-    const element = headerRef.current;
-    if (!element || !simpleBar) return;
-    async function updateTextColor() {
-      const element = headerRef.current;
-      if (!element) return;
+  // useEffect(() => {
+  //   const element = headerRef.current;
+  //   if (!element || !simpleBar) return;
+  //   async function updateTextColor() {
+  //     const element = headerRef.current;
+  //     if (!element) return;
 
-      const canvas = await html2canvas(document.body, {
-        backgroundColor: null,
-        scale: 1,
-        x: element.offsetLeft,
-        y: element.offsetTop,
-        width: element.offsetWidth,
-        height: element.offsetHeight,
-      });
+  //     const canvas = await html2canvas(document.body, {
+  //       backgroundColor: null,
+  //       scale: 1,
+  //       x: element.offsetLeft,
+  //       y: element.offsetTop,
+  //       width: element.offsetWidth,
+  //       height: element.offsetHeight,
+  //     });
 
-      const context = canvas.getContext('2d');
-      if (!context) return;
+  //     const context = canvas.getContext('2d');
+  //     if (!context) return;
 
-      const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-      let brightnessSum = 0;
+  //     const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+  //     let brightnessSum = 0;
 
-      for (let i = 0; i < imageData.data.length; i += 4) {
-        const r = imageData.data[i];
-        const g = imageData.data[i + 1];
-        const b = imageData.data[i + 2];
-        // Формула относительной яркости
-        const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
-        brightnessSum += brightness;
-      }
+  //     for (let i = 0; i < imageData.data.length; i += 4) {
+  //       const r = imageData.data[i];
+  //       const g = imageData.data[i + 1];
+  //       const b = imageData.data[i + 2];
+  //       // Формула относительной яркости
+  //       const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
+  //       brightnessSum += brightness;
+  //     }
 
-      const avgBrightness = brightnessSum / (imageData.data.length / 4);
-      if (avgBrightness > 128) {
-        element.classList.add('black')
-      } else {
-        element.classList.remove('black')
-      }
-    }
+  //     const avgBrightness = brightnessSum / (imageData.data.length / 4);
+  //     if (avgBrightness > 128) {
+  //       element.classList.add('black')
+  //     } else {
+  //       element.classList.remove('black')
+  //     }
+  //   }
 
-    const scrollContainer = simpleBar.getScrollElement();
-    let timeoutId:null | NodeJS.Timeout = null
-    let enableChange = true
+  //   const scrollContainer = simpleBar.getScrollElement();
+  //   let timeoutId:null | NodeJS.Timeout = null
+  //   let enableChange = true
 
-    scrollContainer.addEventListener('scroll', () => {
-      if(timeoutId) clearTimeout(timeoutId)
-      if (enableChange) {
-        enableChange = false
-        updateTextColor().then(() => {
-          setTimeout(() => {
-            enableChange = true
-          }, 1000)
-        })
+  //   scrollContainer.addEventListener('scroll', () => {
+  //     if(timeoutId) clearTimeout(timeoutId)
+  //     if (enableChange) {
+  //       enableChange = false
+  //       updateTextColor().then(() => {
+  //         setTimeout(() => {
+  //           enableChange = true
+  //         }, 1000)
+  //       })
 
-      } else {
-        timeoutId = setTimeout(() => {
-          updateTextColor().then(() => {
-            enableChange = true
-          })
-        }, 1000)
-      }
-    });
-  }, [headerRef, simpleBar])
+  //     } else {
+  //       timeoutId = setTimeout(() => {
+  //         updateTextColor().then(() => {
+  //           enableChange = true
+  //         })
+  //       }, 1000)
+  //     }
+  //   });
+  // }, [headerRef, simpleBar])
 
 
 
