@@ -201,39 +201,41 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                         />
 
                         <div ref={setWrapperRef} className="tariff-wrap relative">
-                            <button
-                                type="submit"
-                                ref={setButtonRef}
-                                className="btnIconAn group tariff s:mt-[1px] mt-[15px] bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[transparent] flex items-center gap-[20px] justify-between p-[9px] px-[20px] rounded-[4px]"
-                                style={{
-                                    verticalAlign: 'middle'
-                                }}
-                            >
+                            <div className="overflow-hidden">
+                                <button
+                                    type="submit"
+                                    ref={setButtonRef}
+                                    className="btnIconAn group tariff s:mt-[1px] mt-[15px] bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[transparent] flex items-center gap-[20px] justify-between p-[9px] px-[20px] rounded-[4px]"
+                                    style={{
+                                        verticalAlign: 'middle'
+                                    }}
+                                >
 
-                                <div className="sendIconLeft transition-all ease-in">
-                                    <Image
-                                        alt="message"
-                                        src={MessageImg}
-                                        width="0"
-                                        height="0"
-                                        sizes="100vw"
-                                        className="h-[30px] w-[30px] rotate-[45deg] translate-x-[-5px]"
-                                    />
-                                </div>
-                                <span
-                                    className="transition-all ease-in"
-                                >{btnText}</span>
-                                <div className="sendIconRight transition-all ease-in">
-                                    <Image
-                                        alt="message"
-                                        src={MessageImg}
-                                        width="0"
-                                        height="0"
-                                        sizes="100vw"
-                                        className="h-[30px] w-[30px] rotate-[45deg] translate-x-[-5px]"
-                                    />
-                                </div>
-                            </button>
+                                    <div className="sendIconLeft transition-all ease-in">
+                                        <Image
+                                            alt="message"
+                                            src={MessageImg}
+                                            width="0"
+                                            height="0"
+                                            sizes="100vw"
+                                            className="h-[30px] w-[30px] rotate-[45deg] translate-x-[-5px]"
+                                        />
+                                    </div>
+                                    <span
+                                        className="transition-all ease-in"
+                                    >{btnText}</span>
+                                    <div className="sendIconRight transition-all ease-in">
+                                        <Image
+                                            alt="message"
+                                            src={MessageImg}
+                                            width="0"
+                                            height="0"
+                                            sizes="100vw"
+                                            className="h-[30px] w-[30px] rotate-[45deg] translate-x-[-5px]"
+                                        />
+                                    </div>
+                                </button>
+                            </div>
                         </div>
 
 
