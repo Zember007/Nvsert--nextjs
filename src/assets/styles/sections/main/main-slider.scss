@@ -157,7 +157,10 @@
 
 
 .overlay-slider {
-  background: linear-gradient(270deg, rgba(245, 245, 245, 0) 0%, #FFF 76px);
+  // background: linear-gradient(270deg, rgba(245, 245, 245, 0) 0%, #FFF 76px);
+  background: url(../../../images/svg/functional/bg-slider.svg);
+  background-size: cover;
+  backdrop-filter: blur(1px);
 }
 
 

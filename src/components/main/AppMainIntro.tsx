@@ -15,7 +15,6 @@ const AppMainIntro = () => {
         <>
             <section className="main-banner">
 
-
                 <div className="wrapper">
                     <div className='main-banner__content'>
                         <h1 className="main-banner__title">{filterPrepositions(t('mainIntro.title'))}</h1>
