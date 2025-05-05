@@ -128,8 +128,8 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
             </div>
 
             <div
-                className={`mx-[-30px]  flex flex-col  group/main cursor-pointer ${!active && 'hover:bg-[#34446D33] hover:backdrop-blur-[1px]'} rounded-[4px] relative`}>
-                <div className={`pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[1] rounded-[4px] ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[transparent]`}></div>
+                className={`mx-[-30px]  flex flex-col  group/main cursor-pointer ${!active && 'hover:bg-[#34446D33] hover:backdrop-blur-[1px]'} rounded-[6px] relative`}>
+                <div className={`pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[1] rounded-[6px] ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[transparent]`}></div>
 
 
 
@@ -142,9 +142,9 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
 
 
                     }}
-                    className={`materialBtn rounded-[4px] overflow-hidden text-left group/window box-scale active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] transition-scale ${!active ? '' : ' bg-[#34446D]  '} active:bg-[#5B6788]  px-[30px]  relative w-full  z-[0]`}>
+                    className={`materialBtn rounded-[6px] overflow-hidden text-left group/window box-scale active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] transition-scale ${!active ? '' : ' bg-[#34446D]  '} active:bg-[#5B6788]  px-[30px]  relative w-full  z-[0]`}>
 
-                    <div className={`border-[transparent] border-solid border ${active && '!border-[#000]'} absolute top-[-1px] bottom-[-1px] right-[0] z-[1000] rounded-[4px] left-[0] transition-all duration-300`}></div>
+                    <div className={`border-[transparent] border-solid border ${active && '!border-[#000]'} absolute top-[-1px] bottom-[-1px] right-[0] z-[1000] rounded-[6px] left-[0] transition-all duration-300`}></div>
 
                     <div
                         className={`pointer-events-none ${active && ' translate-y-[100%]'}  group-active/window:!opacity-[1] transition-all duration-100 !shadow-none card  absolute top-1/2 translate-y-[-50%] left-[30px]`}>
