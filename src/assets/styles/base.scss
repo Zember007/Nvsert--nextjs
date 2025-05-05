@@ -249,9 +249,6 @@
     position: relative;
     z-index: 10;
 
-    &:not(:active) {
-        overflow: hidden;
-    }
 }
 
 .transparent-header main {
