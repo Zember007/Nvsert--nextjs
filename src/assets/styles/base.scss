@@ -249,8 +249,8 @@
     position: relative;
     z-index: 10;
 
-    &.bg-p {
-        background: url('../images/150.png');
+    &:not(:active) {
+        overflow: hidden;
     }
 }
 
@@ -312,9 +312,7 @@
     transition: all 0.3s ease;
     transform: translateZ(0);
 
-    &:not(:active) {
-        overflow: hidden;
-    }
+
 }
 
 .tariff:active,
