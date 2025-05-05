@@ -4,6 +4,7 @@
 .header {
 	--color-item-menu-active: #FFF;
 	--color-item-menu-hover: #ccc;
+	--menu-item-border: #ccc;
 	padding: 10px 0;
 	background: #34446D33;
 	backdrop-filter: blur(50px);
@@ -18,7 +19,7 @@
 	&.black {
 		--color-item-menu-active: #34446D;
 		--color-item-menu-hover: #000;
-
+		--menu-item-border: #000;
 		.header-phone__link {
 			color: #000;
 		}
