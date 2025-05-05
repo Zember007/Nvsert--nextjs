@@ -9,13 +9,13 @@ const AppNavigation = () => {
         <>
             <div className="flex flex-col gap-[20px]">
                 <div className="border-0 border-b border-[#93969D] border-solid py-[20px]">
-                    <p className="text-[20px] font-bold">Сертификация ГОСТ Р</p>
+                    <p className="text-[20px] text-[#FFF] font-bold">Сертификация ГОСТ Р</p>
                 </div>
-                <div className="flex gap-[10px] group">
+                <div className="flex gap-[10px] group items-center border border-solid border-[transparent] hover:border-[#93969D]">
                     <div className="border border-solid border-[#FFFFFF] rounded-[3px] overflow-hidden">
                         <Image src={DocImg} width={43} height={60} alt="document" />
                     </div>
-                    <p className="text-[#FFF] text-[14px] opacity-[0.6]">Декларациясоответствия ГОСТ Р</p>
+                    <p className="transition-all group-hover:opacity-[1] max-w-[170px] text-[#FFF] text-[14px] opacity-[0.6]">Декларациясоответствия ГОСТ Р</p>
                    </div>
                 </div>
         </>      
