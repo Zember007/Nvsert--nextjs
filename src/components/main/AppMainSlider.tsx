@@ -253,7 +253,7 @@ const SliderMain = () => {
 
                                     <div
                                         ref={setWrapperRef}
-                                        className="tariff-wrap w-[100px] bg-p">
+                                        className="tariff-wrap w-[100px]">
                                         <button
                                             ref={setButtonRef}
                                             aria-label="previous slide" data-slider="button-prev"
@@ -282,7 +282,7 @@ const SliderMain = () => {
                                     </div>
                                     <div
                                         ref={setWrapperRef}
-                                        className="tariff-wrap w-[100px] bg-p">
+                                        className="tariff-wrap w-[100px]">
                                         <button
                                             ref={setButtonRef}
                                             aria-label="previous slide" data-slider="button-next"
