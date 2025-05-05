@@ -46,7 +46,7 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
                     before:content-['']
                     before:absolute before:top-[-2.4px] before:left-[-2.4px] before:right-[-2.4px] before:bottom-[-2.4px]  before:z-[-1]
                     relative z-[0]
-                    peer-checked:before:shadow-[0px_0px_2.4px_0px_#000000CC]
+                   
                     group active:scale-[0.9] transition-all duration-300 active:!border-[#5F5F5F]
                     w-[20px] h-[20px] flex items-center justify-center border-[1.2px] border-[#5F5F5F] rounded-[1.8px]
                   ${successful && 'peer-checked:border-[#34C759]'}
