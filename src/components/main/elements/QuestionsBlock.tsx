@@ -3,7 +3,7 @@ import React from 'react';
 const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive: (value: boolean) => void, active: boolean, number: number, title: string, text: string }) => {
     return (
         <div className={`relative flex flex-col rounded-[4px] bg-[#FFFFFF26] backdrop-blur-[1px] z-[0]`}>
-            <div className={`absolute top-0 left-0 right-0 bottom-0 rounded-[4px] z-[-1] border border-solid border-[transparent] ${active && '!border-[#34446D]'}`}></div>
+            <div className={`absolute top-0 left-0 right-0 bottom-0 rounded-[4px] z-[-1] delay-200 border border-solid border-[transparent] ${active && '!border-[#34446D]'}`}></div>
             <div
                 onClick={() => {
                     setActive(!active)
