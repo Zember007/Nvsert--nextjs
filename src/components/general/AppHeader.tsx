@@ -132,7 +132,7 @@ const AppHeader = () => {
           </div>
           <div className={`services-menu js-services-menu relative ${servicesMenuActive && 'active'}`}>
 
-            <div className="services-menu__wrapper">
+            <div className="services-menu__wrapper select-none">
               <AppNavigation />
             </div>
             

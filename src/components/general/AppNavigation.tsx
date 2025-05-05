@@ -12,7 +12,7 @@ const AppNavigation = () => {
                     <p className="text-[20px] text-[#FFF] font-bold">Сертификация ГОСТ Р</p>
                 </div>
                 <div className="flex gap-[10px] group transition-all rounded-[4px] items-center border border-solid border-[transparent] hover:border-[#93969D]">
-                    <div className="border border-solid border-[#FFFFFF] rounded-[3px] overflow-hidden">
+                    <div className="border border-solid border-[#FFFFFF] rounded-[3px]">
                         <Image src={DocImg} width={43} height={60} alt="document" />
                     </div>
                     <p className="transition-all group-hover:opacity-[1] max-w-[170px] text-[#FFF] text-[14px] opacity-[0.6]">Декларациясоответствия ГОСТ Р</p>
