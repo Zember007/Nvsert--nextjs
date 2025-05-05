@@ -199,16 +199,17 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                             inputName="comment"
                         />
 
-                        <div ref={setWrapperRef} className="tariff-wrap relative">                          
-                                <button
-                                    type="submit"
-                                    ref={setButtonRef}
-                                    className="btnIconAn group tariff s:mt-[1px] mt-[15px] bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[transparent] flex items-center gap-[20px] justify-between p-[9px] px-[20px] rounded-[4px]"
-                                    style={{
-                                        verticalAlign: 'middle'
-                                    }}
-                                >
+                        <div ref={setWrapperRef} className="tariff-wrap relative">
+                            <button
+                                type="submit"
+                                ref={setButtonRef}
+                                className=" btnIconAn group  tariff s:mt-[1px] mt-[15px] bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[transparent]    rounded-[4px]"
+                                style={{
+                                    verticalAlign: 'middle'
+                                }}
+                            >
 
+                                <div className="overflow-hidden p-[9px] px-[20px] relative flex items-center gap-[20px] justify-between">
                                     <div className="sendIconLeft transition-all ease-in">
                                         <Image
                                             alt="message"
@@ -232,7 +233,8 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                                             className="h-[30px] w-[30px] rotate-[45deg] translate-x-[-5px]"
                                         />
                                     </div>
-                                </button>
+                                </div>
+                            </button>
                         </div>
 
 
