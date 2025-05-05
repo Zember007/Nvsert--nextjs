@@ -82,77 +82,79 @@ const AppHeader = () => {
   return (
     <header ref={headerRef} className="header">
       <div className="px-[30px] header__wrapper !h-[50px]">
-        <AppLogo />
-        <div className={`header__menu js-header-menu ${burgerMenuActive && 'active'}`}>
-          <nav className="header-nav">
-            <ul className="header-nav__list">
-              <li className="header-nav__item">
-                <AppMenuItem isActive={false} item={{ href: "/", label: 'Главная' }} />
-              </li>
-              <li className="header-nav__item">
-                <button
-                  type="button"
-                  className={`header-nav__link services-menu__btn js-services-menu__btn ${servicesMenuActive && 'active'}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavMenu();
-                  }}
-                >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 16L12 9L19 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
+        <div className="flex items-center">
+          <AppLogo />
+          <div className={`header__menu js-header-menu ${burgerMenuActive && 'active'}`}>
+            <nav className="header-nav">
+              <ul className="header-nav__list">
+                <li className="header-nav__item">
+                  <AppMenuItem isActive={false} item={{ href: "/", label: 'Главная' }} />
+                </li>
+                <li className="header-nav__item">
+                  <button
+                    type="button"
+                    className={`header-nav__link services-menu__btn js-services-menu__btn ${servicesMenuActive && 'active'}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavMenu();
+                    }}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 16L12 9L19 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
 
-                  Услуги
-                </button>
-              </li>
-              <li className="header-nav__item">
-                <AppMenuItem isActive={false} item={{ href: "/about/o-kompanii/", label: t('navigation.about') }} />
+                    Услуги
+                  </button>
+                </li>
+                <li className="header-nav__item">
+                  <AppMenuItem isActive={false} item={{ href: "/about/o-kompanii/", label: t('navigation.about') }} />
 
-              </li>
-              <li className="header-nav__item">
-                <AppMenuItem isActive={false} item={{ href: "/contacts/", label: t('navigation.contacts') }} />
+                </li>
+                <li className="header-nav__item">
+                  <AppMenuItem isActive={false} item={{ href: "/contacts/", label: t('navigation.contacts') }} />
 
-              </li>
-            </ul>
-          </nav>
-          <div className="header__menu-content">
-            <p className="title">
-              Зачем искать что-то самому, если можно заказать расчет?
-            </p>
-            <p className="subtitle">
-              Оставьте свои контактные данные, и мы сформируем для вас предложение
-              по документу или пакету документов
-            </p>
-            <Link
-              href="/find-out-cost/"
-              className="btn btn--primary btn--m header__calc-link"
-            >
-              {t('calculation.name')}
-            </Link>
-          </div>
-          <div className={`services-menu js-services-menu relative ${servicesMenuActive && 'active'}`}>
-
-            <div className="services-menu__wrapper select-none">
-              <AppNavigation />
+                </li>
+              </ul>
+            </nav>
+            <div className="header__menu-content">
+              <p className="title">
+                Зачем искать что-то самому, если можно заказать расчет?
+              </p>
+              <p className="subtitle">
+                Оставьте свои контактные данные, и мы сформируем для вас предложение
+                по документу или пакету документов
+              </p>
+              <Link
+                href="/find-out-cost/"
+                className="btn btn--primary btn--m header__calc-link"
+              >
+                {t('calculation.name')}
+              </Link>
             </div>
+            <div className={`services-menu js-services-menu relative ${servicesMenuActive && 'active'}`}>
 
-
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavMenu();
-              }}
-              className="close !top-[10px] !right-[30px]">
-              <div className="in">
-                <div className="close-button-block"></div>
-                <div className="close-button-block"></div>
+              <div className="services-menu__wrapper select-none">
+                <AppNavigation />
               </div>
-              <div className="out">
-                <div className="close-button-block"></div>
-                <div className="close-button-block"></div>
-              </div>
-            </button>
 
+
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavMenu();
+                }}
+                className="close !top-[10px] !right-[30px]">
+                <div className="in">
+                  <div className="close-button-block"></div>
+                  <div className="close-button-block"></div>
+                </div>
+                <div className="out">
+                  <div className="close-button-block"></div>
+                  <div className="close-button-block"></div>
+                </div>
+              </button>
+
+            </div>
           </div>
         </div>
 
