@@ -25,7 +25,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                     </button>
                 </div>
             </div>
-            <div className={`max-h-[0px] transition-all duration-200 delay-100 overflow-hidden ${active && '!max-h-[1000px]'}`}>
+            <div className={`max-h-[0px] transition-all duration-200 overflow-hidden ${active && '!max-h-[1000px]'}`}>
                 <div className="pl-[110px] pr-[34px] py-[30px]">
                     <div className="mtp__spoiler-text" >
                         <div dangerouslySetInnerHTML={{ __html: text }}></div>
