@@ -11,7 +11,7 @@ const AppNavigation = () => {
                 <div className="border-0 border-b border-[#93969D] border-solid py-[20px]">
                     <p className="text-[20px] text-[#FFF] font-bold">Сертификация ГОСТ Р</p>
                 </div>
-                <div className="flex gap-[10px] group items-center border border-solid border-[transparent] hover:border-[#93969D]">
+                <div className="flex gap-[10px] group transition-all rounded-[4px] items-center border border-solid border-[transparent] hover:border-[#93969D]">
                     <div className="border border-solid border-[#FFFFFF] rounded-[3px] overflow-hidden">
                         <Image src={DocImg} width={43} height={60} alt="document" />
                     </div>
