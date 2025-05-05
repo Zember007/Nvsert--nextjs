@@ -101,4 +101,20 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
 
     }
   }
+
+  &.doc-btn {
+    &:hover {
+
+      span {
+        transform: translateX(40px);
+      }
+
+
+      .sendIconLeft {
+        transform: translateX(0);
+        left: 10px;
+        opacity: 1;
+      }
+    }
+  }
 }

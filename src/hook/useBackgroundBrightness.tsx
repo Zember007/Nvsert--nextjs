@@ -214,12 +214,12 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
         updateTextColor();
         setTimeout(() => {
           enableChange = true;
-        }, 1000);
+        }, 200);
       } else {
         timeoutId = setTimeout(() => {
           updateTextColor();
           enableChange = true;
-        }, 1000);
+        }, 200);
       }
     });
 

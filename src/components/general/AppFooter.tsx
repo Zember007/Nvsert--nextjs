@@ -38,7 +38,7 @@ const AppFooter = () => {
           </div>
         </div>
         <div className="flex flex-col justify-between items-start">
-          <div className="flex flex-col gap-[10px]">
+          <div className="flex flex-col gap-[10px] items-start">
             <div className="flex gap-[10px]">
               {menuItems.map((item, i) => (
                 <AppMenuItem key={i} item={item} isActive={false} />

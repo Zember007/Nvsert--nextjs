@@ -2,27 +2,46 @@
 @import '../base/mixins';
 
 .header {
-	padding: 16px 0;
+	--color-item-menu-active: #FFF;
+	--color-item-menu-hover: #ccc;
+	padding: 10px 0;
 	background: #34446D33;
 	backdrop-filter: blur(50px);
 	box-shadow: 0px 2px 2px 0px #00000040;
-    z-index: 100000;
-	.header-phone svg path{
+	z-index: 100000;
+
+	.header-phone svg path {
 		@include transition();
 
 	}
+
 	&.black {
+		--color-item-menu-active: #34446D;
+		--color-item-menu-hover: #000;
+
 		.header-phone__link {
 			color: #000;
 		}
 
-		.header-phone svg path{
-			fill:#000;
+		.header-phone svg path {
+			fill: #000;
 		}
 
 		.logo {
 			color: #000;
 
+		}
+
+		.header-nav__link {
+			color: #000;
+
+			svg path {
+				stroke: black;
+			}
+
+			&.active {
+				border: 1px solid #00000099;
+			}
 		}
 	}
 
@@ -110,6 +129,7 @@
 			@include resetBtnStyles;
 			display: flex;
 			align-items: center;
+			gap: 4px;
 			font-size: 16px;
 			line-height: 24px;
 			vertical-align: middle;
@@ -117,15 +137,25 @@
 			color: $typography-primary;
 			text-decoration: none;
 			font-family: $font-family-2;
+			padding: 5px 15px;
+			border-radius: 4px;
+			border: 1px solid transparent;
+
+			svg path {
+				@include transition();
+			}
 
 			@media(max-width: $media-l) {
 				font-size: 20px;
 				line-height: 28px;
 			}
 
-			&:hover,
-			&:active {
-				// color: $typography-accent;
+			&:not(.active) svg {
+				transform: rotate(180deg);
+			}
+
+			&.active {
+				border: 1px solid #FFF;
 			}
 
 			.icon {
@@ -137,73 +167,7 @@
 			}
 		}
 
-		.services-menu__btn {
-			.burger-btn {
-				display: flex;
-				width: 18px;
-				height: 12px;
-				justify-content: center;
-				align-items: center;
-				padding: 0;
-				position: relative;
-				z-index: 10;
-				margin-right: 6px;
 
-				span {
-					display: block;
-					position: relative;
-					width: 18px;
-					height: 2px;
-					background-color: $white-color;
-					@include transition();
-
-					&:after,
-					&:before {
-						content: '';
-						display: block;
-						position: absolute;
-						height: 2px;
-						background-color: $white-color;
-						@include transition();
-					}
-
-					&:before {
-						top: -5px;
-						width: 18px;
-
-					}
-
-					&:after {
-						bottom: -5px;
-						width: 9px;
-						right: 0;
-
-					}
-				}
-
-
-			}
-
-			@media (max-width: $media-l) {
-				&.active {
-					.burger-btn {
-						span {
-							transform: rotate(45deg);
-
-							&:after {
-								transform: scale(0);
-							}
-
-							&:before {
-								transform: rotate(-90deg);
-								top: 0;
-							}
-						}
-					}
-				}
-			}
-
-		}
 	}
 
 	&-phone {
@@ -320,66 +284,7 @@
 			font-weight: 600;
 		}
 
-		.burger-btn {
-			display: flex;
-			width: 18px;
-			height: 12px;
-			justify-content: center;
-			align-items: center;
-			padding: 0;
-			position: relative;
-			z-index: 15;
-			margin-left: 6px;
 
-			span {
-				display: block;
-				position: relative;
-				width: 18px;
-				height: 2px;
-				background-color: $white-color;
-				@include transition();
-
-				&:after,
-				&:before {
-					content: '';
-					display: block;
-					position: absolute;
-					width: 18px;
-					height: 2px;
-					background-color: $white-color;
-					@include transition();
-				}
-
-				&:before {
-					top: -5px;
-
-				}
-
-				&:after {
-					bottom: -5px;
-
-				}
-			}
-
-
-		}
-
-		&.active {
-			.burger-btn {
-				span {
-					transform: rotate(45deg);
-
-					&:after {
-						transform: scale(0);
-					}
-
-					&:before {
-						transform: rotate(-90deg);
-						top: 0;
-					}
-				}
-			}
-		}
 	}
 
 	&__calc-link {
@@ -513,19 +418,7 @@
 		color: $white-color;
 	}
 
-	.burger-btn {
-		span {
-			background-color: $white-color;
 
-			&:before {
-				background-color: $white-color;
-			}
-
-			&:after {
-				background-color: $white-color;
-			}
-		}
-	}
 }
 
 .services-menu-bg {
@@ -533,16 +426,19 @@
 }
 
 .services-menu {
-	background: #141414;
+	background: #34446D33;
+	box-shadow: 0px 2px 2px 0px #00000040;
+	backdrop-filter: blur(50px);
 	width: 100vw;
 	height: 100vh;
-	height: calc(var(--vh, 1vh) * 100);
+	height: auto;
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 21;
-	padding-top: 60px;
-	transform: translateY(-120%);
+	z-index: -1;
+	padding-top: 10px;
+	padding-bottom: 44px;
+	transform: translateY(-100%);
 	transition: all 0.3s ease-in-out 0s;
 
 	@media (max-width: $media-s) {
@@ -553,19 +449,10 @@
 
 	&.active {
 		transform: translateY(0);
+		top: 70px;
 	}
 
-	&__header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		margin-bottom: 40px;
 
-		@media (max-width: $media-l) {
-			display: none;
-		}
-
-	}
 
 	&__title {
 		color: $white-color;
@@ -586,10 +473,12 @@
 	}
 
 	&__wrapper {
-		max-height: calc(100vh - 190px);
 		max-height: calc((var(--vh, 1vh) * 100) - 190px);
 		overflow-y: auto;
-		padding-right: 4px;
+		padding: 0 212px;
+
+		display: flex;
+		gap: 30px;
 
 		@media (max-width: $media-l) {
 			margin-top: 32px;

@@ -4,7 +4,6 @@
 import Link from "next/link";
 import AppValidationObserver from "./AppValidationObserver";
 import AppInput from "./elements/AppInput";
-import { useTranslation } from "react-i18next";
 import AppTextarea from "./elements/AppTextarea";
 import { useForm } from "react-hook-form";
 import axios from "axios";

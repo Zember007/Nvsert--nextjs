@@ -1,38 +1,7 @@
-.header {
-  backdrop-filter: blur(4px);
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25);
-  background: rgba(255, 255, 255, 0.1);
-}
 
-.logo {
-  position: relative;
-  display: inline-block;
-  -webkit-mask-image: linear-gradient(
-    60deg,
-    #000 25%,
-    rgba(0, 0, 0, 0.2) 50%,
-    #000 75%
-  );
-  mask-image: linear-gradient(
-    60deg,
-    #000 25%,
-    rgba(0, 0, 0, 0.2) 50%,
-    #000 75%
-  );
-  -webkit-mask-size: 400%;
-  mask-size: 400%;
-  -webkit-mask-position: 0;
-  mask-position: 0;
-  pointer-events: none;
-  transition: mask-position 1s ease, -webkit-mask-position 1s ease;
-}
-
-.logo-wrapper:hover .logo {
-  -webkit-mask-position: 100%;
-  mask-position: 100%;
-}
 
 .menu-item {
+  
   align-items: center;
   color: #878787;
   display: flex;
@@ -54,10 +23,6 @@
   -moz-osx-font-smoothing: grayscale;
   border: 1px solid transparent;
 }
-.header.black .menu-item{
-  color: #00000099;
-
-}
 
 .menu-item-active span {
   display: flex;
@@ -70,7 +35,7 @@
 }
 
 .menu-item:hover {
-  color: #ccc;
+  color:  var(--color-item-menu-hover);
   border-color: #353535;
 }
 
@@ -162,7 +127,7 @@
 }
 
 .menu-item-active:active {
-  color: #4a738c;
+  color: var(--color-item-menu-active);
 }
 
 .menu-item-active .highlight {
@@ -233,15 +198,15 @@
   transform-origin: center;
   will-change: transform, color, border-color;
   transition: transform 0.2s ease, border-color 0.5s ease;
-  color: #4a738c;
-  border-color: #4a738c;
+  color: var(--color-item-menu-active);
+  border-color: var(--color-item-menu-active);
   background: none;
   box-shadow: none;
 }
 
 .menu-item:active::after,
 .menu-item.fast-click::after {
-  border-color: #4a738c;
+  border-color: var(--color-item-menu-active);
   transition: border-color 0.5s ease;
   opacity: 1;
 }
@@ -325,7 +290,7 @@
 
 .login-button:active::after,
 .login-button.fast-click::after {
-  border-color: #4a738c;
+  border-color: var(--color-item-menu-active);
   transition: border-color 0.5s ease;
   opacity: 1;
 }
@@ -336,7 +301,7 @@
   transform-origin: center;
   will-change: transform;
   transition: transform 0.2s ease, color 0.5s ease;
-  color: #4a738c;
+  color: var(--color-item-menu-active);
   box-shadow: inset 2px 2px 2px 0 rgba(7, 26, 38, 0.5),
     inset -2px -2px 2px 0 rgba(7, 26, 38, 0.5);
 }
@@ -344,7 +309,7 @@
 .login-button:active::before,
 .login-button.fast-click::before {
   clip-path: inset(0 0 0 0);
-  color: #4a738c;
+  color: var(--color-item-menu-active);
 }
 
 .menu-item-active:active,
@@ -353,37 +318,37 @@
   transform-origin: center;
   will-change: transform, color, border-color;
   transition: transform 0.2s ease, color 0.5s ease, border-color 0.5s ease;
-  color: #4a738c !important;
-  border-color: #4a738c;
+  color: var(--color-item-menu-active) !important;
+  border-color: var(--color-item-menu-active);
   background: none;
   box-shadow: none;
 }
 
 .menu-item-active:active span,
 .menu-item-active.fast-click span {
-  color: #4a738c !important;
+  color: var(--color-item-menu-active) !important;
   transition: color 0.5s ease, -webkit-text-fill-color 0.5s ease;
   will-change: color, -webkit-text-fill-color;
   background: none !important;
   -webkit-background-clip: none !important;
   background-clip: none !important;
-  -webkit-text-fill-color: #4a738c !important;
+  -webkit-text-fill-color: var(--color-item-menu-active) !important;
 }
 
 .menu-item-active:active::before,
 .menu-item-active.fast-click::before {
-  color: #4a738c !important;
+  color: var(--color-item-menu-active) !important;
   transition: color 0.5s ease, -webkit-text-fill-color 0.5s ease;
   will-change: color, -webkit-text-fill-color;
   background: none !important;
   -webkit-background-clip: none !important;
   background-clip: none !important;
-  -webkit-text-fill-color: #4a738c !important;
+  -webkit-text-fill-color: var(--color-item-menu-active) !important;
 }
 
 .menu-item-active:active::after,
 .menu-item-active.fast-click::after {
-  border-color: #4a738c;
+  border-color: var(--color-item-menu-active);
   transition: border-color 0.5s ease;
   opacity: 1;
 }

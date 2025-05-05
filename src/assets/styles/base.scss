@@ -31,36 +31,40 @@
 .PhotoView__Photo {
     box-shadow: 0px 0px 10px 0px #000000CC;
     cursor: inherit !important;
-   
+
 }
 
 .PhotoView__Photo__attr {
     position: relative;
     width: 448px;
+
     &.loaded {
-        &::before ,
+
+        &::before,
         &::after {
             display: none;
         }
     }
-    &::before ,
+
+    &::before,
     &::after {
-        position: absolute;        
-        bottom: -50px;      
+        position: absolute;
+        bottom: -50px;
         color: #FFF;
         font-weight: 700;
         font-size: 20px;
         vertical-align: bottom;
-        
+
     }
+
     &::before {
         content: attr(data-duration);
-        left: 0;  
+        left: 0;
     }
 
     &::after {
         content: attr(data-price);
-        right: 0;  
+        right: 0;
     }
 }
 
@@ -80,12 +84,12 @@
 
 
 
-    
+
 }
 
 .rubik,
 .rubik * {
-  font-family: "Rubik", sans-serif;
+    font-family: "Rubik", sans-serif;
 }
 
 .close {
@@ -244,6 +248,7 @@
     perspective: 200px;
     position: relative;
     z-index: 10;
+
     &.bg-p {
         background: url('../images/150.png');
     }
@@ -269,16 +274,12 @@
     opacity: 0;
     transition: opacity 300ms ease;
     z-index: 20;
-    mask-image: radial-gradient(
-        150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-        white,
-        transparent 60%
-      );
-        -webkit-mask-image: radial-gradient(
-        150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-        white,
-        transparent 60%
-      );
+    mask-image: radial-gradient(150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            white,
+            transparent 60%);
+    -webkit-mask-image: radial-gradient(150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            white,
+            transparent 60%);
     border: 1px solid #FFF;
     border-radius: 4px;
 
@@ -310,6 +311,10 @@
     transition: none;
     transition: all 0.3s ease;
     transform: translateZ(0);
+
+    &:not(:active) {
+        overflow: hidden;
+    }
 }
 
 .tariff:active,
@@ -417,7 +422,7 @@ input:-webkit-autofill {
 }
 
 
-  
+
 .simplebar-scrollbar:before {
     background: rgba(52, 68, 109, 0.2) !important;
     border: 1px solid #93969D !important;

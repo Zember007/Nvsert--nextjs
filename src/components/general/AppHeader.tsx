@@ -73,7 +73,7 @@ const AppHeader = () => {
 
 
 
-  useBackgroundBrightness({simpleBar, headerRef })
+  useBackgroundBrightness({ simpleBar, headerRef })
 
 
 
@@ -98,9 +98,10 @@ const AppHeader = () => {
                     handleNavMenu();
                   }}
                 >
-                  <span className="burger-btn">
-                    <span></span>
-                  </span>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 16L12 9L19 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+
                   Услуги
                 </button>
               </li>
@@ -129,27 +130,29 @@ const AppHeader = () => {
               {t('calculation.name')}
             </Link>
           </div>
-          <div className={`services-menu js-services-menu ${servicesMenuActive && 'active'}`}>
-            <div className="wrapper">
-              <div className=" py-[30px] px-[18px]  services-menu-bg rounded-[8px]">
-                <div className="services-menu__header">
-                  <p className="services-menu__title">Услуги</p>
-                  <button
-                    className={`services-menu__btn-close js-services-menu__btn ${servicesMenuActive && 'active'}`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavMenu();
-                    }}
-                    type="button"
-                  >
-                    <i className="icon icon--close"></i>
-                  </button>
-                </div>
-                <div className="services-menu__wrapper">
-                  <AppNavigation />
-                </div>
-              </div>
+          <div className={`services-menu js-services-menu relative ${servicesMenuActive && 'active'}`}>
+
+            <div className="services-menu__wrapper">
+              <AppNavigation />
             </div>
+            
+
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavMenu();
+              }}
+              className="close !top-[10px] !right-[30px]">
+              <div className="in">
+                <div className="close-button-block"></div>
+                <div className="close-button-block"></div>
+              </div>
+              <div className="out">
+                <div className="close-button-block"></div>
+                <div className="close-button-block"></div>
+              </div>
+            </button>
+
           </div>
         </div>
 
