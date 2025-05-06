@@ -1,6 +1,6 @@
 import { useHeaderContext } from '@/components/contexts/HeaderContext'
 import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
+import { Suspense, useRef } from 'react';
 import AppIntroForm from '@/components/forms/AppIntroForm'
 import Draggable from 'react-draggable';
 
@@ -23,6 +23,7 @@ interface AppModalWrapperProps {
 
 
 const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive, defaultModalActive, defaultModalName }) => {
+    const nodeRef = useRef<HTMLDivElement>(null);
     return (
         <>
             <div className={`modal__wrapper ${defaultModalActive && 'active'}`}
@@ -30,8 +31,10 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
                     setDefaultModalActive(false)
                 }}
             >
-                <Draggable>
-                    <div className={`modal__box modal ${defaultModalActive && 'active'}`} onClick={(e) => { e.stopPropagation() }}>
+                <Draggable defaultPosition={{ x: 0, y: 0 }} nodeRef={nodeRef as React.RefObject<HTMLElement>}>
+                    <div
+                        ref={nodeRef}
+                        className={`modal__box modal ${defaultModalActive && 'active'}`} onClick={(e) => { e.stopPropagation() }}>
                         <div id='modal-default' className="modal__content main-form">
                             {
                                 defaultModalName === 'successMessage' &&
