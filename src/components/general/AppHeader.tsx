@@ -95,7 +95,7 @@ const AppHeader = () => {
                       item={{
                         href: '#',
                         label: <button
-                          type="button"           
+                          type="button"
                           className={`gap-[4px] flex items-center `}
                           onClick={(e) => {
                             e.preventDefault();
@@ -145,15 +145,17 @@ const AppHeader = () => {
             <AppMenuItem
               isActive={false}
               item={{
-                href: '#', label: <button
-                  onClick={() => { openDefaultModal('introForm') }}
-                  className="header-phone">
+                href: '#',
+                label:
+                  <button
+                    onClick={() => { openDefaultModal('introForm') }}
+                    className="header-phone">
 
-                  <span
-                    className="header-phone__link">
-                    8 495 777-11-97
-                  </span>
-                </button>
+                    <span
+                      className="header-phone__link">
+                      8 495 777-11-97
+                    </span>
+                  </button>
               }}
             />
           </div>

@@ -16,6 +16,8 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
       if (!element) return;
 
       const rect = element.getBoundingClientRect();
+      console.log(rect.top);
+      
       const points = [
         { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }, // центр
         { x: rect.left + 10, y: rect.top + 10 }, // верхний левый угол
@@ -139,7 +141,6 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
       }
 
       // Обновляем класс
-      console.log(validColorFound, brightness);
       
       if (validColorFound && element) {
         element.classList.toggle('black', brightness > 128);
