@@ -77,15 +77,7 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
 
                     if (validColorFound && element) {
                       element.classList.toggle('black', brightness > 128);
-                      console.log(
-                        'Background image color:',
-                        bgColor,
-                        'Brightness:',
-                        brightness,
-                        'Element:',
-                        underlyingElement.tagName,
-                        underlyingElement.className
-                      );
+                  
                     }
                   }
                 }
@@ -147,28 +139,15 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
       }
 
       // Обновляем класс
+      console.log(validColorFound && element, brightness);
+      
       if (validColorFound && element) {
         element.classList.toggle('black', brightness > 128);
       } else {
         element.classList.toggle('black', true); // Запасной: светлый фон
       }
 
-      // Логирование для отладки
-      console.log(
-        'Point checked:',
-        points,
-        'Brightness:',
-        brightness,
-        'Valid color found:',
-        validColorFound,
-        'Background color:',
-        bgColor,
-        'Found element:',
-        foundElement?.tagName,
-        foundElement?.className,
-        'Underlying elements:',
-        checkedElements
-      );
+      // Логирование для отладки   
     };
 
     // Функция для получения цвета из фонового изображения
@@ -208,6 +187,8 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
     let enableChange: boolean = true;
 
     scrollContainer.addEventListener('scroll', () => {
+      
+      
       if (timeoutId) clearTimeout(timeoutId);
       if (enableChange) {
         enableChange = false;
@@ -222,6 +203,7 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
         }, 200);
       }
     });
+
 
     // Начальная проверка
     updateTextColor();

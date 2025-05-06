@@ -14,7 +14,6 @@ import { useSimpleBar } from "../contexts/SimpleBarContext";
 import html2canvas from 'html2canvas';
 import useBackgroundBrightness from "@/hook/useBackgroundBrightness";
 
-let snapshotCanvas = null;
 
 
 
