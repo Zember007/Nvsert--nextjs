@@ -174,7 +174,8 @@
 	}
 
 	&-phone {
-		@include transition();
+		transition: all 0.6s ease;		
+		will-change: color;
 		font-size: 16px;
 		line-height: 24px;
 		font-family: $font-family-2;
@@ -200,7 +201,8 @@
 		}
 
 		&__link {
-			@include transition();
+			transition: all 0.6s ease;
+			will-change: color;
 			color: $typography-primary;
 			text-decoration: none;
 
@@ -586,6 +588,8 @@
 }
 
 .logo {
+	transition: all 0.6s ease;
+	will-change: color;
 	display: flex;
 	width: 122px;
 	height: 24px;
