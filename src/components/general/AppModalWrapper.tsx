@@ -31,7 +31,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
                     setDefaultModalActive(false)
                 }}
             >
-                <Draggable defaultPosition={{ x: 0, y: 0 }} nodeRef={nodeRef as React.RefObject<HTMLElement>}>
+                <Draggable defaultPosition={{ x: 0, y: 0 }} enableUserSelectHack={false} nodeRef={nodeRef as React.RefObject<HTMLDivElement>}>
                     <div
                         ref={nodeRef}
                         className={`modal__box modal ${defaultModalActive && 'active'}`} onClick={(e) => { e.stopPropagation() }}>
