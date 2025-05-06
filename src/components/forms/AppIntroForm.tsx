@@ -38,13 +38,12 @@ const AppIntroForm = () => {
                 const myElement = document.getElementById('modal-default')
                 if (myElement) {
                     BounceEffect(myElement, {
-                        startPosition: "-0",
+                        startPosition: "0",
                         endPosition: `${20}px`,
                         duration: 300,
-                        easing: "ease-in-out",
+                        easing: "linear",
                         direction: 'vertical'
                     });
-
 
                     setSuccessMessageVisible(true)
 

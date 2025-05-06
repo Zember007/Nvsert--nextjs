@@ -63,10 +63,10 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
         const myElement = document.getElementById('form-main')
         if (myElement) {
             BounceEffect(myElement, {
-                startPosition: "-0",
+                startPosition: "0",
                 endPosition: `${20}px`,
                 duration: 300,
-                easing: "ease-in-out",
+                easing: "linear",
                 direction: 'vertical'
             });
 
@@ -206,7 +206,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                                 className=" btnIconAn group  tariff s:mt-[1px] mt-[15px] bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[transparent]   rounded-[4px]"
                                 style={{
                                     verticalAlign: 'middle'
-                                }}
+                                }}                              
                             >
 
                                 <div className="overflow-hidden p-[9px] px-[20px] relative flex items-center gap-[20px] justify-between">

@@ -21,7 +21,7 @@ export function BounceEffect(
     // Останавливаем текущую анимацию и сбрасываем состояние
     element.style.animation = "none";
     element.style.transform = `translate${direction === "vertical" ? "Y" : "X"}(${startPosition})`;
-
+    const id = Date.now()
     // Запускаем новую анимацию
     requestAnimationFrame(() => {
 
@@ -30,7 +30,7 @@ export function BounceEffect(
 
         // Создаем keyframes
         const keyframes = `
-        @keyframes bounce {
+        @keyframes bounce${id} {
             0% { 
                 transform: translate${direction === "vertical" ? "Y" : "X"}(${startPosition});
             }
@@ -50,16 +50,16 @@ export function BounceEffect(
     `;
 
         // Удаляем существующий стиль анимации, если есть
-        const existingStyle = document.getElementById("bounce-keyframes");
+        const existingStyle = document.getElementById(`bounce-keyframes${id}`);
         if (existingStyle) existingStyle.remove();
 
         // Создаем новый стиль
         const styleSheet = document.createElement("style");
-        styleSheet.id = "bounce-keyframes";
+        styleSheet.id = `bounce-keyframes${id}`;
         styleSheet.textContent = keyframes;
         document.head.appendChild(styleSheet);
 
-        element.style.animation = `bounce ${duration}ms ${easing} forwards`;
+        element.style.animation = `bounce${id} ${duration}ms ${easing} forwards`;
 
     });
 
