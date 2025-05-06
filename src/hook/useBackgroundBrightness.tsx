@@ -139,7 +139,7 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
       }
 
       // Обновляем класс
-      console.log(validColorFound && element, brightness);
+      console.log(validColorFound, brightness);
       
       if (validColorFound && element) {
         element.classList.toggle('black', brightness > 128);

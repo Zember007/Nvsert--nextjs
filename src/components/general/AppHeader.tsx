@@ -151,7 +151,7 @@ const AppHeader = () => {
 
                   <span
                     className="header-phone__link">
-                    8 (800) 700-33-75
+                    8 495 777-11-97
                   </span>
                 </button>
               }}
