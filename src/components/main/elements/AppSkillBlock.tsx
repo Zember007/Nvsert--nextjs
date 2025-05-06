@@ -86,13 +86,13 @@ const AppSkillBlock = (skill: any) => {
 
         <div
           style={{
+            borderColor: `${'#CCCCCC'}`,
             ...(!skill.folder && {
-              borderColor: `${'#CCCCCC'}`,
               background: `${skill.bg === 'secondary' ? '#93969D26' : '#FFFFFF26'}`,
             }),
             ...(mousePX && { ...cardStyle })
           }}
-          className={`flex   ${!skill.folder && 'border border-solid'} backdrop-blur-[1px] rounded-[4px] overflow-hidden flex-col gap-[14px] relative z-[1] justify-between h-full transition-all duration-500 ${skill.folder ? '!items-center !justify-center' : 'p-[20px]'}`}
+          className={`flex  border border-solid backdrop-blur-[1px] rounded-[4px] overflow-hidden flex-col gap-[14px] relative z-[1] justify-between h-full transition-all duration-500 ${skill.folder ? '!items-center !justify-center' : 'p-[20px]'}`}
         >
           {
             skill.folder ?
