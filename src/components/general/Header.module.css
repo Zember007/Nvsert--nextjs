@@ -105,52 +105,13 @@
 
 .menu-item-active {
   color: var(--color-item-menu-active);
-  font-size: 18px;
-  font-weight: 400;
-  display: flex;
-  flex: 1 0 auto;
-  justify-content: center;
-  overflow: visible;
-  text-align: center;
-  transition: transform 0.2s ease, color 1.5s ease;
-  will-change: transform, color, border-color;
-  transform-origin: center;
-  backface-visibility: hidden;
-  perspective: 1000px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  position: relative;
-  border-radius: 4px;
-  padding: 7px 20px;
-  height: 36px;
-  background: none;
-  border: 1px solid transparent;
 }
 
 .menu-item-active:active {
   color: var(--color-item-menu-active);
 }
 
-.menu-item-active .highlight {
-  background: radial-gradient(
-    250px circle at var(--last-mouse-x, var(--click-x, 50%))
-      var(--last-mouse-y, var(--click-y, 50%)),
-    #c7c7c714,
-    transparent 30%
-  );
-  border-radius: inherit;
-  content: "";
-  height: 100%;
-  left: 0;
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  transition: opacity 0.3s ease;
-  width: 100%;
-  z-index: 20;
-  will-change: opacity;
-  pointer-events: none;
-}
+
 
 .menu-item-active::after {
   content: "";
