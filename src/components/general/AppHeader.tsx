@@ -89,23 +89,28 @@ const AppHeader = () => {
               <nav className="header-nav">
                 <ul className="header-nav__list">
                   <li className="header-nav__item">
-                    <AppMenuItem isActive={false} item={{ href: "/", label: 'Главная' }} />
+                    <AppMenuItem isActive={true} item={{ href: "/", label: 'Главная' }} />
                   </li>
                   <li className="header-nav__item">
-                    <button
-                      type="button"
-                      className={`header-nav__link services-menu__btn js-services-menu__btn ${servicesMenuActive && 'active'}`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleNavMenu();
-                      }}
-                    >
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5 16L12 9L19 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
+                    <AppMenuItem isActive={servicesMenuActive}
+                      item={{
+                        href: '#',
+                        label: <button
+                          type="button"
+                          className={`gap-[4px] flex items-center `}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleNavMenu();
+                          }}
+                        >
+                          Услуги
 
-                      Услуги
-                    </button>
+                          <svg className={`*:stroke-[#FFFFFF99] ${servicesMenuActive ? '*:stroke-[var(--color-item-menu-active)]' : 'rotate-[180deg]'}`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 16L12 9L19 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                        </button>
+                      }}
+                    />
                   </li>
                   <li className="header-nav__item">
                     <AppMenuItem isActive={false} item={{ href: "/about/o-kompanii/", label: t('navigation.about') }} />
@@ -141,7 +146,7 @@ const AppHeader = () => {
               item={{
                 href: '#', label: <button
                   onClick={() => { openDefaultModal('introForm') }}
-                  className="header-phone">       
+                  className="header-phone">
 
                   <span
                     className="header-phone__link">

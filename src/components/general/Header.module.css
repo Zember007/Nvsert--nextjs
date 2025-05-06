@@ -36,6 +36,8 @@
 
 .menu-item:hover {
   color:  var(--color-item-menu-hover);
+  border-color: var(--menu-item-border-hover);
+  
 }
 
 .menu-item::after {
@@ -102,7 +104,7 @@
 }
 
 .menu-item-active {
-  color: var(--siniy);
+  color: var(--color-item-menu-active);
   font-size: 18px;
   font-weight: 400;
   display: flex;
@@ -252,6 +254,6 @@
 }
 
 .menu-item-active:hover {
-  color: var(--siniy);
+  color: var(--color-item-menu-active);
   border-color: #353535;
 }

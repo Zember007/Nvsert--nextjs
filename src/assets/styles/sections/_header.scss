@@ -2,13 +2,11 @@
 @import '../base/mixins';
 
 .header {
-	--color-item-menu-active: #FFF;
-	--color-item-menu-hover: #ccc;
-	--menu-item-border: #ccc;
+
 	padding: 5px 0;
 	background: #34446D33;
-	backdrop-filter: blur(50px);
-	box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.251);
+	backdrop-filter: blur(15px);
+	box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.251);
 	z-index: 100000;
 
 	.header-phone svg path {
@@ -16,10 +14,16 @@
 
 	}
 
+	svg {
+	}
+
 	&.black {
-		--color-item-menu-active: #34446D;
+		--color-item-menu-active: #000;
 		--color-item-menu-hover: #000;
 		--menu-item-border: #000;
+		--menu-item-border-hover: #fff;
+
+		
 		.header-phone__link {
 			color: #000;
 		}
@@ -36,9 +40,7 @@
 		.header-nav__link {
 			color: #000;
 
-			svg path {
-				stroke: black;
-			}
+			
 
 			&.active {
 				border: 1px solid #00000099;
@@ -76,7 +78,7 @@
 		&__list {
 			display: flex;
 			align-items: center;
-			gap: 64px;
+			gap:8px;
 
 			@media (max-width: $media-xl) {
 				gap: 40px
@@ -425,7 +427,7 @@
 .services-menu {
 	background: #34446D33;
 	box-shadow: 0px 2px 2px 0px #00000040;
-	backdrop-filter: blur(50px);
+	backdrop-filter: blur(15px);
 	width: 100vw;
 	height: auto;
 	position: fixed;

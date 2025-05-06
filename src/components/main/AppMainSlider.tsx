@@ -331,7 +331,7 @@ const SliderMain = () => {
                         className="slide-main l:inset-[0%] l:h-[100%] h-[300px] l:bottom-0 bottom-[80px] l:z-0 z-[]">
 
                         <div className="slider-wrap">
-                            <div ref={whiteBgRef} className={`slide-blur left-[562px]`}>
+                            <div ref={whiteBgRef} className={`slide-blur left-[562px] white`}>
                                 <span className="line" style={{ '--blur': '4px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '8px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>

@@ -12,6 +12,13 @@ html {
   // scroll-behavior: smooth;
 }
 
+:root {  
+  --color-item-menu-active: #FFF;
+	--color-item-menu-hover: #ccc;
+	--menu-item-border: #ccc;
+	--menu-item-border-hover: #353535;
+}
+
 .bg-noise {
   --opacity: 0.9;
   position: fixed;
