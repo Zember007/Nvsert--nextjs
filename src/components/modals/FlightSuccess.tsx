@@ -5,39 +5,6 @@ import FlyingPlane from './elements/FlyingPlane';
 const FlightSuccess = ({bg, close, small = false, text }: { bg?:string; close: () => void; small?: boolean; text:string }) => {
 
     const [time, setTime] = React.useState(10);
-    const bounceContent = useRef<HTMLDivElement | null >(null)
-    const bounceContent1 = useRef<HTMLDivElement | null >(null)
-
-    useEffect(() => {
-        if (!bounceContent.current || !bounceContent1.current) return
-
-        BounceEffect(bounceContent.current, {
-            startPosition: "-100px",
-            endPosition: `-20px`,
-            duration: 300,
-            easing: "ease-in",
-            direction: 'vertical'
-        });
-        BounceEffect(bounceContent1.current, {
-            startPosition: "-100px",
-            endPosition: `-20px`,
-            duration: 300,
-            easing: "ease-in",
-            direction: 'vertical'
-        });
-
-        const timer = setInterval(() => {
-            setTime(prev => {
-                const num = prev - 1
-                if (num === 0) {
-                    clearInterval(timer)
-                    close()
-                }
-                return num
-            });
-        }, 1000);
-        return () => clearInterval(timer);
-    }, [bounceContent])
 
     return (
         <div className="active  pt-[100px]"
@@ -57,14 +24,12 @@ const FlightSuccess = ({bg, close, small = false, text }: { bg?:string; close: (
             </button>
             <div                
                 className="flex flex-col items-center">
-                <div
-                ref={bounceContent}
+                <div                
                 className="flex flex-col gap-[20px] text-white text-center items-center">
                     <p className="text-[32px] tracking-[-0.03em]">{text}</p>
                     <p className="text-[20px]">Мы свяжемся с Вами <br /> в течение 10 минут!</p>
                 </div>
-                <div
-                ref={bounceContent1}
+                <div                
                 className={`${small ? 'top-[220px]' : 'top-[256px]'} left-0 right-0 absolute`}>
                     <FlyingPlane />
                 </div>
