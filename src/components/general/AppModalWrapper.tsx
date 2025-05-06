@@ -2,6 +2,7 @@ import { useHeaderContext } from '@/components/contexts/HeaderContext'
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 import AppIntroForm from '@/components/forms/AppIntroForm'
+import Draggable from 'react-draggable';
 
 const AppKnowCostForm = dynamic(() => import('@/components/forms/AppKnowCostForm'), {
     loading: () => <p>Loading...</p>,
@@ -19,6 +20,8 @@ interface AppModalWrapperProps {
     defaultModalName: string;
 }
 
+
+
 const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive, defaultModalActive, defaultModalName }) => {
     return (
         <>
@@ -27,33 +30,35 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
                     setDefaultModalActive(false)
                 }}
             >
-                <div className={`modal__box modal ${defaultModalActive && 'active'}`} onClick={(e) => { e.stopPropagation() }}>
-                    <div id='modal-default' className="modal__content main-form">
-                        {
-                            defaultModalName === 'successMessage' &&
-                            <>
-                                <Suspense fallback={<p></p>}>
-                                    <AppSuccessMessage />
-                                </Suspense>
-                            </>
-                        }
-                        {
-                            defaultModalName === 'introForm' &&
-                            <>
-                               
+                <Draggable>
+                    <div className={`modal__box modal ${defaultModalActive && 'active'}`} onClick={(e) => { e.stopPropagation() }}>
+                        <div id='modal-default' className="modal__content main-form">
+                            {
+                                defaultModalName === 'successMessage' &&
+                                <>
+                                    <Suspense fallback={<p></p>}>
+                                        <AppSuccessMessage />
+                                    </Suspense>
+                                </>
+                            }
+                            {
+                                defaultModalName === 'introForm' &&
+                                <>
+
                                     <AppIntroForm />
-                           
-                            </>
-                        }
 
-                        {
-                            defaultModalName === 'knowCost' &&
+                                </>
+                            }
 
-                            <AppKnowCostForm />
+                            {
+                                defaultModalName === 'knowCost' &&
 
-                        }
+                                <AppKnowCostForm />
+
+                            }
+                        </div>
                     </div>
-                </div>
+                </Draggable>
             </div>
         </>
     );
