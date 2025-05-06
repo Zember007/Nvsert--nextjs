@@ -24,7 +24,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
 
   return (
     <div className={`z-[0] relative card-wrap h-[517px] w-full translate-y-[0] ${!isVisible && '!translate-y-[30px] opacity-0'} transition-all duration-500 `}>
-      <div className="absolute top-[0] left-0 right-0 bottom-0 border-[#CCCCCC] z-[-1] border border-solid  rounded-[8px]"></div>
+      <div className="absolute top-[0] left-0 right-0 bottom-0 border-[#CCCCCC] z-[1] border border-solid  rounded-[8px]"></div>
       <div
         className="bg-[#FFFFFF26] backdrop-blur-[1px] hover:bg-[#93969D26] group !shadow-none card  h-full  rounded-[8px] flex flex-col gap-[29px] justify-between ">
         <div className="flex flex-col gap-[20px] h-full">
