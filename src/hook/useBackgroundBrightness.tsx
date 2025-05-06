@@ -16,7 +16,6 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
       if (!element) return;
 
       const rect = element.getBoundingClientRect();
-      console.log(rect.top);
       
       const points = [
         { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }, // центр
@@ -38,6 +37,8 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
         const scrollRect = scrollContainer.getBoundingClientRect();
         const adjustedX = x - scrollRect.left;
         const adjustedY = y - scrollRect.top;
+       
+        
 
         // Фильтруем элементы: <section>, <div> с классами content, block, section
         const underlyingElements = document.elementsFromPoint(x, y).filter(
@@ -48,6 +49,7 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
                 el.classList.contains('block') ||
                 el.classList.contains('section')))
         );
+
 
         // Логируем все найденные элементы
         checkedElements = underlyingElements.map((el) => `${el.tagName}.${el.className}`);
@@ -197,12 +199,17 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
         setTimeout(() => {
           enableChange = true;
         }, 200);
-      } else {
-        timeoutId = setTimeout(() => {
-          updateTextColor();
-          enableChange = true;
+      } 
+
+      timeoutId = setTimeout(() => {
+        updateTextColor();
+        
+        enableChange = true;
+
+        setTimeout(() => {
+          updateTextColor();                  
         }, 200);
-      }
+      }, 200);
     });
 
 
