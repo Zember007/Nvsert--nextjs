@@ -103,15 +103,32 @@
   line-height: 19px;
 }
 
-.menu-item-active {
-  color: var(--color-item-menu-active);
-}
+
 
 .menu-item-active:active {
   color: var(--color-item-menu-active);
 }
 
-
+.menu-item-active .highlight {
+  background: radial-gradient(
+    250px circle at var(--last-mouse-x, var(--click-x, 50%))
+      var(--last-mouse-y, var(--click-y, 50%)),
+    #c7c7c714,
+    transparent 30%
+  );
+  border-radius: inherit;
+  content: "";
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transition: opacity 0.3s ease;
+  width: 100%;
+  z-index: 20;
+  will-change: opacity;
+  pointer-events: none;
+}
 
 .menu-item-active::after {
   content: "";
@@ -216,5 +233,4 @@
 
 .menu-item-active:hover {
   color: var(--color-item-menu-active);
-  border-color: #353535;
 }
