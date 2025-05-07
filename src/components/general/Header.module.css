@@ -116,15 +116,8 @@
   bottom: -1px;
   border: 1px solid var(--menu-item-border);
   border-radius: 4px;
-  background: radial-gradient(150px circle at var(--last-mouse-x, var(--click-x, 50%)) var(--last-mouse-y, var(--click-y, 50%)),
-      rgba(255, 255, 255, 0.1),
-      transparent 60%);
-  mask-image: radial-gradient(150px circle at var(--last-mouse-x, var(--click-x, 50%)) var(--last-mouse-y, var(--click-y, 50%)),
-      white,
-      transparent 60%);
-  -webkit-mask-image: radial-gradient(150px circle at var(--last-mouse-x, var(--click-x, 50%)) var(--last-mouse-y, var(--click-y, 50%)),
-      white,
-      transparent 60%);
+
+
   opacity: 0;
   pointer-events: none;
 }

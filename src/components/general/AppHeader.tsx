@@ -141,18 +141,16 @@ const AppHeader = () => {
           <div >
             <AppMenuItem
               isActive={false}
+              onClick={() => { openDefaultModal('introForm') }}
               item={{
                 href: '#',
                 label:
-                  <button
-                    onClick={() => { openDefaultModal('introForm') }}
-                    className="header-phone">
-
+                  <div className="header-phone">
                     <span
                       className="header-phone__link">
                       8 495 777-11-97
                     </span>
-                  </button>
+                  </div>
               }}
             />
           </div>
@@ -174,7 +172,7 @@ const AppHeader = () => {
       <div className={`services-menu js-services-menu relative ${servicesMenuActive && 'active'}`}>
 
         <div className="services-menu__wrapper select-none">
-          <AppNavigation />
+          <AppNavigation active={servicesMenuActive}/>
         </div>
 
 
