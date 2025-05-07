@@ -2,7 +2,7 @@
 
 
 import FolderImg from '@/assets/images/folder.png'
-import Folder1Img from '@/assets/images/floder1.jpg'
+import Folder1Img from '@/assets/images/floder1.png'
 
 import Image01 from '@/assets/images/main-gallery/01.webp';
 import Image02 from '@/assets/images/main-gallery/02.webp';
