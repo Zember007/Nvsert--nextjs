@@ -3,7 +3,7 @@
 .menu-item {
   
   align-items: center;
-  color: #878787;
+  color: var(--color-item-menu);
   display: flex;
   flex: 1 0 auto;
   font-size: 18px;

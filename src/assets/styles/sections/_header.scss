@@ -15,10 +15,11 @@
 
 	&.black {
 		--color-item-menu-active: #000;
-		--color-item-menu-hover: #000;		
+		--color-item-menu-hover: #000;
 		--menu-item-border: #000;
+		--color-item-menu: rgba(0, 0, 0, 0.6);
 		--menu-item-border-hover: transparent;
-		
+
 		.header-phone__link {
 			color: #000;
 		}
@@ -35,7 +36,7 @@
 		.header-nav__link {
 			color: #000;
 
-			
+
 
 			&.active {
 				border: 1px solid #00000099;
@@ -73,7 +74,7 @@
 		&__list {
 			display: flex;
 			align-items: center;
-			gap:8px;
+			gap: 8px;
 
 			@media (max-width: $media-xl) {
 				gap: 40px
@@ -169,7 +170,7 @@
 	}
 
 	&-phone {
-		transition: all 0.3s ease;		
+		transition: all 0.3s ease;
 		will-change: color;
 		font-size: 16px;
 		line-height: 24px;
