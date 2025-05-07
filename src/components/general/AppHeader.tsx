@@ -88,7 +88,7 @@ const AppHeader = () => {
               <nav className="header-nav">
                 <ul className="header-nav__list">
                   <li className="header-nav__item">
-                    <AppMenuItem isActive={true} item={{ href: "/", label: 'Главная' }} />
+                    <AppMenuItem isActive={pathname === '/'} item={{ href: "/", label: 'Главная' }} />
                   </li>
                   <li className="header-nav__item group">
                     <AppMenuItem isActive={servicesMenuActive}
@@ -114,11 +114,11 @@ const AppHeader = () => {
                     />
                   </li>
                   <li className="header-nav__item">
-                    <AppMenuItem isActive={false} item={{ href: "/about/o-kompanii/", label: t('navigation.about') }} />
+                    <AppMenuItem isActive={pathname.includes('/about/o-kompanii/')} item={{ href: "/about/o-kompanii/", label: t('navigation.about') }} />
 
                   </li>
                   <li className="header-nav__item">
-                    <AppMenuItem isActive={false} item={{ href: "/contacts/", label: t('navigation.contacts') }} />
+                    <AppMenuItem isActive={pathname.includes('/contacts')} item={{ href: "/contacts/", label: t('navigation.contacts') }} />
 
                   </li>
                 </ul>
