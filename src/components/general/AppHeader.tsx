@@ -114,7 +114,7 @@ const AppHeader = () => {
                     />
                   </li>
                   <li className="header-nav__item">
-                    <AppMenuItem isActive={pathname.includes('/about/o-kompanii/')} item={{ href: "/about/o-kompanii/", label: t('navigation.about') }} />
+                    <AppMenuItem isActive={pathname.includes('/o-kompanii')} item={{ href: "/about/o-kompanii/", label: t('navigation.about') }} />
 
                   </li>
                   <li className="header-nav__item">
