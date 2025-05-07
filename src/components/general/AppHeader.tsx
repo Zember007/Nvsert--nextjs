@@ -92,24 +92,21 @@ const AppHeader = () => {
                   </li>
                   <li className="header-nav__item group">
                     <AppMenuItem isActive={servicesMenuActive}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleNavMenu();
+                      }}
                       item={{
                         href: '#',
-                        label: <button
-                          type="button"
-                          className={`gap-[4px] flex items-center `}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handleNavMenu();
-                          }}
-                        >
+                        label: <div className={`gap-[4px] flex items-center `}>
                           Услуги
 
                           <div>
-                            <svg className={`*:stroke-[#878787] transition-all duration-200 group-hover:*:!stroke-[var(--color-item-menu-active)] ${servicesMenuActive ? 'duration-[0.6s] *:!stroke-[var(--color-item-menu-active)]' : 'rotate-[180deg]'}`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg className={`*:stroke-[var(--color-item-menu)] group-hover:*:!stroke-[var(--color-item-menu-active)] ${servicesMenuActive ? '*:!stroke-[var(--color-item-menu-active)]' : 'rotate-[180deg]'}`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M5 16L12 9L19 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                           </div>
-                        </button>
+                        </div>
                       }}
                     />
                   </li>

@@ -1,7 +1,5 @@
-
-
 .menu-item {
-  
+
   align-items: center;
   color: var(--color-item-menu);
   display: flex;
@@ -35,9 +33,9 @@
 }
 
 .menu-item:hover {
-  color:  var(--color-item-menu-active);
+  color: var(--color-item-menu-active);
   border-color: var(--menu-item-border-hover);
-  
+
 }
 
 .menu-item::after {
@@ -49,23 +47,19 @@
   bottom: -1px;
   border: 1px solid var(--menu-item-border);
   border-radius: 4px;
-  background: radial-gradient(
-    150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(255, 255, 255, 0.1),
-    transparent 60%
-  );
-  mask-image: radial-gradient(
-    150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    white,
-    transparent 60%
-  );
-  -webkit-mask-image: radial-gradient(
-    150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    white,
-    transparent 60%
-  );
+  background: radial-gradient(150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(255, 255, 255, 0.1),
+      transparent 60%);
+  mask-image: radial-gradient(150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      white,
+      transparent 60%);
+  -webkit-mask-image: radial-gradient(150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      white,
+      transparent 60%);
   opacity: 0;
   pointer-events: none;
+  mask-composite: intersect;
+  -webkit-mask-composite: destination-in;
 }
 
 .menu-item:hover::after,
@@ -74,11 +68,9 @@
 }
 
 .highlight {
-  background: radial-gradient(
-    250px circle at var(--mouse-x) var(--mouse-y),
-    #c7c7c714,
-    transparent 30%
-  );
+  background: radial-gradient(250px circle at var(--mouse-x) var(--mouse-y),
+      #c7c7c714,
+      transparent 30%);
   border-radius: inherit;
   content: "";
   height: 100%;
@@ -100,12 +92,9 @@
 }
 
 .menu-item-active .highlight {
-  background: radial-gradient(
-    250px circle at var(--last-mouse-x, var(--click-x, 50%))
-      var(--last-mouse-y, var(--click-y, 50%)),
-    #c7c7c714,
-    transparent 30%
-  );
+  background: radial-gradient(250px circle at var(--last-mouse-x, var(--click-x, 50%)) var(--last-mouse-y, var(--click-y, 50%)),
+      #c7c7c714,
+      transparent 30%);
   border-radius: inherit;
   content: "";
   height: 100%;
@@ -129,35 +118,23 @@
   bottom: -1px;
   border: 1px solid var(--menu-item-border);
   border-radius: 4px;
-  background: radial-gradient(
-    150px circle at var(--last-mouse-x, var(--click-x, 50%))
-      var(--last-mouse-y, var(--click-y, 50%)),
-    rgba(255, 255, 255, 0.1),
-    transparent 60%
-  );
-  mask-image: radial-gradient(
-    150px circle at var(--last-mouse-x, var(--click-x, 50%))
-      var(--last-mouse-y, var(--click-y, 50%)),
-    white,
-    transparent 60%
-  );
-  -webkit-mask-image: radial-gradient(
-    150px circle at var(--last-mouse-x, var(--click-x, 50%))
-      var(--last-mouse-y, var(--click-y, 50%)),
-    white,
-    transparent 60%
-  );
+  background: radial-gradient(150px circle at var(--last-mouse-x, var(--click-x, 50%)) var(--last-mouse-y, var(--click-y, 50%)),
+      rgba(255, 255, 255, 0.1),
+      transparent 60%);
+  mask-image: radial-gradient(150px circle at var(--last-mouse-x, var(--click-x, 50%)) var(--last-mouse-y, var(--click-y, 50%)),
+      white,
+      transparent 60%);
+  -webkit-mask-image: radial-gradient(150px circle at var(--last-mouse-x, var(--click-x, 50%)) var(--last-mouse-y, var(--click-y, 50%)),
+      white,
+      transparent 60%);
   opacity: 0;
   pointer-events: none;
 }
 
 .menu-item-active:hover .highlight {
-  background: radial-gradient(
-    250px circle at var(--mouse-x, var(--last-mouse-x, var(--click-x, 50%)))
-      var(--mouse-y, var(--last-mouse-y, var(--click-y, 50%))),
-    #c7c7c714,
-    transparent 30%
-  );
+  background: radial-gradient(250px circle at var(--mouse-x, var(--last-mouse-x, var(--click-x, 50%))) var(--mouse-y, var(--last-mouse-y, var(--click-y, 50%))),
+      #c7c7c714,
+      transparent 30%);
   opacity: 1;
 }
 

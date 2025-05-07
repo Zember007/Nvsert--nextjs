@@ -75,13 +75,7 @@ const AppSkillBlock = (skill: any) => {
       onMouseLeave={handleMouseLeave}
       ref={cardRef}>
       <div
-        className={`card rebound-box relative z-[0] group/item l:mr-0 mr-[20px] rounded-[4px]  text-[#000] h-[226px] min-w-[300px] w-full`}
-        // style={
-        //   {
-        //     ...cardStyle,
-
-        //   }
-        // }
+        className={`card rebound-box relative z-[0] group/item l:mr-0 mr-[20px] rounded-[4px]  text-[#000] h-[227px] min-w-[300px] w-full`}
       >
 
         <div
@@ -97,7 +91,7 @@ const AppSkillBlock = (skill: any) => {
           {
             skill.folder ?
               <>
-                <Image alt="folder" className={`transition-all duration-300 rounded-[4px] h-full`} src={skill.img} />
+                <Image alt="folder" className={`transition-all max-w-[none] duration-300 rounded-[4px] h-full`} src={skill.img} />
 
               </>
               :
