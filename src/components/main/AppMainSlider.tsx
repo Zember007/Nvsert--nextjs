@@ -204,7 +204,7 @@ const SliderMain = () => {
                         </button>
                     </div>
 
-                    <div className={`overlay l:w-[642px] w-full p-[30px] pr-[80px] relative z-[0]  rounded-[8px] border border-solid border-[#34446D] overflow-hidden `}>
+                    <div className={`overlay l:w-[642px] w-full p-[30px] pr-[76px] relative z-[0]  rounded-[8px] border border-solid border-[#34446D] overflow-hidden `}>
                         <div className={`overlay-slider absolute top-0 right-[76px] left-0 bottom-0 z-[-2] transition-all duration-300 `}></div>
                         <div className="flex flex-col justify-between h-full l:items-start items-center w-full">
                             <div className=" grow relative w-full overflow-hidden">
