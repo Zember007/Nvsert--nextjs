@@ -102,7 +102,7 @@ const AppHeader = () => {
                           Услуги
 
                           <div>
-                            <svg className={`*:stroke-[var(--color-item-menu)] group-hover:*:!stroke-[var(--color-item-menu-active)] ${servicesMenuActive ? '*:!stroke-[var(--color-item-menu-active)]' : 'rotate-[180deg]'}`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg className={`transition-all duration-300 easy *:transition-all *:duration-300 *:easy *:stroke-[var(--color-item-menu)] group-hover:*:!stroke-[var(--color-item-menu-active)] ${servicesMenuActive ? '*:!stroke-[var(--color-item-menu-active)]' : 'rotate-[180deg]'}`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M5 16L12 9L19 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                           </div>

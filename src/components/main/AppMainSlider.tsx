@@ -39,83 +39,73 @@ const SliderMain = () => {
         let oldIndex = 0
 
         const changeSlides = async (index: number, oldIndex: number) => {
-            if (oldIndex == 20 && index == 0) {
+            if (timeoutId) clearTimeout(timeoutId);
+
+            const totalSlides = slides.length;
+
+            const goToSlide = (i: number) => {
                 sliders.forEach((slider) => {
-                    slider.slickNext()
-                })
-            } else if (index == 20 && oldIndex == 0) {
+                    slider.slickGoTo(i);
+                });
+            };
+
+            const next = () => {
                 sliders.forEach((slider) => {
-                    slider.slickPrev()
-                })
-            } else {
-                const delta = slides.length - Math.abs(index - oldIndex)
+                    slider.slickNext();
+                });
+            };
 
-                if (delta < (slides.length / 2)) {
-                    if (index - oldIndex < 0) {
+            const prev = () => {
+                sliders.forEach((slider) => {
+                    slider.slickPrev();
+                });
+            };
 
-                        if (oldIndex !== slides.length - 1) {
-                            sliders.forEach((slider) => {
-                                slider.slickGoTo(slides.length - 1)
-                            })
-                            timeoutId = setTimeout(() => {
-                                sliders.forEach((slider) => {
-                                    slider.slickNext()
-                                })
-                                setTimeout(() => {
-                                    sliders.forEach((slider) => {
-                                        slider.slickGoTo(index)
-                                    })
-                                }, 820)
-                            }, 820)
-                        } else {
-                            sliders.forEach((slider) => {
-                                slider.slickNext()
-                            })
-                            timeoutId = setTimeout(() => {
-                                sliders.forEach((slider) => {
-                                    slider.slickGoTo(index)
-                                })
-                            }, 820)
-                        }
+            const delay = (fn: () => void, ms: number) => {
+                return new Promise<void>((resolve) => {
+                    timeoutId = setTimeout(() => {
+                        fn();
+                        resolve();
+                    }, ms);
+                });
+            };
 
+            const isWrapForward = oldIndex === totalSlides - 1 && index === 0;
+            const isWrapBackward = oldIndex === 0 && index === totalSlides - 1;
 
-                    } else {
-
-                        if (oldIndex !== 0) {
-                            sliders.forEach((slider) => {
-                                slider.slickGoTo(0)
-                            })
-
-                            timeoutId = setTimeout(() => {
-                                sliders.forEach((slider) => {
-                                    slider.slickPrev()
-                                })
-                                setTimeout(() => {
-                                    sliders.forEach((slider) => {
-                                        slider.slickGoTo(index)
-                                    })
-                                }, 820)
-                            }, 820)
-                        } else {
-                            sliders.forEach((slider) => {
-                                slider.slickPrev()
-                            })
-                            timeoutId = setTimeout(() => {
-                                sliders.forEach((slider) => {
-                                    slider.slickGoTo(index)
-                                })
-                            }, 820)
-                        }
-
-                    }
-                } else {
-                    sliders.forEach((slider) => {
-                        slider.slickGoTo(index)
-                    })
-                }
-
+            if (isWrapForward) {
+                next();
+                return;
             }
-        }
+
+            if (isWrapBackward) {
+                prev();
+                return;
+            }
+
+            const forwardDistance = (index - oldIndex + totalSlides) % totalSlides;
+            const backwardDistance = (oldIndex - index + totalSlides) % totalSlides;
+
+            // если ближе "через край", делаем хитрый переход с задержками
+            if (Math.min(forwardDistance, backwardDistance) > totalSlides / 2) {
+                if (index < oldIndex) {
+                    // движение назад через край
+                    goToSlide(totalSlides - 1);
+                    await delay(() => next(), 820);
+                    await delay(() => goToSlide(index), 820);
+                } else {
+                    // движение вперёд через край
+                    goToSlide(0);
+                    await delay(() => prev(), 820);
+                    await delay(() => goToSlide(index), 820);
+                }
+            } else {
+                // прямой переход без анимации
+                goToSlide(index);
+            }
+        };
+
+
 
         initSlider((index: number) => {
 
