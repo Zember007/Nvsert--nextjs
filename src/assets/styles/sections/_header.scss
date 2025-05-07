@@ -11,7 +11,7 @@
 
 	svg,
 	svg path {
-		transition: transform 0.2s ease, color 0.3s ease;
+		transition: transform 0.2s ease, color 0.3s ease, stroke 0.3s ease;
 	}
 
 	&.black {
@@ -444,7 +444,7 @@
 	padding-top: 10px;
 	padding-bottom: 44px;
 	transform: translateY(-100%);
-	transition: all 0.15s ease;
+	transition: all 0.1s ease;
 
 	@media (max-width: $media-s) {
 		top: 100px;
