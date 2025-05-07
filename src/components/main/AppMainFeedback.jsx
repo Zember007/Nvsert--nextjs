@@ -142,6 +142,71 @@ const AppMainFeedback = () => {
         }
     }, [])
 
+    const readyPhoto = () => {
+        setTimeout(() => {
+
+
+            const portal = document.querySelector('.PhotoView-Portal');
+            const arrowLeft = document.querySelector('.PhotoView-Slider__ArrowLeft');
+            const arrowRight = document.querySelector('.PhotoView-Slider__ArrowRight');
+            const closeBtn = document.querySelector('.PhotoView-Slider__BannerRight');
+
+
+            if (!portal || !arrowLeft || !arrowRight) {
+                console.error('Один из необходимых элементов не найден');
+                return;
+            }
+
+            // Отслеживание движения курсора
+            portal.addEventListener('mousemove', (e) => {
+                const rect = portal.getBoundingClientRect(); // Получаем размеры и положение блока
+                const cursorX = e.clientX - rect.left; // Позиция курсора относительно левого края блока
+                const halfWidth = rect.width / 2; // Половина ширины блока
+
+                // Удаляем оба класса перед добавлением нового
+                portal.classList.remove('modal__nav-arrow--left', 'modal__nav-arrow--right');
+
+                // Добавляем класс в зависимости от положения курсора
+                if (cursorX <= halfWidth) {
+                    portal.classList.add('modal__nav-arrow--left');
+                } else {
+                    portal.classList.add('modal__nav-arrow--right');
+                }
+            });
+
+            // Удаление классов при выходе курсора из блока
+            portal.addEventListener('mouseleave', () => {
+                portal.classList.remove('modal__nav-arrow--left', 'modal__nav-arrow--right');
+            });
+
+            // Обработка клика
+            portal.addEventListener('click', (e) => {
+                const target = e.target;
+                if (target?.closest('.PhotoView-Slider__BannerRight') || target?.closest('.PhotoView-Slider__ArrowLeft') || target?.closest('.PhotoView-Slider__ArrowRight')) return
+
+                const rect = portal.getBoundingClientRect();
+                const cursorX = e.clientX - rect.left;
+                const halfWidth = rect.width / 2;
+
+                // Симулируем клик на соответствующую стрелку
+                if (cursorX <= halfWidth) {
+                    arrowLeft.click();
+                } else {
+                    arrowRight.click();
+
+                }
+            });
+
+
+            closeBtn.addEventListener('click', (e) => {
+                portal.removeEventListener('click', () => { })
+                portal.removeEventListener('mouseleave', () => { })
+                portal.removeEventListener('mousemove', () => { })
+                closeBtn.removeEventListener('click', () => { })
+            });
+
+        }, 100)
+    }
 
     return (
         <section className="py-[75px]">
@@ -169,77 +234,15 @@ const AppMainFeedback = () => {
 
                                 <div className="flex gap-[20px] feedback-slider-container translate-x-[-95px]">
                                     {[...Array(10)].map((_, index) =>
-                                        <div data-slider="slide-feedback" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] h-[267px] rounded-[4px]">
+                                        <div
+                                            onClick={readyPhoto}
+                                            data-slider="slide-feedback" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] h-[267px] rounded-[4px]">
                                             <PhotoView src={`/feedback/${index}.png`}
                                                 width={475}
                                                 height={667}
                                             >
                                                 <Image
-                                                    onClick={() => {
-                                                        setTimeout(() => {
-                                                            
 
-                                                            const portal = document.querySelector('.PhotoView-Portal');
-                                                            const arrowLeft = document.querySelector('.PhotoView-Slider__ArrowLeft');
-                                                            const arrowRight = document.querySelector('.PhotoView-Slider__ArrowRight');
-                                                            const closeBtn = document.querySelector('.PhotoView-Slider__BannerRight');
-
-
-                                                            if (!portal || !arrowLeft || !arrowRight) {
-                                                                console.error('Один из необходимых элементов не найден');
-                                                                return;
-                                                            }
-
-                                                            // Отслеживание движения курсора
-                                                            portal.addEventListener('mousemove', (e) => {
-                                                                const rect = portal.getBoundingClientRect(); // Получаем размеры и положение блока
-                                                                const cursorX = e.clientX - rect.left; // Позиция курсора относительно левого края блока
-                                                                const halfWidth = rect.width / 2; // Половина ширины блока
-
-                                                                // Удаляем оба класса перед добавлением нового
-                                                                portal.classList.remove('modal__nav-arrow--left', 'modal__nav-arrow--right');
-
-                                                                // Добавляем класс в зависимости от положения курсора
-                                                                if (cursorX <= halfWidth) {
-                                                                    portal.classList.add('modal__nav-arrow--left');
-                                                                } else {
-                                                                    portal.classList.add('modal__nav-arrow--right');
-                                                                }
-                                                            });
-
-                                                            // Удаление классов при выходе курсора из блока
-                                                            portal.addEventListener('mouseleave', () => {
-                                                                portal.classList.remove('modal__nav-arrow--left', 'modal__nav-arrow--right');
-                                                            });
-
-                                                            // Обработка клика
-                                                            portal.addEventListener('click', (e) => {
-                                                                const target = e.target;
-                                                                if (target?.closest('.PhotoView-Slider__BannerRight') || target?.closest('.PhotoView-Slider__ArrowLeft') || target?.closest('.PhotoView-Slider__ArrowRight')) return
-
-                                                                const rect = portal.getBoundingClientRect();
-                                                                const cursorX = e.clientX - rect.left;
-                                                                const halfWidth = rect.width / 2;
-
-                                                                // Симулируем клик на соответствующую стрелку
-                                                                if (cursorX <= halfWidth) {
-                                                                    arrowLeft.click();
-                                                                } else {
-                                                                    arrowRight.click();
-
-                                                                }
-                                                            });
-
-
-                                                            closeBtn.addEventListener('click', (e) => {
-                                                                portal.removeEventListener('click', () => { })
-                                                                portal.removeEventListener('mouseleave', () => { })
-                                                                portal.removeEventListener('mousemove', () => { })
-                                                                closeBtn.removeEventListener('click', () => { })
-                                                            });
-
-                                                        }, 100)
-                                                    }}
                                                     src={`/feedback/${index}.png`} alt='feedback' width={190} height={267} />
                                             </PhotoView>
                                         </div>)}
@@ -257,7 +260,10 @@ const AppMainFeedback = () => {
 
                                 <div className="flex gap-[20px] translate-x-[-95px] feedback-slider-container">
                                     {[...Array(10)].map((_, index) =>
-                                        <div data-slider="slide-feedback1" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] h-[267px] rounded-[4px]">
+                                        <div
+                                            onClick={readyPhoto}
+
+                                            data-slider="slide-feedback1" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] h-[267px] rounded-[4px]">
                                             <PhotoView src={`/feedback/${index}.png`}>
                                                 <Image src={`/feedback/${index}.png`} alt='feedback' width={190} height={267} />
                                             </PhotoView>
