@@ -13,7 +13,7 @@
   overflow: visible;
   position: relative;
   text-align: center;
-  transition: transform 0.2s ease, color 0.6s ease;
+  transition: transform 0.2s ease, color 0.3s ease;
   border-radius: 4px;
   padding: 10px 15px;
   height: 36px;
@@ -29,7 +29,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  transition: color 0.6s ease;
+  transition: color 0.3s ease;
   will-change: color;
   color: var(--color-item-menu-active);
 }
@@ -166,7 +166,7 @@
   transform: scale(0.95);
   transform-origin: center;
   will-change: transform, color, border-color;
-  transition: transform 0.2s ease, border-color 0.6s ease;
+  transition: transform 0.2s ease, border-color 0.3s ease;
   color: var(--color-item-menu-active);
   border-color: var(--color-item-menu-active);
   background: none;
@@ -176,7 +176,7 @@
 .menu-item:active::after,
 .menu-item.fast-click::after {
   border-color: var(--color-item-menu-active);
-  transition: border-color 0.6s ease;
+  transition: border-color 0.3s ease;
   opacity: 1;
 }
 
@@ -185,7 +185,7 @@
   transform: scale(0.95);
   transform-origin: center;
   will-change: transform, color, border-color;
-  transition: transform 0.2s ease, color 0.6s ease, border-color 0.6s ease;
+  transition: transform 0.2s ease, color 0.3s ease, border-color 0.3s ease;
   color: var(--color-item-menu-active) !important;
   border-color: var(--color-item-menu-active);
   background: none;
@@ -195,7 +195,7 @@
 .menu-item-active:active span,
 .menu-item-active.fast-click span {
   color: var(--color-item-menu-active) !important;
-  transition: color 0.6s ease, -webkit-text-fill-color 0.6s ease;
+  transition: color 0.3s ease, -webkit-text-fill-color 0.3s ease;
   will-change: color, -webkit-text-fill-color;
   background: none !important;
   -webkit-background-clip: none !important;
@@ -206,7 +206,7 @@
 .menu-item-active:active::before,
 .menu-item-active.fast-click::before {
   color: var(--color-item-menu-active) !important;
-  transition: color 0.6s ease, -webkit-text-fill-color 0.6s ease;
+  transition: color 0.3s ease, -webkit-text-fill-color 0.3s ease;
   will-change: color, -webkit-text-fill-color;
   background: none !important;
   -webkit-background-clip: none !important;
@@ -217,7 +217,7 @@
 .menu-item-active:active::after,
 .menu-item-active.fast-click::after {
   border-color: var(--color-item-menu-active);
-  transition: border-color 0.6s ease;
+  transition: border-color 0.3s ease;
   opacity: 1;
 }
 

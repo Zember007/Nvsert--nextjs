@@ -10,13 +10,14 @@
 	z-index: 100000;
 
 	svg {
-		transition: transform 0.2s ease, color 0.6s ease;
+		transition: transform 0.2s ease, color 0.3s ease;
 	}
 
 	&.black {
 		--color-item-menu-active: #000;
 		--color-item-menu-hover: #000;		
-
+		--menu-item-border: #000;
+		--menu-item-border-hover: transparent;
 		
 		.header-phone__link {
 			color: #000;
@@ -168,7 +169,7 @@
 	}
 
 	&-phone {
-		transition: all 0.6s ease;		
+		transition: all 0.3s ease;		
 		will-change: color;
 		font-size: 16px;
 		line-height: 24px;
@@ -195,7 +196,7 @@
 		}
 
 		&__link {
-			transition: all 0.6s ease;
+			transition: all 0.3s ease;
 			will-change: color;
 			color: $typography-primary;
 			text-decoration: none;
@@ -462,7 +463,7 @@
 		.icon--close {
 			width: 100%;
 			height: 100%;
-			background-color: rgba(255, 255, 255, 0.6);
+			background-color: rgba(255, 255, 255, 0.3);
 		}
 	}
 
@@ -582,8 +583,6 @@
 }
 
 .logo {
-	transition: all 0.6s ease;
-	will-change: color;
 	display: flex;
 	width: 122px;
 	height: 24px;

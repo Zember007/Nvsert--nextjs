@@ -1,14 +1,27 @@
-import React, { useEffect, useRef } from 'react';
-import { BounceEffect } from "@/hook/useBounce";
+import React, { useEffect } from 'react';
 import FlyingPlane from './elements/FlyingPlane';
 
-const FlightSuccess = ({bg, close, small = false, text }: { bg?:string; close: () => void; small?: boolean; text:string }) => {
+const FlightSuccess = ({ bg, close, small = false, text }: { bg?: string; close: () => void; small?: boolean; text: string }) => {
 
     const [time, setTime] = React.useState(10);
 
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setTime(prev => {
+                const num = prev - 1
+                if (num === 0) {
+                    clearInterval(timer)
+                    close()
+                }
+                return num
+            });
+        }, 1000);
+        return () => clearInterval(timer);
+    })
+
     return (
         <div className="active  pt-[100px]"
-        style={{background: bg}}
+            style={{ background: bg }}
         >
             <button
                 onClick={() => { close() }}
@@ -22,15 +35,15 @@ const FlightSuccess = ({bg, close, small = false, text }: { bg?:string; close: (
                     <div className="close-button-block"></div>
                 </div>
             </button>
-            <div                
+            <div
                 className="flex flex-col items-center">
-                <div                
-                className="flex flex-col gap-[20px] text-white text-center items-center">
+                <div
+                    className="flex flex-col gap-[20px] text-white text-center items-center">
                     <p className="text-[32px] tracking-[-0.03em]">{text}</p>
                     <p className="text-[20px]">Мы свяжемся с Вами <br /> в течение 10 минут!</p>
                 </div>
-                <div                
-                className={`${small ? 'top-[220px]' : 'top-[256px]'} left-0 right-0 absolute`}>
+                <div
+                    className={`${small ? 'top-[220px]' : 'top-[256px]'} left-0 right-0 absolute`}>
                     <FlyingPlane />
                 </div>
             </div>
