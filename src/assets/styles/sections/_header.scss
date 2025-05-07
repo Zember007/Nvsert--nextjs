@@ -9,19 +9,13 @@
 	box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.251);
 	z-index: 100000;
 
-	.header-phone svg path {
-		@include transition();
-
-	}
-
 	svg {
+		transition: transform 0.2s ease, color 0.6s ease;
 	}
 
 	&.black {
 		--color-item-menu-active: #000;
-		--color-item-menu-hover: #000;
-		--menu-item-border: #000;
-		--menu-item-border-hover: #fff;
+		--color-item-menu-hover: #000;		
 
 		
 		.header-phone__link {
