@@ -34,7 +34,7 @@
 
 .menu-item:hover {
   color: var(--color-item-menu-active);
-  outline: 1px solid var(--menu-item-border-hover);
+  outline: 0.5px solid var(--menu-item-border-hover);
 
 }
 
