@@ -170,10 +170,10 @@ const AppMainFeedback = () => {
                                 <div className="flex gap-[20px] feedback-slider-container translate-x-[-95px]">
                                     {[...Array(10)].map((_, index) =>
                                         <div data-slider="slide-feedback" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] h-[267px] rounded-[4px]">
-                                            <PhotoView src={`/feedback/${index}.png`}
+                                            {/* <PhotoView src={`/feedback/${index}.png`}
                                                 width={475}
                                                 height={667}
-                                            >
+                                            > */}
                                                 <Image
                                                     onClick={() => {
                                                         setTimeout(() => {
@@ -186,7 +186,6 @@ const AppMainFeedback = () => {
 
 
                                                             if (!portal || !arrowLeft || !arrowRight) {
-                                                                console.error('Один из необходимых элементов не найден');
                                                                 return;
                                                             }
 
@@ -241,7 +240,7 @@ const AppMainFeedback = () => {
                                                         }, 100)
                                                     }}
                                                     src={`/feedback/${index}.png`} alt='feedback' width={190} height={267} />
-                                            </PhotoView>
+                                            {/* </PhotoView> */}
                                         </div>)}
                                 </div>
 

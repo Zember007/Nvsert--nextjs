@@ -372,12 +372,14 @@ export function horizontalLoop(items, config) {
                     let x = this.x;
                     gsap.killTweensOf(tl);
                     wasPlaying = !tl.paused();
-                    tl.pause();
+                    // tl.pause();
                     startProgress = tl.progress();
                     refresh();
                     ratio = 1 / totalWidth;
                     initChangeX = (startProgress / -ratio) - x;
                     gsap.set(proxy, { x: startProgress / -ratio });
+                    // console.log('pause');
+                    
                 },
                 onDrag() {
                     align();
