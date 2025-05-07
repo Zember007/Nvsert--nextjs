@@ -145,8 +145,10 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
 
     if (validColorFound && element) {
       element.classList.toggle('black', brightness > 128);
+      document.querySelector('.services-menu')?.classList.toggle('black', brightness > 128)
     } else {
       element.classList.toggle('black', true); // Запасной: светлый фон
+      document.querySelector('.services-menu')?.classList.toggle('black', true)
     }
 
     // Логирование для отладки   
