@@ -64,7 +64,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
         if (myElement) {
             BounceEffect(myElement, {
                 startPosition: "0",
-                endPosition: `${20}px`,
+                endPosition: `${30}px`,
                 duration: 300,
                 easing: "linear",
                 direction: 'vertical'
