@@ -97,7 +97,7 @@ const AppSkillBlock = (skill: any) => {
           {
             skill.folder ?
               <>
-                <Image alt="folder" className={`transition-all duration-300 rounded-[4px]`} src={skill.img} height={280} />
+                <Image alt="folder" className={`transition-all duration-300 rounded-[4px] h-full`} src={skill.img} />
 
               </>
               :
