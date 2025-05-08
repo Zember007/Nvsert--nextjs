@@ -13,6 +13,7 @@ import AppMenuItem from "./AppMenuItem";
 import { useSimpleBar } from "../contexts/SimpleBarContext";
 import html2canvas from 'html2canvas';
 import useBackgroundBrightness from "@/hook/useBackgroundBrightness";
+import { filterPhone } from "@/hook/filter";
 
 
 
@@ -141,9 +142,8 @@ const AppHeader = () => {
           <div >
             <AppMenuItem
               isActive={false}
-              onClick={() => { openDefaultModal('introForm') }}
               item={{
-                href: '#',
+                href: filterPhone('8 495 777-11-97'),
                 label:
                   <div className="header-phone">
                     <span

@@ -19,7 +19,8 @@
   background: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  outline: 1px solid transparent;
+  
+  box-shadow: 0 0 0px 0.5px transparent;
 }
 
 .menu-item-active span {
@@ -34,7 +35,8 @@
 
 .menu-item:hover {
   color: var(--color-item-menu-active);
-  outline: 0.5px solid var(--menu-item-border-hover);
+  /* outline: 0.5px solid var(--menu-item-border-hover); */
+  box-shadow: 0 0 0px 1px var(--menu-item-border-hover);
 
 }
 
