@@ -40,6 +40,10 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
 
 
       // Фильтруем элементы: <section>, <div> с классами content, block, section
+
+      console.log(document.elementsFromPoint(0, 0), {x, y});
+
+
       const underlyingElements = document.elementsFromPoint(x, y).filter(
         (el) =>
           el.tagName === 'SECTION' ||
@@ -194,29 +198,19 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
 
     const scrollContainer = simpleBar.getScrollElement();
     let timeoutId: NodeJS.Timeout | null = null;
-    let enableChange: boolean = true;
-
+    let time = Date.now()
     scrollContainer.addEventListener('scroll', () => {
 
 
       if (timeoutId) clearTimeout(timeoutId);
-      if (enableChange) {
-        enableChange = false;
+      if (time + 200 <= Date.now()) {
         updateTextColor();
-        setTimeout(() => {
-          enableChange = true;
-        }, 200);
+        time = Date.now()
       }
 
       timeoutId = setTimeout(() => {
         updateTextColor();
-
-        enableChange = true;
-
-        setTimeout(() => {
-          updateTextColor();
-        }, 200);
-      }, 200);
+      }, 500);
     });
 
 
@@ -232,7 +226,7 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
 
   useEffect(() => {
     updateTextColor()
-  },[pathname])
+  }, [pathname])
 };
 
 export default useBackgroundBrightness;
