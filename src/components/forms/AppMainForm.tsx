@@ -188,8 +188,8 @@ const AppMainForm = ({ btnText, bg = true }: { btnText: string ; bg: boolean}) =
                             <div id='bounce-checkbox' className="pl-[10px] flex items-center gap-[30px]"
                                 onClick={() => { clearErrors('Contact') }}
                             >
-                                <AppCheckbox id="check-phone" successful={emailSuccessful} fail={failCheck} checked={isPhone} onChange={(value) => { setIsPhone(value); if (value) { setIsEmail(false); setFocus('Contact'); setEmailSuccessful(false) } }} label="Телефон" />
-                                <AppCheckbox id="check-email" successful={emailSuccessful} fail={failCheck} checked={isEmail} onChange={(value) => { setIsEmail(value); if (value) { setIsPhone(false); setFocus('Contact'); setEmailSuccessful(false) } }} label="Email" />
+                                <AppCheckbox id={`check-phone${Date.now()}`} successful={emailSuccessful} fail={failCheck} checked={isPhone} onChange={(value) => { setIsPhone(value); if (value) { setIsEmail(false); setFocus('Contact'); setEmailSuccessful(false) } }} label="Телефон" />
+                                <AppCheckbox id={`check-email${Date.now()}`} successful={emailSuccessful} fail={failCheck} checked={isEmail} onChange={(value) => { setIsEmail(value); if (value) { setIsPhone(false); setFocus('Contact'); setEmailSuccessful(false) } }} label="Email" />
                             </div>
                         </div>
 
