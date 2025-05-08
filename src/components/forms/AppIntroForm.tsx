@@ -7,6 +7,7 @@ import AppInput from "./elements/AppInput";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Image from "next/image";
+import ImgCall from '@/assets/images/order-call.png'
 import { useButton } from "@/hook/useButton";
 import { useEffect, useRef, useState } from "react";
 import { BounceEffect } from "@/hook/useBounce";
@@ -14,7 +15,7 @@ import FlightSuccess from "../modals/FlightSuccess";
 import { useHeaderContext } from "../contexts/HeaderContext";
 
 
-const AppIntroForm = () => {
+const AppIntroForm = ({close}:{close?:() => void}) => {
     const { setButtonRef, setWrapperRef } = useButton();
 
     const onSubmit = async (e: any) => {
@@ -76,7 +77,7 @@ const AppIntroForm = () => {
     const [contactError, setContactError] = useState(false);
     const { defaultModalActive } = useHeaderContext();
     useEffect(() => {
-        
+
         if (!formRef.current || !defaultModalActive) return
 
         BounceEffect(formRef.current, {
@@ -89,9 +90,26 @@ const AppIntroForm = () => {
 
     }, [formRef, defaultModalActive])
     return (
-        <div className='flex flex-col gap-[12px]'>
+        <div className='flex flex-col gap-[20px]'>
             {successMessageVisible && <FlightSuccess text="Спасибо" small={true} close={() => { setSuccessMessageVisible(false) }} />}
-            <span className={`${successMessageVisible && 'opacity-0'} leading-[1] text-[#FFF] text-[32px] text-center tracking-[-0.03em]`}>Заказать звонок</span>
+            <button
+            onClick={() => {close && close()}}
+                className="close !top-[15px] !right-[15px]">
+                <div className="in">
+                    <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
+                    <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
+                </div>
+                <div className="out">
+                    <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
+                    <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
+                </div>
+            </button>
+            <div className={`${successMessageVisible && 'opacity-0'} flex flex-col gap-[40px]`}>
+                <span className={` leading-[1] text-[#FFF] text-[32px] tracking-[-0.03em]`}>Заказать звонок</span>
+                <div className="w-full overflow-hidden rounded-[4px]">
+                    <Image src={ImgCall} alt='order-call'></Image>
+                </div>
+            </div>
             <div className={`${successMessageVisible && 'opacity-0'}`} ref={formRef}>
                 <AppValidationObserver methods={methods} onSubmit={onSubmit}>
                     {({ register, errors }) => (
@@ -116,9 +134,9 @@ const AppIntroForm = () => {
 
                             <div ref={setWrapperRef} className="tariff-wrap relative  mt-[24px]">
                                 <button
-                                onClick={() => {
-                                    setSuccessMessageVisible(true)
-                                }}
+                                    onClick={() => {
+                                        setSuccessMessageVisible(true)
+                                    }}
                                     type="submit"
                                     ref={setButtonRef}
                                     className=" group tariff  bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[10px] justify-center p-[9px] rounded-[4px]"

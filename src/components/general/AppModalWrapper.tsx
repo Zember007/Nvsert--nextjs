@@ -48,7 +48,9 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
                                 defaultModalName === 'introForm' &&
                                 <>
 
-                                    <AppIntroForm />
+                                    <AppIntroForm
+                                        close={() => { setDefaultModalActive(false) }}
+                                    />
 
                                 </>
                             }
