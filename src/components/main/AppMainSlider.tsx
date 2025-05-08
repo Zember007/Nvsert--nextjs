@@ -198,9 +198,8 @@ const SliderMain = () => {
                         <div className={`overlay-slider absolute top-0 right-[76px] left-0 bottom-0 z-[-2] transition-all duration-300 `}></div>
                         <div className="flex flex-col justify-between h-full l:items-start items-center w-full">
                             <div className=" grow relative w-full overflow-hidden">
-                            <div className="absolute z-[6] h-[50px] text-center  rounded-[4px]  w-full border-[#34446D] border-solid border">
-                                                           
-                                                            </div>
+                                <div className="absolute z-[6] h-[50px]  rounded-[4px]  w-full border-[#34446D] border-solid border">                                    
+                                </div>
                                 {[...Array(5)].map((_, i) => (
                                     <div
                                         style={{
