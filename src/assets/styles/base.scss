@@ -300,18 +300,16 @@
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
 
-    transition: transform 0.3s ease, box-shadow 150ms ease;
 
     backface-visibility: hidden;
     will-change: transform;
-    // -webkit-font-smoothing: antialiased;
-    // -moz-osx-font-smoothing: grayscale;
+
     text-rendering: optimizeLegibility;
 
 
     backface-visibility: hidden;
     transition: none;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     transform: translateZ(0);
 
 

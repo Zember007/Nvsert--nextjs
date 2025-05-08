@@ -203,7 +203,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
                             <button
                                 type="submit"
                                 ref={setButtonRef}
-                                className=" btnIconAn group  tariff s:mt-[1px] mt-[15px] bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[transparent]   rounded-[4px]"
+                                className=" btnIconAn group  tariff an-border s:mt-[1px] mt-[15px] bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[transparent]   rounded-[4px]"
                                 style={{
                                     verticalAlign: 'middle'
                                 }}                              
