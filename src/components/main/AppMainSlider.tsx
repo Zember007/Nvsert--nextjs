@@ -91,13 +91,13 @@ const SliderMain = () => {
                 if (index < oldIndex) {
                     // движение назад через край
                     goToSlide(totalSlides - 1);
-                    await delay(() => next(), 820);
-                    await delay(() => goToSlide(index), 820);
+                    await delay(() => next(), 800);
+                    await delay(() => goToSlide(index), 800);
                 } else {
                     // движение вперёд через край
                     goToSlide(0);
-                    await delay(() => prev(), 820);
-                    await delay(() => goToSlide(index), 820);
+                    await delay(() => prev(), 800);
+                    await delay(() => goToSlide(index), 800);
                 }
             } else {
                 // прямой переход без анимации
@@ -105,6 +105,7 @@ const SliderMain = () => {
             }
         };
 
+        let time = Date.now()
 
 
         initSlider((index: number) => {
@@ -122,21 +123,19 @@ const SliderMain = () => {
 
 
             if (enableList) {
-
                 changeSlides(index, oldIndex)
                 oldIndex = index
-
                 enableList = false
-                timeoutId = setTimeout(() => {
-                    enableList = true
-                }, 820)
-            } else {
-                timeoutId = setTimeout(() => {
-                    enableList = true
-                    changeSlides(index, oldIndex)
-                    oldIndex = index
-                }, 820)
+                time = Date.now()
             }
+
+            let interval = time + 800 <= Date.now() ? 200  : time + 800 - Date.now() + 100
+
+            timeoutId = setTimeout(() => {
+                enableList = true
+                changeSlides(index, oldIndex)
+                oldIndex = index
+            }, interval)
 
 
 
@@ -198,7 +197,7 @@ const SliderMain = () => {
                         <div className={`overlay-slider absolute top-0 right-[76px] left-0 bottom-0 z-[-2] transition-all duration-300 `}></div>
                         <div className="flex flex-col justify-between h-full l:items-start items-center w-full">
                             <div className=" grow relative w-full overflow-hidden">
-                                <div className="absolute z-[6] h-[50px]  rounded-[4px]  w-full border-[#34446D] border-solid border">                                    
+                                <div className="absolute z-[6] h-[50px]  rounded-[4px]  w-full border-[#34446D] border-solid border">
                                 </div>
                                 {[...Array(5)].map((_, i) => (
                                     <div
