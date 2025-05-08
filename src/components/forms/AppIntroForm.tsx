@@ -90,7 +90,7 @@ const AppIntroForm = ({close}:{close?:() => void}) => {
 
     }, [formRef, defaultModalActive])
     return (
-        <div className='flex flex-col gap-[20px]'>
+        <div className='flex flex-col gap-[20px] py-[30px] px-[40px]'>
             {successMessageVisible && <FlightSuccess text="Спасибо" small={true} close={() => { setSuccessMessageVisible(false) }} />}
             <button
             onClick={() => {close && close()}}
@@ -105,7 +105,7 @@ const AppIntroForm = ({close}:{close?:() => void}) => {
                 </div>
             </button>
             <div className={`${successMessageVisible && 'opacity-0'} flex flex-col gap-[40px]`}>
-                <span className={` leading-[1] text-[#FFF] text-[32px] tracking-[-0.03em]`}>Заказать звонок</span>
+                <span className={`pl-[10px] leading-[1] text-[#FFF] text-[32px] tracking-[-0.03em]`}>Заказать звонок</span>
                 <div className="w-full overflow-hidden rounded-[4px]">
                     <Image src={ImgCall} alt='order-call'></Image>
                 </div>

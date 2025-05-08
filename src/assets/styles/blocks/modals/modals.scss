@@ -105,17 +105,14 @@
     background: #00000080;
     display: flex;
     flex-direction: column;
-    padding: 30px 40px;
     border-radius: 6px;
     border: 1px solid #737373;
     max-height: 90vh;
 
     @media (max-width: $media-m) {
-      padding: 24px 16px;
     }
 
     @media (max-width: $media-s) {
-      padding: 48px 16px 24px;
       border-radius: 0;
       min-height: 100vh;
       min-height: calc(var(--vh, 1vh) * 100);
@@ -125,7 +122,6 @@
 
   &__close {
     display: block;
-    padding: 0;
     width: 32px;
     height: 32px;
     color: $icon-normal;
