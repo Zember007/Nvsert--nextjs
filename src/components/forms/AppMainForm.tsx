@@ -16,7 +16,7 @@ import { BounceEffect } from "@/hook/useBounce";
 import FlightSuccess from "../modals/FlightSuccess";
 
 
-const AppMainForm = ({ btnText }: { btnText: string }) => {
+const AppMainForm = ({ btnText, bg = true }: { btnText: string ; bg: boolean}) => {
     const { setButtonRef, setWrapperRef } = useButton();
 
     const onSubmit = async (e: any) => {
@@ -147,7 +147,7 @@ const AppMainForm = ({ btnText }: { btnText: string }) => {
     }, [isPhone, isEmail])
 
     return (
-        <div id="form-main" className='border-main main-form bg-[#00000050] py-[27px] pb-[30px] px-[48px] max-w-[420px] flex flex-col gap-[12px] rounded-[6px]'>
+        <div id="form-main" className={`border-main main-form ${bg && 'bg-[#00000050]'} py-[27px] pb-[30px] px-[48px] max-w-[420px] flex flex-col gap-[12px] rounded-[6px]`}>
             {successMessageVisible && <FlightSuccess text="Спасибо за заявку" bg={'#2d2f31'} close={() => { setSuccessMessageVisible(false) }} />}
             <span className='leading-[1] text-[#FFF] text-[32px] text-center tracking-[-0.03em]'>Оформить заявку</span>
             <AppValidationObserver methods={methods} onSubmit={onSubmit}>

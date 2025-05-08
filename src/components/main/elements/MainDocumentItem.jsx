@@ -302,7 +302,7 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
                                     initial={{ y: 20, opacity: 0 }}
                                     className="tariff-wrap w-[250px]" ref={setWrapperRef}>
                                     <button
-                                        onClick={() => { openDefaultModal('introForm') }}
+                                        onClick={() => { openDefaultModal('orderForm') }}
                                         ref={setButtonRef} className='btnIconAn doc-btn  border-[#34446D] border border-solid tariff text-[20px] transition-all duration-300 font-bold tracking-normal  gap-[6px]  text-[#34446D] hover:text-[#FFF] rounded-[4px]  group hover:bg-[#34446D]  leading-[1]'>
                                         <div className="justify-center m:flex items-center px-[16px] py-[9px] relative overflow-hidden">
                                             <div className="sendIconLeft transition-all ease-in">

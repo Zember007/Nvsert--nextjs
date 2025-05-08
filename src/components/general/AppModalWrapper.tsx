@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 import { Suspense, useRef } from 'react';
 import AppIntroForm from '@/components/forms/AppIntroForm'
 import Draggable from 'react-draggable';
+import AppMainForm from '../forms/AppMainForm';
 
 const AppKnowCostForm = dynamic(() => import('@/components/forms/AppKnowCostForm'), {
     loading: () => <p>Loading...</p>,
@@ -51,6 +52,15 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
                                     <AppIntroForm
                                         close={() => { setDefaultModalActive(false) }}
                                     />
+
+                                </>
+                            }
+
+                            {
+                                defaultModalName === 'orderForm' &&
+                                <>
+
+                                    <AppMainForm bg={false} btnText='Оформить заявку' />
 
                                 </>
                             }
