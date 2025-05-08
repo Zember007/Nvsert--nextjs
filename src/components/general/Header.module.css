@@ -48,7 +48,7 @@
   border: var(--menu-item-border-w) solid var(--menu-item-border);
   border-radius: 4px;
   background: radial-gradient(150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, var(--menu-item-opacity-light)),
       transparent 60%);
   mask-image: radial-gradient(150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
       white,
@@ -119,7 +119,7 @@
   border: var(--menu-item-border-w) solid var(--menu-item-border);
   border-radius: 4px;
   background: radial-gradient(150px circle at var(--last-mouse-x, var(--click-x, 50%)) var(--last-mouse-y, var(--click-y, 50%)),
-      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, var(--menu-item-opacity-light)),
       transparent 60%);
   mask-image: radial-gradient(150px circle at var(--last-mouse-x, var(--click-x, 50%)) var(--last-mouse-y, var(--click-y, 50%)),
       white,
