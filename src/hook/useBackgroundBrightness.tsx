@@ -39,12 +39,11 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
 
 
 
-      // Фильтруем элементы: <section>, <div> с классами content, block, section
+      const elements = document.elementsFromPoint(x, y) 
+      console.log(elements);
+      
 
-      console.log(document.elementsFromPoint(0, 0), {x, y});
-
-
-      const underlyingElements = document.elementsFromPoint(x, y).filter(
+      const underlyingElements = elements.filter(
         (el) =>
           el.tagName === 'SECTION' ||
           (el.tagName === 'DIV' &&
@@ -58,6 +57,7 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
       checkedElements = underlyingElements.map((el) => `${el.tagName}.${el.className}`);
 
       for (const underlyingElement of underlyingElements) {
+        
         const computedStyle = window.getComputedStyle(underlyingElement);
         bgColor = computedStyle.backgroundColor;
 

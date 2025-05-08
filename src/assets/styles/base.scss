@@ -257,13 +257,13 @@
 
 .tariff.an-border::before {
     mask-image: radial-gradient(150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0.8) 40%,
-    transparent 60%);
--webkit-mask-image: radial-gradient(150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0.8) 40%,
-    transparent 60%);
+            rgba(255, 255, 255, 1),
+            rgba(255, 255, 255, 0.8) 40%,
+            transparent 60%);
+    -webkit-mask-image: radial-gradient(150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            rgba(255, 255, 255, 1),
+            rgba(255, 255, 255, 0.8) 40%,
+            transparent 60%);
     border: 1px solid #FFF;
     border-radius: 4px;
 }
@@ -282,8 +282,8 @@
     opacity: 0;
     transition: opacity 300ms ease;
     z-index: 20;
-   
-   
+
+
 
 }
 
@@ -439,4 +439,15 @@ input:-webkit-autofill {
 
 .simplebar-track.simplebar-vertical {
     width: 13px !important
+}
+
+[data-simplebar].simplebar-dragging,
+[data-simplebar].simplebar-dragging .simplebar-content {
+    pointer-events: visible !important;
+    -webkit-touch-callout: auto !important;
+    -webkit-user-select: auto !important;
+    -khtml-user-select: auto !important;
+    -moz-user-select: auto !important;
+    -ms-user-select: auto !important;
+    user-select: auto !important;
 }
