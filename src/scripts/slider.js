@@ -54,46 +54,36 @@ export function initSlider(onChangeFunction, onDragFunction) {
 
 
     let currentIndex = 0;
-    let isAnimating = false;
-    function updateSteps(newIndex) {
-        // if (isAnimating) return;
-        // isAnimating = true;
-
+    function updateSteps(newIndex) {   
+        gsap.killTweensOf(stepsParent)
         const height = stepsArray[0].offsetHeight;
         const maxOffset = totalSlides * height;
 
-        // Определяем направление для плавной анимации
         let delta = newIndex - currentIndex;
         if (newIndex === 0 && currentIndex === totalSlides - 1) {
-            delta = 1; // Переход с конца на начало
+            delta = 1;
         } else if (newIndex === totalSlides - 1 && currentIndex === 0) {
-            delta = -1; // Переход с начала на конец
+            delta = -1;
         }
         const direction = delta >= 0 ? 1 : -1;
 
-        // Текущая позиция
         let currentY = gsap.getProperty(stepsParent, "y") || 0;
 
-        // Предварительная установка для перехода с начала на конец
         if (newIndex === totalSlides - 1 && currentIndex === 0) {
             gsap.set(stepsParent, { y: -maxOffset });
             currentY = -maxOffset;
         }
 
-        // Сохраняем новый индекс
         currentIndex = newIndex;
 
-        // Вычисляем целевую позицию на основе индекса
         let targetY = newIndex * height;
 
-        // Корректируем targetY для бесшовности
         if (targetY >= maxOffset) {
             targetY -= maxOffset;
         } else if (targetY < 0) {
             targetY += maxOffset;
         }
 
-        // Если текущая позиция сильно отклоняется, подстраиваем её для плавной анимации
         if (Math.abs(currentY + targetY) > maxOffset / 2 && direction !== 0) {
             gsap.set(stepsParent, {
                 y: currentY + (direction > 0 ? maxOffset : -maxOffset)
@@ -115,7 +105,6 @@ export function initSlider(onChangeFunction, onDragFunction) {
                     gsap.set(stepsParent, { y: currentY - maxOffset });
                 }
 
-                // isAnimating = false;
             }
         });
     }
@@ -146,13 +135,11 @@ export function initSlider(onChangeFunction, onDragFunction) {
 
     if (nextButton) {
         nextButton.addEventListener("click", () => {
-            // if(isAnimating) return;
             loop.next({ ease: "power3", duration: 0.725 })
         });
     }
     if (prevButton) {
         prevButton.addEventListener("click", () => {
-            // if(isAnimating) return;
             loop.previous({ ease: "power3", duration: 0.725 })
         });
     }
