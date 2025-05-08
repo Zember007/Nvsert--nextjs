@@ -16,7 +16,7 @@ import { BounceEffect } from "@/hook/useBounce";
 import FlightSuccess from "../modals/FlightSuccess";
 
 
-const AppMainForm = ({ btnText, bg = true }: { btnText: string ; bg: boolean}) => {
+const AppMainForm = ({ btnText, bg = true }: { btnText: string ; bg?: boolean}) => {
     const { setButtonRef, setWrapperRef } = useButton();
 
     const onSubmit = async (e: any) => {
