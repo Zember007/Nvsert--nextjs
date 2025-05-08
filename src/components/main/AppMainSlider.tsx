@@ -227,7 +227,7 @@ const SliderMain = () => {
                                                         <div className="flex items-center gap-[10px]  relative z-[10]">
 
 
-                                                            <div className="h-[50px] p-[10px] relative text-center w-full">
+                                                            <div className="h-[50px] relative text-center w-full">
                                                                 <span className='text-[24px] font-bold text-[#000000] block bg-[#d6dae2]'>
                                                                     {
                                                                         filterPrepositions(slide.title)
