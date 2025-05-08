@@ -40,7 +40,6 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
 
 
       const elements = document.elementsFromPoint(x, y) 
-      console.log(elements);
       
 
       const underlyingElements = elements.filter(

@@ -129,12 +129,15 @@ const SliderMain = () => {
                 time = Date.now()
             }
 
+            
+
             let interval = time + 800 <= Date.now() ? 200  : time + 800 - Date.now() + 200
 
             timeoutId = setTimeout(() => {
                 enableList = true
                 changeSlides(index, oldIndex)
                 oldIndex = index
+                time = Date.now()
             }, interval)
 
 
