@@ -16,7 +16,8 @@
 
 	&.black {
 		--color-item-menu-active: #000;
-		--color-item-menu-hover: transparent;
+		--color-item-menu-hover: #000;
+		--menu-item-border-hover: transparent;
 		--menu-item-border: #FFF;
 		--color-item-menu: rgba(0, 0, 0, 0.6);
 		--menu-item-opacity-light: 0.5;
