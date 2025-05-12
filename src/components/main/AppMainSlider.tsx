@@ -91,13 +91,13 @@ const SliderMain = () => {
                 if (index < oldIndex) {
                     // движение назад через край
                     goToSlide(totalSlides - 1);
-                    await delay(() => next(), 820);
-                    await delay(() => goToSlide(index), 820);
+                    await delay(() => next(), 800);
+                    await delay(() => goToSlide(index), 800);
                 } else {
                     // движение вперёд через край
                     goToSlide(0);
-                    await delay(() => prev(), 820);
-                    await delay(() => goToSlide(index), 820);
+                    await delay(() => prev(), 800);
+                    await delay(() => goToSlide(index), 800);
                 }
             } else {
                 // прямой переход без анимации
@@ -122,23 +122,25 @@ const SliderMain = () => {
 
 
 
-            if (enableList && time + 820 <= Date.now()) {
-                changeSlides(index, oldIndex)
-                oldIndex = index
-                enableList = false
-                time = Date.now()
-            }
-
+            // if (enableList && time + 800 <= Date.now()) {
+            //     changeSlides(index, oldIndex)
+            //     oldIndex = index
+            //     enableList = false
+            //     time = Date.now()
+            // }
             
-
-            let interval = time + 820 <= Date.now() ? 200  : time + 820 - Date.now() + 200
+            let interval = time + 800 <= Date.now() ? 200 : time + 800 - Date.now() + 200
 
             timeoutId = setTimeout(() => {
+                time = Date.now()
                 enableList = true
                 changeSlides(index, oldIndex)
                 oldIndex = index
-                time = Date.now()
             }, interval)
+
+
+
+
 
 
 
