@@ -5,8 +5,8 @@ const PromtModal = ({ children, content, timer }: { children: ReactNode, content
     const [timerId, setTimerId] = useState<NodeJS.Timeout | null>(null)
 
     useEffect(() => {
-        if (!active || !timer) return
         if(timerId) clearTimeout(timerId)
+        if (!active || !timer) return
 
         setTimerId(setTimeout(() => {
             setActive(false)
