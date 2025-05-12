@@ -129,7 +129,7 @@ const SliderMain = () => {
             //     time = Date.now()
             // }
             
-            let interval = time + 800 <= Date.now() ? 100 : time + 800 - Date.now() + 100
+            let interval = time + 800 <= Date.now() ? 200 : time + 800 - Date.now() + 200
 
             timeoutId = setTimeout(() => {
                 time = Date.now()
