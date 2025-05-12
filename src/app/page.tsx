@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 
 import '@/assets/styles/main.scss'
 
-import AppMainIntro from '../components/main/AppMainIntro'
+import AppMainIntro from '../components/main/AppMainSlider'
 import AppMainDocuments from '../components/main/AppMainDocuments'
 import AppMainQuestions from '../components/main/AppMainQuestions'
 import { useEffect } from 'react';
@@ -32,12 +32,12 @@ export default function Home() {
   return (
     <div className="main text-[#000] overflow-hidden select-none ">
       <AppMainIntro />
-      <AppMainDocuments />
+      {/* <AppMainDocuments />
       <DynamicAppMainSkills />
       <DynamicAppMainSlider />
       <DynamicAppMainSafeguards />
       <DynamicAppMainFeedback />
-      <AppMainQuestions />
+      <AppMainQuestions /> */}
     </div>
   );
 }
