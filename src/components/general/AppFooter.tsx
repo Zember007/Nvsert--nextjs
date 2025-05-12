@@ -72,7 +72,7 @@ const AppFooter = () => {
       </div>
 
       <div className="flex flex-col justify-between">
-        <div className="flex justify-between w-[400px]">
+        <div className="flex justify-between ">
           <div className="flex gap-[8px]">
             {email &&
               <PromtModal
