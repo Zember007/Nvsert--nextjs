@@ -76,27 +76,53 @@ const AppFooter = () => {
           <div className="flex gap-[8px]">
             {email &&
               <PromtModal
-                content={<div className="flex gap-[4px] items-center">
+                content={<div className="flex gap-[4px] items-center h-[14px]">
                   <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M17.2439 0.185578C17.5556 0.458339 17.5872 0.932161 17.3144 1.24389L6.81443 13.2439C6.67774 13.4001 6.48242 13.4927 6.27496 13.4996C6.0675 13.5065 5.86645 13.4271 5.71967 13.2803L1.21967 8.78034C0.926777 8.48745 0.926777 8.01257 1.21967 7.71968C1.51256 7.42679 1.98744 7.42679 2.28033 7.71968L6.21347 11.6528L16.1856 0.256132C16.4583 -0.0555957 16.9322 -0.0871838 17.2439 0.185578Z" fill="white" />
                   </svg>
-                  <span className="text-[#FFF] text-[18px] leading-[0.8]">Скопировано</span>
+                  <span className="text-[#FFF] text-[18px]">Скопировано</span>
                 </div>}
                 timer={3000}
               >
-                <AppMenuItem item={{ href: filterPhone(email.value), label: email.value }} isActive={false} />
+                <AppMenuItem
+                onClick={() => {
+                  navigator.clipboard.writeText(email.value)
+                }}
+                item={{ href: '#', label: email.value }} isActive={false} />
               </PromtModal>
             }
+            <PromtModal
+              content={<div className="flex gap-[4px] items-center h-[14px]">
+                <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M17.2439 0.185578C17.5556 0.458339 17.5872 0.932161 17.3144 1.24389L6.81443 13.2439C6.67774 13.4001 6.48242 13.4927 6.27496 13.4996C6.0675 13.5065 5.86645 13.4271 5.71967 13.2803L1.21967 8.78034C0.926777 8.48745 0.926777 8.01257 1.21967 7.71968C1.51256 7.42679 1.98744 7.42679 2.28033 7.71968L6.21347 11.6528L16.1856 0.256132C16.4583 -0.0555957 16.9322 -0.0871838 17.2439 0.185578Z" fill="white" />
+                </svg>
+                <span className="text-[#FFF] text-[18px]">Скопировано</span>
+              </div>}
+              timer={3000}
+            >
+              <AppMenuItem item={{ href: '#', label: 'Telegram' }} isActive={false} />
+            </PromtModal>
+            <PromtModal
+              content={<div className="flex gap-[4px] items-center h-[14px]">
+                <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M17.2439 0.185578C17.5556 0.458339 17.5872 0.932161 17.3144 1.24389L6.81443 13.2439C6.67774 13.4001 6.48242 13.4927 6.27496 13.4996C6.0675 13.5065 5.86645 13.4271 5.71967 13.2803L1.21967 8.78034C0.926777 8.48745 0.926777 8.01257 1.21967 7.71968C1.51256 7.42679 1.98744 7.42679 2.28033 7.71968L6.21347 11.6528L16.1856 0.256132C16.4583 -0.0555957 16.9322 -0.0871838 17.2439 0.185578Z" fill="white" />
+                </svg>
+                <span className="text-[#FFF] text-[18px]">Скопировано</span>
+              </div>}
+              timer={3000}
+            >
+              <AppMenuItem item={{ href: '#', label: 'WhatsApp' }} isActive={false} />
+            </PromtModal>
             <PromtModal
               content={
                 <div className="flex flex-col gap-[20px]">
                   {/* i18n.language */}
                   {langs.map((lang, i) => (
                     <button
-                    onClick={() => {
-                      changeLanguage(lang.code)
-                    }}
-                    key={i} className="h-[10px] flex items-center gap-[4px]">
+                      onClick={() => {
+                        changeLanguage(lang.code)
+                      }}
+                      key={i} className="h-[10px] flex items-center gap-[4px]">
                       <div className="w-[10px] h-[10px] flex items-center justify-center">
                         <div className="relative w-[6px] h-[6px]">
                           <div className={`transition-all duration-300 ease ${i18n.language === lang.code && 'bg-[#69D771]'} absolute inset-0 rounded-full blur-sm opacity-70`} />
