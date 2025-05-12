@@ -74,8 +74,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+
     transition: all .3s;
     opacity: 0;
     visibility: hidden;
@@ -90,13 +89,8 @@
   &__box {
     max-width: 400px;
     position: relative;
-    will-change: transform;
-    // transition: all .3s;
-    // transform: translateY(-50px);
-
-    &.active {
-      // transform: translateY(0);
-    }
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
   }
 
   &__content {

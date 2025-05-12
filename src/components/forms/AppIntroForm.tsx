@@ -10,12 +10,12 @@ import Image from "next/image";
 import ImgCall from '@/assets/images/order-call.png'
 import { useButton } from "@/hook/useButton";
 import { useEffect, useRef, useState } from "react";
-import { BounceEffect } from "@/hook/useBounce";
 import FlightSuccess from "../modals/FlightSuccess";
 import { useHeaderContext } from "../contexts/HeaderContext";
+import { useAnimation, motion } from "framer-motion";
 
 
-const AppIntroForm = ({close}:{close?:() => void}) => {
+const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrapper?: () => void }) => {
     const { setButtonRef, setWrapperRef } = useButton();
 
     const onSubmit = async (e: any) => {
@@ -36,19 +36,7 @@ const AppIntroForm = ({close}:{close?:() => void}) => {
                 reset();
 
 
-                const myElement = document.getElementById('modal-default')
-                if (myElement) {
-                    BounceEffect(myElement, {
-                        startPosition: "0",
-                        endPosition: `${20}px`,
-                        duration: 300,
-                        easing: "linear",
-                        direction: 'vertical'
-                    });
-
-                    setSuccessMessageVisible(true)
-
-                }
+                BounceWrapper && BounceWrapper()
 
             }
         } catch (error) {
@@ -72,28 +60,35 @@ const AppIntroForm = ({close}:{close?:() => void}) => {
         }
     }
 
-    const formRef = useRef<HTMLDivElement | null>(null)
 
     const [contactError, setContactError] = useState(false);
     const { defaultModalActive } = useHeaderContext();
+
+    const controls = useAnimation();
+    const defaultSettings = {
+        duration: 0.6,
+        ease: [0.34, 1.56, 0.64, 1],
+        times: [0, 0.2, 0.5, 0.8, 1],
+        openY: [-30, 0, -10, 0, 0],
+    };
+
     useEffect(() => {
-
-        if (!formRef.current || !defaultModalActive) return
-
-        BounceEffect(formRef.current, {
-            startPosition: "-10px",
-            endPosition: `-30px`,
-            duration: 300,
-            easing: "ease-in",
-            direction: 'vertical'
+        if (!defaultModalActive) return
+        controls.start({
+            y: defaultSettings.openY, 
+            transition: {
+                duration: defaultSettings.duration,
+                ease: defaultSettings.ease,
+                delay: 0.2,
+                times: defaultSettings.times
+            }
         });
-
-    }, [formRef, defaultModalActive])
+    }, [defaultModalActive])
     return (
         <div className='flex flex-col gap-[20px] py-[30px] px-[40px]'>
             {successMessageVisible && <FlightSuccess text="Спасибо" small={true} close={() => { setSuccessMessageVisible(false) }} />}
             <button
-            onClick={() => {close && close()}}
+                onClick={() => { close && close() }}
                 className="close !top-[15px] !right-[15px]">
                 <div className="in">
                     <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
@@ -110,7 +105,9 @@ const AppIntroForm = ({close}:{close?:() => void}) => {
                     <Image src={ImgCall} alt='order-call'></Image>
                 </div>
             </div>
-            <div className={`${successMessageVisible && 'opacity-0'}`} ref={formRef}>
+            <motion.div
+                animate={controls}
+                className={`${successMessageVisible && 'opacity-0'}`} >
                 <AppValidationObserver methods={methods} onSubmit={onSubmit}>
                     {({ register, errors }) => (
                         <div className="flex flex-col gap-[20px]">
@@ -161,7 +158,7 @@ const AppIntroForm = ({close}:{close?:() => void}) => {
                     )
                     }
                 </AppValidationObserver >
-            </div>
+            </motion.div>
         </div>
     );
 };
