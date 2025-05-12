@@ -47,7 +47,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
     }, [defaultModalActive])
     return (
         <>
-            <div className={`modal__wrapper ${defaultModalActive && 'active'}`}
+            <div className={`modal__wrapper select-none ${defaultModalActive && 'active'}`}
                 onClick={() => {
                     setDefaultModalActive(false)
                 }}
