@@ -7,7 +7,7 @@ interface MenuItem {
     href: string;
 }
 
-const AppMenuItem: React.FC<{ item: MenuItem; isActive: boolean, onClick?: (e:React.MouseEvent<HTMLAnchorElement>) => void }> = React.memo(
+const AppMenuItem: React.FC<{ item: MenuItem; isActive: boolean, onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void }> = React.memo(
     ({ item, isActive, onClick }) => {
         const [isFastClick, setIsFastClick] = React.useState(false);
 
@@ -23,6 +23,9 @@ const AppMenuItem: React.FC<{ item: MenuItem; isActive: boolean, onClick?: (e:Re
         };
 
         const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+            if (item.href === '#') {
+                e.preventDefault()
+            }
             onClick && onClick(e)
             const rect = e.currentTarget.getBoundingClientRect();
             const x = e.clientX - rect.left;
