@@ -2,13 +2,15 @@ import { ReactNode, useEffect, useState } from "react";
 
 const PromtModal = ({ children, content, timer }: { children: ReactNode, content: ReactNode, timer?: number }) => {
     const [active, setActive] = useState(false)
+    const [timerId, setTimerId] = useState<NodeJS.Timeout | null>(null)
 
     useEffect(() => {
         if (!active || !timer) return
+        if(timerId) clearTimeout(timerId)
 
-        setTimeout(() => {
+        setTimerId(setTimeout(() => {
             setActive(false)
-        },timer)
+        },timer))
     }, [active])
     return (
         <div className="relative">
@@ -16,7 +18,7 @@ const PromtModal = ({ children, content, timer }: { children: ReactNode, content
                 {content}
             </div>
             <div
-                onClick={() => { setActive(prev => !prev) }}>
+                onClick={() => { setActive(!timer ? !active : true) }}>
                 {children}
             </div>
         </div>
