@@ -54,10 +54,10 @@
       transparent 60%);
   mask-image: radial-gradient(150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
       white,
-      transparent 60%);
+      var(--mask-menu-item) 60%);
   -webkit-mask-image: radial-gradient(150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
       white,
-      transparent 60%);
+      var(--mask-menu-item) 60%);
   opacity: 0;
   pointer-events: none;
   mask-composite: intersect;
@@ -125,10 +125,10 @@
       transparent 60%);
   mask-image: radial-gradient(150px circle at var(--last-mouse-x, var(--click-x, 50%)) var(--last-mouse-y, var(--click-y, 50%)),
       white,
-      transparent 60%);
+      var(--mask-menu-item) 60%);
   -webkit-mask-image: radial-gradient(150px circle at var(--last-mouse-x, var(--click-x, 50%)) var(--last-mouse-y, var(--click-y, 50%)),
       white,
-      transparent 60%);
+      var(--mask-menu-item) 60%);
   opacity: 0;
   pointer-events: none;
 }
