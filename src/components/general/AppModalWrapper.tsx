@@ -53,57 +53,58 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
                 }}
             >
                 <Draggable defaultPosition={{ x: 0, y: 0 }} enableUserSelectHack={false} nodeRef={nodeRef as React.RefObject<HTMLDivElement>}>
-                    <motion.div
-                        animate={controls}
-                        ref={nodeRef}
-                        className={`modal__box modal ${defaultModalActive && 'active'}`} onClick={(e) => { e.stopPropagation() }}>
-                        <div id='modal-default' className="modal__content main-form">
-                            {
-                                defaultModalName === 'successMessage' &&
-                                <>
-                                    <Suspense fallback={<p></p>}>
-                                        <AppSuccessMessage />
-                                    </Suspense>
-                                </>
-                            }
-                            {
-                                defaultModalName === 'introForm' &&
-                                <>
+                    <div ref={nodeRef}>
+                        <motion.div
+                            animate={controls}
+                            className={`modal__box modal ${defaultModalActive && 'active'}`} onClick={(e) => { e.stopPropagation() }}>
+                            <div id='modal-default' className="modal__content main-form">
+                                {
+                                    defaultModalName === 'successMessage' &&
+                                    <>
+                                        <Suspense fallback={<p></p>}>
+                                            <AppSuccessMessage />
+                                        </Suspense>
+                                    </>
+                                }
+                                {
+                                    defaultModalName === 'introForm' &&
+                                    <>
 
-                                    <AppIntroForm
-                                        BounceWrapper={() => {
-                                            controls.start({
-                                                y: defaultSettings.openY,
-                                                transition: {
-                                                    duration: defaultSettings.duration,
-                                                    ease: defaultSettings.ease,
-                                                    times: defaultSettings.times
-                                                }
-                                            });
-                                        }}
-                                        close={() => { setDefaultModalActive(false) }}
-                                    />
+                                        <AppIntroForm
+                                            BounceWrapper={() => {
+                                                controls.start({
+                                                    y: defaultSettings.openY,
+                                                    transition: {
+                                                        duration: defaultSettings.duration,
+                                                        ease: defaultSettings.ease,
+                                                        times: defaultSettings.times
+                                                    }
+                                                });
+                                            }}
+                                            close={() => { setDefaultModalActive(false) }}
+                                        />
 
-                                </>
-                            }
+                                    </>
+                                }
 
-                            {
-                                defaultModalName === 'orderForm' &&
-                                <>
+                                {
+                                    defaultModalName === 'orderForm' &&
+                                    <>
 
-                                    <AppMainForm bg={false} btnText='Оформить заявку' />
+                                        <AppMainForm bg={false} btnText='Оформить заявку' />
 
-                                </>
-                            }
+                                    </>
+                                }
 
-                            {
-                                defaultModalName === 'knowCost' &&
+                                {
+                                    defaultModalName === 'knowCost' &&
 
-                                <AppKnowCostForm />
+                                    <AppKnowCostForm />
 
-                            }
-                        </div>
-                    </motion.div>
+                                }
+                            </div>
+                        </motion.div>
+                    </div>
                 </Draggable>
             </div>
         </>
