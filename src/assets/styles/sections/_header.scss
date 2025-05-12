@@ -11,7 +11,7 @@
 
 	svg,
 	svg path {
-		transition: transform 0.2s ease, color 0.3s ease, stroke 0.3s ease;
+		transition: transform 0.2s ease, color 0.15s ease, stroke 0.15s ease;
 	}
 
 	&.black {
@@ -174,7 +174,7 @@
 	}
 
 	&-phone {
-		transition: all 0.3s ease;
+		transition: all 0.15s ease;
 		will-change: color;
 		font-size: 16px;
 		line-height: 24px;
@@ -201,7 +201,7 @@
 		}
 
 		&__link {
-			transition: all 0.3s ease;
+			transition: all 0.15s ease;
 			will-change: color;
 			color: $typography-primary;
 			text-decoration: none;
