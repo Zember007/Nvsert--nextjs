@@ -89,7 +89,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
             {successMessageVisible && <FlightSuccess text="Спасибо" small={true} close={() => { setSuccessMessageVisible(false) }} />}
             <button
                 onClick={() => { close && close() }}
-                className="close !top-[15px] !right-[15px]">
+                className={`${successMessageVisible && 'opacity-0'} close !top-[15px] !right-[15px]`}>
                 <div className="in">
                     <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
                     <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
