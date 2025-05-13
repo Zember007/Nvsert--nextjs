@@ -35,7 +35,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
             if (response.status === 200 || 201) {
                 reset();
 
-
+                animation()
                 BounceWrapper && BounceWrapper()
 
             }
@@ -72,10 +72,9 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
         openY: [-30, 0, -10, 0, 0],
     };
 
-    useEffect(() => {
-        if (!defaultModalActive) return
+    const animation = () => {
         controls.start({
-            y: defaultSettings.openY, 
+            y: defaultSettings.openY,
             transition: {
                 duration: defaultSettings.duration,
                 ease: defaultSettings.ease,
@@ -83,10 +82,14 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
                 times: defaultSettings.times
             }
         });
+    }
+
+    useEffect(() => {
+        if (!defaultModalActive) return
+        animation()
     }, [defaultModalActive])
     return (
         <div className='flex flex-col gap-[20px] py-[30px] px-[40px]'>
-            {successMessageVisible && <FlightSuccess text="Спасибо" small={true} close={() => { setSuccessMessageVisible(false) }} />}
             <button
                 onClick={() => { close && close() }}
                 className={`${successMessageVisible && 'opacity-0'} close !top-[15px] !right-[15px]`}>
@@ -107,10 +110,12 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
             </div>
             <motion.div
                 animate={controls}
-                className={`${successMessageVisible && 'opacity-0'}`} >
+            >
+                {successMessageVisible && <FlightSuccess text="Спасибо" close={() => { setSuccessMessageVisible(false) }} />}
+
                 <AppValidationObserver methods={methods} onSubmit={onSubmit}>
                     {({ register, errors }) => (
-                        <div className="flex flex-col gap-[20px]">
+                        <div className={`${successMessageVisible && 'opacity-0'} flex flex-col gap-[20px]`}>
                             <AppInput
                                 className="!bg-[#2a2a2a] focus:!bg-[#21262F]"
                                 title={'ФИО'}
@@ -130,7 +135,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
                             />
 
                             <div ref={setWrapperRef} className="tariff-wrap relative  mt-[24px]">
-                                <button  
+                                <button
                                     type="submit"
                                     ref={setButtonRef}
                                     className=" group tariff  bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[10px] justify-center p-[9px] rounded-[4px]"

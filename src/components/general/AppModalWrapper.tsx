@@ -34,8 +34,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
         openY: [-100, -80, 10, 0, 0],
     };
 
-    useEffect(() => {
-        if (!defaultModalActive) return
+    const animation = () => {
         controls.start({
             y: defaultSettings.openY, // Используем openY для отскока
             transition: {
@@ -44,6 +43,11 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
                 times: defaultSettings.times
             }
         });
+    }
+
+    useEffect(() => {
+        if (!defaultModalActive) return
+        animation()
     }, [defaultModalActive])
     return (
         <>
@@ -72,14 +76,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
 
                                         <AppIntroForm
                                             BounceWrapper={() => {
-                                                controls.start({
-                                                    y: defaultSettings.openY,
-                                                    transition: {
-                                                        duration: defaultSettings.duration,
-                                                        ease: defaultSettings.ease,
-                                                        times: defaultSettings.times
-                                                    }
-                                                });
+                                                animation()
                                             }}
                                             close={() => { setDefaultModalActive(false) }}
                                         />
