@@ -37,6 +37,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
 
                 animation()
                 BounceWrapper && BounceWrapper()
+                setSuccessMessageVisible(true)
 
             }
         } catch (error) {
@@ -137,6 +138,11 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
                             <div ref={setWrapperRef} className="tariff-wrap relative  mt-[24px]">
                                 <button
                                     type="submit"
+                                    onClick={() => {
+                                        animation()
+                                        BounceWrapper && BounceWrapper()
+                                        setSuccessMessageVisible(true)
+                                    }}
                                     ref={setButtonRef}
                                     className=" group tariff  bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[10px] justify-center p-[9px] rounded-[4px]"
                                     style={{
