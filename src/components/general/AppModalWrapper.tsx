@@ -31,7 +31,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
         duration: 0.6,
         ease: [0.34, 1.56, 0.64, 1],
         times: [0, 0.2, 0.5, 0.8, 1],
-        openY: [-100, -80, 10, 0, 0],
+        openY: [-100, 10, 0, 0],
     };
 
     const animation = () => {
@@ -40,7 +40,8 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
             transition: {
                 duration: defaultSettings.duration,
                 ease: defaultSettings.ease,
-                times: defaultSettings.times
+                times: defaultSettings.times,
+                delay: 0.2
             }
         });
     }
