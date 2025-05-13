@@ -1,5 +1,5 @@
 .menu-item {
-
+  -webkit-background-clip: text;
   align-items: center;
   color: var(--color-item-menu);
   display: flex;
@@ -19,7 +19,7 @@
   background: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
+
   border: 1px solid transparent;
 }
 
@@ -35,7 +35,7 @@
 
 .menu-item:hover {
   color: var(--color-item-menu-active);
-  border:  1px solid var(--menu-item-border-hover);
+  border: 1px solid var(--menu-item-border-hover);
 
 }
 
@@ -47,7 +47,7 @@
   z-index: 10;
   right: -1px;
   bottom: -1px;
-  border: var(--menu-item-border-w) solid var(--menu-item-border);
+  /* border: var(--menu-item-border-w) solid var(--menu-item-border);
   border-radius: 4px;
   background: radial-gradient(150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
       rgba(255, 255, 255, var(--menu-item-opacity-light)),
@@ -57,11 +57,37 @@
       var(--mask-menu-item) 60%);
   -webkit-mask-image: radial-gradient(150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
       white,
-      var(--mask-menu-item) 60%);
+      var(--mask-menu-item) 60%); */
+
+  border-radius: 4px;
+  padding: 1px;
+
+  /* Градиент на border через маску */
+  /* mask:
+    radial-gradient(150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      white 0%,
+      transparent 60%);
+
+  -webkit-mask:
+    radial-gradient(150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      white 0%,
+      transparent 60%); */
+
+  background: radial-gradient(150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      white,
+      black 100%);
+
+  mask: linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(#fff, #fff);
+  mask-composite: exclude;
+  mask-clip: padding-box, border-box;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+
+
+
   opacity: 0;
   pointer-events: none;
-  mask-composite: intersect;
-  -webkit-mask-composite: destination-in;
 }
 
 .menu-item:hover::after,
