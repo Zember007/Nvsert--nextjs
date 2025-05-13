@@ -33,15 +33,18 @@ const FlightSuccess = ({ bg, close, small = false, text }: { bg?: string; close:
             });
         }, 1000);
         return () => clearInterval(timer);
-    },[])
+    }, [])
 
 
 
 
     return (
-        <motion.div
-            animate={controls}
-            className="relative">
+
+
+        <div className="active  pt-[100px]"
+            style={{ background: bg }}
+        >
+
             <button
                 onClick={() => { close() }}
                 className="close !top-[30px] !right-[30px]">
@@ -54,25 +57,22 @@ const FlightSuccess = ({ bg, close, small = false, text }: { bg?: string; close:
                     <div className="close-button-block"></div>
                 </div>
             </button>
-            <div className="active  pt-[100px]"
-                style={{ background: bg }}
-            >
 
+            <div
+                className="flex flex-col items-center">
                 <div
-                    className="flex flex-col items-center">
-                    <div
-                        className="flex flex-col gap-[20px] text-white text-center items-center">
-                        <p className="text-[32px] tracking-[-0.03em]">{text}</p>
-                        <p className="text-[20px]">Мы свяжемся с Вами <br /> в течение 10 минут!</p>
-                    </div>
-                    <div
-                        className={`${small ? 'top-[220px]' : 'top-[256px]'} left-0 right-0 absolute`}>
-                        <FlyingPlane />
-                    </div>
+                    className="flex flex-col gap-[20px] text-white text-center items-center">
+                    <p className="text-[32px] tracking-[-0.03em]">{text}</p>
+                    <p className="text-[20px]">Мы свяжемся с Вами <br /> в течение 10 минут!</p>
                 </div>
-                <p className={`text-[#A4A4A4] font-light text-[44px] rubik absolute ${small ? 'top-[30px] left-[30px]' : 'bottom-[30px] left-[50%] translate-x-[-50%]'}`}>{time}</p>
+                <div
+                    className={`${small ? 'top-[220px]' : 'top-[256px]'} left-0 right-0 absolute`}>
+                    <FlyingPlane />
+                </div>
             </div>
-        </motion.div>
+            <p className={`text-[#A4A4A4] font-light text-[44px] rubik absolute ${small ? 'top-[30px] left-[30px]' : 'bottom-[30px] left-[50%] translate-x-[-50%]'}`}>{time}</p>
+        </div>
+
     );
 };
 
