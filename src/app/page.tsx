@@ -6,8 +6,6 @@ import '@/assets/styles/main.scss'
 import AppMainIntro from '../components/main/AppMainIntro'
 import AppMainDocuments from '../components/main/AppMainDocuments'
 import AppMainQuestions from '../components/main/AppMainQuestions'
-import { useEffect } from 'react';
-import { useHeaderContext } from '@/components/contexts/HeaderContext';
 
 export default function Home() {
 
