@@ -195,13 +195,14 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
                             </div>
                             <AppFooter />
                         </main>
+                        <AppModalWrapper
+                            setDefaultModalActive={setDefaultModalActive}
+                            defaultModalActive={defaultModalActive}
+                            defaultModalName={defaultModalName}
+                        />
                     </SimpleBar>
                 </SimpleBarContext.Provider>
-                <AppModalWrapper
-                    setDefaultModalActive={setDefaultModalActive}
-                    defaultModalActive={defaultModalActive}
-                    defaultModalName={defaultModalName}
-                />
+
                 <div className="bg-noise"></div>
             </body>
         </>

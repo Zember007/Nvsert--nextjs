@@ -56,12 +56,12 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
                     setDefaultModalActive(false)
                 }}
             >
-                <Draggable defaultPosition={{ x: 0, y: 0 }} enableUserSelectHack={false} nodeRef={nodeRef as React.RefObject<HTMLDivElement>}>
+                <Draggable bounds="parent" handle=".modal__content" defaultPosition={{ x: 0, y: 0 }}  nodeRef={nodeRef as React.RefObject<HTMLDivElement>}>
                     <div ref={nodeRef}>
                         <motion.div
                             animate={controls}
                             className={`modal__box modal ${defaultModalActive && 'active'}`} onClick={(e) => { e.stopPropagation() }}>
-                            <div id='modal-default' className="modal__content main-form">
+                            <div id='modal-default' className=" modal__content main-form">
                                 {
                                     defaultModalName === 'successMessage' &&
                                     <>
