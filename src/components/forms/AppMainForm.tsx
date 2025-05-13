@@ -224,9 +224,6 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active }: { btnText: s
                             <button
                                 type="submit"
                                 ref={setButtonRef}
-                                onClick={() => {
-                                    successVisible()
-                                }}
                                 className=" btnIconAn group  tariff an-border s:mt-[1px] mt-[15px] bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[transparent]   rounded-[4px]"
                                 style={{
                                     verticalAlign: 'middle'
