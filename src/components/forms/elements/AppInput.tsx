@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from "react-hook-form";
 
-const AppInput = ({ title,disable,fail,message = true, inputName, type, required, autocomplete, mask, className, classNameTitle, onBlur }: { onBlur?:(value:string) => void ,disable?:boolean,fail?:boolean, message?:boolean, title: string, inputName: string, type?: string, required?: boolean, autocomplete?: string, mask?: string, className?: string, classNameTitle?: string }) => {
+const AppInput = ({ title, disable, fail, message = true, inputName, type, required, autocomplete, mask, className, classNameTitle, onBlur }: { onBlur?: (value: string) => void, disable?: boolean, fail?: boolean, message?: boolean, title: string, inputName: string, type?: string, required?: boolean, autocomplete?: string, mask?: string, className?: string, classNameTitle?: string }) => {
     const { register, formState: { errors, isSubmitted, submitCount }, setValue, clearErrors } = useFormContext();
 
     const formatPhoneNumber = (e: React.FormEvent<HTMLInputElement>) => {
@@ -54,7 +54,7 @@ const AppInput = ({ title,disable,fail,message = true, inputName, type, required
     }, [title])
     return (
         <div className={`relative z-[0] ${disable && 'active:scale-[0.95]'} transition-all duration-300 `}>
-            <label className={`field ${disable && 'pointer-events-none'} ${visibleError && ((errors[inputName]  ) || fail) && isSubmitted && 'bounce'}`}>
+            <label className={`field ${disable && 'pointer-events-none'} ${visibleError && ((errors[inputName]) || fail) && isSubmitted && 'bounce'}`}>
 
 
 
@@ -68,18 +68,20 @@ const AppInput = ({ title,disable,fail,message = true, inputName, type, required
                     name={inputName}
                     placeholder={title}
                     autoComplete={autocomplete}
+                    disabled={disable || false}
                     onInput={(e) => { changeInput(e) }}
-                    onFocus={() => {clearErrors(inputName)}}
+                    onFocus={() => { clearErrors(inputName) }}
                     onBlur={(e) => {
-                        if(onBlur) {
+                        if (onBlur) {
                             onBlur(e.currentTarget.value);
                         }
-                        if(e.target.value && e.target.value !== '') {
+                        if (e.target.value && e.target.value !== '') {
                             e.target.value = e.target.value.trimEnd() + ' '
                             e.target.setSelectionRange(e.target.value.length, e.target.value.length);
-                        }}}
+                        }
+                    }}
                 />
-                <span className={`field__title ${(errors[inputName] ) && '!text-[#FF3030]'} ${classNameTitle}`}>
+                <span className={`field__title ${(errors[inputName]) && '!text-[#FF3030]'} ${classNameTitle}`}>
                     {title}
                 </span>
                 <span className={`field__title-top ${classNameTitle}`}>
