@@ -17,7 +17,7 @@ import FlightSuccess from "../modals/FlightSuccess";
 import { useAnimation, motion } from "framer-motion";
 
 
-const AppMainForm = ({ btnText, bg = true, BounceWrapper, active }: { btnText: string; bg?: boolean; BounceWrapper?: () => void; active?: boolean }) => {
+const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btnText: string; bg?: boolean; close?: () => void; BounceWrapper?: () => void; active?: boolean }) => {
     const { setButtonRef, setWrapperRef } = useButton();
 
     const onSubmit = async (e: any) => {
@@ -172,7 +172,20 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active }: { btnText: s
             initial={{ x: 0 }}
             className={`relative main-form ${bg && 'bg-[#00000050] border-main'} py-[27px] pb-[30px] px-[48px] max-w-[420px] flex flex-col gap-[12px] rounded-[6px]`}>
             {successMessageVisible && <FlightSuccess text="Спасибо за заявку" close={() => { setSuccessMessageVisible(false) }} />}
-            <span className={`leading-[1] text-[#FFF] text-[32px] text-center tracking-[-0.03em]  ${successMessageVisible && 'opacity-0'}`}>Оформить заявку</span>
+            {!bg &&
+                <button
+                    onClick={() => { close && close() }}
+                    className={`${successMessageVisible && 'opacity-0'} close !top-[15px] !right-[15px]`}>
+                    <div className="in">
+                        <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
+                        <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
+                    </div>
+                    <div className="out">
+                        <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
+                        <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
+                    </div>
+                </button>}
+            <span className={`leading-[1] text-[#FFF] text-[32px] ${bg ? 'text-center' : 'text-left'} tracking-[-0.03em] px-[8px]  ${successMessageVisible && 'opacity-0'}`}>Оформить заявку</span>
             <div className={`${successMessageVisible && 'opacity-0'}`}>
                 <AppValidationObserver methods={methods} onSubmit={onSubmit}>
                     {({ register, errors }) => (

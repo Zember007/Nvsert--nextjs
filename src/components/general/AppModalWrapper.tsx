@@ -92,6 +92,8 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
                                             BounceWrapper={() => {
                                                 animation()
                                             }}
+                                            close={() => { setDefaultModalActive(false) }}
+
                                             active={defaultModalActive}
                                             bg={false} btnText='Оформить заявку' />
 
