@@ -69,6 +69,8 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active }: { btnText: s
 
     }
 
+    const ids = Date.now()
+
     const validContact = (value: string) => {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const phoneRegex = /^(?:\+7|8)?[\s(-]*\d[\s(-]*\d{2}[\s)-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}$/;
@@ -91,7 +93,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active }: { btnText: s
     const contactValue = watch("Contact") || "";
 
     const bounceCheckbox = () => {
-        const myElement = document.getElementById('bounce-checkbox')
+        const myElement = document.getElementById(`bounce-checkbox${ids}`)
         if (myElement) {
             BounceEffect(myElement, {
                 startPosition: "-50px",
@@ -166,110 +168,113 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active }: { btnText: s
 
     return (
         <motion.div
-        animate={controls}
-        initial={{ x: 0 }}
-         className={`relative main-form ${bg && 'bg-[#00000050] border-main'} py-[27px] pb-[30px] px-[48px] max-w-[420px] flex flex-col gap-[12px] rounded-[6px]`}>
+            animate={controls}
+            initial={{ x: 0 }}
+            className={`relative main-form ${bg && 'bg-[#00000050] border-main'} py-[27px] pb-[30px] px-[48px] max-w-[420px] flex flex-col gap-[12px] rounded-[6px]`}>
             {successMessageVisible && <FlightSuccess text="Спасибо за заявку" close={() => { setSuccessMessageVisible(false) }} />}
-            <span className='leading-[1] text-[#FFF] text-[32px] text-center tracking-[-0.03em]'>Оформить заявку</span>
-            <AppValidationObserver methods={methods} onSubmit={onSubmit}>
-                {({ register, errors }) => (
-                    <div className="flex flex-col s:gap-[19px] gap-[5px]">
-                        <AppInput
-                            className="!bg-[#2a2a2a] focus:!bg-[#21262F]"
-                            title={'ФИО'}
-                            inputName="name"
-                            required={true}
-                        />
-                        <div className="flex flex-col gap-[12px]">
-                            <div
-                                onClick={() => {
-                                    if (!isEmail && !isPhone) {
-                                        bounceCheckbox()
-                                        setFailCheck(true)
-                                    } else {
-                                        setFailCheck(false)
+            <span className={`leading-[1] text-[#FFF] text-[32px] text-center tracking-[-0.03em]  ${successMessageVisible && 'opacity-0'}`}>Оформить заявку</span>
+            <div className={`${successMessageVisible && 'opacity-0'}`}>
+                <AppValidationObserver methods={methods} onSubmit={onSubmit}>
+                    {({ register, errors }) => (
+                        <div className="flex flex-col s:gap-[19px] gap-[5px]">
+                            <AppInput
+                                className="!bg-[#2a2a2a] focus:!bg-[#21262F]"
+                                title={'ФИО'}
+                                inputName="name"
+                                required={true}
+                            />
+                            <div className="flex flex-col gap-[12px]">
+                                <div
+                                    onClick={() => {
+                                        if (!isEmail && !isPhone) {
+                                            bounceCheckbox()
+                                            setFailCheck(true)
+                                        } else {
+                                            setFailCheck(false)
 
-                                    }
-                                    setEmailError(false)
-                                }}
-                                className="w-full relative z-[1]">
-                                <AppInput
-                                    className="!bg-[#2a2a2a] focus:!bg-[#21262F]"
-                                    title={isPhone ? 'Телефон' : isEmail ? 'Email' : ''}
-                                    inputName="Contact"
-                                    mask={isPhone ? "phone" : ''}
-                                    type={isPhone ? "phone" : 'text'}
-                                    fail={emailError}
-                                    required={true}
-                                    message={false}
-                                    disable={!isPhone && !isEmail}
-                                    onBlur={() => { validContact(contactValue) }}
-                                />
-                            </div>
-                            <div id='bounce-checkbox' className="pl-[10px] flex items-center gap-[30px]"
-                                onClick={() => { clearErrors('Contact') }}
-                            >
-                                <AppCheckbox id={`check-phone${Date.now()}`} successful={emailSuccessful} fail={failCheck} checked={isPhone} onChange={(value) => { setIsPhone(value); if (value) { setIsEmail(false); setFocus('Contact'); setEmailSuccessful(false) } }} label="Телефон" />
-                                <AppCheckbox id={`check-email${Date.now()}`} successful={emailSuccessful} fail={failCheck} checked={isEmail} onChange={(value) => { setIsEmail(value); if (value) { setIsPhone(false); setFocus('Contact'); setEmailSuccessful(false) } }} label="Email" />
-                            </div>
-                        </div>
-
-                        <AppTextarea
-                            className="!bg-[#2a2a2a] focus:!bg-[#21262F]"
-                            title={'Комментарий'}
-                            inputName="comment"
-                        />
-
-                        <div ref={setWrapperRef} className="tariff-wrap relative">
-                            <button
-                                type="submit"
-                                ref={setButtonRef}
-                                className=" btnIconAn group  tariff an-border s:mt-[1px] mt-[15px] bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[transparent]   rounded-[4px]"
-                                style={{
-                                    verticalAlign: 'middle'
-                                }}
-                            >
-
-                                <div className="overflow-hidden p-[9px] px-[20px] relative flex items-center gap-[20px] justify-between">
-                                    <div className="sendIconLeft transition-all ease-in">
-                                        <Image
-                                            alt="message"
-                                            src={MessageImg}
-                                            width="0"
-                                            height="0"
-                                            sizes="100vw"
-                                            className="h-[30px] w-[30px] rotate-[45deg] translate-x-[-5px]"
-                                        />
-                                    </div>
-                                    <span
-                                        className="transition-all ease-in"
-                                    >{btnText}</span>
-                                    <div className="sendIconRight transition-all ease-in">
-                                        <Image
-                                            alt="message"
-                                            src={MessageImg}
-                                            width="0"
-                                            height="0"
-                                            sizes="100vw"
-                                            className="h-[30px] w-[30px] rotate-[45deg] translate-x-[-5px]"
-                                        />
-                                    </div>
+                                        }
+                                        setEmailError(false)
+                                    }}
+                                    className="w-full relative z-[1]">
+                                    <AppInput
+                                        className="!bg-[#2a2a2a] focus:!bg-[#21262F]"
+                                        title={isPhone ? 'Телефон' : isEmail ? 'Email' : ''}
+                                        inputName="Contact"
+                                        mask={isPhone ? "phone" : ''}
+                                        type={isPhone ? "phone" : 'text'}
+                                        fail={emailError}
+                                        required={true}
+                                        message={false}
+                                        disable={!isPhone && !isEmail}
+                                        onBlur={() => { validContact(contactValue) }}
+                                    />
                                 </div>
-                            </button>
+                                <div id={`bounce-checkbox${ids}`} className="pl-[10px] flex items-center gap-[30px]"
+                                    onClick={() => { clearErrors('Contact') }}
+                                >
+                                    <AppCheckbox id={`check-phone${ids}`} successful={emailSuccessful} fail={failCheck} checked={isPhone} onChange={(value) => { setIsPhone(value); if (value) { setIsEmail(false); setFocus('Contact'); setEmailSuccessful(false) } }} label="Телефон" />
+                                    <AppCheckbox id={`check-email${ids}`} successful={emailSuccessful} fail={failCheck} checked={isEmail} onChange={(value) => { setIsEmail(value); if (value) { setIsPhone(false); setFocus('Contact'); setEmailSuccessful(false) } }} label="Email" />
+                                </div>
+                            </div>
+
+                            <AppTextarea
+                                className="!bg-[#2a2a2a] focus:!bg-[#21262F]"
+                                title={'Комментарий'}
+                                inputName="comment"
+                            />
+
+                            <div ref={setWrapperRef} className="tariff-wrap relative">
+                                <button
+                                    type="submit"
+                                    ref={setButtonRef}
+                                    className=" btnIconAn group  tariff an-border s:mt-[1px] mt-[15px] bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[transparent]   rounded-[4px]"
+                                    style={{
+                                        verticalAlign: 'middle'
+                                    }}
+                                >
+
+                                    <div className="overflow-hidden p-[9px] px-[20px] relative flex items-center gap-[20px] justify-between">
+                                        <div className="sendIconLeft transition-all ease-in">
+                                            <Image
+                                                alt="message"
+                                                src={MessageImg}
+                                                width="0"
+                                                height="0"
+                                                sizes="100vw"
+                                                className="h-[30px] w-[30px] rotate-[45deg] translate-x-[-5px]"
+                                            />
+                                        </div>
+                                        <span
+                                            className="transition-all ease-in"
+                                        >{btnText}</span>
+                                        <div className="sendIconRight transition-all ease-in">
+                                            <Image
+                                                alt="message"
+                                                src={MessageImg}
+                                                width="0"
+                                                height="0"
+                                                sizes="100vw"
+                                                className="h-[30px] w-[30px] rotate-[45deg] translate-x-[-5px]"
+                                            />
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+
+
+                            <span className="mt-[1px] text-[#A4A4A4] text-[10px] s:text-[13px]">
+                                Согласен на обработку моих персональных данных{' '}
+                                <span className="whitespace-nowrap">в соответствии</span> с{' '}
+                                <Link href="/soglashenie/polzovatelskoe-soglashenie/" target="_blank">
+                                    Пользовательским соглашением
+                                </Link>
+                            </span>
                         </div>
+                    )
+                    }
+                </AppValidationObserver >
+            </div>
 
-
-                        <span className="mt-[1px] text-[#A4A4A4] text-[10px] s:text-[13px]">
-                            Согласен на обработку моих персональных данных{' '}
-                            <span className="whitespace-nowrap">в соответствии</span> с{' '}
-                            <Link href="/soglashenie/polzovatelskoe-soglashenie/" target="_blank">
-                                Пользовательским соглашением
-                            </Link>
-                        </span>
-                    </div>
-                )
-                }
-            </AppValidationObserver >
         </motion.div>
     );
 };
