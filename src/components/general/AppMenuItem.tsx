@@ -74,17 +74,19 @@ const AppMenuItem: React.FC<{ item: MenuItem; isActive: boolean, onClick?: (e: R
         };
 
         return (
-            <Link
-                href={item.href}
-                className={getClassName()}
-                data-text={item.label}
-                onMouseMove={handleMouseMove}
-                onClick={handleClick}
-                onMouseUp={handleMouseUp}
-                onMouseLeave={handleMouseLeave}>
-                <span>{item.label}</span>
-                <div className={styles.highlight} />
-            </Link>
+            <div className="overflow-hidden">
+                <Link
+                    href={item.href}
+                    className={getClassName()}
+                    data-text={item.label}
+                    onMouseMove={handleMouseMove}
+                    onClick={handleClick}
+                    onMouseUp={handleMouseUp}
+                    onMouseLeave={handleMouseLeave}>
+                    <span>{item.label}</span>
+                    <div className={styles.highlight} />
+                </Link>
+            </div>
         );
     }
 );
