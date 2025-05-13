@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import FlyingPlane from './elements/FlyingPlane';
 import { useAnimation, motion } from 'framer-motion';
 
-const FlightSuccess = ({ bg, close, small = false, text }: { bg?: string; close: () => void; small?: boolean; text: string }) => {
+const FlightSuccess = ({  close, small = false, text }: {  close: () => void; small?: boolean; text: string }) => {
 
     const [time, setTime] = React.useState(10);
 
@@ -26,9 +26,7 @@ const FlightSuccess = ({ bg, close, small = false, text }: { bg?: string; close:
     return (
 
 
-        <div className="active  pt-[100px]"
-            style={{ background: bg }}
-        >
+        <div className="active  pt-[100px]">
 
             <button
                 onClick={() => { close() }}

@@ -169,7 +169,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active }: { btnText: s
         animate={controls}
         initial={{ x: 0 }}
          className={`relative main-form ${bg && 'bg-[#00000050] border-main'} py-[27px] pb-[30px] px-[48px] max-w-[420px] flex flex-col gap-[12px] rounded-[6px]`}>
-            {successMessageVisible && <FlightSuccess text="Спасибо за заявку" bg={'#2d2f31'} close={() => { setSuccessMessageVisible(false) }} />}
+            {successMessageVisible && <FlightSuccess text="Спасибо за заявку" close={() => { setSuccessMessageVisible(false) }} />}
             <span className='leading-[1] text-[#FFF] text-[32px] text-center tracking-[-0.03em]'>Оформить заявку</span>
             <AppValidationObserver methods={methods} onSubmit={onSubmit}>
                 {({ register, errors }) => (
@@ -224,6 +224,9 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active }: { btnText: s
                             <button
                                 type="submit"
                                 ref={setButtonRef}
+                                onClick={() => {
+                                    successVisible()
+                                }}
                                 className=" btnIconAn group  tariff an-border s:mt-[1px] mt-[15px] bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[transparent]   rounded-[4px]"
                                 style={{
                                     verticalAlign: 'middle'
