@@ -55,7 +55,7 @@ const FlightSuccess = ({ bg, close, small = false, text }: { bg?: string; close:
                     <FlyingPlane />
                 </div>
             </div>
-            <p className={`text-[#A4A4A4] font-light text-[44px] rubik absolute ${small ? 'top-[30px] left-[30px]' : 'bottom-[30px] left-[50%] translate-x-[-50%]'}`}>{time}</p>
+            <p className={`text-[#A4A4A4] font-light text-[44px] rubik absolute bottom-[30px] left-[50%] translate-x-[-50%]`}>{time}</p>
         </div>
 
     );

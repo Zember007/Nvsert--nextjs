@@ -88,7 +88,12 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
                                     defaultModalName === 'orderForm' &&
                                     <>
 
-                                        <AppMainForm bg={false} btnText='Оформить заявку' />
+                                        <AppMainForm
+                                            BounceWrapper={() => {
+                                                animation()
+                                            }}
+                                            active={defaultModalActive}
+                                            bg={false} btnText='Оформить заявку' />
 
                                     </>
                                 }

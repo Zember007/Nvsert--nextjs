@@ -14,9 +14,10 @@ import { useEffect, useRef, useState } from "react";
 import AppCheckbox from './elements/AppCheckbox';
 import { BounceEffect } from "@/hook/useBounce";
 import FlightSuccess from "../modals/FlightSuccess";
+import { useAnimation, motion } from "framer-motion";
 
 
-const AppMainForm = ({ btnText, bg = true }: { btnText: string ; bg?: boolean}) => {
+const AppMainForm = ({ btnText, bg = true, BounceWrapper, active }: { btnText: string; bg?: boolean; BounceWrapper?: () => void; active?: boolean }) => {
     const { setButtonRef, setWrapperRef } = useButton();
 
     const onSubmit = async (e: any) => {
@@ -60,20 +61,12 @@ const AppMainForm = ({ btnText, bg = true }: { btnText: string ; bg?: boolean}) 
     };
 
     const successVisible = () => {
-        const myElement = document.getElementById('form-main')
-        if (myElement) {
-            BounceEffect(myElement, {
-                startPosition: "0",
-                endPosition: `${30}px`,
-                duration: 300,
-                easing: "linear",
-                direction: 'vertical'
-            });
+
+        BounceWrapper && BounceWrapper()
+        animation()
+        setSuccessMessageVisible(true)
 
 
-            setSuccessMessageVisible(true)
-
-        }
     }
 
     const validContact = (value: string) => {
@@ -146,8 +139,36 @@ const AppMainForm = ({ btnText, bg = true }: { btnText: string ; bg?: boolean}) 
         setFailCheck(false)
     }, [isPhone, isEmail])
 
+    const controls = useAnimation();
+    const defaultSettings = {
+        duration: 0.6,
+        ease: [0.34, 1.56, 0.64, 1],
+        times: [0, 0.2, 0.5, 0.8, 1],
+        openY: [-30, 0, -10, 0, 0],
+    };
+
+    const animation = () => {
+        controls.start({
+            y: defaultSettings.openY,
+            transition: {
+                duration: defaultSettings.duration,
+                ease: defaultSettings.ease,
+                delay: 0.2,
+                times: defaultSettings.times
+            }
+        });
+    }
+
+    useEffect(() => {
+        if (!active) return
+        animation()
+    }, [active])
+
     return (
-        <div id="form-main" className={` main-form ${bg && 'bg-[#00000050] border-main'} py-[27px] pb-[30px] px-[48px] max-w-[420px] flex flex-col gap-[12px] rounded-[6px]`}>
+        <motion.div
+        animate={controls}
+        initial={{ x: 0 }}
+         className={`relative main-form ${bg && 'bg-[#00000050] border-main'} py-[27px] pb-[30px] px-[48px] max-w-[420px] flex flex-col gap-[12px] rounded-[6px]`}>
             {successMessageVisible && <FlightSuccess text="Спасибо за заявку" bg={'#2d2f31'} close={() => { setSuccessMessageVisible(false) }} />}
             <span className='leading-[1] text-[#FFF] text-[32px] text-center tracking-[-0.03em]'>Оформить заявку</span>
             <AppValidationObserver methods={methods} onSubmit={onSubmit}>
@@ -206,7 +227,7 @@ const AppMainForm = ({ btnText, bg = true }: { btnText: string ; bg?: boolean}) 
                                 className=" btnIconAn group  tariff an-border s:mt-[1px] mt-[15px] bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[transparent]   rounded-[4px]"
                                 style={{
                                     verticalAlign: 'middle'
-                                }}                              
+                                }}
                             >
 
                                 <div className="overflow-hidden p-[9px] px-[20px] relative flex items-center gap-[20px] justify-between">
@@ -249,7 +270,7 @@ const AppMainForm = ({ btnText, bg = true }: { btnText: string ; bg?: boolean}) 
                 )
                 }
             </AppValidationObserver >
-        </div>
+        </motion.div>
     );
 };
 
