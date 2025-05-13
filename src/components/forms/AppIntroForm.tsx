@@ -111,6 +111,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
             </div>
             <motion.div
                 animate={controls}
+                className="!static"
             >
                 {successMessageVisible && <FlightSuccess text="Спасибо" close={() => { setSuccessMessageVisible(false) }} />}
 
