@@ -7,8 +7,8 @@ interface MenuItem {
     href: string;
 }
 
-const AppMenuItem: React.FC<{ item: MenuItem; isActive: boolean, onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void }> = React.memo(
-    ({ item, isActive, onClick }) => {
+const AppMenuItem: React.FC<{ item: MenuItem; isActive: boolean, onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void, className?: string }> = React.memo(
+    ({ item, isActive, onClick, className }) => {
         const [isFastClick, setIsFastClick] = React.useState(false);
 
         const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -67,7 +67,7 @@ const AppMenuItem: React.FC<{ item: MenuItem; isActive: boolean, onClick?: (e: R
         };
 
         const getClassName = () => {
-            const classes = [styles["menu-item"]];
+            const classes = [styles["menu-item"], className];
             if (isActive) classes.push(styles["menu-item-active"]);
             if (isFastClick) classes.push(styles["fast-click"]);
             return classes.join(" ");

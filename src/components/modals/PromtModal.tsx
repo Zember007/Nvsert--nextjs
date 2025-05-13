@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 
-const PromtModal = ({ children, content, timer }: { children: ReactNode, content: ReactNode, timer?: number }) => {
+const PromtModal = ({className, children, content, timer }: { className?:string, children: ReactNode, content: ReactNode, timer?: number }) => {
     const [active, setActive] = useState(false)
     const [timerId, setTimerId] = useState<NodeJS.Timeout | null>(null)
 
@@ -14,7 +14,7 @@ const PromtModal = ({ children, content, timer }: { children: ReactNode, content
     }, [active])
     return (
         <div className="relative">
-            <div className={`${!active && 'opacity-0 unvisible'} duration-300 ease transition-all  absolute right-0 top-[-8px] translate-y-[-100%] bg-[#00000080] backdrop-blur-[20px] rounded-[4px] p-[15px]`}>
+            <div className={`${!active && 'opacity-0 unvisible'} ${className} duration-300 ease transition-all  absolute right-0 top-[-8px] translate-y-[-100%] bg-[#00000080] backdrop-blur-[20px] rounded-[4px] p-[15px]`}>
                 {content}
             </div>
             <div
