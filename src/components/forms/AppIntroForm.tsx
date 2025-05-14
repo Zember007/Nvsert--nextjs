@@ -140,7 +140,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
                             <button
                                 type="submit"
                                 ref={setButtonRef}
-                                className="no-drag group tariff  bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[10px] justify-center p-[9px] rounded-[4px]"
+                                className="no-drag group tariff  bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold an-border flex items-center gap-[10px] justify-center p-[9px] rounded-[4px]"
                                 style={{
                                     verticalAlign: 'middle'
                                 }}
