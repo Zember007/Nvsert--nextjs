@@ -225,8 +225,8 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
                                 <div id={`bounce-checkbox${ids}`} className="pl-[10px] flex items-center gap-[30px]"
                                     onClick={() => { clearErrors('Contact') }}
                                 >
-                                    <AppCheckbox classLabel='text-[#FFF]' id={`check-phone${ids}`} successful={emailSuccessful} fail={failCheck} checked={isPhone} onChange={(value) => { setIsPhone(value); if (value) { setIsEmail(false); setFocus('Contact'); setEmailSuccessful(false) } }} label="Телефон" />
-                                    <AppCheckbox classLabel='text-[#FFF]' id={`check-email${ids}`} successful={emailSuccessful} fail={failCheck} checked={isEmail} onChange={(value) => { setIsEmail(value); if (value) { setIsPhone(false); setFocus('Contact'); setEmailSuccessful(false) } }} label="Email" />
+                                    <AppCheckbox whiteBox={!bg} id={`check-phone${ids}`} successful={emailSuccessful} fail={failCheck} checked={isPhone} onChange={(value) => { setIsPhone(value); if (value) { setIsEmail(false); setFocus('Contact'); setEmailSuccessful(false) } }} label="Телефон" />
+                                    <AppCheckbox whiteBox={!bg} id={`check-email${ids}`} successful={emailSuccessful} fail={failCheck} checked={isEmail} onChange={(value) => { setIsEmail(value); if (value) { setIsPhone(false); setFocus('Contact'); setEmailSuccessful(false) } }} label="Email" />
                                 </div>
                             </div>
 

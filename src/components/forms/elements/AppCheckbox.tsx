@@ -7,7 +7,7 @@ interface CustomCheckboxProps {
     fail?: boolean;
     successful?: boolean;
     id: string;
-    classLabel: string;
+    whiteBox?: boolean;
 }
 
 const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
@@ -17,7 +17,7 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
     fail,
     successful,
     id,
-    classLabel
+    whiteBox
 }) => {
     // Генерируем уникальный id один раз при создании компонента
 
@@ -49,8 +49,8 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
                     before:absolute before:top-[-2.4px] before:left-[-2.4px] before:right-[-2.4px] before:bottom-[-2.4px]  before:z-[-1]
                     relative z-[0]
                    
-                    group active:scale-[0.9] transition-all duration-300 active:!border-[#5F5F5F]
-                    w-[20px] h-[20px] flex items-center justify-center border-[1.2px] border-[#5F5F5F] rounded-[1.8px]
+                    group active:scale-[0.9] transition-all duration-300 active:!${whiteBox ? 'border-[#FFF]' : 'border-[#5F5F5F]'}
+                    w-[20px] h-[20px] flex items-center justify-center border-[1.2px] ${whiteBox ? 'border-[#FFF]' : 'border-[#5F5F5F]'} rounded-[1.8px]
                   ${successful ? 'peer-checked:border-[#34C759]' : 'peer-checked:bg-[#21262F]'}
                   peer-checked:*:block
                   cursor-pointer ${fail && '!border-[#FF3030]'}`}
@@ -62,7 +62,7 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
                     </svg>
                 </span>
             </label>
-            <span className={` transition-all duration-300 peer-checked:text-[#FFF] ${classLabel || 'text-[#CCCCCC80]'} ${fail && 'text-[#FF3030]'}`}>{label}</span>
+            <span className={` transition-all duration-300 peer-checked:text-[#FFF] ${whiteBox ? 'text-[#FFF]' : 'text-[#CCCCCC80]'} ${fail && '!text-[#FF3030]'}`}>{label}</span>
         </div>
     );
 };

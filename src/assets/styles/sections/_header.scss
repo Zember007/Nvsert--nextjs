@@ -7,7 +7,7 @@
 	background: #34446D33;
 	backdrop-filter: blur(15px);
 	box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.251);
-	z-index: 100000;
+	z-index: 50;
 	
 
 	svg,
@@ -21,7 +21,7 @@
 		--color-item-menu-hover: #000;
 		--menu-item-border-hover: transparent;
 		--menu-item-border: #FFF;
-		--color-item-menu: rgba(0, 0, 0, 0.6);
+		--color-item-menu: rgba(0, 0, 0, 1);
 		--menu-item-opacity-light: 0.5;
 
 		.header-phone__link {

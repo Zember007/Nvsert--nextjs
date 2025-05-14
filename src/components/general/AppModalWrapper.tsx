@@ -52,11 +52,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
     }, [defaultModalActive])
     return (
         <>
-            <div className={`modal__wrapper select-none ${defaultModalActive && 'active'}`}
-                onClick={() => {
-                    setDefaultModalActive(false)
-                }}
-            >
+            <div className={`modal__wrapper select-none ${defaultModalActive && 'active'}`}>
                 <Draggable bounds="parent" handle=".modal__content" defaultPosition={{ x: 0, y: 0 }}  nodeRef={nodeRef as React.RefObject<HTMLDivElement>}>
                     <div ref={nodeRef}>
                         <motion.div
@@ -76,9 +72,6 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
                                     <>
 
                                         <AppIntroForm
-                                            BounceWrapper={() => {
-                                                animation()
-                                            }}
                                             close={() => { setDefaultModalActive(false) }}
                                         />
 
@@ -90,11 +83,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
                                     <>
 
                                         <AppMainForm
-                                            BounceWrapper={() => {
-                                                animation()
-                                            }}
                                             close={() => { setDefaultModalActive(false) }}
-
                                             active={defaultModalActive}
                                             bg={false} btnText='Оформить заявку' />
 

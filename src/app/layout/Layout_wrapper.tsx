@@ -188,6 +188,11 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
             <body className={classBody}>
                 <SimpleBarContext.Provider value={{ simpleBar: simpleBarRef.current }}>
                     <SimpleBar className="max-h-[100vh]" ref={simpleBarRef} id='scrollSimple'>
+                        <AppModalWrapper
+                            setDefaultModalActive={setDefaultModalActive}
+                            defaultModalActive={defaultModalActive}
+                            defaultModalName={defaultModalName}
+                        />
                         <main className={`${transparent && 'transparent-header'} ${calcPageBodyClass && 'cost-calc-page'}`}>
                             <div className="content">
                                 <AppHeader />
@@ -195,11 +200,6 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
                             </div>
                             <AppFooter />
                         </main>
-                        <AppModalWrapper
-                            setDefaultModalActive={setDefaultModalActive}
-                            defaultModalActive={defaultModalActive}
-                            defaultModalName={defaultModalName}
-                        />
                     </SimpleBar>
                 </SimpleBarContext.Provider>
 

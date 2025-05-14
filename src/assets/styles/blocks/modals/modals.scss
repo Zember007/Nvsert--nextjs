@@ -73,15 +73,15 @@
     z-index: 100;
     display: flex;
     justify-content: center;
-    align-items: center;    
+    align-items: center;
     opacity: 0;
     visibility: hidden;
-    
+    pointer-events: none;
     &.active {
 
       opacity: 1;
       visibility: visible;
-    transition: all 0s 0.2s;
+      transition: all 0s 0.2s;
 
     }
   }
@@ -89,8 +89,7 @@
   &__box {
     max-width: 400px;
     position: relative;
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    pointer-events: all;
   }
 
   &__content {
@@ -100,10 +99,11 @@
     display: flex;
     flex-direction: column;
     border-radius: 6px;
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     max-height: 90vh;
 
-    @media (max-width: $media-m) {
-    }
+    @media (max-width: $media-m) {}
 
     @media (max-width: $media-s) {
       border-radius: 0;
