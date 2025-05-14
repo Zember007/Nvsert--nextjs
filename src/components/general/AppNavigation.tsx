@@ -34,7 +34,7 @@ const AppNavigation = ({active}:{active:boolean}) => {
     }, [active]);
     return (
         <>
-            <div className="grid grid-cols-6 w-full">
+            <div className="grid grid-cols-6 w-full gap-[28px]">
             {[...Array(6)].map((_, i) => (
                 <Link key={i} href={'#'} className="flex gap-[10px] group transition-all rounded-[4px] items-center border border-solid border-[transparent] hover:border-[#93969D]">
                     <motion.div

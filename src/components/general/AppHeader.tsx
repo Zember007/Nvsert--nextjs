@@ -177,7 +177,7 @@ const AppHeader = () => {
       <div className={`services-menu menu-headers js-services-menu relative ${servicesMenuActive && 'active'}`}>
 
         <div className="services-menu__wrapper select-none">
-          <div className="grid grid-cols-6 h-[60px] w-full">
+          <div className="grid grid-cols-6 h-[60px] w-full gap-[28px]">
             <div className="flex items-center">
               <p className="text-[20px] text-[#FFF]">Сертификация ГОСТ Р</p>
             </div>
@@ -200,7 +200,7 @@ const AppHeader = () => {
         </div>
 
       </div>
-      <div className={`services-menu pt-[20px] h-[50vw] js-services-menu relative ${servicesMenuActive && 'active'}`}>
+      <div className={`services-menu pt-[20px] !h-[50vh] js-services-menu relative ${servicesMenuActive && 'active'}`}>
 
         <div className="services-menu__wrapper select-none">
           <AppNavigation active={servicesMenuActive} />
