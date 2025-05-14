@@ -446,9 +446,7 @@
 	transform: translateY(-100%);
 	transition: all 0.1s ease;
 
-	&:not(.menu-headers) {
-		transition-delay: 0.1s;
-	}
+	
 
 	&.menu-headers {
 		z-index: 21;
@@ -460,12 +458,20 @@
 		transform: translateY(-150%);
 	}
 
+	&.menu-headers {
+		transition-delay: 0.1s;
+	}
+
 	&.active {
 		transform: translateY(0);
 		top: 120px;
 
 		&.menu-headers {
 			top: 60px;
+			transition-delay: 0s;
+		}
+		&:not(.menu-headers) {
+			transition-delay: 0.1s;
 		}
 	}
 
