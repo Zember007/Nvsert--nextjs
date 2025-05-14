@@ -13,14 +13,13 @@
   text-align: center;
   transition: transform 0.2s ease, color 0.15s ease, stroke 0.15s ease;
   border-radius: 4px;
-  padding: 10px 15px;
+  padding: 12px 17px;
   height: 36px;
   will-change: transform, color, border-color, opacity;
   background: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  border: 1px solid transparent;
 }
 
 .menu-item-active span {
@@ -152,7 +151,6 @@
   will-change: transform, color, border-color;
   transition: transform 0.2s ease, border-color 0.3s ease;
   color: var(--color-item-menu-active);
-  border-color: var(--border-item-menu-active);
   background: none;
   box-shadow: none;
 }
@@ -166,7 +164,6 @@
   will-change: transform, color, border-color;
   transition: transform 0.2s ease, color 0.15s ease, border-color 0.3s ease;
   color: var(--color-item-menu-active) !important;
-  border-color: var(--border-item-menu-active);
   background: none;
   box-shadow: none;
 }
@@ -186,7 +183,6 @@
 
 .menu-item-active:active::after,
 .menu-item-active.fast-click::after {
-  border-color: var(--border-item-menu-active);
   transition: border-color 0.3s ease;
   opacity: 1;
 }
