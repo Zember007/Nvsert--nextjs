@@ -68,19 +68,12 @@
 .menu-item::before {
   content: "";
   position: absolute;
-  top: -1px;
-  left: -1px;
-  z-index: 10;
-  right: -1px;
-  bottom: -1px;
-
-  border-radius: 4px;
-  background: radial-gradient(150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-  rgba(255, 255, 255, var(--menu-item-opacity-light)),
-  transparent 60%);
-
   opacity: 0;
   pointer-events: none;
+  z-index: -1;
+  border-radius: 4px;
+  inset: 0;
+  background: radial-gradient(150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, var(--menu-item-opacity-light)), transparent 60%);
 }
 
 
