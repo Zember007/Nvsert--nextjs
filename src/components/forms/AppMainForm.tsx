@@ -185,7 +185,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
                         <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
                     </div>
                 </button>}
-            <span className={`leading-[1] text-[#FFF] text-[32px] ${bg ? 'text-center' : 'text-left'} tracking-[-0.03em] px-[8px]  ${successMessageVisible && 'opacity-0'}`}>Оформить заявку</span>
+            <span className={`leading-[1] text-[#FFF] no-drag text-[32px] ${bg ? 'text-center' : 'text-left'} tracking-[-0.03em] px-[8px]  ${successMessageVisible && 'opacity-0'}`}>Оформить заявку</span>
             <div className={`${successMessageVisible && 'opacity-0'}`}>
                 <AppValidationObserver methods={methods} onSubmit={onSubmit}>
                     {({ register, errors }) => (
