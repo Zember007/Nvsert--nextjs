@@ -143,7 +143,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
 
     const controls = useAnimation();
     const defaultSettings = {
-        duration: 0.6,
+        duration: 0.3,
         ease: [0.34, 1.56, 0.64, 1],
         times: [0, 0.2, 0.5, 0.8, 1],
         openY: [-30, 0, -10, 0, 0],
