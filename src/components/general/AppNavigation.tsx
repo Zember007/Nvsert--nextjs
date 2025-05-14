@@ -27,7 +27,8 @@ const AppNavigation = ({active}:{active:boolean}) => {
                 transition: {
                     duration: defaultSettings.duration,
                     ease: defaultSettings.ease,
-                    times: defaultSettings.times
+                    times: defaultSettings.times,
+                    delay: 0.1
                 }
             });
         }
