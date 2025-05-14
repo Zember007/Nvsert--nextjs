@@ -141,7 +141,7 @@ const AppHeader = () => {
 
           <div className="flex gap-[8px]">
             <AppMenuItem
-              className="!px-[30px] group"
+              className="!px-[35px] group"
               onClick={() => {
                 openDefaultModal('introForm')
               }}
