@@ -34,11 +34,9 @@ const AppNavigation = ({active}:{active:boolean}) => {
     }, [active]);
     return (
         <>
-            <div className="flex flex-col gap-[20px]">
-                <div className="border-0 border-b border-[#93969D] border-solid py-[20px]">
-                    <p className="text-[20px] text-[var(--color-item-menu-active)] font-bold">Сертификация ГОСТ Р</p>
-                </div>
-                <Link href={'#'} className="flex gap-[10px] group transition-all rounded-[4px] items-center border border-solid border-[transparent] hover:border-[#93969D]">
+            <div className="grid grid-cols-6 w-full">
+            {[...Array(6)].map((_, i) => (
+                <Link key={i} href={'#'} className="flex gap-[10px] group transition-all rounded-[4px] items-center border border-solid border-[transparent] hover:border-[#93969D]">
                     <motion.div
                         initial={{ y: 40, opacity: 0 }}
                         animate={controls}>
@@ -46,6 +44,7 @@ const AppNavigation = ({active}:{active:boolean}) => {
                     </motion.div>
                     <p className="transition-all group-hover:text-[var(--color-item-menu-active)] max-w-[170px] text-[var(--color-item-menu)] text-[14px] opacity-[0.6]">Декларациясоответствия ГОСТ Р</p>
                 </Link>
+            ))}
             </div>
         </>
     );

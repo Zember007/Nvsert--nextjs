@@ -13,13 +13,13 @@
   text-align: center;
   transition: transform 0.2s ease, color 0.15s ease, stroke 0.15s ease;
   border-radius: 4px;
-  padding: 12px 17px;
+  padding: 10px 15px;
   height: 36px;
   will-change: transform, color, border-color, opacity;
   background: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
+  border: 1px solid transparent;
 }
 
 .menu-item-active span {
@@ -81,6 +81,10 @@
 .menu-item:hover::after {
   opacity: 1;
 }
+.menu-item:active::after {  
+  background: #000;
+}
+
 
 .menu-item:hover::before {
   opacity: 1;
@@ -112,7 +116,7 @@
 
 .menu-item-active:after {
   opacity: 1;
-  background: var(--color-item-menu-active);
+  background: #000;
 }
 
 .menu-item-active .highlight {
@@ -146,6 +150,7 @@
   color: var(--color-item-menu-active);
   background: none;
   box-shadow: none;
+
 }
 
 

@@ -170,7 +170,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
         <motion.div
             animate={controls}
             initial={{ x: 0 }}
-            className={`relative main-form ${bg && 'bg-[#00000050] border-main'} py-[27px] pb-[30px] px-[48px] max-w-[420px] flex flex-col gap-[12px] rounded-[6px]`}>
+            className={`relative main-form ${bg && 'bg-[#00000050] border-main'} py-[27px] pb-[30px] px-[48px] max-w-[400px] flex flex-col gap-[12px] rounded-[6px]`}>
             {successMessageVisible && <FlightSuccess text="Спасибо за заявку" close={() => { setSuccessMessageVisible(false) }} />}
             {!bg &&
                 <button

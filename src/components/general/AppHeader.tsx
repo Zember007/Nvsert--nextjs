@@ -174,28 +174,37 @@ const AppHeader = () => {
 
         </div>
       </header>
-      <div className={`services-menu js-services-menu relative ${servicesMenuActive && 'active'}`}>
+      <div className={`services-menu menu-headers js-services-menu relative ${servicesMenuActive && 'active'}`}>
+
+        <div className="services-menu__wrapper select-none">
+          <div className="grid grid-cols-6 h-[60px] w-full">
+            <div className="flex items-center">
+              <p className="text-[20px] text-[#FFF]">Сертификация ГОСТ Р</p>
+            </div>
+            <div className="flex items-center">
+              <p className="text-[20px] text-[#FFF]">Таможенный союз</p>
+            </div>
+            <div className="flex items-center">
+              <p className="text-[20px] text-[#FFF]">Сертификация</p>
+            </div>
+            <div className="flex items-center">
+              <p className="text-[20px] text-[#FFF]">ИСО (СМК)</p>
+            </div>
+            <div className="flex items-center">
+              <p className="text-[20px] text-[#FFF]">Роспотребнадзор</p>
+            </div>
+            <div className="flex items-center">
+              <p className="text-[20px] text-[#FFF]">Тех. документация</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div className={`services-menu pt-[20px] h-[50vw] js-services-menu relative ${servicesMenuActive && 'active'}`}>
 
         <div className="services-menu__wrapper select-none">
           <AppNavigation active={servicesMenuActive} />
         </div>
-
-
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            handleNavMenu();
-          }}
-          className="close !top-[10px] !right-[30px]">
-          <div className="in">
-            <div className="close-button-block"></div>
-            <div className="close-button-block"></div>
-          </div>
-          <div className="out">
-            <div className="close-button-block"></div>
-            <div className="close-button-block"></div>
-          </div>
-        </button>
 
       </div>
     </>

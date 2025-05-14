@@ -8,7 +8,7 @@
 	backdrop-filter: blur(15px);
 	box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.251);
 	z-index: 50;
-	
+
 
 	svg,
 	svg path {
@@ -444,10 +444,16 @@
 	top: 0;
 	left: 0;
 	z-index: 20;
-	padding-top: 10px;
-	padding-bottom: 44px;
 	transform: translateY(-100%);
 	transition: all 0.1s ease;
+
+	&:not(.menu-headers) {
+		transition-delay: 0.1s;
+	}
+
+	&.menu-headers {
+		z-index: 21;
+	}
 
 	@media (max-width: $media-s) {
 		top: 100px;
@@ -457,7 +463,11 @@
 
 	&.active {
 		transform: translateY(0);
-		top: 60px;
+		top: 120px;
+
+		&.menu-headers {
+			top: 60px;
+		}
 	}
 
 
@@ -482,10 +492,9 @@
 
 	&__wrapper {
 		max-height: calc((var(--vh, 1vh) * 100) - 190px);
-		padding: 0 227px;
+		padding: 0 212px;
 
-		display: flex;
-		gap: 30px;
+		width: 100%;
 
 		@media (max-width: $media-l) {
 			margin-top: 32px;
