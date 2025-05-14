@@ -1,6 +1,6 @@
 import { useHeaderContext } from '@/components/contexts/HeaderContext'
 import dynamic from 'next/dynamic';
-import { Suspense, useEffect, useRef } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import AppIntroForm from '@/components/forms/AppIntroForm'
 import Draggable from 'react-draggable';
 import AppMainForm from '../forms/AppMainForm';
@@ -47,13 +47,28 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
     }
 
     useEffect(() => {
-        if (!defaultModalActive) return
-        animation()
+        if (defaultModalActive) {
+            animation()
+        } else {
+            resetDrag()
+        }
     }, [defaultModalActive])
+
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+
+    const handleDrag = (e: any, data: any) => {
+        setPosition({ x: data.x, y: data.y });
+    };
+
+    const resetDrag = () => {
+        setPosition({ x: 0, y: 0 });
+    };
     return (
         <>
             <div className={`modal__wrapper select-none ${defaultModalActive && 'active'}`}>
-                <Draggable bounds="parent" handle=".modal__content" defaultPosition={{ x: 0, y: 0 }}  nodeRef={nodeRef as React.RefObject<HTMLDivElement>}>
+                <Draggable
+                    position={position} onDrag={handleDrag}
+                    bounds="parent" handle=".modal__content" defaultPosition={{ x: 0, y: 0 }} nodeRef={nodeRef as React.RefObject<HTMLDivElement>}>
                     <div ref={nodeRef}>
                         <motion.div
                             animate={controls}
