@@ -85,10 +85,6 @@ input:auto-fill {
       }
     }
 
-    &:disabled {
-      border-color: $input-bg-disable;
-      background: $input-bg-disable;
-    }
 
     &:required {
       &~.field__title {
