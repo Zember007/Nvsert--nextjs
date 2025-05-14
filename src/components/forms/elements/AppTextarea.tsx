@@ -14,7 +14,7 @@ const AppTextarea = ({ title, inputName, required, className }: { title: string,
             }, 50)
         }, [submitCount])
     return (
-        <div className="relative">
+        <div className="relative no-drag">
             {isSubmitted && errors[inputName] && <ul className="error-list" >
                 <li className={`error-item ${visibleError && 'bounce'}`}>
                     Это поле обязательно

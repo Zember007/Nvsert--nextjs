@@ -175,7 +175,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
             {!bg &&
                 <button
                     onClick={() => { close && close() }}
-                    className={`${successMessageVisible && 'opacity-0'} close !top-[15px] !right-[15px]`}>
+                    className={`${successMessageVisible && 'opacity-0'} close no-drag !top-[15px] !right-[15px]`}>
                     <div className="in">
                         <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
                         <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
@@ -240,7 +240,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
                                 <button
                                     type="submit"
                                     ref={setButtonRef}
-                                    className=" btnIconAn group  tariff an-border s:mt-[1px] mt-[15px] bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[transparent]   rounded-[4px]"
+                                    className="no-drag btnIconAn group  tariff an-border s:mt-[1px] mt-[15px] bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[transparent]   rounded-[4px]"
                                     style={{
                                         verticalAlign: 'middle'
                                     }}

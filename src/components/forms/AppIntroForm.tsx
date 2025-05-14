@@ -96,7 +96,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
             className='flex flex-col gap-[20px] py-[30px] px-[40px] relative'>
             <button
                 onClick={() => { close && close() }}
-                className={`${successMessageVisible && 'opacity-0'} close !top-[15px] !right-[15px]`}>
+                className={`${successMessageVisible && 'opacity-0'} no-drag close !top-[15px] !right-[15px]`}>
                 <div className="in">
                     <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
                     <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
@@ -140,7 +140,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
                             <button
                                 type="submit"
                                 ref={setButtonRef}
-                                className=" group tariff  bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[10px] justify-center p-[9px] rounded-[4px]"
+                                className="no-drag group tariff  bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] flex items-center gap-[10px] justify-center p-[9px] rounded-[4px]"
                                 style={{
                                     verticalAlign: 'middle'
                                 }}

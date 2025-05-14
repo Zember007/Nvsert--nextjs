@@ -68,50 +68,52 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
             <div className={`modal__wrapper select-none ${defaultModalActive && 'active'}`}>
                 <Draggable
                     position={position} onDrag={handleDrag}
-                    bounds="parent" handle=".modal__content" defaultPosition={{ x: 0, y: 0 }} nodeRef={nodeRef as React.RefObject<HTMLDivElement>}>
+                    bounds="parent"  cancel=".no-drag" defaultPosition={{ x: 0, y: 0 }} nodeRef={nodeRef as React.RefObject<HTMLDivElement>}>
                     <div ref={nodeRef}>
                         <motion.div
                             animate={controls}
                             className={`modal__box modal ${defaultModalActive && 'active'}`} onClick={(e) => { e.stopPropagation() }}>
-                            <div id='modal-default' className=" modal__content main-form">
-                                {
-                                    defaultModalName === 'successMessage' &&
-                                    <>
-                                        <Suspense fallback={<p></p>}>
-                                            <AppSuccessMessage />
-                                        </Suspense>
-                                    </>
-                                }
-                                {
-                                    defaultModalName === 'introForm' &&
-                                    <>
+                            {defaultModalActive &&
+                                <div id='modal-default' className=" modal__content main-form">
+                                    {
+                                        defaultModalName === 'successMessage' &&
+                                        <>
+                                            <Suspense fallback={<p></p>}>
+                                                <AppSuccessMessage />
+                                            </Suspense>
+                                        </>
+                                    }
+                                    {
+                                        defaultModalName === 'introForm' &&
+                                        <>
 
-                                        <AppIntroForm
-                                            close={() => { setDefaultModalActive(false) }}
-                                        />
+                                            <AppIntroForm
+                                                close={() => { setDefaultModalActive(false) }}
+                                            />
 
-                                    </>
-                                }
+                                        </>
+                                    }
 
-                                {
-                                    defaultModalName === 'orderForm' &&
-                                    <>
+                                    {
+                                        defaultModalName === 'orderForm' &&
+                                        <>
 
-                                        <AppMainForm
-                                            close={() => { setDefaultModalActive(false) }}
-                                            active={defaultModalActive}
-                                            bg={false} btnText='Оформить заявку' />
+                                            <AppMainForm
+                                                close={() => { setDefaultModalActive(false) }}
+                                                active={defaultModalActive}
+                                                bg={false} btnText='Оформить заявку' />
 
-                                    </>
-                                }
+                                        </>
+                                    }
 
-                                {
-                                    defaultModalName === 'knowCost' &&
+                                    {
+                                        defaultModalName === 'knowCost' &&
 
-                                    <AppKnowCostForm />
+                                        <AppKnowCostForm />
 
-                                }
-                            </div>
+                                    }
+                                </div>
+                            }
                         </motion.div>
                     </div>
                 </Draggable>
