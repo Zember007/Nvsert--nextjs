@@ -191,7 +191,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
                     {({ register, errors }) => (
                         <div className="flex flex-col s:gap-[19px] gap-[5px]">
                             <AppInput
-                                className="!bg-[#2a2a2a] focus:!bg-[#21262F] placeholder-shown:!bg-[#21262F]"
+                                className="!bg-[#2a2a2a] focus:!bg-[#21262F] not-placeholder-shown:!bg-[#21262F]"
                                 title={'ФИО'}
                                 inputName="name"
                                 required={true}
@@ -210,7 +210,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
                                     }}
                                     className="w-full relative z-[1]">
                                     <AppInput
-                                        className="!bg-[#2a2a2a] focus:!bg-[#21262F] placeholder-shown:!bg-[#21262F]"
+                                        className="!bg-[#2a2a2a] focus:!bg-[#21262F] not-placeholder-shown:!bg-[#21262F]"
                                         title={isPhone ? 'Телефон' : isEmail ? 'Email' : ''}
                                         inputName="Contact"
                                         mask={isPhone ? "phone" : ''}
@@ -231,7 +231,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
                             </div>
 
                             <AppTextarea
-                                className="!bg-[#2a2a2a] focus:!bg-[#21262F] placeholder-shown:!bg-[#21262F]"
+                                className="!bg-[#2a2a2a] focus:!bg-[#21262F] not-placeholder-shown:!bg-[#21262F]"
                                 title={'Комментарий'}
                                 inputName="comment"
                             />
