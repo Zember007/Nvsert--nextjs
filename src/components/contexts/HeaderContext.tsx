@@ -8,6 +8,9 @@ interface HeaderContextType {
     setDefaultModalActive: (value: boolean) => void;
     makeDefaultHeader: () => void;
     makeTransparentHeader: () => void;
+    darkHeader: boolean;
+    setDarkHeader: (value:boolean) => void;
+
 }
 
 const HeaderContext = createContext<HeaderContextType | undefined>(undefined);
@@ -21,6 +24,7 @@ export function useHeaderContext() {
 }
 
 export function HeaderContextProvider({ children }: { children: ReactNode }) {
+    const [darkHeader, setDarkHeader] = useState(false);
     const [transparent, setTransparent] = useState(false);
     const [defaultModalActive, setDefaultModalActive] = useState(false);
     const [defaultModalName, setDefaultModalName] = useState('');
@@ -46,6 +50,8 @@ export function HeaderContextProvider({ children }: { children: ReactNode }) {
         setDefaultModalActive,
         makeDefaultHeader,
         makeTransparentHeader,
+        darkHeader,
+        setDarkHeader
     };
 
     return (

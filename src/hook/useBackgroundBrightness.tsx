@@ -1,3 +1,4 @@
+import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import { usePathname } from 'next/navigation';
 import { useEffect, RefObject } from 'react';
 
@@ -9,6 +10,8 @@ interface UseBackgroundBrightnessProps {
 const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightnessProps) => {
 
   const pathname = usePathname()
+
+  const {setDarkHeader} = useHeaderContext()
 
   const updateTextColor = () => {
     const element = headerRef.current;
@@ -153,6 +156,9 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
       element.classList.toggle('black', true); // Запасной: светлый фон
       document.querySelector('.services-menu')?.classList.toggle('black', true)
     }
+    
+    setDarkHeader(element.classList.contains('black'))
+
 
     // Логирование для отладки   
   };
