@@ -95,7 +95,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
             initial={{ x: 0 }}
             className='flex flex-col gap-[20px] pb-[33px] pt-[38px] px-[40px] relative'>
             
-            <div className={`${successMessageVisible && 'opacity-0'} flex flex-col gap-[40px]`}>
+            <div className={`${successMessageVisible && 'opacity-0'} flex flex-col gap-[44px]`}>
                 <div className="h-[23px] no-drag">
                     <span className={`pl-[10px] leading-[1] text-[#FFF] text-[32px] tracking-[-0.03em]`}>Заказать звонок</span>
                 </div>
@@ -129,11 +129,11 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
 
 
 
-                        <div ref={setWrapperRef} className="tariff-wrap relative">
+                        <div ref={setWrapperRef} className="tariff-wrap relative mt-[24px]">
                             <button
                                 type="submit"
                                 ref={setButtonRef}
-                                className="no-drag btnIconAn group  tariff an-border s:mt-[1px] mt-[15px] bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold   rounded-[4px]"
+                                className="no-drag btnIconAn group  tariff an-border bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold   rounded-[4px]"
                                 style={{
                                     verticalAlign: 'middle'
                                 }}
@@ -154,7 +154,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
                         </div>
 
 
-                        <span className="mt-[1px] text-[#A4A4A4] text-[10px] s:text-[13px]">
+                        <span className="text-[#A4A4A4] text-[10px] s:text-[13px]">
                             Согласен на обработку моих персональных данных{' '}
                             <span className="whitespace-nowrap">в соответствии</span> с{' '}
                             <Link href="/soglashenie/polzovatelskoe-soglashenie/" target="_blank">
