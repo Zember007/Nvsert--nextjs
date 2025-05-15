@@ -2,10 +2,12 @@
 import Image from "next/image";
 import DocImg from '@/assets/images/main-gallery/01.webp'
 import Link from "next/link";
-import { useAnimation, motion } from "framer-motion";
+import { useAnimation, motion, AnimationControls } from "framer-motion";
 import { useEffect } from "react";
+import { gostR, iso, rospotrebnadzor, sertifikatsiya, tamozhennySoyuz, tekhDokumentatsiya } from './utils'
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
-const AppNavigation = ({active}:{active:boolean}) => {
+const AppNavigation = ({ active }: { active: boolean }) => {
     const controls = useAnimation();
 
     const defaultSettings = {
@@ -36,19 +38,61 @@ const AppNavigation = ({active}:{active:boolean}) => {
     return (
         <>
             <div className="grid grid-cols-6 w-full gap-[28px]">
-            {[...Array(6)].map((_, i) => (
-                <Link key={i} href={'#'} className="flex gap-[10px] group transition-all rounded-[4px] items-center border border-solid border-[transparent] hover:border-[#93969D]">
-                    <motion.div
-                        initial={{ y: 40, opacity: 0 }}
-                        animate={controls}>
-                        <Image src={DocImg} width={43} height={60} alt="document" className="rounded-[3px]" />
-                    </motion.div>
-                    <p className="transition-all group-hover:text-[var(--color-item-menu-active)] max-w-[170px] text-[var(--color-item-menu)] text-[14px] opacity-[0.6]">Декларациясоответствия ГОСТ Р</p>
-                </Link>
-            ))}
+
+                <div className="flex flex-col gap-[20px]">
+                    {gostR.map((item, i) => (
+                        <WrapperItem key={i} {...item} controls={controls}/>
+                    ))}
+                </div>
+
+                <div className="flex flex-col gap-[20px]">
+                    {tamozhennySoyuz.map((item, i) => (
+                        <WrapperItem key={i} {...item} controls={controls}/>
+                    ))}
+                </div>
+
+                <div className="flex flex-col gap-[20px]">
+                    {sertifikatsiya.map((item, i) => (
+                        <WrapperItem key={i} {...item} controls={controls}/>
+                    ))}
+                </div>
+
+                <div className="flex flex-col gap-[20px]">
+                    {iso.map((item, i) => (
+                        <WrapperItem key={i} {...item} controls={controls}/>
+                    ))}
+                </div>
+
+                <div className="flex flex-col gap-[20px]">
+                    {rospotrebnadzor.map((item, i) => (
+                        <WrapperItem key={i} {...item} controls={controls}/>
+                    ))}
+                </div>
+
+                <div className="flex flex-col gap-[20px]">
+                    {tekhDokumentatsiya.map((item, i) => (
+                        <WrapperItem key={i} {...item} controls={controls}/>
+                    ))}
+                </div>
+
             </div>
         </>
     );
 };
+
+const WrapperItem = ({ img, title, controls }: { img: string | StaticImport, title: string, controls: AnimationControls }) => {
+    return (
+        <>
+            <Link href={'#'} className="flex gap-[10px] group rounded-[4px] items-center border border-solid border-[transparent] hover:border-[#93969D]">
+                <motion.div
+                    initial={{ y: 40, opacity: 0 }}
+                    animate={controls}>
+                    <Image src={img} width={43} height={60} alt="document" className="rounded-[3px]" />
+                </motion.div>
+                <p className="transition-all group-hover:text-[var(--color-item-menu-active)] max-w-[170px] text-[var(--color-item-menu)] text-[14px] opacity-[0.6]">{title}</p>
+            </Link>
+        </>
+    )
+}
 
 export default AppNavigation;
