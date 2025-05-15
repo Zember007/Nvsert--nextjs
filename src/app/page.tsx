@@ -29,12 +29,12 @@ export default function Home() {
 
   return (
     <div className="main text-[#000] overflow-hidden select-none ">
-      <AppMainIntro />
+      {/* <AppMainIntro />
       <AppMainDocuments />
       <DynamicAppMainSkills />
       <DynamicAppMainSlider />
       <DynamicAppMainSafeguards />
-      <DynamicAppMainFeedback />
+      <DynamicAppMainFeedback /> */}
       <AppMainQuestions />
     </div>
   );

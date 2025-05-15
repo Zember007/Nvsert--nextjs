@@ -37,20 +37,38 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
 
                     <div
                         className="tariff-wrap w-[247px] " ref={setWrapperRef}>
-                        <button                    
+                        <button
                             ref={setButtonRef} className='btnIconAn  border-[#34446D] border border-solid tariff text-[20px] transition-all duration-300 font-bold tracking-normal  gap-[6px]  text-[#34446D] hover:text-[#FFF] rounded-[4px]  group hover:bg-[#34446D]  leading-[1]'>
                             <div className="justify-between m:flex items-center px-[16px] py-[9px] relative overflow-hidden">
-                                <div className="sendIconLeft transition-all ease-in">
-                                    <svg className='group-hover:*:fill-[#FFF] rotate-[45deg] *:transition-all *:duration-300' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M29.0627 0.9375L0.930664 12.1875L11.426 16.9336L26.2502 3.75L13.0666 18.5742L17.8127 29.0625L29.0627 0.9375Z" fill="#34446D" />
+                                <div className="sendIconLeft transition-all ease-in">                  
+                                    <svg className='  group-hover:*:*:stroke-[#34446D] *:transition-all *:duration-300' width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect className='group-hover:fill-[#FFF] transition-all duration-300' x="1" y="1" width="24" height="24" rx="2" fill="#34446D" />
+                                        <g clip-path="url(#clip0_3340_1351)">
+                                            <path d="M5.81677 13H20.1832" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M16.0785 8.8953L20.1832 13L16.0785 17.1047" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_3340_1351">
+                                                <rect width="17.4147" height="17.4147" fill="white" transform="translate(0.685913 13) rotate(-45)" />
+                                            </clipPath>
+                                        </defs>
                                     </svg>
                                 </div>
                                 <span
                                     className="transition-all ease-in"
                                 >Подробнее</span>
                                 <div className="sendIconRight transition-all ease-in">
-                                    <svg className='group-hover:*:fill-[#FFF] rotate-[45deg] *:transition-all *:duration-300' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M29.0627 0.9375L0.930664 12.1875L11.426 16.9336L26.2502 3.75L13.0666 18.5742L17.8127 29.0625L29.0627 0.9375Z" fill="#34446D" />
+                                <svg className='  group-hover:*:*:stroke-[#34446D] *:transition-all *:duration-300' width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect className='group-hover:fill-[#FFF] transition-all duration-300' x="1" y="1" width="24" height="24" rx="2" fill="#34446D" />
+                                        <g clip-path="url(#clip0_3340_1351)">
+                                            <path d="M5.81677 13H20.1832" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M16.0785 8.8953L20.1832 13L16.0785 17.1047" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_3340_1351">
+                                                <rect width="17.4147" height="17.4147" fill="white" transform="translate(0.685913 13) rotate(-45)" />
+                                            </clipPath>
+                                        </defs>
                                     </svg>
                                 </div>
                             </div>
