@@ -30,7 +30,7 @@ const FlightSuccess = ({ close, small = false, text, closeIcon = true }: { close
 
             {closeIcon && <button
                 onClick={() => { close() }}
-                className="close !top-[30px] !right-[30px]">
+                className="close !top-[25px] !right-[25px]">
                 <div className="in">
                     <div className="close-button-block"></div>
                     <div className="close-button-block"></div>
@@ -44,7 +44,7 @@ const FlightSuccess = ({ close, small = false, text, closeIcon = true }: { close
             <div
                 className="flex flex-col items-center">
                 <div
-                    className="flex flex-col gap-[20px] text-white text-center items-center">
+                    className="flex flex-col gap-[30px] text-white text-center items-center">
                     <div className="h-[23px]">
                         <p className="text-[32px] tracking-[-0.03em]">{text}</p>
                     </div>
