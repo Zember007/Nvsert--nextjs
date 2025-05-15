@@ -269,13 +269,9 @@
     border-radius: 4px;
     padding: 1px;
 
-
     background: radial-gradient(80px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
             var(--menu-item-border),
             #737373 100%);
-
-
-
 
     -webkit-mask:
         linear-gradient(#fff 0 0) content-box,
