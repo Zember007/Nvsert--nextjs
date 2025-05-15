@@ -14,7 +14,7 @@
   transition: transform 0.2s ease, color 0.15s ease, stroke 0.15s ease;
   border-radius: 4px;
   padding: 10px 15px;
-  height: 36px;
+  height: 35px;
   will-change: transform, color, border-color, opacity;
   background: none;
   -webkit-font-smoothing: antialiased;
