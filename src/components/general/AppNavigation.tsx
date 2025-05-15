@@ -6,6 +6,7 @@ import { useAnimation, motion, AnimationControls } from "framer-motion";
 import { useEffect } from "react";
 import { gostR, iso, rospotrebnadzor, sertifikatsiya, tamozhennySoyuz, tekhDokumentatsiya } from './utils'
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { useHeaderContext } from "../contexts/HeaderContext";
 
 const AppNavigation = ({ active }: { active: boolean }) => {
     const controls = useAnimation();
@@ -41,37 +42,37 @@ const AppNavigation = ({ active }: { active: boolean }) => {
 
                 <div className="flex flex-col gap-[20px]">
                     {gostR.map((item, i) => (
-                        <WrapperItem key={i} {...item} controls={controls}/>
+                        <WrapperItem key={i} {...item} controls={controls} />
                     ))}
                 </div>
 
                 <div className="flex flex-col gap-[20px]">
                     {tamozhennySoyuz.map((item, i) => (
-                        <WrapperItem key={i} {...item} controls={controls}/>
+                        <WrapperItem key={i} {...item} controls={controls} />
                     ))}
                 </div>
 
                 <div className="flex flex-col gap-[20px]">
                     {sertifikatsiya.map((item, i) => (
-                        <WrapperItem key={i} {...item} controls={controls}/>
+                        <WrapperItem key={i} {...item} controls={controls} />
                     ))}
                 </div>
 
                 <div className="flex flex-col gap-[20px]">
                     {iso.map((item, i) => (
-                        <WrapperItem key={i} {...item} controls={controls}/>
+                        <WrapperItem key={i} {...item} controls={controls} />
                     ))}
                 </div>
 
                 <div className="flex flex-col gap-[20px]">
                     {rospotrebnadzor.map((item, i) => (
-                        <WrapperItem key={i} {...item} controls={controls}/>
+                        <WrapperItem key={i} {...item} controls={controls} />
                     ))}
                 </div>
 
                 <div className="flex flex-col gap-[20px]">
                     {tekhDokumentatsiya.map((item, i) => (
-                        <WrapperItem key={i} {...item} controls={controls}/>
+                        <WrapperItem key={i} {...item} controls={controls} />
                     ))}
                 </div>
 
@@ -81,6 +82,7 @@ const AppNavigation = ({ active }: { active: boolean }) => {
 };
 
 const WrapperItem = ({ img, title, controls }: { img: string | StaticImport, title: string, controls: AnimationControls }) => {
+    const { darkHeader } = useHeaderContext();
     return (
         <>
             <Link href={'#'} className="flex gap-[10px] group rounded-[4px] items-center border border-solid border-[transparent] hover:border-[#93969D]">
@@ -89,7 +91,7 @@ const WrapperItem = ({ img, title, controls }: { img: string | StaticImport, tit
                     animate={controls}>
                     <Image src={img} width={43} height={60} alt="document" className="rounded-[3px]" />
                 </motion.div>
-                <p className="transition-all group-hover:text-[var(--color-item-menu-active)] max-w-[170px] text-[var(--color-item-menu)] text-[14px] opacity-[0.6]">{title}</p>
+                <p className={`${darkHeader ? 'text-[#000]' : 'text-[#FFF]'} transition-all  max-w-[170px]  text-[14px] opacity-[0.6]`}>{title}</p>
             </Link>
         </>
     )

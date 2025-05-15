@@ -111,14 +111,14 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
                 {({ register, errors }) => (
                     <div className={`${successMessageVisible && 'opacity-0'} flex flex-col gap-[20px]`}>
                         <AppInput
-                            className="!bg-[#2a2a2a] focus:!bg-[#21262F] not-placeholder-shown:!bg-[#21262F]"
+                            className="!bg-[#2a2a2a] focus:!bg-[#21262F] [&:not(:placeholder-shown)]:!bg-[#21262F]"
                             title={'ФИО'}
                             inputName="name"
                             required={true}
                         />
 
                         <AppInput
-                            className="!bg-[#2a2a2a] focus:!bg-[#21262F] not-placeholder-shown:!bg-[#21262F]"
+                            className="!bg-[#2a2a2a] focus:!bg-[#21262F] [&:not(:placeholder-shown)]:!bg-[#21262F]"
                             title={'Телефон'}
                             inputName="Contact"
                             mask={"phone"}

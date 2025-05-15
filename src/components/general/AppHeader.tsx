@@ -179,29 +179,28 @@ const AppHeader = () => {
         <div className="services-menu__wrapper select-none">
           <div className="grid grid-cols-6 h-[60px] w-full gap-[28px]">
             <div className="flex items-center">
-              <p className="text-[20px] text-[#FFF]">Сертификация ГОСТ Р</p>
+              <p className={`text-[20px] ${darkHeader ? 'text-[#000]' : 'text-[#FFF]'}`}>Сертификация ГОСТ Р</p>
             </div>
             <div className="flex items-center">
-              <p className="text-[20px] text-[#FFF]">Таможенный союз</p>
+              <p className={`text-[20px] ${darkHeader ? 'text-[#000]' : 'text-[#FFF]'}`}>Таможенный союз</p>
             </div>
             <div className="flex items-center">
-              <p className="text-[20px] text-[#FFF]">Сертификация</p>
+              <p className={`text-[20px] ${darkHeader ? 'text-[#000]' : 'text-[#FFF]'}`}>Сертификация</p>
             </div>
             <div className="flex items-center">
-              <p className="text-[20px] text-[#FFF]">ИСО (СМК)</p>
+              <p className={`text-[20px] ${darkHeader ? 'text-[#000]' : 'text-[#FFF]'}`}>ИСО (СМК)</p>
             </div>
             <div className="flex items-center">
-              <p className="text-[20px] text-[#FFF]">Роспотребнадзор</p>
+              <p className={`text-[20px] ${darkHeader ? 'text-[#000]' : 'text-[#FFF]'}`}>Роспотребнадзор</p>
             </div>
             <div className="flex items-center">
-              <p className="text-[20px] text-[#FFF]">Тех. документация</p>
+              <p className={`text-[20px] ${darkHeader ? 'text-[#000]' : 'text-[#FFF]'}`}>Тех. документация</p>
             </div>
           </div>
         </div>
 
       </div>
       <div className={`services-menu pt-[20px] !h-[50vh] js-services-menu relative ${servicesMenuActive && 'active'}`}>
-
         <div className="services-menu__wrapper select-none">
           <AppNavigation active={servicesMenuActive} />
         </div>

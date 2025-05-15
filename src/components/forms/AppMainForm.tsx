@@ -183,7 +183,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
                     {({ register, errors }) => (
                         <div className="flex flex-col gap-[20px] ">
                             <AppInput
-                                className="!bg-[#2a2a2a] focus:!bg-[#21262F] not-placeholder-shown:!bg-[#21262F]"
+                                className="!bg-[#2a2a2a] focus:!bg-[#21262F] [&:not(:placeholder-shown)]:!bg-[#21262F]"
                                 title={'ФИО'}
                                 inputName="name"
                                 required={true}
@@ -202,7 +202,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
                                     }}
                                     className="w-full relative z-[1]">
                                     <AppInput
-                                        className="!bg-[#2a2a2a] focus:!bg-[#21262F] not-placeholder-shown:!bg-[#21262F]"
+                                        className="!bg-[#2a2a2a] focus:!bg-[#21262F] [&:not(:placeholder-shown)]:!bg-[#21262F]"
                                         title={isPhone ? 'Телефон' : isEmail ? 'Email' : ''}
                                         inputName="Contact"
                                         mask={isPhone ? "phone" : ''}
@@ -223,7 +223,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
                             </div>
 
                             <AppTextarea
-                                className="!bg-[#2a2a2a] focus:!bg-[#21262F] not-placeholder-shown:!bg-[#21262F]"
+                                className="!bg-[#2a2a2a] focus:!bg-[#21262F] [&:not(:placeholder-shown)]:!bg-[#21262F]"
                                 title={'Комментарий'}
                                 inputName="comment"
                             />
@@ -267,7 +267,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
                             </div>
 
 
-                            <span className="no-drag text-[#A4A4A4] text-[10px] s:text-[13px]">
+                            <span className="no-drag text-[#A4A4A4] mt-[7px] text-[10px] s:text-[13px]">
                                 {filterPrepositions('Нажимая на кнопку «Оформить заявку» вы соглашаетесь с ')}
                                 <Link href="/soglashenie/polzovatelskoe-soglashenie/" target="_blank">
                                     политикой конфиденциальности
