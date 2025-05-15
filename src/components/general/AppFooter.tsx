@@ -160,11 +160,11 @@ const AppFooter = () => {
                       key={i} className="h-[10px] flex items-center gap-[4px] group">
                       <div className="w-[10px] h-[10px] flex items-center justify-center">
                         <div className="relative w-[6px] h-[6px]">
-                          <div className={`transition-all duration-300 ease group-hover:bg-[#CCCCCC] ${i18n.language === lang.code && 'bg-[#69D771]'} absolute inset-0 rounded-full blur-sm opacity-70`} />
-                          <div className={`transition-all duration-300 ease group-hover:bg-[#CCCCCC] ${i18n.language === lang.code ? 'bg-[#69D771]' : 'bg-[#00000080]'} absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 inset-[4px] rounded-full  w-[4px] h-[4px]`} />
+                          <div className={`transition-all duration-300 ease  ${i18n.language === lang.code ? 'bg-[#69D771]' : 'group-hover:bg-[#CCCCCC]'} absolute inset-0 rounded-full blur-sm opacity-70`} />
+                          <div className={`transition-all duration-300 ease  ${i18n.language === lang.code ? 'bg-[#69D771]' : 'group-hover:bg-[#CCCCCC] bg-[#00000080]'} absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 inset-[4px] rounded-full  w-[4px] h-[4px]`} />
                         </div>
                       </div>
-                      <span className={`transition-all duration-300 ease text-[18px] group-hover:text-[#CCCCCC] ${i18n.language === lang.code ? 'text-[#69D771]' : 'text-[#00000080]'}`}>{lang.lable}</span>
+                      <span className={`transition-all duration-300 ease text-[18px]  ${i18n.language === lang.code ? 'text-[#69D771]' : 'group-hover:text-[#CCCCCC] text-[#00000080]'}`}>{lang.lable}</span>
                     </button>
                   ))}
 
