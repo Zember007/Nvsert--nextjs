@@ -170,33 +170,24 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
         <motion.div
             animate={controls}
             initial={{ x: 0 }}
-            className={`relative main-form ${bg && 'bg-[#00000050] border-main'} py-[27px] pb-[30px] px-[48px] max-w-[400px] flex flex-col gap-[12px] rounded-[6px]`}>
-            {successMessageVisible && <FlightSuccess text="Спасибо за заявку" close={() => { setSuccessMessageVisible(false) }} />}
-            {!bg &&
-                <button
-                    onClick={() => { close && close() }}
-                    className={`${successMessageVisible && 'opacity-0'} close no-drag !top-[15px] !right-[15px]`}>
-                    <div className="in">
-                        <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
-                        <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
-                    </div>
-                    <div className="out">
-                        <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
-                        <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
-                    </div>
-                </button>}
-            <span className={`leading-[1] text-[#FFF] no-drag text-[32px] ${bg ? 'text-center' : 'text-left'} tracking-[-0.03em] px-[8px]  ${successMessageVisible && 'opacity-0'}`}>Оформить заявку</span>
+            className={`relative main-form ${bg && 'bg-[#00000050] border-main'} pb-[33px] pt-[38px] px-[40px] max-w-[400px] flex flex-col gap-[20px] rounded-[6px]`}>
+            {successMessageVisible && <FlightSuccess closeIcon={bg} text="Спасибо за заявку" close={() => { setSuccessMessageVisible(false) }} />}
+  
+            <div className="h-[23px] no-drag">
+                <span className={`leading-[1] text-[#FFF] text-[32px] ${bg ? 'text-center' : 'text-left'} tracking-[-0.03em] px-[8px]  ${successMessageVisible && 'opacity-0'}`}>Оформить заявку</span>
+            </div>
+
             <div className={`${successMessageVisible && 'opacity-0'}`}>
                 <AppValidationObserver methods={methods} onSubmit={onSubmit}>
                     {({ register, errors }) => (
-                        <div className="flex flex-col s:gap-[19px] gap-[5px]">
+                        <div className="flex flex-col gap-[20px] ">
                             <AppInput
                                 className="!bg-[#2a2a2a] focus:!bg-[#21262F] not-placeholder-shown:!bg-[#21262F]"
                                 title={'ФИО'}
                                 inputName="name"
                                 required={true}
                             />
-                            <div className="flex flex-col gap-[12px]">
+                            <div className="flex flex-col gap-[10px]">
                                 <div
                                     onClick={() => {
                                         if (!isEmail && !isPhone) {
@@ -240,7 +231,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
                                 <button
                                     type="submit"
                                     ref={setButtonRef}
-                                    className="no-drag btnIconAn group  tariff an-border s:mt-[1px] mt-[15px] bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold   rounded-[4px]"
+                                    className="no-drag btnIconAn group  tariff an-border bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold   rounded-[4px]"
                                     style={{
                                         verticalAlign: 'middle'
                                     }}
@@ -275,7 +266,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
                             </div>
 
 
-                            <span className="mt-[1px] text-[#A4A4A4] text-[10px] s:text-[13px]">
+                            <span className=" text-[#A4A4A4] text-[10px] s:text-[13px]">
                                 Согласен на обработку моих персональных данных{' '}
                                 <span className="whitespace-nowrap">в соответствии</span> с{' '}
                                 <Link href="/soglashenie/polzovatelskoe-soglashenie/" target="_blank">

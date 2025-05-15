@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import FlyingPlane from './elements/FlyingPlane';
 import { useAnimation, motion } from 'framer-motion';
 
-const FlightSuccess = ({  close, small = false, text }: {  close: () => void; small?: boolean; text: string }) => {
+const FlightSuccess = ({ close, small = false, text, closeIcon = true }: { closeIcon?:boolean; close: () => void; small?: boolean; text: string }) => {
 
     const [time, setTime] = React.useState(10);
 
@@ -28,7 +28,7 @@ const FlightSuccess = ({  close, small = false, text }: {  close: () => void; sm
 
         <div className="active  pt-[100px]">
 
-            <button
+            {closeIcon && <button
                 onClick={() => { close() }}
                 className="close !top-[30px] !right-[30px]">
                 <div className="in">
@@ -39,13 +39,16 @@ const FlightSuccess = ({  close, small = false, text }: {  close: () => void; sm
                     <div className="close-button-block"></div>
                     <div className="close-button-block"></div>
                 </div>
-            </button>
+            </button>}
 
             <div
                 className="flex flex-col items-center">
                 <div
                     className="flex flex-col gap-[20px] text-white text-center items-center">
-                    <p className="text-[32px] tracking-[-0.03em]">{text}</p>
+                    <div className="h-[23px]">
+                        <p className="text-[32px] tracking-[-0.03em]">{text}</p>
+                    </div>
+
                     <p className="text-[20px]">Мы свяжемся с Вами <br /> в течение 10 минут!</p>
                 </div>
                 <div

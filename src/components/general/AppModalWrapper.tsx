@@ -68,13 +68,25 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
             <div className={`modal__wrapper select-none ${defaultModalActive && 'active'}`}>
                 <Draggable
                     position={position} onDrag={handleDrag}
-                    bounds="parent"  cancel=".no-drag" defaultPosition={{ x: 0, y: 0 }} nodeRef={nodeRef as React.RefObject<HTMLDivElement>}>
+                    bounds="parent" cancel=".no-drag" defaultPosition={{ x: 0, y: 0 }} nodeRef={nodeRef as React.RefObject<HTMLDivElement>}>
                     <div ref={nodeRef}>
                         <motion.div
                             animate={controls}
                             className={`modal__box modal ${defaultModalActive && 'active'}`} onClick={(e) => { e.stopPropagation() }}>
                             {defaultModalActive &&
                                 <div id='modal-default' className=" modal__content main-form">
+                                    <button
+                                        onClick={() => { setDefaultModalActive(false) }}
+                                        className={`no-drag close !top-[25px] !right-[25px]`}>
+                                        <div className="in">
+                                            <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
+                                            <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
+                                        </div>
+                                        <div className="out">
+                                            <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
+                                            <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
+                                        </div>
+                                    </button>
                                     {
                                         defaultModalName === 'successMessage' &&
                                         <>
@@ -87,9 +99,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
                                         defaultModalName === 'introForm' &&
                                         <>
 
-                                            <AppIntroForm
-                                                close={() => { setDefaultModalActive(false) }}
-                                            />
+                                            <AppIntroForm/>
 
                                         </>
                                     }
@@ -98,8 +108,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
                                         defaultModalName === 'orderForm' &&
                                         <>
 
-                                            <AppMainForm
-                                                close={() => { setDefaultModalActive(false) }}
+                                            <AppMainForm                                                
                                                 active={defaultModalActive}
                                                 bg={false} btnText='Оформить заявку' />
 
