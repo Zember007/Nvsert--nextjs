@@ -155,7 +155,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
                         </div>
 
 
-                        <span className="text-[#A4A4A4] text-[10px] s:text-[13px]">
+                        <span className="text-[#A4A4A4] text-[10px] s:text-[13px] no-drag">
                             {filterPrepositions('Нажимая на кнопку «Оформить заявку» вы соглашаетесь с ')}
                             <Link href="/soglashenie/polzovatelskoe-soglashenie/" target="_blank">
                                 политикой конфиденциальности
