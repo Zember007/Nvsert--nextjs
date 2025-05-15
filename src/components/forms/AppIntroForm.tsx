@@ -13,6 +13,7 @@ import { useEffect, useRef, useState } from "react";
 import FlightSuccess from "../modals/FlightSuccess";
 import { useHeaderContext } from "../contexts/HeaderContext";
 import { useAnimation, motion } from "framer-motion";
+import { filterPrepositions } from "@/hook/filter";
 
 
 const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrapper?: () => void }) => {
@@ -94,7 +95,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
             animate={controls}
             initial={{ x: 0 }}
             className='flex flex-col gap-[20px] pb-[33px] pt-[38px] px-[40px] relative'>
-            
+
             <div className={`${successMessageVisible && 'opacity-0'} flex flex-col gap-[44px]`}>
                 <div className="h-[23px] no-drag">
                     <span className={`pl-[10px] leading-[1] text-[#FFF] text-[32px] tracking-[-0.03em]`}>Заказать звонок</span>
@@ -155,10 +156,9 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
 
 
                         <span className="text-[#A4A4A4] text-[10px] s:text-[13px]">
-                            Согласен на обработку моих персональных данных{' '}
-                            <span className="whitespace-nowrap">в соответствии</span> с{' '}
+                            {filterPrepositions('Нажимая на кнопку «Оформить заявку» вы соглашаетесь с ')}
                             <Link href="/soglashenie/polzovatelskoe-soglashenie/" target="_blank">
-                                Пользовательским соглашением
+                                политикой конфиденциальности
                             </Link>
                         </span>
                     </div>

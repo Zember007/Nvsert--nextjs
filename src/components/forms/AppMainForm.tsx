@@ -15,6 +15,7 @@ import AppCheckbox from './elements/AppCheckbox';
 import { BounceEffect } from "@/hook/useBounce";
 import FlightSuccess from "../modals/FlightSuccess";
 import { useAnimation, motion } from "framer-motion";
+import { filterPrepositions } from "@/hook/filter";
 
 
 const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btnText: string; bg?: boolean; close?: () => void; BounceWrapper?: () => void; active?: boolean }) => {
@@ -172,7 +173,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
             initial={{ x: 0 }}
             className={`relative main-form ${bg && 'bg-[#00000050] border-main'} pb-[33px] pt-[38px] px-[40px] max-w-[400px] flex flex-col gap-[20px] rounded-[6px]`}>
             {successMessageVisible && <FlightSuccess closeIcon={bg} text="Спасибо за заявку" close={() => { setSuccessMessageVisible(false) }} />}
-  
+
             <div className="h-[23px] no-drag">
                 <span className={`leading-[1] text-[#FFF] text-[32px] ${bg ? 'text-center' : 'text-left'} tracking-[-0.03em] px-[8px]  ${successMessageVisible && 'opacity-0'}`}>Оформить заявку</span>
             </div>
@@ -267,10 +268,9 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
 
 
                             <span className=" text-[#A4A4A4] text-[10px] s:text-[13px]">
-                                Согласен на обработку моих персональных данных{' '}
-                                <span className="whitespace-nowrap">в соответствии</span> с{' '}
+                                {filterPrepositions('Нажимая на кнопку «Оформить заявку» вы соглашаетесь с ')}
                                 <Link href="/soglashenie/polzovatelskoe-soglashenie/" target="_blank">
-                                    Пользовательским соглашением
+                                    политикой конфиденциальности
                                 </Link>
                             </span>
                         </div>
