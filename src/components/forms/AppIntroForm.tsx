@@ -74,13 +74,13 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
         openY: [-30, 0, -10, 0, 0],
     };
 
-    const animation = () => {
+    const animation = (delay?:number) => {
         controls.start({
             y: defaultSettings.openY,
             transition: {
                 duration: defaultSettings.duration,
                 ease: defaultSettings.ease,
-                delay: 0.2,
+                delay: delay || 0,
                 times: defaultSettings.times
             }
         });
@@ -88,7 +88,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
 
     useEffect(() => {
         if (!defaultModalActive) return
-        animation()
+        animation(0.2)
     }, [defaultModalActive])
     return (
         <motion.div

@@ -150,13 +150,13 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
         openY: [-30, 0, -10, 0, 0],
     };
 
-    const animation = () => {
+    const animation = (delay?:number) => {
         controls.start({
             y: defaultSettings.openY,
             transition: {
                 duration: defaultSettings.duration,
                 ease: defaultSettings.ease,
-                delay: 0.2,
+                delay: delay || 0,
                 times: defaultSettings.times
             }
         });
@@ -164,7 +164,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
 
     useEffect(() => {
         if (!active) return
-        animation()
+        animation(0.2)
     }, [active])
 
     return (
