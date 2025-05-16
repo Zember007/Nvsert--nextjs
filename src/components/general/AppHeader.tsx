@@ -208,6 +208,7 @@ const AppHeader = () => {
                       </clipPath>
                     </defs>
                   </svg>
+                  
 
                 </div>
                 <p className={`transition-all whitespace-nowrap group-hover:right-1/2 group-hover:translate-x-1/2 absolute top-1/2 -translate-y-1/2 right-[13px] text-[18px] ${darkHeader ? 'text-[#000]' : 'text-[#FFF]'}`}>{item}</p>
