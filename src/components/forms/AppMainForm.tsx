@@ -29,7 +29,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const phoneRegex = /^(?:\+7|8)?[\s(-]*\d[\s(-]*\d{2}[\s)-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}$/;
 
-        if ((!emailRegex.test(e.Contact.trim()) && isEmail) || (!phoneRegex.test(e.Contact.trim()) && isPhone)) {
+        if ((!emailRegex.test(e.contact.trim()) && isEmail) || (!phoneRegex.test(e.contact.trim()) && isPhone)) {
             setEmailError(true)
             setEmailSuccessful(false)
             return;
@@ -92,13 +92,13 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
         defaultValues: {
             name: '',
             comment: '',
-            Contact: ''
+            contact: ''
         }
     });
 
     const { reset, formState: { submitCount }, watch, clearErrors, setFocus } = methods;
 
-    const contactValue = watch("Contact") || "";
+    const contactValue = watch("contact") || "";
 
     const bounceCheckbox = () => {
         const myElement = document.getElementById(`bounce-checkbox${ids}`)
@@ -146,7 +146,8 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
     const [successMessageVisible, setSuccessMessageVisible] = useState(false);
 
     useEffect(() => {
-        setFailCheck(false)
+        setFailCheck(false)        
+        setFocus('contact');
     }, [isPhone, isEmail])
 
     const controls = useAnimation();
@@ -211,7 +212,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
                                     <AppInput
                                         className="!bg-[#2a2a2a] focus:!bg-[#21262F] [&:not(:placeholder-shown)]:!bg-[#21262F]"
                                         title={isPhone ? 'Телефон' : isEmail ? 'Email' : ''}
-                                        inputName="Contact"
+                                        inputName="contact"
                                         mask={isPhone ? "phone" : ''}
                                         type={isPhone ? "phone" : 'text'}
                                         fail={emailError}
@@ -222,10 +223,10 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
                                     />
                                 </div>
                                 <div id={`bounce-checkbox${ids}`} className="pl-[10px] flex items-center gap-[30px]"
-                                    onClick={() => { clearErrors('Contact') }}
+                                    onClick={() => { clearErrors('contact') }}
                                 >
-                                    <AppCheckbox whiteBox={!bg} id={`check-phone${ids}`} successful={emailSuccessful} fail={failCheck} checked={isPhone} onChange={(value) => { setIsPhone(value); if (value) { setIsEmail(false); setFocus('Contact'); setEmailSuccessful(false) } }} label="Телефон" />
-                                    <AppCheckbox whiteBox={!bg} id={`check-email${ids}`} successful={emailSuccessful} fail={failCheck} checked={isEmail} onChange={(value) => { setIsEmail(value); if (value) { setIsPhone(false); setFocus('Contact'); setEmailSuccessful(false) } }} label="Email" />
+                                    <AppCheckbox whiteBox={!bg} id={`check-phone${ids}`} successful={emailSuccessful} fail={failCheck} checked={isPhone} onChange={(value) => { setIsPhone(value); if (value) { setIsEmail(false); setEmailSuccessful(false) } }} label="Телефон" />
+                                    <AppCheckbox whiteBox={!bg} id={`check-email${ids}`} successful={emailSuccessful} fail={failCheck} checked={isEmail} onChange={(value) => { setIsEmail(value); if (value) { setIsPhone(false); setEmailSuccessful(false) } }} label="Email" />
                                 </div>
                             </div>
 

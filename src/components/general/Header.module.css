@@ -80,7 +80,8 @@
 .menu-item:hover::after {
   opacity: 1;
 }
-.menu-item:active::after {  
+
+.menu-item:active::after {
   background: #000;
 }
 
@@ -117,6 +118,13 @@
   opacity: 1;
   background: #000;
 }
+
+.menu-item-active:hover:after {
+  background: radial-gradient(80px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      var(--menu-item-border),
+      black 100%);
+}
+
 
 .menu-item-active .highlight {
   background: radial-gradient(250px circle at var(--last-mouse-x, var(--click-x, 50%)) var(--last-mouse-y, var(--click-y, 50%)),
