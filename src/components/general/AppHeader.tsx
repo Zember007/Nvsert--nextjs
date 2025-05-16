@@ -15,7 +15,7 @@ import html2canvas from 'html2canvas';
 import useBackgroundBrightness from "@/hook/useBackgroundBrightness";
 import { filterPhone } from "@/hook/filter";
 import { useButton } from "@/hook/useButton";
-
+import { useAnimation, motion } from "framer-motion";
 
 
 
@@ -29,12 +29,32 @@ const AppHeader = () => {
 
   const headerRef = useRef<null | HTMLElement>(null)
 
-  const {setButtonRef, setWrapperRef} = useButton()
+  const { setButtonRef, setWrapperRef } = useButton()
 
 
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
+
+  const controls = useAnimation();
+  const defaultSettings = {
+    duration: 0.3,
+    ease: [0.34, 1.56, 0.64, 1],
+    times: [0, 0.2, 0.5, 0.8, 1],
+    openY: [-100, 0, -10, 0],
+  };
+
+  const animation = () => {
+    controls.start({
+      y: defaultSettings.openY, // Используем openY для отскока
+      transition: {
+        duration: defaultSettings.duration,
+        ease: defaultSettings.ease,
+        times: defaultSettings.times,
+        delay: 0.2
+      }
+    });
+  }
 
   function handleNavMenu() {
     if (servicesMenuActive) {
@@ -85,6 +105,12 @@ const AppHeader = () => {
     'Роспотребнадзор',
     'Тех. документация',
   ]
+
+  useEffect(() => {
+    if (servicesMenuActive) {
+      animation()
+    }
+  }, [servicesMenuActive])
 
 
 
@@ -191,13 +217,14 @@ const AppHeader = () => {
 
         </div>
       </header>
+      
       <div className={`services-menu menu-headers !py-[12px] js-services-menu relative ${servicesMenuActive && 'active'}`}>
 
         <div className="services-menu__wrapper select-none">
           <div className="grid grid-cols-6 h-[60px] w-full gap-[28px]">
             {services.map((item, i) => (
               <div ref={setWrapperRef} key={i} className="tariff-wrap ">
-                <Link ref={setButtonRef} href={'#'}  className={`tariff an-border rounded-[4px] group ${darkHeader ? 'bdark' : 'bwhite'}`}>
+                <Link ref={setButtonRef} href={'#'} className={`tariff an-border rounded-[4px] group ${darkHeader ? 'bdark' : 'bwhite'}`}>
                   <div className={`relative  transition-all h-full rounded-[4px]  overflow-hidden `}>
                     <div className="absolute top-1/2 -translate-y-1/2 group-hover:left-[13px] group-hover:translate-x-0 transition-all left-0 -translate-x-full">
                       <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -224,13 +251,19 @@ const AppHeader = () => {
         </div>
 
       </div>
-      <div className={`services-menu !backdrop-blur-[20px] py-[20px] js-services-menu relative ${servicesMenuActive && 'active'}`}>
-        <div className="services-menu__wrapper select-none">
-          <AppNavigation active={servicesMenuActive} />
+      <motion.div
+        animate={controls}
+        className=" relative z-[20]"
+      >
+        <div
+          className={`services-menu !backdrop-blur-[20px] py-[20px] js-services-menu relative ${servicesMenuActive && 'active'}`}>
+          <div className="services-menu__wrapper select-none">
+            <AppNavigation active={servicesMenuActive} />
+          </div>
+
+
         </div>
-
-
-      </div>
+      </motion.div>
     </>
   );
 };
