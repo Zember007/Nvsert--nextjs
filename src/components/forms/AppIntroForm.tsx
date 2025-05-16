@@ -46,7 +46,13 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
         }
     };
 
-    const methods = useForm({ mode: "onTouched", shouldFocusError: false });
+    const methods = useForm({
+        mode: "onTouched", shouldFocusError: false,
+        defaultValues: {
+            name: '',
+            Contact: ''
+        }
+    });
 
     const { reset } = methods;
 
@@ -74,7 +80,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
         openY: [-30, 0, -10, 0, 0],
     };
 
-    const animation = (delay?:number) => {
+    const animation = (delay?: number) => {
         controls.start({
             y: defaultSettings.openY,
             transition: {

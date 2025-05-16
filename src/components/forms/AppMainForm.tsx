@@ -87,7 +87,14 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
         }
     }
 
-    const methods = useForm({ mode: "onTouched", shouldFocusError: false });
+    const methods = useForm({
+        mode: "onTouched", shouldFocusError: false,
+        defaultValues: {
+            name: '',
+            comment: '',
+            Contact: ''
+        }
+    });
 
     const { reset, formState: { submitCount }, watch, clearErrors, setFocus } = methods;
 
@@ -150,7 +157,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
         openY: [-30, 0, -10, 0, 0],
     };
 
-    const animation = (delay?:number) => {
+    const animation = (delay?: number) => {
         controls.start({
             y: defaultSettings.openY,
             transition: {

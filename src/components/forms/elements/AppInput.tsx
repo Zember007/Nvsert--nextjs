@@ -64,7 +64,7 @@ const AppInput = ({ title, disable, fail, message = true, inputName, type, requi
                         required
                     })}
                     type={type}
-                    className={`field__input no-drag ${className} ${(fail) && 'error !text-[red]'} `}
+                    className={`field__input no-drag ${className} ${(fail) && 'error !text-[#FF3030]'} `}
                     name={inputName}
                     placeholder={title}
                     autoComplete={autocomplete}
