@@ -54,7 +54,7 @@ const AppInput = ({ title, disable, fail, message = true, inputName, type, requi
     }, [title])
     return (
         <div className={`relative z-[0] ${disable && 'active:scale-[0.95]'} transition-all duration-300 `}>
-            <label className={`field ${disable && 'pointer-events-none'} ${visibleError && ((errors[inputName]) || fail) && isSubmitted && 'bounce'}`}>
+            <label className={`field  ${visibleError && ((errors[inputName]) || fail) && isSubmitted && 'bounce'}`}>
 
 
 
