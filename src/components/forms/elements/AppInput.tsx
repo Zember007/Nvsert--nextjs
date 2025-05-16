@@ -76,7 +76,7 @@ const AppInput = ({ title, disable, fail, message = true, inputName, type, requi
                             onBlur(e.currentTarget.value);
                         }
                         if (e.target.value && e.target.value !== '') {
-                            e.target.value = e.target.value.trimEnd() + ' '
+                            e.target.value = e.target.value + ' '
                             e.target.setSelectionRange(e.target.value.length, e.target.value.length);
                         }
                     }}
