@@ -75,7 +75,14 @@ const AppHeader = () => {
 
   useBackgroundBrightness({ simpleBar, headerRef })
 
-
+  const services = [
+    'Сертификация ГОСТ Р',
+    'Таможенный союз',
+    'Сертификация',
+    'ИСО (СМК)',
+    'Роспотребнадзор',
+    'Тех. документация',
+  ]
 
 
 
@@ -182,28 +189,30 @@ const AppHeader = () => {
 
         </div>
       </header>
-      <div className={`services-menu menu-headers js-services-menu relative ${servicesMenuActive && 'active'}`}>
+      <div className={`services-menu menu-headers !py-[12px] js-services-menu relative ${servicesMenuActive && 'active'}`}>
 
         <div className="services-menu__wrapper select-none">
           <div className="grid grid-cols-6 h-[60px] w-full gap-[28px]">
-            <div className="flex items-center">
-              <p className={`text-[20px] ${darkHeader ? 'text-[#000]' : 'text-[#FFF]'}`}>Сертификация ГОСТ Р</p>
-            </div>
-            <div className="flex items-center">
-              <p className={`text-[20px] ${darkHeader ? 'text-[#000]' : 'text-[#FFF]'}`}>Таможенный союз</p>
-            </div>
-            <div className="flex items-center">
-              <p className={`text-[20px] ${darkHeader ? 'text-[#000]' : 'text-[#FFF]'}`}>Сертификация</p>
-            </div>
-            <div className="flex items-center">
-              <p className={`text-[20px] ${darkHeader ? 'text-[#000]' : 'text-[#FFF]'}`}>ИСО (СМК)</p>
-            </div>
-            <div className="flex items-center">
-              <p className={`text-[20px] ${darkHeader ? 'text-[#000]' : 'text-[#FFF]'}`}>Роспотребнадзор</p>
-            </div>
-            <div className="flex items-center">
-              <p className={`text-[20px] ${darkHeader ? 'text-[#000]' : 'text-[#FFF]'}`}>Тех. документация</p>
-            </div>
+            {services.map((item, i) => (
+              <Link href={'#'} key={i} className={`relative group transition-all hover:border-[transparent] rounded-[4px] group border overflow-hidden ${darkHeader ? 'border-black' : 'border-white'} border-solid`}>
+                <div className="absolute top-1/2 -translate-y-1/2 left-[13px] transition-all group-hover:left-0 group-hover:-translate-x-full">
+                  <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="1.5" y="1.5" width="23" height="23" rx="2.5" stroke="#A4A4A4" />
+                    <g clip-path="url(#clip0_3485_4121)">
+                      <path d="M5.81593 13H20.1824" stroke="#A4A4A4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                      <path d="M16.0777 8.8953L20.1824 13L16.0777 17.1047" stroke="#A4A4A4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_3485_4121">
+                        <rect width="17.4147" height="17.4147" fill="white" transform="translate(0.685059 13) rotate(-45)" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+
+                </div>
+                <p className={`transition-all whitespace-nowrap group-hover:right-1/2 group-hover:translate-x-1/2 absolute top-1/2 -translate-y-1/2 right-[13px] text-[18px] ${darkHeader ? 'text-[#000]' : 'text-[#FFF]'}`}>{item}</p>
+              </Link>
+            ))}
           </div>
         </div>
 
