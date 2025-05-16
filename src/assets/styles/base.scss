@@ -258,32 +258,44 @@
     min-height: 6900px;
 }
 
-.tariff.an-border::after {
-    content: "";
-    position: absolute;
-    top: -1px;
-    bottom: -1px;
-    left: -1px;
-    right: -1px;
+.tariff.an-border {
+    --color-b: #737373;
 
-    transition: opacity 300ms ease;
-    z-index: 20;
+    &.bdark {
+        --color-b: #000;
+    }
 
-    border-radius: 4px;
-    padding: 1px;
+    &.bwhite {
+        --color-b: #FFF;
+    }
 
-    background: radial-gradient(80px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-            var(--menu-item-border),
-            #737373 100%);
+    &::after {
+        content: "";
+        position: absolute;
+        top: -1px;
+        bottom: -1px;
+        left: -1px;
+        right: -1px;
 
-    -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
+        transition: opacity 300ms ease;
+        z-index: 20;
 
-    opacity: 0;
-    pointer-events: none;
+        border-radius: 4px;
+        padding: 1px;
+
+        background: radial-gradient(80px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                var(--menu-item-border),
+                var(--color-b) 100%);
+
+        -webkit-mask:
+            linear-gradient(#fff 0 0) content-box,
+            linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+
+        opacity: 0;
+        pointer-events: none;
+    }
 }
 
 .tariff::before {

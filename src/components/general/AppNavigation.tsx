@@ -85,13 +85,13 @@ const WrapperItem = ({ img, title, controls }: { img: string | StaticImport, tit
     const { darkHeader } = useHeaderContext();
     return (
         <>
-            <Link href={'#'} className="flex gap-[10px] group rounded-[4px] items-center border border-solid border-[transparent] hover:border-[#93969D]">
+            <Link href={'#'} className={`flex gap-[10px] group rounded-[4px] items-center border border-solid border-[transparent] hover:${darkHeader ? 'border-[#000]' : 'border-[#FFF]'}`}>
                 <motion.div
                     initial={{ y: 40, opacity: 0 }}
                     animate={controls}>
                     <Image src={img} width={43} height={60} alt="document" className="rounded-[3px]" />
                 </motion.div>
-                <p className={`${darkHeader ? 'text-[#000]' : 'text-[#FFF]'} transition-all  max-w-[170px]  text-[14px] opacity-[0.6]`}>{title}</p>
+                <p className={`${darkHeader ? 'text-[#000]' : 'text-[#FFF]'} transition-all  max-w-[170px]  text-[14px]`}>{title}</p>
             </Link>
         </>
     )

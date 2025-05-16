@@ -1,7 +1,7 @@
 import { useRef, useCallback, useEffect } from 'react';
 
 export const useButton = () => {
-  const buttonRefs = useRef<Array<HTMLButtonElement | HTMLDivElement>>([]);
+  const buttonRefs = useRef<Array<HTMLElement | HTMLDivElement>>([]);
   const wrapperRefs = useRef<HTMLDivElement[]>([]);
 
   const setWrapperRef = useCallback((el: HTMLDivElement | null) => {
@@ -9,7 +9,7 @@ export const useButton = () => {
     wrapperRefs.current.push(el);
   }, []);
 
-  const setButtonRef = useCallback((el: HTMLButtonElement | null | HTMLDivElement) => {
+  const setButtonRef = useCallback((el: HTMLElement | null | HTMLDivElement) => {
     if (!el || buttonRefs.current.includes(el)) return;
     buttonRefs.current.push(el);
   }, []);
