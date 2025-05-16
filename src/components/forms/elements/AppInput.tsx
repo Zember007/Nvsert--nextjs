@@ -53,7 +53,7 @@ const AppInput = ({ title, disable, fail, message = true, inputName, type, requi
         setValue(inputName, '')
     }, [title])
     return (
-        <div className={`relative z-[0] ${disable && 'active:scale-[0.95]'} transition-all duration-300 `}>
+        <div className={`relative z-[0] `}>
             <label className={`field  ${visibleError && ((errors[inputName]) || fail) && isSubmitted && 'bounce'}`}>
 
 
@@ -64,7 +64,7 @@ const AppInput = ({ title, disable, fail, message = true, inputName, type, requi
                         required
                     })}
                     type={type}
-                    className={`field__input no-drag ${className} ${(fail) && 'error !text-[#FF3030]'} `}
+                    className={`field__input no-drag ${disable && 'active:scale-[0.95]'} transition-transform duration-300  ${className} ${(fail) && 'error !text-[#FF3030]'} `}
                     name={inputName}
                     placeholder={title}
                     autoComplete={autocomplete}
