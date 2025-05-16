@@ -74,7 +74,7 @@ const AppMenuItem: React.FC<{ item: MenuItem; isActive: boolean, onClick?: (e: R
         };
 
         return (
-            <div className="overflow-hidden">
+            <div className="overflow-x-hidden px-[1px]">
                 <Link
                     href={item.href}
                     className={getClassName()}
