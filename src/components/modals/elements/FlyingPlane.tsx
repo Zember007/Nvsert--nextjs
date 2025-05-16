@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 export default function FlyingPlane() {
 
     const lineAnimation = {
-        x: "-417px",
-        y: "213px",
+        x: "-400px",
+        y: "200px",
     };
 
     const lineTransitions = {
