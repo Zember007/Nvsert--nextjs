@@ -80,7 +80,7 @@ const AppFooter = () => {
                   onClick={() => {
                     navigator.clipboard.writeText(email.value)
                   }}
-                  className="!px-[31px] group"
+                  className="!px-[31.5px] group"
                   item={{
                     href: '#', label:
                       <div>
@@ -104,7 +104,7 @@ const AppFooter = () => {
               timer={3000}
             >
               <AppMenuItem
-                className="!px-[31px] group"
+                className="!px-[31.5px] group"
                 item={{
                   href: '#', label:
                     <div>
@@ -133,7 +133,7 @@ const AppFooter = () => {
               timer={3000}
             >
               <AppMenuItem
-                className="!px-[31px] group"
+                className="!px-[31.5px] group"
                 item={{
                   href: '#', label:
                     <div>
