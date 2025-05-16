@@ -97,7 +97,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
             className='flex flex-col gap-[20px] pb-[33px] pt-[38px] px-[40px] relative'>
 
             <div className={`${successMessageVisible && 'opacity-0'} flex flex-col gap-[44px]`}>
-                <div className="h-[23px] no-drag">
+                <div className="h-[23px] ">
                     <span className={`pl-[10px] leading-[1] text-[#FFF] text-[32px] tracking-[-0.03em]`}>Заказать звонок</span>
                 </div>
                 <div className="w-full overflow-hidden pointer-events-none rounded-[4px]">
@@ -155,9 +155,9 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
                         </div>
 
 
-                        <span className="text-[#CCCCCC] text-[10px] s:text-[13px] no-drag">
+                        <span className="text-[#CCCCCC] text-[10px] s:text-[13px] ">
                             {filterPrepositions('Нажимая на кнопку «Оформить заявку» вы соглашаетесь с ')}
-                            <Link href="/soglashenie/polzovatelskoe-soglashenie/" target="_blank">
+                            <Link href="/soglashenie/polzovatelskoe-soglashenie/" className="no-drag" target="_blank">
                                 политикой конфиденциальности
                             </Link>
                         </span>

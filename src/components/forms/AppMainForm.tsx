@@ -174,7 +174,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
             className={`relative main-form ${bg && 'bg-[#00000050] border-main'} pb-[33px] pt-[38px] px-[40px] max-w-[400px] flex flex-col gap-[20px] rounded-[6px]`}>
             {successMessageVisible && <FlightSuccess closeIcon={bg} text="Спасибо за заявку" close={() => { setSuccessMessageVisible(false) }} />}
 
-            <div className="h-[23px] no-drag">
+            <div className="h-[23px] ">
                 <span className={`leading-[1] text-[#FFF] text-[32px] ${bg ? 'text-center' : 'text-left'} tracking-[-0.03em] px-[8px]  ${successMessageVisible && 'opacity-0'}`}>Оформить заявку</span>
             </div>
 
@@ -267,9 +267,9 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
                             </div>
 
 
-                            <span className="no-drag text-[#CCCCCC] mt-[7px] text-[10px] s:text-[13px]">
+                            <span className=" text-[#CCCCCC] mt-[7px] text-[10px] s:text-[13px]">
                                 {filterPrepositions('Нажимая на кнопку «Оформить заявку» вы соглашаетесь с ')}
-                                <Link href="/soglashenie/polzovatelskoe-soglashenie/" target="_blank">
+                                <Link href="/soglashenie/polzovatelskoe-soglashenie/" className="no-drag" target="_blank">
                                     политикой конфиденциальности
                                 </Link>
                             </span>
