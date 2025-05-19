@@ -221,7 +221,7 @@ const AppHeader = () => {
       <div className={`services-menu menu-headers !py-[12px] js-services-menu relative ${servicesMenuActive && 'active'}`}>
 
         <div className="services-menu__wrapper select-none">
-          <div className="grid grid-cols-6 h-[50px] w-full gap-[28px]">
+          <div className="grid grid-cols-6 h-[50px] w-full gap-[30px]">
             {services.map((item, i) => (
               <div ref={setWrapperRef} key={i} className="tariff-wrap ">
                 <Link ref={setButtonRef} href={'#'} className={`tariff an-border rounded-[4px] group bdark`}>

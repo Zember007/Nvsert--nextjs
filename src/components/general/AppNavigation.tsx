@@ -38,7 +38,7 @@ const AppNavigation = ({ active }: { active: boolean }) => {
     }, [active]);
     return (
         <>
-            <div className="grid grid-cols-6 w-full gap-[28px]">
+            <div className="grid grid-cols-6 w-full gap-[30px]">
 
                 <div className="flex flex-col gap-[20px]">
                     {gostR.map((item, i) => (
