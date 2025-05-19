@@ -70,7 +70,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
 
 
     const [contactError, setContactError] = useState(false);
-    const { defaultModalActive } = useHeaderContext();
+    const { defaultModalActive, defaultModalCount } = useHeaderContext();
 
     const controls = useAnimation();
     const defaultSettings = {
@@ -80,13 +80,12 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
         openY: [-30, 0, -10, 0, 0],
     };
 
-    const animation = (delay?: number) => {
+    const animation = () => {
         controls.start({
             y: defaultSettings.openY,
             transition: {
                 duration: defaultSettings.duration,
                 ease: defaultSettings.ease,
-                delay: delay || 0,
                 times: defaultSettings.times
             }
         });
@@ -94,8 +93,8 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
 
     useEffect(() => {
         if (!defaultModalActive) return
-        animation(0.2)
-    }, [defaultModalActive])
+        animation()
+    }, [defaultModalActive, defaultModalCount])
     return (
         <motion.div
             animate={controls}

@@ -20,7 +20,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
     const simpleBarRef = useRef<any>(null); // Ref для SimpleBar
 
     const metadata = useSelector((state: RootState) => state.metadata);
-    const { transparent, setDefaultModalActive, defaultModalActive, defaultModalName } = useHeaderContext();
+    const { transparent, setDefaultModalActive, defaultModalActive, defaultModalName, resetCountModal, defaultModalCount } = useHeaderContext();
     const { calcPageBodyClass } = useSelector((state: RootState) => state.documents);
     const { configs: configsPure, file_configs: fileConfigsPure } = useSelector((state: RootState) => state.config);
 
@@ -192,6 +192,8 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
                             setDefaultModalActive={setDefaultModalActive}
                             defaultModalActive={defaultModalActive}
                             defaultModalName={defaultModalName}
+                            reset={resetCountModal}
+                            countTrigger={defaultModalCount}
                         />
                         <main className={`${transparent && 'transparent-header'} ${calcPageBodyClass && 'cost-calc-page'}`}>
                             <div className="content">

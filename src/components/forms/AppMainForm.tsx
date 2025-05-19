@@ -18,7 +18,7 @@ import { useAnimation, motion } from "framer-motion";
 import { filterPrepositions } from "@/hook/filter";
 
 
-const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btnText: string; bg?: boolean; close?: () => void; BounceWrapper?: () => void; active?: boolean }) => {
+const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }: { btnText: string; bg?: boolean; close?: () => void; BounceWrapper?: () => void; active?: boolean; countTrigger?:number }) => {
     const { setButtonRef, setWrapperRef } = useButton();
 
     const onSubmit = async (e: any) => {
@@ -158,13 +158,12 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
         openY: [-30, 0, -10, 0, 0],
     };
 
-    const animation = (delay?: number) => {
+    const animation = () => {
         controls.start({
             y: defaultSettings.openY,
             transition: {
                 duration: defaultSettings.duration,
                 ease: defaultSettings.ease,
-                delay: delay || 0,
                 times: defaultSettings.times
             }
         });
@@ -172,8 +171,8 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, close }: { btn
 
     useEffect(() => {
         if (!active) return
-        animation(0.2)
-    }, [active])
+        animation()
+    }, [active, countTrigger])
 
     return (
         <motion.div

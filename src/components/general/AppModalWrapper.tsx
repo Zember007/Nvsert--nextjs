@@ -20,11 +20,13 @@ interface AppModalWrapperProps {
     setDefaultModalActive: (active: boolean) => void;
     defaultModalActive: boolean;
     defaultModalName: string;
+    reset: () => void;
+    countTrigger: number
 }
 
 
 
-const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive, defaultModalActive, defaultModalName }) => {
+const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ reset, countTrigger, setDefaultModalActive, defaultModalActive, defaultModalName }) => {
     const nodeRef = useRef<HTMLDivElement>(null);
     const controls = useAnimation();
     const defaultSettings = {
@@ -40,8 +42,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
             transition: {
                 duration: defaultSettings.duration,
                 ease: defaultSettings.ease,
-                times: defaultSettings.times,
-                delay: 0.2
+                times: defaultSettings.times
             }
         });
     }
@@ -51,8 +52,10 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
             animation()
         } else {
             resetDrag()
+            reset()
+
         }
-    }, [defaultModalActive])
+    }, [defaultModalActive, countTrigger])
 
     const [position, setPosition] = useState({ x: 0, y: 0 });
 
@@ -99,7 +102,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
                                         defaultModalName === 'introForm' &&
                                         <>
 
-                                            <AppIntroForm/>
+                                            <AppIntroForm />
 
                                         </>
                                     }
@@ -108,7 +111,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ setDefaultModalActive
                                         defaultModalName === 'orderForm' &&
                                         <>
 
-                                            <AppMainForm                                                
+                                            <AppMainForm
                                                 active={defaultModalActive}
                                                 bg={false} btnText='Оформить заявку' />
 
