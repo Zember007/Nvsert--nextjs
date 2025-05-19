@@ -217,7 +217,7 @@ const AppHeader = () => {
 
         </div>
       </header>
-      <div className={`services-menu-box menu-headers  ${servicesMenuActive && 'active'}`}>
+      <div className={`services-menu-box menu-headers  ${servicesMenuActive && 'active'} ${darkHeader && 'dark'}`}>
         <div className={`services-menu !py-[12px] js-services-menu relative `}>
 
           <div className="services-menu__wrapper select-none">
@@ -225,9 +225,11 @@ const AppHeader = () => {
               {services.map((item, i) => (
                 <div ref={setWrapperRef} key={i} className="tariff-wrap ">
                   <Link ref={setButtonRef} href={'#'} className={`tariff tariff-inset not-backdrop an-border rounded-[4px] group bdark`}>
-                    <div className={`relative  transition-all h-full rounded-[4px]  overflow-hidden `}>
-                      <div className="absolute top-1/2 -translate-y-1/2  group-hover:translate-x-0 transition-all group/svg p-[13px] -translate-x-full">
-                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div className={`relative z-0 transition-all h-full rounded-[4px]  overflow-hidden `}>
+                      <div className="absolute z-[10] top-1/2 -translate-y-1/2  group-hover:translate-x-0 transition-all group/svg p-[13px] -translate-x-full">
+                        <svg 
+                        className="transition-all duration-200 group-hover/svg:*:stroke-[#FFF]"
+                        width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <rect x="1.5" y="1.5" width="23" height="23" rx="2.5" stroke="#000" />
                           <g clip-path="url(#clip0_3485_4121)">
                             <path d="M5.81593 13H20.1824" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -252,7 +254,7 @@ const AppHeader = () => {
 
         </div>
       </div>
-      <div className={`services-menu-box ${servicesMenuActive && 'active'}`}>
+      <div className={`services-menu-box ${servicesMenuActive && 'active'} ${darkHeader && 'dark'}`}>
         <motion.div
           animate={controls}
           className=" relative"

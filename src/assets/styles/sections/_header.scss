@@ -436,6 +436,10 @@
 
 	transition: all 0.1s ease;
 
+	&.dark {
+		--menu-item-opacity-light: 0.5;
+	}
+
 	&.menu-headers {
 		z-index: 21;
 		transition-delay: 0.1s;
