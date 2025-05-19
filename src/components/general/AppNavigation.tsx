@@ -1,12 +1,12 @@
 
 import Image from "next/image";
-import DocImg from '@/assets/images/main-gallery/01.webp'
 import Link from "next/link";
 import { useAnimation, motion, AnimationControls } from "framer-motion";
 import { useEffect } from "react";
 import { gostR, iso, rospotrebnadzor, sertifikatsiya, tamozhennySoyuz, tekhDokumentatsiya } from './utils'
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { useHeaderContext } from "../contexts/HeaderContext";
+import { filterPrepositions } from "@/hook/filter";
 
 const AppNavigation = ({ active }: { active: boolean }) => {
     const controls = useAnimation();
@@ -85,13 +85,13 @@ const WrapperItem = ({ img, title, controls }: { img: string | StaticImport, tit
     const { darkHeader } = useHeaderContext();
     return (
         <>
-            <Link href={'#'} className={`flex gap-[10px] group rounded-[4px] items-center border border-solid border-[transparent] ${darkHeader ? 'hover:border-[#000]' : 'hover:border-[#FFF]'}`}>
+            <Link href={'#'} className={`flex gap-[10px] group  rounded-[4px] items-center border border-solid border-[transparent] hover:border-[#000]`}>
                 <motion.div
                     initial={{ y: 40, opacity: 0 }}
                     animate={controls}>
                     <Image src={img} width={43} height={60} alt="document" className="rounded-[3px]" />
                 </motion.div>
-                <p className={`${darkHeader ? 'text-[#000]' : 'text-[#FFF]'} transition-all  max-w-[170px]  text-[14px]`}>{title}</p>
+                <p className={`${darkHeader ? 'text-[#000]' : 'text-[#FFF]'} pr-[30px] leading-[1.2] transition-all  max-w-[170px]  text-[14px]`}>{filterPrepositions(title)}</p>
             </Link>
         </>
     )

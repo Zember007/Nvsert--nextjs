@@ -208,14 +208,14 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
 
 
       if (timeoutId) clearTimeout(timeoutId);
-      if (time + 200 <= Date.now()) {
+      if (time + 100 <= Date.now()) {
         updateTextColor();
         time = Date.now()
       }
 
       timeoutId = setTimeout(() => {
         updateTextColor();
-      }, 500);
+      }, 200);
     });
 
 

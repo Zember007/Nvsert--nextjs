@@ -138,7 +138,7 @@ const AppHeader = () => {
                           Услуги
 
                           <div>
-                            <svg className={`transition-all duration-300 easy *:*:transition-all *:*:duration-300 *:*:easy *:*:stroke-[var(--color-item-menu)] group-hover:*:*:!stroke-[var(--color-item-menu-active)] ${servicesMenuActive ? '*:!stroke-[var(--color-item-menu-active)]' : 'rotate-[180deg]'}`} width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg className={`transition-all duration-300 easy *:*:transition-all *:*:duration-300 *:*:easy *:*:stroke-[var(--color-item-menu)] group-hover:*:*:!stroke-[var(--color-item-menu-active)] ${servicesMenuActive ? '*:!stroke-[var(--color-item-menu-active)] rotate-[180deg]' : ''}`} width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <g clip-path="url(#clip0_3424_2610)">
                                 <path d="M1 11L8 4L15 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                               </g>
@@ -221,10 +221,10 @@ const AppHeader = () => {
       <div className={`services-menu menu-headers !py-[12px] js-services-menu relative ${servicesMenuActive && 'active'}`}>
 
         <div className="services-menu__wrapper select-none">
-          <div className="grid grid-cols-6 h-[60px] w-full gap-[28px]">
+          <div className="grid grid-cols-6 h-[50px] w-full gap-[28px]">
             {services.map((item, i) => (
               <div ref={setWrapperRef} key={i} className="tariff-wrap ">
-                <Link ref={setButtonRef} href={'#'} className={`tariff an-border rounded-[4px] group ${darkHeader ? 'bdark' : 'bwhite'}`}>
+                <Link ref={setButtonRef} href={'#'} className={`tariff an-border rounded-[4px] group bdark`}>
                   <div className={`relative  transition-all h-full rounded-[4px]  overflow-hidden `}>
                     <div className="absolute top-1/2 -translate-y-1/2 group-hover:left-[13px] group-hover:translate-x-0 transition-all left-0 -translate-x-full">
                       <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
