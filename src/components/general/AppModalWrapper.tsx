@@ -49,9 +49,9 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ reset, countTrigger, 
 
     useEffect(() => {
         if (defaultModalActive) {
+            resetDrag()
             animation()
         } else {
-            resetDrag()
             reset()
 
         }
