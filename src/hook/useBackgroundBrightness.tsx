@@ -203,19 +203,17 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
 
     const scrollContainer = simpleBar.getScrollElement();
     let timeoutId: NodeJS.Timeout | null = null;
-    let time = Date.now()
     scrollContainer.addEventListener('scroll', () => {
 
 
       if (timeoutId) clearTimeout(timeoutId);
-      if (time + 100 <= Date.now()) {
-        updateTextColor();
-        time = Date.now()
-      }
+
+      updateTextColor();
+
 
       timeoutId = setTimeout(() => {
         updateTextColor();
-      }, 200);
+      }, 100);
     });
 
 

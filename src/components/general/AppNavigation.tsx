@@ -7,8 +7,10 @@ import { gostR, iso, rospotrebnadzor, sertifikatsiya, tamozhennySoyuz, tekhDokum
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { useHeaderContext } from "../contexts/HeaderContext";
 import { filterPrepositions } from "@/hook/filter";
+import { useButton } from "@/hook/useButton";
 
 const AppNavigation = ({ active }: { active: boolean }) => {
+    
     const controls = useAnimation();
 
     const defaultSettings = {
@@ -83,16 +85,20 @@ const AppNavigation = ({ active }: { active: boolean }) => {
 
 const WrapperItem = ({ img, title, controls }: { img: string | StaticImport, title: string, controls: AnimationControls }) => {
     const { darkHeader } = useHeaderContext();
+      const { setButtonRef, setWrapperRef } = useButton()
+    
     return (
         <>
-            <Link href={'#'} className={`flex gap-[10px] group  rounded-[4px] items-center border border-solid border-[transparent] hover:border-[#000]`}>
+         <div ref={setWrapperRef} className="tariff-wrap">
+            <Link  ref={setButtonRef} href={'#'} className={`tariff not-backdrop an-border bdark flex gap-[10px] group  rounded-[4px] items-center `}>
                 <motion.div
                     initial={{ y: 40, opacity: 0 }}
                     animate={controls}>
-                    <Image src={img} width={43} height={60} alt="document" className="rounded-[3px]" />
+                    <Image src={img} width={43} height={60} alt="document" className="rounded-[4px]" />
                 </motion.div>
-                <p className={`${darkHeader ? 'text-[#000]' : 'text-[#FFF]'} pr-[30px] leading-[1.2] transition-all  max-w-[170px]  text-[14px]`}>{filterPrepositions(title)}</p>
+                <p className={`${darkHeader ? 'text-[#000]' : 'text-[#FFF]'} pr-[12px] leading-[1.2] transition-all  max-w-[170px]  text-[14px]`}>{filterPrepositions(title)}</p>
             </Link>
+         </div>
         </>
     )
 }

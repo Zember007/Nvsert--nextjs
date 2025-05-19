@@ -268,11 +268,7 @@
     &::after {
         content: "";
         position: absolute;
-        inset: 0;
-        // top: -1px;
-        // bottom: -1px;
-        // left: -1px;
-        // right: -1px;
+      
 
         transition: opacity 300ms ease;
         z-index: 20;
@@ -292,6 +288,21 @@
 
         opacity: 0;
         pointer-events: none;
+    }
+
+    &.tariff-inset {
+        &::after {
+            inset: 0;
+        }
+    }
+
+    &:not(.tariff-inset) {
+        &::after {
+            top: -1px;
+            bottom: -1px;
+            left: -1px;
+            right: -1px;
+        }
     }
 }
 
@@ -322,8 +333,10 @@
     z-index: 1;
     cursor: pointer;
     box-sizing: border-box;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    &:not(.not-backdrop) {
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+    }
 
 
     backface-visibility: hidden;
