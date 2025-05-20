@@ -147,10 +147,10 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
                     <div className={`border-[transparent] border-solid border ${active && '!border-[#000]'} absolute top-[-1px] bottom-[-1px] right-[0] z-[1000] rounded-[6px] left-[0] transition-all duration-300`}></div>
 
                     <div
-                        className={`pointer-events-none ${active && ' translate-y-[100%]'}  group-active/window:!opacity-[1] transition-all duration-100 !shadow-none card  absolute top-1/2 translate-y-[-50%] left-[30px]`}>
+                        className={` ${active && ' translate-y-[100%]'} transition-all duration-100   z-[2] absolute top-1/2 -translate-y-1/2 left-[30px]`}>
 
                         <Image
-                            className='border-[0.2px] solid border-[#A4A4A4] overflow-hidden rounded-[5px]'
+                            className='border-[0.2px] solid border-[#A4A4A4] rounded-[5px]'
                             ref={smallPhotoRef}
                             alt='document' src={img}
                             width="43"
