@@ -225,7 +225,7 @@ const AppHeader = () => {
               {services.map((item, i) => (
                 <div ref={setWrapperRef} key={i} className="tariff-wrap ">
                   <Link ref={setButtonRef} href={'#'} className={`tariff  tariff-inset not-backdrop an-border rounded-[4px] group bdark  `}>
-                    <div className={`relative z-0 transition-all h-full rounded-[4px]  overflow-hidden ${darkHeader && 'group-hover:bg-[#34446D]'}`}>
+                    <div className={`relative z-[-2] transition-all h-full rounded-[4px]  overflow-hidden ${darkHeader && 'group-hover:bg-[#34446D]'}`}>
                       <div className="absolute z-[10] top-1/2 -translate-y-1/2  group-hover:translate-x-0 transition-all p-[13px] -translate-x-full">
                         <svg className={`${darkHeader && '*:stroke-[#FFF] *:*:stroke-[#FFF] transition-all'}`} width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <rect x="1.5" y="1.5" width="23" height="23" rx="2.5" stroke="#000" />
