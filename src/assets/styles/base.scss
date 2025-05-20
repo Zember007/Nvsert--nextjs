@@ -268,7 +268,7 @@
     &::after {
         content: "";
         position: absolute;
-      
+
 
         transition: opacity 300ms ease;
         z-index: 20;
@@ -307,16 +307,14 @@
 }
 
 .tariff::before {
-    background: radial-gradient(250px circle at var(--mouse-x) var(--mouse-y),
-            #c7c7c738,
-            transparent 30%);
+    background: radial-gradient(150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, var(--menu-item-opacity-light)), transparent 60%);
     border-radius: inherit;
     content: "";
     position: absolute;
     inset: 0;
     opacity: 0;
+    z-index: -1;
     transition: opacity 300ms ease;
-    z-index: 20;
 
 
 
@@ -333,6 +331,7 @@
     z-index: 1;
     cursor: pointer;
     box-sizing: border-box;
+
     &:not(.not-backdrop) {
         backdrop-filter: blur(4px);
         -webkit-backdrop-filter: blur(4px);

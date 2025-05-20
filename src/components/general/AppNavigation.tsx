@@ -90,13 +90,14 @@ const WrapperItem = ({ img, title, controls }: { img: string | StaticImport, tit
     return (
         <>
          <div ref={setWrapperRef} className="tariff-wrap">
-            <Link  ref={setButtonRef} href={'#'} className={`tariff not-backdrop an-border bdark flex gap-[10px] group  rounded-[4px] items-center `}>
+            <Link  ref={setButtonRef} href={'#'} className={`tariff not-backdrop an-border bdark flex gap-[10px] group  rounded-[4px] items-center ${darkHeader && 'hover:bg-[#34446D]'}`}>
                 <motion.div
                     initial={{ y: 40, opacity: 0 }}
+                    className="min-w-[43px]"
                     animate={controls}>
                     <Image src={img} width={43} height={60} alt="document" className="rounded-[4px]" />
                 </motion.div>
-                <p className={`${darkHeader ? 'text-[#000]' : 'text-[#FFF]'} pr-[12px] leading-[1.2] transition-all  max-w-[170px]  text-[14px]`}>{filterPrepositions(title)}</p>
+                <p className={`${darkHeader ? 'text-[#000] group-hover:text-[#FFF]' : 'text-[#FFF]'} pr-[12px] leading-[1.2] transition-all  max-w-[170px]  text-[14px]`}>{filterPrepositions(title)}</p>
             </Link>
          </div>
         </>
