@@ -41,7 +41,7 @@ const AppHeader = () => {
     duration: 0.3,
     ease: [0.34, 1.56, 0.64, 1],
     times: [0, 0.2, 0.5, 0.8, 1],
-    openY: [-100, 0, -20, 0],
+    openY: [-50, 0, -20, 0, 0],
   };
 
   const animation = () => {
@@ -256,7 +256,7 @@ const AppHeader = () => {
           className=" relative"
         >
           <div
-            className={`services-menu !backdrop-blur-[20px] py-[20px] js-services-menu relative ${servicesMenuActive && 'active'}`}>
+            className={`services-menu !backdrop-blur-[20px] py-[20px] pt-[30px] js-services-menu relative ${servicesMenuActive && 'active'}`}>
             <div className="services-menu__wrapper select-none">
               <AppNavigation active={servicesMenuActive} />
             </div>
