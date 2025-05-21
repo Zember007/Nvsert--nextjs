@@ -50,7 +50,7 @@ const AppNavigation = ({ active }: { active: boolean }) => {
 
                 <div className="flex flex-col gap-[20px]">
                     {tamozhennySoyuz.map((item, i) => (
-                        <WrapperItem bg="#5B6788" key={i} {...item} controls={controls} />
+                        <WrapperItem bg={true} key={i} {...item} controls={controls} />
                     ))}
                 </div>
 
@@ -83,14 +83,14 @@ const AppNavigation = ({ active }: { active: boolean }) => {
     );
 };
 
-const WrapperItem = ({ img, title, controls, bg }: { img: string | StaticImport, title: string, controls: AnimationControls, bg?: string }) => {
+const WrapperItem = ({ img, title, controls, bg }: { img: string | StaticImport, title: string, controls: AnimationControls, bg?: boolean }) => {
     const { darkHeader } = useHeaderContext();
       const { setButtonRef, setWrapperRef } = useButton()
     
     return (
         <>
          <div ref={setWrapperRef} className="tariff-wrap">
-            <Link  ref={setButtonRef} href={'#'} className={`tariff no-light not-backdrop flex gap-[10px] group  rounded-[4px] items-center ${bg ? `hover:bg-[${bg}]` : 'hover:bg-[#00000080]'} border-solid ${darkHeader ? 'hover:border-[#000]' : 'hover:border-[#ccc]'} border border-[transparent]`}>
+            <Link  ref={setButtonRef} href={'#'} className={`tariff no-light not-backdrop flex gap-[10px] group  rounded-[4px] items-center ${bg ? `hover:bg-[#5B6788]` : 'hover:bg-[#00000080]'} border-solid ${darkHeader ? 'hover:border-[#000]' : 'hover:border-[#ccc]'} border border-[transparent]`}>
                 <motion.div
                     initial={{ y: 40, opacity: 0 }}
                     className="min-w-[43px] rounded-[4px] overflow-hidden group-hover:rounded-[2px]"
