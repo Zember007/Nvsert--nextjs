@@ -50,7 +50,7 @@ const AppNavigation = ({ active }: { active: boolean }) => {
 
                 <div className="flex flex-col gap-[20px]">
                     {tamozhennySoyuz.map((item, i) => (
-                        <WrapperItem bg={true} key={i} {...item} controls={controls} />
+                        <WrapperItem key={i} {...item} controls={controls} />
                     ))}
                 </div>
 
@@ -83,21 +83,21 @@ const AppNavigation = ({ active }: { active: boolean }) => {
     );
 };
 
-const WrapperItem = ({ img, title, controls, bg }: { img: string | StaticImport, title: string, controls: AnimationControls, bg?: boolean }) => {
+const WrapperItem = ({ img, title, controls }: { img: string | StaticImport, title: string, controls: AnimationControls }) => {
     const { darkHeader } = useHeaderContext();
       const { setButtonRef, setWrapperRef } = useButton()
     
     return (
         <>
          <div ref={setWrapperRef} className="tariff-wrap">
-            <Link  ref={setButtonRef} href={'#'} className={`tariff no-light not-backdrop flex gap-[10px] group  rounded-[4px] items-center ${bg ? `hover:bg-[#5B6788]` : 'hover:bg-[#00000080]'} border-solid ${darkHeader ? 'hover:border-[#000]' : 'hover:border-[#ccc]'} border border-[transparent]`}>
+            <Link  ref={setButtonRef} href={'#'} className={`tariff no-light not-backdrop flex gap-[10px] group  rounded-[4px] items-center ${darkHeader ? `hover:bg-[#5B6788]` : 'hover:bg-[#00000080]'} border-solid ${darkHeader ? 'hover:border-[#000]' : 'hover:border-[#ccc]'} border border-[transparent]`}>
                 <motion.div
                     initial={{ y: 40, opacity: 0 }}
                     className="min-w-[43px] rounded-[4px] overflow-hidden group-hover:rounded-[2px]"
                     animate={controls}>
                     <Image src={img} width={43} height={60} alt="document" />
                 </motion.div>
-                <p className={`${darkHeader ? 'text-[#000] group-hover:text-[#FFF]' : 'text-[#FFF]'} pr-[12px] leading-[1.2]  max-w-[170px]  text-[14px]`}>{filterPrepositions(title)}</p>
+                <p className={`${darkHeader ? 'text-[#000] group-hover:text-[#FFF] font-bold' : 'text-[#FFF]'} pr-[12px] leading-[1.2]  max-w-[170px]  text-[14px]`}>{filterPrepositions(title)}</p>
             </Link>
          </div>
         </>
