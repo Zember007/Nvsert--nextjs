@@ -90,7 +90,7 @@ const WrapperItem = ({ img, title, controls }: { img: string | StaticImport, tit
     return (
         <>
          <div ref={setWrapperRef} className="tariff-wrap">
-            <Link  ref={setButtonRef} href={'#'} className={`tariff no-light not-backdrop flex gap-[10px] group  rounded-[4px] items-center hover:bg-[#00000080] border-solid hover:border-[#ccc] border-[transparent]`}>
+            <Link  ref={setButtonRef} href={'#'} className={`tariff no-light not-backdrop flex gap-[10px] group  rounded-[4px] items-center hover:bg-[#00000080] border-solid hover:border-[#ccc] border border-[transparent]`}>
                 <motion.div
                     initial={{ y: 40, opacity: 0 }}
                     className="min-w-[43px]"
