@@ -150,7 +150,6 @@ const AppMainFeedback = () => {
                                                 height={667}
                                             >
                                                 <Image
-
                                                     src={`/feedback/small/${index + 1}.png`} alt='feedback' width={190} height={267} />
                                             </PhotoView>
                                         </div>)}
