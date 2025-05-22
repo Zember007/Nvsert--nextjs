@@ -473,6 +473,10 @@ input:-webkit-autofill {
     width: 13px !important
 }
 
+.simplebar-track {
+    right: 1px !important;
+}
+
 [data-simplebar].simplebar-dragging,
 [data-simplebar].simplebar-dragging .simplebar-content {
     pointer-events: visible !important;
