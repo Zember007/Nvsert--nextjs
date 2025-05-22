@@ -21,6 +21,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
     if (!el) return
     bounceEl.current.push(el)
   }
+  
 
   return (
     <div className={`z-[0] relative card-wrap h-[517px] w-full translate-y-[0] ${!isVisible && '!translate-y-[30px] opacity-0'} transition-all duration-500 `}>
