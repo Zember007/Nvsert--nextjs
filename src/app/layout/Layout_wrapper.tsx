@@ -195,7 +195,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
                             reset={resetCountModal}
                             countTrigger={defaultModalCount}
                         />
-                        <main className={`${transparent && 'transparent-header'} ${calcPageBodyClass && 'cost-calc-page'}`}>
+                        <main className={`select-none ${transparent && 'transparent-header'} ${calcPageBodyClass && 'cost-calc-page'}`}>
                             <div className="content">
                                 <AppHeader />
                                 {children}
