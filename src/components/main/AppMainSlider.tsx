@@ -187,12 +187,7 @@ const SliderMain = () => {
                                 </div>
                                 <span
                                     className="transition-all ease-in"
-                                >Оформить заявку</span>
-                                <div className="sendIconRight transition-all ease-in">
-                                    <svg className='group-hover:*:fill-[#FFF] rotate-[45deg] *:transition-all *:duration-300' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M29.0627 0.9375L0.930664 12.1875L11.426 16.9336L26.2502 3.75L13.0666 18.5742L17.8127 29.0625L29.0627 0.9375Z" fill="#34446D" />
-                                    </svg>
-                                </div>
+                                >Оформить заявку</span>               
                             </div>
 
                         </button>

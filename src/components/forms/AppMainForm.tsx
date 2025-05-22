@@ -245,7 +245,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                     }}
                                 >
 
-                                    <div className="overflow-hidden p-[9px] px-[20px] relative flex items-center gap-[20px] justify-between">
+                                    <div className="overflow-hidden p-[9px] px-[20px] relative flex items-center justify-center">
                                         <div className="sendIconLeft transition-all ease-in">
                                             <Image
                                                 alt="message"
@@ -258,17 +258,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                         </div>
                                         <span
                                             className="transition-all ease-in"
-                                        >{btnText}</span>
-                                        <div className="sendIconRight transition-all ease-in">
-                                            <Image
-                                                alt="message"
-                                                src={MessageImg}
-                                                width="0"
-                                                height="0"
-                                                sizes="100vw"
-                                                className="h-[30px] w-[30px] rotate-[45deg] translate-x-[-5px]"
-                                            />
-                                        </div>
+                                        >{btnText}</span>            
                                     </div>
                                 </button>
                             </div>

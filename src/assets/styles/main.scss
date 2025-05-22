@@ -75,6 +75,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
 }
 
 .btnIconAn {
+  height: 50px;
   .sendIconLeft {
     position: absolute;
     left: 0;
@@ -85,7 +86,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   &:hover {
 
     span {
-      transform: translateX(105px);
+      transform: translateX(55px);
     }
 
 
@@ -106,7 +107,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
     &:hover {
 
       span {
-        transform: translateX(40px);
+        transform: translateX(20px);
       }
 
 
