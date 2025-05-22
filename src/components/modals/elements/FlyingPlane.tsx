@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 
 export default function FlyingPlane() {
 
     const lineAnimation = {
         x: "-400px",
-        y: `200px`,
+        y: `213px`,
     };
 
     const lineTransitions = {

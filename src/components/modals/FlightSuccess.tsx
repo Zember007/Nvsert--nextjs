@@ -6,19 +6,19 @@ const FlightSuccess = ({ close, small = false, text, closeIcon = true }: { close
 
     const [time, setTime] = React.useState(10);
 
-    // useEffect(() => {
-    //     const timer = setInterval(() => {
-    //         setTime(prev => {
-    //             const num = prev - 1
-    //             if (num === 0) {
-    //                 clearInterval(timer)
-    //                 close()
-    //             }
-    //             return num
-    //         });
-    //     }, 1000);
-    //     return () => clearInterval(timer);
-    // }, [])
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setTime(prev => {
+                const num = prev - 1
+                if (num === 0) {
+                    clearInterval(timer)
+                    close()
+                }
+                return num
+            });
+        }, 1000);
+        return () => clearInterval(timer);
+    }, [])
 
 
 

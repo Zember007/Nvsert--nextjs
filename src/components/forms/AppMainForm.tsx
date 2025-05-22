@@ -37,7 +37,6 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
             setEmailError(false)
         }
 
-        console.log(123123);
 
 
         for (const key in e) {
