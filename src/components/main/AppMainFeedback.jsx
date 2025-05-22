@@ -141,7 +141,7 @@ const AppMainFeedback = () => {
 
 
                                 <div className="flex gap-[20px] feedback-slider-container translate-x-[-95px]">
-                                    {[...Array(20)].map((_, index) =>
+                                    {[...Array(19)].map((_, index) =>
                                         <div
                                             onClick={readyPhoto}
                                             data-slider="slide-feedback" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] h-[267px] rounded-[4px]">
@@ -167,15 +167,15 @@ const AppMainFeedback = () => {
 
 
                                 <div className="flex gap-[20px] translate-x-[-95px] feedback-slider-container">
-                                    {[...Array(21)].map((_, index) =>
+                                    {[...Array(19)].map((_, index) =>
                                         <div
                                             onClick={readyPhoto}
 
                                             data-slider="slide-feedback1" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] h-[267px] rounded-[4px]">
-                                            <PhotoView src={`/feedback/big/${21 + index}.png`}>
+                                            <PhotoView src={`/feedback/big/${20 + index}.png`}>
                                                 <Image
                                                     className='min-h-full'
-                                                    src={`/feedback/small/${21 + index}.png`} alt='feedback' width={190} height={267} />
+                                                    src={`/feedback/small/${20 + index}.png`} alt='feedback' width={190} height={267} />
                                             </PhotoView>
                                         </div>)}
                                 </div>
