@@ -145,13 +145,13 @@ const AppMainFeedback = () => {
                                         <div
                                             onClick={readyPhoto}
                                             data-slider="slide-feedback" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] h-[267px] rounded-[4px]">
-                                            <PhotoView src={`/feedback/big/${index + 1}.png`}
+                                            <PhotoView src={`/feedbacks/big/${index + 1}.png`}
                                                 width={475}
                                                 height={667}
                                             >
                                                 <Image
                                                     className='min-h-full'
-                                                    src={`/feedback/small/${index + 1}.png`} alt='feedback' width={190} height={267} />
+                                                    src={`/feedbacks/small/${index + 1}.png`} alt='feedback' width={190} height={267} />
                                             </PhotoView>
                                         </div>)}
                                 </div>
@@ -172,10 +172,10 @@ const AppMainFeedback = () => {
                                             onClick={readyPhoto}
 
                                             data-slider="slide-feedback1" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] h-[267px] rounded-[4px]">
-                                            <PhotoView src={`/feedback/big/${20 + index}.png`}>
+                                            <PhotoView src={`/feedbacks/big/${20 + index}.png`}>
                                                 <Image
                                                     className='min-h-full'
-                                                    src={`/feedback/small/${20 + index}.png`} alt='feedback' width={190} height={267} />
+                                                    src={`/feedbacks/small/${20 + index}.png`} alt='feedback' width={190} height={267} />
                                             </PhotoView>
                                         </div>)}
                                 </div>
