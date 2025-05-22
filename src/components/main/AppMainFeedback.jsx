@@ -150,6 +150,7 @@ const AppMainFeedback = () => {
                                                 height={667}
                                             >
                                                 <Image
+                                                    className='min-h-full'
                                                     src={`/feedback/small/${index + 1}.png`} alt='feedback' width={190} height={267} />
                                             </PhotoView>
                                         </div>)}
@@ -171,8 +172,10 @@ const AppMainFeedback = () => {
                                             onClick={readyPhoto}
 
                                             data-slider="slide-feedback1" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] h-[267px] rounded-[4px]">
-                                            <PhotoView src={`/feedback/big/${21+index}.png`}>
-                                                <Image src={`/feedback/small/${21+index}.png`} alt='feedback' width={190} height={267} />
+                                            <PhotoView src={`/feedback/big/${21 + index}.png`}>
+                                                <Image
+                                                    className='min-h-full'
+                                                    src={`/feedback/small/${21 + index}.png`} alt='feedback' width={190} height={267} />
                                             </PhotoView>
                                         </div>)}
                                 </div>
