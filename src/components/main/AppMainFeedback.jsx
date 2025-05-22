@@ -44,98 +44,6 @@ const AppMainFeedback = () => {
 
 
 
-
-
-
-        //         const wrappers = document.querySelectorAll('.feedback-slider-container');
-        //         const wrapper = document.querySelector('.feedback-slider-box');
-
-        //         if (wrappers.length && wrapper) {
-
-        //             let bounds: any = [];
-        //             let initialCursorX = 0;
-        //             let initialSliderTime = [0, 0];
-        //             wrappers.forEach((wrapper, index) => {
-
-        //                 bounds[index] = wrapper.getBoundingClientRect()
-
-        //                 initialSliderTime[0] = loop.time();
-        //                 initialSliderTime[1] = loop1.time();
-
-        //                 wrapper.addEventListener("mouseenter", (e: any) => {
-        //                     bounds[index] = wrapper.getBoundingClientRect();
-        //                     initialCursorX = e.clientX - bounds[index].left;
-
-        //                     initialSliderTime[0] = loop.time();
-        //                     initialSliderTime[1] = loop1.time();
-
-        //                 })
-
-
-
-
-        //                 window.addEventListener("resize", () => {
-        //                     bounds[index] = wrapper.getBoundingClientRect();
-        //                 });
-        //             })
-        //             wrapper.addEventListener("mousemove", (e: any) => {
-
-
-        //                 if (!bounds[0] || !bounds[1] || !initialCursorX || !initialSliderTime[0] || !initialSliderTime[1]) return;
-        //                 const currentX = e.clientX - bounds[0].left;
-        //                 const currentX1 = e.clientX - bounds[1].left;
-
-        //                 const deltaX = currentX - initialCursorX;
-        //                 const ratioDelta = -deltaX / bounds[0].width;
-        //                 const deltaTime = ratioDelta * loop.duration();
-        //                 const deltaX1 = currentX1 - initialCursorX;
-        //                 const ratioDelta1 = -deltaX1 / bounds[1].width;
-        //                 const deltaTime1 = ratioDelta1 * loop1.duration();
-        // ;
-
-        //                 const totalDuration = loop.duration();
-        //                 const current = loop.totalTime();
-        //                 let target = initialSliderTime[0] + deltaTime;
-
-        //                 target = gsap.utils.wrap(0, totalDuration, target);
-
-        //                 let diff = target - (current % totalDuration);
-        //                 if (Math.abs(diff) > totalDuration / 2) {
-        //                     diff += (diff < 0 ? totalDuration : -totalDuration);
-        //                 }
-        //                 target = current + diff;
-
-        //                 gsap.to(loop, {
-        //                     totalTime: target,
-        //                     duration: 2,
-        //                     ease: "power4"
-        //                 });
-
-        //                 const totalDuration1 = loop1.duration();
-        //                 const current1 = loop1.totalTime();
-        //                 let target1 = initialSliderTime[1] + deltaTime1;
-
-        //                 target1 = gsap.utils.wrap(0, totalDuration1, target1);
-
-        //                 let diff1 = target1 - (current1 % totalDuration1);
-        //                 if (Math.abs(diff1) > totalDuration1 / 2) {
-        //                     diff1 += (diff1 < 0 ? totalDuration1 : -totalDuration1);
-        //                 }
-        //                 target1 = current1 + diff1;
-
-        //                 gsap.to(loop1, {
-        //                     totalTime: target1,
-        //                     duration: 1.2,
-        //                     ease: "power4"
-        //                 });
-        //             });
-
-        //         }
-
-
-
-
-
         return () => {
             loop.kill();
             loop1.kill();
@@ -233,17 +141,17 @@ const AppMainFeedback = () => {
 
 
                                 <div className="flex gap-[20px] feedback-slider-container translate-x-[-95px]">
-                                    {[...Array(10)].map((_, index) =>
+                                    {[...Array(20)].map((_, index) =>
                                         <div
                                             onClick={readyPhoto}
                                             data-slider="slide-feedback" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] h-[267px] rounded-[4px]">
-                                            <PhotoView src={`/feedback/${index}.png`}
+                                            <PhotoView src={`/feedback/big/${index + 1}.png`}
                                                 width={475}
                                                 height={667}
                                             >
                                                 <Image
 
-                                                    src={`/feedback/${index}.png`} alt='feedback' width={190} height={267} />
+                                                    src={`/feedback/small/${index + 1}.png`} alt='feedback' width={190} height={267} />
                                             </PhotoView>
                                         </div>)}
                                 </div>
@@ -259,13 +167,13 @@ const AppMainFeedback = () => {
 
 
                                 <div className="flex gap-[20px] translate-x-[-95px] feedback-slider-container">
-                                    {[...Array(10)].map((_, index) =>
+                                    {[...Array(21)].map((_, index) =>
                                         <div
                                             onClick={readyPhoto}
 
                                             data-slider="slide-feedback1" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] h-[267px] rounded-[4px]">
-                                            <PhotoView src={`/feedback/${index}.png`}>
-                                                <Image src={`/feedback/${index}.png`} alt='feedback' width={190} height={267} />
+                                            <PhotoView src={`/feedback/big/${21+index}.png`}>
+                                                <Image src={`/feedback/small/${21+index}.png`} alt='feedback' width={190} height={267} />
                                             </PhotoView>
                                         </div>)}
                                 </div>
