@@ -37,7 +37,6 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
             setEmailError(false)
         }
 
-        console.log(123123);
 
 
         for (const key in e) {
@@ -143,7 +142,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
     const [emailError, setEmailError] = useState(false);
     const [emailSuccessful, setEmailSuccessful] = useState(false);
     const [failCheck, setFailCheck] = useState(false);
-    const [successMessageVisible, setSuccessMessageVisible] = useState(false);
+    const [successMessageVisible, setSuccessMessageVisible] = useState(true);
 
     useEffect(() => {
         setFailCheck(false)        

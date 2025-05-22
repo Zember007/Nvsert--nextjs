@@ -4,14 +4,13 @@ export default function FlyingPlane() {
 
     const lineAnimation = {
         x: "-400px",
-        y: "200px",
+        y: `200px`,
     };
 
     const lineTransitions = {
         duration: 2,
         repeat: Infinity,
-        ease: "linear",
-
+        ease: "linear"
     }
 
 
