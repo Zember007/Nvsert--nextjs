@@ -11,11 +11,11 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                 onClick={() => {
                     setActive(!active)
                 }}
-                className={`${active && ' !bg-[#5B6788] !shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] !border-[#000]'} hover:bg-[#34446D33] h-[70px] relative active:transition-all active:duration-200 active:bg-[#5B6788] active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] hover:border-[#34446D]  group border-[#CCCCCC] cursor-pointer border-solid border rounded-[6px]  flex items-center gap-[40px] pr-[10px]`}>
-                <div className={`${active && 'scale-[0.9]'} group-active:scale-[0.9] will-change-transform ease transition-all duration-100 w-[70px] min-w-[70px] h-[70px] flex items-center justify-center`}>
+                className={`${active ? ' !bg-[#5B6788] !shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] !border-[#000]' : 'delay-200'} hover:bg-[#34446D33] h-[70px] relative active:transition-all active:duration-200 active:bg-[#5B6788] active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] hover:border-[#34446D]  group border-[#CCCCCC] cursor-pointer border-solid border rounded-[6px]  flex items-center gap-[40px] pr-[10px]`}>
+                <div className={`${active ? 'scale-[0.9]' : 'delay-200'} group-active:scale-[0.9] will-change-transform ease transition-all duration-100 w-[70px] min-w-[70px] h-[70px] flex items-center justify-center`}>
                     <p className={`${active && 'text-[50px] text-[#FFF]'} text-[22px] rubik group-hover:text-[50px] group-active:duration-[0] ease transition-all duration-100 group-active:text-[#FFF]`}>{number}</p>
                 </div>
-                <div className={`${active && 'scale-[0.99]'} group-active:scale-[0.99] grow will-change-transform ease transition-all duration-100  flex items-center gap-[40px]`}>
+                <div className={`${active ? 'scale-[0.99]' : 'delay-200'} group-active:scale-[0.99] grow will-change-transform ease transition-all duration-100  flex items-center gap-[40px]`}>
                     <p className={`${active ? '[text-shadow:0_0_0.7px_white] text-[#FFF]' : 'group-hover:[text-shadow:0_0_0.7px_black]'} grow text-[20px] ease-in-out transition-all duration-200 group-active:duration-[0] font-[400] group-active:text-[#FFF]  group-active:[text-shadow:0_0_0.7px_white]`}>{title}</p>
                     <button>
                         <svg
