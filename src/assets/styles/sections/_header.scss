@@ -3,9 +3,12 @@
 
 .header {
 
+	--filter-blur: 15px;
+
 	padding: 5px 0;
 	background: #34446D33;
-	backdrop-filter: blur(15px);
+	backdrop-filter: blur(var(--filter-blur));
+	transition: backdrop-filter 0.2s ease;
 	box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 2px 0px;
 	z-index: 50;
 

@@ -209,10 +209,12 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
       if (timeoutId) clearTimeout(timeoutId);
 
       updateTextColor();
+      element.style.setProperty('--filter-blur', '5px')
 
 
       timeoutId = setTimeout(() => {
         updateTextColor();
+        element.style.setProperty('--filter-blur', '15px')
       }, 100);
     });
 
