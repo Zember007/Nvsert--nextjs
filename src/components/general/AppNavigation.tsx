@@ -82,7 +82,7 @@ const AppNavigation = ({ active }: { active: boolean }) => {
 
                 <div className="flex flex-col gap-[20px]">
                     {rospotrebnadzor.map((item, i) => (
-                        <WrapperItem key={i} title={tekhDokumentatsiyaLang[i].title} img={item.img} controls={controls} />
+                        <WrapperItem key={i} title={rospotrebnadzorLang[i].title} img={item.img} controls={controls} />
                     ))}
                 </div>
 
