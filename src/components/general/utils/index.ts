@@ -19,38 +19,38 @@ import Image20 from '@/assets/images/main-gallery/20.webp';
 
 
 export const gostR = [
-    { title: 'Сертификат соответствия ГОСТ Р', img: Image01 },
-    { title: 'Декларация соответствия ГОСТ Р', img: Image02 },
-    { title: 'Сертификат соответствия «Сейсмостойкости»', img: Image03 }
+    { img: Image01 },
+    { img: Image02 },
+    { img: Image03 }
 ];
 
 
 export const tamozhennySoyuz = [
-    { title: 'Декларация Таможенного Союза (ДС ТР ТС)', img: Image06 },
-    { title: 'Прохождение инспекционного контроля (ИК)', img: Image05 },
-    { title: 'Сертификат Таможенного Союза (СС ТР ТС)', img: Image04 },
-    { title: 'Сертификат соответствия Пожарной Безопасности', img: Image07 }
+    { img: Image06 },
+    { img: Image05 },
+    { img: Image04 },
+    { img: Image07 }
 ];
 
 export const sertifikatsiya = [
-    { title: 'Сертификат на тип продукции', img: Image08 },
-    { title: 'Информационное отказное письмо', img: Image10 },
-    { title: 'Паспорт безопасности химической продукции', img: Image19 },
-    { title: 'Сертификат о происхождении товара (СТ-1)', img: Image20 }
+    { img: Image08 },
+    { img: Image10 },
+    { img: Image19 },
+    { img: Image20 }
 ];
 
 export const iso = [
-    { title: 'ГОСТ Р ИСО 9001–2015 (Стандарт организации)', img: Image16 },
-    { title: 'ГОСТ Р ИСО 14001–2016 (Экологический менеджмент)', img: Image17 },
-    { title: 'ГОСТ Р ИСО 22000–2007 (Пищевой менеджмент)', img: Image18 }
+    { img: Image16 },
+    { img: Image17 },
+    { img: Image18 }
 ];
 
 export const rospotrebnadzor = [
-    { title: 'Свидетельство о государственной регистрации (СГР)', img: Image12 },
-    { title: 'Экспертное заключение (ЭЗ)', img: Image15 }
+    { img: Image12 },
+    { img: Image15 }
 ];
 
 export const tekhDokumentatsiya = [
-    { title: 'Протокол испытаний (исследований) ПИ', img: Image09 },
-    { title: 'Технические условия (ТУ)', img: Image11 }
+    { img: Image09 },
+    { img: Image11 }
 ];
