@@ -1,8 +1,8 @@
-import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateActionStaff } from '@/store/staff';
 import { AppDispatch } from '@/config/store';
+import { useTranslation } from 'react-i18next';
 
 interface StaffMember {
     name: string;
@@ -53,7 +53,7 @@ const Staff: React.FC = () => {
                         <label className="search-form__label">
                             <input type="text"
                                 className="search-form__input js-search-form__input"
-                                placeholder="Введите имя сотрудника"
+                                placeholder={t('staff.search.placeholder')}
                                 value={query}
                                 onInput={(e) => {
                                     setQuery(e.currentTarget.value);
@@ -63,7 +63,7 @@ const Staff: React.FC = () => {
                         <div className="search-form__controls">
                             <button type="reset" className="btn search-form__btn search-form__btn--reset js-search-form__btn--reset"
                                 onClick={() => resetSearch()}
-                                title="Сбросить">
+                                title={t('staff.search.reset')}>
                                 <i className="icon icon--close"></i>
                             </button>
                         </div>

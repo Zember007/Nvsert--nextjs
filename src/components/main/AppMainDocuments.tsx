@@ -4,19 +4,20 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import '@/assets/styles/sections/main/animation/documents.scss'
 import '@/assets/styles/sections/main/animation/skills.scss'
 import { PhotoProvider } from '@/assets/lib/react-photo-view';
+import { useTranslation } from "react-i18next";
 
 
 
 const AppMainDocuments = () => {
 
     const [activeIndex, setActive] = useState<number | null>(null)
-
+    const { t } = useTranslation();
 
     return (
         <section id="documents_box" className="py-[75px] flex flex-col gap-[40px]">
             <div className="wrapper ">
 
-                <h2 className=" leading-[1] text-center   text-[24px] xs:text-[40px] l:text-[56px] text-[#000000] tracking-[-0.04em]">Мы оформляем следующие документы</h2>
+                <h2 className=" leading-[1] text-center   text-[24px] xs:text-[40px] l:text-[56px] text-[#000000] tracking-[-0.04em]">{t('docs.heading')}</h2>
 
             </div>
             <PhotoProvider maskOpacity={0.4} maskClassName="blurred-mask"
@@ -27,12 +28,12 @@ const AppMainDocuments = () => {
 
                     const box = document.querySelector('.PhotoView-Slider__BannerWrap') as HTMLDivElement;
                     if (!box) return
-                    box.dataset.before = documents[index].title;
+                    box.dataset.before = t(`documents.${documents[index].key}.title`);
 
                     const photos = document.querySelectorAll<HTMLDivElement>('.PhotoView__Photo__attr');
                     photos.forEach((photo) => {
-                        photo.dataset.price = documents[index].price;
-                        photo.dataset.duration = documents[index].duration;
+                        photo.dataset.price = t(`documents.${documents[index].key}.price`);
+                        photo.dataset.duration = t(`documents.${documents[index].key}.duration`);
                     })
                 }}
 
@@ -46,15 +47,16 @@ const AppMainDocuments = () => {
 
                             <MainDocumentItem
                                 index={index}
+
                                 setPhoto={() => {
                                     setTimeout(() => {
                                         const box = document.querySelector('.PhotoView-Slider__BannerWrap') as HTMLDivElement;
                                         if (!box) return
-                                        box.dataset.before = item.title;
+                                        box.dataset.before = t(`documents.${item.key}.title`);
                                         const photos = document.querySelectorAll<HTMLDivElement>('.PhotoView__Photo__attr');
                                         photos.forEach((photo) => {
-                                            photo.dataset.price = documents[index].price;
-                                            photo.dataset.duration = documents[index].duration;
+                                            photo.dataset.price = t(`documents.${item.key}.price`);
+                                            photo.dataset.duration = t(`documents.${item.key}.duration`);
                                         })
 
                                         const portal = document.querySelector('.PhotoView-Portal') as HTMLDivElement;
@@ -118,8 +120,16 @@ const AppMainDocuments = () => {
 
                                     }, 100)
                                 }}
-                                setActive={(value: any) => {setActive(value ? index : null)}} 
-                                active={index === activeIndex} key={index} {...item} />
+                                setActive={(value: any) => { setActive(value ? index : null) }}
+                                active={index === activeIndex} 
+                                key={index} 
+                                content={t(`documents.${item.key}.content`, { returnObjects: true })}
+                                content1={t(`documents.${item.key}.content1`, { returnObjects: true })}
+                                duration={t(`documents.${item.key}.duration`)}
+                                img={item.img}
+                                price={t(`documents.${item.key}.price`)}
+                                title={t(`documents.${item.key}.title`)}
+                                />
                         )
                     }
 
