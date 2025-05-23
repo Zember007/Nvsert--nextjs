@@ -9,12 +9,14 @@ import { skills } from './utils';
 import AppSkillBlock from './elements/AppSkillBlock';
 import '@/assets/styles/sections/main/animation/skills.scss'
 import { filterPrepositions } from '@/hook/filter';
+import { useTranslation } from 'react-i18next';
 
 
 gsap.registerPlugin(Draggable);
 
 const AppMainSkills = () => {
 
+    const { t } = useTranslation()
     const [isVisible, setIsVisible] = useState(false);
     const divRef = useRef(null);
     const skillsData = skills;
@@ -33,16 +35,16 @@ const AppMainSkills = () => {
             observer.observe(divRef.current);
         }
 
-   
 
 
-        
+
+
 
         return () => {
             if (divRef.current) {
                 observer.unobserve(divRef.current);
             }
-         
+
         };
     }, []);
 
@@ -58,7 +60,7 @@ const AppMainSkills = () => {
             <div className="wrapper flex flex-col gap-[40px]">
                 <h2 className="leading-[1] tracking-[-0.04em] text-center  text-[24px] xs:text-[40px] l:text-[56px]">Наши основные преимущества</h2>
                 <div className="flex flex-col">
-                    <div  className="flex xl:grid grid-cols-4 l:gap-[20px]">
+                    <div className="flex xl:grid grid-cols-4 l:gap-[20px]">
                         {
                             skillsData.map((skill, index) => (
                                 <div key={index}>
@@ -66,8 +68,7 @@ const AppMainSkills = () => {
                                         <div></div>
                                     )
                                         :
-
-                                        <AppSkillBlock index={index} {...skill} isVisible={isVisible} />
+                                        <AppSkillBlock title={t(`skills.${skill.key}.title`)} text={t(`skills.${skill.key}.text`, { returnObjects: true })} index={index} {...skill} isVisible={isVisible} />
                                     }
                                 </div>
                             ))
