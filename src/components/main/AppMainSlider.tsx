@@ -11,7 +11,13 @@ import "slick-carousel/slick/slick-theme.css";
 import { useButton } from '@/hook/useButton';
 import { useHeaderContext } from '../contexts/HeaderContext';
 import { useSimpleBar } from '../contexts/SimpleBarContext';
+import { useTranslation } from 'react-i18next';
 
+
+interface slideItem {
+    title: string;
+    text: string;
+}
 
 const settings = {
     infinite: true,
@@ -128,7 +134,7 @@ const SliderMain = () => {
             //     enableList = false
             //     time = Date.now()
             // }
-            
+
             let interval = time + 800 <= Date.now() ? 200 : time + 800 - Date.now() + 200
 
             timeoutId = setTimeout(() => {
@@ -165,6 +171,11 @@ const SliderMain = () => {
 
     const { openDefaultModal } = useHeaderContext();
 
+    const { t } = useTranslation()
+
+
+    const slidesLang = t('MainSlider.items', { returnObjects: true }) as slideItem[]
+
 
 
     return (
@@ -187,7 +198,7 @@ const SliderMain = () => {
                                 </div>
                                 <span
                                     className="transition-all ease-in"
-                                >Оформить заявку</span>               
+                                >Оформить заявку</span>
                             </div>
 
                         </button>
@@ -228,7 +239,7 @@ const SliderMain = () => {
                                                             <div className="h-[50px] relative text-center py-[10px] w-full bg-[#d6dae2] ">
                                                                 <span className='text-[24px] font-bold text-[#000000] block '>
                                                                     {
-                                                                        filterPrepositions(slide.title)
+                                                                        filterPrepositions(slidesLang[index].title)
                                                                     }
                                                                 </span>
                                                             </div>
@@ -236,7 +247,7 @@ const SliderMain = () => {
                                                         <div className={`l:grow slide-text relative w-full h-full  `}>
 
                                                             <p className={`text-[16px] bg-[#FFF]`}>
-                                                                {filterPrepositions(slide.text)}
+                                                                {filterPrepositions(slidesLang[index].text)}
                                                             </p>
 
                                                         </div>
