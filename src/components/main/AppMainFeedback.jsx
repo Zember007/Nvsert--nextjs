@@ -9,6 +9,7 @@ import Image from 'next/image';
 import gsap from 'gsap';
 import Draggable from "gsap/dist/Draggable";
 import InertiaPlugin from "@/scripts/InertiaPlugin";
+import { useTranslation } from 'react-i18next';
 
 gsap.registerPlugin(Draggable, InertiaPlugin);
 
@@ -116,6 +117,8 @@ const AppMainFeedback = () => {
         }, 100)
     }
 
+    const {t} = useTranslation()
+
     return (
         <section className="py-[75px]">
             <PhotoProvider maskOpacity={0.4} maskClassName="blurred-mask"
@@ -125,7 +128,7 @@ const AppMainFeedback = () => {
 
             >
                 <div className="wrapper flex flex-col gap-[40px]">
-                    <h2 className="leading-[1] tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px]">Реальные отзывы клиентов</h2>
+                    <h2 className="leading-[1] tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px]">{t('MainFeedback.title')}</h2>
 
 
                     <div className="relative h-[554px] flex flex-col gap-[10px] overflow-hidden feedback-slider-box">
