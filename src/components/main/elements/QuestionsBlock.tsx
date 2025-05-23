@@ -5,7 +5,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
     const { setButtonRef, setWrapperRef } = useButton()
 
     return (
-        <div className={`relative flex flex-col rounded-[6px] group/box ${number == 2 && '!bg-[#FFFFFF26] hover:!bg-[#34446D33]'} ${active ? 'bg-[#34446D33]' : 'bg-[#FFFFFF26]'}  backdrop-blur-[1px] z-[0]`}>
+        <div className={`relative flex flex-col rounded-[6px]  group/box ${number == 2 && '!bg-[#FFFFFF26] hover:!bg-[#34446D33] transition-all'} ${active ? 'bg-[#34446D33]' : 'bg-[#FFFFFF26]'}  backdrop-blur-[1px] z-[0]`}>
             <div className={`absolute top-0 left-0 right-0 bottom-0 rounded-[6px] z-[-1]  border border-solid border-[transparent] ${active ? '!border-[#34446D]' : 'delay-200'}`}></div>
             <div
                 onClick={() => {
