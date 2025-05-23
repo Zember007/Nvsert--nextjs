@@ -13,6 +13,7 @@ import AppModalWrapper from '@/components/general/AppModalWrapper';
 import { AppDispatch, RootState } from '@/config/store';
 import { usePathname } from 'next/navigation';
 import { SimpleBarContext } from '@/components/contexts/SimpleBarContext';
+import * as THREE from 'three'
 
 const Layout_wrapper = ({ children }: { children: ReactNode }) => {
     const dispatch = useDispatch<AppDispatch>();
@@ -155,7 +156,107 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
         }
     }, [pathname]);
 
+    const canvasRef = useRef<HTMLCanvasElement>(null)
 
+
+    useEffect(() => {
+        const canvas = canvasRef.current
+        if (!canvas || !simpleBarRef.current) return
+        const scrollContainer = simpleBarRef.current?.getScrollElement();
+    
+        const renderer = new THREE.WebGLRenderer({
+          canvas,
+          alpha: true,
+          premultipliedAlpha: true,
+        })
+        renderer.setPixelRatio(window.devicePixelRatio)
+        renderer.setSize(window.innerWidth, window.innerHeight)
+        renderer.setClearColor(0x000000, 0)
+    
+        const scene = new THREE.Scene()
+    
+        const camera = new THREE.OrthographicCamera(
+          -window.innerWidth / 2,
+          window.innerWidth / 2,
+          window.innerHeight / 2,
+          -window.innerHeight / 2,
+          0.1,
+          10
+        )
+        camera.position.z = 1
+    
+        const loader = new THREE.TextureLoader()
+        loader.load('/noise.png', (texture) => {
+          texture.wrapS = THREE.RepeatWrapping
+          texture.wrapT = THREE.RepeatWrapping
+          texture.minFilter = THREE.LinearFilter
+          texture.generateMipmaps = false
+          texture.premultiplyAlpha = true
+
+          const mirrorHeightPx = 60
+    
+          const displayWidth = window.innerWidth
+          const displayHeight = window.innerHeight * 2 // делаем выше, чтобы циклить
+    
+          // Основной слой шума
+          const mainGeometry = new THREE.PlaneGeometry(displayWidth, displayHeight  - mirrorHeightPx)
+          const mainMaterial = new THREE.MeshBasicMaterial({ map: texture, transparent: true })
+          const mainMesh = new THREE.Mesh(mainGeometry, mainMaterial)
+        
+    
+          // Отражение сверху (полоска)
+          const mirrorGeometry = new THREE.PlaneGeometry(displayWidth, mirrorHeightPx)
+    
+          const mirrorTexture = texture.clone()
+          mirrorTexture.wrapS = THREE.RepeatWrapping
+          mirrorTexture.wrapT = THREE.RepeatWrapping
+          mirrorTexture.repeat.set(1, mirrorHeightPx / displayHeight)
+    
+          const mirrorMaterial = new THREE.MeshBasicMaterial({
+            map: mirrorTexture,
+            transparent: true,
+            color:'#FFF'
+          })
+    
+          const mirrorMesh = new THREE.Mesh(mirrorGeometry, mirrorMaterial)
+          mirrorMesh.scale.y = -1
+          mirrorMesh.position.y = window.innerHeight / 2 - mirrorHeightPx / 2
+
+          mainMesh.position.y = -mirrorHeightPx / 2
+          scene.add(mainMesh)
+          scene.add(mirrorMesh)
+    
+          const animate = () => {
+            console.log(scrollContainer.scrollY);
+            
+            const scrollY = scrollContainer.scrollTop
+            // const scrollOffset = (scrollY * 0.002) % 1 // повторяемость
+    
+            texture.offset.y = 0
+
+            const offsetY = (scrollY * 0.002) % 1
+            mirrorTexture.offset.y = offsetY + (1 - mirrorTexture.repeat.y)
+            // mirrorTexture.offset.y = scrollOffset + (1 - mirrorTexture.repeat.y)
+    
+            renderer.render(scene, camera)
+            requestAnimationFrame(animate)
+          }
+    
+          animate()
+        })
+    
+        const onResize = () => {
+          renderer.setSize(window.innerWidth, window.innerHeight)
+          camera.left = -window.innerWidth / 2
+          camera.right = window.innerWidth / 2
+          camera.top = window.innerHeight / 2
+          camera.bottom = -window.innerHeight / 2
+          camera.updateProjectionMatrix()
+        }
+    
+        window.addEventListener('resize', onResize)
+        return () => window.removeEventListener('resize', onResize)
+      }, [simpleBarRef, canvasRef])
     return (
         <>
             <head>
@@ -204,8 +305,12 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
                         </main>
                     </SimpleBar>
                 </SimpleBarContext.Provider>
-
-                <div className="bg-noise"></div>
+                <div className="canvas_block">
+                    <div className="w-full h-full">
+                        <canvas ref={canvasRef} style={{ display: 'block' }} />
+                    </div>
+                </div>
+                {/* <div className="bg-noise"></div> */}
             </body>
         </>
     );
