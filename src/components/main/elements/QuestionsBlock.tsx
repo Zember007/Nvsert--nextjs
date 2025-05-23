@@ -5,7 +5,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
     const { setButtonRef, setWrapperRef } = useButton()
 
     return (
-        <div className={`relative flex flex-col rounded-[6px]  group/box ${number == 2 && '!bg-[#FFFFFF26] hover:!bg-[#34446D33] transition-all'} ${active ? 'bg-[#34446D33]' : 'bg-[#FFFFFF26]'}  backdrop-blur-[1px] z-[0]`}>
+        <div className={`relative flex flex-col rounded-[6px]  group/box bg-[#FFFFFF26] hover:bg-[#34446D33] ${active && 'transition-all'}   backdrop-blur-[1px] z-[0]`}>
             <div className={`absolute top-0 left-0 right-0 bottom-0 rounded-[6px] z-[-1]  border border-solid border-[transparent] ${active ? '!border-[#34446D]' : 'delay-200'}`}></div>
             <div
                 onClick={() => {
@@ -38,7 +38,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                     <div
                         className="tariff-wrap w-[247px] " ref={setWrapperRef}>
                         <button
-                            ref={setButtonRef} className={`btnIconAn ${number == 2 ? 'group-hover/box:border-[transparent] border-[#34446D] border-solid border group-hover/box:bg-[#34446D] group-hover/box:text-[#FFF] text-[#34446D]' : 'border-[transparent] border-solid border bg-[#34446D] text-[#FFF] '} an-border tariff text-[20px] transition-all duration-300 font-bold tracking-normal  gap-[6px]   rounded-[4px] group   leading-[1]`}>
+                            ref={setButtonRef} className={`btnIconAn group-hover/box:border-[transparent] border-[#34446D] border-solid border group-hover/box:bg-[#34446D] group-hover/box:text-[#FFF] text-[#34446D] an-border tariff text-[20px] transition-all duration-300 font-bold tracking-normal  gap-[6px]   rounded-[4px] group   leading-[1]`}>
                             <div className="justify-center m:flex items-center px-[16px] py-[9px] relative overflow-hidden">
                                 <div className="sendIconLeft transition-all ease-in">                  
                                     <svg className='  group-hover:*:*:stroke-[#34446D] *:transition-all *:duration-300' width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
