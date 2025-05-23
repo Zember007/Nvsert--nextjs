@@ -68,7 +68,7 @@ const AppMainSkills = () => {
                                         <div></div>
                                     )
                                         :
-                                        <AppSkillBlock title={t(`skills.${skill.key}.title`)} text={t(`skills.${skill.key}.text`, { returnObjects: true })} index={index} {...skill} isVisible={isVisible} />
+                                        <AppSkillBlock title={t(`MainSkills.${skill.key}.title`)} text={t(`MainSkills.${skill.key}.text`, { returnObjects: true })} index={index} {...skill} isVisible={isVisible} />
                                     }
                                 </div>
                             ))

@@ -28,12 +28,12 @@ const AppMainDocuments = () => {
 
                     const box = document.querySelector('.PhotoView-Slider__BannerWrap') as HTMLDivElement;
                     if (!box) return
-                    box.dataset.before = t(`documents.${documents[index].key}.title`);
+                    box.dataset.before = t(`MainDocuments.${documents[index].key}.title`);
 
                     const photos = document.querySelectorAll<HTMLDivElement>('.PhotoView__Photo__attr');
                     photos.forEach((photo) => {
-                        photo.dataset.price = t(`documents.${documents[index].key}.price`);
-                        photo.dataset.duration = t(`documents.${documents[index].key}.duration`);
+                        photo.dataset.price = t(`MainDocuments.${documents[index].key}.price`);
+                        photo.dataset.duration = t(`MainDocuments.${documents[index].key}.duration`);
                     })
                 }}
 
@@ -52,11 +52,11 @@ const AppMainDocuments = () => {
                                     setTimeout(() => {
                                         const box = document.querySelector('.PhotoView-Slider__BannerWrap') as HTMLDivElement;
                                         if (!box) return
-                                        box.dataset.before = t(`documents.${item.key}.title`);
+                                        box.dataset.before = t(`MainDocuments.${item.key}.title`);
                                         const photos = document.querySelectorAll<HTMLDivElement>('.PhotoView__Photo__attr');
                                         photos.forEach((photo) => {
-                                            photo.dataset.price = t(`documents.${item.key}.price`);
-                                            photo.dataset.duration = t(`documents.${item.key}.duration`);
+                                            photo.dataset.price = t(`MainDocuments.${item.key}.price`);
+                                            photo.dataset.duration = t(`MainDocuments.${item.key}.duration`);
                                         })
 
                                         const portal = document.querySelector('.PhotoView-Portal') as HTMLDivElement;
@@ -123,12 +123,12 @@ const AppMainDocuments = () => {
                                 setActive={(value: any) => { setActive(value ? index : null) }}
                                 active={index === activeIndex} 
                                 key={index} 
-                                content={t(`documents.${item.key}.content`, { returnObjects: true })}
-                                content1={t(`documents.${item.key}.content1`, { returnObjects: true })}
-                                duration={t(`documents.${item.key}.duration`)}
+                                content={t(`MainDocuments.${item.key}.content`, { returnObjects: true })}
+                                content1={t(`MainDocuments.${item.key}.content1`, { returnObjects: true })}
+                                duration={t(`MainDocuments.${item.key}.duration`)}
                                 img={item.img}
-                                price={t(`documents.${item.key}.price`)}
-                                title={t(`documents.${item.key}.title`)}
+                                price={t(`MainDocuments.${item.key}.price`)}
+                                title={t(`MainDocuments.${item.key}.title`)}
                                 />
                         )
                     }

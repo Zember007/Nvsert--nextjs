@@ -28,8 +28,8 @@ const AppFooter = () => {
 
   const menuItems = [
     { label: "FAQ", href: "#" },
-    { label: "Блог", href: "#" },
-    { label: "Отзывы", href: "#" },
+    { label: t("navigation.blog"), href: "#" },
+    { label: t("navigation.reviews"), href: "#" },
     { label: t('navigation.tnved'), href: "/class/tnved/" }
   ]
 
@@ -45,8 +45,8 @@ const AppFooter = () => {
           <p className="text-[16px]">© 2025 NVSERT</p>
 
           <div className="flex flex-col gap-[20px] text-[#FFF] *:leading-[1]">
-            <span>ИНН 6027189146</span>
-            <span>ООО «ЦЕНТР СТАНДАРТИЗАЦИИ»</span>
+            <span>{t("footer.inn")}</span>
+            <span>{t("footer.company")}</span>
           </div>
         </div>
         <div className="flex flex-col justify-between items-start">
@@ -58,7 +58,7 @@ const AppFooter = () => {
           </div>
 
           <div>
-            <AppMenuItem item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: 'Политика конфиденциальности' }} isActive={false} />
+            <AppMenuItem item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: t("footer.policy") }} isActive={false} />
           </div>
         </div>
       </div>
@@ -72,7 +72,7 @@ const AppFooter = () => {
                   <svg  width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M17.2439 0.185578C17.5556 0.458339 17.5872 0.932161 17.3144 1.24389L6.81443 13.2439C6.67774 13.4001 6.48242 13.4927 6.27496 13.4996C6.0675 13.5065 5.86645 13.4271 5.71967 13.2803L1.21967 8.78034C0.926777 8.48745 0.926777 8.01257 1.21967 7.71968C1.51256 7.42679 1.98744 7.42679 2.28033 7.71968L6.21347 11.6528L16.1856 0.256132C16.4583 -0.0555957 16.9322 -0.0871838 17.2439 0.185578Z" fill="white" />
                   </svg>
-                  <span className="text-[#FFF] text-[18px]">Скопировано</span>
+                  <span className="text-[#FFF] text-[18px]">{t("copied")}</span>
                 </div>}
                 timer={3000}
               >
@@ -99,7 +99,7 @@ const AppFooter = () => {
                 <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M17.2439 0.185578C17.5556 0.458339 17.5872 0.932161 17.3144 1.24389L6.81443 13.2439C6.67774 13.4001 6.48242 13.4927 6.27496 13.4996C6.0675 13.5065 5.86645 13.4271 5.71967 13.2803L1.21967 8.78034C0.926777 8.48745 0.926777 8.01257 1.21967 7.71968C1.51256 7.42679 1.98744 7.42679 2.28033 7.71968L6.21347 11.6528L16.1856 0.256132C16.4583 -0.0555957 16.9322 -0.0871838 17.2439 0.185578Z" fill="white" />
                 </svg>
-                <span className="text-[#FFF] text-[18px]">Скопировано</span>
+                <span className="text-[#FFF] text-[18px]">{t("copied")}</span>
               </div>}
               timer={3000}
             >
@@ -128,7 +128,7 @@ const AppFooter = () => {
                 <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M17.2439 0.185578C17.5556 0.458339 17.5872 0.932161 17.3144 1.24389L6.81443 13.2439C6.67774 13.4001 6.48242 13.4927 6.27496 13.4996C6.0675 13.5065 5.86645 13.4271 5.71967 13.2803L1.21967 8.78034C0.926777 8.48745 0.926777 8.01257 1.21967 7.71968C1.51256 7.42679 1.98744 7.42679 2.28033 7.71968L6.21347 11.6528L16.1856 0.256132C16.4583 -0.0555957 16.9322 -0.0871838 17.2439 0.185578Z" fill="white" />
                 </svg>
-                <span className="text-[#FFF] text-[18px]">Скопировано</span>
+                <span className="text-[#FFF] text-[18px]">{t("copied")}</span>
               </div>}
               timer={3000}
             >
