@@ -38,7 +38,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                     <div
                         className="tariff-wrap w-[247px] " ref={setWrapperRef}>
                         <button
-                            ref={setButtonRef} className='btnIconAn  border-[#34446D] border border-solid tariff text-[20px] transition-all duration-300 font-bold tracking-normal  gap-[6px]  text-[#34446D] hover:text-[#FFF] rounded-[4px]  group hover:bg-[#34446D]  leading-[1]'>
+                            ref={setButtonRef} className='btnIconAn an-border border-[#34446D] border border-solid tariff text-[20px] transition-all duration-300 font-bold tracking-normal  gap-[6px]  text-[#FFF] rounded-[4px] group bg-[#34446D]  leading-[1]'>
                             <div className="justify-center m:flex items-center px-[16px] py-[9px] relative overflow-hidden">
                                 <div className="sendIconLeft transition-all ease-in">                  
                                     <svg className='  group-hover:*:*:stroke-[#34446D] *:transition-all *:duration-300' width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
