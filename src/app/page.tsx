@@ -5,7 +5,6 @@ import '@/assets/styles/main.scss'
 
 import AppMainIntro from '../components/main/AppMainIntro'
 import AppMainDocuments from '../components/main/AppMainDocuments'
-import AppMainQuestions from '../components/main/AppMainQuestions'
 
 export default function Home() {
 
@@ -26,6 +25,11 @@ export default function Home() {
   });
 
 
+  const DynamicAppMainQuestions = dynamic(() => import('../components/main/AppMainQuestions'), {
+    ssr: false,
+  });
+
+
 
   return (
     <div className="main text-[#000] overflow-hidden select-none ">
@@ -35,7 +39,7 @@ export default function Home() {
       <DynamicAppMainSlider />
       <DynamicAppMainSafeguards />
       <DynamicAppMainFeedback />
-      <AppMainQuestions />
+      <DynamicAppMainQuestions />
     </div>
   );
 }
