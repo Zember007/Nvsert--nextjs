@@ -114,7 +114,7 @@ const AppFooter = () => {
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M10.0001 0.5C4.47749 0.5 0.00012207 4.97737 0.00012207 10.5C0.00012207 16.0226 4.47749 20.5 10.0001 20.5C15.5228 20.5 20.0001 16.0226 20.0001 10.5C20.0001 4.97737 15.5228 0.5 10.0001 0.5ZM2.3445 7.32894C1.92808 8.33429 1.71374 9.41182 1.71374 10.5C1.71374 12.6977 2.58677 14.8054 4.14077 16.3594C5.69476 17.9134 7.80244 18.7864 10.0001 18.7864C12.1978 18.7864 14.3055 17.9134 15.8595 16.3594C17.4135 14.8054 18.2865 12.6977 18.2865 10.5C18.2865 9.41182 18.0722 8.33429 17.6557 7.32894C17.2393 6.32359 16.6289 5.41011 15.8595 4.64064C15.09 3.87118 14.1765 3.26081 13.1712 2.84438C12.1658 2.42795 11.0883 2.21362 10.0001 2.21362C8.91194 2.21362 7.83441 2.42795 6.82906 2.84438C5.82371 3.26081 4.91023 3.87118 4.14077 4.64064C3.3713 5.41011 2.76093 6.32359 2.3445 7.32894Z" fill="white" fill-opacity="0.5" />
                         <defs>
                           <linearGradient id="paint0_linear_3340_1315" x1="494.461" y1="6.44531" x2="494.461" y2="831.774" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#2AABEE" />
+                            <stop offset="0" stop-color="#2AABEE" />
                             <stop offset="1" stop-color="#229ED9" />
                           </linearGradient>
                         </defs>
@@ -158,12 +158,12 @@ const AppFooter = () => {
                         changeLanguage(lang.code)
                       }}
                       key={i} className="h-[10px] flex items-center gap-[4px] group">
-                      <div className="w-[10px] h-[10px] flex items-center justify-center">
-                        <div className="relative w-[6px] h-[6px]">
-                          <div className={`transition-all duration-300 ease  ${i18n.language === lang.code ? 'bg-[#69D771]' : 'group-hover:bg-[#CCCCCC]'} absolute inset-0 rounded-full blur-sm opacity-70`} />
-                          <div className={`transition-all duration-300 ease  ${i18n.language === lang.code ? 'bg-[#69D771]' : 'group-hover:bg-[#CCCCCC] bg-[#00000080]'} absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 inset-[4px] rounded-full  w-[4px] h-[4px]`} />
-                        </div>
-                      </div>
+                      <span className="w-[10px] h-[10px] flex items-center justify-center">
+                        <span className="block relative w-[6px] h-[6px]">
+                          <span className={`block transition-all duration-300 ease  ${i18n.language === lang.code ? 'bg-[#69D771]' : 'group-hover:bg-[#CCCCCC]'} absolute inset-0 rounded-full blur-sm opacity-70`} />
+                          <span className={`block transition-all duration-300 ease  ${i18n.language === lang.code ? 'bg-[#69D771]' : 'group-hover:bg-[#CCCCCC] bg-[#00000080]'} absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 inset-[4px] rounded-full  w-[4px] h-[4px]`} />
+                        </span>
+                      </span>
                       <span className={`transition-all duration-300 ease text-[18px]  ${i18n.language === lang.code ? 'text-[#69D771]' : 'group-hover:text-[#CCCCCC] text-[#00000080]'}`}>{lang.lable}</span>
                     </button>
                   ))}
