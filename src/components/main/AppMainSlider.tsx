@@ -230,27 +230,19 @@ const SliderMain = () => {
                                             }
                                             }
                                             className="w-[500%] slider">
-                                            {slides.map((slide, index) => (
+                                            {slides.map((_, index) => (
                                                 <div key={index} >
                                                     <div className="flex flex-col l:gap-[15px] gap-[30px]  w-full">
-                                                        <div className="flex items-center gap-[10px]  relative z-[10]">
+                                                        <span className="text-[24px] font-bold text-[#000000] block  h-[50px] relative text-center py-[10px] w-full bg-[#d6dae2]  relative z-[10]">
+                                                            {
+                                                                filterPrepositions(slidesLang[index].title)
+                                                            }
+                                                        </span>
+                                                        <p className={`l:grow slide-text relative w-full h-full text-[16px] bg-[#FFF] `}>
 
+                                                            {filterPrepositions(slidesLang[index].text)}
 
-                                                            <div className="h-[50px] relative text-center py-[10px] w-full bg-[#d6dae2] ">
-                                                                <span className='text-[24px] font-bold text-[#000000] block '>
-                                                                    {
-                                                                        filterPrepositions(slidesLang[index].title)
-                                                                    }
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <div className={`l:grow slide-text relative w-full h-full  `}>
-
-                                                            <p className={`text-[16px] bg-[#FFF]`}>
-                                                                {filterPrepositions(slidesLang[index].text)}
-                                                            </p>
-
-                                                        </div>
+                                                        </p>
                                                     </div>
 
                                                 </div>
@@ -261,8 +253,6 @@ const SliderMain = () => {
                             </div>
                             <div className="flex justify-between items-end w-full relative z-[10]">
                                 <div className="flex gap-[10px]">
-
-
                                     <div
                                         ref={setWrapperRef}
                                         className="tariff-wrap w-[100px]">
