@@ -142,7 +142,7 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
 
 
                     }}
-                    className={`materialBtn rounded-[6px] overflow-hidden text-left group/window box-scale active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] transition-scale ${!active ? '' : ' bg-[#34446D]  '} active:bg-[#5B6788]  px-[30px]  relative w-full  z-[0]`}>
+                    className={`materialBtn rounded-[6px] overflow-hidden text-left group/window box-scale active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] transition-scale ${!active ? '' : ' bg-[#5B6788]  shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset]'} active:bg-[#5B6788]  px-[30px]  relative w-full  z-[0]`}>
 
                     <div className={`border-[transparent] border-solid border ${active && '!border-[#000]'} absolute top-[-1px] bottom-[-1px] right-[0] z-[1000] rounded-[6px] left-[0] transition-all duration-300`}></div>
 
@@ -163,7 +163,7 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
                         style={{
                             textRendering: 'geometricPrecision'
                         }}
-                        className={`w-full  relative z-[2] container-scale  transition-scale backface-hidden gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] ' : 'text-[#000]'} group-active/window:text-[#FFF]    relative`}
+                        className={`w-full  relative z-[2] container-scale  transition-scale backface-hidden gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] active' : 'text-[#000]'} group-active/window:text-[#FFF]    relative`}
 
                     >
 

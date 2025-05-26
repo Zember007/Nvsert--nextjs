@@ -71,15 +71,25 @@
   }
 }
 
-.box-scale:active {
+.box-scale {
   .container-scale {
-    transform: scale(.99);
+    transform: scale(1);
     transform-origin: center;
     will-change: transform;
+
+    &.active {
+      transform: scale(.99);
+    }
+  }
+
+  &:active {
+    .container-scale {
+      transform: scale(.99);
+    }
   }
 }
 
 
 .transition-scale {
-  transition: background .3s ease,  transform .2s ease-in,  box-shadow .2s ease;
+  transition: background .3s ease, transform .2s ease-in, box-shadow .2s ease;
 }
