@@ -6,14 +6,21 @@ import '@/assets/styles/base/_mixins.scss'
 import '@/assets/styles/base/_icon.scss'
 import { ReactNode } from "react"
 
+import { Rubik } from 'next/font/google'
 
+const rubik = Rubik({
+    subsets: ['latin'],
+    weight: ['300'],
+    display: 'swap',
+    variable: '--font-rubik',
+})
 
 export default function RootLayout({ children }: { children: ReactNode }) {
 
   
 
   return (
-    <html lang="ru">
+    <html lang="ru" className={rubik.variable}>
       <Provider>
 
 

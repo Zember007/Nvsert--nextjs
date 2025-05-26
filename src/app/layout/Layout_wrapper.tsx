@@ -13,14 +13,7 @@ import AppModalWrapper from '@/components/general/AppModalWrapper';
 import { AppDispatch, RootState } from '@/config/store';
 import { usePathname } from 'next/navigation';
 import { SimpleBarContext } from '@/components/contexts/SimpleBarContext';
-import { Rubik } from 'next/font/google'
 
-Rubik({
-    subsets: ['latin'],
-    weight: ['300'],
-    display: 'swap',
-    variable: '--font-rubik',
-})
 
 const Layout_wrapper = ({ children }: { children: ReactNode }) => {
     const dispatch = useDispatch<AppDispatch>();
