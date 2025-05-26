@@ -16,6 +16,7 @@ import useBackgroundBrightness from "@/hook/useBackgroundBrightness";
 import { filterPhone } from "@/hook/filter";
 import { useButton } from "@/hook/useButton";
 import { useAnimation, motion } from "framer-motion";
+import NavSvg from "./elements/NavSvg";
 
 
 
@@ -229,18 +230,7 @@ const AppHeader = () => {
                   <Link ref={setButtonRef} href={'#'} className={`tariff  tariff-inset not-backdrop an-border rounded-[4px] group bdark  `}>
                     <div className={`relative z-[-2] transition-all h-full rounded-[4px]  overflow-hidden`}>
                       <div className="absolute z-[10] top-1/2 -translate-y-1/2  group-hover:translate-x-0 transition-all p-[13px] -translate-x-full">
-                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <rect x="1.5" y="1.5" width="23" height="23" rx="2.5" stroke="#000" />
-                          <g clip-path="url(#clip0_3485_4121)">
-                            <path d="M5.81593 13H20.1824" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M16.0777 8.8953L20.1824 13L16.0777 17.1047" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                          </g>
-                          <defs>
-                            <clipPath id="clip0_3485_4121">
-                              <rect width="17.4147" height="17.4147" fill="white" transform="translate(0.685059 13) rotate(-45)" />
-                            </clipPath>
-                          </defs>
-                        </svg>
+                        <NavSvg />
                       </div>
                       <p className={`transition-all whitespace-nowrap right-1/2 translate-x-1/2 absolute top-1/2 -translate-y-1/2 group-hover:translate-x-0 group-hover:right-[13px] text-[18px] ${darkHeader ? 'text-[#000]' : 'text-[#FFF]'}`}>{item}</p>
                     </div>
