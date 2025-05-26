@@ -83,7 +83,11 @@ const AppMenuItem: React.FC<{ item: MenuItem; isActive: boolean, onClick?: (e: R
                     onClick={handleClick}
                     onMouseUp={handleMouseUp}
                     onMouseLeave={handleMouseLeave}>
-                    <span>{item.label}</span>
+                    {typeof item.label === 'string' ?
+                        <span>{item.label}</span>
+                        :
+                        item.label
+                    }
                     <div className={styles.highlight} />
                 </Link>
             </div>
