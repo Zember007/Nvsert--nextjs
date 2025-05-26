@@ -1,17 +1,45 @@
 import { useButton } from '@/hook/useButton';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useAnimation, motion } from "framer-motion";
 
 const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive: (value: boolean) => void, active: boolean, number: number, title: string, text: string }) => {
+    const controls = useAnimation();
     const { setButtonRef, setWrapperRef } = useButton()
 
+    const defaultSettings = {
+        duration: 0.6,
+        bounce: 5,
+        delay: 0,
+        ease: [0.34, 1.56, 0.64, 1], // Кастомная cubic-bezier кривая
+        times: [0, 0.2, 0.5, 0.8, 1], // Временные точки
+        openY: [0, 26, 0, 0, 0], // Эффект отскока при открытии
+        closeY: [60, -6, 0, 0, 0], // Эффект отскока при закрытии
+        opacity: [0, 1, 1, 1, 1],
+    };
+
+      useEffect(() => {
+            if (active) {
+                controls.start({
+                    y: defaultSettings.openY, // Используем openY для отскока
+                    opacity: defaultSettings.opacity,
+                    transition: {
+                        duration: defaultSettings.duration,
+                        ease: defaultSettings.ease,
+                        times: defaultSettings.times
+                    }
+                });             
+            }
+        }, [active]);
+
+
     return (
-        <div className={`relative flex flex-col rounded-[6px]  group/box bg-[#FFFFFF26] hover:bg-[#34446D33] ${active && 'transition-all'}   backdrop-blur-[1px] z-[0]`}>
+        <div className={`relative flex flex-col rounded-[6px] ${active ? '' : 'bg-[#FFFFFF26]'}  backdrop-blur-[1px] z-[0]`}>
             <div className={`absolute top-0 left-0 right-0 bottom-0 rounded-[6px] z-[-1]  border border-solid border-[transparent] ${active ? '!border-[#34446D]' : 'delay-200'}`}></div>
             <div
                 onClick={() => {
                     setActive(!active)
                 }}
-                className={`${active ? ' !bg-[#5B6788] !shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] !border-[#000]' : 'delay-200'} hover:bg-[#34446D33] h-[70px] relative active:transition-all active:duration-200 active:bg-[#5B6788] active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] hover:border-[#34446D]  group border-[#CCCCCC] cursor-pointer border-solid border rounded-[6px]  flex items-center gap-[40px] pr-[10px] active:delay-0`}>
+                className={`${active ? ' !bg-[#5B6788] !shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] !border-[#000]' : ''} hover:bg-[#34446D33] h-[70px] relative active:transition-all active:duration-200 active:bg-[#5B6788] active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] hover:border-[#34446D]  group border-[#CCCCCC] cursor-pointer border-solid border rounded-[6px]  flex items-center gap-[40px] pr-[10px] active:delay-0`}>
                 <div className={`${active ? 'scale-[0.9]' : 'delay-200'} group-active:delay-0 group-active:scale-[0.9] will-change-transform ease transition-all duration-100 w-[70px] min-w-[70px] h-[70px] flex items-center justify-center`}>
                     <p className={`${active && 'text-[50px] text-[#FFF]'} text-[22px] rubik group-hover:text-[50px] group-active:duration-[0] ease transition-all duration-100 group-active:text-[#FFF]`}>{number}</p>
                 </div>
@@ -35,12 +63,14 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                     </div>
 
 
-                    <div
+                    <motion.div
+                        animate={controls}
+                        initial={{ y: 20, opacity: 0 }}
                         className="tariff-wrap w-[247px] " ref={setWrapperRef}>
                         <button
-                            ref={setButtonRef} className={`btnIconAn group-hover/box:border-[transparent] border-[#34446D] border-solid border group-hover/box:bg-[#34446D] group-hover/box:text-[#FFF] text-[#34446D] an-border tariff text-[20px] transition-all duration-300 font-bold tracking-normal  gap-[6px]   rounded-[4px] group   leading-[1]`}>
+                            ref={setButtonRef} className='btnIconAn border border-solid border-[#34446D] tariff text-[20px] transition-all duration-300 font-bold tracking-normal  gap-[6px]  hover:text-[#FFF] text-[#34446D] rounded-[4px] group hover:bg-[#34446D]  leading-[1]'>
                             <div className="justify-center m:flex items-center px-[16px] py-[9px] relative overflow-hidden">
-                                <div className="sendIconLeft transition-all ease-in">                  
+                                <div className="sendIconLeft transition-all ease-in">
                                     <svg className='  group-hover:*:*:stroke-[#34446D] *:transition-all *:duration-300' width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <rect className='group-hover:fill-[#FFF] transition-all duration-300' x="1" y="1" width="24" height="24" rx="2" fill="#34446D" />
                                         <g clip-path="url(#clip0_3340_1351)">
@@ -56,11 +86,11 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                                 </div>
                                 <span
                                     className="transition-all ease-in"
-                                >Подробнее</span>   
+                                >Подробнее</span>
                             </div>
 
                         </button>
-                    </div>
+                    </motion.div>
 
                 </div>
             </div>
