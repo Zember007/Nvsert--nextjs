@@ -15,7 +15,7 @@ import { usePathname } from 'next/navigation';
 import { SimpleBarContext } from '@/components/contexts/SimpleBarContext';
 import { Rubik } from 'next/font/google'
 
-const rubik = Rubik({
+Rubik({
     subsets: ['latin'],
     weight: ['300'],
     display: 'swap',
@@ -292,7 +292,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
                 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png" />
                 <link rel="apple-touch-icon" sizes="1024x1024" href="/apple-touch-icon-1024x1024.png" />
             </head>
-            <body className={classBody + ' ' + rubik.className}>
+            <body className={classBody}>
                 <SimpleBarContext.Provider value={{ simpleBar: simpleBarRef.current }}>
                     <SimpleBar className="max-h-[100vh]" ref={simpleBarRef} id='scrollSimple'>
                         <AppModalWrapper
