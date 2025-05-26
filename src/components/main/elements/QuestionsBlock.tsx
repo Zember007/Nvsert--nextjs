@@ -17,29 +17,30 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
         opacity: [0, 1, 1, 1, 1],
     };
 
-      useEffect(() => {
-            if (active) {
-                controls.start({
-                    y: defaultSettings.openY, // Используем openY для отскока
-                    opacity: defaultSettings.opacity,
-                    transition: {
-                        duration: defaultSettings.duration,
-                        ease: defaultSettings.ease,
-                        times: defaultSettings.times
-                    }
-                });             
-            }
-        }, [active]);
+    useEffect(() => {
+        if (active) {
+            controls.start({
+                y: defaultSettings.openY, // Используем openY для отскока
+                opacity: defaultSettings.opacity,
+                transition: {
+                    duration: defaultSettings.duration,
+                    ease: defaultSettings.ease,
+                    times: defaultSettings.times
+                }
+            });
+        }
+    }, [active]);
 
 
     return (
-        <div className={`relative flex flex-col rounded-[6px] ${active ? '' : 'bg-[#FFFFFF26]'}  backdrop-blur-[1px] z-[0]`}>
-            <div className={`absolute top-0 left-0 right-0 bottom-0 rounded-[6px] z-[-1]  border border-solid border-[transparent] ${active ? '!border-[#34446D]' : 'delay-200'}`}></div>
+        <div className={`relative flex flex-col rounded-[6px] group/main ${active ? '' : 'bg-[#FFFFFF26]'}  backdrop-blur-[1px] z-[0]`}>            
+            <div className={`pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[1] rounded-[6px] ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[#CCCCCC]`}></div>
             <div
                 onClick={() => {
                     setActive(!active)
                 }}
-                className={`${active ? ' !bg-[#5B6788] !shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] !border-[transparent]' : ''} margin-[-1px] hover:bg-[#34446D33] h-[70px] relative active:transition-all active:duration-200 active:bg-[#5B6788] active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] hover:border-[#34446D]  group border-[#CCCCCC] cursor-pointer border-solid border rounded-[6px]  flex items-center gap-[40px] pr-[10px] active:delay-0`}>
+                className={`${active ? ' !bg-[#5B6788] !shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] ' : ''} hover:bg-[#34446D33] h-[70px] relative active:transition-all active:duration-200 active:bg-[#5B6788] active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset]   group cursor-pointer  rounded-[6px]  flex items-center gap-[40px] pr-[10px] active:delay-0`}>
+                
                 <div className={`${active ? 'scale-[0.9]' : 'delay-200'} group-active:delay-0 group-active:scale-[0.9] will-change-transform ease transition-all duration-100 w-[70px] min-w-[70px] h-[70px] flex items-center justify-center`}>
                     <p className={`${active && 'text-[50px] text-[#FFF]'} text-[22px] rubik group-hover:text-[50px] group-active:duration-[0] ease transition-all duration-100 group-active:text-[#FFF]`}>{number}</p>
                 </div>
