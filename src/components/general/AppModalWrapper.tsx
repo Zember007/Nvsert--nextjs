@@ -49,8 +49,11 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ reset, countTrigger, 
 
     useEffect(() => {
         if (defaultModalActive) {
-            resetDrag()
+            
             animation()
+        } else {
+            reset()
+            resetDrag()
         }
     }, [defaultModalActive, countTrigger])
 
@@ -75,8 +78,8 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ reset, countTrigger, 
                             className={`modal__box modal ${defaultModalActive && 'active'}`} onClick={(e) => { e.stopPropagation() }}>
                             {defaultModalActive &&
                                 <div id='modal-default' className=" modal__content main-form">
-                                    <button            
-                                        onClick={() => { setDefaultModalActive(false);reset();  }}
+                                    <button
+                                        onClick={() => { setDefaultModalActive(false) }}
                                         className={`no-drag close !top-[25px] !right-[25px]`}>
                                         <div className="in">
                                             <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
