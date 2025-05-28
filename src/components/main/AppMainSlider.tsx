@@ -4,13 +4,12 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { slides } from './utils';
 import { filterPrepositions } from '@/hook/filter';
-
-import Slider from "react-slick";
+import HorizontalSlide from './elements/HorisontalSlide'
+// import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useButton } from '@/hook/useButton';
 import { useHeaderContext } from '../contexts/HeaderContext';
-import { useSimpleBar } from '../contexts/SimpleBarContext';
 import { useTranslation } from 'react-i18next';
 
 
@@ -31,87 +30,15 @@ const settings = {
 
 const SliderMain = () => {
 
-    const [sliders, setSliders] = useState<Slider[]>([]);
+    const sliders = useRef<any[]>([]);
 
     const whiteBgRef = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
-        if (sliders.length < 5 || !whiteBgRef.current) return
-        let timeoutId: NodeJS.Timeout | null = null;
+        if (sliders.current.length < 5 || !whiteBgRef.current) return
         let timeoutIdBg: NodeJS.Timeout | null = null;
-        let enableList = true
 
 
-        let oldIndex = 0
-
-        const changeSlides = async (index: number, oldIndex: number) => {
-            if (timeoutId) clearTimeout(timeoutId);
-
-            const totalSlides = slides.length;
-
-            const goToSlide = (i: number) => {
-                sliders.forEach((slider) => {
-                    slider.slickGoTo(i);
-                });
-            };
-
-            const next = () => {
-                sliders.forEach((slider) => {
-                    slider.slickNext();
-                });
-            };
-
-            const prev = () => {
-                sliders.forEach((slider) => {
-                    slider.slickPrev();
-                });
-            };
-
-            const delay = (fn: () => void, ms: number) => {
-                return new Promise<void>((resolve) => {
-                    timeoutId = setTimeout(() => {
-                        fn();
-                        resolve();
-                    }, ms);
-                });
-            };
-
-            const isWrapForward = oldIndex === totalSlides - 1 && index === 0;
-            const isWrapBackward = oldIndex === 0 && index === totalSlides - 1;
-
-            if (isWrapForward) {
-                next();
-                return;
-            }
-
-            if (isWrapBackward) {
-                prev();
-                return;
-            }
-
-            const forwardDistance = (index - oldIndex + totalSlides) % totalSlides;
-            const backwardDistance = (oldIndex - index + totalSlides) % totalSlides;
-
-            // если ближе "через край", делаем хитрый переход с задержками
-            if (Math.min(forwardDistance, backwardDistance) > totalSlides / 2) {
-                if (index < oldIndex) {
-                    // движение назад через край
-                    goToSlide(totalSlides - 1);
-                    await delay(() => next(), 800);
-                    await delay(() => goToSlide(index), 800);
-                } else {
-                    // движение вперёд через край
-                    goToSlide(0);
-                    await delay(() => prev(), 800);
-                    await delay(() => goToSlide(index), 800);
-                }
-            } else {
-                // прямой переход без анимации
-                goToSlide(index);
-            }
-        };
-
-        let time = Date.now()
 
 
         initSlider((index: number) => {
@@ -119,31 +46,12 @@ const SliderMain = () => {
 
 
 
-            if (timeoutId) {
-                clearTimeout(timeoutId)
-            }
 
 
 
-
-
-
-            // if (enableList && time + 800 <= Date.now()) {
-            //     changeSlides(index, oldIndex)
-            //     oldIndex = index
-            //     enableList = false
-            //     time = Date.now()
-            // }
-
-            let interval = time + 800 <= Date.now() ? 200 : time + 800 - Date.now() + 200
-
-            timeoutId = setTimeout(() => {
-                time = Date.now()
-                enableList = true
-                changeSlides(index, oldIndex)
-                oldIndex = index
-            }, interval)
-
+            sliders.current.forEach(el => {
+                el.goToSlide(index)
+            })
 
 
 
@@ -217,19 +125,16 @@ const SliderMain = () => {
                                         }}
                                         key={i} className={`absolute wrapper-slide wrapper-slide${i}  top-0  w-1/5 h-full pointer-events-none`}>
 
-                                        <Slider
+                                        <HorizontalSlide
                                             ref={el => {
-                                                if (el && !sliders.includes(el)) {
-                                                    setSliders(prev => [...prev, el]);
+                                                if (el && !sliders.current.includes(el)) {
+                                                    sliders.current.push(el)
                                                 }
                                             }}
-                                            {
-                                            ...{
-                                                ...settings,
-                                                speed: 800 - i * 100
-                                            }
-                                            }
-                                            className="w-[500%] slider">
+                                            speed={10 + i * 2}
+                                            paused={true}
+                                            // className="w-[500%] slider"
+                                            >
                                             {slides.map((_, index) => (
                                                 <div key={index} >
                                                     <div className="flex flex-col l:gap-[15px] gap-[30px]  w-full">
@@ -247,7 +152,7 @@ const SliderMain = () => {
 
                                                 </div>
                                             ))}
-                                        </Slider>
+                                        </HorizontalSlide>
                                     </div>
                                 ))}
                             </div>

@@ -48,8 +48,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ reset, countTrigger, 
     }
 
     useEffect(() => {
-        if (defaultModalActive) {
-            
+        if (defaultModalActive) {            
             animation()
         } else {
             reset()
