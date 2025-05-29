@@ -38,6 +38,7 @@ const HorizontalLoop = forwardRef<HorizontalLoopRef, HorizontalLoopProps>(
         const timelineRef = useRef<gsap.core.Timeline | null>(null);
         const timesRef = useRef<number[]>([]);
         const lastIndexRef = useRef<number>(-1);
+        const timeWrap = useRef<(v: number) => number>((v: number) => { return v });
 
         const getClosest = (values: number[], value: number, wrap: number) => {
             let i = values.length,
@@ -65,28 +66,30 @@ const HorizontalLoop = forwardRef<HorizontalLoopRef, HorizontalLoopProps>(
 
                 if (!tl || !times.length) return;
 
-                let vars: any = {};
-                const currentIndex = tl.current ? tl.current() : 0;
-                if (Math.abs(index - currentIndex) > length / 2) {
-                    index += index > currentIndex ? -length : length;
+                const curIndex = tl.current();
+                if (Math.abs(index - curIndex) > length / 2) {
+                    index += index > curIndex ? -length : length;
                 }
 
                 const newIndex = gsap.utils.wrap(0, length, index);
                 let time = times[newIndex];
+                let vars: gsap.TweenVars = {};
 
-                if ((time > tl.time()) !== (index > currentIndex) && index !== currentIndex) {
-                    time += tl.duration() * (index > currentIndex ? 1 : -1);
+                if ((time > tl.time()) !== (index > curIndex) && index !== curIndex) {
+                    time += tl.duration() * (index > curIndex ? 1 : -1);
                 }
 
+                // Обёртка времени
+                const wrappedTime = gsap.utils.wrap(0, tl.duration())(time);
                 if (time < 0 || time > tl.duration()) {
                     vars.modifiers = { time: gsap.utils.wrap(0, tl.duration()) };
                 }
 
-                lastIndexRef.current = newIndex;
                 vars.overwrite = true;
+                lastIndexRef.current = newIndex;
 
                 return vars.duration === 0
-                    ? tl.time(gsap.utils.wrap(0, tl.duration(), time))
+                    ? tl.time(wrappedTime)
                     : tl.tweenTo(time, vars);
             },
         }));
@@ -134,6 +137,8 @@ const HorizontalLoop = forwardRef<HorizontalLoopRef, HorizontalLoopProps>(
                 },
             });
 
+            timeWrap.current = gsap.utils.wrap(0, tl.duration());
+
             let startX = items[0].offsetLeft;
             for (let i = 0; i < totalItems; i++) {
                 const item = items[i];
@@ -145,20 +150,20 @@ const HorizontalLoop = forwardRef<HorizontalLoopRef, HorizontalLoopProps>(
                     xPercent: ((curX - distanceToLoop) / widths[i]) * 100,
                     duration: distanceToLoop / pixelsPerSecond,
                 }, 0)
-                .to(item, {
-                    opacity: opacity ? 0 : 1,
-                    duration: 0.3,
-                }, distanceToLoop / pixelsPerSecond)
-                .fromTo(item, {
-                    xPercent: ((curX - distanceToLoop + totalWidth) / widths[i]) * 100,
-                    opacity: opacity ? 0 : 1,
-                }, {
-                    xPercent: xPercents[i],
-                    opacity: 1,
-                    duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond,
-                    immediateRender: false,
-                }, distanceToLoop / pixelsPerSecond)
-                .add(`label${i}`, distanceToStart / pixelsPerSecond);
+                    .to(item, {
+                        opacity: opacity ? 0 : 1,
+                        duration: 0.3,
+                    }, distanceToLoop / pixelsPerSecond)
+                    .fromTo(item, {
+                        xPercent: ((curX - distanceToLoop + totalWidth) / widths[i]) * 100,
+                        opacity: opacity ? 0 : 1,
+                    }, {
+                        xPercent: xPercents[i],
+                        opacity: 1,
+                        duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond,
+                        immediateRender: false,
+                    }, distanceToLoop / pixelsPerSecond)
+                    .add(`label${i}`, distanceToStart / pixelsPerSecond);
 
                 times[i] = distanceToStart / pixelsPerSecond;
             }

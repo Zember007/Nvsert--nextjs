@@ -37,25 +37,31 @@ const SliderMain = () => {
     useEffect(() => {
         if (sliders.current.length < 5 || !whiteBgRef.current) return
         let timeoutIdBg: NodeJS.Timeout | null = null;
+        let timeoutId: NodeJS.Timeout | null = null;
 
-
+        let time = Date.now()
+        let enableList = true
 
 
         const loop: any = initSlider((index: number) => {
 
+            if (enableList && time + 800 <= Date.now()) {
+                sliders.current.forEach(el => {
+                    el.goToSlide(index)
+                })
+                enableList = false
+                time = Date.now()
+            }
 
+            let interval = time + 800 <= Date.now() ? 200 : time + 800 - Date.now() + 200
 
-
-
-
-
-            sliders.current.forEach(el => {
-                el.goToSlide(index)
-            })
-
-
-
-
+            timeoutId = setTimeout(() => {
+                time = Date.now()
+                enableList = true
+                sliders.current.forEach(el => {
+                    el.goToSlide(index)
+                })
+            }, interval)
 
 
         },
