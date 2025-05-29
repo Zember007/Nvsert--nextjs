@@ -62,35 +62,36 @@ const HorizontalLoop = forwardRef<HorizontalLoopRef, HorizontalLoopProps>(
             goToSlide(index: number) {
                 const tl = timelineRef.current;
                 const times = timesRef.current;
-                const length = times.length;
+                // const length = times.length;
 
                 if (!tl || !times.length) return;
 
-                const curIndex = tl.current();
-                if (Math.abs(index - curIndex) > length / 2) {
-                    index += index > curIndex ? -length : length;
-                }
+                // const curIndex = tl.current();
+                // if (Math.abs(index - curIndex) > length / 2) {
+                //     index += index > curIndex ? -length : length;
+                // }
 
-                const newIndex = gsap.utils.wrap(0, length, index);
-                let time = times[newIndex];
-                let vars: gsap.TweenVars = {};
+                // const newIndex = gsap.utils.wrap(0, length, index);
+                // let time = times[newIndex];
+                // let vars: gsap.TweenVars = {};
 
-                if ((time > tl.time()) !== (index > curIndex) && index !== curIndex) {
-                    time += tl.duration() * (index > curIndex ? 1 : -1);
-                }
+                // if ((time > tl.time()) !== (index > curIndex) && index !== curIndex) {
+                //     time += tl.duration() * (index > curIndex ? 1 : -1);
+                // }
 
-                // Обёртка времени
-                const wrappedTime = gsap.utils.wrap(0, tl.duration())(time);
-                if (time < 0 || time > tl.duration()) {
-                    vars.modifiers = { time: gsap.utils.wrap(0, tl.duration()) };
-                }
+                // // Обёртка времени
+                // const wrappedTime = gsap.utils.wrap(0, tl.duration())(time);
+                // if (time < 0 || time > tl.duration()) {
+                //     vars.modifiers = { time: gsap.utils.wrap(0, tl.duration()) };
+                // }
 
-                vars.overwrite = true;
-                lastIndexRef.current = newIndex;
+                // vars.overwrite = true;
+                // lastIndexRef.current = newIndex;
 
-                return vars.duration === 0
-                    ? tl.time(wrappedTime)
-                    : tl.tweenTo(time, vars);
+                // return vars.duration === 0
+                //     ? tl.time(wrappedTime)
+                //     : tl.tweenTo(time, vars);
+                tl.toIndex(index, { ease: "power3", duration: 0.725 });
             },
         }));
 
@@ -171,22 +172,20 @@ const HorizontalLoop = forwardRef<HorizontalLoopRef, HorizontalLoopProps>(
             // Методы для управления
             tl.current = () => getClosest(times, tl.time(), tl.duration());
             tl.toIndex = (index: number, vars: any = {}) => {
-                const length = times.length;
-                if (Math.abs(index - tl.current()) > length / 2) {
-                    index += index > tl.current() ? -length : length;
-                }
-                const newIndex = gsap.utils.wrap(0, length, index);
-                let time = times[newIndex];
-                if ((time > tl.time()) !== (index > tl.current()) && index !== tl.current()) {
+                vars = vars || {};
+                
+                (Math.abs(index - tl.current()) > length / 2) && (index += index > tl.current() ? -length : length); // always go in the shortest direction
+                let newIndex = gsap.utils.wrap(0, length, index),
+                    time = times[newIndex];
+                if (time > tl.time() !== index > tl.current() && index !== tl.current()) { // if we're wrapping the timeline's playhead, make the proper adjustments
                     time += tl.duration() * (index > tl.current() ? 1 : -1);
                 }
                 if (time < 0 || time > tl.duration()) {
-                    vars.modifiers = { time: gsap.utils.wrap(0, tl.duration()) };
+                    vars.modifiers = { time: timeWrap };
                 }
                 vars.overwrite = true;
-                return vars.duration === 0
-                    ? tl.time(gsap.utils.wrap(0, tl.duration(), time))
-                    : tl.tweenTo(time, vars);
+                
+                return vars.duration === 0 ? tl.time(gsap.utils.wrap(0, tl.duration(), time)) : tl.tweenTo(time, vars);
             };
             tl.next = (vars: any = {}) => tl.toIndex(tl.current() + 1, vars);
             tl.previous = (vars: any = {}) => tl.toIndex(tl.current() - 1, vars);
