@@ -64,7 +64,7 @@ const SliderMain = () => {
             // }, interval)
 
             sliders.current.forEach((el, i) => {
-                el.goToSlide(index, 1.6 - i * 0.15)
+                el.goToSlide(index, 1.8 - i * 0.15)
             })
 
         },
