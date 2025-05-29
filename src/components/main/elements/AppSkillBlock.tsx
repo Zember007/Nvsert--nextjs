@@ -31,11 +31,7 @@ const AppSkillBlock = (skill: any) => {
     willChange: 'transform'
   };
 
-  // const textStyle = {
-  //   transform: `translate3d(${(mousePX || 0) * 20 * 2}px, ${(mousePY || 0) * 20 * 2}px, 0) scale(1.1)`,
-  //   transition: 'transform 0.3s ease-out',
-  //   willChange: 'transform'
-  // };
+
 
 
   const handleMouseMove = (e: React.MouseEvent) => {

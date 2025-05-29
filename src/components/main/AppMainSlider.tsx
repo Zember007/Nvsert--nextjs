@@ -41,7 +41,7 @@ const SliderMain = () => {
 
 
 
-        initSlider((index: number) => {
+        const loop: any = initSlider((index: number) => {
 
 
 
@@ -70,6 +70,27 @@ const SliderMain = () => {
                     whiteBgRef.current?.classList.add('white')
                 }, 300)
             })
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    loop.next({ ease: "power3", duration: 0.725 })
+                }
+            },
+            { threshold: 0.5 }
+        );
+
+        if (divRef.current) {
+            observer.observe(divRef.current);
+        }
+
+
+        return () => {
+            if (divRef.current) {
+                observer.unobserve(divRef.current);
+            }
+
+        };
     }, [sliders, whiteBgRef])
 
     const divRef = useRef(null);
@@ -133,8 +154,8 @@ const SliderMain = () => {
                                             }}
                                             speed={10 + i * 2}
                                             paused={true}
-                                            // className="w-[500%] slider"
-                                            >
+                                        // className="w-[500%] slider"
+                                        >
                                             {slides.map((_, index) => (
                                                 <div key={index} >
                                                     <div className="flex flex-col l:gap-[15px] gap-[30px]  w-full">
