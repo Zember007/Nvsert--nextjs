@@ -31,7 +31,6 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
 
         if ((!emailRegex.test(e.contact.trim()) && isEmail) || (!phoneRegex.test(e.contact.trim()) && isPhone)) {
             setEmailError(true)
-            setEmailSuccessful(false)
             return;
         } else {
             setEmailError(false)
@@ -79,7 +78,6 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
 
         if ((!emailRegex.test(value.trim()) && isEmail) || (!phoneRegex.test(value.trim()) && isPhone)) {
             setEmailError(true)
-            setEmailSuccessful(false)
 
             if (isEmail) {
                 setContactData(prev => (
@@ -98,7 +96,6 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
             }
         } else {
             setEmailError(false)
-            setEmailSuccessful(true)
 
             if (isEmail) {
                 setContactData(prev => (
@@ -174,7 +171,6 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
     const [isPhone, setIsPhone] = useState(false);
     const [isEmail, setIsEmail] = useState(false);
     const [emailError, setEmailError] = useState(false);
-    const [emailSuccessful, setEmailSuccessful] = useState(false);
     const [failCheck, setFailCheck] = useState(false);
     const [successMessageVisible, setSuccessMessageVisible] = useState(false);
     const [contactData, setContactData] = useState({
@@ -265,9 +261,9 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                 >
                                     <AppCheckbox whiteBox={!bg} id={`check-phone${ids}`} successful={contactData.phone !== ''} fail={failCheck} checked={isPhone || contactData.phone !== ''}                                
                                         onChange={(value) => {
-                                         setIsPhone(value || contactData.phone !== ''); if (value || contactData.phone !== '') { setIsEmail(false); setEmailSuccessful(false) } }} label="Телефон" />
+                                         setIsPhone(value || contactData.phone !== ''); if (value || contactData.phone !== '') { setIsEmail(false);} }} label="Телефон" />
                                     <AppCheckbox whiteBox={!bg} id={`check-email${ids}`} successful={contactData.email !== ''} fail={failCheck} checked={isEmail || contactData.email !== ''}            
-                                        onChange={(value) => { setIsEmail(value || contactData.email !== ''); if (value || contactData.email !== '') { setIsPhone(false); setEmailSuccessful(false) } }} label="Email" />
+                                        onChange={(value) => { setIsEmail(value || contactData.email !== ''); if (value || contactData.email !== '') { setIsPhone(false);} }} label="Email" />
                                 </div>
                             </div>
 
