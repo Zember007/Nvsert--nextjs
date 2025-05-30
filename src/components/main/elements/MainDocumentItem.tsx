@@ -187,7 +187,7 @@ const MainDocumentItem = memo(({
 
             <div
                 className={`mx-[-30px] flex flex-col group/main cursor-pointer ${!active && 'hover:bg-[#34446D33] hover:backdrop-blur-[1px]'} rounded-[6px] relative`}>
-                <div className={`pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[-1] rounded-[6px] ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[transparent]`}></div>
+                <div className={`pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[1] rounded-[6px] ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[transparent]`}></div>
 
                 <div
                     onClick={handleItemClick}
