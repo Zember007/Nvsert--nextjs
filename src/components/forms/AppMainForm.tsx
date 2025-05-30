@@ -259,11 +259,25 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                 <div id={`bounce-checkbox${ids}`} className="pl-[10px] flex items-center gap-[30px]"
                                     onClick={() => { clearErrors('contact') }}
                                 >
-                                    <AppCheckbox whiteBox={!bg} id={`check-phone${ids}`} successful={contactData.phone !== ''} fail={failCheck} checked={isPhone || contactData.phone !== ''}                                
+                                    <AppCheckbox whiteBox={!bg} id={`check-phone${ids}`} successful={contactData.phone !== ''} fail={failCheck} checked={isPhone || contactData.phone !== ''}
                                         onChange={(value) => {
-                                         setIsPhone(value || contactData.phone !== ''); if (value || contactData.phone !== '') { setIsEmail(false);} }} label="Телефон" />
-                                    <AppCheckbox whiteBox={!bg} id={`check-email${ids}`} successful={contactData.email !== ''} fail={failCheck} checked={isEmail || contactData.email !== ''}            
-                                        onChange={(value) => { setIsEmail(value || contactData.email !== ''); if (value || contactData.email !== '') { setIsPhone(false);} }} label="Email" />
+                                            setIsPhone(value || contactData.phone !== ''); 
+                                            if (value || contactData.phone !== '') { 
+                                                setIsEmail(false); 
+                                            } else if(contactData.email !== '') {
+                                                setIsEmail(true);
+                                            }
+                                        }} label="Телефон" />
+                                    <AppCheckbox whiteBox={!bg} id={`check-email${ids}`} successful={contactData.email !== ''} fail={failCheck} checked={isEmail || contactData.email !== ''}
+                                        onChange={(value) => {
+                                            setIsEmail(value || contactData.email !== '');
+                                            if (value || contactData.email !== '') {
+                                                setIsPhone(false);
+                                            } else if(contactData.phone !== '') {
+                                                setIsPhone(true);
+                                            }
+
+                                        }} label="Email" />
                                 </div>
                             </div>
 
