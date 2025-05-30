@@ -17,9 +17,17 @@ export function middleware(req: NextRequest) {
   if (targetUrl) {
     const requestHeaders = new Headers(req.headers);
 
-    // Добавляем заголовки
-    requestHeaders.set('X-Access-Token', process.env.apiToken || '');
-    requestHeaders.set('Authorization', 'Basic Y29mZmVlOmNvZmZlZQ==');
+    // Используем переменные окружения для токенов
+    const accessToken = process.env.API_ACCESS_TOKEN;
+    const authToken = process.env.API_AUTH_TOKEN;
+
+    if (accessToken) {
+      requestHeaders.set('X-Access-Token', accessToken);
+    }
+    
+    if (authToken) {
+      requestHeaders.set('Authorization', `Bearer ${authToken}`);
+    }
 
     // Перезаписываем запрос с новыми заголовками
     return NextResponse.rewrite(new URL(targetUrl, req.url), {
