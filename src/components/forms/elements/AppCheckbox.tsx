@@ -2,7 +2,6 @@ import React, { ChangeEvent } from 'react';
 
 interface CustomCheckboxProps {
     checked: boolean;
-    onClick: () => void;
     onChange: (checked: boolean) => void;
     label?: string;
     fail?: boolean;
@@ -18,8 +17,7 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
     fail,
     successful,
     id,
-    whiteBox,
-    onClick
+    whiteBox
 }) => {
     // Генерируем уникальный id один раз при создании компонента
 
@@ -34,7 +32,6 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
             onClick={(e) => {
                 if (labelRef.current?.contains(e.target as Node)) return;
                 onChange(!checked)
-                onClick()
             }
             }>
             <input
