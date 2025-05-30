@@ -238,6 +238,7 @@ const MainDocumentItem = memo(({
                         <div className="s:p-[30px] p-[15px] document-item  flex flex-col l:flex-row gap-[10px] ">
                             <div className="w-[60%] s:gap-0 gap-[20px] flex flex-col m:flex-row m:items-stretch">
                                 <div className='m:m-0 m-auto'>
+                                    
                                     <div ref={photoRef}
                                         onClick={() => setPhoto()}
                                         className={`${!active && 'pointer-events-none'} transition-all duration-200 `}>
