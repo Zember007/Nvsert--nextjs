@@ -1,61 +1,107 @@
-
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, memo } from 'react';
 import { filterPrepositions } from '@/hook/filter';
 import { PhotoView } from '@/assets/lib/react-photo-view';
 import { useButton } from '@/hook/useButton';
 import { useAnimation, motion } from "framer-motion";
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 
+// Выносим анимационные настройки
+const ANIMATION_SETTINGS = {
+    duration: 0.6,
+    bounce: 5,
+    delay: 0,
+    ease: [0.34, 1.56, 0.64, 1],
+    times: [0, 0.2, 0.5, 0.8, 1],
+    openY: [0, 26, 0, 0, 0],
+    closeY: [60, -6, 0, 0, 0],
+    opacity: [0, 1, 1, 1, 1],
+};
 
+// Компонент кнопки
+const ActionButton = memo(({ onClick, icon, text, className }) => (
+    <button onClick={onClick} className={className}>
+        <span className="justify-center w-full m:flex items-center px-[16px] py-[9px] relative overflow-hidden">
+            <span className="sendIconLeft transition-all ease-in">
+                {icon}
+            </span>
+            <span className="transition-all ease-in sendText">{text}</span>
+        </span>
+    </button>
+));
 
-const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, price, duration, active, setActive }) => {
+ActionButton.displayName = 'ActionButton';
+
+// Компонент списка документов
+const DocumentList = memo(({ content1, listHidden, setListHidden }) => (
+    <div className="flex gap-[10px] flex-col grow m:max-w-[500px]">
+        {content1.map((cont, contIndex) => (
+            <div key={contIndex} className='flex gap-[10px] flex-col items-start'>
+                <p className={`${contIndex === 0 ? 'text-[19px]' : 'text-[16px]'} font-bold`}>
+                    {filterPrepositions(cont.title)}
+                </p>
+                {cont.subtitle && <span>{cont.subtitle}</span>}
+                <ul className='list-disc pl-[20px] flex flex-col gap-[6px]'>
+                    {cont.list.map((list, index) => (
+                        <li 
+                            className={`${listHidden && (index > 2 || contIndex > 0) && 'hidden'}`} 
+                            key={index}
+                        >
+                            {filterPrepositions(list)}
+                        </li>
+                    ))}
+                </ul>
+                {cont.list.length > 3 && (
+                    <button
+                        className='text-[#34446D] font-bold'
+                        onClick={() => setListHidden(!listHidden)}
+                    >
+                        {listHidden ? 'Показать полный список документов 🡣' : 'Скрыть 🡡'}
+                    </button>
+                )}
+            </div>
+        ))}
+    </div>
+));
+
+DocumentList.displayName = 'DocumentList';
+
+const MainDocumentItem = memo(({ 
+    setPhoto, 
+    img, 
+    index, 
+    title, 
+    content, 
+    content1, 
+    price, 
+    duration, 
+    active, 
+    setActive 
+}) => {
     const controls = useAnimation();
-
     const [listHidden, setListHidden] = useState(true);
-
-    const { setButtonRef, setWrapperRef } = useButton()
+    const [photoWidth, setPhotoWidth] = useState(0);
+    
+    const { setButtonRef, setWrapperRef } = useButton();
+    const { openDefaultModal } = useHeaderContext();
 
     const wrapperRef = useRef(null);
     const photoRef = useRef(null);
-
     const containerPhotoRef = useRef(null);
     const LinkServiceRef = useRef(null);
     const smallPhotoRef = useRef(null);
-    const [photoWidth, setPhotoWidth] = useState(0);
 
-
+    // Вычисление ширины фото
     useEffect(() => {
-        const container = containerPhotoRef.current
+        const container = containerPhotoRef.current;
+        if (!container) return;
 
-        if (!container) return
-
-        const width = container.offsetHeight / img.height * img.width
-
-        setPhotoWidth(width >= 190 ? width : 190)
-
-
-    }, [containerPhotoRef.current])
-
-
-
-
-
-
-    const defaultSettings = {
-        duration: 0.6,
-        bounce: 5,
-        delay: 0,
-        ease: [0.34, 1.56, 0.64, 1], // Кастомная cubic-bezier кривая
-        times: [0, 0.2, 0.5, 0.8, 1], // Временные точки
-        openY: [0, 26, 0, 0, 0], // Эффект отскока при открытии
-        closeY: [60, -6, 0, 0, 0], // Эффект отскока при закрытии
-        opacity: [0, 1, 1, 1, 1],
-    };
-
-
+        const width = container.offsetHeight / img.height * img.width;
+        setPhotoWidth(width >= 190 ? width : 190);
+    }, [containerPhotoRef.current, img.height, img.width]);
 
     const isInViewport = (el) => {
+        if (!el) return false;
         const rect = el.getBoundingClientRect();
         return (
             rect.top >= 0 &&
@@ -64,84 +110,65 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
     };
+
     const scrollToElement = (el) => {
+        const documents_box = document.getElementById('documents_box');
+        if (!documents_box || !el) return;
 
-        const documents_box = document.getElementById('documents_box')
-        if (!documents_box || !el) return
-
+        const scrollOptions = { behavior: 'smooth' };
+        
         if (index === 0) {
-            documents_box.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
+            documents_box.scrollIntoView({ ...scrollOptions, block: 'start' });
         } else if (index === 17) {
-            documents_box.scrollIntoView({ behavior: 'smooth', block: 'end' });
+            documents_box.scrollIntoView({ ...scrollOptions, block: 'end' });
         } else {
-            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            el.scrollIntoView({ ...scrollOptions, block: 'center' });
         }
-
-
     };
 
-
-
-    // Применение анимации в useEffect:
     useEffect(() => {
-        if (active) {
-            controls.start({
-                y: defaultSettings.openY, // Используем openY для отскока
-                opacity: defaultSettings.opacity,
-                transition: {
-                    duration: defaultSettings.duration,
-                    ease: defaultSettings.ease,
-                    times: defaultSettings.times
-                }
-            });
+        if (!active) return;
 
-            const el = wrapperRef.current;
-            if (!el) return;
-
-            if (!isInViewport(el)) {
-
-                setTimeout(() => {
-                    scrollToElement(el);
-                }, 200)
-
+        controls.start({
+            y: ANIMATION_SETTINGS.openY,
+            opacity: ANIMATION_SETTINGS.opacity,
+            transition: {
+                duration: ANIMATION_SETTINGS.duration,
+                ease: ANIMATION_SETTINGS.ease,
+                times: ANIMATION_SETTINGS.times
             }
+        });
+
+        const el = wrapperRef.current;
+        if (el && !isInViewport(el)) {
+            setTimeout(() => scrollToElement(el), 200);
         }
-    }, [active]);
+    }, [active, controls]);
 
+    const handleItemClick = (event) => {
+        if (photoRef.current?.contains(event.target)) return;
+        if (LinkServiceRef.current?.contains(event.target) && active) return;
+        setActive(!active);
+    };
 
-    const { openDefaultModal } = useHeaderContext();
-
-
-
+    const commonButtonClasses = 'btnIconAn doc-btn tariff text-[20px] group hover:bg-[#34446D] hover:text-[#FFF] font-bold tracking-normal m:flex items-center gap-[10px] text-[#34446D] rounded-[4px] border-[#34446D] border border-solid leading-[1]';
 
     return (
-        <div className={`wrapper document-wrapper-border group/wrapper relative`}
-            ref={wrapperRef}
-        >
-            <div className={`absolute top-[-1px] bottom-[-1px] border-group right-[16px] left-[16px] ${!active && ' group-hover/wrapper:!border-[transparent]'}`}
+        <div className="wrapper document-wrapper-border group/wrapper relative" ref={wrapperRef}>
+            <div 
+                className={`absolute top-[-1px] bottom-[-1px] border-group right-[16px] left-[16px] ${!active && ' group-hover/wrapper:!border-[transparent]'}`}
                 style={{
-                    borderTopColor: (active) ? 'transparent' : '#93969D',
-                    borderBottomColor: (active) ? 'transparent' : '#93969D'
+                    borderTopColor: active ? 'transparent' : '#93969D',
+                    borderBottomColor: active ? 'transparent' : '#93969D'
                 }}
-            >
-            </div>
+            />
 
             <div
                 className={`mx-[-30px]  flex flex-col  group/main cursor-pointer ${!active && 'hover:bg-[#34446D33] hover:backdrop-blur-[1px]'} rounded-[6px] relative`}>
                 <div className={`pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[-1] rounded-[6px] ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[transparent]`}></div>
 
-
-
                 <div
-                    onClick={(event) => {
-                        if (photoRef.current?.contains(event.target)) return;
-                        if (LinkServiceRef.current?.contains(event.target) && active) return;
-                        setActive(!active);
-
-
-
-                    }}
+                    onClick={handleItemClick}
                     className={`materialBtn rounded-[6px] overflow-hidden text-left group/window box-scale active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] transition-scale ${!active ? '' : ' bg-[#5B6788]  shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset]'} active:bg-[#5B6788]  px-[30px]  relative w-full  z-[0]`}>
 
                     <div className={`border-[transparent] border-solid border ${active && '!border-[#000]'} absolute top-[-1px] bottom-[-1px] right-[0] z-[1000] rounded-[6px] left-[0] transition-all duration-300`}></div>
@@ -262,55 +289,26 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
 
                             <div className="w-[40%] items-start flex gap-[20px] flex-col   text-[#000]">
 
-                                <div className="flex gap-[10px] flex-col grow  m:max-w-[500px]">
-                                    {
-                                        content1.map((cont, contIndex) => (
-                                            <div key={contIndex} className='flex gap-[10px] flex-col items-start'>
-                                                <p className={`${contIndex === 0 ? 'text-[19px]' : 'text-[16px]'} font-bold`}>{filterPrepositions(cont.title)}</p>
-
-                                                {cont.subtitle && <span>{cont.subtitle}</span>}
-
-                                                <ul className=' list-disc pl-[20px] flex flex-col gap-[6px]'>
-
-                                                    {
-                                                        cont.list.map((list, index) => (
-                                                            <li className={`${listHidden && (index > 2 || contIndex > 0) && 'hidden'}`} key={index}>{filterPrepositions(list)}</li>
-                                                        ))
-                                                    }
-
-                                                </ul>
-
-
-                                                {
-                                                    cont.list.length > 3 && <button
-                                                        className='text-[#34446D] font-bold'
-                                                        onClick={() => setListHidden(!listHidden)}
-                                                    >{listHidden ? 'Показать полный список документов 🡣' : 'Скрыть 🡡'}</button>
-                                                }
-                                            </div>
-                                        ))
-                                    }
-                                </div>
+                                <DocumentList 
+                                    content1={content1} 
+                                    listHidden={listHidden} 
+                                    setListHidden={setListHidden} 
+                                />
 
                                 <motion.div
                                     animate={controls}
                                     initial={{ y: 20, opacity: 0 }}
                                     className="tariff-wrap w-[250px]" ref={setWrapperRef}>
-                                    <button
-                                        onClick={() => { openDefaultModal('orderForm') }}
-                                        ref={setButtonRef} className='btnIconAn doc-btn  border-[#34446D] border border-solid tariff text-[20px] transition-all duration-300 font-bold tracking-normal  gap-[6px]  text-[#34446D] hover:text-[#FFF] rounded-[4px]  group hover:bg-[#34446D]  leading-[1]'>
-                                        <span className="justify-center m:flex items-center px-[16px] py-[9px] relative overflow-hidden">
-                                            <span className="sendIconLeft transition-all ease-in">
-                                                <svg className='group-hover:*:fill-[#FFF] rotate-[45deg] *:transition-all ' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M29.0627 0.9375L0.930664 12.1875L11.426 16.9336L26.2502 3.75L13.0666 18.5742L17.8127 29.0625L29.0627 0.9375Z" fill="#34446D" />
-                                                </svg>
-                                            </span>
-                                            <span
-                                                className="transition-all ease-in sendText"
-                                            >Оформить заявку</span>                      
-                                        </span>
-
-                                    </button>
+                                    <ActionButton
+                                        onClick={() => openDefaultModal('orderForm')}
+                                        icon={
+                                            <svg className='group-hover:*:fill-[#FFF] rotate-[45deg] *:transition-all' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M29.0627 0.9375L0.930664 12.1875L11.426 16.9336L26.2502 3.75L13.0666 18.5742L17.8127 29.0625L29.0627 0.9375Z" fill="#34446D" />
+                                            </svg>
+                                        }
+                                        text="Оформить заявку"
+                                        className={commonButtonClasses}
+                                    />
                                 </motion.div>
 
 
@@ -334,6 +332,8 @@ const MainDocumentItem = ({ setPhoto, img, index, title, content, content1, pric
 
         </div >
     );
-};
+});
+
+MainDocumentItem.displayName = 'MainDocumentItem';
 
 export default MainDocumentItem;

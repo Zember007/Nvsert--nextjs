@@ -5,9 +5,7 @@ import Image from 'next/image';
 import { slides } from './utils';
 import { filterPrepositions } from '@/hook/filter';
 import HorizontalSlide from './elements/HorisontalSlide'
-// import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 import { useButton } from '@/hook/useButton';
 import { useHeaderContext } from '../contexts/HeaderContext';
 import { useTranslation } from 'react-i18next';
