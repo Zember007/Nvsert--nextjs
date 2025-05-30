@@ -247,10 +247,10 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                     }}
                                     className="w-full relative z-[1]">
                                     <AppInput
-                                    defaultValue={isEmail ? contactData.email : contactData.phone}
+                                        defaultValue={isEmail ? contactData.email : isPhone ? contactData.phone : ''}
                                         className="!bg-[#2a2a2a] focus:!bg-[#21262F] [&:not(:placeholder-shown)]:!bg-[#21262F]"
                                         title={isPhone ? 'Телефон' : isEmail ? 'Email' : ''}
-                                        inputName="contact"                                        
+                                        inputName="contact"
                                         mask={isPhone ? "phone" : ''}
                                         type={isPhone ? "phone" : 'text'}
                                         fail={emailError}
@@ -263,8 +263,26 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                 <div id={`bounce-checkbox${ids}`} className="pl-[10px] flex items-center gap-[30px]"
                                     onClick={() => { clearErrors('contact') }}
                                 >
-                                    <AppCheckbox whiteBox={!bg} id={`check-phone${ids}`} successful={contactData.phone !== ''} fail={failCheck} checked={isPhone || contactData.phone !== ''} onChange={(value) => { setIsPhone(value); if (value) { setIsEmail(false); setEmailSuccessful(false) } }} label="Телефон" />
-                                    <AppCheckbox whiteBox={!bg} id={`check-email${ids}`} successful={contactData.email !== ''} fail={failCheck} checked={isEmail || contactData.email !== ''} onChange={(value) => { setIsEmail(value); if (value) { setIsPhone(false); setEmailSuccessful(false) } }} label="Email" />
+                                    <AppCheckbox whiteBox={!bg} id={`check-phone${ids}`} successful={contactData.phone !== ''} fail={failCheck} checked={isPhone || contactData.phone !== ''}
+                                        onClick={
+                                            () => {
+                                                if (contactData.phone !== '') {
+                                                    setIsPhone(true);
+                                                    setIsEmail(false);
+                                                }
+                                            }
+                                        }
+                                        onChange={(value) => { setIsPhone(value); if (value) { setIsEmail(false); setEmailSuccessful(false) } }} label="Телефон" />
+                                    <AppCheckbox whiteBox={!bg} id={`check-email${ids}`} successful={contactData.email !== ''} fail={failCheck} checked={isEmail || contactData.email !== ''}
+                                        onClick={
+                                            () => {
+                                                if (contactData.email !== '') {
+                                                    setIsPhone(false);
+                                                    setIsEmail(true);
+                                                }
+                                            }
+                                        }
+                                        onChange={(value) => { setIsEmail(value); if (value) { setIsPhone(false); setEmailSuccessful(false) } }} label="Email" />
                                 </div>
                             </div>
 
