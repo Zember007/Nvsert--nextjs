@@ -24,11 +24,11 @@ export interface PhotoViewProps {
     /**
      * 子节点，一般为缩略图
      */
-    children?: any;
+    children?: React.ReactElement;
     /**
      * 触发的事件
      */
     triggers?: ('onClick' | 'onDoubleClick')[];
 }
-declare const PhotoView: ({ src, render, overlay, width, height, triggers, children, }: PhotoViewProps) => import("react").DetailedReactHTMLElement<import("react").HTMLProps<HTMLElement>, HTMLElement>;
+declare const PhotoView: ({ src, render, overlay, width, height, triggers, children, }: PhotoViewProps) => import("react").ReactElement<unknown, string | import("react").JSXElementConstructor<any>>;
 export default PhotoView;

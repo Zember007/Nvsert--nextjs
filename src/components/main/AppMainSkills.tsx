@@ -62,16 +62,19 @@ const AppMainSkills = () => {
                 <div className="flex flex-col">
                     <div className="flex xl:grid grid-cols-4 l:gap-[20px]">
                         {
-                            skillsData.map((skill, index) => (
-                                <div key={index}>
-                                    {(skill.empty) ? (
-                                        <div></div>
-                                    )
-                                        :
-                                        <AppSkillBlock title={t(`MainSkills.${skill.key}.title`)} text={t(`MainSkills.${skill.key}.text`, { returnObjects: true })} index={index} {...skill} isVisible={isVisible} />
-                                    }
-                                </div>
-                            ))
+                            skillsData.map((skill, index) => {
+                                if (skill.empty) return <div key={index}></div>;
+
+                                const props = {
+                                    title: t(`MainSkills.${skill.key}.title`),
+                                    text: t(`MainSkills.${skill.key}.text`, { returnObjects: true }),
+                                    index,
+                                    ...skill,
+                                    isVisible,
+                                };
+
+                                return <AppSkillBlock key={index} {...props} />;
+                            })
                         }
                     </div>
 
