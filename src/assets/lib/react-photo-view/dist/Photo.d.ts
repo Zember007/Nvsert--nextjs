@@ -15,4 +15,4 @@ export interface IPhotoProps extends React.HTMLAttributes<HTMLElement> {
     loadingElement?: React.ReactElement;
     brokenElement?: React.ReactElement | ((photoProps: BrokenElementParams) => React.ReactElement);
 }
-export default function Photo({ src, loaded, broken, className, onPhotoLoad, loadingElement, brokenElement, ...restProps }: IPhotoProps): import("react/jsx-runtime").JSX.Element;
+export default function Photo({ src, loaded, broken, className, onPhotoLoad, loadingElement, brokenElement, ...restProps }: IPhotoProps): React.JSX.Element;

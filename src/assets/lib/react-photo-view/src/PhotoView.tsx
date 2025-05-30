@@ -1,4 +1,4 @@
-import type React from 'react';
+import type { FC } from 'react';
 import { useImperativeHandle, Children, cloneElement, useContext, useEffect, useMemo, useRef } from 'react';
 import useInitial from './hooks/useInitial';
 import useMethods from './hooks/useMethods';
@@ -37,7 +37,7 @@ export interface PhotoViewProps {
   triggers?: ('onClick' | 'onDoubleClick')[];
 }
 
-const PhotoView: React.FC<PhotoViewProps> = ({
+const PhotoView = ({
   src,
   render,
   overlay,
@@ -45,7 +45,7 @@ const PhotoView: React.FC<PhotoViewProps> = ({
   height,
   triggers = ['onClick'],
   children,
-}) => {
+}: PhotoViewProps) => {
   const photoContext = useContext<PhotoContextType>(PhotoContext);
   const key = useInitial(() => photoContext.nextId());
   const originRef = useRef<HTMLElement>(null);
@@ -56,7 +56,7 @@ const PhotoView: React.FC<PhotoViewProps> = ({
     return () => {
       photoContext.remove(key);
     };
-  }, []);
+  }, [key, photoContext]);
 
   function invokeChildrenFn(eventName: string, e: React.SyntheticEvent) {
     if (children) {
@@ -78,12 +78,12 @@ const PhotoView: React.FC<PhotoViewProps> = ({
   });
 
   const eventListeners = useMemo(() => {
-    const listener = {};
+    const listener: Record<string, (e: React.MouseEvent) => void> = {};
     triggers.forEach((eventName) => {
       listener[eventName] = fn.show.bind(null, eventName);
     });
     return listener;
-  }, []);
+  }, [triggers, fn]);
 
   useEffect(() => {
     photoContext.update({
@@ -95,10 +95,10 @@ const PhotoView: React.FC<PhotoViewProps> = ({
       width,
       height,
     });
-  }, [src]);
+  }, [key, src, fn.render, overlay, width, height, photoContext]);
 
   if (children) {
-    return Children.only(cloneElement(children, { ...eventListeners, ref: originRef }  as React.HTMLProps<HTMLElement>));
+    return Children.only(cloneElement(children, { ...eventListeners, ref: originRef } as React.HTMLProps<HTMLElement>));
   }
   return null;
 };

@@ -10,5 +10,5 @@ type PhotoProviderState = {
     visible: boolean;
     index: number;
 };
-export default function PhotoProvider({ children, onIndexChange, onVisibleChange, ...restProps }: PhotoProviderProps): import("react/jsx-runtime").JSX.Element;
+export default function PhotoProvider({ children, onIndexChange, onVisibleChange, ...restProps }: PhotoProviderProps): React.JSX.Element;
 export {};

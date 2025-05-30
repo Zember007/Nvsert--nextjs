@@ -61,8 +61,8 @@ const DocumentList = memo(({ content1, listHidden, setListHidden }: DocumentList
                 {cont.subtitle && <span>{cont.subtitle}</span>}
                 <ul className='list-disc pl-[20px] flex flex-col gap-[6px]'>
                     {cont.list.map((list, index) => (
-                        <li 
-                            className={`${listHidden && (index > 2 || contIndex > 0) && 'hidden'}`} 
+                        <li
+                            className={`${listHidden && (index > 2 || contIndex > 0) && 'hidden'}`}
                             key={index}
                         >
                             {filterPrepositions(list)}
@@ -84,22 +84,22 @@ const DocumentList = memo(({ content1, listHidden, setListHidden }: DocumentList
 
 DocumentList.displayName = 'DocumentList';
 
-const MainDocumentItem = memo(({ 
-    setPhoto, 
-    img, 
-    index, 
-    title, 
-    content, 
-    content1, 
-    price, 
-    duration, 
-    active, 
-    setActive 
+const MainDocumentItem = memo(({
+    setPhoto,
+    img,
+    index,
+    title,
+    content,
+    content1,
+    price,
+    duration,
+    active,
+    setActive
 }: MainDocumentItemProps) => {
     const controls = useAnimation();
     const [listHidden, setListHidden] = useState(true);
     const [photoWidth, setPhotoWidth] = useState(0);
-    
+
     const { setButtonRef, setWrapperRef } = useButton();
     const { openDefaultModal } = useHeaderContext();
 
@@ -133,11 +133,11 @@ const MainDocumentItem = memo(({
         const documents_box = document.getElementById('documents_box');
         if (!documents_box || !el) return;
 
-        const scrollOptions: ScrollIntoViewOptions = { 
+        const scrollOptions: ScrollIntoViewOptions = {
             behavior: 'smooth',
             block: 'center'
         };
-        
+
         if (index === 0) {
             documents_box.scrollIntoView({ ...scrollOptions, block: 'start' });
         } else if (index === 17) {
@@ -177,7 +177,7 @@ const MainDocumentItem = memo(({
 
     return (
         <div className="wrapper document-wrapper-border group/wrapper relative" ref={wrapperRef}>
-            <div 
+            <div
                 className={`absolute top-[-1px] bottom-[-1px] border-group right-[16px] left-[16px] ${!active && ' group-hover/wrapper:!border-[transparent]'}`}
                 style={{
                     borderTopColor: active ? 'transparent' : '#93969D',
@@ -238,21 +238,26 @@ const MainDocumentItem = memo(({
                         <div className="s:p-[30px] p-[15px] document-item  flex flex-col l:flex-row gap-[10px] ">
                             <div className="w-[60%] s:gap-0 gap-[20px] flex flex-col m:flex-row m:items-stretch">
                                 <div className='m:m-0 m-auto'>
-                                    
-                                    <div ref={photoRef}
-                                        onClick={() => setPhoto()}
-                                        className={`${!active && 'pointer-events-none'} transition-all duration-200 `}>
-                                        <motion.div
-                                            initial={{ y: 20, opacity: 0 }}
-                                            animate={controls}
-                                            className="!shadow-none border-[0.2px] solid border-[#A4A4A4] overflow-hidden rounded-[5px]">
-                                            <Image
-                                                alt='document' src={img}
-                                                width={photoWidth || 190}
-                                                height={photoWidth / img.width * img.height || 267}
-                                                className={`transition-all duration-200 h-auto`} />
-                                        </motion.div>
-                                    </div>
+                                    <PhotoView
+                                        src={img.src}
+                                        width={475}
+                                        height={667}
+                                    >
+                                        <div ref={photoRef}
+                                            onClick={() => setPhoto()}
+                                            className={`${!active && 'pointer-events-none'} transition-all duration-200 `}>
+                                            <motion.div
+                                                initial={{ y: 20, opacity: 0 }}
+                                                animate={controls}
+                                                className="!shadow-none border-[0.2px] solid border-[#A4A4A4] overflow-hidden rounded-[5px]">
+                                                <Image
+                                                    alt='document' src={img}
+                                                    width={photoWidth || 190}
+                                                    height={photoWidth / img.width * img.height || 267}
+                                                    className={`transition-all duration-200 h-auto`} />
+                                            </motion.div>
+                                        </div>
+                                    </PhotoView>
                                 </div>
 
                                 <div ref={containerPhotoRef} className="grow flex justify-center">
@@ -281,7 +286,7 @@ const MainDocumentItem = memo(({
                                                     </span>
                                                     <span
                                                         className="transition-all ease-in sendText"
-                                                    >Перейти в услугу</span>                                    
+                                                    >Перейти в услугу</span>
                                                 </span>
                                             </button>
                                         </motion.div>
@@ -290,10 +295,10 @@ const MainDocumentItem = memo(({
                             </div>
 
                             <div className="w-[40%] items-start flex gap-[20px] flex-col   text-[#000]">
-                                <DocumentList 
-                                    content1={content1} 
-                                    listHidden={listHidden} 
-                                    setListHidden={setListHidden} 
+                                <DocumentList
+                                    content1={content1}
+                                    listHidden={listHidden}
+                                    setListHidden={setListHidden}
                                 />
 
                                 <motion.div

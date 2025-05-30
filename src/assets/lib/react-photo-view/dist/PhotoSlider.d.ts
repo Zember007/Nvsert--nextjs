@@ -10,4 +10,4 @@ export interface IPhotoSliderProps extends PhotoProviderBase {
     afterClose?: () => void;
     direction?: 'ltr' | 'rtl';
 }
-export default function PhotoSlider(props: IPhotoSliderProps): import("react/jsx-runtime").JSX.Element;
+export default function PhotoSlider(props: IPhotoSliderProps): React.JSX.Element;

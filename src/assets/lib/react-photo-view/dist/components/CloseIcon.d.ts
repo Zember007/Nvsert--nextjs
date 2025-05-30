@@ -1,2 +1,3 @@
-declare function CloseIcon(props: any): import("react/jsx-runtime").JSX.Element;
+import React from 'react';
+declare function CloseIcon(props: any): React.JSX.Element;
 export default CloseIcon;

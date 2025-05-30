@@ -1,4 +1,4 @@
 import React from 'react';
 import './Spinner.less';
-declare function Spinner({ className, ...props }: React.HTMLAttributes<HTMLElement>): import("react/jsx-runtime").JSX.Element;
+declare function Spinner({ className, ...props }: React.HTMLAttributes<HTMLElement>): React.JSX.Element;
 export default Spinner;
