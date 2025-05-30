@@ -1,4 +1,4 @@
-
+'use client'
 import Provider from "./layout/Provider"
 import '@/assets/styles/base/_variables.scss'
 import '@/assets/styles/base/_mixins.scss'
