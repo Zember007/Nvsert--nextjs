@@ -18,7 +18,7 @@ import { useAnimation, motion } from "framer-motion";
 import { filterPrepositions } from "@/hook/filter";
 
 
-const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }: { btnText: string; bg?: boolean; close?: () => void; BounceWrapper?: () => void; active?: boolean; countTrigger?:number }) => {
+const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }: { btnText: string; bg?: boolean; close?: () => void; BounceWrapper?: () => void; active?: boolean; countTrigger?: number }) => {
     const { setButtonRef, setWrapperRef } = useButton();
 
     const onSubmit = async (e: any) => {
@@ -45,13 +45,15 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
             }
         }
 
+        formData.append('email', contactData.email);
+        formData.append('phone', contactData.phone);
+
         try {
             const response = await axios.post('/api/feedback', formData);
             if (response.status === 200 || 201) {
                 reset();
                 setIsPhone(false);
                 setIsEmail(false);
-                // openDefaultModal('successMessage');
                 successVisible()
 
             }
@@ -79,11 +81,43 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
             setEmailError(true)
             setEmailSuccessful(false)
 
-            return;
+            if (isEmail) {
+                setContactData(prev => (
+                    {
+                        ...prev,
+                        email: ''
+                    }
+                ))
+            } else {
+                setContactData(prev => (
+                    {
+                        ...prev,
+                        phone: ''
+                    }
+                ))
+            }
         } else {
             setEmailError(false)
             setEmailSuccessful(true)
+
+            if (isEmail) {
+                setContactData(prev => (
+                    {
+                        ...prev,
+                        email: value.trim()
+                    }
+                ))
+            } else {
+                setContactData(prev => (
+                    {
+                        ...prev,
+                        phone: value.trim()
+                    }
+                ))
+            }
         }
+
+
     }
 
     const methods = useForm({
@@ -143,9 +177,14 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
     const [emailSuccessful, setEmailSuccessful] = useState(false);
     const [failCheck, setFailCheck] = useState(false);
     const [successMessageVisible, setSuccessMessageVisible] = useState(false);
+    const [contactData, setContactData] = useState({
+        phone: '',
+        email: ''
+    });
+
 
     useEffect(() => {
-        setFailCheck(false)        
+        setFailCheck(false)
         setFocus('contact');
     }, [isPhone, isEmail])
 
@@ -208,9 +247,10 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                     }}
                                     className="w-full relative z-[1]">
                                     <AppInput
+                                    defaultValue={isEmail ? contactData.email : contactData.phone}
                                         className="!bg-[#2a2a2a] focus:!bg-[#21262F] [&:not(:placeholder-shown)]:!bg-[#21262F]"
                                         title={isPhone ? 'Телефон' : isEmail ? 'Email' : ''}
-                                        inputName="contact"
+                                        inputName="contact"                                        
                                         mask={isPhone ? "phone" : ''}
                                         type={isPhone ? "phone" : 'text'}
                                         fail={emailError}
@@ -223,8 +263,8 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                 <div id={`bounce-checkbox${ids}`} className="pl-[10px] flex items-center gap-[30px]"
                                     onClick={() => { clearErrors('contact') }}
                                 >
-                                    <AppCheckbox whiteBox={!bg} id={`check-phone${ids}`} successful={emailSuccessful} fail={failCheck} checked={isPhone} onChange={(value) => { setIsPhone(value); if (value) { setIsEmail(false); setEmailSuccessful(false) } }} label="Телефон" />
-                                    <AppCheckbox whiteBox={!bg} id={`check-email${ids}`} successful={emailSuccessful} fail={failCheck} checked={isEmail} onChange={(value) => { setIsEmail(value); if (value) { setIsPhone(false); setEmailSuccessful(false) } }} label="Email" />
+                                    <AppCheckbox whiteBox={!bg} id={`check-phone${ids}`} successful={contactData.phone !== ''} fail={failCheck} checked={isPhone || contactData.phone !== ''} onChange={(value) => { setIsPhone(value); if (value) { setIsEmail(false); setEmailSuccessful(false) } }} label="Телефон" />
+                                    <AppCheckbox whiteBox={!bg} id={`check-email${ids}`} successful={contactData.email !== ''} fail={failCheck} checked={isEmail || contactData.email !== ''} onChange={(value) => { setIsEmail(value); if (value) { setIsPhone(false); setEmailSuccessful(false) } }} label="Email" />
                                 </div>
                             </div>
 
@@ -257,7 +297,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                         </span>
                                         <span
                                             className="transition-all ease-in sendText"
-                                        >{btnText}</span>            
+                                        >{btnText}</span>
                                     </span>
                                 </button>
                             </div>
