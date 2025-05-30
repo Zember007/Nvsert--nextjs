@@ -43,23 +43,6 @@ const SliderMain = () => {
 
         const loop: any = initSlider((index: number) => {
 
-            // if (enableList && time + 800 <= Date.now()) {
-            //     sliders.current.forEach(el => {
-            //         el.goToSlide(index)
-            //     })
-            //     enableList = false
-            //     time = Date.now()
-            // }
-
-            // let interval = time + 800 <= Date.now() ? 200 : time + 800 - Date.now() + 200
-
-            // timeoutId = setTimeout(() => {
-            //     time = Date.now()
-            //     enableList = true
-            //     sliders.current.forEach(el => {
-            //         el.goToSlide(index)
-            //     })
-            // }, interval)
 
             sliders.current.forEach((el, i) => {
                 el.goToSlide(index, 1.8 - i * 0.15)

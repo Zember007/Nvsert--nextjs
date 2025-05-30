@@ -4,134 +4,116 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import '@/assets/styles/sections/main/animation/documents.scss'
 import { PhotoProvider } from '@/assets/lib/react-photo-view';
 import { useTranslation } from "react-i18next";
-
-
+import { ContentItem, Content1Item } from "@/types/documents";
 
 const AppMainDocuments = () => {
-
-    const [activeIndex, setActive] = useState<number | null>(null)
+    const [activeIndex, setActive] = useState<number | null>(null);
     const { t } = useTranslation();
+
+    const handlePhotoClick = (item: typeof documents[0], index: number) => {
+        setTimeout(() => {
+            const box = document.querySelector('.PhotoView-Slider__BannerWrap') as HTMLDivElement;
+            if (!box) return;
+            box.dataset.before = t(`MainDocuments.${item.key}.title`);
+            
+            const photos = document.querySelectorAll<HTMLDivElement>('.PhotoView__Photo__attr');
+            photos.forEach((photo) => {
+                photo.dataset.price = t(`MainDocuments.${item.key}.price`);
+                photo.dataset.duration = t(`MainDocuments.${item.key}.duration`);
+            });
+
+            const portal = document.querySelector('.PhotoView-Portal') as HTMLDivElement;
+            const arrowLeft = document.querySelector('.PhotoView-Slider__ArrowLeft') as HTMLDivElement;
+            const arrowRight = document.querySelector('.PhotoView-Slider__ArrowRight') as HTMLDivElement;
+            const closeBtn = document.querySelector('.PhotoView-Slider__BannerRight') as HTMLDivElement;
+
+            if (!portal || !arrowLeft || !arrowRight) {
+                console.error('Один из необходимых элементов не найден');
+                return;
+            }
+
+            const handleMouseMove = (e: MouseEvent) => {
+                const rect = portal.getBoundingClientRect();
+                const cursorX = e.clientX - rect.left;
+                const halfWidth = rect.width / 2;
+
+                portal.classList.remove('modal__nav-arrow--left', 'modal__nav-arrow--right');
+
+                if (cursorX <= halfWidth) {
+                    portal.classList.add('modal__nav-arrow--left');
+                } else {
+                    portal.classList.add('modal__nav-arrow--right');
+                }
+            };
+
+            const handleMouseLeave = () => {
+                portal.classList.remove('modal__nav-arrow--left', 'modal__nav-arrow--right');
+            };
+
+            const handleClick = (e: MouseEvent) => {
+                const target = e.target as Element;
+                if (target?.closest('.PhotoView-Slider__BannerRight') || 
+                    target?.closest('.PhotoView-Slider__ArrowLeft') || 
+                    target?.closest('.PhotoView-Slider__ArrowRight')) return;
+
+                const rect = portal.getBoundingClientRect();
+                const cursorX = e.clientX - rect.left;
+                const halfWidth = rect.width / 2;
+
+                if (cursorX <= halfWidth) {
+                    arrowLeft.click();
+                } else {
+                    arrowRight.click();
+                }
+            };
+
+            portal.addEventListener('mousemove', handleMouseMove);
+            portal.addEventListener('mouseleave', handleMouseLeave);
+            portal.addEventListener('click', handleClick);
+
+            closeBtn.addEventListener('click', () => {
+                portal.removeEventListener('mousemove', handleMouseMove);
+                portal.removeEventListener('mouseleave', handleMouseLeave);
+                portal.removeEventListener('click', handleClick);
+            });
+        }, 100);
+    };
 
     return (
         <section id="documents_box" className="py-[75px] flex flex-col gap-[40px]">
-            <div className="wrapper ">
-
-                <h2 className=" leading-[1] text-center   text-[24px] xs:text-[40px] l:text-[56px] text-[#000000] tracking-[-0.04em]">{t('docs.heading')}</h2>
-
+            <div className="wrapper">
+                <h2 className="leading-[1] text-center text-[24px] xs:text-[40px] l:text-[56px] text-[#000000] tracking-[-0.04em]">
+                    {t('docs.heading')}
+                </h2>
             </div>
-            <PhotoProvider maskOpacity={0.4} maskClassName="blurred-mask"
+            
+            <PhotoProvider 
+                maskOpacity={0.4} 
+                maskClassName="blurred-mask"
                 speed={() => 0}
                 onIndexChange={(index) => {
-
-                    setActive(index)
-
-                    const box = document.querySelector('.PhotoView-Slider__BannerWrap') as HTMLDivElement;
-                    if (!box) return
-                    box.dataset.before = t(`MainDocuments.${documents[index].key}.title`);
-
-                    const photos = document.querySelectorAll<HTMLDivElement>('.PhotoView__Photo__attr');
-                    photos.forEach((photo) => {
-                        photo.dataset.price = t(`MainDocuments.${documents[index].key}.price`);
-                        photo.dataset.duration = t(`MainDocuments.${documents[index].key}.duration`);
-                    })
+                    setActive(index);
+                    const item = documents[index];
+                    handlePhotoClick(item, index);
                 }}
-
                 maskClosable={false}
-
             >
-
                 <div className="flex flex-col">
-                    {
-                        documents.map((item, index) =>
-
-                            <MainDocumentItem
-                                index={index}
-
-                                setPhoto={() => {
-                                    setTimeout(() => {
-                                        const box = document.querySelector('.PhotoView-Slider__BannerWrap') as HTMLDivElement;
-                                        if (!box) return
-                                        box.dataset.before = t(`MainDocuments.${item.key}.title`);
-                                        const photos = document.querySelectorAll<HTMLDivElement>('.PhotoView__Photo__attr');
-                                        photos.forEach((photo) => {
-                                            photo.dataset.price = t(`MainDocuments.${item.key}.price`);
-                                            photo.dataset.duration = t(`MainDocuments.${item.key}.duration`);
-                                        })
-
-                                        const portal = document.querySelector('.PhotoView-Portal') as HTMLDivElement;
-                                        const arrowLeft = document.querySelector('.PhotoView-Slider__ArrowLeft') as HTMLDivElement;
-                                        const arrowRight = document.querySelector('.PhotoView-Slider__ArrowRight') as HTMLDivElement;
-                                        const closeBtn = document.querySelector('.PhotoView-Slider__BannerRight') as HTMLDivElement;
-
-
-                                        if (!portal || !arrowLeft || !arrowRight) {
-                                            console.error('Один из необходимых элементов не найден');
-                                            return;
-                                        }
-
-                                        // Отслеживание движения курсора
-                                        portal.addEventListener('mousemove', (e) => {
-                                            const rect = portal.getBoundingClientRect(); // Получаем размеры и положение блока
-                                            const cursorX = e.clientX - rect.left; // Позиция курсора относительно левого края блока
-                                            const halfWidth = rect.width / 2; // Половина ширины блока
-
-                                            // Удаляем оба класса перед добавлением нового
-                                            portal.classList.remove('modal__nav-arrow--left', 'modal__nav-arrow--right');
-
-                                            // Добавляем класс в зависимости от положения курсора
-                                            if (cursorX <= halfWidth) {
-                                                portal.classList.add('modal__nav-arrow--left');
-                                            } else {
-                                                portal.classList.add('modal__nav-arrow--right');
-                                            }
-                                        });
-
-                                        // Удаление классов при выходе курсора из блока
-                                        portal.addEventListener('mouseleave', () => {
-                                            portal.classList.remove('modal__nav-arrow--left', 'modal__nav-arrow--right');
-                                        });
-
-                                        // Обработка клика
-                                        portal.addEventListener('click', (e) => {
-                                            const target = e.target as Element;
-                                            if (target?.closest('.PhotoView-Slider__BannerRight') || target?.closest('.PhotoView-Slider__ArrowLeft') || target?.closest('.PhotoView-Slider__ArrowRight')) return
-
-                                            const rect = portal.getBoundingClientRect();
-                                            const cursorX = e.clientX - rect.left;
-                                            const halfWidth = rect.width / 2;
-
-                                            // Симулируем клик на соответствующую стрелку
-                                            if (cursorX <= halfWidth) {
-                                                arrowLeft.click();
-                                            } else {
-                                                arrowRight.click();
-
-                                            }
-                                        });
-
-
-                                        closeBtn.addEventListener('click', (e) => {
-                                            portal.removeEventListener('click', () => { })
-                                            portal.removeEventListener('mouseleave', () => { })
-                                            portal.removeEventListener('mousemove', () => { })
-                                            closeBtn.removeEventListener('click', () => { })
-                                        });
-
-                                    }, 100)
-                                }}
-                                setActive={(value: any) => { setActive(value ? index : null) }}
-                                active={index === activeIndex} 
-                                key={index} 
-                                content={t(`MainDocuments.${item.key}.content`, { returnObjects: true })}
-                                content1={t(`MainDocuments.${item.key}.content1`, { returnObjects: true })}
-                                duration={t(`MainDocuments.${item.key}.duration`)}
-                                img={item.img}
-                                price={t(`MainDocuments.${item.key}.price`)}
-                                title={t(`MainDocuments.${item.key}.title`)}
-                                />
-                        )
-                    }
-
+                    {documents.map((item, index) => (
+                        <MainDocumentItem
+                            key={index}
+                            index={index}
+                            setPhoto={() => handlePhotoClick(item, index)}
+                            setActive={(value: boolean) => setActive(value ? index : null)}
+                            active={index === activeIndex}
+                            content={t(`MainDocuments.${item.key}.content`, { returnObjects: true }) as ContentItem}
+                            content1={t(`MainDocuments.${item.key}.content1`, { returnObjects: true }) as Content1Item[]}
+                            duration={t(`MainDocuments.${item.key}.duration`)}
+                            img={item.img}
+                            price={t(`MainDocuments.${item.key}.price`)}
+                            title={t(`MainDocuments.${item.key}.title`)}
+                        />
+                    ))}
                 </div>
             </PhotoProvider>
         </section>

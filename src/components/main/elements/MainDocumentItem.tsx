@@ -5,6 +5,7 @@ import { PhotoView } from '@/assets/lib/react-photo-view';
 import { useButton } from '@/hook/useButton';
 import { useAnimation, motion } from "framer-motion";
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
+import { MainDocumentItemProps } from '@/types/documents';
 
 // Выносим анимационные настройки
 const ANIMATION_SETTINGS = {
@@ -18,8 +19,25 @@ const ANIMATION_SETTINGS = {
     opacity: [0, 1, 1, 1, 1],
 };
 
+interface ActionButtonProps {
+    onClick: () => void;
+    icon: React.ReactNode;
+    text: string;
+    className: string;
+}
+
+interface DocumentListProps {
+    content1: MainDocumentItemProps['content1'];
+    listHidden: boolean;
+    setListHidden: (value: boolean) => void;
+}
+
+// Типы для рефов
+type DivRef = HTMLDivElement | null;
+type ImageRef = HTMLImageElement | null;
+
 // Компонент кнопки
-const ActionButton = memo(({ onClick, icon, text, className }) => (
+const ActionButton = memo(({ onClick, icon, text, className }: ActionButtonProps) => (
     <button onClick={onClick} className={className}>
         <span className="justify-center w-full m:flex items-center px-[16px] py-[9px] relative overflow-hidden">
             <span className="sendIconLeft transition-all ease-in">
@@ -33,7 +51,7 @@ const ActionButton = memo(({ onClick, icon, text, className }) => (
 ActionButton.displayName = 'ActionButton';
 
 // Компонент списка документов
-const DocumentList = memo(({ content1, listHidden, setListHidden }) => (
+const DocumentList = memo(({ content1, listHidden, setListHidden }: DocumentListProps) => (
     <div className="flex gap-[10px] flex-col grow m:max-w-[500px]">
         {content1.map((cont, contIndex) => (
             <div key={contIndex} className='flex gap-[10px] flex-col items-start'>
@@ -77,7 +95,7 @@ const MainDocumentItem = memo(({
     duration, 
     active, 
     setActive 
-}) => {
+}: MainDocumentItemProps) => {
     const controls = useAnimation();
     const [listHidden, setListHidden] = useState(true);
     const [photoWidth, setPhotoWidth] = useState(0);
@@ -85,11 +103,11 @@ const MainDocumentItem = memo(({
     const { setButtonRef, setWrapperRef } = useButton();
     const { openDefaultModal } = useHeaderContext();
 
-    const wrapperRef = useRef(null);
-    const photoRef = useRef(null);
-    const containerPhotoRef = useRef(null);
-    const LinkServiceRef = useRef(null);
-    const smallPhotoRef = useRef(null);
+    const wrapperRef = useRef<DivRef>(null);
+    const photoRef = useRef<DivRef>(null);
+    const containerPhotoRef = useRef<DivRef>(null);
+    const LinkServiceRef = useRef<DivRef>(null);
+    const smallPhotoRef = useRef<ImageRef>(null);
 
     // Вычисление ширины фото
     useEffect(() => {
@@ -100,7 +118,7 @@ const MainDocumentItem = memo(({
         setPhotoWidth(width >= 190 ? width : 190);
     }, [containerPhotoRef.current, img.height, img.width]);
 
-    const isInViewport = (el) => {
+    const isInViewport = (el: HTMLElement | null): boolean => {
         if (!el) return false;
         const rect = el.getBoundingClientRect();
         return (
@@ -111,18 +129,21 @@ const MainDocumentItem = memo(({
         );
     };
 
-    const scrollToElement = (el) => {
+    const scrollToElement = (el: HTMLElement | null) => {
         const documents_box = document.getElementById('documents_box');
         if (!documents_box || !el) return;
 
-        const scrollOptions = { behavior: 'smooth' };
+        const scrollOptions: ScrollIntoViewOptions = { 
+            behavior: 'smooth',
+            block: 'center'
+        };
         
         if (index === 0) {
             documents_box.scrollIntoView({ ...scrollOptions, block: 'start' });
         } else if (index === 17) {
             documents_box.scrollIntoView({ ...scrollOptions, block: 'end' });
         } else {
-            el.scrollIntoView({ ...scrollOptions, block: 'center' });
+            el.scrollIntoView(scrollOptions);
         }
     };
 
@@ -145,9 +166,10 @@ const MainDocumentItem = memo(({
         }
     }, [active, controls]);
 
-    const handleItemClick = (event) => {
-        if (photoRef.current?.contains(event.target)) return;
-        if (LinkServiceRef.current?.contains(event.target) && active) return;
+    const handleItemClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        const target = event.target as HTMLElement;
+        if (photoRef.current?.contains(target)) return;
+        if (LinkServiceRef.current?.contains(target) && active) return;
         setActive(!active);
     };
 
@@ -164,7 +186,7 @@ const MainDocumentItem = memo(({
             />
 
             <div
-                className={`mx-[-30px]  flex flex-col  group/main cursor-pointer ${!active && 'hover:bg-[#34446D33] hover:backdrop-blur-[1px]'} rounded-[6px] relative`}>
+                className={`mx-[-30px] flex flex-col group/main cursor-pointer ${!active && 'hover:bg-[#34446D33] hover:backdrop-blur-[1px]'} rounded-[6px] relative`}>
                 <div className={`pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[-1] rounded-[6px] ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[transparent]`}></div>
 
                 <div
@@ -191,14 +213,10 @@ const MainDocumentItem = memo(({
                             textRendering: 'geometricPrecision'
                         }}
                         className={`w-full  relative z-[2] container-scale  transition-scale backface-hidden gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] active' : 'text-[#000]'} group-active/window:text-[#FFF]    relative`}
-
                     >
 
                         <p className="translate-y-[-1px] transition-all duration-200 leading-[11px] will-change-transform w-[60%] pl-[63px]  text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">
-
-
                             {title}
-
                         </p>
                         <div className="will-change-transform *:will-change-transform w-[40%] grid grid-cols-[1fr_1fr_auto] items-center justify-between">
                             <p className="translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px] transition-all duration-200 font-bold tracking-normal">{duration}</p>
@@ -210,42 +228,30 @@ const MainDocumentItem = memo(({
                                     <path d="M19 19L5 5" stroke={`${active ? 'white' : 'black'}`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                     <path d="M5 13L5 5L13 5" stroke={`${active ? 'white' : 'black'}`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
-
                             </button>
                         </div>
-
                     </div>
                 </div>
 
                 <div className={`${active && 'bg-[#FFFFFF26] backdrop-blur-[1px]'}`}>
-
-                    <div className={`transition-all easy-in duration-200 overflow-hidden max-h-0   ${active && '!max-h-[1400px] '}`}
-                    >
+                    <div className={`transition-all easy-in duration-200 overflow-hidden max-h-0   ${active && '!max-h-[1400px] '}`}>
                         <div className="s:p-[30px] p-[15px] document-item  flex flex-col l:flex-row gap-[10px] ">
                             <div className="w-[60%] s:gap-0 gap-[20px] flex flex-col m:flex-row m:items-stretch">
                                 <div className='m:m-0 m-auto'>
-
-                                    <PhotoView
-                                        src={img.src}
-                                        width={475}
-                                        height={667}
-                                    >
-                                        <div ref={photoRef}
-                                            onClick={() => setPhoto()}
-                                            className={`${!active && 'pointer-events-none'} transition-all duration-200 `}>
-                                            <motion.div
-                                                initial={{ y: 20, opacity: 0 }}
-                                                animate={controls}
-                                                className="!shadow-none border-[0.2px] solid border-[#A4A4A4] overflow-hidden rounded-[5px]">
-                                                <Image
-                                                    alt='document' src={img}
-                                                    width={photoWidth || 190}
-                                                    height={photoWidth / img.width * img.height || 267}
-                                                    className={`transition-all duration-200 h-auto`} />
-                                            </ motion.div>
-
-                                        </div>
-                                    </PhotoView>
+                                    <div ref={photoRef}
+                                        onClick={() => setPhoto()}
+                                        className={`${!active && 'pointer-events-none'} transition-all duration-200 `}>
+                                        <motion.div
+                                            initial={{ y: 20, opacity: 0 }}
+                                            animate={controls}
+                                            className="!shadow-none border-[0.2px] solid border-[#A4A4A4] overflow-hidden rounded-[5px]">
+                                            <Image
+                                                alt='document' src={img}
+                                                width={photoWidth || 190}
+                                                height={photoWidth / img.width * img.height || 267}
+                                                className={`transition-all duration-200 h-auto`} />
+                                        </motion.div>
+                                    </div>
                                 </div>
 
                                 <div ref={containerPhotoRef} className="grow flex justify-center">
@@ -264,7 +270,6 @@ const MainDocumentItem = memo(({
                                             initial={{ y: 20, opacity: 0 }}
                                             className="tariff-wrap w-[250px] " ref={setWrapperRef}>
                                             <button
-
                                                 ref={setButtonRef}
                                                 className='btnIconAn doc-btn tariff text-[20px] group hover:bg-[#34446D] hover:text-[#FFF] font-bold tracking-normal m:flex items-center gap-[10px] text-[#34446D] rounded-[4px] border-[#34446D] border border-solid leading-[1]'>
                                                 <span className="justify-center w-full m:flex items-center px-[16px] py-[9px] relative overflow-hidden">
@@ -277,18 +282,13 @@ const MainDocumentItem = memo(({
                                                         className="transition-all ease-in sendText"
                                                     >Перейти в услугу</span>                                    
                                                 </span>
-
-
-
                                             </button>
                                         </motion.div>
-
                                     </div>
                                 </div>
                             </div>
 
                             <div className="w-[40%] items-start flex gap-[20px] flex-col   text-[#000]">
-
                                 <DocumentList 
                                     content1={content1} 
                                     listHidden={listHidden} 
@@ -310,12 +310,7 @@ const MainDocumentItem = memo(({
                                         className={commonButtonClasses}
                                     />
                                 </motion.div>
-
-
-
-
                             </div>
-
 
                             <div className="tariff-wrap m:hidden" ref={setWrapperRef}>
                                 <button ref={setButtonRef} className='tariff justify-center  py-[18px] text-[20px] font-bold rounded-[4px] bg-[#000000] leading-[1] text-[#FFF]'>
@@ -323,14 +318,10 @@ const MainDocumentItem = memo(({
                                 </button>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
-        </div >
+        </div>
     );
 });
 
