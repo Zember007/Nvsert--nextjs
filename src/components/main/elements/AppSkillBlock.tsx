@@ -11,7 +11,7 @@ interface AppSkillBlockProps {
   isVisible?: boolean;
 }
 
-const AppSkillBlock: React.FC<AppSkillBlockProps> = ({ text, folder, bg, title, img, isVisible }) => {
+const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBlockProps) => {
   const cardRef = useRef<null | HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [mouseX, setMouseX] = useState(0);
@@ -34,7 +34,7 @@ const AppSkillBlock: React.FC<AppSkillBlockProps> = ({ text, folder, bg, title, 
 
   const cardStyle = {
     transform: `rotateY(${(mousePX || 0) * 30}deg) rotateX(${(mousePY || 0) * -30}deg) translate3d(${(mousePX || 0) * 20 * 2}px, ${(mousePY || 0) * 20 * 2}px, 0) scale(1.1)`,
-    
+
     perspective: '1200px',
     transition: 'transform 0.3s ease-out',
     willChange: 'transform'
