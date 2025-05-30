@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
 import { gsap } from 'gsap';
 
@@ -38,7 +36,7 @@ const HorizontalLoop = forwardRef<HorizontalLoopRef, HorizontalLoopProps>(
         const timelineRef = useRef<gsap.core.Timeline | null>(null);
         const timesRef = useRef<number[]>([]);
         const lastIndexRef = useRef<number>(-1);
-        const timeWrap = useRef<(v: number) => number>((v: number) => { return v });
+        const timeWrap = useRef<(v: number) => number>((v: number) => v);
 
         const getClosest = (values: number[], value: number, wrap: number) => {
             let i = values.length,
@@ -60,54 +58,68 @@ const HorizontalLoop = forwardRef<HorizontalLoopRef, HorizontalLoopProps>(
 
         useImperativeHandle(ref, () => ({
             goToSlide(index: number, timeD: number) {
-                console.log(index, timeD);
-                
                 const tl = timelineRef.current;
                 const times = timesRef.current;
                 const length = times.length;
-
+        
                 if (!tl || !length) return;
-
+        
+                // Текущий индекс и время
                 const curIndex = tl.current();
                 const currentTime = tl.time();
                 const duration = tl.duration();
-
+        
                 // Обеспечиваем цикл: превращаем index в диапазон [0, length)
                 const newIndex = gsap.utils.wrap(0, length, index);
                 lastIndexRef.current = newIndex;
-
-                // Получаем target time
-                let baseTime = times[newIndex];
-
-                // Ключ: считаем ближайшее wrapped-время до целевого
-                let time = baseTime;
+        
+                // Получаем базовое время для целевого слайда
+                const baseTime = times[newIndex];
+        
+                // Вычисляем разницу с учетом цикла
                 let diff = baseTime - currentTime;
-
-                // если разница больше половины продолжительности — значит, короче через wrap
-                if (Math.abs(diff) > duration / 2) {
-                    time += diff > 0 ? -duration : duration;
+                const absDiff = Math.abs(diff);
+        
+                // Кратчайший путь: корректируем diff
+                if (absDiff > duration / 2) {
+                    diff = diff > 0 ? diff - duration : diff + duration;
                 }
-
-                // Оборачиваем время в пределах таймлайна
-                const wrappedTime = gsap.utils.wrap(0, duration)(time);
-
+        
+                // Целевое время
+                const targetTime = currentTime + diff;
+        
+                // Оборачиваем время
+                const wrappedTime = gsap.utils.wrap(0, duration, targetTime);
+        
+                // Отладочные логи
+                console.log({
+                    curIndex,
+                    newIndex,
+                    currentTime,
+                    baseTime,
+                    diff,
+                    absDiff,
+                    targetTime,
+                    wrappedTime,
+                    duration,
+                    direction: diff > 0 ? 'forward' : 'backward',
+                });
+        
                 const vars: gsap.TweenVars = {
                     ease: "power3",
-                    duration: timeD,
+                    duration: Math.max(timeD, 0.1), // Минимальная длительность для плавности
                     overwrite: true,
-                };
-
-                // Добавляем модификатор, если выходит за границы
-                if (time < 0 || time > duration) {
-                    vars.modifiers = {
+                    modifiers: {
                         time: gsap.utils.wrap(0, duration),
-                    };
-                }
-
-                // И возвращаем либо jump, либо анимацию
-                return vars.duration === 0
-                    ? tl.time(wrappedTime)
-                    : tl.tweenTo(time, vars);
+                    },
+                    // Добавляем onUpdate для отладки направления анимации
+                    onUpdate: () => {
+                        console.log('Animation time:', tl.time(), 'Index:', tl.current());
+                    },
+                };
+        
+                // Выполняем анимацию
+                return tl.tweenTo(wrappedTime, vars);
             },
         }));
 
@@ -189,21 +201,18 @@ const HorizontalLoop = forwardRef<HorizontalLoopRef, HorizontalLoopProps>(
             tl.current = () => getClosest(times, tl.time(), tl.duration());
             tl.toIndex = (index: number, vars: any = {}) => {
                 const length = times.length;
-                if (Math.abs(index - tl.current()) > length / 2) {
-                    index += index > tl.current() ? -length : length;
-                }
                 const newIndex = gsap.utils.wrap(0, length, index);
-                let time = times[newIndex];
-                if ((time > tl.time()) !== (index > tl.current()) && index !== tl.current()) {
-                    time += tl.duration() * (index > tl.current() ? 1 : -1);
+                const currentTime = tl.time();
+                const time = times[newIndex];
+                let diff = time - currentTime;
+                const absDiff = Math.abs(diff);
+                if (absDiff > tl.duration() / 2) {
+                    diff = diff > 0 ? diff - tl.duration() : diff + tl.duration();
                 }
-                if (time < 0 || time > tl.duration()) {
-                    vars.modifiers = { time: gsap.utils.wrap(0, tl.duration()) };
-                }
+                const targetTime = currentTime + diff;
+                vars.modifiers = { time: gsap.utils.wrap(0, tl.duration()) };
                 vars.overwrite = true;
-                return vars.duration === 0
-                    ? tl.time(gsap.utils.wrap(0, tl.duration(), time))
-                    : tl.tweenTo(time, vars);
+                return tl.tweenTo(targetTime, vars);
             };
             tl.next = (vars: any = {}) => tl.toIndex(tl.current() + 1, vars);
             tl.previous = (vars: any = {}) => tl.toIndex(tl.current() - 1, vars);
@@ -216,7 +225,6 @@ const HorizontalLoop = forwardRef<HorizontalLoopRef, HorizontalLoopProps>(
                 else tl.play();
             }
 
-
             return () => {
                 tl.kill();
                 if (tl.draggable) tl.draggable.kill();
@@ -228,7 +236,6 @@ const HorizontalLoop = forwardRef<HorizontalLoopRef, HorizontalLoopProps>(
                 if (timelineRef.current) {
                     const progress = timelineRef.current.progress();
                     timelineRef.current.progress(0, true);
-                    // Пересчитать ширины и таймлайн (добавить populateWidths и populateTimeline)
                     timelineRef.current.progress(progress, true);
                 }
             };
