@@ -22,7 +22,6 @@ const AppMainSkills = () => {
     const skillsData = skills;
 
     useEffect(() => {
-        if (typeof window === "undefined") return
 
         const observer = new IntersectionObserver(
             ([entry]) => {

@@ -98,7 +98,6 @@ const AppMainSafeguards = () => {
 
 
   useEffect(() => {
-    if (typeof window === "undefined") return
 
     const observer = new IntersectionObserver(
       ([entry]) => {
