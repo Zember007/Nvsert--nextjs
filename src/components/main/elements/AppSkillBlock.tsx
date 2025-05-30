@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { filterPrepositions } from '@/hook/filter';
 
 interface AppSkillBlockProps {
@@ -7,7 +7,7 @@ interface AppSkillBlockProps {
   folder?: boolean;
   bg?: 'secondary' | string;
   title?: string;
-  img?: string;
+  img?: string | StaticImageData;
   isVisible?: boolean;
 }
 

@@ -64,7 +64,7 @@ const AppMainSkills = () => {
                             skillsData.map((skill, index) => {
                                 if (skill.empty) return <div key={index}></div>;
 
-                                return <AppSkillBlock key={index} text={t(`MainSkills.${skill.key}.text`, { returnObjects: true }) as string[]} bg={skill.bg} folder={skill.folder} />;
+                                return <AppSkillBlock key={index} img={skill.img} title={t(`MainSkills.${skill.key}.title`)} isVisible={isVisible} text={t(`MainSkills.${skill.key}.text`, { returnObjects: true }) as string[]} bg={skill.bg} folder={skill.folder} />;
                             })
                         }
                     </div>
