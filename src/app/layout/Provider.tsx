@@ -1,4 +1,4 @@
-'use client'; 
+'use client'
 
 import '@/config/i18n';
 import { Provider } from 'react-redux';

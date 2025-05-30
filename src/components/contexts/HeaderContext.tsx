@@ -1,3 +1,5 @@
+'use client'
+
 import { createContext, useState, useContext, useCallback, ReactNode } from 'react';
 
 interface HeaderContextType {
