@@ -1,5 +1,5 @@
 
-import { PhotoProvider, PhotoView } from '@/assets/lib/react-photo-view';
+// import { PhotoProvider, PhotoView } from '@/assets/lib/react-photo-view';
 import Feedback from './elements/Feedback';
 import 'react-photo-view/dist/react-photo-view.css';
 import { useEffect, useRef, useState } from 'react';
@@ -121,12 +121,12 @@ const AppMainFeedback = () => {
 
     return (
         <section className="py-[75px]">
-            <PhotoProvider maskOpacity={0.4} maskClassName="blurred-mask"
+            {/* <PhotoProvider maskOpacity={0.4} maskClassName="blurred-mask"
                 speed={() => 0}
 
                 maskClosable={false}
 
-            >
+            > */}
                 <div className="wrapper flex flex-col gap-[40px]">
                     <h2 className="leading-[1] tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px]">{t('MainFeedback.title')}</h2>
 
@@ -148,14 +148,14 @@ const AppMainFeedback = () => {
                                         <div
                                             onClick={readyPhoto}
                                             data-slider="slide-feedback" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] h-[267px] rounded-[4px]">
-                                            <PhotoView src={`/feedbacks/big/${index + 1}.png`}
+                                            {/* <PhotoView src={`/feedbacks/big/${index + 1}.png`}
                                                 width={475}
                                                 height={667}
-                                            >
+                                            > */}
                                                 <Image
                                                     className='min-h-full'
                                                     src={`/feedbacks/small/${index + 1}.png`} alt='feedback' width={190} height={267} />
-                                            </PhotoView>
+                                            {/* </PhotoView> */}
                                         </div>)}
                                 </div>
 
@@ -175,11 +175,11 @@ const AppMainFeedback = () => {
                                             onClick={readyPhoto}
 
                                             data-slider="slide-feedback1" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] h-[267px] rounded-[4px]">
-                                            <PhotoView src={`/feedbacks/big/${20 + index}.png`}>
+                                            {/* <PhotoView src={`/feedbacks/big/${20 + index}.png`}> */}
                                                 <Image
                                                     className='min-h-full'
                                                     src={`/feedbacks/small/${20 + index}.png`} alt='feedback' width={190} height={267} />
-                                            </PhotoView>
+                                            {/* </PhotoView> */}
                                         </div>)}
                                 </div>
 
@@ -199,7 +199,7 @@ const AppMainFeedback = () => {
 
                     </div>
                 </div>
-            </PhotoProvider>
+            {/* </PhotoProvider> */}
         </section>
     );
 };

@@ -2,7 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { filterPrepositions } from '@/hook/filter';
 
-const AppSkillBlock = (skill: any) => {
+interface AppSkillBlockProps {
+  text: string[];
+  folder?: boolean;
+  bg?: 'secondary' | string;
+  title?: string;
+  img?: string;
+  isVisible?: boolean;
+}
+
+const AppSkillBlock: React.FC<AppSkillBlockProps> = ({ text, folder, bg, title, img, isVisible }) => {
   const cardRef = useRef<null | HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [mouseX, setMouseX] = useState(0);
@@ -30,9 +39,6 @@ const AppSkillBlock = (skill: any) => {
     transition: 'transform 0.3s ease-out',
     willChange: 'transform'
   };
-
-
-
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const card = cardRef.current;
@@ -62,10 +68,10 @@ const AppSkillBlock = (skill: any) => {
     }, 1000));
   };
 
-  const list: string[] = skill.text;
+  const list: string[] = text;
 
   return (
-    <div className={`hover:z-[12] relative card-wrap ${!skill.folder ? 'cursor-pointer ' : ''}`}
+    <div className={`hover:z-[12] relative card-wrap ${!folder ? 'cursor-pointer ' : ''}`}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -77,27 +83,25 @@ const AppSkillBlock = (skill: any) => {
         <div
           style={{
             borderColor: `${'#CCCCCC'}`,
-            ...(!skill.folder && {
-              background: `${skill.bg === 'secondary' ? '#93969D26' : '#FFFFFF26'}`,
+            ...(!folder && {
+              background: `${bg === 'secondary' ? '#93969D26' : '#FFFFFF26'}`,
             }),
             ...(mousePX && { ...cardStyle })
           }}
-          className={`flex  border border-solid backdrop-blur-[1px] rounded-[4px] overflow-hidden flex-col gap-[14px] relative z-[1] justify-between h-full transition-all duration-500 ${skill.folder ? '!items-center !justify-center' : 'p-[20px]'}`}
+          className={`flex  border border-solid backdrop-blur-[1px] rounded-[4px] overflow-hidden flex-col gap-[14px] relative z-[1] justify-between h-full transition-all duration-500 ${folder ? '!items-center !justify-center' : 'p-[20px]'}`}
         >
           {
-            skill.folder ?
+            folder ?
               <>
-                <Image alt="folder" className={`transition-all max-w-[none] duration-300 rounded-[4px] h-full`} src={skill.img} />
-
+                {img && <Image alt="folder" className={`transition-all max-w-[none] duration-300 rounded-[4px] h-full`} src={img} />}
               </>
               :
               <>
-
                 <span className={`font-bold text-[20px] transition-all duration-500`} >
-                  {filterPrepositions(skill.title)}
+                  {title && filterPrepositions(title)}
                 </span>
                 <div className='grow'>
-                  <ul className={`list-disc pl-[17px] ${!skill.isVisible && 'translate-y-[10px] opacity-0'} transition-all duration-500 flex flex-col gap-[5px]`} >
+                  <ul className={`list-disc pl-[17px] ${!isVisible && 'translate-y-[10px] opacity-0'} transition-all duration-500 flex flex-col gap-[5px]`} >
                     {list.map((item, index) =>
                       <li key={index}>{filterPrepositions(item)}</li>
                     )}
