@@ -5,7 +5,7 @@ export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   let targetUrl: string | null = null; // Определяем целевой URL
-  
+
   // Проверяем, начинается ли путь с /api/
   if (pathname.startsWith('/api/')) {
     targetUrl = `${process.env.apiTarget}${pathname.replace('/api/', '')}`;
@@ -19,15 +19,12 @@ export function middleware(req: NextRequest) {
 
     // Используем переменные окружения для токенов
     const accessToken = process.env.API_ACCESS_TOKEN;
-    const authToken = process.env.API_AUTH_TOKEN;
 
     if (accessToken) {
       requestHeaders.set('X-Access-Token', accessToken);
     }
-    
-    if (authToken) {
-      requestHeaders.set('Authorization', `Bearer ${authToken}`);
-    }
+
+    requestHeaders.set('Authorization', `Basic Y29mZmVlOmNvZmZlZQ==`);
 
     // Перезаписываем запрос с новыми заголовками
     return NextResponse.rewrite(new URL(targetUrl, req.url), {

@@ -2,7 +2,6 @@ import DatePicker from "react-multi-date-picker";
 // import "react-multi-date-picker/styles/colors/teal.css";
 import { ru } from "react-multi-date-picker";
 import { useState } from "react";
-import '@/assets/styles/blocks/vue-datapicker.scss'
 import { useFormContext } from "react-hook-form";
 
 const AppInputDate = ({ title, inputName, required }) => {
