@@ -8,9 +8,9 @@ const QuestionArrow = () => {
             className='  group-hover:*:*:stroke-[#34446D] *:transition-all '
             width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect className='group-hover:fill-[#FFF] transition-all' x="1" y="1" width="24" height="24" rx="2" fill="#34446D" />
-            <g clip-path={`url(#${clipPathId})`}>
-                <path d="M5.81677 13H20.1832" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M16.0785 8.8953L20.1832 13L16.0785 17.1047" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <g clipPath={`url(#${clipPathId})`}>
+                <path d="M5.81677 13H20.1832" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M16.0785 8.8953L20.1832 13L16.0785 17.1047" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </g>
             <defs>
                 <clipPath id={clipPathId}>

@@ -65,15 +65,7 @@ const AppMainSkills = () => {
                             skillsData.map((skill, index) => {
                                 if (skill.empty) return <div key={index}></div>;
 
-                                const props = {
-                                    title: t(`MainSkills.${skill.key}.title`),
-                                    text: t(`MainSkills.${skill.key}.text`, { returnObjects: true }),
-                                    index,
-                                    ...skill,
-                                    isVisible,
-                                };
-
-                                return <AppSkillBlock key={index} {...props} />;
+                                return <AppSkillBlock key={index} text={t(`MainSkills.${skill.key}.text`, { returnObjects: true }) as string[]} bg={skill.bg} folder={skill.folder} />;
                             })
                         }
                     </div>

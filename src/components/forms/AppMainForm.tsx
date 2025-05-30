@@ -10,7 +10,7 @@ import axios from "axios";
 import MessageImg from '@/assets/images/svg/message-flight.svg';
 import Image from "next/image";
 import { useButton } from "@/hook/useButton";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import AppCheckbox from './elements/AppCheckbox';
 import { BounceEffect } from "@/hook/useBounce";
 import FlightSuccess from "../modals/FlightSuccess";
@@ -70,7 +70,8 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
 
     }
 
-    const ids = Date.now()
+    const ids = useId()
+    
 
     const validContact = (value: string) => {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;

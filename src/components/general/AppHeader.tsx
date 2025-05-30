@@ -139,8 +139,8 @@ const AppHeader = () => {
 
                           <div>
                             <svg className={`transition-all duration-300 easy *:*:transition-all *:*:duration-300 *:*:easy *:*:stroke-[var(--color-item-menu)] group-hover:*:*:!stroke-[var(--color-item-menu-active)] ${servicesMenuActive ? '*:!stroke-[var(--color-item-menu-active)] rotate-[180deg]' : ''}`} width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <g clip-path="url(#clip0_3424_2610)">
-                                <path d="M1 11L8 4L15 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                              <g clipPath="url(#clip0_3424_2610)">
+                                <path d="M1 11L8 4L15 11" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                               </g>
                               <defs>
                                 <clipPath id="clip0_3424_2610">
