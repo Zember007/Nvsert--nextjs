@@ -35,10 +35,7 @@ const SliderMain = () => {
     useEffect(() => {
         if (sliders.current.length < 5 || !whiteBgRef.current) return
         let timeoutIdBg: NodeJS.Timeout | null = null;
-        let timeoutId: NodeJS.Timeout | null = null;
-
-        let time = Date.now()
-        let enableList = true
+ 
 
 
         const loop: any = initSlider((index: number) => {
