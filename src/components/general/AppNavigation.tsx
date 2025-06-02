@@ -9,12 +9,26 @@ import { useHeaderContext } from "../contexts/HeaderContext";
 import { filterPrepositions } from "@/hook/filter";
 import { useButton } from "@/hook/useButton";
 import { useTranslation } from "react-i18next";
+import { AppDispatch, RootState } from "@/config/store";
+import { useDispatch, useSelector } from "react-redux";
+import { updateActionNavigation } from "@/store/navigation";
 
 interface navigationLang {
     title: string
 }
 
 const AppNavigation = ({ active }: { active: boolean }) => {
+
+    const dispatch = useDispatch<AppDispatch>();
+    const { navigation } = useSelector((state: RootState) => state.navigation);
+
+ 
+
+    useEffect(() => {
+        if (navigation.length === 0) {
+            dispatch(updateActionNavigation());
+        }
+    }, [dispatch, navigation]);
 
     const { t } = useTranslation()
 
