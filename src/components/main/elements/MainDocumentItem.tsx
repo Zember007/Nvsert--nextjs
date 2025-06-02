@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useEffect, useRef, useState, memo } from 'react';
 import { filterPrepositions } from '@/hook/filter';
-// import { PhotoView } from '@/assets/lib/react-photo-view';
+import { PhotoView } from '@/assets/lib/react-photo-view';
 import { useButton } from '@/hook/useButton';
 import { useAnimation, motion } from "framer-motion";
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
@@ -238,11 +238,11 @@ const MainDocumentItem = memo(({
                         <div className="s:p-[30px] p-[15px] document-item  flex flex-col l:flex-row gap-[10px] ">
                             <div className="w-[60%] s:gap-0 gap-[20px] flex flex-col m:flex-row m:items-stretch">
                                 <div className='m:m-0 m-auto'>
-                                    {/* <PhotoView
+                                    <PhotoView
                                         src={img.src}
                                         width={475}
                                         height={667}
-                                    > */}
+                                    >
                                         <div ref={photoRef}
                                             onClick={() => setPhoto()}
                                             className={`${!active && 'pointer-events-none'} transition-all duration-200 `}>
@@ -257,7 +257,7 @@ const MainDocumentItem = memo(({
                                                     className={`transition-all duration-200 h-auto`} />
                                             </motion.div>
                                         </div>
-                                    {/* </PhotoView> */}
+                                    </PhotoView>
                                 </div>
 
                                 <div ref={containerPhotoRef} className="grow flex justify-center">

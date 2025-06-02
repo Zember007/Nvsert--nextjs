@@ -1,16 +1,22 @@
-import { useRef, useMemo } from 'react';
+import { useRef } from 'react';
 
 /**
  * Hook of persistent methods
  */
-export default function useMethods<T extends Record<string, (...args: any[]) => any>>(fn: T): T {
+export default function useMethods<T extends Record<string, (...args: any[]) => any>>(fn: T) {
+  const { current } = useRef({
+    fn,
+    curr: undefined as T | undefined,
+  });
+  current.fn = fn;
 
-
-  return useMemo(() => {
-    const methods = {} as T;
-    (Object.keys(fn) as Array<keyof T>).forEach((key) => {
-      methods[key] = ((...args: unknown[]) => fn[key].call(fn, ...args)) as T[keyof T];
+  if (!current.curr) {
+    const curr = Object.create(null);
+    Object.keys(fn).forEach((key) => {
+      curr[key] = (...args: unknown[]) => current.fn[key].call(current.fn, ...args);
     });
-    return methods;
-  }, [fn]); 
+    current.curr = curr;
+  }
+
+  return current.curr as T;
 }

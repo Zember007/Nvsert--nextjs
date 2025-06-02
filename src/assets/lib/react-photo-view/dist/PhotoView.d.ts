@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import type React from 'react';
 import type { PhotoRenderParams } from './types';
 export interface PhotoViewProps {
     /**
@@ -24,11 +24,13 @@ export interface PhotoViewProps {
     /**
      * 子节点，一般为缩略图
      */
-    children?: React.ReactElement;
+    children?: any;
     /**
      * 触发的事件
      */
     triggers?: ('onClick' | 'onDoubleClick')[];
 }
-declare const PhotoView: ({ src, render, overlay, width, height, triggers, children, }: PhotoViewProps) => import("react").ReactElement<unknown, string | import("react").JSXElementConstructor<any>>;
+declare const PhotoView: ({ src, render, overlay, width, height, triggers, children, }: PhotoViewProps) => React.FunctionComponentElement<{
+    ref: React.RefObject<HTMLElement>;
+}>;
 export default PhotoView;

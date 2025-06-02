@@ -1,9 +1,9 @@
-import type { FC } from 'react';
+import type React from 'react';
 import { useImperativeHandle, Children, cloneElement, useContext, useEffect, useMemo, useRef } from 'react';
 import useInitial from './hooks/useInitial';
 import useMethods from './hooks/useMethods';
 import type { PhotoContextType } from './photo-context';
-import PhotoContext from './photo-context';
+import PhotoContext from './photo-context'
 import type { PhotoRenderParams } from './types';
 
 export interface PhotoViewProps {
@@ -30,7 +30,7 @@ export interface PhotoViewProps {
   /**
    * 子节点，一般为缩略图
    */
-  children?: React.ReactElement;
+  children?: any;
   /**
    * 触发的事件
    */
@@ -56,7 +56,7 @@ const PhotoView = ({
     return () => {
       photoContext.remove(key);
     };
-  }, [key, photoContext]);
+  }, []);
 
   function invokeChildrenFn(eventName: string, e: React.SyntheticEvent) {
     if (children) {
@@ -78,12 +78,12 @@ const PhotoView = ({
   });
 
   const eventListeners = useMemo(() => {
-    const listener: Record<string, (e: React.MouseEvent) => void> = {};
+    const listener = {};
     triggers.forEach((eventName) => {
       listener[eventName] = fn.show.bind(null, eventName);
     });
     return listener;
-  }, [triggers, fn]);
+  }, []);
 
   useEffect(() => {
     photoContext.update({
@@ -95,10 +95,10 @@ const PhotoView = ({
       width,
       height,
     });
-  }, [key, src, fn.render, overlay, width, height, photoContext]);
+  }, [src]);
 
   if (children) {
-    return Children.only(cloneElement(children, { ...eventListeners, ref: originRef } as React.HTMLProps<HTMLElement>));
+    return Children.only(cloneElement(children, { ...eventListeners, ref: originRef }));
   }
   return null;
 };

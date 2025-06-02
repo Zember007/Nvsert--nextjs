@@ -2,7 +2,7 @@ import MainDocumentItem from "./elements/MainDocumentItem";
 import { documents } from "./utils";
 import { useState } from "react";
 import '@/assets/styles/sections/main/animation/documents.scss'
-// import { PhotoProvider } from '@/assets/lib/react-photo-view';
+import { PhotoProvider } from '@/assets/lib/react-photo-view';
 import { useTranslation } from "react-i18next";
 import { ContentItem, Content1Item } from "@/types/documents";
 
@@ -87,7 +87,7 @@ const AppMainDocuments = () => {
                 </h2>
             </div>
             
-            {/* <PhotoProvider 
+            <PhotoProvider 
                 maskOpacity={0.4} 
                 maskClassName="blurred-mask"
                 speed={() => 0}
@@ -97,7 +97,7 @@ const AppMainDocuments = () => {
                     handlePhotoClick(item, index);
                 }}
                 maskClosable={false}
-            > */}
+            >
                 <div className="flex flex-col">
                     {documents.map((item, index) => (
                         <MainDocumentItem
@@ -115,7 +115,7 @@ const AppMainDocuments = () => {
                         />
                     ))}
                 </div>
-            {/* </PhotoProvider> */}
+            </PhotoProvider>
         </section>
     );
 };
