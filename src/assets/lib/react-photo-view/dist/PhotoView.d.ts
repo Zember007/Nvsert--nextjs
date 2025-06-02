@@ -24,7 +24,7 @@ export interface PhotoViewProps {
     /**
      * 子节点，一般为缩略图
      */
-    children?: any;
+    children?: React.ReactElement;
     /**
      * 触发的事件
      */

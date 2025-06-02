@@ -30,14 +30,14 @@ export interface PhotoViewProps {
   /**
    * 子节点，一般为缩略图
    */
-  children?: any;
+  children?: React.ReactElement;
   /**
    * 触发的事件
    */
   triggers?: ('onClick' | 'onDoubleClick')[];
 }
 
-const PhotoView: React.FC<PhotoViewProps> = ({
+const PhotoView = ({
   src,
   render,
   overlay,
@@ -45,7 +45,7 @@ const PhotoView: React.FC<PhotoViewProps> = ({
   height,
   triggers = ['onClick'],
   children,
-}) => {
+}:PhotoViewProps) => {
   const photoContext = useContext<PhotoContextType>(PhotoContext);
   const key = useInitial(() => photoContext.nextId());
   const originRef = useRef<HTMLElement>(null);
@@ -97,16 +97,9 @@ const PhotoView: React.FC<PhotoViewProps> = ({
     });
   }, [src]);
 
-
-
   if (children) {
-    const cloned = cloneElement(children, {
-      ...eventListeners,
-      ref: originRef,
-    });
-    return <>{cloned}</>; // ✅ Оборачиваем в JSX, теперь это valid React component
+    return Children.only(cloneElement(children, { ...eventListeners, ref: originRef } as React.HTMLProps<HTMLElement>) );
   }
-
   return null;
 };
 
