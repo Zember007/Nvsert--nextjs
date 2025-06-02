@@ -1,6 +1,5 @@
 
-// import { PhotoProvider, PhotoView } from '@/assets/lib/react-photo-view';
-import Feedback from './elements/Feedback';
+import { PhotoProvider, PhotoView } from '@/assets/lib/react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import { useEffect, useRef, useState } from 'react';
 import { horizontalLoop } from '@/scripts/slider';
