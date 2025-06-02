@@ -1,4 +1,5 @@
 import type React from 'react';
+import { JSX } from 'react';
 import type { PhotoRenderParams } from './types';
 export interface PhotoViewProps {
     /**
@@ -30,5 +31,5 @@ export interface PhotoViewProps {
      */
     triggers?: ('onClick' | 'onDoubleClick')[];
 }
-declare const PhotoView: React.FC<PhotoViewProps>;
+declare const PhotoView: ({ src, render, overlay, width, height, triggers, children, }: PhotoViewProps) => JSX.Element;
 export default PhotoView;

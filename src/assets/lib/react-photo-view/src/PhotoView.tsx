@@ -1,5 +1,5 @@
 import type React from 'react';
-import { useImperativeHandle, Children, cloneElement, useContext, useEffect, useMemo, useRef } from 'react';
+import { useImperativeHandle, Children, cloneElement, useContext, useEffect, useMemo, useRef, JSX } from 'react';
 import useInitial from './hooks/useInitial';
 import useMethods from './hooks/useMethods';
 import type { PhotoContextType } from './photo-context';
@@ -45,7 +45,7 @@ const PhotoView = ({
   height,
   triggers = ['onClick'],
   children,
-}:PhotoViewProps) => {
+}:PhotoViewProps): JSX.Element => {
   const photoContext = useContext<PhotoContextType>(PhotoContext);
   const key = useInitial(() => photoContext.nextId());
   const originRef = useRef<HTMLElement>(null);
