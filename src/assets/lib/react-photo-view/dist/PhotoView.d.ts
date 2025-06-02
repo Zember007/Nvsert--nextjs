@@ -30,7 +30,5 @@ export interface PhotoViewProps {
      */
     triggers?: ('onClick' | 'onDoubleClick')[];
 }
-declare const PhotoView: ({ src, render, overlay, width, height, triggers, children, }: PhotoViewProps) => React.FunctionComponentElement<{
-    ref: React.RefObject<HTMLElement>;
-}>;
+declare const PhotoView: React.FC<PhotoViewProps>;
 export default PhotoView;

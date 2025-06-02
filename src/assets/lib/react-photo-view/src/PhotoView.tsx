@@ -3,7 +3,7 @@ import { useImperativeHandle, Children, cloneElement, useContext, useEffect, use
 import useInitial from './hooks/useInitial';
 import useMethods from './hooks/useMethods';
 import type { PhotoContextType } from './photo-context';
-import PhotoContext from './photo-context'
+import PhotoContext from './photo-context';
 import type { PhotoRenderParams } from './types';
 
 export interface PhotoViewProps {
@@ -37,7 +37,7 @@ export interface PhotoViewProps {
   triggers?: ('onClick' | 'onDoubleClick')[];
 }
 
-const PhotoView = ({
+const PhotoView: React.FC<PhotoViewProps> = ({
   src,
   render,
   overlay,
@@ -45,7 +45,7 @@ const PhotoView = ({
   height,
   triggers = ['onClick'],
   children,
-}: PhotoViewProps) => {
+}) => {
   const photoContext = useContext<PhotoContextType>(PhotoContext);
   const key = useInitial(() => photoContext.nextId());
   const originRef = useRef<HTMLElement>(null);
@@ -97,9 +97,13 @@ const PhotoView = ({
     });
   }, [src]);
 
+
+
   if (children) {
-    return Children.only(cloneElement(children, { ...eventListeners, ref: originRef }));
+    const cloned = Children.only(cloneElement(children, { ...eventListeners, ref: originRef }))
+    return <>{cloned}</>; 
   }
+
   return null;
 };
 
