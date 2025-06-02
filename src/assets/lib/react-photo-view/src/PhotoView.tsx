@@ -50,7 +50,7 @@ const PhotoView = ({
   const key = useInitial(() => photoContext.nextId());
   const originRef = useRef<HTMLElement>(null);
 
-  // useImperativeHandle((children as React.FunctionComponentElement<HTMLElement>)?.ref, () => originRef.current);
+  useImperativeHandle((children as React.FunctionComponentElement<HTMLElement>)?.ref, () => originRef.current);
 
   useEffect(() => {
     return () => {
