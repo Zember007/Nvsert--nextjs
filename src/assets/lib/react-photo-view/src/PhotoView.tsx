@@ -100,8 +100,11 @@ const PhotoView: React.FC<PhotoViewProps> = ({
 
 
   if (children) {
-    const cloned = Children.only(cloneElement(children, { ...eventListeners, ref: originRef }))
-    return <>{cloned}</>; 
+    const cloned = cloneElement(children, {
+      ...eventListeners,
+      ref: originRef,
+    });
+    return <>{cloned}</>; // ✅ Оборачиваем в JSX, теперь это valid React component
   }
 
   return null;
