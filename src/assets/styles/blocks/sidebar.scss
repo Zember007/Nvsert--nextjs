@@ -2,11 +2,11 @@
 @import '../base/mixins';
 
 .cat-menu {
-  width: 304px;
+  width: 250px;
   margin-right: 32px;
   position: sticky;
-  top: 16px;
-  z-index: 20;
+  top: 70px;
+  z-index: 5;
   flex-shrink: 0;
   max-height: calc(100vh - 16px - 72px - 72px - 16px);
   max-height: calc((var(--vh, 1vh) * 100) - 16px - 72px - 72px - 16px);
@@ -116,6 +116,8 @@
 
         .cat-menu__link {
           display: block;
+          color: #93969D;
+          font-weight: 700;
         }
 
         .cat-menu__list {

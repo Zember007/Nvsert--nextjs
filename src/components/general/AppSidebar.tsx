@@ -33,7 +33,7 @@ const AppSidebar = () => {
             >
                 <span></span>
             </button>
-            <ul className="cat-menu__content">
+            <ul className="flex flex-col gap-[20px]">
                 {navigation.map((item) => (
                     <AppSidebarItem
                         key={item.id}
