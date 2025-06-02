@@ -48,11 +48,11 @@ const Page = () => {
 
     }, [searchParams])
 
-    useEffect(() => {
-        if (error) {
-            notFound()
-        }
-    }, [error])
+    // useEffect(() => {
+    //     if (error) {
+    //         notFound()
+    //     }
+    // }, [error])
     return (
         <div>
             <div className="article">

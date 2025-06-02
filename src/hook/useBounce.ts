@@ -6,7 +6,6 @@ interface BounceOptions {
     direction?: 'vertical' | 'horizontal';
     distanceCoficent?: number;
 }
-import {useId} from 'react'
 
 export function BounceEffect(
     element: HTMLElement,
@@ -22,7 +21,7 @@ export function BounceEffect(
     // Останавливаем текущую анимацию и сбрасываем состояние
     element.style.animation = "none";
     element.style.transform = `translate${direction === "vertical" ? "Y" : "X"}(${startPosition})`;
-    const id = useId()
+    const id = Date.now()
     // Запускаем новую анимацию
     requestAnimationFrame(() => {
 
