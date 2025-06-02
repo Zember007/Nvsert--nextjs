@@ -54,7 +54,6 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
     }, [configs, file_configs, dispatch]);
 
     useEffect(() => {
-        if (typeof window === 'undefined') return;
 
 
 
@@ -176,7 +175,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
         if (pathname === '/' && classBody === '') {
             setClassBody('transparent-header');
         }
-    }, [pathname]);
+    }, [pathname, classBody]);
 
     return (
         <>
