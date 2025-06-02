@@ -4,10 +4,9 @@ import AppBreadcrumbs from '@/components/general/AppBreadcrumbs';
 import AppSidebar from '@/components/general/AppSidebar';
 import AppArticle from '@/components/pages/AppArticle';
 import AppArticles from '@/components/pages/AppArticles';
-import { updateActionNavigation } from '@/store/navigation';
 import { resetPages, updateActionPages } from '@/store/pages';
 import { notFound, useParams, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 

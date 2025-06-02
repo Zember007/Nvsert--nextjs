@@ -16,41 +16,41 @@ import Image17 from '@/assets/images/main-gallery/17.webp';
 import Image18 from '@/assets/images/main-gallery/18.webp';
 import Image19 from '@/assets/images/main-gallery/19.webp';
 import Image20 from '@/assets/images/main-gallery/20.webp';
+import { StaticImageData } from 'next/image';
 
+type NavigationImg = {
+    [key: string]: { img: StaticImageData }[];
+  };
 
-export const gostR = [
-    { img: Image01 },
-    { img: Image02 },
-    { img: Image03 }
-];
-
-
-export const tamozhennySoyuz = [
-    { img: Image06 },
-    { img: Image05 },
-    { img: Image04 },
-    { img: Image07 }
-];
-
-export const sertifikatsiya = [
-    { img: Image08 },
-    { img: Image10 },
-    { img: Image19 },
-    { img: Image20 }
-];
-
-export const iso = [
-    { img: Image16 },
-    { img: Image17 },
-    { img: Image18 }
-];
-
-export const rospotrebnadzor = [
-    { img: Image12 },
-    { img: Image15 }
-];
-
-export const tekhDokumentatsiya = [
-    { img: Image09 },
-    { img: Image11 }
-];
+export const navigationImg: NavigationImg = {
+    tekhDokumentatsiya: [
+        { img: Image09 },
+        { img: Image11 }
+    ],
+    rospotrebnadzor: [
+        { img: Image12 },
+        { img: Image15 }
+    ],
+    iso: [
+        { img: Image16 },
+        { img: Image17 },
+        { img: Image18 }
+    ],
+    sertifikatsiya: [
+        { img: Image08 },
+        { img: Image10 },
+        { img: Image19 },
+        { img: Image20 }
+    ],
+    tamozhennySoyuz: [
+        { img: Image06 },
+        { img: Image05 },
+        { img: Image04 },
+        { img: Image07 }
+    ],
+    gostR: [
+        { img: Image01 },
+        { img: Image02 },
+        { img: Image03 }
+    ]
+}

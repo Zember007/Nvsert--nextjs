@@ -5,7 +5,7 @@ export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   let targetUrl: string | null = null; // Определяем целевой URL
-  
+
   // Проверяем, начинается ли путь с /api/
   if (pathname.startsWith('/api/')) {
     targetUrl = `${process.env.apiTarget}${pathname.replace('/api/', '')}`;

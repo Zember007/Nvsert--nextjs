@@ -16,12 +16,14 @@ import { filterPhone } from "@/hook/filter";
 import { useButton } from "@/hook/useButton";
 import { useAnimation, motion } from "framer-motion";
 import NavSvg from "./elements/NavSvg";
+import { RootState } from "@/config/store";
 
 
 
 
 const AppHeader = () => {
   const { makeDefaultHeader, makeTransparentHeader, openDefaultModal, darkHeader } = useHeaderContext();
+  const { navigation } = useSelector((state: RootState) => state.navigation);
 
   const pathname = usePathname();
   const [servicesMenuActive, setServicesMenuActive] = useState(false);
@@ -96,15 +98,6 @@ const AppHeader = () => {
 
 
   useBackgroundBrightness({ simpleBar, headerRef })
-
-  const services = [
-    'ГОСТ Р',
-    'Таможенный союз',
-    'Сертификация',
-    'ИСО (СМК)',
-    'Роспотребнадзор',
-    'Тех. документация',
-  ]
 
   useEffect(() => {
     if (servicesMenuActive) {
@@ -224,14 +217,14 @@ const AppHeader = () => {
 
           <div className="services-menu__wrapper select-none">
             <div className="grid grid-cols-6 h-[50px] w-full gap-[30px]">
-              {services.map((item, i) => (
+              {navigation.map((item, i) => (
                 <div ref={setWrapperRef} key={i} className="tariff-wrap ">
-                  <Link ref={setButtonRef} href={'#'} className={`tariff  tariff-inset not-backdrop an-border rounded-[4px] group bdark  `}>
+                  <Link ref={setButtonRef} href={item.full_slug} className={`tariff  tariff-inset not-backdrop an-border rounded-[4px] group bdark  `}>
                     <div className={`relative z-[-2] transition-all h-full rounded-[4px]  overflow-hidden`}>
                       <div className="absolute z-[10] top-1/2 -translate-y-1/2  group-hover:translate-x-0 transition-all p-[13px] -translate-x-full">
                         <NavSvg />
                       </div>
-                      <p className={`transition-all whitespace-nowrap right-1/2 translate-x-1/2 absolute top-1/2 -translate-y-1/2 group-hover:translate-x-0 group-hover:right-[13px] text-[18px] ${darkHeader ? 'text-[#000]' : 'text-[#FFF]'}`}>{item}</p>
+                      <p className={`transition-all whitespace-nowrap right-1/2 translate-x-1/2 absolute top-1/2 -translate-y-1/2 group-hover:translate-x-0 group-hover:right-[13px] text-[18px] ${darkHeader ? 'text-[#000]' : 'text-[#FFF]'}`}>{t(`navigation.${item.title}.title`)}</p>
                     </div>
                   </Link>
                 </div>
