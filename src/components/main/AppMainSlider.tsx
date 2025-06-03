@@ -42,7 +42,7 @@ const SliderMain = () => {
 
 
             sliders.current.forEach((el, i) => {
-                el.goToSlide(index, 1.8 - i * 0.15)
+                el.goToSlide(index, { ease: "power3", duration: 3 - i * 0.15 })
             })
 
         },
@@ -138,10 +138,7 @@ const SliderMain = () => {
                                                 if (el && !sliders.current.includes(el)) {
                                                     sliders.current.push(el)
                                                 }
-                                            }}
-                                            speed={10 + i * 2}
-                                            paused={true}
-                                        // className="w-[500%] slider"
+                                            }}                                                                                                                   
                                         >
                                             {slides.map((_, index) => (
                                                 <div key={index} >
