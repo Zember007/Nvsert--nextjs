@@ -50,7 +50,7 @@ const PhotoView = ({
   const key = useInitial(() => photoContext.nextId());
   const originRef = useRef<HTMLElement>(null);
 
-  useImperativeHandle((children as React.FunctionComponentElement<HTMLElement>)?.ref, () => originRef.current);
+  // useImperativeHandle((children as React.FunctionComponentElement<HTMLElement>)?.ref, () => originRef.current);
 
   useEffect(() => {
     return () => {
@@ -98,9 +98,10 @@ const PhotoView = ({
   }, [src]);
 
   if (children) {
-    return Children.only(cloneElement(children, { ...eventListeners, ref: originRef } as React.HTMLProps<HTMLElement>) );
+    return Children.only(cloneElement(children, { ...eventListeners, ref: originRef } as React.HTMLProps<HTMLElement>));
   }
   return null;
 };
 
 export default PhotoView;
+

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { JSX, useRef } from 'react';
 import isTouchDevice from './utils/isTouchDevice';
 import getMultipleTouchPosition from './utils/getMultipleTouchPosition';
 import getPositionOnMoveOrScale from './utils/getPositionOnMoveOrScale';
@@ -46,18 +46,18 @@ export interface PhotoBoxProps {
   // style
   style?: object;
   // 自定义 loading
-  loadingElement?: React.ReactElement;
+  loadingElement?: JSX.Element;
   // 加载失败 Element
-  brokenElement?: React.ReactElement | ((photoProps: BrokenElementParams) => React.ReactElement);
+  brokenElement?: JSX.Element | ((photoProps: BrokenElementParams) => JSX.Element);
 
   // Photo 点击事件
   onPhotoTap: PhotoTapFunction;
   // Mask 点击事件
   onMaskTap: PhotoTapFunction;
   // 到达边缘滑动事件
-  onReachMove?: ReachMoveFunction;
+  onReachMove: ReachMoveFunction;
   // 触摸解除事件
-  onReachUp?: ReachFunction;
+  onReachUp: ReachFunction;
   // Resize 事件
   onPhotoResize: () => void;
   // 向父组件导出属性

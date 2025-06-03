@@ -13,7 +13,7 @@ export declare const defaultEasing = "cubic-bezier(0.25, 0.8, 0.25, 1)";
 /**
  * 最大滑动切换图片距离
  */
-export declare const maxMoveOffset = 40;
+export declare const maxMoveOffset = 100;
 /**
  * 图片的间隔
  */

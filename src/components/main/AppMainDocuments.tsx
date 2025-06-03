@@ -15,7 +15,7 @@ const AppMainDocuments = () => {
             const box = document.querySelector('.PhotoView-Slider__BannerWrap') as HTMLDivElement;
             if (!box) return;
             box.dataset.before = t(`MainDocuments.${item.key}.title`);
-            
+
             const photos = document.querySelectorAll<HTMLDivElement>('.PhotoView__Photo__attr');
             photos.forEach((photo) => {
                 photo.dataset.price = t(`MainDocuments.${item.key}.price`);
@@ -52,8 +52,8 @@ const AppMainDocuments = () => {
 
             const handleClick = (e: MouseEvent) => {
                 const target = e.target as Element;
-                if (target?.closest('.PhotoView-Slider__BannerRight') || 
-                    target?.closest('.PhotoView-Slider__ArrowLeft') || 
+                if (target?.closest('.PhotoView-Slider__BannerRight') ||
+                    target?.closest('.PhotoView-Slider__ArrowLeft') ||
                     target?.closest('.PhotoView-Slider__ArrowRight')) return;
 
                 const rect = portal.getBoundingClientRect();
@@ -86,15 +86,23 @@ const AppMainDocuments = () => {
                     {t('docs.heading')}
                 </h2>
             </div>
-            
-            <PhotoProvider 
-                maskOpacity={0.4} 
+
+            <PhotoProvider
+                maskOpacity={0.4}
                 maskClassName="blurred-mask"
                 speed={() => 0}
                 onIndexChange={(index) => {
                     setActive(index);
                     const item = documents[index];
-                    handlePhotoClick(item, index);
+                    const box = document.querySelector('.PhotoView-Slider__BannerWrap') as HTMLDivElement;
+                    if (!box) return;
+                    box.dataset.before = t(`MainDocuments.${item.key}.title`);
+
+                    const photos = document.querySelectorAll<HTMLDivElement>('.PhotoView__Photo__attr');
+                    photos.forEach((photo) => {
+                        photo.dataset.price = t(`MainDocuments.${item.key}.price`);
+                        photo.dataset.duration = t(`MainDocuments.${item.key}.duration`);
+                    });
                 }}
                 maskClosable={false}
             >
