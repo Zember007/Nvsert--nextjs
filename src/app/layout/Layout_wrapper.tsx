@@ -48,10 +48,12 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
     }, [fileConfigsPure]);
 
     useEffect(() => {
+        console.log(configs, file_configs);
+        
         if (configs.length && file_configs.length) {
             dispatch(setMetadata(generateMetadata(configs, file_configs)));
         }
-    }, [configs, file_configs, dispatch]);
+    }, [configs, file_configs]);
 
     useEffect(() => {
 
