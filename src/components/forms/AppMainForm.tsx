@@ -169,7 +169,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
         }
     }, [contactValue])
 
-    const [isPhone, setIsPhone] = useState(false);
+    const [isPhone, setIsPhone] = useState(true);
     const [isEmail, setIsEmail] = useState(false);
     const [emailError, setEmailError] = useState(false);
     const [failCheck, setFailCheck] = useState(false);
