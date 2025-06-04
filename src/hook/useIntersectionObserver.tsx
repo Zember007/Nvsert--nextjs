@@ -13,8 +13,7 @@ export function useIntersectionObserver(options: IntersectionObserverInit = {}) 
     const checkInitialPosition = () => {
       const rect = ref.current!.getBoundingClientRect();
       const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-      // Элемент считается видимым, если он в пределах экрана или ближе 1000px
-      if (rect.top <= windowHeight + 1000) {
+      if (rect.top <= windowHeight) {
         setIsVisible(true);
       }
     };
