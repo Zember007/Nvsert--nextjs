@@ -94,7 +94,7 @@ const WrapperItem = ({ img, title, controls, link }: { link: string; img: string
                 <Link ref={setButtonRef} href={link} className={`tariff no-transitions no-light not-backdrop flex gap-[10px] group  rounded-[4px] items-center ${darkHeader ? `hover:bg-[#5B6788]` : 'hover:bg-[#00000080]'} border-solid ${darkHeader ? 'hover:border-[#000]' : 'hover:border-[#ccc]'} border border-[transparent]`}>
                     <motion.div
                         initial={{ y: 40, opacity: 0 }}
-                        className="rounded-[4px] overflow-hidden group-hover:rounded-[2px]"
+                        className="rounded-[4px] overflow-hidden group-hover:rounded-[2px] min-w-[43px]"
                         animate={controls}>
                         <Image src={img} className="w-[43px] h-[60px]" width={43} height={60} alt="document" />
                     </motion.div>
