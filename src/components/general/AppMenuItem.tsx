@@ -104,7 +104,7 @@ const AppMenuItem: React.FC<{
                 <button
                     type="button"
                     className={getClassName()}
-                    data-text={extractTextFromReactNode(item.label)}
+                    aria-label={extractTextFromReactNode(item.label)}
                     onMouseMove={handleMouseMove}
                     onClick={handleClick}
                     onMouseUp={handleMouseUp}
