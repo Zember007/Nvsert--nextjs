@@ -341,6 +341,7 @@
 
     backface-visibility: hidden;
     transition: none;
+
     &:not(.no-transitions) {
         transition: all 0.2s ease;
     }
@@ -348,6 +349,7 @@
     &.no-transitions {
         transition: transform 0.2s ease, shadow 0.2s ease;
     }
+
     transform: translateZ(0);
 
 
@@ -503,4 +505,11 @@ input:-webkit-autofill {
     top: 0;
     left: 0;
     right: 0;
+}
+
+.linear-text {
+    background: linear-gradient(90deg, #fff 0%, rgba(255, 255, 255, 0.44) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

@@ -46,7 +46,7 @@ const FlightSuccess = ({ close, small = false, text, closeIcon = true }: { close
                 <div
                     className="flex flex-col gap-[30px] text-white text-center items-center">
                     <div className="h-[23px]">
-                        <p className="text-[32px] tracking-[-0.03em]">{text}</p>
+                        <p className="text-[32px] tracking-[-0.03em] linear-text">{text}</p>
                     </div>
 
                     <p className="text-[20px]">Мы свяжемся с Вами <br /> в течение 10 минут!</p>
