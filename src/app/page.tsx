@@ -4,9 +4,12 @@ import dynamic from 'next/dynamic';
 import '@/assets/styles/main.scss'
 
 import AppMainIntro from '../components/main/AppMainIntro'
-import AppMainDocuments from '../components/main/AppMainDocuments'
 
 export default function Home() {
+
+  const DynamicAppMainDocuments = dynamic(() => import('../components/main/AppMainDocuments'), {
+    ssr: false,
+  });
 
   const DynamicAppMainSkills = dynamic(() => import('../components/main/AppMainSkills'), {
     ssr: false,
@@ -34,7 +37,7 @@ export default function Home() {
   return (
     <div className="main text-[#000] overflow-hidden select-none ">
       <AppMainIntro />
-      <AppMainDocuments />
+      <DynamicAppMainDocuments />
       <DynamicAppMainSkills />
       <DynamicAppMainSlider />
       <DynamicAppMainSafeguards />
