@@ -1,14 +1,36 @@
-import React, { ReactNode } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import styles from "./Header.module.css";
 import Link from 'next/link';
 
 interface MenuItem {
-    label: string | ReactNode;
+    label: ReactNode;
     href: string;
 }
 
 const AppMenuItem: React.FC<{ item: MenuItem; isActive: boolean, onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void, className?: string }> = React.memo(
     ({ item, isActive, onClick, className }) => {
+        function extractTextFromReactNode(node: ReactNode): string {
+            if (node === null || node === undefined || typeof node === 'boolean') {
+                return '';
+            }
+
+            if (typeof node === 'string' || typeof node === 'number') {
+                return node.toString();
+            }
+
+            if (Array.isArray(node)) {
+                return node.map(extractTextFromReactNode).join('');
+            }
+
+            // Если это React элемент
+            if (React.isValidElement(node)) {
+                const element = node as ReactElement<any, any>;
+                return extractTextFromReactNode(element.props.children);
+            }
+
+            // Если node - какой-то другой объект (например, функция, символ и т.д.)
+            return '';
+        }
         const [isFastClick, setIsFastClick] = React.useState(false);
 
         const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -78,7 +100,7 @@ const AppMenuItem: React.FC<{ item: MenuItem; isActive: boolean, onClick?: (e: R
                 <Link
                     href={item.href}
                     className={getClassName()}
-                    data-text={item.label}
+                    data-text={extractTextFromReactNode(item.label)}
                     onMouseMove={handleMouseMove}
                     onClick={handleClick}
                     onMouseUp={handleMouseUp}
