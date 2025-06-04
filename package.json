@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start -p 3000",
     "export": "next export",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.1",
@@ -19,6 +20,7 @@
     "lodash": "^4.17.21",
     "next": "15.1.7",
     "next-i18next": "^15.4.2",
+    "next-sitemap": "^4.2.3",
     "photoswipe": "^5.4.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
