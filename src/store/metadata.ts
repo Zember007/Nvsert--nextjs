@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   title: 'Декларирование, сертификация, лицензирование.',
-  description: '',
+  description: 'Сертификация оборудования, разработка технических документов, свидетельств государственной регистрации, экспертных заключений.',
   keywords: '',
   openGraph: {
     title: '',
