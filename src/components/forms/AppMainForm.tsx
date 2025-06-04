@@ -71,7 +71,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
     }
 
     const ids = useId()
-    
+
 
     const validContact = (value: string) => {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -182,7 +182,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
 
     useEffect(() => {
         setFailCheck(false)
-        setFocus('contact');
+
     }, [isPhone, isEmail])
 
     const controls = useAnimation();
@@ -262,10 +262,12 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                 >
                                     <AppCheckbox whiteBox={!bg} id={`check-phone${ids}`} successful={contactData.phone !== ''} fail={failCheck} checked={isPhone || contactData.phone !== ''}
                                         onChange={(value) => {
-                                            setIsPhone(value || contactData.phone !== ''); 
-                                            if (value || contactData.phone !== '') { 
-                                                setIsEmail(false); 
-                                            } else if(contactData.email !== '') {
+                                            setIsPhone(value || contactData.phone !== '');
+                                            if (value || contactData.phone !== '') {
+                                                setIsEmail(false);
+                                                setFocus('contact');
+
+                                            } else if (contactData.email !== '') {
                                                 setIsEmail(true);
                                             }
                                         }} label="Телефон" />
@@ -274,10 +276,12 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                             setIsEmail(value || contactData.email !== '');
                                             if (value || contactData.email !== '') {
                                                 setIsPhone(false);
-                                            } else if(contactData.phone !== '') {
+                                                setFocus('contact');
+
+                                            } else if (contactData.phone !== '') {
                                                 setIsPhone(true);
                                             }
-
+                                            setFocus('contact');
                                         }} label="Email" />
                                 </div>
                             </div>
