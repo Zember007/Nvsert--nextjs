@@ -215,9 +215,9 @@ const MainDocumentItem = memo(({
                         className={`w-full  relative z-[2] container-scale  transition-scale backface-hidden gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] active' : 'text-[#000]'} group-active/window:text-[#FFF]    relative`}
                     >
 
-                        <p className="translate-y-[-1px] transition-all duration-200 leading-[11px] will-change-transform w-[60%] pl-[63px]  text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">
+                        <h3 className="translate-y-[-1px] transition-all duration-200 leading-[11px] will-change-transform w-[60%] pl-[63px]  text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">
                             {title}
-                        </p>
+                        </h3>
                         <div className="will-change-transform *:will-change-transform w-[40%] grid grid-cols-[1fr_1fr_auto] items-center justify-between">
                             <p className="translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px] transition-all duration-200 font-bold tracking-normal">{duration}</p>
                             <p className="translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px] transition-all duration-200 font-bold tracking-normal">{price}</p>

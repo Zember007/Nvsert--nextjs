@@ -114,7 +114,7 @@ const AppMainSafeguards = () => {
       observer.observe(divRef.current);
     }
 
- 
+
     return () => {
       if (divRef.current) {
         observer.unobserve(divRef.current);
@@ -129,28 +129,25 @@ const AppMainSafeguards = () => {
 
 
   return (
-    <section
-      className="py-[75px] relative">
-      <div className="wrapper flex flex-col gap-[50px]">
-        <h2 className="leading-[1] tracking-[-0.04em] text-center  text-[24px] xs:text-[40px] l:text-[56px]">Гарантии и безупречный сервис</h2>
-        <div className="grid grid-cols-4 gap-[20px]">
-          {
-            guarantees.map((item, index) => (
-              <SafeguardBlock
-                key={index}
-                img={item.img}
-                index={index}
-                title={item.title}
-                items={item.items}
-                isVisible={isVisible}
+    <>
+      <div className="grid grid-cols-4 gap-[20px]">
+        {
+          guarantees.map((item, index) => (
+            <SafeguardBlock
+              key={index}
+              img={item.img}
+              index={index}
+              title={item.title}
+              items={item.items}
+              isVisible={isVisible}
 
-              />
-            ))
-          }
-        </div>
+            />
+          ))
+        }
       </div>
       <div ref={divRef} className='top-0 bottom-0 left-0 right-0 absolute pointer-events-none'></div>
-    </section >
+
+    </>
   );
 };
 

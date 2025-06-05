@@ -39,7 +39,7 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "src/scripts/slider.js"
-, "src/components/main/elements/MainDocumentItem.jsx", "src/components/main/AppMainFeedback.jsx"  ],
+, "src/components/main/elements/MainDocumentItem.jsx", "src/components/main/AppMainFeedback.tsx"  ],
   "exclude": [
     "node_modules",
     "src/assets/lib/react-photo-view",

@@ -18,11 +18,7 @@ const AppMainQuestions = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
   return (
-    <section className="py-[75px]">
-      <div className="wrapper flex flex-col gap-[40px]">
-        <h2 className="leading-[1] tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px]">
-          {t('MainQuestions.title')}
-        </h2>
+
         <div className="flex flex-col gap-[10px]">
 
           {questions.map((item, index) => (
@@ -42,8 +38,6 @@ const AppMainQuestions = () => {
           ))}
         </div>
 
-      </div>
-    </section>
   );
 };
 

@@ -1,14 +1,13 @@
 
 import { PhotoProvider, PhotoView } from '@/assets/lib/react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 import { horizontalLoop } from '@/scripts/slider';
 import { useButton } from '@/hook/useButton';
 import Image from 'next/image';
 import gsap from 'gsap';
 import Draggable from "gsap/dist/Draggable";
 import InertiaPlugin from "@/scripts/InertiaPlugin";
-import { useTranslation } from 'react-i18next';
 
 gsap.registerPlugin(Draggable, InertiaPlugin);
 
@@ -21,7 +20,7 @@ const AppMainFeedback = () => {
     useEffect(() => {
         const slides = gsap.utils.toArray('[data-slider="slide-feedback"]');
         const slides1 = gsap.utils.toArray('[data-slider="slide-feedback1"]');
-        const loop = horizontalLoop(slides, {
+        const loop: any = horizontalLoop(slides, {
             paused: false,
             draggable: true,
             speed: 0.5,
@@ -31,7 +30,7 @@ const AppMainFeedback = () => {
             opacity: false
         });
 
-        const loop1 = horizontalLoop(slides1, {
+        const loop1: any = horizontalLoop(slides1, {
             paused: false,
             draggable: true,
             speed: 0.5,
@@ -54,10 +53,10 @@ const AppMainFeedback = () => {
         setTimeout(() => {
 
 
-            const portal = document.querySelector('.PhotoView-Portal');
-            const arrowLeft = document.querySelector('.PhotoView-Slider__ArrowLeft');
-            const arrowRight = document.querySelector('.PhotoView-Slider__ArrowRight');
-            const closeBtn = document.querySelector('.PhotoView-Slider__BannerRight');
+            const portal = document.querySelector('.PhotoView-Portal') as HTMLDivElement;
+            const arrowLeft = document.querySelector('.PhotoView-Slider__ArrowLeft') as HTMLDivElement;
+            const arrowRight = document.querySelector('.PhotoView-Slider__ArrowRight') as HTMLDivElement;
+            const closeBtn = document.querySelector('.PhotoView-Slider__BannerRight') as HTMLDivElement;
 
 
             if (!portal || !arrowLeft || !arrowRight) {
@@ -66,7 +65,7 @@ const AppMainFeedback = () => {
             }
 
             // Отслеживание движения курсора
-            portal.addEventListener('mousemove', (e) => {
+            portal.addEventListener('mousemove', (e: any) => {
                 const rect = portal.getBoundingClientRect(); // Получаем размеры и положение блока
                 const cursorX = e.clientX - rect.left; // Позиция курсора относительно левого края блока
                 const halfWidth = rect.width / 2; // Половина ширины блока
@@ -88,8 +87,8 @@ const AppMainFeedback = () => {
             });
 
             // Обработка клика
-            portal.addEventListener('click', (e) => {
-                const target = e.target;
+            portal.addEventListener('click', (e: any) => {
+                const target = e.target as Element;
                 if (target?.closest('.PhotoView-Slider__BannerRight') || target?.closest('.PhotoView-Slider__ArrowLeft') || target?.closest('.PhotoView-Slider__ArrowRight')) return
 
                 const rect = portal.getBoundingClientRect();
@@ -116,26 +115,21 @@ const AppMainFeedback = () => {
         }, 100)
     }
 
-    const {t} = useTranslation()
 
     return (
-        <section className="py-[75px]">
-            <PhotoProvider maskOpacity={0.4} maskClassName="blurred-mask"
-                speed={() => 0}
+     
+                <PhotoProvider maskOpacity={0.4} maskClassName="blurred-mask"
+                    speed={() => 0}
 
-                maskClosable={false}
+                    maskClosable={false}
 
-            >
-                <div className="wrapper flex flex-col gap-[40px]">
-                    <h2 className="leading-[1] tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px]">{t('MainFeedback.title')}</h2>
-
-
+                >
                     <div className="relative h-[554px] flex flex-col gap-[10px] overflow-hidden feedback-slider-box">
 
                         <div className="slide-blur left-0">
-                            <span className="line" style={{ '--blur': '10px', '--lightness': '100%' }}></span>
-                            <span className="line" style={{ '--blur': '5px', '--lightness': '100%' }}></span>
-                            <span className="line" style={{ '--blur': '2px', '--lightness': '100%' }}></span>
+                            <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
+                            <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
+                            <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
                         </div>
 
                         <div className="slide-main">
@@ -147,7 +141,7 @@ const AppMainFeedback = () => {
                                         <div
                                             onClick={readyPhoto}
                                             data-slider="slide-feedback" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] h-[267px] rounded-[4px]">
-                                            <PhotoView src={`/feedbacks/big/${index + 1}.png`}           
+                                            <PhotoView src={`/feedbacks/big/${index + 1}.png`}
                                             >
                                                 <Image
                                                     className='min-h-full'
@@ -189,15 +183,14 @@ const AppMainFeedback = () => {
 
 
                         <div className="slide-blur right-0 !translate-x-[0]">
-                            <span className="line" style={{ '--blur': '2px', '--lightness': '100%' }}></span>
-                            <span className="line" style={{ '--blur': '5px', '--lightness': '100%' }}></span>
-                            <span className="line" style={{ '--blur': '10px', '--lightness': '100%' }}></span>
+                            <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
+                            <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
+                            <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
                         </div>
 
                     </div>
-                </div>
-            </PhotoProvider>
-        </section>
+                </PhotoProvider>
+          
     );
 };
 
