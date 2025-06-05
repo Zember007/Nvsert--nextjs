@@ -260,6 +260,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                         onBlur={() => {setFocusContact(false); validContact(contactValue) }}
                                     />
                                 </div>
+                                
                                 <div id={`bounce-checkbox${ids}`} className="pl-[10px] flex items-center gap-[30px]"
                                     onClick={() => { clearErrors('contact') }}
                                 >
