@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from 'react';
 
 interface CustomCheckboxProps {
+    focus?: boolean;
     checked: boolean;
     onChange: (checked: boolean) => void;
     label?: string;
@@ -17,7 +18,8 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
     fail,
     successful,
     id,
-    whiteBox
+    whiteBox,
+    focus
 }) => {
     // Генерируем уникальный id один раз при создании компонента
 
@@ -51,7 +53,8 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
                    
                     group active:scale-[0.9] transition-all duration-300 active:!${whiteBox ? 'border-[#FFF]' : 'border-[#5F5F5F]'}
                     w-[20px] h-[20px] flex items-center justify-center border-[1.2px] ${whiteBox ? 'border-[#FFF]' : 'border-[#5F5F5F]'} rounded-[1.8px]
-                  ${successful ? 'peer-checked:border-[#34C759]' : 'peer-checked:bg-[#21262F]'}
+                  ${successful ? 'peer-checked:border-[#34C759]' : ''}
+                  ${!successful && focus && 'peer-checked:bg-[#21262F]'}
                   peer-checked:*:block
                   cursor-pointer ${fail && '!border-[#FF3030]'}`}
 

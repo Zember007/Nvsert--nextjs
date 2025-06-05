@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from "react-hook-form";
 
-const AppInput = ({ title, defaultValue, disable, fail, message = true, inputName, type, required, autocomplete, mask, className, classNameTitle, onBlur }: { onBlur?: (value: string) => void, disable?: boolean, fail?: boolean, message?: boolean, title: string, inputName: string, type?: string, required?: boolean, autocomplete?: string, mask?: string, className?: string, classNameTitle?: string, defaultValue?: string }) => {
+const AppInput = ({ title, defaultValue, disable, fail, message = true, inputName, type, required, autocomplete, mask, className, classNameTitle, onBlur, onFocus }: { onFocus?: (value: string) => void, onBlur?: (value: string) => void, disable?: boolean, fail?: boolean, message?: boolean, title: string, inputName: string, type?: string, required?: boolean, autocomplete?: string, mask?: string, className?: string, classNameTitle?: string, defaultValue?: string }) => {
     const { register, formState: { errors, isSubmitted, submitCount }, setValue, clearErrors } = useFormContext();
 
     const formatPhoneNumber = (e: React.FormEvent<HTMLInputElement>) => {
@@ -70,7 +70,11 @@ const AppInput = ({ title, defaultValue, disable, fail, message = true, inputNam
                     autoComplete={autocomplete}
                     disabled={disable || false}
                     onInput={(e) => { changeInput(e) }}
-                    onFocus={() => { clearErrors(inputName) }}
+                    onFocus={(e) => {
+                        if (onFocus) {
+                            onFocus(e.currentTarget.value);
+                        }
+                    }}
                     onBlur={(e) => {
                         if (onBlur) {
                             onBlur(e.currentTarget.value);

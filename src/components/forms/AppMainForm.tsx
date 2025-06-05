@@ -129,6 +129,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
 
     const { reset, formState: { submitCount }, watch, clearErrors, setFocus } = methods;
 
+
     const contactValue = watch("contact") || "";
 
     const bounceCheckbox = () => {
@@ -169,6 +170,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
         }
     }, [contactValue])
 
+    const [focusContact, setFocusContact] = useState(false)
     const [isPhone, setIsPhone] = useState(false);
     const [isEmail, setIsEmail] = useState(false);
     const [emailError, setEmailError] = useState(false);
@@ -254,13 +256,14 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                         required={true}
                                         message={false}
                                         disable={!isPhone && !isEmail}
-                                        onBlur={() => { validContact(contactValue) }}
+                                        onFocus={() => {setFocusContact(true)}}
+                                        onBlur={() => {setFocusContact(false); validContact(contactValue) }}
                                     />
                                 </div>
                                 <div id={`bounce-checkbox${ids}`} className="pl-[10px] flex items-center gap-[30px]"
                                     onClick={() => { clearErrors('contact') }}
                                 >
-                                    <AppCheckbox whiteBox={!bg} id={`check-phone${ids}`} successful={contactData.phone !== ''} fail={failCheck} checked={isPhone || contactData.phone !== ''}
+                                    <AppCheckbox whiteBox={!bg} id={`check-phone${ids}`} successful={contactData.phone !== ''} focus={focusContact} fail={failCheck} checked={isPhone || contactData.phone !== ''}
                                         onChange={(value) => {
                                             setIsPhone(value || contactData.phone !== '');
                                             if (value || contactData.phone !== '') {
@@ -271,7 +274,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                                 setIsEmail(true);
                                             }
                                         }} label="Телефон" />
-                                    <AppCheckbox whiteBox={!bg} id={`check-email${ids}`} successful={contactData.email !== ''} fail={failCheck} checked={isEmail || contactData.email !== ''}
+                                    <AppCheckbox focus={focusContact} whiteBox={!bg} id={`check-email${ids}`} successful={contactData.email !== ''} fail={failCheck} checked={isEmail || contactData.email !== ''}
                                         onChange={(value) => {
                                             setIsEmail(value || contactData.email !== '');
                                             if (value || contactData.email !== '') {
