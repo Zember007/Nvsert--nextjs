@@ -42,7 +42,7 @@ const SliderMain = () => {
 
 
             sliders.current.forEach((el, i) => {
-                el.goToSlide(index, { ease: "power3", duration: 2.2 - i * 0.15 })
+                el.goToSlide(index, { ease: "power3", duration: 2 - i * 0.15 })
             })
 
         },
