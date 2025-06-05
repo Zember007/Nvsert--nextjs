@@ -53,9 +53,9 @@ export default function Home() {
             <LazyLoadSection component={
               DynamicAppMainSkills
             } />
-            <h4 className='text-[18px] leading-[1.5] mt-[40px]'>
+            <h3 className='text-[18px] leading-[1.5] mt-[40px]'>
               {filterPrepositions('Наша компания признана одной из ведущих на рынке сертификации в Российской Федерации и стран Евразийского Экономического Союза. Специалисты NVSERT предоставляют широкий спектр услуг, направленный на оформление обязательной и добровольной сертификации, декларирования, соответствия требованиям технических регламентов и других документов, подтверждающих качество выпускаемой продукции.')}
-            </h4>
+            </h3>
             <Link
               href={'/about'}
               className='flex items-center gap-[8px] mt-[28px]'
