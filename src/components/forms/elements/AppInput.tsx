@@ -64,7 +64,7 @@ const AppInput = ({ title, defaultValue, disable, fail, message = true, inputNam
                         required
                     })}
                     type={type}
-                    className={`field__input no-drag ${disable && 'active:scale-[0.95] pointer-events-none'} transition-transform duration-300  ${className} ${(fail) && 'error !text-[#FF3030]'} `}
+                    className={`field__input no-drag ${disable && 'active:scale-[0.95] pointer-events-none placeholder:text-[transparent]'} transition-transform duration-300  ${className} ${(fail) && 'error !text-[#FF3030]'} `}
                     name={inputName}
                     placeholder={title}
                     autoComplete={autocomplete}
@@ -81,12 +81,15 @@ const AppInput = ({ title, defaultValue, disable, fail, message = true, inputNam
                         }
                     }}
                 />
-                <span className={`field__title ${(errors[inputName]) && '!text-[#FF3030]'} ${classNameTitle}`}>
-                    {title}
-                </span>
-                <span className={`field__title-top ${classNameTitle}`}>
-                    {title}
-                </span>
+                {!disable &&
+                    <>
+                        <span className={` field__title ${(errors[inputName]) && '!text-[#FF3030]'} ${classNameTitle}`}>
+                            {title}
+                        </span>
+                        <span className={`field__title-top ${classNameTitle}`}>
+                            {title}
+                        </span>
+                    </>}
             </label>
             {/* {message && visibleError && isSubmitted && errors[inputName] && <ul className="error-list" >
                 <li className={`error-item ${visibleError && 'bounce'}`}>
