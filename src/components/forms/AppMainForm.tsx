@@ -249,7 +249,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                         title={isPhone ? 'Телефон' : isEmail ? 'Email' : ''}
                                         inputName="contact"
                                         mask={isPhone ? "phone" : ''}
-                                        type={isPhone ? "phone" : 'text'}
+                                        type={isPhone ? "tel" : 'text'}
                                         fail={emailError}
                                         required={true}
                                         message={false}

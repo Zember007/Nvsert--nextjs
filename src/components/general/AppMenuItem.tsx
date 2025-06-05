@@ -94,7 +94,7 @@ const AppMenuItem: React.FC<{
     const content = (
         <>
             {typeof item.label === 'string' ? <span>{item.label}</span> : item.label}
-            <div className={styles.highlight} />
+            <span className={styles.highlight} />
         </>
     );
 

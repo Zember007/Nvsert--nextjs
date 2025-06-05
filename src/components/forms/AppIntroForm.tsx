@@ -127,7 +127,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
                             title={'Телефон'}
                             inputName="Contact"
                             mask={"phone"}
-                            type={"phone"}
+                            type={"tel"}
                             required={true}
                             fail={contactError}
                             onBlur={(value) => { validContact(value) }}
