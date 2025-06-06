@@ -3,7 +3,8 @@ import { gsap } from 'gsap';
 import { horizontalLoop } from '@/scripts/slider';
 
 type HorizontalLoopProps = {
-    children: React.ReactNode[];                
+    children: React.ReactNode[]; 
+    initial: boolean;               
     onChange?: (index: number) => void;
 };
 
@@ -14,7 +15,8 @@ export type HorizontalLoopRef = {
 const HorizontalLoop = forwardRef<HorizontalLoopRef, HorizontalLoopProps>(
     (
         {
-            children
+            children,
+            initial
         },
         ref
     ) => {
@@ -28,7 +30,7 @@ const HorizontalLoop = forwardRef<HorizontalLoopRef, HorizontalLoopProps>(
         }));
 
         useEffect(() => {
-            if (!containerRef.current) return;
+            if (!containerRef.current || !initial) return;
 
             const items = Array.from(containerRef.current.children) as HTMLElement[];
             const tl:any = horizontalLoop(items, {
@@ -37,12 +39,6 @@ const HorizontalLoop = forwardRef<HorizontalLoopRef, HorizontalLoopProps>(
            
             timelineRef.current = tl;
 
-            return () => {
-                tl.kill();                
-            };
-        }, []);
-
-        useEffect(() => {
             const onResize = () => {
                 if (timelineRef.current) {
                     const progress = timelineRef.current.progress();
@@ -52,8 +48,13 @@ const HorizontalLoop = forwardRef<HorizontalLoopRef, HorizontalLoopProps>(
             };
 
             window.addEventListener('resize', onResize);
-            return () => window.removeEventListener('resize', onResize);
-        }, []);
+
+
+            return () => {
+                tl.kill(); 
+                window.removeEventListener('resize', onResize);               
+            };
+        }, [initial]);
 
         return (
             <div ref={containerRef} className="slider w-[500%] flex">

@@ -5,6 +5,7 @@ import '@/assets/styles/main.scss'
 
 import AppMainIntro from '../components/main/AppMainIntro'
 import AppMainDocuments from '../components/main/AppMainDocuments'
+import AppMainSlider from '../components/main/AppMainSlider'
 import LazyLoadSection from '@/hook/LazyLoadSection';
 
 
@@ -17,10 +18,6 @@ import { useTranslation } from 'react-i18next';
 export default function Home() {
 
   const DynamicAppMainSkills = dynamic(() => import('../components/main/AppMainSkills'), {
-    ssr: false,
-  });
-
-  const DynamicAppMainSlider = dynamic(() => import('../components/main/AppMainSlider'), {
     ssr: false,
   });
 
@@ -66,16 +63,10 @@ export default function Home() {
           </div>
         </div>
       </section >
-      <section className='py-[75px] text-[#000] relative'>
-        <div className="wrapper flex flex-col gap-[40px]">
+    
+          <AppMainSlider/>
 
-          <h2 className='leading-[1] tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px]'>Помогаем с документами по отраслям</h2>
-          <LazyLoadSection component={
-            DynamicAppMainSlider
-          } />
-
-        </div>
-      </section>
+     
       <section
         className="py-[75px] relative">
         <div className="wrapper flex flex-col gap-[50px]">
