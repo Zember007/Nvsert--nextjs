@@ -2,7 +2,6 @@
 
 const nextConfig = {
   output: 'standalone',
-  swcMinify: true,
   i18n: {
     locales: ['ru'],
     defaultLocale: 'ru'
