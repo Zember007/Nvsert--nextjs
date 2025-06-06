@@ -210,12 +210,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
                             <AppFooter />
                         </main>
                     </SimpleBar>
-                </SimpleBarContext.Provider>
-                {/* <div className="canvas_block">
-                    <div className="w-full h-full">
-                        <canvas ref={canvasRef} style={{ display: 'block' }} />
-                    </div>
-                </div> */}
+                </SimpleBarContext.Provider>         
                 <div className="bg-noise"></div>
             </body>
         </>

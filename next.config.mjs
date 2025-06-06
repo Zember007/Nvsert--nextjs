@@ -2,6 +2,7 @@
 
 const nextConfig = {
   output: 'standalone',
+  swcMinify: true,
   i18n: {
     locales: ['ru'],
     defaultLocale: 'ru'
@@ -12,7 +13,6 @@ const nextConfig = {
       test: /\.(mp4)$/i,
       use: [
         {
-          loader: 'file-loader',
           options: {
             publicPath: '/_next',
             name: 'static/media/[name].[hash].[ext]',
