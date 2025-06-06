@@ -44,19 +44,11 @@
   }
 }
 
-.materialBtn {
-  position: relative;
-}
 
 .document-wrapper-border:last-child .border-group {
   border-bottom-width: 1px;
 }
 
-
-.border-bounce {
-  --duration: 400ms;
-  // animation: border_bounce var(--duration) ease-in forwards;
-}
 
 
 @keyframes border_bounce {

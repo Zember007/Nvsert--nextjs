@@ -80,12 +80,10 @@ const AppMainDocuments = () => {
     };
 
     return (
-        <section id="documents_box" className="py-[75px] flex flex-col gap-[40px]">
-            <div className="wrapper">
-                <h2 className="leading-[1] text-center text-[24px] xs:text-[40px] l:text-[56px] text-[#000000] tracking-[-0.04em]">
-                    {t('docs.heading')}
-                </h2>
-            </div>
+        <section id="documents_box" className="py-[75px] flex flex-col gap-[40px] wrapper">
+            <h2 className="leading-[1] text-center text-[24px] xs:text-[40px] l:text-[56px] text-[#000000] tracking-[-0.04em]">
+                {t('docs.heading')}
+            </h2>
 
             <PhotoProvider
                 maskOpacity={0.4}

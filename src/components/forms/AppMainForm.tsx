@@ -252,7 +252,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                     <AppInput
                                         defaultValue={isEmail ? contactData.email : isPhone ? contactData.phone : ''}
                                         className="!bg-[#2a2a2a] focus:!bg-[#21262F] [&:not(:placeholder-shown)]:!bg-[#21262F]"
-                                        title={isPhone ? 'Телефон' :  'Email'}
+                                        title={isPhone ? 'Телефон' : 'Email'}
                                         inputName="contact"
                                         mask={isPhone ? "phone" : ''}
                                         type={isPhone ? "tel" : 'text'}
@@ -260,11 +260,11 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                         required={true}
                                         message={false}
                                         disable={!isPhone && !isEmail}
-                                        onFocus={() => {setFocusContact(true)}}
-                                        onBlur={() => {setFocusContact(false); validContact(contactValue) }}
+                                        onFocus={() => { setFocusContact(true) }}
+                                        onBlur={() => { setFocusContact(false); validContact(contactValue) }}
                                     />
                                 </div>
-                                
+
                                 <div id={`bounce-checkbox${ids}`} className="pl-[10px] flex items-center gap-[30px]"
                                     onClick={() => { clearErrors('contact') }}
                                 >
@@ -304,27 +304,24 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                 <button
                                     type="submit"
                                     ref={setButtonRef}
-                                    className="no-drag btnIconAn group  tariff an-border bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold   rounded-[4px]"
+                                    className="no-drag btnIconAn group  tariff an-border bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold  overflow-hidden p-[9px] px-[20px] relative flex items-center justify-center rounded-[4px]"
                                     style={{
                                         verticalAlign: 'middle'
                                     }}
                                 >
-
-                                    <span className="overflow-hidden p-[9px] px-[20px] relative flex items-center justify-center">
-                                        <span className="sendIconLeft transition-all ease-in">
-                                            <Image
-                                                alt="message"
-                                                src={MessageImg}
-                                                width="0"
-                                                height="0"
-                                                sizes="100vw"
-                                                className="h-[30px] w-[30px] rotate-[45deg] translate-x-[-5px]"
-                                            />
-                                        </span>
-                                        <span
-                                            className="transition-all ease-in sendText"
-                                        >{btnText}</span>
+                                    <span className="sendIconLeft transition-all ease-in">
+                                        <Image
+                                            alt="message"
+                                            src={MessageImg}
+                                            width="0"
+                                            height="0"
+                                            sizes="100vw"
+                                            className="h-[30px] w-[30px] rotate-[45deg] translate-x-[-5px]"
+                                        />
                                     </span>
+                                    <span
+                                        className="transition-all ease-in sendText"
+                                    >{btnText}</span>
                                 </button>
                             </div>
 

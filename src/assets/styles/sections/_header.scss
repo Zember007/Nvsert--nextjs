@@ -615,7 +615,7 @@
 	z-index: 12;
 
 	@media (max-width: $media-s) {
-		width: 42px;
+		width: 82px;
 	}
 
 	.icon {
@@ -623,17 +623,17 @@
 		height: 100%;
 
 		&--logo {
-			@media (max-width: $media-s) {
-				display: none;
-			}
+			// @media (max-width: $media-s) {
+			// 	display: none;
+			// }
 		}
 
 		&--logo-mob {
 			display: none;
 
-			@media (max-width: $media-s) {
-				display: block;
-			}
+			// @media (max-width: $media-s) {
+			// 	display: block;
+			// }
 		}
 	}
 

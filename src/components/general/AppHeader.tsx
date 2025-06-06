@@ -173,7 +173,7 @@ const AppHeader = () => {
             </div>
           </div>
 
-          <div className="flex gap-[8px]">
+          <div className="hidden xl:flex gap-[8px]">
             <AppMenuItem
               className="!px-[31px] group"
               onClick={() => {
@@ -197,13 +197,12 @@ const AppHeader = () => {
           </div>
           <button
             type="button"
-            className={`btn-mobile js-burger-btn ${burgerMenuActive && 'active'}`}
+            className={`btn-mobile ${burgerMenuActive && 'active'}`}
             onClick={() => {
               burgerHandler();
             }}
-          >
-            Меню
-            <span className="burger-btn">
+          >            
+            <span className="">
               <span></span>
             </span>
           </button>
