@@ -7,19 +7,7 @@ const nextConfig = {
     defaultLocale: 'ru'
   },
 
-  webpack: (config, { isServer }) => {
-    config.module.rules.push({
-      test: /\.(mp4)$/i,
-      use: [
-        {
-          options: {
-            publicPath: '/_next',
-            name: 'static/media/[name].[hash].[ext]',
-          },
-        },
-      ],
-    });
-
+  webpack: (config) => {
     return config;
   },
 
