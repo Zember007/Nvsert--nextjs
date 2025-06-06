@@ -179,8 +179,14 @@ const MainDocumentItem = memo(({
 
             <div
                 ref={wrapperRef}
-                className={`${index !== 0 && '-mt-[1px]'} mx-[-23px] flex flex-col group/main cursor-pointer ${!active ? 'hover:bg-[#34446D33] hover:backdrop-blur-[1px] hover:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[transparent] rounded-[6px] relative`}>                
-
+                className={`${index !== 0 && '-mt-[1px]'} mx-[-23px] flex flex-col group/main cursor-pointer ${!active ? 'hover:bg-[#34446D33] hover:backdrop-blur-[1px] hover:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[transparent] rounded-[6px] relative`}>
+                <div
+                    className={`absolute top-[-1px] bottom-[-1px] border-group right-[16px] left-[16px] ${!active && ' group-hover/wrapper:!border-[transparent]'}`}
+                    style={{
+                        borderTopColor: active ? 'transparent' : '#93969D',
+                        borderBottomColor: active ? 'transparent' : '#93969D'
+                    }}
+                />
                 <div
                     onClick={handleItemClick}
                     className={`rounded-[6px] -mx-[1px] w-[calc(100%+2px)] -mt-[1px] border-[transparent] border-solid border ${active && '!border-[#000]'}  text-left group/window box-scale active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] transition-scale ${!active ? '' : ' bg-[#5B6788]  shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset]'} active:bg-[#5B6788]  px-[23px]  relative w-full  z-[0]`}>
@@ -201,7 +207,7 @@ const MainDocumentItem = memo(({
                         style={{
                             textRendering: 'geometricPrecision'
                         }}
-                        className={` w-full border-0 -mb-[1px] ${index === 0 && 'border-t'} border-b border-solid border-[#93969D] group-hover/window:border-[transparent] relative z-[2] container-scale  transition-scale backface-hidden gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] active !border-[transparent]' : 'text-[#000]'} group-active/window:text-[#FFF]    relative`}
+                        className={` w-full   relative z-[2] container-scale  transition-scale backface-hidden gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] active !border-[transparent]' : 'text-[#000]'} group-active/window:text-[#FFF]    relative`}
                     >
 
                         <h3 className="translate-y-[-1px] transition-all duration-200 leading-[11px] will-change-transform w-[60%] pl-[63px]  text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">
