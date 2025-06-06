@@ -1,6 +1,7 @@
 'use client'
 import '@/assets/styles/base.scss';
 import 'simplebar-react/dist/simplebar.min.css';
+import '@/assets/lib/react-photo-view/dist/react-photo-view.css';
 import SimpleBar from 'simplebar-react';
 import AppHeader from '@/components/general/AppHeader';
 import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';

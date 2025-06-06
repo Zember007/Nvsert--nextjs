@@ -53,6 +53,10 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                 reset();
                 setIsPhone(false);
                 setIsEmail(false);
+                setContactData({
+                    email: '',
+                    phone: ''
+                })
                 successVisible()
 
             }
