@@ -189,9 +189,7 @@ const MainDocumentItem = memo(({
                 />
                 <div
                     onClick={handleItemClick}
-                    className={`rounded-[6px] -mx-[1px] w-[calc(100%+2px)] -mt-[1px] border-[transparent] border-solid border ${active && '!border-[#000]'}  text-left group/window box-scale active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] transition-scale ${!active ? '' : ' bg-[#5B6788]  shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset]'} active:bg-[#5B6788]  px-[23px]  relative w-full  z-[0]`}>
-
-                    {/* <div className={` absolute top-[-1px] bottom-[-1px] right-[0] z-[1000] rounded-[6px] left-[0] transition-all duration-300`}></div> */}
+                    className={`rounded-[6px] overflow-hidden -mx-[1px] w-[calc(100%+2px)] -mt-[1px] border-[transparent] border-solid border ${active && '!border-[#000]'}  text-left group/window box-scale active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] transition-scale ${!active ? '' : ' bg-[#5B6788]  shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset]'} active:bg-[#5B6788]  px-[23px]  relative w-full  z-[0]`}>                    
 
 
                     <Image
