@@ -201,7 +201,7 @@ const MainDocumentItem = memo(({
                         style={{
                             textRendering: 'geometricPrecision'
                         }}
-                        className={` w-full border-0 -mb-[1px] border-b border-solid border-[#93969D] group-hover/window:border-[transparent] relative z-[2] container-scale  transition-scale backface-hidden gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] active !border-[transparent]' : 'text-[#000]'} group-active/window:text-[#FFF]    relative`}
+                        className={` w-full border-0 -mb-[1px] ${index === 0 && 'border-t'} border-b border-solid border-[#93969D] group-hover/window:border-[transparent] relative z-[2] container-scale  transition-scale backface-hidden gap-[10px] flex items-center justify-between py-[15px] s:py-[23px] ${active ? 'text-[#FFF] active !border-[transparent]' : 'text-[#000]'} group-active/window:text-[#FFF]    relative`}
                     >
 
                         <h3 className="translate-y-[-1px] transition-all duration-200 leading-[11px] will-change-transform w-[60%] pl-[63px]  text-[16px] s:text-[18px] m:text-[20px]  font-bold tracking-normal">
