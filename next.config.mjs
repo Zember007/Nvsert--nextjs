@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
+  output: 'standalone',
   i18n: {
     locales: ['ru'],
     defaultLocale: 'ru'
