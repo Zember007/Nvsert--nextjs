@@ -22,6 +22,9 @@ import Image17 from '@/assets/images/main-gallery/17.webp';
 import Image18 from '@/assets/images/main-gallery/18.webp';
 import Image19 from '@/assets/images/main-gallery/19.webp';
 import Image20 from '@/assets/images/main-gallery/20.webp';
+import Image21 from '@/assets/images/main-gallery/21.webp';
+import Image22 from '@/assets/images/main-gallery/22.webp';
+import Image23 from '@/assets/images/main-gallery/23.webp';
 
 
 export const documents = [
@@ -56,6 +59,46 @@ export const documents = [
         key: 'doc7'
     },
     {
+        img: Image12,
+        key: 'doc15'
+    },
+    {
+        img: Image15,
+        key: 'doc16'
+    },
+    {
+        img: Image21,
+        key: 'doc21'
+    },
+    {
+        img: Image09,
+        key: 'doc17'
+    },
+    {
+        img: Image11,
+        key: 'doc18'
+    },
+    {
+        img: Image22,
+        key: 'doc22'
+    },
+    {
+        img: Image23,
+        key: 'doc23'
+    },
+    {
+        img: Image16,
+        key: 'doc12'
+    },
+    {
+        img: Image17,
+        key: 'doc13'
+    },
+    {
+        img: Image18,
+        key: 'doc14'
+    },
+    {
         img: Image10,
         key: 'doc8'
     },
@@ -71,34 +114,8 @@ export const documents = [
         img: Image19,
         key: 'doc11'
     },
-    {
-        img: Image16,
-        key: 'doc12'
-    },
-    {
-        img: Image17,
-        key: 'doc13'
-    },
-    {
-        img: Image18,
-        key: 'doc14'
-    },
-    {
-        img: Image12,
-        key: 'doc15'
-    },
-    {
-        img: Image15,
-        key: 'doc16'
-    },
-    {
-        img: Image09,
-        key: 'doc17'
-    },
-    {
-        img: Image11,
-        key: 'doc18'
-    },
+   
+   
 
 
 ];
