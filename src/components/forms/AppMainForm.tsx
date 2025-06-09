@@ -219,17 +219,17 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
         <motion.div
             animate={controls}
             initial={{ x: 0 }}
-            className={`relative main-form ${bg && 'bg-[#00000050] border-main'} pb-[33px] pt-[38px] px-[40px] max-w-[400px] flex flex-col gap-[20px] rounded-[6px]`}>
+            className={`relative main-form ${bg && 'bg-[#00000050] border-main'} p-[20px] s:pb-[33px] s:pt-[38px] s:px-[40px] max-w-[400px] flex flex-col s:gap-[20px] gap-[15px] rounded-[6px]`}>
             {successMessageVisible && <FlightSuccess closeIcon={bg} text="Спасибо за заявку" close={() => { setSuccessMessageVisible(false) }} />}
 
-            <div className="h-[23px] ">
-                <span className={`leading-[1] text-[#FFF] text-[32px] ${bg ? 'text-center' : 'text-left'} tracking-[-0.03em] px-[8px]  ${successMessageVisible && 'opacity-0'} linear-text`}>Оформить заявку</span>
+            <div className="h-[16px] s:h-[23px]">
+                <span className={`leading-[1] text-[#FFF] text-[22px] s:text-[32px] ${bg ? 'text-center' : 'text-left'} tracking-[-0.03em] px-[8px]  ${successMessageVisible && 'opacity-0'} linear-text`}>Оформить заявку</span>
             </div>
 
             <div className={`${successMessageVisible && 'opacity-0'}`}>
                 <AppValidationObserver methods={methods} onSubmit={onSubmit}>
                     {({ register, errors }) => (
-                        <div className="flex flex-col gap-[20px] ">
+                        <div className="flex flex-col s:gap-[20px] gap-[15px]">
                             <AppInput
                                 className="!bg-[#2a2a2a] focus:!bg-[#21262F] [&:not(:placeholder-shown)]:!bg-[#21262F]"
                                 title={'ФИО'}

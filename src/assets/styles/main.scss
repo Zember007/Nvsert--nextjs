@@ -77,10 +77,15 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
 .btnIconAn {
   height: 50px;
   .sendIconLeft {
+    @apply transition-all ease-in;
     position: absolute;
     left: 0;
     transform: translateX(-100%);
     opacity: 0;
+  }
+
+  .sendText {
+    @apply transition-all ease-in;
   }
 
   &:hover {
