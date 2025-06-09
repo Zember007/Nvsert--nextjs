@@ -9,7 +9,7 @@
   z-index: 0;
   background: #000;
 
-  @media (max-width: $media-s) {
+  @media (max-width: varibles.$media-s) {
     padding-top: 70px;
     padding-bottom: 40px;
   }
