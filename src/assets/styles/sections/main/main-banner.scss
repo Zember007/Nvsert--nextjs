@@ -9,6 +9,11 @@
   z-index: 0;
   background: #000;
 
+  @media (max-width: $media-s) {
+    padding-top: 70px;
+    padding-bottom: 40px;
+  }
+
   &::before {
     content: '';
     position: absolute;

@@ -76,6 +76,11 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
 
 .btnIconAn {
   height: 50px;
+
+  @media (max-width: $media-s) {
+    height: 40px;
+  }
+
   .sendIconLeft {
     @apply transition-all ease-in;
     position: absolute;

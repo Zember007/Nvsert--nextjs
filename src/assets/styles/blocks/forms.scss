@@ -5,7 +5,7 @@ select {
 }
 
 input:auto-fill {
-    -webkit-text-fill-color: inherit;
+  -webkit-text-fill-color: inherit;
 }
 
 .field {
@@ -15,8 +15,12 @@ input:auto-fill {
   cursor: pointer;
   margin: 0;
   z-index: 0;
-  vertical-align: middle;	
+  vertical-align: middle;
   padding-top: 25px;
+
+  @media (max-width: $media-s) {
+    padding-top: 20px;
+  }
 
   &.bounce {
     animation: bounce-input 0.4s ease;
@@ -25,7 +29,7 @@ input:auto-fill {
 
   &__input,
   &__textarea {
-   
+
     z-index: 1;
     @include transition();
     display: block;
@@ -47,11 +51,10 @@ input:auto-fill {
     }
 
     @media (max-width: $media-s) {
-      // font-size: 14px;
-      // line-height: 20px;
-      // height: 32px;
-      // padding: 12px 16px;
-      // margin-top: 20px;
+      font-size: 14px;
+      line-height: 20px;
+      height: 40px;
+      padding: 15px 10px;
     }
 
     &::placeholder {
@@ -128,12 +131,15 @@ input:auto-fill {
       max-width: calc(100% - 40px);
       overflow: hidden;
       text-overflow: ellipsis;
+      @media (max-width: $media-s) {
+        font-size: 14px;
+        top: 30px;
+      }
     }
 
     @media (max-width: $media-s) {
       font-size: 14px;
-      top: 26px;
-      left: 8px;
+      top: 30px;
     }
   }
 
@@ -303,6 +309,7 @@ input:-webkit-autofill:focus {
 .main-form {
   position: relative;
   overflow: hidden;
+
   .active {
     z-index: 100;
     position: absolute;
