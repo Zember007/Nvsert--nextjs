@@ -34,7 +34,7 @@ const SliderMain = () => {
     const whiteBgRef = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
-        if (sliders.current.length < 5 || !whiteBgRef.current || !isVisible || !ref.current) return
+        if (!whiteBgRef.current || !isVisible || !ref.current) return
         let timeoutIdBg: NodeJS.Timeout | null = null;
 
 
@@ -124,12 +124,12 @@ const SliderMain = () => {
                                 <div className=" grow relative w-full overflow-hidden">
                                     <div className="absolute z-[6] h-[50px]  rounded-[4px]  w-full border-[#34446D] border-solid border">
                                     </div>
-                                    {[...Array(isVisible ? 5 : 1)].map((_, i) => (
-                                        <div
+                                    {/* {[...Array(isVisible ? 5 : 1)].map((_, i) => ( */}
+                                        {/* <div
                                             style={{
                                                 zIndex: 5 - i
                                             }}
-                                            key={i} className={`absolute wrapper-slide wrapper-slide${i}  top-0  w-1/5 h-full pointer-events-none`}>
+                                            key={i} className={`absolute wrapper-slide wrapper-slide${i}  top-0  w-1/5 h-full pointer-events-none`}> */}
 
                                             <HorizontalSlide
                                                 ref={el => {
@@ -157,8 +157,8 @@ const SliderMain = () => {
                                                     </div>
                                                 ))}
                                             </HorizontalSlide>
-                                        </div>
-                                    ))}
+                                        {/* </div> */}
+                                    {/* ))} */}
                                 </div>
                                 <div className="flex justify-between items-end w-full relative z-[10]">
                                     <div className="flex gap-[10px]">
