@@ -113,6 +113,12 @@
 .wrapper-slide {
   overflow: hidden;
 
+  &.animate {
+    animation: slideIn 0.6s ease-out forwards;
+  }
+  
+
+
   &.wrapper-slide4 {
 
     pointer-events: all;
@@ -181,3 +187,15 @@
     @apply leading-[1] tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px]
   }
 }
+
+  /* Определение анимации slideIn */
+  @keyframes slideIn {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }

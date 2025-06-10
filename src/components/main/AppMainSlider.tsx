@@ -31,6 +31,7 @@ const SliderMain = () => {
     const { ref, isVisible } = useIntersectionObserver();
     const [activeIndex, setActive] = useState<number>(0)
     const whiteBgRef = useRef<HTMLDivElement | null>(null)
+    const sliders = useRef<HTMLDivElement[]>([])
 
     useEffect(() => {
         if (!whiteBgRef.current || !isVisible || !ref.current) return
@@ -41,7 +42,18 @@ const SliderMain = () => {
         const loop: any = initSlider((index: number) => {
 
             setActive(index)
-
+            
+            if(!sliders.current[0].classList.contains('animate')) {
+                sliders.current.forEach(el => {
+                    el.classList.add('animate')
+                });
+    
+                setTimeout(() => {
+                    sliders.current.forEach(el => {
+                        el.classList.remove('animate')
+                    });
+                },600)
+            }
 
         },
             () => {
@@ -125,6 +137,10 @@ const SliderMain = () => {
                                         <div
                                             style={{
                                                 zIndex: 5 - i
+                                            }}
+                                            ref={(el) => {
+                                                if(!el) return
+                                                sliders.current.push(el)
                                             }}
                                             key={i} className={`absolute wrapper-slide wrapper-slide${i}  top-0  w-1/5 h-full pointer-events-none`}>
                                             <div className="slider w-[500%] flex">
