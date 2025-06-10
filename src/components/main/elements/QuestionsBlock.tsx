@@ -48,7 +48,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                 <div className={`${active ? 'scale-[0.99]' : ''} transition-scale group-active:scale-[0.99] grow will-change-transform ease transition-all duration-100  flex items-center gap-[40px]`}>
                     <h3 className={`${active ? '[text-shadow:0_0_0.7px_white] text-[#FFF]' : ''} grow text-[20px] ease-in-out transition-all duration-200 group-active:duration-[0] font-[400] group-active:text-[#FFF]  group-active:[text-shadow:0_0_0.7px_white]`}>{title}</h3>
                     <svg
-                        className={`${!active ? 'rotate-[180deg] group-hover:*:stroke-[#000] ' : '*:stroke-[#FFF]'} *:transition-all *:duration-200  group-active:*:stroke-[#FFF] transition-all duration-200`}
+                        className={`${!active ? 'rotate-[180deg]  ' : ''} *:transition-all *:duration-200   transition-all duration-200`}
                         width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M19 19L5 5" stroke={`#93969D`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         <path d="M5 13L5 5L13 5" stroke={`#93969D`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

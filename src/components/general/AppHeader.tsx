@@ -17,6 +17,7 @@ import { useButton } from "@/hook/useButton";
 import { useAnimation, motion } from "framer-motion";
 import NavSvg from "./elements/NavSvg";
 import { RootState } from "@/config/store";
+import GUI from "lil-gui";
 
 
 
@@ -105,6 +106,38 @@ const AppHeader = () => {
     }
   }, [servicesMenuActive])
 
+
+  const divRef = useRef(null);
+
+  useEffect(() => {
+    // Начальные значения для CSS-переменных
+    const config = {
+      color: 'rgba(52, 68, 109, 0.2)', // Начальный цвет с альфа-каналом
+    };
+
+    // Создаем GUI
+    const gui = new GUI();
+
+    // Добавляем контроллер для цвета с поддержкой альфа-канала
+    gui
+      .addColor(config, 'color')
+      .name('Color & Opacity')
+      .onChange((value: string) => {
+        if (headerRef.current) {
+          headerRef.current.style.setProperty('--color', value);
+        }
+      });
+
+    // Устанавливаем начальное значение
+    if (headerRef.current) {
+      headerRef.current.style.setProperty('--color', config.color);
+    }
+
+    // Очистка при размонтировании
+    return () => {
+      gui.destroy();
+    };
+  }, []);
 
 
   return (
