@@ -57,9 +57,9 @@ const HorizontalLoop = forwardRef<HorizontalLoopRef, HorizontalLoopProps>(
         }, [initial]);
 
         return (
-            <div ref={containerRef} className="slider w-full flex">
+            <div ref={containerRef} className="slider w-[500%] flex">
                 {children.map((child, i) => (
-                    <div key={i} className='w-[535px]'>
+                    <div key={i} className='min-w-[535px]'>
                         {child}
                     </div>
                 ))}

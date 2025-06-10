@@ -10,7 +10,6 @@ import { useButton } from '@/hook/useButton';
 import { useHeaderContext } from '../contexts/HeaderContext';
 import { useTranslation } from 'react-i18next';
 import { useIntersectionObserver } from '@/hook/useIntersectionObserver';
-import SendIcon from '../svg/SendIcon';
 
 
 interface slideItem {
@@ -30,12 +29,12 @@ const settings = {
 
 const SliderMain = () => {
     const { ref, isVisible } = useIntersectionObserver();
-    const sliders = useRef<any>(null);
+    const sliders = useRef<any[]>([]);
 
     const whiteBgRef = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
-        if (!sliders.current || !whiteBgRef.current || !isVisible || !ref.current) return
+        if (sliders.current.length < 5 || !whiteBgRef.current || !isVisible || !ref.current) return
         let timeoutIdBg: NodeJS.Timeout | null = null;
 
 
@@ -43,7 +42,9 @@ const SliderMain = () => {
         const loop: any = initSlider((index: number) => {
 
 
-            sliders.current.goToSlide(index, { ease: "power3", duration: 2 })
+            sliders.current.forEach((el, i) => {
+                el.goToSlide(index, { ease: "power3", duration: 1 - i * 0.15 })
+            })
 
         },
             () => {
@@ -98,53 +99,66 @@ const SliderMain = () => {
             <section ref={ref} className='py-[75px] text-[#000] relative'>
                 <div className="wrapper flex flex-col gap-[40px]">
 
-                    <h2 className='sliders__h2'>Помогаем с документами по отраслям</h2>
-                    <div className="cloneable">
+                    <h2 className='leading-[1] tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px]'>Помогаем с документами по отраслям</h2>
+                    <div className="cloneable l:h-[447px] h-[710px]">
 
                         <div className="tariff-wrap w-[252px] " ref={setWrapperRef}>
                             <button
                                 onClick={() => { openDefaultModal('introForm') }}
-                                ref={setButtonRef} className='tariff sliders__button group doc-btn btnIconAn'>
-                                <span className="sendIconLeft ">
-                                    <SendIcon className='group-hover:*:fill-[#FFF]' />
+                                ref={setButtonRef} className='justify-center m:flex items-center px-[16px] py-[9px] relative overflow-hidden btnIconAn doc-btn  border-[#34446D] border border-solid tariff text-[20px] transition-all duration-300 font-bold tracking-normal  gap-[6px]  text-[#34446D] hover:text-[#FFF] rounded-[4px]  group hover:bg-[#34446D]   leading-[1]'>
+                                <span className="sendIconLeft transition-all ease-in">
+                                    <svg className='group-hover:*:fill-[#FFF] rotate-[45deg] *:transition-all *:duration-300' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M29.0627 0.9375L0.930664 12.1875L11.426 16.9336L26.2502 3.75L13.0666 18.5742L17.8127 29.0625L29.0627 0.9375Z" fill="#34446D" />
+                                    </svg>
                                 </span>
                                 <span
-                                    className="sendText"
+                                    className="transition-all ease-in sendText"
                                 >Оформить заявку</span>
 
                             </button>
                         </div>
 
-                        <div className={`overlay`}>
-                            <div className={`overlay-slider`}></div>
-                            <div className="overlay-slider-box">
-                                <div className=" grow relative w-full overflow-hidden">          
-                                    <div className="overlay-slider-window"></div>                     
-                                    <div className={`wrapper-slide`}>
-
-                                        <HorizontalSlide
-                                            ref={sliders}
-                                            initial={isVisible}
-                                        >
-                                            {slides.map((_, index) => (
-                                                <div key={index} >
-                                                    <div className="flex flex-col l:gap-[15px] gap-[30px]  w-full">
-                                                        <span className="text-[24px] font-bold text-[#000000] block  h-[50px] relative text-center py-[10px] w-full bg-[#d6dae2]  relative z-[10]">
-                                                            {
-                                                                filterPrepositions(slidesLang[index].title)
-                                                            }
-                                                        </span>
-                                                        <p className={`l:grow slide-text relative w-full h-full text-[16px] bg-[#FFF] `}>
-
-                                                            {filterPrepositions(slidesLang[index].text)}
-
-                                                        </p>
-                                                    </div>
-
-                                                </div>
-                                            ))}
-                                        </HorizontalSlide>
+                        <div className={`overlay l:w-[642px] w-full p-[30px] pr-[76px] relative z-[0]  rounded-[8px] border border-solid border-[#34446D] overflow-hidden `}>
+                            <div className={`overlay-slider absolute top-0 right-[76px] left-0 bottom-0 z-[-2] transition-all duration-300 `}></div>
+                            <div className="flex flex-col justify-between h-full l:items-start items-center w-full">
+                                <div className=" grow relative w-full overflow-hidden">
+                                    <div className="absolute z-[6] h-[50px]  rounded-[4px]  w-full border-[#34446D] border-solid border">
                                     </div>
+                                    {[...Array(isVisible ? 5 : 1)].map((_, i) => (
+                                        <div
+                                            style={{
+                                                zIndex: 5 - i
+                                            }}
+                                            key={i} className={`absolute wrapper-slide wrapper-slide${i}  top-0  w-1/5 h-full pointer-events-none`}>
+
+                                            <HorizontalSlide
+                                                ref={el => {
+                                                    if (el && !sliders.current.includes(el)) {
+                                                        sliders.current.push(el)
+                                                    }
+                                                }}
+                                                initial={isVisible}
+                                            >
+                                                {slides.map((_, index) => (
+                                                    <div key={index} >
+                                                        <div className="flex flex-col l:gap-[15px] gap-[30px]  w-full">
+                                                            <span className="text-[24px] font-bold text-[#000000] block  h-[50px] relative text-center py-[10px] w-full bg-[#d6dae2]  relative z-[10]">
+                                                                {
+                                                                    filterPrepositions(slidesLang[index].title)
+                                                                }
+                                                            </span>
+                                                            <p className={`l:grow slide-text relative w-full h-full text-[16px] bg-[#FFF] `}>
+
+                                                                {filterPrepositions(slidesLang[index].text)}
+
+                                                            </p>
+                                                        </div>
+
+                                                    </div>
+                                                ))}
+                                            </HorizontalSlide>
+                                        </div>
+                                    ))}
                                 </div>
                                 <div className="flex justify-between items-end w-full relative z-[10]">
                                     <div className="flex gap-[10px]">
