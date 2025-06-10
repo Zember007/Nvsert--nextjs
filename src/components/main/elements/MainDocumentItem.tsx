@@ -8,6 +8,7 @@ import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import { MainDocumentItemProps } from '@/types/documents';
 import SendIcon from '@/components/svg/SendIcon';
 import ServiceMoveIcon from '../svg/ServiceMoveIcon';
+import useWindowWidth from '@/hook/useWindowWidth';
 
 // Выносим анимационные настройки
 const ANIMATION_SETTINGS = {
@@ -42,7 +43,7 @@ type ImageRef = HTMLImageElement | null;
 // Компонент кнопки
 const ActionButton = memo(({ onClick, icon, text, className, setRef }: ActionButtonProps) => (
     <button ref={setRef} onClick={onClick} className={`document__button ${className}`}>
-        <span className="sendIconLeft transition-all ease-in">
+        <span className="sendIconLeft transition-all ease-in m:block hidden">
             {icon}
         </span>
         <span className="transition-all ease-in sendText">{text}</span>
@@ -97,6 +98,7 @@ const MainDocumentItem = memo(({
     active,
     setActive
 }: MainDocumentItemProps) => {
+    const windowWidth = useWindowWidth()
     const controls = useAnimation();
     const [listHidden, setListHidden] = useState(true);
     const [photoWidth, setPhotoWidth] = useState(0);
@@ -174,7 +176,7 @@ const MainDocumentItem = memo(({
         setActive(!active);
     };
 
-    const commonButtonClasses = 'btnIconAn doc-btn tariff text-[20px] group hover:bg-[#34446D] hover:text-[#FFF] font-bold tracking-normal m:flex items-center gap-[10px] text-[#34446D] rounded-[4px] border-[#34446D] border border-solid leading-[1]';
+    const commonButtonClasses = 'group btnIconAn doc-btn tariff ';
 
     return (
         <>
@@ -226,6 +228,52 @@ const MainDocumentItem = memo(({
                     <div className={`document__hidden ${active && 'active'}`}>
                         <div className="document__item  ">
                             <div className="document__list-photo">
+                                {windowWidth < 768 &&
+                                    <>
+                                       
+                                        <div className="flex flex-col gap-[10px]">
+                                            <motion.div
+                                                animate={controls}
+                                                initial={{ y: 20 }}
+                                                className="tariff-wrap w-[190px] m:w-[250px]" ref={setWrapperRef}>
+                                                <ActionButton
+                                                    setRef={setButtonRef}
+                                                    onClick={() => openDefaultModal('orderForm')}
+                                                    icon={
+                                                        <SendIcon className='group-hover:*:fill-[#FFF]' />
+                                                    }
+                                                    text="Оформить заявку"
+                                                    className={commonButtonClasses}
+                                                />
+                                            </motion.div>
+                                            <motion.div
+                                                animate={controls}
+                                                initial={{ y: 20 }}
+                                                className="tariff-wrap w-[190px] m:w-[250px] " ref={setWrapperRef}>
+                                                <ActionButton
+                                                    setRef={setButtonRef}
+                                                    onClick={() => openDefaultModal('orderForm')}
+                                                    icon={
+                                                        <ServiceMoveIcon className='group-hover:*:fill-[#FFF]' />
+                                                    }
+                                                    text="Перейти в услугу"
+                                                    className={commonButtonClasses}
+                                                />
+                                            </motion.div>
+                                        </div>
+
+                                        <div className="flex flex-col gap-[10px] items-center">
+                                            <div className="flex flex-col gap-[5px] items-center">
+                                                <span className='text-[14px] text-[#00000080]'>Срок оформления</span>
+                                                <span className='text-[16px] font-bold'>{duration}</span>
+                                            </div>
+                                            <div className="flex flex-col gap-[5px] items-center">
+                                                <span className='text-[14px] text-[#00000080]'>Стоимость</span>
+                                                <span className='text-[16px] font-bold'>{price}</span>
+                                            </div>
+                                        </div>
+                                    </>
+                                }
                                 <div className='m:m-0 m-auto'>
                                     <PhotoView
                                         src={img.src}
@@ -236,7 +284,7 @@ const MainDocumentItem = memo(({
                                         <motion.div
                                             ref={photoRef}
                                             onClick={() => setPhoto()}
-                                            initial={{ y: 20, opacity: 0 }}
+                                            initial={{ y: 20 }}
                                             animate={controls}
                                             className="document__big-img">
                                             <Image
@@ -254,25 +302,26 @@ const MainDocumentItem = memo(({
                                             <p className='text-[16px] text-[#000000] m:max-w-[360px]'>
                                                 {filterPrepositions(content.text)}
                                             </p>
-                                            <p className='text-[16px] text-[#000000] m:max-w-[300px]'>
+                                            <p className='hidden m:block text-[16px] text-[#000000] m:max-w-[300px]'>
                                                 {content.text1 && filterPrepositions(content.text1)}
                                             </p>
                                         </div>
 
-                                        <motion.div
-                                            animate={controls}
-                                            initial={{ y: 20, opacity: 0 }}
-                                            className="tariff-wrap w-[250px] " ref={setWrapperRef}>
-                                            <ActionButton
-                                                setRef={setButtonRef}
-                                                onClick={() => openDefaultModal('orderForm')}
-                                                icon={
-                                                    <ServiceMoveIcon className='group-hover:*:fill-[#FFF]' />
-                                                }
-                                                text="Перейти в услугу"
-                                                className={commonButtonClasses}
-                                            />
-                                        </motion.div>
+                                        {windowWidth >= 768 &&
+                                            <motion.div
+                                                animate={controls}
+                                                initial={{ y: 20 }}
+                                                className="tariff-wrap w-[190px] m:w-[250px] " ref={setWrapperRef}>
+                                                <ActionButton
+                                                    setRef={setButtonRef}
+                                                    onClick={() => openDefaultModal('orderForm')}
+                                                    icon={
+                                                        <ServiceMoveIcon className='group-hover:*:fill-[#FFF]' />
+                                                    }
+                                                    text="Перейти в услугу"
+                                                    className={commonButtonClasses}
+                                                />
+                                            </motion.div>}
                                     </div>
                                 </div>
                             </div>
@@ -283,21 +332,22 @@ const MainDocumentItem = memo(({
                                     listHidden={listHidden}
                                     setListHidden={setListHidden}
                                 />
-
-                                <motion.div
-                                    animate={controls}
-                                    initial={{ y: 20, opacity: 0 }}
-                                    className="tariff-wrap w-[250px]" ref={setWrapperRef}>
-                                    <ActionButton
-                                        setRef={setButtonRef}
-                                        onClick={() => openDefaultModal('orderForm')}
-                                        icon={
-                                            <SendIcon className='group-hover:*:fill-[#FFF]' />
-                                        }
-                                        text="Оформить заявку"
-                                        className={commonButtonClasses}
-                                    />
-                                </motion.div>
+                                {windowWidth >= 768 &&
+                                    <motion.div
+                                        animate={controls}
+                                        initial={{ y: 20 }}
+                                        className="tariff-wrap w-[190px] m:w-[250px]" ref={setWrapperRef}>
+                                        <ActionButton
+                                            setRef={setButtonRef}
+                                            onClick={() => openDefaultModal('orderForm')}
+                                            icon={
+                                                <SendIcon className='group-hover:*:fill-[#FFF]' />
+                                            }
+                                            text="Оформить заявку"
+                                            className={commonButtonClasses}
+                                        />
+                                    </motion.div>
+                                }
                             </div>
                         </div>
                     </div>

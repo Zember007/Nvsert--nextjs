@@ -12,9 +12,9 @@
 .drop-reverse {
   display: block;
   position: absolute;
-  border-radius: 100%;
+  border-radium: 100%;
   transform: scale(0);
-  pointer-events: none;
+  pointer-eventm: none;
 
 }
 
@@ -91,7 +91,7 @@
     @apply m:mx-[-23px] flex flex-col cursor-pointer border-solid border border-[transparent] rounded-[6px] relative;
 
     &.active {
-      @apply hover:bg-[#34446D33] hover:backdrop-blur-[1px] hover:border-[#34446D];
+      @apply hover:bg-[#34446D33] bg-[#34446D33] m:bg-[transparent] m:border-[transparent] border-[#34446D] hover:backdrop-blur-[1px] hover:border-[#34446D];
     }
   }
 
@@ -117,7 +117,7 @@
     }
 
     &-wrap {
-      @apply w-full relative z-[2] gap-[10px] flex items-center justify-between py-[14px] m:py-[23px] relative;
+      @apply w-full relative z-[2] gap-[10px] flex items-center justify-between py-[14px] m:h-auto h-[59px] m:py-[23px] relative;
 
       &.active {
         @apply text-[#FFF] !border-[transparent];
@@ -126,15 +126,15 @@
   }
 
   &__desc {
-    @apply  translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px] transition-all duration-200 font-bold tracking-normal;
+    @apply  translate-y-[-1px] text-[16px] m:text-[18px] m:text-[20px] transition-all duration-200 font-bold tracking-normal;
 
     &-wrap {
-      @apply hidden will-change-transform *:will-change-transform w-[40%] m:grid grid-cols-[1fr_1fr_auto] items-center justify-between;
+      @apply hidden will-change-transform *:will-change-transform m:w-[40%] m:grid grid-cols-[1fr_1fr_auto] items-center justify-between;
     }
   }
 
   &__title {
-    @apply m:translate-y-[-1px] transition-all duration-200 m:leading-[11px] leading-[1] will-change-transform m:w-[60%] pl-[52px] m:pl-[63px] text-[16px] s:text-[18px] m:text-[20px] font-bold tracking-normal;
+    @apply m:translate-y-[-1px] transition-all duration-200 m:leading-[11px] leading-[1] will-change-transform m:w-[60%] pl-[52px] m:pl-[63px] text-[16px] m:text-[18px] m:text-[20px] font-bold tracking-normal;
   }
 
   &__small-img {
@@ -156,13 +156,13 @@
   &__list {
 
     &-photo {
-      @apply w-[60%] s:gap-0 gap-[20px] flex flex-col m:flex-row m:items-stretch;
+      @apply m:w-[60%] m:gap-0 gap-[20px] items-center flex flex-col-reverse m:flex-row m:items-stretch;
     }
 
     @apply flex gap-[10px] flex-col grow m:max-w-[500px];
 
     &-wrap {
-      @apply w-[40%] items-start flex gap-[20px] flex-col   text-[#000];
+      @apply m:w-[40%] items-start flex gap-[20px] flex-col   text-[#000];
     }
 
     &-item {
@@ -175,7 +175,7 @@
   }
 
   &__button {
-    @apply justify-center w-full m:flex items-center px-[16px] py-[9px] relative overflow-hidden;
+    @apply justify-center w-full m:flex items-center relative overflow-hidden m:text-[20px] text-[18px] hover:bg-[#34446D] hover:text-[#FFF] font-bold tracking-normal m:flex items-center gap-[10px] text-[#34446D] rounded-[4px] border-[#34446D] border border-solid leading-[1];
   }
 
   &__hidden {
@@ -187,6 +187,6 @@
   }
 
   &__item {
-    @apply flex flex-col l:flex-row gap-[10px] s:p-[30px] p-[15px] ;
+    @apply flex flex-col items-center m:items-stretch m:flex-row gap-[10px] m:p-[30px] p-[15px] ;
   }
 }
