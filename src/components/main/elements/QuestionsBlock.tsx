@@ -34,7 +34,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
 
 
     return (
-        <div className={`relative flex flex-col rounded-[6px] group/main ${active ? '' : 'bg-[#FFFFFF26] hover:bg-[#34446D33] '}  backdrop-blur-[1px] z-[0]`}>
+        <div className={`relative flex flex-col rounded-[6px] group/main ${active ? '' : 'bg-[#FFFFFF26] hover:bg-[#34446D33] '} z-[0]`}>
             <div className={`pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[-1] rounded-[6px] ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-solid border border-[#CCCCCC]`}></div>
             <div
                 onClick={() => {

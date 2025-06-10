@@ -22,6 +22,7 @@ const AppMainSkills = () => {
         const observer = new IntersectionObserver(
             ([entry]) => {
                 setIsVisible(entry.isIntersecting);
+                if (entry.isIntersecting && divRef.current) observer.unobserve(divRef.current);
             },
             { threshold: 0.3 }
         );
@@ -29,8 +30,6 @@ const AppMainSkills = () => {
         if (divRef.current) {
             observer.observe(divRef.current);
         }
-
-
 
 
 
