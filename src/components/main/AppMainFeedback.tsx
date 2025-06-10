@@ -1,6 +1,6 @@
 
 import { PhotoProvider, PhotoView } from '@/assets/lib/react-photo-view';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { horizontalLoop } from '@/scripts/slider';
 import { useButton } from '@/hook/useButton';
 import Image from 'next/image';
@@ -14,13 +14,14 @@ gsap.registerPlugin(Draggable, InertiaPlugin);
 
 const AppMainFeedback = () => {
 
-    const { setButtonRef, setWrapperRef } = useButton()
+    const ref = useRef(null)
+
 
     useEffect(() => {
         const slides = gsap.utils.toArray('[data-slider="slide-feedback"]');
         const slides1 = gsap.utils.toArray('[data-slider="slide-feedback1"]');
         const loop: any = horizontalLoop(slides, {
-            paused: false,
+            paused: true,
             draggable: true,
             speed: 0.5,
             offsetLeft: 0,
@@ -30,7 +31,7 @@ const AppMainFeedback = () => {
         });
 
         const loop1: any = horizontalLoop(slides1, {
-            paused: false,
+            paused: true,
             draggable: true,
             speed: 0.5,
             offsetLeft: 0,
@@ -40,6 +41,20 @@ const AppMainFeedback = () => {
             opacity: false
         });
 
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    loop.next({ ease: "power3", duration: 0.725 })
+                    loop1.previous({ ease: "power3", duration: 0.725 })
+                }
+            },
+            { threshold: 0.5 }
+        );
+
+        if (ref.current) {
+            observer.observe(ref.current);
+        }
 
 
         return () => {
@@ -116,80 +131,80 @@ const AppMainFeedback = () => {
 
 
     return (
-     
-                <PhotoProvider maskOpacity={0.4} maskClassName="blurred-mask"
-                    speed={() => 0}
 
-                    maskClosable={false}
+        <PhotoProvider maskOpacity={0.4} maskClassName="blurred-mask"
+            speed={() => 0}
 
-                >
-                    <div className="relative h-[554px] flex flex-col gap-[10px] overflow-hidden feedback-slider-box">
+            maskClosable={false}
 
-                        <div className="slide-blur left-0">
-                            <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
-                            <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
-                            <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
-                        </div>
+        >
+            <div ref={ref} className="relative h-[554px] flex flex-col gap-[10px] overflow-hidden feedback-slider-box">
 
-                        <div className="slide-main">
-                            <div className="slider-wrap !pt-0 ">
+                <div className="slide-blur left-0">
+                    <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
+                    <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
+                    <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
+                </div>
 
-
-                                <div className="flex gap-[20px] feedback-slider-container translate-x-[-95px]">
-                                    {[...Array(19)].map((_, index) =>
-                                        <div
-                                            onClick={readyPhoto}
-                                            data-slider="slide-feedback" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] h-[267px] rounded-[4px]">
-                                            <PhotoView src={`/feedbacks/big/${index + 1}.png`}
-                                            >
-                                                <Image
-                                                    className='min-h-full'
-                                                    src={`/feedbacks/small/${index + 1}.png`} alt='feedback' width={190} height={267} />
-                                            </PhotoView>
-                                        </div>)}
-                                </div>
+                <div className="slide-main">
+                    <div className="slider-wrap !pt-0 ">
 
 
-
-                            </div>
-
-                        </div>
-
-                        <div className="slide-main bottom-0">
-                            <div className="slider-wrap !pt-0">
-
-
-                                <div className="flex gap-[20px] translate-x-[-95px] feedback-slider-container">
-                                    {[...Array(19)].map((_, index) =>
-                                        <div
-                                            onClick={readyPhoto}
-
-                                            data-slider="slide-feedback1" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] h-[267px] rounded-[4px]">
-                                            <PhotoView src={`/feedbacks/big/${20 + index}.png`}>
-                                                <Image
-                                                    className='min-h-full'
-                                                    src={`/feedbacks/small/${20 + index}.png`} alt='feedback' width={190} height={267} />
-                                            </PhotoView>
-                                        </div>)}
-                                </div>
-
-
-
-                            </div>
-
+                        <div className="flex gap-[20px] feedback-slider-container translate-x-[-95px]">
+                            {[...Array(19)].map((_, index) =>
+                                <div
+                                    onClick={readyPhoto}
+                                    data-slider="slide-feedback" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] h-[267px] rounded-[4px]">
+                                    <PhotoView src={`/feedbacks/big/${index + 1}.png`}
+                                    >
+                                        <Image
+                                            className='min-h-full'
+                                            src={`/feedbacks/small/${index + 1}.png`} alt='feedback' width={190} height={267} />
+                                    </PhotoView>
+                                </div>)}
                         </div>
 
 
-
-                        <div className="slide-blur right-0 !translate-x-[0]">
-                            <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
-                            <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
-                            <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
-                        </div>
 
                     </div>
-                </PhotoProvider>
-          
+
+                </div>
+
+                <div className="slide-main bottom-0">
+                    <div className="slider-wrap !pt-0">
+
+
+                        <div className="flex gap-[20px] translate-x-[-95px] feedback-slider-container">
+                            {[...Array(19)].map((_, index) =>
+                                <div
+                                    onClick={readyPhoto}
+
+                                    data-slider="slide-feedback1" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] h-[267px] rounded-[4px]">
+                                    <PhotoView src={`/feedbacks/big/${20 + index}.png`}>
+                                        <Image
+                                            className='min-h-full'
+                                            src={`/feedbacks/small/${20 + index}.png`} alt='feedback' width={190} height={267} />
+                                    </PhotoView>
+                                </div>)}
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+
+
+                <div className="slide-blur right-0 !translate-x-[0]">
+                    <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
+                    <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
+                    <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
+                </div>
+
+            </div>
+        </PhotoProvider>
+
     );
 };
 
