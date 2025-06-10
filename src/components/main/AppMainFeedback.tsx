@@ -26,6 +26,7 @@ const AppMainFeedback = () => {
             speed: 0.5,
             offsetLeft: 0,
             repeat: -1,
+            snap: false,
             gap: 20,
             opacity: false
         });
@@ -36,6 +37,7 @@ const AppMainFeedback = () => {
             speed: 0.5,
             offsetLeft: 0,
             repeat: -1,
+            snap: false,
             gap: 20,
             reversed: true,
             opacity: false
