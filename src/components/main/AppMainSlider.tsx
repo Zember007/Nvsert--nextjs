@@ -29,22 +29,19 @@ const settings = {
 
 const SliderMain = () => {
     const { ref, isVisible } = useIntersectionObserver();
-    const sliders = useRef<any[]>([]);
-
+    const [activeIndex, setActive] = useState<number>(0)
     const whiteBgRef = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
-        if (sliders.current.length < 5 || !whiteBgRef.current || !isVisible || !ref.current) return
+        if (!whiteBgRef.current || !isVisible || !ref.current) return
         let timeoutIdBg: NodeJS.Timeout | null = null;
 
 
 
         const loop: any = initSlider((index: number) => {
 
+            setActive(index)
 
-            sliders.current.forEach((el, i) => {
-                el.goToSlide(index, { ease: "power3", duration: 1 - i * 0.15 })
-            })
 
         },
             () => {
@@ -130,33 +127,24 @@ const SliderMain = () => {
                                                 zIndex: 5 - i
                                             }}
                                             key={i} className={`absolute wrapper-slide wrapper-slide${i}  top-0  w-1/5 h-full pointer-events-none`}>
+                                            <div className="slider w-[500%] flex">
+                                                <div className='min-w-[535px]'>
+                                                    <div className="flex flex-col l:gap-[15px] gap-[30px]  w-full">
+                                                        <span className="text-[24px] font-bold text-[#000000] block  h-[50px] relative text-center py-[10px] w-full bg-[#d6dae2]  relative z-[10]">
+                                                            {
+                                                                filterPrepositions(slidesLang[activeIndex].title)
+                                                            }
+                                                        </span>
+                                                        <p className={`l:grow slide-text relative w-full h-full text-[16px] bg-[#FFF] `}>
 
-                                            <HorizontalSlide
-                                                ref={el => {
-                                                    if (el && !sliders.current.includes(el)) {
-                                                        sliders.current.push(el)
-                                                    }
-                                                }}
-                                                initial={isVisible}
-                                            >
-                                                {slides.map((_, index) => (
-                                                    <div key={index} >
-                                                        <div className="flex flex-col l:gap-[15px] gap-[30px]  w-full">
-                                                            <span className="text-[24px] font-bold text-[#000000] block  h-[50px] relative text-center py-[10px] w-full bg-[#d6dae2]  relative z-[10]">
-                                                                {
-                                                                    filterPrepositions(slidesLang[index].title)
-                                                                }
-                                                            </span>
-                                                            <p className={`l:grow slide-text relative w-full h-full text-[16px] bg-[#FFF] `}>
+                                                            {filterPrepositions(slidesLang[activeIndex].text)}
 
-                                                                {filterPrepositions(slidesLang[index].text)}
-
-                                                            </p>
-                                                        </div>
-
+                                                        </p>
                                                     </div>
-                                                ))}
-                                            </HorizontalSlide>
+
+                                                </div>
+
+                                            </div>
                                         </div>
                                     ))}
                                 </div>
