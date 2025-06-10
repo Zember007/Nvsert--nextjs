@@ -126,7 +126,7 @@
   }
 
   &__desc {
-    @apply translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px] transition-all duration-200 font-bold tracking-normal;
+    @apply m:block hidden translate-y-[-1px] text-[16px] s:text-[18px] m:text-[20px] transition-all duration-200 font-bold tracking-normal;
 
     &-wrap {
       @apply will-change-transform *:will-change-transform w-[40%] grid grid-cols-[1fr_1fr_auto] items-center justify-between;

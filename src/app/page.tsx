@@ -46,8 +46,7 @@ export default function Home() {
       <AppMainIntro />
       <AppMainDocuments />
       <section
-        className="py-[75px] relative">
-        <div className="wrapper flex flex-col gap-[40px]">
+        className="py-[75px] relative wrapper flex flex-col gap-[40px]">
           <h2 className="leading-[1] tracking-[-0.04em] text-center  text-[24px] xs:text-[40px] l:text-[56px]">Наши основные преимущества</h2>
           <div className="flex flex-col">
             <LazyLoadSection component={
@@ -64,7 +63,6 @@ export default function Home() {
               <Image src={ArrowImg} alt='arrow' width={24} height={24} />
             </Link>
           </div>
-        </div>
       </section >
 
       <DynamicAppMainSlider />

@@ -326,7 +326,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                             </div>
 
 
-                            <span className=" text-[#CCCCCC] mt-[7px] text-[11px] s:text-[13px]">
+                            <span className=" text-[#CCCCCC] s:mt-[7px] text-[11px] s:text-[13px]">
                                 {filterPrepositions('Нажимая на кнопку «Оформить заявку» вы соглашаетесь с ')}
                                 <Link href="/soglashenie/polzovatelskoe-soglashenie/" className="no-drag" target="_blank">
                                     политикой конфиденциальности
