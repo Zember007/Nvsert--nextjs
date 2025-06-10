@@ -49,6 +49,10 @@ const AppMainFeedback = () => {
                 if (entry.isIntersecting) {
                     loop.next({ ease: "power3", duration: 0.725 })
                     loop1.previous({ ease: "power3", duration: 0.725 })
+
+                    if (ref.current) {
+                        observer.unobserve(ref.current);
+                    }
                 }
             },
             { threshold: 0.5 }
