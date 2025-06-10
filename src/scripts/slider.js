@@ -54,7 +54,7 @@ export function initSlider(onChangeFunction, onDragFunction) {
 
 
     let currentIndex = 0;
-    function updateSteps(newIndex) {   
+    function updateSteps(newIndex) {
         gsap.killTweensOf(stepsParent)
         const height = stepsArray[0].offsetHeight;
         const maxOffset = totalSlides * height;
@@ -113,6 +113,7 @@ export function initSlider(onChangeFunction, onDragFunction) {
         paused: true,
         draggable: true,
         center: false,
+        snap: true,
         offsetLeft: 75,
         opacity: true,
         gap: 0,
@@ -366,7 +367,7 @@ export function horizontalLoop(items, config) {
                     initChangeX = (startProgress / -ratio) - x;
                     gsap.set(proxy, { x: startProgress / -ratio });
                     // console.log('pause');
-                    
+
                 },
                 onDrag() {
                     align();
@@ -376,7 +377,7 @@ export function horizontalLoop(items, config) {
                     align();
                     if (wasPlaying) {
                         const currentVelocity = Math.abs(InertiaPlugin.getVelocity(proxy, "x"));
-                
+
                         if (currentVelocity <= pixelsPerSecond + 60) {
                             gsap.killTweensOf(proxy);
                         }
@@ -385,6 +386,8 @@ export function horizontalLoop(items, config) {
                 overshootTolerance: 0,
                 inertia: true, // Включаем инерцию
                 snap(value) {
+                    if (!config.snap) return
+
                     if (Math.abs(startProgress / -ratio - this.x) < 10) {
                         return lastSnap + initChangeX;
                     }

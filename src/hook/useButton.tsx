@@ -9,7 +9,7 @@ export const useButton = () => {
     wrapperRefs.current.push(el);
   }, []);
 
-  const setButtonRef = useCallback((el: HTMLElement | null | HTMLDivElement) => {
+  const setButtonRef = useCallback((el: HTMLElement | null) => {
     if (!el || buttonRefs.current.includes(el)) return;
     buttonRefs.current.push(el);
   }, []);
@@ -29,6 +29,8 @@ export const useButton = () => {
       if (!button || !wrapper) return;
 
       const handleMouseMove = (e: MouseEvent) => {
+
+        
         const rect = button.getBoundingClientRect();
         const mouseX = e.clientX - rect.left;
         const mouseY = e.clientY - rect.top;
