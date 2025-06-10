@@ -35,7 +35,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
               }}
             >{filterPrepositions(title)}</p>
             <Image
-              className='w-auto h-full group-hover:scale-[1.1] group-hover:grayscale group-hover:rotate-[4deg] scale-[1] transition-all duration-100 ease-in-out'
+              className='w-auto h-full group-hover:grayscale transition-all duration-100 ease-in-out'
               alt='document' src={img}
               width="0"
               height="0"
