@@ -113,7 +113,7 @@
 .wrapper-slide {
   overflow: hidden;
 
-  &.animate {
+  .animate {
     animation: slideIn 0.6s ease-out forwards;
   }
   

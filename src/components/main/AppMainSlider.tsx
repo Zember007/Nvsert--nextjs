@@ -42,17 +42,17 @@ const SliderMain = () => {
         const loop: any = initSlider((index: number) => {
 
             setActive(index)
-            
-            if(!sliders.current[0].classList.contains('animate')) {
+
+            if (!sliders.current[0].classList.contains('animate')) {
                 sliders.current.forEach(el => {
                     el.classList.add('animate')
                 });
-    
+
                 setTimeout(() => {
                     sliders.current.forEach(el => {
                         el.classList.remove('animate')
                     });
-                },600)
+                }, 600)
             }
 
         },
@@ -92,7 +92,7 @@ const SliderMain = () => {
             }
 
         };
-    }, [ whiteBgRef, ref, isVisible])
+    }, [whiteBgRef, ref, isVisible])
 
 
 
@@ -135,22 +135,24 @@ const SliderMain = () => {
                             <div className={`overlay-slider absolute top-0 right-[76px] left-0 bottom-0 z-[-2] transition-all duration-300 `}></div>
                             <div className="flex flex-col justify-between h-full l:items-start items-center w-full">
                                 <div className=" grow relative w-full overflow-hidden">
-                                    <div className="absolute z-[6] h-[50px]  rounded-[4px]  w-full border-[#34446D] border-solid border">
+                                    <div className="absolute z-[1] h-[50px] bg-[#d6dae2] rounded-[4px]  w-full border-[#34446D] border-solid border">
                                     </div>
                                     {[...Array(isVisible ? 5 : 1)].map((_, i) => (
                                         <div
                                             style={{
                                                 zIndex: 5 - i
                                             }}
-                                            ref={(el) => {
-                                                if(!el) return
-                                                sliders.current.push(el)
-                                            }}
-                                            key={i} className={`absolute wrapper-slide wrapper-slide${i}  top-0  w-1/5 h-full pointer-events-none`}>
-                                            <div className="slider w-[500%] flex">
+
+                                            key={i} className={`absolute wrapper-slide wrapper-slide${i} top-0  w-1/5 h-full pointer-events-none`}>
+                                            <div
+                                                ref={(el) => {
+                                                    if (!el) return
+                                                    sliders.current.push(el)
+                                                }}
+                                                className="slider w-[500%] flex">
                                                 <div className='min-w-[535px]'>
                                                     <div className="flex flex-col l:gap-[15px] gap-[30px]  w-full">
-                                                        <span className="text-[24px] font-bold text-[#000000] block  h-[50px] relative text-center py-[10px] w-full bg-[#d6dae2]  relative z-[10]">
+                                                        <span className="text-[24px] font-bold text-[#000000] block  h-[50px] relative text-center py-[10px] w-full  border border-solid border-[transparent] relative z-[10]">
                                                             {
                                                                 filterPrepositions(slidesLang[activeIndex].title)
                                                             }
