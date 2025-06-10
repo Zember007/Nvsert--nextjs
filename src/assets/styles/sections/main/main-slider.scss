@@ -112,11 +112,50 @@
 
 .wrapper-slide {
   overflow: hidden;
-  pointer-events: none;
-  height: 100%;
-  top: 0;
-  position: absolute;
-  left: 0;
+
+  &.wrapper-slide4 {
+
+    pointer-events: all;
+    width: 100%;
+
+    .slider {
+      width: 100%;
+    }
+  }
+
+  &.wrapper-slide3 {
+    left: 20%;
+
+    .slider {
+      left: -100%;
+    }
+  }
+
+  &.wrapper-slide2 {
+    left: 40%;
+
+    .slider {
+      left: -200%;
+    }
+  }
+
+  &.wrapper-slide1 {
+    left: 60%;
+
+    .slider {
+      left: -300%;
+
+    }
+  }
+
+  &.wrapper-slide0 {
+    left: 80%;
+
+    .slider {
+      left: -400%;
+
+    }
+  }
 
   .slider {
     box-sizing: border-box;
@@ -130,6 +169,7 @@
     position: relative;
   }
 }
+
 
 .sliders {
   &__button {
