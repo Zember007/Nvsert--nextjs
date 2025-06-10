@@ -76,7 +76,7 @@ const SliderMain = () => {
             }
 
         };
-    }, [sliders, whiteBgRef, ref, isVisible])
+    }, [ whiteBgRef, ref, isVisible])
 
 
 
