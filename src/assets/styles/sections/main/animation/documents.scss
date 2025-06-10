@@ -117,7 +117,7 @@
     }
 
     &-wrap {
-      @apply w-full relative z-[2] gap-[10px] flex items-center justify-between py-[15px] m:py-[23px] relative;
+      @apply w-full relative z-[2] gap-[10px] flex items-center justify-between py-[14px] m:py-[23px] relative;
 
       &.active {
         @apply text-[#FFF] !border-[transparent];
