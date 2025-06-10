@@ -112,25 +112,37 @@ const AppHeader = () => {
   useEffect(() => {
     // Начальные значения для CSS-переменных
     const config = {
-      color: 'rgba(52, 68, 109, 0.2)', // Начальный цвет с альфа-каналом
+      color: '#34446d', // Начальный цвет в формате HEX (без альфа)
+      opacity: 0.2, // Начальная прозрачность
     };
 
     // Создаем GUI
     const gui = new GUI();
 
-    // Добавляем контроллер для цвета с поддержкой альфа-канала
+    // Добавляем контроллер для цвета (без альфа-канала)
     gui
       .addColor(config, 'color')
-      .name('Color & Opacity')
-      .onChange((value: string) => {
+      .name('Color')
+      .onChange((value:string) => {
         if (headerRef.current) {
           headerRef.current.style.setProperty('--color', value);
         }
       });
 
-    // Устанавливаем начальное значение
+    // Добавляем контроллер для прозрачности
+    gui
+      .add(config, 'opacity', 0, 1, 0.01)
+      .name('Opacity')
+      .onChange((value:number) => {
+        if (headerRef.current) {
+          headerRef.current.style.setProperty('--opacity', value.toString());
+        }
+      });
+
+    // Устанавливаем начальные значения
     if (headerRef.current) {
       headerRef.current.style.setProperty('--color', config.color);
+      headerRef.current.style.setProperty('--opacity', config.opacity.toString());
     }
 
     // Очистка при размонтировании

@@ -4,10 +4,12 @@
 .header {
 
 	--filter-blur: 15px;
-	--color: rgba(52, 68, 109, 0.2);
+	--color: rgb(52, 68, 109);
+	--opacity: 0.2;
 
 	padding: 5px 0;
 	background: var(--color);
+	opacity: var(--opacity);
 	backdrop-filter: blur(var(--filter-blur));
 	transition: backdrop-filter 0.2s ease;
 	box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 2px 0px;
