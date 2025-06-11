@@ -4,28 +4,18 @@
 .header {
 
 	--filter-blur: 15px;
-	--color: rgb(52, 68, 109);
-	--opacity: 0.2;
+	--color: rgb(52, 68, 109, 0.35);
 	position: relative;
 
 	padding: 5px 0;
 	
 	backdrop-filter: blur(var(--filter-blur));
 	transition: backdrop-filter 0.2s ease;
-	box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 2px 0px;
+	box-shadow: 0 1px 2px 0 rgb(0 0 0 / 55%);
 	z-index: 50;
 
-	&::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: var(--color);
-		opacity: var(--opacity);
-	}
-
+	background: var(--color);
+	
 	svg,
 	svg path {
 		transition: transform 0.15s ease, color 0s ease, stroke 0.15s ease;
@@ -480,8 +470,8 @@
 
 .services-menu {
 
-	background: #34446D33;
-	box-shadow: 0px 2px 2px 0px #00000040;
+	background: var(--color);
+	box-shadow: 0 1px 2px 0 rgb(0 0 0 / 55%);
 	backdrop-filter: blur(15px);
 	width: 100vw;
 
