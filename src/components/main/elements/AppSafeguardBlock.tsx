@@ -24,7 +24,8 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
 
 
   return (
-    <div className={`z-[0] relative card-wrap h-[517px] w-full group/box translate-y-[0] ${!isVisible && '!translate-y-[30px] opacity-0'} transition-all duration-500 `}>
+    <div
+      className={`z-[0] min-w-[300px] relative card-wrap h-[517px] w-full group/box translate-y-[0] ${!isVisible && '!translate-y-[30px] opacity-0'} transition-all duration-500 `}>
       <div className="absolute top-[-1px] left-0 right-0 group-hover/box:border-[#34446D] bottom-0 border-[#CCCCCC] z-[1] pointer-events-none border border-solid  rounded-[8px]"></div>
       <div className="bg-[#FFFFFF26] group-hover/box:bg-[#34446D33] group !shadow-none card  h-full  rounded-[8px] flex flex-col gap-[29px] justify-between ">
         <div className="flex flex-col gap-[20px] h-full">
@@ -47,12 +48,12 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
               <div
                 key={index} className={`group/stroke flex flex-col ${index == items.length - 1 ? 'grow' : 'pb-[20px]'}`}>
                 <div className="flex justify-between gap-[20px]">
-                  <p className='text-[18px] font-bold  transition-all duration-100'>{item.subtitle.split(' ').length === 2 ? 
-                  <>
-                  {item.subtitle.split(' ')[0]  } <br />
-                  {item.subtitle.split(' ')[1]}
-                  </>
-                  :filterPrepositions(item.subtitle)}</p>
+                  <p className='text-[18px] font-bold  transition-all duration-100'>{item.subtitle.split(' ').length === 2 ?
+                    <>
+                      {item.subtitle.split(' ')[0]} <br />
+                      {item.subtitle.split(' ')[1]}
+                    </>
+                    : filterPrepositions(item.subtitle)}</p>
                   <div className="min-w-[16px] h-[20px] flex items-end">
                     <svg
                       className={`rotate-[180deg] group-hover/stroke:rotate-[0deg] *:transition-all *:duration-100 transition-all duration-100`}
@@ -62,7 +63,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
                     </svg>
                   </div>
                 </div>
-                
+
 
                 <div className="overflow-hidden transition-all duration-100 group-hover/stroke:max-h-[95px] max-h-0">
                   <ul

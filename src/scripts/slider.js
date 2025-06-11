@@ -4,7 +4,7 @@ import InertiaPlugin from "./InertiaPlugin";
 
 gsap.registerPlugin(Draggable, InertiaPlugin);
 
-export function initSlider(onChangeFunction, onDragFunction) {
+export function initSlider({ onChangeFunction, onDragFunction, mobile }) {
     const wrapper = document.querySelector('[data-slider="list"]');
     if (!wrapper) {
         console.error("Контейнер слайдера не найден");
@@ -112,11 +112,11 @@ export function initSlider(onChangeFunction, onDragFunction) {
     const loop = horizontalLoop(slides, {
         paused: true,
         draggable: true,
-        center: false,
+        center: mobile,
         snap: true,
-        offsetLeft: 75,
-        opacity: true,
-        gap: 0,
+        offsetLeft: mobile ? 0 : 75,
+        opacity: !mobile,
+        gap: mobile ? 20 : 0,
         onChange: (index) => {
             if (activeElement) {
                 activeElement.classList.remove("active");

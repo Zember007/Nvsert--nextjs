@@ -95,7 +95,7 @@ const AppMainSkills = () => {
                 </div>
                 <div className="flex gap-[10px] xl:hidden mx-auto">
                     {skillsData.map((_, i) => (
-                        <div key={i} className={`${activeIndex === i ? 'bg-[#34446D]' : ""} w-[10px] h-[10px] border border-solid border-[#34446D] rounded-1/2`}></div>
+                        <div key={i} className={`${activeIndex === i ? 'bg-[#34446D]' : ""} w-[10px] h-[10px] border border-solid border-[#34446D] rounded-full`}></div>
                     ))}
                 </div>
 

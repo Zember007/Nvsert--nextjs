@@ -8,11 +8,13 @@ import Img1 from '@/assets/images/safeguard/1.webp'
 import Img2 from '@/assets/images/safeguard/2.webp'
 import Img3 from '@/assets/images/safeguard/3.webp'
 import Img4 from '@/assets/images/safeguard/4.webp'
-
+import useWindowWidth from '@/hook/useWindowWidth';
+import { horizontalLoop } from '@/scripts/slider';
 
 
 const AppMainSafeguards = () => {
 
+  const widthWindow = useWindowWidth()
   const [isVisible, setIsVisible] = useState(false);
   const divRef = useRef(null);
 
@@ -123,30 +125,63 @@ const AppMainSafeguards = () => {
     };
   }, []);
 
+  const timeLine = useRef<any>(null)
+  const [activeIndex, setActive] = useState<number>(0)
 
+  useEffect(() => {
+    if (widthWindow < 1280) {
+      const slides = gsap.utils.toArray('[data-slider="slide-safeguard"]');
+      timeLine.current = horizontalLoop(slides, {
+        paused: true,
+        draggable: true,
+        gap: 20,
+        snap: true,
+        onChange: (index: number) => {
+          setActive(index)
+        }
+      });
+    }
+  }, [widthWindow])
 
 
 
 
   return (
     <>
-      <div className="grid grid-cols-4 gap-[20px]">
-        {
-          guarantees.map((item, index) => (
-            <SafeguardBlock
-              key={index}
-              img={item.img}
-              index={index}
-              title={item.title}
-              items={item.items}
-              isVisible={isVisible}
+      <section
+        ref={divRef}
+        className="py-[75px] relative">
+        <div className="wrapper flex flex-col gap-[50px]">
+          <h2 className="leading-[1] tracking-[-0.04em] text-center  text-[24px] xs:text-[40px] l:text-[56px]">Гарантии и безупречный сервис</h2>
+          <div className="flex flex-col gap-[20px]">
+            <div className="flex gap-[20px]">
+              {
+                guarantees.map((item, index) => (
+                  <div
+                    key={index}
+                    data-slider="slide-safeguard"
+                  >
+                    <SafeguardBlock
+                      img={item.img}
+                      index={index}
+                      title={item.title}
+                      items={item.items}
+                      isVisible={isVisible}
 
-            />
-          ))
-        }
-      </div>
-      <div ref={divRef} className='top-0 bottom-0 left-0 right-0 absolute pointer-events-none'></div>
+                    />
+                  </div>
+                ))
+              }
+            </div>
 
+            <div className="flex gap-[10px] xl:hidden mx-auto">
+              {guarantees.map((_, i) => (
+                <div key={i} className={`${activeIndex === i ? 'bg-[#34446D]' : ""} w-[10px] h-[10px] border border-solid border-[#34446D] rounded-full`}></div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section >
     </>
   );
 };

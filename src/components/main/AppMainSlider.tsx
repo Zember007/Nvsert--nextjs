@@ -10,6 +10,7 @@ import { useButton } from '@/hook/useButton';
 import { useHeaderContext } from '../contexts/HeaderContext';
 import { useTranslation } from 'react-i18next';
 import { useIntersectionObserver } from '@/hook/useIntersectionObserver';
+import useWindowWidth from '@/hook/useWindowWidth';
 
 
 interface slideItem {
@@ -29,49 +30,87 @@ const settings = {
 
 const SliderMain = () => {
     const { ref, isVisible } = useIntersectionObserver();
+    const widthWindow = useWindowWidth();
     const [activeIndex, setActive] = useState<number>(0)
     const whiteBgRef = useRef<HTMLDivElement | null>(null)
     const sliders = useRef<HTMLDivElement[]>([])
+    const timeLine = useRef<any>(null)
 
     useEffect(() => {
         if (!whiteBgRef.current || !isVisible || !ref.current) return
-        let timeoutIdBg: NodeJS.Timeout | null = null;
+
+        if (widthWindow >= 1240) {
+            let timeoutIdBg: NodeJS.Timeout | null = null;
 
 
 
-        const loop: any = initSlider((index: number) => {
+            timeLine.current = initSlider({
+                onChangeFunction: (index: number) => {
 
-            setActive(index)
+                    setActive(index)
 
-            if (!sliders.current[0].classList.contains('animate')) {
-                sliders.current.forEach(el => {
-                    el.classList.add('animate')
-                });
+                    if (!sliders.current[0].classList.contains('animate')) {
+                        sliders.current.forEach(el => {
+                            el.classList.add('animate')
+                        });
 
-                setTimeout(() => {
-                    sliders.current.forEach(el => {
-                        el.classList.remove('animate')
-                    });
-                }, 400)
-            }
+                        setTimeout(() => {
+                            sliders.current.forEach(el => {
+                                el.classList.remove('animate')
+                            });
+                        }, 400)
+                    }
 
-        },
-            () => {
+                },
+                onDragFunction: () => {
 
-                whiteBgRef.current?.classList.remove('white')
-                if (timeoutIdBg) {
-                    clearTimeout(timeoutIdBg)
-                }
+                    whiteBgRef.current?.classList.remove('white')
+                    if (timeoutIdBg) {
+                        clearTimeout(timeoutIdBg)
+                    }
 
-                timeoutIdBg = setTimeout(() => {
-                    whiteBgRef.current?.classList.add('white')
-                }, 300)
+                    timeoutIdBg = setTimeout(() => {
+                        whiteBgRef.current?.classList.add('white')
+                    }, 300)
+                },
+                mobile: false
+
             })
+        } else {
+
+            whiteBgRef.current?.classList.remove('white')
+
+
+            if (timeLine.current) timeLine.current.kill()
+
+            timeLine.current = initSlider({
+                onChangeFunction: (index: number) => {
+
+                    setActive(index)
+
+                    if (!sliders.current[0].classList.contains('animate')) {
+                        sliders.current.forEach(el => {
+                            el.classList.add('animate')
+                        });
+
+                        setTimeout(() => {
+                            sliders.current.forEach(el => {
+                                el.classList.remove('animate')
+                            });
+                        }, 400)
+                    }
+
+                },
+                onDragFunction: null,
+                mobile: true
+            })
+        }
+
 
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
-                    loop.next({ ease: "power3", duration: 0.725 })
+                    if (timeLine.current) timeLine.current.next({ ease: "power3", duration: 0.725 })
 
                     if (ref.current) {
                         observer.unobserve(ref.current);
@@ -92,7 +131,7 @@ const SliderMain = () => {
             }
 
         };
-    }, [whiteBgRef, ref, isVisible])
+    }, [whiteBgRef, ref, isVisible, widthWindow])
 
 
 
@@ -112,57 +151,41 @@ const SliderMain = () => {
             <section ref={ref} className='py-[75px] text-[#000] relative'>
                 <div className="wrapper flex flex-col gap-[40px]">
 
-                    <h2 className='leading-[1] tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px]'>Помогаем с документами по отраслям</h2>
-                    <div className="cloneable l:h-[447px] h-[710px]">
+                    <h2 className='leading-[1] tracking-[-0.04em] text-center text-[24px] xs:text-[40px] xl:text-[56px]'>Помогаем с документами по отраслям</h2>
+                    <div className="cloneable xl:flex-row flex-col xl:gap-0 gap-[30px] xl:pt-0 pt-[240px]">
 
-                        <div className="tariff-wrap w-[252px] " ref={setWrapperRef}>
-                            <button
-                                onClick={() => { openDefaultModal('introForm') }}
-                                ref={setButtonRef} className='justify-center m:flex items-center px-[16px] py-[9px] relative overflow-hidden btnIconAn doc-btn  border-[#34446D] border border-solid tariff text-[20px] transition-all duration-300 font-bold tracking-normal  gap-[6px]  text-[#34446D] hover:text-[#FFF] rounded-[4px]  group hover:bg-[#34446D]   leading-[1]'>
-                                <span className="sendIconLeft transition-all ease-in">
-                                    <svg className='group-hover:*:fill-[#FFF] rotate-[45deg] *:transition-all *:duration-300' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M29.0627 0.9375L0.930664 12.1875L11.426 16.9336L26.2502 3.75L13.0666 18.5742L17.8127 29.0625L29.0627 0.9375Z" fill="#34446D" />
-                                    </svg>
-                                </span>
-                                <span
-                                    className="transition-all ease-in sendText"
-                                >Оформить заявку</span>
-
-                            </button>
-                        </div>
-
-                        <div className={`overlay l:w-[642px] w-full p-[30px] pr-[76px] relative z-[0]  rounded-[8px] border border-solid border-[#34446D] overflow-hidden `}>
+                        <div className={`overlay xl:w-[642px] xl:h-[447px] h-[630px] w-full p-[30px] pr-[76px] relative z-[0]  rounded-[8px] border border-solid border-[#34446D] overflow-hidden `}>
                             <div className={`overlay-slider absolute top-0 right-[76px] left-0 bottom-0 z-[-2] transition-all duration-300 `}></div>
-                            <div className="flex flex-col justify-between h-full l:items-start items-center w-full">
+                            <div className="flex flex-col justify-between h-full xl:items-start items-center w-full">
                                 <div className=" grow relative w-full overflow-hidden">
                                     <div className="absolute z-[-1] h-[50px] bg-[#d6dae2] rounded-[4px]  w-full border-[#34446D] border-solid border">
-                                    </div>                       
-                                        <div className={`absolute wrapper-slide top-0  w-full h-full pointer-events-none`}>
-                                            <div
-                                                ref={(el) => {
-                                                    if (!el) return
-                                                    sliders.current.push(el)
-                                                }}
-                                                className="slider flex">
-                                                <div className='w-full'>
-                                                    <div className="flex flex-col l:gap-[15px] gap-[30px]  w-full">
-                                                        <span className="text-[24px] font-bold text-[#000000] block  h-[50px] relative text-center py-[10px] w-full  border border-solid border-[transparent] relative z-[10]">
-                                                            {
-                                                                filterPrepositions(slidesLang[activeIndex].title)
-                                                            }
-                                                        </span>
-                                                        <p className={`l:grow slide-text relative w-full h-full text-[16px] bg-[#FFF] `}>
+                                    </div>
+                                    <div className={`absolute wrapper-slide top-0  w-full h-full pointer-events-none`}>
+                                        <div
+                                            ref={(el) => {
+                                                if (!el) return
+                                                sliders.current.push(el)
+                                            }}
+                                            className="slider flex">
+                                            <div className='w-full'>
+                                                <div className="flex flex-col xl:gap-[15px] gap-[30px]  w-full">
+                                                    <span className="text-[24px] font-bold text-[#000000] block  h-[50px] relative text-center py-[10px] w-full  border border-solid border-[transparent] relative z-[10]">
+                                                        {
+                                                            filterPrepositions(slidesLang[activeIndex].title)
+                                                        }
+                                                    </span>
+                                                    <p className={`xl:grow slide-text relative w-full h-full text-[16px] bg-[#FFF] `}>
 
-                                                            {filterPrepositions(slidesLang[activeIndex].text)}
+                                                        {filterPrepositions(slidesLang[activeIndex].text)}
 
-                                                        </p>
-                                                    </div>
-
+                                                    </p>
                                                 </div>
 
                                             </div>
+
                                         </div>
-                                
+                                    </div>
+
                                 </div>
                                 <div className="flex justify-between items-end w-full relative z-[10]">
                                     <div className="flex gap-[10px]">
@@ -241,20 +264,36 @@ const SliderMain = () => {
 
                         </div>
 
+                        <div className="tariff-wrap w-[252px] " ref={setWrapperRef}>
+                            <button
+                                onClick={() => { openDefaultModal('introForm') }}
+                                ref={setButtonRef} className='justify-center m:flex items-center px-[16px] py-[9px] relative overflow-hidden btnIconAn doc-btn  border-[#34446D] border border-solid tariff text-[20px] transition-all duration-300 font-bold tracking-normal  gap-[6px]  text-[#34446D] hover:text-[#FFF] rounded-[4px]  group hover:bg-[#34446D]   leading-[1]'>
+                                <span className="sendIconLeft transition-all ease-in">
+                                    <svg className='group-hover:*:fill-[#FFF] rotate-[45deg] *:transition-all *:duration-300' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M29.0627 0.9375L0.930664 12.1875L11.426 16.9336L26.2502 3.75L13.0666 18.5742L17.8127 29.0625L29.0627 0.9375Z" fill="#34446D" />
+                                    </svg>
+                                </span>
+                                <span
+                                    className="transition-all ease-in sendText"
+                                >Оформить заявку</span>
+
+                            </button>
+                        </div>
+
                         <div
 
-                            className="slide-main l:inset-[0%] l:h-[100%] h-[300px] l:bottom-0 bottom-[80px] l:z-0 z-[]">
+                            className="slide-main xl:inset-[0%] xl:h-[100%] h-[220px] top-0 z-0">
 
                             <div className="slider-wrap">
-                                <div ref={whiteBgRef} className={`slide-blur left-[562px] white`}>
-                                    <span className="line" style={{ '--blur': '4px', '--lightness': '100%' } as React.CSSProperties}></span>
-                                    <span className="line" style={{ '--blur': '8px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <div ref={whiteBgRef} className={`slide-blur xl:left-[562px] left-0 `}>
+                                    <span className="line hidden xl:block white" style={{ '--blur': '4px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                    <span className="line" style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
                                     <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
                                     <span className="line" style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 </div>
 
 
-                                <div className="slide-blur right-0 !translate-x-[0]">
+                                <div className="slide-blur right-0">
                                     <span className="line" style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>
                                     <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
                                     <span className="line" style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
@@ -268,7 +307,7 @@ const SliderMain = () => {
                                     {
                                         slides.map((item, index) => (
                                             <div
-                                                key={index} data-slider="slide" className="slider-slide min-w-[336px] h-[336px] shadow-[0px_0px_4px_0px_#00000080] rounded-[8px] border border-solid border-[#FFF]">
+                                                key={index} data-slider="slide" className="slider-slide xl:min-w-[336px] xl:max-w-[336px] xl:h-[336px] min-w-[220px] max-w-[220px] h-[220px] shadow-[0px_0px_4px_0px_#00000080] rounded-[8px] border border-solid border-[#FFF]">
                                                 <div className="slide-inner relative bg-[#FFF] overflow-hidden rounded-[8px]">
                                                     <Image src={item.img} alt='slide' fill
                                                         style={{ objectFit: 'cover' }} />

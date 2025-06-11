@@ -1,21 +1,16 @@
 .cloneable {
-  @apply l:h-[447px] h-[710px];
-  padding: var(--container-padding);
-  justify-content: end;
+  justify-content: space-between;
   align-items: end;
   display: flex;
   position: relative;
-  font-size: 1.1vw;
 }
 
 .overlay {
-  @apply l:w-[642px] w-full p-[30px] pr-[76px] relative z-[0] rounded-[8px] border border-solid border-[#34446D] overflow-hidden;
+
   z-index: 2;
   justify-content: flex-start;
   align-items: center;
-  height: 100%;
   display: flex;
-  position: absolute;
   inset: 0% auto 0% 0%;
   background: linear-gradient(270deg, rgba(245, 245, 245, 0) 0%, #FFF 76px);
 
@@ -43,8 +38,8 @@
 
 
 .slider-wrap {
+  @apply xl:pt-[31px];
   justify-content: flex-start;
-  padding-top: 31px;
   overflow: hidden;
   width: 100%;
   height: 100%;
@@ -53,14 +48,12 @@
 }
 
 .slider-list {
+  @apply xl:translate-x-[638px] xl:pl-[75px] xl:gap-[75px] gap-[20px];
   flex-flow: row;
-  gap: 75px;
   justify-content: flex-end;
   align-items: stretch;
   display: flex;
   position: relative;
-  transform: translateX(638px);
-  padding-left: 75px;
 }
 
 .slider-slide {
@@ -116,7 +109,7 @@
   .animate {
     animation: slideIn 0.4s ease-out forwards;
   }
-  
+
 
 
   &.wrapper-slide4 {
@@ -188,14 +181,15 @@
   }
 }
 
-  /* Определение анимации slideIn */
-  @keyframes slideIn {
-    0% {
-      transform: translateX(-20%);
-      opacity: 0;
-    }
-    100% {
-      transform: translateX(0);
-      opacity: 1;
-    }
+/* Определение анимации slideIn */
+@keyframes slideIn {
+  0% {
+    transform: translateX(-20%);
+    opacity: 0;
   }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

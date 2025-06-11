@@ -47,44 +47,36 @@ export default function Home() {
       <AppMainDocuments />
       <section
         className="py-[75px] relative wrapper flex flex-col gap-[40px]">
-          <h2 className="leading-[1] tracking-[-0.04em] text-center  text-[24px] xs:text-[40px] l:text-[56px]">Наши основные преимущества</h2>
-          <div className="flex flex-col">
-            <LazyLoadSection component={
-              DynamicAppMainSkills
-            } />
-            <h3 className='text-[18px] leading-[1.5] mt-[40px]'>
-              {filterPrepositions('Наша компания признана одной из ведущих на рынке сертификации в Российской Федерации и стран Евразийского Экономического Союза. Специалисты NVSERT предоставляют широкий спектр услуг, направленный на оформление обязательной и добровольной сертификации, декларирования, соответствия требованиям технических регламентов и других документов, подтверждающих качество выпускаемой продукции.')}
-            </h3>
-            <Link
-              href={'/about'}
-              className='flex items-center gap-[8px] mt-[28px]'
-            >
-              <span className='text-[20px] font-bold'>Подробнее о компании</span>
-              <Image src={ArrowImg} alt='arrow' width={24} height={24} />
-            </Link>
-          </div>
+        <h2 className="leading-[1] tracking-[-0.04em] text-center  text-[24px] xs:text-[40px] l:text-[56px]">Наши основные преимущества</h2>
+        <div className="flex flex-col">
+          <LazyLoadSection
+            component={DynamicAppMainSkills}
+          />
+          <h3 className='text-[18px] leading-[1.5] mt-[40px]'>
+            {filterPrepositions('Наша компания признана одной из ведущих на рынке сертификации в Российской Федерации и стран Евразийского Экономического Союза. Специалисты NVSERT предоставляют широкий спектр услуг, направленный на оформление обязательной и добровольной сертификации, декларирования, соответствия требованиям технических регламентов и других документов, подтверждающих качество выпускаемой продукции.')}
+          </h3>
+          <Link
+            href={'/about'}
+            className='flex items-center gap-[8px] mt-[28px]'
+          >
+            <span className='text-[20px] font-bold'>Подробнее о компании</span>
+            <Image src={ArrowImg} alt='arrow' width={24} height={24} />
+          </Link>
+        </div>
       </section >
 
       <DynamicAppMainSlider />
 
 
-      <section
-        className="py-[75px] relative">
-        <div className="wrapper flex flex-col gap-[50px]">
-          <h2 className="leading-[1] tracking-[-0.04em] text-center  text-[24px] xs:text-[40px] l:text-[56px]">Гарантии и безупречный сервис</h2>
-          <LazyLoadSection component={
-            DynamicAppMainSafeguards
-          } />
-        </div>
-      </section >
+
+      <DynamicAppMainSafeguards />
+
       <section className="py-[75px]">
 
         <div className="wrapper flex flex-col gap-[40px]">
           <h2 className="leading-[1] tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px]">{t('MainFeedback.title')}</h2>
 
-          <LazyLoadSection component={
-            DynamicAppMainFeedback
-          } />
+          <DynamicAppMainFeedback />
         </div>
       </section>
       <section className="py-[75px]">
