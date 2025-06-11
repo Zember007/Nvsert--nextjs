@@ -17,7 +17,6 @@ import { useButton } from "@/hook/useButton";
 import { useAnimation, motion } from "framer-motion";
 import NavSvg from "./elements/NavSvg";
 import { RootState } from "@/config/store";
-import GUI from "lil-gui";
 
 
 
@@ -107,49 +106,6 @@ const AppHeader = () => {
   }, [servicesMenuActive])
 
 
-  const divRef = useRef(null);
-
-  useEffect(() => {
-    // Начальные значения для CSS-переменных
-    const config = {
-      color: '#34446d', // Начальный цвет в формате HEX (без альфа)
-      opacity: 0.2, // Начальная прозрачность
-    };
-
-    // Создаем GUI
-    const gui = new GUI();
-
-    // Добавляем контроллер для цвета (без альфа-канала)
-    gui
-      .addColor(config, 'color')
-      .name('Color')
-      .onChange((value:string) => {
-        if (headerRef.current) {
-          headerRef.current.style.setProperty('--color', value);
-        }
-      });
-
-    // Добавляем контроллер для прозрачности
-    gui
-      .add(config, 'opacity', 0, 1, 0.01)
-      .name('Opacity')
-      .onChange((value:number) => {
-        if (headerRef.current) {
-          headerRef.current.style.setProperty('--opacity', value.toString());
-        }
-      });
-
-    // Устанавливаем начальные значения
-    if (headerRef.current) {
-      headerRef.current.style.setProperty('--color', config.color);
-      headerRef.current.style.setProperty('--opacity', config.opacity.toString());
-    }
-
-    // Очистка при размонтировании
-    return () => {
-      gui.destroy();
-    };
-  }, []);
 
 
   return (

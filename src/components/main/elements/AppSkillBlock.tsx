@@ -71,13 +71,14 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
   const list: string[] = text;
 
   return (
-    <div className={`hover:z-[12] relative card-wrap ${!folder ? 'cursor-pointer ' : ''}`}
+    <div
+      className={`hover:z-[12] relative card-wrap ${!folder ? 'cursor-pointer ' : ''}`}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       ref={cardRef}>
       <div
-        className={`card rebound-box relative z-[0] group/item l:mr-0 mr-[20px] rounded-[4px]  text-[#000] h-[227px] min-w-[300px] w-full`}
+        className={`card rebound-box relative z-[0] group/item l:mr-0 mr-[20px] rounded-[4px]  text-[#000] h-[230px] min-w-[221px] max-w-[221px] xl:min-w-[300px] xl:max-w-[300px] w-full`}
       >
 
         <div
