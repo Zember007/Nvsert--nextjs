@@ -207,7 +207,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
                                 <AppHeader />
                                 {children}
                             </div>
-                            {/* <AppFooter /> */}
+                            <AppFooter />
                         </main>
                     </SimpleBar>
                 </SimpleBarContext.Provider>         
