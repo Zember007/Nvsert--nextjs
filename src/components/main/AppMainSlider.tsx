@@ -148,7 +148,7 @@ const SliderMain = () => {
 
     return (
         <>
-            <section ref={ref} className='py-[75px] text-[#000] relative'>
+            <section ref={ref} className='py-[40px] s:py-[75px] text-[#000] relative'>
                 <div className="wrapper flex flex-col gap-[40px]">
 
                     <h2 className='leading-[1] tracking-[-0.04em] text-center text-[24px] xs:text-[40px] xl:text-[56px]'>Помогаем с документами по отраслям</h2>

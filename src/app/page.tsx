@@ -37,7 +37,6 @@ export default function Home() {
     ssr: false,
   });
 
-  const { t } = useTranslation()
 
 
 
@@ -46,7 +45,7 @@ export default function Home() {
       <AppMainIntro />
       <AppMainDocuments />
       <section
-        className="py-[75px] relative wrapper flex flex-col gap-[40px]">
+        className="py-[40px] s:py-[75px] relative wrapper flex flex-col gap-[40px]">
         <h2 className="leading-[1] tracking-[-0.04em] text-center  text-[24px] xs:text-[40px] l:text-[56px]">Наши основные преимущества</h2>
         <div className="flex flex-col">
           <LazyLoadSection
@@ -69,27 +68,18 @@ export default function Home() {
 
 
 
-      <DynamicAppMainSafeguards />
+      <DynamicAppMainSafeguards /> 
 
-      <section className="py-[75px]">
-
-        <div className="wrapper flex flex-col gap-[40px]">
-          <h2 className="leading-[1] tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px]">{t('MainFeedback.title')}</h2>
+     
 
           <DynamicAppMainFeedback />
-        </div>
-      </section>
-      <section className="py-[75px]">
-        <div className="wrapper flex flex-col gap-[40px]">
-          <h2 className="leading-[1] tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px]">
-            {t('MainQuestions.title')}
-          </h2>
-          <LazyLoadSection component={
-            DynamicAppMainQuestions
-          } />
 
-        </div>
-      </section>
+      
+
+          <DynamicAppMainQuestions />
+
+
+     
 
     </div>
   );

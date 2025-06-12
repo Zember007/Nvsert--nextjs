@@ -53,11 +53,8 @@ const AppMainSkills = () => {
             const slides = gsap.utils.toArray('[data-slider="slide-skill"]');
             timeLine.current = horizontalLoop(slides, {
                 paused: true,
-                draggable: true,
-                // offsetLeft: 0,
-                // repeat: -1,
-                snap: true,
-                // gap: 10,
+                draggable: true,                                
+                snap: true,                
                 onChange: (index:number) => {
                     setActive(index)
                 }
