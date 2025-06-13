@@ -9,10 +9,11 @@ interface MenuItem {
 
 const AppMenuItem: React.FC<{
     item: MenuItem;
+    classNameBox?: string;
     isActive: boolean;
     onClick?: (e: React.MouseEvent<HTMLElement>) => void;
     className?: string;
-}> = React.memo(({ item, isActive, onClick, className }) => {
+}> = React.memo(({ item, isActive, onClick, className = '', classNameBox = '' }) => {
 
     function extractTextFromReactNode(node: ReactNode): string {
         if (node === null || node === undefined || typeof node === 'boolean') return '';
@@ -98,7 +99,7 @@ const AppMenuItem: React.FC<{
     );
 
     return (
-        <div className="overflow-x-hidden px-[1px]">
+        <div className={`${classNameBox ? classNameBox : ''} overflow-x-hidden px-[1px]`}>
             {item.href === '#' ? (
                 <button
                     type="button"

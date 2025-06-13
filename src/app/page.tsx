@@ -68,18 +68,18 @@ export default function Home() {
 
 
 
-      <DynamicAppMainSafeguards /> 
-
-     
-
-          <DynamicAppMainFeedback />
-
-      
-
-          <DynamicAppMainQuestions />
+      <DynamicAppMainSafeguards />
 
 
-     
+
+      <DynamicAppMainFeedback />
+
+
+
+      <DynamicAppMainQuestions />
+
+
+
 
     </div>
   );

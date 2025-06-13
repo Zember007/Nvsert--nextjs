@@ -39,20 +39,14 @@
   content: "";
   position: absolute;
   inset: 0;
-
-
-
-
   border-radius: 4px;
   padding: 1px;
-
 
   background: radial-gradient(80px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
       var(--menu-item-border),
       black 100%);
-
-
-
+      
+  opacity: 0;
 
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
@@ -60,12 +54,18 @@
   -webkit-mask-composite: xor;
   mask-composite: exclude;
 
-  opacity: 0;
   pointer-events: none;
+
 }
 
 
+@media (max-width: 1239px) {
+  .menu-item::after {
+    opacity: 1;
 
+    background: black;
+  }
+}
 
 .menu-item:hover::after {
   opacity: 1;

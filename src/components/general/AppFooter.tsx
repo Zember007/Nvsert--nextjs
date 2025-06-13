@@ -20,10 +20,6 @@ const AppFooter = () => {
   };
 
   const { configs } = useSelector((state: RootState) => state.config);
-
-  const RussiaPhone = configs?.find((item) => item.key === 'PHONE_RUSSIA');
-  const moscowPhone = configs?.find((item) => item.key === 'PHONE_MOSCOW');
-  const spbPhone = configs?.find((item) => item.key === 'PHONE_SPB');
   const email = configs?.find((item) => item.key === 'email');
 
   const menuItems = [
@@ -39,9 +35,9 @@ const AppFooter = () => {
   ]
 
   return (
-    <footer className="h-[168px]  flex justify-between p-[30px] bg-[#3C4049] text-[#FFFFFF99] text-[18px]">
-      <div className="flex gap-[120px]">
-        <div className="flex flex-col justify-between">
+    <footer className="xl:h-[168px] h-[420px] relative flex justify-between p-[30px] bg-[#3C4049] text-[#FFFFFF99] text-[18px]">
+      <div className="flex xl:gap-[120px] xl:items-stretch items-start">
+        <div className="flex flex-col justify-between xl:gap-0 gap-[32px] xl:static absolute bottom-[20px]">
           <p className="text-[16px]">© 2025 NVSERT</p>
 
           <div className="flex flex-col gap-[20px] text-[#FFF] *:leading-[1]">
@@ -49,27 +45,27 @@ const AppFooter = () => {
             <span>{t("footer.company")}</span>
           </div>
         </div>
-        <div className="flex flex-col justify-between items-start">
-          <div className="flex gap-[10px]">
+        <div className="flex flex-col xl:justify-between items-start relative">
+          <div className="flex gap-[10px] xl:flex-row flex-col">
             {menuItems.map((item, i) => (
               <AppMenuItem key={i} item={item} isActive={false} />
             ))}
 
           </div>
 
-          <div>
-            <AppMenuItem item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: t("footer.policy") }} isActive={false} />
-          </div>
+          <AppMenuItem 
+          classNameBox={'absolute whitespace-nowrap !overflow-visible xl:static bottom-[-30px] xl:translate-y-0 translate-y-full'}          
+          item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: t("footer.policy") }} isActive={false} />
         </div>
       </div>
 
       <div className="flex flex-col justify-between">
         <div className="flex justify-between ">
-          <div className="flex gap-[8px]">
+          <div className="flex gap-[10px] xl:flex-row flex-col">
             {email &&
               <PromtModal
                 content={<div className="flex gap-[4px] items-center h-[14px]">
-                  <svg  width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" clipRule="evenodd" d="M17.2439 0.185578C17.5556 0.458339 17.5872 0.932161 17.3144 1.24389L6.81443 13.2439C6.67774 13.4001 6.48242 13.4927 6.27496 13.4996C6.0675 13.5065 5.86645 13.4271 5.71967 13.2803L1.21967 8.78034C0.926777 8.48745 0.926777 8.01257 1.21967 7.71968C1.51256 7.42679 1.98744 7.42679 2.28033 7.71968L6.21347 11.6528L16.1856 0.256132C16.4583 -0.0555957 16.9322 -0.0871838 17.2439 0.185578Z" fill="white" />
                   </svg>
                   <span className="text-[#FFF] text-[18px]">{t("copied")}</span>
@@ -84,10 +80,10 @@ const AppFooter = () => {
                   item={{
                     href: '#', label:
                       <>
-                        <svg className="absolute top-1/2 transition-all duration-200 ease -translate-y-1/2 left-[-1px] -translate-x-full group-hover:translate-x-0 group-hover:left-[15px]" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg className="absolute top-1/2 transition-all duration-200 ease -translate-y-1/2  xl:-translate-x-full translate-x-0 xl:left-[-1px] left-[15px]  group-hover:translate-x-0 group-hover:left-[15px]" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M3.5381 5.96154C3.5381 5.45151 3.7407 4.96236 4.10135 4.60172C4.462 4.24107 4.95114 4.03846 5.46117 4.03846H6.61502V7.5C6.61502 7.75254 6.66476 8.00261 6.7614 8.23593C6.85805 8.46925 6.9997 8.68125 7.17827 8.85982C7.53892 9.22047 8.02806 9.42308 8.5381 9.42308H14.6919C14.9445 9.42308 15.1946 9.37334 15.4279 9.27669C15.6612 9.18005 15.8732 9.03839 16.0518 8.85982C16.2303 8.68125 16.372 8.46925 16.4686 8.23593C16.5653 8.00261 16.615 7.75254 16.615 7.5V4.06923C16.9992 4.1396 17.3528 4.32527 17.6289 4.60154L19.8981 6.87077C20.0767 7.04938 20.2183 7.26141 20.3149 7.49476C20.4115 7.72811 20.4612 7.97821 20.4612 8.23077V19.0385C20.4613 19.4818 20.3082 19.9115 20.0278 20.255C19.7475 20.5984 19.3571 20.8344 18.9227 20.9231V14.4231C18.9227 13.913 18.7201 13.4239 18.3595 13.0633C17.9988 12.7026 17.5097 12.5 16.9996 12.5H6.99963C6.4896 12.5 6.00046 12.7026 5.63981 13.0633C5.27917 13.4239 5.07656 13.913 5.07656 14.4231V20.9231C4.64219 20.8344 4.25179 20.5984 3.97144 20.255C3.69109 19.9115 3.538 19.4818 3.5381 19.0385V5.96154ZM6.61502 20.9615V14.4231C6.61502 14.3211 6.65554 14.2232 6.72767 14.1511C6.7998 14.079 6.89763 14.0385 6.99963 14.0385H16.9996C17.1016 14.0385 17.1995 14.079 17.2716 14.1511C17.3437 14.2232 17.3842 14.3211 17.3842 14.4231V20.9615H6.61502ZM15.0766 4.03846V7.5C15.0766 7.60201 15.036 7.69984 14.9639 7.77196C14.8918 7.84409 14.7939 7.88462 14.6919 7.88462H8.5381C8.43609 7.88462 8.33826 7.84409 8.26613 7.77196C8.194 7.69984 8.15348 7.60201 8.15348 7.5V4.03846H15.0766ZM5.46117 2.5C4.54312 2.5 3.66266 2.8647 3.01349 3.51386C2.36433 4.16303 1.99963 5.04348 1.99963 5.96154V19.0385C1.99963 19.9565 2.36433 20.837 3.01349 21.4861C3.66266 22.1353 4.54312 22.5 5.46117 22.5H18.5381C19.4562 22.5 20.3366 22.1353 20.9858 21.4861C21.6349 20.837 21.9996 19.9565 21.9996 19.0385V8.23077C21.9996 7.77619 21.9101 7.32607 21.7362 6.90609C21.5622 6.48611 21.3072 6.10451 20.9858 5.78308L18.7166 3.51385C18.3951 3.19241 18.0135 2.93744 17.5935 2.76348C17.1736 2.58953 16.7234 2.5 16.2689 2.5H5.46117Z" fill="white" fillOpacity="0.5" />
                         </svg>
-                        <span className="transition-all duration-200 ease block group-hover:translate-x-[16px]">{email.value}</span>
+                        <span className="transition-all duration-200 ease block xl:translate-x-0 translate-x-[16px] group-hover:translate-x-[16px]">{email.value}</span>
                       </>
                   }} isActive={false} />
 
@@ -108,7 +104,7 @@ const AppFooter = () => {
                 item={{
                   href: '#', label:
                     <>
-                      <svg className="absolute top-1/2 transition-all duration-200 ease -translate-y-1/2 left-[-1px] -translate-x-full group-hover:translate-x-0 group-hover:left-[16px]" width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <svg className="absolute top-1/2 transition-all duration-200 ease  left-[16px] xl:left-[-1px] -translate-x-full xl:-translate-x-full -translate-y-1/2 translate-x-0 group-hover:translate-x-0 group-hover:left-[16px]" width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14.3357 7.43586L13.2769 14.2155C13.2623 14.309 13.2247 14.3974 13.1675 14.4727C13.1103 14.5481 13.0353 14.6081 12.9492 14.6473C12.8631 14.6865 12.7686 14.7037 12.6742 14.6973C12.5798 14.691 12.4885 14.6613 12.4084 14.6109L8.86263 12.3892C8.78893 12.3431 8.72673 12.2808 8.68076 12.207C8.6348 12.1332 8.60628 12.0499 8.59738 11.9635C8.58848 11.877 8.59943 11.7896 8.6294 11.708C8.65938 11.6264 8.70758 11.5527 8.77034 11.4926L11.7138 8.67153C11.7468 8.64045 11.708 8.58896 11.6691 8.61228L7.40256 11.1652C7.14896 11.3177 6.84781 11.3707 6.5574 11.3138L5.01282 11.0156C4.45521 10.9078 4.37846 10.1423 4.90207 9.92566L13.1613 6.51105C13.302 6.45251 13.4557 6.43256 13.6067 6.45324C13.7577 6.47393 13.9004 6.53452 14.0202 6.62875C14.14 6.72298 14.2324 6.84744 14.2881 6.98932C14.3437 7.13119 14.3605 7.28534 14.3367 7.43586" fill="white" fillOpacity="0.5" />
                         <path d="M14.3357 7.43586L13.2769 14.2155C13.2623 14.309 13.2247 14.3974 13.1675 14.4727C13.1103 14.5481 13.0353 14.6081 12.9492 14.6473C12.8631 14.6865 12.7686 14.7037 12.6742 14.6973C12.5798 14.691 12.4885 14.6613 12.4084 14.6109L8.86263 12.3892C8.78893 12.3431 8.72673 12.2808 8.68076 12.207C8.6348 12.1332 8.60628 12.0499 8.59738 11.9635C8.58848 11.877 8.59943 11.7896 8.6294 11.708C8.65938 11.6264 8.70758 11.5527 8.77034 11.4926L11.7138 8.67153C11.7468 8.64045 11.708 8.58896 11.6691 8.61228L7.40256 11.1652C7.14896 11.3177 6.84781 11.3707 6.5574 11.3138L5.01282 11.0156C4.45521 10.9078 4.37846 10.1423 4.90207 9.92566L13.1613 6.51105C13.302 6.45251 13.4557 6.43256 13.6067 6.45324C13.7577 6.47393 13.9004 6.53452 14.0202 6.62875C14.14 6.72298 14.2324 6.84744 14.2881 6.98932C14.3437 7.13119 14.3605 7.28534 14.3367 7.43586" fill="url(#paint0_linear_3340_1315)" />
                         <path fillRule="evenodd" clipRule="evenodd" d="M10.0001 0.5C4.47749 0.5 0.00012207 4.97737 0.00012207 10.5C0.00012207 16.0226 4.47749 20.5 10.0001 20.5C15.5228 20.5 20.0001 16.0226 20.0001 10.5C20.0001 4.97737 15.5228 0.5 10.0001 0.5ZM2.3445 7.32894C1.92808 8.33429 1.71374 9.41182 1.71374 10.5C1.71374 12.6977 2.58677 14.8054 4.14077 16.3594C5.69476 17.9134 7.80244 18.7864 10.0001 18.7864C12.1978 18.7864 14.3055 17.9134 15.8595 16.3594C17.4135 14.8054 18.2865 12.6977 18.2865 10.5C18.2865 9.41182 18.0722 8.33429 17.6557 7.32894C17.2393 6.32359 16.6289 5.41011 15.8595 4.64064C15.09 3.87118 14.1765 3.26081 13.1712 2.84438C12.1658 2.42795 11.0883 2.21362 10.0001 2.21362C8.91194 2.21362 7.83441 2.42795 6.82906 2.84438C5.82371 3.26081 4.91023 3.87118 4.14077 4.64064C3.3713 5.41011 2.76093 6.32359 2.3445 7.32894Z" fill="white" fillOpacity="0.5" />
@@ -119,7 +115,7 @@ const AppFooter = () => {
                           </linearGradient>
                         </defs>
                       </svg>
-                      <span className="transition-all duration-200 ease block group-hover:text-[#2AABEE] group-hover:translate-x-[16px]">Telegram</span>
+                      <span className="transition-all duration-200 ease block xl:translate-x-0 translate-x-[16px] xl:text-inherit text-[#2AABEE] group-hover:text-[#2AABEE] group-hover:translate-x-[16px]">Telegram</span>
                     </>
                 }} isActive={false} />
             </PromtModal>
@@ -138,20 +134,20 @@ const AppFooter = () => {
                   href: '#', label:
                     <>
 
-                      <svg className="absolute top-1/2 transition-all duration-200 ease -translate-y-1/2 left-[-1px] -translate-x-full group-hover:translate-x-0 group-hover:left-[15px]" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <svg className="absolute top-1/2 transition-all duration-200 ease left-[16px] xl:left-[-1px] -translate-x-full xl:-translate-x-full -translate-y-1/2 translate-x-0 group-hover:translate-x-0 group-hover:left-[15px]" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" clipRule="evenodd" d="M16.2307 14.33C16.3794 14.4025 16.4988 14.4606 16.56 14.49C16.6095 14.5138 16.655 14.5348 16.6968 14.554C16.8662 14.6321 16.9739 14.6818 17.03 14.77C17.1 14.88 17.1 15.37 16.89 15.95C16.69 16.53 15.7 17.06 15.22 17.13C14.79 17.19 14.25 17.22 13.66 17.03C13.3 16.92 12.84 16.77 12.25 16.51C9.87904 15.4871 8.28497 13.157 8.04455 12.8056C8.0335 12.7895 8.02531 12.7775 8.02003 12.77L8.01809 12.7674C7.89075 12.5977 7.01004 11.4236 7.01004 10.21C7.01004 9.08443 7.55483 8.4866 7.81191 8.20448C7.83347 8.18082 7.85301 8.15938 7.87003 8.14004C8.10003 7.89004 8.36003 7.83004 8.53003 7.83004H9.01003C9.0274 7.8312 9.04557 7.83142 9.06444 7.83164C9.20852 7.83338 9.39319 7.83562 9.57003 8.26004C9.77003 8.76004 10.27 9.98003 10.33 10.1C10.39 10.22 10.43 10.36 10.35 10.53C10.3432 10.5437 10.3366 10.557 10.3301 10.5699C10.261 10.709 10.2098 10.812 10.1 10.94C10.0617 10.9847 10.0214 11.0335 9.9806 11.0828C9.89369 11.1878 9.80491 11.2952 9.73003 11.37C9.60003 11.5 9.48003 11.63 9.62003 11.88C9.77003 12.13 10.26 12.94 11 13.6C11.8038 14.3183 12.5051 14.6198 12.8479 14.7671C12.906 14.7921 12.9538 14.8126 12.99 14.83C13.24 14.96 13.39 14.94 13.53 14.77C13.67 14.61 14.14 14.05 14.31 13.8C14.48 13.56 14.64 13.6 14.87 13.68C15.0361 13.748 15.7724 14.1067 16.2307 14.33Z" fill="#60D669" />
                         <path fillRule="evenodd" clipRule="evenodd" d="M19.05 5.41005C18.1331 4.48415 17.041 3.75002 15.8375 3.25041C14.634 2.75081 13.3431 2.49574 12.04 2.50005C6.58004 2.50005 2.13005 6.95004 2.13005 12.41C2.13005 14.16 2.59005 15.86 3.45005 17.36L2.05005 22.5L7.30003 21.12C8.75003 21.91 10.38 22.33 12.04 22.33C17.5 22.33 21.95 17.88 21.95 12.42C21.95 9.77003 20.92 7.28004 19.05 5.41005ZM7.84003 19.5C9.11003 20.25 10.56 20.65 12.04 20.65C16.58 20.65 20.28 16.96 20.26 12.42C20.2642 11.3371 20.0533 10.2641 19.6396 9.26336C19.2259 8.26258 18.6176 7.3539 17.85 6.59004C16.3 5.03005 14.23 4.17005 12.03 4.17005C7.49003 4.17005 3.79004 7.87004 3.79004 12.41C3.79097 13.9593 4.22759 15.4771 5.05004 16.79L5.25004 17.1L4.42004 20.14L7.54003 19.32L7.84003 19.5Z" fill="white" fillOpacity="0.5" />
                       </svg>
 
-                      <span className="transition-all duration-200 ease block group-hover:text-[#60D669] group-hover:translate-x-[16px]">WhatsApp</span>
+                      <span className="transition-all duration-200 ease block xl:text-inherit text-[#60D669] xl:translate-x-0 translate-x-[16px]  group-hover:text-[#60D669] group-hover:translate-x-[16px]">WhatsApp</span>
                     </>
                 }} isActive={false} />
             </PromtModal>
             <PromtModal
               className='!py-[20px]'
+              classNameBox="xl:!relative !absolute xl:bottom-0 xl:right-0 bottom-[100px] right-[30px]"
               content={
                 <div className="flex flex-col gap-[20px]">
-                  {/* i18n.language */}
                   {langs.map((lang, i) => (
                     <button
                       onClick={() => {
@@ -174,10 +170,10 @@ const AppFooter = () => {
               <AppMenuItem
                 item={{
                   href: '#', label: <>
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.2676 18.8833C15.9735 17.9416 18.7776 14.7408 19.1293 10.8333H14.9785C14.8235 13.7891 13.8485 16.5391 12.2676 18.8833ZM19.1293 9.16664C18.7776 5.25831 15.971 2.05664 12.2643 1.11497C13.846 3.45997 14.8226 6.20997 14.9785 9.16664H19.1293ZM7.73678 1.11497C4.02845 2.05664 1.22345 5.25831 0.870117 9.16664H5.02178C5.17762 6.20997 6.15428 3.45997 7.73678 1.11497ZM0.87095 10.8333C1.04402 12.7192 1.79645 14.5054 3.02497 15.9466C4.2535 17.3879 5.89793 18.4137 7.73262 18.8833C6.15178 16.5391 5.17678 13.7891 5.02178 10.8333H0.87095ZM10.0001 19.135C8.07762 16.8141 6.87345 13.9508 6.69178 10.8333H13.3093C13.126 13.95 11.9226 16.8141 10.001 19.135M10.0001 0.869141C11.9226 3.18914 13.1251 6.05164 13.3085 9.16664H6.69178C6.87512 6.05164 8.07845 3.18914 10.0001 0.869141Z" fill="white" fillOpacity="1" />
-                  </svg>
-                  <span className="hidden">Языки</span>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.2676 18.8833C15.9735 17.9416 18.7776 14.7408 19.1293 10.8333H14.9785C14.8235 13.7891 13.8485 16.5391 12.2676 18.8833ZM19.1293 9.16664C18.7776 5.25831 15.971 2.05664 12.2643 1.11497C13.846 3.45997 14.8226 6.20997 14.9785 9.16664H19.1293ZM7.73678 1.11497C4.02845 2.05664 1.22345 5.25831 0.870117 9.16664H5.02178C5.17762 6.20997 6.15428 3.45997 7.73678 1.11497ZM0.87095 10.8333C1.04402 12.7192 1.79645 14.5054 3.02497 15.9466C4.2535 17.3879 5.89793 18.4137 7.73262 18.8833C6.15178 16.5391 5.17678 13.7891 5.02178 10.8333H0.87095ZM10.0001 19.135C8.07762 16.8141 6.87345 13.9508 6.69178 10.8333H13.3093C13.126 13.95 11.9226 16.8141 10.001 19.135M10.0001 0.869141C11.9226 3.18914 13.1251 6.05164 13.3085 9.16664H6.69178C6.87512 6.05164 8.07845 3.18914 10.0001 0.869141Z" fill="white" fillOpacity="1" />
+                    </svg>
+                    <span className="hidden">Языки</span>
                   </>
                 }} isActive={false} />
             </PromtModal>

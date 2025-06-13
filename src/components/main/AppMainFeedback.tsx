@@ -187,7 +187,7 @@ const AppMainFeedback = () => {
 
                             </div>
 
-                            <div className="flex gap-[10px] mx-auto xl:hidden justify-center flex-wrap px-[20px]">
+                            <div className="flex mx-auto xl:hidden justify-center flex-wrap px-[20px]">
                                 {[...Array(19)].map((_, i) => (
                                     <div key={i} className={`${activeIndex === i ? 'bg-[#34446D]' : ""} w-[10px] h-[10px] border border-solid border-[#34446D] rounded-full`}></div>
                                 ))}
@@ -211,7 +211,7 @@ const AppMainFeedback = () => {
 
                             </div>
 
-                            <div className="flex gap-[10px] justify-center flex-wrap mx-auto xl:hidden px-[20px]">
+                            <div className="flex justify-center flex-wrap mx-auto xl:hidden px-[20px]">
                                 {[...Array(19)].map((_, i) => (
                                     <div key={i} className={`${activeIndex1 === i ? 'bg-[#34446D]' : ""} w-[10px] h-[10px] border border-solid border-[#34446D] rounded-full`}></div>
                                 ))}
