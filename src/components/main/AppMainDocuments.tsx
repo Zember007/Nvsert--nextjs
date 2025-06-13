@@ -80,8 +80,8 @@ const AppMainDocuments = () => {
     };
 
     return (
-        <section id="documents_box" className="py-[40px] s:py-[75px] flex flex-col gap-[40px] wrapper">
-            <h2 className="leading-[1] text-center text-[24px] xs:text-[40px] l:text-[56px] text-[#000000] tracking-[-0.04em]">
+        <section id="documents_box" className="section wrapper">
+            <h2 className="section__title">
                 {t('docs.heading')}
             </h2>
 

@@ -231,7 +231,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                     {({ register, errors }) => (
                         <div className="flex flex-col s:gap-[20px] gap-[15px]">
                             <AppInput
-                                className="!bg-[#2a2a2a] focus:!bg-[#21262F] [&:not(:placeholder-shown)]:!bg-[#21262F]"
+                                className="main__input"
                                 title={'ФИО'}
                                 inputName="name"
                                 required={true}
@@ -251,7 +251,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                     className="w-full relative z-[1]">
                                     <AppInput
                                         defaultValue={isEmail ? contactData.email : isPhone ? contactData.phone : ''}
-                                        className="!bg-[#2a2a2a] focus:!bg-[#21262F] [&:not(:placeholder-shown)]:!bg-[#21262F]"
+                                        className="main__input"
                                         title={isPhone ? 'Телефон' : 'Email'}
                                         inputName="contact"
                                         mask={isPhone ? "phone" : ''}
@@ -295,7 +295,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                             </div>
 
                             <AppTextarea
-                                className="!bg-[#2a2a2a] focus:!bg-[#21262F] [&:not(:placeholder-shown)]:!bg-[#21262F]"
+                                className="main__input"
                                 title={'Комментарий'}
                                 inputName="comment"
                             />
@@ -304,12 +304,12 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                 <button
                                     type="submit"
                                     ref={setButtonRef}
-                                    className="no-drag btnIconAn group  tariff an-border bg-[#34446D] text-[18px] s:text-[20px] text-[#FFFFFF] font-bold  overflow-hidden p-[9px] px-[20px] relative flex items-center justify-center rounded-[4px]"
+                                    className="form__button no-drag btnIconAn group tariff an-border"
                                     style={{
                                         verticalAlign: 'middle'
                                     }}
                                 >
-                                    <span className="sendIconLeft transition-all ease-in">
+                                    <span className="sendIconLeft">
                                         <Image
                                             alt="message"
                                             src={MessageImg}
@@ -320,13 +320,13 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                         />
                                     </span>
                                     <span
-                                        className="transition-all ease-in sendText"
+                                        className="sendText"
                                     >{btnText}</span>
                                 </button>
                             </div>
 
 
-                            <span className=" text-[#CCCCCC] s:mt-[7px] text-[11px] s:text-[13px]">
+                            <span className="form__desc">
                                 {filterPrepositions('Нажимая на кнопку «Оформить заявку» вы соглашаетесь с ')}
                                 <Link href="/soglashenie/polzovatelskoe-soglashenie/" className="no-drag" target="_blank">
                                     политикой конфиденциальности

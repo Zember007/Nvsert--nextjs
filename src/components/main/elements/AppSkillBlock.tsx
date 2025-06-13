@@ -21,13 +21,13 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
 
   useEffect(() => {
     const card = cardRef.current;
-    if (card) {
+    if (card && isVisible) {
       setDimensions({
         width: card.offsetWidth,
         height: card.offsetHeight
       });
     }
-  }, [cardRef.current]);
+  }, [cardRef, isVisible]);
 
   const mousePX = mouseX / dimensions.width;
   const mousePY = mouseY / dimensions.height;
@@ -41,6 +41,7 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isVisible) return
     const card = cardRef.current;
     if (card) {
       const rect = card.getBoundingClientRect();
@@ -53,12 +54,14 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
   };
 
   const handleMouseEnter = () => {
+    if (!isVisible) return
     if (mouseLeaveDelay) {
       clearTimeout(mouseLeaveDelay);
     }
   };
 
   const handleMouseLeave = () => {
+    if (!isVisible) return
     setMouseLeaveDelay(setTimeout(() => {
       setMouseX(0);
       setMouseY(0);

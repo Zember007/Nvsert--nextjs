@@ -150,35 +150,33 @@ const AppMainSafeguards = () => {
     <>
       <section
         ref={divRef}
-        className="py-[75px] relative">
-        <div className="wrapper flex flex-col gap-[50px]">
-          <h2 className="leading-[1] tracking-[-0.04em] text-center  text-[24px] xs:text-[40px] l:text-[56px]">Гарантии и безупречный сервис</h2>
-          <div className="flex flex-col gap-[20px]">
-            <div className="flex gap-[20px]">
-              {
-                guarantees.map((item, index) => (
-                  <div
-                    key={index}
-                    data-slider="slide-safeguard"
-                  >
-                    <SafeguardBlock
-                      img={item.img}
-                      index={index}
-                      title={item.title}
-                      items={item.items}
-                      isVisible={isVisible}
+        className="section wrapper">
+        <h2 className="section__title">Гарантии и безупречный сервис</h2>
+        <div className="flex flex-col gap-[20px]">
+          <div className="flex gap-[20px]">
+            {
+              guarantees.map((item, index) => (
+                <div
+                  key={index}
+                  data-slider="slide-safeguard"
+                >
+                  <SafeguardBlock
+                    img={item.img}
+                    index={index}
+                    title={item.title}
+                    items={item.items}
+                    isVisible={isVisible}
 
-                    />
-                  </div>
-                ))
-              }
-            </div>
+                  />
+                </div>
+              ))
+            }
+          </div>
 
-            <div className="flex xl:hidden mx-auto">
-              {guarantees.map((_, i) => (
-                <div key={i} className={`${activeIndex === i ? 'bg-[#34446D]' : ""} w-[10px] h-[10px] border border-solid border-[#34446D] rounded-full`}></div>
-              ))}
-            </div>
+          <div className="slide-dots-box">
+            {guarantees.map((_, i) => (
+              <div key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
+            ))}
           </div>
         </div>
       </section >

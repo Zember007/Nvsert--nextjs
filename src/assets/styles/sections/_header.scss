@@ -323,8 +323,8 @@
 			z-index: 10;
 			top: 0;
 			left: 0;
-			//background: #37476F;
-			background: #34446D;
+			backdrop-filter: blur(var(--filter-blur));
+			background: var(--color);
 			padding-top: 72px;
 			display: flex;
 			flex-direction: column;

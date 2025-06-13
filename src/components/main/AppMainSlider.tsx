@@ -33,7 +33,7 @@ const SliderMain = () => {
     const widthWindow = useWindowWidth();
     const [activeIndex, setActive] = useState<number>(0)
     const whiteBgRef = useRef<HTMLDivElement | null>(null)
-    const sliders = useRef<HTMLDivElement[]>([])
+    const slider = useRef<HTMLDivElement>(null)
     const timeLine = useRef<any>(null)
 
     useEffect(() => {
@@ -49,15 +49,12 @@ const SliderMain = () => {
 
                     setActive(index)
 
-                    if (!sliders.current[0].classList.contains('animate')) {
-                        sliders.current.forEach(el => {
-                            el.classList.add('animate')
-                        });
+                    if (slider.current && !slider.current.classList.contains('animate')) {
+                        slider.current.classList.add('animate')
 
                         setTimeout(() => {
-                            sliders.current.forEach(el => {
-                                el.classList.remove('animate')
-                            });
+                            if (!slider.current) return
+                            slider.current.classList.remove('animate')
                         }, 400)
                     }
 
@@ -88,15 +85,12 @@ const SliderMain = () => {
 
                     setActive(index)
 
-                    if (!sliders.current[0].classList.contains('animate')) {
-                        sliders.current.forEach(el => {
-                            el.classList.add('animate')
-                        });
+                    if (slider.current && !slider.current.classList.contains('animate')) {
+                        slider.current.classList.add('animate')
 
                         setTimeout(() => {
-                            sliders.current.forEach(el => {
-                                el.classList.remove('animate')
-                            });
+                            if (!slider.current) return
+                            slider.current.classList.remove('animate')
                         }, 400)
                     }
 
@@ -148,178 +142,173 @@ const SliderMain = () => {
 
     return (
         <>
-            <section ref={ref} className='py-[40px] s:py-[75px] text-[#000] relative'>
-                <div className="wrapper flex flex-col gap-[40px]">
+            <section ref={ref} className='section wrapper'>
 
-                    <h2 className='leading-[1] tracking-[-0.04em] text-center text-[24px] xs:text-[40px] xl:text-[56px]'>Помогаем с документами по отраслям</h2>
-                    <div className="cloneable xl:flex-row flex-col xl:gap-0 gap-[30px] xl:pt-0 pt-[240px]">
+                <h2 className='section__title'>Помогаем с документами по отраслям</h2>
+                <div className="cloneable">
 
-                        <div className="flex xl:hidden mx-auto">
-                            {slides.map((_, i) => (
-                                <div key={i} className={`${activeIndex === i ? 'bg-[#34446D]' : ""} w-[10px] h-[10px] border border-solid border-[#34446D] rounded-full`}></div>
-                            ))}
-                        </div>
+                    <div className="slide-dots-box">
+                        {slides.map((_, i) => (
+                            <div key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
+                        ))}
+                    </div>
 
-                        <div className={`overlay xl:w-[642px] xl:h-[447px] h-[630px] w-full xl:p-[30px] xl:pr-[76px] relative z-[0]  rounded-[8px] border border-solid border-[#34446D] overflow-hidden `}>
-                            <div className={`overlay-slider absolute top-0 xl:right-[76px] left-0 bottom-0 z-[-2] transition-all duration-300 `}></div>
-                            <div className="flex flex-col justify-between h-full xl:items-start items-center w-full">
-                                <div className=" grow relative w-full overflow-hidden">
-                                    <div className="absolute z-[-1] xl:h-[50px] h-[65px] bg-[#d6dae2] xl:rounded-[4px]  w-full border-[#34446D] border-solid xl:border border-b border-0">
-                                    </div>
-                                    <div
-                                        ref={(el) => {
-                                            if (!el) return
-                                            sliders.current.push(el)
-                                        }}
-                                        className={`absolute wrapper-slide top-0  w-full h-full pointer-events-none`}>
+                    <div className={`overlay `}>
+                        <div className={`overlay-slider`}></div>
 
-                                        <div className="flex flex-col xl:gap-[15px] h-full  w-full">
-                                            <span className="xl:text-[24px] text-[18px] font-bold text-[#000000] block  flex items-center justify-center xl:p-[10px] xl:h-[50px] h-[65px] relative text-center p-[15px] w-full  border border-solid border-[transparent] relative z-[10]">
-                                                {
-                                                    filterPrepositions(slidesLang[activeIndex].title)
-                                                }
-                                            </span>
-                                            <p className={`grow slide-text xl:p-0 p-[20px] relative w-full h-full text-[16px] bg-[#FFF] `}>
+                        <div className=" grow relative w-full overflow-hidden">
+                            <div className="absolute z-[-1] xl:h-[50px] h-[65px] bg-[#d6dae2] xl:rounded-[4px]  w-full border-[#34446D] border-solid xl:border border-b border-0">
+                            </div>
+                            <div
+                                ref={slider}
+                                className={`absolute wrapper-slide top-0  w-full h-full pointer-events-none`}>
 
-                                                {filterPrepositions(slidesLang[activeIndex].text)}
+                                <div className="flex flex-col xl:gap-[15px] h-full  w-full">
+                                    <span className="xl:text-[24px] text-[18px] font-bold text-[#000000] block  flex items-center justify-center xl:p-[10px] xl:h-[50px] h-[65px] relative text-center p-[15px] w-full  border border-solid border-[transparent] relative z-[10]">
+                                        {
+                                            filterPrepositions(slidesLang[activeIndex].title)
+                                        }
+                                    </span>
+                                    <p className={`grow slide-text xl:p-0 p-[20px] relative w-full h-full text-[16px] bg-[#FFF] `}>
 
-                                            </p>
-                                        </div>
+                                        {filterPrepositions(slidesLang[activeIndex].text)}
 
-                                    </div>
-
+                                    </p>
                                 </div>
-                                <div className="justify-between items-end w-full relative z-[10] xl:flex hidden">
-                                    <div className="flex gap-[10px]">
-                                        <div
-                                            ref={setWrapperRef}
-                                            className="tariff-wrap w-[100px]">
-                                            <button
-                                                ref={setButtonRef}
-                                                aria-label="previous slide" data-slider="button-prev"
-                                                className="tariff hover:bg-[#34446D] group h-[50px] rounded-[4px] border-[#34446D] border border-solid flex items-center justify-center">
 
-                                                <svg className='group-hover:*:*:fill-[#FFF] *:*:transition-all *:*:duration-300' xmlns="http://www.w3.org/2000/svg" width="46" height="38" viewBox="0 0 46 38" fill="none">
-                                                    <path d="M24.4482 34.9009H28.7887" stroke="#424242" strokeWidth="0.600425" strokeLinecap="round" />
-                                                    <path d="M24.4482 3.02588L28.7887 3.02588" stroke="#424242" strokeWidth="0.600425" strokeLinecap="round" />
-                                                    <g filter="url(#filter0_d_1459_643)">
-                                                        <path d="M30.1421 2H23.8391L10.1421 18.962L23.8391 35.9239H30.1421L16.4451 18.962L30.1421 2Z" fill="#34446D" />
-                                                    </g>
-                                                    <defs>
-                                                        <filter id="filter0_d_1459_643" x="7" y="0" width="27" height="38" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                                                            <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                                                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5 0" result="hardAlpha" />
-                                                            <feOffset dx="1" dy="0" />
-                                                            <feGaussianBlur stdDeviation="0.723404" />
-                                                            <feComposite in2="hardAlpha" operator="out" />
-                                                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0" />
-                                                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1459_613" />
-                                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1459_613" result="shape" />
-                                                        </filter>
-                                                    </defs>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <div
-                                            ref={setWrapperRef}
-                                            className="tariff-wrap w-[100px]">
-                                            <button
-                                                ref={setButtonRef}
-                                                aria-label="previous slide" data-slider="button-next"
-                                                className=" tariff group hover:bg-[#34446D] h-[50px] rounded-[4px] border-[#34446D] border border-solid flex items-center justify-center">
-
-                                                <svg className='rotate-[180deg] group-hover:*:*:fill-[#FFF] *:*:transition-all *:*:duration-300' xmlns="http://www.w3.org/2000/svg" width="46" height="38" viewBox="0 0 46 38" fill="none">
-                                                    <path d="M24.4482 34.9009H28.7887" stroke="#424242" strokeWidth="0.600425" strokeLinecap="round" />
-                                                    <path d="M24.4482 3.02588L28.7887 3.02588" stroke="#424242" strokeWidth="0.600425" strokeLinecap="round" />
-                                                    <g filter="url(#filter0_d_1459_613)">
-                                                        <path d="M30.1421 2H23.8391L10.1421 18.962L23.8391 35.9239H30.1421L16.4451 18.962L30.1421 2Z" fill="#34446D" />
-                                                    </g>
-                                                    <defs>
-                                                        <filter id="filter0_d_1459_613" x="7" y="0" width="27" height="38" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                                                            <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                                                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5 0" result="hardAlpha" />
-                                                            <feOffset dx="1" dy="0" />
-                                                            <feGaussianBlur stdDeviation="0.723404" />
-                                                            <feComposite in2="hardAlpha" operator="out" />
-                                                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0" />
-                                                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1459_613" />
-                                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1459_613" result="shape" />
-                                                        </filter>
-                                                    </defs>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div className="flex item-center text-[40px] font-[300] text-[#34446D] ">
-                                        <div className="h-[40px] overflow-hidden">
-                                            <div className="count-column rubik">
-                                                <h3 data-slide-count="step" className="count-heading ">01</h3>
-                                            </div>
-                                        </div>
-                                        <span className='leading-[1] rubik'>/</span>
-                                        <div className="count-column ">
-                                            <h3 data-slide-count="total" className="count-heading rubik">{slides.length}</h3>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
                         </div>
+                        <div className="slider__navigations">
+                            <div className="flex gap-[10px]">
+                                <div
+                                    ref={setWrapperRef}
+                                    className="tariff-wrap w-[100px]">
+                                    <button
+                                        ref={setButtonRef}
+                                        aria-label="previous slide" data-slider="button-prev"
+                                        className="tariff item group">
 
-                        <div className="tariff-wrap xl:w-[252px] w-full" ref={setWrapperRef}>
-                            <button
-                                onClick={() => { openDefaultModal('introForm') }}
-                                ref={setButtonRef} className='justify-center m:flex items-center px-[16px] py-[9px] relative overflow-hidden btnIconAn doc-btn  border-[#34446D] border border-solid tariff text-[20px] transition-all duration-300 font-bold tracking-normal  gap-[6px]  text-[#34446D] hover:text-[#FFF] rounded-[4px]  group hover:bg-[#34446D]   leading-[1]'>
-                                <span className="xl:block hidden sendIconLeft transition-all ease-in">
-                                    <svg className='group-hover:*:fill-[#FFF] rotate-[45deg] *:transition-all *:duration-300' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M29.0627 0.9375L0.930664 12.1875L11.426 16.9336L26.2502 3.75L13.0666 18.5742L17.8127 29.0625L29.0627 0.9375Z" fill="#34446D" />
-                                    </svg>
-                                </span>
-                                <span
-                                    className="transition-all ease-in sendText"
-                                >Оформить заявку</span>
+                                        <svg className='group-hover:*:*:fill-[#FFF] *:*:transition-all *:*:duration-300' xmlns="http://www.w3.org/2000/svg" width="46" height="38" viewBox="0 0 46 38" fill="none">
+                                            <path d="M24.4482 34.9009H28.7887" stroke="#424242" strokeWidth="0.600425" strokeLinecap="round" />
+                                            <path d="M24.4482 3.02588L28.7887 3.02588" stroke="#424242" strokeWidth="0.600425" strokeLinecap="round" />
+                                            <g filter="url(#filter0_d_1459_643)">
+                                                <path d="M30.1421 2H23.8391L10.1421 18.962L23.8391 35.9239H30.1421L16.4451 18.962L30.1421 2Z" fill="#34446D" />
+                                            </g>
+                                            <defs>
+                                                <filter id="filter0_d_1459_643" x="7" y="0" width="27" height="38" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                                                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5 0" result="hardAlpha" />
+                                                    <feOffset dx="1" dy="0" />
+                                                    <feGaussianBlur stdDeviation="0.723404" />
+                                                    <feComposite in2="hardAlpha" operator="out" />
+                                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0" />
+                                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1459_613" />
+                                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1459_613" result="shape" />
+                                                </filter>
+                                            </defs>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div
+                                    ref={setWrapperRef}
+                                    className="tariff-wrap w-[100px]">
+                                    <button
+                                        ref={setButtonRef}
+                                        aria-label="previous slide" data-slider="button-next"
+                                        className=" tariff item group">
 
-                            </button>
+                                        <svg className='rotate-[180deg] group-hover:*:*:fill-[#FFF] *:*:transition-all *:*:duration-300' xmlns="http://www.w3.org/2000/svg" width="46" height="38" viewBox="0 0 46 38" fill="none">
+                                            <path d="M24.4482 34.9009H28.7887" stroke="#424242" strokeWidth="0.600425" strokeLinecap="round" />
+                                            <path d="M24.4482 3.02588L28.7887 3.02588" stroke="#424242" strokeWidth="0.600425" strokeLinecap="round" />
+                                            <g filter="url(#filter0_d_1459_613)">
+                                                <path d="M30.1421 2H23.8391L10.1421 18.962L23.8391 35.9239H30.1421L16.4451 18.962L30.1421 2Z" fill="#34446D" />
+                                            </g>
+                                            <defs>
+                                                <filter id="filter0_d_1459_613" x="7" y="0" width="27" height="38" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                                                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5 0" result="hardAlpha" />
+                                                    <feOffset dx="1" dy="0" />
+                                                    <feGaussianBlur stdDeviation="0.723404" />
+                                                    <feComposite in2="hardAlpha" operator="out" />
+                                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0" />
+                                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1459_613" />
+                                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1459_613" result="shape" />
+                                                </filter>
+                                            </defs>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="flex item-center text-[40px] font-[300] text-[#34446D] ">
+                                <div className="h-[40px] overflow-hidden">
+                                    <div className="count-column rubik">
+                                        <h3 data-slide-count="step" className="count-heading ">01</h3>
+                                    </div>
+                                </div>
+                                <span className='leading-[1] rubik'>/</span>
+                                <div className="count-column ">
+                                    <h3 data-slide-count="total" className="count-heading rubik">{slides.length}</h3>
+                                </div>
+                            </div>
                         </div>
 
-                        <div
 
-                            className="slide-main xl:inset-[0%] xl:h-[100%] h-[220px] top-0 z-0">
+                    </div>
 
-                            <div className="slider-wrap">
-                                <div ref={whiteBgRef} className={`xl:opacity-100 opacity-0 slide-blur xl:left-[562px] left-0 `}>
-                                    <span className="line hidden xl:block white" style={{ '--blur': '4px', '--lightness': '100%' } as React.CSSProperties}></span>
-                                    <span className="line" style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
-                                    <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
-                                    <span className="line" style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>
-                                </div>
+                    <div className="tariff-wrap xl:w-[252px] w-full" ref={setWrapperRef}>
+                        <button
+                            onClick={() => { openDefaultModal('introForm') }}
+                            ref={setButtonRef} className='slider__button group btnIconAn doc-btn tariff'>
+                            <span className="sendIconLeft">
+                                <svg className='group-hover:*:fill-[#FFF] rotate-[45deg] *:transition-all *:duration-300' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M29.0627 0.9375L0.930664 12.1875L11.426 16.9336L26.2502 3.75L13.0666 18.5742L17.8127 29.0625L29.0627 0.9375Z" fill="#34446D" />
+                                </svg>
+                            </span>
+                            <span
+                                className="sendText"
+                            >Оформить заявку</span>
+
+                        </button>
+                    </div>
+
+                    <div
+
+                        className="slide-main">
+
+                        <div className="slider-wrap">
+                            <div ref={whiteBgRef} className={`slide-blur xl:left-[562px] left-0 `}>
+                                <span className="line hidden xl:block white" style={{ '--blur': '4px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className="line" style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className="line" style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>
+                            </div>
 
 
-                                <div className="xl:opacity-100 opacity-0 slide-blur right-0">
-                                    <span className="line" style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>
-                                    <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
-                                    <span className="line" style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
-                                </div>
-                                <div data-slider="list" className={`slider-list`}
-                                    onMouseMove={() => {
-                                    }}
-                                >
+                            <div className="slide-blur right-0">
+                                <span className="line" style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className="line" style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
+                            </div>
+                            <div data-slider="list" className={`slider-list`}
+                                onMouseMove={() => {
+                                }}
+                            >
 
 
-                                    {
-                                        slides.map((item, index) => (
-                                            <div
-                                                key={index} data-slider="slide" className="slider-slide xl:min-w-[336px] xl:max-w-[336px] xl:h-[336px] min-w-[220px] max-w-[220px] h-[220px] shadow-[0px_0px_4px_0px_#00000080] rounded-[8px] border border-solid border-[#FFF]">
-                                                <div className="slide-inner relative bg-[#FFF] overflow-hidden rounded-[8px]">
-                                                    <Image src={item.img} alt='slide' fill
-                                                        style={{ objectFit: 'cover' }} />
-                                                    <div className="absolute scale-[-0.9] w-full h-auto bg-[#34446D] mix-blend-hue"></div>
+                                {
+                                    slides.map((item, index) => (
+                                        <div
+                                            key={index} data-slider="slide" className="slider-slide xl:min-w-[336px] xl:max-w-[336px] xl:h-[336px] min-w-[220px] max-w-[220px] h-[220px] shadow-[0px_0px_4px_0px_#00000080] rounded-[8px] border border-solid border-[#FFF]">
+                                            <div className="slide-inner relative bg-[#FFF] overflow-hidden rounded-[8px]">
+                                                <Image src={item.img} alt='slide' fill
+                                                    style={{ objectFit: 'cover' }} />
+                                                <div className="absolute scale-[-0.9] w-full h-auto bg-[#34446D] mix-blend-hue"></div>
 
-                                                </div>
                                             </div>
-                                        ))
-                                    }
-                                </div>
+                                        </div>
+                                    ))
+                                }
                             </div>
                         </div>
                     </div>

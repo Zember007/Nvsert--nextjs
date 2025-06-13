@@ -10,7 +10,7 @@
 
 @import 'sections/main/main-adv';
 @import 'sections/main/main-spoiler';
-@import 'sections/main/main-gallery';
+@import 'sections/main/main-skills';
 
 
 .bg-secondary {
@@ -34,13 +34,14 @@ $wall__line_bd-cr: hsl(0deg 0% 100% / 0%);
 $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
 
 .slide-blur {
+  @apply xl:flex hidden;
   position: absolute;
   top: 0;
   bottom: 0;
   height: 100%;
   pointer-events: none;
   z-index: 1;
-  display: flex;
+
 
   .line {
     background-color: $wall__line_bd-cr;
@@ -78,7 +79,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   height: 50px;
 
   .sendIconLeft {
-    @apply transition-all ease-in;
+    @apply transition-all ease-in xl:block hidden;
     position: absolute;
     left: 0;
     transform: translateX(-100%);
@@ -122,6 +123,44 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
         left: 10px;
         opacity: 1;
       }
+    }
+  }
+}
+
+.section {
+  @apply py-[40px] s:py-[75px] relative flex flex-col gap-[40px];
+
+
+  &__title {
+    @apply leading-[1] tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px];
+  }
+}
+
+.slide-dots {
+  @apply w-[10px] h-[10px] border border-solid border-[#34446D] rounded-full;
+
+  &.active {
+    @apply bg-[#34446D];
+  }
+
+  &-box {
+    @apply flex xl:hidden mx-auto justify-center flex-wrap px-[20px];
+  }
+}
+
+.main {
+  &__input {
+    background: #2a2a2a !important;
+
+
+    &:focus {
+      background: #21262F !important;
+    }
+
+    &:not(:placeholder-shown) {
+      background: #21262F !important;
+
+
     }
   }
 }

@@ -1,4 +1,5 @@
 .cloneable {
+  @apply xl:flex-row flex-col xl:gap-0 gap-[30px] xl:pt-0 pt-[240px];
   justify-content: space-between;
   align-items: end;
   display: flex;
@@ -6,11 +7,8 @@
 }
 
 .overlay {
-
+  @apply xl:w-[642px] xl:h-[447px] h-[630px] w-full xl:p-[30px] xl:pr-[76px] relative z-[0] rounded-[8px] border border-solid border-[#34446D] overflow-hidden flex flex-col justify-between xl:items-start items-center w-full;
   z-index: 2;
-  justify-content: flex-start;
-  align-items: center;
-  display: flex;
   inset: 0% auto 0% 0%;
   background: linear-gradient(270deg, rgba(245, 245, 245, 0) 0%, #FFF 76px);
 
@@ -72,9 +70,9 @@
 
 
 .slide-main {
+  @apply xl:inset-[0%] xl:h-[100%] h-[220px] top-0 z-0;
   width: 100%;
   position: absolute;
-  top: 0;
   overflow: hidden;
 }
 
@@ -90,7 +88,7 @@
 
 
 .overlay-slider {
-  @apply absolute top-0 right-[76px] left-0 bottom-0 z-[-2] transition-all duration-300;
+  @apply absolute top-0 xl:right-[76px] left-0 bottom-0 z-[-2] transition-all duration-300 ;
   background: url(../../../images/svg/functional/bg-slider.svg);
   background-size: cover;
   backdrop-filter: blur(1px);
@@ -167,6 +165,20 @@
     touch-action: pan-y;
     -webkit-tap-highlight-color: transparent;
     position: relative;
+  }
+}
+
+.slider {
+  &__navigations {
+    @apply justify-between items-end w-full relative z-[10] xl:flex hidden;
+
+    .item {
+      @apply hover:bg-[#34446D]  h-[50px] rounded-[4px] border-[#34446D] border border-solid flex items-center justify-center
+    }
+  }
+
+  &__button {
+    @apply justify-center m:flex items-center px-[16px] py-[9px] relative overflow-hidden   border-[#34446D] border border-solid  text-[20px] transition-all duration-300 font-bold tracking-normal  gap-[6px]  text-[#34446D] hover:text-[#FFF] rounded-[4px]   hover:bg-[#34446D]   leading-[1];
   }
 }
 

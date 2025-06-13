@@ -150,10 +150,9 @@ const AppMainFeedback = () => {
 
 
     return (
-        <section className="py-[40px] s:py-[75px]">
+        <section className="section wrapper">
 
-            <div className="wrapper flex flex-col gap-[40px]">
-                <h2 className="leading-[1] tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px]">{t('MainFeedback.title')}</h2>
+                <h2 className="section__title">{t('MainFeedback.title')}</h2>
                 <PhotoProvider maskOpacity={0.4} maskClassName="blurred-mask"
                     speed={() => 0}
 
@@ -162,7 +161,7 @@ const AppMainFeedback = () => {
                 >
                     <div ref={ref} className="relative flex flex-col gap-[20px] xl:overflow-hidden feedback-slider-box">
 
-                        <div className="slide-blur left-0 opacity-0 xl:opacity-100">
+                        <div className="slide-blur left-0">
                             <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
                             <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
                             <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
@@ -187,9 +186,9 @@ const AppMainFeedback = () => {
 
                             </div>
 
-                            <div className="flex mx-auto xl:hidden justify-center flex-wrap px-[20px]">
+                            <div className="slide-dots-box">
                                 {[...Array(19)].map((_, i) => (
-                                    <div key={i} className={`${activeIndex === i ? 'bg-[#34446D]' : ""} w-[10px] h-[10px] border border-solid border-[#34446D] rounded-full`}></div>
+                                    <div key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
                                 ))}
                             </div>
                         </div>
@@ -211,15 +210,15 @@ const AppMainFeedback = () => {
 
                             </div>
 
-                            <div className="flex justify-center flex-wrap mx-auto xl:hidden px-[20px]">
+                            <div className="slide-dots-box">
                                 {[...Array(19)].map((_, i) => (
-                                    <div key={i} className={`${activeIndex1 === i ? 'bg-[#34446D]' : ""} w-[10px] h-[10px] border border-solid border-[#34446D] rounded-full`}></div>
+                                    <div key={i} className={`${activeIndex1 === i ? 'active' : ""} slide-dots`}></div>
                                 ))}
                             </div>
                         </div>
 
 
-                        <div className=" opacity-0 xl:opacity-100 slide-blur right-0 ">
+                        <div className="slide-blur right-0 ">
                             <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
                             <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
                             <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
@@ -227,7 +226,6 @@ const AppMainFeedback = () => {
 
                     </div>
                 </PhotoProvider>
-            </div>
         </section>
 
     );

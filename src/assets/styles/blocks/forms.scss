@@ -131,6 +131,7 @@ input:auto-fill {
       max-width: calc(100% - 40px);
       overflow: hidden;
       text-overflow: ellipsis;
+
       @media (max-width: $media-s) {
         font-size: 14px;
         top: 30px;
@@ -393,5 +394,15 @@ input:-webkit-autofill:focus {
       animation-fill-mode: forwards;
       transition: transform 0.2s ease;
     }
+  }
+}
+
+.form {
+  &__desc {
+    @apply text-[#CCCCCC] s:mt-[7px] text-[11px] s:text-[13px];
+  }
+
+  &__button {
+    @apply overflow-hidden p-[9px] px-[20px] relative flex items-center justify-center bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold rounded-[4px];
   }
 }

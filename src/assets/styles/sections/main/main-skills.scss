@@ -1,0 +1,20 @@
+.skills {
+    &__wrapper {
+        @apply flex flex-col;
+
+        &-desc {
+            @apply text-[18px] leading-[1.5] mt-[40px];
+        }
+
+        &-move {
+            @apply flex items-center gap-[8px] mt-[28px];
+
+            span {
+                @apply text-[20px] font-bold;
+            }
+        }
+    }
+    &__box {
+        @apply flex xl:grid grid-cols-4 gap-[10px] xl:gap-[20px];
+    }
+}
