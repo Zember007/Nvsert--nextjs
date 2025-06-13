@@ -10,7 +10,6 @@ import { usePathname } from "next/navigation";
 import { disableOverflow, enableOverflow } from "@/store/body";
 import { useHeaderContext } from "../contexts/HeaderContext";
 import AppMenuItem from "./AppMenuItem";
-import { useSimpleBar } from "../contexts/SimpleBarContext";
 import useBackgroundBrightness from "@/hook/useBackgroundBrightness";
 import { filterPhone } from "@/hook/filter";
 import { useButton } from "@/hook/useButton";
@@ -32,7 +31,6 @@ const AppHeader = () => {
   const headerRef = useRef<null | HTMLElement>(null)
 
   const { setButtonRef, setWrapperRef } = useButton()
-
 
   const { t } = useTranslation();
 
@@ -93,11 +91,10 @@ const AppHeader = () => {
   }, [pathname]);
 
 
-  const { simpleBar } = useSimpleBar()
 
 
 
-  useBackgroundBrightness({ simpleBar, headerRef })
+  useBackgroundBrightness({ headerRef })
 
   useEffect(() => {
     if (servicesMenuActive) {

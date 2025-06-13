@@ -4,10 +4,9 @@ import { useEffect, RefObject } from 'react';
 
 interface UseBackgroundBrightnessProps {
   headerRef: RefObject<HTMLElement | null>;
-  simpleBar: any;
 }
 
-const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightnessProps) => {
+const useBackgroundBrightness = ({ headerRef }: UseBackgroundBrightnessProps) => {
 
   const pathname = usePathname()
 
@@ -15,7 +14,7 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
 
   const updateTextColor = () => {
     const element = headerRef.current;
-    if (!element || !simpleBar) return;
+    if (!element) return;
 
     const rect = element.getBoundingClientRect();
 
@@ -35,10 +34,10 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
 
     for (const { x, y } of points) {
       // Корректировка координат относительно simpleBar
-      const scrollContainer = simpleBar.getScrollElement();
-      const scrollRect = scrollContainer.getBoundingClientRect();
-      const adjustedX = x - scrollRect.left;
-      const adjustedY = y - scrollRect.top;
+      // const scrollContainer = window;
+      // const scrollRect = scrollContainer.getBoundingClientRect();
+      // const adjustedX = x - scrollRect.left;
+      // const adjustedY = y - scrollRect.top;
 
 
 
@@ -71,28 +70,28 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
           (bgColor.includes('rgba') && parseFloat(bgColor.split(',')[3]) <= 0.5)
         ) {
           // Проверяем фоновое изображение
-          const bgImage = computedStyle.backgroundImage;
-          if (bgImage && bgImage !== 'none') {
-            getColorFromBackgroundImage(underlyingElement, adjustedX, adjustedY).then((color) => {
-              if (color) {
-                bgColor = color;
-                const rgb = bgColor.match(/\d+/g);
-                if (rgb) {
-                  const r = parseInt(rgb[0], 10);
-                  const g = parseInt(rgb[1], 10);
-                  const b = parseInt(rgb[2], 10);
-                  brightness = 0.299 * r + 0.587 * g + 0.114 * b;
-                  validColorFound = true;
+          // const bgImage = computedStyle.backgroundImage;
+          // if (bgImage && bgImage !== 'none') {
+          //   // getColorFromBackgroundImage(underlyingElement, adjustedX, adjustedY).then((color) => {
+          //   //   if (color) {
+          //   //     bgColor = color;
+          //   //     const rgb = bgColor.match(/\d+/g);
+          //   //     if (rgb) {
+          //   //       const r = parseInt(rgb[0], 10);
+          //   //       const g = parseInt(rgb[1], 10);
+          //   //       const b = parseInt(rgb[2], 10);
+          //   //       brightness = 0.299 * r + 0.587 * g + 0.114 * b;
+          //   //       validColorFound = true;
 
-                  if (validColorFound && element) {
-                    element.classList.toggle('black', brightness > 128);
+          //   //       if (validColorFound && element) {
+          //   //         element.classList.toggle('black', brightness > 128);
 
-                  }
-                }
-              }
-            });
-            if (validColorFound) break;
-          }
+          //   //       }
+          //   //     }
+          //   //   }
+          //   // });
+          //   if (validColorFound) break;
+          // }
 
           // Поднимаемся по DOM-дереву
           let parent: HTMLElement | null = underlyingElement.parentElement;
@@ -164,44 +163,44 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
   };
 
   // Функция для получения цвета из фонового изображения
-  const getColorFromBackgroundImage = async (element: Element, x: number, y: number): Promise<string | null> => {
-    try {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return null;
+  // const getColorFromBackgroundImage = async (element: Element, x: number, y: number): Promise<string | null> => {
+  //   try {
+  //     const canvas = document.createElement('canvas');
+  //     const ctx = canvas.getContext('2d');
+  //     if (!ctx) return null;
 
-      const img = new Image();
-      const bgImage = window.getComputedStyle(element).backgroundImage;
+  //     const img = new Image();
+  //     const bgImage = window.getComputedStyle(element).backgroundImage;
 
-      const urlMatch = bgImage.match(/url\(["']?([^"']*)["']?\)/);
-      if (!urlMatch) return null;
+  //     const urlMatch = bgImage.match(/url\(["']?([^"']*)["']?\)/);
+  //     if (!urlMatch) return null;
 
-      img.crossOrigin = 'Anonymous';
-      img.src = urlMatch[1];
+  //     img.crossOrigin = 'Anonymous';
+  //     img.src = urlMatch[1];
 
-      await new Promise<void>((resolve, reject) => {
-        img.onload = () => resolve();
-        img.onerror = () => reject();
-      });
+  //     await new Promise<void>((resolve, reject) => {
+  //       img.onload = () => resolve();
+  //       img.onerror = () => reject();
+  //     });
 
-      canvas.width = 1;
-      canvas.height = 1;
-      ctx.drawImage(img, 0, 0, 1, 1);
-      const pixel = ctx.getImageData(0, 0, 1, 1).data;
-      return `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
-    } catch (e) {
-      console.error('Error processing background image:', e);
-      return null;
-    }
-  };
+  //     canvas.width = 1;
+  //     canvas.height = 1;
+  //     ctx.drawImage(img, 0, 0, 1, 1);
+  //     const pixel = ctx.getImageData(0, 0, 1, 1).data;
+  //     return `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
+  //   } catch (e) {
+  //     console.error('Error processing background image:', e);
+  //     return null;
+  //   }
+  // };
 
   useEffect(() => {
     const element = headerRef.current;
-    if (!element || !simpleBar) return;
+    if (!element) return;
 
 
 
-    const scrollContainer = simpleBar.getScrollElement();
+    const scrollContainer = window;
     let timeoutId: NodeJS.Timeout | null = null;
     scrollContainer.addEventListener('scroll', () => {
 
@@ -225,7 +224,7 @@ const useBackgroundBrightness = ({ headerRef, simpleBar }: UseBackgroundBrightne
         scrollContainer.removeEventListener('scroll', updateTextColor);
       }
     };
-  }, [headerRef, simpleBar]);
+  }, [headerRef]);
 
   useEffect(() => {
     updateTextColor()
