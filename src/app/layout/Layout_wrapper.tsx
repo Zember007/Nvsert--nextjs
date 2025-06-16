@@ -117,29 +117,38 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
         window.addEventListener('wheel', handleWheel, { passive: false });
 
         let isTicking = false;
+        let isDragging = false;
+        let startY = 0;
+        let startScrollTop = 0;
 
-        const customScrollController = () => {
-            const scrollTop = window.scrollY || window.pageYOffset;
-            const scrollHeight = document.documentElement.scrollHeight;
-            const clientHeight = window.innerHeight || document.documentElement.clientHeight;
-            const maxScroll = scrollHeight - clientHeight;
+        const scrollbar = scrollbarRef.current;
 
-            // Процент прокрутки
-            const scrollPercent = maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0;
+        if (!scrollbar) return
 
-            // Высота ползунка относительно видимой области
-            const scrollbarHeight = (clientHeight / scrollHeight) * clientHeight;
-            // Позиция ползунка, учитывающая его высоту
-            const maxTop = clientHeight - scrollbarHeight; // Максимальная позиция top
-            const topPercent = maxScroll > 0 ? (scrollTop / maxScroll) * maxTop : 0;
+        // Обновление позиции и высоты ползунка при прокрутке
+        function updateScrollbar() {
+            if (!isDragging) {
+                const scrollTop = window.scrollY || window.pageYOffset;
+                const scrollHeight = document.documentElement.scrollHeight;
+                const clientHeight = window.innerHeight || document.documentElement.clientHeight;
+                const maxScroll = scrollHeight - clientHeight;
 
-            // Обновляем CSS-переменные
-            scrollbarRef.current?.style.setProperty('--scrollY', `${topPercent}px`);
-            scrollbarRef.current?.style.setProperty('--scrollbarHeight', `${scrollbarHeight}px`);
+                // Процент прокрутки
+                const scrollPercent = maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0;
 
-            isTicking = false;
+                // Высота ползунка
+                const scrollbarHeight = (clientHeight / scrollHeight) * clientHeight;
+                // Позиция ползунка
+                const maxTop = clientHeight - scrollbarHeight;
+                const topPercent = maxScroll > 0 ? (scrollTop / maxScroll) * maxTop : 0;
+
+                // Обновляем CSS-переменные
+                scrollbar.style.setProperty('--scrollY', `${topPercent}px`);
+                scrollbar.style.setProperty('--scrollbarHeight', `${scrollbarHeight}px`);
+            }
         }
 
+        // Обработчик прокрутки
         window.addEventListener('scroll', () => {
 
             if (!isScrolling) {
@@ -148,12 +157,79 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
             }
 
             if (!isTicking) {
-                requestAnimationFrame(customScrollController);
+                requestAnimationFrame(() => {
+                    updateScrollbar();
+                    isTicking = false;
+                });
                 isTicking = true;
             }
         });
 
-        customScrollController()
+        // Обработчики для мыши
+        scrollbar.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startY = e.clientY;
+            startScrollTop = window.scrollY || window.pageYOffset;
+            e.preventDefault(); // Предотвращаем выделение текста
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+
+            const scrollHeight = document.documentElement.scrollHeight;
+            const clientHeight = window.innerHeight || document.documentElement.clientHeight;
+            const maxScroll = scrollHeight - clientHeight;
+            const scrollbarHeight = (clientHeight / scrollHeight) * clientHeight;
+            const maxTop = clientHeight - scrollbarHeight;
+
+            // Вычисляем смещение
+            const deltaY = e.clientY - startY;
+            const scrollDelta = (deltaY / maxTop) * maxScroll;
+
+            // Прокручиваем страницу
+            window.scrollTo({
+                top: startScrollTop + scrollDelta,
+                behavior: 'auto'
+            });
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // Обработчики для сенсорных устройств
+        scrollbar.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            startY = e.touches[0].clientY;
+            startScrollTop = window.scrollY || window.pageYOffset;
+            e.preventDefault();
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+
+            const scrollHeight = document.documentElement.scrollHeight;
+            const clientHeight = window.innerHeight || document.documentElement.clientHeight;
+            const maxScroll = scrollHeight - clientHeight;
+            const scrollbarHeight = (clientHeight / scrollHeight) * clientHeight;
+            const maxTop = clientHeight - scrollbarHeight;
+
+            // Вычисляем смещение
+            const deltaY = e.touches[0].clientY - startY;
+            const scrollDelta = (deltaY / maxTop) * maxScroll;
+
+            // Прокручиваем страницу
+            window.scrollTo({
+                top: startScrollTop + scrollDelta,
+                behavior: 'auto'
+            });
+        });
+
+        document.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+
+        updateScrollbar()
 
         return () => {
             window.removeEventListener('wheel', handleWheel);
