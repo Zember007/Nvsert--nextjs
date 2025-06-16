@@ -305,15 +305,15 @@
     }
 }
 
-.tariff:not(.no-light)::before {
-    background: radial-gradient(150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, var(--menu-item-opacity-light)), transparent 60%);
-    border-radius: inherit;
-    content: "";
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    z-index: -1;
-}
+// .tariff:not(.no-light)::before {
+//     background: radial-gradient(150px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, var(--menu-item-opacity-light)), transparent 60%);
+//     border-radius: inherit;
+//     content: "";
+//     position: absolute;
+//     inset: 0;
+//     opacity: 0;
+//     z-index: -1;
+// }
 
 .tariff:hover::before,
 .tariff:hover::after {
@@ -358,7 +358,7 @@
 .tariff:active,
 .tariff.fast-click {
     box-shadow: inset 2px 2px 4px 0 #34446D,
-        inset -2px -2px 4px 0 #34446D;
+        inset -2px -2px 4px 0 hsl(223, 35%, 32%);
     transform: scale(0.9) rotateY(var(--y)) translateZ(10px) !important;
 }
 
