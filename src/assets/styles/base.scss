@@ -362,8 +362,29 @@
     transform: scale(0.9) rotateY(var(--y)) translateZ(10px) !important;
 }
 
-body::-webkit-scrollbar {
-    display: none;
+body {
+    --scrollY: 0%;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    &::before {
+        content: '';
+        z-index: 1000;
+        position: fixed;
+        top: var(--scrollY);
+        right: 2px;
+        width: 10px;
+        height: 20px;
+        background: rgba(52, 68, 109, 0.2);
+        border: 1px solid #93969D ;
+        border-radius: 3px;
+        transition: background 0.2s;
+        &:hover {
+            background: rgba(52, 68, 109, 0.5);
+        }
+    }
 }
 
 
@@ -464,37 +485,6 @@ input:-webkit-autofill {
 
 
 
-.simplebar-scrollbar:before {
-    background: rgba(52, 68, 109, 0.2) !important;
-    border: 1px solid #93969D !important;
-    border-radius: 3px !important;
-    transition: background .2s linear !important;
-    opacity: 1 !important;
-}
-
-.simplebar-dragging .simplebar-scrollbar:before,
-.simplebar-hover .simplebar-scrollbar:before {
-    background: rgba(52, 68, 109, 0.5) !important;
-}
-
-.simplebar-track.simplebar-vertical {
-    width: 13px !important
-}
-
-.simplebar-track {
-    right: 1px !important;
-}
-
-[data-simplebar].simplebar-dragging,
-[data-simplebar].simplebar-dragging .simplebar-content {
-    pointer-events: visible !important;
-    -webkit-touch-callout: auto !important;
-    -webkit-user-select: auto !important;
-    -khtml-user-select: auto !important;
-    -moz-user-select: auto !important;
-    -ms-user-select: auto !important;
-    user-select: auto !important;
-}
 
 .canvas_block {
     position: fixed;

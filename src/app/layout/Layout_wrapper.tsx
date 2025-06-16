@@ -23,7 +23,6 @@ gsap.registerPlugin(ScrollTrigger);
 const Layout_wrapper = ({ children }: { children: ReactNode }) => {
     const dispatch = useDispatch<AppDispatch>();
     const pathname = usePathname();
-    const simpleBarRef = useRef<any>(null);
 
     const metadata = useSelector((state: RootState) => state.metadata);
     const { transparent, setDefaultModalActive, defaultModalActive, defaultModalName, resetCountModal, defaultModalCount } = useHeaderContext();
@@ -81,14 +80,9 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
         let targetScroll = 0;
         let isScrolling = false;
 
-
-
-
-
+        // Инициализируем текущую прокрутку
         const initScroll = () => {
-            const scrollTop = window.scrollY;
-
-            currentScroll = scrollTop;
+            currentScroll = window.scrollY;
             targetScroll = currentScroll;
         };
 
@@ -99,21 +93,17 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
                 return;
             }
             currentScroll += diff * 0.2;
-
-            window.scrollTo({ top: currentScroll });
-
+            window.scrollTo(0, currentScroll);
             requestAnimationFrame(smoothScroll);
         };
 
         const handleWheel = (e: WheelEvent) => {
             e.preventDefault();
             targetScroll += e.deltaY;
-            const scrollHeight = document.documentElement.scrollHeight;
-            const clientHeight = document.documentElement.clientHeight;
-            
-                const maxScroll = scrollHeight - clientHeight;
-                targetScroll = Math.max(0, Math.min(targetScroll, maxScroll));
-            
+
+            // Ограничим targetScroll в пределах документа
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            targetScroll = Math.max(0, Math.min(targetScroll, maxScroll));
 
             if (!isScrolling) {
                 isScrolling = true;
@@ -121,21 +111,36 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
             }
         };
 
-        const handleScroll = () => {
+        initScroll();
+        window.addEventListener('wheel', handleWheel, { passive: false });
+
+        let isTicking = false;
+        window.addEventListener('scroll', () => {
+
+            if (!isScrolling) {
                 currentScroll = window.scrollY;
                 targetScroll = currentScroll;
-        };
+            }
 
-        initScroll();
-
-            window.addEventListener('wheel', handleWheel, { passive: false });
-            window.addEventListener('scroll', handleScroll);
+            if (!isTicking) {
+                requestAnimationFrame(() => {
+                    const scrollTop = window.scrollY || window.pageYOffset;
+                    const scrollHeight = document.documentElement.scrollHeight;
+                    const clientHeight = window.innerHeight || document.documentElement.clientHeight;
+                    const maxScroll = scrollHeight - clientHeight;
+                    const percent = maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0;
+                    document.body.style.setProperty('--scrollY', `${percent}%`);
+                    isTicking = false;
+                });
+                isTicking = true;
+            }
+        });
 
         return () => {
-                window.removeEventListener('wheel', handleWheel);
-                window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('wheel', handleWheel);
+            window.removeEventListener('scroll', () => { });
         };
-    }, [simpleBarRef])
+    }, [])
 
     const [classBody, setClassBody] = useState('transparent-header');
 
