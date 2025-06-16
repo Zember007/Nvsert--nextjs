@@ -127,25 +127,19 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
 
         // Обновление позиции и высоты ползунка при прокрутке
         function updateScrollbar() {
-            if (!isDragging) {
-                const scrollTop = window.scrollY || window.pageYOffset;
-                const scrollHeight = document.documentElement.scrollHeight;
-                const clientHeight = window.innerHeight || document.documentElement.clientHeight;
-                const maxScroll = scrollHeight - clientHeight;
+            const scrollTop = window.scrollY || window.pageYOffset;
+            const scrollHeight = document.documentElement.scrollHeight;
+            const clientHeight = window.innerHeight || document.documentElement.clientHeight;
+            const maxScroll = scrollHeight - clientHeight;
+            // Высота ползунка
+            const scrollbarHeight = (clientHeight / scrollHeight) * clientHeight;
+            // Позиция ползунка
+            const maxTop = clientHeight - scrollbarHeight;
+            const topPercent = maxScroll > 0 ? (scrollTop / maxScroll) * maxTop : 0;
 
-                // Процент прокрутки
-                const scrollPercent = maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0;
-
-                // Высота ползунка
-                const scrollbarHeight = (clientHeight / scrollHeight) * clientHeight;
-                // Позиция ползунка
-                const maxTop = clientHeight - scrollbarHeight;
-                const topPercent = maxScroll > 0 ? (scrollTop / maxScroll) * maxTop : 0;
-
-                // Обновляем CSS-переменные
-                scrollbar.style.setProperty('--scrollY', `${topPercent}px`);
-                scrollbar.style.setProperty('--scrollbarHeight', `${scrollbarHeight}px`);
-            }
+            // Обновляем CSS-переменные
+            scrollbar.style.setProperty('--scrollY', `${topPercent}px`);
+            scrollbar.style.setProperty('--scrollbarHeight', `${scrollbarHeight}px`);
         }
 
         // Обработчик прокрутки
