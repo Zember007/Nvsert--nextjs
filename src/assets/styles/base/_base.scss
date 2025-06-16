@@ -51,8 +51,7 @@ body {
   font-family: $font-family;
   font-size: $font-size;
   font-weight: $font-weight;
-  // -webkit-font-smoothing: antialiased;
-  // -moz-osx-font-smoothing: grayscale;
+
   line-height: $line-height;
   letter-spacing: $letter-spacing;
   color: $typography-primary;
@@ -61,14 +60,6 @@ body {
     font-size: 14px;
     line-height: 20px;
   }
-
-  /* &.header-catalog-overflow {
-		overflow: hidden;
-	}
-
-	&.header-mobile-nav-overflow {
-		overflow: hidden;
-	} */
 
   &.overflow {
     overflow: hidden;

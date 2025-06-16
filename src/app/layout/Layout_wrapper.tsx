@@ -120,6 +120,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
         let isDragging = false;
         let startY = 0;
         let startScrollTop = 0;
+        let scrollPadding = 4;
 
         const scrollbar = scrollbarRef.current;
 
@@ -134,13 +135,59 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
             // Высота ползунка
             const scrollbarHeight = (clientHeight / scrollHeight) * clientHeight;
             // Позиция ползунка
-            const maxTop = clientHeight - scrollbarHeight - 8;
+            const maxTop = clientHeight - scrollbarHeight - scrollPadding * 2;
             const topPercent = maxScroll > 0 ? (scrollTop / maxScroll) * maxTop : 0;
 
             // Обновляем CSS-переменные
             scrollbar.style.setProperty('--scrollY', `${topPercent}px`);
             scrollbar.style.setProperty('--scrollbarHeight', `${scrollbarHeight}px`);
         }
+
+        function scrollMove(e: TouchEvent | MouseEvent) {
+            if (!isDragging) return;
+
+            const scrollHeight = document.documentElement.scrollHeight;
+            const clientHeight = window.innerHeight || document.documentElement.clientHeight;
+            const maxScroll = scrollHeight - clientHeight;
+            const scrollbarHeight = (clientHeight / scrollHeight) * clientHeight;
+            const maxTop = clientHeight - scrollbarHeight - scrollPadding * 2;
+
+            // Вычисляем смещение
+            let clientY = 0
+
+            if (e instanceof TouchEvent) {
+                clientY = e.touches[0].clientY
+            } else {
+                clientY = e.clientY
+            }
+
+            const deltaY = clientY - startY;
+            const scrollDelta = (deltaY / maxTop) * maxScroll;
+
+            // Прокручиваем страницу
+            window.scrollTo({
+                top: startScrollTop + scrollDelta,
+                behavior: 'auto'
+            });
+        }
+
+        function startScroll(e: TouchEvent | MouseEvent) {
+
+            isDragging = true;
+            let clientY = 0
+
+            if (e instanceof TouchEvent) {
+                clientY = e.touches[0].clientY
+            } else {
+                clientY = e.clientY
+            }
+            startY = clientY;
+            startScrollTop = window.scrollY || window.pageYOffset;
+            e.preventDefault();
+
+        }
+
+        window.addEventListener('resize', updateScrollbar)
 
         // Обработчик прокрутки
         window.addEventListener('scroll', () => {
@@ -160,64 +207,18 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
         });
 
         // Обработчики для мыши
-        scrollbar.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            startY = e.clientY;
-            startScrollTop = window.scrollY || window.pageYOffset;
-            e.preventDefault(); // Предотвращаем выделение текста
-        });
+        scrollbar.addEventListener('mousedown', startScroll);
 
-        document.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-
-            const scrollHeight = document.documentElement.scrollHeight;
-            const clientHeight = window.innerHeight || document.documentElement.clientHeight;
-            const maxScroll = scrollHeight - clientHeight;
-            const scrollbarHeight = (clientHeight / scrollHeight) * clientHeight;
-            const maxTop = clientHeight - scrollbarHeight;
-
-            // Вычисляем смещение
-            const deltaY = e.clientY - startY;
-            const scrollDelta = (deltaY / maxTop) * maxScroll;
-
-            // Прокручиваем страницу
-            window.scrollTo({
-                top: startScrollTop + scrollDelta,
-                behavior: 'auto'
-            });
-        });
+        document.addEventListener('mousemove', scrollMove);
 
         document.addEventListener('mouseup', () => {
             isDragging = false;
         });
 
         // Обработчики для сенсорных устройств
-        scrollbar.addEventListener('touchstart', (e) => {
-            isDragging = true;
-            startY = e.touches[0].clientY;
-            startScrollTop = window.scrollY || window.pageYOffset;
-            e.preventDefault();
-        });
+        scrollbar.addEventListener('touchstart', startScroll);
 
-        document.addEventListener('touchmove', (e) => {
-            if (!isDragging) return;
-
-            const scrollHeight = document.documentElement.scrollHeight;
-            const clientHeight = window.innerHeight || document.documentElement.clientHeight;
-            const maxScroll = scrollHeight - clientHeight;
-            const scrollbarHeight = (clientHeight / scrollHeight) * clientHeight;
-            const maxTop = clientHeight - scrollbarHeight ;
-
-            // Вычисляем смещение
-            const deltaY = e.touches[0].clientY - startY;
-            const scrollDelta = (deltaY / maxTop) * maxScroll;
-
-            // Прокручиваем страницу
-            window.scrollTo({
-                top: startScrollTop + scrollDelta,
-                behavior: 'auto'
-            });
-        });
+        document.addEventListener('touchmove', scrollMove);
 
         document.addEventListener('touchend', () => {
             isDragging = false;
@@ -227,7 +228,25 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
 
         return () => {
             window.removeEventListener('wheel', handleWheel);
+
             window.removeEventListener('scroll', () => { });
+
+            scrollbar.removeEventListener('mousedown', startScroll);
+
+            document.removeEventListener('mousemove', scrollMove);
+
+            document.removeEventListener('mouseup', () => {
+                isDragging = false;
+            });
+
+            scrollbar.removeEventListener('touchstart', startScroll);
+
+            document.removeEventListener('touchmove', scrollMove);
+
+            document.removeEventListener('touchend', () => {
+                isDragging = false;
+            });
+
         };
     }, [scrollbarRef])
 
