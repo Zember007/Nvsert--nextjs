@@ -28,7 +28,6 @@ const AppHeader = () => {
   const [servicesMenuActive, setServicesMenuActive] = useState(false);
   const [burgerMenuActive, setBurgerMenuActive] = useState(false);
 
-  const headerRef = useRef<null | HTMLElement>(null)
 
   const { setButtonRef, setWrapperRef } = useButton()
 
@@ -94,7 +93,6 @@ const AppHeader = () => {
 
 
 
-  useBackgroundBrightness({ headerRef })
 
   useEffect(() => {
     if (servicesMenuActive) {
@@ -107,7 +105,7 @@ const AppHeader = () => {
 
   return (
     <>
-      <header ref={headerRef} className="header">
+      <header className="header">
         <div className="px-[30px] header__wrapper !h-[50px]">
           <div className="flex items-center">
             <AppLogo />

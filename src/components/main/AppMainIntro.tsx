@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import AppMainForm from '../forms/AppMainForm';
 import { filterPrepositions } from '@/hook/filter';
 import { useAnimation, motion } from "framer-motion";
+import { useEffect, useRef } from 'react';
 
 
 const AppMainIntro = () => {
@@ -28,9 +29,40 @@ const AppMainIntro = () => {
         });
     }
 
+    const ref = useRef(null)
+
+    useEffect(() => {
+        const header = document.querySelector('.header')
+        if (!ref.current || !header) return
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) {                        
+                        header.classList.add('black'); 
+                    } else {
+                        header.classList.remove('black'); 
+                    }
+                });
+            },
+            {
+                root: null, 
+                rootMargin: '0px',
+                threshold: 0
+            }
+        );
+
+        observer.observe(ref.current);
+
+        return () => {
+            if (!ref.current) return
+            observer.unobserve(ref.current);
+        }
+
+    }, [ref])
+
     return (
         <>
-            <section className="main-banner">
+            <section ref={ref} className="main-banner">
 
                 <div className="wrapper">
                     <div className='main-banner__content'>
