@@ -130,8 +130,20 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
                     const scrollHeight = document.documentElement.scrollHeight;
                     const clientHeight = window.innerHeight || document.documentElement.clientHeight;
                     const maxScroll = scrollHeight - clientHeight;
-                    const percent = maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0;
-                    scrollbarRef.current?.style.setProperty('--scrollY', `${percent}%`);
+
+                    // Процент прокрутки
+                    const scrollPercent = maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0;
+
+                    // Высота ползунка относительно видимой области
+                    const scrollbarHeight = (clientHeight / scrollHeight) * clientHeight;
+                    // Позиция ползунка, учитывающая его высоту
+                    const maxTop = clientHeight - scrollbarHeight; // Максимальная позиция top
+                    const topPercent = maxScroll > 0 ? (scrollTop / maxScroll) * maxTop : 0;
+
+                    // Обновляем CSS-переменные
+                    scrollbarRef.current?.style.setProperty('--scrollY', `${topPercent}px`);
+                    scrollbarRef.current?.style.setProperty('--scrollbarHeight', `${scrollbarHeight}px`);
+
                     isTicking = false;
                 });
                 isTicking = true;

@@ -368,27 +368,30 @@ body {
         display: none;
     }
 
-    
+
 }
 
 
 .scrollbar {
-    --scrollY: 0%;
+    --scrollY: 0px;
+    --scrollbarHeight: 20px;
+    /* Значение по умолчанию, будет перезаписано JS */
 
-        z-index: 1000;
-        position: fixed;
-        top: var(--scrollY);
-        right: 2px;
-        width: 13px;
-        height: 20px;
-        background: rgba(52, 68, 109, 0.2);
-        border: 1px solid #93969D ;
-        border-radius: 3px;
-        transition: background 0.2s;
-        &:hover {
-            background: rgba(52, 68, 109, 0.5);
-        }
-    }
+    z-index: 1000;
+    position: fixed;
+    top: var(--scrollY);
+    right: 2px;
+    width: 13px;
+    height: var(--scrollbarHeight);
+    background: rgba(52, 68, 109, 0.2);
+    border: 1px solid #93969D;
+    border-radius: 3px;
+    transition: background 0.2s;
+}
+
+.scrollbar:hover {
+    background: rgba(52, 68, 109, 0.5);
+}
 
 
 
