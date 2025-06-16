@@ -134,7 +134,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
             // Высота ползунка
             const scrollbarHeight = (clientHeight / scrollHeight) * clientHeight;
             // Позиция ползунка
-            const maxTop = clientHeight - scrollbarHeight;
+            const maxTop = clientHeight - scrollbarHeight - 20;
             const topPercent = maxScroll > 0 ? (scrollTop / maxScroll) * maxTop : 0;
 
             // Обновляем CSS-переменные
@@ -206,7 +206,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
             const clientHeight = window.innerHeight || document.documentElement.clientHeight;
             const maxScroll = scrollHeight - clientHeight;
             const scrollbarHeight = (clientHeight / scrollHeight) * clientHeight;
-            const maxTop = clientHeight - scrollbarHeight;
+            const maxTop = clientHeight - scrollbarHeight ;
 
             // Вычисляем смещение
             const deltaY = e.touches[0].clientY - startY;
