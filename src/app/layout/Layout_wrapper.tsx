@@ -24,6 +24,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
     const dispatch = useDispatch<AppDispatch>();
     const pathname = usePathname();
 
+    const scrollbarRef = useRef<HTMLDivElement>(null)
     const metadata = useSelector((state: RootState) => state.metadata);
     const { transparent, setDefaultModalActive, defaultModalActive, defaultModalName, resetCountModal, defaultModalCount } = useHeaderContext();
     const { calcPageBodyClass } = useSelector((state: RootState) => state.documents);
@@ -76,6 +77,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
     }, [dispatch]);
 
     useEffect(() => {
+        if (!scrollbarRef.current) return
         let currentScroll = 0;
         let targetScroll = 0;
         let isScrolling = false;
@@ -129,7 +131,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
                     const clientHeight = window.innerHeight || document.documentElement.clientHeight;
                     const maxScroll = scrollHeight - clientHeight;
                     const percent = maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0;
-                    document.body.style.setProperty('--scrollY', `${percent}%`);
+                    scrollbarRef.current?.style.setProperty('--scrollY', `${percent}%`);
                     isTicking = false;
                 });
                 isTicking = true;
@@ -140,7 +142,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
             window.removeEventListener('wheel', handleWheel);
             window.removeEventListener('scroll', () => { });
         };
-    }, [])
+    }, [scrollbarRef])
 
     const [classBody, setClassBody] = useState('transparent-header');
 
@@ -182,6 +184,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
                     <AppFooter />
                 </main>
                 <div className="bg-noise"></div>
+                <div ref={scrollbarRef} className="scrollbar"></div>
             </body>
         </>
     );

@@ -363,19 +363,23 @@
 }
 
 body {
-    --scrollY: 0%;
 
     &::-webkit-scrollbar {
         display: none;
     }
 
-    &::before {
-        content: '';
+    
+}
+
+
+.scrollbar {
+    --scrollY: 0%;
+
         z-index: 1000;
         position: fixed;
         top: var(--scrollY);
         right: 2px;
-        width: 10px;
+        width: 13px;
         height: 20px;
         background: rgba(52, 68, 109, 0.2);
         border: 1px solid #93969D ;
@@ -385,8 +389,6 @@ body {
             background: rgba(52, 68, 109, 0.5);
         }
     }
-}
-
 
 
 
