@@ -117,6 +117,29 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
         window.addEventListener('wheel', handleWheel, { passive: false });
 
         let isTicking = false;
+
+        const customScrollController = () => {
+            const scrollTop = window.scrollY || window.pageYOffset;
+            const scrollHeight = document.documentElement.scrollHeight;
+            const clientHeight = window.innerHeight || document.documentElement.clientHeight;
+            const maxScroll = scrollHeight - clientHeight;
+
+            // Процент прокрутки
+            const scrollPercent = maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0;
+
+            // Высота ползунка относительно видимой области
+            const scrollbarHeight = (clientHeight / scrollHeight) * clientHeight;
+            // Позиция ползунка, учитывающая его высоту
+            const maxTop = clientHeight - scrollbarHeight; // Максимальная позиция top
+            const topPercent = maxScroll > 0 ? (scrollTop / maxScroll) * maxTop : 0;
+
+            // Обновляем CSS-переменные
+            scrollbarRef.current?.style.setProperty('--scrollY', `${topPercent}px`);
+            scrollbarRef.current?.style.setProperty('--scrollbarHeight', `${scrollbarHeight}px`);
+
+            isTicking = false;
+        }
+
         window.addEventListener('scroll', () => {
 
             if (!isScrolling) {
@@ -125,30 +148,12 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
             }
 
             if (!isTicking) {
-                requestAnimationFrame(() => {
-                    const scrollTop = window.scrollY || window.pageYOffset;
-                    const scrollHeight = document.documentElement.scrollHeight;
-                    const clientHeight = window.innerHeight || document.documentElement.clientHeight;
-                    const maxScroll = scrollHeight - clientHeight;
-
-                    // Процент прокрутки
-                    const scrollPercent = maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0;
-
-                    // Высота ползунка относительно видимой области
-                    const scrollbarHeight = (clientHeight / scrollHeight) * clientHeight;
-                    // Позиция ползунка, учитывающая его высоту
-                    const maxTop = clientHeight - scrollbarHeight; // Максимальная позиция top
-                    const topPercent = maxScroll > 0 ? (scrollTop / maxScroll) * maxTop : 0;
-
-                    // Обновляем CSS-переменные
-                    scrollbarRef.current?.style.setProperty('--scrollY', `${topPercent}px`);
-                    scrollbarRef.current?.style.setProperty('--scrollbarHeight', `${scrollbarHeight}px`);
-
-                    isTicking = false;
-                });
+                requestAnimationFrame(customScrollController);
                 isTicking = true;
             }
         });
+
+        customScrollController()
 
         return () => {
             window.removeEventListener('wheel', handleWheel);
