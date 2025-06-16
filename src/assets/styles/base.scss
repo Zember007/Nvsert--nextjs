@@ -375,17 +375,24 @@ body {
 .scrollbar {
     --scrollY: 0px;
     --scrollbarHeight: 100px;
-
     z-index: 1000;
+    right: 0;
+    top: 0;
+    height: 100%;
     position: fixed;
-    top: var(--scrollY);
-    right: 2px;
-    width: 10px;
-    height: var(--scrollbarHeight);
-    background: rgba(52, 68, 109, 0.2);
-    border: 1px solid #93969D;
-    border-radius: 3px;
-    transition: background 0.2s;
+    width: 13px;
+    padding: 0 2px;
+
+    &::before {
+        content: '';
+        position: relative;
+        top: var(--scrollY);
+        width: 100%;
+        height: var(--scrollbarHeight);
+        background: rgba(52, 68, 109, 0.2);
+        border: 1px solid #93969D;
+        border-radius: 3px;
+    }
 }
 
 
