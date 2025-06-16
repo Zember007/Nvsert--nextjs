@@ -96,10 +96,10 @@
   }
 
   &__border {
-    @apply absolute top-[-1px] bottom-[-1px] border-group m:right-[23px] m:left-[23px];
+    @apply border-[#93969D] absolute top-[-1px] bottom-[-1px] border-group m:right-[23px] m:left-[23px];
 
     &.active {
-      @apply border-t-[#93969D] border-b-[#93969D];
+      @apply border-[transparent];
     }
   }
 
