@@ -385,6 +385,7 @@ body {
 
     &::before {
         content: '';
+        display: block;
         position: relative;
         top: var(--scrollY);
         width: 100%;
