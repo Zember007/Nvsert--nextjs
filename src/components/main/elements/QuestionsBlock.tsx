@@ -34,13 +34,13 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
 
 
     return (
-        <div className={`relative flex flex-col rounded-[6px] group/main ${active ? '' : 'bg-[#FFFFFF26] '} z-[0]`}>
+        <div className={`relative flex flex-col rounded-[6px]  group/main ${active ? '' : 'bg-[#FFFFFF26] hover:bg-[#34446D33]'} z-[0]`}>
             <div className={`pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[-1] rounded-[6px]  ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-[#34446D] border-solid border m:border-[#CCCCCC]`}></div>
             <div
                 onClick={() => {
                     setActive(!active)
                 }}
-                className={`${active ? ' !bg-[#5B6788] !shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] ' : 'group-hover/main:bg-[#34446D33] '}  m:bg-[transparent] bg-[#34446D33]  m:h-[70px] h-[60px] relative  active:bg-[#5B6788]  active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset]   group cursor-pointer  rounded-[6px]  flex items-center gap-[10px] m:gap-[40px] m:pr-[10px] pr-[20px] transition-scale`}>
+                className={`${active ? ' !bg-[#5B6788] !shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] ' : ' '}  m:bg-[transparent] bg-[#34446D33]  m:h-[70px] h-[60px] relative  active:bg-[#5B6788]  active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset]   group cursor-pointer  rounded-[6px]  flex items-center gap-[10px] m:gap-[40px] m:pr-[10px] pr-[20px] transition-scale`}>
 
                 <div className={`${active ? 'scale-[0.9]' : ''} transition-scale group-active:scale-[0.9] will-change-transform ease transition-all duration-100 m:w-[70px] m:min-w-[70px] w-[44px] min-w-[44px] h-[60px] m:h-[70px] flex items-center justify-center`}>
                     <p className={`${active && 'm:text-[50px] text-[36px] text-[#FFF]'} text-[22px] rubik m:group-hover:text-[50px] group-active:duration-[0] ease transition-all duration-100 group-active:text-[#FFF]`}>{number}</p>
