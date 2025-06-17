@@ -57,7 +57,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                 </div>
             </div>
             <div className={`max-h-[0px] transition-all easy-in duration-200 overflow-hidden ${active && '!max-h-[1000px]'}`}>
-                <div className="pl-[60px] m:pl-[110px] p-[20px] m:pr-[34px] m:py-[30px] flex flex-col gap-[30px]">
+                <div className="m:pl-[110px] p-[20px] m:pr-[34px] m:py-[30px] flex flex-col gap-[30px]">
                     <div className="mtp__spoiler-text" >
                         <div dangerouslySetInnerHTML={{ __html: text }}></div>
                     </div>
@@ -68,7 +68,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                         initial={{ y: 20, opacity: 0 }}
                         className="tariff-wrap m:w-[247px] w-full " ref={setWrapperRef}>
                         <button
-                            ref={setButtonRef} className='btnIconAn justify-center m:flex items-center px-[16px] py-[9px] relative overflow-hidden border border-solid border-[#34446D] tariff m:text-[20px] text-[18px] transition-all duration-300 font-bold tracking-normal  gap-[6px]  hover:text-[#FFF] text-[#34446D] rounded-[4px] group hover:bg-[#34446D]  leading-[1] '>
+                            ref={setButtonRef} className='btnIconAn m:bg-[transparent] bg-[#34446D] justify-center m:flex items-center px-[16px] py-[9px] relative overflow-hidden border border-solid border-[#34446D] tariff m:text-[20px] text-[18px] transition-all duration-300 font-bold tracking-normal  gap-[6px]  hover:text-[#FFF] m:text-[#34446D] rounded-[4px] group hover:bg-[#34446D]  leading-[1] '>
                             <span className="sendIconLeft transition-all ease-in m:block hidden">
                                 <QuestionArrow />
                             </span>
