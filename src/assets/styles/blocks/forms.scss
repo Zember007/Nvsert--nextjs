@@ -104,6 +104,10 @@ input:auto-fill {
     min-height: 100px;
     height: 100px;
     resize: vertical;
+    @media (max-width: $media-s) {
+      min-height: 75px;
+      height: 75px;
+    }
   }
 
   &__title {
@@ -403,6 +407,6 @@ input:-webkit-autofill:focus {
   }
 
   &__button {
-    @apply overflow-hidden p-[9px] px-[20px] relative flex items-center justify-center bg-[#34446D] text-[14px] s:text-[20px] text-[#FFFFFF] font-bold rounded-[4px];
+    @apply overflow-hidden  p-[9px] px-[20px] relative flex items-center justify-center bg-[#34446D] text-[18px] s:text-[20px] text-[#FFFFFF] font-bold rounded-[4px];
   }
 }

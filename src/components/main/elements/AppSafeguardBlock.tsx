@@ -32,7 +32,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
       <div className="bg-[#FFFFFF26] group-hover/box:bg-[#34446D33] group !shadow-none card  h-full  rounded-[8px] flex flex-col gap-[29px] justify-between ">
         <div className="flex flex-col gap-[20px] h-full">
           <div className="overflow-hidden h-[200px]  w-full relative rounded-t-[8px]">
-            <p className="text-[22px] z-[2] text-[#FFF] backdrop-blur-[4px] p-[10px] rounded-[4px] bg-[#FFFFFF1A] font-bold absolute top-[15px] left-[15px]"
+            <p className="text-[24px] z-[2] text-[#FFF] backdrop-blur-[4px] p-[10px] rounded-[4px] bg-[#FFFFFF1A] font-bold absolute top-[15px] left-[15px]"
               style={{
                 maxWidth: (index === 3 ? '220' : '200') + 'px'
               }}
