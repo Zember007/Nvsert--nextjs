@@ -74,6 +74,12 @@ const AppMainSkills = () => {
             setWidthCards(null)
         }
 
+        return () => {
+            if (timeLine.current) {
+              timeLine.current.kill();
+            }
+          }
+
     }, [widthWindow, isVisibleSection, widthCards])
 
 

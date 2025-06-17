@@ -146,6 +146,12 @@ const AppMainSafeguards = () => {
         setWidthCards(widthWindow - 40)
       }
     }
+
+    return () => {
+      if (timeLine.current) {
+        timeLine.current.kill();
+      }
+    }
   }, [widthWindow, widthCards])
 
 
