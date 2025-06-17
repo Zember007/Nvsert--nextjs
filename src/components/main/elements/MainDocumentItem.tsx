@@ -228,7 +228,7 @@ const MainDocumentItem = memo(({
                                 {windowWidth && windowWidth < 768 &&
                                     <>
                                        
-                                        <div className="flex flex-col gap-[10px]">
+                                        <div className="flex flex-col gap-[10px] w-full">
                                             <motion.div
                                                 animate={controls}
                                                 initial={{ y: 20 }}
