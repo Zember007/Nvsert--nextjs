@@ -232,7 +232,7 @@ const MainDocumentItem = memo(({
                                             <motion.div
                                                 animate={controls}
                                                 initial={{ y: 20 }}
-                                                className="tariff-wrap w-[190px] m:w-[250px]" ref={setWrapperRef}>
+                                                className="tariff-wrap w-full m:w-[250px]" ref={setWrapperRef}>
                                                 <ActionButton
                                                     setRef={setButtonRef}
                                                     onClick={() => openDefaultModal('orderForm')}
@@ -246,7 +246,7 @@ const MainDocumentItem = memo(({
                                             <motion.div
                                                 animate={controls}
                                                 initial={{ y: 20 }}
-                                                className="tariff-wrap w-[190px] m:w-[250px] " ref={setWrapperRef}>
+                                                className="tariff-wrap w-full m:w-[250px] " ref={setWrapperRef}>
                                                 <ActionButton
                                                     setRef={setButtonRef}
                                                     onClick={() => openDefaultModal('orderForm')}
@@ -308,7 +308,7 @@ const MainDocumentItem = memo(({
                                             <motion.div
                                                 animate={controls}
                                                 initial={{ y: 20 }}
-                                                className="tariff-wrap w-[190px] m:w-[250px] " ref={setWrapperRef}>
+                                                className="tariff-wrap w-full m:w-[250px] " ref={setWrapperRef}>
                                                 <ActionButton
                                                     setRef={setButtonRef}
                                                     onClick={() => openDefaultModal('orderForm')}
@@ -333,7 +333,7 @@ const MainDocumentItem = memo(({
                                     <motion.div
                                         animate={controls}
                                         initial={{ y: 20 }}
-                                        className="tariff-wrap w-[190px] m:w-[250px]" ref={setWrapperRef}>
+                                        className="tariff-wrap w-full m:w-[250px]" ref={setWrapperRef}>
                                         <ActionButton
                                             setRef={setButtonRef}
                                             onClick={() => openDefaultModal('orderForm')}
