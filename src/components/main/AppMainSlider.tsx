@@ -39,7 +39,7 @@ const SliderMain = () => {
     useEffect(() => {
         if (!whiteBgRef.current || !isVisible || !ref.current) return
 
-        if (widthWindow >= 1240) {
+        if (widthWindow && widthWindow >= 1240) {
             let timeoutIdBg: NodeJS.Timeout | null = null;
 
 

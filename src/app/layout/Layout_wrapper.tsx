@@ -16,6 +16,7 @@ import { usePathname } from 'next/navigation';
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import useWindowWidth from '@/hook/useWindowWidth';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -76,6 +77,8 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
         };
     }, [dispatch]);
 
+    const widthWindow = useWindowWidth()
+
     useEffect(() => {
         if (!scrollbarRef.current) return
         let currentScroll = 0;
@@ -124,7 +127,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
 
         const scrollbar = scrollbarRef.current;
 
-        if (!scrollbar) return
+        if (!scrollbar && widthWindow && widthWindow < 768) return
 
         // Обновление позиции и высоты ползунка при прокрутке
         function updateScrollbar() {
@@ -248,7 +251,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
             });
 
         };
-    }, [scrollbarRef])
+    }, [scrollbarRef, widthWindow])
 
     const [classBody, setClassBody] = useState('transparent-header');
 

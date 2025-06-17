@@ -11,9 +11,10 @@ interface GuaranteeCardProps {
   }[];
   isVisible: boolean,
   index: number
+  width?: number | null;
 }
 
-const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, index, img }) => {
+const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, index, img, width }) => {
 
   const bounceEl = useRef<HTMLElement[]>([])
 
@@ -25,8 +26,9 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
 
   return (
     <div
+    style={{ ...(width && { width: `${width}px` }) }}    
       className={`z-[0] min-w-[300px] relative card-wrap h-[517px] w-full group/box translate-y-[0] ${!isVisible && '!translate-y-[30px] opacity-0'} transition-all duration-500 `}>
-      <div className="absolute top-[-1px] left-0 right-0 group-hover/box:border-[#34446D] bottom-0 border-[#CCCCCC] z-[1] pointer-events-none border border-solid  rounded-[8px]"></div>
+      <div className="absolute top-[-1px] left-0 right-0 bottom-0 border-[#93969d] z-[1] pointer-events-none border border-solid  rounded-[8px]"></div>
       <div className="bg-[#FFFFFF26] group-hover/box:bg-[#34446D33] group !shadow-none card  h-full  rounded-[8px] flex flex-col gap-[29px] justify-between ">
         <div className="flex flex-col gap-[20px] h-full">
           <div className="overflow-hidden h-[200px]  w-full relative rounded-t-[8px]">

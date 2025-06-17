@@ -202,9 +202,6 @@ const MainDocumentItem = memo(({
 
 
                     <div
-                        style={{
-                            textRendering: 'geometricPrecision'
-                        }}
                         className={`document__navigation-wrap container-scale transition-scale backface-hidden ${active ? 'active' : 'text-[#000]'} group-active/window:text-[#FFF]   `}
                     >
 
@@ -228,7 +225,7 @@ const MainDocumentItem = memo(({
                     <div className={`document__hidden ${active && 'active'}`}>
                         <div className="document__item  ">
                             <div className="document__list-photo">
-                                {windowWidth < 768 &&
+                                {windowWidth && windowWidth < 768 &&
                                     <>
                                        
                                         <div className="flex flex-col gap-[10px]">
@@ -307,7 +304,7 @@ const MainDocumentItem = memo(({
                                             </p>
                                         </div>
 
-                                        {windowWidth >= 768 &&
+                                        {windowWidth && windowWidth >= 768 &&
                                             <motion.div
                                                 animate={controls}
                                                 initial={{ y: 20 }}
@@ -332,7 +329,7 @@ const MainDocumentItem = memo(({
                                     listHidden={listHidden}
                                     setListHidden={setListHidden}
                                 />
-                                {windowWidth >= 768 &&
+                                {windowWidth && windowWidth >= 768 &&
                                     <motion.div
                                         animate={controls}
                                         initial={{ y: 20 }}

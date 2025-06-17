@@ -127,21 +127,26 @@ const AppMainSafeguards = () => {
 
   const timeLine = useRef<any>(null)
   const [activeIndex, setActive] = useState<number>(0)
+  const [widthCards, setWidthCards] = useState<number | null>(null)
 
   useEffect(() => {
-    if (widthWindow < 1280) {
-      const slides = gsap.utils.toArray('[data-slider="slide-safeguard"]');
-      timeLine.current = horizontalLoop(slides, {
-        paused: true,
-        draggable: true,
-        gap: 20,
-        snap: true,
-        onChange: (index: number) => {
-          setActive(index)
-        }
-      });
+    if (widthWindow && widthWindow < 1280) {
+      if (widthWindow - 40 === widthCards) {
+        const slides = gsap.utils.toArray('[data-slider="slide-safeguard"]');
+        timeLine.current = horizontalLoop(slides, {
+          paused: true,
+          draggable: true,
+          gap: 20,
+          snap: true,
+          onChange: (index: number) => {
+            setActive(index)
+          }
+        });
+      } else {
+        setWidthCards(widthWindow - 40)
+      }
     }
-  }, [widthWindow])
+  }, [widthWindow, widthCards])
 
 
 
@@ -166,7 +171,7 @@ const AppMainSafeguards = () => {
                     title={item.title}
                     items={item.items}
                     isVisible={isVisible}
-
+                    width={widthCards}
                   />
                 </div>
               ))

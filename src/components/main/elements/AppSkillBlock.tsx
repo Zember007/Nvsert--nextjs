@@ -9,9 +9,10 @@ interface AppSkillBlockProps {
   title?: string;
   img?: string | StaticImageData;
   isVisible?: boolean;
+  width?: number | null;
 }
 
-const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBlockProps) => {
+const AppSkillBlock = ({ text, folder, bg, title, img, isVisible, width }: AppSkillBlockProps) => {
   const cardRef = useRef<null | HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [mouseX, setMouseX] = useState(0);
@@ -75,24 +76,24 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
 
   return (
     <div
-      className={`hover:z-[12] relative card-wrap ${!folder ? 'cursor-pointer ' : ''}`}
+      style={{ ...(width && { width: `${width}px` }) }}
+      className={`hover:z-[12] relative card-wrap h-[230px] w-[300px] ${!folder ? 'cursor-pointer ' : ''}`}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      ref={cardRef}>
+      ref={cardRef} >
       <div
-        className={`card rebound-box relative z-[0] group/item l:mr-0 mr-[20px] rounded-[4px]  text-[#000] h-[230px] min-w-[221px] max-w-[221px] xl:min-w-[300px] xl:max-w-[300px] w-full`}
+        className={`card rebound-box relative z-[0] h-full group/item  rounded-[4px]  text-[#000]  w-full`}
       >
 
         <div
           style={{
-            borderColor: `${'#CCCCCC'}`,
             ...(!folder && {
               background: `${bg === 'secondary' ? '#93969D26' : '#FFFFFF26'}`,
             }),
             ...(mousePX && { ...cardStyle })
           }}
-          className={`flex  border border-solid rounded-[4px] overflow-hidden flex-col gap-[14px] relative z-[1] justify-between h-full transition-all duration-500 ${folder ? '!items-center !justify-center' : 'p-[20px]'}`}
+          className={`flex border-[#93969D] border border-solid rounded-[4px] overflow-hidden flex-col gap-[14px] relative z-[1] justify-between h-full transition-all duration-500 ${folder ? '!items-center !justify-center' : 'p-[20px]'}`}
         >
           {
             folder ?
@@ -115,7 +116,7 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
           }
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

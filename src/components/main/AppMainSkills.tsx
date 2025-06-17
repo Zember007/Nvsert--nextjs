@@ -22,7 +22,7 @@ const AppMainSkills = () => {
     const widthWindow = useWindowWidth()
     const [isVisible, setIsVisible] = useState(false);
     const { ref, isVisible: isVisibleSection } = useIntersectionObserver();
-    const skillsData = widthWindow >= 1240 ? skills : skills.filter(item => !item.empty);
+    const skillsData = (widthWindow && widthWindow < 1240) ? skills.filter(item => !item.empty) : skills;
 
     useEffect(() => {
 
@@ -51,20 +51,30 @@ const AppMainSkills = () => {
 
     const timeLine = useRef<any>(null)
     const [activeIndex, setActive] = useState<number>(0)
+    const [widthCards, setWidthCards] = useState<number | null>(null)
 
     useEffect(() => {
-        if (widthWindow < 1240 && isVisibleSection) {
-            const slides = gsap.utils.toArray('[data-slider="slide-skill"]');
-            timeLine.current = horizontalLoop(slides, {
-                paused: true,
-                draggable: true,
-                snap: true,
-                onChange: (index: number) => {
-                    setActive(index)
-                }
-            });
+        if (widthWindow && widthWindow < 1240 && isVisibleSection) {
+            if (widthWindow - 40 === widthCards) {
+                const slides = gsap.utils.toArray('[data-slider="slide-skill"]');
+                timeLine.current = horizontalLoop(slides, {
+                    paused: true,
+                    draggable: true,
+                    gap: 20,
+                    snap: true,
+                    onChange: (index: number) => {
+                        setActive(index)
+                    }
+                });
+            } else {
+                setWidthCards(widthWindow - 40)
+            }
+
+        } else {
+            setWidthCards(null)
         }
-    }, [widthWindow, isVisibleSection])
+
+    }, [widthWindow, isVisibleSection, widthCards])
 
 
 
@@ -91,7 +101,9 @@ const AppMainSkills = () => {
                                         key={index}
                                         data-slider="slide-skill"
                                     >
-                                        <AppSkillBlock img={skill.img} title={t(`MainSkills.${skill.key}.title`)} isVisible={isVisible} text={t(`MainSkills.${skill.key}.text`, { returnObjects: true }) as string[]} bg={skill.bg} folder={skill.folder} />
+                                        <AppSkillBlock
+                                            width={widthCards}
+                                            img={skill.img} title={t(`MainSkills.${skill.key}.title`)} isVisible={isVisible} text={t(`MainSkills.${skill.key}.text`, { returnObjects: true }) as string[]} bg={skill.bg} folder={skill.folder} />
 
                                     </div>
                                 );

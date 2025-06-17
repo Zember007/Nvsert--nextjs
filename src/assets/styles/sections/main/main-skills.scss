@@ -15,6 +15,6 @@
         }
     }
     &__box {
-        @apply flex xl:grid grid-cols-4 gap-[10px] xl:gap-[20px];
+        @apply flex xl:grid grid-cols-4 gap-[20px];
     }
 }

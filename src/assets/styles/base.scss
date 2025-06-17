@@ -362,8 +362,7 @@
     transform: scale(0.9) rotateY(var(--y)) translateZ(10px) !important;
 }
 
-body {
-    scrollbar-width: none;
+body {        
     &::-webkit-scrollbar {
         display: none;
     }
@@ -391,6 +390,10 @@ body {
         background: rgba(52, 68, 109, 0.2);
         border: 1px solid #93969D;
         border-radius: 5px;
+    }
+
+    @media (max-width: 768px) {
+        display: none;
     }
 }
 
