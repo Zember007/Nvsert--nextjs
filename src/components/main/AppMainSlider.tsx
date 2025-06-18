@@ -197,15 +197,13 @@ const SliderMain = () => {
                     <div className={`overlay `}>
                         <div className={`overlay-slider`}></div>
 
-                        <div className=" grow relative w-full overflow-hidden">
-                            <div className="absolute z-[-1] xl:h-[50px] h-[65px] bg-[#d6dae2] xl:rounded-[4px]  w-full border-[#34446D] border-solid xl:border border-b border-0">
-                            </div>
+                        <div className=" grow relative w-full overflow-hidden">                     
                             <div
                                 ref={slider}
                                 className={`absolute wrapper-slide top-0  w-full h-full pointer-events-none`}>
 
                                 <div className="flex flex-col xl:gap-[15px] h-full  w-full">
-                                    <span className="xl:text-[24px] text-[18px] font-bold text-[#000000] block  flex items-center justify-center xl:p-[10px] xl:h-[50px] h-[65px] relative text-center p-[15px] w-full  border border-solid border-[transparent] relative z-[10]">
+                                    <span className="xl:h-[50px] h-[65px] bg-[#d6dae2] xl:rounded-[4px]  w-full border-[#34446D] border-solid xl:border border-b border-0 xl:text-[24px] text-[18px] font-bold text-[#000000] block  flex items-center justify-center xl:p-[10px] xl:h-[50px] h-[65px] relative text-center p-[15px] w-full  border border-solid border-[transparent] relative z-[10]">
                                         {
                                             filterPrepositions(slidesLang[activeIndex].title)
                                         }
