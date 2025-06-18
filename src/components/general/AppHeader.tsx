@@ -105,8 +105,8 @@ const AppHeader = () => {
 
   return (
     <>
-      <header className="header">
-        <div className="px-[30px] header__wrapper !h-[50px]">
+      <header className="header xl:py-[5px]">
+        <div className="px-[30px] header__wrapper">
           <div className="flex items-center">
             <AppLogo />
             <div className={`header__menu js-header-menu ${burgerMenuActive && 'active'}`}>
