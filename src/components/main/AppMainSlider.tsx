@@ -197,27 +197,21 @@ const SliderMain = () => {
                     <div className={`overlay `}>
                         <div className={`overlay-slider`}></div>
 
-                        <div className=" grow relative w-full overflow-hidden">                     
-                            <div
-                                ref={slider}
-                                className={`absolute wrapper-slide top-0  w-full h-full pointer-events-none`}>
 
-                                <div className="flex flex-col xl:gap-[15px] h-full  w-full">
-                                    <span className="xl:h-[50px] h-[65px] bg-[#d6dae2] xl:rounded-[4px]  w-full border-[#34446D] border-solid xl:border border-b border-0 xl:text-[24px] text-[18px] font-bold text-[#000000] block  flex items-center justify-center xl:p-[10px] xl:h-[50px] h-[65px] relative text-center p-[15px] w-full  border border-solid border-[transparent] relative z-[10]">
-                                        {
-                                            filterPrepositions(slidesLang[activeIndex].title)
-                                        }
-                                    </span>
-                                    <p className={`grow slide-text xl:p-0 p-[20px] relative w-full h-full text-[16px] bg-[#FFF] `}>
+                        <div className="flex flex-col xl:gap-[15px]  grow relative w-full overflow-hidden">
+                            <span className="xl:h-[50px] h-[65px] bg-[#d6dae2] xl:rounded-[4px]  w-full border-[#34446D] border-solid xl:border border-b border-0 xl:text-[24px] text-[18px] font-bold text-[#000000] block  flex items-center justify-center xl:p-[10px] xl:h-[50px] h-[65px] relative text-center p-[15px] w-full  border border-solid border-[transparent] relative z-[10]">
+                                {
+                                    filterPrepositions(slidesLang[activeIndex].title)
+                                }
+                            </span>
+                            <p className={`grow slide-text xl:p-0 p-[20px] relative w-full h-full text-[16px] bg-[#FFF] `}>
 
-                                        {filterPrepositions(slidesLang[activeIndex].text)}
+                                {filterPrepositions(slidesLang[activeIndex].text)}
 
-                                    </p>
-                                </div>
-
-                            </div>
-
+                            </p>
                         </div>
+
+
                         <div className="slider__navigations">
                             <div className="flex gap-[10px]">
                                 <div
@@ -293,6 +287,12 @@ const SliderMain = () => {
                         </div>
 
 
+                    </div>
+
+                    <div className="slide-dots-box">
+                        {slides.map((_, i) => (
+                            <div key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
+                        ))}
                     </div>
 
                     <div className="tariff-wrap xl:w-[252px] w-full" ref={setWrapperRef}>

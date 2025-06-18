@@ -68,7 +68,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                         initial={{ y: 20, opacity: 0 }}
                         className="tariff-wrap m:w-[247px] w-full " ref={setWrapperRef}>
                         <button
-                            ref={setButtonRef} className='btnIconAn m:bg-[transparent] bg-[#34446D] justify-center m:flex items-center px-[16px] py-[9px] relative overflow-hidden border border-solid border-[#34446D] tariff m:text-[20px] text-[18px] transition-all duration-300 font-bold tracking-normal  gap-[6px]  hover:text-[#FFF] m:text-[#34446D] rounded-[4px] group hover:bg-[#34446D]  leading-[1] '>
+                            ref={setButtonRef} className='btnIconAn m:bg-[transparent] bg-[#34446D] justify-center m:flex items-center px-[16px] py-[9px] relative overflow-hidden border border-solid border-[#34446D] tariff m:text-[20px] text-[18px] transition-all duration-300 font-bold tracking-normal  gap-[6px]  hover:text-[#FFF] text-[#FFF] m:text-[#34446D] rounded-[4px] group hover:bg-[#34446D]  leading-[1] '>
                             <span className="sendIconLeft transition-all ease-in m:block hidden">
                                 <QuestionArrow />
                             </span>
