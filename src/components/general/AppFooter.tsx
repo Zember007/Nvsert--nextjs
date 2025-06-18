@@ -56,6 +56,10 @@ const AppFooter = () => {
           <AppMenuItem 
           classNameBox={'absolute whitespace-nowrap !overflow-visible xl:static bottom-[-30px] xl:translate-y-0 translate-y-full'}          
           item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: t("footer.policy") }} isActive={false} />
+                 <AppMenuItem 
+          classNameBox={'absolute whitespace-nowrap !overflow-visible xl:static bottom-[-30px] xl:translate-y-0 translate-y-full'}          
+          item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: 'Обработка персональных данных' }} isActive={false} />
+          
         </div>
       </div>
 

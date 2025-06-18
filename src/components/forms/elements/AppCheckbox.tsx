@@ -65,7 +65,7 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
                     </svg>
                 </span>
             </label>
-            <span className={` transition-all duration-300 peer-checked:text-[#FFF] ${whiteBox ? 'text-[#FFF]' : 'text-[#CCCCCC80]'} ${fail && '!text-[#FF3030]'}`}>{label}</span>
+            <span className={` transition-all duration-300 peer-checked:text-[#FFF] ${whiteBox ? 'text-[#FFF]' : 'text-[#ADADAD]'} ${fail && '!text-[#FF3030]'}`}>{label}</span>
         </div>
     );
 };

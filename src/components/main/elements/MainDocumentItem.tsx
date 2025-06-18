@@ -259,7 +259,7 @@ const MainDocumentItem = memo(({
                                             </motion.div>
                                         </div>
 
-                                        <div className="flex flex-col gap-[10px] items-center">
+                                        <div className="flex gap-[10px]">
                                             <div className="flex flex-col gap-[5px] items-center">
                                                 <span className='text-[14px] text-[#00000080]'>Срок оформления</span>
                                                 <span className='text-[16px] font-bold'>{duration}</span>
