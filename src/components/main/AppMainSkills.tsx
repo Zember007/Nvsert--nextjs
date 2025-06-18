@@ -54,8 +54,8 @@ const AppMainSkills = () => {
     const [widthCards, setWidthCards] = useState<number | null>(null)
 
     useEffect(() => {
-        if (widthWindow && widthWindow < 1240 && isVisibleSection) {
-            if (widthWindow - 40 === widthCards) {
+        if (ref.current && widthWindow && widthWindow < 1240 && isVisibleSection) {
+            if (ref.current.clientWidth - 40 === widthCards) {
                 const slides = gsap.utils.toArray('[data-slider="slide-skill"]');
                 timeLine.current = horizontalLoop(slides, {
                     paused: true,
@@ -67,7 +67,7 @@ const AppMainSkills = () => {
                     }
                 });
             } else {
-                setWidthCards(widthWindow - 40)
+                setWidthCards(ref.current.clientWidth - 40)
             }
 
         } else {

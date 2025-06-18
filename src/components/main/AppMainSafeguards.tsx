@@ -16,7 +16,7 @@ const AppMainSafeguards = () => {
 
   const widthWindow = useWindowWidth()
   const [isVisible, setIsVisible] = useState(false);
-  const divRef = useRef(null);
+  const divRef = useRef<HTMLDivElement>(null);
 
   const guarantees = [
 
@@ -130,8 +130,8 @@ const AppMainSafeguards = () => {
   const [widthCards, setWidthCards] = useState<number | null>(null)
 
   useEffect(() => {
-    if (widthWindow && widthWindow < 1280) {
-      if (widthWindow - 40 === widthCards) {
+    if (widthWindow && widthWindow < 1280 && divRef.current) {
+      if (divRef.current.clientWidth - 40 === widthCards) {
         const slides = gsap.utils.toArray('[data-slider="slide-safeguard"]');
         timeLine.current = horizontalLoop(slides, {
           paused: true,
@@ -143,7 +143,7 @@ const AppMainSafeguards = () => {
           }
         });
       } else {
-        setWidthCards(widthWindow - 40)
+        setWidthCards(divRef.current.clientWidth - 40)
       }
     }
 
