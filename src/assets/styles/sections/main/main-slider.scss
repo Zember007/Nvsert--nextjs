@@ -1,5 +1,5 @@
 .cloneable {
-  @apply xl:flex-row flex-col xl:gap-0 gap-[30px] xl:pt-0 pt-[240px];
+  @apply xl:flex-row flex-col xl:gap-0 gap-[30px];
   justify-content: space-between;
   align-items: end;
   display: flex;
@@ -36,7 +36,7 @@
 
 
 .slider-wrap {
-  @apply xl:pt-[31px];
+  @apply xl:pt-[31px] p-[1px];
   justify-content: flex-start;
   overflow: hidden;
   width: 100%;
@@ -70,9 +70,8 @@
 
 
 .slide-main {
-  @apply xl:inset-[0%] xl:h-[100%] h-[220px] top-0 z-0;
+  @apply xl:inset-[0%] xl:absolute xl:h-[100%] top-0 z-0;
   width: 100%;
-  position: absolute;
   overflow: hidden;
 }
 

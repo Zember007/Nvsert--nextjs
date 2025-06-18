@@ -147,6 +147,47 @@ const SliderMain = () => {
                 <h2 className='section__title'>Помогаем с документами по отраслям</h2>
                 <div className="cloneable">
 
+
+                    <div className="slide-main">
+
+                        <div className="slider-wrap">
+                            <div ref={whiteBgRef} className={`slide-blur xl:left-[562px] left-0 `}>
+                                <span className="line hidden xl:block white" style={{ '--blur': '4px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className="line" style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className="line" style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>
+                            </div>
+
+
+                            <div className="slide-blur right-0">
+                                <span className="line" style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className="line" style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
+                            </div>
+                            <div data-slider="list" className={`slider-list`}
+                                onMouseMove={() => {
+                                }}
+                            >
+
+
+                                {
+                                    slides.map((item, index) => (
+                                        <div
+                                            style={{ ...(widthWindow && widthWindow < 1240 && { width: `${widthWindow - 40}px`, height: `${widthWindow - 40}px` }) }}
+                                            key={index} data-slider="slide" className="slider-slide w-[336px] h-[336px]  h-[220px] shadow-[0px_0px_4px_0px_#00000080] rounded-[8px] border border-solid border-[#FFF]">
+                                            <div className="slide-inner relative bg-[#FFF] overflow-hidden rounded-[8px]">
+                                                <Image src={item.img} alt='slide' fill
+                                                    style={{ objectFit: 'cover' }} />
+                                                <div className="absolute scale-[-0.9] w-full h-auto bg-[#34446D] mix-blend-hue"></div>
+
+                                            </div>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        </div>
+                    </div>
+
                     <div className="slide-dots-box">
                         {slides.map((_, i) => (
                             <div key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
@@ -272,47 +313,6 @@ const SliderMain = () => {
                         </button>
                     </div>
 
-                    <div
-
-                        className="slide-main">
-
-                        <div className="slider-wrap">
-                            <div ref={whiteBgRef} className={`slide-blur xl:left-[562px] left-0 `}>
-                                <span className="line hidden xl:block white" style={{ '--blur': '4px', '--lightness': '100%' } as React.CSSProperties}></span>
-                                <span className="line" style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
-                                <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
-                                <span className="line" style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>
-                            </div>
-
-
-                            <div className="slide-blur right-0">
-                                <span className="line" style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>
-                                <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
-                                <span className="line" style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
-                            </div>
-                            <div data-slider="list" className={`slider-list`}
-                                onMouseMove={() => {
-                                }}
-                            >
-
-
-                                {
-                                    slides.map((item, index) => (
-                                        <div
-                                        style={{...(widthWindow && widthWindow < 1240 && {width: `${widthWindow- 40}px`})}}
-                                            key={index} data-slider="slide" className="slider-slide w-[336px] h-[336px]  h-[220px] shadow-[0px_0px_4px_0px_#00000080] rounded-[8px] border border-solid border-[#FFF]">
-                                            <div className="slide-inner relative bg-[#FFF] overflow-hidden rounded-[8px]">
-                                                <Image src={item.img} alt='slide' fill
-                                                    style={{ objectFit: 'cover' }} />
-                                                <div className="absolute scale-[-0.9] w-full h-auto bg-[#34446D] mix-blend-hue"></div>
-
-                                            </div>
-                                        </div>
-                                    ))
-                                }
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
         </>
