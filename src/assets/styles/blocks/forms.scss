@@ -404,6 +404,7 @@ input:-webkit-autofill:focus {
 .form {
   &__desc {
     @apply text-[#ADADAD] s:mt-[7px] text-[12px] s:text-[14px];
+    line-height: 1.2;
   }
 
   &__button {

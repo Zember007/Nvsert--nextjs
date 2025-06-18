@@ -223,7 +223,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
             {successMessageVisible && <FlightSuccess closeIcon={bg} text="Спасибо за заявку" close={() => { setSuccessMessageVisible(false) }} />}
 
             <div className="h-[16px] s:h-[23px]">
-                <span className={`leading-[1] text-[#FFF] text-[24px] s:text-[32px] ${bg ? 'text-center' : 'text-left'} tracking-[-0.03em] px-[8px]  ${successMessageVisible && 'opacity-0'} linear-text`}>Оформить заявку</span>
+                <span className={`leading-[1] text-[#FFF] text-[24px] s:text-[32px] ${bg ? 'text-center' : 'text-left'} tracking-[-0.03em] s:px-[8px]  ${successMessageVisible && 'opacity-0'} linear-text`}>Оформить заявку</span>
             </div>
 
             <div className={`${successMessageVisible && 'opacity-0'}`}>
