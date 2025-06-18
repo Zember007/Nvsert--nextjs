@@ -178,7 +178,7 @@
   }
 
   &__button {
-    @apply justify-center w-full m:flex items-center relative overflow-hidden m:text-[20px] text-[18px] bg-[#34446D] text-[#FFF] m:bg-[transparent]  m:hover:bg-[#34446D] m:hover:text-[#FFF] font-bold tracking-normal m:flex items-center gap-[10px] m:text-[#34446D] rounded-[4px] border-[#34446D] border border-solid leading-[1];
+    @apply justify-center w-full m:flex items-center relative overflow-hidden m:text-[20px] text-[18px] bg-[#34446D] text-[#FFF] m:bg-[transparent]  m:hover:bg-[#34446D] m:hover:text-[#FFF] tracking-normal m:flex items-center gap-[10px] m:text-[#34446D] rounded-[4px] border-[#34446D] border border-solid leading-[1];
   }
 }
 

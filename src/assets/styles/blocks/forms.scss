@@ -407,6 +407,6 @@ input:-webkit-autofill:focus {
   }
 
   &__button {
-    @apply overflow-hidden  p-[9px] px-[20px] relative flex items-center justify-center bg-[#34446D] text-[18px] s:text-[20px] text-[#FFFFFF] font-bold rounded-[4px];
+    @apply overflow-hidden  p-[9px] px-[20px] relative flex items-center justify-center bg-[#34446D] text-[18px] s:text-[20px] text-[#FFFFFF]  rounded-[4px];
   }
 }
