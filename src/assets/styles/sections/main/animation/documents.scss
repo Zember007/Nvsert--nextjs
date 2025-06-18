@@ -104,7 +104,7 @@
   }
 
   &__navigation {
-    @apply rounded-[6px] overflow-hidden -mx-[1px] w-[calc(100%+2px)] -mt-[1px] border-[transparent] border-solid border text-left box-scale transition-scale active:bg-[#5B6788] m:px-[23px] relative z-[0];
+    @apply rounded-[6px] overflow-hidden -mx-[1px] w-[calc(100%+2px)] m:h-auto h-[59px] -mt-[1px] border-[transparent] border-solid border text-left box-scale transition-scale active:bg-[#5B6788] m:px-[23px] relative z-[0];
 
     &:active {
       box-shadow: 2px 2px 4px 0px #000000CC inset, -2px -2px 4px 0px #000000CC inset;
@@ -117,7 +117,7 @@
     }
 
     &-wrap {
-      @apply w-full relative z-[2] gap-[10px] flex items-center justify-between py-[14px] m:h-auto h-[59px] m:py-[23px] relative;
+      @apply w-full relative z-[2] gap-[10px] flex items-center justify-between py-[14px]  m:py-[23px] relative;
 
       &.active {
         @apply text-[#FFF] !border-[transparent];

@@ -286,10 +286,10 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
                     countTrigger={defaultModalCount}
                 />
                 <main className={`select-none ${transparent && 'transparent-header'} ${calcPageBodyClass && 'cost-calc-page'}`}>
-                    <div className="content">
+                    {/* <div className="content">
                         <AppHeader />
                         {children}
-                    </div>
+                    </div> */}
                     <AppFooter />
                 </main>
                 <div className="bg-noise"></div>

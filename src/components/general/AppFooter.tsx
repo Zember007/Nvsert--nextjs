@@ -35,31 +35,31 @@ const AppFooter = () => {
   ]
 
   return (
-    <footer className="xl:h-[168px] h-[420px] relative flex justify-between p-[30px] bg-[#3C4049] text-[#FFFFFF99] text-[18px]">
-      <div className="flex xl:gap-[120px] xl:items-stretch items-start">
-        <div className="flex flex-col justify-between xl:gap-0 gap-[32px] xl:static absolute bottom-[20px]">
-          <p className="text-[16px]">© 2025 NVSERT</p>
+    <footer className="xl:h-[168px] xl:flex-row gap-[20px] flex-col-reverse items-center xl:items-stretch relative flex justify-between p-[30px] bg-[#3C4049] text-[#FFFFFF99] text-[18px]">
+      <div className="flex xl:gap-[120px] gap-[30px] xl:items-stretch items-center xl:flex-row flex-col-reverse">
+        <div className="flex xl:flex-col flex-col-reverse justify-between xl:items-start items-center xl:gap-0 gap-[16px]">
+          <p className="">© 2025 NVSERT</p>
 
-          <div className="flex flex-col gap-[20px] text-[#FFF] *:leading-[1]">
+          <div className=" xl:text-[16px] xl:items-start items-center text-[14px] flex flex-col gap-[16px] text-[#FFF]">
             <span>{t("footer.inn")}</span>
             <span>{t("footer.company")}</span>
           </div>
         </div>
-        <div className="flex flex-col xl:justify-between items-start relative">
-          <div className="flex gap-[10px] xl:flex-row flex-col">
+        <div className="flex flex-col xl:justify-between xl:items-start gap-[20px] items-center relative">
+          <div className="grid grid-cols-2 xl:flex gap-[10px] xl:flex-row flex-col">
             {menuItems.map((item, i) => (
               <AppMenuItem key={i} item={item} isActive={false} />
             ))}
 
           </div>
 
-          <AppMenuItem 
-          classNameBox={'absolute whitespace-nowrap !overflow-visible xl:static bottom-[-30px] xl:translate-y-0 translate-y-full'}          
-          item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: t("footer.policy") }} isActive={false} />
-                 <AppMenuItem 
-          classNameBox={'absolute whitespace-nowrap !overflow-visible xl:static bottom-[-30px] xl:translate-y-0 translate-y-full'}          
-          item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: 'Обработка персональных данных' }} isActive={false} />
-          
+          <div className="flex gap-[10px] xl:flex-row flex-col">
+            <AppMenuItem
+              item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: t("footer.policy") }} isActive={false} />
+            <AppMenuItem
+              item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: 'Обработка персональных данных' }} isActive={false} />
+          </div>
+
         </div>
       </div>
 
@@ -149,7 +149,6 @@ const AppFooter = () => {
             </PromtModal>
             <PromtModal
               className='!py-[20px]'
-              classNameBox="xl:!relative !absolute xl:bottom-0 xl:right-0 bottom-[100px] right-[30px]"
               content={
                 <div className="flex flex-col gap-[20px]">
                   {langs.map((lang, i) => (

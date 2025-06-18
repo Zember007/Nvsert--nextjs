@@ -112,7 +112,6 @@ export function initSlider({ onChangeFunction, onDragFunction, mobile }) {
     const loop = horizontalLoop(slides, {
         paused: true,
         draggable: true,
-        center: mobile,
         snap: true,
         offsetLeft: mobile ? 0 : 75,
         opacity: !mobile,

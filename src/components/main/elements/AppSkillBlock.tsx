@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import { filterPrepositions } from '@/hook/filter';
+import useWindowWidth from '@/hook/useWindowWidth';
 
 interface AppSkillBlockProps {
   text: string[];
@@ -13,11 +14,12 @@ interface AppSkillBlockProps {
 }
 
 const AppSkillBlock = ({ text, folder, bg, title, img, isVisible, width }: AppSkillBlockProps) => {
+  const widthWindow = useWindowWidth()
+
   const cardRef = useRef<null | HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [mouseX, setMouseX] = useState(0);
   const [mouseY, setMouseY] = useState(0);
-  const [oldMousePX, setOldMousePX] = useState(0);
   const [mouseLeaveDelay, setMouseLeaveDelay] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -42,6 +44,7 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible, width }: AppSk
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
+    if(!widthWindow || widthWindow < 1240) return
     if (!isVisible) return
     const card = cardRef.current;
     if (card) {
@@ -49,12 +52,13 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible, width }: AppSk
       setMouseX(e.clientX - rect.left - dimensions.width / 2);
       setMouseY(e.clientY - rect.top - dimensions.height / 2);
 
-      setOldMousePX(e.clientX - rect.left - dimensions.width / 2)
 
     }
   };
 
   const handleMouseEnter = () => {
+    if(!widthWindow || widthWindow < 1240) return
+
     if (!isVisible) return
     if (mouseLeaveDelay) {
       clearTimeout(mouseLeaveDelay);
@@ -62,13 +66,13 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible, width }: AppSk
   };
 
   const handleMouseLeave = () => {
+    if(!widthWindow || widthWindow < 1240) return
+
     if (!isVisible) return
     setMouseLeaveDelay(setTimeout(() => {
       setMouseX(0);
       setMouseY(0);
-      setTimeout(() => {
-        setOldMousePX(0)
-      }, 500)
+
     }, 1000));
   };
 

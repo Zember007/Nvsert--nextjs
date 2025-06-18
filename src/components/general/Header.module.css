@@ -58,15 +58,6 @@
 
 }
 
-
-@media (max-width: 1239px) {
-  .menu-item::after {
-    opacity: 1;
-
-    background: black;
-  }
-}
-
 .menu-item:hover::after {
   opacity: 1;
 }
