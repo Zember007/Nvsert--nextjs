@@ -57,7 +57,7 @@ const DocumentList = memo(({ content1, listHidden, setListHidden }: DocumentList
     <div className="document__list">
         {content1.map((cont, contIndex) => (
             <div key={contIndex} className='document__list-item'>
-                <p className={`${contIndex === 0 ? 'text-[19px]' : 'text-[16px]'} font-bold`}>
+                <p className={`${contIndex === 0 ? 'm:text-[19px]' : ''} text-[16px] font-bold`}>
                     {filterPrepositions(cont.title)}
                 </p>
                 {cont.subtitle && <span>{cont.subtitle}</span>}
@@ -73,7 +73,7 @@ const DocumentList = memo(({ content1, listHidden, setListHidden }: DocumentList
                 </ul>
                 {cont.list.length > 3 && (
                     <button
-                        className='text-[#34446D] font-bold'
+                        className='text-[#34446D] font-bold text-[16px] text-left'
                         onClick={() => setListHidden(!listHidden)}
                     >
                         {listHidden ? 'Показать полный список документов 🡣' : 'Скрыть 🡡'}
@@ -262,11 +262,11 @@ const MainDocumentItem = memo(({
                                         <div className="flex gap-[10px]">
                                             <div className="flex flex-col gap-[5px] items-center">
                                                 <span className='text-[14px] text-[#00000080]'>Срок оформления</span>
-                                                <span className='text-[16px] font-bold'>{duration}</span>
+                                                <span className='text-[18px] font-bold'>{duration}</span>
                                             </div>
                                             <div className="flex flex-col gap-[5px] items-center">
                                                 <span className='text-[14px] text-[#00000080]'>Стоимость</span>
-                                                <span className='text-[16px] font-bold'>{price}</span>
+                                                <span className='text-[18px] font-bold'>{price}</span>
                                             </div>
                                         </div>
                                     </>
