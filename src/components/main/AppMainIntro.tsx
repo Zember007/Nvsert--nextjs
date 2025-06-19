@@ -5,7 +5,7 @@ import AppMainForm from '../forms/AppMainForm';
 import { filterPrepositions } from '@/hook/filter';
 import { useAnimation, motion } from "framer-motion";
 import { useEffect, useRef } from 'react';
-import GUI from 'lil-gui';
+// import GUI from 'lil-gui';
 
 
 const AppMainIntro = () => {
@@ -61,33 +61,33 @@ const AppMainIntro = () => {
 
     }, [ref])
 
-    const params = useRef({
-        blur: 2,
-        opacity: 0.6,
-      });
+    // const params = useRef({
+    //     blur: 2,
+    //     opacity: 0.6,
+    //   });
     
-      useEffect(() => {
-        const banner = ref.current;
-        if (!banner) return;
+    //   useEffect(() => {
+    //     const banner = ref.current;
+    //     if (!banner) return;
     
-        // Функция обновления CSS-переменных
-        const updateStyles = () => {
-          banner.style.setProperty("--blur-bg", `${params.current.blur}px`);
-          banner.style.setProperty("--bg-op", `${params.current.opacity}`);
-        };
+    //     // Функция обновления CSS-переменных
+    //     const updateStyles = () => {
+    //       banner.style.setProperty("--blur-bg", `${params.current.blur}px`);
+    //       banner.style.setProperty("--bg-op", `${params.current.opacity}`);
+    //     };
     
-        updateStyles(); // установить начальные значения
+    //     updateStyles(); // установить начальные значения
     
-        // Создание GUI
-        const gui = new GUI();
-        gui.add(params.current, "blur", 0, 20).onChange(updateStyles);
-        gui.add(params.current, "opacity", 0, 1).step(0.01).onChange(updateStyles);
+    //     // Создание GUI
+    //     const gui = new GUI();
+    //     gui.add(params.current, "blur", 0, 20).onChange(updateStyles);
+    //     gui.add(params.current, "opacity", 0, 1).step(0.01).onChange(updateStyles);
     
-        // Очистка
-        return () => {
-          gui.destroy();
-        };
-      }, [ref]);
+    //     // Очистка
+    //     return () => {
+    //       gui.destroy();
+    //     };
+    //   }, [ref]);
 
     return (
         <>
