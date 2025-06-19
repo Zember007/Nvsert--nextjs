@@ -22,7 +22,7 @@ const AppMainQuestions = () => {
         <h2 className="section__title">
           {t('MainQuestions.title')}
         </h2>
-        <div className="flex flex-col gap-[10px]">
+        <div className="flex flex-col m:gap-[10px]">
 
           {questions.map((item, index) => (
             <QuestionsBlock
