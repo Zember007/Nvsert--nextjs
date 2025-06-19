@@ -185,20 +185,22 @@ const MainDocumentItem = memo(({
                 ref={wrapperRef}
                 className={`${index !== 0 && '-mt-[1px]'} document-wrapper-border document__box group/main  ${!active ? 'active' : '!border-[#34446D]'}`}>
                 <div
-                    className={`document__border ${!active ? ' group-hover/main:!border-[transparent]' : 'active'}`}
+                    className={`document__border ${!active ? ' m:group-hover/main:!border-[transparent]' : 'active'}`}
                 />
                 <div
                     onClick={handleItemClick}
                     className={`document__navigation group/window ${!active ? '' : 'active'} `}>
 
-
-                    <Image
+                    <div
                         className={` ${active && 'active'} document__small-img `}
-                        ref={smallPhotoRef}
-                        alt='document' src={img}
-                        width="43"
-                        height="60"
-                    />
+                    >
+                        <Image
+                            ref={smallPhotoRef}
+                            alt='document' src={img}
+                            width="41"
+                            height="58"
+                        />
+                    </div>
 
 
                     <div
@@ -227,7 +229,7 @@ const MainDocumentItem = memo(({
                             <div className="document__list-photo">
                                 {windowWidth && windowWidth < 768 &&
                                     <>
-                                       
+
                                         <div className="flex flex-col gap-[10px] w-full">
                                             <motion.div
                                                 animate={controls}

@@ -104,7 +104,7 @@ const AppMainDocuments = () => {
                 }}
                 maskClosable={false}
             >
-                <div className="flex flex-col m:gap-0 gap-[10px]">
+                <div className="flex flex-col">
                     {documents.map((item, index) => (
                         <MainDocumentItem
                             key={index}

@@ -171,10 +171,6 @@ button,
   padding-left: map_get($wrapper, padding-size);
   padding-right: map_get($wrapper, padding-size);
   margin: 0 auto;
-
-  @media (max-width: $media-s) {
-    max-width: 360px;
-  }
 }
 
 .fullpage {
