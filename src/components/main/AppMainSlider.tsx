@@ -173,8 +173,8 @@ const SliderMain = () => {
                                 {
                                     slides.map((item, index) => (
                                         <div
-                                            key={index} data-slider="slide" className="slider-slide xl:w-[336px] xl:h-[336px] w-[320px]  h-[320px] rounded-[8px]">
-                                            <div className="slide-inner relative bg-[#FFF] overflow-hidden rounded-[8px]">
+                                            key={index} data-slider="slide" className="slider-slide xl:w-[336px] xl:h-[336px] w-[320px]  h-[320px] rounded-[6px]">
+                                            <div className="slide-inner relative bg-[#FFF] overflow-hidden rounded-[6px]">
                                                 <Image src={item.img} alt='slide' fill
                                                     style={{ objectFit: 'cover' }} />
                                                 <div className="absolute scale-[-0.9] w-full h-auto bg-[#34446D] mix-blend-hue"></div>
@@ -198,7 +198,7 @@ const SliderMain = () => {
 
 
                         <div className="flex flex-col xl:gap-[15px]  grow relative w-full overflow-hidden">
-                            <span className="xl:h-[50px] h-[65px] bg-[#d6dae2] xl:rounded-[4px]  w-full border-[#34446D] border-solid xl:border border-b border-0 xl:text-[24px] text-[18px] font-bold text-[#000000] block  flex items-center justify-center xl:p-[10px] xl:h-[50px] h-[65px] relative text-center p-[15px] w-full  border border-solid border-[transparent] relative z-[10]">
+                            <span className="xl:h-[50px] h-[65px] bg-[#d6dae2] xl:rounded-[6px]  w-full border-[#34446D] border-solid xl:border border-b border-0 xl:text-[24px] text-[18px] font-bold text-[#000000] block  flex items-center justify-center xl:p-[10px] xl:h-[50px] h-[65px] relative text-center p-[15px] w-full  border border-solid border-[transparent] relative z-[10]">
                                 {
                                     filterPrepositions(slidesLang[activeIndex].title)
                                 }

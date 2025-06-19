@@ -175,7 +175,7 @@ const AppMainFeedback = () => {
                                 {[...Array(19)].map((_, index) =>
                                     <div
                                         onClick={readyPhoto}
-                                        data-slider="slide-feedback" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] min-w-[190px] h-[267px] rounded-[4px]">
+                                        data-slider="slide-feedback" key={index} className="border-[#E5E7EB] border border-solid overflow-hidden w-[190px] min-w-[190px] h-[267px] rounded-[4px]">
                                         <PhotoView src={`/feedbacks/big/${index + 1}.png`}
                                         >
                                             <Image
@@ -200,7 +200,7 @@ const AppMainFeedback = () => {
                                     <div
                                         onClick={readyPhoto}
 
-                                        data-slider="slide-feedback1" key={index} className="border-[#CCCCCC] border border-solid overflow-hidden w-[190px] min-w-[190px] h-[267px] rounded-[4px]">
+                                        data-slider="slide-feedback1" key={index} className="border-[#E5E7EB] border border-solid overflow-hidden w-[190px] min-w-[190px] h-[267px] rounded-[4px]">
                                         <PhotoView src={`/feedbacks/big/${20 + index}.png`}>
                                             <Image
                                                 className='min-h-full'

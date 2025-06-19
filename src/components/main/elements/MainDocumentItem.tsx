@@ -216,8 +216,8 @@ const MainDocumentItem = memo(({
                             <svg
                                 className={`${!active && 'rotate-[180deg]'} group-active/window:*:transition-all group-active/window:*:duration-200 group-active/window:*:stroke-[#FFF] ${active ? '' : 'group-active/window:*:stroke-[#000]'} transition-all duration-300`}
                                 width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M19 19L5 5" stroke={`${active ? 'white' : 'black'}`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M5 13L5 5L13 5" stroke={`${active ? 'white' : 'black'}`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                <path d="M19 19L5 5" stroke={`${active ? '#93969D' : 'black'}`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                <path d="M5 13L5 5L13 5" stroke={`${active ? '#93969D' : 'black'}`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </div>
                     </div>

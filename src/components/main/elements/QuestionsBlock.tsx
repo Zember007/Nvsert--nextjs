@@ -34,11 +34,11 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
 
 
     return (
-        <div className={`relative document-wrapper-border m:mt-0 mt-[-1px] flex flex-col rounded-[6px]  group/main ${active ? '' : 'bg-[#FFFFFF26] hover:bg-[#34446D33]'} z-[0]`}>
+        <div className={`relative document-wrapper-border mt-[-1px] flex flex-col rounded-[6px]  group/main ${active ? '' : 'bg-[#FFFFFF26] hover:bg-[#34446D33]'} z-[0]`}>
             <div
-                className={`document__border m:hidden block ${!active ? 'group-hover/main:!border-[transparent]' : 'active'}`}
+                className={`!left-[6px] !right-[6px] document__border ${!active ? 'group-hover/main:!border-[transparent]' : 'active'}`}
             />
-            <div className={` pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[-1] rounded-[6px]  ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-[transparent] m:border-[#34446D] border-solid border m:border-[#CCCCCC]`}></div>
+            <div className={`pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[-1] rounded-[6px]  ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-[transparent]  border-solid border`}></div>
             <div
                 onClick={() => {
                     setActive(!active)

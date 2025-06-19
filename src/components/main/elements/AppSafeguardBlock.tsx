@@ -26,11 +26,11 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
   return (
     <div
       className={`z-[0] min-w-[300px] xl:w-auto w-[320px] relative card-wrap h-[517px] w-full group/box translate-y-[0] ${!isVisible && '!translate-y-[30px] opacity-0'} transition-all duration-500 `}>
-      <div className="absolute top-[-1px] left-0 right-0 bottom-0 border-[#93969d] z-[1] pointer-events-none border border-solid  rounded-[8px]"></div>
-      <div className="bg-[#FFFFFF26] group-hover/box:bg-[#34446D33] group !shadow-none card  h-full  rounded-[8px] flex flex-col gap-[29px] justify-between ">
+      <div className="absolute top-[-1px] left-0 right-0 bottom-0 border-[#93969d] group-hover/box:border-[#34446D] z-[1] pointer-events-none border border-solid  rounded-[6px]"></div>
+      <div className="bg-[#FFFFFF26] group-hover/box:bg-[#34446D33] group !shadow-none card  h-full  rounded-[6px] flex flex-col gap-[29px] justify-between ">
         <div className="flex flex-col gap-[20px] h-full">
           <div className="overflow-hidden h-[200px]  w-full relative rounded-t-[8px]">
-            <p className="text-[24px] z-[2] text-[#FFF] backdrop-blur-[4px] p-[10px] rounded-[4px] bg-[#FFFFFF1A] font-bold absolute top-[15px] left-[15px]"
+            <p className="text-[24px] z-[2] text-[#FFF] backdrop-blur-[4px] p-[10px] rounded-[4px] bg-[#FFFFFF1A]  absolute top-[15px] left-[15px]"
               style={{
                 maxWidth: (index === 3 ? '220' : '200') + 'px'
               }}
@@ -54,14 +54,13 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
                       {item.subtitle.split(' ')[1]}
                     </>
                     : filterPrepositions(item.subtitle)}</p>
-                  <div className="min-w-[16px] h-[20px] flex items-end">
-                    <svg
-                      className={`rotate-[180deg] group-hover/stroke:rotate-[0deg] *:transition-all *:duration-100 transition-all duration-100`}
-                      width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M19 19L5 5" stroke={`#93969D`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      <path d="M5 13L5 5L13 5" stroke={`#93969D`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </div>
+                  <svg
+                    className={`rotate-[0deg] group-hover/stroke:rotate-[180deg] *:transition-all *:duration-100 transition-all duration-100`}
+                    width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 5L19 19" stroke="#93969D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M19 11L19 19L11 19" stroke="#93969D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+
                 </div>
 
 
