@@ -128,7 +128,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
 }
 
 .section {
-  @apply py-[40px] s:py-[75px] relative flex flex-col gap-[40px] overflow-hidden;
+  @apply py-[40px] s:py-[75px] relative flex flex-col gap-[40px];
 
 
   &__title {

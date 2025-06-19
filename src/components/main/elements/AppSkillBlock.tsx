@@ -10,10 +10,9 @@ interface AppSkillBlockProps {
   title?: string;
   img?: string | StaticImageData;
   isVisible?: boolean;
-  width?: number | null;
 }
 
-const AppSkillBlock = ({ text, folder, bg, title, img, isVisible, width }: AppSkillBlockProps) => {
+const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBlockProps) => {
   const widthWindow = useWindowWidth()
 
   const cardRef = useRef<null | HTMLDivElement>(null);
@@ -80,8 +79,7 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible, width }: AppSk
 
   return (
     <div
-      style={{ ...(width && { width: `${width}px` }) }}
-      className={`hover:z-[12] relative card-wrap h-[230px] w-[300px] ${!folder ? 'cursor-pointer ' : ''}`}
+      className={`hover:z-[12] relative card-wrap h-[230px] xl:w-[300px] w-[320px] ${!folder ? 'cursor-pointer ' : ''}`}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

@@ -29,7 +29,7 @@ const AppMainSkills = () => {
         const observer = new IntersectionObserver(
             ([entry]) => {
                 setIsVisible(entry.isIntersecting);
-                if (entry.isIntersecting && ref.current) observer.unobserve(ref.current);
+                if (entry.isIntersecting && ref.current) observer.unobserve(ref.current);  timeLine.current?.next({ ease: "power3", duration: 0.725 });
             },
             { threshold: 0.3 }
         );
@@ -51,36 +51,31 @@ const AppMainSkills = () => {
 
     const timeLine = useRef<any>(null)
     const [activeIndex, setActive] = useState<number>(0)
-    const [widthCards, setWidthCards] = useState<number | null>(null)
 
     useEffect(() => {
-        if (ref.current && widthWindow && widthWindow < 1240 && isVisibleSection) {
-            if (ref.current.clientWidth - 40 === widthCards) {
-                const slides = gsap.utils.toArray('[data-slider="slide-skill"]');
-                timeLine.current = horizontalLoop(slides, {
-                    paused: true,
-                    draggable: true,
-                    gap: 20,
-                    snap: true,
-                    onChange: (index: number) => {
-                        setActive(index)
-                    }
-                });
-            } else {
-                setWidthCards(ref.current.clientWidth - 40)
-            }
+        if (widthWindow && widthWindow < 1240 && isVisibleSection) {
+            const slides = gsap.utils.toArray('[data-slider="slide-skill"]');
+            timeLine.current = horizontalLoop(slides, {
+                paused: true,
+                center: true,
+                draggable: true,
+                gap: 20,
+                snap: true,
+                onChange: (index: number) => {
+                    setActive(index)
+                }
+            });
 
-        } else {
-            setWidthCards(null)
+           
+
         }
-
         return () => {
             if (timeLine.current) {
-              timeLine.current.kill();
+                timeLine.current.kill();
             }
-          }
+        }
 
-    }, [widthWindow, isVisibleSection, widthCards])
+    }, [widthWindow, isVisibleSection])
 
 
 
@@ -108,7 +103,6 @@ const AppMainSkills = () => {
                                         data-slider="slide-skill"
                                     >
                                         <AppSkillBlock
-                                            width={widthCards}
                                             img={skill.img} title={t(`MainSkills.${skill.key}.title`)} isVisible={isVisible} text={t(`MainSkills.${skill.key}.text`, { returnObjects: true }) as string[]} bg={skill.bg} folder={skill.folder} />
 
                                     </div>

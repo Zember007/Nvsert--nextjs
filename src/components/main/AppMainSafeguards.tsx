@@ -106,6 +106,7 @@ const AppMainSafeguards = () => {
         setIsVisible(entry.isIntersecting);
         if (divRef.current && entry.isIntersecting) {
           observer.unobserve(divRef.current);
+          timeLine.current?.next({ ease: "power3", duration: 0.725 })
         }
 
       },
@@ -127,24 +128,22 @@ const AppMainSafeguards = () => {
 
   const timeLine = useRef<any>(null)
   const [activeIndex, setActive] = useState<number>(0)
-  const [widthCards, setWidthCards] = useState<number | null>(null)
 
   useEffect(() => {
     if (widthWindow && widthWindow < 1280 && divRef.current) {
-      if (divRef.current.clientWidth - 40 === widthCards) {
-        const slides = gsap.utils.toArray('[data-slider="slide-safeguard"]');
-        timeLine.current = horizontalLoop(slides, {
-          paused: true,
-          draggable: true,
-          gap: 20,
-          snap: true,
-          onChange: (index: number) => {
-            setActive(index)
-          }
-        });
-      } else {
-        setWidthCards(divRef.current.clientWidth - 40)
-      }
+
+      const slides = gsap.utils.toArray('[data-slider="slide-safeguard"]');
+      timeLine.current = horizontalLoop(slides, {
+        paused: true,
+        center: true,
+        draggable: true,
+        gap: 20,
+        snap: true,
+        onChange: (index: number) => {
+          setActive(index)
+        }
+      });
+
     }
 
     return () => {
@@ -152,7 +151,7 @@ const AppMainSafeguards = () => {
         timeLine.current.kill();
       }
     }
-  }, [widthWindow, widthCards])
+  }, [widthWindow])
 
 
 
@@ -177,7 +176,6 @@ const AppMainSafeguards = () => {
                     title={item.title}
                     items={item.items}
                     isVisible={isVisible}
-                    width={widthCards}
                   />
                 </div>
               ))
