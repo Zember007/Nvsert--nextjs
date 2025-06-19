@@ -85,7 +85,7 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
       onMouseLeave={handleMouseLeave}
       ref={cardRef} >
       <div
-        className={`card rebound-box relative z-[0] h-full group/item  rounded-[4px]  text-[#000]  w-full`}
+        className={`card rebound-box relative z-[0] h-full group/item  rounded-[6px]  text-[#000]  w-full`}
       >
 
         <div
@@ -95,12 +95,12 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
             }),
             ...(mousePX && { ...cardStyle })
           }}
-          className={`flex border-[#93969D] border border-solid rounded-[4px] overflow-hidden flex-col gap-[14px] relative z-[1] justify-between h-full transition-all duration-500 ${folder ? '!items-center !justify-center' : 'p-[20px]'}`}
+          className={`flex border-[#93969D] border border-solid rounded-[6px] overflow-hidden flex-col gap-[14px] relative z-[1] justify-between h-full transition-all duration-500 ${folder ? '!items-center !justify-center' : 'p-[20px]'}`}
         >
           {
             folder ?
               <>
-                {img && <Image alt="folder" className={`transition-all max-w-[none] duration-300 rounded-[4px] h-full`} src={img} />}
+                {img && <Image alt="folder" className={`transition-all max-w-[none] duration-300 rounded-[6px] h-full`} src={img} />}
               </>
               :
               <>
