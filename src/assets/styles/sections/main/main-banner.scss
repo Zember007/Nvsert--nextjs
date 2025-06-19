@@ -6,9 +6,8 @@
   padding-bottom: 75px;  
   position: relative;
   z-index: 0;
-  --blur-bg: 2px;
-  --bg-op: 0.6;
-  backdrop-filter: blur(var(--blur-bg));
+  
+  background: rgba(0, 0, 0, 0.78);
 
 
   @media (max-width: varibles.$media-s) {
@@ -16,17 +15,16 @@
     padding-bottom: 40px;
   }
 
-  &::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    opacity: var(--bg-op);
-    background: rgb(0, 0, 0);
-  }
+  // &::before {
+  //   content: '';
+  //   position: absolute;
+  //   z-index: -1;
+  //   top: 0;
+  //   bottom: 0;
+  //   left: 0;
+  //   right: 0;
+  //   opacity: var(--bg-op);
+  // }
 
   @media (max-width: varibles.$media-l) {
     padding-top: 100px;
