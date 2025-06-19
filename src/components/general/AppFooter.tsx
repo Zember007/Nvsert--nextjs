@@ -46,7 +46,7 @@ const AppFooter = () => {
           </div>
         </div>
         <div className="flex flex-col xl:justify-between xl:items-start gap-[20px] items-center relative">
-          <div className="grid grid-cols-2 xl:flex gap-[10px] xl:flex-row flex-col">
+          <div className="grid grid-cols-2 xl:flex gap-[10px] xl:flex-row flex-col justify-items-center xl:justify-items-normal">
             {menuItems.map((item, i) => (
               <AppMenuItem key={i} item={item} isActive={false} />
             ))}
@@ -65,7 +65,7 @@ const AppFooter = () => {
 
       <div className="flex flex-col justify-between">
         <div className="flex justify-between ">
-          <div className="flex gap-[10px] xl:flex-row flex-col">
+          <div className="flex gap-[10px] xl:flex-row flex-col items-center">
             {email &&
               <PromtModal
                 content={<div className="flex gap-[4px] items-center h-[14px]">
