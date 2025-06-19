@@ -173,8 +173,7 @@ const SliderMain = () => {
                                 {
                                     slides.map((item, index) => (
                                         <div
-                                            style={{ ...(widthWindow && ref.current && widthWindow < 1240 && { width: `${ref.current.clientWidth - 40}px`, height: `${ref.current.clientWidth - 40}px` }) }}
-                                            key={index} data-slider="slide" className="slider-slide w-[336px] h-[336px]  h-[220px] shadow-[0px_0px_4px_0px_#00000080] rounded-[8px] border border-solid border-[#FFF]">
+                                            key={index} data-slider="slide" className="slider-slide xl:w-[336px] xl:h-[336px] w-[320px]  h-[320px] rounded-[8px]">
                                             <div className="slide-inner relative bg-[#FFF] overflow-hidden rounded-[8px]">
                                                 <Image src={item.img} alt='slide' fill
                                                     style={{ objectFit: 'cover' }} />
