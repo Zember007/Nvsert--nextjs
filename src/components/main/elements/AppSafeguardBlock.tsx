@@ -30,7 +30,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
       <div className="bg-[#FFFFFF26] group-hover/box:bg-[#34446D33] group !shadow-none card  h-full  rounded-[6px] flex flex-col gap-[29px] justify-between ">
         <div className="flex flex-col gap-[20px] h-full">
           <div className="overflow-hidden h-[200px]  w-full relative rounded-t-[8px]">
-            <p className="text-[22px] z-[2] text-[#FFF] backdrop-blur-[4px] p-[10px] rounded-[4px] bg-[#FFFFFF1A]  absolute top-[15px] left-[15px] w-[205px]"        
+            <p className="shadow-[inset_0_0_6px_0_rgba(255, 255, 255, 0.3),_0_0_10px_0_rgba(0, 0, 0, 0.8)] text-[22px] z-[2] text-[#FFF] backdrop-blur-[4px] p-[10px] rounded-[4px] bg-[#FFFFFF1A]  absolute top-[15px] left-[15px] w-[205px]"        
             >{filterPrepositions(title)}</p>
             <Image
               className='w-auto min-w-full h-full group-hover:grayscale transition-all duration-100 ease-in-out'
