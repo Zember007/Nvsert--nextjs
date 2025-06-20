@@ -91,10 +91,10 @@ const WrapperItem = ({ img, title, controls, link }: { link: string; img: string
     return (
         <>
             <div ref={setWrapperRef} className="tariff-wrap">
-                <Link ref={setButtonRef} href={link} className={`tariff no-transitions no-light not-backdrop flex gap-[10px] group  rounded-[4px] items-center hover:bg-[#34446d33] border-solid hover:border-[#000] border border-[transparent]`}>
+                <Link ref={setButtonRef} href={link} className={`tariff overflow-hidden no-transitions no-light not-backdrop flex gap-[10px] group  rounded-[4px] items-center hover:bg-[#34446d33] border-solid hover:border-[#000] border border-[transparent]`}>
                     <motion.div
                         initial={{ y: 40, opacity: 0 }}
-                        className="rounded-[4px] overflow-hidden group-hover:rounded-[2px] min-w-[43px]"
+                        className=" overflow-hidden group-hover:rounded-[2px] min-w-[43px]"
                         animate={controls}>
                         <Image src={img} className="w-[43px] h-[60px]" width={43} height={60} alt="document" />
                     </motion.div>

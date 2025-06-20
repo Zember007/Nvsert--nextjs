@@ -477,7 +477,10 @@
 
 .services-menu {
 
-	background: var(--color);
+	background-color: var(--color);
+	background-image: url('../../images/150.webp');
+	background-repeat: repeat;
+
 	box-shadow: 0 1px 2px 0 rgb(0 0 0 / 55%);
 	backdrop-filter: blur(15px);
 	width: 100vw;
