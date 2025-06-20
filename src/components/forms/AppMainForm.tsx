@@ -216,10 +216,10 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
     }, [active, countTrigger])
 
     return (
-        <motion.div
+        <motion.div 
             animate={controls}
             initial={{ x: 0 }}
-            className={`relative main-form ${bg && 'bg-[#00000050] border-main'} p-[20px] s:pb-[33px] s:pt-[38px] s:px-[40px] max-w-[320px] s:max-w-[400px] flex flex-col s:gap-[20px] gap-[15px] rounded-[6px]`}>
+            className={`relative main-form ${bg && 'bg-[#0000004d] border-main'} p-[20px] s:pb-[33px] s:pt-[38px] s:px-[40px] max-w-[320px] s:max-w-[400px] flex flex-col s:gap-[20px] gap-[15px] rounded-[6px]`}>
             {successMessageVisible && <FlightSuccess closeIcon={bg} text="Спасибо за заявку" close={() => { setSuccessMessageVisible(false) }} />}
 
             <div className="h-[16px] s:h-[23px]">
@@ -231,7 +231,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                     {({ register, errors }) => (
                         <div className="flex flex-col s:gap-[20px] gap-[15px]">
                             <AppInput
-                                className={`${bg ? '!bg-[#2a2a2a]' : '!bg-[transparent]'}   main__input `}
+                                className={`${bg ? '!bg-[#00000026] focus:!bg-[#34446d33] !border-[#444] focus:!border-[#ffffff80]' : '!bg-[transparent] focus:!bg-[#21262F]'}  main__input `}
                                 title={'ФИО'}
                                 inputName="name"
                                 required={true}
@@ -251,7 +251,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                     className="w-full relative z-[1]">
                                     <AppInput
                                         defaultValue={isEmail ? contactData.email : isPhone ? contactData.phone : ''}
-                                        className={`main__input ${bg ? '!bg-[#2a2a2a]' : '!bg-[transparent]'}`}
+                                        className={`main__input ${bg ? '!bg-[#00000026] focus:!bg-[#34446d33] !border-[#444] focus:!border-[#ffffff80]' : '!bg-[transparent] focus:!bg-[#21262F]'}`}
                                         title={isPhone ? 'Телефон' : 'Email'}
                                         inputName="contact"
                                         mask={isPhone ? "phone" : ''}
@@ -295,7 +295,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                             </div>
 
                             <AppTextarea
-                                className={`main__input ${bg ? '!bg-[#2a2a2a]' : '!bg-[transparent]'}`}
+                                className={`main__input ${bg ? '!bg-[#00000026] focus:!bg-[#34446d33] !border-[#444] focus:!border-[#ffffff80]' : '!bg-[transparent] focus:!bg-[#21262F]'}`}
                                 title={'Комментарий'}
                                 inputName="comment"
                             />

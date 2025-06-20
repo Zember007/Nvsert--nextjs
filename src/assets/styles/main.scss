@@ -153,10 +153,6 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   &__input {    
 
 
-    &:focus {
-      background: #21262F !important;
-    }
-
     &:not(:placeholder-shown) {
       background: #21262F !important;
 

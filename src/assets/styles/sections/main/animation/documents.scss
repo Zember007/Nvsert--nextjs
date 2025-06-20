@@ -109,7 +109,7 @@
   }
 
   &__navigation {
-    @apply rounded-[6px] overflow-hidden -mx-[1px] w-[calc(100%+2px)] m:h-auto h-[68px] border-[transparent] border-solid border text-left box-scale transition-scale active:bg-[#5B6788] m:px-[23px] relative z-[0];
+    @apply rounded-[6px] overflow-hidden -mx-[1px] w-[calc(100%+2px)]  h-[68px] border-[transparent] border-solid border text-left box-scale transition-scale active:bg-[#5B6788] m:px-[23px] relative z-[0];
 
     &:active {
       box-shadow: 2px 2px 4px 0px #000000CC inset, -2px -2px 4px 0px #000000CC inset;
