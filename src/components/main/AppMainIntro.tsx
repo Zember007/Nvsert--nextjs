@@ -32,34 +32,34 @@ const AppMainIntro = () => {
 
     const ref = useRef<HTMLDivElement>(null)
 
-    useEffect(() => {
-        const header = document.querySelector('.header')
-        if (!ref.current || !header) return
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (!entry.isIntersecting) {                        
-                        header.classList.add('black'); 
-                    } else {
-                        header.classList.remove('black'); 
-                    }
-                });
-            },
-            {
-                root: null, 
-                rootMargin: '0px',
-                threshold: 0
-            }
-        );
+    // useEffect(() => {
+    //     const header = document.querySelector('.header')
+    //     if (!ref.current || !header) return
+    //     const observer = new IntersectionObserver(
+    //         (entries) => {
+    //             entries.forEach((entry) => {
+    //                 if (!entry.isIntersecting) {                        
+    //                     header.classList.add('black'); 
+    //                 } else {
+    //                     header.classList.remove('black'); 
+    //                 }
+    //             });
+    //         },
+    //         {
+    //             root: null, 
+    //             rootMargin: '0px',
+    //             threshold: 0
+    //         }
+    //     );
 
-        observer.observe(ref.current);
+    //     observer.observe(ref.current);
 
-        return () => {
-            if (!ref.current) return
-            observer.unobserve(ref.current);
-        }
+    //     return () => {
+    //         if (!ref.current) return
+    //         observer.unobserve(ref.current);
+    //     }
 
-    }, [ref])
+    // }, [ref])
 
     // const params = useRef({
     //     blur: 2,
