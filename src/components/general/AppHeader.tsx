@@ -236,10 +236,10 @@ const AppHeader = () => {
                 <div ref={setWrapperRef} key={i} className="tariff-wrap ">
                   <Link ref={setButtonRef} href={item.full_slug} className={`tariff  tariff-inset not-backdrop an-border rounded-[4px] group bdark  `}>
                     <div className={`relative z-[-2] transition-all h-full rounded-[4px]  overflow-hidden`}>
-                      <div className="absolute z-[10] top-1/2 -translate-y-1/2  group-hover:translate-x-0 transition-all p-[13px] -translate-x-full">
+                      <p className={`transition-all whitespace-nowrap left-1/2 -translate-x-1/2 absolute top-1/2 -translate-y-1/2 group-hover:translate-x-0 group-hover:left-[13px] text-[18px] ${darkHeader ? 'text-[#000]' : 'text-[#FFF]'}`}>{t(`navigation.${item.title}.title`)}</p>
+                      <div className="absolute z-[10] top-1/2 -translate-y-1/2 right-0 group-hover:translate-x-0 transition-all p-[13px] translate-x-full">
                         <NavSvg />
                       </div>
-                      <p className={`transition-all whitespace-nowrap right-1/2 translate-x-1/2 absolute top-1/2 -translate-y-1/2 group-hover:translate-x-0 group-hover:right-[13px] text-[18px] ${darkHeader ? 'text-[#000]' : 'text-[#FFF]'}`}>{t(`navigation.${item.title}.title`)}</p>
                     </div>
                   </Link>
                 </div>
