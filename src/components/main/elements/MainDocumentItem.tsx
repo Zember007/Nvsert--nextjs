@@ -218,7 +218,7 @@ const MainDocumentItem = memo(({
                             <p className="document__desc">{duration}</p>
                             <p className="document__desc">{price}</p>
                             <svg
-                                className={`${!active ? 'rotate-[180deg]  ' : ''} *:transition-all *:duration-200   hidden m:block transition-all duration-200`}
+                                className={`${!active ? 'rotate-[180deg]  ' : '*:stroke-[#FFF]'} *:transition-all *:duration-200   hidden m:block transition-all duration-200`}
                                 width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M19 19L5 5" stroke={`#93969D`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 <path d="M5 13L5 5L13 5" stroke={`#93969D`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
