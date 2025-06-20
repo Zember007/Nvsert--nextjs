@@ -96,7 +96,7 @@
     @apply m:mx-[-23px] flex flex-col cursor-pointer rounded-[6px] relative;
 
     &.active {
-      @apply m:hover:bg-[#34446D33] bg-[transparent] ;
+      @apply hover:bg-[#34446D33] bg-[transparent] ;
     }
   }
 
