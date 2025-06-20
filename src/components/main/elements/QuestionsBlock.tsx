@@ -35,7 +35,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
 
     return (
         <div
-            className={`-mt-[1px] document-wrapper-border relative group/main`}
+            className={` document-wrapper-border relative group/main`}
         >
             <div
                 className={`!left-[6px] !right-[6px] document__border ${!active ? 'group-hover/main:!border-[transparent]' : 'active'}`}
