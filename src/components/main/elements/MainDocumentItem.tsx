@@ -208,7 +208,7 @@ const MainDocumentItem = memo(({
 
 
                     <div
-                        className={`document__navigation-wrap container-scale transition-scale backface-hidden ${active ? 'active' : 'text-[#000]'} group-active/window:text-[#FFF]   `}
+                        className={`document__navigation-bg document__navigation-wrap container-scale transition-scale backface-hidden ${active ? 'active' : 'text-[#000]'} group-active/window:text-[#FFF]   `}
                     >
 
                         <h3 className="document__title">

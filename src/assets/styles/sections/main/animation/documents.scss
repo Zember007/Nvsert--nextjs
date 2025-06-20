@@ -110,6 +110,11 @@
       box-shadow: 2px 2px 4px 0px #000000CC inset, -2px -2px 4px 0px #000000CC inset;
     }
 
+    &-bg.active {
+      background-image: url('../../../../images/150.webp');
+      background-repeat: repeat;
+    }
+
     &.active {
       @apply bg-[#5B6788];
       border-color: #000 !important;
