@@ -119,7 +119,7 @@ const AppMainSkills = () => {
                     {filterPrepositions('Наша компания признана одной из ведущих на рынке сертификации в Российской Федерации и стран Евразийского Экономического Союза. Специалисты NVSERT предоставляют широкий спектр услуг, направленный на оформление обязательной и добровольной сертификации, декларирования, соответствия требованиям технических регламентов и других документов, подтверждающих качество выпускаемой продукции.')}
                 </h3>
 
-                <div className="tariff-wrap xl:w-[252px] w-full mt-[20px]" ref={setWrapperRef}>
+                <div className="tariff-wrap xl:w-[252px] w-full mt-[20px] xl:px-0 px-[20px]" ref={setWrapperRef}>
                     <button
                         ref={setButtonRef} className='slider__button group btnIconAn doc-btn tariff'>
 

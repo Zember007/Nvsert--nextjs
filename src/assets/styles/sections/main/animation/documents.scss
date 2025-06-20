@@ -1,3 +1,8 @@
+.document-wrapper-border {
+  position: relative;
+  z-index: 0;
+}
+
 .document-wrapper-border:first-child .border-group {
   border-top-width: 1px;
 }
