@@ -179,14 +179,18 @@ const MainDocumentItem = memo(({
     const commonButtonClasses = 'group btnIconAn doc-btn tariff ';
 
     return (
-        <>
+        <div
+            className={`${index !== 0 && '-mt-[1px]'} document-wrapper-border relative group/main`}
+        >
+
+            <div
+                className={`document__border ${!active ? ' m:group-hover/main:!border-[transparent]' : 'active'}`}
+            />
 
             <div
                 ref={wrapperRef}
-                className={`${index !== 0 && '-mt-[1px]'} document-wrapper-border document__box group/main  ${!active ? 'active' : '!border-[#34446D]'}`}>
-                <div
-                    className={`document__border ${!active ? ' m:group-hover/main:!border-[transparent]' : 'active'}`}
-                />
+                className={` document__box   ${!active ? 'active' : '!border-[#34446D]'}`}>
+
                 <div
                     onClick={handleItemClick}
                     className={`document__navigation group/window ${!active ? '' : 'active'} `}>
@@ -352,7 +356,7 @@ const MainDocumentItem = memo(({
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 });
 

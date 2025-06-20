@@ -351,11 +351,11 @@
     transition: none;
 
     &:not(.no-transitions) {
-        transition: all 0.2s ease;
+        transition: all 0.1s ease;
     }
 
     &.no-transitions {
-        transition: transform 0.2s ease, shadow 0.2s ease;
+        transition: transform 0.1s ease, shadow 0.1s ease;
     }
 
     transform: translateZ(0);
