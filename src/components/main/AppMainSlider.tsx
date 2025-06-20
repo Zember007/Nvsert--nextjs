@@ -1,4 +1,3 @@
-import '@/assets/styles/sections/main/main-slider.scss'
 import { initSlider } from '@/scripts/slider'
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';

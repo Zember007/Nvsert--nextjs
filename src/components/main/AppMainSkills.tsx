@@ -13,6 +13,7 @@ import Image from 'next/image';
 import { filterPrepositions } from '@/hook/filter';
 import ArrowImg from '@/assets/images/svg/arrow-small.svg'
 import { useIntersectionObserver } from '@/hook/useIntersectionObserver';
+import { useButton } from '@/hook/useButton';
 
 gsap.registerPlugin(Draggable);
 
@@ -29,7 +30,7 @@ const AppMainSkills = () => {
         const observer = new IntersectionObserver(
             ([entry]) => {
                 setIsVisible(entry.isIntersecting);
-                if (entry.isIntersecting && ref.current) observer.unobserve(ref.current);  timeLine.current?.next({ ease: "power3", duration: 0.725 });
+                if (entry.isIntersecting && ref.current) observer.unobserve(ref.current); timeLine.current?.next({ ease: "power3", duration: 0.725 });
             },
             { threshold: 0.3 }
         );
@@ -66,7 +67,7 @@ const AppMainSkills = () => {
                 }
             });
 
-           
+
 
         }
         return () => {
@@ -77,11 +78,7 @@ const AppMainSkills = () => {
 
     }, [widthWindow, isVisibleSection])
 
-
-
-
-
-
+    const { setButtonRef, setWrapperRef } = useButton()
 
     return (
 
@@ -121,13 +118,15 @@ const AppMainSkills = () => {
                 <h3 className='skills__wrapper-desc'>
                     {filterPrepositions('Наша компания признана одной из ведущих на рынке сертификации в Российской Федерации и стран Евразийского Экономического Союза. Специалисты NVSERT предоставляют широкий спектр услуг, направленный на оформление обязательной и добровольной сертификации, декларирования, соответствия требованиям технических регламентов и других документов, подтверждающих качество выпускаемой продукции.')}
                 </h3>
-                <Link
-                    href={'/about'}
-                    className='skills__wrapper-move'
-                >
-                    <span>Подробнее о компании</span>
-                    <Image src={ArrowImg} alt='arrow' width={24} height={24} />
-                </Link>
+
+                <div className="tariff-wrap xl:w-[252px] w-full mt-[20px]" ref={setWrapperRef}>
+                    <button
+                        ref={setButtonRef} className='slider__button group btnIconAn doc-btn tariff'>
+
+                        Подробнее о компании
+
+                    </button>
+                </div>
             </div>
         </section >
     );
