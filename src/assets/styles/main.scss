@@ -82,8 +82,8 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   .sendIconLeft {
     @apply transition-all ease-in xl:block hidden;
     position: absolute;
-    left: 0;
-    transform: translateX(-100%);
+    right: 0;
+    transform: translateX(100%);
     opacity: 0;
   }
 
@@ -94,13 +94,13 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   &:hover {
 
     .sendText {
-      @apply xl:translate-x-[55px]
+      @apply xl:translate-x-[-55px]
     }
 
 
     .sendIconLeft {
       transform: translateX(0);
-      left: 15px;
+      right: 15px;
       opacity: 1;
     }
 
@@ -115,13 +115,13 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
     &:hover {
 
       .sendText {
-        @apply xl:translate-x-[20px];
+        @apply xl:translate-x-[-20px];
       }
 
 
       .sendIconLeft {
         transform: translateX(0);
-        left: 10px;
+        right: 10px;
         opacity: 1;
       }
     }
