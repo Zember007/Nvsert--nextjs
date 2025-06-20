@@ -197,12 +197,12 @@ const SliderMain = () => {
 
 
                         <div className="flex flex-col xl:gap-[15px]  grow relative w-full overflow-hidden">
-                            <span className="xl:h-[50px] h-[65px] bg-[#d6dae2] xl:rounded-[6px]  w-full border-[#34446D] border-solid xl:border border-b border-0 xl:text-[24px] text-[18px] font-bold text-[#000000] block  flex items-center justify-center xl:p-[10px] xl:h-[50px] h-[65px] relative text-center p-[15px] w-full  border border-solid border-[transparent] relative z-[10]">
+                            <span className="overlay-title">
                                 {
                                     filterPrepositions(slidesLang[activeIndex].title)
                                 }
                             </span>
-                            <p className={`grow slide-text xl:p-0 p-[20px] relative w-full h-full text-[16px] bg-[#FFF] `}>
+                            <p className={`grow slide-text xl:p-0 p-[20px] w-full h-full text-[16px] bg-[#FFF] `}>
 
                                 {filterPrepositions(slidesLang[activeIndex].text)}
 
@@ -271,7 +271,7 @@ const SliderMain = () => {
                                     </button>
                                 </div>
                             </div>
-                            <div className="flex item-center text-[40px] font-[300] text-[#34446D] ">
+                            <div className="flex item-center text-[40px] font-[300] text-[#93969D] ">
                                 <div className="h-[40px] overflow-hidden">
                                     <div className="count-column rubik">
                                         <h3 data-slide-count="step" className="count-heading ">01</h3>
