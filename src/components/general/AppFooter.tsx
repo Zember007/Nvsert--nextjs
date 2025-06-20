@@ -36,11 +36,11 @@ const AppFooter = () => {
 
   return (
     <footer className="xl:h-[234px] xl:flex-row gap-[20px] flex-col-reverse items-center xl:items-stretch relative flex justify-between p-[30px] bg-[#3C4049] text-[#FFFFFF99] text-[18px]">
-      <div className="flex xl:gap-[120px] gap-[30px] xl:items-stretch items-center xl:flex-row flex-col-reverse">
-        <div className="flex xl:flex-col flex-col-reverse justify-between xl:items-start items-center xl:gap-0 gap-[16px]">
+      <div className="flex xl:gap-[120px] gap-[30px] xl:items-stretch items-center xl:flex-row flex-col-reverse text-[#FFF]">
+        <div className="xl:py-[10px] flex xl:flex-col flex-col-reverse justify-between xl:items-start items-center xl:gap-0 gap-[16px]">
           <p className="">© 2025 NVSERT</p>
 
-          <div className=" xl:text-[16px] xl:items-start items-center text-[14px] flex flex-col gap-[16px] text-[#FFF]">
+          <div className=" xl:text-[16px] xl:items-start items-center text-[14px] flex flex-col xl:gap-[18px]  gap-[16px] ">
             <span>{t("footer.inn")}</span>
             <span>{t("footer.company")}</span>
           </div>
@@ -53,13 +53,13 @@ const AppFooter = () => {
 
           </div>
 
-          <div className="flex gap-[10px] xl:flex-row flex-col">
+          <div className="flex xl:gap-[8px] gap-[10px] flex-col">
             <AppMenuItem
-              className="after:!content-none xl:after:!content-[''] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] !h-[50px] !justify-center"
+              className="after:!content-none xl:after:!content-[''] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] !h-[50px] xl:!justify-start !justify-center"
 
               item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: t("footer.policy") }} isActive={false} />
             <AppMenuItem
-              className="after:!content-none xl:after:!content-[''] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] !h-[50px] !justify-center"
+              className="after:!content-none xl:after:!content-[''] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] !h-[50px] xl:!justify-start !justify-center"
 
               item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: 'Обработка персональных данных' }} isActive={false} />
           </div>
