@@ -91,7 +91,7 @@
     @apply m:mx-[-23px] flex flex-col cursor-pointer border-solid border border-[transparent] rounded-[6px] relative;
 
     &.active {
-      @apply m:hover:bg-[#34446D33] bg-[transparent] border-[transparent] m:hover:border-[#93969D];
+      @apply m:hover:bg-[#34446D33] bg-[transparent] border-[transparent] active:border-[#93969D] m:hover:border-[#93969D];
     }
   }
 
