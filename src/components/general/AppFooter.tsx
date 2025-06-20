@@ -35,7 +35,7 @@ const AppFooter = () => {
   ]
 
   return (
-    <footer className="xl:h-[234px] xl:flex-row gap-[20px] flex-col-reverse items-center xl:items-stretch relative flex justify-between p-[30px] bg-[#3C4049] text-[#FFFFFF99] text-[18px]">
+    <footer className="rounded-t-[35px] xl:h-[234px] xl:flex-row gap-[20px] flex-col-reverse items-center xl:items-stretch relative flex justify-between p-[30px] bg-[#3C4049] text-[#FFFFFF99] text-[18px]">
       <div className="flex xl:gap-[120px] gap-[30px] xl:items-stretch items-center xl:flex-row flex-col-reverse text-[#FFF]">
         <div className="xl:py-[10px] flex xl:flex-col flex-col-reverse justify-between xl:items-start items-center xl:gap-0 gap-[16px]">
           <p className="">© 2025 NVSERT</p>
