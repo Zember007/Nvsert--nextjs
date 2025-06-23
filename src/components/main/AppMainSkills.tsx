@@ -60,7 +60,7 @@ const AppMainSkills = () => {
                 paused: true,
                 center: true,
                 draggable: true,
-                gap: 20,
+                gap: (widthWindow - 320) / 2 ,
                 snap: true,
                 onChange: (index: number) => {
                     setActive(index)
