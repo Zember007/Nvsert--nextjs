@@ -35,7 +35,7 @@ const AppFooter = () => {
   ]
 
   return (
-    <footer className="rounded-t-[35px] xl:h-[234px] xl:flex-row gap-[20px] flex-col-reverse items-center xl:items-stretch relative flex justify-between p-[30px] bg-[#3C4049] text-[#FFFFFF99] text-[18px]">
+    <footer className="rounded-t-[35px] xl:h-[234px] xl:flex-row gap-[35px] flex-col-reverse items-center xl:items-stretch relative flex justify-between p-[30px] bg-[#3C4049] text-[#FFFFFF99] text-[18px]">
       <div className="flex xl:gap-[120px] gap-[30px] xl:items-stretch items-center xl:flex-row flex-col-reverse text-[#FFF]">
         <div className="xl:py-[10px] flex xl:flex-col flex-col-reverse justify-between xl:items-start items-center xl:gap-0 gap-[16px]">
           <p className="">© 2025 NVSERT</p>
@@ -45,7 +45,7 @@ const AppFooter = () => {
             <span>{t("footer.company")}</span>
           </div>
         </div>
-        <div className="flex flex-col xl:justify-between xl:items-start gap-[20px] items-center relative">
+        <div className="flex flex-col xl:justify-between xl:items-start gap-[35px] items-center relative">
           <div className="grid grid-cols-2 xl:flex gap-[10px] xl:flex-row flex-col justify-items-center xl:justify-items-normal">
             {menuItems.map((item, i) => (
               <AppMenuItem key={i} item={item} isActive={false} />
@@ -172,6 +172,7 @@ const AppFooter = () => {
                 }} isActive={false} />
             </PromtModal>
             <PromtModal
+              classNameBox="mt-[25px]"
               className='!py-[20px]'
               content={
                 <div className="flex flex-col gap-[20px]">
