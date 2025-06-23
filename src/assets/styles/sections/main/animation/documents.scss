@@ -10,7 +10,8 @@
 .document-wrapper-border .border-group {
   border-bottom-width: 1px;
   border-style: solid;
-
+  height: calc(100% + 1px);
+  transform: translateY(1px);
 }
 
 .drop,
@@ -93,7 +94,7 @@
 
 .document {
   &__box {
-    @apply m:mx-[-23px] flex flex-col cursor-pointer rounded-[6px] relative;
+    @apply m:mx-[-23px] flex flex-col rounded-[6px] relative;
 
     &.active {
       @apply hover:bg-[#34446D33] bg-[transparent] ;
@@ -101,7 +102,7 @@
   }
 
   &__border {
-    @apply border-[#93969D] absolute top-[-1px] bottom-[-1px] border-group right-[4px] left-[4px] m:right-[0] m:left-[0];
+    @apply border-[#93969D] absolute bottom-[0] border-group right-[4px] left-[4px] m:right-[0] m:left-[0];
 
     &.active {
       @apply border-[transparent];
@@ -109,7 +110,7 @@
   }
 
   &__navigation {
-    @apply rounded-[6px] overflow-hidden -mx-[1px] w-[calc(100%+2px)]  h-[68px] border-[transparent] border-solid border text-left box-scale transition-scale active:bg-[#5B6788] m:px-[23px] relative z-[0];
+    @apply rounded-[6px] overflow-hidden h-[70px] text-left  transition-scale active:bg-[#5B6788] m:px-[23px] relative z-[0];
 
     &:active {
       box-shadow: 2px 2px 4px 0px #000000CC inset, -2px -2px 4px 0px #000000CC inset;
@@ -130,7 +131,7 @@
       @apply w-full relative z-[2] gap-[10px] flex items-center justify-between h-full  m:py-[23px] relative;
 
       &.active {
-        @apply text-[#FFF] !border-[transparent];
+        @apply text-[#FFF];
       }
     }
   }

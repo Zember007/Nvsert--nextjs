@@ -180,7 +180,7 @@ const MainDocumentItem = memo(({
 
     return (
         <div
-            className={`document-wrapper-border relative group/main`}
+            className={`document-wrapper-border group/main`}
         >
 
             <div
