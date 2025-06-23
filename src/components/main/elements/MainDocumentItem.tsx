@@ -187,7 +187,7 @@ const MainDocumentItem = memo(({
         >
 
             <div
-                className={`document__border ${!active ? 'group-active/main:!border-[transparent] m:group-hover/main:!border-[transparent]' : 'active'}`}
+                className={`document__border ${!active ? 'group-active/main:!border-[transparent] group-hover/main:!border-[transparent]' : 'active'}`}
             />
 
             <div
