@@ -164,8 +164,7 @@ const SliderMain = () => {
                                 <span className="line" style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
                             </div>
                             <div data-slider="list" className={`slider-list`}
-                                onMouseMove={() => {
-                                }}
+                                style={{ ...(widthWindow && widthWindow < 1240 && { gap: (widthWindow - 320) / 2 }) }}
                             >
 
 

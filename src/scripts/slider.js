@@ -115,7 +115,8 @@ export function initSlider({ onChangeFunction, onDragFunction, mobile }) {
         snap: true,
         offsetLeft: mobile ? 0 : 75,
         opacity: !mobile,
-        gap: mobile ? 20 : 0,
+        center: mobile,
+        gap: mobile ? (window.innerWidth - 320) / 2 : 0,
         onChange: (index) => {
             if (activeElement) {
                 activeElement.classList.remove("active");
