@@ -90,7 +90,7 @@ const AppMainSkills = () => {
             className="section wrapper">
             <h2 className="section__title">Наши основные преимущества</h2>
             <div className="skills__wrapper">
-                <div className="flex flex-col gap-[20px]">
+                <div className="flex flex-col gap-[20px] overflow-hidden">
                     <div className="skills__box"
                     style={{...(widthWindow && widthWindow < 1240 && {gap: (widthWindow - 320) / 2})}}
                     >

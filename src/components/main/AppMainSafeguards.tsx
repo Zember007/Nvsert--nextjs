@@ -133,11 +133,12 @@ const AppMainSafeguards = () => {
     if (widthWindow && widthWindow < 1280 && divRef.current) {
 
       const slides = gsap.utils.toArray('[data-slider="slide-safeguard"]');
+      const gap = (widthWindow - 320) / 2
       timeLine.current = horizontalLoop(slides, {
         paused: true,
         center: true,
         draggable: true,
-        gap: 20,
+        gap: gap,
         snap: true,
         onChange: (index: number) => {
           setActive(index)
@@ -162,8 +163,10 @@ const AppMainSafeguards = () => {
         ref={divRef}
         className="section wrapper">
         <h2 className="section__title">Гарантии и безупречный сервис</h2>
-        <div className="flex flex-col gap-[20px]">
-          <div className="flex gap-[20px]">
+        <div className="flex flex-col gap-[20px] overflow-hidden">
+          <div className="flex gap-[20px]"          
+          style={{...(widthWindow && widthWindow < 1240 && {gap: (widthWindow - 320) / 2})}}
+          >
             {
               guarantees.map((item, index) => (
                 <div
