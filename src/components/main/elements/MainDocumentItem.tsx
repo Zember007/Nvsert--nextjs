@@ -138,16 +138,19 @@ const MainDocumentItem = memo(({
 
         const scrollOptions: ScrollIntoViewOptions = {
             behavior: 'smooth',
-            block: 'center'
+            block: 'start'
         };
 
-        if (index === 0) {
-            documents_box.scrollIntoView({ ...scrollOptions, block: 'start' });
-        } else if (index === 17) {
-            documents_box.scrollIntoView({ ...scrollOptions, block: 'end' });
-        } else {
-            el.scrollIntoView(scrollOptions);
-        }
+        // if (index === 0) {
+        //     documents_box.scrollIntoView({ ...scrollOptions, block: 'start' });
+        // } else if (index === 17) {
+        //     documents_box.scrollIntoView({ ...scrollOptions, block: 'start' });
+        // } else {
+        //     el.scrollIntoView(scrollOptions);
+        // }
+
+        el.scrollIntoView(scrollOptions);
+
     };
 
     useEffect(() => {
