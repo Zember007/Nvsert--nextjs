@@ -10,6 +10,7 @@ import AudioLogo from '@/assets/images/svg/audio-selector.svg';
 import { RootState } from "@/config/store";
 import AppMenuItem from "./AppMenuItem";
 import PromtModal from "../modals/PromtModal";
+import { useHeaderContext } from "../contexts/HeaderContext";
 
 const AppFooter = () => {
 
@@ -33,6 +34,9 @@ const AppFooter = () => {
     { lable: 'Россия', code: 'ru' },
     { lable: 'English', code: 'en' },
   ]
+
+  const { openDefaultModal } = useHeaderContext();
+
 
   return (
     <footer className="rounded-t-[35px] xl:h-[234px] xl:flex-row gap-[35px] flex-col-reverse items-center xl:items-stretch relative flex justify-between p-[30px] bg-[#3C4049] text-[#FFFFFF99] text-[18px]">
@@ -71,6 +75,7 @@ const AppFooter = () => {
         <div className="flex justify-between ">
           <div className="flex gap-[10px] xl:flex-row flex-col items-center">
             <button
+              onClick={() => { openDefaultModal('introForm') }}
               className="xl:hidden  border border-solid text-[18px] flex items-center justify-between px-[15px] text-[#FFF]  border-[#93969D] h-[50px] w-[200px] rounded-[4px] bg-[#34446D]"
             >
               <span>Связаться</span>
