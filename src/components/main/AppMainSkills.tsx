@@ -53,19 +53,22 @@ const AppMainSkills = () => {
     const timeLine = useRef<any>(null)
     const [activeIndex, setActive] = useState<number>(0)
 
+
     useEffect(() => {
         if (widthWindow && widthWindow < 1240 && isVisibleSection) {
             const slides = gsap.utils.toArray('[data-slider="slide-skill"]');
+            const gap = (widthWindow - 320) / 2
             timeLine.current = horizontalLoop(slides, {
                 paused: true,
                 center: true,
                 draggable: true,
-                gap: (widthWindow - 320) / 2 ,
+                gap:  gap,
                 snap: true,
                 onChange: (index: number) => {
                     setActive(index)
                 }
             });
+
 
 
 
@@ -88,7 +91,9 @@ const AppMainSkills = () => {
             <h2 className="section__title">Наши основные преимущества</h2>
             <div className="skills__wrapper">
                 <div className="flex flex-col gap-[20px]">
-                    <div className="skills__box">
+                    <div className="skills__box"
+                    style={{...(widthWindow && widthWindow < 1240 && {gap: (widthWindow - 320) / 2})}}
+                    >
 
                         {
                             skillsData.map((skill, index) => {
