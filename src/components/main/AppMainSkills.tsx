@@ -114,7 +114,11 @@ const AppMainSkills = () => {
                     </div>
                     <div className="slide-dots-box">
                         {skillsData.map((_, i) => (
-                            <div key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
+                            <div
+                            onClick={() => {
+                                timeLine.current.toIndex(i,{ ease: "power3", duration: 0.725 })
+                            }}
+                            key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
                         ))}
                     </div>
 
