@@ -136,8 +136,8 @@ const AppMainSafeguards = () => {
       const gap = (widthWindow - 320) / 2
       timeLine.current = horizontalLoop(slides, {
         paused: true,
-        center: true,
         draggable: true,
+        offsetLeft: gap,
         gap: gap,
         snap: true,
         onChange: (index: number) => {
