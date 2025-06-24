@@ -126,14 +126,11 @@ const SliderMain = () => {
         };
     }, [whiteBgRef, ref, isVisible, widthWindow])
 
-
-
     const { setButtonRef, setWrapperRef } = useButton()
 
     const { openDefaultModal } = useHeaderContext();
 
     const { t } = useTranslation()
-
 
     const slidesLang = t('MainSlider.items', { returnObjects: true }) as slideItem[]
 
