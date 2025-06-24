@@ -105,7 +105,7 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
             <nav className="header-nav">
                 <ul className="header-nav__list">
                     {canGoBack && (
-                        <li className="w-full flex items-center justify-between">
+                        <li className="w-full grid grid-cols-3 items-center justify-items-center">
                             <button
                                 onClick={handleGoBack}
                                 className="h-[50px] flex items-center"
@@ -115,7 +115,7 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
                                 </svg>
                                 <span className="text-[18px] text-[#FFF]">Назад</span>
                             </button>
-                            <span className="text-[18px] text-[#FFF]">
+                            <span className="text-[20px] font-bold text-[#FFF]">
                                 {currentLevel.title}
                             </span>
                         </li>
