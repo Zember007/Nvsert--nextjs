@@ -60,7 +60,7 @@ const AppMainSkills = () => {
             const gap = (widthWindow - 320) / 2
             timeLine.current = horizontalLoop(slides, {
                 paused: true,
-                offsetLeft: gap,
+                center: true,
                 draggable: true,
                 gap: gap,
                 snap: true,
