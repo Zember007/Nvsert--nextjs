@@ -139,7 +139,7 @@ const SliderMain = () => {
 
     useEffect(() => {
 
-        if(!overlayText.current || !timeLine.current) return
+        if (!overlayText.current) return
 
         let startX = 0;
 
@@ -151,14 +151,21 @@ const SliderMain = () => {
             const endX = e.changedTouches[0].clientX;
             const diffX = endX - startX;
 
-            if (Math.abs(diffX) > 50) { 
+            if (Math.abs(diffX) > 50) {
                 if (diffX > 0) {
-                    timeLine.current.next({ ease: "power3", duration: 0.725 })
-                } else {
                     timeLine.current.previous({ ease: "power3", duration: 0.725 })
+
+                } else {
+                    timeLine.current.next({ ease: "power3", duration: 0.725 })
+
                 }
             }
         });
+
+        return () => {
+            overlayText.current?.removeEventListener('touchend', function () { })
+            overlayText.current?.removeEventListener('touchstart', function () { })
+        }
     }, [overlayText, timeLine])
 
 
@@ -220,8 +227,8 @@ const SliderMain = () => {
                     </div>
 
                     <div
-                    ref={overlayText}
-                    className={`overlay `}>
+                        ref={overlayText}
+                        className={`overlay `}>
                         <div className={`overlay-slider`}></div>
 
 
