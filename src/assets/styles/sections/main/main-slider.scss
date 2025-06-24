@@ -1,3 +1,5 @@
+@use '../../base/variables' as varibles;
+
 .cloneable {
   @apply xl:flex-row flex-col xl:gap-0 gap-[30px];
   justify-content: space-between;
@@ -15,13 +17,13 @@
 }
 
 .overlay-title {
-  @apply xl:h-[50px] h-[65px] xl:rounded-[6px] rounded-b-[5px]  border-[#93969D] border-solid xl:border border-b border-0 xl:text-[24px] s:text-[20px] text-[18px] text-[#000]  flex items-center justify-center xl:p-[10px]  p-[15px] w-full ;
+  @apply xl:h-[50px] h-[65px] xl:rounded-[6px] rounded-b-[5px] border-[#93969D] border-solid xl:border border-b border-0 xl:text-[24px] s:text-[20px] text-[18px] text-[#000] flex items-center justify-center xl:p-[10px] p-[15px] w-full;
 
-	--color: rgba(25, 24, 35, 0.4);
+  --color: rgba(25, 24, 35, 0.4);
 
-	background-color: var(--color);
-	background-image: url('../../../images/150.webp');
-	background-repeat: repeat;
+  background-color: var(--color);
+  background-image: url('../../../images/150.webp');
+  background-repeat: repeat;
 
 }
 
@@ -84,6 +86,11 @@
   @apply xl:inset-[0%] xl:absolute xl:h-[100%] top-0 z-0;
   width: 100%;
   overflow: hidden;
+
+  @media (max-width: varibles.$media-xl) {
+    width: calc(100% + 40px);
+    margin: 0 -20px;
+  }
 }
 
 
@@ -98,7 +105,7 @@
 
 
 .overlay-slider {
-  @apply absolute top-0 xl:right-[76px] left-0 bottom-0 z-[-2] transition-all duration-300 ;
+  @apply absolute top-0 xl:right-[76px] left-0 bottom-0 z-[-2] transition-all duration-300;
   background: url(../../../images/svg/functional/bg-slider.svg);
   background-size: cover;
   backdrop-filter: blur(1px);
@@ -183,12 +190,12 @@
     @apply justify-between items-end w-full relative z-[10] xl:flex hidden;
 
     .item {
-      @apply hover:bg-[#34446D]  h-[50px] rounded-[4px] border-[#34446D] border border-solid flex items-center justify-center
+      @apply hover:bg-[#34446D] h-[50px] rounded-[4px] border-[#34446D] border border-solid flex items-center justify-center
     }
   }
 
   &__button {
-    @apply justify-center w-full m:flex items-center relative overflow-hidden m:text-[20px] text-[18px] bg-[#34446D] text-[#FFF] m:bg-[transparent]  m:hover:bg-[#34446D] m:hover:text-[#FFF] tracking-normal m:flex items-center gap-[10px] m:text-[#34446D] rounded-[4px] border-[#34446D] border border-solid leading-[1];
+    @apply justify-center w-full m:flex items-center relative overflow-hidden m:text-[20px] text-[18px] bg-[#34446D] text-[#FFF] m:bg-[transparent] m:hover:bg-[#34446D] m:hover:text-[#FFF] tracking-normal m:flex items-center gap-[10px] m:text-[#34446D] rounded-[4px] border-[#34446D] border border-solid leading-[1];
   }
 }
 

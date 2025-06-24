@@ -113,7 +113,7 @@ export function initSlider({ onChangeFunction, onDragFunction, mobile }) {
         paused: true,
         draggable: true,
         snap: true,
-        offsetLeft: mobile ? (window.innerWidth - 320) / 2 - 20 : 75,
+        offsetLeft: mobile ? (window.innerWidth - 320) / 2 : 75,
         opacity: !mobile,
         gap: mobile ? (window.innerWidth - 320) / 2 : 0,
         onChange: (index) => {

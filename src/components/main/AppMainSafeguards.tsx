@@ -163,8 +163,8 @@ const AppMainSafeguards = () => {
         ref={divRef}
         className="section wrapper">
         <h2 className="section__title">Гарантии и безупречный сервис</h2>
-        <div className="flex flex-col gap-[20px] overflow-hidden ">
-          <div className="flex gap-[20px]"          
+        <div className="flex flex-col gap-[20px]">
+          <div className="safeguard__box"          
           style={{...(widthWindow && widthWindow < 1240 && {gap: (widthWindow - 320) / 2})}}
           >
             {

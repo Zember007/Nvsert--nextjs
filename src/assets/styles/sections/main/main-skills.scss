@@ -1,3 +1,5 @@
+@use '../../base/variables' as varibles;
+
 .skills {
     &__wrapper {
         @apply flex flex-col;
@@ -16,5 +18,10 @@
     }
     &__box {
         @apply flex xl:grid grid-cols-4 gap-[20px];
+
+        @media (max-width: varibles.$media-xl) {
+            width: calc(100% + 40px);
+            margin: 0 -20px;
+          }
     }
 }

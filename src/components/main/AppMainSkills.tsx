@@ -60,9 +60,9 @@ const AppMainSkills = () => {
             const gap = (widthWindow - 320) / 2
             timeLine.current = horizontalLoop(slides, {
                 paused: true,
-                center: true,
+                offsetLeft: gap,
                 draggable: true,
-                gap:  gap,
+                gap: gap,
                 snap: true,
                 onChange: (index: number) => {
                     setActive(index)
@@ -90,9 +90,9 @@ const AppMainSkills = () => {
             className="section wrapper">
             <h2 className="section__title">Наши основные преимущества</h2>
             <div className="skills__wrapper">
-                <div className="flex flex-col gap-[20px] overflow-hidden">
+                <div className="flex flex-col gap-[20px]">
                     <div className="skills__box"
-                    style={{...(widthWindow && widthWindow < 1240 && {gap: (widthWindow - 320) / 2})}}
+                        style={{ ...(widthWindow && widthWindow < 1240 && { gap: (widthWindow - 320) / 2 }) }}
                     >
 
                         {
@@ -115,10 +115,10 @@ const AppMainSkills = () => {
                     <div className="slide-dots-box">
                         {skillsData.map((_, i) => (
                             <div
-                            onClick={() => {
-                                timeLine.current.toIndex(i,{ ease: "power3", duration: 0.725 })
-                            }}
-                            key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
+                                onClick={() => {
+                                    timeLine.current.toIndex(i, { ease: "power3", duration: 0.725 })
+                                }}
+                                key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
                         ))}
                     </div>
 

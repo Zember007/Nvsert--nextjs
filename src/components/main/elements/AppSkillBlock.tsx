@@ -95,7 +95,7 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
             }),
             ...(mousePX && { ...cardStyle })
           }}
-          className={`flex border-[#93969D] border border-solid rounded-[6px] overflow-hidden flex-col gap-[14px] relative z-[1] justify-between h-full transition-all duration-500 ${folder ? '!items-center !justify-center' : 'p-[20px]'}`}
+          className={`flex border-[#93969D]  border-solid rounded-[6px] overflow-hidden flex-col gap-[14px] relative z-[1] justify-between h-full transition-all duration-500 ${folder ? '!items-center !justify-center xl:border' : 'border p-[20px]'}`}
         >
           {
             folder ?
