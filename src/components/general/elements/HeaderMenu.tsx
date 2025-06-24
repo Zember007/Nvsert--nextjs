@@ -152,6 +152,13 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
                     href="/find-out-cost/"
                     className="btn btn--primary btn--m header__calc-link"
                 >
+                    Заказать звонок
+                </Link>
+                <Link
+                    href="/find-out-cost/"
+                    className="btn btn--primary btn--m header__calc-link"
+                >
+                    Оформить заявку
                 </Link>
             </div>
         </div>

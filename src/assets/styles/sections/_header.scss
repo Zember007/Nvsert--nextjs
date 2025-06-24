@@ -383,8 +383,14 @@
 			}
 
 			.header__calc-link {
-				display: block;
+				display: flex;
+				align-items: center;
+				justify-content: center;
 				margin-top: 56px;
+				border: 1px solid #93969d;
+				border-radius: 4px;			
+				height: 50px;
+				font-size: 20px;
 				z-index: 1;
 				margin-left: 0;
 
