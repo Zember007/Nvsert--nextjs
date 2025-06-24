@@ -65,24 +65,24 @@ const AppMainIntro = () => {
     //     blur: 2,
     //     opacity: 0.6,
     //   });
-    
+
     //   useEffect(() => {
     //     const banner = ref.current;
     //     if (!banner) return;
-    
+
     //     // Функция обновления CSS-переменных
     //     const updateStyles = () => {
     //       banner.style.setProperty("--blur-bg", `${params.current.blur}px`);
     //       banner.style.setProperty("--bg-op", `${params.current.opacity}`);
     //     };
-    
+
     //     updateStyles(); // установить начальные значения
-    
+
     //     // Создание GUI
     //     const gui = new GUI();
     //     gui.add(params.current, "blur", 0, 20).onChange(updateStyles);
     //     gui.add(params.current, "opacity", 0, 1).step(0.01).onChange(updateStyles);
-    
+
     //     // Очистка
     //     return () => {
     //       gui.destroy();
@@ -95,7 +95,15 @@ const AppMainIntro = () => {
 
                 <div className="wrapper">
                     <div className='main-banner__content'>
-                        <h1 className="main-banner__title">{filterPrepositions(t('mainIntro.title'))}</h1>
+                        <div className="flex flex-col">
+                            <h1 className="main-banner__title">{filterPrepositions(t('mainIntro.title'))}</h1>
+                            <iframe
+                                src="https://test1.audiosector.ru/"
+                                width="100%"
+                                height="600"
+                                sandbox="allow-scripts allow-same-origin">
+                            </iframe>
+                        </div>
 
                         <motion.div
                             animate={controls}>

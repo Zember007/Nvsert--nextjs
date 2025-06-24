@@ -10,12 +10,12 @@ import { usePathname } from "next/navigation";
 import { disableOverflow, enableOverflow } from "@/store/body";
 import { useHeaderContext } from "../contexts/HeaderContext";
 import AppMenuItem from "./AppMenuItem";
-import useBackgroundBrightness from "@/hook/useBackgroundBrightness";
 import { filterPhone } from "@/hook/filter";
 import { useButton } from "@/hook/useButton";
 import { useAnimation, motion } from "framer-motion";
 import NavSvg from "./elements/NavSvg";
 import { RootState } from "@/config/store";
+import HeaderMenu from "./elements/HeaderMenu";
 
 
 
@@ -26,7 +26,7 @@ const AppHeader = () => {
 
   const pathname = usePathname();
   const [servicesMenuActive, setServicesMenuActive] = useState(false);
-  const [burgerMenuActive, setBurgerMenuActive] = useState(false);
+  const [burgerMenuActive, setBurgerMenuActive] = useState(true);
 
 
   const { setButtonRef, setWrapperRef } = useButton()
@@ -86,7 +86,7 @@ const AppHeader = () => {
   }
 
   useEffect(() => {
-    closeNavMenues();
+    // closeNavMenues();
   }, [pathname]);
 
 
@@ -105,18 +105,22 @@ const AppHeader = () => {
 
   return (
     <>
-      <header className={`header xl:py-[5px] ${servicesMenuActive ? 'active' : ''}`}>
+      <header className={`header xl:py-[5px] ${(servicesMenuActive || burgerMenuActive) ? 'active' : ''}`}>
         <div className="px-[20px] header__wrapper">
+
           <div className="flex items-center">
             <AppLogo />
-            <div className={`header__menu js-header-menu ${burgerMenuActive && 'active'}`}>
+
+            <div className={`header__menu`}>
               <nav className="header-nav">
                 <ul className="header-nav__list">
-                  <li className="header-nav__item">
-                    <AppMenuItem isActive={pathname === '/'} item={{ href: "/", label: t('navigation.main') }} />
+                  <li className="w-full">
+                    <AppMenuItem
+                      isActive={pathname === '/'} item={{ href: "/", label: t('navigation.main') }} />
                   </li>
-                  <li className="header-nav__item group">
-                    <AppMenuItem isActive={servicesMenuActive}
+                  <li className="w-full group">
+                    <AppMenuItem
+                      isActive={servicesMenuActive}
                       onClick={(e) => {
                         e.preventDefault();
                         handleNavMenu();
@@ -141,12 +145,14 @@ const AppHeader = () => {
                       }}
                     />
                   </li>
-                  <li className="header-nav__item">
-                    <AppMenuItem isActive={pathname.includes('/o-kompanii')} item={{ href: "/about/o-kompanii/", label: t('navigation.about') }} />
+                  <li className="w-full">
+                    <AppMenuItem
+                      isActive={pathname.includes('/o-kompanii')} item={{ href: "/about/o-kompanii/", label: t('navigation.about') }} />
 
                   </li>
-                  <li className="header-nav__item">
-                    <AppMenuItem isActive={pathname.includes('/contacts')} item={{ href: "/contacts/", label: t('navigation.contacts') }} />
+                  <li className="w-full">
+                    <AppMenuItem
+                      isActive={pathname.includes('/contacts')} item={{ href: "/contacts/", label: t('navigation.contacts') }} />
 
                   </li>
                 </ul>
@@ -228,6 +234,9 @@ const AppHeader = () => {
 
         </div>
       </header>
+      <HeaderMenu
+        active={burgerMenuActive}
+      />
       <div className={`services-menu-box menu-headers  ${servicesMenuActive && 'active'} ${darkHeader && 'dark'}`}>
         <div className={`services-menu !py-[12px] js-services-menu relative `}>
 

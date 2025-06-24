@@ -1,5 +1,5 @@
 import React, { ReactElement, ReactNode } from 'react';
-import styles from "./Header.module.css";
+import styles from "./Header.module.scss";
 import Link from 'next/link';
 
 interface MenuItem {
@@ -13,7 +13,8 @@ const AppMenuItem: React.FC<{
     isActive: boolean;
     onClick?: (e: React.MouseEvent<HTMLElement>) => void;
     className?: string;
-}> = React.memo(({ item, isActive, onClick, className = '', classNameBox = '' }) => {
+    isHeader?: boolean 
+}> = React.memo(({ item, isActive, onClick, className = '', classNameBox = '', isHeader = false }) => {
 
     function extractTextFromReactNode(node: ReactNode): string {
         if (node === null || node === undefined || typeof node === 'boolean') return '';
@@ -87,6 +88,7 @@ const AppMenuItem: React.FC<{
 
     const getClassName = () => {
         const classes = [styles["menu-item"], className];
+        if(isHeader) classes.push(styles["header-item"]);
         if (isActive) classes.push(styles["menu-item-active"]);
         if (isFastClick) classes.push(styles["fast-click"]);
         return classes.join(" ");
