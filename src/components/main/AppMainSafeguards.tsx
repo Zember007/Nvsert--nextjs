@@ -137,7 +137,7 @@ const AppMainSafeguards = () => {
       timeLine.current = horizontalLoop(slides, {
         paused: true,
         draggable: true,
-        offsetLeft: gap,
+        center: true,
         gap: gap,
         snap: true,
         onChange: (index: number) => {
