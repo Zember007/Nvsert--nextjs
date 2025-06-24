@@ -137,6 +137,33 @@ const SliderMain = () => {
 
     const slidesLang = t('MainSlider.items', { returnObjects: true }) as slideItem[]
 
+    const overlayText = useRef<HTMLDivElement>(null)
+
+
+    useEffect(() => {
+
+        if(!overlayText.current || !timeLine.current) return
+
+        let startX = 0;
+
+        overlayText.current.addEventListener('touchstart', function (e) {
+            startX = e.touches[0].clientX;
+        });
+
+        overlayText.current.addEventListener('touchend', function (e) {
+            const endX = e.changedTouches[0].clientX;
+            const diffX = endX - startX;
+
+            if (Math.abs(diffX) > 50) { 
+                if (diffX > 0) {
+                    timeLine.current.next({ ease: "power3", duration: 0.725 })
+                } else {
+                    timeLine.current.previous({ ease: "power3", duration: 0.725 })
+                }
+            }
+        });
+    }, [overlayText, timeLine])
+
 
 
     return (
@@ -164,9 +191,11 @@ const SliderMain = () => {
                                 <span className="line" style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
                             </div>
                             <div data-slider="list" className={`slider-list`}
-                                style={{ ...(widthWindow && widthWindow < 1240 && { 
-                                    gap: (widthWindow - 320) / 2
-                                 }) }}
+                                style={{
+                                    ...(widthWindow && widthWindow < 1240 && {
+                                        gap: (widthWindow - 320) / 2
+                                    })
+                                }}
                             >
 
 
@@ -193,7 +222,9 @@ const SliderMain = () => {
                         ))}
                     </div>
 
-                    <div className={`overlay `}>
+                    <div
+                    ref={overlayText}
+                    className={`overlay `}>
                         <div className={`overlay-slider`}></div>
 
 
