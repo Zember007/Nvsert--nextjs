@@ -26,7 +26,7 @@ const AppHeader = () => {
 
   const pathname = usePathname();
   const [servicesMenuActive, setServicesMenuActive] = useState(false);
-  const [burgerMenuActive, setBurgerMenuActive] = useState(true);
+  const [burgerMenuActive, setBurgerMenuActive] = useState(false);
 
 
   const { setButtonRef, setWrapperRef } = useButton()
@@ -86,7 +86,7 @@ const AppHeader = () => {
   }
 
   useEffect(() => {
-    // closeNavMenues();
+    closeNavMenues();
   }, [pathname]);
 
 

@@ -32,62 +32,7 @@ const AppMainIntro = () => {
 
     const ref = useRef<HTMLDivElement>(null)
 
-    // useEffect(() => {
-    //     const header = document.querySelector('.header')
-    //     if (!ref.current || !header) return
-    //     const observer = new IntersectionObserver(
-    //         (entries) => {
-    //             entries.forEach((entry) => {
-    //                 if (!entry.isIntersecting) {                        
-    //                     header.classList.add('black'); 
-    //                 } else {
-    //                     header.classList.remove('black'); 
-    //                 }
-    //             });
-    //         },
-    //         {
-    //             root: null, 
-    //             rootMargin: '0px',
-    //             threshold: 0
-    //         }
-    //     );
-
-    //     observer.observe(ref.current);
-
-    //     return () => {
-    //         if (!ref.current) return
-    //         observer.unobserve(ref.current);
-    //     }
-
-    // }, [ref])
-
-    // const params = useRef({
-    //     blur: 2,
-    //     opacity: 0.6,
-    //   });
-
-    //   useEffect(() => {
-    //     const banner = ref.current;
-    //     if (!banner) return;
-
-    //     // Функция обновления CSS-переменных
-    //     const updateStyles = () => {
-    //       banner.style.setProperty("--blur-bg", `${params.current.blur}px`);
-    //       banner.style.setProperty("--bg-op", `${params.current.opacity}`);
-    //     };
-
-    //     updateStyles(); // установить начальные значения
-
-    //     // Создание GUI
-    //     const gui = new GUI();
-    //     gui.add(params.current, "blur", 0, 20).onChange(updateStyles);
-    //     gui.add(params.current, "opacity", 0, 1).step(0.01).onChange(updateStyles);
-
-    //     // Очистка
-    //     return () => {
-    //       gui.destroy();
-    //     };
-    //   }, [ref]);
+ 
 
     return (
         <>
@@ -97,12 +42,12 @@ const AppMainIntro = () => {
                     <div className='main-banner__content'>
                         <div className="flex flex-col">
                             <h1 className="main-banner__title">{filterPrepositions(t('mainIntro.title'))}</h1>
-                            <iframe
+                            {/* <iframe
                                 src="https://test1.audiosector.ru/"
                                 width="100%"
                                 height="600"
                                 sandbox="allow-scripts allow-same-origin">
-                            </iframe>
+                            </iframe> */}
                         </div>
 
                         <motion.div
