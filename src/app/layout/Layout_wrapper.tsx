@@ -97,7 +97,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
                 isScrolling = false;
                 return;
             }
-            currentScroll += diff * 0.2;
+            currentScroll += diff * 0.15;
             window.scrollTo(0, currentScroll);
             requestAnimationFrame(smoothScroll);
         };
