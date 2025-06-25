@@ -114,11 +114,11 @@ const AppHeader = () => {
             <div className={`header__menu`}>
               <nav className="header-nav">
                 <ul className="header-nav__list">
-                  <li className="w-full">
+                  <li >
                     <AppMenuItem
                       isActive={pathname === '/'} item={{ href: "/", label: t('navigation.main') }} />
                   </li>
-                  <li className="w-full group">
+                  <li className="group">
                     <AppMenuItem
                       isActive={servicesMenuActive}
                       onClick={(e) => {
@@ -145,12 +145,12 @@ const AppHeader = () => {
                       }}
                     />
                   </li>
-                  <li className="w-full">
+                  <li >
                     <AppMenuItem
                       isActive={pathname.includes('/o-kompanii')} item={{ href: "/about/o-kompanii/", label: t('navigation.about') }} />
 
                   </li>
-                  <li className="w-full">
+                  <li >
                     <AppMenuItem
                       isActive={pathname.includes('/contacts')} item={{ href: "/contacts/", label: t('navigation.contacts') }} />
 
