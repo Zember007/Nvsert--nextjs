@@ -199,7 +199,7 @@ const MainDocumentItem = memo(({
                 ref={wrapperRef}
                 className={` document__box   ${!active ? 'active' : ''}`}>
 
-                <div className={`pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[-1] rounded-[6px]  ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-[transparent]  border-solid border`}></div>
+                <div className={`pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[1] rounded-[6px]  ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-[transparent]  border-solid border`}></div>
 
                 <div
                     onClick={handleItemClick}
