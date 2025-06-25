@@ -2,7 +2,7 @@
 @use '../../base/mixins' as mixins;
 
 .main-banner {
-  @apply s:rounded-b-[35px];
+  @apply xl:rounded-b-[35px];
   padding-top: 120px;
   padding-bottom: 75px;  
   position: relative;
