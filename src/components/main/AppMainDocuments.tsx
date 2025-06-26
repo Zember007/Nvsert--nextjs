@@ -77,11 +77,12 @@ const AppMainDocuments = () => {
                 portal.removeEventListener('click', handleClick);
             });
         }, 100);
+        
     };
 
     return (
         <section id="documents_box" className="section wrapper">
-            
+
             <h2 className="section__title">
                 {t('docs.heading')}
             </h2>
