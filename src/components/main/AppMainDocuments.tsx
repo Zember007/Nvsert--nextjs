@@ -80,7 +80,7 @@ const AppMainDocuments = () => {
     };
 
     return (
-        <section id="documents_box" className="xl:bg-[transparent] bg-[#FFF] section wrapper rounded-t-[35px]">
+        <section id="documents_box" className="section wrapper">
             <h2 className="section__title">
                 {t('docs.heading')}
             </h2>
