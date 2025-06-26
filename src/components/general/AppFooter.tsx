@@ -39,9 +39,9 @@ const AppFooter = () => {
 
 
   return (
-    <footer className="rounded-t-[35px] xl:h-[234px] xl:flex-row gap-[35px] flex-col-reverse items-center xl:items-stretch relative flex justify-between p-[30px] bg-[#3C4049] text-[#FFFFFF99] text-[18px]">
-      <div className="flex xl:gap-[120px] gap-[30px] xl:items-stretch items-center xl:flex-row flex-col-reverse text-[#FFF]">
-        <div className="xl:py-[10px] flex xl:flex-col flex-col-reverse justify-between xl:items-start items-center xl:gap-0 gap-[16px]">
+    <footer className="rounded-t-[35px] xl:h-[234px] xl:flex-row gap-[35px] flex-col-reverse relative flex justify-between p-[30px] bg-[#3C4049] text-[#FFFFFF99] text-[18px]">
+      <div className="flex xl:gap-[120px] gap-[30px] xl:flex-row flex-col-reverse text-[#FFF]">
+        <div className="xl:pt-0 xl:border-none pt-[30px] border-[#737373] border-t border-solid xl:py-[10px] flex xl:flex-col flex-col-reverse justify-between xl:items-start items-center xl:gap-0 gap-[16px]">
           <p className="">© 2025 NVSERT</p>
 
           <div className=" xl:text-[16px] xl:items-start items-center text-[14px] flex flex-col xl:gap-[18px]  gap-[16px] ">
@@ -49,15 +49,15 @@ const AppFooter = () => {
             <span>{t("footer.company")}</span>
           </div>
         </div>
-        <div className="flex flex-col xl:justify-between xl:items-start gap-[35px] items-center relative">
-          <div className="grid grid-cols-2 xl:flex gap-[10px] xl:flex-row flex-col justify-items-center xl:justify-items-normal">
+        <div className="flex flex-col xl:justify-between items-start gap-[35px]  relative">
+          <div className="flex gap-[10px] xl:flex-row flex-col">
             {menuItems.map((item, i) => (
               <AppMenuItem key={i} item={item} isActive={false} />
             ))}
 
           </div>
 
-          <div className="flex xl:gap-[8px] gap-[10px] flex-col">
+          <div className="flex xl:gap-[8px] gap-[10px] flex-col xl:pt-0 xl:border-none pt-[30px] border-[#737373] border-t border-solid xl:w-auto w-full">
             <AppMenuItem
             className="xl:!h-[35px] !h-auto"              
 
@@ -71,12 +71,12 @@ const AppFooter = () => {
         </div>
       </div>
 
-      <div className="flex flex-col justify-between">
-        <div className="flex justify-between ">
-          <div className="flex gap-[10px] xl:flex-row flex-col items-center">
+      <div className="flex flex-col justify-between xl:w-auto w-full">
+        <div className="flex justify-between w-full">
+          <div className="flex gap-[10px] xl:flex-row flex-col items-center w-full relative">
             <button
               onClick={() => { openDefaultModal('introForm') }}
-              className="xl:hidden  border border-solid text-[18px] flex items-center justify-between px-[15px] text-[#FFF]  border-[#93969D] h-[50px] w-[200px] rounded-[4px] bg-[#34446D]"
+              className="xl:hidden  border border-solid text-[18px] flex items-center justify-between px-[15px] text-[#FFF]  border-[#93969D] h-[50px] w-full rounded-[4px] bg-[#34446D]"
             >
               <span>Заказать звонок</span>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -101,7 +101,7 @@ const AppFooter = () => {
                   onClick={() => {
                     navigator.clipboard.writeText(email.value)
                   }}
-                  className="after:!content-none xl:after:!content-[''] xl:!px-[35px] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] xl:w-auto !h-[50px] w-[200px] group"
+                  className="after:!content-none xl:after:!content-[''] xl:!px-[35px] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] w-full !h-[50px] w-full group"
                   item={{
                     href: '#', label:
                       <>
@@ -128,7 +128,7 @@ const AppFooter = () => {
               timer={3000}
             >
               <AppMenuItem
-                className="after:!content-none xl:after:!content-[''] xl:!px-[35px] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] xl:w-auto !h-[50px] w-[200px] group"
+                className="after:!content-none xl:after:!content-[''] xl:!px-[35px] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] w-full  !h-[50px]  group"
                 item={{
                   href: '#', label:
                     <>
@@ -162,7 +162,7 @@ const AppFooter = () => {
               timer={3000}
             >
               <AppMenuItem
-                className="after:!content-none xl:after:!content-[''] xl:!px-[35px] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] xl:w-auto !h-[50px] w-[200px] group"
+                className="after:!content-none xl:after:!content-[''] xl:!px-[35px] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] w-full !h-[50px] w-[200px] group"
                 item={{
                   href: '#', label:
                     <>
@@ -180,7 +180,7 @@ const AppFooter = () => {
                 }} isActive={false} />
             </PromtModal>
             <PromtModal
-              classNameBox="xl:mt-0 mt-[25px]"
+              classNameBox="xl:!relative !absolute xl:bottom-0 bottom-[-45px] right-0 !w-auto xl:translate-y-0 translate-y-full"
               className='!py-[20px]'
               content={
                 <div className="flex flex-col gap-[20px]">

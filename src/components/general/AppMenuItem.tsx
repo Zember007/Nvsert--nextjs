@@ -101,7 +101,7 @@ const AppMenuItem: React.FC<{
     );
 
     return (
-        <div className={`${classNameBox ? classNameBox : ''} overflow-x-hidden px-[1px]`}>
+        <>
             {item.href === '#' ? (
                 <button
                     type="button"
@@ -125,7 +125,7 @@ const AppMenuItem: React.FC<{
                     {content}
                 </Link>
             )}
-        </div>
+        </>
     );
 });
 
