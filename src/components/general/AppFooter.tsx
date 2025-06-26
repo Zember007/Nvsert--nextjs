@@ -98,7 +98,7 @@ const AppFooter = () => {
                   onClick={() => {
                     navigator.clipboard.writeText(email.value)
                   }}
-                  className="after:!content-none xl:after:!content-[''] xl:!px-[31.5px] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] xl:w-auto !h-[50px] w-[200px] group"
+                  className="after:!content-none xl:after:!content-[''] xl:!px-[35px] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] xl:w-auto !h-[50px] w-[200px] group"
                   item={{
                     href: '#', label:
                       <>
@@ -125,7 +125,7 @@ const AppFooter = () => {
               timer={3000}
             >
               <AppMenuItem
-                className="after:!content-none xl:after:!content-[''] xl:!px-[31.5px] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] xl:w-auto !h-[50px] w-[200px] group"
+                className="after:!content-none xl:after:!content-[''] xl:!px-[35px] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] xl:w-auto !h-[50px] w-[200px] group"
                 item={{
                   href: '#', label:
                     <>
@@ -159,7 +159,7 @@ const AppFooter = () => {
               timer={3000}
             >
               <AppMenuItem
-                className="after:!content-none xl:after:!content-[''] xl:!px-[31.5px] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] xl:w-auto !h-[50px] w-[200px] group"
+                className="after:!content-none xl:after:!content-[''] xl:!px-[35px] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] xl:w-auto !h-[50px] w-[200px] group"
                 item={{
                   href: '#', label:
                     <>
@@ -177,7 +177,7 @@ const AppFooter = () => {
                 }} isActive={false} />
             </PromtModal>
             <PromtModal
-              classNameBox="mt-[25px]"
+              classNameBox="xl:mt-[25px]"
               className='!py-[20px]'
               content={
                 <div className="flex flex-col gap-[20px]">
