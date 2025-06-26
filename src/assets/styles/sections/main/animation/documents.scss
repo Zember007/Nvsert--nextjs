@@ -110,7 +110,7 @@
   }
 
   &__navigation {
-    @apply rounded-[6px] overflow-hidden h-[70px] text-left  transition-scale active:bg-[#5B6788] m:px-[23px] relative z-[0];
+    @apply rounded-[6px] overflow-hidden h-[70px] text-left box-scale transition-scale active:bg-[#5B6788] m:px-[23px] relative z-[0];
 
     &:active {
       box-shadow: 2px 2px 4px 0px #000000CC inset, -2px -2px 4px 0px #000000CC inset;
@@ -190,7 +190,7 @@
   }
 
   &__hidden {
-    @apply transition-all ease-in duration-200 overflow-hidden max-h-0  ;
+    @apply transition-all ease-in duration-200 overflow-hidden max-h-0  rounded-b-[6px];
 
     &.active {
       max-height: 1400px !important;
