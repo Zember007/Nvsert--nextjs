@@ -10,10 +10,8 @@
 
 	z-index: 50;
 
-	&::before {
+	&__bg {
 		mix-blend-mode: difference;
-		content: '';
-		display: block;
 		position: absolute;
 		z-index: -1;
 		backdrop-filter: blur(var(--filter-blur));
@@ -428,6 +426,8 @@
 	position: fixed;
 	width: 100%;
 	top: 0;
+
+	
 
 	.logo {
 		color: $white-color;
