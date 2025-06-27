@@ -333,7 +333,7 @@ const SliderMain = () => {
                         ))}
                     </div>
 
-                    <div className="tariff-wrap xl:w-[246px] w-full xl:px-0 px-[20px]" ref={setWrapperRef}>
+                    <div className="tariff-wrap xl:w-[246px] w-[280px] m:mx-0 mx-auto" ref={setWrapperRef}>
                         <button
                             onClick={() => { openDefaultModal('introForm') }}
                             ref={setButtonRef} className=' slider__button group btnIconAn doc-btn tariff'>

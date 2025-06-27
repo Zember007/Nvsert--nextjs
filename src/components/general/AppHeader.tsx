@@ -199,10 +199,8 @@ const AppHeader = () => {
               }} isActive={false} />
           </div>
           <div className=" xl:hidden flex gap-[24px] items-center">
-            <button
-              type="button"
-              aria-label="Order phone"
-              onClick={() => { openDefaultModal('introForm') }}
+            <Link
+            href={filterPhone('8 495 777-11-97')}
             >
 
               <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -210,7 +208,7 @@ const AppHeader = () => {
               </svg>
 
 
-            </button>
+            </Link>
 
             <button
               type="button"
