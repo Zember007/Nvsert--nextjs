@@ -304,7 +304,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                 <button
                                     type="submit"
                                     ref={setButtonRef}
-                                    className="form__button s:!h-[50px] !h-[40px] no-drag btnIconAn group tariff"
+                                    className="form__button blink-button s:!h-[50px] !h-[40px] no-drag btnIconAn group tariff"
                                     style={{
                                         verticalAlign: 'middle'
                                     }}

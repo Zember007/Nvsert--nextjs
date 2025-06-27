@@ -336,7 +336,7 @@ const SliderMain = () => {
                     <div className="tariff-wrap xl:w-[246px] w-full xl:px-0 px-[20px]" ref={setWrapperRef}>
                         <button
                             onClick={() => { openDefaultModal('introForm') }}
-                            ref={setButtonRef} className='slider__button group btnIconAn doc-btn tariff'>
+                            ref={setButtonRef} className='blink-button slider__button group btnIconAn doc-btn tariff'>
                             <span className="sendIconLeft">
                                 <svg className='group-hover:*:fill-[#FFF] rotate-[45deg] *:transition-all *:duration-300' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M29.0627 0.9375L0.930664 12.1875L11.426 16.9336L26.2502 3.75L13.0666 18.5742L17.8127 29.0625L29.0627 0.9375Z" fill="#34446D" />

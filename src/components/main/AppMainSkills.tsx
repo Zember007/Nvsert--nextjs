@@ -130,7 +130,7 @@ const AppMainSkills = () => {
 
                 <div className="tariff-wrap xl:w-[252px] w-full mt-[20px] xl:px-0 px-[20px]" ref={setWrapperRef}>
                     <button
-                        ref={setButtonRef} className='slider__button group btnIconAn doc-btn tariff'>
+                        ref={setButtonRef} className='blink-button slider__button group btnIconAn doc-btn tariff'>
 
                         Подробнее о компании
 
