@@ -171,14 +171,3 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   }
 }
 
-.blink-button:hover {
-  animation: blink 0.2s ease-in;
-}
-
-@keyframes blink {
-  0%   { opacity: 1; }
-  25%  { opacity: 0.3; }
-  50% { opacity: 1; }
-  75%  { opacity: 0.3; }
-  100% { opacity: 1; }
-}
