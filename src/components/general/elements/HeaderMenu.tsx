@@ -1,13 +1,20 @@
 import Link from 'next/link';
+import HomeIcon from '@/assets/images/svg/menu/home.svg'
+import ContactIcon from '@/assets/images/svg/menu/contact.svg'
+import OkompaniiIcon from '@/assets/images/svg/menu/o-kompanii.svg'
+import ServiceIcon from '@/assets/images/svg/menu/service.svg'
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 const navigationData = [
     {
+        icon: HomeIcon,
         id: 'main',
         title: 'Главная',
         href: '/'
     },
     {
+        icon: ServiceIcon,
         id: 'services',
         title: 'Услуги',
         children: [
@@ -48,11 +55,13 @@ const navigationData = [
         ]
     },
     {
+        icon: OkompaniiIcon,
         id: 'about',
         title: 'О компании',
         href: '/about'
     },
     {
+        icon: ContactIcon,
         id: 'contacts',
         title: 'Контакты',
         href: '/contacts'
@@ -130,9 +139,14 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
                             onClick={() => handleItemClick(item)}
                             className={`${index === 0 ? 'border-t' : ''} ${item.children && item.children.length > 0 ? 'group' : ''} menu-mob-item`}
                         >
-                            <span className="text-[18px] text-[#FFF]">
-                                {item.title}
-                            </span>
+                            <div className="flex items-center gap-[10px]">
+                                {item.icon &&
+                                    <Image src={item.icon} alt='icon' height={24} width={24}/>
+                                }
+                                <span className="text-[18px] text-[#FFF]">
+                                    {item.title}
+                                </span>
+                            </div>
 
                             {item.children && item.children.length > 0 && (
                                 <svg
