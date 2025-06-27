@@ -73,7 +73,7 @@ const AppFooter = () => {
 
       <div className="flex flex-col justify-between xl:w-auto w-full">
         <div className="flex justify-between w-full">
-          <div className="flex gap-[10px] xl:flex-row flex-col items-center w-full relative">
+          <div className="flex gap-[10px] xl:flex-row flex-col items-center w-[280px] xl:mx-0 mx-auto relative">
             <button
               onClick={() => { openDefaultModal('introForm') }}
               className="xl:hidden  border border-solid text-[18px] flex items-center justify-between px-[15px] text-[#FFF]  border-[#93969D] h-[50px] w-full rounded-[4px] bg-[#34446D]"
@@ -101,7 +101,7 @@ const AppFooter = () => {
                   onClick={() => {
                     navigator.clipboard.writeText(email.value)
                   }}
-                  className="after:!content-none xl:after:!content-[''] xl:!px-[35px] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] w-full !h-[50px] w-full group"
+                  className="after:!content-none xl:after:!content-[''] xl:!px-[35px] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] w-[280px] xl:mx-0 mx-auto !h-[50px] xl:w-full group"
                   item={{
                     href: '#', label:
                       <>
@@ -128,7 +128,7 @@ const AppFooter = () => {
               timer={3000}
             >
               <AppMenuItem
-                className="after:!content-none xl:after:!content-[''] xl:!px-[35px] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] w-full  !h-[50px]  group"
+                className="after:!content-none xl:after:!content-[''] xl:!px-[35px] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] xl:w-full w-[280px] xl:mx-0 mx-auto  !h-[50px]  group"
                 item={{
                   href: '#', label:
                     <>
@@ -162,7 +162,7 @@ const AppFooter = () => {
               timer={3000}
             >
               <AppMenuItem
-                className="after:!content-none xl:after:!content-[''] xl:!px-[35px] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] w-full !h-[50px] w-[200px] group"
+                className="after:!content-none xl:after:!content-[''] xl:!px-[35px] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] xl:w-full w-[280px] xl:mx-0 mx-auto !h-[50px]  group"
                 item={{
                   href: '#', label:
                     <>
