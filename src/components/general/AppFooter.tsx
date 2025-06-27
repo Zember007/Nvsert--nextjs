@@ -39,7 +39,7 @@ const AppFooter = () => {
 
 
   return (
-    <footer className="rounded-t-[35px] xl:h-[234px] xl:flex-row gap-[35px] flex-col-reverse relative flex justify-between p-[30px] bg-[#3C4049] text-[#FFFFFF99] text-[18px]">
+    <footer className="rounded-t-[35px] xl:h-[234px] xl:flex-row gap-[50px] flex-col-reverse relative flex justify-between p-[30px] bg-[#3C4049] text-[#FFFFFF99] text-[18px]">
       <div className="flex xl:gap-[120px] gap-[30px] xl:flex-row flex-col-reverse text-[#FFF]">
         <div className="xl:pt-0 xl:border-none pt-[30px] border-[#737373] border-t border-solid xl:py-[10px] flex xl:flex-col flex-col-reverse justify-between xl:items-start items-center xl:gap-0 gap-[16px]">
           <p className="">© 2025 NVSERT</p>
@@ -49,7 +49,7 @@ const AppFooter = () => {
             <span>{t("footer.company")}</span>
           </div>
         </div>
-        <div className="flex flex-col xl:justify-between items-start gap-[35px]  relative">
+        <div className="flex flex-col xl:justify-between items-start gap-[50px]  relative">
           <div className="flex gap-[10px] xl:flex-row flex-col">
             {menuItems.map((item, i) => (
               <AppMenuItem key={i} item={item} isActive={false} />
@@ -59,11 +59,11 @@ const AppFooter = () => {
 
           <div className="flex xl:gap-[8px] gap-[10px] flex-col xl:pt-0 xl:border-none pt-[30px] border-[#737373] border-t border-solid xl:w-auto w-full">
             <AppMenuItem
-            className="xl:!h-[35px] !h-auto"              
+            className="xl:!h-[35px] !h-auto !text-left"              
 
               item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: t("footer.policy") }} isActive={false} />
             <AppMenuItem
-            className="xl:!h-[35px] !h-auto"
+            className="xl:!h-[35px] !h-auto !text-left"
 
               item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: 'Обработка персональных данных' }} isActive={false} />
           </div>
