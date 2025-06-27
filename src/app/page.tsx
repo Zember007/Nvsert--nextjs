@@ -5,6 +5,7 @@ import AppMainIntro from '../components/main/AppMainIntro'
 import AppMainDocuments from '../components/main/AppMainDocuments'
 import LazyLoadSection from '@/hook/LazyLoadSection';
 
+
 export default function Home() {
 
   const DynamicAppMainSkills = dynamic(() => import('../components/main/AppMainSkills'), {
