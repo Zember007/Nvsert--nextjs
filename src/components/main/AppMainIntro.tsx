@@ -41,12 +41,12 @@ const AppMainIntro = () => {
                     <div className='main-banner__content'>
                         <div className="flex flex-col">
                             <h1 className="main-banner__title">{filterPrepositions(t('mainIntro.title'))}</h1>
-                            {/* <iframe
+                            <iframe
                                 src="https://test1.audiosector.ru/"
                                 width="100%"
                                 height="600"
                                 sandbox="allow-scripts allow-same-origin">
-                            </iframe> */}
+                            </iframe>
                         </div>
 
                         <motion.div
