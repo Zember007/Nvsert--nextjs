@@ -5,37 +5,19 @@
 
 	--filter-blur: 15px;
 	--color: rgba(25, 24, 35, 0.4);
-	position: relative;
-
-
+	backdrop-filter: blur(var(--filter-blur));
+	background-color: var(--color);
+	background-image: url('../../images/150.webp');
+	background-repeat: repeat;
 	z-index: 50;
 
-	@media (max-width: $media-xl) {
-		mix-blend-mode: difference;
-	}
+	// @media (max-width: $media-xl) {
+	// 	mix-blend-mode: difference;
+	// }
 
-
-	&__bg {
-		position: absolute;
-		z-index: -1;
-		backdrop-filter: blur(var(--filter-blur));
-		background-color: var(--color);
-		background-image: url('../../images/150.webp');
-		background-repeat: repeat;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-	}
-	@media (max-width: $media-xl) {
-		mix-blend-mode: difference;
-	}
 	&.active {
 		box-shadow: 0 1px 2px 0 rgb(0 0 0 / 55%);
 
-		@media (max-width: $media-xl) {
-			mix-blend-mode: normal;
-		}
 	}
 
 	svg,
