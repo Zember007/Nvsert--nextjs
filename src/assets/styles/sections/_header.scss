@@ -2,6 +2,7 @@
 @import '../base/mixins';
 
 .header {
+    mix-blend-mode: difference;
 
 	--filter-blur: 15px;
 	--color: rgba(25, 24, 35, 0.4);
