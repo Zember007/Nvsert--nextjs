@@ -104,11 +104,12 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
     return (
         <div className={`header__menu-mob ${active && 'active'}`}>
             <nav className="header-nav">
-                <ul className="rubik header-nav__list text-[#000]">
+                <ul className="rubik header-nav__list ">
                     <li className="w-full h-[50px] grid grid-cols-3 items-center gap-[10px]">
                         {canGoBack &&
                             <>
                                 <button
+                                className='rotate-[180deg]'
                                     onClick={handleGoBack}>
                                     <Image src={ArrowIcon} alt='back' width={20} height={20} />
                                 </button>
@@ -126,7 +127,7 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
                         >
                             <div className="flex items-center gap-[10px]">
 
-                                <span className="text-[18px] text-[#FFF]">
+                                <span className="text-[18px] text-[#000]">
                                     {item.title}
                                 </span>
                             </div>
