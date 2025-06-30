@@ -14,6 +14,8 @@
 		@media (max-width: $media-xl) {
 			@apply bg-[#FFF];
 			--color: transparent;
+			border-radius: 0;
+			border-bottom: 1px solid #34446D;
 		}
 	}
 
@@ -157,8 +159,7 @@
 		flex-grow: 1;
 
 		&-mob {
-			--filter-blur: 15px;
-			--color: rgba(25, 24, 35, 0.4);
+			--color: #FFF;
 			display: none;
 
 			@media (max-width: $media-l) {
@@ -168,7 +169,6 @@
 				z-index: 10;
 				top: 0;
 				left: 0;
-				backdrop-filter: blur(var(--filter-blur));
 				background: var(--color);
 				padding-top: 30px;
 				display: flex;
