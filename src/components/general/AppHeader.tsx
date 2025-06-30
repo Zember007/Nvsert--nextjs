@@ -105,7 +105,7 @@ const AppHeader = () => {
 
   return (
     <>
-      <header className={`header xl:py-[5px] ${(servicesMenuActive || burgerMenuActive) ? 'active' : ''}`}>
+      <header className={`header ${(servicesMenuActive || burgerMenuActive) ? 'active' : ''}`}>
 
         <div className="header__bg">
           <AppLogo />
