@@ -19,10 +19,8 @@
   height: 35px;
   will-change: transform, color, border-color, opacity;
   background: none;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
   overflow: hidden;
+  border: 1px solid transparent;
 
 }
 
@@ -41,37 +39,7 @@
 
 .menu-item:hover {
   color: var(--color-item-menu-active);
-}
-
-.menu-item::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 4px;
-  padding: 1px;
-
-  background: radial-gradient(80px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      var(--menu-item-border),
-      black 100%);
-      
-  opacity: 0;
-
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-
-  pointer-events: none;
-
-}
-
-.menu-item:hover::after {
-  opacity: 1;
-}
-
-.menu-item:active::after {
-  background: #000;
+  border-color: #FFF;
 }
 
 
@@ -85,21 +53,10 @@
   color: var(--color-item-menu-active);
 }
 
-.menu-item-active:after {
-  opacity: 1;
-  background: #000;
+.menu-item-active {
+  border-color: #000;
+
 }
-
-.menu-item-active:hover:after {
-  background: radial-gradient(80px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      var(--menu-item-border),
-      black 100%);
-}
-
-
-
-
-
 
 
 
@@ -139,14 +96,7 @@
   -webkit-text-fill-color: var(--color-item-menu-active) !important;
 }
 
-
-
-.menu-item-active:active::after,
-.menu-item-active.fast-click::after {
-  transition: border-color 0.3s ease;
-  opacity: 1;
-}
-
 .menu-item-active:hover {
   color: var(--color-item-menu-active);
+  border-color: #FFF;
 }

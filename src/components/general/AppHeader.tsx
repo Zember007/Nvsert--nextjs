@@ -157,21 +157,7 @@ const AppHeader = () => {
               </li>
             </ul>
           </nav>
-          <div className="header__menu-content">
-            <p className="title">
-              Зачем искать что-то самому, если можно заказать расчет?
-            </p>
-            <p className="subtitle">
-              Оставьте свои контактные данные, и мы сформируем для вас предложение
-              по документу или пакету документов
-            </p>
-            <Link
-              href="/find-out-cost/"
-              className="btn btn--primary btn--m header__calc-link"
-            >
-              {t('calculation.name')}
-            </Link>
-          </div>
+
         </div>
 
         <div className="header__bg hidden xl:flex gap-[8px]">
