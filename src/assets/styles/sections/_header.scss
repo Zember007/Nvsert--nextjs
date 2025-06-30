@@ -53,7 +53,7 @@
 	}
 
 
-	&-nav {	
+	&-nav {
 
 		@media(max-width: $media-l) {
 			width: 100%;
@@ -152,7 +152,7 @@
 		align-items: center;
 	}
 
-	&__menu {	
+	&__menu {
 		position: relative;
 		z-index: 10;
 		flex-grow: 1;
@@ -351,15 +351,15 @@
 
 	&__wrapper {
 		max-height: calc((var(--vh, 1vh) * 100) - 190px);
-		padding: 0 212px;
-
+		max-width: 1420px;
+		margin-right: auto;
+		margin-left: auto;
 		width: 100%;
 
 		@media (max-width: $media-l) {
 			margin-top: 32px;
 			max-height: calc(100vh - 140px);
 			max-height: calc((var(--vh, 1vh) * 100) - 140px);
-			padding-right: 16px;
 		}
 
 		@media (max-width: $media-s) {
