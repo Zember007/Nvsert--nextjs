@@ -321,8 +321,8 @@
 	background-repeat: repeat;
 
 	backdrop-filter: blur(15px);
-	width: 100vw;
-
+	width: calc(100vw - 8px);
+	border-radius: 4px;
 
 
 
