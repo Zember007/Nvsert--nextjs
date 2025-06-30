@@ -46,222 +46,222 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
         return parsedConf;
     }, [fileConfigsPure]);
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (configs && file_configs) {
-            dispatch(setMetadata(generateMetadata(configs, file_configs)));
-        }
+    //     if (configs && file_configs) {
+    //         dispatch(setMetadata(generateMetadata(configs, file_configs)));
+    //     }
 
-    }, [configs, file_configs, dispatch]);
+    // }, [configs, file_configs, dispatch]);
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        dispatch(updateActionConfigs());
-        dispatch(updateActionFileConfigs());
+    //     dispatch(updateActionConfigs());
+    //     dispatch(updateActionFileConfigs());
 
-        function set100Vh() {
-            let vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
-        }
+    //     function set100Vh() {
+    //         let vh = window.innerHeight * 0.01;
+    //         document.documentElement.style.setProperty('--vh', `${vh}px`);
+    //     }
 
-        set100Vh();
-        window.addEventListener('resize', set100Vh);
+    //     set100Vh();
+    //     window.addEventListener('resize', set100Vh);
 
-        const img = document.querySelector('img');
-        img?.addEventListener('contextmenu', (e) => e.preventDefault());
+    //     const img = document.querySelector('img');
+    //     img?.addEventListener('contextmenu', (e) => e.preventDefault());
 
-        return () => {
-            window.removeEventListener('resize', set100Vh);
-            img?.removeEventListener('contextmenu', (e) => e.preventDefault());
-        };
-    }, [dispatch]);
+    //     return () => {
+    //         window.removeEventListener('resize', set100Vh);
+    //         img?.removeEventListener('contextmenu', (e) => e.preventDefault());
+    //     };
+    // }, [dispatch]);
 
     const widthWindow = useWindowWidth()
 
-    useEffect(() => {
-        if (!scrollbarRef.current) return
-        let currentScroll = 0;
-        let targetScroll = 0;
-        let isScrolling = false;
+    // useEffect(() => {
+    //     if (!scrollbarRef.current) return
+    //     let currentScroll = 0;
+    //     let targetScroll = 0;
+    //     let isScrolling = false;
 
-        // Инициализируем текущую прокрутку
-        const initScroll = () => {
-            currentScroll = window.scrollY;
-            targetScroll = currentScroll;
-        };
+    //     // Инициализируем текущую прокрутку
+    //     const initScroll = () => {
+    //         currentScroll = window.scrollY;
+    //         targetScroll = currentScroll;
+    //     };
 
-        const smoothScroll = () => {
-            const diff = targetScroll - currentScroll;
-            if (Math.abs(diff) < 0.1) {
-                isScrolling = false;
-                return;
-            }
-            currentScroll += diff * 0.15;
-            window.scrollTo(0, currentScroll);
-            requestAnimationFrame(smoothScroll);
-        };
+    //     const smoothScroll = () => {
+    //         const diff = targetScroll - currentScroll;
+    //         if (Math.abs(diff) < 0.1) {
+    //             isScrolling = false;
+    //             return;
+    //         }
+    //         currentScroll += diff * 0.15;
+    //         window.scrollTo(0, currentScroll);
+    //         requestAnimationFrame(smoothScroll);
+    //     };
 
-        const handleWheel = (e: WheelEvent) => {
-            e.preventDefault();
-            targetScroll += e.deltaY;
+    //     const handleWheel = (e: WheelEvent) => {
+    //         e.preventDefault();
+    //         targetScroll += e.deltaY;
 
-            // Ограничим targetScroll в пределах документа
-            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-            targetScroll = Math.max(0, Math.min(targetScroll, maxScroll));
+    //         // Ограничим targetScroll в пределах документа
+    //         const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    //         targetScroll = Math.max(0, Math.min(targetScroll, maxScroll));
 
-            if (!isScrolling) {
-                isScrolling = true;
-                requestAnimationFrame(smoothScroll);
-            }
-        };
+    //         if (!isScrolling) {
+    //             isScrolling = true;
+    //             requestAnimationFrame(smoothScroll);
+    //         }
+    //     };
 
-        initScroll();
-        window.addEventListener('wheel', handleWheel, { passive: false });
+    //     initScroll();
+    //     window.addEventListener('wheel', handleWheel, { passive: false });
 
-        let isTicking = false;
-        let isDragging = false;
-        let startY = 0;
-        let startScrollTop = 0;
-        let scrollPadding = 4;
+    //     let isTicking = false;
+    //     let isDragging = false;
+    //     let startY = 0;
+    //     let startScrollTop = 0;
+    //     let scrollPadding = 4;
 
-        const scrollbar = scrollbarRef.current;
+    //     const scrollbar = scrollbarRef.current;
 
-        if (!scrollbar && widthWindow && widthWindow < 768) return
+    //     if (!scrollbar && widthWindow && widthWindow < 768) return
 
-        // Обновление позиции и высоты ползунка при прокрутке
-        function updateScrollbar() {
-            const scrollTop = window.scrollY || window.pageYOffset;
-            const scrollHeight = document.documentElement.scrollHeight;
-            const clientHeight = window.innerHeight || document.documentElement.clientHeight;
-            const maxScroll = scrollHeight - clientHeight;
-            // Высота ползунка
-            const scrollbarHeight = (clientHeight / scrollHeight) * clientHeight;
-            // Позиция ползунка
-            const maxTop = clientHeight - scrollbarHeight - scrollPadding * 2;
-            const topPercent = maxScroll > 0 ? (scrollTop / maxScroll) * maxTop : 0;
+    //     // Обновление позиции и высоты ползунка при прокрутке
+    //     function updateScrollbar() {
+    //         const scrollTop = window.scrollY || window.pageYOffset;
+    //         const scrollHeight = document.documentElement.scrollHeight;
+    //         const clientHeight = window.innerHeight || document.documentElement.clientHeight;
+    //         const maxScroll = scrollHeight - clientHeight;
+    //         // Высота ползунка
+    //         const scrollbarHeight = (clientHeight / scrollHeight) * clientHeight;
+    //         // Позиция ползунка
+    //         const maxTop = clientHeight - scrollbarHeight - scrollPadding * 2;
+    //         const topPercent = maxScroll > 0 ? (scrollTop / maxScroll) * maxTop : 0;
 
-            // Обновляем CSS-переменные
-            scrollbar.style.setProperty('--scrollY', `${topPercent}px`);
-            scrollbar.style.setProperty('--scrollbarHeight', `${scrollbarHeight}px`);
-        }
+    //         // Обновляем CSS-переменные
+    //         scrollbar.style.setProperty('--scrollY', `${topPercent}px`);
+    //         scrollbar.style.setProperty('--scrollbarHeight', `${scrollbarHeight}px`);
+    //     }
 
-        function scrollMove(e: TouchEvent | MouseEvent) {
-            if (!isDragging) return;
+    //     function scrollMove(e: TouchEvent | MouseEvent) {
+    //         if (!isDragging) return;
 
-            const scrollHeight = document.documentElement.scrollHeight;
-            const clientHeight = window.innerHeight || document.documentElement.clientHeight;
-            const maxScroll = scrollHeight - clientHeight;
-            const scrollbarHeight = (clientHeight / scrollHeight) * clientHeight;
-            const maxTop = clientHeight - scrollbarHeight - scrollPadding * 2;
+    //         const scrollHeight = document.documentElement.scrollHeight;
+    //         const clientHeight = window.innerHeight || document.documentElement.clientHeight;
+    //         const maxScroll = scrollHeight - clientHeight;
+    //         const scrollbarHeight = (clientHeight / scrollHeight) * clientHeight;
+    //         const maxTop = clientHeight - scrollbarHeight - scrollPadding * 2;
 
-            // Вычисляем смещение
-            let clientY = 0
+    //         // Вычисляем смещение
+    //         let clientY = 0
 
-            if (e instanceof TouchEvent) {
-                clientY = e.touches[0].clientY
-            } else {
-                clientY = e.clientY
-            }
+    //         if (e instanceof TouchEvent) {
+    //             clientY = e.touches[0].clientY
+    //         } else {
+    //             clientY = e.clientY
+    //         }
 
-            const deltaY = clientY - startY;
-            const scrollDelta = (deltaY / maxTop) * maxScroll;
+    //         const deltaY = clientY - startY;
+    //         const scrollDelta = (deltaY / maxTop) * maxScroll;
 
-            // Прокручиваем страницу
-            window.scrollTo({
-                top: startScrollTop + scrollDelta,
-                behavior: 'auto'
-            });
-        }
+    //         // Прокручиваем страницу
+    //         window.scrollTo({
+    //             top: startScrollTop + scrollDelta,
+    //             behavior: 'auto'
+    //         });
+    //     }
 
-        function startScroll(e: TouchEvent | MouseEvent) {
+    //     function startScroll(e: TouchEvent | MouseEvent) {
 
-            isDragging = true;
-            let clientY = 0
+    //         isDragging = true;
+    //         let clientY = 0
 
-            if (e instanceof TouchEvent) {
-                clientY = e.touches[0].clientY
-            } else {
-                clientY = e.clientY
-            }
-            startY = clientY;
-            startScrollTop = window.scrollY || window.pageYOffset;
-            e.preventDefault();
+    //         if (e instanceof TouchEvent) {
+    //             clientY = e.touches[0].clientY
+    //         } else {
+    //             clientY = e.clientY
+    //         }
+    //         startY = clientY;
+    //         startScrollTop = window.scrollY || window.pageYOffset;
+    //         e.preventDefault();
 
-        }
+    //     }
 
-        window.addEventListener('resize', updateScrollbar)
+    //     window.addEventListener('resize', updateScrollbar)
 
-        // Обработчик прокрутки
-        window.addEventListener('scroll', () => {
+    //     // Обработчик прокрутки
+    //     window.addEventListener('scroll', () => {
 
-            if (!isScrolling) {
-                currentScroll = window.scrollY;
-                targetScroll = currentScroll;
-            }
+    //         if (!isScrolling) {
+    //             currentScroll = window.scrollY;
+    //             targetScroll = currentScroll;
+    //         }
 
-            if (!isTicking) {
-                requestAnimationFrame(() => {
-                    updateScrollbar();
-                    isTicking = false;
-                });
-                isTicking = true;
-            }
-        });
+    //         if (!isTicking) {
+    //             requestAnimationFrame(() => {
+    //                 updateScrollbar();
+    //                 isTicking = false;
+    //             });
+    //             isTicking = true;
+    //         }
+    //     });
 
-        // Обработчики для мыши
-        scrollbar.addEventListener('mousedown', startScroll);
+    //     // Обработчики для мыши
+    //     scrollbar.addEventListener('mousedown', startScroll);
 
-        document.addEventListener('mousemove', scrollMove);
+    //     document.addEventListener('mousemove', scrollMove);
 
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-        });
+    //     document.addEventListener('mouseup', () => {
+    //         isDragging = false;
+    //     });
 
-        // Обработчики для сенсорных устройств
-        scrollbar.addEventListener('touchstart', startScroll);
+    //     // Обработчики для сенсорных устройств
+    //     scrollbar.addEventListener('touchstart', startScroll);
 
-        document.addEventListener('touchmove', scrollMove);
+    //     document.addEventListener('touchmove', scrollMove);
 
-        document.addEventListener('touchend', () => {
-            isDragging = false;
-        });
+    //     document.addEventListener('touchend', () => {
+    //         isDragging = false;
+    //     });
 
-        updateScrollbar()
+    //     updateScrollbar()
 
-        return () => {
-            window.removeEventListener('wheel', handleWheel);
+    //     return () => {
+    //         window.removeEventListener('wheel', handleWheel);
 
-            window.removeEventListener('scroll', () => { });
+    //         window.removeEventListener('scroll', () => { });
 
-            scrollbar.removeEventListener('mousedown', startScroll);
+    //         scrollbar.removeEventListener('mousedown', startScroll);
 
-            document.removeEventListener('mousemove', scrollMove);
+    //         document.removeEventListener('mousemove', scrollMove);
 
-            document.removeEventListener('mouseup', () => {
-                isDragging = false;
-            });
+    //         document.removeEventListener('mouseup', () => {
+    //             isDragging = false;
+    //         });
 
-            scrollbar.removeEventListener('touchstart', startScroll);
+    //         scrollbar.removeEventListener('touchstart', startScroll);
 
-            document.removeEventListener('touchmove', scrollMove);
+    //         document.removeEventListener('touchmove', scrollMove);
 
-            document.removeEventListener('touchend', () => {
-                isDragging = false;
-            });
+    //         document.removeEventListener('touchend', () => {
+    //             isDragging = false;
+    //         });
 
-        };
-    }, [scrollbarRef, widthWindow])
+    //     };
+    // }, [scrollbarRef, widthWindow])
 
     const [classBody, setClassBody] = useState('transparent-header');
 
-    useEffect(() => {
-        if (pathname !== '/' && classBody !== '') {
-            setClassBody('');
-        }
-        if (pathname === '/' && classBody === '') {
-            setClassBody('transparent-header');
-        }
-    }, [pathname, classBody]);
+    // useEffect(() => {
+    //     if (pathname !== '/' && classBody !== '') {
+    //         setClassBody('');
+    //     }
+    //     if (pathname === '/' && classBody === '') {
+    //         setClassBody('transparent-header');
+    //     }
+    // }, [pathname, classBody]);
 
     return (
         <>

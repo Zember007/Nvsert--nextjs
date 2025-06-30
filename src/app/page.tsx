@@ -36,7 +36,7 @@ export default function Home() {
     <div className="main text-[#000] overflow-hidden select-none ">
       <AppMainIntro />
 
-      <AppMainDocuments />
+      {/* <AppMainDocuments />
 
       <DynamicAppMainSkills />
 
@@ -46,7 +46,7 @@ export default function Home() {
 
       <DynamicAppMainFeedback />
 
-      <DynamicAppMainQuestions />
+      <DynamicAppMainQuestions /> */}
     </div>
   );
 }
