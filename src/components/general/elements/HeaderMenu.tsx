@@ -133,7 +133,9 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
                             </div>
 
                             {item.children && item.children.length > 0 && (
-                                    <Image src={ArrowIcon} alt='back' />                                
+                                <div className="min-w-[20px]">
+                                    <Image src={ArrowIcon} alt='back' />
+                                </div>
                             )}
                         </button>
                     ))}
