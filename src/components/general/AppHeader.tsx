@@ -168,7 +168,6 @@ const AppHeader = () => {
               onClick={() => {
                 navigator.clipboard.writeText('info@nvsert.ru')
               }}
-              className="after:!content-none xl:after:!content-[''] xl:!px-[35px] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] w-[280px] xl:mx-0 mx-auto !h-[50px] xl:w-full group"
               item={{
                 href: '#', label:
                   <>
