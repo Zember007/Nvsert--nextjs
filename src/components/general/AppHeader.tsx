@@ -106,8 +106,6 @@ const AppHeader = () => {
   return (
     <>
       <header className={`header xl:py-[5px] ${(servicesMenuActive || burgerMenuActive) ? 'active' : ''}`}>
-        <div className="header__bg"></div>
-        <div className="px-[20px] header__wrapper">
 
           <div className="flex items-center">
             <AppLogo />
@@ -233,7 +231,6 @@ const AppHeader = () => {
             </button>
           </div>
 
-        </div>
       </header>
       <HeaderMenu
         active={burgerMenuActive}
