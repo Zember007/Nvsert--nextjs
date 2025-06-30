@@ -2,7 +2,6 @@ import Link from 'next/link';
 import ArrowIcon from '@/assets/images/svg/menu/arrow.svg'
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-
 const navigationData = [
     {
         id: 'main',
@@ -106,12 +105,12 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
         <div className={`header__menu-mob ${active && 'active'}`}>
             <nav className="header-nav">
                 <ul className="rubik header-nav__list text-[]">
-                    <li className="w-full h-[50px] grid items-center gap-[10px]">
+                    <li className="w-full h-[50px] grid grid-cols-3 items-center gap-[10px]">
                         {canGoBack &&
                             <>
                                 <button
                                     onClick={handleGoBack}>
-                                    <Image src={ArrowIcon} alt='back' />
+                                    <Image src={ArrowIcon} alt='back' width={20} height={20} />
                                 </button>
 
                                 <span className=' text-[24px] text-center'>{currentLevel.title}</span>
@@ -134,7 +133,7 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
 
                             {item.children && item.children.length > 0 && (
                                 <div className="min-w-[20px]">
-                                    <Image src={ArrowIcon} alt='back' />
+                                    <Image src={ArrowIcon} alt='back' width={20} height={20} />
                                 </div>
                             )}
                         </button>
