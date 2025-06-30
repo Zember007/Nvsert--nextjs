@@ -172,7 +172,7 @@ const AppHeader = () => {
           </div>
         </div>
 
-        <div className="hidden xl:flex gap-[8px]">
+        <div className="header__bg hidden xl:flex gap-[8px]">
           <AppMenuItem
             className="!px-[31px] group"
             onClick={() => {

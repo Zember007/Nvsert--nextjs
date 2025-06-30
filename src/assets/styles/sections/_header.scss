@@ -5,10 +5,7 @@
 
 	--filter-blur: 15px;
 	--color: rgba(25, 24, 35, 0.4);
-	backdrop-filter: blur(var(--filter-blur));
-	background-color: var(--color);
-	background-image: url('../../images/150.webp');
-	background-repeat: repeat;
+
 	z-index: 50;
 	height: 50px;
 
@@ -158,8 +155,20 @@
 		}
 	}
 
-	&__menu {
+	&__bg {
+		backdrop-filter: blur(var(--filter-blur));
+		background-color: var(--color);
+		background-image: url('../../images/150.webp');
+		background-repeat: repeat;
+		border-radius: 4px;
+	}
 
+	&__menu {
+		backdrop-filter: blur(var(--filter-blur));
+		background-color: var(--color);
+		background-image: url('../../images/150.webp');
+		background-repeat: repeat;
+		border-radius: 4px;
 		position: relative;
 		z-index: 10;
 		flex-grow: 1;
@@ -290,13 +299,19 @@
 	right: 4px;
 	border-radius: 4px;
 	display: flex;
-	align-items: center;	
+	align-items: center;
 	gap: 4px;
 
 
 	.logo {
 		color: $white-color;
 		mix-blend-mode: difference;
+		backdrop-filter: blur(var(--filter-blur));
+		background-color: var(--color);
+		background-image: url('../../images/150.webp');
+		background-repeat: repeat;
+		border-radius: 4px;
+
 	}
 
 	&-nav {
