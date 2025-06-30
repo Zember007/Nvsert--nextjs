@@ -53,12 +53,7 @@
 	}
 
 
-	&-nav {
-
-		@media (max-width: $media-xl) {
-			mix-blend-mode: difference;
-
-		}
+	&-nav {	
 
 		@media(max-width: $media-l) {
 			width: 100%;

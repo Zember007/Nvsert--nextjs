@@ -104,7 +104,7 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
     return (
         <div className={`header__menu-mob ${active && 'active'}`}>
             <nav className="header-nav">
-                <ul className="rubik header-nav__list text-[]">
+                <ul className="rubik header-nav__list text-[#000]">
                     <li className="w-full h-[50px] grid grid-cols-3 items-center gap-[10px]">
                         {canGoBack &&
                             <>
