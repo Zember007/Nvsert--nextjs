@@ -107,7 +107,7 @@ const AppHeader = () => {
     <>
       <header className={`header ${(servicesMenuActive || burgerMenuActive) ? 'active' : ''}`}>
 
-        <div className="header__bg">
+        <div className="header__bg xl:grow-0 grow">
           <AppLogo />
         </div>
 
@@ -160,7 +160,7 @@ const AppHeader = () => {
 
         </div>
 
-        <div className="header__bg hidden xl:flex gap-[8px]">
+        <div className="header__bg !hidden xl:!flex gap-[8px]">
           <AppMenuItem
             className="!px-[31px] group"
             onClick={() => {
@@ -182,9 +182,10 @@ const AppHeader = () => {
               href: filterPhone('8 495 777-11-97'), label: '8 495 777-11-97'
             }} isActive={false} />
         </div>
-        <div className=" xl:hidden flex gap-[24px] items-center">
+        <div className=" xl:hidden flex gap-[4px]">
           <Link
             href={filterPhone('8 495 777-11-97')}
+            className="header__bg"
           >
 
             <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -193,28 +194,29 @@ const AppHeader = () => {
 
 
           </Link>
-
-          <button
-            type="button"
-            className="relative w-[34px] h-[30px] py-[3px] flex items-center justify-center z-50"
-            onClick={burgerHandler}
-            aria-label="Toggle menu"
-          >
-            <div className="relative w-[34px] h-[24px] flex flex-col justify-between items-center pointer-events-none">
-              <span
-                className={`rounded-[8px] block h-[4px] w-full bg-white transition-transform duration-300 ease-in-out ${burgerMenuActive ? 'rotate-45 translate-y-[10px]' : ''
-                  }`}
-              ></span>
-              <span
-                className={`rounded-[8px] block h-[4px] w-full bg-white transition-all duration-300 ease-in-out ${burgerMenuActive ? 'opacity-0' : ''
-                  }`}
-              ></span>
-              <span
-                className={`rounded-[8px] block h-[4px] w-full bg-white transition-transform duration-300 ease-in-out ${burgerMenuActive ? '-rotate-45 -translate-y-[10px]' : ''
-                  }`}
-              ></span>
-            </div>
-          </button>
+          <div className="header__bg">
+            <button
+              type="button"
+              className="relative  w-[34px] h-[30px] py-[3px] flex items-center justify-center z-50"
+              onClick={burgerHandler}
+              aria-label="Toggle menu"
+            >
+              <div className="relative w-[34px] h-[24px] flex flex-col justify-between items-center pointer-events-none">
+                <span
+                  className={`rounded-[8px] block h-[4px] w-full bg-white transition-transform duration-300 ease-in-out ${burgerMenuActive ? 'rotate-45 translate-y-[10px]' : ''
+                    }`}
+                ></span>
+                <span
+                  className={`rounded-[8px] block h-[4px] w-full bg-white transition-all duration-300 ease-in-out ${burgerMenuActive ? 'opacity-0' : ''
+                    }`}
+                ></span>
+                <span
+                  className={`rounded-[8px] block h-[4px] w-full bg-white transition-transform duration-300 ease-in-out ${burgerMenuActive ? '-rotate-45 -translate-y-[10px]' : ''
+                    }`}
+                ></span>
+              </div>
+            </button>
+          </div>
         </div>
 
       </header>
