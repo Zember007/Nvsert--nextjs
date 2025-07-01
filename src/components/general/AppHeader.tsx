@@ -106,7 +106,7 @@ const AppHeader = () => {
   return (
     <>
 
-      <div className={`header__bg gap-[8px]  l:!flex !hidden mix-blend-difference fixed h-[50px] top-[4px] right-[229px] z-[51] `}>
+      <div className={`header__bg gap-[8px]  l:!flex !hidden mix-blend-difference fixed h-[50px] top-[4px] right-[240px] z-[51] `}>
         <AppMenuItem
           onClick={() => {
             navigator.clipboard.writeText('info@nvsert.ru')
@@ -131,7 +131,7 @@ const AppHeader = () => {
 
       <Link
         href={filterPhone('8 495 777-11-97')}
-        className={`l:!hidden ${burgerMenuActive ? 'active' : 'mix-blend-difference'} header__bg fixed h-[50px] top-[4px] right-[72px] z-[51] `}
+        className={`l:!hidden ${burgerMenuActive ? 'active' : 'mix-blend-difference'} header__bg fixed h-[50px] top-[4px] right-[64px] z-[51] `}
       >
 
         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -222,7 +222,7 @@ const AppHeader = () => {
           </div>
         </div>
         <div className=" xl:hidden flex gap-[4px]">
-          <div className="w-[60px]"></div>
+          <div className="w-[52px]"></div>
           <div className="header__bg">
             <button
               type="button"
