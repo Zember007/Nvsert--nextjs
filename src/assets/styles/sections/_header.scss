@@ -1,16 +1,20 @@
 @import '../base/variables';
 @import '../base/mixins';
 
+:root {
+	--filter-blur-header: 15px;
+	--color-header: rgba(25, 24, 35, 0.4);
+}
+
 .header {
 
-	--filter-blur: 15px;
-	--color: rgba(25, 24, 35, 0.4);
+	
 
 	z-index: 50;
 	height: 54px;
 	padding: 4px;
 	padding-bottom: 0;
-	backdrop-filter: blur(var(--filter-blur));
+	// backdrop-filter: blur(var(--filter-blur));
 
 	&.active {
 		@media (max-width: $media-l) {
@@ -20,6 +24,8 @@
 			border-bottom: 1px solid #34446D;
 
 			.header__bg {
+				background-color: none;
+				backdrop-filter: blur(0);
 				background-image: none;
 			}
 		}
@@ -138,8 +144,8 @@
 	}
 
 	&__bg {
-		backdrop-filter: blur(var(--filter-blur));
-		background-color: var(--color);
+		backdrop-filter: blur(var(--filter-blur-header));
+		background-color: var(--color-header);
 		background-image: url('../../images/150.webp');
 		background-repeat: repeat;
 		border-radius: 4px;
