@@ -107,7 +107,7 @@ const AppHeader = () => {
     <>
       <Link
         href={filterPhone('8 495 777-11-97')}
-        className="header__bg fixed h-[50px] fixed-el top-[4px] right-[72px]  mix-blend-difference"
+        className={`${burgerMenuActive ? 'active' : ''} header__bg fixed h-[50px] top-[4px] right-[72px] z-[51] mix-blend-difference`}
       >
 
         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">

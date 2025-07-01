@@ -8,10 +8,6 @@
 
 .header {
 
-	&:hover ~ .fixed-el {
-		z-index: 51;
-	}
-
 	z-index: 50;
 	height: 54px;
 	padding: 4px;
@@ -154,6 +150,12 @@
 		padding: 0 15px;
 		display: flex;
 		align-items: center;
+
+		&.active {
+			background-color: transparent;
+			backdrop-filter: blur(0);
+			background-image: none;
+		}
 	}
 
 	&__menu {
