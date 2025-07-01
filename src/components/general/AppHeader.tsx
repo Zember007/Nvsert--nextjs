@@ -106,7 +106,7 @@ const AppHeader = () => {
   return (
     <>
 
-      <div className={`header__bg gap-[8px]  l:!flex !hidden mix-blend-difference fixed h-[50px] top-[4px] right-[226px] z-[51] `}>
+      <div className={`header__bg gap-[8px]  l:!flex !hidden mix-blend-difference fixed h-[50px] top-[4px] right-[229px] z-[51] `}>
         <AppMenuItem
           onClick={() => {
             navigator.clipboard.writeText('info@nvsert.ru')
@@ -197,7 +197,7 @@ const AppHeader = () => {
 
         </div>
 
-        <div className="hidden xl:flex gap-[2px]">
+        <div className="hidden xl:flex gap-[4px]">
           <div className="w-[342px]"></div>
           <div className="header__bg">
             <AppMenuItem
@@ -221,7 +221,7 @@ const AppHeader = () => {
               }} isActive={false} />
           </div>
         </div>
-        <div className=" xl:hidden flex gap-[2px]">
+        <div className=" xl:hidden flex gap-[4px]">
           <div className="w-[60px]"></div>
           <div className="header__bg">
             <button

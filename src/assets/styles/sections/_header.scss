@@ -10,8 +10,8 @@
 
 	z-index: 50;
 	height: 58px;
-	padding: 4px;
-	backdrop-filter: blur(5px);
+	padding: 4px 13px;
+	backdrop-filter: blur(4px);
 
 	@media (max-width: $media-l) {
 		padding: 4px;
@@ -271,7 +271,7 @@
 	left: 0;
 	width: 100%;
 	display: flex;
-	gap: 2px;
+	gap: 4px;
 
 
 	.logo {
