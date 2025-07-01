@@ -8,7 +8,9 @@
 
 .header {
 
-	
+	&:hover ~ .fixed-el {
+		z-index: 51;
+	}
 
 	z-index: 50;
 	height: 54px;
