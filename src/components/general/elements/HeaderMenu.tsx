@@ -100,49 +100,69 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
 
     const currentLevel = navigationStack[navigationStack.length - 1];
 
-
     return (
         <div className={`header__menu-mob ${active && 'active'}`}>
-            <nav className="header-nav">
-                <ul className="rubik header-nav__list ">
-                    <li className="w-full h-[50px] grid grid-cols-3 items-center gap-[10px]">
-                        {canGoBack &&
-                            <>
-                                <button
-                                className='rotate-[180deg]'
-                                    onClick={handleGoBack}>
-                                    <Image src={ArrowIcon} alt='back' width={20} height={20} />
-                                </button>
-
-                                <span className=' text-[24px] text-center'>{currentLevel.title}</span>
-
-                            </>
-                        }
-                    </li>
-                    {currentLevel.items.map((item, index) => (
-                        <button
-                            key={item.id}
-                            onClick={() => handleItemClick(item)}
-                            className={`${index === 0 ? 'border-t' : ''} ${item.children && item.children.length > 0 ? 'group' : ''} menu-mob-item`}
+           <nav className="header-nav relative overflow-hidden w-full">
+                <div
+                    className="flex transition-transform duration-300"
+                    style={{
+                        transform: `translateX(-${(navigationStack.length - 1) * 100}%)`
+                    }}
+                >
+                    {navigationStack.map((level, index) => (
+                        <ul
+                            key={index}
+                            className="rubik header-nav__list min-w-full flex-shrink-0"
                         >
-                            <div className="flex items-center gap-[10px]">
-
-                                <span className="text-[18px] text-[#000]">
-                                    {item.title}
-                                </span>
-                            </div>
-
-                            {item.children && item.children.length > 0 && (
-                                <div className="min-w-[20px]">
-                                    <Image src={ArrowIcon} alt='back' width={20} height={20} />
-                                </div>
+                            <li className="w-full h-[50px] grid grid-cols-3 items-center gap-[10px]">
+                                {index > 0 && (
+                                    <>
+                                        <button onClick={handleGoBack}>
+                                            <Image
+                                                className="rotate-[180deg]"
+                                                src={ArrowIcon}
+                                                alt="back"
+                                                width={20}
+                                                height={20}
+                                            />
+                                        </button>
+                                        <span className="text-[24px] text-center col-span-2">
+                                            {level.title}
+                                        </span>
+                                    </>
+                                )}
+                            </li>
+                            {level.items.map((item) =>
+                                item.href ? (
+                                    <Link
+                                        key={item.id}
+                                        href={item.href}
+                                        className={`flex justify-between items-center w-full active:rounded-[4px] active:bg-[#34446d33] active:border-[#34446D] active:border menu-mob-item`}
+                                    >
+                                        <span className="text-[18px] text-[#000]">{item.title}</span>
+                                        {item.children && (
+                                            <Image src={ArrowIcon} alt="more" width={20} height={20} />
+                                        )}
+                                    </Link>
+                                ) : (
+                                    <button
+                                        key={item.id}
+                                        onClick={() => handleItemClick(item)}
+                                        className="flex justify-between items-center w-full active:rounded-[4px] active:bg-[#34446d33] active:border-[#34446D] active:border menu-mob-item"
+                                    >
+                                        <span className="text-[18px] text-[#000]">{item.title}</span>
+                                        {item.children && (
+                                            <Image src={ArrowIcon} alt="more" width={20} height={20} />
+                                        )}
+                                    </button>
+                                )
                             )}
-                        </button>
+                        </ul>
                     ))}
-                </ul>
+                </div>
             </nav>
 
-            <div className="flex flex-col gap-[10px] p-[40px] text-[#FFF]">
+            <div className="flex flex-col gap-[10px] p-[40px] w-[320px] mx-auto text-[#FFF]">
                 <div className="button-menu bg-[#34446D]">
                     <span>Заказать звонок</span>
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
