@@ -102,36 +102,35 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
 
     return (
         <div className={`header__menu-mob ${active && 'active'}`}>
-           <nav className="header-nav relative overflow-hidden w-full">
+            <nav className="header-nav flex flex-col gap-[26px] relative overflow-hidden w-full">
+                <div className="header-nav__list rubik !grid grid-cols-3">
+                    {canGoBack &&
+                        <>
+                            <button
+                                onClick={handleGoBack}>
+                                <Image
+                                className='rotate-[180deg]'
+                                src={ArrowIcon} alt='back' width={20} height={20} />
+                            </button>
+
+                            <span className=' text-[24px] text-center'>{currentLevel.title}</span>
+
+                        </>
+                    }
+                </div>
                 <div
-                    className="flex transition-transform duration-300"
+                    className="flex transition-transform"
                     style={{
                         transform: `translateX(-${(navigationStack.length - 1) * 100}%)`
                     }}
                 >
+
+
                     {navigationStack.map((level, index) => (
                         <ul
                             key={index}
                             className="rubik header-nav__list min-w-full flex-shrink-0"
                         >
-                            <li className="w-full h-[50px] grid grid-cols-3 items-center gap-[10px]">
-                                {index > 0 && (
-                                    <>
-                                        <button onClick={handleGoBack}>
-                                            <Image
-                                                className="rotate-[180deg]"
-                                                src={ArrowIcon}
-                                                alt="back"
-                                                width={20}
-                                                height={20}
-                                            />
-                                        </button>
-                                        <span className="text-[24px] text-center">
-                                            {level.title}
-                                        </span>
-                                    </>
-                                )}
-                            </li>
                             {level.items.map((item) =>
                                 item.href ? (
                                     <Link
