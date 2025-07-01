@@ -10,9 +10,12 @@
 
 	z-index: 50;
 	height: 54px;
-	padding: 4px;
-	padding-bottom: 0;
-	// backdrop-filter: blur(var(--filter-blur));
+	padding: 4px 22px 0 22px;
+	backdrop-filter: blur(var(--filter-blur-header));
+
+	@media (max-width: $media-l) {
+		padding: 4px 4px 0 4px;
+	}
 
 	&.active {
 		@media (max-width: $media-l) {
@@ -86,7 +89,7 @@
 				z-index: 100;
 				padding: 0 40px;
 			}
-	
+
 			@media(max-width: $media-s) {
 				z-index: 1;
 			}
@@ -182,7 +185,7 @@
 				transform: translateX(100%);
 				@include transition();
 
-			
+
 
 				&.active {
 					transform: translateX(0);
