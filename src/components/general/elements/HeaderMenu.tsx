@@ -102,7 +102,7 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
 
     return (
         <div className={`header__menu-mob ${active && 'active'}`}>
-           <nav className="header-nav relative overflow-hidden w-full">
+            <nav className="header-nav relative overflow-hidden w-full">
                 <div
                     className="flex transition-transform duration-300"
                     style={{
@@ -110,10 +110,9 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
                     }}
                 >
                     {navigationStack.map((level, index) => (
-                        <ul
+                        <div
                             key={index}
-                            className="rubik header-nav__list min-w-full flex-shrink-0"
-                        >
+                            className="header-nav__list rubik">
                             <li className="w-full h-[50px] grid grid-cols-3 items-center gap-[10px]">
                                 {index > 0 && (
                                     <>
@@ -132,32 +131,37 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
                                     </>
                                 )}
                             </li>
-                            {level.items.map((item) =>
-                                item.href ? (
-                                    <Link
-                                        key={item.id}
-                                        href={item.href}
-                                        className={`flex justify-between items-center w-full active:rounded-[4px] active:bg-[#34446d33] active:border-[#34446D] active:border menu-mob-item`}
-                                    >
-                                        <span className="text-[18px] text-[#000]">{item.title}</span>
-                                        {item.children && (
-                                            <Image src={ArrowIcon} alt="more" width={20} height={20} />
-                                        )}
-                                    </Link>
-                                ) : (
-                                    <button
-                                        key={item.id}
-                                        onClick={() => handleItemClick(item)}
-                                        className="flex justify-between items-center w-full active:rounded-[4px] active:bg-[#34446d33] active:border-[#34446D] active:border menu-mob-item"
-                                    >
-                                        <span className="text-[18px] text-[#000]">{item.title}</span>
-                                        {item.children && (
-                                            <Image src={ArrowIcon} alt="more" width={20} height={20} />
-                                        )}
-                                    </button>
-                                )
-                            )}
-                        </ul>
+                            <ul
+                                className=" flex overflow-y-auto flex-col gap-[10px]  min-w-full flex-shrink-0"
+                            >
+
+                                {level.items.map((item) =>
+                                    item.href ? (
+                                        <Link
+                                            key={item.id}
+                                            href={item.href}
+                                            className={`flex justify-between items-center w-full active:rounded-[4px] active:bg-[#34446d33] active:border-[#34446D] active:border menu-mob-item`}
+                                        >
+                                            <span className="text-[18px] text-[#000]">{item.title}</span>
+                                            {item.children && (
+                                                <Image src={ArrowIcon} alt="more" width={20} height={20} />
+                                            )}
+                                        </Link>
+                                    ) : (
+                                        <button
+                                            key={item.id}
+                                            onClick={() => handleItemClick(item)}
+                                            className="flex justify-between items-center w-full active:rounded-[4px] active:bg-[#34446d33] active:border-[#34446D] active:border menu-mob-item"
+                                        >
+                                            <span className="text-[18px] text-[#000]">{item.title}</span>
+                                            {item.children && (
+                                                <Image src={ArrowIcon} alt="more" width={20} height={20} />
+                                            )}
+                                        </button>
+                                    )
+                                )}
+                            </ul>
+                        </div>
                     ))}
                 </div>
             </nav>
