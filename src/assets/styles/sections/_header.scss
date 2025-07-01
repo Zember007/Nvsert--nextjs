@@ -9,12 +9,12 @@
 .header {
 
 	z-index: 50;
-	height: 54px;
-	padding: 4px 22px 0 22px;
+	height: 58px;
+	padding: 4px 22px 4px 22px;
 	backdrop-filter: blur(var(--filter-blur-header));
 
 	@media (max-width: $media-l) {
-		padding: 4px 4px 0 4px;
+		padding: 4px;
 	}
 
 	&.active {
