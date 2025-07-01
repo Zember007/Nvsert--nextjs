@@ -21,8 +21,9 @@
 		@media (max-width: $media-l) {
 			@apply bg-[#FFF];
 			--color: transparent;
-			border-radius: 0;
 			border-bottom: 1px solid #34446D;
+			padding-bottom: 0;
+			height: 54px;
 
 			.header__bg {
 				background-color: transparent;
@@ -269,7 +270,6 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	border-radius: 4px;
 	display: flex;
 	gap: 4px;
 
