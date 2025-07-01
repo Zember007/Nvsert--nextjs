@@ -126,7 +126,7 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
                                                 height={20}
                                             />
                                         </button>
-                                        <span className="text-[24px] text-center col-span-2">
+                                        <span className="text-[24px] text-center">
                                             {level.title}
                                         </span>
                                     </>
