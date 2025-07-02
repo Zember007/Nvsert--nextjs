@@ -9,13 +9,13 @@
 .header {
 
 	z-index: 50;
-	height: 58px;
-	padding: 4px ;
+	height: 54px;
+	padding: 2px ;
 	backdrop-filter: blur(4px);
 
-	@media (max-width: $media-l) {
-		padding: 4px;
-	}
+	// @media (max-width: $media-l) {
+	// 	padding: 2px;
+	// }
 
 	&.active {
 		@media (max-width: $media-l) {
@@ -23,7 +23,7 @@
 			--color: transparent;
 			border-bottom: 1px solid #34446D;
 			padding-bottom: 0;
-			height: 54px;
+			height: 52px;
 
 			.header__bg {
 				background-color: transparent;
@@ -271,7 +271,7 @@
 	left: 0;
 	width: 100%;
 	display: flex;
-	gap: 4px;
+	gap: 2px;
 
 
 	.logo {
