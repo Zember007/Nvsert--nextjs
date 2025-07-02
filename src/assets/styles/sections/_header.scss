@@ -13,9 +13,9 @@
 	padding: 2px ;
 	backdrop-filter: blur(4px);
 
-	// @media (max-width: $media-l) {
-	// 	padding: 2px;
-	// }
+	@media (max-width: $media-l) {
+		padding: 2px 4px;
+	}
 
 	&.active {
 		@media (max-width: $media-l) {
