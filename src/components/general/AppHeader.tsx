@@ -106,7 +106,7 @@ const AppHeader = () => {
   return (
     <>
 
-      <div className={`header__bg gap-[8px] l:!flex !hidden mix-blend-difference fixed h-[50px] top-[2px] right-[194.5px] z-[51] `}>
+      <div className={`header__bg gap-[8px] l:!flex !hidden mix-blend-difference fixed h-[50px] top-[2px] right-[194px] z-[51] `}>
         <AppMenuItem
           onClick={() => {
             navigator.clipboard.writeText('info@nvsert.ru')
