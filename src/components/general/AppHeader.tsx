@@ -137,7 +137,7 @@ const AppHeader = () => {
 
       <Link
         href={filterPhone('8 495 777-11-97')}
-        className={`rubik border border-solid border-[#FFF] l:!hidden !backdrop-filter-none ${burgerMenuActive ? 'active' : 'mix-blend-difference'} header__bg fixed h-[50px] top-[2px] right-[62px] z-[51] `}
+        className={`rubik border border-solid  l:!hidden !backdrop-filter-none ${burgerMenuActive ? 'active border-[transparent]' : 'mix-blend-difference border-[#FFF]'} header__bg fixed h-[50px] top-[2px] right-[62px] z-[51] `}
       >
 
         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -217,7 +217,7 @@ const AppHeader = () => {
           </div>
         </div>
         <div className=" xl:hidden flex gap-[2px]">
-          <div className="w-[52px]"></div>
+          <div className="w-[55px]"></div>
           <div className="header__bg">
             <button
               type="button"

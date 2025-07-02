@@ -91,6 +91,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
         };
 
         const smoothScroll = () => {
+            if(document.body.style.overflow === 'hidden') return
             const diff = targetScroll - currentScroll;
             if (Math.abs(diff) < 0.1) {
                 isScrolling = false;
@@ -146,7 +147,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
         }
 
         function scrollMove(e: TouchEvent | MouseEvent) {
-            if (!isDragging) return;
+            if (!isDragging || document.body.style.overflow === 'hidden') return;
 
             const scrollHeight = document.documentElement.scrollHeight;
             const clientHeight = window.innerHeight || document.documentElement.clientHeight;
