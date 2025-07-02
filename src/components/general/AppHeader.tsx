@@ -131,6 +131,12 @@ const AppHeader = () => {
           }} isActive={false} />
       </div>
 
+      <div className="header__bg min-w-[190px] xl:!flex !hidden fixed mix-blend-difference border border-solid border-[#FFF] h-[49px] top-[2px] left-[2px]">
+          <AppLogo
+            className={`xl:mx-auto ${burgerMenuActive ? '!text-[#000]' : ''}`}
+          />
+        </div>
+
       <Link
         href={filterPhone('8 495 777-11-97')}
         className={`border border-solid border-[#FFF] l:!hidden !backdrop-blur-0 ${burgerMenuActive ? 'active' : 'mix-blend-difference'} header__bg fixed h-[49px] top-[2px] right-[60px] z-[51] `}
@@ -144,7 +150,7 @@ const AppHeader = () => {
       </Link>
       <header className={`header ${(servicesMenuActive || burgerMenuActive) ? 'active' : ''}`}>
 
-        <div className="header__bg min-w-[190px] xl:grow-0 grow">
+        <div className="header__bg min-w-[190px] xl:grow-0 grow xl:opacity-0">
           <AppLogo
             className={`xl:mx-auto ${burgerMenuActive ? '!text-[#000]' : ''}`}
           />
