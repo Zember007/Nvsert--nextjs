@@ -106,7 +106,7 @@ const AppHeader = () => {
   return (
     <>
 
-      <div className={`border border-solid border-[#FFF] w-[385px] header__bg !backdrop-blur-[none] gap-[8px] l:!flex !hidden mix-blend-difference fixed h-[50px] top-[2px] right-[193.5px] z-[51] `}>
+      <div className={`border border-solid border-[#FFF] w-[385px] header__bg !backdrop-filter-none gap-[8px] l:!flex !hidden mix-blend-difference fixed h-[50px] top-[2px] right-[193.5px] z-[51] `}>
         <AppMenuItem
           onClick={() => {
             navigator.clipboard.writeText('info@nvsert.ru')
@@ -131,7 +131,7 @@ const AppHeader = () => {
           }} isActive={false} />
       </div>
 
-      <div className="z-[51] !backdrop-blur-[none] header__bg min-w-[190px] xl:!flex !hidden fixed mix-blend-difference border border-solid border-[#FFF] h-[50px] top-[2px] left-[2px]">
+      <div className="z-[51] !backdrop-filter-none header__bg min-w-[190px] xl:!flex !hidden fixed mix-blend-difference border border-solid border-[#FFF] h-[50px] top-[2px] left-[2px]">
           <AppLogo
             className={`xl:mx-auto ${burgerMenuActive ? '!text-[#000]' : ''}`}
           />
@@ -139,7 +139,7 @@ const AppHeader = () => {
 
       <Link
         href={filterPhone('8 495 777-11-97')}
-        className={`border border-solid border-[#FFF] l:!hidden !backdrop-blur-[none] ${burgerMenuActive ? 'active' : 'mix-blend-difference'} header__bg fixed h-[50px] top-[2px] right-[60px] z-[51] `}
+        className={`border border-solid border-[#FFF] l:!hidden !backdrop-filter-none ${burgerMenuActive ? 'active' : 'mix-blend-difference'} header__bg fixed h-[50px] top-[2px] right-[60px] z-[51] `}
       >
 
         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
