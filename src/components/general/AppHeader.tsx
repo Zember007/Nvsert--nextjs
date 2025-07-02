@@ -131,7 +131,7 @@ const AppHeader = () => {
           }} isActive={false} />
       </div>
 
-      <div className=" !backdrop-blur-0 header__bg min-w-[190px] xl:!flex !hidden fixed mix-blend-difference border border-solid border-[#FFF] h-[49px] top-[2px] left-[2px]">
+      <div className="z-[51] !backdrop-blur-0 header__bg min-w-[190px] xl:!flex !hidden fixed mix-blend-difference border border-solid border-[#FFF] h-[49px] top-[2px] left-[2px]">
           <AppLogo
             className={`xl:mx-auto ${burgerMenuActive ? '!text-[#000]' : ''}`}
           />
