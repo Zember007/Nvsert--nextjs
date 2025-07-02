@@ -386,7 +386,7 @@ body {
     top: 0;
     height: 100%;
     position: fixed;
-    width: 13px;
+    width: 12px;
     padding: 4px 2px;
 
     &::before {
@@ -398,7 +398,7 @@ body {
         height: var(--scrollbarHeight);
         background: rgba(52, 68, 109, 0.2);
         border: 1px solid #93969D;
-        border-radius: 5px;
+        border-radius: 3px;
     }
 
     @media (max-width: 768px) {

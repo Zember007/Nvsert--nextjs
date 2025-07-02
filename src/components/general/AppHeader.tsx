@@ -106,7 +106,7 @@ const AppHeader = () => {
   return (
     <>
 
-      <div className={`header__bg gap-[8px] l:!flex !hidden mix-blend-difference fixed h-[50px] top-[2px] right-[194px] z-[51] `}>
+      <div className={`w-[385px] header__bg gap-[8px] l:!flex !hidden mix-blend-difference fixed h-[50px] top-[2px] right-[193.5px] z-[51] `}>
         <AppMenuItem
           onClick={() => {
             navigator.clipboard.writeText('info@nvsert.ru')
@@ -200,7 +200,7 @@ const AppHeader = () => {
         </div>
 
         <div className="hidden xl:flex gap-[2px]">
-          <div className="w-[384px]"></div>
+          <div className="w-[385px]"></div>
           <div className="header__bg w-[190px]">
             <AppMenuItem
               className="mx-auto"

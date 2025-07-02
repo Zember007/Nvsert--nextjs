@@ -8,37 +8,18 @@
   position: relative;
   z-index: 0;
   
-  background: #040610bd;  
+  // background: #040610bd;  
 
   @media (max-width: varibles.$media-s) {
     padding-top: 70px;
     padding-bottom: 40px;
   }
 
-  // &::before {
-  //   content: '';
-  //   position: absolute;
-  //   z-index: -1;
-  //   top: 0;
-  //   bottom: 0;
-  //   left: 0;
-  //   right: 0;
-  //   opacity: var(--bg-op);
-  // }
-
-  // @media (max-width: varibles.$media-l) {
-  //   padding-top: 100px;
-  //   padding-bottom: 112px;
-  // }
-
-  // @media (max-width: varibles.$media-s) {
-  //   padding-top: 90px;
-  // }
 
   &__title {
     max-width: 792px;
     width: 100%;
-    color: varibles.$white-color;
+    color: #000;
     font-weight: 400;
     font-size: 64px;
     line-height: 73.59px;
