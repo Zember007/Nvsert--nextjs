@@ -142,7 +142,7 @@ const AppHeader = () => {
       </Link>
       <header className={`header ${(servicesMenuActive || burgerMenuActive) ? 'active' : ''}`}>
 
-        <div className="header__bg xl:grow-0 grow">
+        <div className="header__bg min-w-[221px] xl:grow-0 grow">
           <AppLogo
             className={`${burgerMenuActive ? '!text-[#000]' : ''}`}
           />
