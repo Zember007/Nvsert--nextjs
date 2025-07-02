@@ -106,7 +106,7 @@ const AppHeader = () => {
   return (
     <>
 
-      <div className={`header__bg gap-[8px]  l:!flex !hidden mix-blend-difference fixed h-[50px] top-[4px] right-[240px] z-[51] `}>
+      <div className={`header__bg gap-[8px]  l:!flex !hidden mix-blend-difference fixed h-[50px] top-[4px] right-[229px] z-[51] `}>
         <AppMenuItem
           onClick={() => {
             navigator.clipboard.writeText('info@nvsert.ru')
@@ -144,7 +144,7 @@ const AppHeader = () => {
 
         <div className="header__bg min-w-[221px] xl:grow-0 grow">
           <AppLogo
-            className={`${burgerMenuActive ? '!text-[#000]' : ''}`}
+            className={`xl:mx-auto ${burgerMenuActive ? '!text-[#000]' : ''}`}
           />
         </div>
 
