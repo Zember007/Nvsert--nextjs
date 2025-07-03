@@ -63,7 +63,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
 
                     </div>
                 </div>
-                <div className={`max-h-[0px] transition-all easy-in duration-200 overflow-hidden ${active && '!max-h-[1000px]'}`}>
+                <div className={`arial max-h-[0px] transition-all easy-in duration-200 overflow-hidden ${active && '!max-h-[1000px]'}`}>
                     <div className="m:pl-[110px] p-[20px] m:pr-[34px] m:py-[30px] flex flex-col gap-[30px]">
                         <div className="mtp__spoiler-text" >
                             <div dangerouslySetInnerHTML={{ __html: text }}></div>

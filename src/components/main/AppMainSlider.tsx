@@ -238,7 +238,7 @@ const SliderMain = () => {
                                     filterPrepositions(slidesLang[activeIndex].title)
                                 }
                             </span>
-                            <p className={`grow slide-text xl:p-0 p-[20px] w-full h-full text-[16px] bg-[#FFF] `}>
+                            <p className={`arial grow slide-text xl:p-0 p-[20px] w-full h-full text-[16px] bg-[#FFF] `}>
 
                                 {filterPrepositions(slidesLang[activeIndex].text)}
 
