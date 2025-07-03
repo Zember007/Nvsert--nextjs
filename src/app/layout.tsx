@@ -8,15 +8,15 @@ import { ReactNode } from "react"
 import { Rubik } from 'next/font/google'
 
 const rubik = Rubik({
-    subsets: ['latin'],
-    weight: ['300'],
-    display: 'swap',
-    variable: '--font-rubik',
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  display: 'swap',
+  variable: '--font-rubik',
 })
 
 export default function RootLayout({ children }: { children: ReactNode }) {
 
-  
+
 
   return (
     <html lang="ru" className={rubik.variable}>

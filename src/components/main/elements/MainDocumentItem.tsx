@@ -237,7 +237,7 @@ const MainDocumentItem = memo(({
                     </div>
                 </div>
 
-                <div className={`document__hidden ${active && 'active bg-[#FFFFFF26] backdrop-blur-[1px]'}`}>
+                <div className={`document__hidden ${active && 'active bg-[#FFFFFF26]'}`}>
                     <div className="document__item  ">
                         <div className="document__list-photo">
                             {windowWidth && windowWidth < 768 &&

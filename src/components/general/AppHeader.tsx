@@ -104,7 +104,7 @@ const AppHeader = () => {
   return (
     <>
 
-      <div className={`rubik border border-solid border-[#FFF] w-[385px] header__bg !backdrop-filter-none gap-[8px] l:!flex !hidden mix-blend-difference fixed h-[50px] top-[2px] right-[193.5px] z-[51] `}>
+      <div className={`rubik border border-solid border-[#FFF] w-[385px] header__bg !backdrop-filter-none gap-[8px] l:!flex !hidden mix-blend-difference fixed h-[50px] top-[2px] right-[194px] z-[51] `}>
         <AppMenuItem
           onClick={() => {
             navigator.clipboard.writeText('info@nvsert.ru')
@@ -137,7 +137,7 @@ const AppHeader = () => {
 
       <Link
         href={filterPhone('8 495 777-11-97')}
-        className={`rubik border border-solid  l:!hidden !backdrop-filter-none ${burgerMenuActive ? 'active border-[transparent]' : 'mix-blend-difference border-[#FFF]'} header__bg fixed h-[50px] top-[2px] right-[62px] z-[51] `}
+        className={`rubik border border-solid  l:!hidden !backdrop-filter-none ${burgerMenuActive ? 'active border-[transparent]' : 'mix-blend-difference border-[#FFF]'} header__bg fixed h-[50px] top-[2px] right-[64px] z-[51] `}
       >
 
         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -217,7 +217,7 @@ const AppHeader = () => {
           </div>
         </div>
         <div className=" xl:hidden flex gap-[2px]">
-          <div className="w-[55px]"></div>
+          <div className="w-[54px]"></div>
           <div className="header__bg">
             <button
               type="button"
