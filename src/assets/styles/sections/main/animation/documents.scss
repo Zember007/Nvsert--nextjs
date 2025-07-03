@@ -137,7 +137,7 @@
   }
 
   &__desc {
-    @apply  translate-y-[-1px] text-[16px] m:text-[20px] transition-all duration-200 font-bold tracking-normal;
+    @apply  translate-y-[-1px] text-[16px] m:text-[20px] transition-all duration-200  tracking-normal;
 
     &-wrap {
       @apply hidden will-change-transform *:will-change-transform m:w-[40%] m:grid grid-cols-[1fr_1fr_auto] items-center justify-between;
@@ -145,7 +145,7 @@
   }
 
   &__title {
-    @apply m:translate-y-[-1px] transition-all duration-200 m:leading-[11px] leading-[1] will-change-transform m:w-[60%] pl-[63px] text-[18px] m:text-[20px] m:font-bold tracking-normal;
+    @apply m:translate-y-[-1px] transition-all duration-200 m:leading-[11px] leading-[1] will-change-transform m:w-[60%] pl-[63px] text-[18px] m:text-[20px]  tracking-normal;
   }
 
   &__small-img {

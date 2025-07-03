@@ -216,14 +216,14 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
     }, [active, countTrigger])
 
     return (
-        <motion.div 
+        <motion.div
             animate={controls}
             initial={{ x: 0 }}
-            className={`relative main-form ${bg && 'bg-[#0000004d] border-main'} p-[20px] s:pb-[33px] s:pt-[38px] s:px-[40px] max-w-[320px] s:max-w-[400px] flex flex-col s:gap-[20px] gap-[15px] rounded-[6px]`}>
+            className={`relative main-form ${bg && 'bg-[#93969d26] border-main'} p-[20px] s:pb-[33px] s:pt-[38px] s:px-[40px] max-w-[320px] s:max-w-[400px] flex flex-col s:gap-[20px] gap-[15px] rounded-[6px]`}>
             {successMessageVisible && <FlightSuccess closeIcon={bg} text="Спасибо за заявку" close={() => { setSuccessMessageVisible(false) }} />}
 
             <div className="h-[16px] s:h-[23px]">
-                <span className={`leading-[1] text-[#FFF] text-[24px] s:text-[32px] ${bg ? 'text-center linear-text' : 'text-left'} tracking-[-0.03em] s:px-[8px]  ${successMessageVisible && 'opacity-0'} `}>Оформить заявку</span>
+                <span className={`leading-[1] text-[#000] text-[24px] s:text-[32px] ${bg ? 'text-center' : 'text-left'} tracking-[-0.03em] s:px-[8px]  ${successMessageVisible && 'opacity-0'} `}>Оформить заявку</span>
             </div>
 
             <div className={`${successMessageVisible && 'opacity-0'}`}>
@@ -231,7 +231,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                     {({ register, errors }) => (
                         <div className="flex flex-col s:gap-[20px] gap-[15px]">
                             <AppInput
-                                className={`${bg ? '!bg-[#00000026] focus:!bg-[#34446d33] !border-[#444] focus:!border-[#ffffff80]' : '!bg-[transparent] focus:!bg-[#21262F]'}  main__input `}
+                                className={`${bg ? '!bg-[#34446d33] focus:!bg-[#34446d33] !border-[#444] focus:!border-[#ffffff80]' : '!bg-[transparent] focus:!bg-[#21262F]'}  main__input `}
                                 title={'ФИО'}
                                 inputName="name"
                                 required={true}
@@ -310,14 +310,9 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                     }}
                                 >
                                     <span className="sendIconLeft">
-                                        <Image
-                                            alt="message"
-                                            src={MessageImg}
-                                            width="0"
-                                            height="0"
-                                            sizes="100vw"
-                                            className="h-[30px] w-[30px] rotate-[45deg] translate-x-[-5px]"
-                                        />
+                                        <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M3 8.5V6.5H0V8.5H3ZM8.96767 0.5L7.52908 1.93076L12.1092 6.48713H6V8.51185H12.1092L7.52908 13.0682L8.96767 14.5L16 7.5L15.2822 6.78462L14.5634 6.06823L8.96767 0.5Z" fill="#34446D" />
+                                        </svg>
                                     </span>
                                     <span
                                         className="sendText"

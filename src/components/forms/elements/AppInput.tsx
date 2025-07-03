@@ -87,10 +87,10 @@ const AppInput = ({ title, defaultValue, disable, fail, message = true, inputNam
                 />
                 {!disable &&
                     <>
-                        <span className={` field__title ${(errors[inputName]) && '!text-[#FF3030]'} ${classNameTitle}`}>
+                        {/* <span className={` field__title ${(errors[inputName]) && '!text-[#FF3030]'} ${classNameTitle}`}>
                             {title}
-                        </span>
-                        <span className={`field__title-top ${classNameTitle}`}>
+                        </span> */}
+                        <span className={`field__title-top ${(errors[inputName]) && '!text-[#FF3030]'} ${classNameTitle}`}>
                             {title}
                         </span>
                     </>}

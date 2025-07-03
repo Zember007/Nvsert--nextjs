@@ -31,9 +31,9 @@ const AppTextarea = ({ title, inputName, required, className }: { title: string,
                     name={inputName}
                     placeholder={title}
                 ></textarea>
-                <span className="field__title">
+                {/* <span className="field__title">
                     {title}
-                </span>
+                </span> */}
                 <span className={`field__title-top`}>
                     {title}
                 </span>

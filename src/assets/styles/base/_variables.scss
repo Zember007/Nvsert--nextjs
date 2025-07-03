@@ -1,11 +1,13 @@
 @function rem($px) {
-  $remValue: ($px / 16) + rem; 
-  @return $remValue; 
+  $remValue: (
+    $px / 16) + rem;
+  @return $remValue;
 }
 
 $white-color: #ffffff;
 
-$theme-primary: rgba(52, 68, 109, 1);
+$theme-primary: rgba(52, 68, 109, 1
+);
 $theme-border-light: rgba(244, 245, 245, 1);
 $theme-border: rgba(226, 227, 227, 1);
 $theme-border-dark: rgba(148, 150, 156, 1);
@@ -31,7 +33,7 @@ $icon-disable: rgba(233, 234, 234, 1);
 $icon-accent: rgba(52, 68, 109, 1);
 $icon-dark: rgba(49, 62, 96, 1);
 
-$input-placeholder-normal:#FFFFFF;
+$input-placeholder-normal: #000;
 $input-placeholder-hover: rgba(255, 255, 255, 1);
 $input-placeholder-focus: rgba(255, 255, 255, 1);
 $input-placeholder-active: rgba(108, 116, 117, 1);
@@ -76,8 +78,11 @@ $font-size--small: 80%;
 
 $font-path: "~assets/fonts";
 
-$font-family: Arial, Helvetica, sans-serif;
-$font-family-2:Arial, Helvetica, sans-serif;
+// $font-family: Arial, Helvetica, sans-serif;
+// $font-family-2:Arial, Helvetica, sans-serif;
+$font-family: var(--font-rubik), sans-serif;
+$font-family-2: var(--font-rubik), sans-serif;
+
 $font-family--monospace: SFMono-Regular, Menlo, Monaco, Consolas,
   "Liberation Mono", "Courier New", monospace;
 $font-family--icon: "icomoon";

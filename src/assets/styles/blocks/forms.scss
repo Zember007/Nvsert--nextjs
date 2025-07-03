@@ -129,7 +129,7 @@ input:auto-fill {
       position: absolute;
       top: 40px;
       left: 10px;
-      z-index: -1;
+      z-index: 1;
       font-size: 16px;
       color: $input-placeholder-normal;
       max-width: calc(100% - 40px);
@@ -137,13 +137,11 @@ input:auto-fill {
       text-overflow: ellipsis;
 
       @media (max-width: $media-s) {
-        // font-size: 14px;
         top: 30px;
       }
     }
 
     @media (max-width: $media-s) {
-      // font-size: 14px;
       top: 30px;
     }
   }
@@ -306,7 +304,7 @@ input:-webkit-autofill:focus {
 }
 
 .border-main {
-  border: 1px solid #000;
+  border: 1px solid #93969d;
 
 
 }
@@ -403,11 +401,11 @@ input:-webkit-autofill:focus {
 
 .form {
   &__desc {
-    @apply text-[#ADADAD] s:mt-[7px] text-[12px] s:text-[14px];
+    @apply text-[#000] s:mt-[7px] text-[12px] s:text-[14px];
     line-height: 1.2;
   }
 
   &__button {
-    @apply overflow-hidden  p-[9px] px-[20px] relative flex items-center justify-center bg-[#34446D] text-[18px] s:text-[20px] text-[#FFFFFF]  rounded-[4px];
+    @apply overflow-hidden  p-[9px] px-[20px] relative flex items-center justify-center border border-solid border-[#34446D] text-[18px] s:text-[20px] text-[#34446D]  rounded-[4px];
   }
 }
