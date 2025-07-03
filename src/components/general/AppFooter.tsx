@@ -59,11 +59,11 @@ const AppFooter = () => {
 
           <div className="flex xl:gap-[8px] gap-[10px] flex-col xl:pt-0 xl:border-none pt-[30px] border-[#737373] border-t border-solid xl:w-auto w-full">
             <AppMenuItem
-            className="xl:!h-[35px] !h-auto !text-left"              
+            className="max-xl:!border-[#93969D] xl:!h-[35px] !h-auto !text-left"              
 
               item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: t("footer.policy") }} isActive={false} />
             <AppMenuItem
-            className="xl:!h-[35px] !h-auto !text-left"
+            className="max-xl:!border-[#93969D]  xl:!h-[35px] !h-auto !text-left"
 
               item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: 'Обработка персональных данных' }} isActive={false} />
           </div>
@@ -101,7 +101,7 @@ const AppFooter = () => {
                   onClick={() => {
                     navigator.clipboard.writeText(email.value)
                   }}
-                  className="after:!content-none xl:after:!content-[''] xl:!px-[35px] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] w-[280px] xl:mx-0 mx-auto !h-[50px] xl:w-full group"
+                  className="max-xl:!border-[#93969D] xl:!px-[35px]  xl:!h-[35px] w-[280px] xl:mx-0 mx-auto !h-[50px] xl:w-full group"
                   item={{
                     href: '#', label:
                       <>
@@ -128,7 +128,7 @@ const AppFooter = () => {
               timer={3000}
             >
               <AppMenuItem
-                className="after:!content-none xl:after:!content-[''] xl:!px-[35px] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] xl:w-full w-[280px] xl:mx-0 mx-auto  !h-[50px]  group"
+                className="max-xl:!border-[#93969D] xl:!px-[35px] xl:!h-[35px] xl:w-full w-[280px] xl:mx-0 mx-auto  !h-[50px]  group"
                 item={{
                   href: '#', label:
                     <>
@@ -162,7 +162,7 @@ const AppFooter = () => {
               timer={3000}
             >
               <AppMenuItem
-                className="after:!content-none xl:after:!content-[''] xl:!px-[35px] xl:border-none border border-solid border-[#93969D] xl:!h-[35px] xl:w-full w-[280px] xl:mx-0 mx-auto !h-[50px]  group"
+                className="max-xl:!border-[#93969D] xl:!px-[35px] xl:!h-[35px] xl:w-full w-[280px] xl:mx-0 mx-auto !h-[50px]  group"
                 item={{
                   href: '#', label:
                     <>
