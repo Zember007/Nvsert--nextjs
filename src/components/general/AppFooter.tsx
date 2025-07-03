@@ -59,11 +59,11 @@ const AppFooter = () => {
 
           <div className="flex xl:gap-[8px] gap-[10px] flex-col xl:pt-0 xl:border-none pt-[30px] border-[#737373] border-t border-solid xl:w-auto w-full">
             <AppMenuItem
-            className="max-xl:!border-[#93969D] xl:!h-[35px] !h-auto !text-left"              
+            className=" xl:!h-[35px] !h-auto !text-left"              
 
               item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: t("footer.policy") }} isActive={false} />
             <AppMenuItem
-            className="max-xl:!border-[#93969D]  xl:!h-[35px] !h-auto !text-left"
+            className=" xl:!h-[35px] !h-auto !text-left"
 
               item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: 'Обработка персональных данных' }} isActive={false} />
           </div>
