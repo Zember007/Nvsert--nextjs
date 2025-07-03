@@ -131,12 +131,12 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
                             key={index}
                             className="header-nav__list min-w-full flex-shrink-0"
                         >
-                            {level.items.map((item) =>
+                            {level.items.map((item, index_item) =>
                                 item.href ? (
                                     <Link
                                         key={item.id}
                                         href={item.href}
-                                        className={`header__menu-mob-item`}
+                                        className={`${index_item === 0 ? 'first-child' : ''} header__menu-mob-item`}
                                     >
                                         <span className="text-[18px] text-[#000]">{item.title}</span>
                                         {item.children && (
@@ -147,7 +147,7 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
                                     <button
                                         key={item.id}
                                         onClick={() => handleItemClick(item)}
-                                        className="header__menu-mob-item"
+                                        className={`${index_item === 0 ? 'first-child' : ''} header__menu-mob-item`}
                                     >
                                         <span className="text-[18px] text-[#000]">{item.title}</span>
                                         {item.children && (

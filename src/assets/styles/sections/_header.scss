@@ -291,12 +291,12 @@
 			bottom: -1px;
 			left: 11px;
 			right: 11px;
-			border-top: 1px solid #93969d;
 			z-index: -1;
+			border-bottom: 1px solid #93969d;
 		}
 
-		&:last-child::before {
-			border-bottom: 1px solid #93969d;
+		&.first-child::before {
+			border-top: 1px solid #93969d;
 		}
 
 	}
