@@ -84,7 +84,6 @@
 
 			@media(max-width: $media-l) {
 				width: 100%;
-				max-width: 576px;
 				margin: 0 auto 0 auto;
 				position: relative;
 				z-index: 100;
@@ -282,6 +281,11 @@
 		&__link {
 			color: $white-color;
 		}
+	}
+
+	&__menu-mob-item {
+		@apply px-[11px] flex justify-between items-center w-full active:rounded-[4px] active:bg-[#34446d33] active:border-[#34446D] active:border menu-mob-item;
+
 	}
 
 

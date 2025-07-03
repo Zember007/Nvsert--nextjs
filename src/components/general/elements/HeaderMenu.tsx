@@ -103,7 +103,7 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
     return (
         <div className={`header__menu-mob ${active && 'active'}`}>
             <nav className="header-nav flex flex-col gap-[26px] relative overflow-hidden w-full">
-                <div className="header-nav__list rubik !grid grid-cols-3">
+                <div className="header-nav__list !grid grid-cols-3">
                     {canGoBack &&
                         <>
                             <button
@@ -129,14 +129,14 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
                     {navigationStack.map((level, index) => (
                         <ul
                             key={index}
-                            className="rubik header-nav__list min-w-full flex-shrink-0"
+                            className="header-nav__list min-w-full flex-shrink-0"
                         >
                             {level.items.map((item) =>
                                 item.href ? (
                                     <Link
                                         key={item.id}
                                         href={item.href}
-                                        className={`flex justify-between items-center w-full active:rounded-[4px] active:bg-[#34446d33] active:border-[#34446D] active:border menu-mob-item`}
+                                        className={`header__menu-mob-item`}
                                     >
                                         <span className="text-[18px] text-[#000]">{item.title}</span>
                                         {item.children && (
@@ -147,7 +147,7 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
                                     <button
                                         key={item.id}
                                         onClick={() => handleItemClick(item)}
-                                        className="flex justify-between items-center w-full active:rounded-[4px] active:bg-[#34446d33] active:border-[#34446D] active:border menu-mob-item"
+                                        className="header__menu-mob-item"
                                     >
                                         <span className="text-[18px] text-[#000]">{item.title}</span>
                                         {item.children && (
@@ -171,7 +171,7 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
                 <div className="button-menu  w-[320px] mx-auto">
                     <span className='text-[#000]'>info@nvsert.ru</span>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3.61538 4.63462C3.61538 4.09908 3.82812 3.58548 4.2068 3.2068C4.58548 2.82812 5.09908 2.61538 5.63462 2.61538H6.84615V6.25C6.84615 6.51517 6.89838 6.77774 6.99986 7.02273C7.10133 7.26771 7.25007 7.49031 7.43757 7.67781C7.81625 8.05649 8.32985 8.26923 8.86538 8.26923H15.3269C15.5921 8.26923 15.8547 8.217 16.0996 8.11553C16.3446 8.01405 16.5672 7.86531 16.7547 7.67781C16.9422 7.49031 17.091 7.26771 17.1924 7.02273C17.2939 6.77774 17.3462 6.51517 17.3462 6.25V2.64769C17.7495 2.72158 18.1208 2.91653 18.4107 3.20662L20.7934 5.58931C20.9809 5.77685 21.1296 5.99948 21.231 6.2445C21.3325 6.48952 21.3847 6.75212 21.3846 7.01731V18.3654C21.3847 18.8309 21.224 19.2821 20.9296 19.6427C20.6352 20.0033 20.2253 20.2511 19.7692 20.3442V13.5192C19.7692 12.9837 19.5565 12.4701 19.1778 12.0914C18.7991 11.7127 18.2855 11.5 17.75 11.5H7.25C6.71447 11.5 6.20087 11.7127 5.82219 12.0914C5.44351 12.4701 5.23077 12.9837 5.23077 13.5192V20.3442C4.77468 20.2511 4.36476 20.0033 4.0704 19.6427C3.77603 19.2821 3.61529 18.8309 3.61538 18.3654V4.63462ZM6.84615 20.3846V13.5192C6.84615 13.4121 6.8887 13.3094 6.96444 13.2337C7.04017 13.1579 7.14289 13.1154 7.25 13.1154H17.75C17.8571 13.1154 17.9598 13.1579 18.0356 13.2337C18.1113 13.3094 18.1538 13.4121 18.1538 13.5192V20.3846H6.84615ZM15.7308 2.61538V6.25C15.7308 6.35711 15.6882 6.45983 15.6125 6.53556C15.5367 6.6113 15.434 6.65385 15.3269 6.65385H8.86538C8.75828 6.65385 8.65556 6.6113 8.57982 6.53556C8.50409 6.45983 8.46154 6.35711 8.46154 6.25V2.61538H15.7308ZM5.63462 1C4.67066 1 3.74618 1.38293 3.06455 2.06455C2.38293 2.74618 2 3.67066 2 4.63462V18.3654C2 19.3293 2.38293 20.2538 3.06455 20.9354C3.74618 21.6171 4.67066 22 5.63462 22H19.3654C20.3293 22 21.2538 21.6171 21.9354 20.9354C22.6171 20.2538 23 19.3293 23 18.3654V7.01731C23 6.54 22.906 6.06737 22.7233 5.62639C22.5407 5.18542 22.273 4.78474 21.9355 4.44723L19.5528 2.06454C19.2153 1.72703 18.8146 1.45931 18.3736 1.27666C17.9326 1.094 17.46 0.999996 16.9827 1H5.63462Z" fill="#93969D" />
+                        <path d="M3.2 21C2.595 21 2.07727 20.7799 1.6468 20.3396C1.21633 19.8994 1.00073 19.3695 1 18.75V5.25C1 4.63125 1.2156 4.10175 1.6468 3.6615C2.078 3.22125 2.59573 3.00075 3.2 3H20.8C21.405 3 21.9231 3.2205 22.3543 3.6615C22.7855 4.1025 23.0007 4.632 23 5.25V18.75C23 19.3687 22.7848 19.8986 22.3543 20.3396C21.9238 20.7806 21.4057 21.0007 20.8 21H3.2ZM12 13.125L3.2 7.5V18.75H20.8V7.5L12 13.125ZM12 10.875L20.8 5.25H3.2L12 10.875ZM3.2 7.5V5.25V18.75V7.5Z" fill="#93969D" />
                     </svg>
 
                 </div>
