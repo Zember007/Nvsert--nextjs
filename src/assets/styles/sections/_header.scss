@@ -10,7 +10,7 @@
 
 	z-index: 50;
 	height: 54px;
-	padding: 2px ;
+	padding: 2px;
 	backdrop-filter: blur(4px);
 
 	@media (max-width: $media-l) {
@@ -276,8 +276,8 @@
 	}
 
 	&__menu-mob-item {
-		@apply  min-h-[50px] w-full items-center flex justify-between items-center w-full rounded-[4px] border-solid active:bg-[#34446d33] active:border-[#34446D] active:border;
-		
+		@apply min-h-[50px] w-full items-center flex justify-between items-center w-full rounded-[4px] border-solid active:bg-[#34446d33] active:border-[#34446D] active:border;
+
 		padding: 10px 11px;
 		text-align: left;
 		display: flex;
@@ -292,6 +292,10 @@
 			left: 11px;
 			right: 11px;
 			border-top: 1px solid #93969d;
+			z-index: -1;
+		}
+
+		&:last-child::before {
 			border-bottom: 1px solid #93969d;
 		}
 
@@ -305,8 +309,8 @@
 
 	position: fixed;
 	top: 0;
-	left: 4px;
-	right: 4px;
+	left: 2px;
+	right: 2px;
 	z-index: 20;
 	transform: translateY(-100%);
 
