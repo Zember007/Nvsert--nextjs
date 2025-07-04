@@ -295,7 +295,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                             </div>
 
                             <AppTextarea
-                                className={`main__input ${bg ? '!bg-[#00000026] focus:!bg-[#34446d33] !border-[#444] focus:!border-[#ffffff80]' : '!bg-[transparent] focus:!bg-[#21262F]'}`}
+                                className={`main__input ${bg ? '!bg-[#34446d33] focus:!bg-[#34446d33] !border-[#444] focus:!border-[#ffffff80]' : '!bg-[transparent] focus:!bg-[#21262F]'}`}
                                 title={'Комментарий'}
                                 inputName="comment"
                             />
