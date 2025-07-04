@@ -154,7 +154,7 @@ const AppHeader = () => {
           />
         </div>
 
-        <div className={`header__menu header__bg`}>
+        <div className={`header__menu header__bg noblur`}>
           <nav className="header-nav">
             <ul className="header-nav__list">
               <li >

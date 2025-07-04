@@ -156,13 +156,16 @@
 	&__bg {
 		backdrop-filter: blur(var(--filter-blur-header));
 		background-color: var(--color-header);
-		background-image: url('../../images/150.webp');
-		background-repeat: repeat;
 		border-radius: 4px;
 		padding: 0 11px;
 		display: flex;
 		align-items: center;
 		overflow: hidden;
+
+		&:not(.noblur) {
+			background-image: url('../../images/150.webp');
+			background-repeat: repeat;
+		}
 
 		&::before {
 			content: '';
@@ -171,8 +174,8 @@
 			left: 0;
 			right: 0;
 			bottom: 0;
-			background: linear-gradient(0deg, transparent 15%, var(--color-header));	
-			pointer-events: none;		
+			background: linear-gradient(0deg, transparent 15%, var(--color-header));
+			pointer-events: none;
 		}
 
 		&.active {
