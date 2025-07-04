@@ -13,7 +13,7 @@ const AppMenuItem: React.FC<{
     isActive: boolean;
     onClick?: (e: React.MouseEvent<HTMLElement>) => void;
     className?: string;
-    isHeader?: boolean 
+    isHeader?: boolean;
 }> = React.memo(({ item, isActive, onClick, className = '', classNameBox = '', isHeader = false }) => {
 
     function extractTextFromReactNode(node: ReactNode): string {
@@ -88,7 +88,7 @@ const AppMenuItem: React.FC<{
 
     const getClassName = () => {
         const classes = [styles["menu-item"], className];
-        if(isHeader) classes.push(styles["header-item"]);
+        if (isHeader) classes.push(styles["header-item"]);
         if (isActive) classes.push(styles["menu-item-active"]);
         if (isFastClick) classes.push(styles["fast-click"]);
         return classes.join(" ");
