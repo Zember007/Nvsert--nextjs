@@ -48,7 +48,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
                 onClick={() => {setActiveBlock(activeBlock === index ? null : index)}}              
                 key={index} className={`group/stroke flex flex-col ${index == items.length - 1 ? 'grow' : 'pb-[20px]'}`}>
                 <div className="flex justify-between gap-[20px]">
-                  <p className='text-[18px] font-bold  transition-all duration-100'>{item.subtitle.split(' ').length === 2 ?
+                  <p className='text-[18px] transition-all duration-100'>{item.subtitle.split(' ').length === 2 ?
                     <>
                       {item.subtitle.split(' ')[0]} <br />
                       {item.subtitle.split(' ')[1]}
@@ -69,7 +69,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
                     ref={(el) => setBounceEl(el)}
                     className={`list-disc leading-[140%] pl-[35px] *:*:text-[16px] pt-[5px] overflow-hidden`}>
 
-                    <li className={`will-change-transform duration-100 transition-all opacity-0 translate-x-[-100%] ${activeBlock === index ? 'opacity-100 translate-x-[0]' : ''} xl:group-hover/stroke:opacity-100 xl:group-hover/stroke:translate-x-[0] `} key={index}>
+                    <li className={`will-change-transform duration-100 font-light transition-all opacity-0 translate-x-[-100%] ${activeBlock === index ? 'opacity-100 translate-x-[0]' : ''} xl:group-hover/stroke:opacity-100 xl:group-hover/stroke:translate-x-[0] `} key={index}>
                       <p >{filterPrepositions(item.text)}</p>
                     </li>
 
