@@ -162,11 +162,6 @@
 		align-items: center;
 		overflow: hidden;
 
-		&:not(.noblur) {
-			background-image: url('../../images/150.webp');
-			background-repeat: repeat;
-		}
-
 		&::before {
 			content: '';
 			position: absolute;
