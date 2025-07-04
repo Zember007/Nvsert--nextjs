@@ -26,10 +26,13 @@
 			height: 52px;
 
 			.header__bg {
-				// background-color: transparent;
+				background-color: transparent;
 				backdrop-filter: blur(0);
-				// background-image: none;
-			background: none;
+				background-image: none;
+
+				&::before {
+					background: none;
+				}
 
 			}
 		}
@@ -148,20 +151,35 @@
 
 	&__bg {
 		backdrop-filter: blur(var(--filter-blur-header));
-		// background-color: var(--color-header);
-		background: linear-gradient(0deg, transparent 15%, var(--color-header));
-		// background-image: url('../../images/150.webp');
-		// background-repeat: repeat;
+		background-color: var(--color-header);
+		background-image: url('../../images/150.webp');
+		background-repeat: repeat;
 		border-radius: 4px;
 		padding: 0 11px;
 		display: flex;
 		align-items: center;
+		position: relative;
+		overflow: hidden;
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: linear-gradient(0deg, transparent 15%, var(--color-header));	
+			pointer-events: none;		
+		}
 
 		&.active {
-			// background-color: transparent;
+			background-color: transparent;
 			backdrop-filter: blur(0);
-			// background-image: none;
-			background: none;
+			background-image: none;
+
+			&::before {
+				background: none;
+			}
 		}
 	}
 
