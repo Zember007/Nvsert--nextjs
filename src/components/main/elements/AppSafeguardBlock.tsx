@@ -32,7 +32,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
       <div className="bg-[#FFFFFF26] group-hover/box:bg-[#34446D33] group !shadow-none card  h-full  rounded-[6px] flex flex-col gap-[29px] justify-between ">
         <div className="flex flex-col gap-[20px] h-full">
           <div className="overflow-hidden h-[200px]  w-full relative rounded-t-[8px]">
-            <p className="shadow-[inset_0_0_6px_0_rgba(255, 255, 255, 0.3),_0_0_10px_0_rgba(0, 0, 0, 0.8)] text-[22px] z-[2] text-[#FFF] backdrop-blur-[4px] p-[10px] rounded-[4px] bg-[#FFFFFF1A]  absolute top-[15px] left-[15px] w-[205px]"        
+            <p className="shadow-[inset_0_0_6px_0_rgba(255, 255, 255, 0.3),_0_0_10px_0_rgba(0, 0, 0, 0.8)] text-[22px] z-[2] text-[#FFF] backdrop-blur-[4px] p-[10px] rounded-[4px] bg-[#FFFFFF1A]  absolute top-[15px] left-[15px] w-[205px]"
             >{filterPrepositions(title)}</p>
             <Image
               className='w-auto min-w-full h-full transition-all duration-100 ease-in-out'
@@ -45,7 +45,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
           <div className="px-[15px] flex flex-col grow">
             {items.map((item, index) =>
               <div
-                onClick={() => {setActiveBlock(activeBlock === index ? null : index)}}              
+                onClick={() => { setActiveBlock(activeBlock === index ? null : index) }}
                 key={index} className={`group/stroke flex flex-col ${index == items.length - 1 ? 'grow' : 'pb-[20px]'}`}>
                 <div className="flex justify-between gap-[20px]">
                   <p className='text-[18px] transition-all duration-100'>{item.subtitle.split(' ').length === 2 ?
@@ -54,12 +54,15 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
                       {item.subtitle.split(' ')[1]}
                     </>
                     : filterPrepositions(item.subtitle)}</p>
+
+
                   <svg
-                    className={` min-w-[24px] rotate-[0deg] xl:group-hover/stroke:rotate-[180deg] ${activeBlock === index ? 'rotate-[180deg]' : ''} *:transition-all *:duration-100 transition-all duration-100`}
-                    width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 5L19 19" stroke="#93969D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M19 11L19 19L11 19" stroke="#93969D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    className={` min-w-[16px] rotate-[0deg] xl:group-hover/stroke:rotate-[180deg] ${activeBlock === index ? 'rotate-[180deg]' : ''} transition-all duration-100`}
+
+                    width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 3H9V0H7V3ZM15 8.96767L13.5692 7.52908L9.01287 12.1092L9.01287 6H6.98815V12.1092L2.43177 7.52908L1 8.96767L8 16L8.71538 15.2822L9.43177 14.5634L15 8.96767Z" fill="#93969D" />
                   </svg>
+
 
                 </div>
 

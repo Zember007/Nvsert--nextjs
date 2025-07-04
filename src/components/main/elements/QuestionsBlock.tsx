@@ -54,11 +54,11 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                     </div>
                     <div className={`${active ? 'scale-[0.99]' : ''} transition-scale group-active:scale-[0.99] grow will-change-transform ease transition-all duration-100  flex items-center gap-[40px]`}>
                         <h3 className={`${active ? '[text-shadow:0_0_0.7px_white] text-[#FFF]' : ''} grow text-[18px] m:text-[20px] ease-in-out transition-all duration-200 group-active:duration-[0] font-[400] group-active:text-[#FFF]  group-active:[text-shadow:0_0_0.7px_white]`}>{title}</h3>
+       
                         <svg
-                            className={`${!active ? 'rotate-[180deg]  ' : '*:stroke-[#FFF]'} *:transition-all *:duration-200   hidden m:block transition-all duration-200`}
-                            width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M19 19L5 5" stroke={`#93969D`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M5 13L5 5L13 5" stroke={`#93969D`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            className={`${!active ? '' : '*:stroke-[#FFF] rotate-[180deg]'} *:transition-all *:duration-200   hidden m:block transition-all duration-200`}
+                            width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 3H9V0H7V3ZM15 8.96767L13.5692 7.52908L9.01287 12.1092L9.01287 6H6.98815V12.1092L2.43177 7.52908L1 8.96767L8 16L8.71538 15.2822L9.43177 14.5634L15 8.96767Z" fill="#93969D" />
                         </svg>
 
                     </div>
