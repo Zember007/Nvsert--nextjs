@@ -161,7 +161,7 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
                 </div>
             </nav>
 
-            <div className="flex flex-col items-center gap-[10px] px-[40px]  text-[#FFF]">
+            <div className="flex flex-col items-center gap-[10px] px-[40px] pb-[80px]  text-[#FFF]">
                 <div className="button-menu bg-[#34446D]  w-[280px] mx-auto">
                     <span>Заказать звонок</span>
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
