@@ -149,6 +149,10 @@
 
 	}
 
+	.header__bg {
+		position: relative;
+	}
+
 	&__bg {
 		backdrop-filter: blur(var(--filter-blur-header));
 		background-color: var(--color-header);
@@ -158,7 +162,6 @@
 		padding: 0 11px;
 		display: flex;
 		align-items: center;
-		position: relative;
 		overflow: hidden;
 
 		&::before {
