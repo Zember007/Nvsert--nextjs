@@ -227,25 +227,12 @@ const MainDocumentItem = memo(({
                         <div className="document__desc-wrap">
                             <p className="document__desc">{duration}</p>
                             <p className="document__desc">{price}</p>
+                       
                             <svg
-                                className={`${!active ? 'rotate-[180deg]  ' : '*:stroke-[#FFF]'} *:transition-all *:duration-200   hidden m:block transition-all duration-200`}
-                                width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M19 19L5 5" stroke={`#93969D`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M5 13L5 5L13 5" stroke={`#93969D`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                            <svg
-                                className={`${!active ? '' : 'rotate-[180deg] *:stroke-[#FFF]'} *:transition-all *:duration-200   hidden m:block transition-all duration-200`}
+                                className={`${!active ? '' : '*:fill-[#FFF] rotate-[180deg]'}  hidden m:block transition-all duration-200`}
                                 width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_4571_3768)">
-                                    <path d="M7 2.99951H9V-0.000488281H7V2.99951ZM15 8.96718L13.5692 7.52859L9.01287 12.1087L9.01287 5.99951H6.98815V12.1087L2.43177 7.52859L1 8.96718L8 15.9995L8.71538 15.2817L9.43177 14.563L15 8.96718Z" fill="#93969D" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_4571_3768">
-                                        <rect width="16" height="16" fill="white" transform="matrix(0 1 -1 0 16 -0.000488281)" />
-                                    </clipPath>
-                                </defs>
+                                <path d="M7 3H9V0H7V3ZM15 8.96767L13.5692 7.52908L9.01287 12.1092L9.01287 6H6.98815V12.1092L2.43177 7.52908L1 8.96767L8 16L8.71538 15.2822L9.43177 14.5634L15 8.96767Z" fill="#93969D" />
                             </svg>
-
                         </div>
                     </div>
                 </div>
