@@ -7,8 +7,11 @@
 }
 
 .mix-blend-difference {
-	--color-header: rgba(230,231,220, 0.4);
 	--color-item-menu: #000;
+}
+
+.header__bg.mix-blend-difference {
+	border: 1px solid  rgba(230,231,220, 0.4);
 }
 
 .header {
