@@ -306,7 +306,15 @@
 		&.have-img {
 			padding: 5px;
 			height: 70px;
+			img {
+				border-radius: 5px;
+				border-width: 1px;
+				border-style: solid;
+				border-color: rgb(164 164 164);
+			}
 		}
+
+	
 
 		&::before {
 			content: '';
