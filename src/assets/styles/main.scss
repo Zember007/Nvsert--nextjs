@@ -84,7 +84,6 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
     position: absolute;
     right: 0;
     transform: translateX(100%);
-    opacity: 0;
   }
 
   .sendText {
@@ -94,19 +93,17 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   &:hover {
 
     .sendText {
-      @apply xl:translate-x-[-55px]
+      @apply xl:translate-x-[-25px]
     }
 
 
     .sendIconLeft {
       transform: translateX(0);
-      right: 15px;
-      opacity: 1;
+      right: 55px;
     }
 
     .sendIconRight {
       transform: translateX(50px);
-      opacity: 0;
 
     }
   }

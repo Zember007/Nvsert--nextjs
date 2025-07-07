@@ -274,7 +274,6 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                             if (value || contactData.phone !== '') {
                                                 setIsEmail(false);
                                                 setFocus('contact');
-
                                             } else if (contactData.email !== '') {
                                                 setIsEmail(true);
                                             }

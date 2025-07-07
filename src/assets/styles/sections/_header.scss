@@ -180,7 +180,7 @@
 			@media (max-width: $media-l) {
 				position: fixed;
 				width: 100vw;
-				height: calc(100vh - 50px);
+				height: calc(100dvh - 50px);
 				z-index: 10;
 				top: 52px;
 				left: 0;

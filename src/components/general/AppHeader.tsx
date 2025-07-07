@@ -170,7 +170,7 @@ const AppHeader = () => {
                     label: <span className={`gap-[4px] flex items-center `}>
                       {t('navigation.services')}
 
-                      <svg className={`transition-all duration-300 easy *:*:transition-all *:*:duration-300 *:*:easy *:*:stroke-[var(--color-item-menu)] group-hover:*:*:!stroke-[var(--color-item-menu-active)] ${!servicesMenuActive ? ' rotate-[180deg]' : '*:!stroke-[var(--color-item-menu-active)]'}`} width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <svg className={`transition-all duration-300 ${!servicesMenuActive ? ' rotate-[180deg]' : ''}`} width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clipPath="url(#clip0_3424_2610)">
                           <path d="M1 11L8 4L15 11" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </g>
