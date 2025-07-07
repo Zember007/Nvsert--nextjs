@@ -77,11 +77,20 @@ const DocumentList = memo(({ content1, listHidden, setListHidden }: DocumentList
                         onClick={() => setListHidden(!listHidden)}
                     >
                         {listHidden ? 'Показать полный список документов' : 'Скрыть'}
-                        <svg className={`${!listHidden ? 'rotate-[180deg]' : ''}`} xmlns="http://www.w3.org/2000/svg" fill="#34446D" version="1.1" id="Layer_1" width="18" height="18" viewBox="0 0 100 100" enable-background="new 0 0 100 100" >
-                            <g>
-                                <path d="M50.5,19.881c-1.104,0-2,0.896-2,2V72.17L33.193,56.609c-0.781-0.781-1.922-0.781-2.703,0   c-0.781,0.78-0.719,2.047,0.062,2.828l18.883,18.857c0.375,0.375,0.899,0.586,1.43,0.586s1.047-0.211,1.422-0.586l18.857-18.857   c0.781-0.781,0.783-2.048,0.002-2.828c-0.781-0.781-2.296-0.781-3.077,0L52.5,71.933V21.881C52.5,20.776,51.604,19.881,50.5,19.881   z" />
+ 
+                        <svg
+                        className={`${listHidden ? 'rotate-[180deg]' : ''}`}
+                        width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_4632_2058)">
+                                <path d="M7 3.5H9V0.5H7L7 3.5ZM15 9.46767L13.5692 8.02908L9.01287 12.6092V6.5H6.98815V12.6092L2.43177 8.02908L1 9.46767L8 16.5L8.71538 15.7822L9.43177 15.0634L15 9.46767Z" fill="#34446D" />
                             </g>
+                            <defs>
+                                <clipPath id="clip0_4632_2058">
+                                    <rect width="16" height="16" fill="white" transform="matrix(0 1 -1 0 16 0.5)" />
+                                </clipPath>
+                            </defs>
                         </svg>
+
                     </button>
                 )}
             </div>
