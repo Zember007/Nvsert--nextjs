@@ -109,6 +109,13 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   }
 
   &.doc-btn {
+    .sendIconLeft {
+      @apply  xl:right-0 right-[10px];
+    }
+  
+    .sendText {
+      @apply xl:translate-x-0 translate-x-[-20px];
+    }
     &:hover {
 
       .sendText {
@@ -119,7 +126,6 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
       .sendIconLeft {
         transform: translateX(0);
         right: 10px;
-        opacity: 1;
       }
     }
   }
