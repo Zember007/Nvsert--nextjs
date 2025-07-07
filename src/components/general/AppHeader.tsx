@@ -250,14 +250,11 @@ const AppHeader = () => {
           <div className="services-menu__wrapper select-none">
             <div className="grid grid-cols-6 h-[50px] w-full gap-[30px]">
               {navigation.map((item, i) => (
-                <div ref={setWrapperRef} key={i} className="tariff-wrap border border-solid hover:border-[#000] border-[transparent]">
-                  <Link ref={setButtonRef} href={item.full_slug} className={`tariff tariff-inset not-backdrop rounded-[4px] group bdark  `}>
-                    <div className={`relative z-[-2] transition-all h-full   overflow-hidden`}>
-                      <p className={`transition-all whitespace-nowrap left-1/2 -translate-x-1/2 absolute top-1/2 -translate-y-1/2 group-hover:translate-x-0 group-hover:left-[13px] text-[18px] ${darkHeader ? 'text-[#000]' : 'text-[#FFF]'}`}>{t(`navigation.${item.title}.title`)}</p>
-                      <div className="absolute z-[10] top-1/2 -translate-y-1/2 right-0 group-hover:translate-x-0 transition-all p-[13px] translate-x-full">
-                        <NavSvg />
-                      </div>
-                    </div>
+                <div ref={setWrapperRef} key={i} className="tariff-wrap">
+                  <Link ref={setButtonRef} href={item.full_slug} className={`text-center tariff rounded-[4px] border-[transparent] hover:border-[#FFF] border border-solid`}>
+                    <p className="text-[18px] text-[#FFF]">
+                      {t(`navigation.${item.title}.title`)}
+                    </p>
                   </Link>
                 </div>
               ))}
