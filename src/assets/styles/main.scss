@@ -141,7 +141,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   @apply w-[8px] h-[8px] relative border border-solid border-[#93969D] rounded-full;
 
   &.active {
-    @apply bg-[#34446D] border-[#34446D] mx-[4px];
+    @apply bg-[#34446D] border-[#34446D] ;
 
     &::before {
       @apply opacity-100;
@@ -161,7 +161,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   }
 
   &-box {
-    @apply flex xl:hidden mx-auto justify-center flex-wrap px-[20px] gap-[4px];
+    @apply flex xl:hidden mx-auto justify-center flex-wrap px-[20px] gap-[7px];
   }
 }
 
