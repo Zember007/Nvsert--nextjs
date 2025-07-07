@@ -56,10 +56,12 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                         <h3 className={`${active ? '[text-shadow:0_0_0.7px_white] text-[#FFF]' : ''} grow text-[18px] m:text-[20px] ease-in-out transition-all duration-200 group-active:duration-[0] font-[400] group-active:text-[#FFF]  group-active:[text-shadow:0_0_0.7px_white]`}>{title}</h3>
 
                         <svg
-                            className={`${!active ? '' : '*:fill-[#FFF] rotate-[180deg]'} hidden m:block transition-all duration-200`}
-                            width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7 3H9V0H7V3ZM15 8.96767L13.5692 7.52908L9.01287 12.1092L9.01287 6H6.98815V12.1092L2.43177 7.52908L1 8.96767L8 16L8.71538 15.2822L9.43177 14.5634L15 8.96767Z" fill="#93969D" />
+                            className={`${!active ? '' : '*:stroke-[#FFF] rotate-[180deg]'}  hidden m:block transition-all duration-200`}
+                            width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 5L19 19" stroke="#93969D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M19 11L19 19L11 19" stroke="#93969D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
+
 
                     </div>
                 </div>
