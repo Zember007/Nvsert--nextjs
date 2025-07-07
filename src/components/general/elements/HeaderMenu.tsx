@@ -107,6 +107,7 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
                     {canGoBack &&
                         <>
                             <button
+                            className='px-[10px]'
                                 onClick={handleGoBack}>
                                 <Image
                                     className='rotate-[180deg]'
