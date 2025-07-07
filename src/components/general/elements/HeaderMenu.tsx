@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import ArrowIcon from '@/assets/images/svg/menu/arrow.svg'
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import Image04 from '@/assets/images/main-gallery/04.webp';
 import Image05 from '@/assets/images/main-gallery/05.webp';
 import Image06 from '@/assets/images/main-gallery/06.webp';
@@ -10,7 +10,7 @@ interface NavigationItem {
     id: string;
     title: string;
     href?: string;
-    img?: any; // или, если у тебя строгий тип картинок, укажи его, например: img?: StaticImageData
+    img?: StaticImageData;
     children?: NavigationItem[];
 }
 
@@ -161,9 +161,14 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
                                         <Link
                                             key={item.id}
                                             href={item.href}
-                                            className={`${index_item === 0 ? 'first-child' : ''} header__menu-mob-item`}
+                                            className={`${index_item === 0 ? 'first-child' : ''} ${item.img ? 'have-img' : ''} header__menu-mob-item`}
                                         >
-                                            <span className="text-[18px] text-[#000]">{item.title}</span>
+                                            <div className="flex items-center gap-[20px]">
+                                                {item.img &&
+                                                    <Image src={item.img} alt="document" width={43} height={60} />
+                                                }
+                                                <span className="text-[18px] text-[#000]">{item.title}</span>
+                                            </div>
                                             {item.children && (
                                                 <Image src={ArrowIcon} alt="more" width={20} height={20} />
                                             )}
