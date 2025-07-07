@@ -131,7 +131,7 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
                         {canGoBack &&
                             <>
                                 <button
-                                    className='px-[10px]'
+                                    className='px-[6px]'
                                     onClick={handleGoBack}>
                                     <Image
                                         className='rotate-[180deg]'
@@ -186,7 +186,9 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
                                                 <span className="text-[18px] text-[#000]">{item.title}</span>
                                             </div>
                                             {item.children && (
-                                                <Image src={ArrowIcon} alt="more" width={20} height={20} />
+                                                <Image 
+                                                className='translate-x-[5px]'
+                                                src={ArrowIcon} alt="more" width={20} height={20} />
                                             )}
                                         </button>
                                     )

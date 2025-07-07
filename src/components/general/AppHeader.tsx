@@ -250,8 +250,8 @@ const AppHeader = () => {
           <div className="services-menu__wrapper select-none">
             <div className="grid grid-cols-6 h-[50px] w-full gap-[30px]">
               {navigation.map((item, i) => (
-                <div ref={setWrapperRef} key={i} className="tariff-wrap">
-                  <button ref={setButtonRef}  className={`text-center tariff rounded-[4px] border-[transparent] hover:border-[#FFF] border border-solid`}>
+                <div ref={setWrapperRef} key={i} className="tariff-wrap ">
+                  <button ref={setButtonRef}  className={`h-full text-center tariff rounded-[4px] border-[transparent] hover:border-[#FFF] border border-solid`}>
                     <p className="text-[18px] text-[#FFF]">
                       {t(`navigation.${item.title}.title`)}
                     </p>
