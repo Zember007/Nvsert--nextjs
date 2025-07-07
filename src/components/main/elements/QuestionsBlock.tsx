@@ -50,7 +50,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                     className={`${active ? ' active !bg-[#5B6788] !shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] ' : ' '} document__navigation-bg  bg-[transparent]   h-[70px] relative  active:bg-[#5B6788]  active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset]   group cursor-pointer  rounded-[6px]  flex items-center gap-[10px] m:gap-[40px] m:pr-[10px] pr-[20px] transition-scale`}>
 
                     <div className={`${active ? 'scale-[0.9]' : ''} transition-scale group-active:scale-[0.9] will-change-transform ease transition-all duration-100 m:w-[70px] m:min-w-[70px] w-[44px] min-w-[44px] h-[70px] flex items-center justify-center`}>
-                        <p className={`${active && 'm:text-[50px] text-[#FFF]'} text-[24px] rubik m:group-hover:text-[50px] group-active:duration-[0] ease transition-all duration-100 group-active:text-[#FFF]`}>{number}</p>
+                        <p className={`${active && 'm:text-[48px] text-[#FFF]'} font-light text-[24px] rubik m:group-hover:text-[50px] group-active:duration-[0] ease transition-all duration-100 group-active:text-[#FFF]`}>{number}</p>
                     </div>
                     <div className={`${active ? 'scale-[0.99]' : ''} transition-scale group-active:scale-[0.99] grow will-change-transform ease transition-all duration-100  flex items-center gap-[40px]`}>
                         <h3 className={`${active ? '[text-shadow:0_0_0.7px_white] text-[#FFF]' : ''} grow text-[18px] m:text-[20px] ease-in-out transition-all duration-200 group-active:duration-[0] font-[400] group-active:text-[#FFF]  group-active:[text-shadow:0_0_0.7px_white]`}>{title}</h3>

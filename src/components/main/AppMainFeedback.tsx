@@ -167,7 +167,7 @@ const AppMainFeedback = () => {
                             <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
                         </div>
 
-                        <div className="gap-[10px] flex items-center justify-between flex-col">
+                        <div className="gap-[20px] flex items-center justify-between flex-col">
 
 
 
@@ -193,7 +193,7 @@ const AppMainFeedback = () => {
                             </div>
                         </div>
 
-                        <div className="gap-[10px] flex items-center justify-between flex-col">
+                        <div className="gap-[20px] flex items-center justify-between flex-col">
 
                             <div className="flex gap-[20px] feedback-slider-container">
                                 {[...Array(19)].map((_, index) =>
