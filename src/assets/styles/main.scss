@@ -82,8 +82,6 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   .sendIconLeft {
     @apply transition-all ease-in xl:translate-x-full xl:right-0 right-[55px];
     position: absolute;
-    right: 0;
-    transform: translateX(100%);
   }
 
   .sendText {
@@ -109,13 +107,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   }
 
   &.doc-btn {
-    .sendIconLeft {
-      @apply  xl:right-0 right-[10px];
-    }
-  
-    .sendText {
-      @apply xl:translate-x-0 translate-x-[-20px];
-    }
+
     &:hover {
 
       .sendText {
@@ -124,8 +116,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
 
 
       .sendIconLeft {
-        transform: translateX(0);
-        right: 10px;
+        @apply xl:translate-x-0 xl:right-0;
       }
     }
   }

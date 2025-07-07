@@ -43,10 +43,10 @@ type ImageRef = HTMLImageElement | null;
 // Компонент кнопки
 const ActionButton = memo(({ onClick, icon, text, className, setRef }: ActionButtonProps) => (
     <button ref={setRef} onClick={onClick} className={`document__button ${className}`}>
-        <span className="sendIconLeft transition-all ease-in m:block hidden">
+        <span className="sendIconLeft">
             {icon}
         </span>
-        <span className="transition-all ease-in sendText">{text}</span>
+        <span className="sendText">{text}</span>
     </button>
 ));
 
