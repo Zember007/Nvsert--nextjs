@@ -345,12 +345,7 @@
 	right: 2px;
 	z-index: 20;
 	transform: translateY(-100%);
-
 	transition: all 0.1s ease;
-
-	&.dark {
-		--menu-item-opacity-light: 0.5;
-	}
 
 	&.menu-headers {
 		z-index: 21;
@@ -377,8 +372,8 @@
 .services-menu {
 
 	background-color: var(--color);
-	background-image: url('../../images/150.webp');
-	background-repeat: repeat;
+	// background-image: url('../../images/150.webp');
+	// background-repeat: repeat;
 
 	backdrop-filter: blur(15px);
 	border-radius: 4px;
