@@ -129,16 +129,11 @@ const AppMainSkills = () => {
                 </h3>
 
                 <div className="tariff-wrap xl:w-[252px] w-[280px] m:mx-0 mx-auto mt-[20px] " ref={setWrapperRef}>
-                    <button
+                    <button    
                         ref={setButtonRef} className=' slider__button group btnIconAn doc-btn tariff'>
-                        <span className="sendIconLeft">
-                            <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M3 8.5V6.5H0V8.5H3ZM8.96767 0.5L7.52908 1.93076L12.1092 6.48713H6V8.51185H12.1092L7.52908 13.0682L8.96767 14.5L16 7.5L15.2822 6.78462L14.5634 6.06823L8.96767 0.5Z" fill="#34446D" />
-                            </svg>
-                        </span>
-                        <span
-                            className="sendText"
-                        >Подробнее о компании</span>
+
+                        Подробнее о компании
+
                     </button>
                 </div>
             </div>
