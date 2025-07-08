@@ -80,12 +80,12 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   height: 50px;
 
   .sendIconLeft {
-    @apply block transition-all ease-in xl:translate-x-full xl:right-0 right-[18%] top-1/2 -translate-y-1/2;
+    @apply block transition-all ease-in xl:translate-x-full xl:right-0 right-[15%] top-1/2 -translate-y-1/2;
     position: absolute;
   }
 
   .sendText {
-    @apply block transition-all ease-in xl:translate-x-0 translate-x-[-25px];
+    @apply block transition-all ease-in xl:translate-x-0 translate-x-[-20px];
   }
 
   &:hover {
