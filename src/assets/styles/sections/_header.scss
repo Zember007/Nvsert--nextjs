@@ -14,6 +14,10 @@
 	border-color: rgba(230, 231, 220, 0.4);
 }
 
+.header__bg {
+	border: 1px solid transparent;
+}
+
 .header {
 
 	z-index: 50;
@@ -133,12 +137,10 @@
 
 	}
 
-	.header__bg {
-		position: relative;
-	}
-
 	&__bg {
-		border: 1px solid transparent;
+		
+		position: relative;
+		border: none;
 
 		backdrop-filter: blur(var(--filter-blur-header));
 		background-color: var(--color-header);
