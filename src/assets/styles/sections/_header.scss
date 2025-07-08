@@ -11,7 +11,7 @@
 // }
 
 .header__bg.mix-blend-difference {
-	border: 1px solid rgba(230, 231, 220, 0.4);
+	border-color: rgba(230, 231, 220, 0.4);
 }
 
 .header {
@@ -138,6 +138,8 @@
 	}
 
 	&__bg {
+		border: 1px solid transparent;
+
 		backdrop-filter: blur(var(--filter-blur-header));
 		background-color: var(--color-header);
 		border-radius: 4px;
@@ -306,6 +308,7 @@
 		&.have-img {
 			padding: 5px;
 			height: 70px;
+
 			img {
 				border-radius: 5px;
 				border-width: 1px;
@@ -314,7 +317,7 @@
 			}
 		}
 
-	
+
 
 		&::before {
 			content: '';
