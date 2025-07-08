@@ -96,8 +96,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
 
 
     .sendIconLeft {
-      transform: translateX(0);
-      right: 55px;
+      @apply xl:translate-x-0 xl:right-[55px];
     }
 
     .sendIconRight {
