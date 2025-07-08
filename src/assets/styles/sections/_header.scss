@@ -139,11 +139,12 @@
 
 	.header__bg {
 		position: relative;
+		border: none;
+
 	}
 
 	&__bg {
 
-		border: none;
 		backdrop-filter: blur(var(--filter-blur-header));
 		background-color: var(--color-header);
 		border-radius: 4px;
