@@ -80,7 +80,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   height: 50px;
 
   .sendIconLeft {
-    @apply block transition-all ease-in xl:translate-x-full xl:right-0 right-[55px] top-1/2 -translate-y-1/2;
+    @apply block transition-all ease-in xl:translate-x-full xl:right-0 right-[18%] top-1/2 -translate-y-1/2;
     position: absolute;
   }
 
@@ -96,7 +96,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
 
 
     .sendIconLeft {
-      @apply xl:translate-x-0 xl:right-[55px];
+      @apply xl:translate-x-0 xl:right-[18%];
     }
 
     .sendIconRight {
@@ -105,20 +105,20 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
     }
   }
 
-  &.doc-btn {
+  // &.doc-btn {
 
-    &:hover {
+  //   &:hover {
 
-      .sendText {
-        @apply xl:translate-x-[-20px];
-      }
+  //     .sendText {
+  //       @apply xl:translate-x-[-20px];
+  //     }
 
 
-      .sendIconLeft {
-        @apply xl:translate-x-0 xl:right-[10px];
-      }
-    }
-  }
+  //     .sendIconLeft {
+  //       @apply xl:translate-x-0 xl:right-[10px];
+  //     }
+  //   }
+  // }
 }
 
 .section {
