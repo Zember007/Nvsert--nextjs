@@ -1,5 +1,14 @@
 .footer {
   &__white {
-
+    --color-item-menu: #000;
+    
+    border: 1px solid #000;
+    border-radius: 2px;
+    padding: 15px 46px;
+    backdrop-filter: blur(4px);
+    color: #000;
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
   }
 }

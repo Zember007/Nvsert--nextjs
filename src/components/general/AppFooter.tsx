@@ -41,8 +41,8 @@ const AppFooter = () => {
   return (
     <footer className="flex flex-col gap-[2px]">
       <div className="flex gap-[2px]">
-        <div className="grow">
-          <p className="">© 2025 NVSERT</p>
+        <div className="footer__white gap-[20px]">
+          <p className="text-[18px] font-light">© 2025 NVSERT</p>
 
           <div className="flex gap-[10px] xl:flex-row flex-col">
             {menuItems.map((item, i) => (
@@ -52,7 +52,7 @@ const AppFooter = () => {
           </div>
         </div>
 
-        <div className="grow flex gap-[10px]">
+        <div className="footer__white gap-[10px]">
           <button
             onClick={() => { openDefaultModal('introForm') }}
             className="xl:hidden  border border-solid text-[18px] flex items-center justify-between px-[15px] text-[#FFF]  border-[#93969D] h-[50px] w-full rounded-[4px] bg-[#34446D]"
