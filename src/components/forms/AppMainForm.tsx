@@ -231,7 +231,6 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                     {({ register, errors }) => (
                         <div className="flex flex-col s:gap-[20px] gap-[15px]">
                             <AppInput
-                                className={`${bg ? '!bg-[#34446d33] focus:!bg-[#34446d33] !border-[#444] focus:!border-[#ffffff80]' : '!bg-[transparent] focus:!bg-[#21262F]'}  main__input `}
                                 title={'ФИО'}
                                 inputName="name"
                                 required={true}
@@ -251,7 +250,6 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                     className="w-full relative z-[1]">
                                     <AppInput
                                         defaultValue={isEmail ? contactData.email : isPhone ? contactData.phone : ''}
-                                        className={`main__input ${bg ? '!bg-[#34446d33] focus:!bg-[#34446d33] !border-[#444] focus:!border-[#ffffff80]' : '!bg-[transparent] focus:!bg-[#21262F]'}`}
                                         title={isPhone ? 'Телефон' : 'Email'}
                                         inputName="contact"
                                         mask={isPhone ? "phone" : ''}
@@ -268,7 +266,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                 <div id={`bounce-checkbox${ids}`} className="pl-[10px] flex items-center gap-[30px]"
                                     onClick={() => { clearErrors('contact') }}
                                 >
-                                    <AppCheckbox  id={`check-phone${ids}`} successful={contactData.phone !== ''} focus={focusContact} fail={failCheck} checked={isPhone || contactData.phone !== ''}
+                                    <AppCheckbox id={`check-phone${ids}`} successful={contactData.phone !== ''} focus={focusContact} fail={failCheck} checked={isPhone || contactData.phone !== ''}
                                         onChange={(value) => {
                                             setIsPhone(value || contactData.phone !== '');
                                             if (value || contactData.phone !== '') {
@@ -278,7 +276,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                                 setIsEmail(true);
                                             }
                                         }} label="Телефон" />
-                                    <AppCheckbox focus={focusContact}  id={`check-email${ids}`} successful={contactData.email !== ''} fail={failCheck} checked={isEmail || contactData.email !== ''}
+                                    <AppCheckbox focus={focusContact} id={`check-email${ids}`} successful={contactData.email !== ''} fail={failCheck} checked={isEmail || contactData.email !== ''}
                                         onChange={(value) => {
                                             setIsEmail(value || contactData.email !== '');
                                             if (value || contactData.email !== '') {
@@ -294,7 +292,6 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                             </div>
 
                             <AppTextarea
-                                className={`main__input ${bg ? '!bg-[#34446d33] focus:!bg-[#34446d33] !border-[#444] focus:!border-[#ffffff80]' : '!bg-[transparent] focus:!bg-[#21262F]'}`}
                                 title={'Комментарий'}
                                 inputName="comment"
                             />
@@ -308,12 +305,12 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                         verticalAlign: 'middle'
                                     }}
                                 >
-                                   
+
                                     <span
                                         className="sendText"
                                     >{btnText}</span>
 
-<span className="sendIconLeft">
+                                    <span className="sendIconLeft">
                                         <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M3 8.5V6.5H0V8.5H3ZM8.96767 0.5L7.52908 1.93076L12.1092 6.48713H6V8.51185H12.1092L7.52908 13.0682L8.96767 14.5L16 7.5L15.2822 6.78462L14.5634 6.06823L8.96767 0.5Z" fill="#34446D" />
                                         </svg>

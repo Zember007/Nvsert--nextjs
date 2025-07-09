@@ -142,18 +142,6 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   }
 }
 
-.main {
-  &__input {
-
-
-    &:not(:placeholder-shown) {
-      background: #34446d33 !important;
-      box-shadow: inset 2px 2px 2px #071a2680, inset -2px -2px 2px #071a2680;
-      border-color: #ffffff80 !important;
-    }
-  }
-}
-
 
 .safeguard__box {
   @apply flex gap-[20px];

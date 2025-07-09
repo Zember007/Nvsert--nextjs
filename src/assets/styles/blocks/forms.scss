@@ -34,13 +34,13 @@ input:auto-fill {
     @include transition();
     display: block;
     height: 50px;
-    background: #4a587d;
+    background: rgba(52, 68, 109, 0.2);
     border-radius: 4px;
     font-size: 16px;
     line-height: 24px;
     font-weight: 400;
     padding: 12px 12px;
-    border: 1px solid #444444;
+    border: 1px solid #93969d;
     resize: none;
     outline: none;
 
@@ -78,10 +78,9 @@ input:auto-fill {
 
     }
 
-    &:focus {
-      box-shadow: inset 2px 2px 2px #071a2680, inset -2px -2px 2px #071a2680;
+    &:focus {      
 
-      border: 1px solid #737373;
+      border: 1px solid #000;
       z-index: 1;
 
       &~.field__title-top {
