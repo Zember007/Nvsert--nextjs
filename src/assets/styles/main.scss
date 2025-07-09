@@ -83,7 +83,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   height: 50px;
 
   .sendIconLeft {
-    @apply block transition-all ease-in translate-x-0 xl:translate-x-[200px];
+    @apply block transition-all ease-in translate-x-0 xl:translate-x-[-15.5px] xl:opacity-0;
   }
 
   .sendText {
@@ -98,7 +98,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
 
 
     .sendIconLeft {
-      @apply xl:translate-x-0;
+      @apply xl:translate-x-0 xl:opacity-100;
     }
 
   }
