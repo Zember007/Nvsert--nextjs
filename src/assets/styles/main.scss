@@ -77,48 +77,32 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
 }
 
 .btnIconAn {
+  display: flex;
+  gap: 15px;
+  align-items: center;
   height: 50px;
 
   .sendIconLeft {
-    @apply block transition-all ease-in translate-x-full xl:right-0 right-[20%] top-1/2 -translate-y-1/2;
-    position: absolute;
+    @apply block transition-all ease-in translate-x-0 xl:translate-x-[200px];
   }
 
   .sendText {
-    @apply block transition-all ease-in xl:translate-x-0 translate-x-[-20px];
+    @apply block transition-all ease-in xl:translate-x-[15.5px] translate-x-0;
   }
 
   &:hover {
 
     .sendText {
-      @apply xl:translate-x-[-25px]
+      @apply xl:translate-x-0
     }
 
 
     .sendIconLeft {
-      @apply xl:translate-x-full xl:right-[20%];
+      @apply xl:translate-x-0;
     }
 
-    .sendIconRight {
-      transform: translateX(50px);
-
-    }
   }
 
-  // &.doc-btn {
-
-  //   &:hover {
-
-  //     .sendText {
-  //       @apply xl:translate-x-[-20px];
-  //     }
-
-
-  //     .sendIconLeft {
-  //       @apply xl:translate-x-0 xl:right-[10px];
-  //     }
-  //   }
-  // }
 }
 
 .section {

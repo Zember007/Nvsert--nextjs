@@ -78,14 +78,16 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                             className="tariff-wrap m:w-[247px] w-[280px] m:mx-0 mx-auto " ref={setWrapperRef}>
                             <button
                                 ref={setButtonRef} className='btnIconAn m:bg-[transparent] bg-[#34446D] justify-center m:flex items-center px-[16px] py-[9px] relative overflow-hidden border border-solid border-[#34446D] tariff m:text-[20px] text-[18px] transition-all duration-300  gap-[6px]  hover:text-[#FFF] text-[#FFF] m:text-[#34446D] rounded-[4px] group hover:bg-[#34446D]  leading-[1] '>
+
+                                <span
+                                    className="sendText"
+                                >Подробнее</span>
+
                                 <span className="sendIconLeft">
                                     <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M3 9.48438V7.48438H0V9.48438H3ZM8.96767 1.48438L7.52908 2.91514L12.1092 7.47151H6V9.49623H12.1092L7.52908 14.0526L8.96767 15.4844L16 8.48438L15.2822 7.76899L14.5634 7.0526L8.96767 1.48438Z" fill="white" />
                                     </svg>
                                 </span>
-                                <span
-                                    className="sendText"
-                                >Подробнее</span>
 
                             </button>
                         </motion.div>
