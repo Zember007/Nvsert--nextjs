@@ -41,10 +41,10 @@ const AppFooter = () => {
   return (
     <footer className="flex flex-col gap-[2px]">
       <div className="flex gap-[2px]">
-        <div className="footer__white gap-[20px]">
-          <p className="text-[18px] font-light">© 2025 NVSERT</p>
+        <div className="footer__white !grid grid-cols-7 justify-items-start">
+          <p className="text-[18px] font-light col-start-1 col-end-3">© 2025 NVSERT</p>
 
-          <div className="flex gap-[10px] xl:flex-row flex-col">
+          <div className="flex gap-[10px] xl:flex-row flex-col col-start-4 col-end-7">
             {menuItems.map((item, i) => (
               <AppMenuItem key={i} item={item} isActive={false} />
             ))}
@@ -80,7 +80,7 @@ const AppFooter = () => {
                 onClick={() => {
                   navigator.clipboard.writeText(email.value)
                 }}
-                className="max-xl:!border-[#93969D] xl:!px-[35px]  xl:!h-[35px] w-[280px] xl:mx-0 mx-auto !h-[50px] xl:w-full group"
+                className="max-xl:!border-[#93969D] xl:!px-[35px]  xl:!h-[35px] w-[280px] xl:mx-0 mx-auto !h-[50px] xl:w-auto group"
                 item={{
                   href: '#', label:
                     <>
@@ -107,7 +107,7 @@ const AppFooter = () => {
             timer={3000}
           >
             <AppMenuItem
-              className="max-xl:!border-[#93969D] xl:!px-[35px] xl:!h-[35px] xl:w-full w-[280px] xl:mx-0 mx-auto  !h-[50px]  group"
+              className="max-xl:!border-[#93969D] xl:!px-[35px] xl:!h-[35px] xl:w-auto w-[280px] xl:mx-0 mx-auto  !h-[50px]  group"
               item={{
                 href: '#', label:
                   <>
@@ -141,7 +141,7 @@ const AppFooter = () => {
             timer={3000}
           >
             <AppMenuItem
-              className="max-xl:!border-[#93969D] xl:!px-[35px] xl:!h-[35px] xl:w-full w-[280px] xl:mx-0 mx-auto !h-[50px]  group"
+              className="max-xl:!border-[#93969D] xl:!px-[35px] xl:!h-[35px] xl:w-auto w-[280px] xl:mx-0 mx-auto !h-[50px]  group"
               item={{
                 href: '#', label:
                   <>
@@ -159,7 +159,6 @@ const AppFooter = () => {
               }} isActive={false} />
           </PromtModal>
           <PromtModal
-            classNameBox="xl:!relative !absolute xl:bottom-0 bottom-[-45px] right-0 !w-auto xl:translate-y-0 translate-y-full"
             className='!py-[20px]'
             content={
               <div className="flex flex-col gap-[20px]">
@@ -186,7 +185,7 @@ const AppFooter = () => {
               item={{
                 href: '#', label: <>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.2676 18.8833C15.9735 17.9416 18.7776 14.7408 19.1293 10.8333H14.9785C14.8235 13.7891 13.8485 16.5391 12.2676 18.8833ZM19.1293 9.16664C18.7776 5.25831 15.971 2.05664 12.2643 1.11497C13.846 3.45997 14.8226 6.20997 14.9785 9.16664H19.1293ZM7.73678 1.11497C4.02845 2.05664 1.22345 5.25831 0.870117 9.16664H5.02178C5.17762 6.20997 6.15428 3.45997 7.73678 1.11497ZM0.87095 10.8333C1.04402 12.7192 1.79645 14.5054 3.02497 15.9466C4.2535 17.3879 5.89793 18.4137 7.73262 18.8833C6.15178 16.5391 5.17678 13.7891 5.02178 10.8333H0.87095ZM10.0001 19.135C8.07762 16.8141 6.87345 13.9508 6.69178 10.8333H13.3093C13.126 13.95 11.9226 16.8141 10.001 19.135M10.0001 0.869141C11.9226 3.18914 13.1251 6.05164 13.3085 9.16664H6.69178C6.87512 6.05164 8.07845 3.18914 10.0001 0.869141Z" fill="white" fillOpacity="1" />
+                    <path d="M12.2676 18.8833C15.9735 17.9416 18.7776 14.7408 19.1293 10.8333H14.9785C14.8235 13.7891 13.8485 16.5391 12.2676 18.8833ZM19.1293 9.16664C18.7776 5.25831 15.971 2.05664 12.2643 1.11497C13.846 3.45997 14.8226 6.20997 14.9785 9.16664H19.1293ZM7.73678 1.11497C4.02845 2.05664 1.22345 5.25831 0.870117 9.16664H5.02178C5.17762 6.20997 6.15428 3.45997 7.73678 1.11497ZM0.87095 10.8333C1.04402 12.7192 1.79645 14.5054 3.02497 15.9466C4.2535 17.3879 5.89793 18.4137 7.73262 18.8833C6.15178 16.5391 5.17678 13.7891 5.02178 10.8333H0.87095ZM10.0001 19.135C8.07762 16.8141 6.87345 13.9508 6.69178 10.8333H13.3093C13.126 13.95 11.9226 16.8141 10.001 19.135M10.0001 0.869141C11.9226 3.18914 13.1251 6.05164 13.3085 9.16664H6.69178C6.87512 6.05164 8.07845 3.18914 10.0001 0.869141Z" fill="black" fillOpacity="1" />
                   </svg>
                   <span className="hidden">Языки</span>
                 </>
@@ -195,13 +194,13 @@ const AppFooter = () => {
         </div>
       </div>
       <div className="flex gap-[2px]">
-        <div className="grow">
+        <div className="footer__dark !grid grid-cols-7 justify-items-start">
           <div className=" xl:text-[16px] xl:items-start items-center text-[14px] flex flex-col xl:gap-[18px]  gap-[16px] ">
             <span>{t("footer.inn")}</span>
             <span>{t("footer.company")}</span>
           </div>
 
-          <div className="flex xl:gap-[8px] gap-[10px] flex-col xl:pt-0 xl:border-none pt-[30px] border-[#737373] border-t border-solid xl:w-auto w-full">
+          <div className="col-start-4 col-end-7 flex gap-[8px] flex-col">
             <AppMenuItem
               className=" xl:!h-[35px] !h-auto !text-left"
 
@@ -213,7 +212,7 @@ const AppFooter = () => {
           </div>
         </div>
 
-        <div className="grow"></div>
+        <div className="footer__dark"></div>
 
 
 

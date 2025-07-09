@@ -18,7 +18,6 @@ const PromtModal = ({className = '', children, content, timer, classNameBox = ''
                 {content}
             </div>
             <div
-            className="w-full"
                 onClick={() => { setActive(!timer ? !active : true) }}>
                 {children}
             </div>

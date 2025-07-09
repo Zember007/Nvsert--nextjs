@@ -30,11 +30,9 @@ export default function Home() {
   });
 
 
-
-
   return (
     <div className="main text-[#000] overflow-hidden select-none ">
-      <AppMainIntro />
+       <AppMainIntro />
 
       <AppMainDocuments />
 
@@ -46,7 +44,7 @@ export default function Home() {
 
       <DynamicAppMainFeedback />
 
-      <DynamicAppMainQuestions />
+      <DynamicAppMainQuestions /> 
     </div>
   );
 }
