@@ -132,7 +132,7 @@ const AppFooter = () => {
         <div className="footer__white !grid grid-cols-7 justify-items-start">
           <p className="text-[18px] font-light col-start-1 col-end-3">© 2025 NVSERT</p>
 
-          <div className="flex gap-[10px] xl:flex-row flex-col col-start-4 col-end-7">
+          <div className="xl:-translate-x-[10px] flex gap-[10px] xl:flex-row flex-col col-start-4 col-end-7">
             {menuItems.map((item, i) => (
               <AppMenuItem key={i} item={item} isActive={false} />
             ))}
@@ -287,7 +287,7 @@ const AppFooter = () => {
             <span>{t("footer.company")}</span>
           </div>
 
-          <div className="col-start-4 col-end-7 flex gap-[8px] flex-col">
+          <div className="xl:-translate-x-[10px] col-start-4 col-end-7 flex gap-[8px] flex-col">
             <AppMenuItem
               className=" xl:!h-[35px] !h-auto !text-left"
 
