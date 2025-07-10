@@ -104,11 +104,11 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
               </>
               :
               <>
-                <h3 className={`text-[20px] transition-all duration-500`} >
+                <h3 className={`text-[20px] transition-all duration-500 font-medium`} >
                   {title && filterPrepositions(title)}
                 </h3>
                 <div className='grow'>
-                  <ul className={`list-disc pl-[17px] ${!isVisible && 'translate-y-[10px] opacity-0'} transition-all duration-500 flex flex-col gap-[5px]`} >
+                  <ul className={`font-light list-disc pl-[17px] ${!isVisible && 'translate-y-[10px] opacity-0'} transition-all duration-500 flex flex-col gap-[5px]`} >
                     {list.map((item, index) =>
                       <li key={index}>{filterPrepositions(item)}</li>
                     )}
