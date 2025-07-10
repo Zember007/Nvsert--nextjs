@@ -105,7 +105,7 @@ const AppFooter = () => {
 
     gsap.to(stepsParent, {
       y: -targetY,
-      duration: 0.18,
+      duration: 0.4,
       ease: "power3",
       onComplete: () => {
         const finalY = Number(gsap.getProperty(stepsParent, "y"));
@@ -304,13 +304,13 @@ const AppFooter = () => {
                 ))}
               </div>
             </div>
-            <div className="slide-dots-box !flex">
+            <div className="flex gap-[7px]">
               {slides.map((_, i) => (
                 <div
-                  // onClick={() => {
-                  //   timeLine.current.toIndex(i, { ease: "power3", duration: 0.725 })
-                  // }}
-                  key={i} className={`${1 === i ? 'active' : ""} slide-dots`}></div>
+                  onClick={() => {
+                    updateSteps(i)
+                  }}
+                  key={i} className={`${currentIndex === i ? 'active' : ""} slide-dots`}></div>
               ))}
             </div>
           </div>
