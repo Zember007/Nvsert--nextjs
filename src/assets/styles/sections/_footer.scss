@@ -26,4 +26,24 @@
     backdrop-filter: blur(4px);
     background: linear-gradient(180deg, #93969d, #3e424b);
   }
+
+  .sendBtn {
+    .sendTextFooter {
+      @apply transition-all duration-200 ease block xl:translate-x-[9px] translate-x-0;
+    }
+
+    .sendIconFooter {
+      @apply xl:opacity-0 opacity-100 xl:translate-x-[-9px] translate-x-0;
+    }
+
+    &:hover {
+      .sendTextFooter {
+        @apply xl:translate-x-0;
+      }
+
+      .sendIconFooter {
+        @apply xl:translate-x-0 xl:opacity-100;
+      }
+    }
+  }
 }

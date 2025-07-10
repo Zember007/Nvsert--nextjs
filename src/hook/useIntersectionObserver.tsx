@@ -13,7 +13,7 @@ export function useIntersectionObserver(options: IntersectionObserverInit = {}) 
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.disconnect(); // Отключаем после срабатывания
+          observer.disconnect(); 
         }
       },
       {
