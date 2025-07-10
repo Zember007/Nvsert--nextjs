@@ -12,9 +12,11 @@ import AppMenuItem from "./AppMenuItem";
 import PromtModal from "../modals/PromtModal";
 import { useHeaderContext } from "../contexts/HeaderContext";
 import gsap from "gsap";
+import { useIntersectionObserver } from "@/hook/useIntersectionObserver";
 
 const AppFooter = () => {
 
+   const { ref, isVisible } = useIntersectionObserver();
   const { t, i18n } = useTranslation();
 
   const changeLanguage = (lng: string) => {
@@ -48,18 +50,19 @@ const AppFooter = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalSlides = slides.length;
 
-  // Клонирование элементов
+
+
+
+  // Автопрокрутка
   useEffect(() => {
     const stepsParent = stepsRef.current;
-    if (!stepsParent) return;
+    if (!stepsParent || !isVisible) return;
 
     const stepsArray = Array.from(stepsParent.children);
     const clones = stepsArray.map(child => child.cloneNode(true));
     clones.forEach(clone => stepsParent.appendChild(clone));
-  }, [slides]);
 
-  // Автопрокрутка
-  useEffect(() => {
+
     const interval = setInterval(() => {
       const nextIndex = (currentIndex + 1) % totalSlides;
       updateSteps(nextIndex);
@@ -67,7 +70,7 @@ const AppFooter = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [currentIndex, totalSlides]);
+  }, [currentIndex, totalSlides, isVisible]);
 
   function updateSteps(newIndex: number) {
     const stepsParent = stepsRef.current;
@@ -119,7 +122,7 @@ const AppFooter = () => {
   }
 
   return (
-    <footer className="footer flex flex-col gap-[2px]">
+    <footer ref={ref} className="footer flex flex-col gap-[2px]">
       <div className="flex gap-[2px]">
         <div className="footer__white !grid grid-cols-7 justify-items-start">
           <p className="text-[18px] font-light col-start-1 col-end-3">© 2025 NVSERT</p>
