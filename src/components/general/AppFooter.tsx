@@ -193,7 +193,7 @@ const AppFooter = () => {
           </PromtModal>
         </div>
       </div>
-      <div className="flex gap-[2px]">
+      <div className="flex gap-[2px] mb-[2px]">
         <div className="footer__dark !grid grid-cols-7 justify-items-start">
           <div className=" xl:text-[16px] xl:items-start items-center text-[14px] flex flex-col xl:gap-[18px]  gap-[16px] ">
             <span>{t("footer.inn")}</span>
