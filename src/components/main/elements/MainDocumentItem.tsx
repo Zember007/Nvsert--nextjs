@@ -73,7 +73,7 @@ const DocumentList = memo(({ content1, listHidden, setListHidden }: DocumentList
                 </ul>
                 {cont.list.length > 3 && (
                     <button
-                        className='text-[#34446D] font-bold text-[16px] text-left inline-flex gap-[5px]'
+                        className='text-[#34446D] text-[16px] text-left inline-flex gap-[5px]'
                         onClick={() => setListHidden(!listHidden)}
                     >
                         {listHidden ? 'Показать полный список документов' : 'Скрыть'}

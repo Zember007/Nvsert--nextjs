@@ -257,7 +257,7 @@ const SliderMain = () => {
                                         className="tariff item group">
 
                                         <svg
-                                            className='group-hover:*:*:fill-[#FFF] *:*:transition-all *:*:duration-300'
+                                            className='group-hover:*:fill-[#FFF] *:transition-all *:duration-300'
                                             width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M13 9V7H16V9H13ZM7.03233 1L8.47092 2.43076L3.89081 6.98713H10V9.01185H3.89081L8.47092 13.5682L7.03233 15L0 8L0.717771 7.28462L1.43656 6.56823L7.03233 1Z" fill="#34446D" />
                                         </svg>
@@ -274,7 +274,7 @@ const SliderMain = () => {
 
                            
                                         <svg
-                                            className='group-hover:*:*:fill-[#FFF] *:*:transition-all *:*:duration-300'
+                                            className='group-hover:*:fill-[#FFF] *:transition-all *:duration-300'
                                             width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M3 9V7H0V9H3ZM8.96767 1L7.52908 2.43076L12.1092 6.98713H6V9.01185H12.1092L7.52908 13.5682L8.96767 15L16 8L15.2822 7.28462L14.5634 6.56823L8.96767 1Z" fill="#34446D" />
                                         </svg>

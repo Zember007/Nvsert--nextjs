@@ -403,7 +403,7 @@ input:-webkit-autofill:focus {
   &__desc {
     @apply text-[#000] s:mt-[7px] text-[12px] s:text-[14px];
     line-height: 1.2;
-    letter-spacing: 0.02em;
+    letter-spacing: -0.5px;
   }
 
   &__button {
