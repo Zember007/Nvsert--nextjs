@@ -33,7 +33,7 @@
     }
 
     .sendIconFooter {
-      @apply xl:opacity-0 opacity-100 xl:translate-x-[-9px] translate-x-0;
+      @apply transition-all duration-200 block xl:opacity-0 opacity-100 xl:translate-x-[-9px] translate-x-0;
     }
 
     &:hover {
