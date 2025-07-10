@@ -13,7 +13,7 @@ const PromtModal = ({className = '', children, content, timer, classNameBox = ''
         },timer))
     }, [active])
     return (
-        <div className={`${classNameBox} relative w-full`}>
+        <div className={`${classNameBox} relative `}>
             <div className={`${!active ? 'opacity-0 unvisible pointer-events-none' : ''} ${className} duration-300 ease transition-all  absolute right-0 top-[-8px] translate-y-[-100%] bg-[#00000080] backdrop-blur-[20px] rounded-[4px] p-[15px]`}>
                 {content}
             </div>
