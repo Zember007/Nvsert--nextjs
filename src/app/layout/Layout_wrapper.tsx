@@ -123,7 +123,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
         let isDragging = false;
         let startY = 0;
         let startScrollTop = 0;
-        let scrollPadding = 4;
+        let scrollPadding = 2;
 
         const scrollbar = scrollbarRef.current;
 
