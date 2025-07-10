@@ -256,25 +256,12 @@ const SliderMain = () => {
                                         aria-label="previous slide" data-slider="button-prev"
                                         className="tariff item group">
 
-                                        <svg className='group-hover:*:*:fill-[#FFF] *:*:transition-all *:*:duration-300' xmlns="http://www.w3.org/2000/svg" width="46" height="38" viewBox="0 0 46 38" fill="none">
-                                            <path d="M24.4482 34.9009H28.7887" stroke="#424242" strokeWidth="0.600425" strokeLinecap="round" />
-                                            <path d="M24.4482 3.02588L28.7887 3.02588" stroke="#424242" strokeWidth="0.600425" strokeLinecap="round" />
-                                            <g filter="url(#filter0_d_1459_643)">
-                                                <path d="M30.1421 2H23.8391L10.1421 18.962L23.8391 35.9239H30.1421L16.4451 18.962L30.1421 2Z" fill="#34446D" />
-                                            </g>
-                                            <defs>
-                                                <filter id="filter0_d_1459_643" x="7" y="0" width="27" height="38" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                                                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                                                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5 0" result="hardAlpha" />
-                                                    <feOffset dx="1" dy="0" />
-                                                    <feGaussianBlur stdDeviation="0.723404" />
-                                                    <feComposite in2="hardAlpha" operator="out" />
-                                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0" />
-                                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1459_613" />
-                                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1459_613" result="shape" />
-                                                </filter>
-                                            </defs>
+                                        <svg
+                                            className='group-hover:*:*:fill-[#FFF] *:*:transition-all *:*:duration-300'
+                                            width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M13 9V7H16V9H13ZM7.03233 1L8.47092 2.43076L3.89081 6.98713H10V9.01185H3.89081L8.47092 13.5682L7.03233 15L0 8L0.717771 7.28462L1.43656 6.56823L7.03233 1Z" fill="#34446D" />
                                         </svg>
+
                                     </button>
                                 </div>
                                 <div
@@ -285,25 +272,13 @@ const SliderMain = () => {
                                         aria-label="previous slide" data-slider="button-next"
                                         className=" tariff item group">
 
-                                        <svg className='rotate-[180deg] group-hover:*:*:fill-[#FFF] *:*:transition-all *:*:duration-300' xmlns="http://www.w3.org/2000/svg" width="46" height="38" viewBox="0 0 46 38" fill="none">
-                                            <path d="M24.4482 34.9009H28.7887" stroke="#424242" strokeWidth="0.600425" strokeLinecap="round" />
-                                            <path d="M24.4482 3.02588L28.7887 3.02588" stroke="#424242" strokeWidth="0.600425" strokeLinecap="round" />
-                                            <g filter="url(#filter0_d_1459_613)">
-                                                <path d="M30.1421 2H23.8391L10.1421 18.962L23.8391 35.9239H30.1421L16.4451 18.962L30.1421 2Z" fill="#34446D" />
-                                            </g>
-                                            <defs>
-                                                <filter id="filter0_d_1459_613" x="7" y="0" width="27" height="38" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                                                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                                                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5 0" result="hardAlpha" />
-                                                    <feOffset dx="1" dy="0" />
-                                                    <feGaussianBlur stdDeviation="0.723404" />
-                                                    <feComposite in2="hardAlpha" operator="out" />
-                                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0" />
-                                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1459_613" />
-                                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1459_613" result="shape" />
-                                                </filter>
-                                            </defs>
+                           
+                                        <svg
+                                            className='group-hover:*:*:fill-[#FFF] *:*:transition-all *:*:duration-300'
+                                            width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M3 9V7H0V9H3ZM8.96767 1L7.52908 2.43076L12.1092 6.98713H6V9.01185H12.1092L7.52908 13.5682L8.96767 15L16 8L15.2822 7.28462L14.5634 6.56823L8.96767 1Z" fill="#34446D" />
                                         </svg>
+
                                     </button>
                                 </div>
                             </div>
