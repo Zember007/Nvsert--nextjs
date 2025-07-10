@@ -311,7 +311,7 @@ const AppFooter = () => {
                 ))}
               </div>
             </div>
-            <div className="flex gap-[7px]">
+            <div className="flex gap-[7px] p-[4px]">
               {slides.map((_, i) => (
                 <div
                   onClick={() => {
