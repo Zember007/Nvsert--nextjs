@@ -39,7 +39,7 @@ const AppFooter = () => {
 
 
   return (
-    <footer className="flex flex-col gap-[2px]">
+    <footer className="footer flex flex-col gap-[2px]">
       <div className="flex gap-[2px]">
         <div className="footer__white !grid grid-cols-7 justify-items-start">
           <p className="text-[18px] font-light col-start-1 col-end-3">© 2025 NVSERT</p>
