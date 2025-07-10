@@ -65,8 +65,7 @@ const AppFooter = () => {
 
     const interval = setInterval(() => {
       const nextIndex = (currentIndex + 1) % totalSlides;
-      updateSteps(nextIndex);
-      setCurrentIndex(nextIndex);
+      updateSteps(nextIndex);      
     }, 3000);
 
     return () => clearInterval(interval);
@@ -119,6 +118,8 @@ const AppFooter = () => {
         }
       },
     });
+
+    setCurrentIndex(nextIndex);
   }
 
   return (
