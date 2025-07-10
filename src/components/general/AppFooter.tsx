@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import AppNavigation from './AppNavigation';
 import AppLogo from './AppLogo';
@@ -11,6 +11,7 @@ import { RootState } from "@/config/store";
 import AppMenuItem from "./AppMenuItem";
 import PromtModal from "../modals/PromtModal";
 import { useHeaderContext } from "../contexts/HeaderContext";
+import gsap from "gsap";
 
 const AppFooter = () => {
 
@@ -37,6 +38,85 @@ const AppFooter = () => {
 
   const { openDefaultModal } = useHeaderContext();
 
+  const slides = [
+    'Помогаем сотрудникам не терять важную информацию',
+    'Оцифровываем бизнесу переговоры в текст',
+    'Конспектируем переговоры и встречи с помощью ИИ'
+  ]
+
+  const stepsRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const totalSlides = slides.length;
+
+  // Клонирование элементов
+  useEffect(() => {
+    const stepsParent = stepsRef.current;
+    if (!stepsParent) return;
+
+    const stepsArray = Array.from(stepsParent.children);
+    const clones = stepsArray.map(child => child.cloneNode(true));
+    clones.forEach(clone => stepsParent.appendChild(clone));
+  }, [slides]);
+
+  // Автопрокрутка
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const nextIndex = (currentIndex + 1) % totalSlides;
+      updateSteps(nextIndex);
+      setCurrentIndex(nextIndex);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [currentIndex, totalSlides]);
+
+  function updateSteps(newIndex: number) {
+    const stepsParent = stepsRef.current;
+    if (!stepsParent) return;
+
+    gsap.killTweensOf(stepsParent);
+    const stepsArray = Array.from(stepsParent.children);
+    const height = (stepsArray[0] as HTMLElement).offsetHeight;
+    const maxOffset = totalSlides * height;
+
+    let delta = newIndex - currentIndex;
+    if (newIndex === 0 && currentIndex === totalSlides - 1) delta = 1;
+    else if (newIndex === totalSlides - 1 && currentIndex === 0) delta = -1;
+
+    const direction = delta >= 0 ? 1 : -1;
+
+    let currentY = Number(gsap.getProperty(stepsParent, "y")) || 0;
+
+    if (newIndex === totalSlides - 1 && currentIndex === 0) {
+      gsap.set(stepsParent, { y: -maxOffset });
+      currentY = -maxOffset;
+    }
+
+    let targetY = newIndex * height;
+
+    if (targetY >= maxOffset) targetY -= maxOffset;
+    else if (targetY < 0) targetY += maxOffset;
+
+    if (Math.abs(currentY + targetY) > maxOffset / 2) {
+      gsap.set(stepsParent, {
+        y: currentY + (direction > 0 ? maxOffset : -maxOffset),
+      });
+      currentY = Number(gsap.getProperty(stepsParent, "y"));
+    }
+
+    gsap.to(stepsParent, {
+      y: -targetY,
+      duration: 0.18,
+      ease: "power3",
+      onComplete: () => {
+        const finalY = Number(gsap.getProperty(stepsParent, "y"));
+        if (Math.abs(finalY) >= maxOffset) {
+          gsap.set(stepsParent, { y: finalY % maxOffset });
+        } else if (finalY > 0) {
+          gsap.set(stepsParent, { y: finalY - maxOffset });
+        }
+      },
+    });
+  }
 
   return (
     <footer className="footer flex flex-col gap-[2px]">
@@ -212,7 +292,29 @@ const AppFooter = () => {
           </div>
         </div>
 
-        <div className="footer__dark"></div>
+        <div className="footer__dark gap-[16px]">
+          <Image src={AudioLogo} alt="audioselector" />
+          <div className="pl-[16px] border-l border-[#FFF] border-solid flex flex-col gap-[4px]">
+            <div className="h-[23px] overflow-hidden text-[#FFF]">
+              <div ref={stepsRef}>
+                {slides.map((item, i) => (
+                  <h3 key={i} className="text-[18px] leading-[23px]">
+                    {item}
+                  </h3>
+                ))}
+              </div>
+            </div>
+            <div className="slide-dots-box !flex">
+              {slides.map((_, i) => (
+                <div
+                  // onClick={() => {
+                  //   timeLine.current.toIndex(i, { ease: "power3", duration: 0.725 })
+                  // }}
+                  key={i} className={`${1 === i ? 'active' : ""} slide-dots`}></div>
+              ))}
+            </div>
+          </div>
+        </div>
 
 
 
