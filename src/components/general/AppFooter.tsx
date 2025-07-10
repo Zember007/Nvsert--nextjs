@@ -119,7 +119,7 @@ const AppFooter = () => {
       },
     });
 
-    setCurrentIndex(nextIndex);
+    setCurrentIndex(newIndex);
   }
 
   return (
