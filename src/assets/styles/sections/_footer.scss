@@ -1,6 +1,7 @@
 .footer {
   @apply mt-[40px] s:mt-[25px];
   margin: 0 2px;
+  margin-bottom: 2px;
 
   &__white {
     --color-item-menu: #000;
@@ -13,11 +14,9 @@
     display: flex;
     align-items: center;
     flex-grow: 1;
-    width: 50%;
   }
 
   &__dark {
-    width: 50%;
     color: #FFF;
     display: flex;
     align-items: center;
