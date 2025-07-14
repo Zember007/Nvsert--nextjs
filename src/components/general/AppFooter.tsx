@@ -304,7 +304,7 @@ const AppFooter = () => {
       </div>
 
       <div className="footer__dark gap-[16px]">
-        <Image src={AudioLogo} alt="audioselector" />
+        <Image src={AudioLogo} alt="audiosector" />
         <div className="pl-[16px] border-l border-[#FFF] border-solid flex flex-col gap-[4px]">
           <div className="xl:h-[23px] h-[36px] overflow-hidden text-[#FFF]">
             <div ref={stepsRef}>
