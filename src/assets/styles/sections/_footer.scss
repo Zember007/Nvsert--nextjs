@@ -4,6 +4,15 @@
   margin-bottom: 2px;
 
   .white-style {
+    .btn-lang {
+      @media (min-width: 1240px) {
+        --color-item-menu: #000;
+      }
+
+      --color-item-menu: #fff;
+
+    }
+
     --color-item-menu: #000;
     border: 1px solid #93969d;
     border-radius: 4px;
@@ -15,7 +24,7 @@
   }
 
   .dark-style {
-    
+
     --color-item-menu: #FFF;
     color: #FFF;
     display: flex;
@@ -28,6 +37,7 @@
 
   &__white {
     @apply xl:px-[46px] xl:py-[15px] p-[40px];
+
     &:not(.change-style) {
       @apply white-style;
     }
