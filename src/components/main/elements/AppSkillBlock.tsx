@@ -104,7 +104,7 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
               </>
               :
               <>
-                <h3 className={`text-[20px] transition-all duration-500 font-medium`} >
+                <h3 className={`text-[20px] transition-all duration-500`} >
                   {title && filterPrepositions(title)}
                 </h3>
                 <div className='grow'>
