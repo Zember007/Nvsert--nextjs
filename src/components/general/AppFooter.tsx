@@ -297,7 +297,7 @@ const AppFooter = () => {
         </div>
       </div>
 
-      <div className="xl:hidden footer__white flex-col gap-[15px] text-[14px]">
+      <div className="xl:!hidden footer__white flex-col gap-[15px] text-[14px]">
         <span>«ЦЕНТР СТАНДАРТИЗАЦИИ»</span>
         <span>ИНН 6027189146</span>
         <span className="font-light">© 2025 NVSERT</span>
