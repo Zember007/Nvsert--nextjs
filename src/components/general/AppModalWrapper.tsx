@@ -74,7 +74,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ reset, countTrigger, 
                     <div ref={nodeRef}>
                         <motion.div
                             animate={controls}
-                            className={`modal__box mix-blend-difference  modal ${defaultModalActive && 'active'}`} onClick={(e) => { e.stopPropagation() }}>
+                            className={`modal__box  modal ${defaultModalActive && 'active'}`} onClick={(e) => { e.stopPropagation() }}>
                             {defaultModalActive &&
                                 <div id='modal-default' className=" modal__content main-form">
                                     <button
