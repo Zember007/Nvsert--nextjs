@@ -195,7 +195,7 @@ const AppFooter = () => {
             item={{
               href: '#', label:
                 <>
-                  <span className="sendTextFooter xl:group-hover:text-[#2AABEE]">Telegram</span>
+                  <span className="sendTextFooter xl:text-inherit text-[#2AABEE] xl:group-hover:text-[#2AABEE]">Telegram</span>
 
 
                   <svg
@@ -230,7 +230,7 @@ const AppFooter = () => {
             item={{
               href: '#', label:
                 <>
-                  <span className="sendTextFooter group-hover:text-[#60D669]">WhatsApp</span>
+                  <span className="sendTextFooter xl:text-inherit text-[#60D669] xl:group-hover:text-[#60D669]">WhatsApp</span>
 
                   <svg
                     className="sendIconFooter"
