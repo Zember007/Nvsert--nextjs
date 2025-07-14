@@ -28,11 +28,11 @@
 
   &__white {
     @apply xl:px-[46px] xl:py-[15px] p-[40px];
-    &:not(.change-style ) {
+    &:not(.change-style) {
       @apply white-style;
     }
 
-    .change-style {
+    &.change-style {
       @media (min-width: 1240px) {
         @apply white-style;
       }
