@@ -81,12 +81,12 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ reset, countTrigger, 
                                         onClick={() => { setDefaultModalActive(false) }}
                                         className={`no-drag close !top-[25px] !right-[25px]`}>
                                         <div className="in">
-                                            <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
-                                            <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
+                                            <div className="close-button-block "></div>
+                                            <div className="close-button-block "></div>
                                         </div>
                                         <div className="out">
-                                            <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
-                                            <div className="close-button-block after:!bg-[#A4A4A4] before:!bg-[#A4A4A4]"></div>
+                                            <div className="close-button-block "></div>
+                                            <div className="close-button-block "></div>
                                         </div>
                                     </button>
                                     {
