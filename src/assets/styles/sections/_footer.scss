@@ -3,9 +3,8 @@
   margin: 0 2px;
   margin-bottom: 2px;
 
-  &__white {
+  .white-style {
     --color-item-menu: #000;
-
     border: 1px solid #93969d;
     border-radius: 4px;
     padding: 15px 46px;
@@ -16,7 +15,8 @@
     flex-grow: 1;
   }
 
-  &__dark {
+  .dark-style {
+    --color-item-menu: #FFF;
     color: #FFF;
     display: flex;
     align-items: center;
@@ -25,6 +25,24 @@
     padding: 15px 46px;
     backdrop-filter: blur(4px);
     background: linear-gradient(180deg, #93969d, #3e424b);
+  }
+
+  &__white {
+    &:not(.footer__navigations) {
+      @apply white-style;
+    }
+
+    .change-style {
+      @media (min-width: 1240px) {
+        @apply white-style;
+      }
+
+      @apply dark-style;
+    }
+  }
+
+  &__dark {
+    @apply dark-style;
   }
 
   .sendBtn {
