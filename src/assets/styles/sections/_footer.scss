@@ -28,7 +28,7 @@
 
   &__white {
     @apply xl:px-[46px] xl:py-[15px] p-[40px];
-    &:not(.footer__navigations) {
+    &:not(.change-style ) {
       @apply white-style;
     }
 
