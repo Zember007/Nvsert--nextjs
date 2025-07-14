@@ -88,6 +88,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
 
   .sendText {
     @apply block duration-100 transition-all ease-in xl:translate-x-[16px] translate-x-0;
+    line-height: .5;
   }
 
   &:hover {
