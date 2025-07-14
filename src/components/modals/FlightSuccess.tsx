@@ -44,7 +44,7 @@ const FlightSuccess = ({ close, small = false, text, closeIcon = true }: { close
             <div
                 className="flex flex-col items-center">
                 <div
-                    className="flex flex-col gap-[30px] text-white text-center items-center">
+                    className="flex flex-col gap-[30px] text-[#000] text-center items-center">
                     <div className="h-[23px]">
                         <p className="text-[32px] tracking-[-0.03em] linear-text">{text}</p>
                     </div>
