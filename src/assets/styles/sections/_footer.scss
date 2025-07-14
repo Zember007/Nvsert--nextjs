@@ -7,7 +7,6 @@
     --color-item-menu: #000;
     border: 1px solid #93969d;
     border-radius: 4px;
-    padding: 15px 46px;
     backdrop-filter: blur(4px);
     color: #000;
     display: flex;
@@ -16,18 +15,19 @@
   }
 
   .dark-style {
+    
     --color-item-menu: #FFF;
     color: #FFF;
     display: flex;
     align-items: center;
     flex-grow: 1;
     border-radius: 4px;
-    padding: 15px 46px;
     backdrop-filter: blur(4px);
     background: linear-gradient(180deg, #93969d, #3e424b);
   }
 
   &__white {
+    @apply xl:px-[46px] xl:py-[15px] p-[40px];
     &:not(.footer__navigations) {
       @apply white-style;
     }
@@ -42,7 +42,7 @@
   }
 
   &__dark {
-    @apply dark-style;
+    @apply dark-style xl:px-[46px] xl:py-[15px] p-[40px];
   }
 
   .sendBtn {
