@@ -154,11 +154,11 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
 
 
                         <span className="form__desc">
-                                {filterPrepositions('Нажимая на кнопку «Оформить заявку» вы соглашаетесь с ')}
-                                <Link href="/soglashenie/polzovatelskoe-soglashenie/" className="no-drag" target="_blank">
-                                    политикой конфиденциальности
-                                </Link>
-                            </span>
+                            {filterPrepositions('Нажимая на кнопку «Оформить заявку» вы соглашаетесь с ')}
+                            <Link href="/soglashenie/polzovatelskoe-soglashenie/" className="no-drag" target="_blank">
+                                политикой конфиденциальности
+                            </Link>
+                        </span>
                     </div>
                 )
                 }
