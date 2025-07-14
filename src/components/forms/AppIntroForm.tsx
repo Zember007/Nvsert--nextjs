@@ -99,7 +99,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
         <motion.div
             animate={controls}
             initial={{ x: 0 }}
-            className='flex flex-col gap-[20px] pb-[33px] pt-[38px] px-[40px] relative'>
+            className='flex flex-col gap-[42px] pb-[33px] pt-[38px] px-[40px] relative'>
 
             <div className={`${successMessageVisible && 'opacity-0'} flex flex-col gap-[44px]`}>
                 <div className="h-[23px] ">
@@ -133,7 +133,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
 
 
 
-                        <div ref={setWrapperRef} className="tariff-wrap relative mt-[24px]">
+                        <div ref={setWrapperRef} className="tariff-wrap relative">
                             <button
                                 type="submit"
                                 ref={setButtonRef}
@@ -153,12 +153,12 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
                         </div>
 
 
-                        <span className="text-[#000] text-[10px] s:text-[13px] ">
-                            {filterPrepositions('Нажимая на кнопку «Оформить заявку» вы соглашаетесь с ')}
-                            <Link href="/soglashenie/polzovatelskoe-soglashenie/" className="no-drag" target="_blank">
-                                политикой конфиденциальности
-                            </Link>
-                        </span>
+                        <span className="form__desc">
+                                {filterPrepositions('Нажимая на кнопку «Оформить заявку» вы соглашаетесь с ')}
+                                <Link href="/soglashenie/polzovatelskoe-soglashenie/" className="no-drag" target="_blank">
+                                    политикой конфиденциальности
+                                </Link>
+                            </span>
                     </div>
                 )
                 }
