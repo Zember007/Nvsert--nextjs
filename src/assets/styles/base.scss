@@ -123,6 +123,8 @@
 .close-button-block {
     position: relative;
     overflow: hidden;
+    width: 32px;
+    height: 16px;
 
     @media (max-width: $media-s) {
         width: 24px;
@@ -141,7 +143,7 @@
     width: 2px;
     height: 25px;
     transform-origin: bottom center;
-    background: #FFF;
+    background: #000;
     transition: all ease-out 280ms;
 }
 
@@ -378,7 +380,7 @@ body {
     height: 100%;
     position: fixed;
     width: 13px;
-    padding:2px;
+    padding: 2px;
 
     &::before {
         content: '';

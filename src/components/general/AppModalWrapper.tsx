@@ -67,14 +67,14 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ reset, countTrigger, 
     };
     return (
         <>
-            <div className={`modal__wrapper select-none ${defaultModalActive && 'active'}`}>
+            <div className={`modal__wrapper  select-none ${defaultModalActive && 'active'}`}>
                 <Draggable
                     position={position} onDrag={handleDrag}
                     bounds="parent" cancel=".no-drag" defaultPosition={{ x: 0, y: 0 }} nodeRef={nodeRef as React.RefObject<HTMLDivElement>}>
                     <div ref={nodeRef}>
                         <motion.div
                             animate={controls}
-                            className={`modal__box modal ${defaultModalActive && 'active'}`} onClick={(e) => { e.stopPropagation() }}>
+                            className={`modal__box mix-blend-difference  modal ${defaultModalActive && 'active'}`} onClick={(e) => { e.stopPropagation() }}>
                             {defaultModalActive &&
                                 <div id='modal-default' className=" modal__content main-form">
                                     <button
