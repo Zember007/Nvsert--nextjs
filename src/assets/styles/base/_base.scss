@@ -49,10 +49,7 @@ body {
   letter-spacing: $letter-spacing;
   color: $typography-primary;
 
-  @include media-m-max {
-    font-size: 14px;
-    line-height: 20px;
-  }
+ 
 
   &.overflow {
     overflow: hidden;
@@ -252,7 +249,6 @@ button,
         color: $white-color;
         font-family: $font-family;
         font-size: rem(18);
-        line-height: 1.22;
         text-shadow: 2px 4px 10px rgba(32, 32, 32, 0.3);
         text-align: right;
       }

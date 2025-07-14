@@ -396,11 +396,7 @@
     @content;
   }
 }
-@mixin media-m-max {
-  @media (max-width: 940px) {
-    @content;
-  }
-}
+
 @mixin media-m-min {
   @media (min-width: 941px) {
     @content;
