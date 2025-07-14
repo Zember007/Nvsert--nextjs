@@ -35,7 +35,7 @@
   }
 
   &__white {
-    @apply xl:px-[46px] xl:py-[15px] p-[40px];
+    @apply xl:px-[46px] xl:py-[15px] p-[41px];
 
     &:not(.change-style) {
       @apply white-style;
@@ -51,7 +51,7 @@
   }
 
   &__dark {
-    @apply dark-style xl:px-[46px] xl:py-[15px] p-[40px];
+    @apply dark-style xl:px-[46px] xl:py-[15px] p-[41px];
   }
 
   .sendBtn {
