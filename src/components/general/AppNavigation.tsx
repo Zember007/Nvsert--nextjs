@@ -98,7 +98,7 @@ const WrapperItem = ({ img, title, controls, link }: { link: string; img: string
                         animate={controls}>
                         <Image src={img} className="w-[43px] h-[60px]" width={43} height={60} alt="document" />
                     </motion.div>
-                    <p className={`${darkHeader ? 'text-[#000] group-hover:text-[#FFF]' : 'text-[#FFF]'} pr-[12px] leading-[1.2]  max-w-[170px]  text-[14px]`}>{filterPrepositions(title)}</p>
+                    <p className={`${darkHeader ? 'text-[#000] group-hover:text-[#FFF]' : 'text-[#FFF]'} pr-[12px] max-w-[170px]  text-[14px]`}>{filterPrepositions(title)}</p>
                 </Link>
             </div>
         </>

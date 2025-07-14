@@ -288,7 +288,7 @@ const SliderMain = () => {
                                         <h3 data-slide-count="step" className="count-heading ">01</h3>
                                     </div>
                                 </div>
-                                <span className='leading-[1] rubik'>/</span>
+                                <span>/</span>
                                 <div className="count-column ">
                                     <h3 data-slide-count="total" className="count-heading rubik">{slides.length}</h3>
                                 </div>

@@ -77,7 +77,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                             initial={{ y: 20, opacity: 0 }}
                             className="tariff-wrap m:w-[220px] w-[280px] m:mx-0 mx-auto " ref={setWrapperRef}>
                             <button
-                                ref={setButtonRef} className='btnIconAn bg-[#34446D] justify-center m:flex items-center px-[16px] py-[9px] relative overflow-hidden border border-solid border-[#34446D] tariff m:text-[20px] text-[18px] transition-all duration-300  gap-[6px] text-[#FFF] rounded-[4px] group  leading-[1] '>
+                                ref={setButtonRef} className='btnIconAn bg-[#34446D] justify-center m:flex items-center px-[16px] py-[9px] relative overflow-hidden border border-solid border-[#34446D] tariff m:text-[20px] text-[18px] transition-all duration-300  gap-[6px] text-[#FFF] rounded-[4px] group'>
 
                                 <span
                                     className="sendText"
