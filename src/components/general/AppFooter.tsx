@@ -128,7 +128,7 @@ const AppFooter = () => {
 
   return (
     <footer ref={ref} className="footer grid xl:grid-cols-2 gap-[2px]">
-      <div className="change-style xl:col-span-1 col-span-2 footer__white xl:!grid grid-cols-7 xl:justify-items-start">
+      <div className="footer__white change-style xl:row-span-1 row-span-2  xl:!grid grid-cols-7 xl:justify-items-start">
         <p className="xl:block hidden text-[18px] font-light col-start-1 col-end-3">© 2025 NVSERT</p>
 
         <div className="xl:-translate-x-[10px] flex gap-[10px] xl:flex-row flex-col col-start-4 col-end-7">
@@ -139,7 +139,7 @@ const AppFooter = () => {
         </div>
       </div>
 
-      <div className="footer__white col-span-1 gap-[10px] xl:flex-row flex-col">
+      <div className="footer__white row-span-1 gap-[10px] xl:flex-row flex-col">
         <button
           onClick={() => { openDefaultModal('introForm') }}
           className="xl:hidden  border border-solid text-[18px] flex items-center justify-between px-[15px] text-[#FFF]  border-[#93969D] h-[50px] w-[280px] mx-auto rounded-[4px] bg-[#34446D]"
