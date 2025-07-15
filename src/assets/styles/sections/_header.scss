@@ -345,11 +345,12 @@
 
 .services-menu-box {
 	--color: rgba(25, 24, 35, 0.4);
-
+	backdrop-filter: blur(15px);
 	position: fixed;
 	top: 0;
-	left: 2px;
-	right: 2px;
+	left: 0;
+	right: 0;
+	padding: 2px;
 	z-index: 20;
 	transform: translateY(-100%);
 	transition: all 0.1s ease;
@@ -363,10 +364,10 @@
 
 	&.active {
 		transform: translateY(0);
-		top: 130px;
+		top: 128px;
 
 		&.menu-headers {
-			top: 54px;
+			top: 52px;
 			transition-delay: 0s;
 		}
 
@@ -379,10 +380,8 @@
 .services-menu {
 
 	background-color: var(--color);
-	// background-image: url('../../images/150.webp');
-	// background-repeat: repeat;
 
-	backdrop-filter: blur(15px);
+	
 	border-radius: 4px;
 
 
