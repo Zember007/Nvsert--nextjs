@@ -35,96 +35,96 @@ const SliderMain = () => {
     const slider = useRef<HTMLDivElement>(null)
     const timeLine = useRef<any>(null)
 
-    useEffect(() => {
-        if (!whiteBgRef.current || !isVisible || !ref.current) return
+    // useEffect(() => {
+    //     if (!whiteBgRef.current || !isVisible || !ref.current) return
 
-        if (widthWindow && widthWindow >= 1240) {
-            let timeoutIdBg: NodeJS.Timeout | null = null;
-
-
-
-            timeLine.current = initSlider({
-                onChangeFunction: (index: number) => {
-
-                    setActive(index)
-
-                    if (slider.current && !slider.current.classList.contains('animate')) {
-                        slider.current.classList.add('animate')
-
-                        setTimeout(() => {
-                            if (!slider.current) return
-                            slider.current.classList.remove('animate')
-                        }, 400)
-                    }
-
-                },
-                onDragFunction: () => {
-
-                    whiteBgRef.current?.classList.remove('white')
-                    if (timeoutIdBg) {
-                        clearTimeout(timeoutIdBg)
-                    }
-
-                    timeoutIdBg = setTimeout(() => {
-                        whiteBgRef.current?.classList.add('white')
-                    }, 300)
-                },
-                mobile: false
-
-            })
-        } else {
-
-            whiteBgRef.current?.classList.remove('white')
+    //     if (widthWindow && widthWindow >= 1240) {
+    //         let timeoutIdBg: NodeJS.Timeout | null = null;
 
 
-            if (timeLine.current) timeLine.current.kill()
 
-            timeLine.current = initSlider({
-                onChangeFunction: (index: number) => {
+    //         timeLine.current = initSlider({
+    //             onChangeFunction: (index: number) => {
 
-                    setActive(index)
+    //                 setActive(index)
 
-                    if (slider.current && !slider.current.classList.contains('animate')) {
-                        slider.current.classList.add('animate')
+    //                 if (slider.current && !slider.current.classList.contains('animate')) {
+    //                     slider.current.classList.add('animate')
 
-                        setTimeout(() => {
-                            if (!slider.current) return
-                            slider.current.classList.remove('animate')
-                        }, 400)
-                    }
+    //                     setTimeout(() => {
+    //                         if (!slider.current) return
+    //                         slider.current.classList.remove('animate')
+    //                     }, 400)
+    //                 }
 
-                },
-                onDragFunction: null,
-                mobile: true
-            })
-        }
+    //             },
+    //             onDragFunction: () => {
 
+    //                 whiteBgRef.current?.classList.remove('white')
+    //                 if (timeoutIdBg) {
+    //                     clearTimeout(timeoutIdBg)
+    //                 }
 
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    if (timeLine.current) timeLine.current.next({ ease: "power3", duration: 0.725 })
+    //                 timeoutIdBg = setTimeout(() => {
+    //                     whiteBgRef.current?.classList.add('white')
+    //                 }, 300)
+    //             },
+    //             mobile: false
 
-                    if (ref.current) {
-                        observer.unobserve(ref.current);
-                    }
-                }
-            },
-            { threshold: 0.2 }
-        );
+    //         })
+    //     } else {
 
-        if (ref.current) {
-            observer.observe(ref.current);
-        }
+    //         whiteBgRef.current?.classList.remove('white')
 
 
-        return () => {
-            if (ref.current) {
-                observer.unobserve(ref.current);
-            }
+    //         if (timeLine.current) timeLine.current.kill()
 
-        };
-    }, [whiteBgRef, ref, isVisible, widthWindow])
+    //         timeLine.current = initSlider({
+    //             onChangeFunction: (index: number) => {
+
+    //                 setActive(index)
+
+    //                 if (slider.current && !slider.current.classList.contains('animate')) {
+    //                     slider.current.classList.add('animate')
+
+    //                     setTimeout(() => {
+    //                         if (!slider.current) return
+    //                         slider.current.classList.remove('animate')
+    //                     }, 400)
+    //                 }
+
+    //             },
+    //             onDragFunction: null,
+    //             mobile: true
+    //         })
+    //     }
+
+
+    //     const observer = new IntersectionObserver(
+    //         ([entry]) => {
+    //             if (entry.isIntersecting) {
+    //                 if (timeLine.current) timeLine.current.next({ ease: "power3", duration: 0.725 })
+
+    //                 if (ref.current) {
+    //                     observer.unobserve(ref.current);
+    //                 }
+    //             }
+    //         },
+    //         { threshold: 0.2 }
+    //     );
+
+    //     if (ref.current) {
+    //         observer.observe(ref.current);
+    //     }
+
+
+    //     return () => {
+    //         if (ref.current) {
+    //             observer.unobserve(ref.current);
+    //         }
+
+    //     };
+    // }, [whiteBgRef, ref, isVisible, widthWindow])
 
     const { setButtonRef, setWrapperRef } = useButton()
 
@@ -256,11 +256,18 @@ const SliderMain = () => {
                                         aria-label="previous slide" data-slider="button-prev"
                                         className="tariff item group">
 
-                                        <svg                                    
-                                        className='group-hover:*:fill-[#FFF] *:transition-all *:duration-300'
-                                        width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M10 21.957L2 13.404L2.00006 9.60268L10 2" stroke="white" stroke-width="2.66667" stroke-linecap="square" />
-                                        </svg>
+                                        <div className="min-h-[24px] transition-all duration-[.13s] translate-y-full group-hover:-translate-y-full">
+                                            <svg
+                                                width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10 21.957L2 13.404L2.00006 9.60268L10 2" stroke="white" stroke-width="2.66667" stroke-linecap="square" />
+                                            </svg>
+                                        </div>
+                                        <div className="min-h-[24px] transition-all duration-[.13s] translate-y-full group-hover:-translate-y-full">
+                                            <svg
+                                                width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10 21.957L2 13.404L2.00006 9.60268L10 2" stroke="white" stroke-width="2.66667" stroke-linecap="square" />
+                                            </svg>
+                                        </div>
 
                                     </button>
                                 </div>
@@ -275,11 +282,19 @@ const SliderMain = () => {
 
 
 
-                                        <svg
-                                            className='group-hover:*:fill-[#FFF] *:transition-all *:duration-300'
-                                            width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M2 21.957L10 13.404L9.99994 9.60268L2 2" stroke="white" stroke-width="2.66667" stroke-linecap="square" />
-                                        </svg>
+
+                                        <div className="min-h-[24px] transition-all duration-[.13s] translate-y-full group-hover:-translate-y-full">
+                                            <svg
+                                                width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M2 21.957L10 13.404L9.99994 9.60268L2 2" stroke="white" stroke-width="2.66667" stroke-linecap="square" />
+                                            </svg>
+                                        </div>
+                                        <div className="min-h-[24px] transition-all duration-[.13s] translate-y-full group-hover:-translate-y-full">
+                                            <svg
+                                                width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M2 21.957L10 13.404L9.99994 9.60268L2 2" stroke="white" stroke-width="2.66667" stroke-linecap="square" />
+                                            </svg>
+                                        </div>
                                     </button>
                                 </div>
                             </div>

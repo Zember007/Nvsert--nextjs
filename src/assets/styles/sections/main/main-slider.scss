@@ -185,7 +185,7 @@
     @apply justify-between items-end w-full relative z-[10] xl:flex hidden;
 
     .item {
-      @apply hover:bg-[#34446D] h-[50px] rounded-[4px] border-[#34446D] border border-solid flex items-center justify-center
+      @apply bg-[#34446D] h-[50px] rounded-[4px] border-[#34446D] border border-solid flex flex-col gap-[26px] items-center justify-center
     }
   }
 
