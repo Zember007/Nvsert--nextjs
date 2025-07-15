@@ -101,7 +101,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
             initial={{ x: 0 }}
             className='flex flex-col gap-[42px] p-[20px] s:p-[40px] relative'>
 
-            <div className={`${successMessageVisible && 'opacity-0'} flex flex-col gap-[44px]`}>
+            <div className={`${successMessageVisible && 'opacity-0'} flex flex-col gap-[20px]`}>
                 <div className="h-[23px] ">
                     <span className={`s:pl-[10px] font-light text-[#000] text-[32px] tracking-[-0.03em]`}>Заказать звонок</span>
                 </div>
@@ -133,7 +133,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
 
 
 
-                        <div ref={setWrapperRef} className="tariff-wrap relative">
+                        <div ref={setWrapperRef} className="tariff-wrap relative mt-[19px]">
                             <button
                                 type="submit"
                                 ref={setButtonRef}
