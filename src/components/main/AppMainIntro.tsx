@@ -39,7 +39,7 @@ const AppMainIntro = () => {
 
                 <div className="wrapper">
                     <div className='main-banner__content'>
-                        <div className="flex flex-col">
+                        <div className="flex flex-col gap-[50px]">
                             <h1 className="main-banner__title">{filterPrepositions(t('mainIntro.title'))}</h1>
                             <div className="h-[334px]"></div>
                         </div>
