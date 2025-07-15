@@ -45,7 +45,11 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
           <div className="px-[15px] flex flex-col grow">
             {items.map((item, index) =>
               <div
-                onClick={() => { setActiveBlock(activeBlock === index ? null : index) }}
+                onClick={() => { 
+                  const isMobile = window.matchMedia("(pointer: coarse)").matches;
+                  if(!isMobile) return
+                  setActiveBlock(activeBlock === index ? null : index) 
+                }}
                 key={index} className={`group/stroke flex flex-col ${index == items.length - 1 ? 'grow' : 'pb-[20px]'}`}>
                 <div className="flex justify-between gap-[20px]">
                   <p className='text-[18px] transition-all duration-100'>{item.subtitle.split(' ').length === 2 ?
