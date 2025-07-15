@@ -3,14 +3,12 @@
   font-family: $font-family-2;
   font-weight: 500;
   font-style: normal;
-  line-height: 48px;
   text-decoration: none;
 }
 @mixin header-h-2 {
   font-size: 32px;
   font-family: $font-family-2;
   font-style: normal;
-  line-height: 40px;
   text-decoration: none;
 }
 @mixin header-h-3 {
