@@ -35,96 +35,96 @@ const SliderMain = () => {
     const slider = useRef<HTMLDivElement>(null)
     const timeLine = useRef<any>(null)
 
-    // useEffect(() => {
-    //     if (!whiteBgRef.current || !isVisible || !ref.current) return
+    useEffect(() => {
+        if (!whiteBgRef.current || !isVisible || !ref.current) return
 
-    //     if (widthWindow && widthWindow >= 1240) {
-    //         let timeoutIdBg: NodeJS.Timeout | null = null;
-
-
-
-    //         timeLine.current = initSlider({
-    //             onChangeFunction: (index: number) => {
-
-    //                 setActive(index)
-
-    //                 if (slider.current && !slider.current.classList.contains('animate')) {
-    //                     slider.current.classList.add('animate')
-
-    //                     setTimeout(() => {
-    //                         if (!slider.current) return
-    //                         slider.current.classList.remove('animate')
-    //                     }, 400)
-    //                 }
-
-    //             },
-    //             onDragFunction: () => {
-
-    //                 whiteBgRef.current?.classList.remove('white')
-    //                 if (timeoutIdBg) {
-    //                     clearTimeout(timeoutIdBg)
-    //                 }
-
-    //                 timeoutIdBg = setTimeout(() => {
-    //                     whiteBgRef.current?.classList.add('white')
-    //                 }, 300)
-    //             },
-    //             mobile: false
-
-    //         })
-    //     } else {
-
-    //         whiteBgRef.current?.classList.remove('white')
+        if (widthWindow && widthWindow >= 1240) {
+            let timeoutIdBg: NodeJS.Timeout | null = null;
 
 
-    //         if (timeLine.current) timeLine.current.kill()
 
-    //         timeLine.current = initSlider({
-    //             onChangeFunction: (index: number) => {
+            timeLine.current = initSlider({
+                onChangeFunction: (index: number) => {
 
-    //                 setActive(index)
+                    setActive(index)
 
-    //                 if (slider.current && !slider.current.classList.contains('animate')) {
-    //                     slider.current.classList.add('animate')
+                    if (slider.current && !slider.current.classList.contains('animate')) {
+                        slider.current.classList.add('animate')
 
-    //                     setTimeout(() => {
-    //                         if (!slider.current) return
-    //                         slider.current.classList.remove('animate')
-    //                     }, 400)
-    //                 }
+                        setTimeout(() => {
+                            if (!slider.current) return
+                            slider.current.classList.remove('animate')
+                        }, 400)
+                    }
 
-    //             },
-    //             onDragFunction: null,
-    //             mobile: true
-    //         })
-    //     }
+                },
+                onDragFunction: () => {
 
+                    whiteBgRef.current?.classList.remove('white')
+                    if (timeoutIdBg) {
+                        clearTimeout(timeoutIdBg)
+                    }
 
-    //     const observer = new IntersectionObserver(
-    //         ([entry]) => {
-    //             if (entry.isIntersecting) {
-    //                 if (timeLine.current) timeLine.current.next({ ease: "power3", duration: 0.725 })
+                    timeoutIdBg = setTimeout(() => {
+                        whiteBgRef.current?.classList.add('white')
+                    }, 300)
+                },
+                mobile: false
 
-    //                 if (ref.current) {
-    //                     observer.unobserve(ref.current);
-    //                 }
-    //             }
-    //         },
-    //         { threshold: 0.2 }
-    //     );
+            })
+        } else {
 
-    //     if (ref.current) {
-    //         observer.observe(ref.current);
-    //     }
+            whiteBgRef.current?.classList.remove('white')
 
 
-    //     return () => {
-    //         if (ref.current) {
-    //             observer.unobserve(ref.current);
-    //         }
+            if (timeLine.current) timeLine.current.kill()
 
-    //     };
-    // }, [whiteBgRef, ref, isVisible, widthWindow])
+            timeLine.current = initSlider({
+                onChangeFunction: (index: number) => {
+
+                    setActive(index)
+
+                    if (slider.current && !slider.current.classList.contains('animate')) {
+                        slider.current.classList.add('animate')
+
+                        setTimeout(() => {
+                            if (!slider.current) return
+                            slider.current.classList.remove('animate')
+                        }, 400)
+                    }
+
+                },
+                onDragFunction: null,
+                mobile: true
+            })
+        }
+
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    if (timeLine.current) timeLine.current.next({ ease: "power3", duration: 0.725 })
+
+                    if (ref.current) {
+                        observer.unobserve(ref.current);
+                    }
+                }
+            },
+            { threshold: 0.2 }
+        );
+
+        if (ref.current) {
+            observer.observe(ref.current);
+        }
+
+
+        return () => {
+            if (ref.current) {
+                observer.unobserve(ref.current);
+            }
+
+        };
+    }, [whiteBgRef, ref, isVisible, widthWindow])
 
     const { setButtonRef, setWrapperRef } = useButton()
 

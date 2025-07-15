@@ -1,7 +1,7 @@
 'use client'
 import dynamic from 'next/dynamic';
 import '@/assets/styles/main.scss'
-import AppMainIntro from '../components/main/AppMainSlider'
+import AppMainIntro from '../components/main/AppMainIntro'
 import AppMainDocuments from '../components/main/AppMainDocuments'
 import LazyLoadSection from '@/hook/LazyLoadSection';
 
@@ -34,7 +34,7 @@ export default function Home() {
     <div className="main text-[#000] overflow-hidden select-none ">
        <AppMainIntro />
 
-      {/* <AppMainDocuments />
+      <AppMainDocuments />
 
       <DynamicAppMainSkills />
 
@@ -44,7 +44,7 @@ export default function Home() {
 
       <DynamicAppMainFeedback />
 
-      <DynamicAppMainQuestions />  */}
+      <DynamicAppMainQuestions /> 
     </div>
   );
 }
