@@ -299,14 +299,14 @@ const AppFooter = () => {
             item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: 'Обработка персональных данных' }} isActive={false} />
         </div>
       </div>
-
-      <div className="xl:!hidden footer__white flex-col gap-[15px] text-[14px]">
+  
+      <div className="xl:!hidden footer__white flex-col gap-[5.5px] !p-[18px] h-[96px] text-[14px]">
         <span>«ЦЕНТР СТАНДАРТИЗАЦИИ»</span>
         <span>ИНН 6027189146</span>
         <span className="font-light">© 2025 NVSERT</span>
       </div>
 
-      <div className="footer__dark gap-[16px]">
+      <div className="footer__dark gap-[16px] xl:h-auto h-[96px]">
         <Image src={AudioLogo} alt="audiosector" />
         <div className="pl-[16px] border-l border-[#FFF] border-solid flex flex-col gap-[4px]">
           <div className="xl:h-[23px] h-[36px] overflow-hidden text-[#FFF]">
