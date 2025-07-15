@@ -39,12 +39,7 @@ export default function Home() {
       <DynamicAppMainSkills />
 
       <DynamicAppMainSlider />
-
-      <DynamicAppMainSafeguards />
-
-      <DynamicAppMainFeedback />
-
-      <DynamicAppMainQuestions /> 
+z
     </div>
   );
 }
