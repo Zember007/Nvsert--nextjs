@@ -36,9 +36,9 @@ export default function FlyingPlane() {
                             <line y1="-0.5" x2="98.549" y2="-0.5" transform="matrix(0.859972 -0.510342 0.510035 0.860153 1.49542 52.1108)" stroke="url(#paint0_linear_2430_1018)" />
                             <defs>
                                 <linearGradient id="paint0_linear_2430_1018" x1="0" y1="0.5" x2="98.549" y2="0.5" gradientUnits="userSpaceOnUse">
-                                    <stop stopColor="white" stop-opacity="0" />
-                                    <stop offset="0.495" stopColor="white" />
-                                    <stop offset="1" stopColor="white" stop-opacity="0" />
+                                    <stop stopColor="#00000080" stop-opacity="0" />
+                                    <stop offset="0.495" stopColor="#00000080" />
+                                    <stop offset="1" stopColor="#00000080" stop-opacity="0" />
                                 </linearGradient>
                             </defs>
                         </svg>
@@ -57,9 +57,9 @@ export default function FlyingPlane() {
                             <line y1="-0.5" x2="98.549" y2="-0.5" transform="matrix(0.859972 -0.510342 0.510035 0.860153 1.49542 52.1108)" stroke="url(#paint0_linear_2430_1018)" />
                             <defs>
                                 <linearGradient id="paint0_linear_2430_1018" x1="0" y1="0.5" x2="98.549" y2="0.5" gradientUnits="userSpaceOnUse">
-                                    <stop stopColor="white" stop-opacity="0" />
-                                    <stop offset="0.495" stopColor="white" />
-                                    <stop offset="1" stopColor="white" stop-opacity="0" />
+                                    <stop stopColor="#00000080" stop-opacity="0" />
+                                    <stop offset="0.495" stopColor="#00000080" />
+                                    <stop offset="1" stopColor="#00000080" stop-opacity="0" />
                                 </linearGradient>
                             </defs>
                         </svg>
@@ -78,9 +78,9 @@ export default function FlyingPlane() {
                             <line y1="-0.5" x2="98.549" y2="-0.5" transform="matrix(0.859972 -0.510342 0.510035 0.860153 1.49542 52.1108)" stroke="url(#paint0_linear_2430_1018)" />
                             <defs>
                                 <linearGradient id="paint0_linear_2430_1018" x1="0" y1="0.5" x2="98.549" y2="0.5" gradientUnits="userSpaceOnUse">
-                                    <stop stopColor="white" stop-opacity="0" />
-                                    <stop offset="0.495" stopColor="white" />
-                                    <stop offset="1" stopColor="white" stop-opacity="0" />
+                                    <stop stopColor="#00000080" stop-opacity="0" />
+                                    <stop offset="0.495" stopColor="#00000080" />
+                                    <stop offset="1" stopColor="#00000080" stop-opacity="0" />
                                 </linearGradient>
                             </defs>
                         </svg>
@@ -99,9 +99,9 @@ export default function FlyingPlane() {
                             <line y1="-0.5" x2="98.549" y2="-0.5" transform="matrix(0.859972 -0.510342 0.510035 0.860153 1.49542 52.1108)" stroke="url(#paint0_linear_2430_1018)" />
                             <defs>
                                 <linearGradient id="paint0_linear_2430_1018" x1="0" y1="0.5" x2="98.549" y2="0.5" gradientUnits="userSpaceOnUse">
-                                    <stop stopColor="white" stop-opacity="0" />
-                                    <stop offset="0.495" stopColor="white" />
-                                    <stop offset="1" stopColor="white" stop-opacity="0" />
+                                    <stop stopColor="#00000080" stop-opacity="0" />
+                                    <stop offset="0.495" stopColor="#00000080" />
+                                    <stop offset="1" stopColor="#00000080" stop-opacity="0" />
                                 </linearGradient>
                             </defs>
                         </svg>
@@ -120,9 +120,9 @@ export default function FlyingPlane() {
                             <line y1="-0.5" x2="98.549" y2="-0.5" transform="matrix(0.859972 -0.510342 0.510035 0.860153 1.49542 52.1108)" stroke="url(#paint0_linear_2430_1018)" />
                             <defs>
                                 <linearGradient id="paint0_linear_2430_1018" x1="0" y1="0.5" x2="98.549" y2="0.5" gradientUnits="userSpaceOnUse">
-                                    <stop stopColor="white" stop-opacity="0" />
-                                    <stop offset="0.495" stopColor="white" />
-                                    <stop offset="1" stopColor="white" stop-opacity="0" />
+                                    <stop stopColor="#00000080" stop-opacity="0" />
+                                    <stop offset="0.495" stopColor="#00000080" />
+                                    <stop offset="1" stopColor="#00000080" stop-opacity="0" />
                                 </linearGradient>
                             </defs>
                         </svg>
@@ -141,9 +141,9 @@ export default function FlyingPlane() {
                             <line y1="-0.5" x2="98.549" y2="-0.5" transform="matrix(0.859972 -0.510342 0.510035 0.860153 1.49542 52.1108)" stroke="url(#paint0_linear_2430_1018)" />
                             <defs>
                                 <linearGradient id="paint0_linear_2430_1018" x1="0" y1="0.5" x2="98.549" y2="0.5" gradientUnits="userSpaceOnUse">
-                                    <stop stopColor="white" stop-opacity="0" />
-                                    <stop offset="0.495" stopColor="white" />
-                                    <stop offset="1" stopColor="white" stop-opacity="0" />
+                                    <stop stopColor="#00000080" stop-opacity="0" />
+                                    <stop offset="0.495" stopColor="#00000080" />
+                                    <stop offset="1" stopColor="#00000080" stop-opacity="0" />
                                 </linearGradient>
                             </defs>
                         </svg>
@@ -162,9 +162,9 @@ export default function FlyingPlane() {
                             <line y1="-0.5" x2="98.549" y2="-0.5" transform="matrix(0.859972 -0.510342 0.510035 0.860153 1.49542 52.1108)" stroke="url(#paint0_linear_2430_1018)" />
                             <defs>
                                 <linearGradient id="paint0_linear_2430_1018" x1="0" y1="0.5" x2="98.549" y2="0.5" gradientUnits="userSpaceOnUse">
-                                    <stop stopColor="white" stop-opacity="0" />
-                                    <stop offset="0.495" stopColor="white" />
-                                    <stop offset="1" stopColor="white" stop-opacity="0" />
+                                    <stop stopColor="#00000080" stop-opacity="0" />
+                                    <stop offset="0.495" stopColor="#00000080" />
+                                    <stop offset="1" stopColor="#00000080" stop-opacity="0" />
                                 </linearGradient>
                             </defs>
                         </svg>
