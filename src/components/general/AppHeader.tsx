@@ -171,7 +171,7 @@ const AppHeader = () => {
                       {t('navigation.services')}
               
                       <svg
-                        className={`transition-all duration-300 ${!servicesMenuActive ? ' rotate-[180deg]' : ''}`}
+                        className={`transition-all duration-300 ${servicesMenuActive ? ' rotate-[180deg]' : ''}`}
                         width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1.29564 0.25L6.76422 5.5135L5.75422 6.48562L0.285645 1.22213L1.29564 0.25ZM10.5438 0.25L11.5538 1.22213L8.54084 4.02093L7.53084 3.04812L10.5438 0.25Z" fill="white" />
                       </svg>
