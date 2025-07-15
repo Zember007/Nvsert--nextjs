@@ -107,7 +107,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
 }
 
 .section {
-  @apply py-[40px] s:py-[75px] relative flex flex-col gap-[20px] s:gap-[40px];
+  @apply py-[40px] s:py-[75px] relative flex flex-col gap-[20px] s:gap-[50px];
 
 
   &__title {
