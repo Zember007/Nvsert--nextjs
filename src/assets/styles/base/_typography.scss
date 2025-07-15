@@ -39,7 +39,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
 	@include header-h-1;
-	line-height: 0.74;
+	margin: -16px 0;
 
 	@media (max-width: $media-l) {
 		font-size: 36px;
@@ -54,7 +54,7 @@ h1 {
 
 h2 {
 	@include header-h-2;
-	line-height: 0.74;
+	margin: -16px 0;
 
 	@media (max-width: $media-l) {
 		font-size: 28px;		
