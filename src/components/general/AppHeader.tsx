@@ -69,15 +69,33 @@ const AppHeader = () => {
     document.body.style.overflow = '';
     makeDefaultHeader();
   }
+  let scrollY = 0;
 
+  function lockScroll() {
+    scrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+  }
+
+  function unlockScroll() {
+    scrollY = document.body.style.top ? parseInt(document.body.style.top) * -1 : 0;
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    window.scrollTo(0, scrollY);
+  }
   function burgerHandler() {
     if (!burgerMenuActive) {
       setBurgerMenuActive(true);
-      document.body.style.overflow = 'hidden';
+      // document.body.style.overflow = 'hidden';
+      lockScroll()
       makeTransparentHeader();
     } else {
       setBurgerMenuActive(false);
-      document.body.style.overflow = '';
+      unlockScroll()
       dispatch(disableOverflow());
       makeDefaultHeader();
     }
@@ -169,7 +187,7 @@ const AppHeader = () => {
                     href: '#',
                     label: <span className={`gap-[4px] flex items-center `}>
                       {t('navigation.services')}
-              
+
                       <svg
                         className={`transition-all duration-300 ${servicesMenuActive ? ' rotate-[180deg]' : ''}`}
                         width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
