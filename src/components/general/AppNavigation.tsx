@@ -94,11 +94,11 @@ const WrapperItem = ({ img, title, controls, link }: { link: string; img: string
                 <Link ref={setButtonRef} href={link} className={`tariff overflow-hidden not-backdrop flex gap-[10px] group  rounded-[4px] items-center hover:bg-[#34446d33] border-solid hover:border-[#fff] border border-[transparent]`}>
                     <motion.div
                         initial={{ y: 40, opacity: 0 }}
-                        className=" overflow-hidden group-hover:rounded-[2px] min-w-[43px]"
+                        className=" overflow-hidden group-hover:rounded-0 rounded-[4px] min-w-[43px]"
                         animate={controls}>
                         <Image src={img} className="w-[43px] h-[60px]" width={43} height={60} alt="document" />
                     </motion.div>
-                    <p className={`${darkHeader ? 'text-[#000] group-hover:text-[#FFF]' : 'text-[#FFF]'} pr-[12px] max-w-[170px]  text-[14px]`}>{filterPrepositions(title)}</p>
+                    <p className={`${darkHeader ? 'text-[#000] group-hover:text-[#FFF]' : 'text-[#FFF]'} pr-[12px] max-w-[170px]  text-[16px]`}>{filterPrepositions(title)}</p>
                 </Link>
             </div>
         </>
