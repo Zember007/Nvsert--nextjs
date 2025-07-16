@@ -344,8 +344,7 @@
 }
 
 .services-menu-box {
-	--color: rgba(25, 24, 35, 0.4);
-	backdrop-filter: blur(15px);
+	backdrop-filter: blur(25px);
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -356,6 +355,7 @@
 	transition: all 0.1s ease;
 
 	&.menu-headers {
+		backdrop-filter: blur(20px);
 		z-index: 21;
 		transition-delay: 0.1s;
 
@@ -379,7 +379,7 @@
 
 .services-menu {
 
-	background-color: var(--color);
+	background: linear-gradient(90deg, #9B9B9E 0%, #646467 100%);
 
 	
 	border-radius: 4px;
