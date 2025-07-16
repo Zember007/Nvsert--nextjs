@@ -100,7 +100,7 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
           {
             folder ?
               <>
-                {img && <Image alt="folder" className={`transition-all max-w-[none] duration-300 rounded-[6px] h-full`} src={img} />}
+                {img && <Image alt="folder" className={`transition-all object-cover duration-300 rounded-[6px] h-full`} src={img} />}
               </>
               :
               <>
