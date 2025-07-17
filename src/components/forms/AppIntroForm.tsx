@@ -132,7 +132,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
 
 
 
-                        <div ref={setWrapperRef} className="tariff-wrap relative mt-[19px]">
+                        <div ref={setWrapperRef} className="tariff-wrap relative mt-[20px]">
                             <button
                                 type="submit"
                                 ref={setButtonRef}
