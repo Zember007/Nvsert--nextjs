@@ -142,7 +142,7 @@ const AppFooter = () => {
       <div className="footer__white  gap-[10px] xl:flex-row flex-col">
         <button
           onClick={() => { openDefaultModal('introForm') }}
-          className="xl:hidden  border border-solid w-full text-[18px] flex items-center justify-between px-[15px] text-[#FFF]  border-[#93969D] h-[50px] max-w-[280px] mx-auto rounded-[4px] bg-[#34446D]"
+          className="xl:hidden  border border-solid w-full text-[18px] flex items-center justify-between px-[15px] text-[#FFF]  border-[#93969D] h-[50px]  mx-auto rounded-[4px] bg-[#34446D]"
         >
           <span>Заказать звонок</span>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -167,7 +167,7 @@ const AppFooter = () => {
               onClick={() => {
                 navigator.clipboard.writeText(email.value)
               }}
-              className="sendBtn max-xl:!border-[#93969D] gap-[8px]  w-full xl:!h-[35px] max-w-[280px] xl:mx-0 mx-auto !h-[50px] xl:w-auto"
+              className="sendBtn max-xl:!border-[#93969D] gap-[8px]  w-full xl:!h-[35px]  xl:mx-0 mx-auto !h-[50px] xl:w-auto"
               item={{
                 href: '#', label:
                   <>
@@ -191,7 +191,7 @@ const AppFooter = () => {
           timer={3000}
         >
           <AppMenuItem
-            className="sendBtn max-xl:!border-[#93969D] w-full  xl:!h-[35px] xl:w-auto max-w-[280px] xl:mx-0 mx-auto  !h-[50px]  group"
+            className="sendBtn max-xl:!border-[#93969D] w-full  xl:!h-[35px] xl:w-auto  xl:mx-0 mx-auto  !h-[50px]  group"
             item={{
               href: '#', label:
                 <>
@@ -226,7 +226,7 @@ const AppFooter = () => {
           timer={3000}
         >
           <AppMenuItem
-            className="sendBtn max-xl:!border-[#93969D] w-full  xl:!h-[35px] xl:w-auto max-w-[280px] xl:mx-0 mx-auto !h-[50px]  group"
+            className="sendBtn max-xl:!border-[#93969D] w-full  xl:!h-[35px] xl:w-auto  xl:mx-0 mx-auto !h-[50px]  group"
             item={{
               href: '#', label:
                 <>
