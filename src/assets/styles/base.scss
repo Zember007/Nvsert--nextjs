@@ -41,6 +41,8 @@
         width: 448px;
     }
 
+    width: calc(100vw - 30px);
+
     &.loaded {
 
         &::before,
@@ -246,19 +248,20 @@
     &::before {
 
         @media (min-width:1240px) {
+        font-size: 20px;
+        top: 50%;
             transform: translate(0, -368px);
         }
+        font-size: 18px;
 
-        transform: translate(0, -26vh);
-        width: 100vw;
+        transform: translate(0, 50px);
+        width: calc(100vw - 30px);
         justify-content: center;
         content: attr(data-before);
         position: fixed;
-        top: 50%;
         left: 0;
         text-align: center;
         right: 0;
-        font-size: 20px;
         font-weight: 700;
         white-space: nowrap;
         display: flex;
