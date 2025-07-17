@@ -32,6 +32,8 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
 
     const configs = useMemo(() => {
         let parsedConf: any = {};
+        console.log(configsPure);
+        
         configsPure?.forEach((item) => {
             parsedConf[item.key] = item.value;
         });
