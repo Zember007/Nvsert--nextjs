@@ -36,7 +36,10 @@
 
 .PhotoView__Photo__attr {
     position: relative;
-    width: 448px;
+
+    @media (min-width:1240px) {
+        width: 448px;
+    }
 
     &.loaded {
 
@@ -76,11 +79,22 @@
 
 .PhotoView-Slider__BannerRight {
 
-    position: fixed !important;
 
-    top: 50%;
-    right: 50%;
-    transform: translate(400px, -318px);
+
+    @media (min-width:1240px) {
+        position: fixed !important;
+
+        top: 50%;
+        right: 50%;
+        transform: translate(400px, -318px);
+    }
+
+    @media (max-width:1239px) {
+        .close {
+            right: 20px;
+            top: 20px;
+        }
+    }
 
 
 
@@ -230,11 +244,17 @@
     opacity: 1 !important;
 
     &::before {
+
+        @media (min-width:1240px) {
+            transform: translate(0, -368px);
+        }
+
+        transform: translate(0, -26vh);
+        width: 100vw;
         justify-content: center;
         content: attr(data-before);
         position: fixed;
         top: 50%;
-        transform: translate(0, -368px);
         left: 0;
         text-align: center;
         right: 0;
@@ -351,7 +371,7 @@
         transition: all 0.1s ease;
     }
 
- 
+
 
     transform: translateZ(0);
 }

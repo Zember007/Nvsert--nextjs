@@ -35,11 +35,13 @@ export default function getSuitableImageSize(naturalWidth: number, naturalHeight
     width = autoWidth;
   }
 
-  // Ограничение ширины до 290px
-  // if (width > maxWidth) {
+   if (width > maxWidth) {
     width = maxWidth;
     height = (naturalHeight / naturalWidth) * maxWidth; // Сохраняем пропорции
-  // }
+   } else {
+    width -= 30
+    height = (naturalHeight / naturalWidth) * width
+   }
 
   return {
     width,
