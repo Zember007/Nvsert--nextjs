@@ -282,7 +282,7 @@ const AppFooter = () => {
         </PromtModal>
       </div>
 
-      <div className="footer__dark xl:!grid grid-cols-7 xl:justify-items-start">
+      <div className="footer__dark bottom-top xl:!grid grid-cols-7 xl:justify-items-start">
         <div className="xl:flex hidden text-[16px] items-start  flex-col gap-[18px] ">
           <span>{t("footer.inn")}</span>
           <span>{t("footer.company")}</span>
