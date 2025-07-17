@@ -351,9 +351,7 @@
         transition: all 0.1s ease;
     }
 
-    &.no-transitions {
-        transition: transform 0.1s ease, shadow 0.1s ease;
-    }
+ 
 
     transform: translateZ(0);
 }
