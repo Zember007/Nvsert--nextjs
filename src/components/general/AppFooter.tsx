@@ -245,7 +245,7 @@ const AppFooter = () => {
             }} isActive={false} />
         </PromtModal>
         <PromtModal
-          classNameBox="!w-auto xl:!relative !absolute xl:bottom-0 xl:right-0 bottom-[-62px] right-[40px]"
+          classNameBox="!w-auto xl:!relative !absolute xl:bottom-0 xl:right-0 bottom-[-62px] right-1/2 xl:translate-x-0 translate-x-[140px]"
           className='!py-[20px]'
           content={
             <div className="flex flex-col gap-[20px]">
@@ -306,7 +306,7 @@ const AppFooter = () => {
         <span className="font-light">© 2025 NVSERT</span>
       </div>
 
-      <div className="footer__dark gap-[16px] xl:h-auto h-[96px]">
+      <div className="footer__dark xl:justify-start justify-center gap-[16px] xl:h-auto h-[96px]">
         <Image src={AudioLogo} alt="audiosector" />
         <div className="pl-[16px] border-l border-[#FFF] border-solid flex flex-col gap-[4px]">
           <div className="xl:h-[23px] h-[36px] overflow-hidden text-[#FFF]">
