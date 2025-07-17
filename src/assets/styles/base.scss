@@ -248,10 +248,12 @@
     &::before {
 
         @media (min-width:1240px) {
-        font-size: 20px;
-        top: 50%;
+            font-size: 20px;
+            top: 50%;
             transform: translate(0, -368px);
+            white-space: nowrap;
         }
+
         font-size: 18px;
 
         transform: translate(0, 50px);
@@ -263,7 +265,6 @@
         text-align: center;
         right: 0;
         font-weight: 700;
-        white-space: nowrap;
         display: flex;
         align-items: end;
     }
