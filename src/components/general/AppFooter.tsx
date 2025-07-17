@@ -131,7 +131,7 @@ const AppFooter = () => {
       <div className="footer__white change-style xl:row-start-auto row-start-2 xl:!grid grid-cols-7 xl:justify-items-start">
         <p className="xl:block hidden text-[18px] font-light col-start-1 col-end-3">© 2025 NVSERT</p>
 
-        <div className="xl:-translate-x-[10px] flex gap-[10px] items-start xl:flex-row flex-col col-start-4 col-end-7">
+        <div className="xl:max-w-full w-full xl:mx-0 mx-auto max-w-[280px] xl:-translate-x-[10px] flex gap-[10px] items-start xl:flex-row flex-col col-start-4 col-end-7">
           {menuItems.map((item, i) => (
             <AppMenuItem key={i} item={item} isActive={false} />
           ))}
@@ -142,7 +142,7 @@ const AppFooter = () => {
       <div className="footer__white  gap-[10px] xl:flex-row flex-col">
         <button
           onClick={() => { openDefaultModal('introForm') }}
-          className="xl:hidden  border border-solid w-full text-[18px] flex items-center justify-between px-[15px] text-[#FFF]  border-[#93969D] h-[50px]  mx-auto rounded-[4px] bg-[#34446D]"
+          className="xl:hidden  border border-solid w-full text-[18px] flex items-center justify-between px-[15px] text-[#FFF]  border-[#93969D] h-[50px] max-w-[280px] mx-auto rounded-[4px] bg-[#34446D]"
         >
           <span>Заказать звонок</span>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -167,7 +167,7 @@ const AppFooter = () => {
               onClick={() => {
                 navigator.clipboard.writeText(email.value)
               }}
-              className="sendBtn max-xl:!border-[#93969D] gap-[8px]  w-full xl:!h-[35px]  xl:mx-0 mx-auto !h-[50px] xl:w-auto"
+              className="sendBtn max-xl:!border-[#93969D] gap-[8px]  w-full xl:!h-[35px] max-w-[280px] xl:mx-0 mx-auto !h-[50px] xl:w-auto"
               item={{
                 href: '#', label:
                   <>
@@ -191,7 +191,7 @@ const AppFooter = () => {
           timer={3000}
         >
           <AppMenuItem
-            className="sendBtn max-xl:!border-[#93969D] w-full  xl:!h-[35px] xl:w-auto  xl:mx-0 mx-auto  !h-[50px]  group"
+            className="sendBtn max-xl:!border-[#93969D] w-full  xl:!h-[35px] xl:w-auto max-w-[280px] xl:mx-0 mx-auto  !h-[50px]  group"
             item={{
               href: '#', label:
                 <>
@@ -226,7 +226,7 @@ const AppFooter = () => {
           timer={3000}
         >
           <AppMenuItem
-            className="sendBtn max-xl:!border-[#93969D] w-full  xl:!h-[35px] xl:w-auto  xl:mx-0 mx-auto !h-[50px]  group"
+            className="sendBtn max-xl:!border-[#93969D] w-full  xl:!h-[35px] xl:w-auto max-w-[280px] xl:mx-0 mx-auto !h-[50px]  group"
             item={{
               href: '#', label:
                 <>
@@ -288,7 +288,7 @@ const AppFooter = () => {
           <span>{t("footer.company")}</span>
         </div>
 
-        <div className=" xl:-translate-x-[10px] col-start-4 col-end-7 flex gap-[8px] flex-col">
+        <div className="xl:max-w-full w-full xl:mx-0 mx-auto max-w-[280px] xl:-translate-x-[10px] col-start-4 col-end-7 flex gap-[8px] flex-col">
           <AppMenuItem
             className=" xl:!h-[35px] !h-auto !text-left"
 
