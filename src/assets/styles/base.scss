@@ -255,7 +255,7 @@
         font-size: 18px;
 
         transform: translate(0, 50px);
-        width: calc(100vw - 30px);
+        width: calc(100vw);
         justify-content: center;
         content: attr(data-before);
         position: fixed;
