@@ -54,7 +54,9 @@
     @apply dark-style xl:px-[46px] xl:py-[15px] p-[27px];
 
     &.bottom-top {
-      background: linear-gradient(180deg, #3e424b , #93969d);
+      @media (max-width: 1239px) {
+        background: linear-gradient(180deg, #3e424b, #93969d);
+      }
     }
   }
 
