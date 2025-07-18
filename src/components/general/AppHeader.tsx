@@ -120,7 +120,7 @@ const AppHeader = () => {
   return (
     <>
 
-      <div className={`rubik  w-[385px] header__bg !backdrop-filter-none gap-[8px] l:!flex !hidden mix-blend-difference fixed h-[60px] top-[2px] right-[194px] z-[51] `}>
+      <div className={`rubik  w-[392px] header__bg !backdrop-filter-none gap-[8px] l:!flex !hidden mix-blend-difference fixed h-[60px] top-[2px] right-[194px] z-[51] `}>
         <AppMenuItem
           onClick={() => {
             navigator.clipboard.writeText('info@nvsert.ru')
@@ -141,7 +141,7 @@ const AppHeader = () => {
 
         <AppMenuItem
           item={{
-            href: filterPhone('8 495 777-11-97'), label: '8 495 777-11-97'
+            href: filterPhone('8 800 700-33-75'), label: '8 800 700-33-75'
           }} isActive={false} />
       </div>
 
@@ -214,7 +214,7 @@ const AppHeader = () => {
         </div>
 
         <div className="hidden xl:flex gap-[2px]">
-          <div className="w-[385px]"></div>
+          <div className="w-[392px]"></div>
           <div className="header__bg w-[190px]">
             <AppMenuItem
               className="mx-auto"
