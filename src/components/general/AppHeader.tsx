@@ -248,7 +248,7 @@ const AppHeader = () => {
         active={burgerMenuActive}
       />
       <div className={`services-menu-box menu-headers  ${servicesMenuActive && 'active'} ${darkHeader && 'dark'}`}>
-        <div className={`services-menu !py-[10px] js-services-menu relative `}>
+        <div className={`services-menu !py-[5px] js-services-menu relative `}>
 
           <div className="services-menu__wrapper select-none">
             <div className="grid grid-cols-6 h-[50px] w-full xxl:gap-[30px] gap-[8px]">
