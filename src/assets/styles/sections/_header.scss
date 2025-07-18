@@ -401,6 +401,7 @@
 	&__wrapper {
 		max-height: calc((var(--vh, 1vh) * 100) - 190px);
 		max-width: 1700px;
+		padding: 0 20px;
 		margin-right: auto;
 		margin-left: auto;
 		width: 100%;

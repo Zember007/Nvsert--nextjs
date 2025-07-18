@@ -261,7 +261,7 @@ const AppHeader = () => {
         <div className={`services-menu !py-[10px] js-services-menu relative `}>
 
           <div className="services-menu__wrapper select-none">
-            <div className="grid grid-cols-6 h-[50px] w-full gap-[30px]">
+            <div className="grid grid-cols-6 h-[50px] w-full xxl:gap-[30px] gap-[8px]">
               {navigation.map((item, i) => (
                 <div ref={setWrapperRef} key={i} className="tariff-wrap ">
                   <a href="#" ref={setButtonRef} className={`h-full text-center btnIconAn flex gap-[10px]`}>
