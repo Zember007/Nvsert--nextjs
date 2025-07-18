@@ -127,7 +127,7 @@ const AppFooter = () => {
   }
 
   return (
-    <footer ref={ref} className="footer grid xl:grid-cols-2 xl:grid-rows-2 gap-[2px]">
+    <footer ref={ref} className="footer grid xl:grid-cols-2 gap-[2px]">
       <div className="footer__white change-style xl:row-start-auto row-start-2 xl:!grid grid-cols-7 xl:justify-items-start">
         <p className="xl:block hidden text-[18px] font-light col-start-1 col-end-3">© 2025 NVSERT</p>
 
