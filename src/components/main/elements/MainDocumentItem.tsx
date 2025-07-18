@@ -332,9 +332,9 @@ const MainDocumentItem = memo(({
                                         <p className='text-[16px] text-[#000000] m:max-w-[360px]'>
                                             {filterPrepositions(content.text)}
                                         </p>
-                                        <p className='hidden m:block text-[16px] text-[#000000] m:max-w-[300px]'>
+                                        {/* <p className='hidden m:block text-[16px] text-[#000000] m:max-w-[300px]'>
                                             {content.text1 && filterPrepositions(content.text1)}
-                                        </p>
+                                        </p> */}
                                     </div>
 
                                     {windowWidth && windowWidth >= 768 &&
