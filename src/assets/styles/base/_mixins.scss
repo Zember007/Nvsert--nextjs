@@ -1,5 +1,6 @@
 @mixin header-h-1 {
   font-size: 40px;
+  letter-spacing: -0.03em;
   font-family: $font-family-2;
   font-weight: 500;
   font-style: normal;
@@ -7,6 +8,7 @@
 }
 @mixin header-h-2 {
   font-size: 32px;
+  letter-spacing: -0.03em;
   font-family: $font-family-2;
   font-style: normal;
   text-decoration: none;
