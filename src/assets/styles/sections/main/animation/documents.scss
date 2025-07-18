@@ -198,6 +198,6 @@
   }
 
   &__item {
-    @apply flex flex-col items-center m:items-stretch m:flex-row gap-[10px] m:p-[30px] p-[20px] ;
+    @apply flex flex-col items-center m:items-stretch m:flex-row m:gap-[10px] gap-[20px] m:p-[30px] p-[20px] ;
   }
 }
