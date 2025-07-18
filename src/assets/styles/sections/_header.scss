@@ -12,6 +12,7 @@
 
 .header__bg {
 	border: 1px solid transparent;
+	background: var(--color-header);
 }
 
 .header {
@@ -132,13 +133,13 @@
 	.header__bg {
 		position: relative;
 		border: none;
-
+		background: linear-gradient(180deg, #646467 0%, #9b9b9e 100%);
 	}
 
 	&__bg {
 
 		backdrop-filter: blur(var(--filter-blur-header));
-		background: linear-gradient(180deg, #646467 0%, #9b9b9e 100%);
+		
 		border-radius: 4px;
 		padding: 0 11px;
 		display: flex;
@@ -339,13 +340,13 @@
 		transition-delay: 0.1s;
 
 		.services-menu {
-			background: linear-gradient(180deg, #9b9b9e 0%, #646467 100%);;
+			background: linear-gradient(180deg, #9b9b9e 0%, #646467 100%);
 		}
 
 	}
 
 	.services-menu {
-		background: linear-gradient(180deg, #646467 0%, #9b9b9e 100%);;
+		background: linear-gradient(180deg, #646467 0%, #9b9b9e 100%);
 	}
 
 
