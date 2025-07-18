@@ -6,10 +6,6 @@
 	--color-header: rgba(25, 24, 35, 0.4);
 }
 
-// .mix-blend-difference {
-// 	--color-item-menu: #000;
-// }
-
 .header__bg.mix-blend-difference {
 	border-color: hsl(50deg 19% 88% / 45%);
 }
@@ -38,13 +34,10 @@
 			height: 52px;
 
 			.header__bg {
-				background-color: transparent;
+				
 				backdrop-filter: blur(0);
-				background-image: none;
-
-				&::before {
-					background: none;
-				}
+				
+				background: none;
 
 			}
 		}
@@ -145,32 +138,18 @@
 	&__bg {
 
 		backdrop-filter: blur(var(--filter-blur-header));
-		background-color: var(--color-header);
+		background: linear-gradient(180deg, #646467 0%, #9b9b9e 100%);
 		border-radius: 4px;
 		padding: 0 11px;
 		display: flex;
 		align-items: center;
 		overflow: hidden;
-
-		&::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			background: linear-gradient(0deg, transparent 1%, rgb(0 0 0 / 40%));
-			pointer-events: none;
-		}
+	
 
 		&.active {
-			background-color: transparent;
+			background: none;
 			backdrop-filter: blur(0);
-			background-image: none;
-
-			&::before {
-				background: none;
-			}
+			
 		}
 	}
 
@@ -359,6 +338,14 @@
 		z-index: 21;
 		transition-delay: 0.1s;
 
+		.services-menu {
+			background: linear-gradient(180deg, #9b9b9e 0%, #646467 100%);;
+		}
+
+	}
+
+	.services-menu {
+		background: linear-gradient(180deg, #646467 0%, #9b9b9e 100%);;
 	}
 
 
@@ -379,7 +366,7 @@
 
 .services-menu {
 
-	background: linear-gradient(90deg, #9B9B9E 0%, #646467 100%);
+	
 
 	
 	border-radius: 4px;
