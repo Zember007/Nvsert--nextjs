@@ -7,8 +7,6 @@ import AppInput from "./elements/AppInput";
 import AppTextarea from "./elements/AppTextarea";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import MessageImg from '@/assets/images/svg/message-flight.svg';
-import Image from "next/image";
 import { useButton } from "@/hook/useButton";
 import { useEffect, useId, useRef, useState } from "react";
 import AppCheckbox from './elements/AppCheckbox';

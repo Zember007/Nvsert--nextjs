@@ -19,6 +19,11 @@
 	color: #FFF;
 	z-index: 50;
 	height: 64px;
+
+	@media (max-width: $media-l) {
+		height: 54px;
+	}
+
 	padding: 2px;
 	backdrop-filter: blur(15px);
 
@@ -35,9 +40,9 @@
 			height: 52px;
 
 			.header__bg {
-				
+
 				backdrop-filter: blur(0);
-				
+
 				background: none;
 
 			}
@@ -139,18 +144,18 @@
 	&__bg {
 
 		backdrop-filter: blur(var(--filter-blur-header));
-		
+
 		border-radius: 4px;
 		padding: 0 11px;
 		display: flex;
 		align-items: center;
 		overflow: hidden;
-	
+
 
 		&.active {
 			background: none;
 			backdrop-filter: blur(0);
-			
+
 		}
 	}
 
@@ -352,7 +357,7 @@
 
 	&.active {
 		transform: translateY(0);
-		top: 138px;
+		top: 134px;
 
 		&.menu-headers {
 			top: 62px;
@@ -367,9 +372,9 @@
 
 .services-menu {
 
-	
 
-	
+
+
 	border-radius: 4px;
 
 
