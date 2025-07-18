@@ -57,11 +57,11 @@ const DocumentList = memo(({ content1, listHidden, setListHidden }: DocumentList
     <div className="document__list">
         {content1.map((cont, contIndex) => (
             <div key={contIndex} className='document__list-item'>
-                <p className={`${contIndex === 0 ? 'm:text-[19px]' : ''} text-[16px] font-bold`}>
+                <p className={`${contIndex === 0 ? 'm:text-[19px]' : ''} text-[16px]`}>
                     {filterPrepositions(cont.title)}
                 </p>
                 {cont.subtitle && <span>{cont.subtitle}</span>}
-                <ul className='document__list-item-ul '>
+                <ul className='document__list-item-ul arial'>
                     {cont.list.map((list, index) => (
                         <li
                             className={`${listHidden && (index > 2 || contIndex > 0) && 'hidden'}`}
@@ -294,12 +294,12 @@ const MainDocumentItem = memo(({
 
                                     <div className="flex gap-[10px]">
                                         <div className="flex flex-col gap-[5px] items-center">
-                                            <span className='text-[14px] text-[#00000080]'>Срок оформления</span>
-                                            <span className='text-[18px] font-bold'>{duration}</span>
+                                            <span className='text-[14px] font-light text-[#00000080]'>Срок оформления</span>
+                                            <span className='text-[18px] '>{duration}</span>
                                         </div>
                                         <div className="flex flex-col gap-[5px] items-center">
-                                            <span className='text-[14px] text-[#00000080]'>Стоимость</span>
-                                            <span className='text-[18px] font-bold'>{price}</span>
+                                            <span className='text-[14px] font-light text-[#00000080]'>Стоимость</span>
+                                            <span className='text-[18px] '>{price}</span>
                                         </div>
                                     </div>
                                 </>
@@ -328,7 +328,7 @@ const MainDocumentItem = memo(({
 
                             <div ref={containerPhotoRef} className="grow flex justify-center">
                                 <div className=" flex flex-col justify-between  items-start">
-                                    <div className="flex flex-col gap-[40px]">
+                                    <div className="arial flex flex-col gap-[40px]">
                                         <p className='text-[16px] text-[#000000] m:max-w-[360px]'>
                                             {filterPrepositions(content.text)}
                                         </p>
