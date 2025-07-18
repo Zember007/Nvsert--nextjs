@@ -18,7 +18,7 @@
 .header {
 	color: #FFF;
 	z-index: 50;
-	height: 54px;
+	height: 64px;
 	padding: 2px;
 	backdrop-filter: blur(15px);
 
@@ -352,10 +352,10 @@
 
 	&.active {
 		transform: translateY(0);
-		top: 128px;
+		top: 138px;
 
 		&.menu-headers {
-			top: 52px;
+			top: 62px;
 			transition-delay: 0s;
 		}
 
