@@ -692,10 +692,10 @@
         },
         "tamozhennySoyuz": {
             "title": "Таможенный союз",
-            "tamozhennySoyuz1": "Декларация Таможенного Союза (ДС ТР ТС)",
-            "tamozhennySoyuz2": "Прохождение инспекционного контроля (ИК)",
-            "tamozhennySoyuz3": "Сертификат Таможенного Союза (СС ТР ТС)",
-            "tamozhennySoyuz4": "Сертификат соответствия Пожарной Безопасности"
+            "tamozhennySoyuz1": "Декларация Таможенного Союза",
+            "tamozhennySoyuz2": "Прохождение инспекционного контроля",
+            "tamozhennySoyuz3": "Сертификат Таможенного Союза",
+            "tamozhennySoyuz4": "Сертификат Пожарной Безопасности"
         },
         "sertifikatsiya": {
             "title": "Сертификация",
@@ -712,13 +712,13 @@
         },
         "rospotrebnadzor": {
             "title": "Роспотребнадзор",
-            "rospotrebnadzor1": "Свидетельство о государственной регистрации (СГР)",
-            "rospotrebnadzor2": "Экспертное заключение (ЭЗ)"
+            "rospotrebnadzor1": "Свидетельство о государственной регистрации",
+            "rospotrebnadzor2": "Экспертное заключение"
         },
         "tekhDokumentatsiya": {
             "title": "Тех. документация",
-            "tekhDokumentatsiya1": "Протокол испытаний (исследований) ПИ",
-            "tekhDokumentatsiya2": "Технические условия (ТУ)"
+            "tekhDokumentatsiya1": "Протокол испытаний",
+            "tekhDokumentatsiya2": "Технические условия"
         }
     },
     "copied": "Скопировано",
