@@ -64,7 +64,7 @@ const AppInput = ({ title, defaultValue, disable, fail, message = true, inputNam
                         required
                     })}
                     type={type}
-                    className={`field__input no-drag ${disable && 'active:scale-[0.95] pointer-events-none placeholder:text-[transparent]'} transition-transform duration-300  ${className || ''} ${(fail) && 'error !text-[#FF3030]'} `}
+                    className={`field__input no-drag ${disable && 'active:scale-[0.95] placeholder:text-[0px]'} transition-transform duration-300  ${className || ''} ${(fail) && 'error !text-[#FF3030]'} `}
                     name={inputName}
                     placeholder={title}
                     autoComplete={autocomplete}
