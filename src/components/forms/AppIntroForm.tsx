@@ -99,7 +99,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
         <motion.div
             animate={controls}
             initial={{ x: 0 }}
-            className='s:h-[593px] h-[452px] border border-solid border-[#93969d] rounded-[6px] flex flex-col gap-[20px] p-[20px] s:p-[40px] relative'>
+            className='s:h-[593px] h-[475px] border border-solid border-[#93969d] rounded-[6px] flex flex-col s:gap-[20px] gap-[15px] p-[20px] s:p-[40px] relative'>
 
             <div className={`${successMessageVisible && 'opacity-0'} flex flex-col gap-[44px]`}>
                 <span className={`leading-[0.7] s:pl-[10px] font-light text-[#000] text-[32px] tracking-[-0.03em]`}>Заказать звонок</span>
@@ -113,7 +113,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
 
             <AppValidationObserver methods={methods} onSubmit={onSubmit}>
                 {({ register, errors }) => (
-                    <div className={`${successMessageVisible && 'opacity-0'} flex flex-col gap-[20px]`}>
+                    <div className={`${successMessageVisible && 'opacity-0'} flex flex-col s:gap-[20px] gap-[15px]`}>
                         <AppInput
                             title={'ФИО'}
                             inputName="name"
@@ -132,7 +132,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
 
 
 
-                        <div ref={setWrapperRef} className="tariff-wrap relative mt-[20px]">
+                        <div ref={setWrapperRef} className="tariff-wrap relative s:mt-[20px]">
                             <button
                                 type="submit"
                                 ref={setButtonRef}

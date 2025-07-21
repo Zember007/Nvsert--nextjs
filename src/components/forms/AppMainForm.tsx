@@ -217,7 +217,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
         <motion.div
             animate={controls}
             initial={{ x: 0 }}
-            className={`relative main-form h-[452px] s:h-[593px] border border-solid border-[#93969d]  ${bg ? 'bg-[#93969d26]  ' : ''} p-[20px] s:p-[40px] max-w-[320px] s:max-w-[400px] flex flex-col gap-[20px]  rounded-[6px]`}>
+            className={`relative main-form h-[475px] s:h-[593px] border border-solid border-[#93969d]  ${bg ? 'bg-[#93969d26]  ' : ''} p-[20px] s:p-[40px] max-w-[320px] s:max-w-[400px] flex flex-col s:gap-[20px] gap-[15px]  rounded-[6px]`}>
             {successMessageVisible && <FlightSuccess closeIcon={bg} text="Спасибо за заявку" close={() => { setSuccessMessageVisible(false) }} />}
 
 
@@ -299,7 +299,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                 <button
                                     type="submit"
                                     ref={setButtonRef}
-                                    className="form__button s:!h-[50px] !h-[40px] no-drag btnIconAn group tariff"
+                                    className="form__button no-drag btnIconAn group tariff"
                                     style={{
                                         verticalAlign: 'middle'
                                     }}
