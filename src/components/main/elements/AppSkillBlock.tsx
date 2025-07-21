@@ -79,7 +79,7 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
 
   return (
     <div
-      className={`hover:z-[12] relative card-wrap h-[230px] xl:w-[300px] w-[320px] ${!folder ? 'cursor-pointer ' : ''}`}
+      className={`hover:z-[12] relative card-wrap h-[224px] xl:w-[310px] w-[320px] ${!folder ? 'cursor-pointer ' : ''}`}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
