@@ -131,14 +131,14 @@ input:auto-fill {
       overflow: hidden;
       text-overflow: ellipsis;
 
-      @media (max-width: $media-s) {
+     /*  @media (max-width: $media-s) {
         top: 30px;
-      }
+      } */
     }
 
-    @media (max-width: $media-s) {
+   /*  @media (max-width: $media-s) {
       top: 30px;
-    }
+    } */
   }
 
 
