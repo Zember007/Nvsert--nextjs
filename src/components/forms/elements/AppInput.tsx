@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from "react-hook-form";
 
-const AppInput = ({ title, defaultValue, disable, fail, message = true, inputName, type, required, autocomplete, mask, className, classNameTitle, onBlur, onFocus }: { onFocus?: (value: string) => void, onBlur?: (value: string) => void, disable?: boolean, fail?: boolean, message?: boolean, title: string, inputName: string, type?: string, required?: boolean, autocomplete?: string, mask?: string, className?: string, classNameTitle?: string, defaultValue?: string }) => {
+const AppInput = ({ title, defaultValue, disable, fail, message = true, inputName, type, required, autocomplete, mask, className, classNameTitle, onBlur, onFocus }: { onClick?: () => void, onFocus?: (value: string) => void, onBlur?: (value: string) => void, disable?: boolean, fail?: boolean, message?: boolean, title: string, inputName: string, type?: string, required?: boolean, autocomplete?: string, mask?: string, className?: string, classNameTitle?: string, defaultValue?: string }) => {
     const { register, formState: { errors, isSubmitted, submitCount }, setValue, clearErrors } = useFormContext();
 
     const formatPhoneNumber = (e: React.FormEvent<HTMLInputElement>) => {
@@ -60,11 +60,12 @@ const AppInput = ({ title, defaultValue, disable, fail, message = true, inputNam
 
 
                 <input
+         
                     {...register(inputName, {
                         required
                     })}
                     type={type}
-                    className={`field__input no-drag ${disable && 'active:scale-[0.95] placeholder:text-[0px]'} transition-transform duration-300  ${className || ''} ${(fail) && 'error !text-[#FF3030]'} `}
+                    className={`field__input no-drag ${disable && 'active:scale-[0.95] pointer-events-none'} transition-transform duration-300  ${className || ''} ${(fail) && 'error !text-[#FF3030]'} `}
                     name={inputName}
                     placeholder={title}
                     autoComplete={autocomplete}

@@ -128,10 +128,10 @@ const AppFooter = () => {
 
   return (
     <footer ref={ref} className="footer grid xl:grid-cols-2 gap-[2px]">
-      <div className="footer__white change-style xl:row-start-auto row-start-2 xl:!grid grid-cols-7 xl:justify-items-start">
+      <div className="footer__white change-style xl:row-start-auto row-start-2 gap-[226px] ">
         <p className="xl:block hidden text-[18px] font-light col-start-1 col-end-3">© 2025 NVSERT</p>
 
-        <div className="xl:max-w-full w-full xl:mx-0 mx-auto max-w-[280px] xl:-translate-x-[10px] flex gap-[10px] items-start xl:flex-row flex-col col-start-4 col-end-7">
+        <div className=" w-full xl:mx-0 mx-auto xl:max-w-full max-w-[280px]  flex gap-[10px] items-start xl:flex-row flex-col ">
           {menuItems.map((item, i) => (
             <AppMenuItem key={i} item={item} isActive={false} />
           ))}
@@ -282,13 +282,13 @@ const AppFooter = () => {
         </PromtModal>
       </div>
 
-      <div className="footer__dark bottom-top xl:!grid grid-cols-7 xl:justify-items-start">
-        <div className="xl:flex hidden text-[16px] items-start  flex-col gap-[18px] font-light">
+      <div className="footer__dark bottom-top gap-[76px]">
+        <div className="xl:flex hidden text-[16px] items-start  flex-col gap-[18px] font-ligh whitespace-nowrap">
           <span>{t("footer.inn")}</span>
           <span>{t("footer.company")}</span>
         </div>
 
-        <div className="xl:max-w-full w-full xl:mx-0 mx-auto max-w-[280px] xl:-translate-x-[10px] col-start-4 col-end-7 flex gap-[8px] flex-col">
+        <div className="xl:max-w-full w-full xl:mx-0 mx-auto max-w-[280px]  flex gap-[8px] flex-col">
           <AppMenuItem
             className=" xl:!h-[35px] !h-auto !text-left"
 
