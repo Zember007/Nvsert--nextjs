@@ -120,7 +120,7 @@ const AppHeader = () => {
   return (
     <>
 
-      <div className={`rubik  w-[353px] header__bg !backdrop-filter-none gap-[8px] l:!flex !hidden mix-blend-difference fixed h-[60px] top-[2px] right-[194px] z-[51] `}>
+      <div className={`rubik  w-[352.3px] header__bg !backdrop-filter-none gap-[8px] l:!flex !hidden mix-blend-difference fixed h-[60px] top-[2px] right-[194px] z-[51] `}>
         <AppMenuItem
           onClick={() => {
             navigator.clipboard.writeText('info@nvsert.ru')
@@ -204,7 +204,7 @@ const AppHeader = () => {
         </div>
 
         <div className="hidden xl:flex gap-[2px]">
-          <div className="w-[353px]"></div>
+          <div className="w-[352.3px]"></div>
           <div className="header__bg w-[190px]">
             <AppMenuItem
               className="mx-auto"
