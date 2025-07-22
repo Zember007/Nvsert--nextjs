@@ -124,7 +124,7 @@ const AppHeader = () => {
     }
   }, [widthContactRef])
 
-  const [widthContact, setWidthContact] = useState(0);
+  const [widthContact, setWidthContact] = useState(356);
   const widthOrderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -226,7 +226,7 @@ const AppHeader = () => {
 
         </div>
 
-        <div className="hidden xl:flex gap-[2px] w-[356px]">
+        <div className="hidden xl:flex gap-[2px]">
           <div
             style={{ width: widthContact + 'px' }}
           ></div>
