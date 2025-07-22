@@ -135,7 +135,7 @@ const AppHeader = () => {
           }} isActive={false} />
       </div>
 
-      <div className="z-[51] !backdrop-filter-none header__bg min-w-[190px] xl:!flex !hidden fixed mix-blend-difference h-[60px] top-[2px] left-[2px]">
+      <div className="z-[51] !backdrop-filter-none header__bg min-w-[192px] xl:!flex !hidden fixed mix-blend-difference h-[60px] top-[2px] left-[2px]">
         <AppLogo
           className={`xl:mx-auto`}
         />
@@ -153,7 +153,7 @@ const AppHeader = () => {
       </Link>
       <header className={`rubik header ${(servicesMenuActive || burgerMenuActive) ? 'active' : ''}`}>
 
-        <div className="header__bg min-w-[190px] xl:grow-0 grow xl:opacity-0">
+        <div className="header__bg min-w-[192px] xl:grow-0 grow xl:opacity-0">
           <AppLogo
             className={`xl:mx-auto ${burgerMenuActive ? '!text-[#000]' : ''}`}
           />
@@ -205,7 +205,7 @@ const AppHeader = () => {
 
         <div className="hidden xl:flex gap-[2px]">
           <div className="w-[352.3px]"></div>
-          <div className="header__bg w-[190px]">
+          <div className="header__bg w-[192px]">
             <AppMenuItem
               className="mx-auto"
               onClick={() => {
