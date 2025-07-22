@@ -138,7 +138,8 @@ const AppHeader = () => {
 
       <div
       ref={widthContactRef}
-      className={`rubik header__bg !backdrop-filter-none gap-[8px] l:!flex !hidden mix-blend-difference fixed h-[60px] top-[2px] right-[194px] z-[51] `}>
+      style={{ right: (widthOrder + 4) + 'px' }}
+      className={`rubik header__bg !backdrop-filter-none gap-[8px] l:!flex !hidden mix-blend-difference fixed h-[60px] top-[2px] right-[196px] z-[51] `}>
         <AppMenuItem
           onClick={() => {
             navigator.clipboard.writeText('info@nvsert.ru')
@@ -225,7 +226,7 @@ const AppHeader = () => {
 
         </div>
 
-        <div className="hidden xl:flex gap-[2px]">
+        <div className="hidden xl:flex gap-[2px] w-[356px]">
           <div
             style={{ width: widthContact + 'px' }}
           ></div>
