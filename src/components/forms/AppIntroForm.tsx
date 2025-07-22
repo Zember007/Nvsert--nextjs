@@ -102,7 +102,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
             className='s:h-[593px] h-[475px] border border-solid border-[#93969d] rounded-[6px] flex flex-col s:gap-[20px] gap-[15px] p-[20px] s:p-[40px] relative'>
 
             <div className={`${successMessageVisible && 'opacity-0'} flex flex-col gap-[44px]`}>
-                <span className={`leading-[0.7] s:pl-[10px] font-light text-[#000] text-[32px] tracking-[-0.03em]`}>Заказать звонок</span>
+                <span className={`form__title`}>Заказать звонок</span>
 
                 <div className="w-full overflow-hidden pointer-events-none rounded-[4px]">
                     <Image src={ImgCall} alt='order-call'></Image>

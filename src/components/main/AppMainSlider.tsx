@@ -36,7 +36,9 @@ const SliderMain = () => {
     const timeLine = useRef<any>(null)
 
     useEffect(() => {
-        if (!whiteBgRef.current || !isVisible || !ref.current) return
+        if (!whiteBgRef.current || !isVisible || !ref.current ) return
+        
+        if (timeLine.current) timeLine.current.destroy(); timeLine.current = null;
 
         if (widthWindow && widthWindow >= 1240) {
             let timeoutIdBg: NodeJS.Timeout | null = null;
@@ -77,7 +79,7 @@ const SliderMain = () => {
             whiteBgRef.current?.classList.remove('white')
 
 
-            if (timeLine.current) timeLine.current.kill()
+            
 
             timeLine.current = initSlider({
                 onChangeFunction: (index: number) => {

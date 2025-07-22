@@ -150,7 +150,9 @@ export function initSlider({ onChangeFunction, onDragFunction, mobile }) {
         loop.kill();
         if (nextButton) nextButton.removeEventListener("click", loop.next);
         if (prevButton) prevButton.removeEventListener("click", loop.previous);
-        slides.forEach(slide => slide.removeEventListener("click"));
+        slides.forEach(item => {
+            gsap.set(item, { clearProps: "all" });
+          });
     };
 
 
