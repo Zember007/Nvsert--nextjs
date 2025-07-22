@@ -138,7 +138,7 @@ const AppHeader = () => {
 
       <div
       ref={widthContactRef}
-      style={{ right: (widthOrder + 4) + 'px' }}
+      style={{ right: (widthOrder ? widthOrder + 4 : 196) + 'px' }}
       className={`rubik header__bg !backdrop-filter-none gap-[8px] l:!flex !hidden mix-blend-difference fixed h-[60px] top-[2px] right-[196px] z-[51] `}>
         <AppMenuItem
           onClick={() => {
