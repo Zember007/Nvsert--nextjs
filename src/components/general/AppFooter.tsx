@@ -133,7 +133,9 @@ const AppFooter = () => {
 
         <div className="xl:w-auto w-full xl:mx-0 mx-auto xl:max-w-full max-w-[280px]  flex gap-[10px] items-start xl:flex-row flex-col ">
           {menuItems.map((item, i) => (
-            <AppMenuItem key={i} item={item} isActive={false} />
+            <AppMenuItem
+            className="xl:!h-[35px] !h-[50px]"
+            key={i} item={item} isActive={false} />
           ))}
 
         </div>
