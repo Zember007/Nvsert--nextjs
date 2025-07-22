@@ -167,7 +167,7 @@ const AppFooter = () => {
               onClick={() => {
                 navigator.clipboard.writeText(email.value)
               }}
-              className="sendBtn max-xl:!border-[#93969D] gap-[8px]  w-full xl:!h-[35px] max-w-[280px] xl:mx-0 mx-auto !h-[50px] xl:w-auto"
+              className="sendBtn max-xl:!border-[#93969D] gap-[8px] max-xl:!bg-[#F5F5F2]  w-full xl:!h-[35px] max-w-[280px] xl:mx-0 mx-auto !h-[50px] xl:w-auto"
               item={{
                 href: '#', label:
                   <>
@@ -191,7 +191,7 @@ const AppFooter = () => {
           timer={3000}
         >
           <AppMenuItem
-            className="sendBtn max-xl:!border-[#93969D] w-full  xl:!h-[35px] xl:w-auto max-w-[280px] xl:mx-0 mx-auto  !h-[50px]  group"
+            className="sendBtn max-xl:!border-[#93969D] max-xl:!bg-[#F5F5F2]  w-full  xl:!h-[35px] xl:w-auto max-w-[280px] xl:mx-0 mx-auto  !h-[50px]  group"
             item={{
               href: '#', label:
                 <>
@@ -226,7 +226,7 @@ const AppFooter = () => {
           timer={3000}
         >
           <AppMenuItem
-            className="sendBtn max-xl:!border-[#93969D] w-full  xl:!h-[35px] xl:w-auto max-w-[280px] xl:mx-0 mx-auto !h-[50px]  group"
+            className="sendBtn max-xl:!border-[#93969D] w-full max-xl:!bg-[#F5F5F2]   xl:!h-[35px] xl:w-auto max-w-[280px] xl:mx-0 mx-auto !h-[50px]  group"
             item={{
               href: '#', label:
                 <>
