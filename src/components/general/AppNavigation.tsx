@@ -68,7 +68,7 @@ const AppNavigation = ({ active }: { active: boolean }) => {
     };
     return (
         <>
-            <div className="grid grid-cols-6 w-full xxl:gap-[30px] gap-[8px]">
+            <div className="grid grid-cols-6 w-full xxxl:gap-[30px] gap-[8px]">
                 {
                     navigation.map((item, i) =>
 
@@ -91,14 +91,14 @@ const WrapperItem = ({ img, title, controls, link }: { link: string; img: string
     return (
         <>
             <div ref={setWrapperRef} className="tariff-wrap">
-                <Link ref={setButtonRef} href={link} className={`tariff overflow-hidden not-backdrop flex xxl:gap-[10px] gap-[5px] group  rounded-[4px] items-center hover:bg-[#34446d33] border-solid hover:border-[#fff] border border-[transparent]`}>
+                <Link ref={setButtonRef} href={link} className={`tariff overflow-hidden not-backdrop flex xxxl:gap-[10px] gap-[5px] group  rounded-[4px] items-center hover:bg-[#34446d33] border-solid hover:border-[#fff] border border-[transparent]`}>
                     <motion.div
                         initial={{ y: 40, opacity: 0 }}
                         className=" overflow-hidden group-hover:rounded-[0px] rounded-[4px] min-w-[43px]"
                         animate={controls}>
                         <Image src={img} className="w-[43px] h-[60px]" width={43} height={60} alt="document" />
                     </motion.div>
-                    <p className={`${darkHeader ? 'text-[#000] group-hover:text-[#FFF]' : 'text-[#FFF]'} max-w-full xxl:pr-[12px] xxl:text-[16px] text-[14px]`}>{filterPrepositions(title)}</p>
+                    <p className={`${darkHeader ? 'text-[#000] group-hover:text-[#FFF]' : 'text-[#FFF]'} max-w-full xxxl:pr-[12px] xxl:text-[16px] text-[14px]`}>{filterPrepositions(title)}</p>
                 </Link>
             </div>
         </>
