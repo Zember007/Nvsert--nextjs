@@ -116,11 +116,29 @@ const AppHeader = () => {
     }
   }, [servicesMenuActive])
 
+  const widthContactRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    if (widthContactRef.current) {
+      setWidthContact(widthContactRef.current.offsetWidth)
+    }
+  }, [widthContactRef])
+
+  const [widthContact, setWidthContact] = useState(0);
+  const widthOrderRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (widthOrderRef.current) {
+      setWidthOrder(widthOrderRef.current.offsetWidth)
+    }
+  }, [widthOrderRef])
+  const [widthOrder, setWidthOrder] = useState(0);
   return (
     <>
 
-      <div className={`rubik  w-[352.3px] header__bg !backdrop-filter-none gap-[8px] l:!flex !hidden mix-blend-difference fixed h-[60px] top-[2px] right-[194px] z-[51] `}>
+      <div
+      ref={widthContactRef}
+      className={`rubik header__bg !backdrop-filter-none gap-[8px] l:!flex !hidden mix-blend-difference fixed h-[60px] top-[2px] right-[194px] z-[51] `}>
         <AppMenuItem
           onClick={() => {
             navigator.clipboard.writeText('info@nvsert.ru')
@@ -135,7 +153,9 @@ const AppHeader = () => {
           }} isActive={false} />
       </div>
 
-      <div className="z-[51] !backdrop-filter-none header__bg min-w-[192px] xl:!flex !hidden fixed mix-blend-difference h-[60px] top-[2px] left-[2px]">
+      <div 
+      style={{ minWidth: widthOrder + 'px' }}
+      className="z-[51] !backdrop-filter-none header__bg  xl:!flex !hidden fixed mix-blend-difference h-[60px] top-[2px] left-[2px]">
         <AppLogo
           className={`xl:mx-auto`}
         />
@@ -153,7 +173,9 @@ const AppHeader = () => {
       </Link>
       <header className={`rubik header ${(servicesMenuActive || burgerMenuActive) ? 'active' : ''}`}>
 
-        <div className="header__bg min-w-[192px] xl:grow-0 grow xl:opacity-0">
+        <div 
+        style={{ minWidth: widthOrder + 'px' }}
+        className="header__bg xl:grow-0 grow xl:opacity-0">
           <AppLogo
             className={`xl:mx-auto ${burgerMenuActive ? '!text-[#000]' : ''}`}
           />
@@ -204,8 +226,12 @@ const AppHeader = () => {
         </div>
 
         <div className="hidden xl:flex gap-[2px]">
-          <div className="w-[352.3px]"></div>
-          <div className="header__bg w-[192px]">
+          <div
+            style={{ width: widthContact + 'px' }}
+          ></div>
+          <div
+            ref={widthOrderRef}
+          className="header__bg">
             <AppMenuItem
               className="mx-auto"
               onClick={() => {
