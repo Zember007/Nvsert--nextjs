@@ -8,10 +8,7 @@ import '@/assets/styles/sections/main/animation/skills.scss'
 import { useTranslation } from 'react-i18next';
 import useWindowWidth from '@/hook/useWindowWidth';
 import { horizontalLoop } from '@/scripts/slider';
-import Link from 'next/link';
-import Image from 'next/image';
 import { filterPrepositions } from '@/hook/filter';
-import ArrowImg from '@/assets/images/svg/arrow-small.svg'
 import { useIntersectionObserver } from '@/hook/useIntersectionObserver';
 import { useButton } from '@/hook/useButton';
 
@@ -55,7 +52,6 @@ const AppMainSkills = () => {
 
 
     useEffect(() => {
-        if (timeLine.current) return
 
         
 
@@ -77,6 +73,11 @@ const AppMainSkills = () => {
 
 
 
+        } else {
+            if (timeLine.current) {
+                timeLine.current.destroy()
+                timeLine.current = null
+            }
         }
        
 
