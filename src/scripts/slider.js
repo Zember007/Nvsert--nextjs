@@ -170,12 +170,13 @@ export function initSlider({ onChangeFunction, onDragFunction, mobile }) {
 
 export function horizontalLoop(items, config) {
     let timeline;
+    let ctx; // GSAP контекст
+    let resizeCleanup; // функция очистки resize обработчика
     items = gsap.utils.toArray(items);
     config = config || {};
     const offsetLeft = config.offsetLeft || 0
-    gsap.context(() => {
-
-
+    
+    ctx = gsap.context(() => {
         let onChange = config.onChange,
             onDragFunction = config.onDragFunction,
             lastIndex = 0,
@@ -294,7 +295,15 @@ export function horizontalLoop(items, config) {
         populateWidths();
         populateTimeline();
         populateOffsets();
+        
+        // Добавляем обработчик resize
         window.addEventListener("resize", onResize);
+        
+        // Сохраняем функцию для очистки
+        resizeCleanup = () => {
+            window.removeEventListener("resize", onResize);
+        };
+        
         function toIndex(index, vars) {
             vars = vars || {};
             (Math.abs(index - curIndex) > length / 2) && (index += index > curIndex ? -length : length); // always go in the shortest direction
@@ -426,11 +435,101 @@ export function horizontalLoop(items, config) {
             tl.draggable = draggable;
         }
 
+        // Добавляем методы для полной очистки
+        tl.kill = function() {
+            // Останавливаем timeline
+            this.pause();
+            
+            // Убиваем все анимации элементов
+            gsap.killTweensOf(items);
+            gsap.killTweensOf(proxy);
+            
+            // Уничтожаем Draggable
+            if (this.draggable) {
+                this.draggable.kill();
+                this.draggable = null;
+            }
+            
+            // Останавливаем отслеживание InertiaPlugin
+            if (proxy) {
+                InertiaPlugin.untrack(proxy, "x");
+                proxy.remove();
+                proxy = null;
+            }
+            
+            // Убиваем сам timeline
+            if (this.getChildren) {
+                this.getChildren().forEach(child => {
+                    if (child.kill) child.kill();
+                });
+            }
+            
+            // Очищаем таймауты
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+                timeoutId = null;
+            }
+            
+            return this;
+        };
+        
+        tl.clear = function() {
+            // Очищаем все CSS свойства со слайдов
+            items.forEach(item => {
+                gsap.set(item, { clearProps: "all" });
+                item.classList.remove('closestSlide');
+            });
+            
+            // Очищаем timeline
+            if (this.clear) {
+                try {
+                    this.clear();
+                } catch (e) {
+                    // Timeline уже очищен
+                }
+            }
+            
+            return this;
+        };
+        
+        tl.destroy = function() {
+            // Полная очистка
+            this.kill();
+            this.clear();
+            
+            return this;
+        };
+
         tl.closestIndex(true);
         lastIndex = curIndex;
         timeline = tl;
-        return () => window.removeEventListener("resize", onResize);
     });
+    
+    // Возвращаем timeline с добавленной функцией очистки resize обработчика
+    if (timeline) {
+        const originalDestroy = timeline.destroy;
+        timeline.destroy = function() {
+            // Сначала очищаем resize обработчик
+            if (resizeCleanup) {
+                resizeCleanup();
+                resizeCleanup = null;
+            }
+            
+            // Очищаем GSAP контекст
+            if (ctx) {
+                ctx.revert();
+                ctx = null;
+            }
+            
+            // Вызываем оригинальный destroy
+            if (originalDestroy) {
+                originalDestroy.call(this);
+            }
+            
+            return this;
+        };
+    }
+    
     return timeline;
 }
 
