@@ -53,9 +53,12 @@ const AppMainSkills = () => {
 
     useEffect(() => {
 
-        const slides = gsap.utils.toArray('[data-slider="slide-skill"]');
+
 
         if (widthWindow && widthWindow < 1240 && isVisibleSection) {
+
+            const slides = gsap.utils.toArray('[data-slider="slide-skill"]');
+
 
             const gap = (widthWindow - 320) / 2
             timeLine.current = horizontalLoop(slides, {
@@ -72,13 +75,11 @@ const AppMainSkills = () => {
 
 
 
-        } else {
+        }
+
+        return () => {
             if (timeLine.current) {
-                timeLine.current.kill()
-                timeLine.current.clear()
-                slides.forEach((item: any) => {
-                    gsap.set(item, { clearProps: "all" });
-                  });
+                timeLine.current.destroy()
                 timeLine.current = null
             }
         }

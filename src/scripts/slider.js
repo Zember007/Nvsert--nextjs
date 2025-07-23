@@ -146,20 +146,11 @@ export function initSlider({ onChangeFunction, onDragFunction, mobile }) {
     }
 
 
-    loop.destroy = () => {
-        loop.kill();
-        if (nextButton) nextButton.removeEventListener("click", loop.next);
-        if (prevButton) prevButton.removeEventListener("click", loop.previous);
-        slides.forEach(item => {
-            gsap.set(item, { clearProps: "all" });
-          });
-    };
 
 
 
     return loop;
 }
-
 
 
 
@@ -294,6 +285,7 @@ export function horizontalLoop(items, config) {
         populateTimeline();
         populateOffsets();
         window.addEventListener("resize", onResize);
+        
         function toIndex(index, vars) {
             vars = vars || {};
             (Math.abs(index - curIndex) > length / 2) && (index += index > curIndex ? -length : length); // always go in the shortest direction
@@ -334,6 +326,56 @@ export function horizontalLoop(items, config) {
         tl.next = vars => { toIndex(tl.current() + 1, vars) };
         tl.previous = vars => toIndex(tl.current() - 1, vars);
         tl.times = times;
+        
+        // Добавляем метод destroy для полного отключения слайдера
+        tl.destroy = () => {
+            // Останавливаем и очищаем timeline
+            tl.pause();
+            tl.kill();
+            
+            // Убираем прослушиватель resize
+            window.removeEventListener("resize", onResize);
+            
+            // Очищаем таймауты
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+                timeoutId = null;
+            }
+            
+            // Убираем draggable если есть
+            if (tl.draggable) {
+                tl.draggable.kill();
+                if (proxy && proxy.parentNode) {
+                    proxy.parentNode.removeChild(proxy);
+                }
+                // Останавливаем отслеживание InertiaPlugin
+                if (typeof InertiaPlugin !== "undefined") {
+                    InertiaPlugin.untrack(proxy, "x");
+                }
+            }
+            
+            // Сбрасываем все CSS стили для элементов
+            gsap.set(items, {
+                clearProps: "all" // Убирает все inline стили, установленные GSAP
+            });
+            
+            // Убираем CSS классы, если они были добавлены
+            items.forEach((el) => {
+                el.classList.remove('closestSlide');
+            });
+            
+            // Очищаем все переменные
+            items = null;
+            times = null;
+            widths = null;
+            spaceBefore = null;
+            xPercents = null;
+            container = null;
+            proxy = null;
+            
+            console.log('horizontalLoop destroyed');
+        };
+        
         tl.progress(1, true).progress(0, true); // pre-render for performance
         if (!config.paused) {
             if (config.reversed) {

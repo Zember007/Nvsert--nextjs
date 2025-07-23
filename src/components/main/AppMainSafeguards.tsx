@@ -149,7 +149,7 @@ const AppMainSafeguards = () => {
 
     return () => {
       if (timeLine.current) {
-        timeLine.current.kill();
+        timeLine.current.destroy();
       }
     }
   }, [widthWindow])
