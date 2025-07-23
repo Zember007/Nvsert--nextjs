@@ -115,14 +115,11 @@
 
 .close {
     display: block;
-    width: 32px;
-    height: 32px;
+    width: 26px;
+    height: 26px;
     float: right;
     cursor: pointer;
-    right: 0;
-    top: 0;
-    position: absolute;
-    overflow: hidden;
+    position: relative;
     z-index: 3000;
 
     @media (max-width: $media-s) {
@@ -138,8 +135,8 @@
 .close-button-block {
     position: relative;
     overflow: hidden;
-    width: 32px;
-    height: 16px;
+    width: 26px;
+    height: 13px;
 
     @media (max-width: $media-s) {
         width: 24px;
@@ -156,7 +153,7 @@
     left: calc(50% - 1px);
     display: block;
     width: 2px;
-    height: 25px;
+    height: 30px;
     transform-origin: bottom center;
     background: #93969D;
     transition: all ease-out 280ms;

@@ -48,7 +48,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ reset, countTrigger, 
     }
 
     useEffect(() => {
-        if (defaultModalActive) {            
+        if (defaultModalActive) {
             animation()
         } else {
             reset()
@@ -79,14 +79,16 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ reset, countTrigger, 
                                 <div id='modal-default' className=" modal__content main-form">
                                     <button
                                         onClick={() => { setDefaultModalActive(false) }}
-                                        className={`no-drag close !top-[25px] !right-[25px]`}>
-                                        <div className="in">
-                                            <div className="close-button-block "></div>
-                                            <div className="close-button-block "></div>
-                                        </div>
-                                        <div className="out">
-                                            <div className="close-button-block "></div>
-                                            <div className="close-button-block "></div>
+                                        className={`no-drag absolute top-[20px] right-[20px] p-[5px] z-[3000]`}>
+                                        <div className="close">
+                                            <div className="in">
+                                                <div className="close-button-block "></div>
+                                                <div className="close-button-block "></div>
+                                            </div>
+                                            <div className="out">
+                                                <div className="close-button-block "></div>
+                                                <div className="close-button-block "></div>
+                                            </div>
                                         </div>
                                     </button>
                                     {
