@@ -148,6 +148,7 @@ export function initSlider({ onChangeFunction, onDragFunction, mobile }) {
 
     loop.destroy = () => {
         loop.kill();
+        loop.clear();  
         if (nextButton) nextButton.removeEventListener("click", loop.next);
         if (prevButton) prevButton.removeEventListener("click", loop.previous);
         slides.forEach(item => {
