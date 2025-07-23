@@ -69,7 +69,7 @@ const AppInput = ({ title, defaultValue, disable, fail, message = true, inputNam
                     name={inputName}
                     placeholder={title}
                     autoComplete={autocomplete}
-                    disabled={disable || false}
+                    /* disabled={disable || false} */
                     onInput={(e) => { changeInput(e) }}
                     onFocus={(e) => {
                         if (onFocus) {
