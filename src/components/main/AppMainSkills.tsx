@@ -1,5 +1,5 @@
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from "gsap";
 import { Draggable } from "gsap/Draggable";
 import { skills } from './utils';
@@ -27,12 +27,7 @@ const AppMainSkills = () => {
         const observer = new IntersectionObserver(
             ([entry]) => {
                 setIsVisible(entry.isIntersecting);
-                if (entry.isIntersecting && ref.current) {
-                    observer.unobserve(ref.current);
-                    if (timeLine.current) {
-                        timeLine.current.next({ ease: "power3", duration: 0.725 });
-                    }
-                }
+                if (entry.isIntersecting && ref.current) observer.unobserve(ref.current); timeLine.current?.next({ ease: "power3", duration: 0.725 });
             },
             { threshold: 0.3 }
         );
@@ -41,90 +36,55 @@ const AppMainSkills = () => {
             observer.observe(ref.current);
         }
 
+
+
+
         return () => {
             if (ref.current) {
                 observer.unobserve(ref.current);
             }
+
         };
     }, []);
 
     const timeLine = useRef<any>(null)
     const [activeIndex, setActive] = useState<number>(0)
-    const lastWidth = useRef<number | null>(null);
 
-    // Функция для полной очистки таймлайна
-    const cleanupTimeline = useCallback(() => {
-        if (timeLine.current) {
-            // Используем новый метод destroy из horizontalLoop
-            if (timeLine.current.destroy) {
-                timeLine.current.destroy();
-            } else {
-                // Fallback для старой версии
-                if (timeLine.current.pause) {
-                    timeLine.current.pause();
-                }
-                
-                if (timeLine.current.kill) {
-                    timeLine.current.kill();
-                }
-                
-                // Очищаем все GSAP свойства со слайдов
-                const slides = gsap.utils.toArray('[data-slider="slide-skill"]');
-                slides.forEach((item: any) => {
-                    gsap.set(item, { clearProps: "all" });
-                    // Убедимся что Draggable тоже очищен
-                    if (item._gsap) {
-                        gsap.killTweensOf(item);
-                    }
-                });
-            }
-            
-            timeLine.current = null;
-        }
-    }, []);
 
     useEffect(() => {
-        // Проверяем, действительно ли нужно пересоздать таймлайн
-        const isMobile = widthWindow && widthWindow < 1240;
-        const wasLastMobile = lastWidth.current && lastWidth.current < 1240;
-        
-        // Если статус мобильной версии не изменился и секция не видна, не пересоздаем
-        if (!isVisibleSection || (isMobile === wasLastMobile && lastWidth.current !== null)) {
-            return;
-        }
 
-        lastWidth.current = widthWindow;
+        const slides = gsap.utils.toArray('[data-slider="slide-skill"]');
 
-        // Полная очистка перед созданием нового таймлайна
-        cleanupTimeline();
+        if (widthWindow && widthWindow < 1240 && isVisibleSection) {
 
-        if (isMobile) {
-            const slides = gsap.utils.toArray('[data-slider="slide-skill"]');
-            
-            if (slides.length > 0) {
-                const gap = (widthWindow - 320) / 2;
-                
-                timeLine.current = horizontalLoop(slides, {
-                    paused: true,
-                    center: true,
-                    draggable: true,
-                    gap: gap,
-                    snap: true,
-                    onChange: (index: number) => {
-                        setActive(index);
-                    }
-                });
-            }
+            const gap = (widthWindow - 320) / 2
+            timeLine.current = horizontalLoop(slides, {
+                paused: true,
+                center: true,
+                draggable: true,
+                gap: gap,
+                snap: true,
+                onChange: (index: number) => {
+                    setActive(index)
+                }
+            });
+
+
+
+
         } else {
-            // Сбрасываем активный индекс для десктопа
-            setActive(0);
+            if (timeLine.current) {
+                timeLine.current.kill()
+                timeLine.current.clear()
+                slides.forEach((item: any) => {
+                    gsap.set(item, { clearProps: "all" });
+                  });
+                timeLine.current = null
+            }
         }
 
-        // Cleanup function для useEffect
-        return () => {
-            cleanupTimeline();
-        };
-    }, [widthWindow, isVisibleSection, cleanupTimeline])
+
+    }, [widthWindow, isVisibleSection])
 
     const { setButtonRef, setWrapperRef } = useButton()
 
@@ -161,9 +121,7 @@ const AppMainSkills = () => {
                         {skillsData.map((_, i) => (
                             <div
                                 onClick={() => {
-                                    if (timeLine.current && timeLine.current.toIndex) {
-                                        timeLine.current.toIndex(i, { ease: "power3", duration: 0.725 });
-                                    }
+                                    timeLine.current.toIndex(i, { ease: "power3", duration: 0.725 })
                                 }}
                                 key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
                         ))}
@@ -172,7 +130,7 @@ const AppMainSkills = () => {
                 </div>
 
                 <h3 className='skills__wrapper-desc arial'>
-                    {filterPrepositions('Наша компания признана одной из ведущих на рынке сертификации в Российской Федерации и стран Евразийского Экономического Союза. Специалисты NVSERT предоставляют широкий спектр услуг, направленный на оформление обязательной и добровольной сертификации, декларирования, соответствия требованиям технических регламентов и других документов, подтверждающих качество выпускаемой продукции.')}
+                    {filterPrepositions('Наша компания признана одной из ведущих на рынке сертификации в Российской Федерации и стран Евразийского Экономического Союза. Специалисты NVSERT предоставляют широкий спектр услуг, направленный на оформление обязательной и добровольной сертификации, декларирования, соответствия требованиям технических регламентов и других документов, подтверждающих качество выпускаемой продукции.')}
                 </h3>
 
                 <div className="tariff-wrap xl:w-[250px] w-[280px] m:mx-0 mx-auto mt-[20px] " ref={setWrapperRef}>
