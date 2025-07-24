@@ -16,20 +16,26 @@ import Image17 from '@/assets/images/main-gallery/17.webp';
 import Image18 from '@/assets/images/main-gallery/18.webp';
 import Image19 from '@/assets/images/main-gallery/19.webp';
 import Image20 from '@/assets/images/main-gallery/20.webp';
+import Image21 from '@/assets/images/main-gallery/21.webp';
+import Image22 from '@/assets/images/main-gallery/22.webp';
+import Image23 from '@/assets/images/main-gallery/23.webp';
 import { StaticImageData } from 'next/image';
 
 type NavigationImg = {
     [key: string]: { img: StaticImageData }[];
-  };
+};
 
 export const navigationImg: NavigationImg = {
     tekhDokumentatsiya: [
         { img: Image09 },
-        { img: Image11 }
+        { img: Image11 },
+        { img: Image22 },
+        { img: Image23 }
     ],
     rospotrebnadzor: [
         { img: Image12 },
-        { img: Image15 }
+        { img: Image15 },
+        { img: Image21 }
     ],
     iso: [
         { img: Image16 },

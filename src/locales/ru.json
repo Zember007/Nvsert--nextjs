@@ -712,13 +712,16 @@
         },
         "rospotrebnadzor": {
             "title": "Роспотребнадзор",
-            "rospotrebnadzor1": "Свидетельство о государственной регистрации",
-            "rospotrebnadzor2": "Экспертное заключение"
+            "rospotrebnadzor1": "Свидетельство о государственной регистрации (СГР)",
+            "rospotrebnadzor2": "Экспертное заключение (ЭЗ)",
+            "rospotrebnadzor3": "Отказное письмо Роспотребнадзора "
         },
         "tekhDokumentatsiya": {
             "title": "Тех. документация",
             "tekhDokumentatsiya1": "Протокол испытаний",
-            "tekhDokumentatsiya2": "Технические условия"
+            "tekhDokumentatsiya2": "Технические условия",
+            "tekhDokumentatsiya3": "Паспорт изделия",
+            "tekhDokumentatsiya4": "Обоснования безопасности"
         }
     },
     "copied": "Скопировано",
