@@ -217,7 +217,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
         <motion.div
             animate={controls}
             initial={{ x: 0 }}
-            className={`relative main-form h-[475px] s:h-[593px] border border-solid border-[#93969d]  ${bg ? 'bg-[#93969d26]  ' : ''} p-[20px] s:p-[40px] max-w-[320px] s:max-w-[400px] flex flex-col s:gap-[20px] gap-[15px]  rounded-[6px]`}>
+            className={`relative main-form h-[475px] s:h-[590px] border border-solid border-[#93969d]  ${bg ? 'bg-[#93969d26]  ' : ''} py-[30px] px-[20px] s:p-[40px] max-w-[320px] s:max-w-[400px] flex flex-col gap-[20px] rounded-[6px]`}>
             {successMessageVisible && <FlightSuccess closeIcon={bg} text="Спасибо за заявку" close={() => { setSuccessMessageVisible(false) }} />}
 
 
@@ -227,7 +227,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
             <div className={`${successMessageVisible && 'opacity-0'}`}>
                 <AppValidationObserver methods={methods} onSubmit={onSubmit}>
                     {({ register, errors }) => (
-                        <div className="flex flex-col s:gap-[20px] gap-[15px]">
+                        <div className="flex flex-col gap-[20px]">
                             <AppInput
                                 title={'ФИО'}
                                 inputName="name"
