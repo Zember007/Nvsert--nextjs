@@ -1,9 +1,8 @@
 'use client'
 import '@/assets/styles/base.scss';
-import 'simplebar-react/dist/simplebar.min.css';
 import '@/assets/lib/react-photo-view/dist/react-photo-view.css';
 import AppHeader from '@/components/general/AppHeader';
-import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
+import { ReactNode, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AppFooter from '@/components/general/AppFooter';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
@@ -15,7 +14,7 @@ import { AppDispatch, RootState } from '@/config/store';
 import { usePathname } from 'next/navigation';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import useWindowWidth from '@/hook/useWindowWidth';
+import CustomScrollbar from '@/components/general/CustomScrollbar';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,7 +23,6 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
     const dispatch = useDispatch<AppDispatch>();
     const pathname = usePathname();
 
-    const scrollbarRef = useRef<HTMLDivElement>(null)
     const metadata = useSelector((state: RootState) => state.metadata);
     const { transparent, setDefaultModalActive, defaultModalActive, defaultModalName, resetCountModal, defaultModalCount } = useHeaderContext();
     const { calcPageBodyClass } = useSelector((state: RootState) => state.documents);
@@ -78,182 +76,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
         };
     }, [dispatch]);
 
-    const widthWindow = useWindowWidth()
 
-    useEffect(() => {
-        if (!scrollbarRef.current) return
-        let currentScroll = 0;
-        let targetScroll = 0;
-        let isScrolling = false;
-
-        // Инициализируем текущую прокрутку
-        const initScroll = () => {
-            currentScroll = window.scrollY;
-            targetScroll = currentScroll;
-        };
-
-        const smoothScroll = () => {
-            if(document.body.style.overflow === 'hidden') return
-            const diff = targetScroll - currentScroll;
-            if (Math.abs(diff) < 0.1) {
-                isScrolling = false;
-                return;
-            }
-            currentScroll += diff * 0.15;
-            window.scrollTo(0, currentScroll);
-            requestAnimationFrame(smoothScroll);
-        };
-
-        const handleWheel = (e: WheelEvent) => {
-            e.preventDefault();
-            targetScroll += e.deltaY;
-
-            // Ограничим targetScroll в пределах документа
-            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-            targetScroll = Math.max(0, Math.min(targetScroll, maxScroll));
-
-            if (!isScrolling) {
-                isScrolling = true;
-                requestAnimationFrame(smoothScroll);
-            }
-        };
-
-        initScroll();
-        window.addEventListener('wheel', handleWheel, { passive: false });
-
-        let isTicking = false;
-        let isDragging = false;
-        let startY = 0;
-        let startScrollTop = 0;
-        let scrollPadding = 2;
-
-        const scrollbar = scrollbarRef.current;
-
-        if (!scrollbar && widthWindow && widthWindow < 768) return
-
-        // Обновление позиции и высоты ползунка при прокрутке
-        function updateScrollbar() {
-            const scrollTop = window.scrollY || window.pageYOffset;
-            const scrollHeight = document.documentElement.scrollHeight;
-            const clientHeight = window.innerHeight || document.documentElement.clientHeight;
-            const maxScroll = scrollHeight - clientHeight;
-            // Высота ползунка
-            const scrollbarHeight = (clientHeight / scrollHeight) * clientHeight;
-            // Позиция ползунка
-            const maxTop = clientHeight - scrollbarHeight - scrollPadding * 2;
-            const topPercent = maxScroll > 0 ? (scrollTop / maxScroll) * maxTop : 0;
-
-            // Обновляем CSS-переменные
-            scrollbar.style.setProperty('--scrollY', `${topPercent}px`);
-            scrollbar.style.setProperty('--scrollbarHeight', `${scrollbarHeight}px`);
-        }
-
-        function scrollMove(e: TouchEvent | MouseEvent) {
-            if (!isDragging || document.body.style.overflow === 'hidden') return;
-
-            const scrollHeight = document.documentElement.scrollHeight;
-            const clientHeight = window.innerHeight || document.documentElement.clientHeight;
-            const maxScroll = scrollHeight - clientHeight;
-            const scrollbarHeight = (clientHeight / scrollHeight) * clientHeight;
-            const maxTop = clientHeight - scrollbarHeight - scrollPadding * 2;
-
-            // Вычисляем смещение
-            let clientY = 0
-
-            if (e instanceof TouchEvent) {
-                clientY = e.touches[0].clientY
-            } else {
-                clientY = e.clientY
-            }
-
-            const deltaY = clientY - startY;
-            const scrollDelta = (deltaY / maxTop) * maxScroll;
-
-            // Прокручиваем страницу
-            window.scrollTo({
-                top: startScrollTop + scrollDelta,
-                behavior: 'auto'
-            });
-        }
-
-        function startScroll(e: TouchEvent | MouseEvent) {
-
-            isDragging = true;
-            let clientY = 0
-
-            if (e instanceof TouchEvent) {
-                clientY = e.touches[0].clientY
-            } else {
-                clientY = e.clientY
-            }
-            startY = clientY;
-            startScrollTop = window.scrollY || window.pageYOffset;
-            e.preventDefault();
-
-        }
-
-        window.addEventListener('resize', updateScrollbar)
-
-        // Обработчик прокрутки
-        window.addEventListener('scroll', () => {
-
-            if (!isScrolling) {
-                currentScroll = window.scrollY;
-                targetScroll = currentScroll;
-            }
-
-            if (!isTicking) {
-                requestAnimationFrame(() => {
-                    updateScrollbar();
-                    isTicking = false;
-                });
-                isTicking = true;
-            }
-        });
-
-        // Обработчики для мыши
-        scrollbar.addEventListener('mousedown', startScroll);
-
-        document.addEventListener('mousemove', scrollMove);
-
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-        });
-
-        // Обработчики для сенсорных устройств
-        scrollbar.addEventListener('touchstart', startScroll);
-
-        document.addEventListener('touchmove', scrollMove);
-
-        document.addEventListener('touchend', () => {
-            isDragging = false;
-        });
-
-        updateScrollbar()
-
-        return () => {
-            window.removeEventListener('wheel', handleWheel);
-
-            window.removeEventListener('scroll', () => { });
-
-            scrollbar.removeEventListener('mousedown', startScroll);
-
-            document.removeEventListener('mousemove', scrollMove);
-
-            document.removeEventListener('mouseup', () => {
-                isDragging = false;
-            });
-
-            scrollbar.removeEventListener('touchstart', startScroll);
-
-            document.removeEventListener('touchmove', scrollMove);
-
-            document.removeEventListener('touchend', () => {
-                isDragging = false;
-            });
-
-        };
-    }, [scrollbarRef, widthWindow])
 
     const [classBody, setClassBody] = useState('transparent-header');
 
@@ -295,7 +118,7 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
                     <AppFooter />
                 </main>
                 <div className="bg-noise"></div>
-                <div ref={scrollbarRef} className="scrollbar"></div>
+                <CustomScrollbar target="window" />
             </body>
         </>
     );

@@ -29,7 +29,7 @@ input:auto-fill {
 
   &__input,
   &__textarea {
-
+    width: 100%;
     z-index: 1;
     @include transition();
     display: block;
@@ -141,6 +141,15 @@ input:auto-fill {
 
       @media (max-width: $media-s) {
         top: 15px;
+      }
+
+      &.focused {
+        top: 0px;
+
+        @media (max-width: $media-s) {
+          top: 15px;
+          opacity: 0;
+        }
       }
     }
 

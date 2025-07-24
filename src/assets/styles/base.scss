@@ -395,7 +395,7 @@ body {
     right: 0;
     top: 0;
     height: 100%;
-    position: fixed;
+    position: absolute;
     width: 13px;
     padding: 2px;
 
@@ -411,8 +411,12 @@ body {
         border-radius: 3px;
     }
 
-    @media (max-width: 768px) {
-        display: none;
+    &.window {
+        position: fixed;
+
+        @media (max-width: 768px) {
+            display: none;
+        }
     }
 }
 

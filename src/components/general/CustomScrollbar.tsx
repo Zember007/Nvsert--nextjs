@@ -1,0 +1,25 @@
+import React from 'react';
+import { useCustomScroll, CustomScrollOptions } from '@/hook/useCustomScroll';
+
+interface CustomScrollbarProps extends CustomScrollOptions {
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+const CustomScrollbar: React.FC<CustomScrollbarProps> = ({
+  className = 'scrollbar window',
+  style,
+  ...scrollOptions
+}) => {
+  const { scrollbarRef } = useCustomScroll(scrollOptions);
+
+  return (
+    <div 
+      ref={scrollbarRef} 
+      className={className}
+      style={style}
+    />
+  );
+};
+
+export default CustomScrollbar; 
