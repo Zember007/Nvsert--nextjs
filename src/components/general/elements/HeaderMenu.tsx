@@ -157,41 +157,45 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
                                 className="header-nav__list min-w-full flex-shrink-0"
                             >
                                 {level.items.map((item, index_item) =>
-                                    item.href ? (
-                                        <Link
-                                            key={item.id}
-                                            href={item.href}
-                                            className={`${index_item === 0 ? 'first-child' : ''} ${item.img ? 'have-img' : ''} header__menu-mob-item`}
-                                        >
-                                            <div className="flex items-center gap-[20px]">
-                                                {item.img &&
-                                                    <Image src={item.img} alt="document" width={43} height={60} />
-                                                }
-                                                <span className="text-[18px] text-[#000]">{item.title}</span>
-                                            </div>
-                                            {item.children && (
-                                                <Image src={ArrowIcon} alt="more" width={20} height={20} />
-                                            )}
-                                        </Link>
-                                    ) : (
-                                        <button
-                                            key={item.id}
-                                            onClick={() => handleItemClick(item)}
-                                            className={`${index_item === 0 ? 'first-child' : ''} ${item.img ? 'have-img' : ''} header__menu-mob-item`}
-                                        >
-                                            <div className="flex items-center gap-[20px]">
-                                                {item.img &&
-                                                    <Image src={item.img} alt="document" width={43} height={60} />
-                                                }
-                                                <span className="text-[18px] text-[#000]">{item.title}</span>
-                                            </div>
-                                            {item.children && (
-                                                <Image
-                                                    className='translate-x-[5px]'
-                                                    src={ArrowIcon} alt="more" width={20} height={20} />
-                                            )}
-                                        </button>
-                                    )
+                                    <li key={item.id} className='w-full'>
+                                        {
+                                            item.href ? (
+                                                <Link
+
+                                                    href={item.href}
+                                                    className={`${index_item === 0 ? 'first-child' : ''} ${item.img ? 'have-img' : ''} header__menu-mob-item`}
+                                                >
+                                                    <div className="flex items-center gap-[20px]">
+                                                        {item.img &&
+                                                            <Image src={item.img} alt="document" width={43} height={60} />
+                                                        }
+                                                        <span className="text-[18px] text-[#000]">{item.title}</span>
+                                                    </div>
+                                                    {item.children && (
+                                                        <Image src={ArrowIcon} alt="more" width={20} height={20} />
+                                                    )}
+                                                </Link>
+                                            ) : (
+                                                <button
+
+                                                    onClick={() => handleItemClick(item)}
+                                                    className={`${index_item === 0 ? 'first-child' : ''} ${item.img ? 'have-img' : ''} header__menu-mob-item`}
+                                                >
+                                                    <div className="flex items-center gap-[20px]">
+                                                        {item.img &&
+                                                            <Image src={item.img} alt="document" width={43} height={60} />
+                                                        }
+                                                        <span className="text-[18px] text-[#000]">{item.title}</span>
+                                                    </div>
+                                                    {item.children && (
+                                                        <Image
+                                                            className='translate-x-[5px]'
+                                                            src={ArrowIcon} alt="more" width={20} height={20} />
+                                                    )}
+                                                </button>
+                                            )
+                                        }
+                                    </li>
                                 )}
                             </ul>
                         ))}
