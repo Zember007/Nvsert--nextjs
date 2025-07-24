@@ -262,7 +262,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                     />
                                 </div>
 
-                                <div id={`bounce-checkbox${ids}`} className="pl-[10px] flex items-center gap-[30px]"
+                                <div id={`bounce-checkbox${ids}`} className="s:pl-[10px] pl-[7px] flex items-center gap-[30px]"
                                     onClick={() => { clearErrors('contact') }}
                                 >
                                     <AppCheckbox id={`check-phone${ids}`} successful={contactData.phone !== ''} focus={focusContact} fail={failCheck} checked={isPhone || contactData.phone !== ''}

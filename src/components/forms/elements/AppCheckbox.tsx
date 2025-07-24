@@ -30,7 +30,7 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
     const labelRef = React.useRef<HTMLLabelElement>(null);
 
     return (
-        <div className="flex items-center gap-[6px] no-drag"
+        <div className="flex items-center s:gap-[6px] gap-[4px] no-drag"
             onClick={(e) => {
                 if (labelRef.current?.contains(e.target as Node)) return;
                 onChange(!checked)
@@ -66,7 +66,7 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
                     </svg>
                 </span>
             </label>
-            <span className={` transition-all duration-300 peer-checked:text-[#000] ${whiteBox ? 'text-[#FFF]' : 'text-[#000]'} ${fail && '!text-[#FF3030]'}`}>{label}</span>
+            <span className={` transition-all duration-300 peer-checked:text-[#000] s:text-[16px] text-[14px] ${whiteBox ? 'text-[#FFF]' : 'text-[#000]'} ${fail && '!text-[#FF3030]'}`}>{label}</span>
         </div>
     );
 };
