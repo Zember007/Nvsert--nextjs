@@ -396,7 +396,7 @@ body {
     top: 0;
     height: 100%;
     position: absolute;
-    width: 13px;
+    width: 8px;
     padding: 2px;
 
     &::before {
@@ -413,6 +413,7 @@ body {
 
     &.window {
         position: fixed;
+        width: 13px;
 
         @media (max-width: 768px) {
             display: none;
