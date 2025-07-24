@@ -100,7 +100,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
         <motion.div
             animate={controls}
             initial={{ x: 0 }}
-            className='s:h-[590px] h-[475px] border border-solid border-[#93969d] rounded-[6px] flex flex-col justify-between py-[30px] px-[20px] s:p-[40px] relative'>
+            className='s:h-[590px] h-[475px] border border-solid border-[#93969d] rounded-[6px] flex flex-col s:gap-[20px] s:justify-start justify-between py-[30px] px-[20px] s:p-[40px] relative'>
 
             <div className={`${successMessageVisible && 'opacity-0'} flex flex-col s:gap-[44px] gap-[20px]`}>
                 <span className={`form__title`}>Заказать звонок</span>
