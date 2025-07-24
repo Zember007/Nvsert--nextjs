@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Image from "next/image";
 import ImgCall from '@/assets/images/order-call.png'
+import ImgCallMob from '@/assets/images/order-call-mob.png'
 import { useButton } from "@/hook/useButton";
 import { useEffect, useRef, useState } from "react";
 import FlightSuccess from "../modals/FlightSuccess";
@@ -101,11 +102,12 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
             initial={{ x: 0 }}
             className='s:h-[590px] h-[475px] border border-solid border-[#93969d] rounded-[6px] flex flex-col justify-between py-[30px] px-[20px] s:p-[40px] relative'>
 
-            <div className={`${successMessageVisible && 'opacity-0'} flex flex-col gap-[44px]`}>
+            <div className={`${successMessageVisible && 'opacity-0'} flex flex-col s:gap-[44px] gap-[20px]`}>
                 <span className={`form__title`}>Заказать звонок</span>
 
-                <div className="w-full overflow-hidden pointer-events-none rounded-[4px]">
-                    <Image className="w-full" src={ImgCall} alt='order-call'></Image>
+                <div className="w-full s:h-[113px] h-[120px] overflow-hidden pointer-events-none rounded-[4px]">
+                    <Image className="w-full s:hidden" src={ImgCallMob} alt='order-call'></Image>
+                    <Image className="w-full hidden s:block" src={ImgCall} alt='order-call'></Image>
                 </div>
             </div>
 
