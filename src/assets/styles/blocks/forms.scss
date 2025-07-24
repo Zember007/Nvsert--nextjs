@@ -44,7 +44,7 @@ input:auto-fill {
     resize: none;
     outline: none;
     color: #000;
-    
+
 
     &.error {
       color: #FF3030;
@@ -73,13 +73,14 @@ input:auto-fill {
 
     }
 
-    &:focus {      
+    &:focus {
 
       border: 1px solid #000;
       z-index: 1;
 
       &~.field__title-top {
         top: 0px;
+
         @media (max-width: $media-s) {
           top: 15px;
           opacity: 0;
@@ -99,12 +100,16 @@ input:auto-fill {
   }
 
   &__textarea {
-    min-height: 100px;
-    height: 100px;
-    resize: vertical;
+    min-height: 107px;
+    height: 107px;
+    resize: none;
+    line-height: 1.2;
+
     @media (max-width: $media-s) {
-      min-height: 75px;
-      height: 75px;
+      min-height: 98px;
+      height: 98px;
+      line-height: 1.3;
+
     }
   }
 
@@ -405,6 +410,6 @@ input:-webkit-autofill:focus {
   }
 
   &__button {
-    @apply overflow-hidden  p-[9px] px-[20px] relative flex items-center justify-center border border-solid border-[#34446D] bg-[#34446D] text-[18px] s:text-[20px] text-[#FFF]  rounded-[4px];
+    @apply overflow-hidden p-[9px] px-[20px] relative flex items-center justify-center border border-solid border-[#34446D] bg-[#34446D] text-[18px] s:text-[20px] text-[#FFF] rounded-[4px];
   }
 }
