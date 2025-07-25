@@ -79,7 +79,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ reset, countTrigger, 
                                 <div id='modal-default' className=" modal__content main-form">
                                     <button
                                         onClick={() => { setDefaultModalActive(false) }}
-                                        className={`no-drag absolute s:top-[20px] s:right-[20px] top-[7px] right-[7px] s:p-[5px] p-[6px] z-[3000]`}>
+                                        className={`no-drag absolute s:top-[20px] s:right-[20px] top-[5px] right-[5px] s:p-[5px] p-[6px] z-[3000]`}>
                                         <div className="close">
                                             <div className="in">
                                                 <div className="close-button-block "></div>
