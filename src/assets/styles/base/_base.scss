@@ -49,6 +49,8 @@ body {
   letter-spacing: $letter-spacing;
   color: $typography-primary;
 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
  
 
   &.overflow {
