@@ -5,16 +5,15 @@ import { horizontalLoop } from '@/scripts/slider';
 import { useButton } from '@/hook/useButton';
 import Image from 'next/image';
 import gsap from 'gsap';
-import Draggable from "gsap/dist/Draggable";
-import InertiaPlugin from "@/scripts/InertiaPlugin";
 import { useTranslation } from 'react-i18next';
+import useWindowWidth from '@/hook/useWindowWidth';
 
-gsap.registerPlugin(Draggable, InertiaPlugin);
 
 
 
 const AppMainFeedback = () => {
 
+    const widthWindow = useWindowWidth();
     const ref = useRef(null)
 
     const [activeIndex, setActive] = useState<number>(0)
@@ -78,7 +77,7 @@ const AppMainFeedback = () => {
             loop.destroy();
             loop1.destroy();
         }
-    }, [])
+    }, [widthWindow])
 
     const readyPhoto = () => {
         setTimeout(() => {
