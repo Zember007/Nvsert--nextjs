@@ -353,6 +353,12 @@ export function horizontalLoop(items, config) {
                     InertiaPlugin.untrack(proxy, "x");
                 }
             }
+
+            if(items){
+                items.forEach((el) => {
+                    el.classList.remove('closestSlide');
+                });
+            }
             
             // Сбрасываем все CSS стили для элементов
             gsap.set(items, {
@@ -360,9 +366,7 @@ export function horizontalLoop(items, config) {
             });
             
             // Убираем CSS классы, если они были добавлены
-            items.forEach((el) => {
-                el.classList.remove('closestSlide');
-            });
+            
             
             // Очищаем все переменные
             items = null;

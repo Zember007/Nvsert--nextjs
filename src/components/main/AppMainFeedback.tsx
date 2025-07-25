@@ -75,8 +75,8 @@ const AppMainFeedback = () => {
 
 
         return () => {
-            loop.kill();
-            loop1.kill();
+            loop.destroy();
+            loop1.destroy();
         }
     }, [])
 
