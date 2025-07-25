@@ -144,12 +144,25 @@ input:auto-fill {
         top: 15px;
       }
 
+      &.textarea-title {
+        top: 35px;
+
+        @media (max-width: $media-s) {
+          top: 10px;
+        }
+      }
+
       &.focused {
         top: 0px;
 
         @media (max-width: $media-s) {
           top: 15px;
           opacity: 0;
+        }
+
+      &.textarea-title {
+        @media (max-width: $media-s) {
+          top: 10px;
         }
       }
     }
