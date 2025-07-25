@@ -280,7 +280,11 @@ export function horizontalLoop(items, config) {
             onResize = () => refresh(true),
             proxy;
 
-        gsap.set(items, { x: offsetLeft || 0 });
+        gsap.set(items, { x:   offsetLeft || 0 });
+
+        console.log('items',window.innerWidth);
+        
+
         populateWidths();
         populateTimeline();
         populateOffsets();
@@ -354,7 +358,7 @@ export function horizontalLoop(items, config) {
                 }
             }
 
-            if(items){
+            if(items && items.length){
                 items.forEach((el) => {
                     el.classList.remove('closestSlide');
                 });
@@ -476,6 +480,7 @@ export function horizontalLoop(items, config) {
         timeline = tl;
         return () => window.removeEventListener("resize", onResize);
     });
+    timeline.next({ ease: "power3", duration: 0.725 })
     return timeline;
 }
 
