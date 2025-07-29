@@ -171,6 +171,7 @@ const AppMainSafeguards = () => {
               guarantees.map((item, index) => (
                 <div
                   key={index}
+                  className='w-full'
                   data-slider="slide-safeguard"
                 >
                   <SafeguardBlock
