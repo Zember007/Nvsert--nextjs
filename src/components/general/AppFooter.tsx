@@ -128,8 +128,8 @@ const AppFooter = () => {
 
   return (
     <footer ref={ref} className="footer grid xl:grid-cols-2 gap-[2px]">
-      <div className="footer__white change-style xl:row-start-auto row-start-2 xxxl:gap-[226px] xxxl:justify-start justify-between">
-        <p className="xl:block hidden text-[18px] font-light col-start-1 col-end-3 whitespace-nowrap">© 2025 NVSERT</p>
+      <div className="footer__white change-style xl:row-start-auto row-start-2   justify-between">
+        <p className="xl:block hidden text-[18px] font-light col-start-1 col-end-3 whitespace-nowrap ml-[21px]">© 2025 NVSERT</p>
 
         <div className="xl:w-auto w-full xl:mx-0 mx-auto xl:max-w-full max-w-[280px]  flex gap-[10px] items-start xl:flex-row flex-col ">
           {menuItems.map((item, i) => (
@@ -284,13 +284,13 @@ const AppFooter = () => {
         </PromtModal>
       </div>
 
-      <div className="footer__dark bottom-top gap-[76px]">
-        <div className="xl:flex hidden text-[16px] items-start  flex-col gap-[18px] font-ligh whitespace-nowrap">
+      <div className="footer__dark bottom-top xl:justify-between">
+        <div className="xl:flex hidden ml-[21px] text-[16px] items-start  flex-col gap-[18px] font-ligh whitespace-nowrap">
           <span>{t("footer.inn")}</span>
           <span>{t("footer.company")}</span>
         </div>
 
-        <div className="xl:max-w-full w-full xl:mx-0 mx-auto max-w-[280px]  flex gap-[8px] flex-col">
+        <div className="xl:max-w-full w-full xl:mx-0 mx-auto max-w-[280px]  flex gap-[8px] flex-col xl:items-end">
           <AppMenuItem
             className=" xl:!h-[35px] !h-auto !text-left"
 
@@ -309,7 +309,7 @@ const AppFooter = () => {
       </div>
 
       <div className="footer__dark xl:justify-start justify-center gap-[16px] xl:h-auto h-[96px]">
-        <Image src={AudioLogo} alt="audiosector" />
+        <Image src={AudioLogo} alt="audiosector" className="xl:ml-[31px]"/>
         <div className="pl-[16px] border-l border-[#FFF] border-solid flex flex-col gap-[4px]">
           <div className="xl:h-[23px] h-[36px] overflow-hidden text-[#FFF]">
             <div ref={stepsRef}>

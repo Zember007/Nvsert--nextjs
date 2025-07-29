@@ -37,17 +37,17 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
         <div
             className={` document-wrapper-border group/main`}
         >
-            <div
-                className={`!left-[6px] !right-[6px] document__border ${!active ? 'group-active/main:!border-[transparent]  group-hover/main:!border-[transparent]' : 'active'}`}
+             <div
+                className={`document__border ${!active ? 'group-active/main:!border-[transparent] group-hover/main:!border-[transparent]' : 'active'}`}
             />
-            <div className={` flex flex-col rounded-[6px]   ${active ? '' : 'bg-[#FFFFFF26] hover:bg-[#34446D33]'} z-[0]`}>
+            <div className={`m:mx-[-23px] flex flex-col rounded-[6px] relative  ${active ? '' : 'bg-[#FFFFFF26] hover:bg-[#34446D33]'} z-[0]`}>
 
                 <div className={`pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[-1] rounded-[6px]  ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-[transparent]  border-solid border`}></div>
                 <div
                     onClick={() => {
                         setActive(!active)
                     }}
-                    className={`${active ? ' active !bg-[#5B6788] !shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] ' : ' '} document__navigation-bg  bg-[transparent]   h-[70px] relative  active:bg-[#5B6788]  active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset]   group cursor-pointer  rounded-[6px]  flex items-center gap-[10px] m:gap-[40px] m:pr-[10px] pr-[20px] transition-scale`}>
+                    className={`${active ? ' active !bg-[#5B6788] !shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] ' : ' '} document__navigation-bg  bg-[transparent]   h-[70px] relative  active:bg-[#5B6788]  active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset]   group cursor-pointer  rounded-[6px]  flex items-center gap-[10px] m:gap-[40px] m:pr-[23px] pr-[20px] transition-scale`}>
 
                     <div className={`${active ? 'scale-[0.9]' : ''} transition-scale group-active:scale-[0.9] will-change-transform ease transition-all duration-100 m:w-[70px] m:min-w-[70px] w-[44px] min-w-[44px] h-[70px] flex items-center justify-center`}>
                         <p className={`${active && 'm:text-[48px] text-[#FFF]'} font-light text-[24px] rubik m:group-hover:text-[50px] group-active:duration-[0] ease transition-all duration-100 group-active:text-[#FFF]`}>{number}</p>

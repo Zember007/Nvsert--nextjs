@@ -35,7 +35,7 @@
   }
 
   &__white {
-    @apply xl:px-[46px] xl:py-[15px] p-[27px];
+    @apply  xl:p-[15px] p-[27px];
 
     &:not(.change-style) {
       @apply white-style;
@@ -51,7 +51,7 @@
   }
 
   &__dark {
-    @apply dark-style xl:px-[46px] xl:py-[15px] p-[27px];
+    @apply dark-style  xl:p-[15px] p-[27px];
 
     &.bottom-top {
       @media (max-width: 1239px) {
