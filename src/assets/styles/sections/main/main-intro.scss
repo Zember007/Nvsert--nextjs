@@ -1,0 +1,10 @@
+@use '../../base/variables' as variables;
+@use '../../base/mixins' as mixins;
+
+.intro-content-container {
+  @apply flex flex-col gap-[50px];
+}
+
+.intro-spacer {
+  @apply h-[334px];
+} 

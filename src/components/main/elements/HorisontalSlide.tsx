@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
 import { gsap } from 'gsap';
 import { horizontalLoop } from '@/scripts/slider';
+import '@/assets/styles/sections/main/horizontal-slide.scss';
 
 type HorizontalLoopProps = {
     children: React.ReactNode[]; 
@@ -57,9 +58,9 @@ const HorizontalLoop = forwardRef<HorizontalLoopRef, HorizontalLoopProps>(
         }, [initial]);
 
         return (
-            <div ref={containerRef} className="slider w-[500%] flex">
+            <div ref={containerRef} className="slider horizontal-slider-container">
                 {children.map((child, i) => (
-                    <div key={i} className='min-w-[535px]'>
+                    <div key={i} className='horizontal-slider-item'>
                         {child}
                     </div>
                 ))}

@@ -1,0 +1,26 @@
+@use '../../base/variables' as variables;
+@use '../../base/mixins' as mixins;
+
+.feedback-slider-box {
+  @apply relative flex flex-col gap-[20px];
+  
+  @media (min-width: 1280px) {
+    overflow: hidden;
+  }
+}
+
+.feedback-slider-section {
+  @apply gap-[20px] flex items-center justify-between flex-col;
+}
+
+.feedback-slider-container {
+  @apply flex gap-[20px];
+}
+
+.feedback-item {
+  @apply border-[#E5E7EB] border border-solid overflow-hidden w-[190px] min-w-[190px] h-[267px] rounded-[4px];
+}
+
+.feedback-image {
+  @apply min-h-full;
+} 

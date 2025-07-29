@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 
 import SafeguardBlock from './elements/AppSafeguardBlock';
 import '@/assets/styles/sections/main/animation/skills.scss'
+import '@/assets/styles/sections/main/main-safeguards.scss'
 import Img1 from '@/assets/images/safeguard/1.webp'
 import Img2 from '@/assets/images/safeguard/2.webp'
 import Img3 from '@/assets/images/safeguard/3.webp'
@@ -163,7 +164,7 @@ const AppMainSafeguards = () => {
         ref={divRef}
         className="section wrapper">
         <h2 className="section__title">Гарантии и безупречный сервис</h2>
-        <div className="flex flex-col gap-[20px]">
+        <div className="safeguards-container">
           <div className="safeguard__box"          
           style={{...(widthWindow && widthWindow < 1240 && {gap: (widthWindow - 320) / 2})}}
           >
@@ -171,7 +172,7 @@ const AppMainSafeguards = () => {
               guarantees.map((item, index) => (
                 <div
                   key={index}
-                  className='w-full'
+                  className='safeguard-slide-item'
                   data-slider="slide-safeguard"
                 >
                   <SafeguardBlock

@@ -1,0 +1,120 @@
+@use '../../base/variables' as variables;
+@use '../../base/mixins' as mixins;
+
+.safeguard-card-wrapper {
+  @apply z-[0] xl:min-w-[300px] min-w-[320px] xl:w-auto w-[320px] relative xl:h-[517px] h-[530px] translate-y-[0] transition-all duration-500;
+  
+  &:not(.visible) {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+}
+
+.safeguard-card-border {
+  @apply absolute top-[2px] left-0 right-0 bottom-0 border-[#93969d] z-[-1] pointer-events-none border border-solid rounded-[6px];
+  
+  .safeguard-card-wrapper:hover & {
+    border-color: #34446D;
+  }
+}
+
+.safeguard-card-content {
+  @apply bg-[#FFFFFF26] h-full rounded-[6px] flex flex-col gap-[29px] justify-between;
+  box-shadow: none !important;
+  
+  .safeguard-card-wrapper:hover & {
+    background-color: #34446D33;
+  }
+}
+
+.safeguard-card-inner {
+  @apply flex flex-col gap-[20px] h-full;
+}
+
+.safeguard-image-container {
+  @apply overflow-hidden h-[200px] w-full relative rounded-t-[8px];
+}
+
+.safeguard-title-overlay {
+  @apply shadow-[inset_0_0_6px_0_rgba(255,_255,_255,_0.3),_0_0_10px_0_rgba(0,_0,_0,_0.8)] text-[22px] z-[2] text-[#FFF] backdrop-blur-[4px] p-[10px] rounded-[4px] bg-[#FFFFFF1A] absolute top-[15px] left-[15px] w-[210px] font-light;
+}
+
+.safeguard-image {
+  @apply w-auto min-w-full h-full transition-all duration-100 ease-in-out;
+}
+
+.safeguard-content-container {
+  @apply px-[15px] flex flex-col grow;
+}
+
+.safeguard-item {
+  @apply  flex flex-col;
+
+  &:not(:last-child) {
+    @apply pb-[20px];
+  }
+
+  &:last-child {
+    @apply grow;
+  }
+}
+
+.safeguard-item-header {
+  @apply flex justify-between gap-[20px];
+}
+
+.safeguard-item-title {
+  @apply text-[18px] transition-all duration-100;
+}
+
+.safeguard-arrow-icon {
+  @apply min-w-[24px] rotate-[0deg] transition-all duration-100;
+  
+  &.active {
+    transform: rotate(180deg);
+  }
+  
+  @media (min-width: 1280px) {
+    .safeguard-item:hover & {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.safeguard-item-content {
+  @apply overflow-hidden transition-all duration-100 max-h-0;
+  
+  &.active {
+    max-height: 95px;
+  }
+  
+  @media (min-width: 1280px) {
+    .safeguard-item:hover & {
+      max-height: 95px;
+    }
+  }
+}
+
+.safeguard-item-list {
+  @apply list-disc leading-[140%] pl-[35px] pt-[5px] overflow-hidden;
+
+  & * * {
+    @apply text-[16px];
+  }
+}
+
+.safeguard-list-item {
+  @apply will-change-transform duration-100 font-light transition-all opacity-0 translate-x-[-100%];
+  
+  &.active {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  @media (min-width: 1280px) {
+    .safeguard-item:hover & {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}

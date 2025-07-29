@@ -1,6 +1,7 @@
 import ArrowImg from '@/assets/images/svg/arrow-main.svg'
 import Image from 'next/image';
 import { ReactNode, useState } from 'react';
+import '@/assets/styles/sections/main/dropdown.scss';
 
 interface props {
     title: string,
@@ -12,18 +13,18 @@ const Dropdown = ({ title, node }: props) => {
     const [active, setActive] = useState(false)
     const [listHidden, setListHidden] = useState(true)
     return (
-        <div className={`${active && 'bg-[#FFF]'} hover:bg-[#FFF] transition-all duration-300 cursor-pointer`}>
+        <div className={`dropdown-container ${active ? 'active' : ''}`}>
           
-                <div className="border-0 border-t border-b border-solid border-[#00000033]  flex flex-col px-[10px]">
+                <div className="dropdown-border">
                     <div
                         onClick={() => {
                             setActive(!active)
                         }}
-                        className="flex items-center justify-between py-[23px]">
+                        className="dropdown-header">
                         <p>{title}</p>
-                        <Image className={`${!active && 'rotate-[180deg]'} transition-all duration-300`} alt='arrow' src={ArrowImg} width={24} height={24} />
+                        <Image className={`dropdown-arrow ${active ? 'active' : ''}`} alt='arrow' src={ArrowImg} width={24} height={24} />
                     </div>
-                    <div className={` flex justify-between items-stretch gap-[10px] transition-all duration-300 overflow-hidden max-h-0 ${active && '!max-h-[500px] pb-[23px]'}`}
+                    <div className={`dropdown-content ${active ? 'active' : ''}`}
                     dangerouslySetInnerHTML={{ __html: node }}>                  
                     </div>
                 </div>

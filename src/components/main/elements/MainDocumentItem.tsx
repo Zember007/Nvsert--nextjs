@@ -9,6 +9,7 @@ import { MainDocumentItemProps } from '@/types/documents';
 import SendIcon from '@/components/svg/SendIcon';
 import ServiceMoveIcon from '../svg/ServiceMoveIcon';
 import useWindowWidth from '@/hook/useWindowWidth';
+import '@/assets/styles/sections/main/document-item.scss';
 
 // Выносим анимационные настройки
 const ANIMATION_SETTINGS = {
@@ -57,14 +58,14 @@ const DocumentList = memo(({ content1, listHidden, setListHidden }: DocumentList
     <div className="document__list">
         {content1.map((cont, contIndex) => (
             <div key={contIndex} className='document__list-item'>
-                <p className={`${contIndex === 0 ? 'm:text-[19px]' : ''} text-[16px]`}>
+                <p className={`document-list-item-title ${contIndex === 0 ? 'large' : ''}`}>
                     {filterPrepositions(cont.title)}
                 </p>
                 {cont.subtitle && <span>{cont.subtitle}</span>}
-                <ul className='document__list-item-ul arial'>
+                <ul className='document__list-item-ul  arial'>
                     {cont.list.map((list, index) => (
                         <li
-                            className={`${listHidden && (index > 2 || contIndex > 0) && 'hidden'}`}
+                            className={` ${listHidden && (index > 2 || contIndex > 0) ? 'hidden' : ''}`}
                             key={index}
                         >
                             {filterPrepositions(list)}
@@ -73,13 +74,13 @@ const DocumentList = memo(({ content1, listHidden, setListHidden }: DocumentList
                 </ul>
                 {cont.list.length > 3 && (
                     <button
-                        className='text-[#34446D] text-[16px] text-left inline-flex gap-[5px]'
+                        className='document-list-show-button'
                         onClick={() => setListHidden(!listHidden)}
                     >
                         {listHidden ? 'Показать полный список документов' : 'Скрыть'}
 
                         <svg
-                            className={`${!listHidden ? 'rotate-[180deg]' : ''}`}
+                            className={`document-list-arrow ${!listHidden ? 'expanded' : ''}`}
                             width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_4632_2058)">
                                 <path d="M7 3.5H9V0.5H7L7 3.5ZM15 9.46767L13.5692 8.02908L9.01287 12.6092V6.5H6.98815V12.6092L2.43177 8.02908L1 9.46767L8 16.5L8.71538 15.7822L9.43177 15.0634L15 9.46767Z" fill="#34446D" />
@@ -255,11 +256,11 @@ const MainDocumentItem = memo(({
                             {windowWidth && windowWidth < 768 &&
                                 <>
 
-                                    <div className="flex flex-col gap-[10px] w-full">
+                                                                            <div className="document-content-wrapper">
                                         <motion.div
                                             animate={controls}
                                             initial={{ y: 20 }}
-                                            className="tariff-wrap w-[280px] m:mx-0 mx-auto m:w-[250px]" ref={setWrapperRef}>
+                                            className="document-actions-mobile tariff-wrap" ref={setWrapperRef}>
                                             <ActionButton
                                                 setRef={setButtonRef}
                                                 onClick={() => openDefaultModal('orderForm')}
@@ -292,19 +293,19 @@ const MainDocumentItem = memo(({
                                         </motion.div>
                                     </div>
 
-                                    <div className="flex gap-[10px]">
-                                        <div className="flex flex-col gap-[5px] items-center">
-                                            <span className='text-[14px] font-light text-[#00000080]'>Срок оформления</span>
-                                            <span className='text-[18px] '>{duration}</span>
+                                    <div className="document-mobile-info">
+                                        <div className="document-info-item">
+                                            <span className='document-info-label'>Срок оформления</span>
+                                            <span className='document-info-value'>{duration}</span>
                                         </div>
-                                        <div className="flex flex-col gap-[5px] items-center">
-                                            <span className='text-[14px] font-light text-[#00000080]'>Стоимость</span>
-                                            <span className='text-[18px] '>{price}</span>
+                                        <div className="document-info-item">
+                                            <span className='document-info-label'>Стоимость</span>
+                                            <span className='document-info-value'>{price}</span>
                                         </div>
                                     </div>
                                 </>
                             }
-                            <div className='m:m-0 m-auto'>
+                            <div className='document-photo-container'>
                                 <PhotoView
                                     src={img.src}
                                     width={475}
@@ -326,10 +327,10 @@ const MainDocumentItem = memo(({
                                 </PhotoView>
                             </div>
 
-                            <div ref={containerPhotoRef} className="grow flex justify-center">
-                                <div className=" flex flex-col justify-between  items-start">
-                                    <div className="arial flex flex-col gap-[40px]">
-                                        <p className='text-[16px] text-[#000000] m:max-w-[360px]'>
+                            <div ref={containerPhotoRef} className="document-photo-wrapper">
+                                <div className="document-content-column">
+                                    <div className="document-text-content arial">
+                                        <p className='document-description'>
                                             {filterPrepositions(content.text)}
                                         </p>
                                         {/* <p className='hidden m:block text-[16px] text-[#000000] m:max-w-[300px]'>
@@ -341,7 +342,7 @@ const MainDocumentItem = memo(({
                                         <motion.div
                                             animate={controls}
                                             initial={{ y: 20 }}
-                                            className="tariff-wrap w-[280px] m:mx-0 mx-auto m:w-[250px] " ref={setWrapperRef}>
+                                            className="document-desktop-actions tariff-wrap" ref={setWrapperRef}>
                                             <ActionButton
                                                 setRef={setButtonRef}
                                                 onClick={() => openDefaultModal('orderForm')}

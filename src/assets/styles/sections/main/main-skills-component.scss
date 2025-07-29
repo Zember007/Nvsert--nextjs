@@ -1,0 +1,14 @@
+@use '../../base/variables' as variables;
+@use '../../base/mixins' as mixins;
+
+.skills-content-container {
+  @apply flex flex-col gap-[20px];
+}
+
+
+
+.skills-tariff-wrap {
+  @apply xl:w-[250px] w-[280px] m:mx-0 mx-auto mt-[20px];
+}
+
+

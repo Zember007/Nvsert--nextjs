@@ -1,0 +1,39 @@
+@use '../../base/variables' as variables;
+@use '../../base/mixins' as mixins;
+
+.dropdown-container {
+  @apply transition-all duration-300 cursor-pointer;
+  
+  &.active {
+    background-color: #FFF;
+  }
+  
+  &:hover {
+    background-color: #FFF;
+  }
+}
+
+.dropdown-border {
+  @apply border-0 border-t border-b border-solid border-[#00000033] flex flex-col px-[10px];
+}
+
+.dropdown-header {
+  @apply flex items-center justify-between py-[23px];
+}
+
+.dropdown-arrow {
+  @apply transition-all duration-300;
+  
+  &:not(.active) {
+    transform: rotate(180deg);
+  }
+}
+
+.dropdown-content {
+  @apply flex justify-between items-stretch gap-[10px] transition-all duration-300 overflow-hidden max-h-0;
+  
+  &.active {
+    max-height: 500px;
+    @apply pb-[23px];
+  }
+} 

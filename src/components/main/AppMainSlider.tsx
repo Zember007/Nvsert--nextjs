@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { slides } from './utils';
 import { filterPrepositions } from '@/hook/filter';
 import HorizontalSlide from './elements/HorisontalSlide'
-
+import '@/assets/styles/sections/main/main-slider-component.scss'
 import { useButton } from '@/hook/useButton';
 import { useHeaderContext } from '../contexts/HeaderContext';
 import { useTranslation } from 'react-i18next';
@@ -183,7 +183,7 @@ const SliderMain = () => {
                     <div className="slide-main">
 
                         <div className="slider-wrap">
-                            <div ref={whiteBgRef} className={`slide-blur xl:left-[562px] left-0 `}>
+                            <div ref={whiteBgRef} className={`slide-blur slide-blur-left`}>
                                 <span className="line hidden xl:block white" style={{ '--blur': '4px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
                                 <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
@@ -208,11 +208,11 @@ const SliderMain = () => {
                                 {
                                     slides.map((item, index) => (
                                         <div
-                                            key={index} data-slider="slide" className="slider-slide xl:w-[336px] xl:h-[336px] w-[320px]  h-[320px] rounded-[6px]">
-                                            <div className="slide-inner relative bg-[#FFF] overflow-hidden rounded-[6px]">
+                                            key={index} data-slider="slide" className="slider-slide slider-slide-item">
+                                            <div className="slide-inner slide-inner-content">
                                                 <Image src={item.img} alt='slide' fill
                                                     style={{ objectFit: 'cover' }} />
-                                                <div className="absolute scale-[-0.9] w-full h-auto bg-[#34446D] mix-blend-hue"></div>
+                                                <div className="slide-overlay-blend"></div>
 
                                             </div>
                                         </div>
@@ -234,13 +234,13 @@ const SliderMain = () => {
                         <div className={`overlay-slider`}></div>
 
 
-                        <div className="flex flex-col xl:gap-[15px]  grow relative w-full overflow-hidden">
+                        <div className="overlay-content-container">
                             <span className="overlay-title">
                                 {
                                     filterPrepositions(slidesLang[activeIndex].title)
                                 }
                             </span>
-                            <p className={`arial grow slide-text xl:p-0 p-[20px] w-full h-full text-[16px] bg-[#FFF] `}>
+                            <p className={`slide-text-content arial slide-text`}>
 
                                 {filterPrepositions(slidesLang[activeIndex].text)}
 
@@ -249,22 +249,22 @@ const SliderMain = () => {
 
 
                         <div className="slider__navigations">
-                            <div className="flex gap-[10px]">
+                            <div className="slider-navigation-container">
                                 <div
                                     ref={setWrapperRef}
-                                    className="tariff-wrap overflow-hidden w-[100px]">
+                                    className="navigation-button-wrap tariff-wrap">
                                     <button
                                         ref={setButtonRef}
                                         aria-label="previous slide" data-slider="button-prev"
                                         className="tariff item group">
 
-                                        <div className="transition-all duration-[.13s] translate-x-[32px] group-hover:-translate-x-[32px]">
+                                        <div className="navigation-button-icon">
                                             <svg
                                                 width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M10 21.957L2 13.404L2.00006 9.60268L10 2" stroke="white" stroke-width="2.66667" stroke-linecap="square" />
                                             </svg>
                                         </div>
-                                        <div className="transition-all duration-[.13s] translate-x-[32px] group-hover:-translate-x-[32px]">
+                                        <div className="navigation-button-icon">
                                             <svg
                                                 width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M10 21.957L2 13.404L2.00006 9.60268L10 2" stroke="white" stroke-width="2.66667" stroke-linecap="square" />
@@ -275,19 +275,19 @@ const SliderMain = () => {
                                 </div>
                                 <div
                                     ref={setWrapperRef}
-                                    className="tariff-wrap overflow-hidden w-[100px]">
+                                    className="navigation-button-wrap tariff-wrap">
                                     <button
                                         ref={setButtonRef}
                                         aria-label="previous slide" data-slider="button-next"
                                         className=" tariff item group">                        
 
-                                        <div className="transition-all duration-[.13s] -translate-x-[32px] group-hover:translate-x-[32px]">
+                                        <div className="navigation-button-icon-next">
                                             <svg
                                                 width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M2 21.957L10 13.404L9.99994 9.60268L2 2" stroke="white" stroke-width="2.66667" stroke-linecap="square" />
                                             </svg>
                                         </div>
-                                        <div className="transition-all duration-[.13s] -translate-x-[32px] group-hover:translate-x-[32px]">
+                                        <div className="navigation-button-icon-next">
                                             <svg
                                                 width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M2 21.957L10 13.404L9.99994 9.60268L2 2" stroke="white" stroke-width="2.66667" stroke-linecap="square" />
@@ -296,8 +296,8 @@ const SliderMain = () => {
                                     </button>
                                 </div>
                             </div>
-                            <div className="flex item-center text-[40px] font-[300] text-[#93969D] ">
-                                <div className="h-[40px] overflow-hidden">
+                            <div className="slide-counter-container">
+                                <div className="slide-counter-overflow">
                                     <div className="count-column rubik">
                                         <h3 data-slide-count="step" className="count-heading ">01</h3>
                                     </div>
@@ -322,10 +322,10 @@ const SliderMain = () => {
                         ))}
                     </div>
 
-                    <div className="tariff-wrap xl:w-[242px] w-[280px] m:mx-0 mx-auto" ref={setWrapperRef}>
+                    <div className="main-button-wrap tariff-wrap" ref={setWrapperRef}>
                         <button
                             onClick={() => { openDefaultModal('orderForm') }}
-                            ref={setButtonRef} className=' slider__button group btnIconAn doc-btn tariff'>
+                            ref={setButtonRef} className='slider__button group btnIconAn doc-btn tariff'>
 
                             <span
                                 className="sendText"

@@ -1,0 +1,73 @@
+@use '../../base/variables' as variables;
+@use '../../base/mixins' as mixins;
+
+.document-content-wrapper {
+  @apply flex flex-col gap-[10px] w-full;
+}
+
+.document-actions-mobile {
+  @apply  w-[280px] m:mx-0 mx-auto m:w-[250px];
+}
+
+.document-mobile-info {
+  @apply flex gap-[10px];
+}
+
+.document-info-item {
+  @apply flex flex-col gap-[5px] items-center;
+}
+
+.document-info-label {
+  @apply text-[14px] font-light text-[#00000080];
+}
+
+.document-info-value {
+  @apply text-[18px];
+}
+
+.document-photo-container {
+  @apply m:m-0 m-auto;
+}
+
+.document-photo-wrapper {
+  @apply grow flex justify-center;
+}
+
+.document-content-column {
+  @apply flex flex-col justify-between items-start;
+}
+
+.document-text-content {
+  @apply  flex flex-col gap-[40px];
+}
+
+.document-description {
+  @apply text-[16px] text-[#000000] m:max-w-[360px];
+}
+
+.document-desktop-actions {
+  @apply  w-[280px] m:mx-0 mx-auto m:w-[250px];
+}
+
+.document-list-actions {
+  @apply  w-[280px] m:mx-0 mx-auto m:w-[250px];
+}
+
+.document-list-show-button {
+  @apply text-[#34446D] text-[16px] text-left inline-flex gap-[5px];
+}
+
+.document-list-arrow {
+  &.expanded {
+    transform: rotate(180deg);
+  }
+}
+
+.document-list-item-title {
+  &.large {
+    @apply m:text-[19px];
+  }
+  
+  @apply text-[16px];
+}
+

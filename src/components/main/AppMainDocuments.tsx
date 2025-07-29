@@ -2,6 +2,7 @@ import MainDocumentItem from "./elements/MainDocumentItem";
 import { documents } from "./utils";
 import { useState } from "react";
 import '@/assets/styles/sections/main/animation/documents.scss'
+import '@/assets/styles/sections/main/main-documents.scss'
 import { PhotoProvider } from '@/assets/lib/react-photo-view';
 import { useTranslation } from "react-i18next";
 import { ContentItem, Content1Item } from "@/types/documents";
@@ -108,7 +109,7 @@ const AppMainDocuments = () => {
                 }}
                 maskClosable={false}
             >
-                <div className="flex flex-col">
+                <div className="documents-container">
                     {documents.map((item, index) => (
                         <MainDocumentItem
                             key={index}

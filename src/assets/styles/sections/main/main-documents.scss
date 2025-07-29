@@ -1,0 +1,6 @@
+@use '../../base/variables' as variables;
+@use '../../base/mixins' as mixins;
+
+.documents-container {
+  @apply flex flex-col;
+} 

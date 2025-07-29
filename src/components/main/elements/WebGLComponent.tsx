@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { init } from '@/scripts/webgl';
+import '@/assets/styles/sections/main/webgl-component.scss';
 
 const WebGLComponent = () => {
 

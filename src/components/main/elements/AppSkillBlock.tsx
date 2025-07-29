@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import { filterPrepositions } from '@/hook/filter';
 import useWindowWidth from '@/hook/useWindowWidth';
+import '@/assets/styles/sections/main/skill-block.scss';
 
 interface AppSkillBlockProps {
   text: string[];
@@ -79,13 +80,13 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
 
   return (
     <div
-      className={`hover:z-[12] relative card-wrap h-[224px] xl:w-[310px] w-[320px] ${!folder ? 'cursor-pointer ' : ''}`}
+      className={`skill-card-wrapper card-wrap ${!folder ? '' : 'folder'}`}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       ref={cardRef} >
       <div
-        className={`card rebound-box relative z-[0] h-full group/item  rounded-[6px]  text-[#000]  w-full`}
+        className={`skill-card-content card group/item`}
       >
 
         <div
@@ -95,20 +96,20 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
             }),
             ...(mousePX && { ...cardStyle })
           }}
-          className={`flex border-[#93969D]  border-solid rounded-[6px] overflow-hidden flex-col gap-[20px] relative z-[1] justify-between h-full transition-all duration-500 ${folder ? '!items-center !justify-center xl:border' : 'border p-[20px]'}`}
+          className={`skill-card-inner ${folder ? 'folder' : ''}`}
         >
           {
             folder ?
               <>
-                {img && <Image alt="folder" className={`transition-all object-cover duration-300 rounded-[6px] h-full`} src={img} />}
+                {img && <Image alt="folder" className={`skill-folder-image`} src={img} />}
               </>
               :
               <>
-                <h3 className={`text-[20px] transition-all duration-500`} >
+                <h3 className={`skill-card-title`} >
                   {title && filterPrepositions(title)}
                 </h3>
-                <div className='grow max-w-[270px]'>
-                  <ul className={`font-light list-disc pl-[17px] ${!isVisible && 'translate-y-[10px] opacity-0'} transition-all duration-500 flex flex-col gap-[5px]`} >
+                <div className='skill-content-container'>
+                  <ul className={`skill-list ${isVisible ? 'visible' : ''}`} >
                     {list.map((item, index) =>
                       <li key={index}>{filterPrepositions(item)}</li>
                     )}

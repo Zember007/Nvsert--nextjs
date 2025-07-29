@@ -1,4 +1,5 @@
 import React,{ useState, ReactNode, ReactElement, cloneElement } from 'react';
+import '@/assets/styles/sections/main/slider-wrapper.scss';
 
 interface SliderWrapperProps {
   children: ReactNode;

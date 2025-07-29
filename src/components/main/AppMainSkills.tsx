@@ -5,6 +5,7 @@ import { Draggable } from "gsap/Draggable";
 import { skills } from './utils';
 import AppSkillBlock from './elements/AppSkillBlock';
 import '@/assets/styles/sections/main/animation/skills.scss'
+import '@/assets/styles/sections/main/main-skills-component.scss'
 import { useTranslation } from 'react-i18next';
 import useWindowWidth from '@/hook/useWindowWidth';
 import { horizontalLoop } from '@/scripts/slider';
@@ -96,7 +97,7 @@ const AppMainSkills = () => {
             className="section wrapper">
             <h2 className="section__title">Наши основные преимущества</h2>
             <div className="skills__wrapper">
-                <div className="flex flex-col gap-[20px]">
+                <div className="skills-content-container">
                     <div className="skills__box"
                         style={{ ...(widthWindow && widthWindow < 1240 && { gap: (widthWindow - 320) / 2 }) }}
                     >
@@ -134,9 +135,9 @@ const AppMainSkills = () => {
                     {filterPrepositions('Наша компания признана одной из ведущих на рынке сертификации в Российской Федерации и стран Евразийского Экономического Союза. Специалисты NVSERT предоставляют широкий спектр услуг, направленный на оформление обязательной и добровольной сертификации, декларирования, соответствия требованиям технических регламентов и других документов, подтверждающих качество выпускаемой продукции.')}
                 </h3>
 
-                <div className="tariff-wrap xl:w-[250px] w-[280px] m:mx-0 mx-auto mt-[20px] " ref={setWrapperRef}>
+                <div className="skills-tariff-wrap tariff-wrap" ref={setWrapperRef}>
                     <button
-                        ref={setButtonRef} className=' slider__button group btnIconAn doc-btn tariff'>
+                        ref={setButtonRef} className='slider__button group btnIconAn doc-btn tariff'>
 
                         <span
                             className="sendText"

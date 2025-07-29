@@ -50,9 +50,9 @@ export const navigationImg: NavigationImg = {
     ],
     tamozhennySoyuz: [
         { img: Image06 },
-        { img: Image05 },
+        { img: Image07 },
         { img: Image04 },
-        { img: Image07 }
+        { img: Image05 }
     ],
     gostR: [
         { img: Image01 },

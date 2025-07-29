@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useMemo } from "react";
+import '@/assets/styles/sections/main/intro-link.scss';
 
 const AppIntroLink = ({ linkType, item }:{ linkType: string, item:any }) => {
 

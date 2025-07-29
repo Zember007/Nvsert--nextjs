@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import QuestionsBlock from './elements/QuestionsBlock';
 import { useState } from 'react';
 import '@/assets/styles/sections/main/animation/documents.scss'
+import '@/assets/styles/sections/main/main-questions.scss'
 
 interface questionItem {
   title: string;
@@ -22,7 +23,7 @@ const AppMainQuestions = () => {
         <h2 className="section__title">
           {t('MainQuestions.title')}
         </h2>
-        <div className="flex flex-col">
+        <div className="questions-container">
 
           {questions.map((item, index) => (
             <QuestionsBlock

@@ -1,5 +1,6 @@
 'use client'
 import '@/assets/styles/sections/main/main-banner.scss';
+import '@/assets/styles/sections/main/main-intro.scss';
 import { useTranslation } from 'react-i18next';
 import AppMainForm from '../forms/AppMainForm';
 import { filterPrepositions } from '@/hook/filter';
@@ -39,9 +40,9 @@ const AppMainIntro = () => {
 
                 <div className="wrapper">
                     <div className='main-banner__content'>
-                        <div className="flex flex-col gap-[50px]">
+                        <div className="intro-content-container">
                             <h1 className="main-banner__title">{filterPrepositions(t('mainIntro.title'))}</h1>
-                            <div className="h-[334px]"></div>
+                            <div className="intro-spacer"></div>
                         </div>
                         
 

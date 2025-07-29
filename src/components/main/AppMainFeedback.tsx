@@ -7,6 +7,7 @@ import Image from 'next/image';
 import gsap from 'gsap';
 import { useTranslation } from 'react-i18next';
 import useWindowWidth from '@/hook/useWindowWidth';
+import '@/assets/styles/sections/main/main-feedback.scss';
 
 
 
@@ -158,7 +159,7 @@ const AppMainFeedback = () => {
                     maskClosable={false}
 
                 >
-                    <div ref={ref} className="relative flex flex-col gap-[20px] xl:overflow-hidden feedback-slider-box">
+                    <div ref={ref} className="feedback-slider-box">
 
                         <div className="slide-blur left-0">
                             <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
@@ -166,19 +167,19 @@ const AppMainFeedback = () => {
                             <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
                         </div>
 
-                        <div className="gap-[20px] flex items-center justify-between flex-col">
+                        <div className="feedback-slider-section">
 
 
 
-                            <div className="flex gap-[20px] feedback-slider-container">
+                            <div className="feedback-slider-container">
                                 {[...Array(19)].map((_, index) =>
                                     <div
                                         onClick={readyPhoto}
-                                        data-slider="slide-feedback" key={index} className="border-[#E5E7EB] border border-solid overflow-hidden w-[190px] min-w-[190px] h-[267px] rounded-[4px]">
+                                        data-slider="slide-feedback" key={index} className="feedback-item">
                                         <PhotoView src={`/feedbacks/big/${index + 1}.png`}
                                         >
                                             <Image
-                                                className='min-h-full'
+                                                className='feedback-image'
                                                 src={`/feedbacks/small/${index + 1}.png`} alt='feedback' width={190} height={267} />
                                         </PhotoView>
                                     </div>)}
@@ -192,17 +193,17 @@ const AppMainFeedback = () => {
                             </div>
                         </div>
 
-                        <div className="gap-[20px] flex items-center justify-between flex-col">
+                        <div className="feedback-slider-section">
 
-                            <div className="flex gap-[20px] feedback-slider-container">
+                            <div className="feedback-slider-container">
                                 {[...Array(19)].map((_, index) =>
                                     <div
                                         onClick={readyPhoto}
 
-                                        data-slider="slide-feedback1" key={index} className="border-[#E5E7EB] border border-solid overflow-hidden w-[190px] min-w-[190px] h-[267px] rounded-[4px]">
+                                        data-slider="slide-feedback1" key={index} className="feedback-item">
                                         <PhotoView src={`/feedbacks/big/${20 + index}.png`}>
                                             <Image
-                                                className='min-h-full'
+                                                className='feedback-image'
                                                 src={`/feedbacks/small/${20 + index}.png`} alt='feedback' width={190} height={267} />
                                         </PhotoView>
                                     </div>)}

@@ -2,6 +2,7 @@ import { useButton } from '@/hook/useButton';
 import React, { useEffect } from 'react';
 import { useAnimation, motion } from "framer-motion";
 import QuestionArrow from '../svg/QuestionArrow';
+import '@/assets/styles/sections/main/questions-block.scss';
 
 const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive: (value: boolean) => void, active: boolean, number: number, title: string, text: string }) => {
     const controls = useAnimation();
@@ -49,14 +50,14 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                     }}
                     className={`${active ? ' active !bg-[#5B6788] !shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] ' : ' '} document__navigation-bg  bg-[transparent]   h-[70px] relative  active:bg-[#5B6788]  active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset]   group cursor-pointer  rounded-[6px]  flex items-center gap-[10px] m:gap-[40px] m:pr-[23px] pr-[20px] transition-scale`}>
 
-                    <div className={`${active ? 'scale-[0.9]' : ''} transition-scale group-active:scale-[0.9] will-change-transform ease transition-all duration-100 m:w-[70px] m:min-w-[70px] w-[44px] min-w-[44px] h-[70px] flex items-center justify-center`}>
-                        <p className={`${active && 'm:text-[48px] text-[#FFF]'} font-light text-[24px] rubik m:group-hover:text-[50px] group-active:duration-[0] ease transition-all duration-100 group-active:text-[#FFF]`}>{number}</p>
+                    <div className={`questions-number-container ${active ? 'active' : ''} transition-scale group-active:scale-[0.9]`}>
+                        <p className={`questions-number-text ${active ? 'active' : ''} m:group-hover:text-[50px] group-active:duration-[0] group-active:text-[#FFF]`}>{number}</p>
                     </div>
-                    <div className={`${active ? 'scale-[0.99]' : ''} transition-scale group-active:scale-[0.99] grow will-change-transform ease transition-all duration-100  flex items-center gap-[40px]`}>
-                        <h3 className={`${active ? 'text-[#FFF]' : ''} font-light grow text-[18px] m:text-[20px] ease-in-out transition-all duration-200 group-active:duration-[0] font-[400] group-active:text-[#FFF]  `}>{title}</h3>
+                    <div className={`questions-content-container ${active ? 'active' : ''} transition-scale group-active:scale-[0.99]`}>
+                        <h3 className={`questions-title ${active ? 'active' : ''} group-active:duration-[0] group-active:text-[#FFF]`}>{title}</h3>
 
                         <svg
-                            className={`${!active ? '' : '*:stroke-[#FFF] rotate-[180deg]'}  hidden m:block transition-all duration-200`}
+                            className={`questions-arrow-icon ${active ? 'active' : ''}`}
                             width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5 5L19 19" stroke="#93969D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             <path d="M19 11L19 19L11 19" stroke="#93969D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -65,8 +66,8 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
 
                     </div>
                 </div>
-                <div className={`max-h-[0px] transition-all easy-in duration-200 overflow-hidden ${active && '!max-h-[1000px]'}`}>
-                    <div className="m:pl-[110px] p-[20px] m:pr-[34px] m:py-[30px] flex flex-col gap-[30px]">
+                <div className={`questions-content-wrapper ${active ? 'active' : ''}`}>
+                    <div className="questions-inner-content">
                         <div className="mtp__spoiler-text" >
                             <div dangerouslySetInnerHTML={{ __html: text }}></div>
                         </div>
@@ -75,9 +76,9 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                         <motion.div
                             animate={controls}
                             initial={{ y: 20, opacity: 0 }}
-                            className="tariff-wrap m:w-[250px] w-[280px] m:mx-0 mx-auto " ref={setWrapperRef}>
+                            className="questions-button-wrap tariff-wrap" ref={setWrapperRef}>
                             <button
-                                ref={setButtonRef} className='btnIconAn bg-[#34446D] justify-center m:flex items-center px-[16px] py-[9px] relative overflow-hidden border border-solid border-[#34446D] tariff m:text-[20px] text-[18px] transition-all duration-300  gap-[6px] text-[#FFF] rounded-[4px] group'>
+                                ref={setButtonRef} className='questions-button group tariff btnIconAn'>
 
                                 <span
                                     className="sendText"
