@@ -404,7 +404,7 @@ export function horizontalLoop(items, config) {
                     }
                 },
                 overshootTolerance: 0,
-                inertia: true,
+                inertia: !isMobile,
                 // Настройки инерции для мобильных устройств
                 maxDuration: isMobile ? 1.2 : 2, // Ограничиваем максимальную длительность инерции на мобильных
                 minDuration: isMobile ? 0.2 : 0.2,
