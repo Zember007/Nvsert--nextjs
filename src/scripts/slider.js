@@ -424,7 +424,7 @@ export function horizontalLoop(items, config) {
                     Math.abs(dif) > tl.duration() / 2 && (dif += dif < 0 ? tl.duration() : -tl.duration());
                     
                     // Для мобильных устройств ограничиваем количество слайдов за один свайп
-                    if (isMobile) {
+                   /*  if (isMobile) {
                         const currentIndex = tl.current();
                         const targetTime = time + dif;
                         const targetIndex = getClosest(times, timeWrap(targetTime), tl.duration());
@@ -439,7 +439,7 @@ export function horizontalLoop(items, config) {
                             lastSnap = -limitedTime / tl.duration() / ratio;
                             return lastSnap;
                         }
-                    }
+                    } */
                     
                     lastSnap = (time + dif) / tl.duration() / -ratio;
                     return lastSnap;
