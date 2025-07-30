@@ -432,6 +432,10 @@ export function horizontalLoop(items, config) {
                         } else if (dragDirection > 0) {
                             tl.reverse();
                         }
+                    } else if (isMobile) {
+                        // Принудительно докручиваем до ближайшего
+                        const index = tl.closestIndex();
+                        tl.toIndex(index, { duration: 0.45, ease: "power2.out" });
                     }
                     syncIndex();
                 },
