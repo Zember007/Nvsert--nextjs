@@ -139,6 +139,7 @@ const AppMainSafeguards = () => {
         paused: true,
         draggable: true,
         center: true,
+        mobile: true,
         gap: gap,
         snap: true,
         onChange: (index: number) => {

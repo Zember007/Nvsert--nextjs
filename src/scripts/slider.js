@@ -52,7 +52,6 @@ export function initSlider({ onChangeFunction, onDragFunction, mobile }) {
         stepsArray.push(clone);
     });
 
-
     let currentIndex = 0;
     function updateSteps(newIndex) {
         gsap.killTweensOf(stepsParent)
@@ -104,7 +103,6 @@ export function initSlider({ onChangeFunction, onDragFunction, mobile }) {
                 } else if (currentY > 0) {
                     gsap.set(stepsParent, { y: currentY - maxOffset });
                 }
-
             }
         });
     }
@@ -117,6 +115,7 @@ export function initSlider({ onChangeFunction, onDragFunction, mobile }) {
         offsetLeft: mobile ? null : 75,
         opacity: !mobile,
         gap: mobile ? (window.innerWidth - 320) / 2 : 0,
+        mobile: mobile, // Передаем флаг mobile
         onChange: (index) => {
             if (activeElement) {
                 activeElement.classList.remove("active");
@@ -145,27 +144,17 @@ export function initSlider({ onChangeFunction, onDragFunction, mobile }) {
         });
     }
 
-
-
-
-
     return loop;
 }
-
-
-
-
-
-
 
 export function horizontalLoop(items, config) {
     let timeline;
     items = gsap.utils.toArray(items);
     config = config || {};
-    const offsetLeft = config.offsetLeft || 0
+    const offsetLeft = config.offsetLeft || 0;
+    const isMobile = config.mobile || false; // Получаем флаг мобильного устройства
+    
     gsap.context(() => {
-
-
         let onChange = config.onChange,
             onDragFunction = config.onDragFunction,
             lastIndex = 0,
@@ -190,7 +179,7 @@ export function horizontalLoop(items, config) {
             indexIsDirty = false,
             center = config.center,
             pixelsPerSecond = (config.speed || 1) * 100,
-            snap = config.snap === false ? v => v : gsap.utils.snap(config.snap || 1), // some browsers shift by a pixel to accommodate flex layouts, so for example if width is 20% the first element's width might be 242px, and the next 243px, alternating back and forth. So we snap to 5 percentage points to make things look more natural
+            snap = config.snap === false ? v => v : gsap.utils.snap(config.snap || 1),
             timeOffset = 0,
             container = center === true ? items[0].parentNode : gsap.utils.toArray(center)[0] || items[0].parentNode,
             totalWidth,
@@ -204,7 +193,7 @@ export function horizontalLoop(items, config) {
                     spaceBefore[i] = b2.left - (i ? b1.right : b1.left);
                     b1 = b2;
                 });
-                gsap.set(items, { // convert "x" to "xPercent" to make things responsive, and populate the widths/xPercents Arrays to make lookups faster.
+                gsap.set(items, {
                     xPercent: i => xPercents[i]
                 });
                 totalWidth = getTotalWidth();
@@ -244,18 +233,16 @@ export function horizontalLoop(items, config) {
                         xPercent: snap((curX - distanceToLoop) / widths[i] * 100),
                         duration: distanceToLoop / pixelsPerSecond
                     }, 0)
-
-
                         .to(item, {
                             opacity: config.opacity ? 0 : 1,
                             duration: 0.3
-                        }, distanceToLoop / pixelsPerSecond) // Начинаем затухание чуть раньше конца первой анимации
+                        }, distanceToLoop / pixelsPerSecond)
                         .fromTo(item, {
                             xPercent: snap((curX - distanceToLoop + totalWidth) / widths[i] * 100),
                             opacity: config.opacity ? 0 : 1
                         }, {
                             xPercent: xPercents[i],
-                            opacity: 1, // Возвращаем полную видимость
+                            opacity: 1,
                             duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond,
                             immediateRender: false,
                             delay: config.opacity ? 0.3 : 0,
@@ -264,10 +251,7 @@ export function horizontalLoop(items, config) {
                     times[i] = distanceToStart / pixelsPerSecond;
                 }
                 timeWrap = gsap.utils.wrap(0, tl.duration());
-
-
             },
-
             refresh = (deep) => {
                 let progress = tl.progress();
                 tl.progress(0, true);
@@ -275,15 +259,11 @@ export function horizontalLoop(items, config) {
                 deep && populateTimeline();
                 populateOffsets();
                 deep && tl.draggable ? tl.time(times[curIndex], true) : tl.progress(progress, true);
-
             },
             onResize = () => refresh(true),
             proxy;
 
-        gsap.set(items, { x:   offsetLeft || 0 });
-
-        console.log('items',window.innerWidth);
-        
+        gsap.set(items, { x: offsetLeft || 0 });
 
         populateWidths();
         populateTimeline();
@@ -292,10 +272,10 @@ export function horizontalLoop(items, config) {
         
         function toIndex(index, vars) {
             vars = vars || {};
-            (Math.abs(index - curIndex) > length / 2) && (index += index > curIndex ? -length : length); // always go in the shortest direction
+            (Math.abs(index - curIndex) > length / 2) && (index += index > curIndex ? -length : length);
             let newIndex = gsap.utils.wrap(0, length, index),
                 time = times[newIndex];
-            if (time > tl.time() !== index > curIndex && index !== curIndex) { // if we're wrapping the timeline's playhead, make the proper adjustments
+            if (time > tl.time() !== index > curIndex && index !== curIndex) {
                 time += tl.duration() * (index > curIndex ? 1 : -1);
             }
             if (time < 0 || time > tl.duration()) {
@@ -306,6 +286,7 @@ export function horizontalLoop(items, config) {
             gsap.killTweensOf(proxy);
             return vars.duration === 0 ? tl.time(timeWrap(time)) : tl.tweenTo(time, vars);
         }
+        
         tl.toIndex = (index, vars) => toIndex(index, vars);
         let timeoutId = null
         tl.closestIndex = setCurrent => {
@@ -322,8 +303,6 @@ export function horizontalLoop(items, config) {
 
             items[index === 0 ? items.length - 1 : index - 1].classList.add('closestSlide')
 
-
-
             return index;
         };
         tl.current = () => indexIsDirty ? tl.closestIndex(true) : curIndex;
@@ -331,28 +310,21 @@ export function horizontalLoop(items, config) {
         tl.previous = vars => toIndex(tl.current() - 1, vars);
         tl.times = times;
         
-        // Добавляем метод destroy для полного отключения слайдера
         tl.destroy = () => {
-            // Останавливаем и очищаем timeline
             tl.pause();
             tl.kill();
-            
-            // Убираем прослушиватель resize
             window.removeEventListener("resize", onResize);
             
-            // Очищаем таймауты
             if (timeoutId) {
                 clearTimeout(timeoutId);
                 timeoutId = null;
             }
             
-            // Убираем draggable если есть
             if (tl.draggable) {
                 tl.draggable.kill();
                 if (proxy && proxy.parentNode) {
                     proxy.parentNode.removeChild(proxy);
                 }
-                // Останавливаем отслеживание InertiaPlugin
                 if (typeof InertiaPlugin !== "undefined") {
                     InertiaPlugin.untrack(proxy, "x");
                 }
@@ -364,15 +336,10 @@ export function horizontalLoop(items, config) {
                 });
             }
             
-            // Сбрасываем все CSS стили для элементов
             gsap.set(items, {
-                clearProps: "all" // Убирает все inline стили, установленные GSAP
+                clearProps: "all"
             });
             
-            // Убираем CSS классы, если они были добавлены
-            
-            
-            // Очищаем все переменные
             items = null;
             times = null;
             widths = null;
@@ -384,14 +351,15 @@ export function horizontalLoop(items, config) {
             console.log('horizontalLoop destroyed');
         };
         
-        tl.progress(1, true).progress(0, true); // pre-render for performance
+        tl.progress(1, true).progress(0, true);
         if (!config.paused) {
             if (config.reversed) {
-                tl.progress(1).reverse(); // запуск с конца в обратную сторону
+                tl.progress(1).reverse();
             } else {
-                tl.play(); // обычный запуск
+                tl.play();
             }
         }
+        
         if (config.draggable && typeof (Draggable) === "function") {
             proxy = document.createElement("div");
             let wrap = gsap.utils.wrap(0, 1),
@@ -412,14 +380,11 @@ export function horizontalLoop(items, config) {
                     let x = this.x;
                     gsap.killTweensOf(tl);
                     wasPlaying = !tl.paused();
-                    // tl.pause();
                     startProgress = tl.progress();
                     refresh();
                     ratio = 1 / totalWidth;
                     initChangeX = (startProgress / -ratio) - x;
                     gsap.set(proxy, { x: startProgress / -ratio });
-                    // console.log('pause');
-
                 },
                 onDrag() {
                     align();
@@ -429,30 +394,57 @@ export function horizontalLoop(items, config) {
                     align();
                     if (wasPlaying) {
                         const currentVelocity = Math.abs(InertiaPlugin.getVelocity(proxy, "x"));
-
-                        if (currentVelocity <= pixelsPerSecond + 60) {
+                        
+                        // Для мобильных устройств уменьшаем порог остановки инерции
+                        const velocityThreshold = isMobile ? pixelsPerSecond + 30 : pixelsPerSecond + 60;
+                        
+                        if (currentVelocity <= velocityThreshold) {
                             gsap.killTweensOf(proxy);
                         }
                     }
                 },
                 overshootTolerance: 0,
-                inertia: true, // Включаем инерцию
+                inertia: true,
+                // Настройки инерции для мобильных устройств
+                maxDuration: isMobile ? 1.2 : 2, // Ограничиваем максимальную длительность инерции на мобильных
+                minDuration: isMobile ? 0.2 : 0.2,
+                resistance: isMobile ? 5000 : 3000, // Увеличиваем сопротивление на мобильных
                 snap(value) {
                     if (!config.snap) return
 
                     if (Math.abs(startProgress / -ratio - this.x) < 10) {
                         return lastSnap + initChangeX;
                     }
+                    
                     let time = -(value * ratio) * tl.duration(),
                         wrappedTime = timeWrap(time),
                         snapTime = times[getClosest(times, wrappedTime, tl.duration())],
                         dif = snapTime - wrappedTime;
+                    
                     Math.abs(dif) > tl.duration() / 2 && (dif += dif < 0 ? tl.duration() : -tl.duration());
+                    
+                    // Для мобильных устройств ограничиваем количество слайдов за один свайп
+                    if (isMobile) {
+                        const currentIndex = tl.current();
+                        const targetTime = time + dif;
+                        const targetIndex = getClosest(times, timeWrap(targetTime), tl.duration());
+                        const slidesDifference = Math.abs(targetIndex - currentIndex);
+                        
+                        // Ограничиваем максимум 3 слайдами за один свайп на мобильных
+                        if (slidesDifference > 3) {
+                            const direction = targetIndex > currentIndex ? 1 : -1;
+                            const limitedIndex = currentIndex + (direction * 3);
+                            const limitedWrappedIndex = gsap.utils.wrap(0, length, limitedIndex);
+                            const limitedTime = times[limitedWrappedIndex];
+                            lastSnap = -limitedTime / tl.duration() / ratio;
+                            return lastSnap;
+                        }
+                    }
+                    
                     lastSnap = (time + dif) / tl.duration() / -ratio;
                     return lastSnap;
                 },
                 onDragEnd() {
-
                     if (wasPlaying) {
                         if (dragDirection < 0) {
                             tl.play();
@@ -461,7 +453,6 @@ export function horizontalLoop(items, config) {
                         }
                     }
                     syncIndex();
-
                 },
                 onRelease() {
                     syncIndex();
@@ -471,6 +462,7 @@ export function horizontalLoop(items, config) {
                     syncIndex();
                 }
             })[0];
+            
             InertiaPlugin.track(proxy, "x");
             tl.draggable = draggable;
         }
@@ -480,7 +472,7 @@ export function horizontalLoop(items, config) {
         timeline = tl;
         return () => window.removeEventListener("resize", onResize);
     });
+    
     timeline.next({ ease: "power3", duration: 0.725 })
     return timeline;
 }
-

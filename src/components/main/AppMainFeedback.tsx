@@ -30,6 +30,7 @@ const AppMainFeedback = () => {
             offsetLeft: 0,
             repeat: -1,
             center: true,
+            mobile: widthWindow && widthWindow < 1240,
             snap: false,
             gap: 20,
             opacity: false,
@@ -47,6 +48,7 @@ const AppMainFeedback = () => {
             center: true,
             snap: false,
             gap: 20,
+            mobile: widthWindow && widthWindow < 1240,
             reversed: true,
             opacity: false,
             onChange: (index: number) => {

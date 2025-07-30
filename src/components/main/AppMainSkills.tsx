@@ -66,6 +66,7 @@ const AppMainSkills = () => {
                 paused: true,
                 center: true,
                 draggable: true,
+                mobile: true,
                 gap: gap,
                 snap: true,
                 onChange: (index: number) => {
