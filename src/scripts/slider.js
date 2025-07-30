@@ -440,6 +440,42 @@ export function horizontalLoop(items, config) {
                             return lastSnap;
                         }
                     } */
+
+                        if (isMobile) {
+                            const currentIndex = tl.current();
+                            const targetTime = time + dif;
+                            const targetIndex = getClosest(times, timeWrap(targetTime), tl.duration());
+                            
+                            // Вычисляем разность с учетом кольцевой структуры
+                            let slidesDifference = targetIndex - currentIndex;
+                            
+                            // Нормализуем разность для кольцевого перехода
+                            if (slidesDifference > length / 2) {
+                                slidesDifference = slidesDifference - length;
+                            } else if (slidesDifference < -length / 2) {
+                                slidesDifference = slidesDifference + length;
+                            }
+                            
+                            // Ограничиваем максимум 3 слайдами за один свайп на мобильных
+                            if (Math.abs(slidesDifference) > 3) {
+                                const direction = slidesDifference > 0 ? 1 : -1;
+                                const limitedIndex = gsap.utils.wrap(0, length, currentIndex + (direction * 3));
+                                const limitedTime = times[limitedIndex];
+                                
+                                // Корректируем время с учетом направления движения
+                                let adjustedTime = limitedTime;
+                                const currentTime = times[currentIndex];
+                                
+                                if (direction > 0 && limitedTime < currentTime) {
+                                    adjustedTime = limitedTime + tl.duration();
+                                } else if (direction < 0 && limitedTime > currentTime) {
+                                    adjustedTime = limitedTime - tl.duration();
+                                }
+                                
+                                lastSnap = -adjustedTime / tl.duration() / ratio;
+                                return lastSnap;
+                            }
+                        }
                     
                     lastSnap = (time + dif) / tl.duration() / -ratio;
                     return lastSnap;
