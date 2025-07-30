@@ -136,12 +136,18 @@ export function initSlider({ onChangeFunction, onDragFunction, mobile }) {
 
     if (nextButton) {
         nextButton.addEventListener("click", () => {
-            loop.next({ ease: "power3", duration: 0.725 })
+            // Проверяем, не происходит ли в данный момент drag
+            if (!loop.isDragging) {
+                loop.next({ ease: "power3", duration: 0.725 })
+            }
         });
     }
     if (prevButton) {
         prevButton.addEventListener("click", () => {
-            loop.previous({ ease: "power3", duration: 0.725 })
+            // Проверяем, не происходит ли в данный момент drag
+            if (!loop.isDragging) {
+                loop.previous({ ease: "power3", duration: 0.725 })
+            }
         });
     }
 
@@ -292,6 +298,13 @@ export function horizontalLoop(items, config) {
         
         function toIndex(index, vars) {
             vars = vars || {};
+            
+            // Защита от слишком быстрых переходов
+            const now = Date.now();
+            if (tl.lastTransitionTime && (now - tl.lastTransitionTime) < 300) {
+                return tl; // Игнорируем переход если прошло меньше 300ms
+            }
+            
             (Math.abs(index - curIndex) > length / 2) && (index += index > curIndex ? -length : length); // always go in the shortest direction
             let newIndex = gsap.utils.wrap(0, length, index),
                 time = times[newIndex];
@@ -304,6 +317,10 @@ export function horizontalLoop(items, config) {
             curIndex = newIndex;
             vars.overwrite = true;
             gsap.killTweensOf(proxy);
+            
+            // Записываем время последнего перехода
+            tl.lastTransitionTime = now;
+            
             return vars.duration === 0 ? tl.time(timeWrap(time)) : tl.tweenTo(time, vars);
         }
         tl.toIndex = (index, vars) => toIndex(index, vars);
@@ -330,6 +347,7 @@ export function horizontalLoop(items, config) {
         tl.next = vars => { toIndex(tl.current() + 1, vars) };
         tl.previous = vars => toIndex(tl.current() - 1, vars);
         tl.times = times;
+        tl.isDragging = false; // Добавляем флаг для отслеживания состояния drag
         
         // Добавляем метод destroy для полного отключения слайдера
         tl.destroy = () => {
@@ -404,6 +422,10 @@ export function horizontalLoop(items, config) {
             }
 
             let dragDirection = 0;
+            let lastDragTime = 0;
+            let dragStartTime = 0;
+            let dragStartX = 0;
+            let isDragging = false;
 
             draggable = Draggable.create(proxy, {
                 trigger: items[0].parentNode,
@@ -412,48 +434,81 @@ export function horizontalLoop(items, config) {
                     let x = this.x;
                     gsap.killTweensOf(tl);
                     wasPlaying = !tl.paused();
-                    // tl.pause();
                     startProgress = tl.progress();
                     refresh();
                     ratio = 1 / totalWidth;
                     initChangeX = (startProgress / -ratio) - x;
                     gsap.set(proxy, { x: startProgress / -ratio });
-                    // console.log('pause');
-
+                    
+                    // Инициализация переменных для контроля drag
+                    dragStartTime = Date.now();
+                    dragStartX = this.x;
+                    isDragging = true;
+                    dragDirection = 0;
+                    tl.isDragging = true; // Устанавливаем флаг в timeline
                 },
                 onDrag() {
+                    if (!isDragging) return;
+                    
+                    const currentTime = Date.now();
+                    const deltaTime = currentTime - lastDragTime;
+                    const deltaX = Math.abs(this.x - dragStartX);
+                    
+                    // Ограничиваем частоту обновления для предотвращения резких скачков
+                    if (deltaTime < 16) return; // ~60fps
+                    
                     align();
-                    dragDirection = this.getDirection("start") === "left" ? -1 : 1;
+                    
+                    // Определяем направление только при значительном движении
+                    if (deltaX > 20) {
+                        dragDirection = this.getDirection("start") === "left" ? -1 : 1;
+                    }
+                    
+                    lastDragTime = currentTime;
                 },
                 onThrowUpdate() {
                     align();
                     if (wasPlaying) {
                         const currentVelocity = Math.abs(InertiaPlugin.getVelocity(proxy, "x"));
-
-                        if (currentVelocity <= pixelsPerSecond + 60) {
+                        
+                        // Увеличиваем порог скорости для более плавного перехода
+                        if (currentVelocity <= pixelsPerSecond + 100) {
                             gsap.killTweensOf(proxy);
                         }
                     }
                 },
                 overshootTolerance: 0,
-                inertia: true, // Включаем инерцию
+                inertia: true,
                 snap(value) {
                     if (!config.snap) return
 
-                    if (Math.abs(startProgress / -ratio - this.x) < 10) {
+                    // Увеличиваем зону "прилипания" для предотвращения случайных переходов
+                    if (Math.abs(startProgress / -ratio - this.x) < 30) {
                         return lastSnap + initChangeX;
                     }
+                    
                     let time = -(value * ratio) * tl.duration(),
                         wrappedTime = timeWrap(time),
                         snapTime = times[getClosest(times, wrappedTime, tl.duration())],
                         dif = snapTime - wrappedTime;
-                    Math.abs(dif) > tl.duration() / 2 && (dif += dif < 0 ? tl.duration() : -tl.duration());
+                    
+                    // Улучшенная логика для предотвращения больших скачков
+                    if (Math.abs(dif) > tl.duration() / 2) {
+                        dif += dif < 0 ? tl.duration() : -tl.duration();
+                    }
+                    
                     lastSnap = (time + dif) / tl.duration() / -ratio;
                     return lastSnap;
                 },
                 onDragEnd() {
-
-                    if (wasPlaying) {
+                    isDragging = false;
+                    tl.isDragging = false; // Сбрасываем флаг в timeline
+                    
+                    // Добавляем минимальное время для определения намерения пользователя
+                    const dragDuration = Date.now() - dragStartTime;
+                    const minDragTime = 100; // 100ms минимальное время для определения намерения
+                    
+                    if (wasPlaying && dragDuration > minDragTime) {
                         if (dragDirection < 0) {
                             tl.play();
                         } else if (dragDirection > 0) {
@@ -461,13 +516,16 @@ export function horizontalLoop(items, config) {
                         }
                     }
                     syncIndex();
-
                 },
                 onRelease() {
+                    isDragging = false;
+                    tl.isDragging = false; // Сбрасываем флаг в timeline
                     syncIndex();
                     indexIsDirty = true;
                 },
                 onThrowComplete: () => {
+                    isDragging = false;
+                    tl.isDragging = false; // Сбрасываем флаг в timeline
                     syncIndex();
                 }
             })[0];
