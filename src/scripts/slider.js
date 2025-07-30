@@ -153,7 +153,7 @@ export function horizontalLoop(items, config) {
     config = config || {};
     const offsetLeft = config.offsetLeft || 0;
     const isMobile = config.mobile || false; // Получаем флаг мобильного устройства
-    
+
     gsap.context(() => {
         let onChange = config.onChange,
             onDragFunction = config.onDragFunction,
@@ -269,7 +269,7 @@ export function horizontalLoop(items, config) {
         populateTimeline();
         populateOffsets();
         window.addEventListener("resize", onResize);
-        
+
         function toIndex(index, vars) {
             vars = vars || {};
             (Math.abs(index - curIndex) > length / 2) && (index += index > curIndex ? -length : length);
@@ -286,7 +286,7 @@ export function horizontalLoop(items, config) {
             gsap.killTweensOf(proxy);
             return vars.duration === 0 ? tl.time(timeWrap(time)) : tl.tweenTo(time, vars);
         }
-        
+
         tl.toIndex = (index, vars) => toIndex(index, vars);
         let timeoutId = null
         tl.closestIndex = setCurrent => {
@@ -309,17 +309,17 @@ export function horizontalLoop(items, config) {
         tl.next = vars => { toIndex(tl.current() + 1, vars) };
         tl.previous = vars => toIndex(tl.current() - 1, vars);
         tl.times = times;
-        
+
         tl.destroy = () => {
             tl.pause();
             tl.kill();
             window.removeEventListener("resize", onResize);
-            
+
             if (timeoutId) {
                 clearTimeout(timeoutId);
                 timeoutId = null;
             }
-            
+
             if (tl.draggable) {
                 tl.draggable.kill();
                 if (proxy && proxy.parentNode) {
@@ -330,16 +330,16 @@ export function horizontalLoop(items, config) {
                 }
             }
 
-            if(items && items.length){
+            if (items && items.length) {
                 items.forEach((el) => {
                     el.classList.remove('closestSlide');
                 });
             }
-            
+
             gsap.set(items, {
                 clearProps: "all"
             });
-            
+
             items = null;
             times = null;
             widths = null;
@@ -347,10 +347,10 @@ export function horizontalLoop(items, config) {
             xPercents = null;
             container = null;
             proxy = null;
-            
+
             console.log('horizontalLoop destroyed');
         };
-        
+
         tl.progress(1, true).progress(0, true);
         if (!config.paused) {
             if (config.reversed) {
@@ -359,7 +359,7 @@ export function horizontalLoop(items, config) {
                 tl.play();
             }
         }
-        
+
         if (config.draggable && typeof (Draggable) === "function") {
             proxy = document.createElement("div");
             let wrap = gsap.utils.wrap(0, 1),
@@ -394,10 +394,10 @@ export function horizontalLoop(items, config) {
                     align();
                     if (wasPlaying) {
                         const currentVelocity = Math.abs(InertiaPlugin.getVelocity(proxy, "x"));
-                        
+
                         // Для мобильных устройств уменьшаем порог остановки инерции
-                        const velocityThreshold =  pixelsPerSecond + 60;
-                        
+                        const velocityThreshold = pixelsPerSecond + 60;
+
                         if (currentVelocity <= velocityThreshold) {
                             gsap.killTweensOf(proxy);
                         }
@@ -412,15 +412,15 @@ export function horizontalLoop(items, config) {
                     if (Math.abs(startProgress / -ratio - this.x) < 10) {
                         return lastSnap + initChangeX;
                     }
-                    
+
                     let time = -(value * ratio) * tl.duration(),
                         wrappedTime = timeWrap(time),
                         snapTime = times[getClosest(times, wrappedTime, tl.duration())],
                         dif = snapTime - wrappedTime;
-                    
+
                     Math.abs(dif) > tl.duration() / 2 && (dif += dif < 0 ? tl.duration() : -tl.duration());
-                    
-                   
+
+
 
                     lastSnap = (time + dif) / tl.duration() / -ratio;
                     return lastSnap;
@@ -434,8 +434,9 @@ export function horizontalLoop(items, config) {
                         }
                     } else if (isMobile) {
                         // Принудительно докручиваем до ближайшего
-                        const index = tl.closestIndex();
-                        tl.toIndex(index, { duration: 0.45, ease: "power2.out" });
+                        const direction = dragDirection;
+                        const newIndex = tl.current() + (direction > 0 ? -1 : 1); // справа налево — это +1
+                        tl.toIndex(newIndex, { duration: 0.45, ease: "power2.out" });
                     }
                     syncIndex();
                 },
@@ -447,7 +448,7 @@ export function horizontalLoop(items, config) {
                     syncIndex();
                 }
             })[0];
-            
+
             InertiaPlugin.track(proxy, "x");
             tl.draggable = draggable;
         }
@@ -457,7 +458,7 @@ export function horizontalLoop(items, config) {
         timeline = tl;
         return () => window.removeEventListener("resize", onResize);
     });
-    
+
     timeline.next({ ease: "power3", duration: 0.725 })
     return timeline;
 }
