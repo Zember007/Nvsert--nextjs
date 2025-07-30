@@ -424,38 +424,9 @@ export function horizontalLoop(items, config) {
                 onDrag() {
                     align();
                     dragDirection = this.getDirection("start") === "left" ? -1 : 1;
-                    
-                    // Ограничение прокрутки на мобильных устройствах
-                    if (window.innerWidth <= 768) { // мобильные устройства
-                        const currentProgress = tl.progress();
-                        const startProgressValue = startProgress;
-                        const progressDiff = Math.abs(currentProgress - startProgressValue);
-                        
-                        // Максимум 2 слайда за один жест (примерно 2/общее_количество_слайдов)
-                        const maxProgressDiff = 2 / length;
-                        
-                        if (progressDiff > maxProgressDiff) {
-                            const clampedProgress = startProgressValue + (currentProgress > startProgressValue ? maxProgressDiff : -maxProgressDiff);
-                            tl.progress(clampedProgress);
-                        }
-                    }
                 },
                 onThrowUpdate() {
                     align();
-                    
-                    // Ограничение прокрутки при инерции на мобильных устройствах
-                    if (window.innerWidth <= 768) {
-                        const currentProgress = tl.progress();
-                        const startProgressValue = startProgress;
-                        const progressDiff = Math.abs(currentProgress - startProgressValue);
-                        const maxProgressDiff = 2 / length;
-                        
-                        if (progressDiff > maxProgressDiff) {
-                            const clampedProgress = startProgressValue + (currentProgress > startProgressValue ? maxProgressDiff : -maxProgressDiff);
-                            tl.progress(clampedProgress);
-                        }
-                    }
-                    
                     if (wasPlaying) {
                         const currentVelocity = Math.abs(InertiaPlugin.getVelocity(proxy, "x"));
 
@@ -472,30 +443,12 @@ export function horizontalLoop(items, config) {
                     if (Math.abs(startProgress / -ratio - this.x) < 10) {
                         return lastSnap + initChangeX;
                     }
-                    
                     let time = -(value * ratio) * tl.duration(),
                         wrappedTime = timeWrap(time),
                         snapTime = times[getClosest(times, wrappedTime, tl.duration())],
                         dif = snapTime - wrappedTime;
                     Math.abs(dif) > tl.duration() / 2 && (dif += dif < 0 ? tl.duration() : -tl.duration());
                     lastSnap = (time + dif) / tl.duration() / -ratio;
-                    
-                    // Ограничение snap на мобильных устройствах
-                    if (window.innerWidth <= 768) {
-                        const currentIndex = tl.closestIndex();
-                        const startIndex = getClosest(times, startProgress * tl.duration(), tl.duration());
-                        const indexDiff = Math.abs(currentIndex - startIndex);
-                        
-                        // Максимум 2 слайда за один жест
-                        if (indexDiff > 2) {
-                            const maxIndex = startIndex + (currentIndex > startIndex ? 2 : -2);
-                            const clampedIndex = gsap.utils.wrap(0, length, maxIndex);
-                            const clampedTime = times[clampedIndex];
-                            const clampedSnap = -(clampedTime / tl.duration()) / ratio;
-                            return clampedSnap;
-                        }
-                    }
-                    
                     return lastSnap;
                 },
                 onDragEnd() {
