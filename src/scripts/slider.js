@@ -136,18 +136,12 @@ export function initSlider({ onChangeFunction, onDragFunction, mobile }) {
 
     if (nextButton) {
         nextButton.addEventListener("click", () => {
-            // Проверяем, не происходит ли в данный момент drag
-            if (!loop.isDragging) {
-                loop.next({ ease: "power3", duration: 0.725 })
-            }
+            loop.next({ ease: "power3", duration: 0.725 })
         });
     }
     if (prevButton) {
         prevButton.addEventListener("click", () => {
-            // Проверяем, не происходит ли в данный момент drag
-            if (!loop.isDragging) {
-                loop.previous({ ease: "power3", duration: 0.725 })
-            }
+            loop.previous({ ease: "power3", duration: 0.725 })
         });
     }
 
@@ -298,13 +292,6 @@ export function horizontalLoop(items, config) {
         
         function toIndex(index, vars) {
             vars = vars || {};
-            
-            // Защита от слишком быстрых переходов
-            const now = Date.now();
-            if (tl.lastTransitionTime && (now - tl.lastTransitionTime) < 300) {
-                return tl; // Игнорируем переход если прошло меньше 300ms
-            }
-            
             (Math.abs(index - curIndex) > length / 2) && (index += index > curIndex ? -length : length); // always go in the shortest direction
             let newIndex = gsap.utils.wrap(0, length, index),
                 time = times[newIndex];
@@ -317,10 +304,6 @@ export function horizontalLoop(items, config) {
             curIndex = newIndex;
             vars.overwrite = true;
             gsap.killTweensOf(proxy);
-            
-            // Записываем время последнего перехода
-            tl.lastTransitionTime = now;
-            
             return vars.duration === 0 ? tl.time(timeWrap(time)) : tl.tweenTo(time, vars);
         }
         tl.toIndex = (index, vars) => toIndex(index, vars);
@@ -347,7 +330,6 @@ export function horizontalLoop(items, config) {
         tl.next = vars => { toIndex(tl.current() + 1, vars) };
         tl.previous = vars => toIndex(tl.current() - 1, vars);
         tl.times = times;
-        tl.isDragging = false; // Добавляем флаг для отслеживания состояния drag
         
         // Добавляем метод destroy для полного отключения слайдера
         tl.destroy = () => {
@@ -422,10 +404,6 @@ export function horizontalLoop(items, config) {
             }
 
             let dragDirection = 0;
-            let lastDragTime = 0;
-            let dragStartTime = 0;
-            let dragStartX = 0;
-            let isDragging = false;
 
             draggable = Draggable.create(proxy, {
                 trigger: items[0].parentNode,
@@ -434,56 +412,64 @@ export function horizontalLoop(items, config) {
                     let x = this.x;
                     gsap.killTweensOf(tl);
                     wasPlaying = !tl.paused();
+                    // tl.pause();
                     startProgress = tl.progress();
                     refresh();
                     ratio = 1 / totalWidth;
                     initChangeX = (startProgress / -ratio) - x;
                     gsap.set(proxy, { x: startProgress / -ratio });
-                    
-                    // Инициализация переменных для контроля drag
-                    dragStartTime = Date.now();
-                    dragStartX = this.x;
-                    isDragging = true;
-                    dragDirection = 0;
-                    tl.isDragging = true; // Устанавливаем флаг в timeline
+                    // console.log('pause');
+
                 },
                 onDrag() {
-                    if (!isDragging) return;
-                    
-                    const currentTime = Date.now();
-                    const deltaTime = currentTime - lastDragTime;
-                    const deltaX = Math.abs(this.x - dragStartX);
-                    
-                    // Ограничиваем частоту обновления для предотвращения резких скачков
-                    if (deltaTime < 16) return; // ~60fps
-                    
                     align();
+                    dragDirection = this.getDirection("start") === "left" ? -1 : 1;
                     
-                    // Определяем направление только при значительном движении
-                    if (deltaX > 20) {
-                        dragDirection = this.getDirection("start") === "left" ? -1 : 1;
+                    // Ограничение прокрутки на мобильных устройствах
+                    if (window.innerWidth <= 768) { // мобильные устройства
+                        const currentProgress = tl.progress();
+                        const startProgressValue = startProgress;
+                        const progressDiff = Math.abs(currentProgress - startProgressValue);
+                        
+                        // Максимум 2 слайда за один жест (примерно 2/общее_количество_слайдов)
+                        const maxProgressDiff = 2 / length;
+                        
+                        if (progressDiff > maxProgressDiff) {
+                            const clampedProgress = startProgressValue + (currentProgress > startProgressValue ? maxProgressDiff : -maxProgressDiff);
+                            tl.progress(clampedProgress);
+                        }
                     }
-                    
-                    lastDragTime = currentTime;
                 },
                 onThrowUpdate() {
                     align();
+                    
+                    // Ограничение прокрутки при инерции на мобильных устройствах
+                    if (window.innerWidth <= 768) {
+                        const currentProgress = tl.progress();
+                        const startProgressValue = startProgress;
+                        const progressDiff = Math.abs(currentProgress - startProgressValue);
+                        const maxProgressDiff = 2 / length;
+                        
+                        if (progressDiff > maxProgressDiff) {
+                            const clampedProgress = startProgressValue + (currentProgress > startProgressValue ? maxProgressDiff : -maxProgressDiff);
+                            tl.progress(clampedProgress);
+                        }
+                    }
+                    
                     if (wasPlaying) {
                         const currentVelocity = Math.abs(InertiaPlugin.getVelocity(proxy, "x"));
-                        
-                        // Увеличиваем порог скорости для более плавного перехода
-                        if (currentVelocity <= pixelsPerSecond + 100) {
+
+                        if (currentVelocity <= pixelsPerSecond + 60) {
                             gsap.killTweensOf(proxy);
                         }
                     }
                 },
                 overshootTolerance: 0,
-                inertia: true,
+                inertia: true, // Включаем инерцию
                 snap(value) {
                     if (!config.snap) return
 
-                    // Увеличиваем зону "прилипания" для предотвращения случайных переходов
-                    if (Math.abs(startProgress / -ratio - this.x) < 30) {
+                    if (Math.abs(startProgress / -ratio - this.x) < 10) {
                         return lastSnap + initChangeX;
                     }
                     
@@ -491,24 +477,30 @@ export function horizontalLoop(items, config) {
                         wrappedTime = timeWrap(time),
                         snapTime = times[getClosest(times, wrappedTime, tl.duration())],
                         dif = snapTime - wrappedTime;
+                    Math.abs(dif) > tl.duration() / 2 && (dif += dif < 0 ? tl.duration() : -tl.duration());
+                    lastSnap = (time + dif) / tl.duration() / -ratio;
                     
-                    // Улучшенная логика для предотвращения больших скачков
-                    if (Math.abs(dif) > tl.duration() / 2) {
-                        dif += dif < 0 ? tl.duration() : -tl.duration();
+                    // Ограничение snap на мобильных устройствах
+                    if (window.innerWidth <= 768) {
+                        const currentIndex = tl.closestIndex();
+                        const startIndex = getClosest(times, startProgress * tl.duration(), tl.duration());
+                        const indexDiff = Math.abs(currentIndex - startIndex);
+                        
+                        // Максимум 2 слайда за один жест
+                        if (indexDiff > 2) {
+                            const maxIndex = startIndex + (currentIndex > startIndex ? 2 : -2);
+                            const clampedIndex = gsap.utils.wrap(0, length, maxIndex);
+                            const clampedTime = times[clampedIndex];
+                            const clampedSnap = -(clampedTime / tl.duration()) / ratio;
+                            return clampedSnap;
+                        }
                     }
                     
-                    lastSnap = (time + dif) / tl.duration() / -ratio;
                     return lastSnap;
                 },
                 onDragEnd() {
-                    isDragging = false;
-                    tl.isDragging = false; // Сбрасываем флаг в timeline
-                    
-                    // Добавляем минимальное время для определения намерения пользователя
-                    const dragDuration = Date.now() - dragStartTime;
-                    const minDragTime = 100; // 100ms минимальное время для определения намерения
-                    
-                    if (wasPlaying && dragDuration > minDragTime) {
+
+                    if (wasPlaying) {
                         if (dragDirection < 0) {
                             tl.play();
                         } else if (dragDirection > 0) {
@@ -516,16 +508,13 @@ export function horizontalLoop(items, config) {
                         }
                     }
                     syncIndex();
+
                 },
                 onRelease() {
-                    isDragging = false;
-                    tl.isDragging = false; // Сбрасываем флаг в timeline
                     syncIndex();
                     indexIsDirty = true;
                 },
                 onThrowComplete: () => {
-                    isDragging = false;
-                    tl.isDragging = false; // Сбрасываем флаг в timeline
                     syncIndex();
                 }
             })[0];
