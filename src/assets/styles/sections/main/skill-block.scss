@@ -10,14 +10,14 @@
 }
 
 .skill-card-content {
-  @apply relative z-[0] h-full rounded-[6px] text-[#000] w-full;
+  @apply relative z-[0] h-full  text-[#000] w-full;
 }
 
 .skill-card-inner {
-  @apply flex overflow-hidden flex-col gap-[20px] relative z-[1] justify-between h-full transition-all duration-500;
+  @apply flex overflow-hidden flex-col gap-[20px] rounded-[6px] relative z-[1] justify-between h-full transition-all duration-500;
   
   &.folder {
-    @apply items-center justify-center border border-solid border-[#93969D] rounded-[6px];
+    @apply items-center justify-center border border-solid xl:border-[#93969D] border-[transparent] rounded-[6px];
   }
   
   &:not(.folder) {
