@@ -396,7 +396,7 @@ export function horizontalLoop(items, config) {
                         const currentVelocity = Math.abs(InertiaPlugin.getVelocity(proxy, "x"));
                         
                         // Для мобильных устройств уменьшаем порог остановки инерции
-                        const velocityThreshold = isMobile ? pixelsPerSecond + 30 : pixelsPerSecond + 60;
+                        const velocityThreshold =  pixelsPerSecond + 60;
                         
                         if (currentVelocity <= velocityThreshold) {
                             gsap.killTweensOf(proxy);
@@ -405,10 +405,7 @@ export function horizontalLoop(items, config) {
                 },
                 overshootTolerance: 0,
                 inertia: !isMobile,
-                // Настройки инерции для мобильных устройств
-                maxDuration: isMobile ? 1.2 : 2, // Ограничиваем максимальную длительность инерции на мобильных
-                minDuration: isMobile ? 0.2 : 0.2,
-                resistance: isMobile ? 5000 : 3000, // Увеличиваем сопротивление на мобильных
+
                 snap(value) {
                     if (!config.snap) return
 
@@ -423,60 +420,8 @@ export function horizontalLoop(items, config) {
                     
                     Math.abs(dif) > tl.duration() / 2 && (dif += dif < 0 ? tl.duration() : -tl.duration());
                     
-                    // Для мобильных устройств ограничиваем количество слайдов за один свайп
-                   /*  if (isMobile) {
-                        const currentIndex = tl.current();
-                        const targetTime = time + dif;
-                        const targetIndex = getClosest(times, timeWrap(targetTime), tl.duration());
-                        const slidesDifference = Math.abs(targetIndex - currentIndex);
-                        
-                        // Ограничиваем максимум 3 слайдами за один свайп на мобильных
-                        if (slidesDifference > 3) {
-                            const direction = targetIndex > currentIndex ? 1 : -1;
-                            const limitedIndex = currentIndex + (direction * 3);
-                            const limitedWrappedIndex = gsap.utils.wrap(0, length, limitedIndex);
-                            const limitedTime = times[limitedWrappedIndex];
-                            lastSnap = -limitedTime / tl.duration() / ratio;
-                            return lastSnap;
-                        }
-                    } */
+                   
 
-                        if (isMobile) {
-                            const currentIndex = tl.current();
-                            const targetTime = time + dif;
-                            const targetIndex = getClosest(times, timeWrap(targetTime), tl.duration());
-                            
-                            // Вычисляем разность с учетом кольцевой структуры
-                            let slidesDifference = targetIndex - currentIndex;
-                            
-                            // Нормализуем разность для кольцевого перехода
-                            if (slidesDifference > length / 2) {
-                                slidesDifference = slidesDifference - length;
-                            } else if (slidesDifference < -length / 2) {
-                                slidesDifference = slidesDifference + length;
-                            }
-                            
-                            // Ограничиваем максимум 3 слайдами за один свайп на мобильных
-                            if (Math.abs(slidesDifference) > 3) {
-                                const direction = slidesDifference > 0 ? 1 : -1;
-                                const limitedIndex = gsap.utils.wrap(0, length, currentIndex + (direction * 3));
-                                const limitedTime = times[limitedIndex];
-                                
-                                // Корректируем время с учетом направления движения
-                                let adjustedTime = limitedTime;
-                                const currentTime = times[currentIndex];
-                                
-                                if (direction > 0 && limitedTime < currentTime) {
-                                    adjustedTime = limitedTime + tl.duration();
-                                } else if (direction < 0 && limitedTime > currentTime) {
-                                    adjustedTime = limitedTime - tl.duration();
-                                }
-                                
-                                lastSnap = -adjustedTime / tl.duration() / ratio;
-                                return lastSnap;
-                            }
-                        }
-                    
                     lastSnap = (time + dif) / tl.duration() / -ratio;
                     return lastSnap;
                 },
