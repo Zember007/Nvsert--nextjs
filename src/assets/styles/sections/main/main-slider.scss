@@ -1,9 +1,9 @@
 @use '../../base/variables' as varibles;
 
 .cloneable {
-  @apply xl:flex-row flex-col xl:gap-0 gap-[30px];
+  @apply xl:flex-row flex-col xl:items-end xl:gap-0 gap-[30px];
   justify-content: space-between;
-  align-items: end;
+
   display: flex;
   position: relative;
 }
