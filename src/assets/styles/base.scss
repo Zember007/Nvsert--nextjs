@@ -400,11 +400,17 @@ body {
     padding: 2px;
 
     &::before {
-        content: '';
-        display: block;
+        content: 'NVSERT';
+        font-size: 8px;
+        font-weight: 300;
+        word-break: break-all;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         position: relative;
         top: var(--scrollY);
         width: 100%;
+        max-width: 100%;
         height: var(--scrollbarHeight);
         background: rgba(52, 68, 109, 0.2);
         border: 1px solid #93969D;
