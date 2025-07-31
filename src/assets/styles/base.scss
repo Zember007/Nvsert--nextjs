@@ -79,7 +79,7 @@
 
 
 .PhotoView-Slider__BannerRight {
-
+height: auto !important;
 
 
     @media (min-width:1240px) {
@@ -87,7 +87,7 @@
 
         top: 50%;
         right: 50%;
-        transform: translate(400px, -318px);
+        transform: translate(400px, -290px);
     }
 
     @media (max-width:1239px) {
