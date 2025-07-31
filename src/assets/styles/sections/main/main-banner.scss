@@ -9,7 +9,7 @@
   z-index: 0;
   
 
-  @media (max-width: varibles.$media-s) {
+  @media (max-width: varibles.$media-xl) {
     padding-top: 94px;
     padding-bottom: 40px;
   }
@@ -23,16 +23,16 @@
     font-size: 64px;
     letter-spacing: -0.04em;
 
-    @media (max-width: varibles.$media-l) {
+    @media (max-width: varibles.$media-xl) {
       margin: 0 auto;
-      font-size: 44px;
-      max-width: 550px;
+      font-size: 56px;
+      max-width: 670px;
+      text-align: center;
     }
 
     @media (max-width: varibles.$media-s) {
       font-size: 28px;
       max-width: 340px;
-      text-align: center;
     }
   }
 
@@ -42,7 +42,7 @@
     justify-content: space-between;
     gap: 20px;
 
-    @media (max-width: varibles.$media-l) {
+    @media (max-width: varibles.$media-xl) {
       gap: 40px;
       flex-direction: column;
 
