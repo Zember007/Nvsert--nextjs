@@ -128,23 +128,23 @@ const AppFooter = () => {
 
   return (
     <footer ref={ref} className="footer grid xl:grid-cols-2 gap-[2px]">
-      <div className="footer__white change-style xl:row-start-auto row-start-2   justify-between">
-        <p className="xl:block hidden text-[18px] font-light col-start-1 col-end-3 whitespace-nowrap ml-[21px]">© 2025 NVSERT</p>
+      <div className="footer__white change-style m:row-start-auto row-start-2   justify-between">
+        <p className="m:block hidden text-[18px] font-light col-start-1 col-end-3 whitespace-nowrap ml-[21px]">© 2025 NVSERT</p>
 
-        <div className="xl:w-auto w-full xl:mx-0 mx-auto xl:max-w-full max-w-[280px]  flex gap-[10px] items-start xl:flex-row flex-col ">
+        <div className="m:w-auto w-full m:mx-0 mx-auto m:max-w-full max-w-[280px]  flex gap-[10px] items-start m:flex-row flex-col ">
           {menuItems.map((item, i) => (
             <AppMenuItem
-            className="xl:!h-[35px] !h-[50px]"
+            className="m:!h-[35px] !h-[50px]"
             key={i} item={item} isActive={false} />
           ))}
 
         </div>
       </div>
 
-      <div className="footer__white  gap-[10px] xl:flex-row flex-col">
+      <div className="footer__white  gap-[10px] m:flex-row flex-col xl:justify-start justify-center">
         <button
           onClick={() => { openDefaultModal('introForm') }}
-          className="xl:hidden  border border-solid w-full text-[18px] flex items-center justify-between px-[15px] text-[#FFF]  border-[#93969D] h-[50px] max-w-[280px] mx-auto rounded-[4px] bg-[#34446D]"
+          className="m:hidden  border border-solid w-full text-[18px] flex items-center justify-between px-[15px] text-[#FFF]  border-[#93969D] h-[50px] max-w-[280px] mx-auto rounded-[4px] bg-[#34446D]"
         >
           <span>Заказать звонок</span>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -169,7 +169,7 @@ const AppFooter = () => {
               onClick={() => {
                 navigator.clipboard.writeText(email.value)
               }}
-              className="sendBtn max-xl:!border-[#93969D] gap-[8px] max-xl:!bg-[#F5F5F2]  w-full xl:!h-[35px] max-w-[280px] xl:mx-0 mx-auto !h-[50px] xl:w-auto"
+              className="sendBtn max-xl:!border-[#93969D] gap-[8px] max-m:!bg-[#F5F5F2]  w-full m:!h-[35px] max-w-[280px] m:mx-0 mx-auto !h-[50px] m:w-auto"
               item={{
                 href: '#', label:
                   <>
@@ -193,11 +193,11 @@ const AppFooter = () => {
           timer={3000}
         >
           <AppMenuItem
-            className="sendBtn max-xl:!border-[#93969D] max-xl:!bg-[#F5F5F2]  w-full  xl:!h-[35px] xl:w-auto max-w-[280px] xl:mx-0 mx-auto  !h-[50px]  group"
+            className="sendBtn max-xl:!border-[#93969D] max-m:!bg-[#F5F5F2]  w-full  m:!h-[35px] m:w-auto max-w-[280px] m:mx-0 mx-auto  !h-[50px]  group"
             item={{
               href: '#', label:
                 <>
-                  <span className="sendTextFooter  xl:group-hover:text-[#2AABEE]">Telegram</span>
+                  <span className="sendTextFooter  m:group-hover:text-[#2AABEE]">Telegram</span>
 
 
                   <svg
@@ -228,11 +228,11 @@ const AppFooter = () => {
           timer={3000}
         >
           <AppMenuItem
-            className="sendBtn max-xl:!border-[#93969D] w-full max-xl:!bg-[#F5F5F2]   xl:!h-[35px] xl:w-auto max-w-[280px] xl:mx-0 mx-auto !h-[50px]  group"
+            className="sendBtn max-xl:!border-[#93969D] w-full max-m:!bg-[#F5F5F2]   m:!h-[35px] m:w-auto max-w-[280px] m:mx-0 mx-auto !h-[50px]  group"
             item={{
               href: '#', label:
                 <>
-                  <span className="sendTextFooter xl:group-hover:text-[#60D669]">WhatsApp</span>
+                  <span className="sendTextFooter m:group-hover:text-[#60D669]">WhatsApp</span>
 
                   <svg
                     className="sendIconFooter"
@@ -247,7 +247,7 @@ const AppFooter = () => {
             }} isActive={false} />
         </PromtModal>
         <PromtModal
-          classNameBox="!w-auto xl:!relative !absolute xl:bottom-0 xl:right-0 bottom-[-62px] right-1/2 xl:translate-x-0 translate-x-[140px]"
+          classNameBox="!w-auto m:!relative !absolute m:bottom-0 m:right-0 bottom-[-62px] right-1/2 m:translate-x-0 translate-x-[140px]"
           className='!py-[20px]'
           content={
             <div className="flex flex-col gap-[20px]">
@@ -274,7 +274,7 @@ const AppFooter = () => {
             item={{
               href: '#', label: <>
                 <svg
-                className="xl:*:fill-black *:fill-white"
+                className="m:*:fill-black *:fill-white"
                 width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M12.2676 18.8833C15.9735 17.9416 18.7776 14.7408 19.1293 10.8333H14.9785C14.8235 13.7891 13.8485 16.5391 12.2676 18.8833ZM19.1293 9.16664C18.7776 5.25831 15.971 2.05664 12.2643 1.11497C13.846 3.45997 14.8226 6.20997 14.9785 9.16664H19.1293ZM7.73678 1.11497C4.02845 2.05664 1.22345 5.25831 0.870117 9.16664H5.02178C5.17762 6.20997 6.15428 3.45997 7.73678 1.11497ZM0.87095 10.8333C1.04402 12.7192 1.79645 14.5054 3.02497 15.9466C4.2535 17.3879 5.89793 18.4137 7.73262 18.8833C6.15178 16.5391 5.17678 13.7891 5.02178 10.8333H0.87095ZM10.0001 19.135C8.07762 16.8141 6.87345 13.9508 6.69178 10.8333H13.3093C13.126 13.95 11.9226 16.8141 10.001 19.135M10.0001 0.869141C11.9226 3.18914 13.1251 6.05164 13.3085 9.16664H6.69178C6.87512 6.05164 8.07845 3.18914 10.0001 0.869141Z" fill="black" fillOpacity="1" />
                 </svg>
@@ -284,37 +284,37 @@ const AppFooter = () => {
         </PromtModal>
       </div>
 
-      <div className="footer__dark bottom-top xl:justify-between">
-        <div className="xl:flex hidden ml-[21px] text-[16px] items-start  flex-col gap-[18px] font-ligh whitespace-nowrap">
+      <div className="footer__dark bottom-top m:justify-between">
+        <div className="m:flex hidden ml-[21px] text-[16px] items-start  flex-col gap-[18px] font-ligh whitespace-nowrap">
           <span>{t("footer.inn")}</span>
           <span>{t("footer.company")}</span>
         </div>
 
-        <div className="xl:max-w-full w-full xl:mx-0 mx-auto max-w-[280px]  flex gap-[8px] flex-col xl:items-end">
+        <div className="m:max-w-full w-full m:mx-0 mx-auto max-w-[280px]  flex gap-[8px] flex-col m:items-end">
           <AppMenuItem
-            className=" xl:!h-[35px] !h-auto !text-left"
+            className=" m:!h-[35px] !h-auto !text-left"
 
             item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: t("footer.policy") }} isActive={false} />
           <AppMenuItem
-            className=" xl:!h-[35px] !h-auto !text-left"
+            className=" m:!h-[35px] !h-auto !text-left"
 
             item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: 'Обработка персональных данных' }} isActive={false} />
         </div>
       </div>
   
-      <div className="xl:!hidden footer__white flex-col gap-[5.5px] !p-[18px] h-[96px] text-[14px]">
+      <div className="m:!hidden footer__white flex-col gap-[5.5px] !p-[18px] h-[96px] text-[14px]">
         <span>«ЦЕНТР СТАНДАРТИЗАЦИИ»</span>
         <span>ИНН 6027189146</span>
         <span className="font-light">© 2025 NVSERT</span>
       </div>
 
-      <div className="footer__dark xl:justify-start justify-center gap-[16px] xl:h-auto h-[96px]">
-        <Image src={AudioLogo} alt="audiosector" className="xl:ml-[31px]"/>
+      <div className="footer__dark xl:justify-start justify-center gap-[16px] m:h-auto h-[96px]">
+        <Image src={AudioLogo} alt="audiosector" className="m:ml-[31px]"/>
         <div className="pl-[16px] border-l border-[#FFF] border-solid flex flex-col gap-[4px]">
-          <div className="xl:h-[23px] h-[36px] overflow-hidden text-[#FFF]">
+          <div className="m:h-[23px] h-[36px] overflow-hidden text-[#FFF]">
             <div ref={stepsRef}>
               {slides.map((item, i) => (
-                <h3 key={i} className="font-light xl:text-[18px] text-[14px]">
+                <h3 key={i} className="font-light m:text-[18px] text-[14px]">
                   {item}
                 </h3>
               ))}
