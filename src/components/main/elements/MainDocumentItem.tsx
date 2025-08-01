@@ -43,7 +43,7 @@ type ImageRef = HTMLImageElement | null;
 
 // Компонент кнопки
 const ActionButton = memo(({ onClick, icon, text, className, setRef }: ActionButtonProps) => (
-    <button ref={setRef} onClick={onClick} className={`document__button ${className}`}>        
+    <button ref={setRef} onClick={onClick} className={`document__button ${className}`}>
         <span className="sendText">{text}</span>
         <span className="sendIconLeft">
             {icon}
@@ -256,7 +256,7 @@ const MainDocumentItem = memo(({
                             {windowWidth && windowWidth < 768 &&
                                 <>
 
-                                                                            <div className="document-content-wrapper">
+                                    <div className="document-content-wrapper">
                                         <motion.div
                                             animate={controls}
                                             initial={{ y: 20 }}

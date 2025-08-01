@@ -167,7 +167,7 @@
   &__list {
 
     &-photo {
-      @apply m:w-[60%] m:gap-0 gap-[20px] items-center flex flex-col-reverse m:flex-row m:items-stretch;
+      @apply m:w-[60%] xl:gap-0 gap-[20px] items-center flex flex-col-reverse m:flex-row m:items-stretch;
     }
 
     @apply flex gap-[10px] flex-col grow m:max-w-[500px];
