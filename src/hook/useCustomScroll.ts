@@ -255,7 +255,9 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
     document.addEventListener('touchmove', scrollMove);
     document.addEventListener('touchend', handleTouchEnd);
 
-    updateScrollbar();
+    setTimeout(() => {
+      updateScrollbar();
+    }, 100);
 
     // Cleanup функция
     return () => {
