@@ -3,7 +3,7 @@
 
   .white-style {
     .btn-lang {
-      @media (min-width: 900px) {
+      @media (min-width: 620px) {
         --color-item-menu: #000;
       }
 
@@ -42,7 +42,7 @@
     }
 
     &.change-style {
-      @media (min-width: 900px) {
+      @media (min-width: 620px) {
         @apply white-style;
       }
 
