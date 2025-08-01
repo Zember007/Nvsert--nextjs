@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 export interface CustomScrollOptions {
   smoothScrollFactor?: number; // Коэффициент плавности скролла (по умолчанию 0.15)
   scrollPadding?: number; // Отступ скроллбара (по умолчанию 2)
-  minWidth?: number; // Минимальная ширина экрана для активации (по умолчанию 768)
+  minWidth?: number; // Минимальная ширина экрана для активации (по умолчанию 900)
   enabled?: boolean; // Включен ли скролл (по умолчанию true)
   target?: 'window' | 'container'; // Цель скролла: window или container (по умолчанию 'window')
   containerRef?: React.RefObject<any>; // Ссылка на контейнер для скролла (обязательно если target === 'container')
@@ -13,7 +13,7 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
   const {
     smoothScrollFactor = 0.15,
     scrollPadding = 2,
-    minWidth = 768,
+    minWidth = 900,
     enabled = true,
     target = 'window',
     containerRef

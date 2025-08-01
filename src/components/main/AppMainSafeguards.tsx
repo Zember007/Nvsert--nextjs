@@ -134,7 +134,7 @@ const AppMainSafeguards = () => {
     if (widthWindow && widthWindow < 1280 && divRef.current) {
 
       const slides = gsap.utils.toArray('[data-slider="slide-safeguard"]');
-      const gap =  widthWindow < 768 ? (widthWindow - 320) / 2 : 20
+      const gap =  widthWindow < 900 ? (widthWindow - 320) / 2 : 20
       timeLine.current = horizontalLoop(slides, {
         paused: true,
         draggable: true,
@@ -167,7 +167,7 @@ const AppMainSafeguards = () => {
         <h2 className="section__title">Гарантии и безупречный сервис</h2>
         <div className="safeguards-container">
           <div className="safeguard__box"          
-          style={{...(widthWindow && widthWindow < 768 && {gap: (widthWindow - 320) / 2})}}
+          style={{...(widthWindow && widthWindow < 900 && {gap: (widthWindow - 320) / 2})}}
           >
             {
               guarantees.map((item, index) => (
