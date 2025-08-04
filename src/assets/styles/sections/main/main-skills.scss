@@ -19,15 +19,19 @@
     &__box {
         @apply flex xxl:grid grid-cols-4 gap-[20px];
 
-        @media (max-width: varibles.$media-xl) {
-            width: calc(100% + 40px);
-            margin: 0 -20px;
-          }
-
-          @media (max-width: varibles.$media-xxl) {
-            width: 970px;
+        @media (max-width: varibles.$media-xxl) {
+            width: 1010px;
             margin: 0 auto;
             overflow: hidden;
           }
+
+        @media (max-width: varibles.$media-xl) {
+            width: calc(100% + 40px) !important;
+            margin: 0 -20px !important;
+            overflow: visible !important;
+
+          }
+
+          
     }
 }
