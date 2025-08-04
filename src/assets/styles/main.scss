@@ -147,13 +147,13 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
 .safeguard__box {
   @apply flex gap-[20px];
 
-  @media (max-width: varibles.$media-xxl) {
+  @media (max-width: $media-xxl) {
     width: 1010px;
     margin: 0 auto;
     overflow: hidden;
   }
 
-@media (max-width: varibles.$media-xl) {
+@media (max-width: $media-xl) {
     width: calc(100% + 40px) !important;
     margin: 0 -20px !important;
     overflow: visible !important;
