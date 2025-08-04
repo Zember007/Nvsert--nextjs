@@ -163,20 +163,20 @@ const AppSidebar = () => {
               key={item.id}
               onClick={() => scrollToSection(item.id)}
               className={`group relative flex items-center justify-center w-[38px] h-[48px] ${i === navItems.length - 1 ? 'rounded-b-[4px]' : ''} ${i === 0 ? 'rounded-t-[4px]' : 'border-t border-solid border-[#CCCCCC] '} transition-all duration-300 ${activeSection === item.id
-                ? 'bg-[#34446D]'
+                ? ''
                 : ''
                 }`}
             >
               {/* Иконка */}
               <div className={`w-[34px] h-[34px] flex items-center justify-center ${activeSection === item.id
-                ? 'text-white'
+                ? 'text-[#34446D]'
                 : 'text-[#93969D]'
                 }`}>
                 {item.icon}
               </div>
 
               {/* Подсказка */}
-              <div className="absolute pointer-events-none z-[-1] right-full mr-3 text-[#34446D] text-[20px] opacity-0 group-hover:translate-x-0 translate-x-[30px] group-hover:opacity-100 transition-all duration-200 whitespace-nowrap">
+              <div className="absolute pointer-events-none z-[-1] right-full mr-3 text-[#34446D] text-[18px] opacity-0 group-hover:translate-x-0 translate-x-[30px] group-hover:opacity-100 transition-all whitespace-nowrap">
                 {item.label}
               </div>
             </button>
