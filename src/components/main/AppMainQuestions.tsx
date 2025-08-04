@@ -19,7 +19,9 @@ const AppMainQuestions = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
   return (
-            <section id="questions" className="section wrapper">
+            <section className="section wrapper">
+        <div id="questions" className="absolute top-[-50px] pointer-events-none" ></div>
+
         <h2 className="section__title">
           {t('MainQuestions.title')}
         </h2>

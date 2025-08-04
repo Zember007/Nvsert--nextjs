@@ -152,7 +152,8 @@ const AppMainFeedback = () => {
 
 
     return (
-        <section id="feedback" className="section wrapper">
+        <section  className="section wrapper">
+        <div id="feedback" className="absolute top-[-50px] pointer-events-none" ></div>
 
                 <h2 className="section__title">{t('MainFeedback.title')}</h2>
                 <PhotoProvider maskOpacity={0.4} maskClassName="blurred-mask"

@@ -84,7 +84,8 @@ const AppMainDocuments = () => {
     
 
     return (
-        <section id="documents" className="section wrapper">
+        <section  className="section wrapper">
+
 
             <h2 className="section__title">
                 {t('docs.heading')}
