@@ -36,7 +36,7 @@ const AppMainIntro = () => {
 
     return (
         <>
-            <section ref={ref} className="main-banner">
+            <section ref={ref} id="intro" className="main-banner">
 
                 <div className="wrapper">
                     <div className='main-banner__content'>

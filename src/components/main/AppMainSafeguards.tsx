@@ -163,6 +163,7 @@ const AppMainSafeguards = () => {
     <>
       <section
         ref={divRef}
+        id="safeguards"
         className="section wrapper">
         <h2 className="section__title">Гарантии и безупречный сервис</h2>
         <div className="safeguards-container">

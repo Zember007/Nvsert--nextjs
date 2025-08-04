@@ -152,7 +152,7 @@ const AppMainFeedback = () => {
 
 
     return (
-        <section className="section wrapper">
+        <section id="feedback" className="section wrapper">
 
                 <h2 className="section__title">{t('MainFeedback.title')}</h2>
                 <PhotoProvider maskOpacity={0.4} maskClassName="blurred-mask"

@@ -4,6 +4,7 @@ import '@/assets/styles/main.scss'
 import AppMainIntro from '../components/main/AppMainIntro'
 import AppMainDocuments from '../components/main/AppMainDocuments'
 import LazyLoadSection from '@/hook/LazyLoadSection';
+import AppSidebar from '../components/general/AppSidebar';
 
 
 export default function Home() {
@@ -31,7 +32,7 @@ export default function Home() {
 
 
   return (
-    <div className="main text-[#000] overflow-hidden select-none ">
+    <div className="main text-[#000] overflow-hidden select-none relative">
        <AppMainIntro />
 
       <AppMainDocuments />
@@ -44,7 +45,9 @@ export default function Home() {
 
       <DynamicAppMainFeedback />
 
-      <DynamicAppMainQuestions /> 
+      <DynamicAppMainQuestions />
+
+      <AppSidebar />
     </div>
   );
 }

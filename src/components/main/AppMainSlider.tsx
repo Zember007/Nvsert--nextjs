@@ -174,7 +174,7 @@ const SliderMain = () => {
 
     return (
         <>
-            <section ref={ref} className='section wrapper'>
+            <section ref={ref} id="slider" className='section wrapper'>
 
                 <h2 className='section__title'>Помогаем с документами по отраслям</h2>
                 <div className="cloneable">

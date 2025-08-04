@@ -95,6 +95,7 @@ const AppMainSkills = () => {
 
         <section
             ref={ref}
+            id="skills"
             className="section wrapper">
             <h2 className="section__title">Наши основные преимущества</h2>
             <div className="skills__wrapper">
