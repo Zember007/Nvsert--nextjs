@@ -56,7 +56,7 @@ const AppMainSkills = () => {
 
 
 
-        if (widthWindow && widthWindow < 1240 && isVisibleSection) {
+        if (widthWindow && widthWindow < 1420 && isVisibleSection) {
 
             const slides = gsap.utils.toArray('[data-slider="slide-skill"]');
 
