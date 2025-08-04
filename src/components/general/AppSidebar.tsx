@@ -176,7 +176,7 @@ const AppSidebar = () => {
               </div>
 
               {/* Подсказка */}
-              <div className="absolute z-[-1] right-full mr-3 text-[#34446D] text-[20px] opacity-0 group-hover:translate-x-0 translate-x-[30px] group-hover:opacity-100 transition-all duration-200 whitespace-nowrap">
+              <div className="absolute pointer-events-none z-[-1] right-full mr-3 text-[#34446D] text-[20px] opacity-0 group-hover:translate-x-0 translate-x-[30px] group-hover:opacity-100 transition-all duration-200 whitespace-nowrap">
                 {item.label}
               </div>
             </button>
