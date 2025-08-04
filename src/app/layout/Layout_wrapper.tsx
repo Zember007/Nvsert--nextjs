@@ -15,13 +15,16 @@ import { usePathname } from 'next/navigation';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CustomScrollbar from '@/components/general/CustomScrollbar';
+import { CopyProvider, useCopyContext } from '@/components/contexts/CopyContext';
+import CopyNotification from '@/components/general/elements/CopyNotification';
 
 gsap.registerPlugin(ScrollTrigger);
 
 
-const Layout_wrapper = ({ children }: { children: ReactNode }) => {
+const LayoutContent = ({ children }: { children: ReactNode }) => {
     const dispatch = useDispatch<AppDispatch>();
     const pathname = usePathname();
+    const { showCopyNotification, notificationPosition, hideNotification } = useCopyContext();
 
     const metadata = useSelector((state: RootState) => state.metadata);
     const { transparent, setDefaultModalActive, defaultModalActive, defaultModalName, resetCountModal, defaultModalCount } = useHeaderContext();
@@ -119,8 +122,25 @@ const Layout_wrapper = ({ children }: { children: ReactNode }) => {
                 </main>
                 <div className="bg-noise"></div>
                 <CustomScrollbar target="window" />
+                
+                <CopyNotification 
+                    isVisible={showCopyNotification}
+                    onHide={hideNotification}
+                    duration={3000}
+                    position={notificationPosition}
+                />
             </body>
         </>
+    );
+};
+
+const Layout_wrapper = ({ children }: { children: ReactNode }) => {
+    return (
+        <CopyProvider>
+            <LayoutContent>
+                {children}
+            </LayoutContent>
+        </CopyProvider>
     );
 };
 

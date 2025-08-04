@@ -13,9 +13,9 @@ import AppMenuItem from "./AppMenuItem";
 import { filterPhone } from "@/hook/filter";
 import { useButton } from "@/hook/useButton";
 import { useAnimation, motion } from "framer-motion";
-import NavSvg from "./elements/NavSvg";
 import { RootState } from "@/config/store";
 import HeaderMenu from "./elements/HeaderMenu";
+import { useCopyContext } from "../contexts/CopyContext";
 
 
 
@@ -133,6 +133,8 @@ const AppHeader = () => {
     }
   }, [widthOrderRef])
   const [widthOrder, setWidthOrder] = useState(0);
+
+  const { handleCopy } = useCopyContext();
   return (
     <>
 
@@ -141,8 +143,8 @@ const AppHeader = () => {
       style={{ right: (widthOrder ? widthOrder + 4 : 196) + 'px' }}
       className={`rubik header__bg !backdrop-filter-none gap-[8px] xl:!flex !hidden mix-blend-difference fixed h-[60px] top-[2px] right-[196px] z-[51] `}>
         <AppMenuItem
-          onClick={() => {
-            navigator.clipboard.writeText('info@nvsert.ru')
+          onClick={(e) => {
+            handleCopy('info@nvsert.ru', e)
           }}
           item={{
             href: '#', label:'info@nvsert.ru'

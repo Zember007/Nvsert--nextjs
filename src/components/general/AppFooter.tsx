@@ -13,18 +13,17 @@ import PromtModal from "../modals/PromtModal";
 import { useHeaderContext } from "../contexts/HeaderContext";
 import gsap from "gsap";
 import { useIntersectionObserver } from "@/hook/useIntersectionObserver";
+import { useCopyContext } from "../contexts/CopyContext";
 
 const AppFooter = () => {
 
   const { ref, isVisible } = useIntersectionObserver();
   const { t, i18n } = useTranslation();
+  const { handleCopy } = useCopyContext();
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
   };
-
-  const { configs } = useSelector((state: RootState) => state.config);
-  const email = configs?.find((item) => item.key === 'email');
 
   const menuItems = [
     { label: "FAQ", href: "#" },
@@ -155,43 +154,21 @@ const AppFooter = () => {
 
 
         </button>
-          <PromtModal
-            content={<div className="flex gap-[4px] items-center h-[14px]">
-              <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fillRule="evenodd" clipRule="evenodd" d="M17.2439 0.185578C17.5556 0.458339 17.5872 0.932161 17.3144 1.24389L6.81443 13.2439C6.67774 13.4001 6.48242 13.4927 6.27496 13.4996C6.0675 13.5065 5.86645 13.4271 5.71967 13.2803L1.21967 8.78034C0.926777 8.48745 0.926777 8.01257 1.21967 7.71968C1.51256 7.42679 1.98744 7.42679 2.28033 7.71968L6.21347 11.6528L16.1856 0.256132C16.4583 -0.0555957 16.9322 -0.0871838 17.2439 0.185578Z" fill="white" />
-              </svg>
-              <span className="text-[#FFF] text-[18px]">{t("copied")}</span>
-            </div>}
-            timer={3000}
-          >
-            <AppMenuItem
-              onClick={() => {
-                navigator.clipboard.writeText('info@nvsert.ru')
-              }}
-              className="sendBtn max-xl:!border-[#93969D] gap-[8px] max-xxs:!bg-[#F5F5F2]  w-full xxs:!h-[35px] max-w-[280px] xxs:mx-0 mx-auto !h-[50px] xxs:w-auto"
-              item={{
-                href: '#', label:
-                  <>
-                    <span className="sendTextFooter">info@nvsert.ru</span>
-                    <svg className="sendIconFooter" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M3.5381 5.96154C3.5381 5.45151 3.7407 4.96236 4.10135 4.60172C4.462 4.24107 4.95114 4.03846 5.46117 4.03846H6.61502V7.5C6.61502 7.75254 6.66476 8.00261 6.7614 8.23593C6.85805 8.46925 6.9997 8.68125 7.17827 8.85982C7.53892 9.22047 8.02806 9.42308 8.5381 9.42308H14.6919C14.9445 9.42308 15.1946 9.37334 15.4279 9.27669C15.6612 9.18005 15.8732 9.03839 16.0518 8.85982C16.2303 8.68125 16.372 8.46925 16.4686 8.23593C16.5653 8.00261 16.615 7.75254 16.615 7.5V4.06923C16.9992 4.1396 17.3528 4.32527 17.6289 4.60154L19.8981 6.87077C20.0767 7.04938 20.2183 7.26141 20.3149 7.49476C20.4115 7.72811 20.4612 7.97821 20.4612 8.23077V19.0385C20.4613 19.4818 20.3082 19.9115 20.0278 20.255C19.7475 20.5984 19.3571 20.8344 18.9227 20.9231V14.4231C18.9227 13.913 18.7201 13.4239 18.3595 13.0633C17.9988 12.7026 17.5097 12.5 16.9996 12.5H6.99963C6.4896 12.5 6.00046 12.7026 5.63981 13.0633C5.27917 13.4239 5.07656 13.913 5.07656 14.4231V20.9231C4.64219 20.8344 4.25179 20.5984 3.97144 20.255C3.69109 19.9115 3.538 19.4818 3.5381 19.0385V5.96154ZM6.61502 20.9615V14.4231C6.61502 14.3211 6.65554 14.2232 6.72767 14.1511C6.7998 14.079 6.89763 14.0385 6.99963 14.0385H16.9996C17.1016 14.0385 17.1995 14.079 17.2716 14.1511C17.3437 14.2232 17.3842 14.3211 17.3842 14.4231V20.9615H6.61502ZM15.0766 4.03846V7.5C15.0766 7.60201 15.036 7.69984 14.9639 7.77196C14.8918 7.84409 14.7939 7.88462 14.6919 7.88462H8.5381C8.43609 7.88462 8.33826 7.84409 8.26613 7.77196C8.194 7.69984 8.15348 7.60201 8.15348 7.5V4.03846H15.0766ZM5.46117 2.5C4.54312 2.5 3.66266 2.8647 3.01349 3.51386C2.36433 4.16303 1.99963 5.04348 1.99963 5.96154V19.0385C1.99963 19.9565 2.36433 20.837 3.01349 21.4861C3.66266 22.1353 4.54312 22.5 5.46117 22.5H18.5381C19.4562 22.5 20.3366 22.1353 20.9858 21.4861C21.6349 20.837 21.9996 19.9565 21.9996 19.0385V8.23077C21.9996 7.77619 21.9101 7.32607 21.7362 6.90609C21.5622 6.48611 21.3072 6.10451 20.9858 5.78308L18.7166 3.51385C18.3951 3.19241 18.0135 2.93744 17.5935 2.76348C17.1736 2.58953 16.7234 2.5 16.2689 2.5H5.46117Z" fill="black" />
-                    </svg>
-                  </>
-              }} isActive={false} />
-
-
-          </PromtModal>
-        <PromtModal
-          content={<div className="flex gap-[4px] items-center h-[14px]">
-            <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fillRule="evenodd" clipRule="evenodd" d="M17.2439 0.185578C17.5556 0.458339 17.5872 0.932161 17.3144 1.24389L6.81443 13.2439C6.67774 13.4001 6.48242 13.4927 6.27496 13.4996C6.0675 13.5065 5.86645 13.4271 5.71967 13.2803L1.21967 8.78034C0.926777 8.48745 0.926777 8.01257 1.21967 7.71968C1.51256 7.42679 1.98744 7.42679 2.28033 7.71968L6.21347 11.6528L16.1856 0.256132C16.4583 -0.0555957 16.9322 -0.0871838 17.2439 0.185578Z" fill="white" />
-            </svg>
-            <span className="text-[#FFF] text-[18px]">{t("copied")}</span>
-          </div>}
-          timer={3000}
-        >
           <AppMenuItem
-            className="sendBtn max-xl:!border-[#93969D] max-xxs:!bg-[#F5F5F2]  w-full  xxs:!h-[35px] xxs:w-auto max-w-[280px] xxs:mx-0 mx-auto  !h-[50px]  group"
+            onClick={(e) => handleCopy('info@nvsert.ru', e)}
+            className="sendBtn max-xl:!border-[#93969D] gap-[8px] max-xxs:!bg-[#F5F5F2]  w-full xxs:!h-[35px] max-w-[280px] xxs:mx-0 mx-auto !h-[50px] xxs:w-auto cursor-pointer"
+            item={{
+              href: '#', label:
+                <>
+                  <span className="sendTextFooter">info@nvsert.ru</span>
+                  <svg className="sendIconFooter" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3.5381 5.96154C3.5381 5.45151 3.7407 4.96236 4.10135 4.60172C4.462 4.24107 4.95114 4.03846 5.46117 4.03846H6.61502V7.5C6.61502 7.75254 6.66476 8.00261 6.7614 8.23593C6.85805 8.46925 6.9997 8.68125 7.17827 8.85982C7.53892 9.22047 8.02806 9.42308 8.5381 9.42308H14.6919C14.9445 9.42308 15.1946 9.37334 15.4279 9.27669C15.6612 9.18005 15.8732 9.03839 16.0518 8.85982C16.2303 8.68125 16.372 8.46925 16.4686 8.23593C16.5653 8.00261 16.615 7.75254 16.615 7.5V4.06923C16.9992 4.1396 17.3528 4.32527 17.6289 4.60154L19.8981 6.87077C20.0767 7.04938 20.2183 7.26141 20.3149 7.49476C20.4115 7.72811 20.4612 7.97821 20.4612 8.23077V19.0385C20.4613 19.4818 20.3082 19.9115 20.0278 20.255C19.7475 20.5984 19.3571 20.8344 18.9227 20.9231V14.4231C18.9227 13.913 18.7201 13.4239 18.3595 13.0633C17.9988 12.7026 17.5097 12.5 16.9996 12.5H6.99963C6.4896 12.5 6.00046 12.7026 5.63981 13.0633C5.27917 13.4239 5.07656 13.913 5.07656 14.4231V20.9231C4.64219 20.8344 4.25179 20.5984 3.97144 20.255C3.69109 19.9115 3.538 19.4818 3.5381 19.0385V5.96154ZM6.61502 20.9615V14.4231C6.61502 14.3211 6.65554 14.2232 6.72767 14.1511C6.7998 14.079 6.89763 14.0385 6.99963 14.0385H16.9996C17.1016 14.0385 17.1995 14.079 17.2716 14.1511C17.3437 14.2232 17.3842 14.3211 17.3842 14.4231V20.9615H6.61502ZM15.0766 4.03846V7.5C15.0766 7.60201 15.036 7.69984 14.9639 7.77196C14.8918 7.84409 14.7939 7.88462 14.6919 7.88462H8.5381C8.43609 7.88462 8.33826 7.84409 8.26613 7.77196C8.194 7.69984 8.15348 7.60201 8.15348 7.5V4.03846H15.0766ZM5.46117 2.5C4.54312 2.5 3.66266 2.8647 3.01349 3.51386C2.36433 4.16303 1.99963 5.04348 1.99963 5.96154V19.0385C1.99963 19.9565 2.36433 20.837 3.01349 21.4861C3.66266 22.1353 4.54312 22.5 5.46117 22.5H18.5381C19.4562 22.5 20.3366 22.1353 20.9858 21.4861C21.6349 20.837 21.9996 19.9565 21.9996 19.0385V8.23077C21.9996 7.77619 21.9101 7.32607 21.7362 6.90609C21.5622 6.48611 21.3072 6.10451 20.9858 5.78308L18.7166 3.51385C18.3951 3.19241 18.0135 2.93744 17.5935 2.76348C17.1736 2.58953 16.7234 2.5 16.2689 2.5H5.46117Z" fill="black" />
+                  </svg>
+                </>
+            }} isActive={false} />
+          <AppMenuItem
+            onClick={(e) => handleCopy('@nvsert', e)}
+            className="sendBtn max-xl:!border-[#93969D] max-xxs:!bg-[#F5F5F2]  w-full  xxs:!h-[35px] xxs:w-auto max-w-[280px] xxs:mx-0 mx-auto  !h-[50px]  group cursor-pointer"
             item={{
               href: '#', label:
                 <>
@@ -215,18 +192,9 @@ const AppFooter = () => {
 
                 </>
             }} isActive={false} />
-        </PromtModal>
-        <PromtModal
-          content={<span className="flex gap-[4px] items-center h-[14px]">
-            <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fillRule="evenodd" clipRule="evenodd" d="M17.2439 0.185578C17.5556 0.458339 17.5872 0.932161 17.3144 1.24389L6.81443 13.2439C6.67774 13.4001 6.48242 13.4927 6.27496 13.4996C6.0675 13.5065 5.86645 13.4271 5.71967 13.2803L1.21967 8.78034C0.926777 8.48745 0.926777 8.01257 1.21967 7.71968C1.51256 7.42679 1.98744 7.42679 2.28033 7.71968L6.21347 11.6528L16.1856 0.256132C16.4583 -0.0555957 16.9322 -0.0871838 17.2439 0.185578Z" fill="white" />
-            </svg>
-            <span className="text-[#FFF] text-[18px]">{t("copied")}</span>
-          </span>}
-          timer={3000}
-        >
           <AppMenuItem
-            className="sendBtn max-xl:!border-[#93969D] w-full max-xxs:!bg-[#F5F5F2]   xxs:!h-[35px] xxs:w-auto max-w-[280px] xxs:mx-0 mx-auto !h-[50px]  group"
+            onClick={(e) => handleCopy('+7 (999) 123-45-67', e)}
+            className="sendBtn max-xl:!border-[#93969D] w-full max-xxs:!bg-[#F5F5F2]   xxs:!h-[35px] xxs:w-auto max-w-[280px] xxs:mx-0 mx-auto !h-[50px]  group cursor-pointer"
             item={{
               href: '#', label:
                 <>
@@ -243,7 +211,6 @@ const AppFooter = () => {
 
                 </>
             }} isActive={false} />
-        </PromtModal>
         <PromtModal
           classNameBox="!w-auto xxs:!relative !absolute xxs:bottom-0 xxs:right-0 bottom-[-62px] right-1/2 xxs:translate-x-0 translate-x-[140px]"
           className='!py-[20px]'
