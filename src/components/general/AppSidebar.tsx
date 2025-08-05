@@ -162,7 +162,7 @@ const AppSidebar = () => {
             <hr className={`xxl:w-full w-[28px] bg-[#CCCCCC]  m-0 ${i === 0 ? 'xxl:hidden h-[2px]' : 'h-[1px]'}`} />
             <button
               key={item.id}
-              onClick={() => scrollToSection(item.id)}
+              onMouseDown={() => scrollToSection(item.id)}
               className={`group relative flex active:scale-[0.92] items-center justify-center w-[38px] h-[48px] transition-all  ${activeSection === item.id
                 ? ''
                 : ''
