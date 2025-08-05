@@ -111,21 +111,21 @@ const AppMainFeedback = () => {
 
 
                             <div className="feedback-slider-container">
-                                {[...Array(19)].map((_, index) =>
+                                {[...Array(14)].map((_, index) =>
                                     <div
                                         data-slider="slide-feedback" key={index} className="feedback-item">
-                                        <PhotoView src={`/feedbacks/big/${index < 9 ? '0' : ''}${index + 1}.png`}
+                                        <PhotoView src={`/feedbacks/big/${index + 1}.png`}
                                         >
                                             <Image
                                                 className='feedback-image'
-                                                src={`/feedbacks/small/${index < 9 ? '0' : ''}${index + 1}.png`} alt='feedback' width={190} height={267} />
+                                                src={`/feedbacks/small/${index + 1}.png`} alt='feedback' width={190} height={267} />
                                         </PhotoView>
                                     </div>)}
 
                             </div>
 
                             <div className="slide-dots-box">
-                                {[...Array(19)].map((_, i) => (
+                                {[...Array(14)].map((_, i) => (
                                     <div key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
                                 ))}
                             </div>
@@ -134,20 +134,20 @@ const AppMainFeedback = () => {
                         <div className="feedback-slider-section">
 
                             <div className="feedback-slider-container">
-                                {[...Array(19)].map((_, index) =>
+                                {[...Array(14)].map((_, index) =>
                                     <div
                                         data-slider="slide-feedback1" key={index} className="feedback-item">
-                                        <PhotoView src={`/feedbacks/big/${index < 9 ? '0' : ''}${20 + index}.png`}>
+                                        <PhotoView src={`/feedbacks/big/${15 + index}.png`}>
                                             <Image
                                                 className='feedback-image'
-                                                src={`/feedbacks/small/${index < 9 ? '0' : ''}${20 + index}.png`} alt='feedback' width={190} height={267} />
+                                                src={`/feedbacks/small/${15 + index}.png`} alt='feedback' width={190} height={267} />
                                         </PhotoView>
                                     </div>)}
 
                             </div>
 
                             <div className="slide-dots-box">
-                                {[...Array(19)].map((_, i) => (
+                                {[...Array(14)].map((_, i) => (
                                     <div key={i} className={`${activeIndex1 === i ? 'active' : ""} slide-dots`}></div>
                                 ))}
                             </div>
