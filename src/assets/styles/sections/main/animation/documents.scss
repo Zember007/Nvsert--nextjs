@@ -173,7 +173,7 @@
     @apply flex gap-[10px] flex-col grow m:max-w-[500px];
 
     &-wrap {
-      @apply m:w-[40%] items-start flex gap-[20px] flex-col   text-[#000];
+      @apply m:w-[40%] w-full items-start flex gap-[20px] flex-col   text-[#000];
     }
 
     &-item {
