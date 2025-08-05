@@ -30,7 +30,7 @@ const FlightSuccess = ({ close, small = false, text, closeIcon = true }: { close
 
             {closeIcon && <button
                 onClick={() => { close() }}
-                className="close !top-[25px] !right-[25px]">
+                className="close !absolute !top-[25px] !right-[25px]">
                 <div className="in">
                     <div className="close-button-block"></div>
                     <div className="close-button-block"></div>
