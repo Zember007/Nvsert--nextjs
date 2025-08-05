@@ -67,7 +67,7 @@ const AppMainSkills = () => {
                 center: widthWindow < 1240 && widthWindow >= 900 ? false : true,
                 draggable: true,
                 mobile: true,
-                gap: gap,
+                gap: Math.round(gap),
                 snap: true,
                 onChange: (index: number) => {
                     setActive(index)
@@ -102,7 +102,7 @@ const AppMainSkills = () => {
             <div className="skills__wrapper">
                 <div className="skills-content-container">
                     <div className="skills__box"
-                        style={{ ...(widthWindow && widthWindow < 900 && { gap: (widthWindow - 320) / 2 }) }}
+                        style={{ ...(widthWindow && widthWindow < 900 && { gap: Math.round((widthWindow - 320) / 2) }) }}
                     >
 
                         {

@@ -140,7 +140,7 @@ const AppMainSafeguards = () => {
         draggable: true,
         center: widthWindow < 1240 && widthWindow >= 900 ? false : true,
         mobile: true,
-        gap: gap,
+        gap: Math.round(gap),
         snap: true,
         onChange: (index: number) => {
           setActive(index)
@@ -170,7 +170,7 @@ const AppMainSafeguards = () => {
         <h2 className="section__title">Гарантии и безупречный сервис</h2>
         <div className="safeguards-container">
           <div className="safeguard__box"          
-          style={{...(widthWindow && widthWindow < 900 && {gap: (widthWindow - 320) / 2})}}
+          style={{...(widthWindow && widthWindow < 900 && {gap: Math.round((widthWindow - 320) / 2)})}}
           >
             {
               guarantees.map((item, index) => (
