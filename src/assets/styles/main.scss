@@ -35,7 +35,15 @@ $wall__line_bd-cr: hsl(0deg 0% 100% / 0%);
 $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
 
 .slide-blur {
-  @apply m:flex hidden;
+
+  &:not(.feedback-blur) {
+    @apply m:flex hidden;
+  }
+
+  &.feedback-blur {
+    @apply xl:flex hidden;
+  }
+
   position: absolute;
   top: 0;
   bottom: 0;
