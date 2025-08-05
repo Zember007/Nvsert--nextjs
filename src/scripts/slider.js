@@ -153,7 +153,7 @@ export function horizontalLoop(items, config) {
     config = config || {};
     const offsetLeft = config.offsetLeft || 0;
     const isMobile = config.mobile || false; // Получаем флаг мобильного устройства
-
+    if (!items || !items.length) return null;
     gsap.context(() => {
         let onChange = config.onChange,
             onDragFunction = config.onDragFunction,
@@ -206,7 +206,8 @@ export function horizontalLoop(items, config) {
                 });
             },
             getClosest = (values, value, wrap) => {
-                let i = values.length,
+                if (!values) return 0
+                let i =  values.length ,
                     closest = 1e10,
                     index = 0, d;
                 while (i--) {
