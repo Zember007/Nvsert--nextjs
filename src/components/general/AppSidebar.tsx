@@ -158,10 +158,12 @@ const AppSidebar = () => {
         <nav className="flex flex-col items-center border border-solid xxl:border-[#CCCCCC] border-[transparent] rounded-[4px] xxl:bg-[#f5f5f2] ">
 
           {navItems.map((item, i) => (
+            <>
+            <hr className={`xxl:w-full w-[28px] bg-[#CCCCCC]  m-0 ${i === 0 ? 'xxl:hidden h-[2px]' : 'h-[1px]'}`} />
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`group relative flex active:scale-[0.92] items-center justify-center w-[38px] h-[48px] ${i === navItems.length - 1 ? 'rounded-b-[4px]' : ''} ${i === 0 ? 'rounded-t-[4px]' : 'border-t-[2px] border-solid border-[#CCCCCC] '} transition-all  ${activeSection === item.id
+              className={`group relative flex active:scale-[0.92] items-center justify-center w-[38px] h-[48px] transition-all  ${activeSection === item.id
                 ? ''
                 : ''
                 }`}
@@ -181,6 +183,11 @@ const AppSidebar = () => {
                 >{item.label}</span>
               </div>
             </button>
+
+            <hr className={`xxl:w-full w-[28px] bg-[#CCCCCC]  m-0 ${i === navItems.length - 1 ? 'xxl:hidden h-[2px]' : 'h-[1px]'}`} />
+            </>
+
+
           ))}
 
         </nav>
