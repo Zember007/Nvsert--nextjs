@@ -157,7 +157,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
     width: 660px;
   }
 
-  @media (max-width: $media-xl) {
+  @media (max-width: $media-m) {
     width: calc(100% + 40px) !important;
     margin: 0 -20px !important;
     overflow: visible !important;
