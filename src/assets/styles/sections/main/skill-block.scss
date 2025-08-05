@@ -17,7 +17,7 @@
   @apply flex overflow-hidden flex-col gap-[20px] rounded-[6px] relative z-[1] justify-between h-full transition-all duration-500;
   
   &.folder {
-    @apply items-center justify-center border border-solid xl:border-[#93969D] border-[transparent] rounded-[6px];
+    @apply items-center justify-center border border-solid xxl:border-[#93969D] border-[transparent] rounded-[6px];
   }
   
   &:not(.folder) {

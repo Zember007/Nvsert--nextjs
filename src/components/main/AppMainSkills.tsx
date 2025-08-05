@@ -21,7 +21,7 @@ const AppMainSkills = () => {
     const widthWindow = useWindowWidth()
     const [isVisible, setIsVisible] = useState(false);
     const { ref, isVisible: isVisibleSection } = useIntersectionObserver();
-    const skillsData = (widthWindow && widthWindow < 1240) ? skills.filter(item => !item.empty) : skills;
+    const skillsData = (widthWindow && widthWindow < 1420) ? skills.filter(item => !item.empty) : skills;
 
     useEffect(() => {
 

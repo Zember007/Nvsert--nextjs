@@ -12,5 +12,7 @@
     img {
         -ms-high-contrast-adjust: none;
         -webkit-user-drag: none;
+        width: 100%;
+        object-fit: cover;
     }
 }

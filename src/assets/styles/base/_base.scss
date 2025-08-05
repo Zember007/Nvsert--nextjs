@@ -165,7 +165,7 @@ button,
   margin: 0 auto;
 
 
-  @media (max-width: $media-xl) and (min-width: calc($media-m + 1px)) {
+  @media (max-width: $media-xxl) and (min-width: calc($media-m + 1px)) {
     padding-left: map_get($wrapper, padding-size-m);
     padding-right: map_get($wrapper, padding-size-m);
   }
