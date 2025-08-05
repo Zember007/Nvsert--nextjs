@@ -154,14 +154,14 @@ const AppSidebar = () => {
   return (
     <>
       {/* Боковой навбар */}
-      <div className="hidden xl:flex fixed right-[25px] top-1/2 transform -translate-y-1/2 z-10 ">
-        <nav className="flex flex-col items-center border border-solid border-[#CCCCCC] rounded-[4px]">
+      <div className="hidden xl:flex fixed xxl:right-[25px] right-[17px] top-1/2 transform -translate-y-1/2 z-10 ">
+        <nav className="flex flex-col items-center border border-solid xxl:border-[#CCCCCC] border-[transparent] rounded-[4px] xxl:bg-[#f5f5f2] ">
 
           {navItems.map((item, i) => (
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`group relative flex active:scale-[0.92] items-center justify-center w-[38px] h-[48px] ${i === navItems.length - 1 ? 'rounded-b-[4px]' : ''} ${i === 0 ? 'rounded-t-[4px]' : 'border-t border-solid border-[#CCCCCC] '} transition-all  ${activeSection === item.id
+              className={`group relative flex active:scale-[0.92] items-center justify-center w-[38px] h-[48px] ${i === navItems.length - 1 ? 'rounded-b-[4px]' : ''} ${i === 0 ? 'rounded-t-[4px]' : 'border-t-[2px] border-solid border-[#CCCCCC] '} transition-all  ${activeSection === item.id
                 ? ''
                 : ''
                 }`}
@@ -175,7 +175,7 @@ const AppSidebar = () => {
               </div>
 
               {/* Подсказка */}
-              <div className="absolute pointer-events-none z-[-1] right-full mr-3 text-[#34446D] text-[18px] opacity-0 group-hover:translate-x-0 translate-x-[30px] group-hover:opacity-100 transition-all whitespace-nowrap">
+              <div className="absolute pointer-events-none z-[-1] right-full mr-3 text-[#34446D] text-[18px] opacity-0 group-hover:translate-x-0 translate-x-[30px] group-hover:opacity-100 transition-all duration-100 whitespace-nowrap">
                 {item.label}
               </div>
             </button>
