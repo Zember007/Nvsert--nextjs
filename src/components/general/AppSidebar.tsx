@@ -161,13 +161,13 @@ const AppSidebar = () => {
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`group relative flex items-center justify-center w-[38px] h-[48px] ${i === navItems.length - 1 ? 'rounded-b-[4px]' : ''} ${i === 0 ? 'rounded-t-[4px]' : 'border-t border-solid border-[#CCCCCC] '} transition-all duration-300 ${activeSection === item.id
+              className={`group relative flex active:scale-[0.92] items-center justify-center w-[38px] h-[48px] ${i === navItems.length - 1 ? 'rounded-b-[4px]' : ''} ${i === 0 ? 'rounded-t-[4px]' : 'border-t border-solid border-[#CCCCCC] '} transition-all  ${activeSection === item.id
                 ? ''
                 : ''
                 }`}
             >
               {/* Иконка */}
-              <div className={`w-[34px] h-[34px] flex items-center justify-center ${activeSection === item.id
+              <div className={`w-[34px] h-[34px] flex items-center justify-center transition-all group- ${activeSection === item.id
                 ? 'text-[#34446D]'
                 : 'text-[#93969D]'
                 }`}>
