@@ -154,7 +154,7 @@ const AppSidebar = () => {
   return (
     <>
       {/* Боковой навбар */}
-      <div className="hidden xl:flex fixed right-[25px] top-1/2 transform -translate-y-1/2 z-40">
+      <div className="hidden xl:flex fixed right-[25px] top-1/2 transform -translate-y-1/2 z-10 ">
         <nav className="flex flex-col items-center border border-solid border-[#CCCCCC] rounded-[4px]">
 
           {navItems.map((item, i) => (
