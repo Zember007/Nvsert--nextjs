@@ -175,8 +175,10 @@ const AppSidebar = () => {
               </div>
 
               {/* Подсказка */}
-              <div className="absolute pointer-events-none z-[-1] right-full mr-3 text-[#34446D] text-[18px] opacity-0 group-hover:translate-x-0 translate-x-[50px] group-hover:opacity-100 transition-all duration-100 whitespace-nowrap">
-                {item.label}
+              <div className="overflow-hidden absolute pointer-events-none z-[-1] right-full  text-[#34446D] text-[18px]  whitespace-nowrap">
+                <span
+                className='group-hover:translate-x-0 translate-x-full transition-all duration-100 block mr-3'
+                >{item.label}</span>
               </div>
             </button>
           ))}
