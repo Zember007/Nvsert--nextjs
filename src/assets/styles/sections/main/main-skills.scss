@@ -20,7 +20,7 @@
         @apply flex xxl:grid grid-cols-4 gap-[20px];
 
         @media (max-width: varibles.$media-xxl) {
-            width: 1010px;
+            width: 1000px;
             margin: 0 auto;
             overflow: hidden;
           }

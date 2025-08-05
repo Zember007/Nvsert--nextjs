@@ -2,7 +2,7 @@
 @use '../../base/mixins' as mixins;
 
 .safeguard-card-wrapper {
-  @apply z-[0] xl:min-w-[300px] min-w-[320px] xl:w-auto w-[320px] relative xl:h-[517px] h-[530px] translate-y-[0] transition-all duration-500;
+  @apply z-[0] xl:min-w-[300px] min-w-[320px] xl:w-auto w-[320px] relative xl:h-[518px] h-[530px] translate-y-[0] transition-all duration-500;
   
   &:not(.visible) {
     transform: translateY(30px);
