@@ -264,13 +264,13 @@ const SliderMain = () => {
                                         <div className="navigation-button-icon">
                                             <svg
                                                 width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M10 21.957L2 13.404L2.00006 9.60268L10 2" stroke="white" stroke-width="2.66667" stroke-linecap="square" />
+                                                <path d="M10 21.957L2 13.404L2.00006 9.60268L10 2" stroke="white" strokeWidth="2.66667" strokeLinecap="square" />
                                             </svg>
                                         </div>
                                         <div className="navigation-button-icon">
                                             <svg
                                                 width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M10 21.957L2 13.404L2.00006 9.60268L10 2" stroke="white" stroke-width="2.66667" stroke-linecap="square" />
+                                                <path d="M10 21.957L2 13.404L2.00006 9.60268L10 2" stroke="white" strokeWidth="2.66667" strokeLinecap="square" />
                                             </svg>
                                         </div>
 
@@ -287,13 +287,13 @@ const SliderMain = () => {
                                         <div className="navigation-button-icon-next">
                                             <svg
                                                 width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M2 21.957L10 13.404L9.99994 9.60268L2 2" stroke="white" stroke-width="2.66667" stroke-linecap="square" />
+                                                <path d="M2 21.957L10 13.404L9.99994 9.60268L2 2" stroke="white" strokeWidth="2.66667" strokeLinecap="square" />
                                             </svg>
                                         </div>
                                         <div className="navigation-button-icon-next">
                                             <svg
                                                 width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M2 21.957L10 13.404L9.99994 9.60268L2 2" stroke="white" stroke-width="2.66667" stroke-linecap="square" />
+                                                <path d="M2 21.957L10 13.404L9.99994 9.60268L2 2" stroke="white" strokeWidth="2.66667" strokeLinecap="square" />
                                             </svg>
                                         </div>
                                     </button>

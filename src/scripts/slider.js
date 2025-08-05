@@ -291,6 +291,8 @@ export function horizontalLoop(items, config) {
         tl.toIndex = (index, vars) => toIndex(index, vars);
         let timeoutId = null
         tl.closestIndex = setCurrent => {
+            if (!items || !items.length) return 0;
+
             if (timeoutId) clearTimeout(timeoutId)
             let index = getClosest(times, tl.time(), tl.duration());
             if (setCurrent) {

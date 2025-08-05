@@ -82,7 +82,7 @@ const DocumentList = memo(({ content1, listHidden, setListHidden }: DocumentList
                         <svg
                             className={`document-list-arrow ${!listHidden ? 'expanded' : ''}`}
                             width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_4632_2058)">
+                            <g clipPath="url(#clip0_4632_2058)">
                                 <path d="M7 3.5H9V0.5H7L7 3.5ZM15 9.46767L13.5692 8.02908L9.01287 12.6092V6.5H6.98815V12.6092L2.43177 8.02908L1 9.46767L8 16.5L8.71538 15.7822L9.43177 15.0634L15 9.46767Z" fill="#34446D" />
                             </g>
                             <defs>
@@ -242,8 +242,8 @@ const MainDocumentItem = memo(({
                             <svg
                                 className={`${!active ? '' : '*:stroke-[#FFF] rotate-[180deg]'}  hidden m:block transition-all duration-200`}
                                 width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5 5L19 19" stroke="#93969D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M19 11L19 19L11 19" stroke="#93969D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M5 5L19 19" stroke="#93969D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                <path d="M19 11L19 19L11 19" stroke="#93969D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
 
                         </div>
