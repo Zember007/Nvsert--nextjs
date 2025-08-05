@@ -236,6 +236,7 @@ const AppFooter = () => {
           }
         >
           <AppMenuItem
+          className="btn-lang"
             item={{
               href: '#', label: <>
                 <svg
