@@ -22,61 +22,7 @@ const AppMainDocuments = () => {
                 photo.dataset.price = t(`MainDocuments.${item.key}.price`);
                 photo.dataset.duration = t(`MainDocuments.${item.key}.duration`);
             });
-
-            const portal = document.querySelector('.PhotoView-Portal') as HTMLDivElement;
-            const arrowLeft = document.querySelector('.PhotoView-Slider__ArrowLeft') as HTMLDivElement;
-            const arrowRight = document.querySelector('.PhotoView-Slider__ArrowRight') as HTMLDivElement;
-            const closeBtn = document.querySelector('.PhotoView-Slider__BannerRight') as HTMLDivElement;
-
-            if (!portal || !arrowLeft || !arrowRight) {
-                console.error('Один из необходимых элементов не найден');
-                return;
-            }
-
-            const handleMouseMove = (e: MouseEvent) => {
-                const rect = portal.getBoundingClientRect();
-                const cursorX = e.clientX - rect.left;
-                const halfWidth = rect.width / 2;
-
-                portal.classList.remove('modal__nav-arrow--left', 'modal__nav-arrow--right');
-
-                if (cursorX <= halfWidth) {
-                    portal.classList.add('modal__nav-arrow--left');
-                } else {
-                    portal.classList.add('modal__nav-arrow--right');
-                }
-            };
-
-            const handleMouseLeave = () => {
-                portal.classList.remove('modal__nav-arrow--left', 'modal__nav-arrow--right');
-            };
-
-            const handleClick = (e: MouseEvent) => {
-                const target = e.target as Element;
-                if (target?.closest('.PhotoView-Slider__BannerRight') ||
-                    target?.closest('.PhotoView-Slider__ArrowLeft') ||
-                    target?.closest('.PhotoView-Slider__ArrowRight')) return;
-
-                const rect = portal.getBoundingClientRect();
-                const cursorX = e.clientX - rect.left;
-                const halfWidth = rect.width / 2;
-
-                if (cursorX <= halfWidth) {
-                    arrowLeft.click();
-                } else {
-                    arrowRight.click();
-                }
-            };
-
-            portal.addEventListener('mousemove', handleMouseMove);
-            portal.addEventListener('mouseleave', handleMouseLeave);
-            portal.addEventListener('click', handleClick);
-
-            closeBtn.addEventListener('click', () => {
-                portal.removeEventListener('mousemove', handleMouseMove);
-                portal.removeEventListener('mouseleave', handleMouseLeave);
-                portal.removeEventListener('click', handleClick);
-            });
+          
         }, 100);
 
     };

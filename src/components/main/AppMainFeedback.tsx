@@ -82,71 +82,7 @@ const AppMainFeedback = () => {
         }
     }, [widthWindow])
 
-    const readyPhoto = () => {
-        setTimeout(() => {
 
-
-            const portal = document.querySelector('.PhotoView-Portal') as HTMLDivElement;
-            const arrowLeft = document.querySelector('.PhotoView-Slider__ArrowLeft') as HTMLDivElement;
-            const arrowRight = document.querySelector('.PhotoView-Slider__ArrowRight') as HTMLDivElement;
-            const closeBtn = document.querySelector('.PhotoView-Slider__BannerRight') as HTMLDivElement;
-
-
-            if (!portal || !arrowLeft || !arrowRight) {
-                console.error('Один из необходимых элементов не найден');
-                return;
-            }
-
-            // Отслеживание движения курсора
-            portal.addEventListener('mousemove', (e: any) => {
-                const rect = portal.getBoundingClientRect(); // Получаем размеры и положение блока
-                const cursorX = e.clientX - rect.left; // Позиция курсора относительно левого края блока
-                const halfWidth = rect.width / 2; // Половина ширины блока
-
-                // Удаляем оба класса перед добавлением нового
-                portal.classList.remove('modal__nav-arrow--left', 'modal__nav-arrow--right');
-
-                // Добавляем класс в зависимости от положения курсора
-                if (cursorX <= halfWidth) {
-                    portal.classList.add('modal__nav-arrow--left');
-                } else {
-                    portal.classList.add('modal__nav-arrow--right');
-                }
-            });
-
-            // Удаление классов при выходе курсора из блока
-            portal.addEventListener('mouseleave', () => {
-                portal.classList.remove('modal__nav-arrow--left', 'modal__nav-arrow--right');
-            });
-
-            // Обработка клика
-            portal.addEventListener('click', (e: any) => {
-                const target = e.target as Element;
-                if (target?.closest('.PhotoView-Slider__BannerRight') || target?.closest('.PhotoView-Slider__ArrowLeft') || target?.closest('.PhotoView-Slider__ArrowRight')) return
-
-                const rect = portal.getBoundingClientRect();
-                const cursorX = e.clientX - rect.left;
-                const halfWidth = rect.width / 2;
-
-                // Симулируем клик на соответствующую стрелку
-                if (cursorX <= halfWidth) {
-                    arrowLeft.click();
-                } else {
-                    arrowRight.click();
-
-                }
-            });
-
-
-            closeBtn.addEventListener('click', (e) => {
-                portal.removeEventListener('click', () => { })
-                portal.removeEventListener('mouseleave', () => { })
-                portal.removeEventListener('mousemove', () => { })
-                closeBtn.removeEventListener('click', () => { })
-            });
-
-        }, 100)
-    }
 
   const { t } = useTranslation()
 
@@ -177,7 +113,6 @@ const AppMainFeedback = () => {
                             <div className="feedback-slider-container">
                                 {[...Array(19)].map((_, index) =>
                                     <div
-                                        onClick={readyPhoto}
                                         data-slider="slide-feedback" key={index} className="feedback-item">
                                         <PhotoView src={`/feedbacks/big/${index + 1}.png`}
                                         >
@@ -201,8 +136,6 @@ const AppMainFeedback = () => {
                             <div className="feedback-slider-container">
                                 {[...Array(19)].map((_, index) =>
                                     <div
-                                        onClick={readyPhoto}
-
                                         data-slider="slide-feedback1" key={index} className="feedback-item">
                                         <PhotoView src={`/feedbacks/big/${20 + index}.png`}>
                                             <Image
