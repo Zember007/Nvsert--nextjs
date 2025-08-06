@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 
 export interface CustomScrollOptions {
   smoothScrollFactor?: number; // Коэффициент плавности скролла (по умолчанию 0.15)
@@ -21,7 +21,7 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
 
   const scrollbarRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!enabled || !scrollbarRef.current) return;
 
     // Для container mode обязательно нужен containerRef

@@ -249,8 +249,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                     <AppInput
                                         defaultValue={isEmail ? contactData.email : isPhone ? contactData.phone : ''}
                                         title={isPhone ? 'Телефон' : 'Email'}
-                                        inputName="contact"
-                                        className="!bg-[#C7CBD4]"
+                                        inputName="contact"                                        
                                         mask={isPhone ? "phone" : ''}
                                         type={isPhone ? "tel" : 'text'}
                                         fail={emailError}

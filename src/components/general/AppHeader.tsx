@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import '@/assets/styles/sections/_header.scss'
 import Link from "next/link";
@@ -116,33 +116,20 @@ const AppHeader = () => {
     }
   }, [servicesMenuActive])
 
-  const widthContactRef = useRef<HTMLDivElement>(null);
+  
 
-  useEffect(() => {
-    if (widthContactRef.current) {
-      setWidthContact(widthContactRef.current.offsetWidth)
-    }
-  }, [widthContactRef])
-
-  const [widthContact, setWidthContact] = useState(356);
-  const widthOrderRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (widthOrderRef.current) {
-      setWidthOrder(widthOrderRef.current.offsetWidth)
-    }
-  }, [widthOrderRef])
-  const [widthOrder, setWidthOrder] = useState(0);
+  
 
   const { handleCopy } = useCopyContext();
+
+  
   return (
     <>
 
       <div
-      ref={widthContactRef}
-      style={{ right: (widthOrder ? widthOrder + 4 : 196) + 'px' }}
-      className={`rubik header__bg !backdrop-filter-none gap-[8px] xl:!flex !hidden mix-blend-difference fixed h-[60px] top-[2px] right-[196px] z-[51] `}>
+      className={`w-[354px] rubik header__bg !backdrop-filter-none gap-[8px] xl:!flex !hidden mix-blend-difference fixed h-[60px] top-[2px] right-[196px] z-[51] `}>
         <AppMenuItem
+        className="w-[150px]"
           onClick={(e) => {
             handleCopy('info@nvsert.ru', e)
           }}
@@ -151,14 +138,14 @@ const AppHeader = () => {
           }} isActive={false} />
 
         <AppMenuItem
+        className="w-[172px]"
           item={{
             href: filterPhone('8 800 700-33-75'), label: '8 800 700-33-75'
           }} isActive={false} />
       </div>
 
       <div 
-      style={{ minWidth: widthOrder + 'px' }}
-      className="z-[51] !backdrop-filter-none header__bg  xl:!flex !hidden fixed mix-blend-difference h-[60px] top-[2px] left-[2px]">
+      className="z-[51] min-w-[192px] !backdrop-filter-none header__bg  xl:!flex !hidden fixed mix-blend-difference h-[60px] top-[2px] left-[2px]">
         <AppLogo
           className={`xl:mx-auto`}
         />
@@ -179,8 +166,7 @@ const AppHeader = () => {
       <header className={`rubik header ${(servicesMenuActive || burgerMenuActive) ? 'active' : ''}`}>
 
         <div 
-        style={{ minWidth: widthOrder + 'px' }}
-        className="header__bg xl:grow-0 grow xl:opacity-0">
+        className="header__bg min-w-[192px] xl:grow-0 grow xl:opacity-0">
           <AppLogo
             className={`xl:mx-auto ${burgerMenuActive ? '!text-[#000]' : ''}`}
           />
@@ -232,13 +218,12 @@ const AppHeader = () => {
 
         <div className="hidden xl:flex gap-[2px]">
           <div
-            style={{ width: widthContact + 'px' }}
+            className="w-[354px]"
           ></div>
           <div
-            ref={widthOrderRef}
-          className="header__bg">
+          className="header__bg w-[192px]">
             <AppMenuItem
-              className="mx-auto"
+              className="mx-auto w-[170px]"
               onClick={() => {
                 openDefaultModal('introForm')
               }}

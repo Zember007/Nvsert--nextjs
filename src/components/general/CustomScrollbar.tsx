@@ -17,7 +17,10 @@ const CustomScrollbar: React.FC<CustomScrollbarProps> = ({
     <div 
       ref={scrollbarRef} 
       className={className}
-      style={style}
+      style={{
+        ...style,
+        display: 'none'
+      }}
     />
   );
 };
