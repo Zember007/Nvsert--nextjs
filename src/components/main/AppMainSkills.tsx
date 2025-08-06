@@ -21,7 +21,7 @@ const AppMainSkills = () => {
     const widthWindow = useWindowWidth()
     const [isVisible, setIsVisible] = useState(false);
     const { ref, isVisible: isVisibleSection } = useIntersectionObserver();
-    const skillsData = (widthWindow && widthWindow < 1450) ? skills.filter(item => !item.empty) : skills;
+    const skillsData = (widthWindow && widthWindow < 1560) ? skills.filter(item => !item.empty) : skills;
 
     useEffect(() => {
 
@@ -56,7 +56,7 @@ const AppMainSkills = () => {
 
 
 
-        if (widthWindow && widthWindow < 1450 && isVisibleSection) {
+        if (widthWindow && widthWindow < 1560 && isVisibleSection) {
 
             const slides = gsap.utils.toArray('[data-slider="slide-skill"]');
 

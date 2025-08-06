@@ -131,7 +131,7 @@ const AppMainSafeguards = () => {
   const [activeIndex, setActive] = useState<number>(0)
 
   useEffect(() => {
-    if (widthWindow && widthWindow < 1450 && divRef.current) {
+    if (widthWindow && widthWindow < 1560 && divRef.current) {
 
       const slides = gsap.utils.toArray('[data-slider="slide-safeguard"]');
       const gap =  widthWindow < 900 ? (widthWindow - 320) / 2 : 20
