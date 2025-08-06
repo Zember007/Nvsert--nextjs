@@ -155,41 +155,43 @@ const AppSidebar = () => {
     <>
       {/* Боковой навбар */}
       <div className="hidden mix-blend-difference  xl:flex fixed xxl:right-[25px] right-[17px] top-1/2 transform -translate-y-1/2 z-10 ">
-     
+
         <nav className="flex flex-col items-center border-[2px] border-solid xxl:border-[#333333] border-[transparent] rounded-[4px] xxl:bg-[#0A0A0D] ">
 
+          <hr className={`w-[28px] bg-[#333333]  m-0 xxl:hidden h-[2px]`} />
           {navItems.map((item, i) => (
             <>
-            <hr className={`xxl:w-full w-[28px] bg-[#333333]  m-0 ${i === 0 ? 'xxl:hidden h-[2px]' : 'h-[1px]'}`} />
-            <button
-              key={item.id}
-              onMouseDown={() => scrollToSection(item.id)}
-              className={`group relative flex active:scale-[0.92] items-center justify-center w-[38px] h-[48px] transition-all  ${activeSection === item.id
-                ? ''
-                : ''
-                }`}
-            >
-              {/* Иконка */}
-              <div className={`w-[34px] h-[34px] flex items-center justify-center transition-all  ${activeSection === item.id
-                ? 'text-[#CBBB92]'
-                : 'text-[#6C6962] group-hover:text-[#CBBB9233]'
-                }`}>
-                {item.icon}
-              </div>
+              {i !== 0 && <hr className={`w-[28px] bg-[#333333]  m-0  h-[1px]`} />}
 
-              {/* Подсказка */}
-              <div className="overflow-hidden absolute  pointer-events-none z-[-1] right-full  text-[#CBBB92] text-[18px]  whitespace-nowrap">
-                <span
-                className='group-hover:translate-x-0 translate-x-full transition-all duration-100 block group-hover:mr-3'
-                >{item.label}</span>
-              </div>
-            </button>
+              <button
+                key={item.id}
+                onMouseDown={() => scrollToSection(item.id)}
+                className={`group relative flex active:scale-[0.92] items-center justify-center w-[38px] h-[48px] transition-all  ${activeSection === item.id
+                  ? ''
+                  : ''
+                  }`}
+              >
+                {/* Иконка */}
+                <div className={`w-[34px] h-[34px] flex items-center justify-center transition-all  ${activeSection === item.id
+                  ? 'text-[#CBBB92]'
+                  : 'text-[#6C6962] group-hover:text-[#CBBB9233]'
+                  }`}>
+                  {item.icon}
+                </div>
 
-            <hr className={`xxl:w-full w-[28px] bg-[#333333]  m-0 ${i === navItems.length - 1 ? 'xxl:hidden h-[2px]' : 'h-[1px]'}`} />
+                {/* Подсказка */}
+                <div className="overflow-hidden absolute  pointer-events-none z-[-1] right-full  text-[#CBBB92] text-[18px]  whitespace-nowrap">
+                  <span
+                    className='group-hover:translate-x-0 translate-x-full transition-all duration-100 block group-hover:mr-3'
+                  >{item.label}</span>
+                </div>
+              </button>
+
             </>
 
 
           ))}
+          <hr className={`w-[28px] bg-[#333333]  m-0 xxl:hidden h-[2px] `} />
 
         </nav>
       </div>
