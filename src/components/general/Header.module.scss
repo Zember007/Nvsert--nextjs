@@ -18,6 +18,9 @@
   overflow: hidden;
   border: 1px solid transparent;
 
+  @media (min-width: 620px) {
+    white-space: nowrap;
+  }
 }
 
 
