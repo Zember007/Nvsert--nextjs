@@ -250,7 +250,7 @@ const AppFooter = () => {
         </PromtModal>
       </div>
 
-      <div className="footer__dark bottom-top xxs:justify-between  m:gap-[113px] xl:!gap-[0px]">
+      <div className="footer__dark bottom-top xxs:justify-between  m:gap-[113px] xl:!gap-[0px] xl:h-auto xxs:h-[135px]">
         <div className="xxs:flex hidden text-[16px] items-start  flex-col gap-[18px] font-ligh whitespace-nowrap">
           <span>{t("footer.inn")}</span>
           <span>{t("footer.company")}</span>
@@ -274,7 +274,7 @@ const AppFooter = () => {
         <span className="font-light">© 2025 NVSERT</span>
       </div>
 
-      <div className="footer__dark xxs:justify-start justify-center gap-[16px] xxs:h-auto h-[96px]">
+      <div className="footer__dark xxs:justify-start justify-center gap-[16px] xl:h-auto xxs:h-[135px] h-[96px]">
         <Image src={AudioLogo} alt="audiosector" className="xl:ml-[31px]"/>
         <div className="pl-[16px] border-l border-[#FFF] border-solid flex flex-col gap-[4px]">
           <div className="xxs:h-[23px] h-[36px] overflow-hidden text-[#FFF]">
