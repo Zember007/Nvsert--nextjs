@@ -170,9 +170,9 @@ const AppSidebar = () => {
                 }`}
             >
               {/* Иконка */}
-              <div className={`w-[34px] h-[34px] flex items-center justify-center transition-all group- ${activeSection === item.id
+              <div className={`w-[34px] h-[34px] flex items-center justify-center transition-all  ${activeSection === item.id
                 ? 'text-[#CBBB92]'
-                : 'text-[#6C6962]'
+                : 'text-[#6C6962] group-hover:text-[#CBBB9233]'
                 }`}>
                 {item.icon}
               </div>
