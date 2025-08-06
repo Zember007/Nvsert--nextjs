@@ -147,7 +147,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   }
 
   &-box {
-    @apply flex xxl:hidden mx-auto justify-center flex-wrap px-[20px] gap-[7px];
+    @apply flex xxl:hidden mx-auto justify-center flex-wrap gap-[7px];
   }
 }
 
