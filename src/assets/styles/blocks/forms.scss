@@ -423,11 +423,11 @@ input:-webkit-autofill:focus {
 .form {
 
   &__title {
-    @apply leading-[0.7] text-[#000] text-[24px] s:text-[32px] font-light text-left tracking-[-0.03em] px-[8px];
+    @apply leading-[0.7] text-[#000] text-[20px] s:text-[32px] font-light text-left tracking-[-0.03em] px-[8px];
   }
 
   &__desc {
-    @apply text-[#000] text-[12px] s:text-[14px]  my-[-3px];
+    @apply text-[#000] text-[10px] s:text-[14px]  my-[-3px];
     line-height: 1.2;
     letter-spacing: -0.5px;
   }
