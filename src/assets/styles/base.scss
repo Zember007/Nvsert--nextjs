@@ -551,6 +551,7 @@ input:-webkit-autofill {
 
 .main {
    @apply pt-[54px] xl:pt-[64px];
+   min-height: calc(100vh - 204px);
 }
 
 .btnIconAn {
