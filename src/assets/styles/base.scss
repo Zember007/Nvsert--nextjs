@@ -548,3 +548,46 @@ input:-webkit-autofill {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+.main {
+   @apply pt-[54px] xl:pt-[64px];
+}
+
+.btnIconAn {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    height: 50px;
+  
+    .sendIconLeft {
+      @apply block duration-100 transition-all ease-in translate-x-0 xl:translate-x-[-16px] xl:opacity-0;
+    }
+  
+    .sendText {
+      @apply block duration-100 transition-all ease-in xl:translate-x-[16px] -translate-y-[1px] translate-x-0;
+      line-height: .5;
+    }
+  
+    &:hover {
+  
+      .sendText {
+        @apply xl:translate-x-0
+      }
+  
+  
+      .sendIconLeft {
+        @apply xl:translate-x-0 xl:opacity-100;
+      }
+  
+    }
+  
+  }
+  
+  .section {
+    @apply py-[40px] s:py-[75px] relative flex flex-col gap-[20px] s:gap-[50px];
+  
+  
+    &__title {
+      @apply text-center text-[20px] xs:text-[40px] xl:text-[58px] font-light;
+    }
+  }

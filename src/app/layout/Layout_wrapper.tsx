@@ -113,13 +113,14 @@ const LayoutContent = ({ children }: { children: ReactNode }) => {
                     reset={resetCountModal}
                     countTrigger={defaultModalCount}
                 />
-                <main className={`select-none ${transparent && 'transparent-header'} ${calcPageBodyClass && 'cost-calc-page'}`}>
-                    <div className="content">
                         <AppHeader />
+
+                <main className={`select-none ${transparent && 'transparent-header'} ${calcPageBodyClass && 'cost-calc-page'}`}>
+                  
                         {children}
-                    </div>
-                    <AppFooter />
+                    
                 </main>
+                    <AppFooter />
                 <div className="bg-noise"></div>
                 <CustomScrollbar target="window" />
                 
