@@ -286,7 +286,9 @@
     max-width: 100%;
 }
 
-
+.transparent-header main {
+    min-height: 6900px;
+}
 
 .tariff.an-border {
     --color-b: #737373;
