@@ -154,11 +154,11 @@ const AppSidebar = () => {
   return (
     <>
       {/* Боковой навбар */}
-      <div className="hidden mix-blend-difference  xl:flex fixed xxl:right-[25px] right-[17px] top-1/2 transform -translate-y-1/2 z-10 ">
+      <div className="hidden mix-blend-difference  xl:flex fixed xxxl:right-[25px] right-[17px] top-1/2 transform -translate-y-1/2 z-10 ">
 
-        <nav className="flex flex-col items-center border-[2px] border-solid xxl:border-[#333333] border-[transparent] rounded-[4px] xxl:bg-[#0A0A0D] ">
+        <nav className="flex flex-col items-center border border-solid xxxl:border-[#333333] border-[transparent] rounded-[4px] xxxl:bg-[#0A0A0D] ">
 
-          <hr className={`w-[28px] bg-[#333333]  m-0 xxl:hidden h-[2px]`} />
+          <hr className={`w-[28px] bg-[#333333]  m-0 xxxl:hidden h-[2px]`} />
           {navItems.map((item, i) => (
             <>
               {i !== 0 && <hr className={`w-[28px] bg-[#333333]  m-0  h-[1px]`} />}
@@ -191,7 +191,7 @@ const AppSidebar = () => {
 
 
           ))}
-          <hr className={`w-[28px] bg-[#333333]  m-0 xxl:hidden h-[2px] `} />
+          <hr className={`w-[28px] bg-[#333333]  m-0 xxxl:hidden h-[2px] `} />
 
         </nav>
       </div>

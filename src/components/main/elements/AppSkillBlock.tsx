@@ -44,7 +44,7 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if(!widthWindow || widthWindow < 1560) return
+    if(!widthWindow || widthWindow < 1420) return
     if (!isVisible) return
     const card = cardRef.current;
     if (card) {
@@ -57,7 +57,7 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
   };
 
   const handleMouseEnter = () => {
-    if(!widthWindow || widthWindow < 1560) return
+    if(!widthWindow || widthWindow < 1420) return
 
     if (!isVisible) return
     if (mouseLeaveDelay) {
@@ -66,7 +66,7 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
   };
 
   const handleMouseLeave = () => {
-    if(!widthWindow || widthWindow < 1560) return
+    if(!widthWindow || widthWindow < 1420) return
 
     if (!isVisible) return
     setMouseLeaveDelay(setTimeout(() => {
