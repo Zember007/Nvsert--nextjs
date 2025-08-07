@@ -270,7 +270,7 @@ const AppHeader = () => {
             <div className="grid grid-cols-6 h-[50px] w-full xxl:gap-[30px] gap-[8px]">
               {navigation.map((item, i) => (
                 <div ref={setWrapperRef} key={i} className="tariff-wrap ">
-                  <a href="#" ref={setButtonRef} className={`h-full text-center btnIconAn flex gap-[10px]`}>
+                  <Link href="/services/" ref={setButtonRef} className={`h-full text-center btnIconAn flex gap-[10px]`}>
                     <p className="text-[18px] text-[#FFF]">
                       {t(`navigation.${item.title}.title`)}
                     </p>
@@ -279,7 +279,7 @@ const AppHeader = () => {
                         <path d="M3.66669 8.00011V6.00011H0.666687V8.00011H3.66669ZM9.63436 0.000106812L8.19576 1.43087L12.7759 5.98724H6.66669V8.01196H12.7759L8.19576 12.5683L9.63436 14.0001L16.6667 7.00011L15.9489 6.28473L15.2301 5.56833L9.63436 0.000106812Z" fill="white" />
                       </svg>
                     </div>
-                  </a>
+                  </Link>
                 </div>
               ))}
             </div>
