@@ -122,6 +122,7 @@ const AppHeader = () => {
 
   const { handleCopy } = useCopyContext();
 
+  const navigationCategories = navigation.map((item) => item.category.title)
   
   return (
     <>
@@ -268,11 +269,11 @@ const AppHeader = () => {
 
           <div className="services-menu__wrapper select-none">
             <div className="grid grid-cols-6 h-[50px] w-full xxl:gap-[30px] gap-[8px]">
-              {navigation.map((item, i) => (
+              {navigationCategories.map((item, i) => (
                 <div ref={setWrapperRef} key={i} className="tariff-wrap ">
                   <Link href="/services/" ref={setButtonRef} className={`h-full text-center btnIconAn flex gap-[10px]`}>
                     <p className="text-[18px] text-[#FFF]">
-                      {t(`navigation.${item.title}.title`)}
+                      {t(`navigation.${item}.title`)}
                     </p>
                     <div className=" sendIconLeft">
                       <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
