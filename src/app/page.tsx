@@ -3,8 +3,8 @@ import dynamic from 'next/dynamic';
 import '@/assets/styles/main.scss'
 import AppMainIntro from '../components/main/AppMainIntro'
 import AppMainDocuments from '../components/main/AppMainDocuments'
-import LazyLoadSection from '@/hook/LazyLoadSection';
-import AppSidebar from '../components/general/AppSidebar';
+// import LazyLoadSection from '@/hook/LazyLoadSection';
+// import AppSidebar from '../components/general/AppSidebar';
 
 
 export default function Home() {
@@ -47,7 +47,7 @@ export default function Home() {
 
       <DynamicAppMainQuestions />
 
-      <AppSidebar />
+      {/* <AppSidebar /> */}
     </div>
   );
 }
