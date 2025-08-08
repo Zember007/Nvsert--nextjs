@@ -12,6 +12,7 @@ interface NavigationItem {
   short_text?: string;
 }
 
+
 interface NavigationState {
   navigation: NavigationItem[];
   services: any[];
