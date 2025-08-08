@@ -113,6 +113,8 @@ const AppSidebar = () => {
     return activeSection;
   };
 
+  const [active, setActive] = useState(false);
+
   // Обновляем активную секцию при скролле
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -120,12 +122,17 @@ const AppSidebar = () => {
     const handleScroll = () => {
       const newActiveSection = getActiveSection();
       setActiveSection(newActiveSection);
+      setActive(false);
+
     };
 
     // Добавляем небольшую задержку для оптимизации производительности
     let timeoutId: NodeJS.Timeout;
     let time = Date.now();
     const throttledScroll = () => {
+      if(!active) {
+        setActive(true);
+      }
       clearTimeout(timeoutId);
       if (time + 50 < Date.now()) {
         handleScroll();
@@ -150,13 +157,14 @@ const AppSidebar = () => {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+  
 
   return (
     <>
       {/* Боковой навбар */}
-      <div className="hidden mix-blend-difference  xl:flex fixed xxxl:right-[25px] right-[17px] top-1/2 transform -translate-y-1/2 z-10 ">
+      <div className="hidden mix-blend-difference group/main xl:flex fixed xxxl:right-[25px] right-[17px] top-1/2 transform -translate-y-1/2 z-10 ">
 
-        <nav className="flex flex-col items-center border border-solid xxxl:border-[#333333] border-[transparent] rounded-[4px] xxxl:bg-[#0A0A0D] ">
+        <nav className={`transition-all duration-100 ${active ? 'translate-x-0' : 'translate-x-[300px]'} group-hover/main:translate-x-0 flex flex-col items-center border border-solid xxxl:border-[#333333] border-[transparent] rounded-[4px] xxxl:bg-[#0A0A0D] `}>
 
           <hr className={`w-[28px] bg-[#333333]  m-0 xxxl:hidden h-[2px]`} />
           {navItems.map((item, i) => (
