@@ -156,7 +156,16 @@ const MainDocumentItem = memo(({
             block: 'start'
         };
 
+        // if (index === 0) {
+        //     documents_box.scrollIntoView({ ...scrollOptions, block: 'start' });
+        // } else if (index === 17) {
+        //     documents_box.scrollIntoView({ ...scrollOptions, block: 'start' });
+        // } else {
+        //     el.scrollIntoView(scrollOptions);
+        // }
+
         el.scrollIntoView(scrollOptions);
+
     };
 
     useEffect(() => {
@@ -211,8 +220,7 @@ const MainDocumentItem = memo(({
                     >
                         <Image
                             ref={smallPhotoRef}
-                            alt='document' 
-                            src={img.src}
+                            alt='document' src={img}
                             width="41"
                             height="58"
                         />
@@ -311,8 +319,7 @@ const MainDocumentItem = memo(({
                                         animate={controls}
                                         className="document__big-img">
                                         <Image
-                                            alt='document' 
-                                            src={img.src}
+                                            alt='document' src={img}
                                             width={photoWidth || 190}
                                             height={photoWidth / img.width * img.height || 267} />
                                     </motion.div>
@@ -326,6 +333,9 @@ const MainDocumentItem = memo(({
                                         <p className='document-description'>
                                             {filterPrepositions(content.text)}
                                         </p>
+                                        {/* <p className='hidden m:block text-[16px] text-[#000000] m:max-w-[300px]'>
+                                            {content.text1 && filterPrepositions(content.text1)}
+                                        </p> */}
                                     </div>
 
                                     {windowWidth && windowWidth >= 900 &&

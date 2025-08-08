@@ -13,96 +13,16 @@ import { AppDispatch, RootState } from "@/config/store";
 import { useDispatch, useSelector } from "react-redux";
 import { updateActionNavigation } from "@/store/navigation";
 
-interface NavigationItem {
-    id: number;
-    documentId: string;
-    title: string;
-    slug: string;
-    duration: string;
-    price: string;
-    description: string;
-    createdAt: string;
-    updatedAt: string;
-    publishedAt: string;
-    documents: Array<{
-        id: number;
-        value: string;
-    }>;
-    img: {
-        id: number;
-        documentId: string;
-        name: string;
-        alternativeText: string | null;
-        caption: string | null;
-        width: number;
-        height: number;
-        formats: {
-            thumbnail: {
-                name: string;
-                hash: string;
-                ext: string;
-                mime: string;
-                path: string | null;
-                width: number;
-                height: number;
-                size: number;
-                sizeInBytes: number;
-                url: string;
-            };
-            medium: {
-                name: string;
-                hash: string;
-                ext: string;
-                mime: string;
-                path: string | null;
-                width: number;
-                height: number;
-                size: number;
-                sizeInBytes: number;
-                url: string;
-            };
-            small: {
-                name: string;
-                hash: string;
-                ext: string;
-                mime: string;
-                path: string | null;
-                width: number;
-                height: number;
-                size: number;
-                sizeInBytes: number;
-                url: string;
-            };
-        };
-        hash: string;
-        ext: string;
-        mime: string;
-        size: number;
-        url: string;
-        previewUrl: string | null;
-        provider: string;
-        provider_metadata: any;
-        createdAt: string;
-        updatedAt: string;
-        publishedAt: string;
-    };
-    category: {
-        id: number;
-        documentId: string;
-        name: string;
-        title: string;
-        slug: string;
-        createdAt: string;
-        updatedAt: string;
-        publishedAt: string;
-    };
+interface navigationLang {
+    title: string
 }
 
 const AppNavigation = ({ active }: { active: boolean }) => {
 
     const dispatch = useDispatch<AppDispatch>();
     const { navigation } = useSelector((state: RootState) => state.navigation);
-    const { darkHeader } = useHeaderContext();
+
+
 
     useEffect(() => {
         if (navigation.length === 0) {
@@ -140,86 +60,43 @@ const AppNavigation = ({ active }: { active: boolean }) => {
         }
     }, [active]);
 
-    // Группируем данные по категориям
-    const groupedByCategory = navigation.reduce((acc, item) => {
-        const categorySlug = item.category.slug;
-        if (!acc[categorySlug]) {
-            acc[categorySlug] = {
-                category: item.category,
-                items: []
-            };
+    const returnImg = (keys: string, i: number) => {
+        if (navigationImg[keys] && navigationImg[keys][i]) {
+            return navigationImg[keys][i].img;
         }
-        acc[categorySlug].items.push(item);
-        return acc;
-    }, {} as Record<string, { category: any; items: NavigationItem[] }>);
-
-    // Если данных нет, показываем пустой контейнер
-    if (navigation.length === 0) {
-        return (
-            <div className="grid grid-cols-6 w-full xxxl:gap-[30px] gap-[8px]">
-                {/* Пустой контейнер для загрузки */}
-            </div>
-        );
-    }
-
+        return '';
+    };
     return (
         <>
-        
             <div className="grid grid-cols-6 w-full xxxl:gap-[30px] gap-[8px]">
                 {
-                    Object.values(groupedByCategory).map((categoryData, categoryIndex) => (
-                        <div key={categoryIndex} className="flex flex-col gap-[20px]">
-                            {/* Заголовок категории */}
-                            <div className="mb-2">
-                                <h3 className={`${darkHeader ? 'text-[#000]' : 'text-[#FFF]'} text-lg font-semibold`}>
-                                    {categoryData.category.title}
-                                </h3>
-                            </div>
-                            {/* Элементы категории */}
-                            {categoryData.items.map((item, itemIndex) => (
-                                <WrapperItem 
-                                    key={item.id} 
-                                    link={`/services/${item.slug}`} 
-                                    title={item.title} 
-                                    img={item.img.url} 
-                                    controls={controls} 
-                                />
+                    navigation.map((item, i) =>
+
+                        <div key={i} className="flex flex-col gap-[20px]">
+                            {item.children.map((children, i) => (
+                                <WrapperItem link={children.full_slug} key={i} title={t(`navigation.${item.title}.${children.title}`)} img={returnImg(item.title, i)} controls={controls} />
                             ))}
                         </div>
-                    ))
+                    )
                 }
             </div>
         </>
     );
 };
 
-const WrapperItem = ({ img, title, controls, link }: { link: string; img: string, title: string, controls: AnimationControls }) => {
+const WrapperItem = ({ img, title, controls, link }: { link: string; img: string | StaticImport, title: string, controls: AnimationControls }) => {
     const { darkHeader } = useHeaderContext();
     const { setButtonRef, setWrapperRef } = useButton()
-
-    // Проверяем, что URL изображения корректный
-    const imageUrl = img && img.startsWith('http') ? img : `https://your-domain.com${img}`;
 
     return (
         <>
             <div ref={setWrapperRef} className="tariff-wrap">
-                <Link ref={setButtonRef} href={link} className={`tariff overflow-hidden not-backdrop flex xxxl:gap-[10px] gap-[5px] group  rounded-[4px] items-center hover:bg-[#34446d33] border-solid hover:border-[#fff] border border-[transparent]`}>
+                <Link ref={setButtonRef} href={'/services/'} className={`tariff overflow-hidden not-backdrop flex xxxl:gap-[10px] gap-[5px] group  rounded-[4px] items-center hover:bg-[#34446d33] border-solid hover:border-[#fff] border border-[transparent]`}>
                     <motion.div
                         initial={{ y: 40, opacity: 0 }}
                         className=" overflow-hidden group-hover:rounded-[0px] rounded-[4px] min-w-[43px]"
                         animate={controls}>
-                        <Image 
-                            src={imageUrl} 
-                            className="w-[43px] h-[60px]" 
-                            width={43} 
-                            height={60} 
-                            alt="document"
-                            onError={(e) => {
-                                // Fallback изображение при ошибке загрузки
-                                const target = e.target as HTMLImageElement;
-                                target.src = '/placeholder-document.png'; // Замените на путь к вашему fallback изображению
-                            }}
-                        />
+                        <Image src={img} className="w-[43px] h-[60px]" width={43} height={60} alt="document" />
                     </motion.div>
                     <p className={`${darkHeader ? 'text-[#000] group-hover:text-[#FFF]' : 'text-[#FFF]'} max-w-full xxxl:pr-[12px] xxl:text-[16px] text-[14px]`}>{filterPrepositions(title)}</p>
                 </Link>

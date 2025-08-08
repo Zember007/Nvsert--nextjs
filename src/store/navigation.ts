@@ -1,99 +1,57 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-interface NavigationItem {
+
+interface NavigationItem2 {
   id: number;
-  documentId: string;
-  title: string;
-  slug: string;
-  duration: string;
-  price: string;
-  description: string;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  documents: Array<{
-    id: number;
-    value: string;
-  }>;
-  img: {
-    id: number;
-    documentId: string;
-    name: string;
-    alternativeText: string | null;
-    caption: string | null;
-    width: number;
-    height: number;
-    formats: {
-      thumbnail: {
-        name: string;
-        hash: string;
-        ext: string;
-        mime: string;
-        path: string | null;
-        width: number;
-        height: number;
-        size: number;
-        sizeInBytes: number;
-        url: string;
-      };
-      medium: {
-        name: string;
-        hash: string;
-        ext: string;
-        mime: string;
-        path: string | null;
-        width: number;
-        height: number;
-        size: number;
-        sizeInBytes: number;
-        url: string;
-      };
-      small: {
-        name: string;
-        hash: string;
-        ext: string;
-        mime: string;
-        path: string | null;
-        width: number;
-        height: number;
-        size: number;
-        sizeInBytes: number;
-        url: string;
-      };
-    };
-    hash: string;
-    ext: string;
-    mime: string;
-    size: number;
-    url: string;
-    previewUrl: string | null;
-    provider: string;
-    provider_metadata: any;
-    createdAt: string;
-    updatedAt: string;
-    publishedAt: string;
-  };
-  category: {
-    id: number;
-    documentId: string;
-    name: string;
+  attributes: {
     title: string;
     slug: string;
+    duration: string;
+    price: string;
+    description: string;
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
+    documents: Array<{
+      id: number;
+      value: string;
+    }>;
+    img: {
+      data: {
+        id: number;
+        attributes: {
+          url: string;
+          alternativeText: string | null;
+          formats: {
+            small?: { url: string };
+            medium?: { url: string };
+            thumbnail?: { url: string };
+          };
+        };
+      } | null;
+    };
+    category: {
+      data: {
+        id: number;
+        attributes: {
+          title: string;
+          slug: string;
+        };
+      } | null;
+    };
   };
 }
 
+
 // Старый интерфейс для fallback данных
-interface LegacyNavigationItem {
+interface NavigationItem {
   id?: number
   title: string;
   full_slug: string;
   slug?: string;
   article_preview?: string;
-  children: LegacyNavigationItem[];
+  children: NavigationItem[];
   seo_h1?: string;
   short_text?: string;
 }
