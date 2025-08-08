@@ -164,6 +164,7 @@ const AppNavigation = ({ active }: { active: boolean }) => {
 
     return (
         <>
+        
             <div className="grid grid-cols-6 w-full xxxl:gap-[30px] gap-[8px]">
                 {
                     Object.values(groupedByCategory).map((categoryData, categoryIndex) => (
