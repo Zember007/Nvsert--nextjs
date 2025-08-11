@@ -146,7 +146,7 @@ const Page = () => {
                                             <button
                                            
                                                 key={certIndex}
-                                                className={`p-[20px] flex flex-col gap-[20px] text-left w-[310px] hover:bg-[#F5F5F5] rounded-[8px] border border-[transparent] hover:border-[#34446d] ${selectedCertificate === certIndex ? 'bg-[#F5F5F5] !border-[#34446d]' : ''}`}
+                                                className={`p-[20px] flex flex-col gap-[20px] text-left w-[310px] hover:bg-[#F5F5F5] rounded-[8px] border border-[transparent] hover:border-[#34446d]`}
                                             >
                                                 <span className='text-[18px]'>{certificate.title}</span>
                                                 <div className="relative w-full">
