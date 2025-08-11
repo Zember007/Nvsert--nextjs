@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import {  RootState } from "@/config/store";
 import {  useSelector } from "react-redux";
 import { NavigationItem } from "@/store/navigation";
+import Image from "next/image";
 
 
 
@@ -83,7 +84,7 @@ const WrapperItem = ({ img, title, controls, link }: { link: string; img: string
                         initial={{ y: 40, opacity: 0 }}
                         className=" overflow-hidden group-hover:rounded-[0px] rounded-[4px] min-w-[43px]"
                         animate={controls}>
-                        <img src={img as string} className="w-[43px] h-[60px]" width={43} height={60} alt="document" />
+                        <Image src={img as string} className="w-[43px] h-[60px]" width={43} height={60} alt="document" />
                     </motion.div>
                     <p className={`${darkHeader ? 'text-[#000] group-hover:text-[#FFF]' : 'text-[#FFF]'} max-w-full xxxl:pr-[12px] xxl:text-[16px] text-[14px]`}>{filterPrepositions(title)}</p>
                 </Link>

@@ -1,23 +1,18 @@
 import { StaticImageData } from 'next/image';
 
-export interface ContentItem {
-    text: string;
-    text1?: string;
-}
 
-export interface Content1Item {
-    title: string;
-    subtitle?: string;
-    list: string[];
+
+export interface documentsList {
+    id: number;
+    value: string;
 }
 
 export interface MainDocumentItemProps {
     setPhoto: () => void;
-    img: StaticImageData;
-    index: number;
+    img: any;
     title: string;
-    content: ContentItem;
-    content1: Content1Item[];
+    content: string;
+    documentsList: documentsList[];
     price: string;
     duration: string;
     active: boolean;

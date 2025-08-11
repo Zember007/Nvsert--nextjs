@@ -32,7 +32,7 @@ interface ActionButtonProps {
 }
 
 interface DocumentListProps {
-    content1: MainDocumentItemProps['content1'];
+    documentsList: MainDocumentItemProps['documentsList'];
     listHidden: boolean;
     setListHidden: (value: boolean) => void;
 }
@@ -54,25 +54,26 @@ const ActionButton = memo(({ onClick, icon, text, className, setRef }: ActionBut
 ActionButton.displayName = 'ActionButton';
 
 // Компонент списка документов
-const DocumentList = memo(({ content1, listHidden, setListHidden }: DocumentListProps) => (
+const DocumentList = memo(({ documentsList, listHidden, setListHidden }: DocumentListProps) => (
     <div className="document__list">
-        {content1.map((cont, contIndex) => (
-            <div key={contIndex} className='document__list-item'>
-                <p className={`document-list-item-title ${contIndex === 0 ? 'large' : ''}`}>
-                    {filterPrepositions(cont.title)}
+            <div className='document__list-item'>
+                <p className={`document-list-item-title large`}>
+                Необходимые документы для оформления
                 </p>
-                {cont.subtitle && <span>{cont.subtitle}</span>}
                 <ul className='document__list-item-ul  arial'>
-                    {cont.list.map((list, index) => (
+                {documentsList.map((list, index) => (
+
                         <li
-                            className={` ${listHidden && (index > 2 || contIndex > 0) ? 'hidden' : ''}`}
+                            className={` ${listHidden && (index > 2 ) ? 'hidden' : ''}`}
                             key={index}
                         >
-                            {filterPrepositions(list)}
+                            {filterPrepositions(list.value)}
                         </li>
                     ))}
                 </ul>
-                {cont.list.length > 3 && (
+                {documentsList.length > 3 && (
+
+
                     <button
                         className='document-list-show-button'
                         onClick={() => setListHidden(!listHidden)}
@@ -95,7 +96,7 @@ const DocumentList = memo(({ content1, listHidden, setListHidden }: DocumentList
                     </button>
                 )}
             </div>
-        ))}
+        
     </div>
 ));
 
@@ -104,10 +105,9 @@ DocumentList.displayName = 'DocumentList';
 const MainDocumentItem = memo(({
     setPhoto,
     img,
-    index,
     title,
     content,
-    content1,
+    documentsList,
     price,
     duration,
     active,
@@ -220,7 +220,8 @@ const MainDocumentItem = memo(({
                     >
                         <Image
                             ref={smallPhotoRef}
-                            alt='document' src={img}
+                            alt='document'
+                            src={'https://test11.audiosector.ru/cp'+img.url}
                             width="41"
                             height="58"
                         />
@@ -307,7 +308,7 @@ const MainDocumentItem = memo(({
                             }
                             <div className='document-photo-container'>
                                 <PhotoView
-                                    src={img.src}
+                                    src={img.url}
                                     width={475}
                                     height={667}
                                 >
@@ -319,7 +320,7 @@ const MainDocumentItem = memo(({
                                         animate={controls}
                                         className="document__big-img">
                                         <Image
-                                            alt='document' src={img}
+                                            alt='document' src={'https://test11.audiosector.ru/cp'+img.url}
                                             width={photoWidth || 190}
                                             height={photoWidth / img.width * img.height || 267} />
                                     </motion.div>
@@ -331,11 +332,9 @@ const MainDocumentItem = memo(({
                                 <div className="document-content-column">
                                     <div className="document-text-content arial">
                                         <p className='document-description'>
-                                            {filterPrepositions(content.text)}
+                                            {filterPrepositions(content)}
                                         </p>
-                                        {/* <p className='hidden m:block text-[16px] text-[#000000] m:max-w-[300px]'>
-                                            {content.text1 && filterPrepositions(content.text1)}
-                                        </p> */}
+                                   
                                     </div>
 
                                     {windowWidth && windowWidth >= 900 &&
@@ -361,7 +360,7 @@ const MainDocumentItem = memo(({
 
                         <div className="document__list-wrap">
                             <DocumentList
-                                content1={content1}
+                                documentsList={documentsList}
                                 listHidden={listHidden}
                                 setListHidden={setListHidden}
                             />

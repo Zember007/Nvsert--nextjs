@@ -6,6 +6,9 @@ const nextConfig = {
     locales: ['ru'],
     defaultLocale: 'ru'
   },
+  images: {
+    domains: ['test11.audiosector.ru'],
+  },
 
   webpack: (config) => {
     config.module.rules.push({

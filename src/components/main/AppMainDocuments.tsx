@@ -5,24 +5,27 @@ import '@/assets/styles/sections/main/animation/documents.scss'
 import '@/assets/styles/sections/main/main-documents.scss'
 import { PhotoProvider } from '@/assets/lib/react-photo-view';
 import { useTranslation } from "react-i18next";
-import { ContentItem, Content1Item } from "@/types/documents";
+import { RootState } from "@/config/store";
+import { useSelector } from "react-redux";
 
 const AppMainDocuments = () => {
     const [activeIndex, setActive] = useState<number | null>(null);
     const { t } = useTranslation();
+    const { navigation } = useSelector((state: RootState) => state.navigation);
 
-    const handlePhotoClick = (item: typeof documents[0], index: number) => {
+
+    const handlePhotoClick = (item: typeof navigation[0]) => {
         setTimeout(() => {
             const box = document.querySelector('.PhotoView-Slider__BannerWrap') as HTMLDivElement;
             if (!box) return;
-            box.dataset.before = t(`MainDocuments.${item.key}.title`);
+            box.dataset.before = item.title;
 
             const photos = document.querySelectorAll<HTMLDivElement>('.PhotoView__Photo__attr');
             photos.forEach((photo) => {
-                photo.dataset.price = t(`MainDocuments.${item.key}.price`);
-                photo.dataset.duration = t(`MainDocuments.${item.key}.duration`);
+                photo.dataset.price = item.price;
+                photo.dataset.duration = item.duration;
             });
-          
+
         }, 100);
 
     };
@@ -58,19 +61,19 @@ const AppMainDocuments = () => {
                 maskClosable={false}
             >
                 <div className="documents-container">
-                    {documents.map((item, index) => (
+                    {navigation.map((item, index) => (
                         <MainDocumentItem
-                            key={index}
-                            index={index}
-                            setPhoto={() => handlePhotoClick(item, index)}
+                            key={index}                       
+                            /* setPhoto={() => handlePhotoClick(item, index)} */
+                            setPhoto={() => { }}
                             setActive={(value: boolean) => setActive(value ? index : null)}
                             active={index === activeIndex}
-                            content={t(`MainDocuments.${item.key}.content`, { returnObjects: true }) as ContentItem}
-                            content1={t(`MainDocuments.${item.key}.content1`, { returnObjects: true }) as Content1Item[]}
-                            duration={t(`MainDocuments.${item.key}.duration`)}
+                            content={item.description}
+                            documentsList={item.documents}
+                            duration={item.duration}
                             img={item.img}
-                            price={t(`MainDocuments.${item.key}.price`)}
-                            title={t(`MainDocuments.${item.key}.title`)}
+                            price={item.price}
+                            title={item.title}
                         />
                     ))}
                 </div>
