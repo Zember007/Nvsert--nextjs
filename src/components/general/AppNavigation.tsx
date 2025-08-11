@@ -73,9 +73,9 @@ const AppNavigation = ({ active }: { active: boolean }) => {
                     navigation.map((item, i) =>
 
                         <div key={i} className="flex flex-col gap-[20px]">
-                            {item.children.map((children, i) => (
+                           {/*  {item.children.map((children, i) => (
                                 <WrapperItem link={children.full_slug} key={i} title={t(`navigation.${item.title}.${children.title}`)} img={returnImg(item.title, i)} controls={controls} />
-                            ))}
+                            ))} */}
                         </div>
                     )
                 }
