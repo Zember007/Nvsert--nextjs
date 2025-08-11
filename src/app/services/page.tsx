@@ -23,12 +23,12 @@ const Page = () => {
     const services = [
         {
             title: "Сертификация ГОСТ Р",
+            description: "Система ГОСТ Р — это национальная система сертификации продукции в России. Документы, оформленные в рамках данной системы, необходимы для легальной продажи продукции, участия в тендерах, госзакупках и работы с крупными клиентами.",
             certificates: [
                 {
                     title: "Сертификат соответствия ГОСТ Р",
                     image: image1,
                     processingTime: "от 2-х дней",
-                    description: "Система ГОСТ Р — это национальная система сертификации продукции в России. Документы, оформленные в рамках данной системы, необходимы для легальной продажи продукции, участия в тендерах, госзакупках и работы с крупными клиентами.",
 
                     cost: "от 8 700 Р"
                 },
@@ -36,7 +36,6 @@ const Page = () => {
                     title: "Декларация соответствия ГОСТ Р",
                     image: image2,
                     processingTime: "от 2-х дней",
-                    description: '',
 
 
                     cost: "от 8 700 Р"
@@ -45,19 +44,18 @@ const Page = () => {
                     title: "Сертификат соответствия ГОСТ Р",
                     image: image3,
                     processingTime: "от 4-х недель",
-                    description: '',
                     cost: "от 38 000 Р"
                 }
             ]
         },
         {
             title: "Таможенный союз",
+            description: "Сертификация в рамках Таможенного союза (ЕАЭС) подтверждает соответствие продукции требованиям технических регламентов, обязательных для применения на территории стран-участниц ЕАЭС.",
             certificates: [
                 {
                     title: "Сертификат соответствия ТС",
                     image: image4,
                     processingTime: "от 3-х дней",
-                    description: "Сертификация в рамках Таможенного союза (ЕАЭС) подтверждает соответствие продукции требованиям технических регламентов, обязательных для применения на территории стран-участниц ЕАЭС.",
 
                     cost: "от 12 000 Р"
                 },
@@ -65,19 +63,18 @@ const Page = () => {
                     title: "Декларация соответствия ТС",
                     image: image5,
                     processingTime: "от 2-х дней",
-                    description: '',
                     cost: "от 9 500 Р"
                 }
             ]
         },
         {
             title: "Сертификация ISO",
+            description: "Международные стандарты ISO помогают организациям повысить эффективность, качество продукции и услуг, а также соответствовать международным требованиям.",
             certificates: [
                 {
                     title: "ISO 9001 - Система менеджмента качества",
                     image: image6,
                     processingTime: "от 6-ти недель",
-                    description: "Международные стандарты ISO помогают организациям повысить эффективность, качество продукции и услуг, а также соответствовать международным требованиям.",
 
                     cost: "от 45 000 Р"
                 },
@@ -85,14 +82,12 @@ const Page = () => {
                     title: "ISO 14001 - Система экологического менеджмента",
                     image: image7,
                     processingTime: "от 8-ми недель",
-                    description: '',
                     cost: "от 52 000 Р"
                 }
             ]
         }
     ];
 
-    const [selectedCertificate, setSelectedCertificate] = useState<number | null>(0);
 
     return (
         <div className="main text-[#000] overflow-hidden select-none relative ">
@@ -141,21 +136,15 @@ const Page = () => {
                             {expandedServices.includes(index) && (
                                 <div className=" wrapper">
                                     {/* Описание услуги */}
-                                    <p className="text-gray-700 mb-6 leading-relaxed h-[60px]">
-                                        {selectedCertificate !== null && services[selectedCertificate].certificates[selectedCertificate].description}
+                                    <p className="text-gray-700 mb-6 leading-relaxed">
+                                        {service.description}
                                     </p>
 
                                     {/* Сертификаты */}
                                     <div className="flex gap-[110px] flex-wrap py-[20px]">
                                         {service.certificates.map((certificate, certIndex) => (
                                             <button
-                                                onClick={() => {
-                                                    if (selectedCertificate === certIndex) {
-                                                        setSelectedCertificate(null);
-                                                    } else {
-                                                        setSelectedCertificate(certIndex);
-                                                    }
-                                                }}
+                                           
                                                 key={certIndex}
                                                 className={`p-[20px] flex flex-col gap-[20px] text-left w-[310px] hover:bg-[#F5F5F5] rounded-[8px] border border-[transparent] hover:border-[#34446d] ${selectedCertificate === certIndex ? 'bg-[#F5F5F5] !border-[#34446d]' : ''}`}
                                             >

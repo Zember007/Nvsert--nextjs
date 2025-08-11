@@ -62,7 +62,7 @@ const AppNavigation = ({ active }: { active: boolean }) => {
 
                         <div key={i} className="flex flex-col gap-[20px]">
                             {grouped[item].map((children:NavigationItem) => (
-                                <WrapperItem link={'#'} key={children.id} title={children.title} img={'https://test11.audiosector.ru/cp'+children.img.url} controls={controls} />
+                                <WrapperItem link={children.slug} key={children.id} title={children.title} img={'https://test11.audiosector.ru/cp'+children.img.url} controls={controls} />
                             ))}
                         </div>
                     )
@@ -79,7 +79,7 @@ const WrapperItem = ({ img, title, controls, link }: { link: string; img: string
     return (
         <>
             <div ref={setWrapperRef} className="tariff-wrap">
-                <Link ref={setButtonRef} href={'/services/'} className={`tariff overflow-hidden not-backdrop flex xxxl:gap-[10px] gap-[5px] group  rounded-[4px] items-center hover:bg-[#34446d33] border-solid hover:border-[#fff] border border-[transparent]`}>
+                <Link ref={setButtonRef} href={'/' + link} className={`tariff overflow-hidden not-backdrop flex xxxl:gap-[10px] gap-[5px] group  rounded-[4px] items-center hover:bg-[#34446d33] border-solid hover:border-[#fff] border border-[transparent]`}>
                     <motion.div
                         initial={{ y: 40, opacity: 0 }}
                         className=" overflow-hidden group-hover:rounded-[0px] rounded-[4px] min-w-[43px]"
