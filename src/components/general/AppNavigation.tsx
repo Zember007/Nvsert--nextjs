@@ -1,36 +1,19 @@
-
-import Image from "next/image";
 import Link from "next/link";
 import { useAnimation, motion, AnimationControls } from "framer-motion";
 import { useEffect } from "react";
-import { navigationImg } from './utils'
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { useHeaderContext } from "../contexts/HeaderContext";
 import { filterPrepositions } from "@/hook/filter";
 import { useButton } from "@/hook/useButton";
 import { useTranslation } from "react-i18next";
-import { AppDispatch, RootState } from "@/config/store";
-import { useDispatch, useSelector } from "react-redux";
-import { updateActionNavigation } from "@/store/navigation";
+import {  RootState } from "@/config/store";
+import {  useSelector } from "react-redux";
+import { NavigationItem } from "@/store/navigation";
 
-interface navigationLang {
-    title: string
-}
+
 
 const AppNavigation = ({ active }: { active: boolean }) => {
 
-    const dispatch = useDispatch<AppDispatch>();
     const { navigation } = useSelector((state: RootState) => state.navigation);
-
-
-
-    useEffect(() => {
-        if (navigation.length === 0) {
-            dispatch(updateActionNavigation());
-        }
-    }, [dispatch, navigation]);
-
-    const { t } = useTranslation()
 
     const controls = useAnimation();
 
@@ -60,22 +43,26 @@ const AppNavigation = ({ active }: { active: boolean }) => {
         }
     }, [active]);
 
-    const returnImg = (keys: string, i: number) => {
-        if (navigationImg[keys] && navigationImg[keys][i]) {
-            return navigationImg[keys][i].img;
+    const grouped = navigation.reduce((acc:any, item:NavigationItem) => {
+        const catId:number = item.category.id;
+        if (!acc[catId]) {
+          acc[catId] = [];
         }
-        return '';
-    };
+        acc[catId].push(item);
+        return acc;
+      }, {});
+
+   
     return (
         <>
             <div className="grid grid-cols-6 w-full xxxl:gap-[30px] gap-[8px]">
                 {
-                    navigation.map((item, i) =>
+                    Object.keys(grouped).map((item, i:number) =>
 
                         <div key={i} className="flex flex-col gap-[20px]">
-                           {/*  {item.children.map((children, i) => (
-                                <WrapperItem link={children.full_slug} key={i} title={t(`navigation.${item.title}.${children.title}`)} img={returnImg(item.title, i)} controls={controls} />
-                            ))} */}
+                            {grouped[item].map((children:NavigationItem) => (
+                                <WrapperItem link={'#'} key={children.id} title={children.title} img={'https://test11.audiosector.ru/cp'+children.img.url} controls={controls} />
+                            ))}
                         </div>
                     )
                 }
@@ -84,7 +71,7 @@ const AppNavigation = ({ active }: { active: boolean }) => {
     );
 };
 
-const WrapperItem = ({ img, title, controls, link }: { link: string; img: string | StaticImport, title: string, controls: AnimationControls }) => {
+const WrapperItem = ({ img, title, controls, link }: { link: string; img: string , title: string, controls: AnimationControls }) => {
     const { darkHeader } = useHeaderContext();
     const { setButtonRef, setWrapperRef } = useButton()
 
@@ -96,7 +83,7 @@ const WrapperItem = ({ img, title, controls, link }: { link: string; img: string
                         initial={{ y: 40, opacity: 0 }}
                         className=" overflow-hidden group-hover:rounded-[0px] rounded-[4px] min-w-[43px]"
                         animate={controls}>
-                        <Image src={img} className="w-[43px] h-[60px]" width={43} height={60} alt="document" />
+                        <img src={img as string} className="w-[43px] h-[60px]" width={43} height={60} alt="document" />
                     </motion.div>
                     <p className={`${darkHeader ? 'text-[#000] group-hover:text-[#FFF]' : 'text-[#FFF]'} max-w-full xxxl:pr-[12px] xxl:text-[16px] text-[14px]`}>{filterPrepositions(title)}</p>
                 </Link>

@@ -17,6 +17,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CustomScrollbar from '@/components/general/CustomScrollbar';
 import { CopyProvider, useCopyContext } from '@/components/contexts/CopyContext';
 import CopyNotification from '@/components/general/elements/CopyNotification';
+import { updateActionNavigation } from '@/store/navigation';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -61,6 +62,7 @@ const LayoutContent = ({ children }: { children: ReactNode }) => {
 
         dispatch(updateActionConfigs());
         dispatch(updateActionFileConfigs());
+        dispatch(updateActionNavigation());
 
         function set100Vh() {
             let vh = window.innerHeight * 0.01;

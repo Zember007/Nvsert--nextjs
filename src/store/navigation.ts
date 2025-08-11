@@ -8,7 +8,7 @@ interface NavigationItem1 {
   full_slug: string;
   slug?: string;
   article_preview?: string;
-  children: NavigationItem[];
+  children: NavigationItem1[];
   seo_h1?: string;
   short_text?: string;
 }
@@ -65,8 +65,8 @@ export const updateActionServices = createAsyncThunk<
   'services/updateServices',
   async (ordering = '', { rejectWithValue }) => {
     try {
-      /* const response = await axios.get(`/api/section-services?ordering=${ordering}`); */
-      return [];
+      const response = await axios.get(`/api/section-services?ordering=${ordering}`);
+      return response.data;
     } catch (error: any) {
       return rejectWithValue(error.response?.data || error.message);
     }

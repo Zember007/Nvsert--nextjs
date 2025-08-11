@@ -13,9 +13,10 @@ import AppMenuItem from "./AppMenuItem";
 import { filterPhone } from "@/hook/filter";
 import { useButton } from "@/hook/useButton";
 import { useAnimation, motion } from "framer-motion";
-import { RootState } from "@/config/store";
+import { AppDispatch, RootState } from "@/config/store";
 import HeaderMenu from "./elements/HeaderMenu";
 import { useCopyContext } from "../contexts/CopyContext";
+import { updateActionNavigation } from "@/store/navigation";
 
 
 
@@ -33,7 +34,8 @@ const AppHeader = () => {
 
   const { t } = useTranslation();
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+
 
   const controls = useAnimation();
   const defaultSettings = {
@@ -105,23 +107,18 @@ const AppHeader = () => {
     closeNavMenues();
   }, [pathname]);
 
-
-
-
-
-
   useEffect(() => {
     if (servicesMenuActive) {
       animation()
     }
   }, [servicesMenuActive])
 
-  
-
-  
-
   const { handleCopy } = useCopyContext();
 
+
+
+
+  const navigationGroup = [...new Set(navigation.map(item => item.category.title))];
   
   return (
     <>
@@ -268,11 +265,11 @@ const AppHeader = () => {
 
           <div className="services-menu__wrapper select-none">
             <div className="grid grid-cols-6 h-[50px] w-full xxl:gap-[30px] gap-[8px]">
-              {navigation.map((item, i) => (
+              {navigationGroup.map((item, i) => (
                 <div ref={setWrapperRef} key={i} className="tariff-wrap ">
                   <Link href="/services/" ref={setButtonRef} className={`h-full text-center btnIconAn flex gap-[10px]`}>
                     <p className="text-[18px] text-[#FFF]">
-                      {t(`navigation.${item.title}.title`)}
+                      {item}
                     </p>
                     <div className=" sendIconLeft">
                       <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -295,7 +292,7 @@ const AppHeader = () => {
           <div
             className={`services-menu !backdrop-blur-[20px] py-[20px] pt-[30px] js-services-menu relative ${servicesMenuActive && 'active'}`}>
             <div className="services-menu__wrapper select-none">
-              {/* <AppNavigation active={servicesMenuActive} /> */}
+              <AppNavigation active={servicesMenuActive} />
             </div>
 
 
