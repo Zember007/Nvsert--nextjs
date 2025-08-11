@@ -41,7 +41,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ reset, countTrigger, 
             y: defaultSettings.openY, // Используем openY для отскока
             transition: {
                 duration: defaultSettings.duration,
-                ease: defaultSettings.ease,
+                ease: [0.34, 1.56, 0.64, 1] as const,
                 times: defaultSettings.times
             }
         });

@@ -202,7 +202,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
             y: defaultSettings.openY,
             transition: {
                 duration: defaultSettings.duration,
-                ease: defaultSettings.ease,
+                ease: [0.34, 1.56, 0.64, 1] as const,
                 times: defaultSettings.times
             }
         });
