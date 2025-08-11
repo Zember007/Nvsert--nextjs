@@ -8,7 +8,7 @@ interface NavigationItem1 {
   full_slug: string;
   slug?: string;
   article_preview?: string;
-  children: NavigationItem1[];
+  children: NavigationItem[];
   seo_h1?: string;
   short_text?: string;
 }
@@ -31,7 +31,7 @@ export interface NavigationItem {
 
 
 interface NavigationState {
-  navigation: any[];
+  navigation: NavigationItem[];
   services: any[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
@@ -40,7 +40,7 @@ interface NavigationState {
 
 
 export const updateActionNavigation = createAsyncThunk<
-  any[],
+NavigationItem[],
   string | undefined,
   { rejectValue: string }
 >(
@@ -65,8 +65,8 @@ export const updateActionServices = createAsyncThunk<
   'services/updateServices',
   async (ordering = '', { rejectWithValue }) => {
     try {
-      const response = await axios.get(`/api/section-services?ordering=${ordering}`);
-      return response.data;
+      /* const response = await axios.get(`/api/section-services?ordering=${ordering}`); */
+      return [];
     } catch (error: any) {
       return rejectWithValue(error.response?.data || error.message);
     }
@@ -86,7 +86,7 @@ const navigationSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(updateActionNavigation.fulfilled, (state, action: PayloadAction<any[]>) => {
+      .addCase(updateActionNavigation.fulfilled, (state, action: PayloadAction<NavigationItem[]>) => {
         state.navigation = action.payload;
 
         state.status = 'succeeded';

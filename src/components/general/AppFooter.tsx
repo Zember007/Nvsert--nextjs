@@ -1,13 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useSelector } from "react-redux";
-import AppNavigation from './AppNavigation';
-import AppLogo from './AppLogo';
 import { useTranslation } from "react-i18next";
-import Link from "next/link";
-import { filterEmail, filterPhone } from "@/hook/filter";
 import Image from "next/image";
 import AudioLogo from '@/assets/images/svg/audio-selector.svg';
-import { RootState } from "@/config/store";
 import AppMenuItem from "./AppMenuItem";
 import PromtModal from "../modals/PromtModal";
 import { useHeaderContext } from "../contexts/HeaderContext";
