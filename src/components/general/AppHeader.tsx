@@ -103,6 +103,7 @@ const AppHeader = () => {
     }
   }
 
+  
   useEffect(() => {
     closeNavMenues();
   }, [pathname]);
