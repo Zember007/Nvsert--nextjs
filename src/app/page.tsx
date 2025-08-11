@@ -47,7 +47,7 @@ export default function Home() {
 
       <DynamicAppMainQuestions />
 
-      <AppSidebar />
+      {/* <AppSidebar /> */}
     </div>
   );
 }
