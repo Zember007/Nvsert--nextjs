@@ -64,7 +64,7 @@ const Page = () => {
             </h1>
 
             {/* Список услуг */}
-            <div className="space-y-[40px]">
+            <div className="space-y-[20px]">
                 {Object.keys(services).map((service, index) => (
                     <div id={`service-${index}`} key={index} className="overflow-hidden">
                         {/* Заголовок спойлера */}
@@ -92,7 +92,7 @@ const Page = () => {
 
                         {/* Содержимое спойлера */}
                         {expandedServices.includes(index) && (
-                            <div className=" wrapper pt-[20px] pb-[60px]">
+                            <div className=" wrapper pt-[20px] pb-[80px]">
                                 {/* Описание услуги */}
                                 <p className="text-gray-700 mb-6 leading-relaxed">
                                     {services[service].category.description}
