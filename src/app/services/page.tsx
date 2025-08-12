@@ -32,7 +32,7 @@ const ServicesContent = () => {
         return acc;
     }, {});
 
- /*    // Get the type query parameter and auto-expand matching category
+    // Get the type query parameter and auto-expand matching category
     useEffect(() => {
 
         console.log(searchParams, services);
@@ -48,7 +48,7 @@ const ServicesContent = () => {
                 document.querySelector(`#service-${matchingIndex}`)?.scrollIntoView({ behavior: 'smooth' });
             }
         }
-    }, [services]); */
+    }, [navigation, searchParams]);
 
     return (
         <div className="main text-[#000] overflow-hidden select-none relative ">
