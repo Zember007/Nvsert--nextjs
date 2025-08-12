@@ -8,7 +8,6 @@ import { NavigationItem } from '@/store/navigation';
 
 const ServicesContent = () => {
     const [expandedServices, setExpandedServices] = useState<number[]>([]);
-    const searchParams = useSearchParams();
 
     const toggleService = (index: number) => {
         setExpandedServices(prev =>
@@ -34,6 +33,8 @@ const ServicesContent = () => {
 
     // Get the type query parameter and auto-expand matching category
     useEffect(() => {
+    const searchParams = useSearchParams();
+
         console.log(searchParams, services);
         const typeParam = searchParams.get('type');
         if (typeParam) {
