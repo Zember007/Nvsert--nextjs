@@ -27,7 +27,6 @@ const AppMenuItem: React.FC<{
         return '';
     }
 
-    const [isFastClick, setIsFastClick] = React.useState(false);
 
     const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
         const rect = e.currentTarget.getBoundingClientRect();
@@ -54,26 +53,12 @@ const AppMenuItem: React.FC<{
         e.currentTarget.style.setProperty("--click-x", `${x}px`);
         e.currentTarget.style.setProperty("--click-y", `${y}px`);
 
-        setIsFastClick(true);
+      
 
-        const handleRouteChange = () => {
-            setTimeout(() => {
-                setIsFastClick(false);
-            }, 120);
-        };
 
-        window.addEventListener("beforeunload", handleRouteChange);
-
-        return () => {
-            window.removeEventListener("beforeunload", handleRouteChange);
-        };
     };
 
-    const handleMouseUp = () => {
-        setTimeout(() => {
-            setIsFastClick(false);
-        }, 120);
-    };
+ 
 
     const handleMouseLeave = (e: React.MouseEvent<HTMLElement>) => {
         const rect = e.currentTarget.getBoundingClientRect();
@@ -83,14 +68,12 @@ const AppMenuItem: React.FC<{
         e.currentTarget.style.setProperty("--last-mouse-x", `${x}px`);
         e.currentTarget.style.setProperty("--last-mouse-y", `${y}px`);
 
-        setIsFastClick(false);
     };
 
     const getClassName = () => {
         const classes = [styles["menu-item"], className];
         if (isHeader) classes.push(styles["header-item"]);
         if (isActive) classes.push(styles["menu-item-active"]);
-        if (isFastClick) classes.push(styles["fast-click"]);
         return classes.join(" ");
     };
 
@@ -109,7 +92,6 @@ const AppMenuItem: React.FC<{
                     aria-label={extractTextFromReactNode(item.label)}
                     onMouseMove={handleMouseMove}
                     onClick={handleClick}
-                    onMouseUp={handleMouseUp}
                     onMouseLeave={handleMouseLeave}>
                     {content}
                 </button>
@@ -120,7 +102,6 @@ const AppMenuItem: React.FC<{
                     data-text={extractTextFromReactNode(item.label)}
                     onMouseMove={handleMouseMove}
                     onClick={handleClick}
-                    onMouseUp={handleMouseUp}
                     onMouseLeave={handleMouseLeave}>
                     {content}
                 </Link>

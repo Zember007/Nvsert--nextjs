@@ -364,10 +364,13 @@
 
 
     backface-visibility: hidden;
-    transition: none;
 
     &:not(.no-transitions) {
         transition: all 0.1s ease;
+    }
+
+    &.no-transitions {
+        transition: transform 0.1s ease;
     }
 
 
