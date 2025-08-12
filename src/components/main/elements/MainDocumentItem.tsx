@@ -132,9 +132,9 @@ const MainDocumentItem = memo(({
         const container = containerPhotoRef.current;
         if (!container) return;
 
-        const width = container.offsetHeight / img.height * img.width;
+        const width = img ? container.offsetHeight / img.height * img.width : 0;
         setPhotoWidth(width >= 190 ? width : 190);
-    }, [containerPhotoRef.current, img.height, img.width]);
+    }, [containerPhotoRef.current, img?.height, img?.width]);
 
     const isInViewport = (el: HTMLElement | null): boolean => {
         if (!el) return false;
@@ -221,7 +221,7 @@ const MainDocumentItem = memo(({
                         <Image
                             ref={smallPhotoRef}
                             alt='document'
-                            src={'https://test11.audiosector.ru/cp'+img.url}
+                            src={'https://test11.audiosector.ru/cp'+img?.url}
                             width="41"
                             height="58"
                         />
@@ -308,7 +308,7 @@ const MainDocumentItem = memo(({
                             }
                             <div className='document-photo-container'>
                                 <PhotoView
-                                    src={img.url}
+                                    src={img?.url}
                                     width={475}
                                     height={667}
                                 >
@@ -320,9 +320,9 @@ const MainDocumentItem = memo(({
                                         animate={controls}
                                         className="document__big-img">
                                         <Image
-                                            alt='document' src={'https://test11.audiosector.ru/cp'+img.url}
+                                            alt='document' src={'https://test11.audiosector.ru/cp'+img?.url}
                                             width={photoWidth || 190}
-                                            height={photoWidth / img.width * img.height || 267} />
+                                            height={photoWidth / img?.width * img?.height || 267} />
                                     </motion.div>
 
                                 </PhotoView>

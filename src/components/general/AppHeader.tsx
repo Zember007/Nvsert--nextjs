@@ -118,8 +118,10 @@ const AppHeader = () => {
 
 
 
-
-  const navigationGroup = [...new Set(navigation.map(item => item.category.title))];
+  const navigationSorted = [...(navigation || [])].sort(
+    (a, b) => (a?.category?.order || 0) - (b?.category?.order || 0)
+  );
+  const navigationGroup = [...new Set(navigationSorted.map(item => item.category.title))];
   
   return (
     <>

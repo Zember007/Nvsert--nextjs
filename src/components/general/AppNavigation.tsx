@@ -53,16 +53,23 @@ const AppNavigation = ({ active }: { active: boolean }) => {
         return acc;
       }, {});
 
+    const sortedGrouped = Object.keys(grouped).sort((a, b) => {
+        const itemA = grouped[a][0];
+        const itemB = grouped[b][0];
+        
+        return itemA.category.order - itemB.category.order;
+    });
+
    
     return (
         <>
             <div className="grid grid-cols-6 w-full xxxl:gap-[30px] gap-[8px]">
                 {
-                    Object.keys(grouped).map((item, i:number) =>
+                    sortedGrouped.map((item, i:number) =>
 
                         <div key={i} className="flex flex-col gap-[20px]">
                             {grouped[item].map((children:NavigationItem) => (
-                                <WrapperItem link={children.slug} key={children.id} title={children.title} img={'https://test11.audiosector.ru/cp'+children.img.url} controls={controls} />
+                                <WrapperItem link={children.slug} key={children.id} title={children.title} img={'https://test11.audiosector.ru/cp'+children.img?.url} controls={controls} />
                             ))}
                         </div>
                     )

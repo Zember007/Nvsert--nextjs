@@ -9,7 +9,7 @@ export interface documentsList {
 
 export interface MainDocumentItemProps {
     setPhoto: () => void;
-    img: any;
+    img?: any;
     title: string;
     content: string;
     documentsList: documentsList[];
