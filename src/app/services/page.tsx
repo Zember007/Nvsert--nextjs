@@ -1,19 +1,14 @@
 'use client';
 import Image from 'next/image';
-import React, { useState } from 'react';
-import image1 from '@/assets/images/main-gallery/01.webp';
-import image2 from '@/assets/images/main-gallery/02.webp';
-import image3 from '@/assets/images/main-gallery/03.webp';
-import image4 from '@/assets/images/main-gallery/04.webp';
-import image5 from '@/assets/images/main-gallery/05.webp';
-import image6 from '@/assets/images/main-gallery/06.webp';
-import image7 from '@/assets/images/main-gallery/07.webp';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useSearchParams } from 'next/navigation';
 import { RootState } from '@/config/store';
 import { NavigationItem } from '@/store/navigation';
 
 const Page = () => {
-    const [expandedServices, setExpandedServices] = useState<number[]>([0]); // Первый спойлер открыт по умолчанию
+    const [expandedServices, setExpandedServices] = useState<number[]>([]); 
+    const searchParams = useSearchParams();
 
     const toggleService = (index: number) => {
         setExpandedServices(prev =>
@@ -24,8 +19,6 @@ const Page = () => {
     };
 
     const { navigation } = useSelector((state: RootState) => state.navigation);
-
-
 
     const services = navigation.reduce((acc:any, item:NavigationItem) => {
         const catId:number = item.category.id;
@@ -38,6 +31,23 @@ const Page = () => {
         acc[catId].items.push(item);
         return acc;
       }, {});
+
+    // Get the type query parameter and auto-expand matching category
+    useEffect(() => {
+        console.log(searchParams, services);
+        const typeParam = searchParams.get('type');
+        if (typeParam) {
+            const serviceKeys = Object.keys(services);
+            const matchingIndex = serviceKeys.findIndex(key => 
+                services[key].category.name === typeParam
+            );
+            
+            if (matchingIndex !== -1) {
+                setExpandedServices([matchingIndex]);
+                document.querySelector(`#service-${matchingIndex}`)?.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    }, [services]);
 
     return (
         <div className="main text-[#000] overflow-hidden select-none relative ">
@@ -60,7 +70,7 @@ const Page = () => {
                 {/* Список услуг */}
                 <div className="space-y-8">
                     {Object.keys(services).map((service, index) => (
-                        <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
+                        <div id={`service-${index}`} key={index} className="border border-gray-200 rounded-lg overflow-hidden">
                             {/* Заголовок спойлера */}
                             <button
                                 onClick={() => toggleService(index)}
@@ -100,7 +110,10 @@ const Page = () => {
                                             >
                                                 <span className='text-[18px]'>{certificate.title}</span>
                                                 <div className="relative w-full">
-                                                    <Image src={certificate.img?.url} alt={certificate.title} className='w-full h-full object-cover border border-[#93969d] rounded-[4px]' />
+                                                    <Image src={'https://test11.audiosector.ru/cp'+certificate.img?.url} alt={certificate.title}
+                                                    width={380}
+                                                    height={270}
+                                                    className='w-full h-full object-cover border border-[#93969d] rounded-[4px]' />
                                                     <div className='absolute bottom-[-10px]  right-[-10px] flex gap-[15px] p-[10px] bg-[#F5F5F5] rounded-[4px] border border-[#000]'>
                                                         <div className="flex flex-col gap-[6px]">
                                                             <span className='text-[#00000080] text-[12px] font-light'>Срок оформления</span>
