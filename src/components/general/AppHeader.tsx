@@ -123,9 +123,8 @@ const AppHeader = () => {
   const navigationGroup = navigation.reduce((acc:any, item) => {
     const catId:number = item.category.id;
     if (!acc[catId]) {
-      acc[catId] = [];
+      acc[catId] = item.category;
     }
-    acc[catId].push(item.category);
     return acc;
   }, {});
   return (

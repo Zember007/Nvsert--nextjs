@@ -45,7 +45,7 @@ const ServicesContent = () => {
             
             if (matchingIndex !== -1) {
                 setExpandedServices([matchingIndex]);
-                document.querySelector(`#service-${matchingIndex}`)?.scrollIntoView({ behavior: 'smooth' });
+                document.querySelector(`#service-${matchingIndex}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         }
     }, [navigation, searchParams]);
