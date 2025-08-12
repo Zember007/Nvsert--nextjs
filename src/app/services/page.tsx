@@ -33,7 +33,7 @@ const Page = () => {
     }, {});
 
     // Get the type query parameter and auto-expand matching category
-    /* useEffect(() => {
+    useEffect(() => {
         console.log(searchParams, services);
         const typeParam = searchParams.get('type');
         if (typeParam) {
@@ -47,7 +47,7 @@ const Page = () => {
                 document.querySelector(`#service-${matchingIndex}`)?.scrollIntoView({ behavior: 'smooth' });
             }
         }
-    }, [services]); */
+    }, [services]);
 
     return (
         <div className="main text-[#000] overflow-hidden select-none relative ">
@@ -70,7 +70,7 @@ const Page = () => {
                         {/* Заголовок спойлера */}
                         <button
                             onClick={() => toggleService(index)}
-                            className="w-full border-t border-b border-[#93969D] "
+                            className="w-full border-t border-b border-[93969D] "
                         >
                             <div className="wrapper !flex-row flex items-center gap-[10px] py-[21px]">
                             <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">

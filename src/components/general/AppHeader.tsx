@@ -119,7 +119,7 @@ const AppHeader = () => {
 
 
 
-  const navigationGroup = [...new Set(navigation.map(item => item.category.title))];
+  const navigationGroup = [...new Set(navigation.map(item => item.category))];
   
   return (
     <>
@@ -268,9 +268,9 @@ const AppHeader = () => {
             <div className="grid grid-cols-6 h-[50px] w-full xxl:gap-[30px] gap-[8px]">
               {navigationGroup.map((item, i) => (
                 <div ref={setWrapperRef} key={i} className="tariff-wrap ">
-                  <Link href="/services/" ref={setButtonRef} className={`h-full text-center btnIconAn flex gap-[10px]`}>
+                  <Link href={`/services?type=${item.name}`} ref={setButtonRef} className={`h-full text-center btnIconAn flex gap-[10px]`}>
                     <p className="text-[18px] text-[#FFF]">
-                      {item}
+                      {item.title}
                     </p>
                     <div className=" sendIconLeft">
                       <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
