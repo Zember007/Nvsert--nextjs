@@ -119,8 +119,15 @@ const AppHeader = () => {
 
 
 
-  const navigationGroup = [...new Set(navigation.map(item => item.category))];
   
+  const navigationGroup = navigation.reduce((acc:any, item) => {
+    const catId:number = item.category.id;
+    if (!acc[catId]) {
+      acc[catId] = [];
+    }
+    acc[catId].push(item.category);
+    return acc;
+  }, {});
   return (
     <>
 
@@ -266,11 +273,11 @@ const AppHeader = () => {
 
           <div className="services-menu__wrapper select-none">
             <div className="grid grid-cols-6 h-[50px] w-full xxl:gap-[30px] gap-[8px]">
-              {navigationGroup.map((item, i) => (
+              {Object.keys(navigationGroup).map((item, i) => (
                 <div ref={setWrapperRef} key={i} className="tariff-wrap ">
-                  <Link href={`/services?type=${item.name}`} ref={setButtonRef} className={`h-full text-center btnIconAn flex gap-[10px]`}>
+                  <Link href={`/services?type=${navigationGroup[item].name}`} ref={setButtonRef} className={`h-full text-center btnIconAn flex gap-[10px]`}>
                     <p className="text-[18px] text-[#FFF]">
-                      {item.title}
+                      {navigationGroup[item].title}
                     </p>
                     <div className=" sendIconLeft">
                       <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -16,6 +16,7 @@ const ServicesContent = () => {
                 : [...prev, index]
         );
     };
+    const searchParams = useSearchParams();
 
     const { navigation } = useSelector((state: RootState) => state.navigation);
 
@@ -31,9 +32,8 @@ const ServicesContent = () => {
         return acc;
     }, {});
 
-    // Get the type query parameter and auto-expand matching category
+ /*    // Get the type query parameter and auto-expand matching category
     useEffect(() => {
-    const searchParams = useSearchParams();
 
         console.log(searchParams, services);
         const typeParam = searchParams.get('type');
@@ -48,7 +48,7 @@ const ServicesContent = () => {
                 document.querySelector(`#service-${matchingIndex}`)?.scrollIntoView({ behavior: 'smooth' });
             }
         }
-    }, [services]);
+    }, [services]); */
 
     return (
         <div className="main text-[#000] overflow-hidden select-none relative ">
