@@ -1,12 +1,12 @@
 'use client';
 import Image from 'next/image';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import { useSearchParams } from 'next/navigation';
 import { RootState } from '@/config/store';
 import { NavigationItem } from '@/store/navigation';
 
-const Page = () => {
+const ServicesContent = () => {
     const [expandedServices, setExpandedServices] = useState<number[]>([]);
     const searchParams = useSearchParams();
 
@@ -132,6 +132,14 @@ const Page = () => {
                 ))}
             </div>
         </div>
+    );
+};
+
+const Page = () => {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <ServicesContent />
+        </Suspense>
     );
 };
 
