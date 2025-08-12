@@ -33,7 +33,7 @@ const Page = () => {
       }, {});
 
     // Get the type query parameter and auto-expand matching category
-    useEffect(() => {
+    /* useEffect(() => {
         console.log(searchParams, services);
         const typeParam = searchParams.get('type');
         if (typeParam) {
@@ -47,18 +47,19 @@ const Page = () => {
                 document.querySelector(`#service-${matchingIndex}`)?.scrollIntoView({ behavior: 'smooth' });
             }
         }
-    }, [services]);
+    }, [services]); */
 
     return (
         <div className="main text-[#000] overflow-hidden select-none relative ">
             {/* Хлебные крошки */}
 
-            <nav className="text-[14px] text-[#A4A4A4]  wrapper !flex-row items-center mt-[10px]">
+            <nav className="text-[14px] text-[#A4A4A4] px-[42px] flex items-center mt-[10px]">
                 <span>Главная</span>
                 <span className="mx-2">›</span>
                 <span className='text-[#34446D]'>Все услуги</span>
             </nav>
-            <h1 className="font-light text-center mt-[40px] mb-[50px]">
+
+            <h1 className="font-light text-center pt-[40px] pb-[50px]">
                 Полный список услуг
             </h1>
 
