@@ -266,6 +266,7 @@ const AppHeader = () => {
       </header>
       <HeaderMenu
         active={burgerMenuActive}
+        closeMenu={closeNavMenues}
       />
       <div className={`services-menu-box menu-headers  ${servicesMenuActive && 'active'} ${darkHeader && 'dark'}`}>
         <div className={`services-menu !py-[5px] js-services-menu relative `}>
