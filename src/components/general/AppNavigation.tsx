@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { useHeaderContext } from "../contexts/HeaderContext";
 import { filterPrepositions } from "@/hook/filter";
 import { useButton } from "@/hook/useButton";
-import { useTranslation } from "react-i18next";
 import {  RootState } from "@/config/store";
 import {  useSelector } from "react-redux";
 import { NavigationItem } from "@/store/navigation";
@@ -14,7 +13,7 @@ import Image from "next/image";
 
 const AppNavigation = ({ active }: { active: boolean }) => {
 
-    const { navigation } = useSelector((state: RootState) => state.navigation);
+    const { services } = useSelector((state: RootState) => state.navigation);
 
     const controls = useAnimation();
 
@@ -44,31 +43,19 @@ const AppNavigation = ({ active }: { active: boolean }) => {
         }
     }, [active]);
 
-    const grouped = navigation.reduce((acc:any, item:NavigationItem) => {
-        const catId:number = item.category.id;
-        if (!acc[catId]) {
-          acc[catId] = [];
-        }
-        acc[catId].push(item);
-        return acc;
-      }, {});
 
-    const sortedGrouped = Object.keys(grouped).sort((a, b) => {
-        const itemA = grouped[a][0];
-        const itemB = grouped[b][0];
-        
-        return itemA.category.order - itemB.category.order;
-    });
+
+   
 
    
     return (
         <>
             <div className="grid grid-cols-6 w-full xxxl:gap-[30px] gap-[8px]">
                 {
-                    sortedGrouped.map((item, i:number) =>
+                    services.map((item, i:number) =>
 
                         <div key={i} className="flex flex-col gap-[20px]">
-                            {grouped[item].map((children:NavigationItem) => (
+                            {item.items.map((children:NavigationItem) => (
                                 <WrapperItem link={children.slug} key={children.id} title={children.title} img={'https://test11.audiosector.ru/cp'+children.img?.url} controls={controls} />
                             ))}
                         </div>

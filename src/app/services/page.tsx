@@ -18,29 +18,17 @@ const ServicesContent = () => {
     };
     const searchParams = useSearchParams();
 
-    const { navigation } = useSelector((state: RootState) => state.navigation);
+    const { services } = useSelector((state: RootState) => state.navigation);
 
-    const services = navigation.reduce((acc: any, item: NavigationItem) => {
-        const catId: number = item.category.id;
-        if (!acc[catId]) {
-            acc[catId] = {
-                category: item.category,
-                items: []
-            };
-        }
-        acc[catId].items.push(item);
-        return acc;
-    }, {});
+    
 
     // Get the type query parameter and auto-expand matching category
     useEffect(() => {
 
-        console.log(searchParams, services);
         const typeParam = searchParams.get('type');
         if (typeParam) {
-            const serviceKeys = Object.keys(services);
-            const matchingIndex = serviceKeys.findIndex(key => 
-                services[key].category.name === typeParam
+            const matchingIndex = services.findIndex((service) => 
+                service.name === typeParam
             );
             
             if (matchingIndex !== -1) {
@@ -48,7 +36,7 @@ const ServicesContent = () => {
                 document.querySelector(`#service-${matchingIndex}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         }
-    }, [navigation, searchParams]);
+    }, [services, searchParams]);
 
     return (
         <div className="main text-[#000] overflow-hidden select-none relative ">
@@ -66,7 +54,7 @@ const ServicesContent = () => {
 
             {/* Список услуг */}
             <div className="space-y-[20px]">
-                {Object.keys(services).map((service, index) => (
+                {services.map((service, index) => (
                     <div id={`service-${index}`} key={index} className="overflow-hidden">
                         {/* Заголовок спойлера */}
                         <button
@@ -86,7 +74,7 @@ const ServicesContent = () => {
                                 </defs>
                             </svg>
 
-                            <h2 className="text-[24px] font-light">{services[service].category.title}</h2>
+                            <h2 className="text-[24px] font-light">{service.title}</h2>
                             </div>
 
                         </button>
@@ -96,12 +84,12 @@ const ServicesContent = () => {
                             <div className=" wrapper pt-[20px] pb-[80px]">
                                 {/* Описание услуги */}
                                 <p className="text-gray-700 mb-6 leading-relaxed">
-                                    {services[service].category.description}
+                                    {service.description}
                                 </p>
 
                                 {/* Сертификаты */}
                                 <div className="flex gap-[110px] flex-wrap py-[20px]">
-                                    {services[service].items.map((certificate: NavigationItem, certIndex: number) => (
+                                    {service.items.map((certificate: NavigationItem, certIndex: number) => (
                                         <button
 
                                             key={certIndex}

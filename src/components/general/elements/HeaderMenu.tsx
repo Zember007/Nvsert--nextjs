@@ -6,87 +6,63 @@ import Image04 from '@/assets/images/main-gallery/04.webp';
 import Image05 from '@/assets/images/main-gallery/05.webp';
 import Image06 from '@/assets/images/main-gallery/06.webp';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
+import { RootState } from '@/config/store';
+import { useSelector } from 'react-redux';
+import { Services } from '@/store/navigation';
 
-interface NavigationItem {
-    id: string;
+
+export interface Navigation {
+    items?: Services[];
+    id?: number;
+    name: string;
     title: string;
-    href?: string;
-    img?: StaticImageData;
-    children?: NavigationItem[];
+    description?: string;
+    slug?: string;
+    img?: any;
 }
 
+interface navigationStackItem {
+    items: Navigation[] | Services[],
+    title: string,
+    parentId?: string
+}
 
-const navigationData: NavigationItem[] = [
-    {
-        id: 'main',
-        title: 'Главная',
-        href: '/'
-    },
-    {
-        id: 'services',
-        title: 'Услуги',
-        children: [
-            {
-                id: 'gost-r',
-                title: 'ГОСТ Р',
-                children: [
-                    {
-                        img: Image05,
-                        id: 'cert-compliance', title: 'Сертификат соответствия ГОСТ Р', href: '/services/gost-r/cert-compliance'
-                    },
-                    {
-                        img: Image04,
-                        id: 'decl-compliance', title: 'Декларация соответствия ГОСТ Р', href: '/services/gost-r/decl-compliance'
-                    },
-                    {
-                        img: Image06,
-                        id: 'cert-agro', title: 'Сертификат соответствия «Сельхозпродукт»', href: '/services/gost-r/cert-agro'
-                    }
-                ]
-            },
-            {
-                id: 'customs-union',
-                title: 'Таможенный союз',
-                href: '/services/customs-union'
-            },
-            {
-                id: 'rospotr',
-                title: 'Роспотребнадзор',
-                href: '/services/rospotr'
-            },
-            {
-                id: 'tech-docs',
-                title: 'Тех. документация',
-                href: '/services/tech-docs'
-            },
-            {
-                id: 'iso-smk',
-                title: 'ИСО (СМК)',
-                href: '/services/iso-smk'
-            },
-            {
-                id: 'certification',
-                title: 'Сертификация',
-                href: '/services/certification'
-            }
-        ]
-    },
-    {
-        id: 'about',
-        title: 'О компании',
-        href: '/about'
-    },
-    {
-        id: 'contacts',
-        title: 'Контакты',
-        href: '/contacts'
-    }
-];
 
 
 const HeaderMenu = ({ active }: { active: boolean }) => {
 
-    const [navigationStack, setNavigationStack] = useState([
+
+
+    const navigationData: Navigation[] = [
+        {
+            name: 'main',
+            title: 'Главная',
+            slug: '/'
+        },
+        {
+            name: 'services',
+            title: 'Услуги',
+            items: []
+        },
+        {
+            name: 'about',
+            title: 'О компании',
+            slug: '/about'
+        },
+        {
+            name: 'contacts',
+            title: 'Контакты',
+            slug: '/contacts'
+        }
+    ];
+
+    const { services } = useSelector((state: RootState) => state.navigation);
+
+
+
+
+
+    const [navigationStack, setNavigationStack] = useState<navigationStackItem[]>([
         { items: navigationData, title: 'NVSERT' }
     ]);
 
@@ -95,13 +71,13 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
 
     const handleItemClick = (item: any) => {
 
-        if (item.children && item.children.length > 0) {
+        if (item.items && item.items.length > 0) {
             setNavigationStack(prev => [
                 ...prev,
                 {
-                    items: item.children!,
+                    items: item.items!,
                     title: item.title,
-                    parentId: item.id
+                    parentId: item.name
                 }
             ]);
 
@@ -115,12 +91,27 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
     };
 
     useEffect(() => {
+
+            if (services.length) {
+                const data = navigationData.find(item => item.name === 'services')
+                if (data && data.items) {
+                    data.items = services
+                }
+
+                setTimeout(() => {
+                    setNavigationStack([{ items: navigationData, title: 'NVSERT' }]);
+                }, 300);
+            }
+
         if (!active) {
             setTimeout(() => {
                 setNavigationStack([{ items: navigationData, title: 'NVSERT' }]);
             }, 300);
         }
-    }, [active]);
+
+        console.log(navigationData);
+        
+    }, [active, services]);
 
     const currentLevel = navigationStack[navigationStack.length - 1];
     const { openDefaultModal } = useHeaderContext();
@@ -159,21 +150,21 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
                                 className="header-nav__list min-w-full flex-shrink-0"
                             >
                                 {level.items.map((item, index_item) =>
-                                    <li key={item.id} className='w-full'>
+                                    <li key={item.name} className='w-full'>
                                         {
-                                            item.href ? (
+                                            'slug' in item && item.slug ? (
                                                 <Link
 
-                                                    href={item.href}
-                                                    className={`${index_item === 0 ? 'first-child' : ''} ${item.img ? 'have-img' : ''} header__menu-mob-item`}
+                                                    href={item.slug}
+                                                    className={`${index_item === 0 ? 'first-child' : ''} ${ item.img ? 'have-img' : ''} header__menu-mob-item`}
                                                 >
                                                     <div className="flex items-center gap-[20px]">
-                                                        {item.img &&
-                                                            <Image src={item.img} alt="document" width={43} height={60} />
-                                                        }
+                                                        {item.img?.url && (
+                                                            <Image src={'https://test11.audiosector.ru/cp' +item.img.url} alt="document" width={43} height={60} />
+                                                        )}
                                                         <span className="text-[18px] text-[#000]">{item.title}</span>
                                                     </div>
-                                                    {item.children && (
+                                                    {item.items && (
                                                         <Image src={ArrowIcon} alt="more" width={20} height={20} />
                                                     )}
                                                 </Link>
@@ -181,15 +172,15 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
                                                 <button
 
                                                     onClick={() => handleItemClick(item)}
-                                                    className={`${index_item === 0 ? 'first-child' : ''} ${item.img ? 'have-img' : ''} header__menu-mob-item`}
+                                                    className={`${index_item === 0 ? 'first-child' : ''} ${'img' in item && item.img ? 'have-img' : ''} header__menu-mob-item`}
                                                 >
                                                     <div className="flex items-center gap-[20px]">
-                                                        {item.img &&
-                                                            <Image src={item.img} alt="document" width={43} height={60} />
+                                                        {'img' in item && item.img?.url &&
+                                                            <Image src={'https://test11.audiosector.ru/cp'  + item.img.url} alt="document" width={43} height={60} />
                                                         }
                                                         <span className="text-[18px] text-[#000]">{item.title}</span>
                                                     </div>
-                                                    {item.children && (
+                                                    {item.items && (
                                                         <Image
                                                             className='translate-x-[5px]'
                                                             src={ArrowIcon} alt="more" width={20} height={20} />
@@ -226,11 +217,11 @@ const HeaderMenu = ({ active }: { active: boolean }) => {
                                 <path fillRule="evenodd" clipRule="evenodd" d="M12.0601 0C5.4329 0 0.0600586 5.37284 0.0600586 12C0.0600586 18.6272 5.4329 24 12.0601 24C18.6872 24 24.0601 18.6272 24.0601 12C24.0601 5.37284 18.6872 0 12.0601 0ZM2.87332 8.19473C2.3736 9.40115 2.1164 10.6942 2.1164 12C2.1164 14.6372 3.16403 17.1664 5.02883 19.0312C6.89363 20.896 9.42284 21.9437 12.0601 21.9437C14.6973 21.9437 17.2265 20.896 19.0913 19.0312C20.9561 17.1664 22.0037 14.6372 22.0037 12C22.0037 10.6942 21.7465 9.40115 21.2468 8.19473C20.7471 6.98831 20.0146 5.89213 19.0913 4.96877C18.1679 4.04542 17.0718 3.31297 15.8653 2.81326C14.6589 2.31354 13.3659 2.05634 12.0601 2.05634C10.7542 2.05634 9.46121 2.31354 8.25479 2.81326C7.04837 3.31297 5.95219 4.04542 5.02883 4.96877C4.10548 5.89213 3.37303 6.98831 2.87332 8.19473Z" fill="white" />
                                 <path fillRule="evenodd" clipRule="evenodd" d="M12.0601 0C5.4329 0 0.0600586 5.37284 0.0600586 12C0.0600586 18.6272 5.4329 24 12.0601 24C18.6872 24 24.0601 18.6272 24.0601 12C24.0601 5.37284 18.6872 0 12.0601 0ZM2.87332 8.19473C2.3736 9.40115 2.1164 10.6942 2.1164 12C2.1164 14.6372 3.16403 17.1664 5.02883 19.0312C6.89363 20.896 9.42284 21.9437 12.0601 21.9437C14.6973 21.9437 17.2265 20.896 19.0913 19.0312C20.9561 17.1664 22.0037 14.6372 22.0037 12C22.0037 10.6942 21.7465 9.40115 21.2468 8.19473C20.7471 6.98831 20.0146 5.89213 19.0913 4.96877C18.1679 4.04542 17.0718 3.31297 15.8653 2.81326C14.6589 2.31354 13.3659 2.05634 12.0601 2.05634C10.7542 2.05634 9.46121 2.31354 8.25479 2.81326C7.04837 3.31297 5.95219 4.04542 5.02883 4.96877C4.10548 5.89213 3.37303 6.98831 2.87332 8.19473Z" fill="url(#paint1_linear_4951_3242)" />
                                 <defs>
-                                    <linearGradient id="paint0_linear_4951_3242" x1="593.414" y1="7.13379" x2="593.414" y2="997.528" gradientUnits="userSpaceOnUse">
+                                    <linearGradient name="paint0_linear_4951_3242" x1="593.414" y1="7.13379" x2="593.414" y2="997.528" gradientUnits="userSpaceOnUse">
                                         <stop stopColor="#2AABEE" />
                                         <stop offset="1" stopColor="#229ED9" />
                                     </linearGradient>
-                                    <linearGradient id="paint1_linear_4951_3242" x1="1200.15" y1="0" x2="1200.15" y2="2400" gradientUnits="userSpaceOnUse">
+                                    <linearGradient name="paint1_linear_4951_3242" x1="1200.15" y1="0" x2="1200.15" y2="2400" gradientUnits="userSpaceOnUse">
                                         <stop stopColor="#2AABEE" />
                                         <stop offset="1" stopColor="#229ED9" />
                                     </linearGradient>

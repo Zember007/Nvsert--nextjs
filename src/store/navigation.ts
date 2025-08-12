@@ -2,16 +2,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { log } from 'console';
 
-interface NavigationItem1 {
-  id?: number
-  title: string;
-  full_slug: string;
-  slug?: string;
-  article_preview?: string;
-  children: NavigationItem1[];
-  seo_h1?: string;
-  short_text?: string;
-}
+
 
 export interface NavigationItem {
   id: number;
@@ -30,9 +21,20 @@ export interface NavigationItem {
 }
 
 
+
+export interface Services {
+  items: NavigationItem[];
+  id: number;
+  name: string;
+  title: string;
+  description: string;
+}
+
+
+
 interface NavigationState {
   navigation: NavigationItem[];
-  services: any[];
+  services: Services[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
@@ -61,21 +63,7 @@ export const updateActionNavigation = createAsyncThunk<
   }
 );
 
-export const updateActionServices = createAsyncThunk<
-  any[],
-  string,
-  { rejectValue: string }
->(
-  'services/updateServices',
-  async (ordering = '', { rejectWithValue }) => {
-    try {
-      const response = await axios.get(`/api/section-services?ordering=${ordering}`);
-      return response.data;
-    } catch (error: any) {
-      return rejectWithValue(error.response?.data || error.message);
-    }
-  }
-);
+
 
 const initialState: NavigationState = {
   navigation: [],
@@ -93,6 +81,25 @@ const navigationSlice = createSlice({
       .addCase(updateActionNavigation.fulfilled, (state, action: PayloadAction<NavigationItem[]>) => {
         state.navigation = action.payload;
 
+        const services = action.payload.reduce<Services[]>((acc, item) => {
+          const catId = item.category.id;
+          let accFind = acc.find(entry => entry.id === catId);
+          if (!accFind) {
+            accFind = {
+              id: item.category.id,
+              name: item.category.name,
+              title: item.category.title,
+              description: item.category.description,
+              items: []
+            };
+            acc.push(accFind);
+          }
+          accFind.items.push(item);
+          return acc;
+        }, []);
+
+        state.services = services;
+
         state.status = 'succeeded';
       })
       .addCase(updateActionNavigation.pending, (state) => {
@@ -104,17 +111,7 @@ const navigationSlice = createSlice({
         state.navigation = []
         state.status = 'failed';
       })
-      .addCase(updateActionServices.fulfilled, (state, action: PayloadAction<any[]>) => {
-        state.services = action.payload;
-        state.status = 'succeeded';
-      })
-      .addCase(updateActionServices.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(updateActionServices.rejected, (state, action: PayloadAction<string | undefined>) => {
-        state.error = action.payload || 'Failed to fetch services';
-        state.status = 'failed';
-      });
+     
   },
 });
 
