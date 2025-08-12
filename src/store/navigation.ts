@@ -41,7 +41,7 @@ interface NavigationState {
 
 
 export const updateActionNavigation = createAsyncThunk<
-NavigationItem[],
+  NavigationItem[],
   string | undefined,
   { rejectValue: string }
 >(
@@ -49,9 +49,12 @@ NavigationItem[],
   async (ordering = '', { rejectWithValue }) => {
     try {
       const response = await axios.get(`/api/services`);
-      console.log(response.data.data);
+      const data: NavigationItem[] = response.data.data
+      const sortedData = data.sort(
+        (a, b) => (a?.category?.order || 0) - (b?.category?.order || 0)
+      );
 
-      return response.data.data
+      return sortedData
     } catch (error: any) {
       return rejectWithValue(error.response?.data || error.message);
     }

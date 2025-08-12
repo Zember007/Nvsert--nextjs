@@ -8,6 +8,9 @@ import image4 from '@/assets/images/main-gallery/04.webp';
 import image5 from '@/assets/images/main-gallery/05.webp';
 import image6 from '@/assets/images/main-gallery/06.webp';
 import image7 from '@/assets/images/main-gallery/07.webp';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/config/store';
+import { NavigationItem } from '@/store/navigation';
 
 const Page = () => {
     const [expandedServices, setExpandedServices] = useState<number[]>([0]); // Первый спойлер открыт по умолчанию
@@ -20,74 +23,21 @@ const Page = () => {
         );
     };
 
-    const services = [
-        {
-            title: "Сертификация ГОСТ Р",
-            description: "Система ГОСТ Р — это национальная система сертификации продукции в России. Документы, оформленные в рамках данной системы, необходимы для легальной продажи продукции, участия в тендерах, госзакупках и работы с крупными клиентами.",
-            certificates: [
-                {
-                    title: "Сертификат соответствия ГОСТ Р",
-                    image: image1,
-                    processingTime: "от 2-х дней",
-
-                    cost: "от 8 700 Р"
-                },
-                {
-                    title: "Декларация соответствия ГОСТ Р",
-                    image: image2,
-                    processingTime: "от 2-х дней",
+    const { navigation } = useSelector((state: RootState) => state.navigation);
 
 
-                    cost: "от 8 700 Р"
-                },
-                {
-                    title: "Сертификат соответствия ГОСТ Р",
-                    image: image3,
-                    processingTime: "от 4-х недель",
-                    cost: "от 38 000 Р"
-                }
-            ]
-        },
-        {
-            title: "Таможенный союз",
-            description: "Сертификация в рамках Таможенного союза (ЕАЭС) подтверждает соответствие продукции требованиям технических регламентов, обязательных для применения на территории стран-участниц ЕАЭС.",
-            certificates: [
-                {
-                    title: "Сертификат соответствия ТС",
-                    image: image4,
-                    processingTime: "от 3-х дней",
 
-                    cost: "от 12 000 Р"
-                },
-                {
-                    title: "Декларация соответствия ТС",
-                    image: image5,
-                    processingTime: "от 2-х дней",
-                    cost: "от 9 500 Р"
-                }
-            ]
-        },
-        {
-            title: "Сертификация ISO",
-            description: "Международные стандарты ISO помогают организациям повысить эффективность, качество продукции и услуг, а также соответствовать международным требованиям.",
-            certificates: [
-                {
-                    title: "ISO 9001 - Система менеджмента качества",
-                    image: image6,
-                    processingTime: "от 6-ти недель",
-
-                    cost: "от 45 000 Р"
-                },
-                {
-                    title: "ISO 14001 - Система экологического менеджмента",
-                    image: image7,
-                    processingTime: "от 8-ми недель",
-                    cost: "от 52 000 Р"
-                }
-            ]
+    const services = navigation.reduce((acc:any, item:NavigationItem) => {
+        const catId:number = item.category.id;
+        if (!acc[catId]) {
+          acc[catId] = {
+            category: item.category,
+            items: []
+          };
         }
-    ];
-
+        acc[catId].items.push(item);
+        return acc;
+      }, {});
 
     return (
         <div className="main text-[#000] overflow-hidden select-none relative ">
@@ -109,7 +59,7 @@ const Page = () => {
 
                 {/* Список услуг */}
                 <div className="space-y-8">
-                    {services.map((service, index) => (
+                    {Object.keys(services).map((service, index) => (
                         <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
                             {/* Заголовок спойлера */}
                             <button
@@ -128,7 +78,7 @@ const Page = () => {
                                     </defs>
                                 </svg>
 
-                                <h2 className="text-[24px] font-light">{service.title}</h2>
+                                <h2 className="text-[24px] font-light">{services[service].category.title}</h2>
 
                             </button>
 
@@ -137,12 +87,12 @@ const Page = () => {
                                 <div className=" wrapper">
                                     {/* Описание услуги */}
                                     <p className="text-gray-700 mb-6 leading-relaxed">
-                                        {service.description}
+                                        {services[service].category.description}
                                     </p>
 
                                     {/* Сертификаты */}
                                     <div className="flex gap-[110px] flex-wrap py-[20px]">
-                                        {service.certificates.map((certificate, certIndex) => (
+                                        {services[service].items.map((certificate:NavigationItem, certIndex:number) => (
                                             <button
                                            
                                                 key={certIndex}
@@ -150,15 +100,15 @@ const Page = () => {
                                             >
                                                 <span className='text-[18px]'>{certificate.title}</span>
                                                 <div className="relative w-full">
-                                                    <Image src={certificate.image} alt={certificate.title} className='w-full h-full object-cover border border-[#93969d] rounded-[4px]' />
+                                                    <Image src={certificate.img?.url} alt={certificate.title} className='w-full h-full object-cover border border-[#93969d] rounded-[4px]' />
                                                     <div className='absolute bottom-[-10px]  right-[-10px] flex gap-[15px] p-[10px] bg-[#F5F5F5] rounded-[4px] border border-[#000]'>
                                                         <div className="flex flex-col gap-[6px]">
                                                             <span className='text-[#00000080] text-[12px] font-light'>Срок оформления</span>
-                                                            <span className='text-[16px] font-light'>{certificate.processingTime}</span>
+                                                            <span className='text-[16px] font-light'>{certificate.duration}</span>
                                                         </div>
                                                         <div className="flex flex-col gap-[6px]">
                                                             <span className='text-[#00000080] text-[12px] font-light'>Стоимость</span>
-                                                            <span className='text-[16px] font-light'>{certificate.cost}</span>
+                                                            <span className='text-[16px] font-light'>{certificate.price}</span>
                                                         </div>
                                                     </div>
                                                 </div>
