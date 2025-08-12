@@ -274,7 +274,7 @@ const AppHeader = () => {
             <div className="grid grid-cols-6 h-[50px] w-full xxl:gap-[30px] gap-[8px]">
               {Object.keys(navigationGroup).map((item, i) => (
                 <div ref={setWrapperRef} key={i} className="tariff-wrap ">
-                  <Link href={`/services?type=${navigationGroup[item].name}`} ref={setButtonRef} className={`h-full text-center btnIconAn flex gap-[10px]`}>
+                  <Link href={`/services?type=${navigationGroup[item].name}`} ref={setButtonRef} className={`h-full text-center btnIconAn transition-all duration-100 active:scale-95 flex gap-[10px]`}>
                     <p className="text-[18px] text-[#FFF]">
                       {navigationGroup[item].title}
                     </p>
