@@ -47,7 +47,7 @@ const ServicesContent = () => {
 
             <nav className="text-[14px] text-[#A4A4A4] px-[42px] flex items-center mt-[10px]">
                 <Link
-                    className='hover:text-[#34446D] hover:underline'
+                    className='hover:text-[#34446D] hover:underline transition-transform duration-100 hover:scale-95'
                     href={'/'}
                 >Главная</Link>
                 <span className="mx-[9px]">
