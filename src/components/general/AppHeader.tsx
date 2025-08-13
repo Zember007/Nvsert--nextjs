@@ -23,7 +23,7 @@ import { updateActionNavigation } from "@/store/navigation";
 
 const AppHeader = () => {
   const { makeDefaultHeader, makeTransparentHeader, openDefaultModal, darkHeader } = useHeaderContext();
-  const { navigation } = useSelector((state: RootState) => state.navigation);
+  const { services } = useSelector((state: RootState) => state.navigation);
 
   const pathname = usePathname();
   const [servicesMenuActive, setServicesMenuActive] = useState(false);
@@ -120,13 +120,7 @@ const AppHeader = () => {
 
 
   
-  const navigationGroup = navigation.reduce((acc:any, item) => {
-    const catId:number = item.category.id;
-    if (!acc[catId]) {
-      acc[catId] = item.category;
-    }
-    return acc;
-  }, {});
+
   return (
     <>
 
@@ -273,11 +267,15 @@ const AppHeader = () => {
 
           <div className="services-menu__wrapper select-none">
             <div className="grid grid-cols-6 h-[50px] w-full xxl:gap-[30px] gap-[8px]">
-              {Object.keys(navigationGroup).map((item, i) => (
+              {services.map((item, i) => (
                 <div ref={setWrapperRef} key={i} className="tariff-wrap ">
-                  <Link href={`/services?type=${navigationGroup[item].name}`} ref={setButtonRef} className={`h-full text-center btnIconAn transition-all duration-100 active:scale-95 flex gap-[10px]`}>
+                  <Link
+                  onClick={() => {
+                    handleNavMenu();
+                  }}
+                  href={`/services?type=${item.name}`} ref={setButtonRef} className={`h-full text-center btnIconAn transition-all duration-100 active:scale-95 flex gap-[10px]`}>
                     <p className="text-[18px] text-[#FFF]">
-                      {navigationGroup[item].title}
+                      {item.title}
                     </p>
                     <div className=" sendIconLeft">
                       <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
