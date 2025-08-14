@@ -138,7 +138,7 @@ const ServicesContent = () => {
                                         key={certIndex}
                                         className={`transition-transform duration-100 active:scale-[.95] p-[20px] flex flex-col gap-[20px] text-left w-[310px] hover:bg-[#F5F5F5] rounded-[8px] border border-[transparent] hover:border-[#34446d]`}
                                     >
-                                        <span className='text-[18px] h-[45px] flex items-center'>{certificate.title}</span>
+                                        <span className='text-[20px] h-[45px] flex items-center tracking-[-0.04em]'>{certificate.title}</span>
                                         <div className="relative w-full">
                                             <Image src={'https://test11.audiosector.ru/cp' + certificate.img?.url} alt={certificate.title}
                                                 width={380}
