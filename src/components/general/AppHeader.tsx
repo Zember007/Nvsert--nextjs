@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useTranslation } from "react-i18next";
 
 import AppLogo from "./AppLogo";
-import AppNavigation from "./AppNavigation";
+import { AppNavigation } from "./AppNavigation";
 import { usePathname } from "next/navigation";
 import { disableOverflow, enableOverflow } from "@/store/body";
 import { useHeaderContext } from "../contexts/HeaderContext";
@@ -103,7 +103,7 @@ const AppHeader = () => {
     }
   }
 
-  
+
   useEffect(() => {
     closeNavMenues();
   }, [pathname]);
@@ -119,31 +119,31 @@ const AppHeader = () => {
 
 
 
-  
+
 
   return (
     <>
 
       <div
-      className={`w-[354px] rubik header__bg !backdrop-filter-none gap-[8px] xl:!flex !hidden mix-blend-difference fixed h-[60px] top-[2px] right-[196px] z-[51] `}>
+        className={`w-[354px] rubik header__bg !backdrop-filter-none gap-[8px] xl:!flex !hidden mix-blend-difference fixed h-[60px] top-[2px] right-[196px] z-[51] `}>
         <AppMenuItem
-        className="w-[150px]"
+          className="w-[150px]"
           onClick={(e) => {
             handleCopy('info@nvsert.ru', e)
           }}
           item={{
-            href: '#', label:'info@nvsert.ru'
+            href: '#', label: 'info@nvsert.ru'
           }} isActive={false} />
 
         <AppMenuItem
-        className="w-[172px]"
+          className="w-[172px]"
           item={{
             href: filterPhone('8 800 700-33-75'), label: '8 800 700-33-75'
           }} isActive={false} />
       </div>
 
-      <div 
-      className="z-[51] min-w-[192px] !backdrop-filter-none header__bg  xl:!flex !hidden fixed mix-blend-difference h-[60px] top-[2px] left-[2px]">
+      <div
+        className="z-[51] min-w-[192px] !backdrop-filter-none header__bg  xl:!flex !hidden fixed mix-blend-difference h-[60px] top-[2px] left-[2px]">
         <AppLogo
           className={`xl:mx-auto`}
         />
@@ -157,14 +157,14 @@ const AppHeader = () => {
         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M7.82667 13.3867C9.74667 17.16 12.84 20.24 16.6133 22.1733L19.5467 19.24C19.9067 18.88 20.44 18.76 20.9067 18.92C22.4 19.4133 24.0133 19.68 25.6667 19.68C26.4 19.68 27 20.28 27 21.0133V25.6667C27 26.4 26.4 27 25.6667 27C13.1467 27 3 16.8533 3 4.33333C3 3.6 3.6 3 4.33333 3H9C9.73333 3 10.3333 3.6 10.3333 4.33333C10.3333 6 10.6 7.6 11.0933 9.09333C11.24 9.56 11.1333 10.08 10.76 10.4533L7.82667 13.3867Z" fill={burgerMenuActive ? '#000' : "#fff"} />
         </svg>
-        
+
 
 
       </Link>
       <header className={`rubik header ${(servicesMenuActive || burgerMenuActive) ? 'active' : ''}`}>
 
-        <div 
-        className="header__bg min-w-[192px] xl:grow-0 grow xl:opacity-0">
+        <div
+          className="header__bg min-w-[192px] xl:grow-0 grow xl:opacity-0">
           <AppLogo
             className={`xl:mx-auto ${burgerMenuActive ? '!text-[#000]' : ''}`}
           />
@@ -219,7 +219,7 @@ const AppHeader = () => {
             className="w-[354px]"
           ></div>
           <div
-          className="header__bg w-[192px]">
+            className="header__bg w-[192px]">
             <AppMenuItem
               className="mx-auto w-[170px]"
               onClick={() => {
@@ -270,10 +270,10 @@ const AppHeader = () => {
               {services.map((item, i) => (
                 <div ref={setWrapperRef} key={i} className="tariff-wrap ">
                   <Link
-                  onClick={() => {
-                    handleNavMenu();
-                  }}
-                  href={`/services?type=${item.name}`} ref={setButtonRef} className={`h-full text-center btnIconAn transition-all duration-100 active:scale-95 flex gap-[10px]`}>
+                    onClick={() => {
+                      handleNavMenu();
+                    }}
+                    href={`/services?type=${item.name}`} ref={setButtonRef} className={`h-full text-center btnIconAn transition-all duration-100 active:scale-95 flex gap-[10px]`}>
                     <p className="text-[18px] text-[#FFF]">
                       {item.title}
                     </p>

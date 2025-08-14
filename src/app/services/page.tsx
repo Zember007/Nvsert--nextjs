@@ -6,6 +6,8 @@ import { useSearchParams } from 'next/navigation';
 import { RootState } from '@/config/store';
 import { NavigationItem } from '@/store/navigation';
 import Link from 'next/link';
+import { AppNavigationItem } from '@/components/general/AppNavigation';
+import { useButton } from '@/hook/useButton';
 
 const ServicesContent = () => {
     const [expandedServices, setExpandedServices] = useState<number[]>([]);
@@ -40,6 +42,8 @@ const ServicesContent = () => {
         }
     }, [services, searchParams]);
 
+    const { setWrapperRef, setButtonRef } = useButton()
+
 
     return (
         <div className="main text-[#000] overflow-hidden select-none relative ">
@@ -59,75 +63,102 @@ const ServicesContent = () => {
                 <span className='text-[#34446D]'>Все услуги</span>
             </nav>
 
-            <h1 className="xl:text-[48px] m:text-[40px] text-[24px] font-light text-center pt-[40px] pb-[50px]">
-                Полный список услуг
-            </h1>
+            <div className="flex items-center m:justify-between justify-center wrapper !flex-row pt-[40px] pb-[50px]">
+                <h1 className="xl:text-[48px] m:text-[40px] text-[24px] font-light text-center ">
+                    Полный список услуг
+                </h1>
+
+                <div ref={setWrapperRef} className="m:!block !hidden tariff-wrap w-[250px]">
+                    <button
+                        onClick={() => {
+                            if (expandedServices.length > 0) {
+                                setExpandedServices([]);
+                            } else {
+                                setExpandedServices(services.map((_, index) => index));
+                            }
+                        }}
+                        ref={setButtonRef}
+                        className="tariff bg-[#f5f5f2]  h-[50px] rounded-[4px] text-[19px] font-light border border-[#93969d] flex items-center justify-center"
+                    >
+                        {expandedServices.length > 0 ? 'Скрыть все услуги' : 'Показать все услуги'}
+                    </button>
+                </div>
+            </div>
 
             {/* Список услуг */}
-            <div className="space-y-[20px]">
+            <div className="flex flex-col">
                 {services.map((service, index) => (
                     <div id={`service-${index}`} key={index} className="overflow-hidden">
                         {/* Заголовок спойлера */}
                         <button
                             onClick={() => toggleService(index)}
-                            className="w-full border-t border-b border-[93969D] "
+                            className="w-full border-t border-b border-[#93969d80] "
                         >
-                            <div className="wrapper !flex-row flex items-center gap-[10px] py-[21px]">
-                                <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_5667_4071)">
-                                        <path d="M4.404 3.30273L7.835 6.62973C8.055 6.84273 8.055 7.15673 7.835 7.36973L1.205 13.7997C0.79 14.2007 0 13.9577 0 13.4297V7.70673L4.404 3.30273Z" fill="black" />
-                                        <path opacity="0.5" d="M0 6.29282V0.569821C0 0.0418214 0.79 -0.201179 1.205 0.199821L3.686 2.60582L0 6.29282Z" fill="black" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_5667_4071">
-                                            <rect width="8" height="14" fill="white" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
+                            <div className={`  wrapper !flex-row flex items-center flex-wrap min-h-[78px] xxl:py-0 py-[30px] overflow-hidden`}>
+                                <div className="flex gap-[10px] items-center w-[200px]">
+                                    <svg
+                                        className={`transition-transform duration-100 ${expandedServices.includes(index) ? 'rotate-90' : ''}`}
+                                        width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_5667_4071)">
+                                            <path d="M4.404 3.30273L7.835 6.62973C8.055 6.84273 8.055 7.15673 7.835 7.36973L1.205 13.7997C0.79 14.2007 0 13.9577 0 13.4297V7.70673L4.404 3.30273Z" fill="black" />
+                                            <path opacity="0.5" d="M0 6.29282V0.569821C0 0.0418214 0.79 -0.201179 1.205 0.199821L3.686 2.60582L0 6.29282Z" fill="black" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_5667_4071">
+                                                <rect width="8" height="14" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
 
-                                <h2 className="xl:text-[24px] xxs:text-[20px] text-[18px] font-light">{service.title}</h2>
+                                    <h2 className={`xl:text-[24px] xxs:text-[20px] text-[18px] font-light ${expandedServices.includes(index) ? 'scale-[.95]' : ''} transition-all duration-200`}>{service.title}</h2>
+                                </div>
+                                <div className={`xxl:ml-[30px] xxl:mt-0 mt-[30px] flex gap-[20px] l:w-[1070px] items-center flex-wrap transition-all duration-100 overflow-hidden ${expandedServices.includes(index) ? 'max-h-[0px] translate-y-full !mt-0' : 'max-h-[200px] translate-y-0'}`}>
+                                    {service.items.map((item, index) => (
+                                        <AppNavigationItem
+                                            dark={true}
+                                            key={index} title={item.title} img={'https://test11.audiosector.ru/cp' + item.img?.url} link={item.slug} />
+                                    ))}
+                                </div>
                             </div>
 
                         </button>
 
-                        {/* Содержимое спойлера */}
-                        {expandedServices.includes(index) && (
-                            <div className=" wrapper pt-[20px] m:pb-[80px] pb-[60px]">
-                                {/* Описание услуги */}
-                                <p className="text-[#000000] mb-[10px] leading-relaxed">
-                                    {service.description}
-                                </p>
+                        <div className={`${!expandedServices.includes(index) ? 'max-h-[0px]' : 'max-h-[2000px] pt-[20px] m:pb-[100px] pb-[80px]'} transition-all duration-100 overflow-hidden wrapper `}>
+                            {/* Описание услуги */}
+                            <p className="text-[#000000] mb-[10px] leading-relaxed">
+                                {service.description}
+                            </p>
 
-                                {/* Сертификаты */}
-                                <div className="flex l:gap-[110px] gap-[30px] flex-wrap py-[20px] m:justify-start  justify-center">
-                                    {service.items.map((certificate: NavigationItem, certIndex: number) => (
-                                        <Link
-                                            href={`/services?type=${service.name}`}
-                                            key={certIndex}
-                                            className={`p-[20px] flex flex-col gap-[20px] text-left w-[310px] hover:bg-[#F5F5F5] rounded-[8px] border border-[transparent] hover:border-[#34446d]`}
-                                        >
-                                            <span className='text-[18px] h-[45px] flex items-center'>{certificate.title}</span>
-                                            <div className="relative w-full">
-                                                <Image src={'https://test11.audiosector.ru/cp' + certificate.img?.url} alt={certificate.title}
-                                                    width={380}
-                                                    height={270}
-                                                    className='w-full h-full object-cover border border-[#93969d] rounded-[4px]' />
-                                                <div className='absolute bottom-[-10px]  right-[-10px] flex gap-[15px] p-[10px] bg-[#F5F5F5] rounded-[4px] border border-[#000]'>
-                                                    <div className="flex flex-col gap-[6px]">
-                                                        <span className='text-[#00000080] text-[12px] font-light'>Срок оформления</span>
-                                                        <span className='text-[16px] font-light'>{certificate.duration}</span>
-                                                    </div>
-                                                    <div className="flex flex-col gap-[6px]">
-                                                        <span className='text-[#00000080] text-[12px] font-light'>Стоимость</span>
-                                                        <span className='text-[16px] font-light'>{certificate.price}</span>
-                                                    </div>
+                            {/* Сертификаты */}
+                            <div className="flex l:gap-[110px] gap-[30px] flex-wrap py-[20px] m:justify-start  justify-center">
+                                {service.items.map((certificate: NavigationItem, certIndex: number) => (
+                                    <Link
+                                        href={`/services?type=${service.name}`}
+                                        key={certIndex}
+                                        className={`transition-transform duration-100 active:scale-[.95] p-[20px] flex flex-col gap-[20px] text-left w-[310px] hover:bg-[#F5F5F5] rounded-[8px] border border-[transparent] hover:border-[#34446d]`}
+                                    >
+                                        <span className='text-[18px] h-[45px] flex items-center'>{certificate.title}</span>
+                                        <div className="relative w-full">
+                                            <Image src={'https://test11.audiosector.ru/cp' + certificate.img?.url} alt={certificate.title}
+                                                width={380}
+                                                height={270}
+                                                className='w-full h-full object-cover border border-[#93969d] rounded-[4px]' />
+                                            <div className='absolute bottom-[-10px]  right-[-10px] flex gap-[15px] p-[10px] bg-[#F5F5F5] rounded-[4px] border border-[#000]'>
+                                                <div className="flex flex-col gap-[6px]">
+                                                    <span className='text-[#00000080] text-[12px] font-light'>Срок оформления</span>
+                                                    <span className='text-[16px] font-light'>{certificate.duration}</span>
+                                                </div>
+                                                <div className="flex flex-col gap-[6px]">
+                                                    <span className='text-[#00000080] text-[12px] font-light'>Стоимость</span>
+                                                    <span className='text-[16px] font-light'>{certificate.price}</span>
                                                 </div>
                                             </div>
-                                        </Link>
-                                    ))}
-                                </div>
+                                        </div>
+                                    </Link>
+                                ))}
                             </div>
-                        )}
+                        </div>
+
                     </div>
                 ))}
             </div>
