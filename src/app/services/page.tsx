@@ -116,6 +116,7 @@ const ServicesContent = () => {
                                     {service.items.map((item, index) => (
                                         <AppNavigationItem
                                             dark={true}
+                                            className='!w-[252px]'
                                             key={index} title={item.title} img={'https://test11.audiosector.ru/cp' + item.img?.url} link={item.slug} />
                                     ))}
                                 </div>
