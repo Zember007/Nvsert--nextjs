@@ -144,13 +144,13 @@ const ServicesContent = () => {
                                                 width={380}
                                                 height={270}
                                                 className='w-full h-full object-cover border border-[#93969d] rounded-[4px]' />
-                                            <div className='absolute bottom-[-10px]  right-[-10px] flex gap-[15px] p-[10px] bg-[#F5F5F5] rounded-[4px] border border-[#000]'>
+                                            <div className='absolute bottom-[-10px]  right-[-10px] flex gap-[15px] p-[10px] bg-[#F5F5F580] rounded-[4px] border border-[#000] backdrop-blur-[4px]'>
                                                 <div className="flex flex-col gap-[6px]">
-                                                    <span className='text-[#00000080] text-[12px] font-light'>Срок оформления</span>
+                                                    <span className='text-[#000] text-[12px] font-light'>Срок оформления</span>
                                                     <span className='text-[16px] font-light'>{certificate.duration}</span>
                                                 </div>
                                                 <div className="flex flex-col gap-[6px]">
-                                                    <span className='text-[#00000080] text-[12px] font-light'>Стоимость</span>
+                                                    <span className='text-[#000] text-[12px] font-light'>Стоимость</span>
                                                     <span className='text-[16px] font-light'>{certificate.price}</span>
                                                 </div>
                                             </div>
