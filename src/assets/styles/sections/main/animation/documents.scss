@@ -94,7 +94,7 @@
 
 .document {
   &__box {
-    @apply m:mx-[-23px] flex flex-col rounded-[6px] relative;
+    @apply l:mx-[-23px] flex flex-col rounded-[6px] relative;
 
     &.active {
       @apply hover:bg-[#34446D33] bg-[transparent] ;
@@ -102,7 +102,7 @@
   }
 
   &__border {
-    @apply border-[#93969D] absolute bottom-[0] border-group right-[4px] left-[4px] m:right-[0] m:left-[0];
+    @apply border-[#93969D] absolute bottom-[0] border-group right-[4px] left-[4px] l:right-[0] l:left-[0];
 
     &.active {
       @apply border-[transparent];
@@ -110,7 +110,7 @@
   }
 
   &__navigation {
-    @apply rounded-[6px] overflow-hidden h-[70px] text-left box-scale transition-scale active:bg-[#5B6788] m:px-[23px] relative z-[0];
+    @apply rounded-[6px] overflow-hidden h-[70px] text-left box-scale transition-scale active:bg-[#5B6788] l:px-[23px] relative z-[0];
 
     &:active {
       box-shadow: 2px 2px 4px 0px #000000CC inset, -2px -2px 4px 0px #000000CC inset;
@@ -128,7 +128,7 @@
     }
 
     &-wrap {
-      @apply w-full relative z-[2] gap-[10px] flex items-center justify-between h-full  m:py-[23px] relative;
+      @apply w-full relative z-[2] gap-[10px] flex items-center justify-between h-full  l:py-[23px] relative;
 
       &.active {
         @apply text-[#FFF];
@@ -140,16 +140,16 @@
     @apply  translate-y-[-1px] text-[16px] m:text-[20px] transition-all duration-200  tracking-normal;
 
     &-wrap {
-      @apply hidden will-change-transform *:will-change-transform m:w-[40%] m:grid grid-cols-[1fr_1fr_auto] items-center justify-between;
+      @apply hidden will-change-transform *:will-change-transform l:w-[40%] l:grid grid-cols-[1fr_1fr_auto] items-center justify-between;
     }
   }
 
   &__title {
-    @apply m:translate-y-[-1px] transition-all duration-200  will-change-transform m:w-[60%] pl-[63px] text-[16px] s:text-[18px] m:text-[20px]  tracking-normal;
+    @apply l:translate-y-[-1px] transition-all duration-200  will-change-transform l:w-[60%] pl-[63px] text-[16px] s:text-[18px] m:text-[20px]  tracking-normal;
   }
 
   &__small-img {
-    @apply overflow-hidden border border-solid border-[#93969D] rounded-[5px] transition-all duration-100 z-[2] absolute top-1/2 -translate-y-1/2 left-[6px] m:left-[23px];
+    @apply overflow-hidden border border-solid border-[#93969D] rounded-[5px] transition-all duration-100 z-[2] absolute top-1/2 -translate-y-1/2 left-[6px] l:left-[23px];
 
     &.active {
       @apply translate-y-[100%];
@@ -167,13 +167,13 @@
   &__list {
 
     &-photo {
-      @apply m:w-[60%] xl:gap-0 gap-[20px] max-w-full items-center flex flex-col-reverse m:flex-row m:items-stretch;
+      @apply l:w-[60%] xl:gap-0 gap-[20px] max-w-full items-center flex flex-col-reverse l:flex-row l:items-stretch;
     }
 
-    @apply flex gap-[10px] flex-col grow m:max-w-[500px];
+    @apply flex gap-[10px] flex-col grow l:max-w-[500px];
 
     &-wrap {
-      @apply m:w-[40%] w-full items-start flex gap-[20px] flex-col   text-[#000];
+      @apply l:w-[40%] w-full items-start flex gap-[20px] flex-col   text-[#000];
     }
 
     &-item {
@@ -186,7 +186,7 @@
   }
 
   &__button {
-    @apply justify-center w-full m:flex items-center relative overflow-hidden m:text-[20px] text-[18px] bg-[#34446D] text-[#FFF] tracking-normal m:flex items-center gap-[10px]  rounded-[4px] border-[#34446D] border border-solid ;
+    @apply justify-center w-full l:flex items-center relative overflow-hidden m:text-[20px] text-[18px] bg-[#34446D] text-[#FFF] tracking-normal l:flex items-center gap-[10px]  rounded-[4px] border-[#34446D] border border-solid ;
   }
 
   &__hidden {
@@ -198,6 +198,6 @@
   }
 
   &__item {
-    @apply flex flex-col items-center m:items-stretch m:flex-row m:gap-[10px] gap-[20px] m:p-[30px] p-[20px] ;
+    @apply flex flex-col items-center l:items-stretch l:flex-row l:gap-[10px] gap-[20px] l:p-[30px] p-[20px] ;
   }
 }
