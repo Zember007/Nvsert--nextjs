@@ -422,6 +422,7 @@ body {
         border-radius: 3px;
         backdrop-filter: blur(2px);
         -webkit-backdrop-filter: blur(2px);
+        
     }
 
     &.window {
@@ -598,3 +599,33 @@ input:-webkit-autofill {
       @apply text-center text-[20px] xs:text-[40px] xl:text-[56px] font-light;
     }
   }
+
+  .line-after {
+    @apply hover:text-[#34446D]  transition-transform duration-100 active:scale-95;
+
+    transition: transform .1s ease;
+    will-change: transform, color, clip-path;
+    position: relative;
+
+    &:after {
+        content: "";
+        border-bottom: 1px solid #34446D;
+        transition: clip-path .1s ease, border-color .1s ease;
+        transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        clip-path: inset(0 0 0 100%);
+    }
+
+    &:hover {
+        &::after {
+            clip-path: inset(0 0 0 0);
+        }
+    }
+}
