@@ -35,6 +35,8 @@ const ServicesContent = () => {
 
             if (matchingIndex !== -1) {
                 setExpandedServices([matchingIndex]);
+                const element = document.getElementById(id);
+                window.scrollTo({ top: (element?.offsetTop || 100) - 100 });
             }
         }
     }, [services, searchParams]);
