@@ -66,9 +66,28 @@ const ServicesContent = () => {
                             }
                         }}
                         ref={setButtonRef}
-                        className="tariff bg-[#f5f5f2]  h-[50px] rounded-[4px] text-[19px] font-light border border-[#93969d] flex items-center justify-center"
+                        className="btnIconAn tariff bg-[#f5f5f2]  h-[50px] rounded-[4px] text-[20px] font-light border border-[#93969d] flex items-center justify-center"
                     >
-                        {expandedServices.length > 0 ? 'Скрыть все услуги' : 'Показать все услуги'}
+                        <span className='sendText w-[192px]'>
+                            {expandedServices.length > 0 ? 'Скрыть все услуги' : 'Показать все услуги'}
+                        </span>
+
+                        <span className='sendIconLeft'>
+                            <svg
+                                className={` ${expandedServices.length > 0 ? 'rotate-180' : ''} transition-transform duration-100`}
+                            width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_5820_2465)">
+                                    <path d="M1 1L15 15" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M15 7L15 15L7 15" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_5820_2465">
+                                        <rect width="16" height="16" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+
+                        </span>
                     </button>
                 </div>
             </div>
