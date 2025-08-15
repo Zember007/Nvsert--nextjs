@@ -30,7 +30,7 @@ const ANIMATION_SETTINGS = {
 };
 
 const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, onToggle }) => {
-    
+
     const controls = useAnimation();
 
     useEffect(() => {
@@ -88,48 +88,52 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                 </div>
             </button>
 
-            <div className={`${!isExpanded ? 'max-h-[0px]' : 'max-h-[2000px] pt-[20px] m:pb-[100px] pb-[80px]'} transition-all duration-200 overflow-hidden wrapper `}>
+            <div className={`${!isExpanded ? 'max-h-[0px]' : 'max-h-[2000px] pt-[20px] m:pb-[100px] pb-[80px]'} transition-all duration-200 overflow-hidden  `}>
                 {/* Описание услуги */}
-                <p className="text-[#000000] mb-[10px] leading-relaxed max-w-[1150px]">
-                    {service.description}
-                </p>
+                <div className="wrapper">
 
-                {/* Сертификаты */}
-                <div className="flex l:gap-[110px] gap-[30px] flex-wrap py-[20px] m:justify-start  justify-center">
-                    {service.items.map((certificate: NavigationItem, certIndex: number) => (
-                        <motion.div
-                            key={certIndex}
-                            initial={{ y: 20 }}
-                            animate={controls}
-                        >
-                            <Link
-                                href={`/services?type=${service.name}`}
-                                className={`transition-transform will-change-transform duration-100 active:scale-[.95] p-[20px] flex flex-col gap-[20px] text-left w-[310px] hover:bg-[#F5F5F5] rounded-[8px] border border-[transparent] hover:border-[#34446d]`}
+                    <p className="text-[#000000] mb-[10px] leading-relaxed max-w-[1150px]">
+                        {service.description}
+                    </p>
+
+                    {/* Сертификаты */}
+                    <div className="flex l:gap-[110px] gap-[30px] flex-wrap py-[20px] m:justify-start  justify-center">
+                        {service.items.map((certificate: NavigationItem, certIndex: number) => (
+                            <motion.div
+                                key={certIndex}
+                                initial={{ y: 20 }}
+                                animate={controls}
                             >
-                                <span className='text-[20px] h-[45px] flex items-center tracking-[-1px]'>{certificate.title}</span>
-                                <div className="relative w-full">
-                                    <Image
-                                        src={'https://test11.audiosector.ru/cp' + certificate.img?.url}
-                                        alt={certificate.title}
-                                        width={380}
-                                        height={270}
-                                        className='w-full h-full object-cover border border-[#93969d] rounded-[4px]'
-                                    />
-                                    <div className='absolute bottom-[-10px]  right-[-10px] flex gap-[15px] p-[10px] bg-[#F5F5F580] rounded-[4px] border border-[#000] backdrop-blur-[4px]'>
-                                        <div className="flex flex-col gap-[6px]">
-                                            <span className='text-[#000] text-[12px] font-light'>Срок оформления</span>
-                                            <span className='text-[16px] font-light'>{certificate.duration}</span>
-                                        </div>
-                                        <div className="flex flex-col gap-[6px]">
-                                            <span className='text-[#000] text-[12px] font-light'>Стоимость</span>
-                                            <span className='text-[16px] font-light'>{certificate.price}</span>
+                                <Link
+                                    href={`/services?type=${service.name}`}
+                                    className={`transition-transform will-change-transform duration-100 active:scale-[.95] p-[20px] flex flex-col gap-[20px] text-left w-[310px] hover:bg-[#F5F5F5] rounded-[8px] border border-[transparent] hover:border-[#34446d]`}
+                                >
+                                    <span className='text-[20px] h-[45px] flex items-center tracking-[-1px]'>{certificate.title}</span>
+                                    <div className="relative w-full">
+                                        <Image
+                                            src={'https://test11.audiosector.ru/cp' + certificate.img?.url}
+                                            alt={certificate.title}
+                                            width={380}
+                                            height={270}
+                                            className='w-full h-full object-cover border border-[#93969d] rounded-[4px]'
+                                        />
+                                        <div className='absolute bottom-[-10px]  right-[-10px] flex gap-[15px] p-[10px] bg-[#F5F5F580] rounded-[4px] border border-[#000] backdrop-blur-[4px]'>
+                                            <div className="flex flex-col gap-[6px]">
+                                                <span className='text-[#000] text-[12px] font-light'>Срок оформления</span>
+                                                <span className='text-[16px] font-light'>{certificate.duration}</span>
+                                            </div>
+                                            <div className="flex flex-col gap-[6px]">
+                                                <span className='text-[#000] text-[12px] font-light'>Стоимость</span>
+                                                <span className='text-[16px] font-light'>{certificate.price}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </Link>
-                        </motion.div>
-                    ))}
+                                </Link>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
+
             </div>
         </div>
     );
