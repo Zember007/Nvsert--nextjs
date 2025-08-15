@@ -25,6 +25,7 @@
 @import 'sections/footer';
 
 @import 'base/print';
+@import 'blocks/breadcrumbs';
 
 
 
@@ -419,6 +420,8 @@ body {
         background: rgba(52, 68, 109, 0.2);
         border: 1px solid #93969D;
         border-radius: 3px;
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
     }
 
     &.window {
@@ -592,6 +595,6 @@ input:-webkit-autofill {
   
   
     &__title {
-      @apply text-center text-[20px] xs:text-[40px] xl:text-[58px] font-light;
+      @apply text-center text-[20px] xs:text-[40px] xl:text-[56px] font-light;
     }
   }

@@ -150,7 +150,7 @@ const AppFooter = () => {
         </button>
           <AppMenuItem
             onClick={(e) => handleCopy('info@nvsert.ru', e)}
-            className="sendBtn max-xl:!border-[#93969D] gap-[8px] max-xxs:!bg-[#F5F5F2]  w-full xxs:!h-[35px] max-w-[280px] xxs:mx-0 mx-auto !h-[50px] xxs:w-auto cursor-pointer"
+            className="sendBtn max-xl:!border-[#93969D] gap-[8px] max-xl:!bg-[#F5F5F2]  w-full xxs:!h-[35px] max-w-[280px] xxs:mx-0 mx-auto !h-[50px] xxs:w-auto cursor-pointer"
             item={{
               href: '#', label:
                 <>

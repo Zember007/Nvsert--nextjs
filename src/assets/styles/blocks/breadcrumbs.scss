@@ -1,76 +1,57 @@
 .breadcrumbs {
-	width: 100%;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	line-height: 1;
-	color: $typography-secondary;
-	list-style: none;
-	align-items: center;
-	padding: 0 !important;
-	margin: 24px 0 !important;
-	min-height: 24px;
-	@media (max-width: $media-m) {
-		margin: 16px 0 !important;
-	}
+	@apply text-[16px] text-[#A4A4A4] px-[42px] flex items-center;
 
 
 	&__item {
-		display: block;
-		position: relative;
-		margin: 0 20px 0 0 !important;
-		list-style-type: none !important;
-		padding-left: 0 !important;
-		line-height: 1.5 !important;
+		display: flex;
+		align-items: center;
 
-		&:last-child {
-			margin-right: 0;
-
+		&:not(:last-child) {
 			&::after {
-				display: none;
+				content: '';
+				display: block;
+				margin: 0 9px;
+				width: 6px;
+				height: 10px;
+				background-image: url('../../../assets/images/svg/functional/breadcrumbs-arrow.svg');
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center;
 			}
 		}
-		.icon--home {
-			width: 16px;
-			height: 16px;
-			color: $typography-secondary;
-		}
 
-		&::before {
-			display: none !important;
-		}
-
-		&::after {
-			content: '';
-			position: absolute;
-			top: 50%;
-			transform: translateY(-50%);
-			left: calc(100% + 7px);
-			width: 8px;
-			height: 8px;
-			background-image: url("../../images/svg/functional/breadcrumbs-marker.svg");
-			background-position: center;
-			background-repeat: no-repeat;
+		&:last-child {
+			@apply text-[#34446D];
 		}
 	}
 
 	&__link {
-		display: block;
-		text-decoration: none;
-		color: $typography-secondary !important;
-		// font-size: rem(14);
-		line-height: rem(20);
-		@media (max-width: $media-s) {
-			// font-size: rem(13);
+		@apply hover:text-[#34446D]  transition-transform duration-100 active:scale-95;
+
+		transition: transform .1s ease;
+		will-change: transform, color, clip-path;
+		position: relative;
+
+		&:after {
+			content: "";
+			border-bottom: 1px solid #34446D;
+			transition: clip-path .1s ease, border-color .1s ease;
+			transform: translateZ(0);
+			-webkit-backface-visibility: hidden;
+			backface-visibility: hidden;
+
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			clip-path: inset(0 0 0 100%);
 		}
 
 		&:hover {
-			color: $link-base-text-hover !important;
-		}
-
-		&.active {
-			color: $typography-primary !important;
-			cursor: auto;
+			&::after {
+				clip-path: inset(0 0 0 0);
+			}
 		}
 	}
 }
