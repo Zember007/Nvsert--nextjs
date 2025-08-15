@@ -162,7 +162,7 @@ const AppFooter = () => {
             }} isActive={false} />
           <AppMenuItem
             onClick={(e) => handleCopy('@nvsert', e)}
-            className="sendBtn max-xl:!border-[#93969D] max-xxs:!bg-[#F5F5F2]  w-full  xxs:!h-[35px] xxs:w-auto max-w-[280px] xxs:mx-0 mx-auto  !h-[50px]  group cursor-pointer"
+            className="sendBtn max-xl:!border-[#93969D] max-xl:!bg-[#F5F5F2]  w-full  xxs:!h-[35px] xxs:w-auto max-w-[280px] xxs:mx-0 mx-auto  !h-[50px]  group cursor-pointer"
             item={{
               href: '#', label:
                 <>
@@ -188,7 +188,7 @@ const AppFooter = () => {
             }} isActive={false} />
           <AppMenuItem
             onClick={(e) => handleCopy('+7 (999) 123-45-67', e)}
-            className="sendBtn max-xl:!border-[#93969D] w-full max-xxs:!bg-[#F5F5F2]   xxs:!h-[35px] xxs:w-auto max-w-[280px] xxs:mx-0 mx-auto !h-[50px]  group cursor-pointer"
+            className="sendBtn max-xl:!border-[#93969D] w-full max-xl:!bg-[#F5F5F2]   xxs:!h-[35px] xxs:w-auto max-w-[280px] xxs:mx-0 mx-auto !h-[50px]  group cursor-pointer"
             item={{
               href: '#', label:
                 <>
