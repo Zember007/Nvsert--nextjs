@@ -27,16 +27,14 @@ const ServicesContent = () => {
     // Get the type query parameter and auto-expand matching category
     useEffect(() => {
 
-        const typeParam = searchParams.get('type');
-        if (typeParam) {
+        const id = new URL(window.location.href).hash.substring(1);
+        if (id) {
             const matchingIndex = services.findIndex((service) =>
-                service.name === typeParam
+                service.name === id
             );
 
             if (matchingIndex !== -1) {
                 setExpandedServices([matchingIndex]);
-                const element = document.getElementById(`service-${matchingIndex}`);
-                window.scrollTo({ top: (element?.offsetTop || 100) - 100, behavior: 'smooth' });
             }
         }
     }, [services, searchParams]);

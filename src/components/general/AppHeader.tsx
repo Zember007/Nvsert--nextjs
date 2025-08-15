@@ -273,7 +273,7 @@ const AppHeader = () => {
                     onClick={() => {
                       handleNavMenu();
                     }}
-                    href={`/services?type=${item.name}`} ref={setButtonRef} className={`h-full text-center btnIconAn transition-all duration-100 active:scale-95 flex gap-[10px]`}>
+                    href={`/services#${item.name}`} ref={setButtonRef} className={`h-full text-center btnIconAn transition-all duration-100 active:scale-95 flex gap-[10px]`}>
                     <p className="text-[18px] text-[#FFF]">
                       {item.title}
                     </p>
