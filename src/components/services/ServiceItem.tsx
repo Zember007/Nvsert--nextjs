@@ -49,20 +49,22 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
     }, [isExpanded, controls]);
 
     return (
-        <div id={service.name} className={`overflow-hidden ${isExpanded ? 'border-b border-[#93969d80]' : ''}`}>
+        <div  className={`overflow-hidden relative ${isExpanded ? 'border-b border-[#93969d80]' : ''}`}>
             {/* Заголовок спойлера */}
+
+            <div id={service.name} className='absolute top-[-60px] left-0 w-full'></div>
             <button
                 onClick={() => onToggle(index)}
                 className={`w-full border-b ${index === 0 ? 'border-t' : ''} border-[#93969d80] `}
             >
-                <div className={` group wrapper !flex-row flex items-center flex-wrap min-h-[78px] xxl:py-0 py-[30px] overflow-hidden`}>
+                <div className={`line-after__box group wrapper !flex-row flex items-center flex-wrap min-h-[78px] xxl:py-0 py-[30px] overflow-hidden`}>
                     <div className="flex gap-[10px] items-center w-[200px]">
                         <svg
-                            className={`transition-transform duration-100 ${isExpanded ? 'rotate-90' : ''}`}
+                            className={`group-hover:text-[#34446D] text-black transition-transform duration-100 ${isExpanded ? 'rotate-90' : ''}`}
                             width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clipPath="url(#clip0_5667_4071)">
-                                <path d="M4.404 3.30273L7.835 6.62973C8.055 6.84273 8.055 7.15673 7.835 7.36973L1.205 13.7997C0.79 14.2007 0 13.9577 0 13.4297V7.70673L4.404 3.30273Z" fill="black" />
-                                <path opacity="0.5" d="M0 6.29282V0.569821C0 0.0418214 0.79 -0.201179 1.205 0.199821L3.686 2.60582L0 6.29282Z" fill="black" />
+                                <path d="M4.404 3.30273L7.835 6.62973C8.055 6.84273 8.055 7.15673 7.835 7.36973L1.205 13.7997C0.79 14.2007 0 13.9577 0 13.4297V7.70673L4.404 3.30273Z" fill="currentColor" />
+                                <path opacity="0.5" d="M0 6.29282V0.569821C0 0.0418214 0.79 -0.201179 1.205 0.199821L3.686 2.60582L0 6.29282Z" fill="currentColor" />
                             </g>
                             <defs>
                                 <clipPath id="clip0_5667_4071">

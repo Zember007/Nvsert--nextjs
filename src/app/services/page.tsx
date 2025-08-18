@@ -18,10 +18,10 @@ const ServicesContent = () => {
                 : [...prev, index]
         );
     };
-    const searchParams = useSearchParams();
 
     const { services } = useSelector((state: RootState) => state.navigation);
 
+    const searchParams = useSearchParams();
 
 
     // Get the type query parameter and auto-expand matching category
@@ -35,11 +35,18 @@ const ServicesContent = () => {
 
             if (matchingIndex !== -1) {
                 setExpandedServices([matchingIndex]);
-                const element = document.getElementById(id);
-                window.scrollTo({ top: (element?.offsetTop || 100) - 100 });
+
+                setTimeout(() => {
+                    const element = document.getElementById(id);
+                    element?.scrollIntoView({ behavior: 'smooth' });
+                }, 200);
+
             }
         }
     }, [services, searchParams]);
+
+
+
 
     const { setWrapperRef, setButtonRef } = useButton()
 

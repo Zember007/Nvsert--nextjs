@@ -607,6 +607,17 @@ input:-webkit-autofill {
     will-change: transform, color, clip-path;
     position: relative;
 
+    &__box {
+        &:hover {
+            .line-after {
+                @apply text-[#34446D];
+                &:after {
+                    clip-path: inset(0 0 0 0);
+                }
+            }
+            
+        }
+    }
     &:after {
         content: "";
         border-bottom: 1px solid #34446D;
