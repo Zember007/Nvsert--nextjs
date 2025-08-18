@@ -57,7 +57,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                 onClick={() => onToggle(index)}
                 className={`w-full border-b ${index === 0 ? 'border-t' : ''} border-[#93969d80] `}
             >
-                <div className={`line-after__box group wrapper !flex-row flex items-center flex-wrap min-h-[78px] xxl:py-0 py-[30px] overflow-hidden`}>
+                <div className={`line-after__box justify-between group wrapper !flex-row flex items-center flex-wrap py-[30px] overflow-hidden`}>
                     <div className="flex gap-[10px] items-center w-[200px]">
                         <svg
                             className={`group-hover:text-[#34446D] text-black transition-transform duration-100 ${isExpanded ? 'rotate-90' : ''}`}
