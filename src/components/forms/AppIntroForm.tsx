@@ -60,6 +60,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
             Contact: ''
         }
     });
+    
 
     const { reset } = methods;
 
