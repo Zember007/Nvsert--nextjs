@@ -122,8 +122,8 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
     return (
         <div className={`header__menu-mob ${active && 'active'}`}>
             <div className="header__menu-mob-inner">
-                <nav className="header-nav flex flex-col gap-[26px] relative overflow-hidden w-full">
-                    <div className="header-nav__list !grid grid-cols-3">
+                <nav className="header-nav flex flex-col  relative overflow-hidden w-full">
+                    <div className="header-nav__list !grid grid-cols-3 h-[50px] !items-center ">
                         {canGoBack &&
                             <>
                                 <button
@@ -134,13 +134,13 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                                         src={ArrowIcon} alt='back' width={20} height={20} />
                                 </button>
 
-                                <span className='white-space-nowrap text-[24px] text-center text-[#000]'>{currentLevel.title}</span>
+                                <span className='whitespace-nowrap text-[24px] text-center text-[#000] justify-self-center'>{currentLevel.title}</span>
 
                             </>
                         }
                     </div>
                     <div
-                        className="flex transition-transform"
+                        className="flex transition-transform mt-[26px]"
                         style={{
                             transform: `translateX(-${(navigationStack.length - 1) * 100}%)`
                         }}
@@ -196,6 +196,9 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                             </ul>
                         ))}
                     </div>
+                    <Link href="/services" className="h-[50px] text-[20px] text-[#93969D] px-[6px] flex items-center justify-center w-full">
+                        Полный список услуг
+                    </Link>
                 </nav>
 
                 <div className="flex flex-col items-center gap-[10px] px-[40px] pb-[80px]  text-[#FFF]">
