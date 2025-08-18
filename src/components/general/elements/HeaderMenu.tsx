@@ -134,7 +134,7 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                                         src={ArrowIcon} alt='back' width={20} height={20} />
                                 </button>
 
-                                <span className=' text-[24px] text-center text-[#000]'>{currentLevel.title}</span>
+                                <span className='white-space-nowrap text-[24px] text-center text-[#000]'>{currentLevel.title}</span>
 
                             </>
                         }
