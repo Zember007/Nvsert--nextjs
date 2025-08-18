@@ -196,7 +196,7 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                             </ul>
                         ))}
                     </div>
-                    <Link href="/services" className="h-[50px] text-[20px] text-[#93969D] px-[6px] flex items-center justify-center w-full">
+                    <Link href="/services" className="h-[50px] text-left text-[#93969D] px-[6px] flex items-center  w-full">
                         Полный список услуг
                     </Link>
                 </nav>
