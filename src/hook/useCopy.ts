@@ -18,23 +18,26 @@ export const useCopy = () => {
         if (!event.target) return;
         
                 // Получаем координаты кнопки
-          const rect = (event.target as HTMLElement).getBoundingClientRect();
+          const rect = (event.target as HTMLElement).parentElement?.getBoundingClientRect();
+
+          if(!rect) return;
           
           // Проверяем, чтобы уведомление не выходило за пределы экрана
           const notificationWidth = 200; // примерная ширина уведомления
           
           let x = rect.right;
-          let y = rect.top - 10 - (event.target as HTMLElement).offsetHeight;
+          let y = rect.top - 20 - (event.target as HTMLElement).offsetHeight;
           
-          // Если уведомление выходит за правый край экрана
-          if (x + notificationWidth > window.innerWidth) {
-            x = rect.left - notificationWidth;
-          }
+       
           
           // Если уведомление выходит за верхний край экрана
           if (y < 0) {
             y = rect.bottom + 10;
           }
+  console.log({
+    x,
+    y
+  });
   
           setNotificationPosition({
             x,

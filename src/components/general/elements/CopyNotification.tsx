@@ -36,7 +36,7 @@ const CopyNotification = ({ isVisible, onHide, duration = 3000, position }: Copy
       style={{
         left: `${position.x}px`,
         top: `${position.y}px`,
-        transform: isRightSide ? 'translateX(-100%)' : 'none'
+        transform:'translateX(-100%)'
       }}
     >
       <div className="flex items-center gap-2 bg-[#00000080] backdrop-blur-[20px] rounded-[4px] px-4 py-3 text-white">
