@@ -70,6 +70,9 @@ const AppHeader = () => {
     setBurgerMenuActive(false);
     document.body.style.overflow = '';
     makeDefaultHeader();
+    unlockScroll()
+    dispatch(disableOverflow());
+    makeDefaultHeader();
   }
   let scrollY = 0;
 
