@@ -45,7 +45,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
         formData.append('email', contactData.email);
         formData.append('phone', contactData.phone);
 
-        try {
+        /* try {
             const response = await axios.post('/api/feedback', formData);
             if (response.status === 200 || 201) {
                 reset();
@@ -60,7 +60,16 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
             }
         } catch (error) {
             console.log(error);
-        }
+        } */
+        reset();
+        setIsPhone(false);
+        setIsEmail(false);
+        setContactData({
+            email: '',
+            phone: ''
+        })
+        successVisible()
+
     };
 
     const successVisible = () => {
@@ -249,7 +258,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                     <AppInput
                                         defaultValue={isEmail ? contactData.email : isPhone ? contactData.phone : ''}
                                         title={isPhone ? 'Телефон' : 'Email'}
-                                        inputName="contact"                                        
+                                        inputName="contact"
                                         mask={isPhone ? "phone" : ''}
                                         type={isPhone ? "tel" : 'text'}
                                         fail={emailError}

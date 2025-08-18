@@ -32,7 +32,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
             }
         }
 
-        try {
+        /* try {
             const response = await axios.post('/api/feedback', formData);
             if (response.status === 200 || 201) {
                 reset();
@@ -44,7 +44,13 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
             }
         } catch (error) {
             console.log(error);
-        }
+        } */
+
+        reset();
+
+        animation()
+        BounceWrapper && BounceWrapper()
+        setSuccessMessageVisible(true)
     };
 
     const methods = useForm({
