@@ -196,9 +196,11 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                             </ul>
                         ))}
                     </div>
-                    <Link href="/services" className="h-[50px] text-left text-[#93969D] px-[6px] flex items-center  w-full">
-                        Полный список услуг
-                    </Link>
+                    <div className="header-nav__list">
+                        <Link href="/services" className="h-[50px] text-left text-[#93969D] px-[6px] flex items-center  w-full">
+                            Полный список услуг
+                        </Link>
+                    </div>
                 </nav>
 
                 <div className="flex flex-col items-center gap-[10px] px-[40px] pb-[80px]  text-[#FFF]">
