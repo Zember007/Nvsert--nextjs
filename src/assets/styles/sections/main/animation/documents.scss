@@ -198,6 +198,7 @@
   }
 
   &__item {
-    @apply flex flex-col items-center l:items-stretch l:flex-row l:gap-[10px] gap-[20px] l:p-[30px] p-[20px] ;
+    @apply flex flex-col items-center l:items-stretch l:flex-row l:gap-[10px] gap-[20px]  p-[20px] ;
+    /* l:p-[30px] */
   }
 }
