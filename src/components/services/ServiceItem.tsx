@@ -52,7 +52,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
         <div  className={`overflow-hidden relative ${isExpanded ? 'border-b border-[#93969d80]' : ''}`}>
             {/* Заголовок спойлера */}
 
-            <div id={service.name} className='absolute top-[-60px] left-0 w-full'></div>
+            <div id={service.name} className='absolute top-[-94px] left-0 w-full'></div>
             <button
                 onClick={() => onToggle(index)}
                 className={`w-full border-b ${index === 0 ? 'border-t' : ''} border-[#93969d80] `}
