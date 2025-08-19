@@ -141,66 +141,66 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                     </div>
                     <div className="mt-[26px] grow overflow-hidden py-[1px]">
 
-                    <div
-                        className="flex transition-transform max-h-full"
-                        style={{
-                            transform: `translateX(-${(navigationStack.length - 1) * 100}%)`
-                        }}
-                    >
+                        <div
+                            className="flex transition-transform max-h-full"
+                            style={{
+                                transform: `translateX(-${(navigationStack.length - 1) * 100}%)`
+                            }}
+                        >
 
 
-                        {navigationStack.map((level, index) => (
-                            <ul
-                                key={index}
-                                className="header-nav__list min-w-full flex-shrink-0"
-                            >
-                                {level.items.map((item, index_item) =>
-                                    <li key={item.name} className='w-full'>
-                                        {
-                                            'slug' in item && item.slug ? (
-                                                <Link
+                            {navigationStack.map((level, index) => (
+                                <ul
+                                    key={index}
+                                    className="header-nav__list min-w-full flex-shrink-0"
+                                >
+                                    {level.items.map((item, index_item) =>
+                                        <li key={item.name} className='w-full'>
+                                            {
+                                                'slug' in item && item.slug ? (
+                                                    <Link
 
-                                                    href={item.slug}
-                                                    className={`${index_item === 0 ? 'first-child' : ''} ${item.img ? 'have-img' : ''} header__menu-mob-item`}
-                                                >
-                                                    <div className="flex items-center gap-[20px]">
-                                                        {item.img?.url && (
-                                                            <Image src={'https://test11.audiosector.ru/cp' + item.img.url} alt="document" width={43} height={60} />
+                                                        href={item.slug}
+                                                        className={`${index_item === 0 ? 'first-child' : ''} ${item.img ? 'have-img' : ''} header__menu-mob-item`}
+                                                    >
+                                                        <div className="flex items-center gap-[20px]">
+                                                            {item.img?.url && (
+                                                                <Image src={'https://test11.audiosector.ru/cp' + item.img.url} alt="document" width={43} height={60} />
+                                                            )}
+                                                            <span className="text-[18px] text-[#000]">{item.title}</span>
+                                                        </div>
+                                                        {item.items && (
+                                                            <Image src={ArrowIcon} alt="more" width={20} height={20} />
                                                         )}
-                                                        <span className="text-[18px] text-[#000]">{item.title}</span>
-                                                    </div>
-                                                    {item.items && (
-                                                        <Image src={ArrowIcon} alt="more" width={20} height={20} />
-                                                    )}
-                                                </Link>
-                                            ) : (
-                                                <button
+                                                    </Link>
+                                                ) : (
+                                                    <button
 
-                                                    onClick={() => handleItemClick(item)}
-                                                    className={`${index_item === 0 ? 'first-child' : ''} ${'img' in item && item.img ? 'have-img' : ''} header__menu-mob-item`}
-                                                >
-                                                    <div className="flex items-center gap-[20px]">
-                                                        {'img' in item && item.img?.url &&
-                                                            <Image src={'https://test11.audiosector.ru/cp' + item.img.url} alt="document" width={43} height={60} />
-                                                        }
-                                                        <span className="text-[18px] text-[#000]">{item.title}</span>
-                                                    </div>
-                                                    {item.items && (
-                                                        <Image
-                                                            className='translate-x-[5px]'
-                                                            src={ArrowIcon} alt="more" width={20} height={20} />
-                                                    )}
-                                                </button>
-                                            )
-                                        }
-                                    </li>
-                                )}
-                            </ul>
-                        ))}
+                                                        onClick={() => handleItemClick(item)}
+                                                        className={`${index_item === 0 ? 'first-child' : ''} ${'img' in item && item.img ? 'have-img' : ''} header__menu-mob-item`}
+                                                    >
+                                                        <div className="flex items-center gap-[20px]">
+                                                            {'img' in item && item.img?.url &&
+                                                                <Image src={'https://test11.audiosector.ru/cp' + item.img.url} alt="document" width={43} height={60} />
+                                                            }
+                                                            <span className="text-[18px] text-[#000]">{item.title}</span>
+                                                        </div>
+                                                        {item.items && (
+                                                            <Image
+                                                                className='translate-x-[5px]'
+                                                                src={ArrowIcon} alt="more" width={20} height={20} />
+                                                        )}
+                                                    </button>
+                                                )
+                                            }
+                                        </li>
+                                    )}
+                                </ul>
+                            ))}
+                        </div>
                     </div>
-                    </div>
-                    
-                    <div className="header-nav__list !mt-[15px]">               
+
+                    <div className="header-nav__list !my-[15px]">
 
                         <Link
                             onClick={() => closeMenu()}
@@ -208,7 +208,7 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                             className={`header__menu-mob-item text-[#93969D] text-[20px]`}
                         >
                             Полный список услуг
-                            
+
                         </Link>
                     </div>
                 </nav>
