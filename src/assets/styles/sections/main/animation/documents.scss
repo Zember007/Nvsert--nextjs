@@ -149,7 +149,7 @@
   }
 
   &__small-img {
-    @apply overflow-hidden border border-solid border-[#93969D] rounded-[5px] transition-all duration-100 z-[2] absolute top-1/2 -translate-y-1/2 left-[6px] l:left-[23px];
+    @apply overflow-hidden border border-solid border-[#93969D] rounded-[3px] transition-all duration-100 z-[2] absolute top-1/2 -translate-y-1/2 left-[6px] l:left-[23px];
 
     &.active {
       @apply translate-y-[100%];
