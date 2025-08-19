@@ -74,11 +74,11 @@ const AppNavigationItem = ({ img, title, controls, link, dark, className }: { li
             <div ref={setWrapperRef} className={`tariff-wrap ${className}`}>
                 <Link ref={setButtonRef} href={'/' + link} className={`tariff text-left no-transitions overflow-hidden not-backdrop flex xxxl:gap-[10px] gap-[5px] group/img  rounded-[4px] items-center    border-solid  border border-[transparent] ${dark ? 'hover:border-[#34446D] hover:bg-[#93969d26]' : 'hover:border-[#fff] hover:bg-[#34446d33]'}`}>
                     <motion.div
-                        className=" overflow-hidden rounded-[3px] min-w-[43px] m-[5px] mr-0 border-solid border border-[#93969D] "
+                        className=" overflow-hidden xxl:group-hover/img:rounded-[0px] group-hover/img:rounded-[3px] xxl:m-[5px] xxl:mr-0 rounded-[3px] min-w-[43px] border-solid border border-[#93969D] xxl:group-hover/img:border-[#fff] group-hover/img:border-[#93969D]"
                         animate={controls}>
                         <Image src={img as string} className="w-[43px] h-[60px]" width={43} height={60} alt="document" />
                     </motion.div>
-                    <p className={`${dark ? 'text-[#000]' : 'text-[#FFF]'} max-w-full xxxl:pr-[12px] xxl:text-[16px] text-[14px]`}>{filterPrepositions(title)}</p>
+                    <p className={`${dark ? 'text-[#000]' : 'text-[#FFF]'} max-w-full xxxl:pr-[12px] xxl:text-[18px] text-[14px]`}>{filterPrepositions(title)}</p>
                 </Link>
             </div>
         </>
