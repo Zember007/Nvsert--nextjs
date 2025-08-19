@@ -94,7 +94,7 @@
 
 .document {
   &__box {
-    @apply l:mx-[-23px] flex flex-col rounded-[6px] relative;
+    @apply l:mx-[-23px] mx-[-5px] flex flex-col rounded-[6px] relative;
 
     &.active {
       @apply hover:bg-[#34446D33] bg-[transparent] ;
@@ -102,7 +102,7 @@
   }
 
   &__border {
-    @apply border-[#93969D] absolute bottom-[0] border-group right-[4px] left-[4px] l:right-[0] l:left-[0];
+    @apply border-[#93969D] absolute bottom-[0] border-group right-[0] left-[0];
 
     &.active {
       @apply border-[transparent];

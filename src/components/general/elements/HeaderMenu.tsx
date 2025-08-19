@@ -139,7 +139,7 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                             </>
                         }
                     </div>
-                    <div className="mt-[26px] grow overflow-hidden py-[1px]">
+                    <div className="mt-[26px] grow overflow-hidden ">
 
                         <div
                             className="flex transition-transform max-h-full"
@@ -152,7 +152,7 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                             {navigationStack.map((level, index) => (
                                 <ul
                                     key={index}
-                                    className="header-nav__list min-w-full flex-shrink-0"
+                                    className="header-nav__list !py-[1px] min-w-full flex-shrink-0"
                                 >
                                     {level.items.map((item, index_item) =>
                                         <li key={item.name} className='w-full'>
