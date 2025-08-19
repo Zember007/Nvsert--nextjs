@@ -55,7 +55,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
             <div id={service.name} className='absolute top-[-94px] left-0 w-full'></div>
             <button
                 onClick={() => onToggle(index)}
-                className={`w-full border-b ${index === 0 ? 'border-t' : ''} border-[#93969d80] `}
+                className={`w-full ${!isExpanded ? 'border-b' : ''} ${index === 0 ? 'border-t' : ''} border-[#93969d80] `}
             >
                 <div className={`line-after__box justify-between group wrapper !flex-row flex items-center flex-wrap py-[30px] overflow-hidden`}>
                     <div className="flex gap-[17px] items-center w-[200px]">
@@ -90,7 +90,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                 </div>
             </button>
 
-            <div className={`${!isExpanded ? 'max-h-[0px]' : 'max-h-[2000px] pt-[20px] m:pb-[100px] pb-[80px]'} transition-all duration-200 overflow-hidden  `}>
+            <div className={`${!isExpanded ? 'max-h-[0px]' : 'max-h-[2000px] m:pb-[100px] pb-[80px]'} transition-all duration-200 overflow-hidden  `}>
                 {/* Описание услуги */}
                 <div className="wrapper">
 
