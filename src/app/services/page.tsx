@@ -58,12 +58,12 @@ const ServicesContent = () => {
                 <AppBreadcrumbs root={'/'} breadcrumbs={[{ id: 2, title: 'Все услуги', full_slug: '/services' }]} />
             </div>
 
-            <div className="flex items-center m:justify-between justify-center wrapper !flex-row pt-[30px] pb-[50px]">
+            <div className="flex items-center m:justify-between justify-center wrapper gap-[20px] m:!flex-row pt-[30px] pb-[50px]">
                 <h1 className="xl:text-[48px] m:text-[40px] text-[24px] font-light text-center ">
                     Полный список услуг
                 </h1>
 
-                <div ref={setWrapperRef} className="m:!block !hidden tariff-wrap w-[250px]">
+                <div ref={setWrapperRef} className="tariff-wrap w-[250px]">
                     <button
                         onClick={() => {
                             if (expandedServices.length > 0) {
