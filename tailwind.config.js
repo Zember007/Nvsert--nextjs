@@ -11,7 +11,8 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        'xs': '480px', // Новый брейкпоинт для маленьких экранов
+        'xss': '360px', 
+        'xs': '480px', 
         's': '520px',
         'xxs': '640px',
         'm': '900px',
