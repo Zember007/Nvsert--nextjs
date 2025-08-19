@@ -145,7 +145,7 @@
   }
 
   &__title {
-    @apply l:translate-y-[-1px] transition-all duration-200  will-change-transform l:w-[60%] pl-[63px] text-[16px] s:text-[18px] m:text-[20px]  tracking-normal;
+    @apply l:translate-y-[-1px] transition-all duration-200  will-change-transform l:w-[60%] pl-[63px] text-[16px] s:text-[18px] m:text-[20px] m:font-normal font-light  tracking-normal;
   }
 
   &__small-img {
