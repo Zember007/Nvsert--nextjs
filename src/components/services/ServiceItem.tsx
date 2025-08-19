@@ -119,7 +119,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                                             height={270}
                                             className='w-full h-full object-cover border border-[#93969d] rounded-[4px]'
                                         />
-                                        <div className='w-[250px] justify-between flex absolute bottom-[-10px]  right-[-10px] flex gap-[15px] p-[10px] bg-[#F5F5F580] rounded-[4px] border border-[#000] backdrop-blur-[4px]'>
+                                        <div className='w-[250px] justify-between flex absolute bottom-[-10px]  right-[-10px] flex p-[10px] bg-[#F5F5F580] rounded-[4px] border border-[#000] backdrop-blur-[4px]'>
                                             <div className="flex flex-col gap-[6px]">
                                                 <span className='text-[#000] text-[14px] font-light'>Срок оформления</span>
                                                 <span className='text-[18px] font-light'>{certificate.duration}</span>
