@@ -139,8 +139,10 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                             </>
                         }
                     </div>
+                    <div className="mt-[26px] grow overflow-hidden py-[1px]">
+
                     <div
-                        className="flex transition-transform mt-[26px]"
+                        className="flex transition-transform max-h-full"
                         style={{
                             transform: `translateX(-${(navigationStack.length - 1) * 100}%)`
                         }}
@@ -196,9 +198,17 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                             </ul>
                         ))}
                     </div>
-                    <div className="header-nav__list mt-[15px]">
-                        <Link href="/services" className="h-[50px] text-left text-[#93969D] px-[11px] flex items-center  w-full">
+                    </div>
+                    
+                    <div className="header-nav__list !mt-[15px]">               
+
+                        <Link
+                            onClick={() => closeMenu()}
+                            href="/services"
+                            className={`header__menu-mob-item text-[#93969D] text-[20px]`}
+                        >
                             Полный список услуг
+                            
                         </Link>
                     </div>
                 </nav>
