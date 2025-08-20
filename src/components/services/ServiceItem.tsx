@@ -57,7 +57,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                 onClick={() => onToggle(index)}
                 className={`w-full ${!isExpanded ? 'border-b' : ''} ${index === 0 ? 'border-t' : ''} border-[#93969d80] `}
             >
-                <div className={`line-after__box justify-between group wrapper !flex-row flex items-center flex-wrap py-[30px] overflow-hidden`}>
+                <div className={`line-after__box justify-between group wrapper xxl:!flex-row flex xxl:items-center py-[30px] overflow-hidden`}>
                     <div className="flex gap-[17px] items-center w-[200px]">
                         <svg
                             className={`group-hover:text-[#34446D] text-black transition-transform duration-100 ${isExpanded ? 'rotate-90' : ''}`}
@@ -75,7 +75,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
 
                         <h2 className={`line-after xl:text-[24px] xxs:text-[20px] text-[18px] font-light group-active:scale-[.9] transition-all duration-200`}>{service.title}</h2>
                     </div>
-                    <div className={`xxl:ml-[30px] xxl:mt-0 mt-[30px] flex gap-[20px] l:w-[1070px] items-center flex-wrap transition-all duration-100 overflow-hidden ${isExpanded ? 'opacity-0  translate-y-full !mt-0' : 'opacity-100  translate-y-0'}`}>
+                    <div className={`xxl:ml-[30px] xxl:mt-0 mt-[30px] flex gap-[20px] xxl:w-[1070px] items-center flex-wrap transition-all duration-100 overflow-hidden ${isExpanded ? 'opacity-0 xxl:max-h-auto max-h-0 translate-y-full !mt-0' : 'opacity-100  translate-y-0 xxl:max-h-auto max-h-[330px]'}`}>
                         {service.items.map((item, itemIndex) => (
                             <AppNavigationItem
                                 dark={true}
