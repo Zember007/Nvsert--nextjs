@@ -31,7 +31,7 @@ const AppTextarea = ({ title, inputName, required, className }: { title: string,
 
                 className={`field ${visibleError && isSubmitted && errors[inputName] && 'bounce'}`}>
 
-                <ScrollableContainer smoothScrollFactor={0.1}>
+                <ScrollableContainer smoothScrollFactor={0.1} priorityScroll={true}>
                     <textarea
                         id={id}
                         {...registerData}

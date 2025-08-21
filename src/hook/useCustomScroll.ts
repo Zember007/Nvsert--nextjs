@@ -7,6 +7,7 @@ export interface CustomScrollOptions {
   enabled?: boolean; // Включен ли скролл (по умолчанию true)
   target?: 'window' | 'container'; // Цель скролла: window или container (по умолчанию 'window')
   containerRef?: React.RefObject<any>; // Ссылка на контейнер для скролла (обязательно если target === 'container')
+  priorityScroll?: boolean; // Приоритетный скролл для textarea (по умолчанию false)
 }
 
 export const useCustomScroll = (options: CustomScrollOptions = {}) => {
@@ -16,10 +17,12 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
     minWidth = 900,
     enabled = true,
     target = 'window',
-    containerRef
+    containerRef,
+    priorityScroll = false
   } = options;
 
   const scrollbarRef = useRef<HTMLDivElement>(null);
+  const lastScrollTimeRef = useRef<number>(0);
 
   useLayoutEffect(() => {
     if (!enabled || !scrollbarRef.current) return;
@@ -64,6 +67,69 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
 
     const handleWheel = (e: Event) => {
       const wheelEvent = e as WheelEvent;
+      
+      // Если это приоритетный скролл (textarea), проверяем возможность скролла в контейнере
+      if (priorityScroll && container) {
+        // Проверяем, находится ли фокус на textarea или её родительском контейнере
+        const activeElement = document.activeElement;
+        const isTextareaFocused = activeElement === container || 
+                                 (activeElement instanceof HTMLTextAreaElement && 
+                                  container.contains(activeElement));
+        
+        // Если фокус не на textarea, позволяем скроллить страницу
+        if (!isTextareaFocused) {
+          return;
+        }
+        
+        const containerScrollTop = container.scrollTop;
+        const containerScrollHeight = container.scrollHeight;
+        const containerClientHeight = container.clientHeight;
+        const containerMaxScroll = containerScrollHeight - containerClientHeight;
+        
+        // Проверяем, можно ли скроллить в контейнере
+        const canScrollUp = containerScrollTop > 0;
+        const canScrollDown = containerScrollTop < containerMaxScroll;
+        
+        // Если скроллим вверх и есть место для скролла вверх в контейнере
+        if (wheelEvent.deltaY < 0 && canScrollUp) {
+          e.preventDefault();
+          targetScroll += wheelEvent.deltaY;
+          targetScroll = Math.max(0, targetScroll);
+          
+          if (!isScrolling) {
+            isScrolling = true;
+            requestAnimationFrame(smoothScroll);
+          }
+          return;
+        }
+        
+        // Если скроллим вниз и есть место для скролла вниз в контейнере
+        if (wheelEvent.deltaY > 0 && canScrollDown) {
+          e.preventDefault();
+          targetScroll += wheelEvent.deltaY;
+          targetScroll = Math.min(targetScroll, containerMaxScroll);
+          
+          if (!isScrolling) {
+            isScrolling = true;
+            requestAnimationFrame(smoothScroll);
+          }
+          return;
+        }
+        
+        // Если контейнер доскроллен до конца и скроллим вниз, или до начала и скроллим вверх
+        // Позволяем скроллить страницу с небольшой задержкой
+        if ((wheelEvent.deltaY > 0 && !canScrollDown) || (wheelEvent.deltaY < 0 && !canScrollUp)) {
+          const now = Date.now();
+          // Добавляем небольшую задержку для плавного переключения
+          if (now - lastScrollTimeRef.current > 50) {
+            lastScrollTimeRef.current = now;
+            // Не предотвращаем событие, позволяем скроллить страницу
+            return;
+          }
+        }
+      }
+      
+      // Обычная логика для window mode или container без приоритета
       e.preventDefault();
       targetScroll += wheelEvent.deltaY;
 
@@ -282,7 +348,7 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
       document.removeEventListener('touchmove', scrollMove);
       document.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [smoothScrollFactor, scrollPadding, minWidth, enabled, target, containerRef]);
+  }, [smoothScrollFactor, scrollPadding, minWidth, enabled, target, containerRef, priorityScroll]);
 
   return { scrollbarRef };
 }; 

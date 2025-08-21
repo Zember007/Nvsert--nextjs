@@ -9,6 +9,7 @@ interface ScrollableContainerProps extends Omit<CustomScrollOptions, 'target' | 
   scrollbarStyle?: React.CSSProperties;
   wrapperClassName?: string;
   wrapperStyle?: React.CSSProperties;
+  priorityScroll?: boolean; // Приоритетный скролл для textarea
 }
 
 const ScrollableContainer: React.FC<ScrollableContainerProps> = ({
@@ -18,6 +19,7 @@ const ScrollableContainer: React.FC<ScrollableContainerProps> = ({
   scrollbarStyle = {},
   wrapperClassName = '',
   wrapperStyle = {},
+  priorityScroll = false,
   ...scrollOptions
 }) => {
   const internalRef = useRef<any>(null);
@@ -59,6 +61,7 @@ const ScrollableContainer: React.FC<ScrollableContainerProps> = ({
         className={scrollbarClassName}
         style={scrollbarStyle}
         minWidth={0}
+        priorityScroll={priorityScroll}
         {...scrollOptions}
       />
       
