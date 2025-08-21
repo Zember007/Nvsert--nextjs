@@ -58,7 +58,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                 className={`w-full ${!isExpanded ? 'border-b' : ''} ${index === 0 ? 'border-t' : ''} border-[#93969d80] `}
             >
                 <div className={`line-after__box justify-between group wrapper xxl:!flex-row flex xxl:items-center py-[30px] overflow-hidden`}>
-                    <div className="flex gap-[17px] items-center w-[200px]">
+                    <div className="flex gap-[22px] items-center w-[200px]">
                         <svg
                             className={`group-hover:text-[#34446D] text-black transition-transform duration-100 ${isExpanded ? 'rotate-90' : ''}`}
                             width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
