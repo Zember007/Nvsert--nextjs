@@ -32,12 +32,13 @@ const ScrollableContainer: React.FC<ScrollableContainerProps> = ({
     ...wrapperStyle
   };
 
-  // Если targetRef не передан, пытаемся найти прокручиваемый элемент автоматически
-  const processedChildren = targetRef ? children : React.Children.map(children, (child, index) => {
-          if (React.isValidElement(child) && index === 0) {
-        // Передаем ref первому дочернему элементу если targetRef не указан
-        const childElement = child as React.ReactElement<any>;
-        return React.cloneElement(childElement, {
+  // Упрощенная логика - всегда обрабатываем первого ребенка
+  const processedChildren = React.Children.map(children, (child, index) => {
+    if (React.isValidElement(child) && index === 0) {
+      // Передаем ref первому дочернему элементу
+      const childElement = child as React.ReactElement<any>;
+      console.log('ScrollableContainer: Processing child:', childElement.type, 'with ref:', containerRef);
+      return React.cloneElement(childElement, {
         ref: containerRef,
         style: {
           ...(childElement.props.style || {}),
@@ -51,9 +52,11 @@ const ScrollableContainer: React.FC<ScrollableContainerProps> = ({
     return child;
   });
 
+  console.log('ScrollableContainer: priorityScroll =', priorityScroll, 'containerRef =', containerRef);
+
   return (
     <div className={wrapperClassName} style={wrapperStyles}>
-      {targetRef ? children : processedChildren}
+      {processedChildren}
       
       <CustomScrollbar
         target="container"

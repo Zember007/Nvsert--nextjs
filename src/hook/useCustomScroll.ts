@@ -30,12 +30,21 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
     // Для container mode обязательно нужен containerRef
     if (target === 'container' && !containerRef?.current) return;
 
+    console.log('useCustomScroll: Initializing with options:', {
+      target,
+      priorityScroll,
+      containerRef: containerRef?.current,
+      enabled
+    });
+
     let currentScroll = 0;
     let targetScroll = 0;
     let isScrolling = false;
 
     const isWindowMode = target === 'window';
     const container = containerRef?.current;
+
+    console.log('useCustomScroll: Container resolved:', container);
 
     // Инициализируем текущую прокрутку
     const initScroll = () => {
@@ -70,14 +79,19 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
       
       // Если это приоритетный скролл (textarea), проверяем возможность скролла в контейнере
       if (priorityScroll && container) {
-        // Проверяем, находится ли фокус на textarea или её родительском контейнере
-        const activeElement = document.activeElement;
-        const isTextareaFocused = activeElement === container || 
-                                 (activeElement instanceof HTMLTextAreaElement && 
-                                  container.contains(activeElement));
+        // Проверяем, находится ли курсор мыши над textarea
+        const mouseX = wheelEvent.clientX;
+        const mouseY = wheelEvent.clientY;
+        const containerRect = container.getBoundingClientRect();
+        const isMouseOverTextarea = mouseX >= containerRect.left && 
+                                   mouseX <= containerRect.right && 
+                                   mouseY >= containerRect.top && 
+                                   mouseY <= containerRect.bottom;
         
-        // Если фокус не на textarea, позволяем скроллить страницу
-        if (!isTextareaFocused) {
+
+        
+        // Если курсор не над textarea, позволяем скроллить страницу
+        if (!isMouseOverTextarea) {
           return;
         }
         
@@ -91,11 +105,12 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
         const canScrollDown = containerScrollTop < containerMaxScroll;
         
         // Если скроллим вверх и есть место для скролла вверх в контейнере
-        if (wheelEvent.deltaY < 0 && canScrollUp) {
+        if ((wheelEvent.deltaY < 0 && canScrollUp) || (wheelEvent.deltaY > 0 && canScrollDown)) {
           e.preventDefault();
+          e.stopPropagation(); // <-- ключевой момент: не даём событию "утечь" наверх
           targetScroll += wheelEvent.deltaY;
-          targetScroll = Math.max(0, targetScroll);
-          
+          targetScroll = Math.max(0, Math.min(targetScroll, containerMaxScroll));
+  
           if (!isScrolling) {
             isScrolling = true;
             requestAnimationFrame(smoothScroll);
@@ -103,18 +118,7 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
           return;
         }
         
-        // Если скроллим вниз и есть место для скролла вниз в контейнере
-        if (wheelEvent.deltaY > 0 && canScrollDown) {
-          e.preventDefault();
-          targetScroll += wheelEvent.deltaY;
-          targetScroll = Math.min(targetScroll, containerMaxScroll);
-          
-          if (!isScrolling) {
-            isScrolling = true;
-            requestAnimationFrame(smoothScroll);
-          }
-          return;
-        }
+ 
         
         // Если контейнер доскроллен до конца и скроллим вниз, или до начала и скроллим вверх
         // Позволяем скроллить страницу с небольшой задержкой
