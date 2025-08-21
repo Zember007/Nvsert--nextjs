@@ -299,7 +299,7 @@ const AppHeader = () => {
           className=" relative"
         >
           <div
-            className={`services-menu !backdrop-blur-[20px] py-[20px] pt-[30px] js-services-menu relative ${servicesMenuActive && 'active'}`}>
+            className={`services-menu !backdrop-blur-[20px] py-[20px]  js-services-menu relative ${servicesMenuActive && 'active'}`}>
             <div className="services-menu__wrapper select-none">
               <AppNavigation active={servicesMenuActive} />
             </div>
