@@ -49,18 +49,18 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
     }, [isExpanded, controls]);
 
     return (
-        <div  className={`overflow-hidden relative ${isExpanded ? 'border-b border-[#93969d80]' : ''}`}>
+        <div  className={`overflow-hidden relative ${index === 0 ? 'border-t' : ''} border-[#93969d80] border-b `}>
             {/* Заголовок спойлера */}
 
             <div id={service.name} className='absolute top-[-94px] left-0 w-full'></div>
             <button
                 onClick={() => onToggle(index)}
-                className={`w-full ${!isExpanded ? 'border-b' : ''} ${index === 0 ? 'border-t' : ''} border-[#93969d80] `}
+                className={`w-full`}
             >
                 <div className={`line-after__box justify-between group wrapper xxl:!flex-row flex xxl:items-center py-[30px] overflow-hidden`}>
                     <div className="flex gap-[22px] items-center w-[200px]">
                         <svg
-                            className={`group-hover:text-[#34446D] text-black transition-transform duration-200 group-active:scale-[.9] ${isExpanded ? 'rotate-90' : ''}`}
+                            className={`group-hover:text-[#34446D] text-black transition-transform duration-100 group-active:scale-[.9] ${isExpanded ? 'rotate-90' : ''}`}
                             width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clipPath="url(#clip0_5667_4071)">
                                 <path d="M4.404 3.30273L7.835 6.62973C8.055 6.84273 8.055 7.15673 7.835 7.36973L1.205 13.7997C0.79 14.2007 0 13.9577 0 13.4297V7.70673L4.404 3.30273Z" fill="currentColor" />
