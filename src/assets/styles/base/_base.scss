@@ -184,6 +184,11 @@ button,
   padding-right: 134px;
   margin: 0 auto;
 
+  @media (max-width: $media-xxl) {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
 }
 
 
