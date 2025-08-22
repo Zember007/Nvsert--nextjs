@@ -59,7 +59,7 @@ const ServicesContent = () => {
             </div>
 
             <div className="flex items-center m:justify-between justify-center wrapper gap-[20px] m:!flex-row pt-[30px] pb-[50px]">
-                <h1 className="xl:text-[48px] m:text-[40px] text-[24px] font-light text-center ">
+                <h1 className="xl:text-[48px] m:text-[40px] text-[24px] font-light text-center -translate-y-[3px]">
                     Полный список услуг
                 </h1>
 
