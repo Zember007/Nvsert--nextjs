@@ -156,7 +156,22 @@ button,
 
 .transparent-header {
   .wrapper {
-    max-width: 1340px;
+
+    min-width: map_get($wrapper, content-size--min);
+    max-width: map_get($wrapper, content-size);
+    padding-left: map_get($wrapper, padding-size);
+    padding-right: map_get($wrapper, padding-size);
+
+
+    @media (max-width: $media-xxl) and (min-width: calc($media-xl + 1px)) {
+      padding-left: 65px;
+      padding-right: 65px;
+    }
+
+    @media (max-width: $media-xl) and (min-width: calc($media-m + 1px)) {
+      padding-left: map_get($wrapper, padding-size-m);
+      padding-right: map_get($wrapper, padding-size-m);
+    }
   }
 }
 
@@ -164,22 +179,11 @@ button,
   height: 100%;
   position: relative;
   width: 100%;
-  min-width: map_get($wrapper, content-size--min);
-  max-width: map_get($wrapper, content-size);
-  padding-left: map_get($wrapper, padding-size);
-  padding-right: map_get($wrapper, padding-size);
+  max-width: 100%;
+  padding-left: 134px;
+  padding-right: 134px;
   margin: 0 auto;
 
-
-  @media (max-width: $media-xxl) and (min-width: calc($media-xl + 1px)) {
-    padding-left: 65px;
-    padding-right: 65px;
-  }
-
-  @media (max-width: $media-xl) and (min-width: calc($media-m + 1px)) {
-    padding-left: map_get($wrapper, padding-size-m);
-    padding-right: map_get($wrapper, padding-size-m);
-  }
 }
 
 
