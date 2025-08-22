@@ -20,6 +20,7 @@ module.exports = {
         'xl': '1240px',
         'xxl': '1450px',
         'xxxl': '1580px',
+        'xxxxl': '1640px',
         'max-s': { max: '519px' },
         'max-m': { max: '767px' },
         'max-l': { max: '1023px' },
