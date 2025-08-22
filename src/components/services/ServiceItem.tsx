@@ -79,7 +79,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                         {service.items.map((item, itemIndex) => (
                             <AppNavigationItem
                                 dark={true}
-                                className='!w-[252px]'
+                                className='!w-[250px]'
                                 key={itemIndex}
                                 title={item.title}
                                 img={'https://test11.audiosector.ru/cp' + item.img?.url}
