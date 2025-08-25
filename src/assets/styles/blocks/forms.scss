@@ -433,6 +433,6 @@ input:-webkit-autofill:focus {
   }
 
   &__button {
-    @apply overflow-hidden p-[9px] px-[20px] relative flex items-center justify-center border border-solid border-[#34446D] bg-[#34446D] text-[18px] s:text-[20px] text-[#FFF] rounded-[4px];
+    @apply overflow-hidden p-[9px] px-[20px] relative flex items-center justify-center border border-solid border-[#34446D] bg-[#34446D] xss:text-[18px] text-[16px] s:text-[20px] text-[#FFF] rounded-[4px];
   }
 }

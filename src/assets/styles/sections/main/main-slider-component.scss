@@ -6,7 +6,7 @@
 }
 
 .slider-slide-item {
-  @apply xl:w-[336px] xl:h-[336px] w-[320px] h-[320px] rounded-[6px];
+  @apply xl:w-[336px] xl:h-[336px] xss:w-[320px] xss:h-[320px] w-[280px] h-[280px] rounded-[6px];
 }
 
 .slide-inner-content {
@@ -22,7 +22,7 @@
 }
 
 .slide-text-content {
-  @apply  grow  xl:p-0 p-[20px] w-full h-full text-[16px] bg-[#FFF];
+  @apply  grow  xl:p-0 p-[20px] w-full h-full xss:text-[16px] text-[14px] bg-[#FFF];
 }
 
 .slider-navigation-container {
@@ -50,7 +50,7 @@
 }
 
 .main-button-wrap {
-  @apply xl:w-[242px] w-[280px] xl:mx-0 mx-auto;
+  @apply xl:w-[242px] xss:w-[280px] w-[260px] xl:mx-0 mx-auto;
 }
 
 

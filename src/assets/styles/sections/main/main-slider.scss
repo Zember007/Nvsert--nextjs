@@ -17,7 +17,7 @@
 }
 
 .overlay-title {
-  @apply xl:h-[50px] h-[65px] xl:rounded-[6px] rounded-b-[5px] border-[#93969D] border-solid xl:border border-b border-0 xl:text-[24px] s:text-[20px] text-[18px] text-[#000] flex items-center justify-center xl:p-[10px] p-[15px] w-full;
+  @apply xl:h-[50px] xss:h-[65px] h-[60px] xl:rounded-[6px] rounded-b-[5px] border-[#93969D] border-solid xl:border border-b border-0 xl:text-[24px] s:text-[20px] xss:text-[18px] text-[16px] text-[#000] flex items-center justify-center xl:p-[10px] p-[15px] w-full;
 
   --color: rgba(25, 24, 35, 0.4);
 
@@ -190,7 +190,7 @@
   }
 
   &__button {
-    @apply justify-center w-full m:flex items-center relative overflow-hidden m:text-[20px] text-[18px] bg-[#34446D] text-[#FFF] tracking-normal m:flex items-center gap-[10px] rounded-[4px] border-[#34446D] border border-solid ;
+    @apply justify-center w-full m:flex items-center relative overflow-hidden m:text-[20px] xss:text-[18px] text-[16px] bg-[#34446D] text-[#FFF] tracking-normal m:flex items-center gap-[10px] rounded-[4px] border-[#34446D] border border-solid ;
   }
 }
 

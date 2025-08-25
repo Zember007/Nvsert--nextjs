@@ -202,7 +202,7 @@ const SliderMain = () => {
                             <div data-slider="list" className={`slider-list`}
                                 style={{
                                     ...(widthWindow && widthWindow < 900 && {
-                                        gap: (widthWindow - 320) / 2
+                                        gap: (widthWindow - (widthWindow < 360 ? 280 : 320)) / 2
                                     })
                                 }}
                             >
