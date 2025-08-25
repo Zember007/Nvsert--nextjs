@@ -2,7 +2,7 @@
 @use '../../base/mixins' as mixins;
 
 .skill-card-wrapper {
-  @apply hover:z-[12] relative h-[224px] xxl:w-[310px] w-[320px];
+  @apply hover:z-[12] relative xss:h-[224px] xxl:w-[310px] xss:w-[320px] h-[172px] w-[280px];
   
   &:not(.folder) {
     @apply cursor-pointer;

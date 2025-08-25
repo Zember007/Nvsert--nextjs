@@ -5,7 +5,7 @@
         @apply flex flex-col;
 
         &-desc {
-            @apply xxl:text-[18px] text-[16px] leading-[1.5] mt-[30px];
+            @apply xxl:text-[18px] xss:text-[16px] text-[14px] leading-[1.5] mt-[30px];
         }
 
         &-move {

@@ -87,7 +87,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
 
 
 .slide-dots {
-  @apply w-[8px] h-[8px] relative border border-solid border-[#93969D] rounded-full;
+  @apply xss:w-[8px] xss:h-[8px] w-[12px] h-[12px] relative border border-solid border-[#93969D] rounded-full;
 
   &.active {
     @apply bg-[#34446D] border-[#34446D];
@@ -100,8 +100,8 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   }
 
   &::before {
-    @apply w-[8px] h-[8px] relative border border-solid border-[#34446D] rounded-full opacity-0;
-    content: '';
+    @apply w-[8px] h-[8px] relative border border-solid border-[#34446D] rounded-full opacity-0 xss:content-[''];
+
     position: absolute;
     top: 50%;
     left: 50%;
@@ -110,7 +110,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
   }
 
   &-box {
-    @apply flex xxl:hidden mx-auto justify-center flex-wrap gap-[7px];
+    @apply flex xxl:hidden  justify-center xss:gap-[7px] gap-[2px];
   }
 }
 
