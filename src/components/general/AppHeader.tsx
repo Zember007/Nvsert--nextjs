@@ -127,7 +127,7 @@ const AppHeader = () => {
   return (
     <>
 
-      <div className="w-[548px] xl:flex hidden gap-[2px] fixed h-[60px] top-[2px] right-[2px] z-[51] mix-blend-difference">
+      <div className="xl:flex hidden gap-[2px] fixed h-[60px] top-[2px] right-[196px] z-[51] mix-blend-difference">
         <div
           className={`w-[354px] rubik header__bg !backdrop-filter-none gap-[8px] mix-blend-difference  h-full`}>
           <AppMenuItem
@@ -145,18 +145,6 @@ const AppHeader = () => {
               href: filterPhone('8 800 700-33-75'), label: '8 800 700-33-75'
             }} isActive={false} />
         </div>
-
-        <div
-            className="header__bg w-[192px] !backdrop-filter-none  mix-blend-difference  h-full">
-            <AppMenuItem
-              className="mx-auto w-[170px]"
-              onClick={() => {
-                openDefaultModal('introForm')
-              }}
-              item={{
-                href: '#', label: t('navigation.order')
-              }} isActive={false} />
-          </div>
       </div>
 
       <div
@@ -231,7 +219,22 @@ const AppHeader = () => {
 
         </div>
 
-        <div className="w-[548px] hidden xl:block"></div>
+        <div className=" hidden xl:flex gap-[2px]">
+          <div className="w-[354px]"></div>
+        <div
+            className="header__bg w-[192px] !backdrop-filter-none  mix-blend-difference  h-full">
+            <AppMenuItem
+              className="mx-auto w-[170px]"
+              onClick={() => {
+                openDefaultModal('introForm')
+              }}
+              item={{
+                href: '#', label: t('navigation.order')
+              }} isActive={false} />
+          </div>
+        </div>
+
+
         <div className=" xl:hidden flex gap-[2px]">
           <div className="w-[54px]"></div>
           <div className="header__bg">
