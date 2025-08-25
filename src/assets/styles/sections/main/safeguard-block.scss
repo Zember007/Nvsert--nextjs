@@ -2,7 +2,7 @@
 @use '../../base/mixins' as mixins;
 
 .safeguard-card-wrapper {
-  @apply z-[0] xl:min-w-[300px] min-w-[320px] xl:w-auto w-[320px] relative xl:h-[518px] h-[530px] translate-y-[0] transition-all duration-500;
+  @apply z-[0] xl:min-w-[300px] xss:min-w-[320px] min-w-[280px] xl:w-auto xss:w-[320px] w-[280px] relative xl:h-[518px] xss:h-[530px] h-[480px] translate-y-[0] transition-all duration-500;
   
   &:not(.visible) {
     transform: translateY(30px);
@@ -36,7 +36,7 @@
 }
 
 .safeguard-title-overlay {
-  @apply shadow-[inset_0_0_6px_0_rgba(255,_255,_255,_0.3),_0_0_10px_0_rgba(0,_0,_0,_0.8)] text-[22px] z-[2] text-[#FFF] backdrop-blur-[4px] p-[10px] rounded-[4px] bg-[#FFFFFF1A] absolute top-[15px] left-[15px] w-[210px] font-light;
+  @apply shadow-[inset_0_0_6px_0_rgba(255,_255,_255,_0.3),_0_0_10px_0_rgba(0,_0,_0,_0.8)] xss:text-[20px] s:text-[22px] text-[18px] z-[2] text-[#FFF] backdrop-blur-[4px] p-[10px] rounded-[4px] bg-[#FFFFFF1A] absolute top-[15px] left-[15px] xss:w-[190px] s:w-[210px] w-[180px] font-light;
 }
 
 .safeguard-image {
@@ -64,7 +64,7 @@
 }
 
 .safeguard-item-title {
-  @apply text-[18px] transition-all duration-100;
+  @apply xss:text-[18px] text-[16px] transition-all duration-100;
 }
 
 .safeguard-arrow-icon {
@@ -104,7 +104,7 @@
 }
 
 .safeguard-list-item {
-  @apply will-change-transform duration-100 font-light transition-all opacity-0 translate-x-[-100%];
+  @apply will-change-transform duration-100 font-light transition-all opacity-0 translate-x-[-100%] xss:text-[16px] text-[14px];
   
   &.active {
     opacity: 1;
