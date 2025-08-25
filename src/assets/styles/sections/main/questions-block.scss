@@ -14,7 +14,7 @@
 }
 
 .questions-number-text {
-  @apply font-light text-[24px] transition-all duration-100;
+  @apply font-light s:text-[24px] text-[22px] transition-all duration-100;
   
   &.active {
     @apply m:text-[48px] text-[#FFF];
