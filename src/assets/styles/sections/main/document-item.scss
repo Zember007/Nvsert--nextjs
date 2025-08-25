@@ -42,7 +42,7 @@
 }
 
 .document-description {
-  @apply text-[16px] text-[#000000] m:max-w-[360px];
+  @apply text-[14px] xss:text-[16px] text-[#000000] m:max-w-[360px];
 }
 
 .document-desktop-actions {
@@ -54,7 +54,7 @@
 }
 
 .document-list-show-button {
-  @apply text-[#34446D] text-[16px] text-left inline-flex gap-[5px];
+  @apply text-[#34446D] text-[14px] xss:text-[16px] text-left inline-flex gap-[5px];
 }
 
 .document-list-arrow {
@@ -68,6 +68,6 @@
     @apply m:text-[19px];
   }
   
-  @apply text-[16px];
+  @apply text-[14px] xss:text-[16px];
 }
 
