@@ -74,7 +74,7 @@ const AppNavigationItem = ({ img, title, controls, link, dark, className }: { li
             <div ref={setWrapperRef} className={`tariff-wrap ${className} max-w-[250px]`}>
                 <Link ref={setButtonRef} href={'/' + link} className={`tariff text-left h-[72px] no-transitions overflow-hidden not-backdrop flex xxxl:gap-[10px] gap-[5px] group/img  rounded-[4px] items-center    border-solid  border border-[transparent] ${dark ? 'hover:border-[#34446D] hover:bg-[#93969d26]' : 'hover:border-[#fff] hover:bg-[#34446d33]'}`}>
                     <motion.div
-                        className=" overflow-hidden xxl:group-hover/img:rounded-[3px] group-hover/img:rounded-[0px] xxl:m-[5px] xxl:mr-0 rounded-[3px] min-w-[43px] border-solid border border-[#93969D] group-hover/img:border-[#fff] xxl:group-hover/img:border-[#93969D]"
+                        className=" overflow-hidden xxl:group-hover/img:rounded-[3px] group-hover/img:rounded-[0px] xxl:m-[6px] xxl:mr-0 rounded-[3px] min-w-[43px] border-solid border border-[#93969D] group-hover/img:border-[#fff] xxl:group-hover/img:border-[#93969D]"
                         animate={controls}>
                         <Image src={img as string} className="w-[43px] h-[60px]" width={43} height={60} alt="document" />
                     </motion.div>
