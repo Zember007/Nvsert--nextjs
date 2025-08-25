@@ -75,7 +75,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
 
                         <h2 className={`line-after xl:text-[24px] xxs:text-[20px] text-[18px] font-light group-active:scale-[.9] transition-all duration-200`}>{service.title}</h2>
                     </div>
-                    <div className={`ml-[30px] xxxxl:mt-0 mt-[25px] flex gap-[20px] xxxxl:w-[1070px] items-center flex-wrap transition-all duration-100 overflow-hidden ${isExpanded ? 'opacity-0 xxxxl:max-h-[100%] max-h-0 translate-y-full !mt-0' : 'opacity-100  translate-y-0 xxxxl:max-h-[100%] max-h-[330px]'}`}>
+                    <div className={`ml-[30px] xxxxl:mt-0 mt-[25px] flex gap-[20px] xxxxl:w-[1070px] items-center flex-wrap transition-all duration-100 overflow-hidden ${isExpanded ? 'opacity-0 xxxxl:max-h-[100%] max-h-0 translate-y-full !mt-0' : 'opacity-100  translate-y-0 xxxxl:max-h-[100%] max-h-[350px]'}`}>
                         {service.items.map((item, itemIndex) => (
                             <AppNavigationItem
                                 dark={true}
