@@ -99,7 +99,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                     </p>
 
                     {/* Сертификаты */}
-                    <div className="ml-[30px] flex l:gap-[110px] gap-[30px] flex-wrap py-[20px] m:justify-start  justify-center">
+                    <div className="ml-[10px] flex l:gap-[110px] gap-[30px] flex-wrap py-[20px] m:justify-start  justify-center">
                         {service.items.map((certificate: NavigationItem, certIndex: number) => (
                             <motion.div
                                 key={certIndex}
