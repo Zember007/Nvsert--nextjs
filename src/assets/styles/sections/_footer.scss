@@ -35,7 +35,7 @@
   }
 
   &__white {
-    @apply  xl:!px-[15px] xl:!py-[15px] p-[27px] m:px-[34px] m:py-[15px];
+    @apply  xl:!px-[15px] xl:!py-[15px] xss:p-[27px] p-[20px] m:px-[34px] m:py-[15px];
 
     &:not(.change-style) {
       @apply white-style;
@@ -51,7 +51,7 @@
   }
 
   &__dark {
-    @apply dark-style  xl:!px-[15px] xl:!py-[15px] p-[27px] m:px-[34px] m:py-[15px];
+    @apply dark-style  xl:!px-[15px] xl:!py-[15px] xss:p-[27px] p-[20px] m:px-[34px] m:py-[15px];
 
     &.bottom-top {
       @media (max-width: 1239px) {
