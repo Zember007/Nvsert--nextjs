@@ -52,7 +52,7 @@ const ServicesContent = () => {
 
 
     return (
-        <div className="main text-[#000] overflow-hidden select-none relative ">
+        <div className="main text-[#000] overflow-hidden select-none relativ mb-[100px] ">
             {/* Хлебные крошки */}
             <AppBreadcrumbs root={'/'} breadcrumbs={[{ id: 2, title: 'Все услуги', full_slug: '/services' }]} />
 
