@@ -264,7 +264,9 @@ export function horizontalLoop(items, config) {
             onResize = () => refresh(true),
             proxy;
 
-        gsap.set(items, { x: offsetLeft || 0 });
+        console.log('offsetLeft',center)
+
+        gsap.set(items, { x: center ? (window.innerWidth - items[0].clientWidth) / 2 : offsetLeft || 0 });
 
         populateWidths();
         populateTimeline();

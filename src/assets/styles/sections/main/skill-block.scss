@@ -5,7 +5,7 @@
   @apply hover:z-[12] relative h-[224px] xxl:w-[310px] xss:w-[320px] w-[280px];
   
   &:not(.folder) {
-    @apply cursor-pointer;
+    @apply xl:cursor-pointer;
   }
 }
 
@@ -30,7 +30,7 @@
 }
 
 .skill-card-title {
-  @apply text-[20px] transition-all duration-500;
+  @apply s:text-[20px] text-[18px] transition-all duration-500;
 }
 
 .skill-content-container {

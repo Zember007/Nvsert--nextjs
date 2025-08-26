@@ -180,7 +180,7 @@
       @apply flex gap-[10px] flex-col items-start;
 
       &-ul {
-        @apply list-disc pl-[20px] flex flex-col gap-[6px];
+        @apply list-disc pl-[20px] flex flex-col gap-[6px] text-[14px] xss:text-[16px];
       }
     }
   }

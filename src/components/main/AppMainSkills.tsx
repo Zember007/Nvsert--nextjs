@@ -109,6 +109,8 @@ const AppMainSkills = () => {
                             skillsData.map((skill, index) => {
                                 if (skill.empty) return <div key={index}></div>;
 
+                                
+
                                 return (
                                     <div
                                         key={index}
