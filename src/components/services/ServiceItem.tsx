@@ -108,23 +108,23 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                             >
                                 <Link
                                     href={`/services?type=${service.name}`}
-                                    className={`transition-transform will-change-transform duration-100 active:scale-[.95] p-[20px] flex flex-col gap-[20px] text-left w-[310px] hover:bg-[#F5F5F5] rounded-[8px] border border-[transparent] hover:border-[#34446d]`}
+                                    className={`w-[312px] transition-transform will-change-transform duration-100 active:scale-[.95] p-[30px] flex flex-col gap-[20px] text-left  hover:bg-[#F5F5F5] rounded-[8px] border border-[transparent] hover:border-[#34446d]`}
                                 >
-                                    <span className='text-[20px] h-[45px] flex items-center tracking-[-1px]'>{certificate.title}</span>
+                                    <span className='text-[20px] h-[45px] flex items-center tracking-[-1px] -my-[1%]'>{certificate.title}</span>
                                     <div className="relative w-full">
                                         <Image
                                             src={'https://test11.audiosector.ru/cp' + certificate.img?.url}
                                             alt={certificate.title}
-                                            width={380}
-                                            height={270}
-                                            className='w-full h-full object-cover border border-[#93969d] rounded-[4px]'
+                                            width={250}
+                                            height={346}
+                                            className='object-cover border border-[#93969d] rounded-[4px]'
                                         />
-                                        <div className='w-[250px] justify-between flex absolute bottom-[-10px]  right-[-10px] flex p-[10px] bg-[#F5F5F580] rounded-[4px] border border-[#000] backdrop-blur-[4px]'>
-                                            <div className="flex flex-col gap-[6px]">
+                                        <div className='w-[250px] justify-between flex absolute bottom-[-10px] leading-[0.68]  right-[-11px] flex p-[11px] bg-[#F5F5F580] rounded-[4px] border border-[#000] backdrop-blur-[4px]'>
+                                            <div className="flex flex-col gap-[10px]">
                                                 <span className='text-[#000] text-[14px] font-light'>Срок оформления</span>
                                                 <span className='text-[18px] font-light'>{certificate.duration}</span>
                                             </div>
-                                            <div className="flex flex-col gap-[6px]">
+                                            <div className="flex flex-col gap-[10px]">
                                                 <span className='text-[#000] text-[14px] font-light'>Стоимость</span>
                                                 <span className='text-[18px] font-light'>{certificate.price}</span>
                                             </div>
