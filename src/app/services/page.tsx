@@ -50,6 +50,8 @@ const ServicesContent = () => {
 
     const { setWrapperRef, setButtonRef } = useButton()
 
+    const [active, setActive] = useState(false);
+
 
     return (
         <div className="main text-[#000] overflow-hidden select-none relativ mb-[100px] ">
@@ -63,6 +65,8 @@ const ServicesContent = () => {
 
                 <div ref={setWrapperRef} className="tariff-wrap w-[250px]">
                     <button
+                        onMouseDown={() => setActive(true)}
+                        onMouseUp={() => setActive(false)}
                         onClick={() => {
                             if (expandedServices.length > 0) {
                                 setExpandedServices([]);
@@ -101,6 +105,7 @@ const ServicesContent = () => {
             <div className="flex flex-col">
                 {services.map((service, index) => (
                     <ServiceItem
+                        active={active}
                         key={index}
                         service={service}
                         index={index}
