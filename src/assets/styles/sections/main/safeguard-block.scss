@@ -99,7 +99,7 @@
   @apply list-disc leading-[140%] pl-[35px] pt-[5px] overflow-hidden;
 
   & * * {
-    @apply text-[16px];
+    @apply xss:text-[16px] text-[14px];
   }
 }
 
