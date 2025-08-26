@@ -58,7 +58,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                 className={`w-full`}
             >
                 <div className={`line-after__box justify-between group wrapper xxxxl:!flex-row flex xxxxl:items-center py-[25px] overflow-hidden`}>
-                    <div className="flex gap-[22px] items-center w-[200px]">
+                    <div className="flex gap-[22px] items-center w-[230px]">
                         <svg
                             className={`group-hover:text-[#34446D] text-black transition-transform duration-100 group-active:scale-[.85] ${isExpanded ? 'rotate-90' : ''}`}
                             width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -73,7 +73,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                             </defs>
                         </svg>
 
-                        <h2 className={`line-after xl:text-[24px] xxs:text-[20px] text-[18px] font-light group-active:scale-[.9] transition-all duration-200`}>{service.title}</h2>
+                        <h2 className={`line-after xl:!text-[24px] xxs:text-[20px] text-[18px] font-light group-active:scale-[.9] transition-all duration-200`}>{service.title}</h2>
                     </div>
                     <div className={`ml-[30px] xxxxl:mt-0 mt-[25px] flex gap-[20px] xxxxl:w-[1070px] items-center flex-wrap transition-all duration-100 overflow-hidden ${isExpanded ? 'opacity-0 xxxxl:max-h-[100%] max-h-0 translate-y-full !mt-0' : 'opacity-100  translate-y-0 xxxxl:max-h-[100%] max-h-[350px]'}`}>
                         {service.items.map((item, itemIndex) => (
