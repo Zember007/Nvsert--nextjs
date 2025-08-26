@@ -137,7 +137,7 @@ const AppFooter = () => {
       <div className="footer__white  gap-[10px] xxs:flex-row flex-col">
         <button
           onClick={() => { openDefaultModal('introForm') }}
-          className="xxs:hidden  border border-solid w-full text-[18px] flex items-center justify-between px-[15px] text-[#FFF]  border-[#93969D] h-[50px] max-w-[280px] mx-auto rounded-[3px] bg-[#34446D]"
+          className="xxs:hidden  border border-solid w-full text-[18px] flex items-center justify-between px-[15px] text-[#FFF]  border-[#93969D] h-[50px] xss:max-w-[280px] max-w-[260px] mx-auto rounded-[3px] bg-[#34446D]"
         >
           <span>Заказать звонок</span>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -150,7 +150,7 @@ const AppFooter = () => {
         </button>
           <AppMenuItem
             onClick={(e) => handleCopy('info@nvsert.ru', e)}
-            className="sendBtn max-xl:!border-[#93969D] gap-[8px] max-xl:!bg-[#F5F5F2]  w-full xxs:!h-[35px] max-w-[280px] xxs:mx-0 mx-auto !h-[50px] xxs:w-auto cursor-pointer"
+            className="sendBtn max-xl:!border-[#93969D] gap-[8px] max-xl:!bg-[#F5F5F2]  w-full xxs:!h-[35px] xss:max-w-[280px] max-w-[260px] xxs:mx-0 mx-auto !h-[50px] xxs:w-auto cursor-pointer"
             item={{
               href: '#', label:
                 <>
@@ -162,7 +162,7 @@ const AppFooter = () => {
             }} isActive={false} />
           <AppMenuItem
             onClick={(e) => handleCopy('@nvsert', e)}
-            className="sendBtn max-xl:!border-[#93969D] max-xl:!bg-[#F5F5F2]  w-full  xxs:!h-[35px] xxs:w-auto max-w-[280px] xxs:mx-0 mx-auto  !h-[50px]  group cursor-pointer"
+            className="sendBtn max-xl:!border-[#93969D] max-xl:!bg-[#F5F5F2]  w-full  xxs:!h-[35px] xxs:w-auto xss:max-w-[280px] max-w-[260px] xxs:mx-0 mx-auto  !h-[50px]  group cursor-pointer"
             item={{
               href: '#', label:
                 <>
@@ -188,7 +188,7 @@ const AppFooter = () => {
             }} isActive={false} />
           <AppMenuItem
             onClick={(e) => handleCopy('+7 (999) 123-45-67', e)}
-            className="sendBtn max-xl:!border-[#93969D] w-full max-xl:!bg-[#F5F5F2]   xxs:!h-[35px] xxs:w-auto max-w-[280px] xxs:mx-0 mx-auto !h-[50px]  group cursor-pointer"
+            className="sendBtn max-xl:!border-[#93969D] w-full max-xl:!bg-[#F5F5F2]   xxs:!h-[35px] xxs:w-auto xss:max-w-[280px] max-w-[260px] xxs:mx-0 mx-auto !h-[50px]  group cursor-pointer"
             item={{
               href: '#', label:
                 <>
@@ -206,7 +206,7 @@ const AppFooter = () => {
                 </>
             }} isActive={false} />
         <PromtModal
-          classNameBox="!w-auto xxs:!relative !absolute xxs:bottom-0 xxs:right-0 bottom-[-62px] right-1/2 xxs:translate-x-0 translate-x-[140px]"
+          classNameBox="!w-auto xxs:!relative !absolute xxs:bottom-0 xxs:right-0 bottom-[-65px] right-1/2 xxs:translate-x-0 translate-x-[140px]"
           className='!py-[20px]'
           content={
             <div className="flex flex-col gap-[20px]">
@@ -230,7 +230,7 @@ const AppFooter = () => {
           }
         >
           <AppMenuItem
-          className="btn-lang"
+          className="btn-lang xxs:!h-[35px] !h-[50px]"
             item={{
               href: '#', label: <>
                 <svg
