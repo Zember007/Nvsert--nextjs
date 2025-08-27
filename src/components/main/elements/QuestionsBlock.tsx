@@ -41,7 +41,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
              <div
                 className={`document__border ${!active ? 'group-active/main:!border-[transparent] group-hover/main:!border-[transparent]' : 'active'}`}
             />
-            <div className={`l:mx-[-23px] flex flex-col rounded-[6px] relative  ${active ? '' : 'bg-[#FFFFFF26] hover:bg-[#34446D33]'} z-[0]`}>
+            <div className={` document__box   ${!active ? 'active' : ''}`}>
 
                 <div className={`pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[-1] rounded-[6px]  ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-[transparent]  border-solid border`}></div>
                 <div

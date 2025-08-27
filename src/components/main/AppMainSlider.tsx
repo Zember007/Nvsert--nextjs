@@ -36,8 +36,8 @@ const SliderMain = () => {
     const timeLine = useRef<any>(null)
 
     useEffect(() => {
-        if (!whiteBgRef.current || !isVisible || !ref.current ) return
-        
+        if (!whiteBgRef.current || !isVisible || !ref.current) return
+
         if (timeLine.current) timeLine.current.destroy(); timeLine.current = null;
 
         if (widthWindow && widthWindow >= 1240) {
@@ -79,7 +79,7 @@ const SliderMain = () => {
             whiteBgRef.current?.classList.remove('white')
 
 
-            
+
 
             timeLine.current = initSlider({
                 onChangeFunction: (index: number) => {
@@ -176,7 +176,7 @@ const SliderMain = () => {
         <>
             <section ref={ref} className='section wrapper'>
 
-        <div id="slider" className="absolute top-[-50px] pointer-events-none" ></div>
+                <div id="slider" className="absolute top-[-50px] pointer-events-none" ></div>
 
 
                 <h2 className='section__title'>Помогаем с документами по отраслям</h2>
@@ -225,10 +225,12 @@ const SliderMain = () => {
                         </div>
                     </div>
 
-                    <div className="slide-dots-box xl:!hidden">
-                        {slides.map((_, i) => (
-                            <div key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
-                        ))}
+                    <div className="slide-dots-box-container">
+                        <div className="slide-dots-box xl:!hidden">
+                            {slides.map((_, i) => (
+                                <div key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
+                            ))}
+                        </div>
                     </div>
 
                     <div
@@ -282,7 +284,7 @@ const SliderMain = () => {
                                     <button
                                         ref={setButtonRef}
                                         aria-label="previous slide" data-slider="button-next"
-                                        className=" tariff item group">                        
+                                        className=" tariff item group">
 
                                         <div className="navigation-button-icon-next">
                                             <svg
@@ -315,14 +317,16 @@ const SliderMain = () => {
 
                     </div>
 
-                    <div className="slide-dots-box xl:!hidden">
-                        {slides.map((_, i) => (
-                            <div
-                                onClick={() => {
-                                    timeLine.current.toIndex(i, { ease: "power3", duration: 0.725 })
-                                }}
-                                key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
-                        ))}
+                    <div className="slide-dots-box-container">
+                        <div className="slide-dots-box xl:!hidden">
+                            {slides.map((_, i) => (
+                                <div
+                                    onClick={() => {
+                                        timeLine.current.toIndex(i, { ease: "power3", duration: 0.725 })
+                                    }}
+                                    key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
+                            ))}
+                        </div>
                     </div>
 
                     <div className="main-button-wrap tariff-wrap" ref={setWrapperRef}>

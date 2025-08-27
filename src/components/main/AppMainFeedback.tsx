@@ -84,45 +84,46 @@ const AppMainFeedback = () => {
 
 
 
-  const { t } = useTranslation()
+    const { t } = useTranslation()
 
 
     return (
-        <section  className="section wrapper">
-        <div id="feedback" className="absolute top-[-50px] pointer-events-none" ></div>
+        <section className="section wrapper">
+            <div id="feedback" className="absolute top-[-50px] pointer-events-none" ></div>
 
-                <h2 className="section__title">{t('MainFeedback.title')}</h2>
-                <PhotoProvider maskOpacity={0.4} maskClassName="blurred-mask"
-                    speed={() => 0}
+            <h2 className="section__title">{t('MainFeedback.title')}</h2>
+            <PhotoProvider maskOpacity={0.4} maskClassName="blurred-mask"
+                speed={() => 0}
 
-                    maskClosable={false}
+                maskClosable={false}
 
-                >
-                    <div ref={ref} className="feedback-slider-box">
+            >
+                <div ref={ref} className="feedback-slider-box">
 
-                        <div className="slide-blur feedback-blur left-0">
-                            <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
-                            <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
-                            <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
+                    <div className="slide-blur feedback-blur left-0">
+                        <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
+                        <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
+                        <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
+                    </div>
+
+                    <div className="feedback-slider-section">
+
+
+
+                        <div className="feedback-slider-container">
+                            {[...Array(14)].map((_, index) =>
+                                <div
+                                    data-slider="slide-feedback" key={index} className="feedback-item">
+                                    <PhotoView src={`/feedbacks/big/${index + 1}.png`}
+                                    >
+                                        <Image
+                                            className='feedback-image'
+                                            src={`/feedbacks/small/${index + 1}.png`} alt='feedback' width={190} height={267} />
+                                    </PhotoView>
+                                </div>)}
+
                         </div>
-
-                        <div className="feedback-slider-section">
-
-
-
-                            <div className="feedback-slider-container">
-                                {[...Array(14)].map((_, index) =>
-                                    <div
-                                        data-slider="slide-feedback" key={index} className="feedback-item">
-                                        <PhotoView src={`/feedbacks/big/${index + 1}.png`}
-                                        >
-                                            <Image
-                                                className='feedback-image'
-                                                src={`/feedbacks/small/${index + 1}.png`} alt='feedback' width={190} height={267} />
-                                        </PhotoView>
-                                    </div>)}
-
-                            </div>
+                        <div className="slide-dots-box-container">
 
                             <div className="slide-dots-box !flex xl:!hidden">
                                 {[...Array(14)].map((_, i) => (
@@ -130,38 +131,41 @@ const AppMainFeedback = () => {
                                 ))}
                             </div>
                         </div>
+                    </div>
 
-                        <div className="feedback-slider-section">
+                    <div className="feedback-slider-section">
 
-                            <div className="feedback-slider-container">
-                                {[...Array(14)].map((_, index) =>
-                                    <div
-                                        data-slider="slide-feedback1" key={index} className="feedback-item">
-                                        <PhotoView src={`/feedbacks/big/${15 + index}.png`}>
-                                            <Image
-                                                className='feedback-image'
-                                                src={`/feedbacks/small/${15 + index}.png`} alt='feedback' width={190} height={267} />
-                                        </PhotoView>
-                                    </div>)}
+                        <div className="feedback-slider-container">
+                            {[...Array(14)].map((_, index) =>
+                                <div
+                                    data-slider="slide-feedback1" key={index} className="feedback-item">
+                                    <PhotoView src={`/feedbacks/big/${15 + index}.png`}>
+                                        <Image
+                                            className='feedback-image'
+                                            src={`/feedbacks/small/${15 + index}.png`} alt='feedback' width={190} height={267} />
+                                    </PhotoView>
+                                </div>)}
 
-                            </div>
+                        </div>
 
+                        <div className="slide-dots-box-container">
                             <div className="slide-dots-box !flex xl:!hidden">
                                 {[...Array(14)].map((_, i) => (
                                     <div key={i} className={`${activeIndex1 === i ? 'active' : ""} slide-dots`}></div>
                                 ))}
                             </div>
                         </div>
-
-
-                        <div className="slide-blur feedback-blur right-0 ">
-                            <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
-                            <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
-                            <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
-                        </div>
-
                     </div>
-                </PhotoProvider>
+
+
+                    <div className="slide-blur feedback-blur right-0 ">
+                        <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
+                        <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
+                        <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
+                    </div>
+
+                </div>
+            </PhotoProvider>
         </section>
 
     );

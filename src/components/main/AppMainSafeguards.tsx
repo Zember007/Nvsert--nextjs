@@ -191,6 +191,7 @@ const AppMainSafeguards = () => {
             }
           </div>
 
+          <div className="slide-dots-box-container">            
           <div className="slide-dots-box">
             {guarantees.map((_, i) => (
               <div 
@@ -199,6 +200,7 @@ const AppMainSafeguards = () => {
             }}
               key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
             ))}
+          </div>
           </div>
         </div>
       </section >

@@ -124,6 +124,7 @@ const AppMainSkills = () => {
                             })
                         }
                     </div>
+                    <div className="slide-dots-box-container">
                     <div className="slide-dots-box">
                         {skillsData.map((_, i) => (
                             <div
@@ -132,6 +133,7 @@ const AppMainSkills = () => {
                                 }}
                                 key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
                         ))}
+                    </div>
                     </div>
 
                 </div>
