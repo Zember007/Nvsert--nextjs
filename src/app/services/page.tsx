@@ -51,7 +51,7 @@ const ServicesContent = () => {
     const { setWrapperRef, setButtonRef } = useButton()
 
     const [active, setActive] = useState(false);
-
+    const [hover, setHover] = useState(false);
 
     return (
         <div className="main text-[#000] overflow-hidden select-none relativ mb-[100px] ">
@@ -65,6 +65,8 @@ const ServicesContent = () => {
 
                 <div ref={setWrapperRef} className="tariff-wrap w-[250px]">
                     <button
+                        onMouseEnter={() => setHover(true)}
+                        onMouseLeave={() => setHover(false)}
                         onMouseDown={() => setActive(true)}
                         onMouseUp={() => setActive(false)}
                         onClick={() => {
@@ -84,7 +86,7 @@ const ServicesContent = () => {
                         <span className='sendIconLeft'>
                             <svg
                                 className={` ${expandedServices.length > 0 ? 'rotate-180' : ''} transition-transform duration-100`}
-                            width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_5820_2465)">
                                     <path d="M1 1L15 15" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                     <path d="M15 7L15 15L7 15" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -105,6 +107,7 @@ const ServicesContent = () => {
             <div className="flex flex-col">
                 {services.map((service, index) => (
                     <ServiceItem
+                        hover={hover}
                         active={active}
                         key={index}
                         service={service}

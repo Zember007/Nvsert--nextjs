@@ -17,6 +17,7 @@ interface ServiceItemProps {
     isExpanded: boolean;
     onToggle: (index: number) => void;
     active: boolean;
+    hover: boolean;
 }
 
 const ANIMATION_SETTINGS = {
@@ -30,7 +31,7 @@ const ANIMATION_SETTINGS = {
     opacity: [0, 1, 1, 1, 1],
 };
 
-const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, onToggle, active }) => {
+const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, onToggle, active, hover }) => {
 
     const controls = useAnimation();
 
@@ -61,7 +62,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                 <div className={`line-after__box justify-between group wrapper xxxxl:!flex-row flex xxxxl:items-center py-[25px] overflow-hidden`}>
                     <div className="flex gap-[22px] items-center w-[250px]">
                         <svg
-                            className={`group-hover:text-[#34446D] text-black transition-transform duration-100 group-active:scale-[.85] ${active && 'scale-[.85]'} ${isExpanded ? 'rotate-90' : ''}`}
+                            className={`${hover && '!text-[#34446D]'} group-hover:text-[#34446D] text-black transition-transform duration-100 group-active:scale-[.85] ${active && 'scale-[.85]'} ${isExpanded ? 'rotate-90' : ''}`}
                             width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clipPath="url(#clip0_5667_4071)">
                                 <path d="M4.404 3.30273L7.835 6.62973C8.055 6.84273 8.055 7.15673 7.835 7.36973L1.205 13.7997C0.79 14.2007 0 13.9577 0 13.4297V7.70673L4.404 3.30273Z" fill="currentColor" />
@@ -74,7 +75,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                             </defs>
                         </svg>
 
-                        <h2 className={`line-after tracking-normal xl:!text-[24px] xxs:text-[20px] text-[18px] font-light group-active:scale-[.9] ${active && 'scale-[.9]'} transition-all duration-200`}>{service.title}</h2>
+                        <h2 className={`line-after tracking-normal xl:!text-[24px] xxs:text-[20px] text-[18px] font-light group-active:scale-[.9] ${hover && 'active'} ${active && 'scale-[.9]'} transition-all duration-200`}>{service.title}</h2>
                     </div>
                     <div className={`ml-[25px] xxxxl:mt-0 mt-[25px] xxxxl:grid flex gap-[20px] xxxxl:grid-cols-4 items-center flex-wrap transition-all duration-100 overflow-hidden ${isExpanded ? 'opacity-0 xxxxl:max-h-[100%] max-h-0 translate-y-full !mt-0' : 'opacity-100  translate-y-0 xxxxl:max-h-[100%] max-h-[350px]'}`}>
                         {service.items.map((item, itemIndex) => (
