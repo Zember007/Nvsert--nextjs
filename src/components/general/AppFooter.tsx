@@ -206,7 +206,7 @@ const AppFooter = () => {
                 </>
             }} isActive={false} />
         <PromtModal
-          classNameBox="!w-auto xxs:!relative !absolute xxs:bottom-0 xxs:right-0 bottom-[-70px] right-1/2 xxs:translate-x-0 translate-x-[140px]"
+          classNameBox="!w-auto xxs:!relative !absolute xxs:bottom-0 xxs:right-0 bottom-[-73px] right-1/2 xxs:translate-x-0 translate-x-[140px]"
           className='!py-[20px]'
           content={
             <div className="flex flex-col gap-[20px]">
@@ -230,7 +230,7 @@ const AppFooter = () => {
           }
         >
           <AppMenuItem
-          className="btn-lang xxs:!h-[35px] !h-[50px]"
+          className="btn-lang xxs:!h-[35px] !h-[50px] xxs:w-auto w-[50px]"
             item={{
               href: '#', label: <>
                 <svg

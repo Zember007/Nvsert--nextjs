@@ -76,7 +76,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
 
                         <h2 className={`line-after tracking-normal xl:!text-[24px] xxs:text-[20px] text-[18px] font-light group-active:scale-[.9] ${active && 'scale-[.9]'} transition-all duration-200`}>{service.title}</h2>
                     </div>
-                    <div className={`ml-[30px] xxxxl:mt-0 mt-[25px] xxxxl:grid flex gap-[20px] xxxxl:grid-cols-4 items-center flex-wrap transition-all duration-100 overflow-hidden ${isExpanded ? 'opacity-0 xxxxl:max-h-[100%] max-h-0 translate-y-full !mt-0' : 'opacity-100  translate-y-0 xxxxl:max-h-[100%] max-h-[350px]'}`}>
+                    <div className={`ml-[25px] xxxxl:mt-0 mt-[25px] xxxxl:grid flex gap-[20px] xxxxl:grid-cols-4 items-center flex-wrap transition-all duration-100 overflow-hidden ${isExpanded ? 'opacity-0 xxxxl:max-h-[100%] max-h-0 translate-y-full !mt-0' : 'opacity-100  translate-y-0 xxxxl:max-h-[100%] max-h-[350px]'}`}>
                         {service.items.map((item, itemIndex) => (
                             <AppNavigationItem
                                 dark={true}
@@ -109,17 +109,19 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                             >
                                 <Link
                                     href={`/services?type=${service.name}`}
-                                    className={`w-[312px] transition-transform will-change-transform duration-100 active:scale-[.95] p-[30px] flex flex-col gap-[20px] text-left  hover:bg-[#F5F5F5] rounded-[8px] border border-[transparent] hover:border-[#34446d]`}
+                                    className={`w-[312px] transition-transform will-change-transform duration-100 active:scale-[.95] p-[30px] flex flex-col gap-[20px] text-left  hover:bg-[#F5F5F5] rounded-[8px] border border-[transparent] hover:border-[#93969d80]`}
                                 >
                                     <span className='text-[20px] h-[45px] flex items-center tracking-[-1px] -my-[1%]'>{certificate.title}</span>
-                                    <div className="relative w-full">
+                                    <div className="relative w-full ">
+                                        <div className="border border-[#93969d] rounded-[4px] overflow-hidden">                                         
                                         <Image
                                             src={'https://test11.audiosector.ru/cp' + certificate.img?.url}
                                             alt={certificate.title}
-                                            width={250}
+                                            width={249}
                                             height={346}
-                                            className='object-cover border border-[#93969d] rounded-[4px]'
+                                            
                                         />
+                                        </div>
                                         <div className='w-[250px] justify-between flex absolute bottom-[-10px] leading-[0.68]  right-[-11px] flex p-[11px] bg-[#F5F5F580] rounded-[4px] border border-[#000] backdrop-blur-[4px]'>
                                             <div className="flex flex-col gap-[10px]">
                                                 <span className='text-[#000] text-[14px] font-light'>Срок оформления</span>
