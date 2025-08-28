@@ -308,7 +308,7 @@ const MainDocumentItem = memo(({
                             }
                             <div className='document-photo-container'>
                                 <PhotoView
-                                    src={img?.url}
+                                    src={'https://test11.audiosector.ru/cp'+img?.url}
                                     width={475}
                                     height={667}
                                 >

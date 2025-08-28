@@ -64,8 +64,7 @@ const AppMainDocuments = () => {
                     {navigation.map((item, index) => (
                         <MainDocumentItem
                             key={index}                       
-                            /* setPhoto={() => handlePhotoClick(item, index)} */
-                            setPhoto={() => { }}
+                            setPhoto={() => handlePhotoClick(item)}
                             setActive={(value: boolean) => setActive(value ? index : null)}
                             active={index === activeIndex}
                             content={item.description}
