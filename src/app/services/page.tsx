@@ -53,8 +53,14 @@ const ServicesContent = () => {
     const [active, setActive] = useState(false);
     const [hover, setHover] = useState(false);
 
+
     return (
         <div className="main text-[#000] overflow-hidden select-none relativ mb-[100px] ">
+
+
+
+
+
             {/* Хлебные крошки */}
             <AppBreadcrumbs root={'/'} breadcrumbs={[{ id: 2, title: 'Все услуги', full_slug: '/services' }]} />
 
@@ -84,19 +90,21 @@ const ServicesContent = () => {
                         </span>
 
                         <span className='sendIconLeft'>
+
                             <svg
                                 className={` ${expandedServices.length > 0 ? 'rotate-180' : ''} transition-transform duration-100`}
-                                width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_5820_2465)">
-                                    <path d="M1 1L15 15" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M15 7L15 15L7 15" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_6510_1879)">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M15.6049 7.72888L17.6338 7.73442L17.6533 15.6286L17.655 16.6434L17.6567 17.6568L7.73434 17.6339L7.72952 15.6043L14.19 15.621L9.87014 11.3012L11.3018 9.86951L15.6217 14.1894L15.6049 7.72888Z" fill="black" />
+                                    <path d="M7.7572 9.1715L9.17142 7.75728L7.0501 5.63596L5.63588 7.05018L7.7572 9.1715Z" fill="black" />
                                 </g>
                                 <defs>
-                                    <clipPath id="clip0_5820_2465">
-                                        <rect width="16" height="16" fill="white" />
+                                    <clipPath id="clip0_6510_1879">
+                                        <rect width="16" height="16" fill="white" transform="translate(12 0.686523) rotate(45)" />
                                     </clipPath>
                                 </defs>
                             </svg>
+
 
                         </span>
                     </button>
