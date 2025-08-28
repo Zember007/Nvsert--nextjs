@@ -225,7 +225,7 @@ const SliderMain = () => {
                         </div>
                     </div>
 
-                    <div className="slide-dots-box-container">
+                    <div className="slide-dots-box-container xl:!hidden">
                         <div className="slide-dots-box xl:!hidden">
                             {slides.map((_, i) => (
                                 <div key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
@@ -317,7 +317,7 @@ const SliderMain = () => {
 
                     </div>
 
-                    <div className="slide-dots-box-container">
+                    <div className="slide-dots-box-container xl:!hidden">
                         <div className="slide-dots-box xl:!hidden">
                             {slides.map((_, i) => (
                                 <div

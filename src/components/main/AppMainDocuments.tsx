@@ -14,21 +14,6 @@ const AppMainDocuments = () => {
     const { navigation } = useSelector((state: RootState) => state.navigation);
 
 
-    const handlePhotoClick = (item: typeof navigation[0]) => {
-        setTimeout(() => {
-            const box = document.querySelector('.PhotoView-Slider__BannerWrap') as HTMLDivElement;
-            if (!box) return;
-            box.dataset.before = item.title;
-
-            const photos = document.querySelectorAll<HTMLDivElement>('.PhotoView__Photo__attr');
-            photos.forEach((photo) => {
-                photo.dataset.price = item.price;
-                photo.dataset.duration = item.duration;
-            });
-
-        }, 100);
-
-    };
 
 
 
@@ -64,7 +49,7 @@ const AppMainDocuments = () => {
                     {navigation.map((item, index) => (
                         <MainDocumentItem
                             key={index}                       
-                            setPhoto={() => handlePhotoClick(item)}
+                            setPhoto={() => {}}
                             setActive={(value: boolean) => setActive(value ? index : null)}
                             active={index === activeIndex}
                             content={item.description}

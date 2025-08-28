@@ -113,7 +113,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
     @apply flex xxl:hidden  justify-center gap-[7px] absolute bottom-0 left-1/2 -translate-x-1/2;
 
     &-container {
-      @apply h-[8px] w-full relative;
+      @apply xxl:hidden h-[8px] w-full relative;
     }
   }
 }

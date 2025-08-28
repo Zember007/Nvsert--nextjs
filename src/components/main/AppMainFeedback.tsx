@@ -123,7 +123,7 @@ const AppMainFeedback = () => {
                                 </div>)}
 
                         </div>
-                        <div className="slide-dots-box-container">
+                        <div className="slide-dots-box-container !flex xl:!hidden">
 
                             <div className="slide-dots-box !flex xl:!hidden">
                                 {[...Array(14)].map((_, i) => (
@@ -148,7 +148,7 @@ const AppMainFeedback = () => {
 
                         </div>
 
-                        <div className="slide-dots-box-container">
+                        <div className="slide-dots-box-container !flex xl:!hidden">
                             <div className="slide-dots-box !flex xl:!hidden">
                                 {[...Array(14)].map((_, i) => (
                                     <div key={i} className={`${activeIndex1 === i ? 'active' : ""} slide-dots`}></div>
