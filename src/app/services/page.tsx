@@ -86,7 +86,7 @@ const ServicesContent = () => {
                         className="btnIconAn tariff bg-[#F5F5F2]   h-[50px] rounded-[4px] text-[20px] font-light border border-[#93969d] flex items-center justify-center"
                     >
                         <span className='sendText'>
-                            {expandedServices.length > 0 ? 'Скрыть услуги' : 'Показать услуги'}
+                            {expandedServices.length > 0 ? 'Свернуть услуги' : 'Показать услуги'}
                         </span>
 
                         <span className='sendIconLeft'>
