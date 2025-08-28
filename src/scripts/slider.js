@@ -265,7 +265,7 @@ export function horizontalLoop(items, config) {
             proxy;
 
 
-        gsap.set(items, { x: center ? (isMobile ? ((window.innerWidth - items[0].clientWidth) / 2) : 0) : (offsetLeft || 0) });
+        gsap.set(items, { x: center ? 0 : (offsetLeft || 0) });
 
         populateWidths();
         populateTimeline();
