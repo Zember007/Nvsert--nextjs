@@ -1,6 +1,7 @@
 .breadcrumbs {
 	@apply text-[16px] text-[#A4A4A4] px-[39px] flex items-center  absolute left-[-4px] top-[68px];
 
+	z-index: 20;
 
 	&__item {
 		display: flex;
