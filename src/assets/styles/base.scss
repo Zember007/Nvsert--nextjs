@@ -88,7 +88,7 @@
 
         top: 50%;
         right: 50%;
-        transform: translate(400px, -290px);
+        transform: translate(400px, -310px);
     }
 
     @media (max-width:1239px) {
@@ -279,6 +279,8 @@
 .PhotoView-Slider__Counter {
     opacity: 0 !important;
 }
+
+
 
 .tariff-wrap {
     perspective: 200px;
