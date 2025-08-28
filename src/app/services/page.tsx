@@ -83,10 +83,10 @@ const ServicesContent = () => {
                             }
                         }}
                         ref={setButtonRef}
-                        className="btnIconAn tariff bg-[#f5f5f2]  h-[50px] rounded-[4px] text-[20px] font-light border border-[#93969d] flex items-center justify-center"
+                        className="btnIconAn tariff bg-[#F5F5F2]   h-[50px] rounded-[4px] text-[20px] font-light border border-[#93969d] flex items-center justify-center"
                     >
-                        <span className='sendText w-[192px]'>
-                            {expandedServices.length > 0 ? 'Скрыть все услуги' : 'Показать все услуги'}
+                        <span className='sendText'>
+                            {expandedServices.length > 0 ? 'Скрыть услуги' : 'Показать услуги'}
                         </span>
 
                         <span className='sendIconLeft'>
