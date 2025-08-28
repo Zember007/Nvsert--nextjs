@@ -23,6 +23,7 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
 
   const scrollbarRef = useRef<HTMLDivElement>(null);
   const lastScrollTimeRef = useRef<number>(0);
+  const updateTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useLayoutEffect(() => {
     if (!enabled || !scrollbarRef.current) return;
@@ -281,6 +282,26 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
 
     const handleResize = () => updateScrollbar();
 
+    // Дебаунсированная функция обновления скроллбара
+    const debouncedUpdateScrollbar = () => {
+      if (updateTimeoutRef.current) {
+        clearTimeout(updateTimeoutRef.current);
+      }
+      updateTimeoutRef.current = setTimeout(() => {
+        updateScrollbar();
+      }, 16); // ~60fps
+    };
+
+    // ResizeObserver для отслеживания изменений размеров контейнера и его содержимого
+    const resizeObserver = new ResizeObserver(() => {
+      debouncedUpdateScrollbar();
+    });
+
+    // MutationObserver для отслеживания изменений DOM, которые могут повлиять на scrollHeight
+    const mutationObserver = new MutationObserver(() => {
+      debouncedUpdateScrollbar();
+    });
+
     // Обработчик прокрутки
     const handleScroll = () => {
       if (!isScrolling) {
@@ -313,8 +334,16 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
     if (isWindowMode) {
       window.addEventListener('resize', handleResize);
       window.addEventListener('scroll', handleScroll);
+      // Наблюдаем за изменениями размеров body для window mode
+      resizeObserver.observe(document.body);
+      // Наблюдаем за изменениями содержимого документа
+      mutationObserver.observe(document.body, { childList: true, subtree: true });
     } else if (container) {
       container.addEventListener('scroll', handleScroll);
+      // Наблюдаем за изменениями размеров контейнера
+      resizeObserver.observe(container);
+      // Наблюдаем за изменениями содержимого контейнера
+      mutationObserver.observe(container, { childList: true, subtree: true });
     }
     
     scrollbar.addEventListener('mousedown', startScroll);
@@ -340,6 +369,15 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
         window.removeEventListener('scroll', handleScroll);
       } else if (container) {
         container.removeEventListener('scroll', handleScroll);
+      }
+      
+      // Отключаем ResizeObserver и MutationObserver
+      resizeObserver.disconnect();
+      mutationObserver.disconnect();
+      
+      // Очищаем timeout
+      if (updateTimeoutRef.current) {
+        clearTimeout(updateTimeoutRef.current);
       }
       
       if (scrollbar) {
