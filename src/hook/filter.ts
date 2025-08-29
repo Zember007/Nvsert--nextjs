@@ -13,5 +13,6 @@ export const filterPrepositions = (text: string): string => {
         "$1$2\u00A0"
       )
       // любое слово + одиночная заглавная буква
-      .replace(/([А-ЯЁ]+)\s([А-ЯЁ])(\s|$)/g, "$1\u00A0$2$3");
+      .replace(/([А-ЯЁ]+)\s([А-ЯЁ])(\s|$)/g, "$1\u00A0$2$3")
+      .replace(/\s+(\d+)/g, '\n$1');
 };
