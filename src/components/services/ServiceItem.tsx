@@ -120,6 +120,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                                             alt={certificate.title}
                                             width={249}
                                             height={346}
+                                            className='h-[346px]'
                                             
                                         />
                                         </div>
