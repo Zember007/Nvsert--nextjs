@@ -91,19 +91,18 @@ const ServicesContent = () => {
 
                         <span className='sendIconLeft'>
 
-                            <svg
-                                className={` ${expandedServices.length > 0 ? 'rotate-180' : ''} transition-transform duration-100`}
-                                width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_6510_1879)">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M15.6049 7.72888L17.6338 7.73442L17.6533 15.6286L17.655 16.6434L17.6567 17.6568L7.73434 17.6339L7.72952 15.6043L14.19 15.621L9.87014 11.3012L11.3018 9.86951L15.6217 14.1894L15.6049 7.72888Z" fill="black" />
-                                    <path d="M7.7572 9.1715L9.17142 7.75728L7.0501 5.63596L5.63588 7.05018L7.7572 9.1715Z" fill="black" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_6510_1879">
-                                        <rect width="16" height="16" fill="white" transform="translate(12 0.686523) rotate(45)" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
+                        <svg width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_6557_2555)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M15.1049 7.72888L17.1338 7.73442L17.1533 15.6286L17.155 16.6434L17.1567 17.6568L7.23434 17.6339L7.22952 15.6043L13.69 15.621L9.37014 11.3012L10.8018 9.86951L15.1217 14.1894L15.1049 7.72888Z" fill="black"/>
+<path d="M7.2572 9.1715L8.67142 7.75728L6.5501 5.63596L5.13588 7.05018L7.2572 9.1715Z" fill="black"/>
+</g>
+<defs>
+<clipPath id="clip0_6557_2555">
+<rect width="16" height="16" fill="white" transform="translate(11.5 0.686523) rotate(45)"/>
+</clipPath>
+</defs>
+</svg>
+
 
 
                         </span>
