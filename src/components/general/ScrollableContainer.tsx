@@ -52,7 +52,6 @@ const ScrollableContainer: React.FC<ScrollableContainerProps> = ({
     return child;
   });
 
-  console.log('ScrollableContainer: priorityScroll =', priorityScroll, 'containerRef =', containerRef);
 
   return (
     <div className={wrapperClassName} style={wrapperStyles}>
