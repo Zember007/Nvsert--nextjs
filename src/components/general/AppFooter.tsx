@@ -166,7 +166,7 @@ const AppFooter = () => {
             item={{
               href: '#', label:
                 <>
-                  <span className="sendTextFooter  xxs:group-hover:text-[#2AABEE]">Telegram</span>
+                  <span className="sendTextFooter">Telegram</span>
 
 
                   <svg
@@ -192,7 +192,7 @@ const AppFooter = () => {
             item={{
               href: '#', label:
                 <>
-                  <span className="sendTextFooter xxs:group-hover:text-[#60D669]">WhatsApp</span>
+                  <span className="sendTextFooter">WhatsApp</span>
 
                   <svg
                     className="sendIconFooter"
@@ -269,7 +269,7 @@ const AppFooter = () => {
       </div>
 
       <div className="footer__dark xxs:justify-start justify-center gap-[16px] xl:h-auto xxs:h-[135px] h-[96px]">
-        <Image src={AudioLogo} alt="audiosector" className="xl:ml-[12px]"/>
+        <Image src={AudioLogo} alt="audiosector" className="xl:ml-[35px]"/>
         <div className="pl-[16px] border-l border-[#FFF] border-solid flex flex-col gap-[4px]">
           <div className="xxs:h-[23px] h-[36px] overflow-hidden text-[#FFF]">
             <div ref={stepsRef}>
