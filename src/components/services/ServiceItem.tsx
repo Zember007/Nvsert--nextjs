@@ -5,6 +5,7 @@ import { NavigationItem } from '@/store/navigation';
 import Link from 'next/link';
 import { AppNavigationItem } from '@/components/general/AppNavigation';
 import { motion, useAnimation } from "framer-motion";
+import { filterPrepositions } from '@/hook/filter';
 
 interface ServiceItemProps {
     service: {
@@ -50,8 +51,18 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
 
     }, [isExpanded, controls]);
 
+    const replaceValue = (value: string) => {
+        return value
+            .replace(/Сертификат\s+соответствия\s+Сейсмостойкости/gi, "Сертификат\u00A0соответствия Сейсмостойкости")
+            .replace(/Пожарной\s+Безопасности/gi, "Пожарной\u00A0Безопасности")
+            .replace(/\s+\(ЭЗ\)/g, "\u00A0(ЭЗ)")
+            .replace(/инспекционного\s+контроля/gi, "инспекционного\u00A0контроля")
+            .replace(/Обоснования\s+безопасности/gi, "Обоснования\u00A0безопасности")
+            ;
+    }
+
     return (
-        <div  className={`overflow-hidden relative ${index === 0 ? 'border-t' : ''} border-[#93969d80] border-b `}>
+        <div className={`overflow-hidden relative ${index === 0 ? 'border-t' : ''} border-[#93969d80] border-b `}>
             {/* Заголовок спойлера */}
 
             <div id={service.name} className='absolute top-[-94px] left-0 w-full'></div>
@@ -112,17 +123,17 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                                     href={`/services?type=${service.name}`}
                                     className={`w-[312px] transition-transform will-change-transform duration-100 active:scale-[.95] p-[30px] flex flex-col gap-[20px] text-left  hover:bg-[#F5F5F2] rounded-[8px] border border-[transparent] hover:border-[#34446D]`}
                                 >
-                                    <span className='text-[20px] h-[45px] flex items-center tracking-[-1px] -my-[1.5%]'>{certificate.title}</span>
+                                    <span className='text-[20px] h-[45px] flex items-center tracking-[-1px] -my-[1.5%] max-w-[230px]'>{replaceValue(certificate.title)}</span>
                                     <div className="relative w-full ">
-                                        <div className="border border-[#93969d] rounded-[4px] overflow-hidden">                                         
-                                        <Image
-                                            src={'https://test11.audiosector.ru/cp' + certificate.img?.url}
-                                            alt={certificate.title}
-                                            width={249}
-                                            height={346}
-                                            className='h-[346px]'
-                                            
-                                        />
+                                        <div className="border border-[#93969d] rounded-[4px] overflow-hidden">
+                                            <Image
+                                                src={'https://test11.audiosector.ru/cp' + certificate.img?.url}
+                                                alt={certificate.title}
+                                                width={249}
+                                                height={346}
+                                                className='h-[346px]'
+
+                                            />
                                         </div>
                                         <div className='w-[250px] justify-between flex absolute bottom-[-10px] leading-[0.68]  right-[-11px] flex p-[11px] bg-[#F5F5F580] rounded-[4px] border border-[#000] backdrop-blur-[4px]'>
                                             <div className="flex flex-col gap-[10px]">

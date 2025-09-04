@@ -17,6 +17,7 @@ export const filterPrepositions = (text: string): string => {
       .replace(/\s+(\d+)/g, '\n$1')
       .replace(/хим\.\s+продукции/gi, "хим.\u00A0продукции")
       .replace(/тип\s+продукции/gi, "тип\u00A0продукции")
+      .replace(/заключение\s+(ЭЗ)/gi, "заключение\u00A0($1)")
       .replace(/Паспорт\s+изделия/gi, "Паспорт\nизделия")
       .replace(/Таможенного\s+Союза/gi, "Таможенного\nСоюза")
       .replace(/соответствия\s+ГОСТ/gi, "соответствия\nГОСТ");
