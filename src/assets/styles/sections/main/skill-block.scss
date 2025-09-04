@@ -38,19 +38,21 @@
 }
 
 .skill-list {
-  @apply font-light list-disc pl-[17px] transition-all duration-500 flex flex-col gap-[5px] xss:text-[16px] text-[14px];
+  @apply font-light  pl-[17px] transition-all duration-500 flex flex-col gap-[5px] xss:text-[16px] text-[14px];
   
   &:not(.visible) {
     transform: translateY(10px);
     opacity: 0;
   }
 
-  li::marker {
-    unicode-bidi: isolate;
-    font-variant-numeric: tabular-nums;
-    text-transform: none;
-    text-indent: 0px !important;
-    text-align: start !important;
-    text-align-last: auto !important;
-}
+  li {
+    position: relative;
+
+    &::before {
+      content: "•";
+      position: absolute;
+      left: -17px;
+      top: -1px;
+    }
+  }
 } 
