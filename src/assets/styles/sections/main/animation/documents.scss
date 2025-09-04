@@ -180,7 +180,18 @@
       @apply flex gap-[10px] flex-col items-start;
 
       &-ul {
-        @apply list-disc pl-[20px] flex flex-col gap-[6px] text-[14px] xss:text-[16px];
+        @apply  pl-[20px] flex flex-col gap-[6px] text-[14px] xss:text-[16px];
+
+        li {
+          position: relative;
+      
+          &::before {
+            content: "•";
+            position: absolute;
+            left: -20px;
+            top: -1px;
+          }
+        }
       }
     }
   }
