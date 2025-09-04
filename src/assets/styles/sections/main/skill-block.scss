@@ -3,25 +3,29 @@
 
 .skill-card-wrapper {
   @apply hover:z-[12] relative h-[224px] xxl:w-[310px] xss:w-[320px] w-[280px];
-  
+
   &:not(.folder) {
     @apply xl:cursor-pointer;
   }
 }
 
 .skill-card-content {
-  @apply relative z-[0] h-full  text-[#000] w-full;
+  @apply relative z-[0] h-full text-[#000] w-full;
 }
 
 .skill-card-inner {
   @apply flex overflow-hidden flex-col xss:gap-[20px] gap-[15px] rounded-[6px] relative z-[1] justify-between h-full transition-all duration-500;
-  
+
   &.folder {
     @apply items-center justify-center border border-solid xxl:border-[#93969D] border-[transparent] rounded-[6px];
   }
-  
+
   &:not(.folder) {
-    @apply border border-solid border-[#93969D] p-[20px];
+    @apply p-[20px];
+
+    outline: 1px solid #93969D;
+    outline-offset: -1px;
+
   }
 }
 
@@ -38,8 +42,8 @@
 }
 
 .skill-list {
-  @apply font-light  pl-[17px] transition-all duration-500 flex flex-col gap-[5px] xss:text-[16px] text-[14px];
-  
+  @apply font-light pl-[17px] transition-all duration-500 flex flex-col gap-[5px] xss:text-[16px] text-[14px];
+
   &:not(.visible) {
     transform: translateY(10px);
     opacity: 0;
@@ -55,4 +59,4 @@
       top: -1px;
     }
   }
-} 
+}
