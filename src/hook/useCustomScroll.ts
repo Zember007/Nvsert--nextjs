@@ -65,62 +65,62 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
         return;
       }
       currentScroll += diff * smoothScrollFactor;
-      
+
       if (isWindowMode) {
         window.scrollTo(0, currentScroll);
       } else if (container) {
         container.scrollTop = currentScroll;
       }
-      
+
       requestAnimationFrame(smoothScroll);
     };
 
     const handleWheel = (e: Event) => {
       const wheelEvent = e as WheelEvent;
-      
+
       // Если это приоритетный скролл (textarea), проверяем возможность скролла в контейнере
       if (priorityScroll && container) {
         // Проверяем, находится ли курсор мыши над textarea
         const mouseX = wheelEvent.clientX;
         const mouseY = wheelEvent.clientY;
         const containerRect = container.getBoundingClientRect();
-        const isMouseOverTextarea = mouseX >= containerRect.left && 
-                                   mouseX <= containerRect.right && 
-                                   mouseY >= containerRect.top && 
-                                   mouseY <= containerRect.bottom;
-        
+        const isMouseOverTextarea = mouseX >= containerRect.left &&
+          mouseX <= containerRect.right &&
+          mouseY >= containerRect.top &&
+          mouseY <= containerRect.bottom;
 
-        
+
+
         // Если курсор не над textarea, позволяем скроллить страницу
         if (!isMouseOverTextarea) {
           return;
         }
-        
+
         const containerScrollTop = container.scrollTop;
         const containerScrollHeight = container.scrollHeight;
         const containerClientHeight = container.clientHeight;
         const containerMaxScroll = containerScrollHeight - containerClientHeight;
-        
+
         // Проверяем, можно ли скроллить в контейнере
         const canScrollUp = containerScrollTop > 0;
         const canScrollDown = containerScrollTop < containerMaxScroll;
-        
+
         // Если скроллим вверх и есть место для скролла вверх в контейнере
         if ((wheelEvent.deltaY < 0 && canScrollUp) || (wheelEvent.deltaY > 0 && canScrollDown)) {
           e.preventDefault();
           e.stopPropagation(); // <-- ключевой момент: не даём событию "утечь" наверх
           targetScroll += wheelEvent.deltaY;
           targetScroll = Math.max(0, Math.min(targetScroll, containerMaxScroll));
-  
+
           if (!isScrolling) {
             isScrolling = true;
             requestAnimationFrame(smoothScroll);
           }
           return;
         }
-        
- 
-        
+
+
+
         // Если контейнер доскроллен до конца и скроллим вниз, или до начала и скроллим вверх
         // Позволяем скроллить страницу с небольшой задержкой
         if ((wheelEvent.deltaY > 0 && !canScrollDown) || (wheelEvent.deltaY < 0 && !canScrollUp)) {
@@ -133,7 +133,7 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
           }
         }
       }
-      
+
       // Обычная логика для window mode или container без приоритета
       e.preventDefault();
       targetScroll += wheelEvent.deltaY;
@@ -181,7 +181,7 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
     // Обновление позиции и высоты ползунка при прокрутке
     function updateScrollbar() {
       if (!scrollbar) return;
-      
+
       let scrollTop: number;
       let scrollHeight: number;
       let clientHeight: number;
@@ -199,7 +199,7 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
       }
 
       const maxScroll = scrollHeight - clientHeight;
-      
+
       // Высота ползунка
       const scrollbarHeight = (clientHeight / scrollHeight) * clientHeight;
       // Позиция ползунка
@@ -216,7 +216,9 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
       }
     }
 
-    function scrollMove(e: TouchEvent | MouseEvent) {
+    function scrollMove(e: MouseEvent) {
+      console.log('scrollMove');
+
       if (!isDragging || document.body.style.overflow === 'hidden') return;
 
       let scrollHeight: number;
@@ -239,11 +241,9 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
       // Вычисляем смещение
       let clientY = 0;
 
-      if (e instanceof TouchEvent) {
-        clientY = e.touches[0].clientY;
-      } else {
-        clientY = e.clientY;
-      }
+
+      clientY = e.clientY;
+
 
       const deltaY = clientY - startY;
       const scrollDelta = (deltaY / maxTop) * maxScroll;
@@ -259,25 +259,62 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
       }
     }
 
-    function startScroll(e: TouchEvent | MouseEvent) {
-      isDragging = true;
+    function scrollTouchMove(e: TouchEvent) {
+      console.log('scrollMove');
+
+      if (!isDragging || document.body.style.overflow === 'hidden') return;
+
+      let scrollHeight: number;
+      let clientHeight: number;
+
+      if (isWindowMode) {
+        scrollHeight = document.documentElement.scrollHeight;
+        clientHeight = window.innerHeight || document.documentElement.clientHeight;
+      } else if (container) {
+        scrollHeight = container.scrollHeight;
+        clientHeight = container.clientHeight;
+      } else {
+        return;
+      }
+
+      const maxScroll = scrollHeight - clientHeight;
+      const scrollbarHeight = (clientHeight / scrollHeight) * clientHeight;
+      const maxTop = clientHeight - scrollbarHeight - scrollPadding * 2;
+
+      // Вычисляем смещение
       let clientY = 0;
 
-      if (e instanceof TouchEvent) {
-        clientY = e.touches[0].clientY;
-      } else {
-        clientY = e.clientY;
+
+      clientY = e.touches[0].clientY;
+
+
+      const deltaY = clientY - startY;
+      const scrollDelta = (deltaY / maxTop) * maxScroll;
+
+      // Прокручиваем страницу или контейнер
+      if (isWindowMode) {
+        window.scrollTo({
+          top: startScrollTop + scrollDelta,
+          behavior: 'auto'
+        });
+      } else if (container) {
+        container.scrollTop = startScrollTop + scrollDelta;
       }
-      
+    }
+
+    function startScroll(clientY: number) {
+
+
+
       startY = clientY;
-      
+
       if (isWindowMode) {
         startScrollTop = window.scrollY || window.pageYOffset;
       } else if (container) {
         startScrollTop = container.scrollTop;
       }
-      
-      e.preventDefault();
+
+     
     }
 
     const handleResize = () => updateScrollbar();
@@ -345,13 +382,21 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
       // Наблюдаем за изменениями содержимого контейнера
       mutationObserver.observe(container, { childList: true, subtree: true });
     }
-    
-    scrollbar.addEventListener('mousedown', startScroll);
+
+    scrollbar.addEventListener('mousedown', (e: MouseEvent) => {
+      isDragging = true;
+      e.preventDefault();
+      startScroll(e.clientY)
+    });
     document.addEventListener('mousemove', scrollMove);
     document.addEventListener('mouseup', handleMouseUp);
-    
-    scrollbar.addEventListener('touchstart', startScroll);
-    document.addEventListener('touchmove', scrollMove);
+
+    scrollbar.addEventListener('touchstart', (e: TouchEvent) => {
+      isDragging = true;
+      e.preventDefault();
+      startScroll(e.touches[0].clientY);
+    });
+    document.addEventListener('touchmove', scrollTouchMove);
     document.addEventListener('touchend', handleTouchEnd);
 
     setTimeout(() => {
@@ -363,31 +408,39 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
       if (wheelTarget) {
         wheelTarget.removeEventListener('wheel', handleWheel);
       }
-      
+
       if (isWindowMode) {
         window.removeEventListener('resize', handleResize);
         window.removeEventListener('scroll', handleScroll);
       } else if (container) {
         container.removeEventListener('scroll', handleScroll);
       }
-      
+
       // Отключаем ResizeObserver и MutationObserver
       resizeObserver.disconnect();
       mutationObserver.disconnect();
-      
+
       // Очищаем timeout
       if (updateTimeoutRef.current) {
         clearTimeout(updateTimeoutRef.current);
       }
-      
+
       if (scrollbar) {
-        scrollbar.removeEventListener('mousedown', startScroll);
-        scrollbar.removeEventListener('touchstart', startScroll);
+        scrollbar.removeEventListener('mousedown', (e: MouseEvent) => {
+          isDragging = true;
+          e.preventDefault();
+          startScroll(e.clientY);
+        });
+        scrollbar.removeEventListener('touchstart', (e: TouchEvent) => {
+          isDragging = true;
+          e.preventDefault();
+          startScroll(e.touches[0].clientY);
+        });
       }
-      
+
       document.removeEventListener('mousemove', scrollMove);
       document.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('touchmove', scrollMove);
+      document.removeEventListener('touchmove', scrollTouchMove);
       document.removeEventListener('touchend', handleTouchEnd);
     };
   }, [smoothScrollFactor, scrollPadding, minWidth, enabled, target, containerRef, priorityScroll]);
