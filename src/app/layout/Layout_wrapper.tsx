@@ -18,6 +18,7 @@ import CustomScrollbar from '@/components/general/CustomScrollbar';
 import { CopyProvider, useCopyContext } from '@/components/contexts/CopyContext';
 import CopyNotification from '@/components/general/elements/CopyNotification';
 import { updateActionNavigation } from '@/store/navigation';
+import SmoothScroll from '@/hook/SmoothScroll';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -35,7 +36,7 @@ const LayoutContent = ({ children }: { children: ReactNode }) => {
     const configs = useMemo(() => {
         let parsedConf: any = {};
         console.log(configsPure);
-        
+
         configsPure?.forEach((item) => {
             parsedConf[item.key] = item.value;
         });
@@ -115,18 +116,22 @@ const LayoutContent = ({ children }: { children: ReactNode }) => {
                     reset={resetCountModal}
                     countTrigger={defaultModalCount}
                 />
-                        <AppHeader />
+                <SmoothScroll>
+                    <AppHeader />
 
-                <main className={`select-none ${transparent && 'transparent-header'} ${calcPageBodyClass && 'cost-calc-page'}`}>
-                  
+                    <main className={`select-none ${transparent && 'transparent-header'} ${calcPageBodyClass && 'cost-calc-page'}`}>
+
                         {children}
-                    
-                </main>
+
+                    </main>
                     <AppFooter />
-                <div className="bg-noise"></div>
-                <CustomScrollbar target="window" />
-                
-                <CopyNotification 
+                    <div className="bg-noise"></div>
+                    {/* <CustomScrollbar target="window" /> */}
+
+
+                </SmoothScroll>
+
+                <CopyNotification
                     isVisible={showCopyNotification}
                     onHide={hideNotification}
                     duration={3000}
