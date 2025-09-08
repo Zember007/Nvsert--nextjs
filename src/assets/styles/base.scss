@@ -607,7 +607,7 @@ input:-webkit-autofill {
 }
 
 .line-after {
-    @apply hover:text-[#34446D] transition-transform duration-100 active:scale-95 translate-y-[1px];
+    @apply hover:text-[#34446D] transition-transform duration-100 active:scale-95 ;
 
     transition: transform .1s ease;
     will-change: transform, color, clip-path;
@@ -646,7 +646,7 @@ input:-webkit-autofill {
         top: 0;
         left: 0;
         right: 0;
-        bottom: 0;
+        bottom: -1px;
         clip-path: inset(0 0 0 100%);
     }
 
