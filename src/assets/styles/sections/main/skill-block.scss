@@ -17,7 +17,10 @@
   @apply flex overflow-hidden flex-col xss:gap-[20px] gap-[15px] rounded-[6px] relative z-[1] justify-between h-full transition-all duration-500;
 
   &.folder {
-    @apply items-center justify-center border border-solid xxl:border-[#93969D] border-[transparent] rounded-[6px];
+    @apply items-center justify-center xxl:outline-[#93969D] outline-[transparent] rounded-[6px];
+
+    outline: 1px solid;
+    outline-offset: -1px;
   }
 
   &:not(.folder) {
