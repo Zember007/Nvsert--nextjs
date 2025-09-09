@@ -73,7 +73,7 @@ const ServicesContent = () => {
                     <button
                         onMouseEnter={() => setHover(true)}
                         onMouseLeave={() => setHover(false)}
-                        onMouseDown={() => setActive(true)}
+                        onMouseDown={() => {setActive(true);setHover(true);} }
                         onMouseUp={() => setActive(false)}
                         onTouchStart={() => {
                             setHover(true);
@@ -89,6 +89,9 @@ const ServicesContent = () => {
                             } else {
                                 setExpandedServices(services.map((_, index) => index));
                             }
+
+                            setActive(false);
+                            setHover(false);
                         }}
                         ref={setButtonRef}
                         className="btnIconAn tariff bg-[#F5F5F2]   h-[50px] rounded-[4px] text-[20px] font-light border border-[#93969d] flex items-center justify-center"
