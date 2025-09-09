@@ -121,36 +121,37 @@ const AppFooter = () => {
 
   return (
     <footer ref={ref} className="footer grid xl:grid-cols-2 gap-[2px]">
-      <div className="footer__white change-style xxs:row-start-auto row-start-2   xl:justify-between xxs:gap-[62px]  m:gap-[208px]  xl:!gap-[0px]" >
+      <div className="footer__white change-style xl:row-start-auto row-start-2   xl:justify-between xxs:gap-[62px]  m:gap-[208px]  xl:!gap-[0px]" >
         <p className="xxs:block hidden text-[18px] font-light col-start-1 col-end-3 whitespace-nowrap">© 2025 NVSERT</p>
 
         <div className="xxs:w-auto w-full xxs:mx-0 mx-auto xxs:max-w-full max-w-[280px]  flex gap-[10px] items-start xxs:flex-row flex-col ">
           {menuItems.map((item, i) => (
             <AppMenuItem
-            className="xxs:!h-[35px] !h-[50px]"
-            key={i} item={item} isActive={false} />
+              className="xxs:!h-[35px] !h-[50px]"
+              key={i} item={item} isActive={false} />
           ))}
 
         </div>
       </div>
 
-      <div className="footer__white  gap-[10px] xxs:flex-row flex-col">
-        <button
-          onClick={() => { openDefaultModal('introForm') }}
-          className="xxs:hidden  border border-solid w-full text-[18px] flex items-center justify-between px-[15px] text-[#FFF]  border-[#93969D] h-[50px] xss:max-w-[280px] max-w-[260px] mx-auto rounded-[3px] bg-[#34446D]"
-        >
-          <span>Заказать звонок</span>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7.03597 2C7.61151 2 9.91367 7.17986 9.91367 7.7554C9.91367 8.90648 8.18705 10.0576 7.61151 11.2086C7.03597 12.3597 8.18705 13.5108 9.33813 14.6619C9.78705 15.1108 11.6403 16.964 12.7914 16.3885C13.9424 15.813 15.0935 14.0863 16.2446 14.0863C16.8201 14.0863 22 16.3885 22 16.964C22 19.2662 20.2734 20.9928 18.5468 21.5683C16.8201 22.1439 15.6691 22.1439 13.3669 21.5683C11.0647 20.9928 9.33813 20.4173 6.46043 17.5396C3.58273 14.6619 3.00719 12.9353 2.43165 10.6331C1.85612 8.33094 1.85612 7.17986 2.43165 5.45324C3.00719 3.72662 4.73381 2 7.03597 2Z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M14 7C14.6689 7.31419 15.277 7.73986 15.7838 8.25676C16.2804 8.75338 16.6959 9.35135 17 10" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M15 2C16.7165 2.45043 18.2504 3.33913 19.4678 4.55652C20.673 5.77391 21.5617 7.29565 22 9" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+      <div className="footer__white ">
+        <div className="xl:flex xxs:grid grid-cols-2 place-items-center flex gap-[10px] xxs:flex-row flex-col w-full">
+          <button
+            onClick={() => { openDefaultModal('introForm') }}
+            className="xl:hidden  border border-solid w-full text-[18px] flex items-center justify-between px-[15px] text-[#FFF]  border-[#93969D] h-[50px] xss:max-w-[280px] max-w-[260px] mx-auto rounded-[3px] bg-[#34446D]"
+          >
+            <span>Заказать звонок</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.03597 2C7.61151 2 9.91367 7.17986 9.91367 7.7554C9.91367 8.90648 8.18705 10.0576 7.61151 11.2086C7.03597 12.3597 8.18705 13.5108 9.33813 14.6619C9.78705 15.1108 11.6403 16.964 12.7914 16.3885C13.9424 15.813 15.0935 14.0863 16.2446 14.0863C16.8201 14.0863 22 16.3885 22 16.964C22 19.2662 20.2734 20.9928 18.5468 21.5683C16.8201 22.1439 15.6691 22.1439 13.3669 21.5683C11.0647 20.9928 9.33813 20.4173 6.46043 17.5396C3.58273 14.6619 3.00719 12.9353 2.43165 10.6331C1.85612 8.33094 1.85612 7.17986 2.43165 5.45324C3.00719 3.72662 4.73381 2 7.03597 2Z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M14 7C14.6689 7.31419 15.277 7.73986 15.7838 8.25676C16.2804 8.75338 16.6959 9.35135 17 10" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M15 2C16.7165 2.45043 18.2504 3.33913 19.4678 4.55652C20.673 5.77391 21.5617 7.29565 22 9" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
 
 
-        </button>
+          </button>
           <AppMenuItem
             onClick={(e) => handleCopy('info@nvsert.ru', e)}
-            className="sendBtn max-xl:!border-[#93969D] gap-[8px] max-xl:!bg-[#F5F5F2]  w-full xxs:!h-[35px] xss:max-w-[280px] max-w-[260px] xxs:mx-0 mx-auto !h-[50px] xxs:w-auto cursor-pointer"
+            className="sendBtn max-xl:!border-[#93969D] gap-[8px] max-xl:!bg-[#F5F5F2]  w-full xl:!h-[35px] xss:max-w-[280px] max-w-[260px] xl:mx-0 mx-auto !h-[50px] xl:w-auto cursor-pointer"
             item={{
               href: '#', label:
                 <>
@@ -162,7 +163,7 @@ const AppFooter = () => {
             }} isActive={false} />
           <AppMenuItem
             onClick={(e) => handleCopy('@nvsert', e)}
-            className="sendBtn max-xl:!border-[#93969D] max-xl:!bg-[#F5F5F2]  w-full  xxs:!h-[35px] xxs:w-auto xss:max-w-[280px] max-w-[260px] xxs:mx-0 mx-auto  !h-[50px]  group cursor-pointer"
+            className="sendBtn max-xl:!border-[#93969D] max-xl:!bg-[#F5F5F2]  w-full  xl:!h-[35px] xl:w-auto xss:max-w-[280px] max-w-[260px] xl:mx-0 mx-auto  !h-[50px]  group cursor-pointer"
             item={{
               href: '#', label:
                 <>
@@ -188,7 +189,7 @@ const AppFooter = () => {
             }} isActive={false} />
           <AppMenuItem
             onClick={(e) => handleCopy('+7 (999) 123-45-67', e)}
-            className="sendBtn max-xl:!border-[#93969D] w-full max-xl:!bg-[#F5F5F2]   xxs:!h-[35px] xxs:w-auto xss:max-w-[280px] max-w-[260px] xxs:mx-0 mx-auto !h-[50px]  group cursor-pointer"
+            className="sendBtn max-xl:!border-[#93969D] w-full max-xl:!bg-[#F5F5F2]   xl:!h-[35px] xl:w-auto xss:max-w-[280px] max-w-[260px] xl:mx-0 mx-auto !h-[50px]  group cursor-pointer"
             item={{
               href: '#', label:
                 <>
@@ -205,43 +206,44 @@ const AppFooter = () => {
 
                 </>
             }} isActive={false} />
-        <PromtModal
-          classNameBox="!w-auto xxs:!relative !absolute xxs:bottom-0 xxs:right-0 bottom-[-73px] right-1/2 xxs:translate-x-0 translate-x-[140px]"
-          className='!py-[20px]'
-          content={
-            <div className="flex flex-col gap-[20px]">
-              {langs.map((lang, i) => (
-                <button
-                  onClick={() => {
-                    changeLanguage(lang.code)
-                  }}
-                  key={i} className="h-[10px] flex items-center gap-[4px] group">
-                  <span className="w-[10px] h-[10px] flex items-center justify-center">
-                    <span className="block relative w-[6px] h-[6px]">
-                      <span className={`block transition-all duration-300 ease  ${i18n.language === lang.code ? 'bg-[#69D771]' : 'group-hover:bg-[#CCCCCC]'} absolute inset-0 rounded-full blur-sm opacity-70`} />
-                      <span className={`block transition-all duration-300 ease  ${i18n.language === lang.code ? 'bg-[#69D771]' : 'group-hover:bg-[#CCCCCC] bg-[#00000080]'} absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 inset-[4px] rounded-full  w-[4px] h-[4px]`} />
+          <PromtModal
+            classNameBox="!w-auto xl:!relative !absolute xl:bottom-0 xl:right-0 xxs:bottom-[-55px] xxs:right-[34px] bottom-[-73px]  right-1/2 xxs:translate-x-0 translate-x-[140px]"
+            className='!py-[20px]'
+            content={
+              <div className="flex flex-col gap-[20px]">
+                {langs.map((lang, i) => (
+                  <button
+                    onClick={() => {
+                      changeLanguage(lang.code)
+                    }}
+                    key={i} className="h-[10px] flex items-center gap-[4px] group">
+                    <span className="w-[10px] h-[10px] flex items-center justify-center">
+                      <span className="block relative w-[6px] h-[6px]">
+                        <span className={`block transition-all duration-300 ease  ${i18n.language === lang.code ? 'bg-[#69D771]' : 'group-hover:bg-[#CCCCCC]'} absolute inset-0 rounded-full blur-sm opacity-70`} />
+                        <span className={`block transition-all duration-300 ease  ${i18n.language === lang.code ? 'bg-[#69D771]' : 'group-hover:bg-[#CCCCCC] bg-[#00000080]'} absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 inset-[4px] rounded-full  w-[4px] h-[4px]`} />
+                      </span>
                     </span>
-                  </span>
-                  <span className={`transition-all duration-300 ease text-[18px]  ${i18n.language === lang.code ? 'text-[#69D771]' : 'group-hover:text-[#CCCCCC] text-[#00000080]'}`}>{lang.lable}</span>
-                </button>
-              ))}
+                    <span className={`transition-all duration-300 ease text-[18px]  ${i18n.language === lang.code ? 'text-[#69D771]' : 'group-hover:text-[#CCCCCC] text-[#00000080]'}`}>{lang.lable}</span>
+                  </button>
+                ))}
 
-            </div>
-          }
-        >
-          <AppMenuItem
-          className="btn-lang xxs:!h-[35px] !h-[50px] xxs:w-auto w-[50px]"
-            item={{
-              href: '#', label: <>
-                <svg
-                className="xxs:*:fill-black *:fill-white"
-                width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12.2676 18.8833C15.9735 17.9416 18.7776 14.7408 19.1293 10.8333H14.9785C14.8235 13.7891 13.8485 16.5391 12.2676 18.8833ZM19.1293 9.16664C18.7776 5.25831 15.971 2.05664 12.2643 1.11497C13.846 3.45997 14.8226 6.20997 14.9785 9.16664H19.1293ZM7.73678 1.11497C4.02845 2.05664 1.22345 5.25831 0.870117 9.16664H5.02178C5.17762 6.20997 6.15428 3.45997 7.73678 1.11497ZM0.87095 10.8333C1.04402 12.7192 1.79645 14.5054 3.02497 15.9466C4.2535 17.3879 5.89793 18.4137 7.73262 18.8833C6.15178 16.5391 5.17678 13.7891 5.02178 10.8333H0.87095ZM10.0001 19.135C8.07762 16.8141 6.87345 13.9508 6.69178 10.8333H13.3093C13.126 13.95 11.9226 16.8141 10.001 19.135M10.0001 0.869141C11.9226 3.18914 13.1251 6.05164 13.3085 9.16664H6.69178C6.87512 6.05164 8.07845 3.18914 10.0001 0.869141Z" fill="black" fillOpacity="1" />
-                </svg>
-                <span className="hidden">Языки</span>
-              </>
-            }} isActive={false} />
-        </PromtModal>
+              </div>
+            }
+          >
+            <AppMenuItem
+              className="btn-lang xxs:!h-[35px] !h-[50px] xxs:w-auto w-[50px]"
+              item={{
+                href: '#', label: <>
+                  <svg
+                    className="xxs:*:fill-black *:fill-white"
+                    width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.2676 18.8833C15.9735 17.9416 18.7776 14.7408 19.1293 10.8333H14.9785C14.8235 13.7891 13.8485 16.5391 12.2676 18.8833ZM19.1293 9.16664C18.7776 5.25831 15.971 2.05664 12.2643 1.11497C13.846 3.45997 14.8226 6.20997 14.9785 9.16664H19.1293ZM7.73678 1.11497C4.02845 2.05664 1.22345 5.25831 0.870117 9.16664H5.02178C5.17762 6.20997 6.15428 3.45997 7.73678 1.11497ZM0.87095 10.8333C1.04402 12.7192 1.79645 14.5054 3.02497 15.9466C4.2535 17.3879 5.89793 18.4137 7.73262 18.8833C6.15178 16.5391 5.17678 13.7891 5.02178 10.8333H0.87095ZM10.0001 19.135C8.07762 16.8141 6.87345 13.9508 6.69178 10.8333H13.3093C13.126 13.95 11.9226 16.8141 10.001 19.135M10.0001 0.869141C11.9226 3.18914 13.1251 6.05164 13.3085 9.16664H6.69178C6.87512 6.05164 8.07845 3.18914 10.0001 0.869141Z" fill="black" fillOpacity="1" />
+                  </svg>
+                  <span className="hidden">Языки</span>
+                </>
+              }} isActive={false} />
+          </PromtModal>
+        </div>
       </div>
 
       <div className="footer__dark bottom-top xxs:justify-between  m:gap-[113px] xl:!gap-[0px] xl:h-auto xxs:h-[135px]">
@@ -261,7 +263,7 @@ const AppFooter = () => {
             item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: 'Обработка персональных данных' }} isActive={false} />
         </div>
       </div>
-  
+
       <div className="xxs:!hidden footer__white flex-col gap-[5.5px] !p-[18px] h-[96px] text-[14px]">
         <span>«ЦЕНТР СТАНДАРТИЗАЦИИ»</span>
         <span>ИНН 6027189146</span>
@@ -269,7 +271,7 @@ const AppFooter = () => {
       </div>
 
       <div className="footer__dark xxs:justify-start justify-center gap-[16px] xl:h-auto xxs:h-[135px] h-[96px]">
-        <Image src={AudioLogo} alt="audiosector" className="xl:ml-[35px]"/>
+        <Image src={AudioLogo} alt="audiosector" className="xl:ml-[35px]" />
         <div className="pl-[16px] border-l border-[#FFF] border-solid flex flex-col gap-[4px]">
           <div className="xxs:h-[23px] h-[36px] overflow-hidden text-[#FFF]">
             <div ref={stepsRef}>
