@@ -216,6 +216,8 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
 
                 <div className="flex flex-col items-center gap-[10px] px-[20px] pb-[80px]  text-[#FFF]">
                     <button
+                        onClick={() => { closeMenu(); openDefaultModal('orderForm') }}
+
                         className="button-menu bg-[#F5F5F2] w-[280px] mx-auto">
                         <span className='text-[#000]'>Оформить заявку</span>
                         <svg width="23" height="26" viewBox="0 0 23 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -225,6 +227,8 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
 
                     </button>
                     <button
+                        onClick={() => {closeMenu(); openDefaultModal('introForm') }}
+
                         className="button-menu bg-[#F5F5F2] w-[280px] mx-auto">
                         <span className='text-[#000]'>Заказать звонок</span>
                         <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
