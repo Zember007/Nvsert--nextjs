@@ -30,7 +30,7 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
     const labelRef = React.useRef<HTMLLabelElement>(null);
 
     return (
-        <div className="flex items-center s:gap-[6px] gap-[4px] no-drag"
+        <div className="flex s:gap-[6px] gap-[4px] no-drag"
             onClick={(e) => {
                 if (labelRef.current?.contains(e.target as Node)) return;
                 onChange(!checked)
