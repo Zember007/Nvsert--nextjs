@@ -57,6 +57,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
             .replace(/Пожарной\s+Безопасности/gi, "Пожарной\u00A0Безопасности")
             .replace(/\s+\(ЭЗ\)/g, "\u00A0(ЭЗ)")
             .replace(/инспекционного\s+контроля/gi, "инспекционного\u00A0контроля")
+            .replace(/Сертификат\s+на\s+тип/gi, "Сертификат\nна тип")
             .replace(/Обоснования\s+безопасности/gi, "Обоснования\u00A0безопасности")
             ;
     }
@@ -105,7 +106,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                 </div>
             </button>
 
-            <div className={`${!isExpanded ? 'max-h-[0px]' : 'max-h-[2000px] m:pb-[100px] pb-[80px]'} transition-all duration-200 overflow-hidden  `}>
+            <div className={`${!isExpanded ? 'max-h-[0px]' : 'max-h-[2220px] m:pb-[100px] pb-[80px]'} transition-all duration-200 overflow-hidden  `}>
                 {/* Описание услуги */}
                 <div className="wrapper">
 
@@ -125,7 +126,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                                     href={`/services?type=${service.name}`}
                                     className={`w-[312px] transition-transform will-change-transform duration-100 active:scale-[.95] p-[30px] flex flex-col gap-[20px] text-left  hover:bg-[#F5F5F2] rounded-[8px] border border-[transparent] hover:border-[#34446D]`}
                                 >
-                                    <span className='text-[20px] h-[45px] flex items-center tracking-[-1px] -my-[1.5%] max-w-[230px]'>{replaceValue(certificate.title)}</span>
+                                    <span className='text-[20px] h-[45px] flex items-center tracking-[-1px] -my-[1.5%] max-w-[230px] whitespace-pre-line'>{replaceValue(certificate.title)}</span>
                                     <div className="relative w-full ">
                                         <div className="border border-[#93969d] rounded-[4px] overflow-hidden">
                                             <Image
