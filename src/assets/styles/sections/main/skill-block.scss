@@ -38,7 +38,7 @@
     @apply border border-solid;
     content: "";
     position: absolute;
-    inset: -1px;
+    inset: 0;
     border-radius: inherit;
     /* если нужно */
     pointer-events: none;
