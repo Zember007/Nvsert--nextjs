@@ -74,7 +74,7 @@ const AppNavigationItem = ({ img, title, controls, link, dark, className }: { li
             <div ref={setWrapperRef} className={`tariff-wrap ${className} !max-w-[250px] h-[72px]`}>
                 <Link ref={setButtonRef} href={'/' + link} className={`tariff text-left no-transitions overflow-hidden not-backdrop flex  xxxl:gap-[10px] gap-[5px] group/img p-[5px] rounded-[3px] items-center    border-solid  border border-[transparent] ${dark ? 'hover:border-[#34446D] hover:bg-[#F5F5F2]' : 'hover:border-[#fff] hover:bg-[#34446d33]'}`}>
                     <motion.div
-                        className=" overflow-hidden  rounded-[3px] min-w-[43px] border-solid border border-[#93969D]"
+                        className=" overflow-hidden h-[60px] rounded-[3px] min-w-[43px] border-solid border border-[#93969D]"
                         animate={controls}>
                         <Image src={img as string} className="w-[43px] h-[60px]" width={43} height={60} alt="document" />
                     </motion.div>
