@@ -30,7 +30,7 @@
 }
 
 .questions-title {
-  @apply font-light grow text-[16px] s:text-[18px] l:text-[20px] ease-in-out transition-all duration-200 font-[400];
+  @apply m:font-normal font-light grow text-[16px] s:text-[18px] l:text-[20px] ease-in-out transition-all duration-200 ;
   
   &.active {
     color: #FFF;
