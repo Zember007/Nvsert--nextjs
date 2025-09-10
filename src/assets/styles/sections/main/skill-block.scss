@@ -14,17 +14,34 @@
 }
 
 .skill-card-inner {
-  @apply flex overflow-hidden flex-col xss:gap-[20px] gap-[15px]  rounded-[6px] relative z-[1] justify-between h-full transition-all duration-500;
+  @apply flex overflow-hidden relative flex-col xss:gap-[20px] gap-[15px] rounded-[6px] relative z-[1] justify-between h-full transition-all duration-500;
 
   &.folder {
-    @apply items-center justify-center xxl:shadow-[0_0_0_0.5px_#93969D] shadow-transparent rounded-[6px];
+    @apply items-center justify-center  rounded-[6px];
 
+    &::after {
+      @apply border-[transparent] xxl:border-[#93969D];
+
+    }
   }
 
   &:not(.folder) {
-    @apply p-[20px] shadow-[0_0_0_0.5px_#93969D];
+    @apply p-[20px];
 
+    &::after {
+      @apply border-[#93969D];
 
+    }
+  }
+
+  &::after {
+    @apply border border-solid;
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    /* если нужно */
+    pointer-events: none;
   }
 }
 
