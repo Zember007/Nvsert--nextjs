@@ -579,7 +579,7 @@ export default function SmoothScroll({children}: SmoothScrollProps) {
                 <div
                     // ref={scrollbarRef}
                     ref={customScrollbarRef}
-                    className={`scrollbar md:block hidden window`}
+                    className={`scrollbar m:block hidden window`}
                 />
             )}
 
