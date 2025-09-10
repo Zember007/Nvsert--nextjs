@@ -207,7 +207,7 @@ const AppFooter = () => {
                 </>
             }} isActive={false} />
           <PromtModal
-            classNameBox="!w-auto xl:!relative !absolute xl:bottom-0 xl:right-0 xxs:bottom-[-55px] xxs:right-[34px] bottom-[-73px]  right-1/2 xxs:translate-x-0 translate-x-[140px]"
+            classNameBox="!w-auto xl:!relative !absolute xl:bottom-0 xl:right-0 xxs:bottom-[-55px] xxs:right-[34px] bottom-[-80px]  right-1/2 xxs:translate-x-0 translate-x-[140px]"
             className='!py-[20px]'
             content={
               <div className="flex flex-col gap-[20px]">
