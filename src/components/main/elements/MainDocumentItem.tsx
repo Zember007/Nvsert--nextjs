@@ -241,7 +241,7 @@ const MainDocumentItem = memo(({
 
 
                             <svg
-                                className={`${!active ? '' : '*:stroke-[#FFF] rotate-[180deg]'}  hidden m:block transition-all duration-200`}
+                                className={`${!active ? '' : '*:stroke-[#FFF] rotate-[180deg]'}  hidden l:block transition-all duration-200`}
                                 width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M5 5L19 19" stroke="#93969D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 <path d="M19 11L19 19L11 19" stroke="#93969D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -254,7 +254,7 @@ const MainDocumentItem = memo(({
                 <div className={`document__hidden ${active && 'active bg-[#FFFFFF26]'}`}>
                     <div className="document__item  ">
                         <div className="document__list-photo">
-                            {windowWidth && windowWidth < 900 &&
+                            {windowWidth && windowWidth < 1024 &&
                                 <>
 
                                     <div className="document-content-wrapper">
@@ -278,7 +278,7 @@ const MainDocumentItem = memo(({
                                         <motion.div
                                             animate={controls}
                                             initial={{ y: 20 }}
-                                            className="tariff-wrap w-[280px] m:mx-0 mx-auto m:w-[250px] " ref={setWrapperRef}>
+                                            className="tariff-wrap w-[280px] l:mx-0 mx-auto l:w-[250px] " ref={setWrapperRef}>
                                             <ActionButton
                                                 setRef={setButtonRef}
                                                 onClick={() => openDefaultModal('orderForm')}
@@ -337,7 +337,7 @@ const MainDocumentItem = memo(({
                                    
                                     </div>
 
-                                    {windowWidth && windowWidth >= 900 &&
+                                    {windowWidth && windowWidth >= 1024 &&
                                         <motion.div
                                             animate={controls}
                                             initial={{ y: 20 }}
@@ -364,11 +364,11 @@ const MainDocumentItem = memo(({
                                 listHidden={listHidden}
                                 setListHidden={setListHidden}
                             />
-                            {windowWidth && windowWidth >= 900 &&
+                            {windowWidth && windowWidth >= 1024 &&
                                 <motion.div
                                     animate={controls}
                                     initial={{ y: 20 }}
-                                    className="tariff-wrap w-[280px] m:mx-0 mx-auto m:w-[250px]" ref={setWrapperRef}>
+                                    className="tariff-wrap w-[280px] l:mx-0 mx-auto l:w-[250px]" ref={setWrapperRef}>
                                     <ActionButton
                                         setRef={setButtonRef}
                                         onClick={() => openDefaultModal('orderForm')}
