@@ -126,7 +126,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                                     href={`/services?type=${service.name}`}
                                     className={`w-[312px] transition-transform will-change-transform duration-100 active:scale-[.95] p-[30px] flex flex-col gap-[20px] text-left  hover:bg-[#F5F5F2] rounded-[8px] border border-[transparent] hover:border-[#34446D]`}
                                 >
-                                    <span className='text-[20px] h-[45px] flex items-center tracking-[-1px] h-[38px] max-w-[230px] whitespace-pre-line'>{replaceValue(certificate.title)}</span>
+                                    <span className='text-[20px] flex items-center tracking-[-1px] h-[38px] max-w-[230px] whitespace-pre-line'>{replaceValue(certificate.title)}</span>
                                     <div className="relative w-full ">
                                         <div className="border border-[#93969d] rounded-[4px] overflow-hidden h-[346px]">
                                             <Image
