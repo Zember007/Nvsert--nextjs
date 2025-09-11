@@ -6,7 +6,7 @@
 }
 
 .document-actions-mobile {
-  @apply  w-[280px] l:mx-0 mx-auto l:w-[250px];
+  @apply  w-[280px] m:mx-0 mx-auto m:w-[250px];
 }
 
 .document-mobile-info {
@@ -26,7 +26,7 @@
 }
 
 .document-photo-container {
-  @apply l:m-0 m-auto;
+  @apply m:m-0 m-auto;
 }
 
 .document-photo-wrapper {
@@ -42,15 +42,15 @@
 }
 
 .document-description {
-  @apply text-[14px] xss:text-[16px] text-[#000000] l:max-w-[360px];
+  @apply text-[14px] xss:text-[16px] text-[#000000] m:max-w-[360px];
 }
 
 .document-desktop-actions {
-  @apply  w-[280px] l:mx-0 mx-auto l:w-[250px];
+  @apply  w-[280px] m:mx-0 mx-auto m:w-[250px];
 }
 
 .document-list-actions {
-  @apply  w-[280px] l:mx-0 mx-auto l:w-[250px];
+  @apply  w-[280px] m:mx-0 mx-auto m:w-[250px];
 }
 
 .document-list-show-button {
@@ -61,7 +61,7 @@
 
 .document-list-item-title {
   &.large {
-    @apply l:text-[19px];
+    @apply m:text-[19px];
   }
   
   @apply text-[16px];

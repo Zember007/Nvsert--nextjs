@@ -35,6 +35,7 @@ interface DocumentListProps {
     documentsList: MainDocumentItemProps['documentsList'];
     listHidden: boolean;
     setListHidden: (value: boolean) => void;
+    hiddenList: number;
 }
 
 // Типы для рефов
@@ -53,8 +54,9 @@ const ActionButton = memo(({ onClick, icon, text, className, setRef }: ActionBut
 
 ActionButton.displayName = 'ActionButton';
 
+
 // Компонент списка документов
-const DocumentList = memo(({ documentsList, listHidden, setListHidden }: DocumentListProps) => (
+const DocumentList = memo(({ documentsList, listHidden, setListHidden, hiddenList }: DocumentListProps) => (
     <div className="document__list">
             <div className='document__list-item'>
                 <p className={`document-list-item-title large`}>
@@ -64,14 +66,14 @@ const DocumentList = memo(({ documentsList, listHidden, setListHidden }: Documen
                 {documentsList.map((list, index) => (
 
                         <li
-                            className={` ${listHidden && (index > 2 ) ? 'hidden' : ''}`}
+                            className={` ${listHidden && (index >= hiddenList ) ? 'hidden' : ''}`}
                             key={index}
                         >
                             {filterPrepositions(list.value)}
                         </li>
                     ))}
                 </ul>
-                {documentsList.length > 3 && (
+                {documentsList.length > hiddenList && (
 
 
                     <button
@@ -196,6 +198,9 @@ const MainDocumentItem = memo(({
 
     const commonButtonClasses = 'group btnIconAn doc-btn tariff ';
 
+const hiddenList = windowWidth && windowWidth < 1240 ? 1 : 2;
+
+
     return (
         <div
             className={`document-wrapper-border group/main`}
@@ -254,7 +259,7 @@ const MainDocumentItem = memo(({
                 <div className={`document__hidden ${active && 'active bg-[#FFFFFF26]'}`}>
                     <div className="document__item  ">
                         <div className="document__list-photo">
-                            {windowWidth && windowWidth < 1024 &&
+                            {windowWidth && windowWidth < 900 &&
                                 <>
 
                                     <div className="document-content-wrapper">
@@ -337,7 +342,7 @@ const MainDocumentItem = memo(({
                                    
                                     </div>
 
-                                    {windowWidth && windowWidth >= 1024 &&
+                                    {windowWidth && windowWidth >= 900 &&
                                         <motion.div
                                             animate={controls}
                                             initial={{ y: 20 }}
@@ -360,11 +365,12 @@ const MainDocumentItem = memo(({
 
                         <div className="document__list-wrap">
                             <DocumentList
+                            hiddenList={hiddenList}
                                 documentsList={documentsList}
                                 listHidden={listHidden}
                                 setListHidden={setListHidden}
                             />
-                            {windowWidth && windowWidth >= 1024 &&
+                            {windowWidth && windowWidth >= 900 &&
                                 <motion.div
                                     animate={controls}
                                     initial={{ y: 20 }}
