@@ -75,10 +75,10 @@ const DocumentList = memo(({ documentsList, listHidden, setListHidden }: Documen
 
 
                     <button
-                        className='document-list-show-button'
+                        className='document-list-show-button line-after__box '
                         onClick={() => setListHidden(!listHidden)}
                     >
-                        {listHidden ? 'Показать полный список документов' : 'Скрыть'}
+                        <span className='sendText line-after'>{listHidden ? 'Показать полный список документов' : 'Скрыть'}</span>
 
                         <svg
                             className={`document-list-arrow ${!listHidden ? 'expanded' : ''}`}

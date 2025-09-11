@@ -134,7 +134,7 @@ const AppFooter = () => {
         </div>
       </div>
 
-      <div className="footer__white ">
+      <div className="footer__white xxs:justify-center xl:justify-start justify-start">
         <div className="xl:flex xxs:grid grid-cols-2 place-items-center flex gap-[10px] xxs:flex-row flex-col xl:w-full xxs:w-auto w-full">
           <button
             onClick={() => { openDefaultModal('introForm') }}
