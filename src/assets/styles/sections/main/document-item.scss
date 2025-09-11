@@ -54,14 +54,10 @@
 }
 
 .document-list-show-button {
-  @apply text-[#34446D] text-[14px] xss:text-[16px] text-left inline-flex gap-[5px];
+  @apply text-[#34446D] text-[14px] xss:text-[16px] text-left inline-flex gap-[15px];
 }
 
-.document-list-arrow {
-  &.expanded {
-    transforl: rotate(180deg);
-  }
-}
+
 
 .document-list-item-title {
   &.large {
