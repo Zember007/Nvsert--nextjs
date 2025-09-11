@@ -135,10 +135,10 @@ const AppFooter = () => {
       </div>
 
       <div className="footer__white ">
-        <div className="xl:flex xxs:grid grid-cols-2 place-items-center flex gap-[10px] xxs:flex-row flex-col w-full">
+        <div className="xl:flex xxs:grid grid-cols-2 place-items-center flex gap-[10px] xxs:flex-row flex-col xl:w-full xxs:w-auto w-full">
           <button
             onClick={() => { openDefaultModal('introForm') }}
-            className="xl:hidden  border border-solid w-full text-[18px] flex items-center justify-between px-[15px] text-[#FFF]  border-[#93969D] h-[50px] xss:max-w-[280px] max-w-[260px] mx-auto rounded-[3px] bg-[#34446D]"
+            className="xl:hidden  border border-solid w-full text-[18px] flex items-center justify-between px-[15px] text-[#FFF]  border-[#93969D] h-[50px] xss:w-[280px] w-[260px] mx-auto rounded-[3px] bg-[#34446D]"
           >
             <span>Заказать звонок</span>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -151,7 +151,7 @@ const AppFooter = () => {
           </button>
           <AppMenuItem
             onClick={(e) => handleCopy('info@nvsert.ru', e)}
-            className="sendBtn max-xl:!border-[#93969D] gap-[8px] max-xl:!bg-[#F5F5F2]  w-full xl:!h-[35px] xss:max-w-[280px] max-w-[260px] xl:mx-0 mx-auto !h-[50px] xl:w-auto cursor-pointer"
+            className="sendBtn max-xl:!border-[#93969D] gap-[8px] max-xl:!bg-[#F5F5F2]  w-full xl:!h-[35px] xss:w-[280px] w-[260px] xl:mx-0 mx-auto !h-[50px] xl:w-auto cursor-pointer"
             item={{
               href: '#', label:
                 <>
@@ -163,7 +163,7 @@ const AppFooter = () => {
             }} isActive={false} />
           <AppMenuItem
             onClick={(e) => handleCopy('@nvsert', e)}
-            className="sendBtn max-xl:!border-[#93969D] max-xl:!bg-[#F5F5F2]  w-full  xl:!h-[35px] xl:w-auto xss:max-w-[280px] max-w-[260px] xl:mx-0 mx-auto  !h-[50px]  group cursor-pointer"
+            className="sendBtn max-xl:!border-[#93969D] max-xl:!bg-[#F5F5F2]  w-full  xl:!h-[35px] xl:w-auto xss:w-[280px] w-[260px] xl:mx-0 mx-auto  !h-[50px]  group cursor-pointer"
             item={{
               href: '#', label:
                 <>
@@ -189,7 +189,7 @@ const AppFooter = () => {
             }} isActive={false} />
           <AppMenuItem
             onClick={(e) => handleCopy('+7 (999) 123-45-67', e)}
-            className="sendBtn max-xl:!border-[#93969D] w-full max-xl:!bg-[#F5F5F2]   xl:!h-[35px] xl:w-auto xss:max-w-[280px] max-w-[260px] xl:mx-0 mx-auto !h-[50px]  group cursor-pointer"
+            className="sendBtn max-xl:!border-[#93969D]  max-xl:!bg-[#F5F5F2]   xl:!h-[35px] xl:w-auto xss:w-[280px] w-[260px] xl:mx-0 mx-auto !h-[50px]  group cursor-pointer"
             item={{
               href: '#', label:
                 <>
