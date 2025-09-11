@@ -207,7 +207,7 @@ const AppFooter = () => {
                 </>
             }} isActive={false} />
           <PromtModal
-            classNameBox="!w-auto xl:!relative !absolute xl:bottom-0 xl:right-0 xxs:bottom-[-55px] xxs:right-[34px] bottom-[-80px]  right-1/2 xxs:translate-x-0 translate-x-[140px]"
+            classNameBox="!w-auto xl:!relative !absolute xl:bottom-0 xl:right-0 m:bottom-[-55px] xxs:bottom-[-65px] xxs:right-[34px] bottom-[-80px]  right-1/2 xxs:translate-x-0 translate-x-[140px]"
             className='!py-[20px]'
             content={
               <div className="flex flex-col gap-[20px]">
@@ -252,13 +252,13 @@ const AppFooter = () => {
           <span>{t("footer.company")}</span>
         </div>
 
-        <div className="xxs:max-w-full m:w-full xxs:mx-0 mx-auto max-w-[280px]  flex gap-[8px] flex-col xl:items-end items-start">
+        <div className="xxs:max-w-full m:w-full xxs:mx-0 mx-auto max-w-[280px]  flex xl:gap-[8px] gap-[10px] flex-col xl:items-end items-start">
           <AppMenuItem
-            className=" xxs:!h-[35px] !h-auto !text-left"
+            className="max-xl:!border-[#FFFFFF] xl:!h-[35px] !h-auto !text-left"
 
             item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: t("footer.policy") }} isActive={false} />
           <AppMenuItem
-            className=" xxs:!h-[35px] !h-auto !text-left"
+            className="max-xl:!border-[#FFFFFF] xl:!h-[35px] !h-auto !text-left"
 
             item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: 'Обработка персональных данных' }} isActive={false} />
         </div>
