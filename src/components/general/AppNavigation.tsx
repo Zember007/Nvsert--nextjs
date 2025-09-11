@@ -78,7 +78,7 @@ const AppNavigationItem = ({ img, title, controls, link, dark, className }: { li
                         animate={controls}>
                         <Image src={img as string} className="w-[43px] h-[60px]" width={43} height={60} alt="document" />
                     </motion.div>
-                    <p className={`${dark ? 'text-[#000] text-[18px]' : 'text-[#FFF] xl:text-[18px] text-[14px]'} leading-[1.1] pr-[6px] whitespace-pre-line max-w-full`}>{filterPrepositions(title)}</p>
+                    <p className={`${dark ? 'text-[#000] text-[18px]' : 'text-[#FFF] xxxxl:text-[18px] xl:text-[16px] text-[14px]'} leading-[1.1] pr-[6px] whitespace-pre-line max-w-full`}>{filterPrepositions(title)}</p>
                 </Link>
             </div>
         </>
