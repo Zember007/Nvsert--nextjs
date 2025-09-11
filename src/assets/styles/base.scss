@@ -607,6 +607,10 @@ input:-webkit-autofill {
 }
 
 .line-after {
+
+    &.stop-color {
+        color: inherit !important;
+    }
     @apply hover:text-[#34446D] transition-transform duration-100 active:scale-95 ;
 
     transition: transform .1s ease;
@@ -636,7 +640,7 @@ input:-webkit-autofill {
 
     &:after {
         content: "";
-        border-bottom: 1px solid #34446D;
+        border-bottom: 1px solid inherit;
         transition: clip-path .1s ease, border-color .1s ease;
         transform: translateZ(0);
         -webkit-backface-visibility: hidden;

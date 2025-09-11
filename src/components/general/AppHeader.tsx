@@ -278,8 +278,8 @@ const AppHeader = () => {
                     onClick={() => {
                       handleNavMenu();
                     }}
-                    href={`/services#${item.name}`} ref={setButtonRef} className={`xxl:pl-[5px] h-full text-center btnIconAn transition-all duration-100 active:scale-95 flex gap-[10px]`}>
-                    <p className="text-[18px] text-[#FFF]">
+                    href={`/services#${item.name}`} ref={setButtonRef} className={`text-[#FFF] line-after__box xxl:pl-[5px] h-full text-center btnIconAn transition-all duration-100 active:scale-95 flex gap-[10px]`}>
+                    <p className="text-[18px]  line-after stop-color">
                       {item.title}
                     </p>
                     <div className=" sendIconLeft">
