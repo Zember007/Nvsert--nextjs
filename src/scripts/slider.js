@@ -114,7 +114,7 @@ export function initSlider({ onChangeFunction, onDragFunction, mobile }) {
         center: mobile,
         offsetLeft: mobile ? null : 75,
         opacity: !mobile,
-        gap: mobile && window.innerWidth < 900 ? (window.innerWidth - (250)) / 2 : 43,
+        gap: mobile && window.innerWidth < 900 ? (window.innerWidth - (250)) / 2 : window.innerWidth < 1240 ? 20  : 43,
         mobile: mobile, // Передаем флаг mobile
         onChange: (index) => {
             if (activeElement) {
