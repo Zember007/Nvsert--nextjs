@@ -217,7 +217,6 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
     }
 
     function scrollMove(e: MouseEvent) {
-      console.log('scrollMove');
 
       if (!isDragging || document.body.style.overflow === 'hidden') return;
 
@@ -260,7 +259,6 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
     }
 
     function scrollTouchMove(e: TouchEvent) {
-      console.log('scrollMove');
 
       if (!isDragging || document.body.style.overflow === 'hidden') return;
 

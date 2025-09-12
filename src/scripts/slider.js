@@ -114,7 +114,7 @@ export function initSlider({ onChangeFunction, onDragFunction, mobile }) {
         center: mobile,
         offsetLeft: mobile ? null : 75,
         opacity: !mobile,
-        gap: mobile && window.innerWidth < 900 ? (window.innerWidth - (250)) / 2 : window.innerWidth < 1240 ? 20  : 43,
+        gap: mobile && window.innerWidth < 900 ? (window.innerWidth - (250)) / 2 : 43,
         mobile: mobile, // Передаем флаг mobile
         onChange: (index) => {
             if (activeElement) {
@@ -194,9 +194,12 @@ export function horizontalLoop(items, config) {
                     
                     // Более точное округление xPercents с учетом пиксельной сетки
                     const rawXPercent = parseFloat(gsap.getProperty(el, "x", "px")) / widths[i] * 100 + gsap.getProperty(el, "xPercent");
-                    // Округляем до целых пикселей в процентах
-                    const pixelPerfectPercent = Math.round(rawXPercent * widths[i] / 100) / widths[i] * 100;
-                    xPercents[i] = Math.round(pixelPerfectPercent * 1000) / 1000; // Округляем до тысячных для точности
+                    
+                    // Специальная обработка для первого слайда при !center && !offsetLeft
+                  
+                        // Округляем до целых пикселей в процентах
+                        const pixelPerfectPercent = Math.round(rawXPercent * widths[i] / 100) / widths[i] * 100;
+                        xPercents[i] = Math.round(pixelPerfectPercent * 1000) / 1000; // Округляем до тысячных для точности
                     
                     b2 = el.getBoundingClientRect();
                     spaceBefore[i] = Math.round(b2.left - (i ? b1.right : b1.left));
@@ -272,31 +275,7 @@ export function horizontalLoop(items, config) {
                 populateWidths();
                 deep && populateTimeline();
                 populateOffsets();
-                
-                // УЛУЧШЕННАЯ КОРРЕКТИРОВКА ПОЗИЦИЙ:
-                if (!center && !offsetLeft && deep) {
-                    // Принудительно выравниваем позиции после полного пересчета
-                    items.forEach((item, i) => {
-                        const targetXPercent = xPercents[i];
-                        const currentXPercent = gsap.getProperty(item, "xPercent");
-                        
-                        // Вычисляем разницу в пикселях для более точной проверки
-                        const pixelDifference = Math.abs((currentXPercent - targetXPercent) * widths[i] / 100);
-                        
-                        // Если разница больше 0.5 пикселя, корректируем
-                        if (pixelDifference > 0.5) {
-                            gsap.set(item, { xPercent: Math.round(targetXPercent * 1000) / 1000 });
-                        }
-                    });
-                    
-                    // Дополнительная проверка для нулевого индекса
-                    const currentIdx = tl.current();
-                    if (currentIdx === 0) {
-                        setTimeout(() => {
-                            tl.alignPositions();
-                        }, 50);
-                    }
-                }
+             
                 
                 deep && tl.draggable ? tl.time(times[curIndex], true) : tl.progress(progress, true);
             },
@@ -310,19 +289,7 @@ export function horizontalLoop(items, config) {
         populateTimeline();
         populateOffsets();
         
-        // Дополнительная коррекция для первоначального выравнивания после populateWidths
-        if (!center && !offsetLeft) {
-            items.forEach((item, i) => {
-                const containerLeft = container.getBoundingClientRect().left;
-                const itemLeft = item.getBoundingClientRect().left;
-                const actualOffset = itemLeft - containerLeft;
-                
-                if (Math.abs(actualOffset) > 1) {
-                    const correctedXPercent = (-actualOffset) / widths[i] * 100;
-                    gsap.set(item, { xPercent: Math.round(correctedXPercent * 1000) / 1000  });
-                }
-            });
-        }
+      
         window.addEventListener("resize", onResize);
 
         function toIndex(index, vars) {
@@ -343,26 +310,14 @@ export function horizontalLoop(items, config) {
             if (vars.duration === 0) {
                 const result = tl.time(timeWrap(time));
                 // Выравниваем позиции после мгновенного перехода
-                requestAnimationFrame(() => {
-                    tl.alignPositions();
-                    // Дополнительная коррекция для нулевого индекса
-                    if (newIndex === 0) {
-                        setTimeout(() => tl.alignPositions(), 16);
-                    }
-                });
+                requestAnimationFrame(() => tl.alignPositions());
                 return result;
             } else {
                 // Добавляем коллбек для выравнивания позиций после анимации
                 const originalOnComplete = vars.onComplete;
                 vars.onComplete = function() {
                     originalOnComplete && originalOnComplete.call(this);
-                    requestAnimationFrame(() => {
-                        tl.alignPositions();
-                        // Дополнительная коррекция для нулевого индекса
-                        if (newIndex === 0) {
-                            setTimeout(() => tl.alignPositions(), 16);
-                        }
-                    });
+                    requestAnimationFrame(() => tl.alignPositions());
                 };
                 return tl.tweenTo(time, vars);
             }
@@ -395,42 +350,7 @@ export function horizontalLoop(items, config) {
         
         // Добавляем функцию для принудительного выравнивания позиций
         tl.alignPositions = () => {
-            if (!center && !offsetLeft) {
-                const currentIndex = tl.current();
-                
-                items.forEach((item, i) => {
-                    // Получаем ожидаемую позицию для текущего состояния слайдера
-                    const expectedXPercent = xPercents[i];
-                    const currentXPercent = gsap.getProperty(item, "xPercent");
-                    
-                    // Вычисляем разницу в пикселях
-                    const pixelDifference = Math.abs((currentXPercent - expectedXPercent) * widths[i] / 100);
-                    
-                    // Если разница больше 0.5 пикселя, корректируем позицию
-                    if (pixelDifference > 0.5) {
-                        gsap.set(item, { 
-                            xPercent: Math.round(expectedXPercent * 1000) / 1000,
-                            force3D: false // Отключаем аппаратное ускорение для точности
-                        });
-                    }
-                    
-                    // Дополнительная проверка для первого слайда при индексе 0
-                    if (currentIndex === 0 && i === 0) {
-                        const containerLeft = container.getBoundingClientRect().left;
-                        const itemLeft = item.getBoundingClientRect().left;
-                        const actualOffset = itemLeft - containerLeft;
-                        
-                        // Если первый слайд смещен относительно контейнера, корректируем
-                        if (Math.abs(actualOffset) > 1) {
-                            const correctedXPercent = (-actualOffset) / widths[i] * 100;
-                            gsap.set(item, { 
-                                xPercent: Math.round(correctedXPercent * 1000) / 1000,
-                                force3D: false
-                            });
-                        }
-                    }
-                });
-            }
+          
         };
 
         tl.destroy = () => {
@@ -559,14 +479,7 @@ export function horizontalLoop(items, config) {
                         // Принудительно докручиваем до ближайшего
                         const direction = dragDirection;
                         const newIndex = tl.current() + (direction > 0 ? -1 : 1); // справа налево — это +1
-                        tl.toIndex(newIndex, { 
-                            duration: 0.45, 
-                            ease: "power2.out",
-                            onComplete: () => {
-                                // Дополнительная коррекция после завершения анимации
-                                setTimeout(() => tl.alignPositions(), 16);
-                            }
-                        });
+                        tl.toIndex(newIndex, { duration: 0.45, ease: "power2.out" });
                     }
                     syncIndex();
                 },
