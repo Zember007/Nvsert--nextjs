@@ -154,6 +154,7 @@ export function horizontalLoop(items, config) {
     const offsetLeft = config.offsetLeft || 0;
     const isMobile = config.mobile || false; // Получаем флаг мобильного устройства
     if (!items || !items.length) return null;
+    const pixelSnap = (value) => Math.round(value);
     gsap.context(() => {
         let onChange = config.onChange,
             onDragFunction = config.onDragFunction,
@@ -167,7 +168,9 @@ export function horizontalLoop(items, config) {
                         lastIndex = i;
                         onChange && onChange(i);
                     }
-                }, paused: config.paused, defaults: { ease: "none" }, onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100)
+                    
+                }, paused: config.paused, defaults: { ease: "none" }, onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100),
+               
             }),
             length = items.length,
             startX = items[0].offsetLeft,
@@ -188,9 +191,13 @@ export function horizontalLoop(items, config) {
                 let b1 = container.getBoundingClientRect(), b2;
                 items.forEach((el, i) => {
                     widths[i] = parseFloat(gsap.getProperty(el, "width", "px"));
-                    xPercents[i] = snap(parseFloat(gsap.getProperty(el, "x", "px")) / widths[i] * 100 + gsap.getProperty(el, "xPercent"));
+                    
+                    // Округляем xPercents для избежания субпиксельных значений
+                    const rawXPercent = parseFloat(gsap.getProperty(el, "x", "px")) / widths[i] * 100 + gsap.getProperty(el, "xPercent");
+                    xPercents[i] = Math.round(rawXPercent * 100) / 100; // Округляем до сотых
+                    
                     b2 = el.getBoundingClientRect();
-                    spaceBefore[i] = b2.left - (i ? b1.right : b1.left);
+                    spaceBefore[i] = Math.round(b2.left - (i ? b1.right : b1.left)); // Округляем spaceBefore
                     b1 = b2;
                 });
                 gsap.set(items, {
@@ -207,7 +214,7 @@ export function horizontalLoop(items, config) {
             },
             getClosest = (values, value, wrap) => {
                 if (!values) return 0
-                let i =  values.length ,
+                let i = values.length,
                     closest = 1e10,
                     index = 0, d;
                 while (i--) {
@@ -228,10 +235,10 @@ export function horizontalLoop(items, config) {
                 for (i = 0; i < length; i++) {
                     item = items[i];
                     curX = xPercents[i] / 100 * (widths[i]);
-                    distanceToStart = item.offsetLeft + curX - startX + spaceBefore[0] - offsetLeft;
-                    distanceToLoop = distanceToStart + (offsetLeft ? offsetLeft : 0) + widths[i] * gsap.getProperty(item, "scaleX");
+                    distanceToStart = Math.round(item.offsetLeft + curX - startX + spaceBefore[0] - offsetLeft);
+                    distanceToLoop =  Math.round(distanceToStart + (offsetLeft ? offsetLeft : 0) + widths[i] * gsap.getProperty(item, "scaleX"));
                     tl.to(item, {
-                        xPercent: snap((curX - distanceToLoop) / widths[i] * 100),
+                        xPercent:  Math.round(snap((curX - distanceToLoop) / widths[i] * 100)),
                         duration: distanceToLoop / pixelsPerSecond
                     }, 0)
                         .to(item, {
@@ -259,6 +266,21 @@ export function horizontalLoop(items, config) {
                 populateWidths();
                 deep && populateTimeline();
                 populateOffsets();
+                
+                // ДОБАВЬТЕ ЭТУ КОРРЕКТИРОВКУ:
+                if (!center && deep) {
+                    // Принудительно выравниваем позиции после полного пересчета
+                    items.forEach((item, i) => {
+                        const targetXPercent = xPercents[i];
+                        const currentXPercent = gsap.getProperty(item, "xPercent");
+                        
+                        // Если разница больше 0.1%, корректируем
+                        if (Math.abs(currentXPercent - targetXPercent) > 0.1) {
+                            gsap.set(item, { xPercent: Math.round(targetXPercent * 100) / 100 });
+                        }
+                    });
+                }
+                
                 deep && tl.draggable ? tl.time(times[curIndex], true) : tl.progress(progress, true);
             },
             onResize = () => refresh(true),

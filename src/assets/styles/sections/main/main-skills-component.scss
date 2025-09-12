@@ -2,7 +2,7 @@
 @use '../../base/mixins' as mixins;
 
 .skills-content-container {
-  @apply flex flex-col gap-[20px];
+  @apply flex flex-col gap-[20px] items-center;
 }
 
 
