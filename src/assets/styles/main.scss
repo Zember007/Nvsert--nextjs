@@ -121,6 +121,7 @@ $wall__line_box-sw: 0 0 0.2em hsla(0, 0%, 0%, 0.18);
 
 .safeguard__box {
   @apply flex gap-[20px];
+  
 
   @media (max-width: $media-xxl) {
     width: 1020px;
