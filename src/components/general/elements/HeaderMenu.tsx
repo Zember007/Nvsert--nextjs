@@ -161,7 +161,7 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                                                     <Link
 
                                                         href={item.slug}
-                                                        className={`${index_item === 0 ? 'first-child' : ''} ${item.img ? 'have-img' : ''} header__menu-mob-item`}
+                                                        className={`${index_item === 0 ? 'first-child' : ''} ${item.img ? 'have-img' : ''} header__menu-mob-item `}
                                                     >
                                                         <div className="flex items-center gap-[20px]">
                                                             {item.img?.url && (
@@ -173,6 +173,7 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                                                             <Image src={ArrowIcon} alt="more" width={20} height={20} />
                                                         )}
                                                     </Link>
+                                                    
                                                 ) : (
                                                     <button
 
