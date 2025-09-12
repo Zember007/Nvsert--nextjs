@@ -47,6 +47,10 @@ const AppTextarea = ({ title, inputName, required, className }: { title: string,
                     ></textarea>
                 </ScrollableContainer>
 
+                <span className={`field__title textarea-title ${isFocused ? 'focused' : ''}`}>
+                    {title}
+                </span>
+
                 <span className={`field__title-top textarea-title ${isFocused ? 'focused' : ''}`}>
                     {title}
                 </span>
