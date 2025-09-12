@@ -79,7 +79,7 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                 {
                     items: item.items!,
                     title: item.title,
-                    parentId: item.name
+                    parentId: item.name,
                 }
             ]);
 
@@ -136,7 +136,6 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                                 </button>
 
                                 <span className='whitespace-nowrap text-[24px] text-center text-[#000] justify-self-center'>{currentLevel.title}</span>
-
                             </>
                         }
                     </div>
@@ -201,17 +200,18 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                         </div>
                     </div>
 
-                    <div className="header-nav__list !my-[15px]">
-
-                        <Link
-                            onClick={() => closeMenu()}
-                            href="/services"
-                            className={`header__menu-mob-item text-[#93969D] text-[20px]`}
-                        >
-                            Полный список услуг
-
-                        </Link>
-                    </div>
+                    {(currentLevel.parentId === 'services' || 
+                      navigationStack.some(level => level.parentId === 'services')) && (
+                        <div className="header-nav__list !my-[15px]">
+                            <Link
+                                onClick={() => closeMenu()}
+                                href="/services"
+                                className={`header__menu-mob-item text-[#93969D] text-[20px]`}
+                            >
+                                Полный список услуг
+                            </Link>
+                        </div>
+                    )}
                 </nav>
 
                 <div className="flex flex-col items-center gap-[10px] px-[20px] pb-[80px]  text-[#FFF]">
