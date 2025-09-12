@@ -114,7 +114,7 @@ export function initSlider({ onChangeFunction, onDragFunction, mobile }) {
         center: mobile,
         offsetLeft: mobile ? null : 75,
         opacity: !mobile,
-        gap: mobile && window.innerWidth < 900 ? (window.innerWidth - (250)) / 2 : 20,
+        gap: mobile && window.innerWidth < 900 ? (window.innerWidth - (250)) / 2 : 43,
         mobile: mobile, // Передаем флаг mobile
         onChange: (index) => {
             if (activeElement) {
@@ -190,14 +190,22 @@ export function horizontalLoop(items, config) {
             populateWidths = () => {
                 let b1 = container.getBoundingClientRect(), b2;
                 items.forEach((el, i) => {
-                    widths[i] = parseFloat(gsap.getProperty(el, "width", "px"));
+                    widths[i] = Math.round(parseFloat(gsap.getProperty(el, "width", "px")));
                     
-                    // Округляем xPercents для избежания субпиксельных значений
+                    // Более точное округление xPercents с учетом пиксельной сетки
                     const rawXPercent = parseFloat(gsap.getProperty(el, "x", "px")) / widths[i] * 100 + gsap.getProperty(el, "xPercent");
-                    xPercents[i] = Math.round(rawXPercent * 100) / 100; // Округляем до сотых
+                    
+                    // Специальная обработка для первого слайда при !center && !offsetLeft
+                    if (i === 0 && !center && !offsetLeft) {
+                        xPercents[i] = 0; // Первый слайд должен быть точно по левому краю
+                    } else {
+                        // Округляем до целых пикселей в процентах
+                        const pixelPerfectPercent = Math.round(rawXPercent * widths[i] / 100) / widths[i] * 100;
+                        xPercents[i] = Math.round(pixelPerfectPercent * 1000) / 1000; // Округляем до тысячных для точности
+                    }
                     
                     b2 = el.getBoundingClientRect();
-                    spaceBefore[i] = Math.round(b2.left - (i ? b1.right : b1.left)); // Округляем spaceBefore
+                    spaceBefore[i] = Math.round(b2.left - (i ? b1.right : b1.left));
                     b1 = b2;
                 });
                 gsap.set(items, {
@@ -234,11 +242,15 @@ export function horizontalLoop(items, config) {
                 tl.clear();
                 for (i = 0; i < length; i++) {
                     item = items[i];
-                    curX = xPercents[i] / 100 * (widths[i]);
+                    curX = Math.round(xPercents[i] / 100 * widths[i]); // Округляем до пикселей
                     distanceToStart = Math.round(item.offsetLeft + curX - startX + spaceBefore[0] - offsetLeft);
-                    distanceToLoop =  Math.round(distanceToStart + (offsetLeft ? offsetLeft : 0) + widths[i] * gsap.getProperty(item, "scaleX"));
+                    distanceToLoop = Math.round(distanceToStart + (offsetLeft ? offsetLeft : 0) + widths[i] * gsap.getProperty(item, "scaleX"));
+                    // Более точное вычисление xPercent с привязкой к пиксельной сетке
+                    const targetXPixels = curX - distanceToLoop;
+                    const targetXPercent = Math.round(targetXPixels / widths[i] * 100 * 1000) / 1000; // Округляем до тысячных
+                    
                     tl.to(item, {
-                        xPercent:  Math.round(snap((curX - distanceToLoop) / widths[i] * 100)),
+                        xPercent: snap(targetXPercent),
                         duration: distanceToLoop / pixelsPerSecond
                     }, 0)
                         .to(item, {
@@ -246,7 +258,7 @@ export function horizontalLoop(items, config) {
                             duration: 0.3
                         }, distanceToLoop / pixelsPerSecond)
                         .fromTo(item, {
-                            xPercent: snap((curX - distanceToLoop + totalWidth) / widths[i] * 100),
+                            xPercent: snap(Math.round((curX - distanceToLoop + totalWidth) / widths[i] * 100 * 1000) / 1000),
                             opacity: config.opacity ? 0 : 1
                         }, {
                             xPercent: xPercents[i],
@@ -267,16 +279,42 @@ export function horizontalLoop(items, config) {
                 deep && populateTimeline();
                 populateOffsets();
                 
-                // ДОБАВЬТЕ ЭТУ КОРРЕКТИРОВКУ:
-                if (!center && deep) {
+                // УЛУЧШЕННАЯ КОРРЕКТИРОВКА ПОЗИЦИЙ:
+                if (!center && !offsetLeft && deep) {
                     // Принудительно выравниваем позиции после полного пересчета
                     items.forEach((item, i) => {
                         const targetXPercent = xPercents[i];
                         const currentXPercent = gsap.getProperty(item, "xPercent");
                         
-                        // Если разница больше 0.1%, корректируем
-                        if (Math.abs(currentXPercent - targetXPercent) > 0.1) {
-                            gsap.set(item, { xPercent: Math.round(targetXPercent * 100) / 100 });
+                        // Вычисляем разницу в пикселях для более точной проверки
+                        const pixelDifference = Math.abs((currentXPercent - targetXPercent) * widths[i] / 100);
+                        
+                        // Если разница больше 0.5 пикселя, корректируем
+                        if (pixelDifference > 0.5) {
+                            gsap.set(item, { xPercent: Math.round(targetXPercent * 1000) / 1000 });
+                        }
+                    });
+                }
+                
+                // Дополнительная коррекция для предотвращения субпиксельного смещения
+                if (!center && !offsetLeft) {
+                    items.forEach((item, i) => {
+                        // Для первого слайда принудительно устанавливаем xPercent = 0
+                        if (i === 0) {
+                            const currentXPercent = gsap.getProperty(item, "xPercent");
+                            if (Math.abs(currentXPercent) > 0.001) {
+                                gsap.set(item, { xPercent: 0 });
+                            }
+                        } else {
+                            // Для остальных слайдов используем обычную коррекцию
+                            const containerLeft = container.getBoundingClientRect().left;
+                            const itemLeft = item.getBoundingClientRect().left;
+                            const actualOffset = itemLeft - containerLeft;
+                            
+                            if (Math.abs(actualOffset) > 1) {
+                                const correctedXPercent = (-actualOffset) / widths[i] * 100;
+                                gsap.set(item, { xPercent: Math.round(correctedXPercent * 1000) / 1000 });
+                            }
                         }
                     });
                 }
@@ -287,11 +325,30 @@ export function horizontalLoop(items, config) {
             proxy;
 
 
-        gsap.set(items, { x: center ? 0 : (offsetLeft || 0) });
+        gsap.set(items, { x: 0 });
 
         populateWidths();
         populateTimeline();
         populateOffsets();
+        
+        // Дополнительная коррекция для первоначального выравнивания после populateWidths
+        if (!center && !offsetLeft) {
+            items.forEach((item, i) => {
+                // Для первого слайда принудительно устанавливаем xPercent = 0
+                if (i === 0) {
+                    gsap.set(item, { xPercent: 0 });
+                } else {
+                    const containerLeft = container.getBoundingClientRect().left;
+                    const itemLeft = item.getBoundingClientRect().left;
+                    const actualOffset = itemLeft - containerLeft;
+                    
+                    if (Math.abs(actualOffset) > 1) {
+                        const correctedXPercent = (-actualOffset) / widths[i] * 100;
+                        gsap.set(item, { xPercent: Math.round(correctedXPercent * 1000) / 1000 });
+                    }
+                }
+            });
+        }
         window.addEventListener("resize", onResize);
 
         function toIndex(index, vars) {
@@ -308,7 +365,21 @@ export function horizontalLoop(items, config) {
             curIndex = newIndex;
             vars.overwrite = true;
             gsap.killTweensOf(proxy);
-            return vars.duration === 0 ? tl.time(timeWrap(time)) : tl.tweenTo(time, vars);
+            
+            if (vars.duration === 0) {
+                const result = tl.time(timeWrap(time));
+                // Выравниваем позиции после мгновенного перехода
+                requestAnimationFrame(() => tl.alignPositions());
+                return result;
+            } else {
+                // Добавляем коллбек для выравнивания позиций после анимации
+                const originalOnComplete = vars.onComplete;
+                vars.onComplete = function() {
+                    originalOnComplete && originalOnComplete.call(this);
+                    requestAnimationFrame(() => tl.alignPositions());
+                };
+                return tl.tweenTo(time, vars);
+            }
         }
 
         tl.toIndex = (index, vars) => toIndex(index, vars);
@@ -335,6 +406,37 @@ export function horizontalLoop(items, config) {
         tl.next = vars => { toIndex(tl.current() + 1, vars) };
         tl.previous = vars => toIndex(tl.current() - 1, vars);
         tl.times = times;
+        
+        // Добавляем функцию для принудительного выравнивания позиций
+        tl.alignPositions = () => {
+            if (!center && !offsetLeft) {
+                items.forEach((item, i) => {
+                    // Для первого слайда принудительно устанавливаем xPercent = 0
+                    if (i === 0) {
+                        const currentXPercent = gsap.getProperty(item, "xPercent");
+                        if (Math.abs(currentXPercent) > 0.001) {
+                            gsap.set(item, { 
+                                xPercent: 0,
+                                force3D: false
+                            });
+                        }
+                    } else {
+                        // Для остальных слайдов используем обычную коррекцию
+                        const containerLeft = container.getBoundingClientRect().left;
+                        const itemLeft = item.getBoundingClientRect().left;
+                        const actualOffset = itemLeft - containerLeft;
+                        
+                        if (Math.abs(actualOffset) > 0.5) {
+                            const correctedXPercent = (-actualOffset) / widths[i] * 100;
+                            gsap.set(item, { 
+                                xPercent: Math.round(correctedXPercent * 1000) / 1000,
+                                force3D: false
+                            });
+                        }
+                    }
+                });
+            }
+        };
 
         tl.destroy = () => {
             tl.pause();
@@ -446,10 +548,10 @@ export function horizontalLoop(items, config) {
 
                     Math.abs(dif) > tl.duration() / 2 && (dif += dif < 0 ? tl.duration() : -tl.duration());
 
-
-
                     lastSnap = (time + dif) / tl.duration() / -ratio;
-                    return lastSnap;
+                    
+                    // Округляем результат для предотвращения субпиксельных смещений
+                    return Math.round(lastSnap * 100) / 100;
                 },
                 onDragEnd() {
                     if (wasPlaying) {
@@ -472,6 +574,8 @@ export function horizontalLoop(items, config) {
                 },
                 onThrowComplete: () => {
                     syncIndex();
+                    // Выравниваем позиции после завершения инерции
+                    requestAnimationFrame(() => tl.alignPositions());
                 }
             })[0];
 
