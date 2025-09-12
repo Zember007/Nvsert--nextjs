@@ -61,7 +61,7 @@ const AppMainSkills = () => {
             const slides = gsap.utils.toArray('[data-slider="slide-skill"]');
 
 
-            const gap =  widthWindow < 900 ? (widthWindow - (250)) / 2 : 20
+            const gap = widthWindow < 900 ? (widthWindow - (250)) / 2 : 20
             timeLine.current = horizontalLoop(slides, {
                 paused: true,
                 center: widthWindow < 1240 && widthWindow >= 900 ? false : true,
@@ -95,8 +95,8 @@ const AppMainSkills = () => {
 
         <section
             ref={ref}
-            className="section wrapper">
-        <div id="skills" className="absolute top-[-50px] pointer-events-none" ></div>
+            className="section ">
+            <div id="skills" className="absolute top-[-50px] pointer-events-none" ></div>
 
             <h2 className="section__title">Наши основные преимущества</h2>
             <div className="skills__wrapper">
@@ -109,7 +109,7 @@ const AppMainSkills = () => {
                             skillsData.map((skill, index) => {
                                 if (skill.empty) return <div key={index}></div>;
 
-                                
+
 
                                 return (
                                     <div
@@ -125,38 +125,40 @@ const AppMainSkills = () => {
                         }
                     </div>
                     <div className="slide-dots-box-container">
-                    <div className="slide-dots-box">
-                        {skillsData.map((_, i) => (
-                            <div
-                                onClick={() => {
-                                    timeLine.current.toIndex(i, { ease: "power3", duration: 0.725 })
-                                }}
-                                key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
-                        ))}
-                    </div>
+                        <div className="slide-dots-box">
+                            {skillsData.map((_, i) => (
+                                <div
+                                    onClick={() => {
+                                        timeLine.current.toIndex(i, { ease: "power3", duration: 0.725 })
+                                    }}
+                                    key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
+                            ))}
+                        </div>
                     </div>
 
                 </div>
 
-                <h3 className='skills__wrapper-desc arial'>
-                    {filterPrepositions('Наша компания признана одной из ведущих на рынке сертификации в Российской Федерации и стран Евразийского Экономического Союза. Специалисты NVSERT предоставляют широкий спектр услуг, направленный на оформление обязательной и добровольной сертификации, декларирования, соответствия требованиям технических регламентов и других документов, подтверждающих качество выпускаемой продукции.')}
-                </h3>
+                <div className="wrapper flex flex-col">
+                    <h3 className='skills__wrapper-desc arial '>
+                        {filterPrepositions('Наша компания признана одной из ведущих на рынке сертификации в Российской Федерации и стран Евразийского Экономического Союза. Специалисты NVSERT предоставляют широкий спектр услуг, направленный на оформление обязательной и добровольной сертификации, декларирования, соответствия требованиям технических регламентов и других документов, подтверждающих качество выпускаемой продукции.')}
+                    </h3>
 
-                <div className="skills-tariff-wrap tariff-wrap" ref={setWrapperRef}>
-                    <button
-                        ref={setButtonRef} className='slider__button group btnIconAn doc-btn tariff'>
+                    <div className="skills-tariff-wrap tariff-wrap " ref={setWrapperRef}>
+                        <button
+                            ref={setButtonRef} className='slider__button group btnIconAn doc-btn tariff'>
 
-                        <span
-                            className="sendText"
-                        >Подробнее</span>
+                            <span
+                                className="sendText"
+                            >Подробнее</span>
 
-                        <span className="sendIconLeft">
-                            <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M3 9.48438V7.48438H0V9.48438H3ZM8.96767 1.48438L7.52908 2.91514L12.1092 7.47151H6V9.49623H12.1092L7.52908 14.0526L8.96767 15.4844L16 8.48438L15.2822 7.76899L14.5634 7.0526L8.96767 1.48438Z" fill="white" />
-                            </svg>
-                        </span>
+                            <span className="sendIconLeft">
+                                <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 9.48438V7.48438H0V9.48438H3ZM8.96767 1.48438L7.52908 2.91514L12.1092 7.47151H6V9.49623H12.1092L7.52908 14.0526L8.96767 15.4844L16 8.48438L15.2822 7.76899L14.5634 7.0526L8.96767 1.48438Z" fill="white" />
+                                </svg>
+                            </span>
 
-                    </button>
+                        </button>
+                    </div>
                 </div>
 
 

@@ -164,7 +164,7 @@ const AppMainSafeguards = () => {
       <section
         ref={divRef}
       
-        className="section wrapper">
+        className="section ">
         <div id="safeguards" className="absolute top-[-50px] pointer-events-none" ></div>
 
         <h2 className="section__title">Гарантии и безупречный сервис</h2>

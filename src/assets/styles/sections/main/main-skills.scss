@@ -21,19 +21,17 @@
 
         @media (max-width: varibles.$media-xxl) {
             width: 1002px;
-            margin: 0 -45px;
-
+            margin: 0 auto;
             overflow: hidden;
           }
 
           @media (max-width: varibles.$media-l) {
             width: 660px;
-
           }
 
         @media (max-width: varibles.$media-m) {
-            width: calc(100% + 40px) !important;
-            margin: 0 -20px !important;
+            width: 100%;
+    
             overflow: visible !important;
 
           }
