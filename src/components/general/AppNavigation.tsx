@@ -72,9 +72,9 @@ const AppNavigationItem = ({ img, title, controls, link, dark, className }: { li
     return (
         <>
             <div ref={setWrapperRef} className={`tariff-wrap ${className} !max-w-[250px] `}>
-                <Link ref={setButtonRef} href={'/' + link} className={`tariff text-left  no-transitions overflow-hidden not-backdrop flex  gap-[10px] group/img  rounded-[3px] items-center    border-solid  border border-[transparent] ${dark ? 'hover:border-[#34446D] hover:bg-[#F5F5F2] h-[72px] p-[5px]' : 'xxxxl:p-[5px] pr-[5px] xxxxl:h-[72px] h-[60px] hover:border-[#fff] hover:bg-[#34446d33]'}`}>
+                <Link ref={setButtonRef} href={'/' + link} className={`tariff text-left  no-transitions overflow-hidden not-backdrop flex  gap-[10px] group/img  rounded-[3px] items-center    border-solid  border border-[transparent] h-[72px] p-[5px] ${dark ? 'hover:border-[#34446D] hover:bg-[#F5F5F2] ' : ' hover:border-[#fff] hover:bg-[#34446d33]'}`}>
                     <motion.div
-                        className={` overflow-hidden h-[60px] rounded-[3px] min-w-[43px] border-solid border  ${dark ? 'border-[#93969D]' : 'xxxxl:group-hover/img:rounded-[3px] group-hover/img:rounded-[0px]'}`}
+                        className={` overflow-hidden h-[60px] rounded-[3px] min-w-[43px] border-solid border border-[#93969D] `}
                         animate={controls}>
                         <Image src={img as string} className="w-[43px] h-[60px]" width={43} height={60} alt="document" />
                     </motion.div>
