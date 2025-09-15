@@ -253,7 +253,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
     // Мемоизируем пропсы для предотвращения мерцания при смене типа инпута
     const contactInputProps = useMemo(() => ({
         defaultValue: isEmail ? contactData.email : isPhone ? contactData.phone : '',
-        title: isPhone ? 'Телефон' : 'Email',
+        title: isPhone ? 'Телефон' : isEmail ? 'Email' : '',
         inputName: "contact",
         mask: isPhone ? "phone" : '',
         type: isPhone ? "tel" : 'text',
