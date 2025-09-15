@@ -129,9 +129,9 @@ const AppHeader = () => {
 
       <div className="xl:flex hidden gap-[2px] fixed h-[60px] top-[2px] right-[196px] z-[51] mix-blend-difference">
         <div
-          className={`w-[354px] rubik header__bg !backdrop-filter-none gap-[8px] mix-blend-difference  h-full`}>
+          className={`w-[368px] rubik header__bg !backdrop-filter-none gap-[8px] mix-blend-difference  h-full`}>
           <AppMenuItem
-            className="w-[150px]"
+            className="w-[159px]"
             onClick={(e) => {
               handleCopy('info@nvsert.ru', e)
             }}
@@ -140,7 +140,7 @@ const AppHeader = () => {
             }} isActive={false} />
 
           <AppMenuItem
-            className="w-[172px]"
+            className="w-[171px]"
             item={{
               href: filterPhone('8 800 700-33-75'), label: '8 800 700-33-75'
             }} isActive={false} />
@@ -220,7 +220,7 @@ const AppHeader = () => {
         </div>
 
         <div className=" hidden xl:flex gap-[2px]">
-          <div className="w-[354px]"></div>
+          <div className="w-[368px]"></div>
         <div
             className="header__bg w-[192px] !backdrop-filter-none  mix-blend-difference  h-full">
             <AppMenuItem
