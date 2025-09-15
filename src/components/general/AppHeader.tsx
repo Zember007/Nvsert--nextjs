@@ -271,7 +271,7 @@ const AppHeader = () => {
         <div className={`services-menu !py-[5px] js-services-menu relative `}>
 
           <div className="services-menu__wrapper select-none">
-            <div className="grid grid-cols-6 h-[50px] w-full xxl:gap-[30px] gap-[8px]">
+            <div className="grid grid-cols-6 h-[50px] w-full xxxl:gap-[30px] gap-[8px]">
               {services.map((item, i) => (
                 <div ref={setWrapperRef} key={i} className="tariff-wrap ">
                   <Link
