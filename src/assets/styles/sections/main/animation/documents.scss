@@ -140,7 +140,7 @@
     @apply  translate-y-[-1px] text-[14px] xss:text-[16px] m:text-[20px] transition-all duration-200  tracking-normal;
 
     &-wrap {
-      @apply hidden will-change-transform *:will-change-transform m:w-[40%] m:grid grid-cols-[1fr_1fr_auto] items-center justify-between;
+      @apply hidden will-change-transform *:will-change-transform m:w-[40%] m:grid grid-cols-[0.76fr_1fr_auto] items-center justify-between;
     }
   }
 

@@ -67,7 +67,7 @@ const AppMainSkills = () => {
                 center: widthWindow < 1240 && widthWindow >= 900 ? false : true,
                 draggable: true,
                 mobile: true,
-                gap: Math.round(gap),
+                gap: Math.round(0),
                 snap: true,
                 onChange: (index: number) => {
                     setActive(index)

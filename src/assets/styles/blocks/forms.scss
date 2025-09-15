@@ -104,8 +104,8 @@ input:auto-fill {
   }
 
   &__textarea {
-    min-height: 107px;
-    height: 107px;
+    min-height: 100px;
+    height: 100px;
     resize: none;
     line-height: 1.2;
     padding: 5px 10px;
@@ -131,6 +131,14 @@ input:auto-fill {
     overflow: hidden;
     text-overflow: ellipsis;
     pointer-events: none;
+
+    &.textarea-title {
+      top: 31px;
+
+      @media (max-width: $media-s) {
+        top: 6px;
+      }
+    }
 
     &.focused {
       opacity: 0;
