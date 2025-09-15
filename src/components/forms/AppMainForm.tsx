@@ -8,7 +8,7 @@ import AppTextarea from "./elements/AppTextarea";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useButton } from "@/hook/useButton";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, useMemo, useCallback } from "react";
 import AppCheckbox from './elements/AppCheckbox';
 import { BounceEffect } from "@/hook/useBounce";
 import FlightSuccess from "../modals/FlightSuccess";
@@ -83,8 +83,22 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
 
     const ids = useId()
 
+    // Состояния формы
+    const [focusContact, setFocusContact] = useState(false)
+    const [isPhone, setIsPhone] = useState(false);
+    const [isEmail, setIsEmail] = useState(false);
+    const [emailError, setEmailError] = useState(false);
+    const [failCheck, setFailCheck] = useState(false);
+    const [successMessageVisible, setSuccessMessageVisible] = useState(false);
+    const [contactData, setContactData] = useState({
+        phone: '',
+        email: ''
+    });
+    
+    // Добавляем состояние для стабилизации переключения типов
+    const [isTransitioning, setIsTransitioning] = useState(false);
 
-    const validContact = (value: string) => {
+    const validContact = useCallback((value: string) => {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const phoneRegex = /^(?:\+7|8)?[\s(-]*\d[\s(-]*\d{2}[\s)-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}$/;
 
@@ -127,7 +141,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
         }
 
 
-    }
+    }, [isEmail, isPhone, setContactData])
 
     const methods = useForm({
         mode: "onTouched", shouldFocusError: false,
@@ -143,7 +157,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
 
     const contactValue = watch("contact") || "";
 
-    const bounceCheckbox = () => {
+    const bounceCheckbox = useCallback(() => {
         const myElement = document.getElementById(`bounce-checkbox${ids}`)
         if (myElement) {
             BounceEffect(myElement, {
@@ -158,7 +172,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
 
 
         }
-    }
+    }, [ids])
 
     useEffect(() => {
         if (!submitCount) return;
@@ -173,40 +187,54 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
 
 
         }
-    }, [submitCount])
+    }, [submitCount, isEmail, isPhone, bounceCheckbox, contactValue, validContact])
 
     useEffect(() => {
         if (emailError && contactValue.length > 0) {
             setEmailError(false)
         }
-    }, [contactValue])
-
-    const [focusContact, setFocusContact] = useState(false)
-    const [isPhone, setIsPhone] = useState(false);
-    const [isEmail, setIsEmail] = useState(false);
-    const [emailError, setEmailError] = useState(false);
-    const [failCheck, setFailCheck] = useState(false);
-    const [successMessageVisible, setSuccessMessageVisible] = useState(false);
-    const [contactData, setContactData] = useState({
-        phone: '',
-        email: ''
-    });
-
+    }, [contactValue, emailError])
 
     useEffect(() => {
         setFailCheck(false)
-
     }, [isPhone, isEmail])
 
+    // Функция для безопасного переключения типов контакта
+    const handleContactTypeChange = (type: 'phone' | 'email', value: boolean) => {
+        if (isTransitioning) return; // Предотвращаем быстрые переключения
+        
+        setIsTransitioning(true);
+        setTimeout(() => setFocus('contact'), 10);
+        
+        if (type === 'phone') {
+            setIsPhone(value || contactData.phone !== '');
+            if (value || contactData.phone !== '') {
+                setIsEmail(false);
+            } else if (contactData.email !== '') {
+                setIsEmail(true);
+            }
+        } else {
+            setIsEmail(value || contactData.email !== '');
+            if (value || contactData.email !== '') {
+                setIsPhone(false);
+            } else if (contactData.phone !== '') {
+                setIsPhone(true);
+            }
+        }
+        
+        // Снимаем блокировку через небольшую задержку
+        setTimeout(() => setIsTransitioning(false), 100);
+    };
+
     const controls = useAnimation();
-    const defaultSettings = {
+    const defaultSettings = useMemo(() => ({
         duration: 0.3,
         ease: [0.34, 1.56, 0.64, 1],
         times: [0, 0.2, 0.5, 0.8, 1],
         openY: [-30, 0, -10, 0, 0],
-    };
+    }), []);
 
-    const animation = () => {
+    const animation = useCallback(() => {
         controls.start({
             y: defaultSettings.openY,
             transition: {
@@ -215,12 +243,27 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                 times: defaultSettings.times
             }
         });
-    }
+    }, [controls, defaultSettings])
 
     useEffect(() => {
         if (!active) return
         animation()
-    }, [active, countTrigger])
+    }, [active, countTrigger, animation])
+
+    // Мемоизируем пропсы для предотвращения мерцания при смене типа инпута
+    const contactInputProps = useMemo(() => ({
+        defaultValue: isEmail ? contactData.email : isPhone ? contactData.phone : '',
+        title: isPhone ? 'Телефон' : 'Email',
+        inputName: "contact",
+        mask: isPhone ? "phone" : '',
+        type: isPhone ? "tel" : 'text',
+        fail: emailError,
+        required: true,
+        message: false,
+        disable: !isPhone && !isEmail,
+        onFocus: () => { setFocusContact(true) },
+        onBlur: () => { setFocusContact(false); validContact(contactValue) }
+    }), [isEmail, isPhone, contactData.email, contactData.phone, emailError, contactValue, validContact])
 
     return (
         <motion.div
@@ -255,46 +298,16 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                         setEmailError(false)
                                     }}
                                     className="w-full relative z-[1]">
-                                    <AppInput
-                                        defaultValue={isEmail ? contactData.email : isPhone ? contactData.phone : ''}
-                                        title={isPhone ? 'Телефон' : 'Email'}
-                                        inputName="contact"
-                                        mask={isPhone ? "phone" : ''}
-                                        type={isPhone ? "tel" : 'text'}
-                                        fail={emailError}
-                                        required={true}
-                                        message={false}
-                                        disable={!isPhone && !isEmail}
-                                        onFocus={() => { setFocusContact(true) }}
-                                        onBlur={() => { setFocusContact(false); validContact(contactValue) }}
-                                    />
+                                    <AppInput {...contactInputProps} />
                                 </div>
 
                                 <div id={`bounce-checkbox${ids}`} className=" flex items-center gap-[20px]"
                                     onClick={() => { clearErrors('contact') }}
                                 >
                                     <AppCheckbox id={`check-phone${ids}`} successful={contactData.phone !== ''} focus={focusContact} fail={failCheck} checked={isPhone || contactData.phone !== ''}
-                                        onChange={(value) => {
-                                            setIsPhone(value || contactData.phone !== '');
-                                            if (value || contactData.phone !== '') {
-                                                setIsEmail(false);
-                                                setFocus('contact');
-                                            } else if (contactData.email !== '') {
-                                                setIsEmail(true);
-                                            }
-                                        }} label="Телефон" />
+                                        onChange={(value) => handleContactTypeChange('phone', value)} label="Телефон" />
                                     <AppCheckbox focus={focusContact} id={`check-email${ids}`} successful={contactData.email !== ''} fail={failCheck} checked={isEmail || contactData.email !== ''}
-                                        onChange={(value) => {
-                                            setIsEmail(value || contactData.email !== '');
-                                            if (value || contactData.email !== '') {
-                                                setIsPhone(false);
-                                                setFocus('contact');
-
-                                            } else if (contactData.phone !== '') {
-                                                setIsPhone(true);
-                                            }
-                                            setFocus('contact');
-                                        }} label="Email" />
+                                        onChange={(value) => handleContactTypeChange('email', value)} label="Email" />
                                 </div>
                             </div>
 

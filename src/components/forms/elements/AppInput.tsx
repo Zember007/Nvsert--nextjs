@@ -39,6 +39,7 @@ const AppInput = ({ title, defaultValue, disable, fail, message = true, inputNam
     }
 
     const [visibleError, setVisibleError] = useState(false)
+    const [titleVisible, setTitleVisible] = useState(true)
 
     useEffect(() => {
         setVisibleError(false)
@@ -51,6 +52,19 @@ const AppInput = ({ title, defaultValue, disable, fail, message = true, inputNam
 
     useEffect(() => {
         setValue(inputName, defaultValue || '')
+    }, [title, defaultValue, inputName, setValue])
+
+    // Плавное переключение заголовка при изменении типа поля
+    useEffect(() => {
+        // Скрываем заголовок
+        setTitleVisible(false)
+        
+        // Показываем новый заголовок с небольшой задержкой
+        const timer = setTimeout(() => {
+            setTitleVisible(true)
+        }, 200)
+        
+        return () => clearTimeout(timer)
     }, [title])
     return (
         <div className={`relative z-[0] `}>
@@ -69,7 +83,7 @@ const AppInput = ({ title, defaultValue, disable, fail, message = true, inputNam
                     name={inputName}
                     placeholder={title}
                     autoComplete={autocomplete}
-                    /* disabled={disable || false} */
+                    disabled={disable || false}
                     onInput={(e) => { changeInput(e) }}
                     onFocus={(e) => {
                         if (onFocus) {
@@ -86,12 +100,12 @@ const AppInput = ({ title, defaultValue, disable, fail, message = true, inputNam
                         }
                     }}
                 />
-                {!disable &&
+                {!disable && titleVisible &&
                     <>
-                        <span className={` field__title ${(errors[inputName]) && '!text-[#FF3030]'} ${classNameTitle}`}>
+                        <span className={` field__title !delay-100 ${titleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1'} ${(errors[inputName]) && '!text-[#FF3030]'} ${classNameTitle}`}>
                             {title}
                         </span>
-                        <span className={`field__title-top ${(errors[inputName]) && '!text-[#FF3030]'} ${classNameTitle}`}>
+                        <span className={`field__title-top ${titleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'} ${(errors[inputName]) && '!text-[#FF3030]'} ${classNameTitle}`}>
                             {title}
                         </span>
                     </>}
