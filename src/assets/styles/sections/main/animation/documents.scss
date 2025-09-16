@@ -94,7 +94,7 @@
 
 .document {
   &__box {
-    @apply m:mx-[-23px] mx-[-5px] flex flex-col rounded-[6px] relative;
+    @apply xl:mx-[-23px] mx-[-5px] flex flex-col rounded-[6px] relative;
 
     &.active {
       @apply hover:bg-[#34446D33] bg-[transparent] ;
@@ -110,7 +110,7 @@
   }
 
   &__navigation {
-    @apply rounded-[6px] overflow-hidden h-[70px] text-left box-scale transition-scale active:bg-[#5B6788] m:px-[23px] relative z-[0];
+    @apply rounded-[6px] overflow-hidden h-[70px] text-left box-scale transition-scale active:bg-[#5B6788] xl:px-[23px] relative z-[0];
 
     &:active {
       box-shadow: 2px 2px 4px 0px #000000CC inset, -2px -2px 4px 0px #000000CC inset;
@@ -137,10 +137,10 @@
   }
 
   &__desc {
-    @apply  translate-y-[-1px] text-[14px] xss:text-[16px] m:text-[20px] transition-all duration-200  tracking-normal;
+    @apply  translate-y-[-1px] text-[14px] xss:text-[18px] xl:text-[20px] transition-all duration-200  tracking-normal;
 
     &-wrap {
-      @apply hidden will-change-transform *:will-change-transform m:w-[41%] m:grid grid-cols-[0.76fr_1fr_auto] items-center justify-between;
+      @apply hidden will-change-transform *:will-change-transform m:w-[41%] m:grid grid-cols-[0.76fr_1fr_auto] items-center justify-between xl:justify-items-start justify-items-end xl:pr-0 pr-[18px];
     }
   }
 
@@ -149,7 +149,7 @@
   }
 
   &__small-img {
-    @apply overflow-hidden border border-solid border-[#93969D] rounded-[3px] transition-all duration-100 z-[2] absolute top-1/2 -translate-y-1/2 left-[6px] m:left-[23px];
+    @apply overflow-hidden border border-solid border-[#93969D] rounded-[3px] transition-all duration-100 z-[2] absolute top-1/2 -translate-y-1/2 left-[6px] xl:left-[23px];
 
     &.active {
       @apply translate-y-[100%];

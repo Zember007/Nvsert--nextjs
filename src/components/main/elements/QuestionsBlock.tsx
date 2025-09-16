@@ -48,7 +48,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                     onClick={() => {
                         setActive(!active)
                     }}
-                    className={`${active ? ' active !bg-[#5B6788] !shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] ' : ' '} document__navigation-bg  bg-[transparent]   h-[70px] relative  active:bg-[#5B6788]  active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset]   group cursor-pointer  rounded-[6px]  flex items-center gap-[10px] l:gap-[40px] l:pr-[23px]  transition-scale`}>
+                    className={`${active ? ' active !bg-[#5B6788] !shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] ' : ' '} document__navigation-bg  bg-[transparent]   h-[70px] relative  active:bg-[#5B6788]  active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset]   group cursor-pointer  rounded-[6px]  flex items-center gap-[9px] xl:gap-[40px] l:pr-[23px]  transition-scale`}>
 
                     <div className={`questions-number-container ${active ? 'active' : ''} transition-scale group-active:scale-[0.9]`}>
                         <p className={`questions-number-text ${active ? 'active' : ''} l:group-hover:text-[50px] group-active:duration-[0] group-active:text-[#FFF]`}>{number}</p>

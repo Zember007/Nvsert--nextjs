@@ -2,7 +2,7 @@
 @use '../../base/mixins' as mixins;
 
 .questions-number-container {
-  @apply l:w-[70px] l:min-w-[70px] w-[44px] min-w-[44px] h-[70px] flex items-center justify-center;
+  @apply xl:w-[70px] xl:min-w-[70px] w-[44px] min-w-[44px] h-[70px] flex items-center justify-center;
   
   &.active {
     transform: scale(0.9);
@@ -40,7 +40,7 @@
 }
 
 .questions-arrow-icon {
-  @apply hidden l:block transition-all duration-200;
+  @apply hidden xl:block transition-all duration-200;
   
   &.active {
     transform: rotate(180deg);
