@@ -156,7 +156,7 @@ const AppHeader = () => {
 
       <Link
         href={filterPhone('8 495 777-11-97')}
-        className={` w-[50px] justify-center rubik   xl:!hidden !backdrop-filter-none ${burgerMenuActive ? 'active' : 'mix-blend-difference'} header__bg fixed h-[50px] top-[2px] right-[58px] z-[51] `}
+        className={` w-[50px] justify-center rubik !p-0  xl:!hidden !backdrop-filter-none ${burgerMenuActive ? 'active' : 'mix-blend-difference'} header__bg fixed h-[50px] top-[2px] right-[58px] z-[51] `}
         aria-label="8 495 777-11-97"
       >
         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -237,14 +237,14 @@ const AppHeader = () => {
 
         <div className=" xl:hidden flex gap-[2px]">
           <div className="w-[50px]"></div>
-          <div className="header__bg w-[50px] justify-center">
+          <div className="header__bg !p-0 w-[50px] justify-center">
             <button
               type="button"
-              className="relative  w-[34px] h-[30px] py-[3px] flex items-center justify-center z-50"
+              className={`relative ${burgerMenuActive ? 'w-[34px]' : 'w-[30px]'}  h-[30px] py-[3px] flex items-center justify-center z-50`}
               onClick={burgerHandler}
               aria-label="Toggle menu"
             >
-              <div className={`${burgerMenuActive ? '*:bg-black' : '*:bg-white'} relative w-[34px] h-[24px] flex  flex-col justify-between items-center pointer-events-none`}>
+              <div className={`${burgerMenuActive ? '*:bg-black w-[34px]' : '*:bg-white w-[30px]'} relative  h-[24px] flex  flex-col justify-between items-center pointer-events-none`}>
                 <span
                   className={`rounded-[8px] block h-[4px] w-full  transition-transform duration-300 ease-in-out ${burgerMenuActive ? 'rotate-45 translate-y-[10px]' : ''
                     }`}
