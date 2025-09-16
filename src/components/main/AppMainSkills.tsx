@@ -53,15 +53,10 @@ const AppMainSkills = () => {
 
 
     useEffect(() => {
-
-
-
         if (widthWindow && widthWindow < 1440 && isVisibleSection) {
-
             const slides = gsap.utils.toArray('[data-slider="slide-skill"]');
-
-
-            const gap = widthWindow < 900 ? (widthWindow - (250)) / 2 : 20
+            const gap = widthWindow < 900 ? (widthWindow - (250)) / 2 : 20;
+            
             timeLine.current = horizontalLoop(slides, {
                 paused: true,
                 center: widthWindow < 1240 && widthWindow >= 900 ? false : true,
@@ -70,24 +65,38 @@ const AppMainSkills = () => {
                 gap: Math.round(gap),
                 snap: true,
                 onChange: (index: number) => {
-                    setActive(index)
+                    setActive(index);
+                    // Принудительное выравнивание после изменения активного слайда
+                    if (timeLine.current && timeLine.current.alignPositions) {
+                        setTimeout(() => timeLine.current.alignPositions(), 50);
+                    }
                 }
             });
-
-
-
-
+    
+            // Принудительное выравнивание через короткий интервал
+            const alignInterval = setInterval(() => {
+                if (timeLine.current && timeLine.current.alignPositions) {
+                    timeLine.current.alignPositions();
+                }
+            }, 100);
+    
+            // Очищаем интервал при размонтировании
+            return () => {
+                clearInterval(alignInterval);
+                if (timeLine.current) {
+                    timeLine.current.destroy();
+                    timeLine.current = null;
+                }
+            };
         }
-
+    
         return () => {
             if (timeLine.current) {
-                timeLine.current.destroy()
-                timeLine.current = null
+                timeLine.current.destroy();
+                timeLine.current = null;
             }
-        }
-
-
-    }, [widthWindow, isVisibleSection])
+        };
+    }, [widthWindow, isVisibleSection]);
 
     const { setButtonRef, setWrapperRef } = useButton()
 

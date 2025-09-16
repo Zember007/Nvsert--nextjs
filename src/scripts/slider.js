@@ -152,28 +152,31 @@ export function horizontalLoop(items, config) {
     items = gsap.utils.toArray(items);
     config = config || {};
     const offsetLeft = config.offsetLeft || 0;
-    const isMobile = config.mobile || false; // Получаем флаг мобильного устройства
+    const isMobile = config.mobile || false;
     if (!items || !items.length) return null;
-    const pixelSnap = (value) => Math.round(value);
+    
     gsap.context(() => {
         let onChange = config.onChange,
             onDragFunction = config.onDragFunction,
             lastIndex = 0,
             tl = gsap.timeline({
-                repeat: config.repeat, onUpdate: function () {
-                    onDragFunction && onDragFunction()
+                repeat: config.repeat, 
+                onUpdate: function () {
+                    onDragFunction && onDragFunction();
+                    forcePixelAlignment(); // Принудительное выравнивание на каждом обновлении
 
                     let i = tl.closestIndex();
                     if (lastIndex !== i) {
                         lastIndex = i;
                         onChange && onChange(i);
                     }
-                    
-                }, paused: config.paused, defaults: { ease: "none" }, onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100),
-               
+                }, 
+                paused: config.paused, 
+                defaults: { ease: "none" }, 
+                onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100),
             }),
             length = items.length,
-            startX = items[0].offsetLeft,
+            startX = Math.round(items[0].offsetLeft),
             times = [],
             widths = [],
             spaceBefore = [],
@@ -186,37 +189,59 @@ export function horizontalLoop(items, config) {
             timeOffset = 0,
             container = center === true ? items[0].parentNode : gsap.utils.toArray(center)[0] || items[0].parentNode,
             totalWidth,
-            getTotalWidth = () => items[length - 1].offsetLeft + xPercents[length - 1] / 100 * widths[length - 1] - startX + spaceBefore[0] + items[length - 1].offsetWidth * gsap.getProperty(items[length - 1], "scaleX") + (config.gap || 0),
+            
+            // Принудительное выравнивание к пиксельной сетке
+            forcePixelAlignment = () => {
+                items.forEach((item, i) => {
+                    const rect = item.getBoundingClientRect();
+                    const containerRect = container.getBoundingClientRect();
+                    
+                    // Получаем текущую позицию относительно контейнера
+                    const currentLeft = rect.left - containerRect.left;
+                    const roundedLeft = Math.round(currentLeft);
+                    
+                    // Если есть субпиксельное смещение - корректируем
+                    if (Math.abs(currentLeft - roundedLeft) > 0.1) {
+                        const correction = roundedLeft - currentLeft;
+                        const currentTransform = gsap.getProperty(item, "x");
+                        gsap.set(item, { 
+                            x: Math.round(currentTransform + correction),
+                            force3D: true 
+                        });
+                    }
+                });
+            },
+            
+            getTotalWidth = () => {
+                return Math.round(items[length - 1].offsetLeft + xPercents[length - 1] / 100 * widths[length - 1] - startX + spaceBefore[0] + items[length - 1].offsetWidth * gsap.getProperty(items[length - 1], "scaleX") + (config.gap || 0));
+            },
+            
             populateWidths = () => {
                 let b1 = container.getBoundingClientRect(), b2;
+                
+                // Сначала сбрасываем все трансформации
+                gsap.set(items, { x: 0, xPercent: 0 });
+                
                 items.forEach((el, i) => {
-                    widths[i] = Math.round(parseFloat(gsap.getProperty(el, "width", "px")));
-                    
-                    // Более точное округление xPercents с учетом пиксельной сетки
-                    const rawXPercent = parseFloat(gsap.getProperty(el, "x", "px")) / widths[i] * 100 + gsap.getProperty(el, "xPercent");
-                    
-                    // Специальная обработка для первого слайда при !center && !offsetLeft
-                  
-                        // Округляем до целых пикселей в процентах
-                        const pixelPerfectPercent = Math.round(rawXPercent * widths[i] / 100) / widths[i] * 100;
-                        xPercents[i] = Math.round(pixelPerfectPercent * 1000) / 1000; // Округляем до тысячных для точности
+                    widths[i] = Math.round(el.offsetWidth);
+                    xPercents[i] = 0; // Изначально все элементы без смещения
                     
                     b2 = el.getBoundingClientRect();
                     spaceBefore[i] = Math.round(b2.left - (i ? b1.right : b1.left));
                     b1 = b2;
                 });
-                gsap.set(items, {
-                    xPercent: i => xPercents[i]
-                });
+                
                 totalWidth = getTotalWidth();
             },
+            
             timeWrap,
             populateOffsets = () => {
-                timeOffset = center ? tl.duration() * (container.offsetWidth / 2) / totalWidth : 0;
+                timeOffset = center ? tl.duration() * (Math.round(container.offsetWidth) / 2) / totalWidth : 0;
                 center && times.forEach((t, i) => {
                     times[i] = timeWrap(tl.labels["label" + i] + tl.duration() * widths[i] / 2 / totalWidth - timeOffset);
                 });
             },
+            
             getClosest = (values, value, wrap) => {
                 if (!values) return 0
                 let i = values.length,
@@ -234,62 +259,70 @@ export function horizontalLoop(items, config) {
                 }
                 return index;
             },
+            
             populateTimeline = () => {
                 let i, item, curX, distanceToStart, distanceToLoop;
                 tl.clear();
+                
                 for (i = 0; i < length; i++) {
                     item = items[i];
-                    curX = Math.round(xPercents[i] / 100 * widths[i]); // Округляем до пикселей
+                    curX = Math.round(xPercents[i] / 100 * widths[i]);
                     distanceToStart = Math.round(item.offsetLeft + curX - startX + spaceBefore[0] - offsetLeft);
                     distanceToLoop = Math.round(distanceToStart + (offsetLeft ? offsetLeft : 0) + widths[i] * gsap.getProperty(item, "scaleX"));
-                    // Более точное вычисление xPercent с привязкой к пиксельной сетке
-                    const targetXPixels = curX - distanceToLoop;
-                    const targetXPercent = Math.round(targetXPixels / widths[i] * 100 * 1000) / 1000; // Округляем до тысячных
+                    
+                    // Используем только x трансформации для более точного контроля
+                    const targetX = Math.round(curX - distanceToLoop);
+                    const fromX = Math.round(curX - distanceToLoop + totalWidth);
                     
                     tl.to(item, {
-                        xPercent: snap(targetXPercent),
-                        duration: distanceToLoop / pixelsPerSecond
+                        x: snap(targetX),
+                        duration: distanceToLoop / pixelsPerSecond,
+                        force3D: true
                     }, 0)
-                        .to(item, {
-                            opacity: config.opacity ? 0 : 1,
-                            duration: 0.3
-                        }, distanceToLoop / pixelsPerSecond)
-                        .fromTo(item, {
-                            xPercent: snap(Math.round((curX - distanceToLoop + totalWidth) / widths[i] * 100 * 1000) / 1000),
-                            opacity: config.opacity ? 0 : 1
-                        }, {
-                            xPercent: xPercents[i],
-                            opacity: 1,
-                            duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond,
-                            immediateRender: false,
-                            delay: config.opacity ? 0.3 : 0,
-                        }, distanceToLoop / pixelsPerSecond)
-                        .add("label" + i, distanceToStart / pixelsPerSecond);
+                    .to(item, {
+                        opacity: config.opacity ? 0 : 1,
+                        duration: 0.3
+                    }, distanceToLoop / pixelsPerSecond)
+                    .fromTo(item, {
+                        x: snap(fromX),
+                        opacity: config.opacity ? 0 : 1
+                    }, {
+                        x: Math.round(curX),
+                        opacity: 1,
+                        duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond,
+                        immediateRender: false,
+                        delay: config.opacity ? 0.3 : 0,
+                        force3D: true
+                    }, distanceToLoop / pixelsPerSecond)
+                    .add("label" + i, distanceToStart / pixelsPerSecond);
+                    
                     times[i] = distanceToStart / pixelsPerSecond;
                 }
                 timeWrap = gsap.utils.wrap(0, tl.duration());
             },
+            
             refresh = (deep) => {
                 let progress = tl.progress();
                 tl.progress(0, true);
                 populateWidths();
                 deep && populateTimeline();
                 populateOffsets();
-             
-                
                 deep && tl.draggable ? tl.time(times[curIndex], true) : tl.progress(progress, true);
+                
+                // Принудительное выравнивание после обновления
+                setTimeout(() => forcePixelAlignment(), 0);
             },
+            
             onResize = () => refresh(true),
             proxy;
 
-
-        gsap.set(items, { x: 0 });
+        // Устанавливаем начальные позиции без трансформаций
+        gsap.set(items, { x: 0, xPercent: 0, force3D: true });
 
         populateWidths();
         populateTimeline();
         populateOffsets();
         
-      
         window.addEventListener("resize", onResize);
 
         function toIndex(index, vars) {
@@ -307,24 +340,25 @@ export function horizontalLoop(items, config) {
             vars.overwrite = true;
             gsap.killTweensOf(proxy);
             
+            // Добавляем коллбек для выравнивания позиций
+            const originalOnComplete = vars.onComplete;
+            vars.onComplete = function() {
+                originalOnComplete && originalOnComplete.call(this);
+                forcePixelAlignment();
+            };
+            
             if (vars.duration === 0) {
                 const result = tl.time(timeWrap(time));
-                // Выравниваем позиции после мгновенного перехода
-                requestAnimationFrame(() => tl.alignPositions());
+                requestAnimationFrame(() => forcePixelAlignment());
                 return result;
             } else {
-                // Добавляем коллбек для выравнивания позиций после анимации
-                const originalOnComplete = vars.onComplete;
-                vars.onComplete = function() {
-                    originalOnComplete && originalOnComplete.call(this);
-                    requestAnimationFrame(() => tl.alignPositions());
-                };
                 return tl.tweenTo(time, vars);
             }
         }
 
         tl.toIndex = (index, vars) => toIndex(index, vars);
         let timeoutId = null
+        
         tl.closestIndex = setCurrent => {
             if (!items || !items.length) return 0;
 
@@ -343,15 +377,14 @@ export function horizontalLoop(items, config) {
 
             return index;
         };
+        
         tl.current = () => indexIsDirty ? tl.closestIndex(true) : curIndex;
         tl.next = vars => { toIndex(tl.current() + 1, vars) };
         tl.previous = vars => toIndex(tl.current() - 1, vars);
         tl.times = times;
         
-        // Добавляем функцию для принудительного выравнивания позиций
-        tl.alignPositions = () => {
-          
-        };
+        // Публичная функция для принудительного выравнивания позиций
+        tl.alignPositions = forcePixelAlignment;
 
         tl.destroy = () => {
             tl.pause();
@@ -407,7 +440,10 @@ export function horizontalLoop(items, config) {
             proxy = document.createElement("div");
             let wrap = gsap.utils.wrap(0, 1),
                 ratio, startProgress, draggable, lastSnap, initChangeX, wasPlaying,
-                align = () => tl.progress(wrap(startProgress + (draggable.startX - draggable.x) * ratio)),
+                align = () => {
+                    const progress = wrap(startProgress + (draggable.startX - draggable.x) * ratio);
+                    tl.progress(progress);
+                },
                 syncIndex = () => tl.closestIndex(true);
 
             if (typeof InertiaPlugin === "undefined") {
@@ -437,8 +473,6 @@ export function horizontalLoop(items, config) {
                     align();
                     if (wasPlaying) {
                         const currentVelocity = Math.abs(InertiaPlugin.getVelocity(proxy, "x"));
-
-                        // Для мобильных устройств уменьшаем порог остановки инерции
                         const velocityThreshold = pixelsPerSecond + 60;
 
                         if (currentVelocity <= velocityThreshold) {
@@ -450,10 +484,10 @@ export function horizontalLoop(items, config) {
                 inertia: !isMobile,
 
                 snap(value) {
-                    if (!config.snap) return
+                    if (!config.snap) return Math.round(value);
 
                     if (Math.abs(startProgress / -ratio - this.x) < 10) {
-                        return lastSnap + initChangeX;
+                        return Math.round(lastSnap + initChangeX);
                     }
 
                     let time = -(value * ratio) * tl.duration(),
@@ -465,8 +499,7 @@ export function horizontalLoop(items, config) {
 
                     lastSnap = (time + dif) / tl.duration() / -ratio;
                     
-                    // Округляем результат для предотвращения субпиксельных смещений
-                    return Math.round(lastSnap * 100) / 100;
+                    return Math.round(lastSnap);
                 },
                 onDragEnd() {
                     if (wasPlaying) {
@@ -476,21 +509,21 @@ export function horizontalLoop(items, config) {
                             tl.reverse();
                         }
                     } else if (isMobile) {
-                        // Принудительно докручиваем до ближайшего
                         const direction = dragDirection;
-                        const newIndex = tl.current() + (direction > 0 ? -1 : 1); // справа налево — это +1
+                        const newIndex = tl.current() + (direction > 0 ? -1 : 1);
                         tl.toIndex(newIndex, { duration: 0.45, ease: "power2.out" });
                     }
                     syncIndex();
+                    setTimeout(() => forcePixelAlignment(), 0);
                 },
                 onRelease() {
                     syncIndex();
                     indexIsDirty = true;
+                    setTimeout(() => forcePixelAlignment(), 0);
                 },
                 onThrowComplete: () => {
                     syncIndex();
-                    // Выравниваем позиции после завершения инерции
-                    requestAnimationFrame(() => tl.alignPositions());
+                    setTimeout(() => forcePixelAlignment(), 0);
                 }
             })[0];
 
@@ -501,6 +534,10 @@ export function horizontalLoop(items, config) {
         tl.closestIndex(true);
         lastIndex = curIndex;
         timeline = tl;
+        
+        // Финальное выравнивание после инициализации
+        setTimeout(() => forcePixelAlignment(), 0);
+        
         return () => window.removeEventListener("resize", onResize);
     });
 

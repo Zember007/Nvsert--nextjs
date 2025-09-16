@@ -667,3 +667,59 @@ input:-webkit-autofill {
         }
     }
 }
+
+/* Стили для предотвращения субпиксельных смещений */
+.skills__box {
+    transform: translateZ(0) translate3d(0, 0, 0); /* Принудительное аппаратное ускорение */
+    backface-visibility: hidden;
+    perspective: 1000px;
+    /* Принудительное округление позиций */
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+[data-slider="slide-skill"] {
+    transform: translateZ(0) translate3d(0, 0, 0); /* Принудительное аппаратное ускорение */
+    backface-visibility: hidden;
+    will-change: transform;
+    transform-style: preserve-3d;
+    
+    /* Принудительное пиксельное выравнивание */
+    position: relative;
+    
+    /* Предотвращение сглаживания */
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+/* Дополнительные стили для четкого позиционирования */
+.skills__box,
+[data-slider="slide-skill"] {
+    /* Предотвращение размытия при трансформациях */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+    /* Точное позиционирование */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* Если используете центрирование */
+.skills__box.centered {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Стили для точек навигации */
+.slide-dots {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+.slide-dots-box {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
