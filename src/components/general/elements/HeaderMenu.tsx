@@ -161,13 +161,13 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                                                     <Link
 
                                                         href={item.slug}
-                                                        className={`${index_item === 0 ? 'first-child' : ''} ${item.img ? 'have-img' : ''} header__menu-mob-item `}
+                                                        className={`${index_item === 0 ? 'first-child' : ''} ${item.img ? 'have-img' : ''} header__menu-mob-item group`}
                                                     >
-                                                        <div className="flex items-center gap-[20px]">
+                                                        <div className="flex items-center gap-[20px] transition-transform will-change-transform duration-100 group-active:scale-[.95]">
                                                             {item.img?.url && (
                                                                 <Image src={'https://test11.audiosector.ru/cp' + item.img.url} alt="document" width={43} height={60} />
                                                             )}
-                                                            <span className="text-[20px] text-[#000]">{filterPrepositions(item.title)}</span>
+                                                            <span className="text-[20px] text-[#000] ">{filterPrepositions(item.title)}</span>
                                                         </div>
                                                         {item.items && (
                                                             <Image src={ArrowIcon} alt="more" width={20} height={20} />
@@ -178,9 +178,9 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                                                     <button
 
                                                         onClick={() => handleItemClick(item)}
-                                                        className={`${index_item === 0 ? 'first-child' : ''} ${'img' in item && item.img ? 'have-img' : ''} header__menu-mob-item`}
+                                                        className={`${index_item === 0 ? 'first-child' : ''} ${'img' in item && item.img ? 'have-img' : ''} header__menu-mob-item group`}
                                                     >
-                                                        <div className="flex items-center gap-[20px]">
+                                                        <div className="flex items-center gap-[20px] transition-transform will-change-transform duration-100 group-active:scale-[.95]">
                                                             {'img' in item && item.img?.url &&
                                                                 <Image src={'https://test11.audiosector.ru/cp' + item.img.url} alt="document" width={43} height={60} />
                                                             }
