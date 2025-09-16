@@ -169,7 +169,7 @@ const AppHeader = () => {
       <header className={`rubik header ${(servicesMenuActive || burgerMenuActive) ? 'active' : ''}`}>
 
         <div
-          className="header__bg min-w-[192px] xl:grow-0 grow xl:opacity-0">
+          className="header__bg min-w-[192px] xl:grow-0 grow xl:opacity-0 !px-[20px]">
           <AppLogo
             className={`xl:mx-auto ${burgerMenuActive ? '!text-[#000]' : ''}`}
           />
