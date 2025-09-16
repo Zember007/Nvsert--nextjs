@@ -59,7 +59,7 @@ const AppMainSkills = () => {
             
             timeLine.current = horizontalLoop(slides, {
                 paused: true,
-                center: widthWindow < 1240 && widthWindow >= 900 ? false : true,
+                center: widthWindow >= 900 ? false : true,
                 draggable: true,
                 mobile: true,
                 gap: Math.round(gap),
