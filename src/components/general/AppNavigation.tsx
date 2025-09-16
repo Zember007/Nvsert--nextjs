@@ -74,9 +74,9 @@ const AppNavigationItem = ({ img, title, controls, link, dark, className }: { li
             <div ref={setWrapperRef} className={`tariff-wrap ${className} !max-w-[250px] `}>
                 <Link ref={setButtonRef} href={'/' + link} className={`tariff text-left  no-transitions overflow-hidden not-backdrop flex  gap-[10px] group/img  rounded-[3px] items-center    border-solid  border border-[transparent] h-[72px] p-[5px] ${dark ? 'hover:border-[#34446D] hover:bg-[#F5F5F2] ' : ' hover:border-[#fff] hover:bg-[#34446d33]'}`}>
                     <motion.div
-                        className={` overflow-hidden h-[60px] rounded-[3px] min-w-[43px] border-solid border border-[#93969D] `}
+                        className={` overflow-hidden h-[60px] rounded-[3px] min-w-[43px] w-[43px] border-solid border border-[#93969D] `}
                         animate={controls}>
-                        <Image src={img as string} className="w-[43px] h-[60px]" width={43} height={60} alt="document" />
+                        <Image src={img as string} className="h-full" width={43} height={60} alt="document" />
                     </motion.div>
                     <p className={`${dark ? 'text-[#000] text-[18px]' : 'text-[#FFF] xxxxl:text-[18px] xxl:text-[16px] text-[14px]'} leading-[1.1] pr-[6px] whitespace-pre-line max-w-full`}>{filterPrepositions(title)}</p>
                 </Link>
