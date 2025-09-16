@@ -163,7 +163,7 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                                                         href={item.slug}
                                                         className={`${index_item === 0 ? 'first-child' : ''} ${item.img ? 'have-img' : ''} header__menu-mob-item group`}
                                                     >
-                                                        <div className="flex items-center gap-[20px] transition-transform will-change-transform duration-100 group-active:scale-[.95]">
+                                                        <div className="flex items-center gap-[20px] transition-transform will-change-transform duration-100 group-active:scale-[.98]">
                                                             {item.img?.url && (
                                                                 <Image src={'https://test11.audiosector.ru/cp' + item.img.url} alt="document" width={43} height={60} />
                                                             )}
