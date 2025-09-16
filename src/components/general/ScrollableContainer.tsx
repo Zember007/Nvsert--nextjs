@@ -37,7 +37,6 @@ const ScrollableContainer: React.FC<ScrollableContainerProps> = ({
     if (React.isValidElement(child) && index === 0) {
       // Передаем ref первому дочернему элементу
       const childElement = child as React.ReactElement<any>;
-      console.log('ScrollableContainer: Processing child:', childElement.type, 'with ref:', containerRef);
       return React.cloneElement(childElement, {
         ref: containerRef,
         style: {

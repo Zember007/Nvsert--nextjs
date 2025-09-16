@@ -67,7 +67,6 @@ const AppInput = ({ title, defaultValue, disable, fail, message = true, inputNam
     return (
         <div className={`relative z-[0] `}>
             <label className={`field  ${visibleError && ((errors[inputName]) || fail) && isSubmitted && 'bounce'}`}>
-
                 <input         
                     {...register(inputName, {
                         required
