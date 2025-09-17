@@ -99,7 +99,7 @@ const LayoutContent = ({ children }: { children: ReactNode }) => {
         <>
             <head>
                 <title>{metadata.title}</title>
-                <meta name="theme-color" content="red"></meta>
+                <meta name="theme-color" content="#34446D"></meta>
                 <meta name="description" content={metadata.description} />
                 <meta name="keywords" content={metadata.keywords} />
                 <meta property="og:title" content={metadata.openGraph?.title} />
