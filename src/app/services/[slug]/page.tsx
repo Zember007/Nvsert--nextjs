@@ -6,6 +6,7 @@ import { RootState } from '@/config/store';
 import ServiceCard from '@/components/services/ServiceCard';
 import AppBreadcrumbs from '@/components/general/AppBreadcrumbs';
 import { AppNavigationItem } from '@/components/general/AppNavigation';
+import AppCollapsibleList from '@/components/general/AppCollapsibleList';
 import Button from '@/components/ui/Button';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 
@@ -75,27 +76,21 @@ const ServiceDetailContent = () => {
                         <ServiceCard serviceName={match.serviceName} certificate={match.item} title={false} padding={false} />
 
                         {recommendedServices && (
-                            <div className="flex flex-col gap-[20px]">
-                                <div className="flex items-center justify-end gap-[10px] pb-[12px] border-b border-[#93969D]">
-                                    <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g clip-path="url(#clip0_7117_3111)">
-                                            <path d="M4.95426 3.77441L8.81413 7.5767C9.06163 7.82013 9.06163 8.17899 8.81413 8.42241L1.35538 15.771C0.888506 16.2293 -0.000244141 15.9516 -0.000244141 15.3481V8.80756L4.95426 3.77441Z" fill="black" />
-                                            <path opacity="0.5" d="M0 7.1918V0.651224C0 0.0477958 0.88875 -0.229919 1.35562 0.228367L4.14675 2.97808L0 7.1918Z" fill="black" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_7117_3111">
-                                                <rect width="9" height="16" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-
-                                    <span className="text-[16px] text-[#161616]">Рекомендуем к оформлению</span>
-                                </div>
-
-                                {recommendedServices.map((children) => (
-                                    <AppNavigationItem dark={true} link={children.slug} key={children.id} title={children.title} img={'https://test11.audiosector.ru/cp' + children.img?.url} />
-                                ))}
-                            </div>
+                            <AppCollapsibleList
+                                title={'Рекомендуем к оформлению'}
+                                items={recommendedServices}
+                                defaultOpen={true}
+                                listClassName='flex flex-col gap-[20px]'
+                                renderItem={(children) => (
+                                    <AppNavigationItem
+                                        dark={true}
+                                        link={children.slug}
+                                        key={children.id}
+                                        title={children.title}
+                                        img={'https://test11.audiosector.ru/cp' + children.img?.url}
+                                    />
+                                )}
+                            />
                         )}
                     </div>
 
