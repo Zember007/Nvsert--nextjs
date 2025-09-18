@@ -7,7 +7,7 @@ type TariffButtonProps = {
     buttonClassName?: string;
 };
 
-const TariffButton: FC<TariffButtonProps> = ({
+const Button: FC<TariffButtonProps> = ({
     label = 'Подробнее',
     wrapperClassName = 'skills-tariff-wrap tariff-wrap ',
     buttonClassName = 'slider__button group btnIconAn doc-btn tariff'
@@ -28,6 +28,6 @@ const TariffButton: FC<TariffButtonProps> = ({
     );
 };
 
-export default TariffButton;
+export default Button;
 
 

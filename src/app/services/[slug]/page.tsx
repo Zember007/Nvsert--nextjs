@@ -49,7 +49,7 @@ const ServiceDetailContent = () => {
 
     return (
         <div className="main text-[#000] overflow-hidden select-none relative mb-[100px]">
-            
+
 
 
             {/* Main Content */}
@@ -109,12 +109,21 @@ const ServiceDetailContent = () => {
                                     <h2 className="text-[24px] font-light text-[#34446D] flex-1">
                                         Что такое сертификат соответствия ГОСТ Р
                                     </h2>
-                                    <div className="w-[16px] h-[16px] relative">
-                                        <svg width="16" height="16" viewBox="0 0 16 16" className="text-[#93969D]">
-                                            <path d="M1 1L15 15" stroke="currentColor" strokeWidth="2" />
-                                            <path d="M1 1L9 9" stroke="currentColor" strokeWidth="2" />
-                                        </svg>
-                                    </div>
+                                    <svg
+                                    className={`transition-transform duration-100 ${!expandedSections.includes('what-is') ? 'rotate-180' : ''}`}
+                                    
+                                    width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_7117_2690)">
+                                            <path d="M15 15L0.999999 0.999999" stroke="#93969D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M1 9L1 1L9 1" stroke="#93969D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_7117_2690">
+                                                <rect width="16" height="16" fill="white" transform="matrix(-1 0 0 -1 16 16)" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+
                                 </div>
 
                                 {expandedSections.includes('what-is') && (
@@ -152,12 +161,20 @@ const ServiceDetailContent = () => {
                                     <h2 className="text-[24px] font-light text-black  flex-1">
                                         Виды сертификатов: обязательный и добровольный
                                     </h2>
-                                    <div className="w-[16px] h-[16px] relative">
-                                        <svg width="16" height="16" viewBox="0 0 16 16" className="text-[#93969D]">
-                                            <path d="M1 1L15 15" stroke="currentColor" strokeWidth="2" />
-                                            <path d="M1 1L9 9" stroke="currentColor" strokeWidth="2" />
-                                        </svg>
-                                    </div>
+                                    <svg 
+                                    className={`transition-transform duration-100 ${!expandedSections.includes('types') ? 'rotate-180' : ''}`}
+                                    width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_7117_2690)">
+                                            <path d="M15 15L0.999999 0.999999" stroke="#93969D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M1 9L1 1L9 1" stroke="#93969D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_7117_2690">
+                                                <rect width="16" height="16" fill="white" transform="matrix(-1 0 0 -1 16 16)" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+
                                 </div>
 
                                 {expandedSections.includes('types') && (
@@ -198,7 +215,7 @@ const ServiceDetailContent = () => {
                     </div>
 
                     {/* Navigation Sidebar */}
-                   {/*  <div className="w-[250px]">
+                    {/*  <div className="w-[250px]">
                         <div className="mb-[20px]">
                             <div className="flex items-center gap-[10px] pb-[12px] border-b border-[#93969D] w-[393px]">
                                 <div className="w-[9px] h-[16px] relative">

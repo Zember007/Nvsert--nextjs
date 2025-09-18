@@ -11,7 +11,7 @@ import useWindowWidth from '@/hook/useWindowWidth';
 import { horizontalLoop } from '@/scripts/slider';
 import { filterPrepositions } from '@/hook/filter';
 import { useIntersectionObserver } from '@/hook/useIntersectionObserver';
-import TariffButton from '@/components/ui/TariffButton';
+import Button from '@/components/ui/Button';
 
 gsap.registerPlugin(Draggable);
 
@@ -152,7 +152,7 @@ const AppMainSkills = () => {
                         {filterPrepositions('Наша компания признана одной из ведущих на рынке сертификации в Российской Федерации и стран Евразийского Экономического Союза. Специалисты NVSERT предоставляют широкий спектр услуг, направленный на оформление обязательной и добровольной сертификации, декларирования, соответствия требованиям технических регламентов и других документов, подтверждающих качество выпускаемой продукции.')}
                     </h3>
 
-                    <TariffButton />
+                    <Button />
                 </div>
 
 
