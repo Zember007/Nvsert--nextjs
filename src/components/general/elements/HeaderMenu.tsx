@@ -160,7 +160,7 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                                                 'slug' in item && item.slug ? (
                                                     <Link
 
-                                                        href={item.slug}
+                                                        href={'/services/' + item.slug}
                                                         className={`${index_item === 0 ? 'first-child' : ''} ${item.img ? 'have-img' : ''} header__menu-mob-item group`}
                                                     >
                                                         <div className="flex items-center gap-[20px] transition-transform will-change-transform duration-100 group-active:scale-[.98]">
