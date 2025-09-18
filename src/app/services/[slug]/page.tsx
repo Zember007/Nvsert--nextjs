@@ -6,13 +6,15 @@ import { RootState } from '@/config/store';
 import ServiceCard from '@/components/services/ServiceCard';
 import AppBreadcrumbs from '@/components/general/AppBreadcrumbs';
 import { AppNavigationItem } from '@/components/general/AppNavigation';
+import Button from '@/components/ui/Button';
+import { useHeaderContext } from '@/components/contexts/HeaderContext';
 
 const ServiceDetailContent = () => {
     const params = useParams<{ slug: string }>();
     const slug = Array.isArray(params?.slug) ? params.slug[0] : params?.slug;
     const { services } = useSelector((state: RootState) => state.navigation);
     const [expandedSections, setExpandedSections] = useState<string[]>(['what-is']);
-
+    const { openDefaultModal } = useHeaderContext();
     const match = useMemo(() => {
         for (const service of services) {
             const found = service.items.find(item => item.slug === slug);
@@ -59,9 +61,10 @@ const ServiceDetailContent = () => {
                     <h1 className="text-[48px] font-light tracking-[-0.04em] text-black">
                         {match?.item.title || 'Сертификат соответствия ГОСТ Р'}
                     </h1>
-                    <button className="bg-[#34446D] border border-[#34446D] text-white px-[15px] py-[13px] rounded text-[20px] font-light  h-[50px] backdrop-blur-sm">
-                        Оформить заявку
-                    </button>
+                    <Button
+                    onClick={() => { openDefaultModal('orderForm') }}
+                    label='Оформить заявку'
+                    />
                 </div>
 
                 {/* Two Column Layout */}

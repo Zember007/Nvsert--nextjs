@@ -6,19 +6,21 @@ type TariffButtonProps = {
     icon?: React.ReactNode;
     wrapperClassName?: string;
     buttonClassName?: string;
+    onClick?: () => void;
 };
 
 const Button: FC<TariffButtonProps> = ({
     label = 'Подробнее',
     icon,
     wrapperClassName,
-    buttonClassName
+    buttonClassName,
+    onClick,
 }) => {
     const { setButtonRef, setWrapperRef } = useButton();
 
     return (
         <div className={`skills-tariff-wrap main-button-wrap tariff-wrap ${wrapperClassName}`} ref={setWrapperRef}>
-            <button ref={setButtonRef} className={` main-button btnIconAn doc-btn tariff ${buttonClassName}`}>
+            <button ref={setButtonRef} className={` main-button btnIconAn doc-btn tariff ${buttonClassName}`} onClick={onClick}>
                 <span className="sendText">{label}</span>
                 <span className="sendIconLeft">
                     {icon ?
