@@ -37,7 +37,7 @@ const RichTextRenderer: React.FC<{ content: string }> = ({ content }) => {
 
         lines.forEach((line, index) => {
             const trimmedLine = line.trim();
-            
+
             if (!trimmedLine) {
                 flushList();
                 elements.push(<br key={`br-${index}`} />);
@@ -80,18 +80,18 @@ const RichTextRenderer: React.FC<{ content: string }> = ({ content }) => {
 };
 
 // Component to render individual content blocks as collapsible sections
-const ContentBlockRenderer: React.FC<{ 
-    block: ContentBlock; 
-    isExpanded: boolean; 
-    onToggle: () => void; 
+const ContentBlockRenderer: React.FC<{
+    block: ContentBlock;
+    isExpanded: boolean;
+    onToggle: () => void;
 }> = ({ block, isExpanded, onToggle }) => {
     const { heading, richText } = block;
 
     if (richText && heading) {
         return (
             <div
-            id={'block-' + block.id}
-            className="w-full">
+                id={'block-' + block.id}
+                className="w-full">
                 <div
                     className="flex justify-center items-center gap-[10px] pb-[13px] border-b border-[#93969D] cursor-pointer"
                     onClick={onToggle}
@@ -153,12 +153,12 @@ const ServiceDetailContent = () => {
         return [...match.item.content].sort((a, b) => a.order - b.order);
     }, [match?.item?.content]);
 
-    
+
 
     // Toggle section expansion
     const toggleSection = (blockId: number) => {
 
-        
+
         setExpandedSections(prev =>
             prev.includes(blockId)
                 ? prev.filter(id => id !== blockId)
@@ -185,50 +185,55 @@ const ServiceDetailContent = () => {
         <div className="main"></div>
     );
 
-   
+
 
     return (
-        <div className="main text-[#000] overflow-hidden select-none relative mb-[100px]">
+        <div className="main text-[#000]  select-none relative mb-[100px]">
 
 
 
             {/* Main Content */}
-            <div className="wrapper pt-[58px]">
+            <div className="wrapper pt-[60px]">
                 {/* Header Section */}
                 <div className="flex justify-between items-center mb-[50px]">
                     <h1 className="text-[48px] font-light tracking-[-0.04em] text-black">
                         {match?.item.title || 'Сертификат соответствия ГОСТ Р'}
                     </h1>
                     <Button
-                    onClick={() => { openDefaultModal('orderForm') }}
-                    label='Оформить заявку'
+                        onClick={() => { openDefaultModal('orderForm') }}
+                        label='Оформить заявку'
                     />
                 </div>
 
                 {/* Two Column Layout */}
-                <div className="flex gap-[30px]">
+                <div className="flex gap-[30px] items-stretch">
                     {/* Left Column */}
-                    <div className=" flex flex-col gap-[37px]  w-[250px]">
+                    <div className="w-[250px] relative">
+                        <div className=" sticky top-[120px]">
+                            <div className=" flex flex-col gap-[37px] ">
 
-                        <ServiceCard serviceName={match.serviceName} certificate={match.item} title={false} padding={false} />
+                                <ServiceCard serviceName={match.serviceName} certificate={match.item} title={false} padding={false} />
 
-                        {recommendedServices && (
-                            <AppCollapsibleList
-                                title={'Рекомендуем к оформлению'}
-                                items={recommendedServices}
-                                defaultOpen={true}
-                                listClassName='flex flex-col gap-[20px]'
-                                renderItem={(children) => (
-                                    <AppNavigationItem
-                                        dark={true}
-                                        link={children.slug}
-                                        key={children.id}
-                                        title={children.title}
-                                        img={'https://test11.audiosector.ru/cp' + children.img?.url}
+                                {recommendedServices && (
+                                    <AppCollapsibleList
+                                        title={'Рекомендуем к оформлению'}
+                                        items={recommendedServices}
+                                        defaultOpen={true}
+                                        listClassName='flex flex-col gap-[20px]'
+                                        renderItem={(children) => (
+                                            <AppNavigationItem
+                                                dark={true}
+                                                link={children.slug}
+                                                key={children.id}
+                                                title={children.title}
+                                                img={'https://test11.audiosector.ru/cp' + children.img?.url}
+                                            />
+                                        )}
                                     />
                                 )}
-                            />
-                        )}
+                            </div>
+                        </div>
+
                     </div>
 
                     {/* Right Column */}
@@ -237,8 +242,8 @@ const ServiceDetailContent = () => {
                         <div className="w-full flex flex-col gap-[30px] items-center">
                             {sortedContentBlocks.map((block, index) => (
                                 <div key={block.id} className="w-full">
-                                    <ContentBlockRenderer 
-                                        block={block} 
+                                    <ContentBlockRenderer
+                                        block={block}
                                         isExpanded={expandedSections.includes(block.id)}
                                         onToggle={() => toggleSection(block.id)}
                                     />
@@ -256,27 +261,27 @@ const ServiceDetailContent = () => {
                                 <p className="text-[16px] font-light tracking-[-0.01em]  text-[rgba(0,0,0,0.6)] w-[378px] leading-[1.4]">
                                     Наши специалисты проведут бесплатную предварительную проверку и дадут чёткий ответ.
                                 </p>
-                               <Button
-                               onClick={() => { openDefaultModal('orderForm') }}
-                               label='Узнать у специалиста'
-                               />
+                                <Button
+                                    onClick={() => { openDefaultModal('orderForm') }}
+                                    label='Узнать у специалиста'
+                                />
                             </div>
                         </div>
                     </div>
 
                     {/* Navigation Sidebar */}
-                     <div className="w-[250px]">
-                       
+                    <div className="w-[250px]">
 
-                 
+
+
 
                         <AppCollapsibleList
-                                title={'Навигация по услуге'}
-                                items={navigationItems}
-                                defaultOpen={true}
-                                listClassName='flex flex-col gap-[20px]'
-                                renderItem={(item, index) => (
-                                    <button
+                            title={'Навигация по услуге'}
+                            items={navigationItems}
+                            defaultOpen={true}
+                            listClassName='flex flex-col gap-[20px]'
+                            renderItem={(item, index) => (
+                                <button
                                     key={index}
                                     className={`flex items-center gap-[24px]  cursor-pointer text-left`}
                                     onClick={() => toggleSection(item.id)}
@@ -296,8 +301,8 @@ const ServiceDetailContent = () => {
                                         {item.title}
                                     </span>
                                 </button>
-                                )}
-                            />
+                            )}
+                        />
                     </div>
                 </div>
             </div>
