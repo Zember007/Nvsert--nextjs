@@ -9,12 +9,127 @@ import { AppNavigationItem } from '@/components/general/AppNavigation';
 import AppCollapsibleList from '@/components/general/AppCollapsibleList';
 import Button from '@/components/ui/Button';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
+import { ContentBlock } from '@/store/navigation';
+
+// Component to render rich text with proper formatting
+const RichTextRenderer: React.FC<{ content: string }> = ({ content }) => {
+    // Split content by lines and process each line
+    const processContent = (text: string) => {
+        const lines = text.split('\n');
+        const elements: React.ReactNode[] = [];
+        let currentListItems: string[] = [];
+        let listKey = 0;
+
+        const flushList = () => {
+            if (currentListItems.length > 0) {
+                elements.push(
+                    <ul key={`list-${listKey++}`} className="list-disc list-inside ">
+                        {currentListItems.map((item, idx) => (
+                            <li key={idx} className="text-[16px] font-light leading-[1.5] text-black ml-[20px]">
+                                {item}
+                            </li>
+                        ))}
+                    </ul>
+                );
+                currentListItems = [];
+            }
+        };
+
+        lines.forEach((line, index) => {
+            const trimmedLine = line.trim();
+            
+            if (!trimmedLine) {
+                flushList();
+                elements.push(<br key={`br-${index}`} />);
+                return;
+            }
+
+            // Handle list items (lines starting with -)
+            if (trimmedLine.startsWith('- ')) {
+                currentListItems.push(trimmedLine.substring(2));
+                return;
+            }
+
+            // Handle subheadings (lines starting with #)
+            if (trimmedLine.startsWith('# ')) {
+                flushList();
+                elements.push(
+                    <h3 key={`subheading-${index}`} className="text-[18px] font-normal tracking-[-0.01em] text-black">
+                        {trimmedLine.substring(2)}
+                    </h3>
+                );
+                return;
+            }
+
+            // Regular paragraph
+            flushList();
+            if (trimmedLine) {
+                elements.push(
+                    <p key={`p-${index}`} className="text-[16px] font-light leading-[1.5] text-black">
+                        {trimmedLine}
+                    </p>
+                );
+            }
+        });
+
+        flushList(); // Flush any remaining list items
+        return elements;
+    };
+
+    return <div>{processContent(content)}</div>;
+};
+
+// Component to render individual content blocks as collapsible sections
+const ContentBlockRenderer: React.FC<{ 
+    block: ContentBlock; 
+    isExpanded: boolean; 
+    onToggle: () => void; 
+}> = ({ block, isExpanded, onToggle }) => {
+    const { blockType, heading, headingLevel, richText } = block;
+
+    if (blockType === 'paragraph' && richText && heading) {
+        return (
+            <div className="w-full">
+                <div
+                    className="flex justify-center items-center gap-[10px] pb-[13px] border-b border-[#93969D] cursor-pointer"
+                    onClick={onToggle}
+                >
+                    <h2 className="text-[24px] font-light text-[#34446D] flex-1">
+                        {heading}
+                    </h2>
+                    <svg
+                        className={`transition-transform duration-100 ${!isExpanded ? 'rotate-180' : ''}`}
+                        width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <g clipPath="url(#clip0_7117_2690)">
+                            <path d="M15 15L0.999999 0.999999" stroke="#93969D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M1 9L1 1L9 1" stroke="#93969D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_7117_2690">
+                                <rect width="16" height="16" fill="white" transform="matrix(-1 0 0 -1 16 16)" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </div>
+
+                {isExpanded && (
+                    <div className="pt-[20px]">
+                        <RichTextRenderer content={richText} />
+                    </div>
+                )}
+            </div>
+        );
+    }
+
+    return null;
+};
 
 const ServiceDetailContent = () => {
     const params = useParams<{ slug: string }>();
     const slug = Array.isArray(params?.slug) ? params.slug[0] : params?.slug;
     const { services } = useSelector((state: RootState) => state.navigation);
-    const [expandedSections, setExpandedSections] = useState<string[]>(['what-is']);
+    const [expandedSections, setExpandedSections] = useState<number[]>([]);
     const { openDefaultModal } = useHeaderContext();
     const match = useMemo(() => {
         for (const service of services) {
@@ -30,21 +145,27 @@ const ServiceDetailContent = () => {
         return services.find(service => service.name === match?.serviceName)?.items;
     }, [services, match]);
 
-    const toggleSection = (sectionId: string) => {
+    // Sort content blocks by order
+    const sortedContentBlocks = useMemo(() => {
+        if (!match?.item?.content) return [];
+        return [...match.item.content].sort((a, b) => a.order - b.order);
+    }, [match?.item?.content]);
+
+    // Toggle section expansion
+    const toggleSection = (blockId: number) => {
         setExpandedSections(prev =>
-            prev.includes(sectionId)
-                ? prev.filter(id => id !== sectionId)
-                : [...prev, sectionId]
+            prev.includes(blockId)
+                ? prev.filter(id => id !== blockId)
+                : [...prev, blockId]
         );
     };
 
-    const navigationItems = [
-        { title: 'Что такое сертификат соответствия ГОСТ Р', active: true, id: 'what-is' },
-        { title: 'Виды сертификатов: обязательный и добровольный', active: false, id: 'types' },
-        { title: 'Где и когда требуется сертификат ГОСТ Р', active: false, id: 'when-needed' },
-        { title: 'Зачем оформлять сертификат соответствия ГОСТ Р', active: false, id: 'why' },
-        { title: 'Почему выбирают NVSERT', active: false, id: 'why-us' }
-    ];
+    // Auto-expand first section
+    React.useEffect(() => {
+        if (sortedContentBlocks.length > 0 && expandedSections.length === 0) {
+            setExpandedSections([sortedContentBlocks[0].id]);
+        }
+    }, [sortedContentBlocks]);
 
     if (!slug || !match) return (
         <div className="main"></div>
@@ -96,102 +217,20 @@ const ServiceDetailContent = () => {
 
                     {/* Right Column */}
                     <div className="flex-1 flex flex-col items-center gap-[50px]">
-                        {/* Expandable Sections */}
+                        {/* Dynamic Content Blocks */}
                         <div className="w-full flex flex-col gap-[30px] items-center">
-                            {/* What is section */}
-                            <div className="w-full">
-                                <div
-                                    className="flex justify-center items-center gap-[10px] pb-[13px] border-b border-[#93969D] cursor-pointer"
-                                    onClick={() => toggleSection('what-is')}
-                                >
-                                    <h2 className="text-[24px] font-light text-[#34446D] flex-1">
-                                        Что такое сертификат соответствия ГОСТ Р
-                                    </h2>
-                                    <svg
-                                    className={`transition-transform duration-100 ${!expandedSections.includes('what-is') ? 'rotate-180' : ''}`}
-                                    
-                                    width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g clip-path="url(#clip0_7117_2690)">
-                                            <path d="M15 15L0.999999 0.999999" stroke="#93969D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M1 9L1 1L9 1" stroke="#93969D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_7117_2690">
-                                                <rect width="16" height="16" fill="white" transform="matrix(-1 0 0 -1 16 16)" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-
+                            {sortedContentBlocks.map((block, index) => (
+                                <div key={block.id} className="w-full">
+                                    <ContentBlockRenderer 
+                                        block={block} 
+                                        isExpanded={expandedSections.includes(block.id)}
+                                        onToggle={() => toggleSection(block.id)}
+                                    />
+                                    {index < sortedContentBlocks.length - 1 && (
+                                        <div className="mt-[30px]" />
+                                    )}
                                 </div>
-
-                                {expandedSections.includes('what-is') && (
-                                    <div className="pt-[20px]">
-                                        <div className="text-[16px] font-light leading-[1.5] text-black mb-[20px]">
-                                            Сертификат соответствия ГОСТ Р — это официальный документ, подтверждающий, что продукция соответствует установленным в России требованиям безопасности, качества и техническим стандартам. Он выдаётся в рамках системы технического регулирования и может основываться на национальных ГОСТах, технических регламентах Таможенного союза (ТР ТС), регламентах Евразийского экономического союза (ТР ЕАЭС) или других нормативных актах.
-                                        </div>
-
-                                        <div className="mb-[20px]">
-                                            <h3 className="text-[18px] font-normal tracking-[-0.01em] text-black mb-[10px]">Кто может выдавать сертификат?</h3>
-                                            <div className="text-[16px] font-light leading-[1.5] text-black">
-                                                Выдачей сертификатов ГОСТ Р занимаются только аккредитованные органы сертификации. Они включены в реестр Федеральной службы по аккредитации (Росаккредитация). Проверить легальность можно в открытом реестре на сайте fsa.gov.ru — по номеру сертификата или названию организации.
-                                            </div>
-                                        </div>
-
-                                        <div className="mb-[20px]">
-                                            <h3 className="text-[18px] font-normal tracking-[-0.01em] text-black mb-[10px]">Роль аккредитованных лабораторий</h3>
-                                            <div className="text-[16px] font-light leading-[1.5] text-black">
-                                                Лаборатория, проводящая испытания, должна иметь аккредитацию на соответствующий перечень методик. Без этого результаты будут признаны недействительными. Протоколы испытаний составляют юридическую основу для выдачи сертификата и могут быть использованы при судебных разбирательствах, проверках и международных поставках.
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-
-                            {/* Banner 1 */}
-                            <div className="w-[700px] h-[300px] bg-gray-400 rounded-[8px]"></div>
-
-                            {/* Types section */}
-                            <div className="w-full">
-                                <div
-                                    className="flex justify-center items-center gap-[10px] pb-[13px] border-b border-[#CCCCCC] cursor-pointer"
-                                    onClick={() => toggleSection('types')}
-                                >
-                                    <h2 className="text-[24px] font-light text-black  flex-1">
-                                        Виды сертификатов: обязательный и добровольный
-                                    </h2>
-                                    <svg 
-                                    className={`transition-transform duration-100 ${!expandedSections.includes('types') ? 'rotate-180' : ''}`}
-                                    width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g clip-path="url(#clip0_7117_2690)">
-                                            <path d="M15 15L0.999999 0.999999" stroke="#93969D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M1 9L1 1L9 1" stroke="#93969D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_7117_2690">
-                                                <rect width="16" height="16" fill="white" transform="matrix(-1 0 0 -1 16 16)" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-
-                                </div>
-
-                                {expandedSections.includes('types') && (
-                                    <div className="pt-[20px] space-y-[20px]">
-                                        <div>
-                                            <h3 className="text-[18px] font-normal tracking-[-0.01em] text-black mb-[10px]">Обязательный сертификат соответствия</h3>
-                                            <div className="text-[16px] font-light leading-[1.5] text-black">
-                                                Обязательная сертификация требуется для продукции, включённой в утверждённый правительством перечень товаров, подлежащих обязательной оценке соответствия.
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h3 className="text-[18px] font-normal tracking-[-0.01em] text-black mb-[10px]">Добровольный сертификат соответствия</h3>
-                                            <div className="text-[16px] font-light leading-[1.5] text-black">
-                                                Этот документ оформляется по инициативе производителя или поставщика — в тех случаях, когда продукция не подлежит обязательной сертификации.
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
+                            ))}
 
                             {/* CTA Banner */}
                             <div className="w-[700px] h-[300px] bg-[rgba(52,68,109,0.2)] rounded-[8px] flex flex-col justify-center items-center gap-[16px] p-[40px] backdrop-blur-sm">
@@ -201,14 +240,13 @@ const ServiceDetailContent = () => {
                                 <p className="text-[16px] font-light tracking-[-0.01em]  text-[rgba(0,0,0,0.6)] w-[378px] leading-[1.4]">
                                     Наши специалисты проведут бесплатную предварительную проверку и дадут чёткий ответ.
                                 </p>
-                                <button className="bg-[#34446D] text-white px-[15px] py-[13px] rounded w-[280px] h-[50px] text-[20px] font-light backdrop-blur-sm">
+                                <button 
+                                    onClick={() => { openDefaultModal('orderForm') }}
+                                    className="bg-[#34446D] text-white px-[15px] py-[13px] rounded w-[280px] h-[50px] text-[20px] font-light backdrop-blur-sm hover:bg-[#2a3654] transition-colors"
+                                >
                                     Узнать у специалиста
                                 </button>
                             </div>
-
-                            {/* More banners */}
-                            <div className="w-[700px] h-[300px] bg-gray-400 rounded-[8px]"></div>
-                            <div className="w-[700px] h-[300px] bg-gray-400 rounded-[8px]"></div>
                         </div>
                     </div>
 

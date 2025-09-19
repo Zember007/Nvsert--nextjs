@@ -18,6 +18,18 @@ export interface NavigationItem {
   documents: any[];
   img: any;
   category: any;
+  content?: ContentBlock[];
+}
+
+export interface ContentBlock {
+  id: number;
+  order: number;
+  blockType: string;
+  heading: string;
+  headingLevel: string;
+  text?: string | null;
+  richText?: string;
+  imageCaption?: string;
 }
 
 

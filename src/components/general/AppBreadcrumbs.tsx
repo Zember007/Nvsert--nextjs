@@ -21,8 +21,6 @@ const AppBreadcrumbs = ({ root, title = '', breadcrumbs = [] }: AppBreadcrumbsPr
 
   return (
     <>
-
-
       <ul className="breadcrumbs">
         <li className="breadcrumbs__item">
           <Link
