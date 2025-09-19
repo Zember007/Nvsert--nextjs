@@ -167,9 +167,19 @@ const ServiceDetailContent = () => {
         }
     }, [sortedContentBlocks]);
 
+    const navigationItems = useMemo(() => {
+        return match?.item?.content?.map(item => ({
+            id: item.id,
+            title: item.heading,
+            active: expandedSections.includes(item.id)
+        }));
+    }, [match?.item.content, expandedSections]);
+
     if (!slug || !match) return (
         <div className="main"></div>
     );
+
+   
 
     return (
         <div className="main text-[#000] overflow-hidden select-none relative mb-[100px]">
@@ -249,22 +259,18 @@ const ServiceDetailContent = () => {
                     </div>
 
                     {/* Navigation Sidebar */}
-                    {/*  <div className="w-[250px]">
-                        <div className="mb-[20px]">
-                            <div className="flex items-center gap-[10px] pb-[12px] border-b border-[#93969D] w-[393px]">
-                                <div className="w-[9px] h-[16px] relative">
-                                    <svg width="9" height="16" viewBox="0 0 9 16" className="text-black">
-                                        <path d="M0 3.77L9 12.22" fill="currentColor" />
-                                        <path d="M0 0L4.15 7.19" fill="currentColor" opacity="0.5" />
-                                    </svg>
-                                </div>
-                                <span className="text-[16px] font-normal text-[#161616]">Навигация по услуге</span>
-                            </div>
-                        </div>
+                     <div className="w-[250px]">
+                       
 
-                        <div className="space-y-[3px]">
-                            {navigationItems.map((item, index) => (
-                                <div
+                 
+
+                        <AppCollapsibleList
+                                title={'Навигация по услуге'}
+                                items={navigationItems}
+                                defaultOpen={true}
+                                listClassName='flex flex-col gap-[20px]'
+                                renderItem={(item, index) => (
+                                    <div
                                     key={index}
                                     className={`flex items-center gap-[24px] p-[0px] cursor-pointer ${item.active ? '' : 'pl-[15px]'}`}
                                     onClick={() => toggleSection(item.id)}
@@ -284,9 +290,9 @@ const ServiceDetailContent = () => {
                                         {item.title}
                                     </span>
                                 </div>
-                            ))}
-                        </div>
-                    </div> */}
+                                )}
+                            />
+                    </div>
                 </div>
             </div>
         </div>
