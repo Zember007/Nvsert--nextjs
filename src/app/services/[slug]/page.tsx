@@ -233,19 +233,17 @@ const ServiceDetailContent = () => {
                             ))}
 
                             {/* CTA Banner */}
-                            <div className="w-[700px] h-[300px] bg-[rgba(52,68,109,0.2)] rounded-[8px] flex flex-col justify-center items-center gap-[16px] p-[40px] backdrop-blur-sm">
-                                <h3 className="text-[24px] font-light tracking-[-0.04em]  text-black w-[492px]">
-                                    Подходит ли ваша продукция под обязательную сертификацию?
+                            <div className="text-center w-[700px] h-[300px] bg-[rgba(52,68,109,0.2)] rounded-[8px] flex flex-col justify-center items-center gap-[16px] p-[40px] backdrop-blur-sm">
+                                <h3 className="text-[24px] font-light tracking-[-0.04em]  text-black w-[460px]">
+                                    Подходит ли ваша продукция <br /> под обязательную сертификацию?
                                 </h3>
                                 <p className="text-[16px] font-light tracking-[-0.01em]  text-[rgba(0,0,0,0.6)] w-[378px] leading-[1.4]">
                                     Наши специалисты проведут бесплатную предварительную проверку и дадут чёткий ответ.
                                 </p>
-                                <button 
-                                    onClick={() => { openDefaultModal('orderForm') }}
-                                    className="bg-[#34446D] text-white px-[15px] py-[13px] rounded w-[280px] h-[50px] text-[20px] font-light backdrop-blur-sm hover:bg-[#2a3654] transition-colors"
-                                >
-                                    Узнать у специалиста
-                                </button>
+                               <Button
+                               onClick={() => { openDefaultModal('orderForm') }}
+                               label='Узнать у специалиста'
+                               />
                             </div>
                         </div>
                     </div>
