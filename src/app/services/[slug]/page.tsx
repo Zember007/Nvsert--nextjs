@@ -85,11 +85,13 @@ const ContentBlockRenderer: React.FC<{
     isExpanded: boolean; 
     onToggle: () => void; 
 }> = ({ block, isExpanded, onToggle }) => {
-    const { blockType, heading, headingLevel, richText } = block;
+    const { heading, richText } = block;
 
-    if (blockType === 'paragraph' && richText && heading) {
+    if (richText && heading) {
         return (
-            <div className="w-full">
+            <div
+            id={'block-' + block.id}
+            className="w-full">
                 <div
                     className="flex justify-center items-center gap-[10px] pb-[13px] border-b border-[#93969D] cursor-pointer"
                     onClick={onToggle}
@@ -151,8 +153,12 @@ const ServiceDetailContent = () => {
         return [...match.item.content].sort((a, b) => a.order - b.order);
     }, [match?.item?.content]);
 
+    
+
     // Toggle section expansion
     const toggleSection = (blockId: number) => {
+
+        
         setExpandedSections(prev =>
             prev.includes(blockId)
                 ? prev.filter(id => id !== blockId)
@@ -270,26 +276,26 @@ const ServiceDetailContent = () => {
                                 defaultOpen={true}
                                 listClassName='flex flex-col gap-[20px]'
                                 renderItem={(item, index) => (
-                                    <div
+                                    <button
                                     key={index}
-                                    className={`flex items-center gap-[24px] p-[0px] cursor-pointer ${item.active ? '' : 'pl-[15px]'}`}
+                                    className={`flex items-center gap-[24px]  cursor-pointer text-left`}
                                     onClick={() => toggleSection(item.id)}
                                 >
-                                    <div className="flex items-center justify-center w-[16px] h-[16px]">
+                                    <div className={`flex items-center justify-center min-w-[16px] w-[16px] h-[16px] relative transition-all duration-100 ${item.active ? 'left-0' : 'left-[15px]'}`}>
                                         {item.active ? (
                                             <>
                                                 <div className="w-[16px] h-[16px] border border-[#34446D] rounded-full relative">
-                                                    <div className="w-[8px] h-[8px] bg-[#34446D] rounded-full absolute top-[4px] left-[4px]"></div>
+                                                    <div className="w-[8px] h-[8px] bg-[#34446D] rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
                                                 </div>
                                             </>
                                         ) : (
-                                            <div className="w-[8px] h-[8px] bg-[#93969D] border border-[#93969D] rounded-full"></div>
+                                            <div className="w-[8px] h-[8px]  border border-[#93969D] rounded-full"></div>
                                         )}
                                     </div>
-                                    <span className={`text-[16px] font-light ${item.active ? 'text-[#34446D]' : 'text-black'}`}>
+                                    <span className={`text-[16px]   ${item.active ? 'text-[#34446D] ' : 'text-black font-light'}`}>
                                         {item.title}
                                     </span>
-                                </div>
+                                </button>
                                 )}
                             />
                     </div>
