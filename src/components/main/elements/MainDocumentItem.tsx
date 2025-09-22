@@ -323,7 +323,7 @@ const hiddenList = windowWidth && windowWidth < 1240 ? 1 : 2;
                                         onClick={() => setPhoto()}
                                         initial={{ y: 20 }}
                                         animate={controls}
-                                        className="document__big-img">
+                                        className="document__big-img ">
                                         <Image
                                             alt='document' src={'https://test11.audiosector.ru/cp'+img?.url}
                                             width={photoWidth || 190}
