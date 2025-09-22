@@ -196,7 +196,7 @@ const ServiceDetailContent = () => {
             <div className="wrapper pt-[60px]">
 
                 <div className="flex gap-[30px]">
-                    <div className="flex flex-col gap-[50px]">
+                    <div className="flex flex-col gap-[50px] flex-1">
                         <h1 className="text-[48px] leading-[50px] !m-0 font-light tracking-[-0.04em] text-black">
                             {match?.item.title || 'Сертификат соответствия ГОСТ Р'}
                         </h1>
@@ -288,7 +288,7 @@ const ServiceDetailContent = () => {
                                 renderItem={(item, index) => (
                                     <button
                                         key={index}
-                                        className={`flex items-center gap-[24px]  cursor-pointer text-left`}
+                                        className={`flex items-center gap-[24px]  cursor-pointer text-left group`}
                                         onClick={() => toggleSection(item.id)}
                                     >
                                         <div className={`flex items-center justify-center min-w-[16px] w-[16px] h-[16px] relative transition-all duration-100 ${item.active ? 'left-0' : 'left-[15px]'}`}>
@@ -302,7 +302,7 @@ const ServiceDetailContent = () => {
                                                 <div className="w-[8px] h-[8px]  border border-[#93969D] rounded-full"></div>
                                             )}
                                         </div>
-                                        <span className={`text-[16px]   ${item.active ? 'text-[#34446D] ' : 'text-black font-light'}`}>
+                                        <span className={`text-[16px] group-active:scale-[0.95] transition-transform duration-100  ${item.active ? 'text-[#34446D] ' : 'text-black font-light'}`}>
                                             {item.title}
                                         </span>
                                     </button>
