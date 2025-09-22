@@ -26,7 +26,7 @@ const RichTextRenderer: React.FC<{ content: string }> = ({ content }) => {
                 elements.push(
                     <ul key={`list-${listKey++}`} className="list-disc -my-[5px]">
                         {currentListItems.map((item, idx) => (
-                            <li key={idx} className="text-[16px] font-light leading-[1.5] text-black ml-[30px]">
+                            <li key={idx} className="text-[16px] font-light leading-[1.5] text-black ml-[25px]">
                                 {item}
                             </li>
                         ))}
