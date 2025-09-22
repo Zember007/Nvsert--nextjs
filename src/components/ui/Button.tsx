@@ -19,7 +19,7 @@ const Button: FC<TariffButtonProps> = ({
     const { setButtonRef, setWrapperRef } = useButton();
 
     return (
-        <div className={`skills-tariff-wrap main-button-wrap tariff-wrap ${wrapperClassName}`} ref={setWrapperRef}>
+        <div className={` main-button-wrap tariff-wrap ${wrapperClassName}`} ref={setWrapperRef}>
             <button ref={setButtonRef} className={` main-button btnIconAn doc-btn tariff ${buttonClassName}`} onClick={onClick}>
                 <span className="sendText">{label}</span>
                 <span className="sendIconLeft">
