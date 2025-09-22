@@ -19,6 +19,7 @@ import { CopyProvider, useCopyContext } from '@/components/contexts/CopyContext'
 import CopyNotification from '@/components/general/elements/CopyNotification';
 import { updateActionNavigation } from '@/store/navigation';
 import SmoothScroll from '@/hook/SmoothScroll';
+import GUI from 'lil-gui';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -94,6 +95,16 @@ const LayoutContent = ({ children }: { children: ReactNode }) => {
             setClassBody('transparent-header');
         }
     }, [pathname, classBody]);
+
+    useEffect(() => {
+        const gui = new GUI()
+
+        gui.add({ 'контрастность фона': 0.7 }, 'контрастность фона', 0, 1, 0.1)
+            .onChange((value:number) => {
+                const el = document.querySelector('.bg-noise') as HTMLElement
+                el.style.setProperty("--opacity", `${value}`);
+            });
+    }, [])
 
     return (
         <>
