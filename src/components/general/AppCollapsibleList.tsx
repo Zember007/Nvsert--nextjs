@@ -50,7 +50,7 @@ function AppCollapsibleList<ItemType = unknown>({
                         </clipPath>
                     </defs>
                 </svg>
-                <span className="text-[16px] text-[#161616]">{title}</span>
+                <span className="text-[16px] text-[#161616] leading-[16px]">{title}</span>
                 
             </button>
 
