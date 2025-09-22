@@ -24,9 +24,9 @@ const RichTextRenderer: React.FC<{ content: string }> = ({ content }) => {
         const flushList = () => {
             if (currentListItems.length > 0) {
                 elements.push(
-                    <ul key={`list-${listKey++}`} className="list-disc list-inside ">
+                    <ul key={`list-${listKey++}`} className="list-disc -my-[5px]">
                         {currentListItems.map((item, idx) => (
-                            <li key={idx} className="text-[16px] font-light leading-[1.5] text-black ml-[20px]">
+                            <li key={idx} className="text-[16px] font-light leading-[1.5] text-black ml-[30px]">
                                 {item}
                             </li>
                         ))}
@@ -41,7 +41,7 @@ const RichTextRenderer: React.FC<{ content: string }> = ({ content }) => {
 
             if (!trimmedLine) {
                 flushList();
-                elements.push(<br key={`br-${index}`} />);
+                elements.push(<div key={`br-${index}`} className='h-[15px]' />);
                 return;
             }
 
@@ -55,7 +55,7 @@ const RichTextRenderer: React.FC<{ content: string }> = ({ content }) => {
             if (trimmedLine.startsWith('# ')) {
                 flushList();
                 elements.push(
-                    <h3 key={`subheading-${index}`} className="text-[18px] font-normal tracking-[-0.01em] text-black">
+                    <h3 key={`subheading-${index}`} className="text-[18px] mt-[9px] font-normal tracking-[-0.01em] text-black">
                         {trimmedLine.substring(2)}
                     </h3>
                 );
@@ -66,7 +66,7 @@ const RichTextRenderer: React.FC<{ content: string }> = ({ content }) => {
             flushList();
             if (trimmedLine) {
                 elements.push(
-                    <p key={`p-${index}`} className="text-[16px] font-light leading-[1.5] text-black">
+                    <p key={`p-${index}`} className="text-[16px] -my-[5px] font-light leading-[1.5] text-black">
                         {trimmedLine}
                     </p>
                 );
@@ -97,7 +97,7 @@ const ContentBlockRenderer: React.FC<{
                     className="flex justify-center items-center gap-[10px] pb-[10px] border-b border-[#93969D] cursor-pointer"
                     onClick={onToggle}
                 >
-                    <h2 className="text-[24px] font-light !m-0 leading-[16px] text-[#34446D] flex-1">
+                    <h2 className="text-[24px] font-light !m-0 leading-[16px] tracking-[0] text-[#34446D] flex-1">
                         {heading}
                     </h2>
                     <svg
@@ -117,7 +117,7 @@ const ContentBlockRenderer: React.FC<{
                 </div>
 
                 {isExpanded && (
-                    <div className="pt-[20px]">
+                    <div className="pt-[30px]">
                         <RichTextRenderer content={richText} />
                     </div>
                 )}
