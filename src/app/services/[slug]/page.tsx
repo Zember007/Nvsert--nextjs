@@ -198,7 +198,7 @@ const ServiceDetailContent = () => {
         if (sortedContentBlocks.length > 0 && expandedSections.length === 0) {
             setExpandedSections([sortedContentBlocks[0].id]);
         }
-    }, [sortedContentBlocks, expandedSections.length]);
+    }, [sortedContentBlocks]);
 
 
     const navigationItems = useMemo(() => {
