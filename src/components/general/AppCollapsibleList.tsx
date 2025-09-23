@@ -29,7 +29,7 @@ function AppCollapsibleList<ItemType = unknown>({
         <div className={`flex flex-col gap-[20px] ${className || ''}`}>
             <button
                 type="button"
-                className={`group flex items-center  gap-[10px] pb-[10px] border-b border-[#93969D] ${position === 'right' ? '2k:mr-0 mr-[-135px] 2k:pr-0 pr-[135px]' : '2k:ml-0 ml-[-135px] 2k:pl-0 pl-[135px]'} ${headerClassName || ''}`}
+                className={`line-after__box group flex items-center  gap-[10px] pb-[10px] border-b border-[#93969D] ${position === 'right' ? '2k:mr-0 mr-[-135px] 2k:pr-0 pr-[135px]' : '2k:ml-0 ml-[-135px] 2k:pl-0 pl-[135px]'} ${headerClassName || ''}`}
                 onClick={() => setIsOpen(prev => !prev)}
                 aria-expanded={isOpen}
             >
@@ -52,7 +52,7 @@ function AppCollapsibleList<ItemType = unknown>({
                         </clipPath>
                     </defs>
                 </svg>
-                <span className="text-[16px] text-[#161616] leading-[16px] group-active:scale-[0.95] transition-transform duration-100">{title}</span>
+                <span className="line-after text-[16px] text-[#161616] leading-[16px] group-active:scale-[0.95] transition-transform duration-100">{title}</span>
                 
             </button>
 
