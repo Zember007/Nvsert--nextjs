@@ -1,7 +1,7 @@
 'use client';
 import React, { Suspense, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { RootState } from '@/config/store';
 import ServiceCard from '@/components/services/ServiceCard';
 import AppBreadcrumbs from '@/components/general/AppBreadcrumbs';
@@ -10,7 +10,7 @@ import AppCollapsibleList from '@/components/general/AppCollapsibleList';
 import Button from '@/components/ui/Button';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import { ContentBlock } from '@/store/navigation';
-import { PhotoProvider } from '@/assets/lib/react-photo-view';
+import { PhotoProvider, PhotoView } from '@/assets/lib/react-photo-view';
 
 // Component to render rich text with proper formatting
 const RichTextRenderer: React.FC<{ content: string }> = ({ content }) => {
@@ -131,8 +131,9 @@ const ContentBlockRenderer: React.FC<{
 const ServiceDetailContent = () => {
     const params = useParams<{ slug: string }>();
     const slug = Array.isArray(params?.slug) ? params.slug[0] : params?.slug;
-    const { services } = useSelector((state: RootState) => state.navigation);
+    const { services, navigation } = useSelector((state: RootState) => state.navigation);
     const [expandedSections, setExpandedSections] = useState<number[]>([]);
+    const [currentServiceIndex, setCurrentServiceIndex] = useState<number>(0);
     const { openDefaultModal } = useHeaderContext();
     const match = useMemo(() => {
         for (const service of services) {
@@ -144,15 +145,33 @@ const ServiceDetailContent = () => {
         return null;
     }, [services, slug]);
 
+    const serviceName = match?.serviceName;
+
     const recommendedServices = useMemo(() => {
-        return services.find(service => service.name === match?.serviceName)?.items;
-    }, [services, match]);
+        return services.find(service => service.name === serviceName)?.items;
+    }, [services, serviceName]);
+
+    // Получаем текущий сервис для отображения (может отличаться от match при пролистывании)
+    const currentService = useMemo(() => {
+        if (!recommendedServices) return match?.item;
+        return recommendedServices[currentServiceIndex] || match?.item;
+    }, [recommendedServices, currentServiceIndex, match?.item]);
+
+    // Синхронизируем индекс с текущим slug
+    React.useEffect(() => {
+        if (recommendedServices) {
+            const index = recommendedServices.findIndex(item => item.slug === slug);
+            if (index !== -1) {
+                setCurrentServiceIndex(index);
+            }
+        }
+    }, [slug, recommendedServices]);
 
     // Sort content blocks by order
     const sortedContentBlocks = useMemo(() => {
-        if (!match?.item?.content) return [];
-        return [...match.item.content].sort((a, b) => a.order - b.order);
-    }, [match?.item?.content]);
+        if (!currentService?.content) return [];
+        return [...currentService.content].sort((a, b) => a.order - b.order);
+    }, [currentService?.content]);
 
 
 
@@ -167,47 +186,85 @@ const ServiceDetailContent = () => {
         );
     };
 
-    // Auto-expand first section
+    // Auto-expand first section when service changes
+    React.useEffect(() => {
+        if (sortedContentBlocks.length > 0) {
+            setExpandedSections([sortedContentBlocks[0].id]);
+        }
+    }, [currentService?.id, sortedContentBlocks]); // Reset when service changes
+
+    // Auto-expand first section on initial load
     React.useEffect(() => {
         if (sortedContentBlocks.length > 0 && expandedSections.length === 0) {
             setExpandedSections([sortedContentBlocks[0].id]);
         }
-    }, [sortedContentBlocks]);
+    }, [sortedContentBlocks, expandedSections.length]);
+
 
     const navigationItems = useMemo(() => {
-        return match?.item?.content?.map(item => ({
+        return currentService?.content?.map(item => ({
             id: item.id,
             title: item.heading,
             active: expandedSections.includes(item.id)
         }));
-    }, [match?.item.content, expandedSections]);
+    }, [currentService?.content, expandedSections]);
 
-    if (!slug || !match) return (
-        <div className="main"></div>
-    );
+    const router = useRouter();
+
+
 
 
 
     return (
         <div className="main text-[#000]  select-none mb-[100px]">
 
-            <AppBreadcrumbs root={'/'} breadcrumbs={[{ id: 2, title: 'Все услуги', full_slug: '/services' },{ id: 3, title: match?.item.title, full_slug: '/services/' + match?.item.slug }]} />
+            <AppBreadcrumbs root={'/'} breadcrumbs={[{ id: 2, title: 'Все услуги', full_slug: '/services' }, { id: 3, title: currentService?.title || '', full_slug: '/services/' + currentService?.slug }]} />
 
 
 
             <PhotoProvider
                 maskOpacity={0.4} maskClassName="blurred-mask"
                 speed={() => 0}
-
+                loop={true}
+                onIndexChange={(index) => {
+                    // Обновляем локальное состояние для изменения контента
+                    setCurrentServiceIndex(index);
+                    // Обновляем URL без перерендеринга страницы
+                    if (recommendedServices?.[index]) {
+                        const newUrl = `/services/${recommendedServices[index].slug}`;
+                        window.history.replaceState({}, '', newUrl);
+                    }
+                }}
                 maskClosable={false}
             >
-                {/* Main Content */}
+
+                {recommendedServices?.map((item) => <PhotoView
+
+                    key={item.id}
+                    title={item.title}
+                    description={
+                        <>
+                            <span>{item.duration}</span>
+                            <span>{item.price}</span>
+                        </>
+                    }
+                    src={'https://test11.audiosector.ru/cp' + item?.img?.url}
+                    width={250}
+                    height={37}
+                >
+                    <div id={'service-' + item.id}>
+                    </div>
+                </PhotoView>)}
+            </PhotoProvider>
+
+            {/* Main Content */}
+            {slug && match &&
                 <div className="wrapper pt-[60px]">
 
                     <div className="flex gap-[40px]">
                         <div className="flex flex-col gap-[50px] flex-1">
                             <h1 className="text-[48px] leading-[50px] !m-0 font-light tracking-[-0.04em] text-black">
-                                {match?.item.title || 'Сертификат соответствия ГОСТ Р'}
+                                {currentService?.title || 'Сертификат соответствия ГОСТ Р'}
                             </h1>
 
 
@@ -216,8 +273,29 @@ const ServiceDetailContent = () => {
                                 {/* Left Column */}
                                 <div className="w-[250px] relative">
                                     <div className=" sticky top-[122px] flex flex-col gap-[40px]">
-                                        <ServiceCard serviceName={match.serviceName} certificate={{ ...match.item, slug: '' }} title={false} padding={false} />
-                                        {recommendedServices && (
+                                        <ServiceCard
+                                            onClick={() => { document.getElementById('service-' + currentService?.id)?.click() }}
+                                            serviceName={match?.serviceName || ''} 
+                                            certificate={{ 
+                                                ...currentService, 
+                                                slug: '', 
+                                                id: currentService?.id || 0,
+                                                documentId: currentService?.documentId || '',
+                                                title: currentService?.title || '',
+                                                duration: currentService?.duration || '',
+                                                price: currentService?.price || '',
+                                                description: currentService?.description || '',
+                                                createdAt: currentService?.createdAt || '',
+                                                updatedAt: currentService?.updatedAt || '',
+                                                publishedAt: currentService?.publishedAt || '',
+                                                documents: currentService?.documents || [],
+                                                img: currentService?.img || null,
+                                                category: currentService?.category || null
+                                            }} 
+                                            title={false} 
+                                            padding={false} 
+                                        />
+                                        {recommendedServices?.filter(item => item.slug !== currentService?.slug) && (
                                             <AppCollapsibleList
                                                 position='left'
                                                 title={'Рекомендуем к оформлению'}
@@ -318,7 +396,7 @@ const ServiceDetailContent = () => {
                     </div>
 
                 </div>
-            </PhotoProvider>
+            }
         </div>
     );
 };

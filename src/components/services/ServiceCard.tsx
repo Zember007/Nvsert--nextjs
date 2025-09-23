@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { NavigationItem } from '@/store/navigation';
-import { PhotoView } from '@/assets/lib/react-photo-view';
 
 interface ServiceCardProps {
     serviceName?: string;
@@ -11,6 +10,7 @@ interface ServiceCardProps {
     className?: string;
     title?: boolean;
     padding?: boolean;
+    onClick?: () => void;
 }
 
 const replaceValue = (value: string) => {
@@ -24,7 +24,7 @@ const replaceValue = (value: string) => {
         .replace(/Обоснования\s+безопасности/gi, "Обоснования\u00A0безопасности");
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, className, title = true, padding = true }) => {
+const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, className, title = true, padding = true, onClick }) => {
     const href = certificate.slug ? `/services/${certificate.slug}` : '';
 
     return (
@@ -57,16 +57,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                 </div>
             </Link>
         ) : (
-            <PhotoView
-            title={certificate.title}
-            description={
-                <>
-                <span>{certificate.duration}</span>
-                <span>{certificate.price}</span>
-                </>
-            }
-            src={'https://test11.audiosector.ru/cp' + certificate.img?.url} width={250} height={37}>
                 <button
+                    onClick={onClick}
                     className={` transition-transform will-change-transform duration-100 active:scale-[.95] ${padding ? 'p-[30px] w-[312px] hover:bg-[#F5F5F2] border border-[transparent] hover:border-[#34446D]' : 'p-0 w-full'} flex flex-col gap-[20px] text-left  rounded-[8px]  ${className || ''}`}
                 >
                     {title && <span className='text-[20px] flex items-center tracking-[-1px] h-[38px] max-w-[230px] whitespace-pre-line'>{replaceValue(certificate.title)}</span>}
@@ -92,7 +84,6 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                         </div>
                     </div>
                 </button>
-            </PhotoView>
         )
     );
 };
