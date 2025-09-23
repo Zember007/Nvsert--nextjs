@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-
+ 
 type AppCollapsibleListProps<ItemType> = {
     title: React.ReactNode;
     items?: ItemType[];

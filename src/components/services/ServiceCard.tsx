@@ -57,7 +57,15 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                 </div>
             </Link>
         ) : (
-            <PhotoView src={'https://test11.audiosector.ru/cp' + certificate.img?.url} width={250} height={37}>
+            <PhotoView
+            title={certificate.title}
+            description={
+                <>
+                <span>{certificate.duration}</span>
+                <span>{certificate.price}</span>
+                </>
+            }
+            src={'https://test11.audiosector.ru/cp' + certificate.img?.url} width={250} height={37}>
                 <button
                     className={` transition-transform will-change-transform duration-100 active:scale-[.95] ${padding ? 'p-[30px] w-[312px] hover:bg-[#F5F5F2] border border-[transparent] hover:border-[#34446D]' : 'p-0 w-full'} flex flex-col gap-[20px] text-left  rounded-[8px]  ${className || ''}`}
                 >

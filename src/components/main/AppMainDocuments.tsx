@@ -30,19 +30,7 @@ const AppMainDocuments = () => {
                 maskOpacity={0.4}
                 maskClassName="blurred-mask"
                 speed={() => 0}
-                onIndexChange={(index) => {
-                    setActive(index);
-                    const item = documents[index];
-                    const box = document.querySelector('.PhotoView-Slider__BannerWrap') as HTMLDivElement;
-                    if (!box) return;
-                    box.dataset.before = t(`MainDocuments.${item.key}.title`);
-
-                    const photos = document.querySelectorAll<HTMLDivElement>('.PhotoView__Photo__attr');
-                    photos.forEach((photo) => {
-                        photo.dataset.price = t(`MainDocuments.${item.key}.price`);
-                        photo.dataset.duration = t(`MainDocuments.${item.key}.duration`);
-                    });
-                }}
+                onIndexChange={(index) => {setActive(index);}}
                 maskClosable={false}
             >
                 <div className="documents-container">

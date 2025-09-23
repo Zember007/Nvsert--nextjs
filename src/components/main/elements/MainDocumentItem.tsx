@@ -313,6 +313,13 @@ const hiddenList = windowWidth && windowWidth < 1240 ? 1 : 2;
                             }
                             <div className='document-photo-container'>
                                 <PhotoView
+                                    title={title}
+                                    description={
+                                        <>
+                                        <span>{duration}</span>
+                                        <span>{price}</span>
+                                        </>
+                                    }
                                     src={'https://test11.audiosector.ru/cp'+img?.url}
                                     width={475}
                                     height={667}
