@@ -65,7 +65,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
     }
 
     return (
-        <div className={`overflow-hidden relative ${index === 0 ? 'border-t' : ''} border-[#93969d80] border-b `}>
+        <div className={`overflow-hidden relative ${index === 0 ? 'border-t' : ''} border-[#93969d80] border-b px-[2px]`}>
             {/* Заголовок спойлера */}
 
             <div id={service.name} className='absolute top-[-94px] left-0 w-full'></div>
