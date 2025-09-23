@@ -59,7 +59,7 @@ export default function Photo({
     return (
       <>
         <div className={`PhotoView__Photo__attr ${!loaded && 'loaded'}`}>
-          {loaded && title && (
+          {!loadingElement && title && (
             <div className="PhotoView__Photo__title">
               {title}
             </div>
@@ -75,7 +75,7 @@ export default function Photo({
             {...restProps}
           />
 
-          {loaded && description && (
+          {!loadingElement && description && (
             <div className="PhotoView__Photo__description">
               {description}
             </div>
