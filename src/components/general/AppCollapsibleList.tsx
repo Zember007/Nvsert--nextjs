@@ -10,6 +10,7 @@ type AppCollapsibleListProps<ItemType> = {
     className?: string;
     headerClassName?: string;
     listClassName?: string;
+    position?: 'right' | 'left';
 };
 
 function AppCollapsibleList<ItemType = unknown>({
@@ -20,6 +21,7 @@ function AppCollapsibleList<ItemType = unknown>({
     className,
     headerClassName,
     listClassName,
+    position = 'right',
 }: AppCollapsibleListProps<ItemType>) {
     const [isOpen, setIsOpen] = useState<boolean>(defaultOpen);
 
@@ -27,7 +29,7 @@ function AppCollapsibleList<ItemType = unknown>({
         <div className={`flex flex-col gap-[20px] ${className || ''}`}>
             <button
                 type="button"
-                className={`group flex items-center  gap-[10px] pb-[10px] border-b border-[#93969D] ${headerClassName || ''}`}
+                className={`group flex items-center  gap-[10px] pb-[10px] border-b border-[#93969D] ${position === 'right' ? '2k:mr-0 mr-[-135px] 2k:pr-0 pr-[135px]' : '2k:ml-0 ml-[-135px] 2k:pl-0 pl-[135px]'} ${headerClassName || ''}`}
                 onClick={() => setIsOpen(prev => !prev)}
                 aria-expanded={isOpen}
             >

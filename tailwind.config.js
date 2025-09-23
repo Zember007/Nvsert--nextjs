@@ -20,6 +20,7 @@ module.exports = {
       xxl: { min: '1440px' },
       xxxl: { min: '1580px' },
       xxxxl: { min: '1640px' },
+      '2k': { min: '1998px' },
       'max-s': { max: '519px' },
       'max-m': { max: '767px' },
       'max-l': { max: '1023px' },

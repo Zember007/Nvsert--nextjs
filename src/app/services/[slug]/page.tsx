@@ -189,7 +189,9 @@ const ServiceDetailContent = () => {
 
 
     return (
-        <div className="main text-[#000]  select-none relative mb-[100px]">
+        <div className="main text-[#000]  select-none mb-[100px]">
+
+            <AppBreadcrumbs root={'/'} breadcrumbs={[{ id: 2, title: 'Все услуги', full_slug: '/services' },{ id: 3, title: match?.item.title, full_slug: '/services/' + match?.item.slug }]} />
 
 
 
@@ -217,6 +219,7 @@ const ServiceDetailContent = () => {
                                         <ServiceCard serviceName={match.serviceName} certificate={{ ...match.item, slug: '' }} title={false} padding={false} />
                                         {recommendedServices && (
                                             <AppCollapsibleList
+                                                position='left'
                                                 title={'Рекомендуем к оформлению'}
                                                 items={recommendedServices}
                                                 defaultOpen={true}
@@ -286,6 +289,7 @@ const ServiceDetailContent = () => {
                                 />
 
                                 <AppCollapsibleList
+                                    position='right'
                                     title={'Навигация по услуге'}
                                     items={navigationItems}
                                     defaultOpen={true}
