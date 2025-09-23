@@ -202,7 +202,7 @@ const ServiceDetailContent = () => {
                 {/* Main Content */}
                 <div className="wrapper pt-[60px]">
 
-                    <div className="flex gap-[30px]">
+                    <div className="flex gap-[40px]">
                         <div className="flex flex-col gap-[50px] flex-1">
                             <h1 className="text-[48px] leading-[50px] !m-0 font-light tracking-[-0.04em] text-black">
                                 {match?.item.title || 'Сертификат соответствия ГОСТ Р'}
@@ -210,11 +210,11 @@ const ServiceDetailContent = () => {
 
 
                             {/* Two Column Layout */}
-                            <div className="flex gap-[30px] items-stretch">
+                            <div className="flex gap-[40px] items-stretch">
                                 {/* Left Column */}
                                 <div className="w-[250px] relative">
-                                    <div className=" sticky top-[110px] flex flex-col gap-[37px]">
-                                            <ServiceCard serviceName={match.serviceName} certificate={{ ...match.item, slug: '' }} title={false} padding={false} />
+                                    <div className=" sticky top-[122px] flex flex-col gap-[40px]">
+                                        <ServiceCard serviceName={match.serviceName} certificate={{ ...match.item, slug: '' }} title={false} padding={false} />
                                         {recommendedServices && (
                                             <AppCollapsibleList
                                                 title={'Рекомендуем к оформлению'}
@@ -278,7 +278,7 @@ const ServiceDetailContent = () => {
 
                         <div className="w-[250px] relative">
 
-                            <div className=" sticky top-[110px] flex flex-col gap-[50px]">
+                            <div className=" sticky top-[122px] flex flex-col gap-[50px]">
 
                                 <Button
                                     onClick={() => { openDefaultModal('orderForm') }}
@@ -296,16 +296,10 @@ const ServiceDetailContent = () => {
                                             className={`flex items-center gap-[24px]  cursor-pointer text-left group`}
                                             onClick={() => toggleSection(item.id)}
                                         >
-                                            <div className={`flex items-center justify-center min-w-[16px] w-[16px] h-[16px] relative transition-all duration-100 ${item.active ? 'left-0' : 'left-[15px]'}`}>
-                                                {item.active ? (
-                                                    <>
-                                                        <div className="w-[16px] h-[16px] border border-[#34446D] rounded-full relative">
-                                                            <div className="w-[8px] h-[8px] bg-[#34446D] rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-                                                        </div>
-                                                    </>
-                                                ) : (
-                                                    <div className="w-[8px] h-[8px]  border border-[#93969D] rounded-full"></div>
-                                                )}
+                                            <div className={`flex items-center justify-center min-w-[16px] w-[16px] h-[16px] relative transition-all duration-100 group-active:left-[15px] ${item.active ? 'left-0' : 'left-[15px]'}`}>
+                                                <div className={` border transition-all duration-100 group-active:w-[8px] group-active:h-[8px] group-active:border-[#34446D] ${!item.active ? 'border-transparent w-[8px] h-[8px]' : 'border-[#34446D] w-[16px] h-[16px]'} rounded-full relative`}>
+                                                    <div className={`w-[8px] h-[8px] transition-all duration-100 group-active:bg-[#34446D] ${item.active ? 'bg-[#34446D] border-transparent' : 'bg-transparent border-[#93969D]'} border  rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}></div>
+                                                </div>
                                             </div>
                                             <span className={`text-[16px] group-active:scale-[0.95] transition-transform duration-100  ${item.active ? 'text-[#34446D] ' : 'text-black font-light'}`}>
                                                 {item.title}
