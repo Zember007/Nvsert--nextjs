@@ -52,7 +52,7 @@ function AppCollapsibleList<ItemType = unknown>({
                         </clipPath>
                     </defs>
                 </svg>
-                <span className="line-after text-[16px] text-[#161616] leading-[16px] group-active:scale-[0.95] transition-transform duration-100">{title}</span>
+                <span className="line-after after:!bottom-[-3px] text-[16px] text-[#161616] leading-[16px] group-active:scale-[0.95] transition-transform duration-100">{title}</span>
                 
             </button>
 
