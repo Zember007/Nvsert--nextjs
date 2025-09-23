@@ -45,6 +45,22 @@ const RichTextRenderer: React.FC<{ content: string }> = ({ content }) => {
                 return;
             }
 
+            // Handle markdown image: ![alt](url)
+            if (/^!\[(.*?)\]\((.*?)\)/.test(trimmedLine)) {
+                const match = trimmedLine.match(/^!\[(.*?)\]\((.*?)\)/);
+                if (match) {
+                    const alt = match[1] || '';
+                    const src = match[2] || '';
+                    flushList();
+                    elements.push(
+                        <div key={`img-${index}`} className="max-w-[700px] mx-auto my-[50px]">
+                            <img src={src} alt={alt} className="w-full h-auto" />
+                        </div>
+                    );
+                    return;
+                }
+            }
+
             // Handle list items (lines starting with -)
             if (trimmedLine.startsWith('- ')) {
                 currentListItems.push(trimmedLine.substring(2));
@@ -263,7 +279,7 @@ const ServiceDetailContent = () => {
 
                     <div className="flex gap-[40px]">
                         <div className="flex flex-col gap-[50px] flex-1">
-                            <h1 className="text-[48px] leading-[50px] !m-0 font-light tracking-[-0.04em] text-black">
+                            <h1 className="text-[48px] leading-[50px] !m-0 font-light tracking-[-0.04em] text-black -translate-x-[4px]">
                                 {currentService?.title || 'Сертификат соответствия ГОСТ Р'}
                             </h1>
 
