@@ -30,6 +30,8 @@ export interface PhotoViewProps {
      * 触发的事件
      */
     triggers?: ('onClick' | 'onDoubleClick')[];
+    title?: string | React.ReactNode;
+    description?: string | React.ReactNode;
 }
-declare const PhotoView: ({ src, render, overlay, width, height, triggers, children, }: PhotoViewProps) => JSX.Element;
+declare const PhotoView: ({ src, render, overlay, width, height, triggers, children, title, description, }: PhotoViewProps) => JSX.Element;
 export default PhotoView;

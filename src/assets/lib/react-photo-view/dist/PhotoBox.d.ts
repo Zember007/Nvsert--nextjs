@@ -19,4 +19,4 @@ export interface PhotoBoxProps {
     expose: (state: ExposedProperties) => void;
     isActive: boolean;
 }
-export default function PhotoBox({ item: { src, render, width: customWidth, height: customHeight, originRef }, visible, speed, easing, wrapClassName, className, style, loadingElement, brokenElement, onPhotoTap, onMaskTap, onReachMove, onReachUp, onPhotoResize, isActive, expose, }: PhotoBoxProps): JSX.Element;
+export default function PhotoBox({ item: { src, render, width: customWidth, height: customHeight, originRef, title, description }, visible, speed, easing, wrapClassName, className, style, loadingElement, brokenElement, onPhotoTap, onMaskTap, onReachMove, onReachUp, onPhotoResize, isActive, expose, }: PhotoBoxProps): JSX.Element;

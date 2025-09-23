@@ -122,7 +122,7 @@ const initialState = {
 };
 
 export default function PhotoBox({
-  item: { src, render, width: customWidth = 0, height: customHeight = 0, originRef },
+  item: { src, render, width: customWidth = 0, height: customHeight = 0, originRef, title, description },
   visible,
   speed,
   easing,
@@ -454,15 +454,19 @@ export default function PhotoBox({
         }}
       >
         {src ? (
-          <Photo
-            src={src}
-            loaded={loaded}
-            broken={broken}
-            {...attrs}
-            onPhotoLoad={handlePhotoLoad}
-            loadingElement={loadingElement}
-            brokenElement={brokenElement}
-          />
+            
+            <Photo
+              title={title}
+              description={description}
+              src={src}
+              loaded={loaded}
+              broken={broken}
+              {...attrs}
+              onPhotoLoad={handlePhotoLoad}
+              loadingElement={loadingElement}
+              brokenElement={brokenElement}
+            />
+         
         ) : (
           render && render({ attrs, scale: currentScale, rotate })
         )}

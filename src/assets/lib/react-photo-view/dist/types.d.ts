@@ -31,6 +31,14 @@ export interface DataType {
      * 触发 ref
      */
     originRef?: React.MutableRefObject<HTMLElement | null>;
+    /**
+     * 标题
+     */
+    title?: string | React.ReactNode;
+    /**
+     * 描述
+     */
+    description?: string | React.ReactNode;
 }
 export interface PhotoProviderBase {
     /**

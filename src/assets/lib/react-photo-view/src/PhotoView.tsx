@@ -35,6 +35,9 @@ export interface PhotoViewProps {
    * 触发的事件
    */
   triggers?: ('onClick' | 'onDoubleClick')[];
+
+  title?: string | React.ReactNode;
+  description?: string | React.ReactNode;
 }
 
 const PhotoView = ({
@@ -45,6 +48,8 @@ const PhotoView = ({
   height,
   triggers = ['onClick'],
   children,
+  title,
+  description,
 }:PhotoViewProps): JSX.Element => {
   const photoContext = useContext<PhotoContextType>(PhotoContext);
   const key = useInitial(() => photoContext.nextId());
@@ -94,6 +99,8 @@ const PhotoView = ({
       overlay,
       width,
       height,
+      title,
+      description,
     });
   }, [src]);
 

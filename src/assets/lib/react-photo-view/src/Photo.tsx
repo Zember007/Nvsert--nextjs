@@ -11,13 +11,15 @@ export interface IPhotoLoadedParams {
   broken?: boolean;
 }
 
-export interface IPhotoProps extends React.HTMLAttributes<HTMLElement> {
+export interface IPhotoProps extends Omit<React.HTMLAttributes<HTMLElement>, 'title'> {
   src: string;
   loaded: boolean;
   broken: boolean;
   onPhotoLoad: (params: IPhotoLoadedParams) => void;
   loadingElement?: React.ReactElement;
   brokenElement?: React.ReactElement | ((photoProps: BrokenElementParams) => React.ReactElement);
+  title?: string | React.ReactNode;
+  description?: string | React.ReactNode;
 }
 
 export default function Photo({
@@ -28,6 +30,8 @@ export default function Photo({
   onPhotoLoad,
   loadingElement,
   brokenElement,
+  title,
+  description,
   ...restProps
 }: IPhotoProps) {
   const mountedRef = useMountedRef();
@@ -55,6 +59,12 @@ export default function Photo({
     return (
       <>
         <div className={`PhotoView__Photo__attr ${!loaded && 'loaded'}`}>
+          {loaded && title && (
+            <div className="PhotoView__Photo__title">
+              {title}
+            </div>
+          )}
+
           <img
             className={`PhotoView__Photo${className ? ` ${className}` : ''}`}
             src={src}
@@ -64,6 +74,12 @@ export default function Photo({
             alt="document"
             {...restProps}
           />
+
+          {loaded && description && (
+            <div className="PhotoView__Photo__description">
+              {description}
+            </div>
+          )}
         </div>
         {!loaded &&
           (loadingElement ? (
