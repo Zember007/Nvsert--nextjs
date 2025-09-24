@@ -293,10 +293,10 @@ const ServiceDetailContent = () => {
                                     <div className=" sticky top-[122px] flex flex-col gap-[40px]">
                                         <ServiceCard
                                             onClick={() => { document.getElementById('service-' + currentService?.id)?.click() }}
-                                            serviceName={match?.serviceName || ''} 
-                                            certificate={{ 
-                                                ...currentService, 
-                                                slug: '', 
+                                            serviceName={match?.serviceName || ''}
+                                            certificate={{
+                                                ...currentService,
+                                                slug: '',
                                                 id: currentService?.id || 0,
                                                 documentId: currentService?.documentId || '',
                                                 title: currentService?.title || '',
@@ -309,9 +309,9 @@ const ServiceDetailContent = () => {
                                                 documents: currentService?.documents || [],
                                                 img: currentService?.img || null,
                                                 category: currentService?.category || null
-                                            }} 
-                                            title={false} 
-                                            padding={false} 
+                                            }}
+                                            title={false}
+                                            padding={false}
                                         />
                                         {recommendedServices?.filter(item => item.slug !== currentService?.slug) && (
                                             <AppCollapsibleList
@@ -338,12 +338,12 @@ const ServiceDetailContent = () => {
                                 {/* Right Column */}
                                 <div className="flex-1 flex flex-col items-center gap-[50px]">
                                     {/* Dynamic Content Blocks */}
-                                    <div className="w-full flex flex-col gap-[30px] items-center">
+                                    <div className="w-full flex flex-col items-center">
                                         {sortedContentBlocks.map((block, index) => (
-                                            
+
                                             <React.Fragment key={block.id}>
-                                                  {index === ctaInsertAfterIndex && (
-                                                    <div className="text-center  max-w-[700px] w-full h-[300px] bg-[rgba(52,68,109,0.2)] rounded-[8px] flex flex-col justify-center items-center gap-[16px] p-[40px] backdrop-blur-sm" key="cta-banner">
+                                                {index === ctaInsertAfterIndex && (
+                                                    <div className="text-center my-[50px]  max-w-[700px] w-full h-[300px] bg-[rgba(52,68,109,0.2)] rounded-[8px] flex flex-col justify-center items-center gap-[16px] p-[40px] backdrop-blur-sm" key="cta-banner">
                                                         <h3 className="text-[24px] font-light tracking-[-0.04em]  text-black w-[460px]">
                                                             Подходит ли ваша продукция <br /> под обязательную сертификацию?
                                                         </h3>
@@ -356,22 +356,18 @@ const ServiceDetailContent = () => {
                                                         />
                                                     </div>
                                                 )}
-                                                <div className="w-full">
-                                                    <ContentBlockRenderer
-                                                        block={block}
-                                                        isExpanded={expandedSections.includes(block.id)}
-                                                        onToggle={() => toggleSection(block.id)}
-                                                    />
-                                                    {index < sortedContentBlocks.length - 1 && (
-                                                        <div className="mt-[30px]" />
-                                                    )}
-                                                </div>
+                                                <ContentBlockRenderer
+                                                    block={block}
+                                                    isExpanded={expandedSections.includes(block.id)}
+                                                    onToggle={() => toggleSection(block.id)}
+                                                />
 
-                                              
+
+
                                             </React.Fragment>
                                         ))}
 
-                                      
+
                                     </div>
                                 </div>
 
