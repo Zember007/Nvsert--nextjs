@@ -149,6 +149,7 @@ const ServiceDetailContent = () => {
     const slug = Array.isArray(params?.slug) ? params.slug[0] : params?.slug;
     const { services, navigation } = useSelector((state: RootState) => state.navigation);
     const [expandedSections, setExpandedSections] = useState<number[]>([]);
+    const [activeBlockId, setActiveBlockId] = useState<number | null>(null);
     const [currentServiceIndex, setCurrentServiceIndex] = useState<number>(0);
     const { openDefaultModal } = useHeaderContext();
     const match = useMemo(() => {
@@ -216,14 +217,71 @@ const ServiceDetailContent = () => {
         }
     }, [sortedContentBlocks]);
 
+    // Track which content block is currently in view and reflect it in the right navigation
+    React.useEffect(() => {
+        const sections = sortedContentBlocks
+            .map(block => document.getElementById('block-' + block.id))
+            .filter((el): el is HTMLElement => Boolean(el));
+
+        if (sections.length === 0) return;
+
+        const handleHashChange = () => {
+            const hash = window.location.hash;
+            if (hash.startsWith('#block-')) {
+                const id = parseInt(hash.replace('#block-', ''), 10);
+                if (!Number.isNaN(id)) {
+                    setActiveBlockId(id);
+                }
+            }
+        };
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const visible = entries
+                    .filter(e => e.isIntersecting)
+                    .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+                const topMost = visible[0];
+                if (topMost) {
+                    const id = parseInt((topMost.target as HTMLElement).id.replace('block-', ''), 10);
+                    if (!Number.isNaN(id)) {
+                        setActiveBlockId(prev => (prev === id ? prev : id));
+                    }
+                }
+            },
+            {
+                root: null,
+                // Activate section when its top crosses roughly 25% from the top,
+                // and deactivate when it leaves above ~60% of the viewport
+                rootMargin: '-25% 0px -60% 0px',
+                threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
+            }
+        );
+
+        sections.forEach(section => observer.observe(section));
+
+        window.addEventListener('hashchange', handleHashChange);
+
+        // Initial selection from hash or default to first block
+        if (window.location.hash && window.location.hash.startsWith('#block-')) {
+            handleHashChange();
+        } else {
+            setActiveBlockId(sortedContentBlocks[0]?.id ?? null);
+        }
+
+        return () => {
+            window.removeEventListener('hashchange', handleHashChange);
+            sections.forEach(section => observer.unobserve(section));
+            observer.disconnect();
+        };
+    }, [sortedContentBlocks]);
 
     const navigationItems = useMemo(() => {
         return currentService?.content?.map(item => ({
             id: item.id,
             title: item.heading,
-            active: expandedSections.includes(item.id)
-        }));
-    }, [currentService?.content, expandedSections]);
+            active: activeBlockId === item.id,
+        })) || [];
+    }, [currentService?.content, activeBlockId]);
 
 
 
