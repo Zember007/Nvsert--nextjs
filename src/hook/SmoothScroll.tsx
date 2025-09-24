@@ -43,7 +43,7 @@ interface DelaySettings {
 }
 
 export default function SmoothScroll({children}: SmoothScrollProps) {
-    const scrollbarRef = useRef<HTMLDivElement>(null);
+
     const pathname = usePathname();
     const [showScrollbar, setShowScrollbar] = useState(true);
     const [isOpen, setIsOpen] = useState(false);
@@ -100,21 +100,14 @@ export default function SmoothScroll({children}: SmoothScrollProps) {
         }
     });
 
-    // const { scrollbarRef: customScrollbarRef } = useCustomScroll({
-    //     smoothScrollFactor: isTrackpad ? trackpadSettings.scrollEaseFactor : mouseSettings.scrollEaseFactor,
-    //     enabled: showScrollbar && !isMobile,
-    //     target: 'window'
-    // });
 
     const getScrollOffset = React.useCallback(() => {
-        if (pathname.includes('/policy') || pathname.includes('/organizations')) return -115;
-        if (pathname.includes('/blogPage')) return -174;
-        if (pathname.includes('/organizations/where-do-you-lose')) return -110;
-        if (pathname.includes('/editors')) return 90;
+     
+        if (pathname.includes('/services')) return 50;
         return 120;
     }, [pathname]);
 
-    const { scrollbarRef: customScrollbarRef } = useCustomScroll({
+    const { scrollbarRef } = useCustomScroll({
         smoothScrollFactor: isTrackpad ? trackpadSettings.scrollEaseFactor : mouseSettings.scrollEaseFactor,
         scrollPadding: 2, // или ваше значение
         enabled: showScrollbar && !isMobile,
@@ -354,6 +347,8 @@ export default function SmoothScroll({children}: SmoothScrollProps) {
 
     useEffect(() => {
         // На мобилках используем нативный скролл
+        console.log(!scrollbarRef.current);
+
         if (isMobile) return;
 
         if (!scrollbarRef.current) return;
@@ -448,6 +443,7 @@ export default function SmoothScroll({children}: SmoothScrollProps) {
 
         const handleAnchorClick = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
+            console.log(target.tagName);
             if (target.tagName === "A") {
                 const anchor = target.getAttribute("href");
                 if (anchor?.startsWith("#")) {
@@ -562,23 +558,14 @@ export default function SmoothScroll({children}: SmoothScrollProps) {
         }, routeDelay);
     }, [pathname, delaySettings.routeChangeDelay]);
 
-    const updateDelaySetting = (key: keyof DelaySettings, property: 'enabled' | 'value', value: boolean | number) => {
-        setDelaySettings(prev => ({
-            ...prev,
-            [key]: {
-                ...prev[key],
-                [property]: value
-            }
-        }));
-    };
+
 
     return (
         <>
             {children}
             {showScrollbar && !isMobile && (
                 <div
-                    // ref={scrollbarRef}
-                    ref={customScrollbarRef}
+                    ref={scrollbarRef}
                     className={`scrollbar m:block hidden window`}
                 />
             )}
