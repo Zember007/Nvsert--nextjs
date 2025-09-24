@@ -186,7 +186,7 @@ const ServiceDetailContent = () => {
     // Sort content blocks by order
     const sortedContentBlocks = useMemo(() => {
         if (!currentService?.content) return [];
-        return [...currentService.content].sort((a, b) => a.order - b.order);
+        return currentService.content;
     }, [currentService?.content]);
 
 
@@ -211,8 +211,8 @@ const ServiceDetailContent = () => {
 
     // Auto-expand first section on initial load
     React.useEffect(() => {
-        if (sortedContentBlocks.length > 0 && expandedSections.length === 0) {
-            setExpandedSections([sortedContentBlocks[0].id]);
+        if (sortedContentBlocks.length > 0) {
+            setExpandedSections(sortedContentBlocks.map(item => item.id));
         }
     }, [sortedContentBlocks]);
 
@@ -225,7 +225,6 @@ const ServiceDetailContent = () => {
         }));
     }, [currentService?.content, expandedSections]);
 
-    const router = useRouter();
 
 
 
@@ -350,8 +349,8 @@ const ServiceDetailContent = () => {
                                             </div>
                                         ))}
 
-                                        {/* CTA Banner */}
-                                        <div className="text-center  max-w-[700px] w-full h-[300px] bg-[rgba(52,68,109,0.2)] rounded-[8px] flex flex-col justify-center items-center gap-[16px] p-[40px] backdrop-blur-sm">
+                                          {/* CTA Banner */}
+                                          <div className="text-center  max-w-[700px] w-full h-[300px] bg-[rgba(52,68,109,0.2)] rounded-[8px] flex flex-col justify-center items-center gap-[16px] p-[40px] backdrop-blur-sm">
                                             <h3 className="text-[24px] font-light tracking-[-0.04em]  text-black w-[460px]">
                                                 Подходит ли ваша продукция <br /> под обязательную сертификацию?
                                             </h3>
@@ -363,6 +362,8 @@ const ServiceDetailContent = () => {
                                                 label='Узнать у специалиста'
                                             />
                                         </div>
+
+                                      
                                     </div>
                                 </div>
 
