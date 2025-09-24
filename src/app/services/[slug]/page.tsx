@@ -335,7 +335,7 @@ const ServiceDetailContent = () => {
 
             {/* Main Content */}
             {slug && match &&
-                <div className="wrapper pt-[60px]">
+                <div className="wrapper pt-[50px]">
 
                     <div className="flex gap-[40px]">
                         <div className="flex flex-col gap-[50px] flex-1">
