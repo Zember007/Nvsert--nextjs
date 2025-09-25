@@ -104,16 +104,28 @@ const ContentBlockRenderer: React.FC<{
 }> = ({ block, isExpanded, onToggle }) => {
     const { heading, richText } = block;
 
+    // Extract first markdown image from content
+    const firstImage = React.useMemo(() => {
+        if (!richText) return null;
+        // Match first occurrence like ![alt](url)
+        const match = richText.match(/!\[(.*?)\]\((.*?)\)/m);
+        if (!match) return null;
+        const alt = match[1] || '';
+        const src = match[2] || '';
+        if (!src) return null;
+        return { alt, src };
+    }, [richText]);
+
     if (richText && heading) {
         return (
             <div
                 id={'block-' + block.id}
                 className="w-full">
                 <div
-                    className="flex justify-center items-center gap-[10px] pb-[10px] border-b border-[#93969d80] cursor-pointer"
+                    className="flex justify-center group items-center gap-[10px] pb-[10px] border-b border-[#93969d80] cursor-pointer"
                     onClick={onToggle}
                 >
-                    <h2 className="text-[24px] font-light !m-0 leading-[16px] tracking-[0] text-[#34446D] flex-1">
+                    <h2 className="text-[24px] group-active:scale-[0.98] transition-all duration-100 font-light !m-0 leading-[16px] tracking-[0] text-[#34446D] flex-1">
                         {heading}
                     </h2>
                     <svg
@@ -132,10 +144,16 @@ const ContentBlockRenderer: React.FC<{
                     </svg>
                 </div>
 
-                {isExpanded && (
+                {isExpanded ? (
                     <div className="pt-[30px]">
                         <RichTextRenderer content={richText} />
                     </div>
+                ) : (
+                    firstImage ? (
+                            <div className="max-w-[700px] mx-auto my-[50px]">
+                                <img src={firstImage.src} alt={firstImage.alt} className="w-full h-auto" />
+                            </div>
+                    ) : (<></>)
                 )}
             </div>
         );
@@ -250,8 +268,7 @@ const ServiceDetailContent = () => {
             },
             {
                 root: null,
-                // Activate section when its top crosses roughly 25% from the top,
-                // and deactivate when it leaves above ~60% of the viewport
+               
                 rootMargin: '-25% 0px -60% 0px',
             }
         );
