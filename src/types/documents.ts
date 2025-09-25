@@ -11,6 +11,7 @@ export interface MainDocumentItemProps {
     setPhoto: () => void;
     img?: any;
     title: string;
+    link: string;
     content: string;
     documentsList: documentsList[];
     price: string;

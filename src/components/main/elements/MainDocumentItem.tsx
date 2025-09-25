@@ -10,6 +10,7 @@ import SendIcon from '@/components/svg/SendIcon';
 import ServiceMoveIcon from '../svg/ServiceMoveIcon';
 import useWindowWidth from '@/hook/useWindowWidth';
 import '@/assets/styles/sections/main/document-item.scss';
+import { useRouter } from 'next/navigation';
 
 // Выносим анимационные настройки
 const ANIMATION_SETTINGS = {
@@ -58,47 +59,47 @@ ActionButton.displayName = 'ActionButton';
 // Компонент списка документов
 const DocumentList = memo(({ documentsList, listHidden, setListHidden, hiddenList }: DocumentListProps) => (
     <div className="document__list">
-            <div className='document__list-item'>
-                <p className={`document-list-item-title large`}>
+        <div className='document__list-item'>
+            <p className={`document-list-item-title large`}>
                 Необходимые документы для оформления
-                </p>
-                <ul className='document__list-item-ul  arial'>
+            </p>
+            <ul className='document__list-item-ul  arial'>
                 {documentsList.map((list, index) => (
 
-                        <li
-                            className={` ${listHidden && (index >= hiddenList ) ? 'hidden' : ''}`}
-                            key={index}
-                        >
-                            {filterPrepositions(list.value)}
-                        </li>
-                    ))}
-                </ul>
-                {documentsList.length > hiddenList && (
-
-
-                    <button
-                        className='document-list-show-button  line-after__box btnIconAn'
-                        onClick={() => setListHidden(!listHidden)}
+                    <li
+                        className={` ${listHidden && (index >= hiddenList) ? 'hidden' : ''}`}
+                        key={index}
                     >
-                        <span className=' line-after !leading-[1.2]'>{listHidden ? 'Показать полный список документов' : 'Скрыть'}</span>
+                        {filterPrepositions(list.value)}
+                    </li>
+                ))}
+            </ul>
+            {documentsList.length > hiddenList && (
 
-                        <svg
-                            className={`sendIconLeft document-list-arrow ${!listHidden ? 'rotate-[180deg]' : ''}`}
-                            width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clipPath="url(#clip0_4632_2058)">
-                                <path d="M7 3.5H9V0.5H7L7 3.5ZM15 9.46767L13.5692 8.02908L9.01287 12.6092V6.5H6.98815V12.6092L2.43177 8.02908L1 9.46767L8 16.5L8.71538 15.7822L9.43177 15.0634L15 9.46767Z" fill="#34446D" />
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_4632_2058">
-                                    <rect width="16" height="16" fill="white" transform="matrix(0 1 -1 0 16 0.5)" />
-                                </clipPath>
-                            </defs>
-                        </svg>
 
-                    </button>
-                )}
-            </div>
-        
+                <button
+                    className='document-list-show-button  line-after__box btnIconAn'
+                    onClick={() => setListHidden(!listHidden)}
+                >
+                    <span className=' line-after !leading-[1.2]'>{listHidden ? 'Показать полный список документов' : 'Скрыть'}</span>
+
+                    <svg
+                        className={`sendIconLeft document-list-arrow ${!listHidden ? 'rotate-[180deg]' : ''}`}
+                        width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clipPath="url(#clip0_4632_2058)">
+                            <path d="M7 3.5H9V0.5H7L7 3.5ZM15 9.46767L13.5692 8.02908L9.01287 12.6092V6.5H6.98815V12.6092L2.43177 8.02908L1 9.46767L8 16.5L8.71538 15.7822L9.43177 15.0634L15 9.46767Z" fill="#34446D" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_4632_2058">
+                                <rect width="16" height="16" fill="white" transform="matrix(0 1 -1 0 16 0.5)" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+
+                </button>
+            )}
+        </div>
+
     </div>
 ));
 
@@ -111,6 +112,7 @@ const MainDocumentItem = memo(({
     content,
     documentsList,
     price,
+    link,
     duration,
     active,
     setActive
@@ -198,7 +200,9 @@ const MainDocumentItem = memo(({
 
     const commonButtonClasses = 'group btnIconAn doc-btn tariff ';
 
-const hiddenList = windowWidth && windowWidth < 1240 ? 1 : 2;
+    const hiddenList = windowWidth && windowWidth < 1240 ? 1 : 2;
+
+    const router = useRouter();
 
 
     return (
@@ -226,7 +230,7 @@ const hiddenList = windowWidth && windowWidth < 1240 ? 1 : 2;
                         <Image
                             ref={smallPhotoRef}
                             alt='document'
-                            src={'https://test11.audiosector.ru/cp'+img?.url}
+                            src={'https://test11.audiosector.ru/cp' + img?.url}
                             width="41"
                             height="58"
                         />
@@ -286,7 +290,7 @@ const hiddenList = windowWidth && windowWidth < 1240 ? 1 : 2;
                                             className="tariff-wrap w-[280px] l:mx-0 mx-auto l:w-[250px] " ref={setWrapperRef}>
                                             <ActionButton
                                                 setRef={setButtonRef}
-                                                onClick={() => openDefaultModal('orderForm')}
+                                                onClick={() => router.push('/services/' + link)}
                                                 icon={
                                                     <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M3 9.48438V7.48438H0V9.48438H3ZM8.96767 1.48438L7.52908 2.91514L12.1092 7.47151H6V9.49623H12.1092L7.52908 14.0526L8.96767 15.4844L16 8.48438L15.2822 7.76899L14.5634 7.0526L8.96767 1.48438Z" fill="white" />
@@ -316,11 +320,11 @@ const hiddenList = windowWidth && windowWidth < 1240 ? 1 : 2;
                                     title={title}
                                     description={
                                         <>
-                                        <span>{duration}</span>
-                                        <span>{price}</span>
+                                            <span>{duration}</span>
+                                            <span>{price}</span>
                                         </>
                                     }
-                                    src={'https://test11.audiosector.ru/cp'+img?.url}
+                                    src={'https://test11.audiosector.ru/cp' + img?.url}
                                     width={475}
                                     height={667}
                                 >
@@ -332,7 +336,7 @@ const hiddenList = windowWidth && windowWidth < 1240 ? 1 : 2;
                                         animate={controls}
                                         className="document__big-img ">
                                         <Image
-                                            alt='document' src={'https://test11.audiosector.ru/cp'+img?.url}
+                                            alt='document' src={'https://test11.audiosector.ru/cp' + img?.url}
                                             width={photoWidth || 190}
                                             height={photoWidth / img?.width * img?.height || 267} />
                                     </motion.div>
@@ -346,7 +350,7 @@ const hiddenList = windowWidth && windowWidth < 1240 ? 1 : 2;
                                         <p className='document-description'>
                                             {filterPrepositions(content)}
                                         </p>
-                                   
+
                                     </div>
 
                                     {windowWidth && windowWidth >= 900 &&
@@ -356,7 +360,7 @@ const hiddenList = windowWidth && windowWidth < 1240 ? 1 : 2;
                                             className="document-desktop-actions tariff-wrap" ref={setWrapperRef}>
                                             <ActionButton
                                                 setRef={setButtonRef}
-                                                onClick={() => openDefaultModal('orderForm')}
+                                                onClick={() => router.push('/services/' + link)}
                                                 icon={
                                                     <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M3 9.48438V7.48438H0V9.48438H3ZM8.96767 1.48438L7.52908 2.91514L12.1092 7.47151H6V9.49623H12.1092L7.52908 14.0526L8.96767 15.4844L16 8.48438L15.2822 7.76899L14.5634 7.0526L8.96767 1.48438Z" fill="white" />
@@ -372,7 +376,7 @@ const hiddenList = windowWidth && windowWidth < 1240 ? 1 : 2;
 
                         <div className="document__list-wrap">
                             <DocumentList
-                            hiddenList={hiddenList}
+                                hiddenList={hiddenList}
                                 documentsList={documentsList}
                                 listHidden={listHidden}
                                 setListHidden={setListHidden}

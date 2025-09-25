@@ -36,6 +36,7 @@ const AppMainDocuments = () => {
                 <div className="documents-container">
                     {navigation.map((item, index) => (
                         <MainDocumentItem
+                            link={item.slug}
                             key={index}                       
                             setPhoto={() => {}}
                             setActive={(value: boolean) => setActive(value ? index : null)}
