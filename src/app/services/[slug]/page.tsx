@@ -253,7 +253,6 @@ const ServiceDetailContent = () => {
                 // Activate section when its top crosses roughly 25% from the top,
                 // and deactivate when it leaves above ~60% of the viewport
                 rootMargin: '-25% 0px -60% 0px',
-                threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
             }
         );
 
