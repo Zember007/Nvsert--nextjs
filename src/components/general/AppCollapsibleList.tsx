@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
 
 type AppCollapsibleListProps<ItemType> = {
     title: React.ReactNode;
@@ -25,17 +26,43 @@ function AppCollapsibleList<ItemType = unknown>({
 }: AppCollapsibleListProps<ItemType>) {
     const [isOpen, setIsOpen] = useState<boolean>(defaultOpen);
 
+    const controls = useAnimation();
+    const defaultSettings = {
+        duration: 0.3,
+        ease: [0.34, 1.56, 0.64, 1],
+        times: [0, 0.2, 0.5, 0.8, 1],
+        openY: [-50, 0, -20, 0, 0],
+    };
+
+    const animation = () => {
+        controls.start({
+            y: defaultSettings.openY, // Используем openY для отскока
+            transition: {
+                duration: defaultSettings.duration,
+                ease: [0.34, 1.56, 0.64, 1] as const,
+                times: defaultSettings.times,
+                delay: 0.1
+            }
+        });
+    }
+
+    useEffect(() => {
+        if (isOpen) {
+            animation()
+        }
+    }, [isOpen])
+
     return (
-        <div className={`flex flex-col gap-[20px] ${className || ''}`}>
+        <div className={`flex flex-col ${className || ''}`}>
             <button
                 type="button"
-                className={`line-after__box group  pb-[10px] border-b border-[#93969D] ${position === 'right' ? '2k:mr-0 mr-[-135px] 2k:pr-0 pr-[135px]' : '2k:ml-0 ml-[-135px] 2k:pl-0 pl-[135px]'} ${headerClassName || ''}`}
+                className={`line-after__box group  pb-[10px] border-b border-[#93969d80] ${position === 'right' ? '2k:mr-0 mr-[-135px] 2k:pr-0 pr-[135px]' : '2k:ml-0 ml-[-135px] 2k:pl-0 pl-[135px]'} ${headerClassName || ''}`}
                 onClick={() => setIsOpen(prev => !prev)}
                 aria-expanded={isOpen}
             >
-                <div className="flex items-center  gap-[10px] group-active:scale-[0.95] transition-transform duration-100">
+                <div className={`flex items-center   group-active:scale-[0.95] transition-all duration-100 ${isOpen ? 'gap-[14px]' : 'gap-[10px]'}`}>
                     <svg
-                        className={`group-hover:text-[#34446D] transition-transform duration-150 ${isOpen ? 'rotate-90' : ''}`}
+                        className={`group-hover:text-[#34446D] transition-transform duration-100 ${isOpen ? 'rotate-90 translate-x-[4px]' : ''}`}
                         width="9"
                         height="16"
                         viewBox="0 0 9 16"
@@ -58,13 +85,21 @@ function AppCollapsibleList<ItemType = unknown>({
                 </div>
             </button>
 
-            {isOpen && (
-                <div className={listClassName}>
-                    {typeof renderItem === 'function' && Array.isArray(items)
-                        ? items.map((item, index) => renderItem(item, index))
-                        : null}
+            <div className={`overflow-hidden`}>
+
+                <div
+                    className={`  ${isOpen ? 'translate-y-0' : '-translate-y-full'} pt-[20px] transition-all duration-100`}>
+                    <motion.div
+                        animate={controls}
+                        className={`${listClassName} relative`}
+                        >
+                        {typeof renderItem === 'function' && Array.isArray(items)
+                            ? items.map((item, index) => renderItem(item, index))
+                            : null}
+                    </motion.div>
+
                 </div>
-            )}
+            </div >
         </div>
     );
 }
