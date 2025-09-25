@@ -31,17 +31,17 @@ function AppCollapsibleList<ItemType = unknown>({
         duration: 0.3,
         ease: [0.34, 1.56, 0.64, 1],
         times: [0, 0.2, 0.5, 0.8, 1],
-        openY: [-50, 0, -20, 0, 0],
+        openY: [-30, 0, -10, 0, 0],
     };
 
     const animation = () => {
         controls.start({
-            y: defaultSettings.openY, // Используем openY для отскока
+            y: defaultSettings.openY,
             transition: {
                 duration: defaultSettings.duration,
                 ease: [0.34, 1.56, 0.64, 1] as const,
                 times: defaultSettings.times,
-                delay: 0.1
+                delay: position === 'right' ? 0 : 0.1
             }
         });
     }
@@ -88,11 +88,11 @@ function AppCollapsibleList<ItemType = unknown>({
             <div className={`overflow-hidden`}>
 
                 <div
-                    className={`  ${isOpen ? 'translate-y-0' : '-translate-y-full'} pt-[20px] transition-all duration-100`}>
+                    className={`  ${position === 'right' ? (isOpen ? 'opacity-100' : 'opacity-0') : (isOpen ?  'translate-y-0' : '-translate-y-full')} ${position === 'right' ? '' : 'transition-all duration-100'}  pt-[20px] `}>
                     <motion.div
                         animate={controls}
                         className={`${listClassName} relative`}
-                        >
+                    >
                         {typeof renderItem === 'function' && Array.isArray(items)
                             ? items.map((item, index) => renderItem(item, index))
                             : null}
