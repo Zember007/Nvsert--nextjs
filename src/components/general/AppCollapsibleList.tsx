@@ -27,21 +27,23 @@ function AppCollapsibleList<ItemType = unknown>({
     const [isOpen, setIsOpen] = useState<boolean>(defaultOpen);
 
     const controls = useAnimation();
-    const defaultSettings = {
-        duration: 0.3,
+    const ANIMATION_SETTINGS = {
+        duration: 0.6,
+        bounce: 5,
+        delay: 0,
         ease: [0.34, 1.56, 0.64, 1],
         times: [0, 0.2, 0.5, 0.8, 1],
-        openY: [-30, 0, -10, 0, 0],
+        openY: [0, 26, 0, 0, 0],
+        closeY: [60, -6, 0, 0, 0],
     };
 
     const animation = () => {
         controls.start({
-            y: defaultSettings.openY,
+            y: ANIMATION_SETTINGS.openY,
             transition: {
-                duration: defaultSettings.duration,
-                ease: [0.34, 1.56, 0.64, 1] as const,
-                times: defaultSettings.times,
-                delay: position === 'right' ? 0 : 0.1
+                duration: ANIMATION_SETTINGS.duration,
+                ease: ANIMATION_SETTINGS.ease,
+                times: ANIMATION_SETTINGS.times
             }
         });
     }
@@ -88,8 +90,9 @@ function AppCollapsibleList<ItemType = unknown>({
             <div className={`overflow-hidden`}>
 
                 <div
-                    className={`  ${position === 'right' ? (isOpen ? 'opacity-100' : 'opacity-0') : (isOpen ?  'translate-y-0' : '-translate-y-full')} ${position === 'right' ? '' : 'transition-all duration-100'}  pt-[20px] `}>
+                    className={`  ${isOpen ? 'translate-y-0' : '-translate-y-full'} pt-[20px] pb-[40px] transition-all duration-100`}>
                     <motion.div
+                        initial={{ y: 20 }}
                         animate={controls}
                         className={`${listClassName} relative`}
                     >
