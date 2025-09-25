@@ -348,7 +348,7 @@ const ServiceDetailContent = () => {
                             <div className="flex gap-[40px] items-stretch">
                                 {/* Left Column */}
                                 <div className="w-[250px] relative">
-                                    <div className=" sticky top-[122px] flex flex-col gap-[40px]">
+                                    <div className=" sticky top-[112px] flex flex-col gap-[40px]">
                                         <ServiceCard
                                             onClick={() => { document.getElementById('service-' + currentService?.id)?.click() }}
                                             serviceName={match?.serviceName || ''}
@@ -438,7 +438,7 @@ const ServiceDetailContent = () => {
 
                         <div className="w-[250px] relative">
 
-                            <div className=" sticky top-[122px] flex flex-col gap-[50px]">
+                            <div className=" sticky top-[112px] flex flex-col gap-[50px]">
 
                                 <Button
                                     onClick={() => { openDefaultModal('orderForm') }}
