@@ -172,7 +172,7 @@ const ServiceDetailContent = () => {
     const [currentServiceIndex, setCurrentServiceIndex] = useState<number>(0);
     const { openDefaultModal } = useHeaderContext();
     const match = useMemo(() => {
-        
+
         for (const service of services) {
             const found = service.items.find(item => item.slug === slug);
             if (found) {
@@ -191,7 +191,7 @@ const ServiceDetailContent = () => {
     // Получаем текущий сервис для отображения (может отличаться от match при пролистывании)
     const currentService = useMemo(() => {
         const slugChanged = prevSlugRef.current !== slug;
-    
+
         prevSlugRef.current = slug;
         if (slugChanged && match?.item) return match.item;
         if (!navItems || navItems.length === 0) return match?.item;
@@ -458,7 +458,7 @@ const ServiceDetailContent = () => {
                                             </div>
 
                                             <div className="flex justify-between">
-                                                <button
+                                               {/*  <button
                                                     onClick={() => {
 
                                                         if (navItems?.[currentServiceIndex - 1] || navItems?.[navItems.length - 1]) {
@@ -479,10 +479,25 @@ const ServiceDetailContent = () => {
                                                         className='line-after'
                                                     >{navItems?.[currentServiceIndex - 1]?.title || navItems?.[navItems.length - 1]?.title}
                                                     </span>
-                                                </button>
+                                                </button> */}
 
 
-                                                <button
+                                                <AppNavigationItem
+                                                    dark={true}
+                                                    title={navItems?.[currentServiceIndex - 1]?.title || navItems?.[navItems.length - 1]?.title}
+                                                    link={navItems?.[currentServiceIndex - 1]?.slug || navItems?.[navItems.length - 1]?.slug}
+                                                    img={'https://test11.audiosector.ru/cp' + (navItems?.[currentServiceIndex - 1]?.img?.url || navItems?.[navItems.length - 1]?.img?.url)}
+                                                />
+
+                                                <AppNavigationItem
+                                                    dark={true}
+                                                    title={navItems?.[currentServiceIndex + 1]?.title || navItems?.[0]?.title}
+                                                    link={navItems?.[currentServiceIndex + 1]?.slug || navItems?.[0]?.slug}
+                                                    img={'https://test11.audiosector.ru/cp' + (navItems?.[currentServiceIndex + 1]?.img?.url || navItems?.[0]?.img?.url)}
+                                                />
+
+
+                                               {/*  <button
                                                     onClick={() => {
 
                                                         if (navItems?.[currentServiceIndex + 1] || navItems?.[0]) {
@@ -503,7 +518,7 @@ const ServiceDetailContent = () => {
                                                         <path d="M0 10.014L5.06461 4.6756L6 5.66156L0.935391 11L0 10.014ZM0 0.985966L0.935391 0L3.62844 2.94125L2.69239 3.92721L0 0.985966Z" fill="#93969D" />
                                                     </svg>
 
-                                                </button>
+                                                </button> */}
                                             </div>
 
                                         </div>
