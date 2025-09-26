@@ -54,6 +54,24 @@ function AppCollapsibleList<ItemType = unknown>({
         }
     }, [isOpen])
 
+    const [delayedVisible, setDelayedVisible] = useState(false);
+
+    useEffect(() => {
+      let timer: NodeJS.Timeout | null = null;
+  
+      if (isOpen) {
+        // включаем с задержкой 100мс
+        timer = setTimeout(() => setDelayedVisible(true), 50);
+      } else {
+        // если закрывается — сразу скрываем
+        setDelayedVisible(false);
+      }
+  
+      return () => {
+        if (timer) clearTimeout(timer);
+      };
+    }, [isOpen]);
+
     return (
         <div className={`flex flex-col ${className || ''}`}>
             <button
@@ -87,10 +105,10 @@ function AppCollapsibleList<ItemType = unknown>({
                 </div>
             </button>
 
-            <div className={`overflow-hidden`}>
+            <div className={`${!isOpen ? "overflow-y-hidden" : delayedVisible ? "overflow-y-visible" : "overflow-y-hidden"}`}>
 
                 <div
-                    className={`  ${isOpen ? 'translate-y-0' : '-translate-y-full'} pt-[20px] pb-[40px] transition-all duration-100`}>
+                    className={`  ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'} pt-[20px]  transition-all duration-100`}>
                     <motion.div
                         initial={{ y: 20 }}
                         animate={controls}
