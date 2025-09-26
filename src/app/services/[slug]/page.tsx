@@ -150,9 +150,9 @@ const ContentBlockRenderer: React.FC<{
                     </div>
                 ) : (
                     firstImage ? (
-                            <div className="max-w-[700px] mx-auto my-[50px]">
-                                <img src={firstImage.src} alt={firstImage.alt} className="w-full h-auto" />
-                            </div>
+                        <div className="max-w-[700px] mx-auto my-[50px]">
+                            <img src={firstImage.src} alt={firstImage.alt} className="w-full h-auto" />
+                        </div>
                     ) : (<></>)
                 )}
             </div>
@@ -268,7 +268,7 @@ const ServiceDetailContent = () => {
             },
             {
                 root: null,
-               
+
                 rootMargin: '-25% 0px -60% 0px',
             }
         );
@@ -443,6 +443,57 @@ const ServiceDetailContent = () => {
 
 
                                     </div>
+                                    {sortedContentBlocks.length > 0 && (
+                                        <div className="flex flex-col gap-[30px] w-full">
+                                            <div className="flex justify-end pb-[20px] border-b border-[#93969d80]">
+                                                <p className='text-[12px] leading-[8px] text-[#93969D] font-light'>Статья написана 20.04.2025</p>
+                                            </div>
+
+                                            <div className="flex justify-between">
+                                                <button
+                                                    onClick={() => {
+
+                                                        if (recommendedServices?.[currentServiceIndex - 1] || recommendedServices?.[recommendedServices.length - 1]) {
+                                                            const newUrl = `/services/${recommendedServices[currentServiceIndex - 1]?.slug || recommendedServices[recommendedServices.length - 1].slug}`;
+                                                            window.history.replaceState({}, '', newUrl);
+
+                                                            setCurrentServiceIndex(recommendedServices?.[currentServiceIndex - 1] ? currentServiceIndex - 1 : recommendedServices.length - 1);
+
+                                                        }
+
+                                                    }}
+                                                    className='text-[16px] leading-[11px] text-[#93969D] font-light flex items-center gap-[10px]'>
+                                                    <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M6 10.014L0.935391 4.6756L4.76837e-07 5.66156L5.06461 11L6 10.014ZM6 0.985966L5.06461 0L2.37156 2.94125L3.30761 3.92721L6 0.985966Z" fill="#93969D" />
+                                                    </svg>
+
+                                                    {recommendedServices?.[currentServiceIndex - 1]?.title || recommendedServices?.[recommendedServices.length - 1]?.title}</button>
+
+
+                                                <button
+                                                    onClick={() => {
+
+                                                        if (recommendedServices?.[currentServiceIndex + 1] || recommendedServices?.[0]) {
+                                                            const newUrl = `/services/${recommendedServices[currentServiceIndex + 1]?.slug || recommendedServices[0].slug}`;
+                                                            window.history.replaceState({}, '', newUrl);
+                                                        }
+
+                                                        setCurrentServiceIndex(recommendedServices?.[currentServiceIndex + 1] ? currentServiceIndex + 1 : 0);
+
+                                                    }}
+                                                    className='text-[16px] leading-[11px] text-[#93969D] font-light flex items-center gap-[10px]'>
+
+
+                                                    {recommendedServices?.[currentServiceIndex + 1]?.title || recommendedServices?.[0]?.title}
+                                                    <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M0 10.014L5.06461 4.6756L6 5.66156L0.935391 11L0 10.014ZM0 0.985966L0.935391 0L3.62844 2.94125L2.69239 3.92721L0 0.985966Z" fill="#93969D" />
+                                                    </svg>
+
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    )}
                                 </div>
 
 
