@@ -462,7 +462,7 @@ const ServiceDetailContent = () => {
                                                         }
 
                                                     }}
-                                                    className='line-after__box active:scale-[0.95] transition-all duration-100 text-[16px] leading-[11px] text-[#93969D] font-light flex items-center gap-[10px]'>
+                                                    className='line-after__box active:scale-[0.95] transition-all duration-100 text-[16px]  text-[#93969D] font-light flex items-center gap-[10px]'>
                                                     <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M6 10.014L0.935391 4.6756L4.76837e-07 5.66156L5.06461 11L6 10.014ZM6 0.985966L5.06461 0L2.37156 2.94125L3.30761 3.92721L6 0.985966Z" fill="#93969D" />
                                                     </svg>
@@ -485,7 +485,7 @@ const ServiceDetailContent = () => {
                                                         setCurrentServiceIndex(recommendedServices?.[currentServiceIndex + 1] ? currentServiceIndex + 1 : 0);
 
                                                     }}
-                                                    className='line-after__box active:scale-[0.95] transition-all duration-100 text-[16px] leading-[11px] text-[#93969D] font-light flex items-center gap-[10px]'>
+                                                    className='line-after__box active:scale-[0.95] transition-all duration-100 text-[16px]  text-[#93969D] font-light flex items-center gap-[10px]'>
 
 
                                                     <span
