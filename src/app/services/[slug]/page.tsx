@@ -125,7 +125,7 @@ const ContentBlockRenderer: React.FC<{
                     className="flex justify-center group items-center gap-[10px] pb-[10px] border-b border-[#93969d80] cursor-pointer"
                     onClick={onToggle}
                 >
-                    <h2 className="text-[24px] group-active:scale-[0.98] transition-all duration-100 font-light !m-0 leading-[16px] tracking-[0] text-[#34446D] flex-1">
+                    <h2 className="text-[24px] group-active:scale-[0.98] transition-all duration-100 font-light !m-0 leading-[18px] tracking-[0] text-[#34446D] flex-1">
                         {heading}
                     </h2>
                     <svg
