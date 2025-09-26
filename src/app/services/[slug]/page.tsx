@@ -462,12 +462,16 @@ const ServiceDetailContent = () => {
                                                         }
 
                                                     }}
-                                                    className='text-[16px] leading-[11px] text-[#93969D] font-light flex items-center gap-[10px]'>
+                                                    className='line-after__box active:scale-[0.95] transition-all duration-100 text-[16px] leading-[11px] text-[#93969D] font-light flex items-center gap-[10px]'>
                                                     <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M6 10.014L0.935391 4.6756L4.76837e-07 5.66156L5.06461 11L6 10.014ZM6 0.985966L5.06461 0L2.37156 2.94125L3.30761 3.92721L6 0.985966Z" fill="#93969D" />
                                                     </svg>
 
-                                                    {recommendedServices?.[currentServiceIndex - 1]?.title || recommendedServices?.[recommendedServices.length - 1]?.title}</button>
+                                                    <span
+                                                        className='line-after'
+                                                    >{recommendedServices?.[currentServiceIndex - 1]?.title || recommendedServices?.[recommendedServices.length - 1]?.title}
+                                                    </span>
+                                                </button>
 
 
                                                 <button
@@ -481,10 +485,12 @@ const ServiceDetailContent = () => {
                                                         setCurrentServiceIndex(recommendedServices?.[currentServiceIndex + 1] ? currentServiceIndex + 1 : 0);
 
                                                     }}
-                                                    className='text-[16px] leading-[11px] text-[#93969D] font-light flex items-center gap-[10px]'>
+                                                    className='line-after__box active:scale-[0.95] transition-all duration-100 text-[16px] leading-[11px] text-[#93969D] font-light flex items-center gap-[10px]'>
 
 
-                                                    {recommendedServices?.[currentServiceIndex + 1]?.title || recommendedServices?.[0]?.title}
+                                                    <span
+                                                        className='line-after'
+                                                    >{recommendedServices?.[currentServiceIndex + 1]?.title || recommendedServices?.[0]?.title}</span>
                                                     <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M0 10.014L5.06461 4.6756L6 5.66156L0.935391 11L0 10.014ZM0 0.985966L0.935391 0L3.62844 2.94125L2.69239 3.92721L0 0.985966Z" fill="#93969D" />
                                                     </svg>
