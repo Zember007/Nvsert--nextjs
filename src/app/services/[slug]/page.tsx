@@ -166,11 +166,13 @@ const ServiceDetailContent = () => {
     const params = useParams<{ slug: string }>();
     const slug = Array.isArray(params?.slug) ? params.slug[0] : params?.slug;
     const { services, navigation } = useSelector((state: RootState) => state.navigation);
+    const prevSlugRef = React.useRef<string | undefined>(undefined);
     const [expandedSections, setExpandedSections] = useState<number[]>([]);
     const [activeBlockId, setActiveBlockId] = useState<number | null>(null);
     const [currentServiceIndex, setCurrentServiceIndex] = useState<number>(0);
     const { openDefaultModal } = useHeaderContext();
     const match = useMemo(() => {
+        
         for (const service of services) {
             const found = service.items.find(item => item.slug === slug);
             if (found) {
@@ -178,29 +180,33 @@ const ServiceDetailContent = () => {
             }
         }
         return null;
-    }, [services, slug]);
+    }, [services, slug, params]);
 
-    const serviceName = match?.serviceName;
 
-    const recommendedServices = useMemo(() => {
-        return services.find(service => service.name === serviceName)?.items;
-    }, [services, serviceName]);
+    // Используем плоский список navigation вместо recommendedServices
+    const navItems = useMemo(() => {
+        return navigation || [];
+    }, [navigation]);
 
     // Получаем текущий сервис для отображения (может отличаться от match при пролистывании)
     const currentService = useMemo(() => {
-        if (!recommendedServices) return match?.item;
-        return recommendedServices[currentServiceIndex] || match?.item;
-    }, [recommendedServices, currentServiceIndex, match?.item]);
+        const slugChanged = prevSlugRef.current !== slug;
+        prevSlugRef.current = slug;
+
+        if (slugChanged && match?.item) return match.item;
+        if (!navItems || navItems.length === 0) return match?.item;
+        return navItems[currentServiceIndex] || match?.item;
+    }, [navItems, currentServiceIndex, match?.item, slug]);
 
     // Синхронизируем индекс с текущим slug
     React.useEffect(() => {
-        if (recommendedServices) {
-            const index = recommendedServices.findIndex(item => item.slug === slug);
+        if (navItems && navItems.length > 0) {
+            const index = navItems.findIndex(item => item.slug === slug);
             if (index !== -1) {
                 setCurrentServiceIndex(index);
             }
         }
-    }, [slug, recommendedServices]);
+    }, [slug, navItems]);
 
     // Sort content blocks by order
     const sortedContentBlocks = useMemo(() => {
@@ -322,15 +328,15 @@ const ServiceDetailContent = () => {
                     // Обновляем локальное состояние для изменения контента
                     setCurrentServiceIndex(index);
                     // Обновляем URL без перерендеринга страницы
-                    if (recommendedServices?.[index]) {
-                        const newUrl = `/services/${recommendedServices[index].slug}`;
+                    if (navItems?.[index]) {
+                        const newUrl = `/services/${navItems[index].slug}`;
                         window.history.replaceState({}, '', newUrl);
                     }
                 }}
                 maskClosable={false}
             >
 
-                {recommendedServices?.map((item) => <PhotoView
+                {navItems?.map((item) => <PhotoView
 
                     key={item.id}
                     title={item.title}
@@ -387,11 +393,11 @@ const ServiceDetailContent = () => {
                                             title={false}
                                             padding={false}
                                         />
-                                        {recommendedServices?.filter(item => item.slug !== currentService?.slug) && (
+                                        {navItems?.filter(item => item.slug !== currentService?.slug) && (
                                             <AppCollapsibleList
                                                 position='left'
                                                 title={'Рекомендуем к оформлению'}
-                                                items={recommendedServices}
+                                                items={navItems.filter(item => item.category.name === currentService?.category.name)}
                                                 defaultOpen={true}
                                                 listClassName='flex flex-col gap-[20px]'
                                                 renderItem={(children) => (
@@ -453,11 +459,11 @@ const ServiceDetailContent = () => {
                                                 <button
                                                     onClick={() => {
 
-                                                        if (recommendedServices?.[currentServiceIndex - 1] || recommendedServices?.[recommendedServices.length - 1]) {
-                                                            const newUrl = `/services/${recommendedServices[currentServiceIndex - 1]?.slug || recommendedServices[recommendedServices.length - 1].slug}`;
+                                                        if (navItems?.[currentServiceIndex - 1] || navItems?.[navItems.length - 1]) {
+                                                            const newUrl = `/services/${navItems[currentServiceIndex - 1]?.slug || navItems[navItems.length - 1].slug}`;
                                                             window.history.replaceState({}, '', newUrl);
 
-                                                            setCurrentServiceIndex(recommendedServices?.[currentServiceIndex - 1] ? currentServiceIndex - 1 : recommendedServices.length - 1);
+                                                            setCurrentServiceIndex(navItems?.[currentServiceIndex - 1] ? currentServiceIndex - 1 : navItems.length - 1);
 
                                                         }
 
@@ -469,7 +475,7 @@ const ServiceDetailContent = () => {
 
                                                     <span
                                                         className='line-after'
-                                                    >{recommendedServices?.[currentServiceIndex - 1]?.title || recommendedServices?.[recommendedServices.length - 1]?.title}
+                                                    >{navItems?.[currentServiceIndex - 1]?.title || navItems?.[navItems.length - 1]?.title}
                                                     </span>
                                                 </button>
 
@@ -477,12 +483,12 @@ const ServiceDetailContent = () => {
                                                 <button
                                                     onClick={() => {
 
-                                                        if (recommendedServices?.[currentServiceIndex + 1] || recommendedServices?.[0]) {
-                                                            const newUrl = `/services/${recommendedServices[currentServiceIndex + 1]?.slug || recommendedServices[0].slug}`;
+                                                        if (navItems?.[currentServiceIndex + 1] || navItems?.[0]) {
+                                                            const newUrl = `/services/${navItems[currentServiceIndex + 1]?.slug || navItems[0].slug}`;
                                                             window.history.replaceState({}, '', newUrl);
                                                         }
 
-                                                        setCurrentServiceIndex(recommendedServices?.[currentServiceIndex + 1] ? currentServiceIndex + 1 : 0);
+                                                        setCurrentServiceIndex(navItems?.[currentServiceIndex + 1] ? currentServiceIndex + 1 : 0);
 
                                                     }}
                                                     className='line-after__box active:scale-[0.95] transition-all duration-100 text-[16px]  text-[#93969D] font-light flex items-center gap-[10px]'>
@@ -490,7 +496,7 @@ const ServiceDetailContent = () => {
 
                                                     <span
                                                         className='line-after'
-                                                    >{recommendedServices?.[currentServiceIndex + 1]?.title || recommendedServices?.[0]?.title}</span>
+                                                    >{navItems?.[currentServiceIndex + 1]?.title || navItems?.[0]?.title}</span>
                                                     <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M0 10.014L5.06461 4.6756L6 5.66156L0.935391 11L0 10.014ZM0 0.985966L0.935391 0L3.62844 2.94125L2.69239 3.92721L0 0.985966Z" fill="#93969D" />
                                                     </svg>
