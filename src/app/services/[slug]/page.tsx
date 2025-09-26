@@ -191,12 +191,14 @@ const ServiceDetailContent = () => {
     // Получаем текущий сервис для отображения (может отличаться от match при пролистывании)
     const currentService = useMemo(() => {
         const slugChanged = prevSlugRef.current !== slug;
+    
         prevSlugRef.current = slug;
-
         if (slugChanged && match?.item) return match.item;
         if (!navItems || navItems.length === 0) return match?.item;
         return navItems[currentServiceIndex] || match?.item;
     }, [navItems, currentServiceIndex, match?.item, slug]);
+
+
 
     // Синхронизируем индекс с текущим slug
     React.useEffect(() => {
