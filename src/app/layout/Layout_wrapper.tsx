@@ -121,7 +121,7 @@ const LayoutContent = ({ children }: { children: ReactNode }) => {
                 <SmoothScroll>
                     <AppHeader />
 
-                    <main className={`select-none ${transparent && 'transparent-header'} ${calcPageBodyClass && 'cost-calc-page'}`}>
+                    <main className={` ${transparent && 'transparent-header'} ${calcPageBodyClass && 'cost-calc-page'}`}>
 
                         {children}
 

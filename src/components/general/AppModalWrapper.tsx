@@ -67,7 +67,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ reset, countTrigger, 
     };
     return (
         <>
-            <div className={`modal__wrapper  select-none ${defaultModalActive && 'active'}`}>
+            <div className={`modal__wrapper ${defaultModalActive && 'active'}`}>
                 <Draggable
                     position={position} onDrag={handleDrag}
                     bounds="parent" cancel=".no-drag" defaultPosition={{ x: 0, y: 0 }} nodeRef={nodeRef as React.RefObject<HTMLDivElement>}>

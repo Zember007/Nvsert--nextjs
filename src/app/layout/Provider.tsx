@@ -1,5 +1,6 @@
 
 
+"use client";
 import '@/config/i18n';
 import { Provider } from 'react-redux';
 import { HeaderContextProvider } from '@/components/contexts/HeaderContext';

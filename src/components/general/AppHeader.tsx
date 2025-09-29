@@ -270,7 +270,7 @@ const AppHeader = () => {
       <div className={`services-menu-box menu-headers  ${servicesMenuActive && 'active'} ${darkHeader && 'dark'}`}>
         <div className={`services-menu !py-[5px] js-services-menu relative `}>
 
-          <div className="services-menu__wrapper select-none">
+          <div className="services-menu__wrapper ">
             <div className="grid grid-cols-6 h-[50px] w-full xxxl:gap-[30px] gap-[8px]">
               {services.map((item, i) => (
                 <div ref={setWrapperRef} key={i} className="tariff-wrap ">
@@ -302,7 +302,7 @@ const AppHeader = () => {
         >
           <div
             className={`services-menu !backdrop-blur-[20px] py-[20px]  js-services-menu relative ${servicesMenuActive && 'active'}`}>
-            <div className="services-menu__wrapper select-none">
+            <div className="services-menu__wrapper">
               <AppNavigation active={servicesMenuActive} />
             </div>
 

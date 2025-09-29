@@ -55,7 +55,7 @@ const ServicesContent = () => {
 
 
     return (
-        <div className="main text-[#000] overflow-hidden select-none relativ mb-[100px] ">
+        <div className="main text-[#000] overflow-hidden  relativ mb-[100px] ">
 
 
 

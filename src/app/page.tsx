@@ -31,7 +31,7 @@ export default function Home() {
 
 
   return (
-    <div className="main text-[#000] overflow-hidden select-none relative">
+    <div className="main text-[#000] overflow-hidden  relative">
        <AppMainIntro />
 
       <AppMainDocuments />

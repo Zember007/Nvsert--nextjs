@@ -119,7 +119,7 @@ const ServiceDetailContent = () => {
 
 
     return (
-        <div className="main text-[#000]  select-none mb-[100px]">
+        <div className="main text-[#000]   mb-[100px]">
 
             <AppBreadcrumbs root={'/'} breadcrumbs={[{ id: 2, title: 'Отзывы', full_slug: '/feedback' }]} />
 
