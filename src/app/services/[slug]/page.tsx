@@ -15,8 +15,9 @@ async function getNavigationData(): Promise<NavigationItem[]> {
     return sortedData;
 }
 
-const Page = async ({ params }: { params: { slug: string } }) => {
-    const slug = Array.isArray(params?.slug) ? params.slug[0] : params?.slug;
+const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
+    const { slug: rawSlug } = await params;
+    const slug = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug;
     const navigation = await getNavigationData();
     return <ClientPage initialNavigation={navigation} initialSlug={slug || ''} />;
 };
