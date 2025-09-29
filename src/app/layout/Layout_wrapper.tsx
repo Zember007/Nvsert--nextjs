@@ -100,6 +100,7 @@ const LayoutContent = ({ children }: { children: ReactNode }) => {
         <>
             <head>
                 <title>{metadata.title}</title>
+                <meta name="yandex-verification" content="90db85a0cc46fb2c" />
                 <meta name="theme-color" content="#646467"></meta>
                 <meta name="description" content={metadata.description} />
                 <meta name="keywords" content={metadata.keywords} />
