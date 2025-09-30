@@ -8,6 +8,7 @@ import Button from '@/components/ui/Button';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import { ContentBlock, NavigationItem } from '@/store/navigation';
 import { PhotoProvider, PhotoView } from '@/assets/lib/react-photo-view';
+import DotNavList from '@/components/general/DotNavList';
 
 // Component to render rich text with proper formatting
 const RichTextRenderer: React.FC<{ content: string }> = ({ content }) => {
@@ -219,65 +220,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
     }, [sortedContentBlocks]);
 
     // Track which content block is currently in view and reflect it in the right navigation
-    React.useEffect(() => {
-        const sections = sortedContentBlocks
-            .map(block => document.getElementById('block-' + block.id))
-            .filter((el): el is HTMLElement => Boolean(el));
-
-        if (sections.length === 0) return;
-
-        const handleHashChange = () => {
-            const hash = window.location.hash;
-            if (hash.startsWith('#block-')) {
-                const id = parseInt(hash.replace('#block-', ''), 10);
-                if (!Number.isNaN(id)) {
-                    setActiveBlockId(id);
-                }
-            }
-        };
-
-        const observer = new IntersectionObserver(
-            (entries) => {
-                const visible = entries
-                    .filter(e => e.isIntersecting)
-                    .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-                const topMost = visible[0];
-                if (topMost) {
-                    const id = parseInt((topMost.target as HTMLElement).id.replace('block-', ''), 10);
-                    if (!Number.isNaN(id)) {
-                        setActiveBlockId(prev => (prev === id ? prev : id));
-                    }
-                }
-            },
-            {
-                root: null,
-                rootMargin: '-25% 0px -60% 0px',
-            }
-        );
-
-        sections.forEach(section => observer.observe(section));
-        window.addEventListener('hashchange', handleHashChange);
-
-        if (window.location.hash && window.location.hash.startsWith('#block-')) {
-            handleHashChange();
-        } else {
-            setActiveBlockId(sortedContentBlocks[0]?.id ?? null);
-        }
-
-        return () => {
-            window.removeEventListener('hashchange', handleHashChange);
-            sections.forEach(section => observer.unobserve(section));
-            observer.disconnect();
-        };
-    }, [sortedContentBlocks]);
-
-    const navigationItems = useMemo(() => {
-        return currentService?.content?.map(item => ({
-            id: item.id,
-            title: item.heading,
-            active: activeBlockId === item.id,
-        })) || [];
-    }, [currentService?.content, activeBlockId]);
+   
 
     const ctaInsertAfterIndex = useMemo(() => {
         return Math.ceil(sortedContentBlocks.length / 2) - 1;
@@ -419,28 +362,8 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                     label='Оформить заявку'
                                 />
 
-                                <AppCollapsibleList
-                                    position='right'
-                                    title={'Навигация по услуге'}
-                                    items={navigationItems}
-                                    defaultOpen={true}
-                                    listClassName='flex flex-col gap-[20px]'
-                                    renderItem={(item, index) => (
-                                        <a
-                                            href={'#block-' + item.id}
-                                            key={index}
-                                            className={`flex items-center gap-[24px]  cursor-pointer text-left group`}
-                                        >
-                                            <div className={`pointer-events-none flex items-center justify-center min-w-[16px] w-[16px] h-[16px] relative transition-all duration-100 group-active:left-[15px] ${item.active ? 'left-0' : 'left-[15px]'}`}>
-                                                <div className={` border transition-all duration-100 group-active:w-[8px] group-active:h-[8px] group-active:border-[#34446D] ${!item.active ? 'border-transparent w-[8px] h-[8px]' : 'border-[#34446D] w-[16px] h-[16px]'} rounded-full relative`}>
-                                                    <div className={`w-[8px] h-[8px] transition-all duration-100 group-active:bg-[#34446D] ${item.active ? 'bg-[#34446D] border-transparent' : 'bg-transparent border-[#93969d80]'} border  rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}></div>
-                                                </div>
-                                            </div>
-                                            <span className={`pointer-events-none text-[16px] group-active:scale-[0.95] transition-transform duration-100  ${item.active ? 'text-[#34446D] ' : 'text-black font-light'}`}>
-                                                {item.title}
-                                            </span>
-                                        </a>
-                                    )}
+                                <DotNavList
+                                    items={currentService?.content?.map(item => ({ id: item.id, title: item.heading, active: item.id === activeBlockId }))}
                                 />
                             </div>
                         </div>

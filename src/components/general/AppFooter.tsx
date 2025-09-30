@@ -22,7 +22,7 @@ const AppFooter = () => {
   const menuItems = [
     { label: "FAQ", href: "#" },
     { label: t("navigation.blog"), href: "#" },
-    { label: t("navigation.reviews"), href: "#" },
+    { label: t("navigation.reviews"), href: "/feedback" },
     { label: t('navigation.tnved'), href: "/class/tnved/" }
   ]
 
