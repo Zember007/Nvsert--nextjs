@@ -26,7 +26,7 @@
 }
 
 .document-photo-container {
-  @apply m:m-0 m-auto transition-all duration-100 active:scale-[0.95] cursor-pointer;
+  @apply m:m-0 m-auto transition-all duration-100 active:scale-[0.95] cursor-pointer flex-shrink-0 ;
 }
 
 .document-photo-wrapper {
@@ -42,7 +42,7 @@
 }
 
 .document-description {
-  @apply text-[14px] xss:text-[16px] text-[#000000] m:max-w-[360px];
+  @apply text-[14px] xss:text-[16px] text-[#000000];
 }
 
 .document-desktop-actions {

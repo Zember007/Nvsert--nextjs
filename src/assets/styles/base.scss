@@ -580,11 +580,11 @@ input:-webkit-autofill {
     height: 50px;
 
     .sendIconLeft {
-        @apply block duration-100 transition-all ease-in translate-x-0 xl:translate-x-[-16px] xl:opacity-0;
+        @apply block duration-100 transition-all ease-in translate-x-0 xl:translate-x-[-12px] xl:opacity-0;
     }
 
     .sendText {
-        @apply block duration-100 transition-all ease-in xl:translate-x-[16px] -translate-y-[1px] translate-x-0;
+        @apply block duration-100 transition-all ease-in xl:translate-x-[12px] -translate-y-[1px] translate-x-0;
         line-height: .5;
     }
 
