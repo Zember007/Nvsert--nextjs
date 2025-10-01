@@ -122,8 +122,8 @@ const AppFooter = () => {
 
   return (
     <footer ref={ref} className="footer grid xl:grid-cols-2 gap-[2px]">
-      <div className="footer__white change-style xl:row-start-auto row-start-2   xl:justify-between xxs:gap-[62px]  m:gap-[208px]  xl:!gap-[0px]" >
-        <p className="xxs:block hidden text-[18px] font-light col-start-1 col-end-3 whitespace-nowrap">© 2025 NVSERT</p>
+      <div className="footer__white change-style xl:row-start-auto row-start-2   xl:justify-between xxs:gap-[62px]  xl:mx-0 m:mx-auto xxs:mx-0 xl:gap-[0px]" >
+        <p className="xxs:block hidden xl:static absolute left-[34px] top-1/2 -translate-y-1/2 text-[18px] font-light col-start-1 col-end-3 whitespace-nowrap">© 2025 NVSERT</p>
 
         <div className="xxs:w-auto w-full xxs:mx-0 mx-auto xxs:max-w-full max-w-[280px]  flex gap-[10px] items-start xxs:flex-row flex-col ">
           {menuItems.map((item, i) => (
