@@ -23,6 +23,7 @@ const AppFooter = () => {
     { label: "FAQ", href: "#" },
     { label: t("navigation.blog"), href: "#" },
     { label: t("navigation.reviews"), href: "/feedback" },
+    { label: t("navigation.okp"), href: "/class/okp/" },
     { label: t('navigation.tnved'), href: "/class/tnved/" }
   ]
 

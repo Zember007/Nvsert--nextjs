@@ -21,7 +21,7 @@ export let ru = {
     services: 'Услуги',
     articles: 'Статьи',
     about: 'О компании',
-    okp: 'ОКП',
+    okp: 'ОКПД 2',
     tnved: 'ТН ВЭД',
     contacts: 'Контакты',
   },
