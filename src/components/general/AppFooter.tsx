@@ -247,7 +247,7 @@ const AppFooter = () => {
         </div>
       </div>
 
-      <div className="footer__dark bottom-top xxs:justify-between  m:gap-[113px] xl:!gap-[0px] xl:h-auto xxs:h-[135px]">
+      <div className="footer__dark bottom-top xxs:justify-between  m:gap-[216px] xl:!gap-[0px] xl:h-auto xxs:h-[135px]">
         <div className="xxs:flex hidden text-[16px] items-start  flex-col gap-[18px] font-ligh whitespace-nowrap">
           <span>{t("footer.inn")}</span>
           <span>{t("footer.company")}</span>
