@@ -23,8 +23,8 @@ const AppFooter = () => {
     { label: "FAQ", href: "#" },
     { label: t("navigation.blog"), href: "#" },
     { label: t("navigation.reviews"), href: "/feedback" },
-    { label: t("navigation.okp"), href: "/class/okp/" },
-    { label: t('navigation.tnved'), href: "/class/tnved/" }
+    { label: t('navigation.tnved'), href: "/class/tnved/" },
+    { label: t("navigation.okp"), href: "/class/okp/" }
   ]
 
   const langs = [
@@ -247,7 +247,7 @@ const AppFooter = () => {
         </div>
       </div>
 
-      <div className="footer__dark bottom-top xxs:justify-between  m:gap-[216px] xl:!gap-[0px] xl:h-auto xxs:h-[135px]">
+      <div className="xl:!flex xxs:!grid footer__dark bottom-top xxs:justify-between  xxs:grid-cols-2 xxs:gap-[10px]  xl:gap-[0px] xl:h-auto xxs:h-[135px]">
         <div className="xxs:flex hidden text-[16px] items-start  flex-col gap-[18px] font-ligh whitespace-nowrap">
           <span>{t("footer.inn")}</span>
           <span>{t("footer.company")}</span>

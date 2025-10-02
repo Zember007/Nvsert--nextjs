@@ -207,7 +207,7 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                             <Link
                                 onClick={() => closeMenu()}
                                 href="/services"
-                                className={`header__menu-mob-item text-[#93969D] text-[20px]`}
+                                className={`header__menu-mob-item text-[#93969D] text-[20px] before:hidden`}
                             >
                                 Полный список услуг
                             </Link>
