@@ -347,7 +347,7 @@ const MainDocumentItem = memo(({
                             <div ref={containerPhotoRef} className="document-photo-wrapper">
                                 <div className="document-content-column">
                                     <div className="document-text-content arial">
-                                        <p className='document-description'>
+                                        <p className='document-description whitespace-pre-line'>
                                             {filterPrepositions(content)}
                                         </p>
 
