@@ -151,7 +151,7 @@ const ContentBlockRenderer: React.FC<{
                         <div className="max-w-[700px] mx-auto my-[50px]">
                             <img src={firstImage.src} alt={firstImage.alt} className="w-full h-auto" />
                         </div>
-                    ) : (<></>)
+                    ) : (<div className="h-[50px]"></div>)
                 )}
             </div>
         );
