@@ -353,23 +353,26 @@ const MainDocumentItem = memo(({
 
                                     </div>
 
+
+
                                     {windowWidth && windowWidth >= 900 &&
                                         <motion.div
                                             animate={controls}
                                             initial={{ y: 20 }}
-                                            className="document-desktop-actions tariff-wrap" ref={setWrapperRef}>
+                                            className="tariff-wrap w-[280px] l:mx-0 mx-auto l:w-[250px]" ref={setWrapperRef}>
                                             <ActionButton
                                                 setRef={setButtonRef}
-                                                onClick={() => router.push('/services/' + link)}
+                                                onClick={() => openDefaultModal('orderForm')}
                                                 icon={
                                                     <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M3 9.48438V7.48438H0V9.48438H3ZM8.96767 1.48438L7.52908 2.91514L12.1092 7.47151H6V9.49623H12.1092L7.52908 14.0526L8.96767 15.4844L16 8.48438L15.2822 7.76899L14.5634 7.0526L8.96767 1.48438Z" fill="white" />
                                                     </svg>
                                                 }
-                                                text="Перейти в услугу"
+                                                text="Оформить заявку"
                                                 className={commonButtonClasses}
                                             />
-                                        </motion.div>}
+                                        </motion.div>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -385,20 +388,19 @@ const MainDocumentItem = memo(({
                                 <motion.div
                                     animate={controls}
                                     initial={{ y: 20 }}
-                                    className="tariff-wrap w-[280px] l:mx-0 mx-auto l:w-[250px]" ref={setWrapperRef}>
+                                    className="document-desktop-actions tariff-wrap" ref={setWrapperRef}>
                                     <ActionButton
                                         setRef={setButtonRef}
-                                        onClick={() => openDefaultModal('orderForm')}
+                                        onClick={() => router.push('/services/' + link)}
                                         icon={
                                             <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M3 9.48438V7.48438H0V9.48438H3ZM8.96767 1.48438L7.52908 2.91514L12.1092 7.47151H6V9.49623H12.1092L7.52908 14.0526L8.96767 15.4844L16 8.48438L15.2822 7.76899L14.5634 7.0526L8.96767 1.48438Z" fill="white" />
                                             </svg>
                                         }
-                                        text="Оформить заявку"
+                                        text="Перейти в услугу"
                                         className={commonButtonClasses}
                                     />
-                                </motion.div>
-                            }
+                                </motion.div>}
                         </div>
                     </div>
                 </div>
