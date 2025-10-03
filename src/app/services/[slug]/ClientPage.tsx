@@ -148,7 +148,7 @@ const ContentBlockRenderer: React.FC<{
                     </div>
                 ) : (
                     firstImage ? (
-                        <div className="max-w-[700px] mx-auto my-[50px]">
+                        <div className="max-w-[700px] mx-auto mt-[50px]">
                             <img src={firstImage.src} alt={firstImage.alt} className="w-full h-auto" />
                         </div>
                     ) : (<></>)
@@ -325,7 +325,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                         {sortedContentBlocks.map((block, index) => (
                                             <React.Fragment key={block.id}>
                                                 {index === ctaInsertAfterIndex && (
-                                                    <div className="text-center my-[50px]  max-w-[700px] w-full h-[300px] bg-[rgba(52,68,109,0.2)] rounded-[8px] flex flex-col justify-center items-center gap-[16px] p-[40px] backdrop-blur-sm" key="cta-banner">
+                                                    <div className="text-center mt-[50px]  max-w-[700px] w-full h-[300px] bg-[rgba(52,68,109,0.2)] rounded-[8px] flex flex-col justify-center items-center gap-[16px] p-[40px] backdrop-blur-sm" key="cta-banner">
                                                         <h3 className="text-[24px] font-light tracking-[-0.04em]  text-black w-[460px]">
                                                             Подходит ли ваша продукция <br /> под обязательную сертификацию?
                                                         </h3>
