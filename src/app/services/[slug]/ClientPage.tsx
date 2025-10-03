@@ -51,7 +51,7 @@ const RichTextRenderer: React.FC<{ content: string }> = ({ content }) => {
                     const src = match[2] || '';
                     flushList();
                     elements.push(
-                        <div key={`img-${index}`} className="max-w-[700px] mx-auto my-[50px]">
+                        <div key={`img-${index}`} className="max-w-[700px] mx-auto mt-[50px]">
                             <img src={src} alt={alt} className="w-full h-auto" />
                         </div>
                     );
@@ -118,7 +118,7 @@ const ContentBlockRenderer: React.FC<{
         return (
             <div
                 id={'block-' + block.id}
-                className="w-full">
+                className="w-full mt-[50px]">
                 <div
                     className="flex justify-center group items-center gap-[10px] pb-[10px] border-b border-[#93969d80] cursor-pointer"
                     onClick={onToggle}
@@ -151,7 +151,7 @@ const ContentBlockRenderer: React.FC<{
                         <div className="max-w-[700px] mx-auto my-[50px]">
                             <img src={firstImage.src} alt={firstImage.alt} className="w-full h-auto" />
                         </div>
-                    ) : (<div className="h-[50px]"></div>)
+                    ) : (<></>)
                 )}
             </div>
         );
