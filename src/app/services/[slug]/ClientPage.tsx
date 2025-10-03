@@ -301,7 +301,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                             <AppCollapsibleList
                                                 position='left'
                                                 title={'Рекомендуем к оформлению'}
-                                                items={navItems.filter(item => item.category.name === currentService?.category.name && item.slug !== currentService?.slug).slice(0, 3)}
+                                                items={navItems.filter(item => item.category.name === currentService?.category.name && item.slug !== currentService?.slug).slice(0, 4)}
                                                 defaultOpen={true}
                                                 listClassName='flex flex-col gap-[20px]'
                                                 renderItem={(children) => (
