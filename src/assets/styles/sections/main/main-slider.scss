@@ -9,7 +9,7 @@
 }
 
 .overlay {
-  @apply xl:w-[642px] xl:h-[447px] w-full xl:p-[30px] xl:pr-[76px] relative z-[0] rounded-[8px] border border-solid border-[#34446D] overflow-hidden flex flex-col justify-between xl:items-start items-center w-full;
+  @apply xl:w-1/2 xl:h-[447px] w-full xl:p-[30px] xl:pr-[76px] relative z-[0] rounded-[8px] border border-solid border-[#34446D] overflow-hidden flex flex-col justify-between xl:items-start items-center w-full;
   z-index: 2;
   inset: 0% auto 0% 0%;
   background: linear-gradient(270deg, rgba(245, 245, 245, 0) 0%, #FFF 76px);
