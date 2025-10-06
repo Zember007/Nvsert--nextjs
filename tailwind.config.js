@@ -12,7 +12,7 @@ module.exports = {
     screens: {
       xss: { min: '360px' },
       xs: { min: '480px' },
-      s: { min: '520px' },
+      s: { min: '540px' },
       xxs: { min: '640px' },
       m: { min: '900px' },
       l: { min: '1024px' },
