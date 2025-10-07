@@ -580,23 +580,13 @@ input:-webkit-autofill {
     height: 50px;
 
     .sendIconLeft {
-        @apply block duration-100 transition-all ease-in translate-x-0 xl:translate-x-[-18px] xl:opacity-0;
+        @apply block duration-100 transition-all ease-in translate-x-0 xl:translate-x-[-10%] xl:opacity-0;
     }
 
-    .doc-btn {
-        .sendText {
-            @apply xl:translate-x-[12px];
 
-        }
-
-        .sendIconLeft {
-            @apply xl:translate-x-[-12px];
-
-        }
-    }
 
     .sendText {
-        @apply block duration-100 transition-all ease-in xl:translate-x-[18px] -translate-y-[1px] translate-x-0;
+        @apply block duration-100 transition-all ease-in xl:translate-x-[10%] -translate-y-[1px] translate-x-0;
         line-height: .5;
     }
 
