@@ -118,7 +118,7 @@ const ContentBlockRenderer: React.FC<{
         return (
             <div
                 id={'block-' + block.id}
-                className="w-full mt-[50px]">
+                className="w-full">
                 <div
                     className="flex justify-center group items-center gap-[10px] pb-[10px] border-b border-[#93969d80] cursor-pointer"
                     onClick={onToggle}
@@ -321,11 +321,11 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                 {/* Right Column */}
                                 <div className="flex-1 flex flex-col items-center gap-[50px]">
                                     {/* Dynamic Content Blocks */}
-                                    <div className="w-full flex flex-col items-center">
+                                    <div className="w-full flex flex-col items-center space-y-[50px]">
                                         {sortedContentBlocks.map((block, index) => (
                                             <React.Fragment key={block.id}>
                                                 {index === ctaInsertAfterIndex && (
-                                                    <div className="text-center mt-[50px]  max-w-[700px] w-full h-[300px] bg-[rgba(52,68,109,0.2)] rounded-[8px] flex flex-col justify-center items-center gap-[16px] p-[40px] backdrop-blur-sm" key="cta-banner">
+                                                    <div className="text-center   max-w-[700px] w-full h-[300px] bg-[rgba(52,68,109,0.2)] rounded-[8px] flex flex-col justify-center items-center gap-[16px] p-[40px] backdrop-blur-sm" key="cta-banner">
                                                         <h3 className="text-[24px] font-light tracking-[-0.04em]  text-black w-[460px]">
                                                             Подходит ли ваша продукция <br /> под обязательную сертификацию?
                                                         </h3>
