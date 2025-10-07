@@ -620,7 +620,7 @@ input:-webkit-autofill {
 
 
     &__title {
-        @apply text-center text-[20px] xss:text-[24px] xxs:text-[40px] xl: !text-[48px] font-light;
+        @apply text-center text-[20px] xss:text-[24px] xxs:text-[40px] xl:text-[48px] font-light;
     }
 }
 
