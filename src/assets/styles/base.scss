@@ -47,7 +47,7 @@
 
     text-align: center;
 
-  
+
 
 
 }
@@ -58,10 +58,10 @@
     bottom: -50px;
     left: 0;
     right: 0;
-    
+
     color: #FFF;
     font-size: 20px;
-    
+
 
     display: flex;
     justify-content: space-between;
@@ -580,11 +580,23 @@ input:-webkit-autofill {
     height: 50px;
 
     .sendIconLeft {
-        @apply block duration-100 transition-all ease-in translate-x-0 xl:translate-x-[-12px] xl:opacity-0;
+        @apply block duration-100 transition-all ease-in translate-x-0 xl:translate-x-[-18px] xl:opacity-0;
+    }
+
+    .doc-btn {
+        .sendText {
+            @apply xl:translate-x-[12px];
+
+        }
+
+        .sendIconLeft {
+            @apply xl:translate-x-[-12px];
+
+        }
     }
 
     .sendText {
-        @apply block duration-100 transition-all ease-in xl:translate-x-[12px] -translate-y-[1px] translate-x-0;
+        @apply block duration-100 transition-all ease-in xl:translate-x-[18px] -translate-y-[1px] translate-x-0;
         line-height: .5;
     }
 
@@ -608,7 +620,7 @@ input:-webkit-autofill {
 
 
     &__title {
-        @apply text-center text-[20px] s:text-[24px] xs:text-[40px] xl:!text-[48px] font-light;
+        @apply text-center text-[20px] xss:text-[24px] xxs:text-[40px] xl: !text-[48px] font-light;
     }
 }
 
@@ -622,10 +634,12 @@ input:-webkit-autofill {
         }
     }
 
- 
+
 
     transition: transform .1s ease;
-    will-change: transform, color, clip-path;
+    will-change: transform,
+    color,
+    clip-path;
     position: relative;
 
     &.active {
@@ -651,7 +665,7 @@ input:-webkit-autofill {
 
     &:after {
         content: "";
-        border-bottom: 1px solid ;
+        border-bottom: 1px solid;
         border-color: #34446D;
         transition: clip-path .1s ease, border-color .1s ease;
         transform: translateZ(0);
@@ -675,7 +689,8 @@ input:-webkit-autofill {
 
 /* Стили для предотвращения субпиксельных смещений */
 .skills__box {
-    transform: translateZ(0) translate3d(0, 0, 0); /* Принудительное аппаратное ускорение */
+    transform: translateZ(0) translate3d(0, 0, 0);
+    /* Принудительное аппаратное ускорение */
     backface-visibility: hidden;
     perspective: 1000px;
     /* Принудительное округление позиций */
@@ -685,14 +700,15 @@ input:-webkit-autofill {
 }
 
 [data-slider="slide-skill"] {
-    transform: translateZ(0) translate3d(0, 0, 0); /* Принудительное аппаратное ускорение */
+    transform: translateZ(0) translate3d(0, 0, 0);
+    /* Принудительное аппаратное ускорение */
     backface-visibility: hidden;
     will-change: transform;
     transform-style: preserve-3d;
-    
+
     /* Принудительное пиксельное выравнивание */
     position: relative;
-    
+
     /* Предотвращение сглаживания */
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
@@ -705,7 +721,7 @@ input:-webkit-autofill {
     /* Предотвращение размытия при трансформациях */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    
+
     /* Точное позиционирование */
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
@@ -730,8 +746,8 @@ input:-webkit-autofill {
 }
 
 .main-button-wrap {
-    @apply xl:w-[250px] xss:w-[280px] w-[260px] xl:mx-0 mx-auto ;
-}   
+    @apply xl:w-[250px] xss:w-[280px] w-[260px] xl:mx-0 mx-auto;
+}
 
 .main-button {
     @apply justify-center w-full m:flex items-center relative overflow-hidden m:text-[20px] xss:text-[18px] text-[16px] bg-[#34446D] text-[#FFF] tracking-normal m:flex items-center gap-[10px] rounded-[4px] border-[#34446D] border border-solid;
@@ -740,17 +756,17 @@ input:-webkit-autofill {
 .list-disc {
     li {
         position: relative;
-    
+
         &::before {
-          content: "•";
-          position: absolute;
-          left: -17px;
-          top: -1px;
+            content: "•";
+            position: absolute;
+            left: -17px;
+            top: -1px;
         }
 
         &::marker {
             content: "";
             display: none;
         }
-      }
+    }
 }
