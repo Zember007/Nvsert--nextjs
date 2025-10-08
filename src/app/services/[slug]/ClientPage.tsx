@@ -1,5 +1,5 @@
 'use client';
-import React, { Suspense, useMemo, useState } from 'react';
+import React, { Suspense, useEffect, useMemo, useState } from 'react';
 import ServiceCard from '@/components/services/ServiceCard';
 import AppBreadcrumbs from '@/components/general/AppBreadcrumbs';
 import { AppNavigationItem } from '@/components/general/AppNavigation';
@@ -225,6 +225,12 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
     const ctaInsertAfterIndex = useMemo(() => {
         return Math.ceil(sortedContentBlocks.length / 2) - 1;
     }, [sortedContentBlocks.length]);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [currentServiceIndex]);
+
+
 
     return (
         <div className="main text-[#000]  mb-[100px]">
