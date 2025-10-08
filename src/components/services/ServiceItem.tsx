@@ -96,6 +96,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                     <div className={`ml-[25px] xxxxl:mt-0 mt-[25px] xxxxl:grid flex gap-[20px] xxxxl:grid-cols-4 items-center flex-wrap transition-all duration-100 overflow-hidden ${isExpanded ? 'opacity-0 xxxxl:max-h-[100%] max-h-0 translate-y-full !mt-0' : 'opacity-100  translate-y-0 xxxxl:max-h-[100%] max-h-[350px]'}`}>
                         {service.items.map((item, itemIndex) => (
                             <AppNavigationItem
+                                onClick={(e) => {e.stopPropagation()}}
                                 dark={true}
                                 className='!w-[250px]'
                                 key={itemIndex}
