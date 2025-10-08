@@ -36,7 +36,7 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
   const mousePY = mouseY / dimensions.height;
 
   const cardStyle = {
-    transform: `rotateY(${(mousePX || 0) * 15}deg) rotateX(${(mousePY || 0) * -15}deg) translate3d(${(mousePX || 0) * 20 }px, ${(mousePY || 0) * 20}px, 0) scale(1.1)`,
+    transform: `rotateY(${(mousePX || 0) * 30}deg) rotateX(${(mousePY || 0) * -30}deg) translate3d(${(mousePX || 0) * 20 * 2}px, ${(mousePY || 0) * 20 * 2}px, 0) scale(1.1)`,
 
     perspective: '1200px',
     transition: 'transform 0.3s ease-out',

@@ -694,7 +694,6 @@ input:-webkit-autofill {
     /* Принудительное аппаратное ускорение */
     backface-visibility: hidden;
     will-change: transform;
-    transform-style: preserve-3d;
 
     /* Принудительное пиксельное выравнивание */
     position: relative;
