@@ -10,7 +10,6 @@ import Adv4Img from '@/assets/images/svg/adv-4.svg'
 import Adv5Img from '@/assets/images/svg/adv-5.svg'
 import Adv6Img from '@/assets/images/svg/adv-6.svg'
 import AppBreadcrumbs from '@/components/general/AppBreadcrumbs';
-import AppSidebar from '@/components/general/AppSidebar';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetPages } from '@/store/pages'
 import { useEffect, useMemo, useState } from 'react';
@@ -79,10 +78,7 @@ const AboutCompany = () => {
                         className="cat-menu__btn js-cat-menu-btn btn btn--l btn--primary">
                         <span className="btn-text">Категории</span>
                     </button>
-                    <div className="cat-menu js-cat-menu">
-                        <AppSidebar />
-                    </div>
-
+                
                     <div className="mtp">
                         <div className="about">
                             <h1 className="about__title">О компании</h1>

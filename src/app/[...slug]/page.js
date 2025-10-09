@@ -1,7 +1,6 @@
 'use client';
 import '@/assets/styles/article.scss'
 import AppBreadcrumbs from '@/components/general/AppBreadcrumbs';
-import AppSidebar from '@/components/general/AppSidebar';
 import AppArticle from '@/components/pages/AppArticle';
 import AppArticles from '@/components/pages/AppArticles';
 import { resetPages, updateActionPages } from '@/store/pages';
@@ -67,9 +66,7 @@ const Page = () => {
                             className="cat-menu__btn js-cat-menu-btn btn btn--l btn--primary" type="button">
                             <span className="btn-text">Категории</span>
                         </button>
-                        <div className="cat-menu js-cat-menu">
-                            <AppSidebar />
-                        </div>
+                     
 
 
                         <div className="mtp">
