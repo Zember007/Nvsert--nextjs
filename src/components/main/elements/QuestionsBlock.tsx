@@ -2,11 +2,13 @@ import { useButton } from '@/hook/useButton';
 import React, { useEffect } from 'react';
 import { useAnimation, motion } from "framer-motion";
 import QuestionArrow from '../svg/QuestionArrow';
+import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
 import '@/assets/styles/sections/main/questions-block.scss';
 
 const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive: (value: boolean) => void, active: boolean, number: number, title: string, text: string }) => {
     const controls = useAnimation();
-    const { setButtonRef, setWrapperRef } = useButton()
+    const { setButtonRef, setWrapperRef } = useButton();
+    const { processContent } = useRichTextRenderer();
 
     const defaultSettings = {
         duration: 0.6,
@@ -38,7 +40,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
         <div
             className={` document-wrapper-border group/main`}
         >
-             <div
+            <div
                 className={`document__border ${!active ? 'group-active/main:!border-[transparent] group-hover/main:!border-[transparent]' : 'active'}`}
             />
             <div className={` document__box   ${!active ? 'active' : ''}`}>
@@ -68,9 +70,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                 </div>
                 <div className={`questions-content-wrapper ${active ? 'active' : ''}`}>
                     <div className="questions-inner-content">
-                        <div className="mtp__spoiler-text" >
-                            <div dangerouslySetInnerHTML={{ __html: text }}></div>
-                        </div>
+                        <div>{processContent(text)}</div>
 
 
                         <motion.div

@@ -1,22 +1,25 @@
 import { useTranslation } from 'react-i18next';
 import QuestionsBlock from './elements/QuestionsBlock';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchFaqs } from '@/store/faq';
+import type { AppDispatch, RootState } from '@/config/store';
 import '@/assets/styles/sections/main/animation/documents.scss'
 import '@/assets/styles/sections/main/main-questions.scss'
-
-interface questionItem {
-  title: string;
-  text: string;
-}
 
 const AppMainQuestions = () => {
 
   const { t } = useTranslation()
-
-  const questions = t('MainQuestions.items', { returnObjects: true }) as questionItem[];
-
+  const dispatch = useDispatch<AppDispatch>();
+  const { faqs, status } = useSelector((state: RootState) => state.faq);
 
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
+
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchFaqs());
+    }
+  }, [dispatch, status]);
 
   return (
             <section className="section wrapper">
@@ -27,11 +30,12 @@ const AppMainQuestions = () => {
         </h2>
         <div className="questions-container">
 
-          {questions.map((item, index) => (
+          {faqs.map((item, index) => (
             <QuestionsBlock
               number={index + 1}
-              key={index}
-              {...item}
+              key={item.id}
+              title={item.heading}
+              text={item.content}
               active={activeIndex === index}
               setActive={(value) => {
                 if (value) {

@@ -13,6 +13,7 @@ import staffReducer from '@/store/staff';
 import documentsReducer from '@/store/documents';
 import metadataReducer from '@/store/metadata';
 import find_out_costReducer from '@/store/find_out_cost';
+import faqReducer from '@/store/faq';
 
 export const store = configureStore({
   reducer: {
@@ -29,7 +30,8 @@ export const store = configureStore({
     staff: staffReducer,
     documents: documentsReducer,
     metadata: metadataReducer,
-    find_out_cost: find_out_costReducer
+    find_out_cost: find_out_costReducer,
+    faq: faqReducer
   },
 });
 
