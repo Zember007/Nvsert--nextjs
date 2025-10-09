@@ -17,7 +17,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CopyProvider, useCopyContext } from '@/components/contexts/CopyContext';
 import CopyNotification from '@/components/general/elements/CopyNotification';
 import { updateActionNavigation } from '@/store/navigation';
-import SmoothScroll from '@/hook/SmoothScroll';
+import ScrollableContainer from '@/components/general/ScrollableContainer';
+import CustomScrollbar from '@/components/general/CustomScrollbar';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,40 +31,44 @@ const LayoutContent = ({ children }: { children: ReactNode }) => {
     const metadata = useSelector((state: RootState) => state.metadata);
     const { transparent, setDefaultModalActive, defaultModalActive, defaultModalName, resetCountModal, defaultModalCount } = useHeaderContext();
     const { calcPageBodyClass } = useSelector((state: RootState) => state.documents);
-    const { configs: configsPure, file_configs: fileConfigsPure } = useSelector((state: RootState) => state.config);
+    const { configs: configsPure, file_configs: fileConfigsPure, status } = useSelector((state: RootState) => state.config);
 
     const configs = useMemo(() => {
-        let parsedConf: any = {};
-        console.log(configsPure);
-
-        configsPure?.forEach((item) => {
+        if (!configsPure) return {};
+        
+        const parsedConf: any = {};
+        configsPure.forEach((item) => {
             parsedConf[item.key] = item.value;
         });
         return parsedConf;
     }, [configsPure]);
 
     const file_configs = useMemo(() => {
-        let parsedConf: any = {};
-        fileConfigsPure?.forEach((item) => {
+        if (!fileConfigsPure) return {};
+        
+        const parsedConf: any = {};
+        fileConfigsPure.forEach((item) => {
             parsedConf[item.key] = item.value;
         });
         return parsedConf;
     }, [fileConfigsPure]);
 
     useEffect(() => {
-
-        if (configs && file_configs) {
+        if (Object.keys(configs).length > 0 && Object.keys(file_configs).length > 0) {
             dispatch(setMetadata(generateMetadata(configs, file_configs)));
         }
-
     }, [configs, file_configs, dispatch]);
 
+    // Загружаем данные только один раз при монтировании, если они еще не загружены
     useEffect(() => {
+        if (status === 'idle') {
+            dispatch(updateActionConfigs());
+            dispatch(updateActionFileConfigs());
+            dispatch(updateActionNavigation());
+        }
+    }, [dispatch, status]);
 
-        dispatch(updateActionConfigs());
-        dispatch(updateActionFileConfigs());
-        dispatch(updateActionNavigation());
-
+    useEffect(() => {
         function set100Vh() {
             let vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -79,7 +84,7 @@ const LayoutContent = ({ children }: { children: ReactNode }) => {
             window.removeEventListener('resize', set100Vh);
             img?.removeEventListener('contextmenu', (e) => e.preventDefault());
         };
-    }, [dispatch]);
+    }, []);
 
 
 
@@ -119,20 +124,17 @@ const LayoutContent = ({ children }: { children: ReactNode }) => {
                     reset={resetCountModal}
                     countTrigger={defaultModalCount}
                 />
-                <SmoothScroll>
-                    <AppHeader />
 
-                    <main className={` ${transparent && 'transparent-header'} ${calcPageBodyClass && 'cost-calc-page'}`}>
+                <AppHeader />
 
-                        {children}
+                <main className={` ${transparent && 'transparent-header'} ${calcPageBodyClass && 'cost-calc-page'}`}>
 
-                    </main>
-                    <AppFooter />
-                    <div className="bg-noise"></div>
-                    {/* <CustomScrollbar target="window" /> */}
+                    {children}
 
-
-                </SmoothScroll>
+                </main>
+                <AppFooter />
+                <div className="bg-noise"></div>
+                <CustomScrollbar target="window" />
 
                 <CopyNotification
                     isVisible={showCopyNotification}

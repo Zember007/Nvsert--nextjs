@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, memo } from "react";
 import { useTranslation } from "react-i18next";
 import Image from "next/image";
 import AudioLogo from '@/assets/images/svg/audio-selector.svg';
@@ -299,4 +299,4 @@ const AppFooter = () => {
   );
 };
 
-export default AppFooter;
+export default memo(AppFooter);

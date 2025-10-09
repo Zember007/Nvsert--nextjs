@@ -160,6 +160,7 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
       }
     };
 
+
     initScroll();
 
     // Добавляем обработчик wheel к нужному элементу
@@ -312,7 +313,7 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
         startScrollTop = container.scrollTop;
       }
 
-     
+
     }
 
     const handleResize = () => updateScrollbar();

@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import '@/assets/styles/sections/_header.scss'
 import Link from "next/link";
@@ -314,4 +314,4 @@ const AppHeader = () => {
   );
 };
 
-export default AppHeader;
+export default memo(AppHeader);

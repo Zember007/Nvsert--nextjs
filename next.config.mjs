@@ -9,6 +9,11 @@ const nextConfig = {
   images: {
     domains: ['test11.audiosector.ru'],
   },
+  // Оптимизации производительности
+  reactStrictMode: true,
+  swcMinify: true,
+  compress: true,
+  poweredByHeader: false,
 
   webpack: (config) => {
     config.module.rules.push({
