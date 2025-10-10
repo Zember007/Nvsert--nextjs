@@ -14,7 +14,9 @@ const DotNavList: React.FC<{
 
 }> = ({ items }) => {
 
-    const [activeBlockId, setActiveBlockId] = React.useState<number | string | null>(null);
+    const [activeBlockId, setActiveBlockId] = React.useState<number | string | null>(
+        items?.[0]?.id ?? null
+    );
 
     React.useEffect(() => {
         if (!items) return;
@@ -58,8 +60,6 @@ const DotNavList: React.FC<{
 
         if (window.location.hash && window.location.hash.startsWith('#block-')) {
             handleHashChange();
-        } else {
-            setActiveBlockId(items[0]?.id ?? null);
         }
 
         return () => {
