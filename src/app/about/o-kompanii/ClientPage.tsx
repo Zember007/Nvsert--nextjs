@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import StandardPageLayout from '@/components/general/StandardPageLayout';
 import CollapseSection from '@/components/general/CollapseSection';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
+import Map from './_components/Map';
 
 interface ContentBlock {
     id: number;
@@ -17,16 +18,37 @@ interface AboutData {
     id: number;
     title: string;
     content: ContentBlock[];
+    seo_title?: string;
+    seo_description?: string;
+    seo_keywords?: string;
+    og_title?: string;
+    og_description?: string;
+    og_image?: string;
 }
 
-const AboutCompanyClient: React.FC = () => {
+interface AboutCompanyClientProps {
+    aboutData: AboutData | null;
+}
+
+const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: initialAboutData }) => {
     const [showAbout, setShowAbout] = React.useState<boolean>(true);
     const [sectionsOpen, setSectionsOpen] = React.useState<number[]>([]);
-    const [aboutData, setAboutData] = useState<AboutData | null>(null);
-    const [loading, setLoading] = useState(true);
+    const [aboutData, setAboutData] = useState<AboutData | null>(initialAboutData);
+    const [loading, setLoading] = useState(!initialAboutData);
     const { processContent } = useRichTextRenderer();
 
     useEffect(() => {
+        // Если данные уже переданы с сервера, используем их
+        if (initialAboutData) {
+            setAboutData(initialAboutData);
+            setLoading(false);
+            // Открываем все секции по умолчанию
+            const allSectionIds = initialAboutData.content.map((_: ContentBlock, index: number) => index + 1);
+            setSectionsOpen(allSectionIds);
+            return;
+        }
+
+        // Fallback для клиентской загрузки (если данные не переданы)
         const fetchAboutData = async () => {
             try {
                 const response = await fetch('/api/about');
@@ -45,7 +67,7 @@ const AboutCompanyClient: React.FC = () => {
         };
 
         fetchAboutData();
-    }, []);
+    }, [initialAboutData]);
 
     const toggleSection = (id: number) => {
         setSectionsOpen(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
@@ -59,9 +81,7 @@ const AboutCompanyClient: React.FC = () => {
             return (
                 <>
                     {parts[0] && <div className="mb-[30px]">{processContent(parts[0])}</div>}
-                    <div className="w-full h-[400px] bg-gray-200 rounded-lg flex items-center justify-center mb-[30px]">
-                        <span className="text-gray-500">Карта</span>
-                    </div>
+                   <Map />
                     {parts[1] && <div>{processContent(parts[1])}</div>}
                 </>
             );

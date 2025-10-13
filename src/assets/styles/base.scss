@@ -70,7 +70,7 @@
 
 .PhotoView__Photo__title {
     color: #FFF;
-    font-size: 20px;
+    font-size: 24px;
     white-space: nowrap;
     position: absolute;
     top: -50px;
@@ -765,4 +765,17 @@ input:-webkit-autofill {
             display: none;
         }
     }
+}
+
+.map-company > path {
+        transition: all 0.1s ease;
+        &:hover {
+            fill: #34446D;
+            fill-opacity: 0.5;
+            stroke: #000;
+            stroke-width: 1;
+        }
+
+        
+    
 }
