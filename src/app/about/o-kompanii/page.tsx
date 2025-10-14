@@ -26,10 +26,8 @@ interface AboutData {
 // Функция для получения данных о компании
 async function getAboutData(): Promise<AboutData | null> {
     try {
-        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-        const response = await fetch(`${baseUrl}/api/about`, {
-            cache: 'no-store' // Для актуальных данных
-        });
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+        const response = await fetch(`${baseUrl}/api/about`);
         
         if (!response.ok) {
             throw new Error('Failed to fetch about data');

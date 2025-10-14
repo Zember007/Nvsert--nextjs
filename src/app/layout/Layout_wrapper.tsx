@@ -2,7 +2,7 @@
 import '@/assets/styles/base.scss';
 import '@/assets/lib/react-photo-view/dist/react-photo-view.css';
 import AppHeader from '@/components/general/AppHeader';
-import { ReactNode, useEffect, useMemo, useState } from 'react';
+import { ReactNode, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AppFooter from '@/components/general/AppFooter';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
@@ -17,7 +17,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CopyProvider, useCopyContext } from '@/components/contexts/CopyContext';
 import CopyNotification from '@/components/general/elements/CopyNotification';
 import { updateActionNavigation } from '@/store/navigation';
-import ScrollableContainer from '@/components/general/ScrollableContainer';
 import CustomScrollbar from '@/components/general/CustomScrollbar';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -25,14 +24,12 @@ gsap.registerPlugin(ScrollTrigger);
 
 const LayoutContent = ({ children }: { children: ReactNode }) => {
     const dispatch = useDispatch<AppDispatch>();
-    const pathname = usePathname();
     const { showCopyNotification, notificationPosition, hideNotification } = useCopyContext();
 
-    const metadata = useSelector((state: RootState) => state.metadata);
     const { transparent, setDefaultModalActive, defaultModalActive, defaultModalName, resetCountModal, defaultModalCount } = useHeaderContext();
     const { calcPageBodyClass } = useSelector((state: RootState) => state.documents);
     const { configs: configsPure, file_configs: fileConfigsPure, status } = useSelector((state: RootState) => state.config);
-
+/* 
     const configs = useMemo(() => {
         if (!configsPure) return {};
         
@@ -41,8 +38,8 @@ const LayoutContent = ({ children }: { children: ReactNode }) => {
             parsedConf[item.key] = item.value;
         });
         return parsedConf;
-    }, [configsPure]);
-
+    }, [configsPure]); */
+/* 
     const file_configs = useMemo(() => {
         if (!fileConfigsPure) return {};
         
@@ -51,98 +48,61 @@ const LayoutContent = ({ children }: { children: ReactNode }) => {
             parsedConf[item.key] = item.value;
         });
         return parsedConf;
-    }, [fileConfigsPure]);
+    }, [fileConfigsPure]); */
 
-    useEffect(() => {
+/*     useEffect(() => {
         if (Object.keys(configs).length > 0 && Object.keys(file_configs).length > 0) {
             dispatch(setMetadata(generateMetadata(configs, file_configs)));
         }
-    }, [configs, file_configs, dispatch]);
+    }, [configs, file_configs, dispatch]); */
 
     // Загружаем данные только один раз при монтировании, если они еще не загружены
     useEffect(() => {
         if (status === 'idle') {
-            dispatch(updateActionConfigs());
-            dispatch(updateActionFileConfigs());
+            /* dispatch(updateActionConfigs());
+            dispatch(updateActionFileConfigs()); */
             dispatch(updateActionNavigation());
         }
     }, [dispatch, status]);
 
     useEffect(() => {
-        function set100Vh() {
-            let vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
-        }
+   
 
-        set100Vh();
-        window.addEventListener('resize', set100Vh);
-
-        const img = document.querySelector('img');
-        img?.addEventListener('contextmenu', (e) => e.preventDefault());
+        const img = document.querySelectorAll('img');
+        img?.forEach(img => img.addEventListener('contextmenu', (e) => e.preventDefault()));
 
         return () => {
-            window.removeEventListener('resize', set100Vh);
-            img?.removeEventListener('contextmenu', (e) => e.preventDefault());
+            img?.forEach(img => img.removeEventListener('contextmenu', (e) => e.preventDefault()));
         };
     }, []);
 
 
 
-    const [classBody, setClassBody] = useState('transparent-header');
-
-    useEffect(() => {
-        if (pathname !== '/' && classBody !== '') {
-            setClassBody('');
-        }
-        if (pathname === '/' && classBody === '') {
-            setClassBody('transparent-header');
-        }
-    }, [pathname, classBody]);
-
-
-
     return (
         <>
-            <head>
-                <title>{metadata.title}</title>
-                <meta name="yandex-verification" content="90db85a0cc46fb2c" />
-                <meta name="theme-color" content="#646467"></meta>
-                <meta name="description" content={metadata.description} />
-                <meta name="keywords" content={metadata.keywords} />
-                <meta property="og:title" content={metadata.openGraph?.title} />
-                <meta property="og:description" content={metadata.openGraph?.description} />
-                {metadata.openGraph?.images?.map((image, i) => (
-                    <meta key={i} property="og:image" content={image} />
-                ))}
-                <link rel="icon" href="/favicon.ico" />
-            </head>
-            <body className={classBody}>
-                <AppModalWrapper
-                    setDefaultModalActive={setDefaultModalActive}
-                    defaultModalActive={defaultModalActive}
-                    defaultModalName={defaultModalName}
-                    reset={resetCountModal}
-                    countTrigger={defaultModalCount}
-                />
+            <AppModalWrapper
+                setDefaultModalActive={setDefaultModalActive}
+                defaultModalActive={defaultModalActive}
+                defaultModalName={defaultModalName}
+                reset={resetCountModal}
+                countTrigger={defaultModalCount}
+            />
 
-                <AppHeader />
+            <AppHeader />
 
-                <main className={` ${transparent && 'transparent-header'} ${calcPageBodyClass && 'cost-calc-page'}`}>
+            <main className={` ${transparent && 'transparent-header'} ${calcPageBodyClass && 'cost-calc-page'}`}>
+                {children}
+            </main>
+            <AppFooter />
+            <div className="bg-noise"></div>
+            <CustomScrollbar target="window" />
 
-                    {children}
-
-                </main>
-                <AppFooter />
-                <div className="bg-noise"></div>
-                <CustomScrollbar target="window" />
-
-                <CopyNotification
-                    isVisible={showCopyNotification}
-                    onHide={hideNotification}
-                    duration={3000}
-                    position={notificationPosition}
-                />
-            </body>
+            <CopyNotification
+                isVisible={showCopyNotification}
+                onHide={hideNotification}
+                duration={3000}
+                position={notificationPosition}
+            />
         </>
     );
 };

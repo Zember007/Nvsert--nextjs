@@ -46,7 +46,7 @@ const ContentBlockRenderer: React.FC<{
                     className="flex justify-center group items-center gap-[10px] pb-[10px] border-b border-[#93969d80] cursor-pointer"
                     onClick={onToggle}
                 >
-                    <h2 className="text-[24px] group-active:scale-[0.98] transition-all duration-100 font-light !m-0 leading-[18px] tracking-[0] text-[#34446D] flex-1">
+                    <h2 className="text-[24px] group-active:scale-[0.98] transition-all duration-100 font-light !m-0  tracking-[0] text-[#34446D] flex-1">
                         {heading}
                     </h2>
                     <svg
@@ -101,7 +101,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
     const [currentServiceIndex, setCurrentServiceIndex] = useState<number>(0);
 
     const currentService = useMemo(() => {
-        
+
         return navItems[currentServiceIndex] || undefined;
     }, [navItems, currentServiceIndex, slug]);
 
@@ -143,7 +143,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
     }, [sortedContentBlocks]);
 
     // Track which content block is currently in view and reflect it in the right navigation
-   
+
 
     const ctaInsertAfterIndex = useMemo(() => {
         return Math.ceil(sortedContentBlocks.length / 2) - 1;
@@ -195,37 +195,47 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                 <div className="wrapper pt-[50px]">
                     <div className="flex gap-[40px]">
                         <div className="flex flex-col gap-[50px] flex-1">
-                            <h1 className="text-[48px] leading-[50px] !m-0 font-light tracking-[-0.04em] text-black -translate-x-[4px]">
+                            <h1 className="text-[48px] leading-[50px] !m-0 font-light tracking-[-0.04em] text-black -translate-x-[4px] m:text-left text-center">
                                 {currentService?.title || 'Сертификат соответствия ГОСТ Р'}
                             </h1>
 
                             {/* Two Column Layout */}
-                            <div className="flex gap-[40px] items-stretch">
+                            <div className="flex gap-[40px] items-stretch m:flex-row flex-col">
                                 {/* Left Column */}
-                                <div className="w-[250px] relative">
-                                    <div className=" sticky top-[112px] flex flex-col gap-[40px]">
-                                        <ServiceCard
-                                            onClick={() => { document.getElementById('service-' + currentService?.id)?.click() }}
-                                            serviceName={currentService?.category?.name || ''}
-                                            certificate={{
-                                                ...currentService,
-                                                slug: '',
-                                                id: currentService?.id || 0,
-                                                documentId: currentService?.documentId || '',
-                                                title: currentService?.title || '',
-                                                duration: currentService?.duration || '',
-                                                price: currentService?.price || '',
-                                                description: currentService?.description || '',
-                                                createdAt: currentService?.createdAt || '',
-                                                updatedAt: currentService?.updatedAt || '',
-                                                publishedAt: currentService?.publishedAt || '',
-                                                documents: currentService?.documents || [],
-                                                img: currentService?.img || null,
-                                                category: currentService?.category || null
-                                            }}
-                                            title={false}
-                                            padding={false}
+                                <div className="m:w-[250px] relative">
+                                    <div className=" xl:sticky top-[112px] flex flex-col gap-[40px]">
+
+                                        <div className="w-[250px] mx-auto">
+                                            <ServiceCard
+                                                onClick={() => { document.getElementById('service-' + currentService?.id)?.click() }}
+                                                serviceName={currentService?.category?.name || ''}
+                                                certificate={{
+                                                    ...currentService,
+                                                    slug: '',
+                                                    id: currentService?.id || 0,
+                                                    documentId: currentService?.documentId || '',
+                                                    title: currentService?.title || '',
+                                                    duration: currentService?.duration || '',
+                                                    price: currentService?.price || '',
+                                                    description: currentService?.description || '',
+                                                    createdAt: currentService?.createdAt || '',
+                                                    updatedAt: currentService?.updatedAt || '',
+                                                    publishedAt: currentService?.publishedAt || '',
+                                                    documents: currentService?.documents || [],
+                                                    img: currentService?.img || null,
+                                                    category: currentService?.category || null
+                                                }}
+                                                title={false}
+                                                padding={false}
+                                            />
+                                        </div>
+
+                                        <Button
+                                            wrapperClassName='xl:hidden block'
+                                            onClick={() => { openDefaultModal('orderForm') }}
+                                            label='Оформить заявку'
                                         />
+
                                         {navItems?.filter(item => item.slug !== currentService?.slug) && (
                                             <AppCollapsibleList
                                                 position='left'
@@ -244,6 +254,13 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                                 )}
                                             />
                                         )}
+
+                                        <div className="xl:hidden block">
+                                            <DotNavList
+                                                position='left'
+                                                items={currentService?.content?.map(item => ({ id: item.id, title: item.heading, active: item.id === activeBlockId }))}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
 
@@ -255,10 +272,10 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                             <React.Fragment key={block.id}>
                                                 {index === ctaInsertAfterIndex && (
                                                     <div className="text-center   max-w-[700px] w-full h-[300px] bg-[rgba(52,68,109,0.2)] rounded-[8px] flex flex-col justify-center items-center gap-[16px] p-[40px] backdrop-blur-sm" key="cta-banner">
-                                                        <h3 className="text-[24px] font-light tracking-[-0.04em]  text-black w-[460px]">
+                                                        <h3 className="text-[24px] font-light tracking-[-0.04em]  text-black max-w-[460px]">
                                                             Подходит ли ваша продукция <br /> под обязательную сертификацию?
                                                         </h3>
-                                                        <p className="text-[16px] font-light tracking-[-0.01em]  text-[rgba(0,0,0,0.6)] w-[378px] leading-[1.4]">
+                                                        <p className="text-[16px] font-light tracking-[-0.01em]  text-[rgba(0,0,0,0.6)] max-w-[378px] leading-[1.4]">
                                                             Наши специалисты проведут бесплатную предварительную проверку и дадут чёткий ответ.
                                                         </p>
                                                         <Button
@@ -284,7 +301,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                             </div>
                         </div>
 
-                        <div className="w-[250px] relative">
+                        <div className="w-[250px] relative xl:block hidden">
                             <div className=" sticky top-[112px] flex flex-col gap-[50px]">
                                 <Button
                                     onClick={() => { openDefaultModal('orderForm') }}
@@ -303,7 +320,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
     );
 };
 
-const   ClientPage = ({ initialNavigation, initialSlug }: ClientPageProps) => {
+const ClientPage = ({ initialNavigation, initialSlug }: ClientPageProps) => {
     return (
         <Suspense fallback={<div>Loading...</div>}>
             <ServiceDetailContent initialNavigation={initialNavigation} initialSlug={initialSlug} />

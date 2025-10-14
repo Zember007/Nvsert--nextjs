@@ -11,8 +11,8 @@ export type DotNavItem = {
 
 const DotNavList: React.FC<{
     items?: DotNavItem[];
-
-}> = ({ items }) => {
+    position?: 'right' | 'left';
+}> = ({ items, position }) => {
 
     const [activeBlockId, setActiveBlockId] = React.useState<number | string | null>(
         items?.[0]?.id ?? null
@@ -78,7 +78,7 @@ const DotNavList: React.FC<{
     }, [items, activeBlockId]);
     return (
         <AppCollapsibleList
-            position='right'
+            position={position || 'right'}
             title={'Навигация по услуге'}
             items={navigationItems}
             defaultOpen={true}
