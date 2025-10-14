@@ -131,7 +131,7 @@ const AppHeader = () => {
         <div
           className={`w-[368px] rubik header__bg !backdrop-filter-none gap-[8px] mix-blend-difference  h-full`}>
           <AppMenuItem
-            className="w-[159px] !justify-center"
+            className="w-[160px] !justify-center"
             onClick={(e) => {
               handleCopy('info@nvsert.ru', e)
             }}
@@ -140,7 +140,7 @@ const AppHeader = () => {
             }} isActive={false} />
 
           <AppMenuItem
-            className="w-[171px] !justify-center"
+            className="flex-1 !justify-center"
             item={{
               href: filterPhone('8 800 700-33-75'), label: '8 800 700-33-75'
             }} isActive={false} />
