@@ -26,7 +26,8 @@ interface AboutData {
 // Функция для получения данных о компании
 async function getAboutData(): Promise<AboutData | null> {
     try {
-        const response = await fetch(`/api/about`);
+        const base = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
+        const response = await fetch(`${base}/api/services`, { next: { revalidate: 60 } });
         
         if (!response.ok) {
             throw new Error('Failed to fetch about data');
@@ -39,6 +40,8 @@ async function getAboutData(): Promise<AboutData | null> {
         return null;
     }
 }
+
+
 
 // Функция для генерации метаданных
 export async function generateMetadata(): Promise<Metadata> {
