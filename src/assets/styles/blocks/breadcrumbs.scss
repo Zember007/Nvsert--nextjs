@@ -1,5 +1,5 @@
 .breadcrumbs {
-	@apply text-[16px] text-[#A4A4A4] xl:px-[40px] px-[29px] flex items-center  absolute left-0 xl:top-[68px] top-[58px];
+	@apply text-[12px] m:text-[14px] xl:text-[16px] text-[#A4A4A4] xl:px-[40px] px-[29px] flex items-center flex-wrap  absolute left-0 xl:top-[68px] top-[58px];
 
 	z-index: 5;
 
@@ -27,7 +27,7 @@
 	}
 
 	&__link {
-		@apply hover:text-[#34446D]  transition-transform duration-100 active:scale-95;
+		@apply hover:text-[#34446D]  transition-transform duration-100 active:scale-95 whitespace-nowrap;
 
 		transition: transform .1s ease;
 		will-change: transform, color, clip-path;
