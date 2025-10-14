@@ -236,24 +236,26 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                             label='Оформить заявку'
                                         />
 
-                                        {navItems?.filter(item => item.slug !== currentService?.slug) && (
-                                            <AppCollapsibleList
-                                                position='left'
-                                                title={'Рекомендуем к оформлению'}
-                                                items={navItems.filter(item => item.category.name === currentService?.category.name && item.slug !== currentService?.slug).slice(0, 4)}
-                                                defaultOpen={true}
-                                                listClassName='flex flex-col gap-[20px]'
-                                                renderItem={(children) => (
-                                                    <AppNavigationItem
-                                                        dark={true}
-                                                        link={children.slug}
-                                                        key={children.id}
-                                                        title={children.title}
-                                                        img={'https://test11.audiosector.ru/cp' + children.img?.url}
-                                                    />
-                                                )}
-                                            />
-                                        )}
+                                        <div className="w-full m:block hidden">
+                                            {navItems?.filter(item => item.slug !== currentService?.slug) && (
+                                                <AppCollapsibleList
+                                                    position='left'
+                                                    title={'Рекомендуем к оформлению'}
+                                                    items={navItems.filter(item => item.category.name === currentService?.category.name && item.slug !== currentService?.slug).slice(0, 4)}
+                                                    defaultOpen={true}
+                                                    listClassName='flex flex-col gap-[20px]'
+                                                    renderItem={(children) => (
+                                                        <AppNavigationItem
+                                                            dark={true}
+                                                            link={children.slug}
+                                                            key={children.id}
+                                                            title={children.title}
+                                                            img={'https://test11.audiosector.ru/cp' + children.img?.url}
+                                                        />
+                                                    )}
+                                                />
+                                            )}
+                                        </div>
 
                                         <div className="xl:hidden block">
                                             <DotNavList
@@ -296,6 +298,27 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                         <div className="w-full flex justify-end pb-[20px] border-b border-[#93969d80]">
                                             <p className='text-[12px] leading-[8px] text-[#93969D] font-light'>Статья написана 20.04.2025</p>
                                         </div>
+                                    )}
+                                </div>
+
+                                <div className="w-full m:hidden block">
+                                    {navItems?.filter(item => item.slug !== currentService?.slug) && (
+                                        <AppCollapsibleList
+                                            position='left'
+                                            title={'Рекомендуем к оформлению'}
+                                            items={navItems.filter(item => item.category.name === currentService?.category.name && item.slug !== currentService?.slug).slice(0, 4)}
+                                            defaultOpen={true}
+                                            listClassName='flex flex-col gap-[20px]'
+                                            renderItem={(children) => (
+                                                <AppNavigationItem
+                                                    dark={true}
+                                                    link={children.slug}
+                                                    key={children.id}
+                                                    title={children.title}
+                                                    img={'https://test11.audiosector.ru/cp' + children.img?.url}
+                                                />
+                                            )}
+                                        />
                                     )}
                                 </div>
                             </div>
