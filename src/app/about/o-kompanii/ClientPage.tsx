@@ -43,7 +43,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
             setAboutData(initialAboutData);
             setLoading(false);
             // Открываем все секции по умолчанию
-            const allSectionIds = initialAboutData.content.map((_: ContentBlock, index: number) => index + 1);
+            const allSectionIds = initialAboutData.content?.map((_: ContentBlock, index: number) => index + 1) || [];
             setSectionsOpen(allSectionIds);
             return;
         }
@@ -56,7 +56,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
                 if (result.data) {
                     setAboutData(result.data);
                     // Открываем все секции по умолчанию
-                    const allSectionIds = result.data.content.map((_: ContentBlock, index: number) => index + 1);
+                    const allSectionIds = result.data.content?.map((_: ContentBlock, index: number) => index + 1) || [];
                     setSectionsOpen(allSectionIds);
                 }
             } catch (error) {
@@ -164,7 +164,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
     ];
 
     // Генерируем элементы для правой навигации на основе загруженных данных
-    const dotNavItems = aboutData?.content.map((block, index) => ({
+    const dotNavItems = aboutData?.content?.map((block, index) => ({
         id: index + 1,
         title: block.heading,
         active: sectionsOpen.includes(index + 1),
@@ -211,7 +211,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
             dotNavItems={dotNavItems}
             showButton={true}
         >
-            {aboutData.content.map((block, index) => (
+            {aboutData.content?.map((block, index) => (
                 <div key={block.id} id={`block-${index + 1}`} className="w-full">
                     <CollapseSection
                         title={block.heading}
@@ -223,7 +223,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
                         </div>
                     </CollapseSection>
                 </div>
-            ))}
+            )) || []}
         </StandardPageLayout>
     );
 };
