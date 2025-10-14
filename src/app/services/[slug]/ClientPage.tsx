@@ -205,36 +205,38 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                 <div className="m:w-[250px] relative">
                                     <div className=" xl:sticky top-[112px] flex flex-col gap-[40px]">
 
-                                        <div className="w-[250px] mx-auto">
-                                            <ServiceCard
-                                                onClick={() => { document.getElementById('service-' + currentService?.id)?.click() }}
-                                                serviceName={currentService?.category?.name || ''}
-                                                certificate={{
-                                                    ...currentService,
-                                                    slug: '',
-                                                    id: currentService?.id || 0,
-                                                    documentId: currentService?.documentId || '',
-                                                    title: currentService?.title || '',
-                                                    duration: currentService?.duration || '',
-                                                    price: currentService?.price || '',
-                                                    description: currentService?.description || '',
-                                                    createdAt: currentService?.createdAt || '',
-                                                    updatedAt: currentService?.updatedAt || '',
-                                                    publishedAt: currentService?.publishedAt || '',
-                                                    documents: currentService?.documents || [],
-                                                    img: currentService?.img || null,
-                                                    category: currentService?.category || null
-                                                }}
-                                                title={false}
-                                                padding={false}
+                                        <div className="flex flex-col gap-[40px] m:flex-col-reverse">
+                                            <div className="w-[250px] mx-auto">
+                                                <ServiceCard
+                                                    onClick={() => { document.getElementById('service-' + currentService?.id)?.click() }}
+                                                    serviceName={currentService?.category?.name || ''}
+                                                    certificate={{
+                                                        ...currentService,
+                                                        slug: '',
+                                                        id: currentService?.id || 0,
+                                                        documentId: currentService?.documentId || '',
+                                                        title: currentService?.title || '',
+                                                        duration: currentService?.duration || '',
+                                                        price: currentService?.price || '',
+                                                        description: currentService?.description || '',
+                                                        createdAt: currentService?.createdAt || '',
+                                                        updatedAt: currentService?.updatedAt || '',
+                                                        publishedAt: currentService?.publishedAt || '',
+                                                        documents: currentService?.documents || [],
+                                                        img: currentService?.img || null,
+                                                        category: currentService?.category || null
+                                                    }}
+                                                    title={false}
+                                                    padding={false}
+                                                />
+                                            </div>
+
+                                            <Button
+                                                wrapperClassName='xl:hidden block'
+                                                onClick={() => { openDefaultModal('orderForm') }}
+                                                label='Оформить заявку'
                                             />
                                         </div>
-
-                                        <Button
-                                            wrapperClassName='xl:hidden block'
-                                            onClick={() => { openDefaultModal('orderForm') }}
-                                            label='Оформить заявку'
-                                        />
 
                                         <div className="w-full m:block hidden">
                                             {navItems?.filter(item => item.slug !== currentService?.slug) && (
