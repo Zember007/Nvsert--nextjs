@@ -26,8 +26,7 @@ interface AboutData {
 // Функция для получения данных о компании
 async function getAboutData(): Promise<AboutData | null> {
     try {
-        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-        const response = await fetch(`${baseUrl}/api/about`);
+        const response = await fetch(`/api/about`);
         
         if (!response.ok) {
             throw new Error('Failed to fetch about data');
