@@ -281,7 +281,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                                             Наши специалисты проведут бесплатную предварительную проверку и дадут чёткий ответ.
                                                         </p>
                                                         <Button
-                                                            onClick={() => { openDefaultModal('infoForm') }}
+                                                            onClick={() => { openDefaultModal('introForm') }}
                                                             label='Связаться'
                                                         />
                                                     </div>
