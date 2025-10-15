@@ -10,6 +10,7 @@ import { ContentBlock, NavigationItem } from '@/store/navigation';
 import { PhotoProvider, PhotoView } from '@/assets/lib/react-photo-view';
 import DotNavList from '@/components/general/DotNavList';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
+import { filterPrepositions } from '@/hook/filter';
 
 // Component to render rich text with proper formatting
 const RichTextRenderer: React.FC<{ content: string }> = ({ content }) => {
@@ -196,14 +197,14 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                     <div className="flex gap-[40px]">
                         <div className="flex flex-col gap-[50px] flex-1">
                             <h1 className="text-[48px] leading-[50px] !m-0 font-light tracking-[-0.04em] text-black -translate-x-[4px] m:text-left text-center">
-                                {currentService?.title || 'Сертификат соответствия ГОСТ Р'}
+                                {filterPrepositions(currentService?.title || '')}
                             </h1>
 
                             {/* Two Column Layout */}
                             <div className="flex gap-[40px] items-stretch m:flex-row flex-col">
                                 {/* Left Column */}
                                 <div className="m:w-[250px] relative">
-                                    <div className=" xl:sticky top-[112px] flex flex-col gap-[40px]">
+                                    <div className="sticky top-[112px] flex flex-col gap-[40px]">
 
                                         <div className="flex flex-col gap-[40px] m:flex-col-reverse">
                                             <div className="w-[250px] mx-auto">
