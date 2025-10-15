@@ -202,7 +202,6 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
             </StandardPageLayout>
         );
     }
-    console.log('aboutData',aboutData);
 
     return (
         <StandardPageLayout
