@@ -182,7 +182,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
             >
                 <div className="w-full text-center py-[50px]">
                     <span className="text-[16px] text-gray-500">Загрузка...</span>
-                </div>
+                </div>dfd
             </StandardPageLayout>
         );
     }
@@ -198,10 +198,11 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
             >
                 <div className="w-full text-center py-[50px]">
                     <span className="text-[16px] text-gray-500">Данные не найдены</span>
-                </div>
+                </div>df
             </StandardPageLayout>
         );
     }
+    console.log('aboutData',aboutData);
 
     return (
         <StandardPageLayout
@@ -223,7 +224,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
                         </div>
                     </CollapseSection>
                 </div>
-            )) || []}
+            ))}
         </StandardPageLayout>
     );
 };
