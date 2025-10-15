@@ -4,7 +4,7 @@ import { NavigationItem } from '@/store/navigation';
 
 async function getNavigationData(): Promise<NavigationItem[]> {
     const base = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
-    const res = await fetch(`${base}/api/services`, { next: { revalidate: 60 } });
+    const res = await fetch(`${base}/api/services`, { next: { revalidate: false } });
     if (!res.ok) return [];
     const json = await res.json();
     const data: NavigationItem[] = json?.data || [];
