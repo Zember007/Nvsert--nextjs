@@ -275,14 +275,15 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                         {sortedContentBlocks.map((block, index) => (
                                             <React.Fragment key={block.id}>
                                                 {index === ctaInsertAfterIndex && (
-                                                    <div className="text-center   max-w-[700px] w-full h-[300px] bg-[rgba(52,68,109,0.2)] rounded-[8px] flex flex-col justify-center items-center gap-[16px] p-[40px] backdrop-blur-sm" key="cta-banner">
-                                                        <h3 className="text-[24px] font-light tracking-[-0.04em]  text-black max-w-[460px]">
+                                                    <div className="text-center   max-w-[700px] w-full min-h-[300px] bg-[rgba(52,68,109,0.2)] rounded-[8px] flex flex-col justify-center items-center gap-[16px] s:p-[40px] p-[20px] backdrop-blur-sm" key="cta-banner">
+                                                        <h3 className="s:text-[24px] text-[20px] font-light tracking-[-0.04em]  text-black max-w-[460px]">
                                                             Подходит ли ваша продукция <br /> под обязательную сертификацию?
                                                         </h3>
-                                                        <p className="text-[16px] font-light tracking-[-0.01em]  text-[rgba(0,0,0,0.6)] max-w-[378px] leading-[1.4]">
+                                                        <p className="s:text-[16px] text-[14px] font-light tracking-[-0.01em]  text-[rgba(0,0,0,0.6)] max-w-[378px] leading-[1.4]">
                                                             Наши специалисты проведут бесплатную предварительную проверку и дадут чёткий ответ.
                                                         </p>
                                                         <Button
+                                                        wrapperClassName='xs:!w-[inherit] !w-full'
                                                             onClick={() => { openDefaultModal('introForm') }}
                                                             label='Связаться'
                                                         />
