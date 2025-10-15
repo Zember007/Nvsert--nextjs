@@ -175,7 +175,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
         return (
             <StandardPageLayout
                 title="О компании"
-                breadcrumbs={[{ id: 1, title: 'О компании', full_slug: '/about/o-kompanii' }]}
+                breadcrumbs={[{ id: 1, title: 'О компании', full_slug: '/about' }]}
                 sidebarNavItems={sidebarNavItems}
                 dotNavItems={[]}
                 showButton={true}
@@ -191,7 +191,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
         return (
             <StandardPageLayout
                 title="О компании"
-                breadcrumbs={[{ id: 1, title: 'О компании', full_slug: '/about/o-kompanii' }]}
+                breadcrumbs={[{ id: 1, title: 'О компании', full_slug: '/about' }]}
                 sidebarNavItems={sidebarNavItems}
                 dotNavItems={[]}
                 showButton={true}
@@ -206,7 +206,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
     return (
         <StandardPageLayout
             title={aboutData.title || "О компании"}
-            breadcrumbs={[{ id: 1, title: 'О компании', full_slug: '/about/o-kompanii' }]}
+            breadcrumbs={[{ id: 1, title: 'О компании', full_slug: '/about' }]}
             sidebarNavItems={sidebarNavItems}
             dotNavItems={dotNavItems}
             showButton={true}

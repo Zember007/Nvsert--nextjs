@@ -102,7 +102,7 @@ export async function generateMetadata(): Promise<Metadata> {
             images: aboutData.og_image ? [`${process.env.NEXT_PUBLIC_BASE_URL}${aboutData.og_image}`] : [],
         },
         alternates: {
-            canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/about/o-kompanii`,
+            canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/about`,
         },
     };
 }
