@@ -11,6 +11,7 @@ import { PhotoProvider, PhotoView } from '@/assets/lib/react-photo-view';
 import DotNavList from '@/components/general/DotNavList';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
 import { filterPrepositions } from '@/hook/filter';
+import Image from 'next/image';
 
 // Component to render rich text with proper formatting
 const RichTextRenderer: React.FC<{ content: string }> = ({ content }) => {
@@ -24,19 +25,10 @@ const ContentBlockRenderer: React.FC<{
     isExpanded: boolean;
     onToggle: () => void;
 }> = ({ block, isExpanded, onToggle }) => {
-    const { heading, richText } = block;
+    const { heading, richText, image, imageCaption } = block;
 
     // Extract first markdown image from content
-    const firstImage = React.useMemo(() => {
-        if (!richText) return null;
-        // Match first occurrence like ![alt](url)
-        const match = richText.match(/!\[(.*?)\]\((.*?)\)/m);
-        if (!match) return null;
-        const alt = match[1] || '';
-        const src = match[2] || '';
-        if (!src) return null;
-        return { alt, src };
-    }, [richText]);
+    const firstImage = { alt: imageCaption, src: image?.formats?.thumbnail?.url, width: image?.formats?.thumbnail?.width, height: image?.formats?.thumbnail?.height };
 
     if (richText && heading) {
         return (
@@ -66,17 +58,22 @@ const ContentBlockRenderer: React.FC<{
                     </svg>
                 </div>
 
-                {isExpanded ? (
+                {isExpanded && (
                     <div className="pt-[30px]">
                         <RichTextRenderer content={richText} />
                     </div>
-                ) : (
+                )}
+
+                {
                     firstImage ? (
                         <div className="max-w-[700px] mx-auto mt-[50px]">
-                            <img src={firstImage.src} alt={firstImage.alt} className="w-full h-auto" />
+                            <Image src={firstImage.src || ''} alt={firstImage.alt || ''} className="w-full h-auto"
+                                width={firstImage.width || 0}
+                                height={firstImage.height || 0}
+                            />
                         </div>
                     ) : (<></>)
-                )}
+                }
             </div>
         );
     }
@@ -284,7 +281,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                                             Наши специалисты проведут бесплатную предварительную проверку и дадут чёткий ответ.
                                                         </p>
                                                         <Button
-                                                        wrapperClassName='xs:!w-[inherit] !w-full'
+                                                            wrapperClassName='xs:!w-[inherit] !w-full'
                                                             onClick={() => { openDefaultModal('introForm') }}
                                                             label='Связаться'
                                                         />

@@ -30,8 +30,33 @@ export interface ContentBlock {
   text?: string | null;
   richText?: string;
   imageCaption?: string;
+  image?: Image;
+
 }
 
+export interface Image {
+  id: number;
+  name: string;
+  formats: {
+    thumbnail: ImageTypeFormat;
+    small: ImageTypeFormat;
+    medium: ImageTypeFormat;
+  }
+}
+
+
+export interface ImageTypeFormat {
+  name: string;
+  hash: string;
+  ext: string;
+  mime: string;
+  path: string;
+  width: number;
+  height: number;
+  size: number;
+  sizeInBytes: number;
+  url: string;
+}
 
 
 export interface Services {
@@ -123,7 +148,7 @@ const navigationSlice = createSlice({
         state.navigation = []
         state.status = 'failed';
       })
-     
+
   },
 });
 
