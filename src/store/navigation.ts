@@ -30,7 +30,7 @@ export interface ContentBlock {
   text?: string | null;
   richText?: string;
   imageCaption?: string;
-  image?: Image;
+  image: any;
 
 }
 

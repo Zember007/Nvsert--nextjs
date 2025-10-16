@@ -28,8 +28,8 @@ const ContentBlockRenderer: React.FC<{
     const { heading, richText, image, imageCaption } = block;
 
     // Extract first markdown image from content
-    const firstImage = { alt: imageCaption, src: image?.formats?.thumbnail?.url, width: image?.formats?.thumbnail?.width, height: image?.formats?.thumbnail?.height };
-
+    const firstImage = { alt: imageCaption, src: image?.url, width: image?.width, height: image?.height };
+    console.log('firstImage', image);
     if (richText && heading) {
         return (
             <div
@@ -65,9 +65,9 @@ const ContentBlockRenderer: React.FC<{
                 )}
 
                 {
-                    firstImage ? (
+                    firstImage.src ? (
                         <div className="max-w-[700px] mx-auto mt-[50px]">
-                            <Image src={firstImage.src || ''} alt={firstImage.alt || ''} className="w-full h-auto"
+                            <Image src={ 'https://test11.audiosector.ru/cp' + firstImage.src || ''} alt={firstImage.alt || ''} className="w-full h-auto"
                                 width={firstImage.width || 0}
                                 height={firstImage.height || 0}
                             />
@@ -99,7 +99,6 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
     const [currentServiceIndex, setCurrentServiceIndex] = useState<number>(0);
 
     const currentService = useMemo(() => {
-
         return navItems[currentServiceIndex] || undefined;
     }, [navItems, currentServiceIndex, slug]);
 

@@ -35,14 +35,14 @@ export const useRichTextRenderer = () => {
             if (/^!\[(.*?)\]\((.*?)\)/.test(trimmedLine)) {
                 const match = trimmedLine.match(/^!\[(.*?)\]\((.*?)\)/);
                 if (match) {
-                    const alt = match[1] || '';
+                   /*  const alt = match[1] || '';
                     const src = match[2] || '';
                     flushList();
                     elements.push(
                         <div key={`img-${index}`} className="max-w-[700px] mx-auto mt-[50px]">
                             <img src={src} alt={alt} className="w-full h-auto" />
                         </div>
-                    );
+                    ); */
                     return;
                 }
             }
