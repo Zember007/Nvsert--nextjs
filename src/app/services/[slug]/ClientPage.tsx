@@ -280,7 +280,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                                             Наши специалисты проведут бесплатную предварительную проверку и дадут чёткий ответ.
                                                         </p>
                                                         <Button
-                                                            wrapperClassName='xs:!w-[inherit] !w-full'
+                                                            wrapperClassName='xs:!w-[250px] !w-full'
                                                             onClick={() => { openDefaultModal('introForm') }}
                                                             label='Связаться'
                                                         />
