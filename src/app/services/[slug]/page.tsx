@@ -12,6 +12,7 @@ async function getNavigationData(): Promise<NavigationItem[]> {
     const sortedData = data.sort(
         (a, b) => (a?.category?.order || 0) - (b?.category?.order || 0)
     );
+    console.log('sortedData', sortedData);
     return sortedData;
 }
 

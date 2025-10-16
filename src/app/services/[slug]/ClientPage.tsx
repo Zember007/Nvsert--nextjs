@@ -29,7 +29,6 @@ const ContentBlockRenderer: React.FC<{
 
     // Extract first markdown image from content
     const firstImage = { alt: imageCaption, src: image?.url, width: image?.width, height: image?.height };
-    console.log('firstImage', image);
     if (richText && heading) {
         return (
             <div
