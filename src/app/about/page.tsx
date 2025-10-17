@@ -2,16 +2,18 @@ import ClientPage from './ClientPage';
 import { Metadata } from 'next';
 
 // Интерфейсы для типизации данных
-interface ContentBlock {
+export interface ContentBlock {
     id: number;
     blockType: string;
     heading: string;
     headingLevel: string;
     richText: string;
     order: number;
+    imageCaption?: string;
+    image: any;
 }
 
-interface AboutData {
+export interface AboutData {
     id: number;
     title: string;
     content: ContentBlock[];
@@ -32,7 +34,7 @@ interface AboutData {
 async function getAboutData(): Promise<AboutData | null> {
     try {
         const base = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
-        const response = await fetch(`${base}/api/about`, { next: { revalidate: false } });
+        const response = await fetch(`${base}/api/about?populate=*`, { next: { revalidate: false } });
         
         if (!response.ok) {
             throw new Error('Failed to fetch about data');
@@ -47,24 +49,7 @@ async function getAboutData(): Promise<AboutData | null> {
         return {
             id: 1,
             title: 'О компании',
-            content: [
-                {
-                    id: 1,
-                    blockType: 'text',
-                    heading: 'О нашей компании',
-                    headingLevel: 'h2',
-                    richText: 'Мы - команда профессионалов, специализирующихся на создании высококачественных веб-решений. Наша компания работает в сфере веб-разработки уже много лет и имеет богатый опыт в создании современных, функциональных и красивых сайтов.',
-                    order: 1
-                },
-                {
-                    id: 2,
-                    blockType: 'text',
-                    heading: 'Наши принципы',
-                    headingLevel: 'h2',
-                    richText: 'Мы придерживаемся принципов качественного кода, внимательного отношения к деталям и индивидуального подхода к каждому проекту. Наша цель - создавать не просто сайты, а полноценные цифровые решения, которые помогают нашим клиентам достигать их бизнес-целей.',
-                    order: 2
-                }
-            ],
+            content: [],
             seo: {
                 metaTitle: 'О компании - NVSERT',
                 metaDescription: 'Информация о нашей компании, принципах работы и команде профессионалов',

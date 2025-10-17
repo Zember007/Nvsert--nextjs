@@ -59,7 +59,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
                             </div>
 
                             {/* Center content */}
-                            <div className="flex-1 flex flex-col gap-[24px]">
+                            <div className="flex-1 flex flex-col gap-[50px]">
                                 {children}
                             </div>
 

@@ -1,30 +1,13 @@
 'use client';
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import StandardPageLayout from '@/components/general/StandardPageLayout';
 import CollapseSection from '@/components/general/CollapseSection';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
 import Map from './_components/Map';
+import { AboutData, ContentBlock } from './page';
 
-interface ContentBlock {
-    id: number;
-    blockType: string;
-    heading: string;
-    headingLevel: string;
-    richText: string;
-    order: number;
-}
 
-interface AboutData {
-    id: number;
-    title: string;
-    content: ContentBlock[];
-    seo_title?: string;
-    seo_description?: string;
-    seo_keywords?: string;
-    og_title?: string;
-    og_description?: string;
-    og_image?: string;
-}
 
 interface AboutCompanyClientProps {
     aboutData: AboutData | null;
@@ -81,7 +64,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
             return (
                 <>
                     {parts[0] && <div className="mb-[30px]">{processContent(parts[0])}</div>}
-                   <Map />
+                    <Map />
                     {parts[1] && <div>{processContent(parts[1])}</div>}
                 </>
             );
@@ -102,25 +85,100 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
                 .filter(block => block.trim())
                 .map(block => block.trim());
 
+            console.log(gridBlocks, 'gridBlocks');
+
             return (
                 <>
                     {beforeGrid && <div className="mb-[30px]">{processContent(beforeGrid)}</div>}
-                    <div className="grid grid-cols-2 gap-[20px] mb-[30px]">
+                    <div className="grid gap-[20px] mb-[30px]" style={{
+                        gridTemplateColumns: '370px 1fr 1fr',
+                        gridTemplateRows: 'repeat(3, auto)',
+                        gridAutoFlow: 'dense'
+                    }}>
                         {gridBlocks.map((block, index) => {
+                            // Проверяем, является ли блок изображением
+                            const imageMatch = block?.replace(/^#\s*/, '').match(/^!\[(.*?)\]\((.*?)\)/);
+
+
+                            // Обычная текстовая карточка
                             const lines = block.split('\n').filter(line => line.trim());
                             const title = lines[0]?.replace(/^#\s*/, '') || '';
                             const content = lines.slice(1).join('\n');
-                            
+
+                            // Определяем стили для разных карточек по индексу
+                            let cardStyle: React.CSSProperties = {};
+                            let cardClass = "p-[30px] border border-[#93969D] rounded-[6px] flex flex-col";
+
+                            if (index === 0) {
+                                // Первая карточка - большая левая (370x620px)
+                                cardStyle = {
+                                    gridColumn: '1',
+                                    gridRow: '1 / 3',
+                                    minHeight: '620px',
+                                    backgroundColor: 'rgba(147, 150, 157, 0.15)'
+                                };
+                                cardClass += " justify-between items-center";
+                            } else if (index >= 1 && index <= 4) {
+                                // Карточки 2-5: сетка 2x2 справа от первой
+                                cardClass += " justify-between items-end";
+                                cardStyle = {
+                                    minHeight: '300px'
+                                };
+                            } else if (index === 5) {
+                                // Предпоследняя карточка внизу
+                                cardStyle = {
+                                    gridColumn: '1',
+                                    gridRow: '3',
+                                    minHeight: '300px'
+                                };
+                                cardClass += " justify-between items-end";
+                            } else if (index === 6) {
+                                // Последняя широкая карточка
+                                cardStyle = {
+                                    gridColumn: '2 / 4',
+                                    gridRow: '3',
+                                    minHeight: '300px',
+                                    backgroundColor: 'rgba(147, 150, 157, 0.15)'
+                                };
+                            }
+
+                            if (imageMatch) {
+                                // Это изображение - рендерим как grid блок с изображением
+                                const alt = imageMatch[1];
+                                const src = imageMatch[2];
+
+
+                                return (
+                                    <div
+                                        key={index}
+                                        className="border border-[#93969D] rounded-[6px] relative overflow-hidden"
+                                        style={cardStyle}
+                                    >
+                                        <Image
+                                            src={src}
+                                            alt={alt}
+                                            fill
+                                            className="object-cover"
+                                            unoptimized={src.startsWith('http')}
+                                        />
+                                    </div>
+                                );
+                            }
+
+
                             return (
-                                <div 
-                                    key={index} 
-                                    className="p-[25px] bg-white border border-[#E5E5E5] rounded-[8px]"
+                                <div
+                                    key={index}
+                                    className={cardClass}
+                                    style={cardStyle}
                                 >
-                                    <h3 className="text-[18px] font-normal tracking-[-0.01em] text-black mb-[15px]">
-                                        {title}
-                                    </h3>
-                                    <div className="text-[16px] font-light leading-[1.5] text-black">
-                                        {processContent(content)}
+                                    <div className="flex flex-col gap-[20px] w-full">
+                                        <h3 className="text-[20px] font-normal leading-[1.2] text-black">
+                                            {title}
+                                        </h3>
+                                        <div className="text-[16px] font-light leading-[1.3] text-black">
+                                            {processContent(content)}
+                                        </div>
                                     </div>
                                 </div>
                             );
@@ -211,19 +269,33 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
             dotNavItems={dotNavItems}
             showButton={true}
         >
-            {aboutData.content?.map((block, index) => (
-                <div key={block.id} id={`block-${index + 1}`} className="w-full">
-                    <CollapseSection
-                        title={block.heading}
-                        isOpen={sectionsOpen.includes(index + 1)}
-                        onToggle={() => toggleSection(index + 1)}
-                    >
-                        <div className="text-[16px] leading-[1.5] text-[#000] font-light tracking-[-0.01em]">
-                            {renderRichText(block.richText)}
-                        </div>
-                    </CollapseSection>
-                </div>
-            ))}
+            {aboutData.content?.map((block, index) => {
+                const firstImage = { alt: block.imageCaption, src: block.image?.url, width: block.image?.width, height: block.image?.height };
+
+                return (
+                    <div key={block.id} id={`block-${index + 1}`} className="w-full">
+                        <CollapseSection
+                            title={block.heading}
+                            isOpen={sectionsOpen.includes(index + 1)}
+                            onToggle={() => toggleSection(index + 1)}
+                        >
+                            <div className="text-[16px] leading-[1.5] text-[#000] font-light tracking-[-0.01em]">
+                                {renderRichText(block.richText)}
+                            </div>
+                        </CollapseSection>
+                        {
+                            firstImage.src ? (
+                                <div className="max-w-[700px] mx-auto mt-[50px]">
+                                    <Image src={'https://test11.audiosector.ru/cp' + firstImage.src || ''} alt={firstImage.alt || ''} className="w-full h-auto"
+                                        width={firstImage.width || 0}
+                                        height={firstImage.height || 0}
+                                    />
+                                </div>
+                            ) : (<></>)
+                        }
+                    </div>
+                )
+            })}
         </StandardPageLayout>
     );
 };

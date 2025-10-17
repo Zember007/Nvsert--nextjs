@@ -57,7 +57,7 @@ export const useRichTextRenderer = () => {
             if (trimmedLine.startsWith('# ')) {
                 flushList();
                 elements.push(
-                    <h3 key={`subheading-${index}`} className="text-[18px] mt-[9px] font-normal tracking-[-0.01em] text-black">
+                    <h3 key={`subheading-${index}`} className="text-[20px] mt-[9px] font-normal tracking-[-0.01em] text-black">
                         {trimmedLine.substring(2)}
                     </h3>
                 );
