@@ -94,7 +94,6 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
     }, [initialNavigation]);
 
     const [expandedSections, setExpandedSections] = useState<number[]>([]);
-    const [activeBlockId, setActiveBlockId] = useState<number | null>(null);
     const [currentServiceIndex, setCurrentServiceIndex] = useState<number>(0);
 
     const currentService = useMemo(() => {
@@ -258,7 +257,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                         <div className="xl:hidden block">
                                             <DotNavList
                                                 position='left'
-                                                items={currentService?.content?.map(item => ({ id: item.id, title: item.heading, active: item.id === activeBlockId }))}
+                                                items={currentService?.content?.map(item => ({ id: item.id, title: item.heading }))}
                                             />
                                         </div>
                                     </div>
@@ -331,7 +330,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                 />
 
                                 <DotNavList
-                                    items={currentService?.content?.map(item => ({ id: item.id, title: item.heading, active: item.id === activeBlockId }))}
+                                    items={currentService?.content?.map(item => ({ id: item.id, title: item.heading }))}
                                 />
                             </div>
                         </div>
