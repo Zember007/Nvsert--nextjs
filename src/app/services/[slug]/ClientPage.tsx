@@ -198,7 +198,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                             <div className="flex gap-[40px] items-stretch m:flex-row flex-col">
                                 {/* Left Column */}
                                 <div className="m:w-[250px] relative">
-                                    <div className="sticky xl:top-[112px] top-[102px] flex flex-col gap-[40px]">
+                                    <div className="sticky xl:top-[116px] top-[106px] flex flex-col gap-[40px]">
 
                                         <div className="flex flex-col gap-[40px] m:flex-col-reverse">
                                             <div className="w-[250px] mx-auto">

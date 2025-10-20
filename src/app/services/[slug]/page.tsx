@@ -8,7 +8,6 @@ async function getNavigationData(): Promise<any[]> {
     if (!res.ok) return [];
 
     const json = await res.json();
-    console.log('sortedData',json);
 
     const data: NavigationItem[] = json?.data || [];
     // Apply the same ordering logic as in navigation slice
