@@ -323,7 +323,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                         </div>
 
                         <div className="w-[250px] relative xl:block hidden">
-                            <div className=" sticky top-[112px] flex flex-col gap-[50px]">
+                            <div className=" sticky top-[116px] flex flex-col gap-[50px]">
                                 <Button
                                     onClick={() => { openDefaultModal('orderForm') }}
                                     label='Оформить заявку'
