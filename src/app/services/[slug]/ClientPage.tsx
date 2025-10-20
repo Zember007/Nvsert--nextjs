@@ -66,7 +66,7 @@ const ContentBlockRenderer: React.FC<{
                 {
                     firstImage.src ? (
                         <div className="max-w-[700px] mx-auto mt-[50px]">
-                            <Image src={ 'https://test11.audiosector.ru/cp' + firstImage.src || ''} alt={firstImage.alt || ''} className="w-full h-auto"
+                            <Image src={'https://test11.audiosector.ru/cp' + firstImage.src || ''} alt={firstImage.alt || ''} className="w-full h-auto"
                                 width={firstImage.width || 0}
                                 height={firstImage.height || 0}
                             />
@@ -272,10 +272,10 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                                 {index === ctaInsertAfterIndex && (
                                                     <div className="text-center   max-w-[700px] w-full min-h-[300px] bg-[rgba(52,68,109,0.2)] rounded-[8px] flex flex-col justify-center items-center gap-[16px] s:p-[40px] p-[20px] backdrop-blur-sm" key="cta-banner">
                                                         <h3 className="s:text-[24px] text-[20px] font-light tracking-[-0.04em]  text-black max-w-[460px]">
-                                                            Подходит ли ваша продукция <br /> под обязательную сертификацию?
+                                                            {currentService?.cta?.title}
                                                         </h3>
                                                         <p className="s:text-[16px] text-[14px] font-light tracking-[-0.01em]  text-[rgba(0,0,0,0.6)] max-w-[378px] leading-[1.4]">
-                                                            Наши специалисты проведут бесплатную предварительную проверку и дадут чёткий ответ.
+                                                            {currentService?.cta?.description}
                                                         </p>
                                                         <Button
                                                             wrapperClassName='xs:!w-[250px] !w-full'

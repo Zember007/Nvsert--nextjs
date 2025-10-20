@@ -6,6 +6,7 @@ import { log } from 'console';
 
 export interface NavigationItem {
   id: number;
+  cta: any;
   documentId: string;
   title: string;
   slug: string;
