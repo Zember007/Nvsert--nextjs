@@ -97,6 +97,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
     const [currentServiceIndex, setCurrentServiceIndex] = useState<number>(0);
 
     const currentService = useMemo(() => {
+        console.log('currentService', navItems[currentServiceIndex]);
         return navItems[currentServiceIndex] || undefined;
     }, [navItems, currentServiceIndex, slug]);
 
