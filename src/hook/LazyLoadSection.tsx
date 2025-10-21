@@ -9,7 +9,7 @@ interface LazyLoadSectionProps {
 }
 
 const LazyLoadSection: React.FC<LazyLoadSectionProps> = ({ component: Component }) => {
-  const { ref, isVisible } = useIntersectionObserver();
+  const { ref, isVisible } = useIntersectionObserver({}, true);
 
   return (
     <div className='relative' >

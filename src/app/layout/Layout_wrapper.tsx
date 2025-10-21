@@ -24,37 +24,35 @@ gsap.registerPlugin(ScrollTrigger);
 
 const LayoutContent = ({ children }: { children: ReactNode }) => {
     const dispatch = useDispatch<AppDispatch>();
-    const { showCopyNotification, notificationPosition, hideNotification } = useCopyContext();
 
-    const { transparent, setDefaultModalActive, defaultModalActive, defaultModalName, resetCountModal, defaultModalCount } = useHeaderContext();
-    const { calcPageBodyClass } = useSelector((state: RootState) => state.documents);
+    const { setDefaultModalActive, defaultModalActive, defaultModalName, resetCountModal, defaultModalCount, showCopyNotification, notificationPosition, hideNotification } = useHeaderContext();
     const { configs: configsPure, file_configs: fileConfigsPure, status } = useSelector((state: RootState) => state.config);
-/* 
-    const configs = useMemo(() => {
-        if (!configsPure) return {};
-        
-        const parsedConf: any = {};
-        configsPure.forEach((item) => {
-            parsedConf[item.key] = item.value;
-        });
-        return parsedConf;
-    }, [configsPure]); */
-/* 
-    const file_configs = useMemo(() => {
-        if (!fileConfigsPure) return {};
-        
-        const parsedConf: any = {};
-        fileConfigsPure.forEach((item) => {
-            parsedConf[item.key] = item.value;
-        });
-        return parsedConf;
-    }, [fileConfigsPure]); */
+    /* 
+        const configs = useMemo(() => {
+            if (!configsPure) return {};
+            
+            const parsedConf: any = {};
+            configsPure.forEach((item) => {
+                parsedConf[item.key] = item.value;
+            });
+            return parsedConf;
+        }, [configsPure]); */
+    /* 
+        const file_configs = useMemo(() => {
+            if (!fileConfigsPure) return {};
+            
+            const parsedConf: any = {};
+            fileConfigsPure.forEach((item) => {
+                parsedConf[item.key] = item.value;
+            });
+            return parsedConf;
+        }, [fileConfigsPure]); */
 
-/*     useEffect(() => {
-        if (Object.keys(configs).length > 0 && Object.keys(file_configs).length > 0) {
-            dispatch(setMetadata(generateMetadata(configs, file_configs)));
-        }
-    }, [configs, file_configs, dispatch]); */
+    /*     useEffect(() => {
+            if (Object.keys(configs).length > 0 && Object.keys(file_configs).length > 0) {
+                dispatch(setMetadata(generateMetadata(configs, file_configs)));
+            }
+        }, [configs, file_configs, dispatch]); */
 
     // Загружаем данные только один раз при монтировании, если они еще не загружены
     useEffect(() => {
@@ -65,22 +63,11 @@ const LayoutContent = ({ children }: { children: ReactNode }) => {
         }
     }, [dispatch, status]);
 
-    useEffect(() => {
-   
-
-        const img = document.querySelectorAll('img');
-        img?.forEach(img => img.addEventListener('contextmenu', (e) => e.preventDefault()));
-
-        return () => {
-            img?.forEach(img => img.removeEventListener('contextmenu', (e) => e.preventDefault()));
-        };
-    }, []);
-
 
 
     return (
         <>
-            <AppModalWrapper
+             <AppModalWrapper
                 setDefaultModalActive={setDefaultModalActive}
                 defaultModalActive={defaultModalActive}
                 defaultModalName={defaultModalName}
@@ -90,12 +77,12 @@ const LayoutContent = ({ children }: { children: ReactNode }) => {
 
             <AppHeader />
 
-            <main className={` ${transparent && 'transparent-header'} ${calcPageBodyClass && 'cost-calc-page'}`}>
+            <main >
                 {children}
             </main>
-            <AppFooter />
+              <AppFooter />
             <div className="bg-noise"></div>
-            <CustomScrollbar target="window" />
+            {/* <CustomScrollbar target="window" /> */}
 
             <CopyNotification
                 isVisible={showCopyNotification}
@@ -109,11 +96,9 @@ const LayoutContent = ({ children }: { children: ReactNode }) => {
 
 const Layout_wrapper = ({ children }: { children: ReactNode }) => {
     return (
-        <CopyProvider>
-            <LayoutContent>
-                {children}
-            </LayoutContent>
-        </CopyProvider>
+        <LayoutContent>
+            {children}
+        </LayoutContent>
     );
 };
 

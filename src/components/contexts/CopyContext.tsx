@@ -11,7 +11,6 @@ interface CopyContextType {
 const CopyContext = createContext<CopyContextType | undefined>(undefined);
 
 export const CopyProvider = ({ children }: { children: ReactNode }) => {
-  const copyHook = useCopy();
 
   return (
     <CopyContext.Provider value={copyHook}>

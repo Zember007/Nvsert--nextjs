@@ -15,14 +15,12 @@ import { useButton } from "@/hook/useButton";
 import { useAnimation, motion } from "framer-motion";
 import { AppDispatch, RootState } from "@/config/store";
 import HeaderMenu from "./elements/HeaderMenu";
-import { useCopyContext } from "../contexts/CopyContext";
-import { updateActionNavigation } from "@/store/navigation";
 
 
 
 
 const AppHeader = () => {
-  const { makeDefaultHeader, makeTransparentHeader, openDefaultModal, darkHeader } = useHeaderContext();
+  const { openDefaultModal, handleCopy } = useHeaderContext();
   const { services } = useSelector((state: RootState) => state.navigation);
 
   const pathname = usePathname();
@@ -69,10 +67,8 @@ const AppHeader = () => {
     setServicesMenuActive(false);
     setBurgerMenuActive(false);
     document.body.style.overflow = '';
-    makeDefaultHeader();
     unlockScroll()
     dispatch(disableOverflow());
-    makeDefaultHeader();
   }
   let scrollY = 0;
 
@@ -97,12 +93,10 @@ const AppHeader = () => {
       setBurgerMenuActive(true);
       // document.body.style.overflow = 'hidden';
       lockScroll()
-      makeTransparentHeader();
     } else {
       setBurgerMenuActive(false);
       unlockScroll()
       dispatch(disableOverflow());
-      makeDefaultHeader();
     }
   }
 
@@ -116,8 +110,6 @@ const AppHeader = () => {
       animation()
     }
   }, [servicesMenuActive])
-
-  const { handleCopy } = useCopyContext();
 
 
 
@@ -267,7 +259,7 @@ const AppHeader = () => {
         active={burgerMenuActive}
         closeMenu={closeNavMenues}
       />
-      <div className={`services-menu-box menu-headers  ${servicesMenuActive && 'active'} ${darkHeader && 'dark'}`}>
+      <div className={`services-menu-box menu-headers  ${servicesMenuActive && 'active'}`}>
         <div className={`services-menu !py-[5px] js-services-menu relative `}>
 
           <div className="services-menu__wrapper ">
@@ -295,7 +287,7 @@ const AppHeader = () => {
 
         </div>
       </div>
-      <div className={`services-menu-box ${servicesMenuActive && 'active'} ${darkHeader && 'dark'}`}>
+      <div className={`services-menu-box ${servicesMenuActive && 'active'}`}>
         <motion.div
           animate={controls}
           className=" relative"

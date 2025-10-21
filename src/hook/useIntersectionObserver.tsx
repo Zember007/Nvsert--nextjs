@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 
-export function useIntersectionObserver(options: IntersectionObserverInit = {}) {
+export function useIntersectionObserver(options: IntersectionObserverInit = {}, disconnect: boolean = false) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -13,7 +13,12 @@ export function useIntersectionObserver(options: IntersectionObserverInit = {}) 
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.disconnect(); 
+
+          if (disconnect) {
+            observer.disconnect();
+          }
+        } else {
+          setIsVisible(false);
         }
       },
       {

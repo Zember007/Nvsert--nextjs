@@ -1,7 +1,8 @@
-import { useCopyContext } from '../contexts/CopyContext';
+
+import { useHeaderContext } from '../contexts/HeaderContext';
 
 const CopyExample = () => {
-  const { handleCopy } = useCopyContext();
+  const { handleCopy } = useHeaderContext();
 
   return (
     <div className="p-4 space-y-4">

@@ -20,7 +20,7 @@ const AppMainSkills = () => {
     const { t } = useTranslation()
     const widthWindow = useWindowWidth()
     const [isVisible, setIsVisible] = useState(false);
-    const { ref, isVisible: isVisibleSection } = useIntersectionObserver();
+    const { ref, isVisible: isVisibleSection } = useIntersectionObserver({}, true);
     const skillsData = (widthWindow && widthWindow < 1440) ? skills.filter(item => !item.empty) : skills;
 
     useEffect(() => {

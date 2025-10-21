@@ -192,7 +192,7 @@ export function horizontalLoop(items, config) {
             
             // Принудительное выравнивание к пиксельной сетке
             forcePixelAlignment = () => {
-                items.forEach((item, i) => {
+                items && items.forEach((item, i) => {
                     const rect = item.getBoundingClientRect();
                     const containerRect = container.getBoundingClientRect();
                     
