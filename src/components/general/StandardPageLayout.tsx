@@ -17,8 +17,7 @@ type StandardPageLayoutProps = {
     title: string;
     /** Хлебные крошки */
     breadcrumbs: BreadcrumbItem[];
-    /** Элементы для левой боковой панели навигации */
-    sidebarNavItems: SidebarItem[];
+
     /** Элементы для правой навигации (точки) */
     dotNavItems?: DotNavItem[];
     /** Контент страницы */
@@ -32,7 +31,7 @@ type StandardPageLayoutProps = {
 const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
     title,
     breadcrumbs,
-    sidebarNavItems,
+
     dotNavItems,
     children,
     showButton = true,
@@ -54,7 +53,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
                             {/* Left sidebar */}
                             <div className="w-[250px] relative">
                                 <div className="sticky top-[112px] flex flex-col gap-[10px]">
-                                    <SidebarNavButtons items={sidebarNavItems} />
+                                    <SidebarNavButtons  />
                                 </div>
                             </div>
 
