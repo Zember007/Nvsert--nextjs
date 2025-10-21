@@ -14,7 +14,6 @@ import { AppDispatch, RootState } from '@/config/store';
 import { usePathname } from 'next/navigation';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { CopyProvider, useCopyContext } from '@/components/contexts/CopyContext';
 import CopyNotification from '@/components/general/elements/CopyNotification';
 import { updateActionNavigation } from '@/store/navigation';
 import CustomScrollbar from '@/components/general/CustomScrollbar';
