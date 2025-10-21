@@ -12,6 +12,8 @@ import DotNavList from '@/components/general/DotNavList';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
 import { filterPrepositions } from '@/hook/filter';
 import Image from 'next/image';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/config/store';
 
 // Component to render rich text with proper formatting
 const RichTextRenderer: React.FC<{ content: string }> = ({ content }) => {
@@ -81,7 +83,7 @@ const ContentBlockRenderer: React.FC<{
 };
 
 interface ClientPageProps {
-    initialNavigation: NavigationItem[];
+    initialNavigation: NavigationItem;
     initialSlug: string;
 }
 
@@ -89,27 +91,28 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
     const slug = initialSlug;
     const { openDefaultModal } = useHeaderContext();
 
-    const navItems = useMemo(() => {
-        return initialNavigation || [];
-    }, [initialNavigation]);
+    const { navigation } = useSelector((state: RootState) => state.navigation);
 
     const [expandedSections, setExpandedSections] = useState<number[]>([]);
     const [currentServiceIndex, setCurrentServiceIndex] = useState<number>(0);
 
     const currentService = useMemo(() => {
-        console.log('currentService', navItems[currentServiceIndex]);
-        return navItems[currentServiceIndex] || undefined;
-    }, [navItems, currentServiceIndex, slug]);
+        if (navigation && navigation.length > 0) {
+            return navigation[currentServiceIndex];
+        }
+        return initialNavigation || undefined;
+    }, [initialNavigation, currentServiceIndex, slug]);
 
     // Sync index with slug
     React.useEffect(() => {
-        if (navItems && navItems.length > 0) {
-            const index = navItems.findIndex(item => item.slug === slug);
+        if (navigation && navigation.length > 0) {
+            console.log('navigation', navigation, slug);
+            const index = navigation.findIndex(item => item.slug === slug);
             if (index !== -1) {
                 setCurrentServiceIndex(index);
             }
         }
-    }, [slug, navItems]);
+    }, [slug, navigation]);
 
     const sortedContentBlocks = useMemo(() => {
         if (!currentService?.content) return [] as ContentBlock[];
@@ -161,14 +164,14 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                 loop={true}
                 onIndexChange={(index) => {
                     setCurrentServiceIndex(index);
-                    if (navItems?.[index]) {
-                        const newUrl = `/services/${navItems[index].slug}`;
+                    if (navigation?.[index]) {
+                        const newUrl = `/services/${navigation[index].slug}`;
                         window.history.replaceState({}, '', newUrl);
                     }
                 }}
                 maskClosable={false}
             >
-                {navItems?.map((item) => <PhotoView
+                {navigation?.map((item) => <PhotoView
                     key={item.id}
                     title={item.title}
                     description={
@@ -235,11 +238,11 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                         </div>
 
                                         <div className="w-full m:block hidden">
-                                            {navItems?.filter(item => item.slug !== currentService?.slug) && (
+                                            {navigation?.filter(item => item.slug !== currentService?.slug) && (
                                                 <AppCollapsibleList
                                                     position='left'
                                                     title={'Рекомендуем к оформлению'}
-                                                    items={navItems.sort((a, b) => a.category.name === currentService?.category.name ? -1 : 1).filter(item => item.slug !== currentService?.slug).slice(0, 3)}
+                                                    items={navigation.filter(item => item.category.name === currentService?.category.name && item.slug !== currentService?.slug).slice(0, 4)}
                                                     defaultOpen={true}
                                                     listClassName='flex flex-col gap-[20px]'
                                                     renderItem={(children) => (
@@ -301,11 +304,11 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                 </div>
 
                                 <div className="w-full m:hidden block">
-                                    {navItems?.filter(item => item.slug !== currentService?.slug) && (
+                                    {navigation?.filter(item => item.slug !== currentService?.slug) && (
                                         <AppCollapsibleList
                                             position='left'
                                             title={'Рекомендуем к оформлению'}
-                                            items={navItems.filter(item => item.category.name === currentService?.category.name && item.slug !== currentService?.slug).slice(0, 4)}
+                                            items={navigation.filter(item => item.category.name === currentService?.category.name && item.slug !== currentService?.slug).slice(0, 4)}
                                             defaultOpen={true}
                                             listClassName='flex flex-col gap-[20px]'
                                             renderItem={(children) => (
