@@ -6,6 +6,8 @@ import CollapseSection from '@/components/general/CollapseSection';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
 import Map from './_components/Map';
 import { AboutData, ContentBlock } from './page';
+import AppCtaBanner from '@/components/general/AppCtaBanner';
+import { useHeaderContext } from '@/components/contexts/HeaderContext';
 
 
 
@@ -19,7 +21,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
     const [aboutData, setAboutData] = useState<AboutData | null>(initialAboutData);
     const [loading, setLoading] = useState(!initialAboutData);
     const { processContent } = useRichTextRenderer();
-
+    const { openDefaultModal } = useHeaderContext();
     useEffect(() => {
         // Если данные уже переданы с сервера, используем их
         if (initialAboutData) {
@@ -63,6 +65,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
             const parts = richText.split('[map]');
             return (
                 <>
+
                     {parts[0] && <div className="mb-[30px]">{processContent(parts[0])}</div>}
                     <Map />
                     {parts[1] && <div>{processContent(parts[1])}</div>}
@@ -70,124 +73,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
             );
         }
 
-        // Обработка [grid_blocks_start] ... [grid_blocks_end]
-        if (richText.includes('[grid_blocks_start]') && richText.includes('[grid_blocks_end]')) {
-            const beforeGrid = richText.substring(0, richText.indexOf('[grid_blocks_start]'));
-            const gridContent = richText.substring(
-                richText.indexOf('[grid_blocks_start]') + '[grid_blocks_start]'.length,
-                richText.indexOf('[grid_blocks_end]')
-            );
-            const afterGrid = richText.substring(richText.indexOf('[grid_blocks_end]') + '[grid_blocks_end]'.length);
 
-            // Разбиваем grid content на блоки по заголовкам #
-            const gridBlocks = gridContent
-                .split(/(?=\n# )/)
-                .filter(block => block.trim())
-                .map(block => block.trim());
-
-            console.log(gridBlocks, 'gridBlocks');
-
-            return (
-                <>
-                    {beforeGrid && <div className="mb-[30px]">{processContent(beforeGrid)}</div>}
-                    <div className="grid gap-[20px] mb-[30px]" style={{
-                        gridTemplateColumns: '370px 1fr 1fr',
-                        gridTemplateRows: 'repeat(3, auto)',
-                        gridAutoFlow: 'dense'
-                    }}>
-                        {gridBlocks.map((block, index) => {
-                            // Проверяем, является ли блок изображением
-                            const imageMatch = block?.replace(/^#\s*/, '').match(/^!\[(.*?)\]\((.*?)\)/);
-
-
-                            // Обычная текстовая карточка
-                            const lines = block.split('\n').filter(line => line.trim());
-                            const title = lines[0]?.replace(/^#\s*/, '') || '';
-                            const content = lines.slice(1).join('\n');
-
-                            // Определяем стили для разных карточек по индексу
-                            let cardStyle: React.CSSProperties = {};
-                            let cardClass = "p-[30px] border border-[#93969D] rounded-[6px] flex flex-col";
-
-                            if (index === 0) {
-                                // Первая карточка - большая левая (370x620px)
-                                cardStyle = {
-                                    gridColumn: '1',
-                                    gridRow: '1 / 3',
-                                    minHeight: '620px',
-                                    backgroundColor: 'rgba(147, 150, 157, 0.15)'
-                                };
-                                cardClass += " justify-between items-center";
-                            } else if (index >= 1 && index <= 4) {
-                                // Карточки 2-5: сетка 2x2 справа от первой
-                                cardClass += " justify-between items-end";
-                                cardStyle = {
-                                    minHeight: '300px'
-                                };
-                            } else if (index === 5) {
-                                // Предпоследняя карточка внизу
-                                cardStyle = {
-                                    gridColumn: '1',
-                                    gridRow: '3',
-                                    minHeight: '300px'
-                                };
-                                cardClass += " justify-between items-end";
-                            } else if (index === 6) {
-                                // Последняя широкая карточка
-                                cardStyle = {
-                                    gridColumn: '2 / 4',
-                                    gridRow: '3',
-                                    minHeight: '300px',
-                                    backgroundColor: 'rgba(147, 150, 157, 0.15)'
-                                };
-                            }
-
-                            if (imageMatch) {
-                                // Это изображение - рендерим как grid блок с изображением
-                                const alt = imageMatch[1];
-                                const src = imageMatch[2];
-
-
-                                return (
-                                    <div
-                                        key={index}
-                                        className="border border-[#93969D] rounded-[6px] relative overflow-hidden"
-                                        style={cardStyle}
-                                    >
-                                        <Image
-                                            src={src}
-                                            alt={alt}
-                                            fill
-                                            className="object-cover"
-                                            unoptimized={src.startsWith('http')}
-                                        />
-                                    </div>
-                                );
-                            }
-
-
-                            return (
-                                <div
-                                    key={index}
-                                    className={cardClass}
-                                    style={cardStyle}
-                                >
-                                    <div className="flex flex-col gap-[20px] w-full">
-                                        <h3 className="text-[20px] font-normal leading-[1.2] text-black">
-                                            {title}
-                                        </h3>
-                                        <div className="text-[16px] font-light leading-[1.3] text-black">
-                                            {processContent(content)}
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-                    {afterGrid && <div>{processContent(afterGrid)}</div>}
-                </>
-            );
-        }
 
         // Обычный текст
         return processContent(richText);
@@ -240,7 +126,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
             >
                 <div className="w-full text-center py-[50px]">
                     <span className="text-[16px] text-gray-500">Загрузка...</span>
-                </div>dfd
+                </div>
             </StandardPageLayout>
         );
     }
@@ -256,7 +142,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
             >
                 <div className="w-full text-center py-[50px]">
                     <span className="text-[16px] text-gray-500">Данные не найдены</span>
-                </div>df
+                </div>
             </StandardPageLayout>
         );
     }
@@ -296,6 +182,12 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
                     </div>
                 )
             })}
+            <AppCtaBanner
+                key="cta-banner"
+                text={aboutData?.cta?.text || ''}
+                description={aboutData?.cta?.description || ''}
+                onButtonClick={() => { openDefaultModal('introForm') }}
+            />
         </StandardPageLayout>
     );
 };

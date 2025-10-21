@@ -28,6 +28,10 @@ export interface AboutData {
     og_title?: string;
     og_description?: string;
     og_image?: string;
+    cta?: {
+        text: string;
+        description: string;
+    };
 }
 
 // Функция для получения данных о компании
