@@ -38,7 +38,7 @@ export interface AboutData {
 async function getAboutData(): Promise<AboutData | null> {
     try {
         const base = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
-        const response = await fetch(`${base}/api/about?populate=*`, { next: { revalidate: false } });
+        const response = await fetch(`${base}/api/about`, { next: { revalidate: false } });
         
         if (!response.ok) {
             throw new Error('Failed to fetch about data');
@@ -46,6 +46,7 @@ async function getAboutData(): Promise<AboutData | null> {
 
         
         const result = await response.json();
+        console.log(result.data, 'result.data');
         return result.data;
     } catch (error) {
         console.error('Error fetching about data:', error);
