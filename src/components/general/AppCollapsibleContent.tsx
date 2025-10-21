@@ -31,8 +31,8 @@ const AppCollapsibleContent: React.FC<AppCollapsibleContentProps> = ({
                     width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
                 >
                     <g clipPath="url(#clip0_7117_2690)">
-                        <path d="M15 15L0.999999 0.999999" stroke="#93969D" strokeWidth="2" strokeLinejoin="round" strokeLinejoin="round" />
-                        <path d="M1 9L1 1L9 1" stroke="#93969D" strokeWidth="2" strokeLinejoin="round" strokeLinejoin="round" />
+                        <path d="M15 15L0.999999 0.999999" stroke="#93969D" strokeWidth="2" strokeLinejoin="round"  />
+                        <path d="M1 9L1 1L9 1" stroke="#93969D" strokeWidth="2" strokeLinejoin="round"  />
                     </g>
                     <defs>
                         <clipPath id="clip0_7117_2690">

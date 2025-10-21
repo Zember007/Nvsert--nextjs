@@ -61,8 +61,8 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                         <svg
                             className={`questions-arrow-icon ${active ? 'active' : ''}`}
                             width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5 5L19 19" stroke="#93969D" strokeWidth="2" strokeLinejoin="round" strokeLinejoin="round" />
-                            <path d="M19 11L19 19L11 19" stroke="#93969D" strokeWidth="2" strokeLinejoin="round" strokeLinejoin="round" />
+                            <path d="M5 5L19 19" stroke="#93969D" strokeWidth="2" strokeLinejoin="round"  /> 
+                            <path d="M19 11L19 19L11 19" stroke="#93969D" strokeWidth="2" strokeLinejoin="round"  />
                         </svg>
 
 
