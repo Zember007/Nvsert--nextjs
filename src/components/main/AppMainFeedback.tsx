@@ -139,7 +139,8 @@ const AppMainFeedback = () => {
                             {[...Array(14)].map((_, index) =>
                                 <div
                                     data-slider="slide-feedback1" key={index} className="feedback-item">
-                                    <PhotoView src={`/feedbacks/big/${15 + index}.png`}>
+                                    <PhotoView
+                                    src={`/feedbacks/big/${15 + index}.png`}>
                                         <Image
                                             className='feedback-image'
                                             src={`/feedbacks/small/${15 + index}.png`} alt='feedback' width={190} height={267} />
