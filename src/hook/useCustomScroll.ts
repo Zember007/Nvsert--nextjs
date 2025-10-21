@@ -31,12 +31,7 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
     // Для container mode обязательно нужен containerRef
     if (target === 'container' && !containerRef?.current) return;
 
-    console.log('useCustomScroll: Initializing with options:', {
-      target,
-      priorityScroll,
-      containerRef: containerRef?.current,
-      enabled
-    });
+   
 
     let currentScroll = 0;
     let targetScroll = 0;
@@ -45,7 +40,6 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
     const isWindowMode = target === 'window';
     const container = containerRef?.current;
 
-    console.log('useCustomScroll: Container resolved:', container);
 
     // Инициализируем текущую прокрутку
     const initScroll = () => {

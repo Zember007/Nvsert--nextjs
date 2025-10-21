@@ -424,7 +424,6 @@ export function horizontalLoop(items, config) {
             container = null;
             proxy = null;
 
-            console.log('horizontalLoop destroyed');
         };
 
         tl.progress(1, true).progress(0, true);
