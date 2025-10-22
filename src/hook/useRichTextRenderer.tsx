@@ -57,23 +57,23 @@ export const useRichTextRenderer = () => {
                                 </svg>
                                 <div className="flex flex-col gap-[15px] w-full">
                                     {number && (
-                                        <div className="text-[48px] font-bold leading-[1] text-[#34446D]">
+                                        <div className="xxs:text-[48px] text-[40px] font-bold leading-[1] text-[#34446D]">
                                             {number}
                                         </div>
                                     )}
                                     {bigTitleMatch && (
-                                        <h3 className="text-[48px] font-light leading-[1] text-[#34446D]">
+                                        <h3 className="xxs:text-[48px] text-[40px] font-light leading-[1] text-[#34446D]">
 
                                             {bigTitleMatch[1].trim()}
                                         </h3>
                                     )}
                                     {smallTitleMatch && (
-                                        <h4 className="text-[20px] font-normal leading-[1.3] text-black">
+                                        <h4 className="xxs:text-[20px] text-[18px] font-normal leading-[1.3] text-black">
                                             {smallTitleMatch[1].trim()}
                                         </h4>
                                     )}
                                     {description && (
-                                        <div className="text-[16px] font-light leading-[1.4] text-black">
+                                        <div className="xxs:text-[16px] text-[14px] font-light leading-[1.4] text-black">
                                             {processContent(description)}
                                         </div>
                                     )}
@@ -192,7 +192,7 @@ export const useRichTextRenderer = () => {
                                     <h3 className="xxs:text-[20px] text-[18px] font-normal leading-[1.2] text-black">
                                         {title}
                                     </h3>
-                                    <div className="text-[16px] font-light leading-[1.3] text-black">
+                                    <div className="xxs:text-[16px] text-[14px] font-light leading-[1.3] text-black">
                                         {processContent(content)}
                                     </div>
                                 </div>
@@ -214,7 +214,7 @@ export const useRichTextRenderer = () => {
                 elements.push(
                     <ul key={`list-${listKey++}`} className="list-disc -my-[5px]">
                         {currentListItems.map((item, idx) => (
-                            <li key={idx} className="text-[16px] font-light leading-[1.5] text-black ml-[25px]">
+                            <li key={idx} className="xxs:text-[16px] text-[14px] font-light leading-[1.5] text-black ml-[25px]">
                                 {item}
                             </li>
                         ))}
@@ -270,7 +270,7 @@ export const useRichTextRenderer = () => {
             flushList();
             if (trimmedLine) {
                 elements.push(
-                    <p key={`p-${index}`} className="text-[16px] -my-[5px] font-light leading-[1.5] text-black">
+                    <p key={`p-${index}`} className="xxs:text-[16px] text-[14px] -my-[5px] font-light leading-[1.5] text-black">
                         {trimmedLine}
                     </p>
                 );
