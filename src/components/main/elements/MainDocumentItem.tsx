@@ -183,7 +183,7 @@ const MainDocumentItem = memo(({
                     times: ANIMATION_SETTINGS.times
                 }
             });
-        }, 100);
+        }, 150);
 
         const el = wrapperRef.current;
         let timerScroll: NodeJS.Timeout | null = null;

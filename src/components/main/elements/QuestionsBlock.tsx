@@ -34,7 +34,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                         times: defaultSettings.times
                     }
                 });
-            }, 100);
+            }, 150);
 
         }
         return () => {
