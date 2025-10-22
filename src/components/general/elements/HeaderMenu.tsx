@@ -155,7 +155,7 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                                                 'slug' in item && item.slug ? (
                                                     <Link
 
-                                                        href={'/services/' + item.slug}
+                                                        href={(currentLevel.parentId === 'services' || navigationStack.some(level => level.parentId === 'services')) ? ('/services/' + item.slug) : item.slug}
                                                         className={`${index_item === 0 ? 'first-child' : ''} ${item.img ? 'have-img' : ''} header__menu-mob-item group`}
                                                     >
                                                         <div className="flex items-center gap-[20px] transition-transform will-change-transform duration-100 group-active:scale-[.98]">
@@ -168,7 +168,7 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                                                             <Image src={ArrowIcon} alt="more" width={20} height={20} />
                                                         )}
                                                     </Link>
-                                                    
+
                                                 ) : (
                                                     <button
 
@@ -196,18 +196,18 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                         </div>
                     </div>
 
-                    {(currentLevel.parentId === 'services' || 
-                      navigationStack.some(level => level.parentId === 'services')) && (
-                        <div className="header-nav__list !my-[15px]">
-                            <Link
-                                onClick={() => closeMenu()}
-                                href="/services"
-                                className={`header__menu-mob-item text-[#93969D] text-[20px] before:hidden`}
-                            >
-                                Полный список услуг
-                            </Link>
-                        </div>
-                    )}
+                    {(currentLevel.parentId === 'services' ||
+                        navigationStack.some(level => level.parentId === 'services')) && (
+                            <div className="header-nav__list !my-[15px]">
+                                <Link
+                                    onClick={() => closeMenu()}
+                                    href="/services"
+                                    className={`header__menu-mob-item text-[#93969D] text-[20px] before:hidden`}
+                                >
+                                    Полный список услуг
+                                </Link>
+                            </div>
+                        )}
                 </nav>
 
                 <div className="flex flex-col items-center gap-[10px] px-[20px] pb-[80px]  text-[#FFF]">
@@ -223,7 +223,7 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
 
                     </button>
                     <button
-                        onClick={() => {openDefaultModal('introForm') }}
+                        onClick={() => { openDefaultModal('introForm') }}
 
                         className="button-menu bg-[#F5F5F2] w-[280px] mx-auto">
                         <span className='text-[#000]'>Заказать звонок</span>
@@ -275,8 +275,8 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
 
                     </div>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 
