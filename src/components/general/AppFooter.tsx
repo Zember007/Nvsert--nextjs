@@ -123,7 +123,7 @@ const AppFooter = () => {
   }
 
   return (
-    <footer ref={ref} className="footer grid xl:grid-cols-2 gap-[2px]">
+    <footer  className="footer grid xl:grid-cols-2 gap-[2px]">
       <div className="footer__white change-style xl:row-start-auto row-start-2   xl:justify-between xxs:gap-[62px]   xl:gap-[0px]" >
         <p className="xxs:block hidden xl:relative absolute xl:left-0 left-[34px] xl:top-0 top-1/2 xl:-translate-y-0 -translate-y-1/2 text-[18px] font-light col-start-1 col-end-3 whitespace-nowrap">© 2025 NVSERT</p>
 
@@ -275,7 +275,7 @@ const AppFooter = () => {
 
       <div className="footer__dark xxs:justify-start justify-center gap-[16px] xl:h-auto xxs:h-[135px] h-[96px]">
         <Image src={AudioLogo} alt="audiosector" className="xl:ml-[35px]" />
-        <div className="pl-[16px] border-l border-[#FFF] border-solid flex flex-col gap-[4px]">
+        <div ref={ref} className="pl-[16px] border-l border-[#FFF] border-solid flex flex-col gap-[4px]">
           <div className="xxs:h-[23px] h-[36px] overflow-hidden text-[#FFF]">
             <div ref={stepsRef}>
               {slides.map((item, i) => (

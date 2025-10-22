@@ -21,7 +21,6 @@ const ANIMATION_SETTINGS = {
     times: [0, 0.2, 0.5, 0.8, 1],
     openY: [0, 26, 0, 0, 0],
     closeY: [60, -6, 0, 0, 0],
-    opacity: [0, 1, 1, 1, 1],
 };
 
 interface ActionButtonProps {
@@ -175,20 +174,27 @@ const MainDocumentItem = memo(({
     useEffect(() => {
         if (!active) return;
 
-        controls.start({
-            y: ANIMATION_SETTINGS.openY,
-            opacity: ANIMATION_SETTINGS.opacity,
-            transition: {
-                duration: ANIMATION_SETTINGS.duration,
-                ease: ANIMATION_SETTINGS.ease,
-                times: ANIMATION_SETTINGS.times
-            }
-        });
+        const timer = setTimeout(() => {
+            controls.start({
+                y: ANIMATION_SETTINGS.openY,
+                transition: {
+                    duration: ANIMATION_SETTINGS.duration,
+                    ease: ANIMATION_SETTINGS.ease,
+                    times: ANIMATION_SETTINGS.times
+                }
+            });
+        }, 100);
 
         const el = wrapperRef.current;
+        let timerScroll: NodeJS.Timeout | null = null;
         if (el && !isInViewport(el)) {
-            setTimeout(() => scrollToElement(el), 200);
+            timerScroll = setTimeout(() => scrollToElement(el), 200);
         }
+
+        return () => {
+            if (timer) clearTimeout(timer);
+            if (timerScroll) clearTimeout(timerScroll);
+        };
     }, [active, controls]);
 
     const handleItemClick = (event: React.MouseEvent<HTMLDivElement>) => {

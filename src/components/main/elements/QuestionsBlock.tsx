@@ -18,21 +18,28 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
         times: [0, 0.2, 0.5, 0.8, 1], // Временные точки
         openY: [0, 26, 0, 0, 0], // Эффект отскока при открытии
         closeY: [60, -6, 0, 0, 0], // Эффект отскока при закрытии
-        opacity: [0, 1, 1, 1, 1],
+        opacity: [1, 1, 1, 1, 1],
     };
 
     useEffect(() => {
+        let timer: NodeJS.Timeout | null = null;
         if (active) {
-            controls.start({
-                y: defaultSettings.openY, // Используем openY для отскока
-                opacity: defaultSettings.opacity,
-                transition: {
-                    duration: defaultSettings.duration,
-                    ease: [0.34, 1.56, 0.64, 1] as const,
-                    times: defaultSettings.times
-                }
-            });
+             timer = setTimeout(() => {
+                controls.start({
+                    y: defaultSettings.openY, // Используем openY для отскока
+                    opacity: defaultSettings.opacity,
+                    transition: {
+                        duration: defaultSettings.duration,
+                        ease: [0.34, 1.56, 0.64, 1] as const,
+                        times: defaultSettings.times
+                    }
+                });
+            }, 100);
+
         }
+        return () => {
+            if (timer) clearTimeout(timer);
+        };
     }, [active]);
 
 
@@ -75,7 +82,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
 
                         <motion.div
                             animate={controls}
-                            initial={{ y: 20, opacity: 0 }}
+                            initial={{ y: 20 }}
                             className="questions-button-wrap tariff-wrap" ref={setWrapperRef}>
                             <button
                                 ref={setButtonRef} className='questions-button group tariff btnIconAn'>
