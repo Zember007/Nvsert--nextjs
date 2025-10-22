@@ -113,7 +113,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                 {/* Описание услуги */}
                 <div className="wrapper">
 
-                    <p className="xxs:ml-[30px] text-[#000000] mb-[10px] leading-[1.5] max-w-[1150px] font-light">
+                    <p className="xxs:ml-[30px] text-[#000000] text-[14px] xss:text-[16px] mb-[10px] leading-[1.5] max-w-[1150px] font-light">
                         {service.description}
                     </p>
 
