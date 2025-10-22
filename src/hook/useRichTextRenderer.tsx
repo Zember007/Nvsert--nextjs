@@ -189,7 +189,7 @@ export const useRichTextRenderer = () => {
                                 style={cardStyle}
                             >
                                 <div className="flex flex-col gap-[20px] w-full">
-                                    <h3 className="text-[20px] font-normal leading-[1.2] text-black">
+                                    <h3 className="xxs:text-[20px] text-[18px] font-normal leading-[1.2] text-black">
                                         {title}
                                     </h3>
                                     <div className="text-[16px] font-light leading-[1.3] text-black">
@@ -259,7 +259,7 @@ export const useRichTextRenderer = () => {
             if (trimmedLine.startsWith('# ')) {
                 flushList();
                 elements.push(
-                    <h3 key={`subheading-${index}`} className="text-[20px] mt-[9px] font-normal tracking-[-0.01em] text-black">
+                    <h3 key={`subheading-${index}`} className="xxs:text-[20px] text-[18px] mt-[9px] font-normal tracking-[-0.01em] text-black">
                         {trimmedLine.substring(2)}
                     </h3>
                 );
