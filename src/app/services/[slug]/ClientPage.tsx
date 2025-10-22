@@ -41,9 +41,9 @@ const ContentBlockRenderer: React.FC<{
                     className="flex justify-center group items-center gap-[10px] pb-[10px] border-b border-[#93969d80] cursor-pointer"
                     onClick={onToggle}
                 >
-                    <h2 className="text-[24px] group-active:scale-[0.98] transition-all duration-100 font-light   tracking-[0] text-[#34446D] flex-1">
+                    <h4 className="group-active:scale-[0.98] transition-all duration-100  text-[#34446D] flex-1">
                         {heading}
-                    </h2>
+                    </h4>
                     <svg
                         className={`transition-transform duration-100 ${!isExpanded ? 'rotate-180' : ''}`}
                         width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -195,7 +195,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                 <div className="wrapper pt-[50px]">
                     <div className="flex gap-[40px]">
                         <div className="flex flex-col gap-[50px] flex-1">
-                            <h1 className="text-[48px] leading-[50px] !m-0 font-light tracking-[-0.04em] text-black -translate-x-[4px] m:text-left text-center">
+                            <h1 className="!m-0  -translate-x-[4px] m:text-left text-center">
                                 {filterPrepositions(currentService?.title || '')}
                             </h1>
 

@@ -90,7 +90,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                             </defs>
                         </svg>
 
-                        <h2 className={`line-after leading-[0.75] after:!bottom-[-5px] !m-0 tracking-normal xl:!text-[24px] xxs:text-[20px] text-[18px] font-light  ${hover  && 'active'}  transition-all duration-200 translate-y-[1px]`}>{service.title}</h2>
+                        <h4 className={`line-after after:!bottom-[-5px] !m-0   ${hover  && 'active'}  transition-all duration-200 translate-y-[1px]`}>{service.title}</h4>
                     </div>
                     </div>
                     <div className={`ml-[25px] xxxxl:mt-0 mt-[25px] xxxxl:grid flex gap-[20px] xxxxl:grid-cols-4 items-center flex-wrap transition-all duration-100 overflow-hidden ${isExpanded ? 'opacity-0 xxxxl:max-h-[100%] max-h-0 translate-y-full !mt-0' : 'opacity-100  translate-y-0 xxxxl:max-h-[100%] max-h-[350px]'}`}>
@@ -109,11 +109,11 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                 </div>
             </button>
 
-            <div className={`${!isExpanded ? 'max-h-[0px]' : 'max-h-[2220px] m:pb-[100px] pb-[80px]'} transition-all duration-200 overflow-hidden  `}>
+            <div className={`${!isExpanded ? 'max-h-[0px]' : 'max-h-[2370px] m:pb-[100px] pb-[80px]'} transition-all duration-200 overflow-hidden  `}>
                 {/* Описание услуги */}
                 <div className="wrapper">
 
-                    <p className="ml-[30px] text-[#000000] mb-[10px] leading-relaxed max-w-[1150px]">
+                    <p className="xxs:ml-[30px] text-[#000000] mb-[10px] leading-[1.5] max-w-[1150px] font-light">
                         {service.description}
                     </p>
 

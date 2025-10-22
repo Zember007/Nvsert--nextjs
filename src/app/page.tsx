@@ -31,7 +31,7 @@ export default function Home() {
 
 
   return (
-    <div className="main text-[#000] overflow-hidden  relative transparent-header">
+    <div className="main text-[#000] overflow-hidden  relative leading-page">
        <AppMainIntro />
 
       <AppMainDocuments />
