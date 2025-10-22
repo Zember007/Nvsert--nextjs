@@ -770,13 +770,16 @@ input:-webkit-autofill {
 
 .map-company > path {
         transition: all 0.1s ease;
-        &:hover {
+        &:hover  {
             fill: #34446D;
             fill-opacity: 0.5;
-            stroke: #000;
-            stroke-width: 1;
         }
+}
 
-        
-    
+.map-company > g  {
+    transition: all 0.1s ease;
+    &:hover > path {
+        fill: #34446D;
+        fill-opacity: 0.5;
+    }
 }
