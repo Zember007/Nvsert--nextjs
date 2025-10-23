@@ -203,9 +203,9 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                             <div className="flex gap-[40px] items-stretch m:flex-row flex-col">
                                 {/* Left Column */}
                                 <div className="m:w-[250px] relative">
-                                    <div className="sticky xl:top-[116px] top-[106px] flex flex-col gap-[40px]">
+                                    <div className="sticky xl:top-[116px] top-[106px] flex flex-col xl:gap-[40px] gap-[20px]">
 
-                                        <div className="flex flex-col gap-[40px] m:flex-col-reverse">
+                                        <div className="flex flex-col gap-[20px] m:flex-col-reverse">
                                             <div className="w-[250px] mx-auto">
                                                 <ServiceCard
                                                     onClick={() => { document.getElementById('service-' + currentService?.id)?.click() }}
@@ -259,18 +259,19 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                             )}
                                         </div>
 
-                                        <div className="xl:hidden block">
-                                            <DotNavList
-                                                position='left'
-                                                items={currentService?.content?.map(item => ({ id: item.id, title: item.heading }))}
-                                            />
-                                        </div>
+
                                     </div>
                                 </div>
 
                                 {/* Right Column */}
                                 <div className="flex-1 flex flex-col items-center gap-[50px]">
                                     {/* Dynamic Content Blocks */}
+                                    <div className="xl:hidden block w-full">
+                                        <DotNavList
+                                            position={null}
+                                            items={currentService?.content?.map(item => ({ id: item.id, title: item.heading }))}
+                                        />
+                                    </div>
                                     <div className="w-full flex flex-col items-center space-y-[50px]">
                                         {sortedContentBlocks.map((block, index) => (
                                             <React.Fragment key={block.id}>
