@@ -6,6 +6,11 @@ strong {
 
 p {
 	margin: 0;
+	@include text-base-post;
+}
+
+.text-base-post {
+	@include text-base-post;
 }
 
 a:not([class]) {

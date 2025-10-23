@@ -214,7 +214,7 @@ export const useRichTextRenderer = () => {
                 elements.push(
                     <ul key={`list-${listKey++}`} className="list-disc -my-[5px]">
                         {currentListItems.map((item, idx) => (
-                            <li key={idx} className="xxs:text-[16px] text-[14px] font-light leading-[1.5] text-black ml-[25px]">
+                            <li key={idx} className="font-light ml-[25px] text-base-post">
                                 {item}
                             </li>
                         ))}
@@ -270,7 +270,7 @@ export const useRichTextRenderer = () => {
             flushList();
             if (trimmedLine) {
                 elements.push(
-                    <p key={`p-${index}`} className="xxs:text-[16px] text-[14px] -my-[5px] font-light leading-[1.5] text-black">
+                    <p key={`p-${index}`} className="-my-[5px]">
                         {trimmedLine}
                     </p>
                 );
