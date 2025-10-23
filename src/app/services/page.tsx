@@ -129,6 +129,7 @@ const ServicesContent = () => {
             <div className="flex flex-col">
                 {services.map((service, index) => (
                     <ServiceItem
+                        last={index === services.length - 1}
                         hover={hover}
                         active={active}
                         key={index}

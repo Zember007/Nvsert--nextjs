@@ -20,6 +20,7 @@ interface ServiceItemProps {
     onToggle: (index: number) => void;
     active: boolean;
     hover: boolean;
+    last: boolean;
 }
 
 const ANIMATION_SETTINGS = {
@@ -33,7 +34,7 @@ const ANIMATION_SETTINGS = {
     opacity: [0, 1, 1, 1, 1],
 };
 
-const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, onToggle, active, hover }) => {
+const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, onToggle, active, hover, last }) => {
 
     const controls = useAnimation();
 
@@ -65,7 +66,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
     }
 
     return (
-        <div className={`overflow-hidden relative ${index === 0 ? 'border-t' : ''} border-[#93969d80] border-b px-[2px]`}>
+        <div className={`overflow-hidden relative ${index === 0 ? 'border-t' : ''} border-[#93969d80] ${last ? '' : 'border-b'} px-[2px]`}>
             {/* Заголовок спойлера */}
 
             <div id={service.name} className='absolute top-[-94px] left-0 w-full'></div>
@@ -109,7 +110,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                 </div>
             </button>
 
-            <div className={`${!isExpanded ? 'max-h-[0px]' : 'max-h-[2370px] m:pb-[100px] pb-[80px]'} transition-all duration-200 overflow-hidden  `}>
+            <div className={`${!isExpanded ? 'max-h-[0px]' : `max-h-[2370px] m:pb-[100px]  ${last ? 'pb-0' : 'pb-[80px]'}`} transition-all duration-200 overflow-hidden  `}>
                 {/* Описание услуги */}
                 <div className="wrapper">
 
@@ -118,7 +119,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                     </p>
 
                     {/* Сертификаты */}
-                    <div className="flex l:gap-x-[110px] gap-x-[30px] gap-y-[30px] flex-wrap py-[20px] m:justify-start  justify-center">
+                    <div className={`flex l:gap-x-[110px] gap-x-[30px] gap-y-[30px] flex-wrap py-[20px] ${last ? 'pb-0' : ''} m:justify-start  justify-center`}>
                         {service.items.map((certificate: NavigationItem, certIndex: number) => (
                             <motion.div
                                 key={certIndex}
