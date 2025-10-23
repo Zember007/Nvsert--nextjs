@@ -76,6 +76,21 @@ const DotNavList: React.FC<{
             active: activeBlockId === item.id,
         })) || [];
     }, [items, activeBlockId]);
+
+    const scrollToElement = (item: DotNavItem, event: React.MouseEvent<HTMLAnchorElement>) => {
+        event.preventDefault();
+
+        const target = event.target as HTMLAnchorElement;
+        const href = target.href;
+        const id = href.split('#')[1];
+        const element = document.getElementById(id);
+        if(!element) return;
+        setActiveBlockId(item.id);
+        window.scrollTo({
+            top: (element?.offsetTop || 100) - 50,
+            behavior: 'smooth'
+        });
+    };
     return (
         <AppCollapsibleList
             position={position || 'right'}
@@ -87,6 +102,7 @@ const DotNavList: React.FC<{
                 <a
                     href={'#block-' + item.id}
                     key={index}
+                    onClick={(event) => scrollToElement(item, event)}
                     className={`flex items-center gap-[24px]  cursor-pointer text-left group`}
                 >
                     <div className={`pointer-events-none flex items-center justify-center min-w-[16px] w-[16px] h-[16px] relative transition-all duration-100 group-active:left-[15px] ${item.active ? 'left-0' : 'left-[15px]'}`}>
