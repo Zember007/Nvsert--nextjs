@@ -55,11 +55,11 @@ h6 {
 }
 
 h1 {
-	@include header-h-2;
+	@include header-h-1;
 }
 
 .leading-page h1 {
-	@include header-h-1;
+	@include header-h-1-primary;
 	margin: -0.85% 0;
 }
 

@@ -1,4 +1,4 @@
-@mixin header-h-1 {
+@mixin header-h-1-primary {
   font-family: 'Rubik', sans-serif;
   font-size: 64px;
   font-weight: 300;
@@ -9,6 +9,31 @@
 
   @media (max-width: $media-l) {
     font-size: 48px;
+    letter-spacing: -2px;
+  }
+
+  @media (max-width: $media-xxs) {
+    font-size: 28px;
+    letter-spacing: -1px;
+  }
+
+  @media (max-width: $media-xs) {
+    font-size: 24px;
+    letter-spacing: -1px;
+  }
+}
+
+@mixin header-h-1 {
+  font-family: 'Rubik', sans-serif;
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  font-style: normal;
+  text-decoration: none;
+
+  @media (max-width: $media-l) {
+    font-size: 40px;
     letter-spacing: -2px;
   }
 
