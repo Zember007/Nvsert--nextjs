@@ -1,5 +1,99 @@
 
 import { useState } from 'react';
+import Image from 'next/image';
+
+// Mapping of region names to coat of arms files
+const coatOfArmsMapping: { [key: string]: string } = {
+    'Калининградская область': '/gerbs/Kaliningrad_Oblast.svg',
+    'Московская область': '/gerbs/Moscow_Oblast_(large).svg',
+    'Москва': '/gerbs/Moscow.svg',
+    'Калужская область': '/gerbs/Kaluga_Oblast.svg',
+    'Орловская область': '/gerbs/Oryol_Oblast.svg',
+    'Владимирская область': '/gerbs/Vladimiri_Oblast.svg',
+    'Тульская область': '/gerbs/Tula_Oblast_(large).svg',
+    'Тамбовская область': '/gerbs/Tambov_Oblast.svg',
+    'Костромская область': '/gerbs/Kostroma_Oblast.svg',
+    'Ивановская область': '/gerbs/Ivanovo_Oblast.svg',
+    'Рязанская область': '/gerbs/Ryazan_Oblast.svg',
+    'Липецкая область': '/gerbs/Lipetsk_oblast.svg',
+    'Ростовская область': '/gerbs/Rostov_Oblast.svg',
+    'Республика Калмыкия': '/gerbs/Kalmykia.svg',
+    'Краснодарский край': '/gerbs/Krasnodar_Krai.svg',
+    'Республика Адыгея': '/gerbs/Adygea.svg',
+    'Воронежская область': '/gerbs/Voronezh_Oblast.svg',
+    'Пензенская область': '/gerbs/Penza_Oblast.svg',
+    'Нижегородская область': '/gerbs/Nizhny_Novgorod_Region.svg',
+    'Республика Мордовия': '/gerbs/Mordovia.svg',
+    'Чувашская Республика': '/gerbs/Chuvashia.svg',
+    'Республика Марий Эл': '/gerbs/Mari_El.svg',
+    'Удмуртская Республика': '/gerbs/Udmurtia.svg',
+    'Республика Татарстан': '/gerbs/Tatarstan.svg',
+    'Волгоградская область': '/gerbs/Volgograd_oblast.svg',
+    'Ульяновская область': '/gerbs/Ulyanovskaya oblast.svg',
+    'Саратовская область': '/gerbs/Saratov_oblast.svg',
+    'Ярославская область': '/gerbs/Yaroslavl_Oblast.svg',
+    'Тверская область': '/gerbs/Tver_oblast.svg',
+    'Новгородская область': '/gerbs/Novgorod_Oblast.svg',
+    'Ленинградская область': '/gerbs/Leningrad_Oblast.svg',
+    'Санкт-Петербург': '/gerbs/Saint_Petersburg.svg',
+    'Республика Крым': '/gerbs/Crimea.svg',
+    'Севастополь': '/gerbs/Sevastopol.svg',
+    'Белгородская область': '/gerbs/Belgorod_Oblast.svg',
+    'Курская область': '/gerbs/Kursk_oblast.svg',
+    'Смоленская область': '/gerbs/Smolensk_oblast.svg',
+    'Брянская область': '/gerbs/Bryansk_Oblast.svg',
+    'Кировская область': '/gerbs/Kirov_Region.svg',
+    'Вологодская область': '/gerbs/Vologda_oblast.svg',
+    'Псковская область': '/gerbs/Pskov_Oblast_(2018).svg',
+    'Ставропольский край': '/gerbs/Stavropol_Krai.svg',
+    'Карачаево-Черкесская Республика': '/gerbs/Karachay-Cherkessia.svg',
+    'Кабардино-Балкарская Республика': '/gerbs/Kabardino-Balkaria.svg',
+    'Республика Северная Осетия - Алания': '/gerbs/Ossetien.svg',
+    'Республика Ингушетия': '/gerbs/Ingushetia.svg',
+    'Чеченская Республика': '/gerbs/Chechnya.svg',
+    'Республика Дагестан': '/gerbs/Dagestan.svg',
+    'Астраханская область': '/gerbs/Astrakhan_Oblast.svg',
+    'Луганская Народная Республика': '/gerbs/Lugansk_People\'s_Republic.svg',
+    'Донецкая Народная Республика': '/gerbs/Donetsk_People\'s_Republic.svg',
+    'Запорожская область': '/gerbs/Zaporozhskaja_oblaste_2023.svg',
+    'Херсонская область': '/gerbs/Kherson_region.svg',
+    'Пермский край': '/gerbs/Perm_Krai.svg',
+    'Самарская область': '/gerbs/Samara_Oblast.svg',
+    'Республика Башкортостан': '/gerbs/Bashkortostan.svg',
+    'Оренбургская область': '/gerbs/Orenburg_Oblast.svg',
+    'Челябинская область': '/gerbs/Chelyabinsk_Oblast.svg',
+    'Свердловская область': '/gerbs/Sverdlovsk_oblast.svg',
+    'Архангельская область': '/gerbs/Arkhangelsk_oblast.svg',
+    'Республика Карелия': '/gerbs/Republic_of_Karelia.svg',
+    'Мурманская область': '/gerbs/Murmanskaya oblast.svg',
+    'Республика Коми': '/gerbs/Komi_Republic.svg',
+    'Курганская область': '/gerbs/Kurgan_Oblast.svg',
+    'Тюменская область': '/gerbs/Tyumen_Oblast.svg',
+    'Ханты-Мансийский автономный округ - Югра': '/gerbs/Yugra_(Khanty-Mansia).svg',
+    'Омская область': '/gerbs/Omsk_Oblast.svg',
+    'Ямало-Ненецкий автономный округ': '/gerbs/Yamal_Nenetsia.svg',
+    'Ненецкий авт. округ': '/gerbs/Nenets_Autonomous_Okrug.svg',
+    'Новосибирская область': '/gerbs/Novosibirsk_oblast.svg',
+    'Кемеровская область': '/gerbs/Kemerovo_Oblast.svg',
+    'Томская область': '/gerbs/Tomsk_Oblast.svg',
+    'Алтайский край': '/gerbs/Altai_Krai.svg',
+    'Республика Алтай': '/gerbs/Altai_Republic.svg',
+    'Республика Хакасия': '/gerbs/Khakassia.svg',
+    'Республика Тыва': '/gerbs/Tuva.svg',
+    'Красноярский край': '/gerbs/Krasnoyarsk_Krai.svg',
+    'Республика Саха (Якутия)': '/gerbs/Sakha_(Yakutia).svg',
+    'Магаданская область': '/gerbs/Magadan_oblast.svg',
+    'Чукотский автономный округ': '/gerbs/Chukotka.svg',
+    'Камчатский край': '/gerbs/Kamchatka_Krai.svg',
+    'Приморский край': '/gerbs/Primorsky_Krai.svg',
+    'Хабаровский край': '/gerbs/Khabarovsk_Krai.svg',
+    'Амурская область': '/gerbs/Amur_Oblast.svg',
+    'Сахалинская область': '/gerbs/Sakhalin_Oblast.svg',
+    'Еврейская автономная область': '/gerbs/Jewish_Autonomous_Oblast.svg',
+    'Забайкальский край': '/gerbs/Zabaykalsky_Krai.svg',
+    'Иркутская область': '/gerbs/Irkutsk_Oblast.svg',
+    'Республика Бурятия': '/gerbs/Buryatia.svg'
+};
 
 const Map = () => {
     const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
@@ -33,7 +127,20 @@ const Map = () => {
                         transform: 'translateX(-50%)'
                     }}
                 >
-                    <span className="text-[18px] font-light">{hoveredRegion}</span>
+                    <div className="flex items-center gap-3">
+                        {coatOfArmsMapping[hoveredRegion] && (
+                            <div className="w-[32px] h-[32px] flex-shrink-0">
+                                <Image
+                                    src={coatOfArmsMapping[hoveredRegion]}
+                                    alt={`Герб ${hoveredRegion}`}
+                                    width={32}
+                                    height={32}
+                                    className="h-full w-full"
+                                />
+                            </div>
+                        )}
+                        <span className="text-[18px] font-light">{hoveredRegion}</span>
+                    </div>
                 </div>
             )}
 
