@@ -31,9 +31,7 @@ export const useRichTextRenderer = () => {
                         const bigTitleMatch = block.match(/##\s*(.+?)\s*#/);
                         const smallTitleMatch = block.match(/^#\s+(.+?)$/m);
 
-                        // Ищем число в начале (если есть)
-                        const numberMatch = block.match(/^(\d+%?\+?)/);
-                        const number = numberMatch ? numberMatch[1] : '';
+       
 
                         // Извлекаем описание (текст после заголовков)
 
@@ -56,24 +54,20 @@ export const useRichTextRenderer = () => {
                                     <path d="M15 0L16.1889 7.2177C16.7462 10.6016 19.3984 13.2538 22.7823 13.8111L30 15L22.7823 16.1889C19.3984 16.7462 16.7462 19.3984 16.1889 22.7823L15 30L13.8111 22.7823C13.2538 19.3984 10.6016 16.7462 7.2177 16.1889L0 15L7.2177 13.8111C10.6016 13.2538 13.2538 10.6016 13.8111 7.2177L15 0Z" fill="#93969D" fillOpacity="0.5" />
                                 </svg>
                                 <div className="flex flex-col gap-[15px] w-full">
-                                    {number && (
-                                        <div className="xxs:text-[48px] text-[40px] font-bold leading-[1] text-[#34446D]">
-                                            {number}
-                                        </div>
-                                    )}
+                                 
                                     {bigTitleMatch && (
-                                        <h3 className="xxs:text-[48px] text-[40px] font-light leading-[1] text-[#34446D]">
+                                        <h2 className="text-[#34446D]">
 
                                             {bigTitleMatch[1].trim()}
-                                        </h3>
+                                        </h2>
                                     )}
                                     {smallTitleMatch && (
-                                        <h4 className="xxs:text-[20px] text-[18px] font-normal leading-[1.3] text-black">
+                                        <h6 className="leading-[1.3] text-black">
                                             {smallTitleMatch[1].trim()}
-                                        </h4>
+                                        </h6>
                                     )}
                                     {description && (
-                                        <div className="xxs:text-[16px] text-[14px] font-light leading-[1.4] text-black">
+                                        <div>
                                             {processContent(description)}
                                         </div>
                                     )}
@@ -189,10 +183,10 @@ export const useRichTextRenderer = () => {
                                 style={cardStyle}
                             >
                                 <div className="flex flex-col gap-[20px] w-full">
-                                    <h3 className="xxs:text-[20px] text-[18px] font-normal leading-[1.2] text-black">
+                                    <h6>
                                         {title}
-                                    </h3>
-                                    <div className="xxs:text-[16px] text-[14px] font-light leading-[1.3] text-black">
+                                    </h6>
+                                    <div>
                                         {processContent(content)}
                                     </div>
                                 </div>
@@ -259,9 +253,9 @@ export const useRichTextRenderer = () => {
             if (trimmedLine.startsWith('# ')) {
                 flushList();
                 elements.push(
-                    <h3 key={`subheading-${index}`} className="xxs:text-[20px] text-[18px] mt-[9px] font-normal tracking-[-0.01em] text-black">
+                    <h6 key={`subheading-${index}`} className="mt-[9px] font-normal text-black">
                         {trimmedLine.substring(2)}
-                    </h3>
+                    </h6>
                 );
                 return;
             }
