@@ -162,7 +162,7 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                                                             {item.img?.url && (
                                                                 <Image src={'https://test11.audiosector.ru/cp' + item.img.url} alt="document" width={43} height={60} />
                                                             )}
-                                                            <h6>{filterPrepositions(item.title)}</h6>
+                                                            <span className='text-[20px] font-light'>{filterPrepositions(item.title)}</span>
                                                         </div>
                                                         {item.items && (
                                                             <Image src={ArrowIcon} alt="more" width={20} height={20} />
@@ -179,7 +179,7 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                                                             {'img' in item && item.img?.url &&
                                                                 <Image src={'https://test11.audiosector.ru/cp' + item.img.url} alt="document" width={43} height={60} />
                                                             }
-                                                            <h6>{item.title}</h6>
+                                                            <span className='text-[20px] font-light'>{item.title}</span>
                                                         </div>
                                                         {item.items && (
                                                             <Image
@@ -202,9 +202,9 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                                 <Link
                                     onClick={() => closeMenu()}
                                     href="/services"
-                                    className={`header__menu-mob-item text-[#93969D] text-[20px] before:hidden`}
+                                    className={`header__menu-mob-item text-[#93969D] before:hidden`}
                                 >
-                                    Полный список услуг
+                                    <span className='text-[20px] font-light'>Полный список услуг</span>
                                 </Link>
                             </div>
                         )}
