@@ -1,5 +1,4 @@
 'use client';
-import '@/assets/styles/cost-calc.scss'
 import AppCalcFormWrapper from '@/components/calculation/AppCalcFormWrapper';
 import AppCalcProgress from '@/components/calculation/AppCalcProgress';
 import { updateActionDiscounts, updateActionDocuments } from '@/store/documents';
