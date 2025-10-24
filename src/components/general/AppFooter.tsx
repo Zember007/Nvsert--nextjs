@@ -278,10 +278,10 @@ const AppFooter = () => {
         className="footer__dark m:justify-start justify-center gap-[16px] xl:h-auto m:h-[135px] h-[96px]">
         <Image src={AudioLogo} alt="audiosector" className="xl:ml-[35px]" />
         <div className="pl-[16px] border-l border-[#FFF] border-solid flex flex-col gap-[4px]">
-          <div className="s:h-[23px] h-[60px] overflow-hidden text-[#FFF]">
+          <div className="xxs:h-[23px] h-[60px] overflow-hidden text-[#FFF]">
             <div ref={stepsRef}>
               {slides.map((item, i) => (
-                <p key={i} className="font-light text-1 font-light s:h-[23px] h-[60px] flex items-center">
+                <p key={i} className="font-light text-1 font-light xxs:h-[23px] h-[60px] flex items-center">
                   {item}
                 </p>
               ))}
