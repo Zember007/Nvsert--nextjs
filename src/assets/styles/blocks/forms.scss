@@ -449,9 +449,9 @@ input:-webkit-autofill:focus {
   }
 
   &__desc {
-    @apply text-[#000] text-[12px] s:text-[14px]  my-[-3px];
-    line-height: 1.2;
-    letter-spacing: -0.5px;
+    @include text-5;
+    @apply text-[#000] my-[-3px];
+    letter-spacing: -0.5px !important;
   }
 
   &__button {
