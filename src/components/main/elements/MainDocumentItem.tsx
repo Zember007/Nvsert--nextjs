@@ -59,10 +59,10 @@ ActionButton.displayName = 'ActionButton';
 const DocumentList = memo(({ documentsList, listHidden, setListHidden, hiddenList }: DocumentListProps) => (
     <div className="document__list">
         <div className='document__list-item'>
-            <p className={`document-list-item-title large`}>
+            <p className={`text-1`}>
                 Необходимые документы для оформления
             </p>
-            <ul className='document__list-item-ul  arial'>
+            <ul className='document__list-item-ul text-2'>
                 {documentsList.map((list, index) => (
 
                     <li
@@ -247,12 +247,12 @@ const MainDocumentItem = memo(({
                         className={`document__navigation-bg document__navigation-wrap container-scale transition-scale backface-hidden ${active ? 'active' : 'text-[#000]'} group-active/window:text-[#FFF]   `}
                     >
 
-                        <h3 className="document__title">
+                        <h6 className="document__title">
                             {title}
-                        </h3>
+                        </h6>
                         <div className="document__desc-wrap">
-                            <p className="document__desc">{duration}</p>
-                            <p className="document__desc">{price}</p>
+                            <h6 className="document__desc">{duration}</h6>
+                            <h6 className="document__desc">{price}</h6>
 
 
                             <svg
@@ -352,8 +352,8 @@ const MainDocumentItem = memo(({
 
                             <div ref={containerPhotoRef} className="document-photo-wrapper">
                                 <div className="document-content-column">
-                                    <div className="document-text-content arial">
-                                        <p className='document-description whitespace-pre-line'>
+                                    <div className="document-text-content">
+                                        <p className='document-description whitespace-pre-line '>
                                             {filterPrepositions(content)}
                                         </p>
 

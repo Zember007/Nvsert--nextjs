@@ -137,7 +137,7 @@
   }
 
   &__desc {
-    @apply  translate-y-[-1px] text-[14px] xss:text-[18px] xl:text-[20px] transition-all duration-200  tracking-normal;
+    @apply  translate-y-[-1px] transition-all duration-200;
 
     &-wrap {
       @apply hidden will-change-transform *:will-change-transform m:w-[41%] m:grid grid-cols-[0.76fr_1fr_auto] items-center justify-between xl:justify-items-start justify-items-end xl:pr-0 pr-[18px];
@@ -145,7 +145,7 @@
   }
 
   &__title {
-    @apply m:translate-y-[-1px] transition-all duration-200  will-change-transform m:w-[59%] pl-[63px] text-[16px] xss:text-[18px] m:text-[20px] m:font-normal font-light  tracking-normal;
+    @apply m:translate-y-[-1px] transition-all duration-200  will-change-transform m:w-[59%] pl-[63px]  font-normal;
   }
 
   &__small-img {
@@ -180,7 +180,7 @@
       @apply flex gap-[10px] flex-col items-start;
 
       &-ul {
-        @apply  pl-[20px] flex flex-col gap-[6px] text-[14px] xss:text-[16px];
+        @apply  pl-[20px] flex flex-col gap-[6px];
 
         li {
           position: relative;

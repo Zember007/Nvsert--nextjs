@@ -1,5 +1,4 @@
 'use client';
-import '@/assets/styles/article.scss'
 import AppClassSpoiler from "@/components/class/AppClassSpoiler";
 import AppBreadcrumbs from "@/components/general/AppBreadcrumbs";
 import { notFound, usePathname, useSearchParams } from "next/navigation";

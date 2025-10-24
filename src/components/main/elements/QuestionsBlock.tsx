@@ -63,7 +63,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                         <p className={`questions-number-text ${active ? 'active' : ''} l:group-hover:text-[50px] group-active:duration-[0] group-active:text-[#FFF]`}>{number}</p>
                     </div>
                     <div className={`questions-content-container ${active ? 'active' : ''} transition-scale group-active:scale-[0.99]`}>
-                        <h3 className={`questions-title ${active ? 'active' : ''} group-active:duration-[0] group-active:text-[#FFF]`}>{title}</h3>
+                        <h6 className={`questions-title ${active ? 'active' : ''} group-active:duration-[0] group-active:text-[#FFF]`}>{title}</h6>
 
                         <svg
                             className={`questions-arrow-icon ${active ? 'active' : ''}`}
@@ -77,7 +77,8 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                 </div>
                 <div className={`questions-content-wrapper ${active ? 'active' : ''}`}>
                     <div className="questions-inner-content">
-                        <div>{processContent(text)}</div>
+                        <div
+                        >{processContent(text, true)}</div>
 
 
                         <motion.div

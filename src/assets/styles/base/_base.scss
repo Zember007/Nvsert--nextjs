@@ -143,10 +143,7 @@ button,
       rgba(244, 247, 251, 0.4)),
     #ffffff;
 
-  @include media-s-max {
-    //padding-top: 52px;
-    //padding-bottom: 48px;
-  }
+
 
   &>.content {
     flex: 1 0 auto;
@@ -176,7 +173,6 @@ button,
 }
 
 .wrapper {
-  overflow-x: hidden;
   height: 100%;
   position: relative;
   width: 100%;

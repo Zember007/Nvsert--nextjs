@@ -64,7 +64,7 @@ const ServicesContent = () => {
             {/* Хлебные крошки */}
             <AppBreadcrumbs root={'/'} breadcrumbs={[{ id: 2, title: 'Все услуги', full_slug: '/services' }]} />
 
-            <div className="flex items-center m:justify-between justify-center wrapper gap-[20px] m:!flex-row pt-[50px] pb-[50px]">
+            <div className="flex items-center m:justify-between justify-center wrapper overflow-hidden gap-[20px] m:!flex-row pt-[50px] pb-[50px]">
                 <h1 className="text-center -translate-x-[4px] translate-y-[1px]">
                     Полный список услуг
                 </h1>

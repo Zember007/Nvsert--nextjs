@@ -1,6 +1,5 @@
 'use client';
 
-import '@/assets/styles/article.scss'
 import AppSpoilerItem from '../../components/general/AppSpoilerItem';
 import AppDefaultForm from '../../components/forms/AppDefaultForm';
 import AppBreadcrumbs from '@/components/general/AppBreadcrumbs';

@@ -125,7 +125,7 @@ const AppFooter = () => {
   return (
     <footer className="footer grid xl:grid-cols-2 gap-[2px]">
       <div className="footer__white change-style xl:row-start-auto row-start-2   xl:justify-between m:gap-[62px]   xl:gap-[0px]" >
-        <p className="m:block hidden xl:relative absolute xl:left-0 left-[34px] xl:top-0 top-1/2 xl:-translate-y-0 -translate-y-1/2 text-[18px] font-light col-start-1 col-end-3 whitespace-nowrap">© 2025 NVSERT</p>
+        <p className="m:block hidden xl:relative absolute xl:left-0 left-[34px] xl:top-0 top-1/2 xl:-translate-y-0 -translate-y-1/2 text-1 font-light col-start-1 col-end-3 whitespace-nowrap">© 2025 NVSERT</p>
 
         <div className=" m:w-auto w-full xl:mx-0 mx-auto m:max-w-full max-w-[280px]  flex gap-[10px] items-start m:flex-row flex-col ">
           {menuItems.map((item, i) => (
@@ -267,9 +267,9 @@ const AppFooter = () => {
         </div>
       </div>
 
-      <div className="m:!hidden footer__white flex-col gap-[5.5px] !p-[18px] h-[96px] text-[14px]">
-        <span>«ЦЕНТР СТАНДАРТИЗАЦИИ»</span>
-        <span>ИНН 6027189146</span>
+      <div className="m:!hidden footer__white flex-col gap-[5.5px] !p-[18px] h-[96px] text-2">
+        <span className="font-normal">«ЦЕНТР СТАНДАРТИЗАЦИИ»</span>
+        <span className="font-normal">ИНН 6027189146</span>
         <span className="font-light">© 2025 NVSERT</span>
       </div>
 
@@ -278,12 +278,12 @@ const AppFooter = () => {
         className="footer__dark m:justify-start justify-center gap-[16px] xl:h-auto m:h-[135px] h-[96px]">
         <Image src={AudioLogo} alt="audiosector" className="xl:ml-[35px]" />
         <div className="pl-[16px] border-l border-[#FFF] border-solid flex flex-col gap-[4px]">
-          <div className="m:h-[23px] h-[36px] overflow-hidden text-[#FFF]">
+          <div className="s:h-[23px] h-[36px] overflow-hidden text-[#FFF]">
             <div ref={stepsRef}>
               {slides.map((item, i) => (
-                <h3 key={i} className="font-light m:text-[18px] text-[14px]">
+                <p key={i} className="font-light text-1 font-light">
                   {item}
-                </h3>
+                </p>
               ))}
             </div>
           </div>

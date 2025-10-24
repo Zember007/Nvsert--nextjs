@@ -2,7 +2,6 @@
 @import 'base/variables';
 @import 'base/mixins';
 
-@import "blocks/modals/pswp";
 @import "blocks/modals/modals";
 
 .questions {
@@ -425,7 +424,6 @@
 	}
 
 	&-success {
-		@include card-normal();
 		display: flex;
 		align-items: center;
 		border-radius: 16px;

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 
 export const useRichTextRenderer = () => {
-    const processContent = (text: string): React.ReactNode[] => {
+    const processContent = (text: string, small?: boolean): React.ReactNode[] => {
 
 
         // Обработка [slider_start] ... [slider_end]
@@ -214,7 +214,7 @@ export const useRichTextRenderer = () => {
                 elements.push(
                     <ul key={`list-${listKey++}`} className="list-disc -my-[5px]">
                         {currentListItems.map((item, idx) => (
-                            <li key={idx} className="font-light ml-[25px] text-base-post">
+                            <li key={idx} className={`font-light ml-[25px] ${small ? 'text-2' : 'text-base-post'}`}>
                                 {item}
                             </li>
                         ))}
@@ -229,7 +229,7 @@ export const useRichTextRenderer = () => {
 
             if (!trimmedLine) {
                 flushList();
-                elements.push(<div key={`br-${index}`} className='h-[15px]' />);
+                elements.push(<div key={`br-${index}`} className={`${small ? 'h-[20px]' : 'h-[15px]'}`} />);
                 return;
             }
 
@@ -270,7 +270,7 @@ export const useRichTextRenderer = () => {
             flushList();
             if (trimmedLine) {
                 elements.push(
-                    <p key={`p-${index}`} className="-my-[5px]">
+                    <p key={`p-${index}`} className={`-my-[5px] ${small ? 'text-2' : 'text-base-post'}`}>
                         {trimmedLine}
                     </p>
                 );

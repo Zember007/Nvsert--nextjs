@@ -17,7 +17,7 @@
 }
 
 .overlay-title {
-  @apply xl:h-[50px] xss:h-[65px] h-[60px] xl:rounded-[6px] rounded-b-[5px] border-[#93969D] border-solid xl:border border-b border-0 s:text-[20px] xss:text-[18px] text-[16px] text-[#000] flex items-center justify-center xl:p-[10px] p-[15px] w-full;
+  @apply xl:h-[50px] xss:h-[65px] h-[60px] font-light xl:rounded-[6px] rounded-b-[5px] border-[#93969D] border-solid xl:border border-b border-0  flex items-center justify-center xl:p-[10px] p-[15px] w-full;
 
   --color: rgba(25, 24, 35, 0.4);
 

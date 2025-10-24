@@ -192,7 +192,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
 
             {/* Main Content */}
             {slug && currentService &&
-                <div className="wrapper pt-[50px]">
+                <div className="wrapper pt-[50px] ">
                     <div className="flex gap-[40px]">
                         <div className="flex flex-col m:gap-[50px] gap-[40px] flex-1">
                             <h1 className="!m-0  -translate-x-[4px] m:text-left text-center">

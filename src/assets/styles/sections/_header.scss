@@ -95,7 +95,6 @@
 
 		&__link {
 			@include transition();
-			@include resetBtnStyles;
 			display: flex;
 			align-items: center;
 			gap: 4px;

@@ -1,5 +1,5 @@
-@use '../../base/variables' as variables;
-@use '../../base/mixins' as mixins;
+@import '../../base/variables' ;
+@import '../../base/mixins' ;
 
 .skill-card-wrapper {
   @apply hover:z-[12] relative h-[224px] xxl:w-[310px] xss:w-[320px] w-[280px];
@@ -35,16 +35,13 @@
   @apply transition-all object-cover duration-300 rounded-[6px] h-full;
 }
 
-.skill-card-title {
-  @apply s:text-[20px] text-[18px] transition-all duration-500;
-}
-
 .skill-content-container {
   @apply grow max-w-[270px];
 }
 
 .skill-list {
-  @apply font-light pl-[17px] transition-all duration-500 flex flex-col gap-[5px] xss:text-[16px] text-[14px];
+  @include text-2;
+  @apply font-light pl-[17px] transition-all duration-500 flex flex-col gap-[5px];
 
   &:not(.visible) {
     transform: translateY(10px);

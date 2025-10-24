@@ -1,5 +1,5 @@
-@use '../../base/variables' as variables;
-@use '../../base/mixins' as mixins;
+@import '../../base/variables';
+@import '../../base/mixins';
 
 .document-content-wrapper {
   @apply flex flex-col gap-[10px] w-full;
@@ -18,11 +18,12 @@
 }
 
 .document-info-label {
-  @apply text-[14px] font-light text-[#00000080];
+  @include text-5;
+  @apply text-[#00000080];
 }
 
 .document-info-value {
-  @apply text-[18px];
+  @include text-1;
 }
 
 .document-photo-container {
@@ -42,7 +43,8 @@
 }
 
 .document-description {
-  @apply text-[14px] xss:text-[16px] text-[#000000];
+  @include text-2;
+  @apply text-[#000000];
 }
 
 .document-desktop-actions {
@@ -54,16 +56,10 @@
 }
 
 .document-list-show-button {
-  @apply text-[#34446D] text-[14px] xss:text-[16px] text-left inline-flex gap-[10px];
+  @include text-2;
+  @apply text-[#34446D] font-normal text-left inline-flex gap-[10px];
 }
 
 
 
-.document-list-item-title {
-  &.large {
-    @apply m:text-[19px];
-  }
-  
-  @apply text-[16px];
-}
 

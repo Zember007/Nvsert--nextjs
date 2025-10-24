@@ -34,8 +34,8 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
         <div className="safeguard-card-inner">
           <div className="safeguard-image-container">
           
-            <p className="safeguard-title-overlay"
-            >{filterPrepositions(title)}</p>
+            <h5 className="safeguard-title-overlay"
+            >{filterPrepositions(title)}</h5>
             <Image
               className='safeguard-image'
               alt='document' src={img}
@@ -54,7 +54,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
                 }}
                 key={index} className={`safeguard-item group/stroke ${index === items.length - 1 ? '' : ''}`}>
                 <div className="safeguard-item-header">
-                  <p className='safeguard-item-title'>{item.subtitle.split(' ').length === 2 ?
+                  <p className='safeguard-item-title text-1'>{item.subtitle.split(' ').length === 2 ?
                     <>
                       {item.subtitle.split(' ')[0]} <br />
                       {item.subtitle.split(' ')[1]}
@@ -79,7 +79,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
                     className={`safeguard-item-list`}>
 
                     <li className={`safeguard-list-item ${activeBlock === index ? 'active' : ''}`} key={index}>
-                      <p >{filterPrepositions(item.text)}</p>
+                      <p className='text-2'>{filterPrepositions(item.text)}</p>
                     </li>
 
                   </ul>

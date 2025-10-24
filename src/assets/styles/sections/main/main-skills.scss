@@ -1,11 +1,13 @@
-@use '../../base/variables' as varibles;
+@import '../../base/variables' ;
+@import '../../base/mixins' ;
 
 .skills {
     &__wrapper {
         @apply flex flex-col;
 
         &-desc {
-            @apply xxl:text-[18px] xss:text-[16px] text-[14px] leading-[1.5] mt-[30px];
+            @include text-1;
+            @apply mt-[30px] font-light;
         }
 
         &-move {
@@ -19,17 +21,17 @@
     &__box {
         @apply flex xxl:grid grid-cols-4 gap-[20px];
 
-        @media (max-width: varibles.$media-xxl) {
+        @media (max-width: $media-xxl) {
             width: 1002px;
             margin: 0 auto;
             overflow: hidden;
           }
 
-          @media (max-width: varibles.$media-l) {
+          @media (max-width: $media-l) {
             width: 660px;
           }
 
-        @media (max-width: varibles.$media-m) {
+        @media (max-width: $media-m) {
             width: 100%;
     
             overflow: visible !important;

@@ -618,7 +618,7 @@ input:-webkit-autofill {
 
 
     &__title {
-        @apply text-center text-[20px] xss:text-[24px] xxs:text-[40px] xl:text-[48px] font-light;
+        @apply text-center;
     }
 }
 
@@ -742,13 +742,7 @@ input:-webkit-autofill {
     backface-visibility: hidden;
 }
 
-.main-button-wrap {
-    @apply xl:w-[250px] xss:w-[280px] w-[260px] xl:mx-0 mx-auto;
-}
 
-.main-button {
-    @apply justify-center w-full m:flex items-center relative overflow-hidden m:text-[20px] text-[18px] bg-[#34446D] text-[#FFF] tracking-normal m:flex items-center gap-[10px] rounded-[4px] border-[#34446D] border border-solid;
-}
 
 .list-disc {
     li {
