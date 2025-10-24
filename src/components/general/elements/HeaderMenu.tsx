@@ -130,7 +130,7 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                                         src={ArrowIcon} alt='back' width={20} height={20} />
                                 </button>
 
-                                <span className='whitespace-nowrap text-[24px] text-center text-[#000] justify-self-center'>{currentLevel.title}</span>
+                                <h4 className='whitespace-nowrap text-center justify-self-center'>{currentLevel.title}</h4>
                             </>
                         }
                     </div>
@@ -162,7 +162,7 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                                                             {item.img?.url && (
                                                                 <Image src={'https://test11.audiosector.ru/cp' + item.img.url} alt="document" width={43} height={60} />
                                                             )}
-                                                            <span className={`text-[20px] text-[#000] font-light`}>{filterPrepositions(item.title)}</span>
+                                                            <h6>{filterPrepositions(item.title)}</h6>
                                                         </div>
                                                         {item.items && (
                                                             <Image src={ArrowIcon} alt="more" width={20} height={20} />
@@ -179,7 +179,7 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                                                             {'img' in item && item.img?.url &&
                                                                 <Image src={'https://test11.audiosector.ru/cp' + item.img.url} alt="document" width={43} height={60} />
                                                             }
-                                                            <span className="text-[20px] text-[#000] font-light">{item.title}</span>
+                                                            <h6>{item.title}</h6>
                                                         </div>
                                                         {item.items && (
                                                             <Image
