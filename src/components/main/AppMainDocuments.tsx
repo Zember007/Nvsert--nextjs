@@ -18,7 +18,7 @@ const AppMainDocuments = () => {
 
 
     return (
-        <section className="section wrapper">
+        <section className="section wrapper !overflow-visible">
 
             <div id="documents" className="absolute top-[-50px] pointer-events-none" ></div>
 
