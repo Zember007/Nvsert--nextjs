@@ -594,14 +594,14 @@ input:-webkit-autofill {
 
 
     .sendText {
-        @apply block duration-100 transition-all ease-in xl:translate-x-[10%] -translate-y-[1px] translate-x-0;
+        @apply block duration-100 transition-all relative ease-in xl:left-[5.5%] -translate-y-[1px] left-0;
         line-height: .5;
     }
 
     &:hover {
 
         .sendText {
-            @apply xl:translate-x-0
+            @apply xl:left-0
         }
 
 
