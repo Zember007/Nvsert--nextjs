@@ -74,7 +74,7 @@ const AppMenuItem: React.FC<{
         const classes = [styles["menu-item"], className];
         if (isHeader) classes.push(styles["header-item"]);
         if (isActive) classes.push(styles["menu-item-active"]);
-        return classes.join(" ") + " text-1 font-light";
+        return classes.join(" ");
     };
 
     const content = (
