@@ -31,7 +31,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
         href ? (
             <Link
                 href={href}
-                className={` transition-transform will-change-transform duration-100 active:scale-[.95] ${padding ? 'p-[30px] w-[312px] hover:bg-[#F5F5F2] border border-[transparent] hover:border-[#34446D]' : 'p-0 w-full'} flex flex-col gap-[20px] text-left  rounded-[8px]  ${className || ''}`}
+                className={` transition-transform will-change-transform duration-100 active:scale-[.95] ${padding ? 'xss:p-[30px] p-[15px] w-[312px] hover:bg-[#F5F5F2] border border-[transparent] hover:border-[#34446D]' : 'p-0 w-full'} flex flex-col gap-[20px] text-left  rounded-[8px]  ${className || ''}`}
             >
                 {title && <h6 className='flex items-center h-[38px] max-w-[230px] whitespace-pre-line'>{replaceValue(certificate.title)}</h6>}
                 <div className="relative w-full ">
@@ -59,7 +59,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
         ) : (
                 <button
                     onClick={onClick}
-                    className={` transition-transform will-change-transform duration-100 active:scale-[.95] ${padding ? 'p-[30px] w-[312px] hover:bg-[#F5F5F2] border border-[transparent] hover:border-[#34446D]' : 'p-0 w-full'} flex flex-col gap-[20px] text-left  rounded-[8px]  ${className || ''}`}
+                    className={` transition-transform will-change-transform duration-100 active:scale-[.95] ${padding ? 'xss:p-[30px] p-[15px] w-[312px] hover:bg-[#F5F5F2] border border-[transparent] hover:border-[#34446D]' : 'p-0 w-full'} flex flex-col gap-[20px] text-left  rounded-[8px]  ${className || ''}`}
                 >
                     {title && <h6 className='flex items-center h-[38px] max-w-[230px] whitespace-pre-line'>{replaceValue(certificate.title)}</h6>}
                     <div className="relative w-full ">
