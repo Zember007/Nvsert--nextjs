@@ -2,7 +2,7 @@
 @use '../../base/mixins' as mixins;
 
 .slide-blur-left {
-  @apply xl:left-[29.7vw] left-0;
+  @apply xl:left-[510px] left-0;
 }
 
 .slider-slide-item {
@@ -50,7 +50,7 @@
 }
 
 .main-button-wrap {
-  @apply xl:w-[236px] xss:w-[280px] w-[260px] xl:mx-0 mx-auto;
+  @apply xl:w-[242px] xss:w-[280px] w-[260px] xl:mx-0 mx-auto;
 }
 
 
