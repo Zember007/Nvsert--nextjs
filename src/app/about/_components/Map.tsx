@@ -100,8 +100,6 @@ const Map = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
     const handleMouseEnter = (event: React.MouseEvent) => {
-
-
         setHoveredRegion(event.currentTarget.id);
         const rect = event.currentTarget.getBoundingClientRect();
         setMousePosition({
@@ -112,8 +110,6 @@ const Map = () => {
 
     const handleMouseLeave = () => {
         setHoveredRegion(null);
-
-
     };
 
     return (
