@@ -5,6 +5,7 @@ import CollapseSection from '@/components/general/CollapseSection';
 import Image from 'next/image';
 import { useButton } from '@/hook/useButton';
 import { PhotoProvider, PhotoView } from '@/assets/lib/react-photo-view';
+import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
 
 type FeedbackPhoto = {
     url?: string;
@@ -42,7 +43,10 @@ export type FeedbackCategoryGroup = {
 
 
 const FeedbackCard: React.FC<{ item: FeedbackItem }> = ({ item }) => {
-    const img = item.photo?.formats?.thumbnail?.url || item.photo?.url || '';
+    const img = item.photo?.url || item.photo?.formats?.thumbnail?.url || '';
+
+    const { processContent } = useRichTextRenderer();
+
     return (
         <PhotoView
             src={'https://test11.audiosector.ru/cp' + img}
@@ -56,10 +60,12 @@ const FeedbackCard: React.FC<{ item: FeedbackItem }> = ({ item }) => {
                         <Image src={'https://test11.audiosector.ru/cp' + img} alt={item.photo?.alternativeText || item.title} className="w-full h-full object-contain" width={190} height={267} />
                     </div>
                 )}
-                <div className="flex-1 flex flex-col gap-[8px]">
+                <div className="flex-1 flex flex-col gap-[20px]">
                     <div className="text-[24px] text-[#000] ">{item.title}</div>
                     {item.content?.body && (
-                        <div className="text-[14px] tracking-[-0.01em] text-[#000] font-light leading-[1.5]">{item.content.body}</div>
+                        <div>
+                           { processContent(item.content.body)}
+                        </div>
                     )}
                 </div>
             </div>
@@ -79,7 +85,7 @@ const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ 
 
     const [mainOpen, setMainOpen] = React.useState<boolean>(true);
 
-   
+
 
     // Элементы для правой навигации
     const dotNavItems = initialCategories.map(cat => ({
