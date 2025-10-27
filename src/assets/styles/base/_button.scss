@@ -17,3 +17,49 @@ button {
 .btn-text {
   @include btn();
 }
+
+.border-button {
+  @apply min-h-[50px] w-full items-center flex justify-between items-center w-full rounded-[4px] border-solid active:bg-[#34446d33] active:border-[#34446D] active:border;
+
+  padding: 10px 11px;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+
+  &.active {
+    @apply bg-[#34446d33] border-[#34446D] border;
+  }
+
+  &.have-img {
+    padding: 5px;
+    height: 70px;
+
+    img {
+      border-radius: 3px;
+      border-width: 1px;
+      border-style: solid;
+      border-color: rgb(164 164 164);
+    }
+  }
+
+ 
+
+
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    bottom: -1px;
+    left: 5px;
+    right: 5px;
+    z-index: -1;
+    border-bottom: 1px solid #93969d;
+  }
+
+  &.first-child::before {
+    border-top: 1px solid #93969d;
+  }
+
+}
