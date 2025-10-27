@@ -105,7 +105,7 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
               </>
               :
               <>
-                <h6>
+                <h6 className='!font-normal'>
                   {title && filterPrepositions(title)}
                 </h6>
                 <div className='skill-content-container'>

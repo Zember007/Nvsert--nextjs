@@ -64,7 +64,7 @@ input:auto-fill {
       }
     }
 
-  /*   &:hover,
+    /*   &:hover,
     &:focus {
 
       &~.field__title {
@@ -126,7 +126,7 @@ input:auto-fill {
     top: 40px;
     left: 10px;
     z-index: 1;
-    
+
     color: $input-placeholder-normal;
     max-width: calc(100% - 40px);
     overflow: hidden;
@@ -156,7 +156,7 @@ input:auto-fill {
       top: 40px;
       left: 10px;
       z-index: -1;
-     
+
       color: $input-placeholder-normal;
       max-width: calc(100% - 40px);
       overflow: hidden;
@@ -182,20 +182,21 @@ input:auto-fill {
           opacity: 0;
         }
 
-      &.textarea-title {
-        @media (max-width: $media-s) {
-          top: 10px;
+        &.textarea-title {
+          @media (max-width: $media-s) {
+            top: 10px;
+          }
         }
+      }
+
+      @media (max-width: $media-s) {
+        top: 15px;
       }
     }
 
-    @media (max-width: $media-s) {
-      top: 15px;
-    }
+
   }
-
-
-}}
+}
 
 /*Стили чекбоксов и радиокнопок*/
 .field-check {
@@ -445,13 +446,13 @@ input:-webkit-autofill:focus {
 .form {
 
   &__title {
-    @apply  px-[8px];
+    @apply px-[8px];
   }
 
   &__desc {
-    @include text-5;
-    @apply text-[#000] my-[-3px];
-    letter-spacing: -0.5px !important;
+    @apply text-[#000] text-[11px] xss:text-[12px] s:text-[14px] my-[-3px];
+    line-height: 1.2;
+    letter-spacing: -0.5px;
   }
 
   &__button {
