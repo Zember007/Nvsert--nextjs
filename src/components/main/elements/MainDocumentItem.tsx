@@ -77,10 +77,10 @@ const DocumentList = memo(({ documentsList, listHidden, setListHidden, hiddenLis
 
 
                 <button
-                    className='document-list-show-button  line-after__box btnIconAn'
+                    className='document-list-show-button  line-after__box btnIconAn !gap-[5px]'
                     onClick={() => setListHidden(!listHidden)}
                 >
-                    <span className=' line-after !leading-[1.2]'>{listHidden ? 'Показать полный список документов' : 'Скрыть'}</span>
+                    <span className=' line-after !leading-[1.2] whitespace-nowrap'>{listHidden ? 'Показать полный список документов' : 'Скрыть'}</span>
 
                     <svg
                         className={`sendIconLeft document-list-arrow ${!listHidden ? 'rotate-[180deg]' : ''}`}
@@ -276,7 +276,7 @@ const MainDocumentItem = memo(({
                                         <motion.div
                                             animate={controls}
                                             initial={{ y: 20 }}
-                                            className="document-actions-mobile tariff-wrap" ref={setWrapperRef}>
+                                            className="tariff-wrap w-[280px] l:mx-0 mx-auto l:w-[250px] " ref={setWrapperRef}>
                                             <ActionButton
                                                 setRef={setButtonRef}
                                                 onClick={() => openDefaultModal('orderForm')}
@@ -365,7 +365,7 @@ const MainDocumentItem = memo(({
                                         <motion.div
                                             animate={controls}
                                             initial={{ y: 20 }}
-                                            className="tariff-wrap w-[280px] l:mx-0 mx-auto l:w-[250px]" ref={setWrapperRef}>
+                                            className="tariff-wrap w-[280px]  l:w-[250px]" ref={setWrapperRef}>
                                             <ActionButton
                                                 setRef={setButtonRef}
                                                 onClick={() => openDefaultModal('orderForm')}
@@ -394,7 +394,7 @@ const MainDocumentItem = memo(({
                                 <motion.div
                                     animate={controls}
                                     initial={{ y: 20 }}
-                                    className="document-desktop-actions tariff-wrap" ref={setWrapperRef}>
+                                    className="tariff-wrap w-[280px]  l:w-[250px] " ref={setWrapperRef}>
                                     <ActionButton
                                         setRef={setButtonRef}
                                         onClick={() => router.push('/services/' + link)}

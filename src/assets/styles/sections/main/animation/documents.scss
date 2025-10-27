@@ -140,12 +140,12 @@
     @apply  translate-y-[-1px] transition-all duration-200;
 
     &-wrap {
-      @apply hidden will-change-transform *:will-change-transform m:w-[41%] m:grid grid-cols-[0.76fr_1fr_auto] items-center justify-between xl:justify-items-start justify-items-end xl:pr-0 pr-[18px];
+      @apply hidden will-change-transform *:will-change-transform l:w-[41%] m:w-[330px] m:flex justify-between l:grid grid-cols-[0.76fr_1fr_auto] items-center justify-between xl:justify-items-start justify-items-end xl:pr-0 l:pr-[18px] pr-[20px];
     }
   }
 
   &__title {
-    @apply m:translate-y-[-1px] transition-all duration-200  will-change-transform m:w-[59%] pl-[63px];
+    @apply m:translate-y-[-1px] transition-all duration-200  will-change-transform l:w-[59%] pl-[63px];
   }
 
   &__small-img {
@@ -167,13 +167,13 @@
   &__list {
 
     &-photo {
-      @apply m:w-[58%] xl:gap-[30px] gap-[20px] max-w-full items-center flex flex-col-reverse m:flex-row m:items-stretch;
+      @apply l:w-[58%] xl:gap-[30px] gap-[20px] max-w-full items-center flex flex-col-reverse m:flex-row m:items-stretch;
     }
 
     @apply flex gap-[10px] flex-col grow m:max-w-[500px];
 
     &-wrap {
-      @apply m:w-[41%] w-full items-start flex gap-[20px] flex-col   text-[#000];
+      @apply l:w-[41%] m:w-[310px] m:min-w-[310px] w-full items-start flex gap-[20px] flex-col   text-[#000];
     }
 
     &-item {
