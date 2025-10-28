@@ -1,7 +1,14 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
+import { horizontalLoop } from '@/scripts/slider';
+import useWindowWidth from '@/hook/useWindowWidth';
 
 export const useRichTextRenderer = () => {
+    const widthWindow = useWindowWidth();
+    const sliderRef = useRef(null);
+    const [activeIndex, setActiveIndex] = useState<number>(0);
+
     const processContent = (text: string, small?: boolean): React.ReactNode[] => {
 
 
@@ -24,57 +31,60 @@ export const useRichTextRenderer = () => {
                 ...(beforeSlider ? processContent(beforeSlider).map((content, index) => (
                     <div key={`before-${index}`}>{content}</div>
                 )) : []),
-                <div key="slider-grid" className="flex gap-[20px]">
-                    {sliderBlocks.map((block, index) => {
+                <div key="slider-container" ref={sliderRef} className="slider-container overflow-hidden max-w-[940px] mx-auto">
+                    <div className="slider-wrapper flex gap-[20px] ">
+                        {sliderBlocks.map((block, index) => {
 
-                        // Ищем заголовки ## (большой текст) и # (меньший)
-                        const bigTitleMatch = block.match(/##\s*(.+?)\s*#/);
-                        const smallTitleMatch = block.match(/^#\s+(.+?)$/m);
+                            // Ищем заголовки ## (большой текст) и # (меньший)
+                            const bigTitleMatch = block.match(/##\s*(.+?)\s*#/);
+                            const smallTitleMatch = block.match(/^#\s+(.+?)$/m);
 
-       
+                            // Извлекаем описание (текст после заголовков)
+                            const description = block
+                                .replace(/##\s*.+?\s*#\s*.+?\n/, '')
+                                .replace(/^\d+%?\+?\s*/, '')
+                                .trim();
 
-                        // Извлекаем описание (текст после заголовков)
-
-
-                        const description = block
-                            .replace(/##\s*.+?\s*#\s*.+?\n/, '')
-                            .replace(/^\d+%?\+?\s*/, '')
-                            .trim();
-
-                        return (
-
-                            <div
-                                key={index}
-                                className="p-[20px] w-1/3 relative border border-[#93969D] bg-[#93969d26] rounded-[4px] flex flex-col justify-between"
-                                style={{ minHeight: '200px' }}
-                            >
-                                <svg
-                                    className="absolute top-[10px] right-[10px]"
-                                    width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15 0L16.1889 7.2177C16.7462 10.6016 19.3984 13.2538 22.7823 13.8111L30 15L22.7823 16.1889C19.3984 16.7462 16.7462 19.3984 16.1889 22.7823L15 30L13.8111 22.7823C13.2538 19.3984 10.6016 16.7462 7.2177 16.1889L0 15L7.2177 13.8111C10.6016 13.2538 13.2538 10.6016 13.8111 7.2177L15 0Z" fill="#93969D" fillOpacity="0.5" />
-                                </svg>
-                                <div className="flex flex-col gap-[15px] w-full">
-                                 
-                                    {bigTitleMatch && (
-                                        <h2 className="text-[#34446D]">
-
-                                            {bigTitleMatch[1].trim()}
-                                        </h2>
-                                    )}
-                                    {smallTitleMatch && (
-                                        <h6 className="leading-[1.3] text-black">
-                                            {smallTitleMatch[1].trim()}
-                                        </h6>
-                                    )}
-                                    {description && (
-                                        <div>
-                                            {processContent(description)}
-                                        </div>
-                                    )}
+                            return (
+                                <div
+                                    key={index}
+                                    data-slider="slider-cards"
+                                    className="p-[20px] w-[300px] min-w-[300px] min-h-[200px] relative border border-[#93969D] bg-[#93969d26] rounded-[4px] flex flex-col justify-between"
+                                >
+                                    <svg
+                                        className="absolute top-[10px] right-[10px]"
+                                        width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M15 0L16.1889 7.2177C16.7462 10.6016 19.3984 13.2538 22.7823 13.8111L30 15L22.7823 16.1889C19.3984 16.7462 16.7462 19.3984 16.1889 22.7823L15 30L13.8111 22.7823C13.2538 19.3984 10.6016 16.7462 7.2177 16.1889L0 15L7.2177 13.8111C10.6016 13.2538 13.2538 10.6016 13.8111 7.2177L15 0Z" fill="#93969D" fillOpacity="0.5" />
+                                    </svg>
+                                    <div className="flex flex-col gap-[15px] w-full">
+                                        {bigTitleMatch && (
+                                            <h2 className="text-[#34446D]">
+                                                {bigTitleMatch[1].trim()}
+                                            </h2>
+                                        )}
+                                        {smallTitleMatch && (
+                                            <h6 className="leading-[1.3] text-black">
+                                                {smallTitleMatch[1].trim()}
+                                            </h6>
+                                        )}
+                                        {description && (
+                                            <div>
+                                                {processContent(description)}
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        })}
+                    </div>
+
+                    <div className="slide-dots-box-container !flex my-[20px]">
+                        <div className="slide-dots-box !flex">
+                            {sliderBlocks.map((_, i) => (
+                                <div key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
+                            ))}
+                        </div>
+                    </div>
                 </div>,
                 ...(afterSlider ? processContent(afterSlider) : [])
             ];
@@ -275,6 +285,45 @@ export const useRichTextRenderer = () => {
         return elements;
     };
 
-    return { processContent };
+    // Инициализация слайдера
+    useEffect(() => {
+        const slides = gsap.utils.toArray('[data-slider="slider-cards"]');
+
+        if (slides.length > 0) {
+            const loop: any = horizontalLoop(slides, {
+                paused: true,
+                draggable: true,
+                mobile: widthWindow && widthWindow < 1240,
+                snap: true,
+                gap: 20,
+                onChange: (index: number) => {
+                    setActiveIndex(index);
+                }
+            });
+
+            const observer = new IntersectionObserver(
+                ([entry]) => {
+                    if (entry.isIntersecting) {
+                        loop.next({ ease: "power3", duration: 0.725 });
+
+                        if (sliderRef.current) {
+                            observer.unobserve(sliderRef.current);
+                        }
+                    }
+                },
+                { threshold: 0.5 }
+            );
+
+            if (sliderRef.current) {
+                observer.observe(sliderRef.current);
+            }
+
+            return () => {
+                loop.destroy();
+            };
+        }
+    }, [widthWindow]);
+
+    return { processContent, sliderRef, activeIndex };
 };
 

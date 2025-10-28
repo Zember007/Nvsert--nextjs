@@ -109,7 +109,7 @@
             top: 20px;
         }
     }
-    
+
     .close {
         --close-color: #FFF;
     }
@@ -454,7 +454,7 @@ body {
         @media (max-width: 900px) {
             display: none;
         }
-        
+
 
 
     }
@@ -731,15 +731,36 @@ input:-webkit-autofill {
     align-items: flex-start;
 }
 
-/* Стили для точек навигации */
 .slide-dots {
-    transform: translateZ(0);
-    backface-visibility: hidden;
-}
+    @apply w-[8px] h-[8px] relative border border-solid border-[#93969D] rounded-full;
 
-.slide-dots-box {
-    transform: translateZ(0);
-    backface-visibility: hidden;
+    &.active {
+        @apply bg-[#34446D] border-[#34446D];
+
+        &::before {
+            @apply opacity-100;
+            transform: translate(-50%, -50%) scale(2);
+
+        }
+    }
+
+    &::before {
+        @apply w-[8px] h-[8px] relative border border-solid border-[#34446D] rounded-full opacity-0 content-[''];
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: all .3s;
+    }
+
+    &-box {
+        @apply flex xxl:hidden justify-center gap-[7px] absolute bottom-0 left-1/2 -translate-x-1/2;
+
+        &-container {
+            @apply xxl:hidden h-[8px] w-full relative;
+        }
+    }
 }
 
 
@@ -762,17 +783,19 @@ input:-webkit-autofill {
     }
 }
 
-.map-company > path {
-        transition: all 0.1s ease;
-        &:hover  {
-            fill: #34446D;
-            fill-opacity: 0.5;
-        }
+.map-company>path {
+    transition: all 0.1s ease;
+
+    &:hover {
+        fill: #34446D;
+        fill-opacity: 0.5;
+    }
 }
 
-.map-company > g  {
+.map-company>g {
     transition: all 0.1s ease;
-    &:hover > path {
+
+    &:hover>path {
         fill: #34446D;
         fill-opacity: 0.5;
     }
