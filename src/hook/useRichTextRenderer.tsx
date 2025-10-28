@@ -13,6 +13,7 @@ export const useRichTextRenderer = () => {
 
 
         // Обработка [slider_start] ... [slider_end]
+
         if (text.includes('[slider_start]') && text.includes('[slider_end]')) {
             const beforeSlider = text.substring(0, text.indexOf('[slider_start]'));
             const sliderContent = text.substring(
@@ -26,6 +27,8 @@ export const useRichTextRenderer = () => {
                 .split(/\[block\]/)
                 .filter(block => block.trim())
                 .map(block => block.trim());
+
+
 
             return [
                 ...(beforeSlider ? processContent(beforeSlider).map((content, index) => (
@@ -90,6 +93,7 @@ export const useRichTextRenderer = () => {
             ];
         }
 
+
         // Обработка [grid_blocks_start] ... [grid_blocks_end]
         if (text.includes('[grid_blocks_start]') && text.includes('[grid_blocks_end]')) {
             const beforeGrid = text.substring(0, text.indexOf('[grid_blocks_start]'));
@@ -111,11 +115,7 @@ export const useRichTextRenderer = () => {
                 ...(beforeGrid ? processContent(beforeGrid).map((content, index) => (
                     <div key={`before-grid-${index}`} className="mb-[30px]">{content}</div>
                 )) : []),
-                <div key="grid-container" className="grid gap-[20px] mb-[30px]" style={{
-                    gridTemplateColumns: '370px 1fr 1fr',
-                    gridTemplateRows: 'repeat(3, auto)',
-                    gridAutoFlow: 'dense'
-                }}>
+                <div key="grid-container" className="grid gap-[20px] mb-[30px] 1k:grid-cols-[370px_1fr_1fr] xxs:grid-cols-2 grid-cols-1" >
                     {gridBlocks.map((block: string, index: number) => {
                         // Проверяем, является ли блок изображением
                         const imageMatch = block?.replace(/^#\s*/, '').match(/^!\[(.*?)\]\((.*?)\)/);
@@ -131,35 +131,15 @@ export const useRichTextRenderer = () => {
                         let cardClass = "p-[30px] border border-[#93969D] rounded-[6px] flex flex-col";
 
                         if (index === 0) {
-                            cardStyle = {
-                                gridColumn: '1',
-                                gridRow: '1 / 3',
-                                minHeight: '620px',
-                                backgroundColor: 'rgba(147, 150, 157, 0.15)'
-                            };
-                            cardClass += " justify-between items-center";
+                            cardClass += " 1k:col-span-1 xxs:col-span-2  1k:row-span-2 1k:min-h-[620px] min-h-[300px] bg-[rgba(147,150,157,0.15)] justify-between  ";
                         } else if (index >= 1 && index <= 4) {
-                            // Карточки 2-5: сетка 2x2 справа от первой
-                            cardClass += " justify-between items-end";
-                            cardStyle = {
-                                minHeight: '300px'
-                            };
+                            cardClass += " justify-between items-end min-h-[300px]";
                         } else if (index === 5) {
-                            // Предпоследняя карточка внизу
-                            cardStyle = {
-                                gridColumn: '1',
-                                gridRow: '3',
-                                minHeight: '300px'
-                            };
-                            cardClass += " justify-between items-end";
+                            cardClass += " 1k:col-span-1 xxs:col-span-2 justify-between items-end min-h-[300px]";
                         } else if (index === 6) {
-                            // Последняя широкая карточка
-                            cardStyle = {
-                                gridColumn: '2 / 4',
-                                gridRow: '3',
-                                minHeight: '300px',
-                                backgroundColor: 'rgba(147, 150, 157, 0.15)'
-                            };
+
+                            cardClass += " justify-between items-end xxs:col-span-2   min-h-[300px] bg-[rgba(147,150,157,0.15)]";
+
                         }
 
                         if (imageMatch) {
@@ -171,8 +151,8 @@ export const useRichTextRenderer = () => {
                             return (
                                 <div
                                     key={index}
-                                    className="border border-[#93969D] rounded-[6px] relative overflow-hidden"
-                                    style={cardStyle}
+
+                                    className={`border border-[#93969D] rounded-[6px] relative overflow-hidden ${cardClass}`}
                                 >
                                     <Image
                                         src={src}
@@ -190,7 +170,6 @@ export const useRichTextRenderer = () => {
                             <div
                                 key={index}
                                 className={cardClass}
-                                style={cardStyle}
                             >
                                 <div className="flex flex-col gap-[20px] w-full">
                                     <h6>

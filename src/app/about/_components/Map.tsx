@@ -113,7 +113,7 @@ const Map = () => {
     };
 
     return (
-        <div className="relative">
+        <div className="relative max-w-full">
             {hoveredRegion && (
                 <div
                     className="px-[20px] py-[10px] fixed backdrop-blur-[7.85px] border-[#34446d] border rounded-[4px] pointer-events-none z-10"
