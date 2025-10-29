@@ -34,7 +34,7 @@ export const useRichTextRenderer = () => {
                 ...(beforeSlider ? processContent(beforeSlider).map((content, index) => (
                     <div key={`before-${index}`}>{content}</div>
                 )) : []),
-                <div key="slider-container" ref={sliderRef} className="slider-container overflow-hidden max-w-[940px] mx-auto">
+                <div key="slider-container" ref={sliderRef} className="slider-container overflow-hidden 1k:max-w-[940px] l:max-w-[640px] max-w-[580px] mx-auto">
                     <div className="slider-wrapper flex gap-[20px] ">
                         {sliderBlocks.map((block, index) => {
 
@@ -52,7 +52,7 @@ export const useRichTextRenderer = () => {
                                 <div
                                     key={index}
                                     data-slider="slider-cards"
-                                    className="p-[20px] w-[300px] min-w-[300px] min-h-[200px] relative border border-[#93969D] bg-[#93969d26] rounded-[4px] flex flex-col justify-between"
+                                    className="p-[20px] l:w-[300px] l:min-w-[300px] w-[280px] min-w-[280px] l:min-h-[200px] min-h-[270px] relative border border-[#93969D] bg-[#93969d26] rounded-[4px] flex flex-col justify-between"
                                 >
                                     <svg
                                         className="absolute top-[10px] right-[10px]"

@@ -76,7 +76,7 @@ function AppCollapsibleList<ItemType = unknown>({
         <div className={`flex flex-col ${className || ''}`}>
             <button
                 type="button"
-                className={`line-after__box group  pb-[10px] border-b border-[#93969d80] m:px-[inherit] m:mx-[inherit] px-[40px] mx-[-40px]  ${1 ? '' : position === 'right' ? '2k:mr-0  2k:pr-0 xl:mr-[-135px] xl:pr-[135px] m:mr-[-40px] m:pr-[40px]' : '2k:ml-0  2k:pl-0 xl:pl-[135px] xl:ml-[-135px] m:ml-[-40px] m:pl-[40px]'} ${headerClassName || ''}`}
+                className={`line-after__box group  pb-[10px] border-b border-[#93969d80] m:px-[inherit] m:mx-[inherit]   ${1 ? '' : position === 'right' ? '2k:mr-0  2k:pr-0 xl:mr-[-135px] xl:pr-[135px] m:mr-[-40px] m:pr-[40px]' : '2k:ml-0  2k:pl-0 xl:pl-[135px] xl:ml-[-135px] m:ml-[-40px] m:pl-[40px]'} ${headerClassName || ''}`}
                 onClick={() => setIsOpen(prev => !prev)}
                 aria-expanded={isOpen}
             >

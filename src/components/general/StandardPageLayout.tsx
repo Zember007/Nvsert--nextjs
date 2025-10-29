@@ -45,15 +45,32 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
             <div className="wrapper pt-[50px]">
                 <div className="flex gap-[40px] max-w-full">
                     <div className="flex flex-col gap-[50px] flex-1 max-w-full">
-                        <h1 className="text-[48px] leading-[50px] !m-0 font-light tracking-[-0.04em] text-black -translate-x-[4px]">
-                            {title}
-                        </h1>
+                        <div className="flex items-center justify-between">
+                            <h1 className="text-[48px] leading-[50px] !m-0 font-light tracking-[-0.04em] text-black -translate-x-[4px]">
+                                {title}
+                            </h1>
 
-                        <div className="flex gap-[40px] items-stretch max-w-full">
+                            <div className="xl:hidden">
+                                <Button
+                                    onClick={() => {
+                                        openDefaultModal('orderForm');
+                                    }}
+                                    label="Оформить заявку"
+                                />
+                            </div>
+
+                        </div>
+                        <div className="flex gap-[40px] m:flex-row flex-col items-stretch max-w-full">
                             {/* Left sidebar */}
-                            <div className="w-[250px] relative">
-                                <div className="sticky top-[112px] flex flex-col gap-[10px]">
-                                    <SidebarNavButtons  />
+                            <div className="m:w-[250px] w-full relative">
+                                <div className="sticky top-[112px] flex flex-col gap-[40px]">
+                                    <SidebarNavButtons />
+
+                                    <div className="xl:hidden">
+                                        {dotNavItems && dotNavItems.length > 0 && (
+                                            <DotNavList items={dotNavItems} />
+                                        )}
+                                    </div>
                                 </div>
                             </div>
 
@@ -63,7 +80,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
                             </div>
 
                             {/* Right column */}
-                            <div className="w-[250px] relative">
+                            <div className="hidden xl:block w-[250px] relative">
                                 <div className="sticky top-[112px] flex flex-col gap-[24px]">
                                     {showButton && (
                                         <Button
