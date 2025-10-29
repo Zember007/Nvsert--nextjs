@@ -46,6 +46,7 @@ const FeedbackCard: React.FC<{ item: FeedbackItem }> = ({ item }) => {
     const img = item.photo?.url || item.photo?.formats?.thumbnail?.url || '';
 
     const { processContent } = useRichTextRenderer();
+    const [showServices, setShowServices] = React.useState<boolean>(false);
 
     return (
         <PhotoView
@@ -53,20 +54,36 @@ const FeedbackCard: React.FC<{ item: FeedbackItem }> = ({ item }) => {
             width={250}
             height={37}
         >
-            <div className="cursor-pointer active:scale-[0.95] transition-all duration-100 flex gap-[16px] p-[20px] border border-[#93969d] bg-[#f5f5f2] rounded-[10px] w-full">
+            <div className="cursor-pointer active:scale-[0.95] transition-all duration-100 flex gap-[16px] xxs:flex-row flex-col p-[20px] border border-[#93969d] bg-[#f5f5f2] rounded-[10px] w-full">
                 {!!img && (
-                    <div className="shrink-0 w-[190px] h-[267px] rounded-[6px] overflow-hidden bg-[#fff] border border-[#E2E4EA]">
+                    <div className="shrink-0 w-[190px] h-[267px] rounded-[6px] overflow-hidden bg-[#fff] border border-[#E2E4EA] xxs:mx-0 mx-auto">
                         {/* Using img to avoid Image domain config issues */}
                         <Image src={'https://test11.audiosector.ru/cp' + img} alt={item.photo?.alternativeText || item.title} className="w-full h-full object-contain" width={190} height={267} />
                     </div>
                 )}
                 <div className="flex-1 flex flex-col gap-[20px]">
-                    <div className="text-[24px] text-[#000] ">{item.title}</div>
+                    <h6 className="!font-normal">{item.title}</h6>
                     {item.content?.body && (
-                        <div>
-                           { processContent(item.content.body)}
-                        </div>
+                        <>
+                            <div>
+                                {processContent(item.content.body.split('\n')[0])}
+
+                                <div className={`${showServices ? 'block' : 'xxl:block hidden'}`}>
+                                    {processContent(item.content.body.split('\n').slice(1).join('\n'))}
+                                </div>
+                            </div>
+                            <button
+                                className={`${showServices ? 'hidden' : 'block xxl:hidden'} text-[#34446D] text-[16px] font-normal mt-[15px] ml-auto grow flex items-end justify-end`}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    e.preventDefault();
+                                    setShowServices(!showServices)
+                                }}
+                            >Показать отзыв</button>
+                        </>
                     )}
+
+
                 </div>
             </div>
         </PhotoView>
