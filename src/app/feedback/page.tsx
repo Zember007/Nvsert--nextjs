@@ -38,7 +38,7 @@ type FeedbackCategoryGroup = {
 
 async function getFeedbacks(): Promise<FeedbackItem[]> {
     const base = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
-    const res = await fetch(`${base}/api/feedbacks`, { next: { revalidate: false } });
+    const res = await fetch(`${base}/api/feedbacks`, { next: { revalidate: 60 } });
     if (!res.ok) return [];
     const json = await res.json();
     console.log(json, 'json');
