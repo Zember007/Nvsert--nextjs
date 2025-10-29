@@ -61,12 +61,12 @@ export const useRichTextRenderer = () => {
                                     </svg>
                                     <div className="flex flex-col gap-[15px] w-full">
                                         {bigTitleMatch && (
-                                            <h2 className="text-[#34446D]">
+                                            <h2 className="text-[#34446D] !font-normal">
                                                 {bigTitleMatch[1].trim()}
                                             </h2>
                                         )}
                                         {smallTitleMatch && (
-                                            <h6 className="leading-[1.3] text-black">
+                                            <h6 className="leading-[1.3] text-black !font-normal">
                                                 {smallTitleMatch[1].trim()}
                                             </h6>
                                         )}
@@ -172,7 +172,7 @@ export const useRichTextRenderer = () => {
                                 className={cardClass}
                             >
                                 <div className="flex flex-col gap-[20px] w-full">
-                                    <h6>
+                                    <h6 className="!font-normal">
                                         {title}
                                     </h6>
                                     <div>
