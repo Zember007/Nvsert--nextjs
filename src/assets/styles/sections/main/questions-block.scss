@@ -59,7 +59,7 @@
 }
 
 .questions-inner-content {
-  @apply l:pl-[110px] p-[20px]  l:pr-[34px] l:py-[30px] flex flex-col gap-[30px];
+  @apply xl:pl-[110px] p-[20px]  xl:pr-[34px] l:py-[30px] flex flex-col gap-[30px];
 
   .mtp__spoiler-text {
     @apply xss:max-w-full max-w-[260px] xss:mx-0 mx-auto;
