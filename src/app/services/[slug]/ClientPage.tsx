@@ -68,7 +68,7 @@ const ContentBlockRenderer: React.FC<{
 
                 {
                     firstImage.src ? (
-                        <div className="max-w-[700px] mx-auto mt-[50px]">
+                        <div className="xl:max-w-[630px] xxs:max-w-[560px] max-w-[280px] mx-auto mt-[50px]">
                             <Image src={'https://test11.audiosector.ru/cp' + firstImage.src || ''} alt={firstImage.alt || ''} className="w-full h-auto"
                                 width={firstImage.width || 0}
                                 height={firstImage.height || 0}
