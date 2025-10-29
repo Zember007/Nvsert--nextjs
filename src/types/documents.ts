@@ -18,4 +18,6 @@ export interface MainDocumentItemProps {
     duration: string;
     active: boolean;
     setActive: (value: boolean) => void;
+    totalItems?: number;
+    index?: number;
 } 

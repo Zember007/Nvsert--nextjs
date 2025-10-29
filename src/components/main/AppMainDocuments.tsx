@@ -47,6 +47,8 @@ const AppMainDocuments = () => {
                             img={item.img}
                             price={item.price}
                             title={item.title}
+                            totalItems={navigation.length }
+                            index={index + 1}
                         />
                     ))}
                 </div>

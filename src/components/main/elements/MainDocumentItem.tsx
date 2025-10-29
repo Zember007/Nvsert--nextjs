@@ -114,7 +114,9 @@ const MainDocumentItem = memo(({
     link,
     duration,
     active,
-    setActive
+    setActive,
+    totalItems = 0,
+    index = 0
 }: MainDocumentItemProps) => {
     const windowWidth = useWindowWidth()
     const controls = useAnimation();
@@ -156,7 +158,7 @@ const MainDocumentItem = memo(({
 
         const scrollOptions: ScrollIntoViewOptions = {
             behavior: 'smooth',
-            block: 'start'
+            block: totalItems / 2 > index ? 'start' : 'end'
         };
 
         // if (index === 0) {
@@ -188,7 +190,7 @@ const MainDocumentItem = memo(({
         const el = wrapperRef.current;
         let timerScroll: NodeJS.Timeout | null = null;
         if (el && !isInViewport(el)) {
-            timerScroll = setTimeout(() => scrollToElement(el), 200);
+            timerScroll = setTimeout(() => scrollToElement(el), 400);
         }
 
         return () => {
