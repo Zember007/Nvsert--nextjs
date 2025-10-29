@@ -56,7 +56,7 @@ export const useRichTextRenderer = () => {
                                 <div
                                     key={index}
                                     data-slider="slider-cards"
-                                    className="p-[20px] l:w-[300px] l:min-w-[300px] xxs:w-[280px] xxs:min-w-[280px] w-[300px] min-w-[300px] l:min-h-[200px] min-h-[270px] relative border border-[#93969D] bg-[#93969d26] rounded-[4px] flex flex-col justify-between"
+                                    className="p-[20px] l:w-[300px] l:min-w-[300px] xxs:w-[280px] xxs:min-w-[280px] xss:w-[300px] xss:min-w-[300px] w-[280px] min-w-[280px] l:min-h-[200px] min-h-[270px] relative border border-[#93969D] bg-[#93969d26] rounded-[4px] flex flex-col justify-between"
                                 >
                                     <svg
                                         className="absolute top-[10px] right-[10px]"
