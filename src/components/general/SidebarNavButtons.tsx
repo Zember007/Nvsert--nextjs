@@ -42,11 +42,11 @@ const SidebarNavButtons = () => {
         }
     ];
     return (
-        <div className={`flex flex-col`}>
+        <div className={`m:flex xxs:grid xxs:grid-cols-2 xxs:gap-[20px] m:gap-0 flex flex-col`}>
             {items.map((item, index_item) => (
                 <Link
                     key={item.id}
-                    className={`border-button px-[15px] active:scale-[.98] transition-transform will-change-transform duration-100 ${index_item === 0 ? 'first-child' : ''} group ${item.active ? 'active' : ''}`}
+                    className={`border-button px-[15px] active:scale-[.98] transition-transform will-change-transform duration-100 ${index_item === 0 ? 'first-child m-responsive' : ''} group ${item.active ? 'active' : ''}`}
                     href={item.href}
                 >
                     <h6 className={`font-light`}>{item.label}</h6>
