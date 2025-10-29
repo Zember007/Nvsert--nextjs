@@ -45,7 +45,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
             <div className="wrapper pt-[50px]">
                 <div className="flex gap-[40px] max-w-full">
                     <div className="flex flex-col gap-[50px] flex-1 max-w-full">
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between gap-[20px] m:flex-row flex-col">
                             <h1 className="text-[48px] leading-[50px] !m-0 font-light tracking-[-0.04em] text-black -translate-x-[4px]">
                                 {title}
                             </h1>
