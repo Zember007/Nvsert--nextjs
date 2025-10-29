@@ -61,7 +61,7 @@ export const useRichTextRenderer = () => {
                                     </svg>
                                     <div className="flex flex-col gap-[15px] w-full">
                                         {bigTitleMatch && (
-                                            <h2 className="text-[#34446D]">
+                                            <h2 className="!text-[20px] text-[#34446D]">
                                                 {bigTitleMatch[1].trim()}
                                             </h2>
                                         )}
