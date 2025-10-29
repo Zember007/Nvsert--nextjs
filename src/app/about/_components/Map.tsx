@@ -109,7 +109,7 @@ const Map = () => {
     };
 
     const handleMouseLeave = () => {
-        setHoveredRegion(null);
+        /* setHoveredRegion(null); */
     };
 
     return (
