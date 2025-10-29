@@ -15,6 +15,8 @@ export const useRichTextRenderer = () => {
         // Обработка [slider_start] ... [slider_end]
 
         if (text.includes('[slider_start]') && text.includes('[slider_end]')) {
+            const gap = widthWindow && widthWindow < 640 ? (widthWindow - (300)) / 2 : 20
+
             const beforeSlider = text.substring(0, text.indexOf('[slider_start]'));
             const sliderContent = text.substring(
                 text.indexOf('[slider_start]') + '[slider_start]'.length,
@@ -35,7 +37,9 @@ export const useRichTextRenderer = () => {
                     <div key={`before-${index}`}>{content}</div>
                 )) : []),
                 <div key="slider-container" ref={sliderRef} className="slider-container overflow-hidden 1k:max-w-[940px] l:max-w-[640px] max-w-[580px] mx-auto">
-                    <div className="slider-wrapper flex gap-[20px] ">
+                    <div className="slider-wrapper flex  "
+                    style={{ gap: `${gap}px` }}
+                    >
                         {sliderBlocks.map((block, index) => {
 
                             // Ищем заголовки ## (большой текст) и # (меньший)
@@ -52,7 +56,7 @@ export const useRichTextRenderer = () => {
                                 <div
                                     key={index}
                                     data-slider="slider-cards"
-                                    className="p-[20px] l:w-[300px] l:min-w-[300px] w-[280px] min-w-[280px] l:min-h-[200px] min-h-[270px] relative border border-[#93969D] bg-[#93969d26] rounded-[4px] flex flex-col justify-between"
+                                    className="p-[20px] l:w-[300px] l:min-w-[300px] xxs:w-[280px] xxs:min-w-[280px] w-[300px] min-w-[300px] l:min-h-[200px] min-h-[270px] relative border border-[#93969D] bg-[#93969d26] rounded-[4px] flex flex-col justify-between"
                                 >
                                     <svg
                                         className="absolute top-[10px] right-[10px]"
@@ -274,7 +278,8 @@ export const useRichTextRenderer = () => {
                 draggable: true,
                 mobile: widthWindow && widthWindow < 1240,
                 snap: true,
-                gap: 20,
+                gap: widthWindow && widthWindow < 640 ? (widthWindow - (300)) / 2 : 20,
+                center: widthWindow && widthWindow < 640 ? true : false,
                 onChange: (index: number) => {
                     setActiveIndex(index);
                 }
