@@ -23,12 +23,8 @@
 
     @media (max-width: varibles.$media-xl) {
       margin: 0 auto;
-      max-width: 670px;
+      max-width: 100%;
       text-align: center;
-    }
-
-    @media (max-width: varibles.$media-xxs) {
-      max-width: 340px;
     }
   }
 
