@@ -248,7 +248,7 @@ const MainDocumentItem = memo(({
                     >
 
                         <h6 className="document__title">
-                            {title}
+                            {filterPrepositions(title)}
                         </h6>
                         <div className="document__desc-wrap">
                             <h6 className="document__desc">{duration}</h6>
