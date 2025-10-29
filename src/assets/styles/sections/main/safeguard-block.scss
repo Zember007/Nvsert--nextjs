@@ -82,7 +82,7 @@
 }
 
 .safeguard-item-content {
-  @apply overflow-hidden transition-all duration-100 max-h-0;
+  @apply transition-all duration-100 max-h-0;
   
   &.active {
     max-height: 95px;
