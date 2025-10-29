@@ -12,7 +12,7 @@ interface HeaderContextType {
     defaultModalCount: number;
     showCopyNotification: boolean;
     notificationPosition: { x: number; y: number } | null;
-    handleCopy: (text: string, event: React.MouseEvent) => Promise<void>;
+    handleCopy: (text: string, event: React.MouseEvent) => void;
     hideNotification: () => void;
 }
 

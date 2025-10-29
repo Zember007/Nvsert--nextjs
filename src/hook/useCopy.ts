@@ -9,46 +9,41 @@ export const useCopy = () => {
   const [showCopyNotification, setShowCopyNotification] = useState(false);
   const [notificationPosition, setNotificationPosition] = useState<CopyPosition | null>(null);
 
-  const handleCopy = async (text: string, event: React.MouseEvent) => {
-    await navigator.clipboard.writeText(text);
+  const handleCopy = (text: string, event: React.MouseEvent) => {
 
-    setTimeout(() => {
-      try {
-        
-        if (!event.target) return;
-        
-                // Получаем координаты кнопки
-          const rect = (event.target as HTMLElement).parentElement?.getBoundingClientRect();
+    event.preventDefault();
+    event.stopPropagation();
 
-          if(!rect) return;
-          
-          // Проверяем, чтобы уведомление не выходило за пределы экрана
-          const notificationWidth = 200; // примерная ширина уведомления
-          
-          let x = rect.right;
-          let y = rect.top - 20 - (event.target as HTMLElement).offsetHeight;
-          
-       
-          
-          // Если уведомление выходит за верхний край экрана
-          if (y < 0) {
-            y = rect.bottom + 10;
-          }
-  console.log({
-    x,
-    y
-  });
-  
-          setNotificationPosition({
-            x,
-            y
-          });
-        
-        setShowCopyNotification(true);
-      } catch (err) {
-        console.error('Failed to copy text: ', err);
-      }
-    }, 500);
+    navigator.clipboard.writeText(text);
+    if (!event.currentTarget) return;
+
+    // Получаем координаты кнопки
+    const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
+
+    if (!rect) return;
+
+
+
+    let x = rect.right;
+    let y = rect.top - 10 - (event.currentTarget as HTMLElement).offsetHeight;
+
+
+
+    // Если уведомление выходит за верхний край экрана
+    if (y < 0) {
+      y = rect.bottom + 10;
+    }
+    console.log({
+      x,
+      y
+    });
+
+    setNotificationPosition({
+      x,
+      y
+    });
+
+    setShowCopyNotification(true);
   };
 
   const hideNotification = () => {
