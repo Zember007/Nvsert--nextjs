@@ -26,6 +26,7 @@ button {
   display: flex;
   justify-content: space-between;
   position: relative;
+  z-index: 0;
 
   &.active {
     @apply bg-[#34446d33] border-[#34446D] border;
@@ -43,7 +44,7 @@ button {
     }
   }
 
- 
+
 
 
 
@@ -55,11 +56,17 @@ button {
     left: 5px;
     right: 5px;
     z-index: -1;
-    border-bottom: 1px solid #93969d;
+    border-bottom: 1px solid;
+    border-color: #93969d;
+  }
+
+  &.active::before,
+  &:active::before {
+    border-color: transparent;
   }
 
   &.first-child::before {
-    border-top: 1px solid #93969d;
+    border-top: 1px solid;
   }
 
   &.first-child.m-responsive {
