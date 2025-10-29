@@ -151,8 +151,8 @@ const MainDocumentItem = memo(({
     };
 
     const scrollToElement = (el: HTMLElement | null) => {
-        const documents_box = document.getElementById('documents_box');
-        if (!documents_box || !el) return;
+        
+        if (!el) return;
 
         const scrollOptions: ScrollIntoViewOptions = {
             behavior: 'smooth',
