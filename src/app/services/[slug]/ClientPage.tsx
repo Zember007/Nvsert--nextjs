@@ -205,7 +205,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                 <div className="m:w-[250px] relative">
                                     <div className="sticky xl:top-[116px] top-[106px] flex flex-col xl:gap-[40px] gap-[20px]">
 
-                                        <div className="flex flex-col gap-[20px] m:flex-col-reverse">
+                                        <div className="flex  gap-[20px] flex-col-reverse">
                                             <div className="w-[250px] mx-auto">
                                                 <ServiceCard
                                                     onClick={() => { document.getElementById('service-' + currentService?.id)?.click() }}
