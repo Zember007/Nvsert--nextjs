@@ -789,6 +789,8 @@ input:-webkit-autofill {
     &:hover {
         fill: #34446D;
         fill-opacity: 0.5;
+        stroke: #000;
+        stroke-width: 1;
     }
 }
 
@@ -798,5 +800,7 @@ input:-webkit-autofill {
     &:hover>path {
         fill: #34446D;
         fill-opacity: 0.5;
+        stroke: #000;
+        stroke-width: 1;
     }
 }
