@@ -135,14 +135,14 @@ export const useRichTextRenderer = () => {
                         let cardClass = "p-[30px] border border-[#93969D] rounded-[6px] flex flex-col";
 
                         if (index === 0) {
-                            cardClass += " 1k:col-span-1 xxs:col-span-2  1k:row-span-2 1k:min-h-[620px] 1k:min-h-[300px] 1k:min-h-[200px] bg-[rgba(147,150,157,0.15)] justify-between  ";
+                            cardClass += " 1k:col-span-1 xxs:col-span-2  1k:row-span-2 1k:min-h-[620px] 1k:min-h-[300px] 1k:min-h-[200px]  justify-between  ";
                         } else if (index >= 1 && index <= 4) {
                             cardClass += " justify-between items-end min-h-[300px]";
                         } else if (index === 5) {
                             cardClass += " 1k:col-span-1 xxs:col-span-2 justify-between items-end min-h-[300px]";
                         } else if (index === 6) {
 
-                            cardClass += " justify-between items-end xxs:col-span-2   min-h-[300px] bg-[rgba(147,150,157,0.15)]";
+                            cardClass += " justify-between items-end xxs:col-span-2   min-h-[300px] ";
 
                         }
 
