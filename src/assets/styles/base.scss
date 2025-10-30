@@ -650,7 +650,7 @@ input:-webkit-autofill {
 
     &__box {
         &:hover {
-            .line-after {
+            .line-after:not(.noactive) {
                 @apply text-[#34446D];
 
                 &:after {
@@ -678,7 +678,7 @@ input:-webkit-autofill {
         clip-path: inset(0 0 0 100%);
     }
 
-    &:hover {
+    &:not(.noactive):hover {
         &::after {
             clip-path: inset(0 0 0 0);
         }

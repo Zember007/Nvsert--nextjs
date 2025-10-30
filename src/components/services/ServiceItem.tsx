@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationItem } from '@/store/navigation';
 import Link from 'next/link';
 import { AppNavigationItem } from '@/components/general/AppNavigation';
@@ -38,6 +38,8 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
 
     const controls = useAnimation();
 
+    const [noActive, setNoActive] = useState(false);
+
     useEffect(() => {
         if (!isExpanded) return;
 
@@ -71,33 +73,38 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
 
             <div id={service.name} className='absolute top-[-94px] left-0 w-full'></div>
             <button
-                onClick={() => onToggle(index)}
+                onClick={() => {
+                    onToggle(index);
+                    setNoActive(!noActive);
+                }}
+                onMouseLeave={() => setNoActive(false)}
+                onMouseEnter={() => setNoActive(false)}
                 className={`w-full`}
             >
                 <div className={`line-after__box justify-between group wrapper xxxxl:!flex-row flex xxxxl:items-center py-[25px] overflow-hidden`}>
                     <div className="w-[250px]">
-                    <div className={`flex gap-[22px] justify-start w-fit items-center transition-transform duration-100  group-active:scale-[.9] ${active && 'scale-[.9]'}`}>
-                        <svg
-                            className={`${hover && '!text-[#34446D]'} group-hover:text-[#34446D] text-black transition-transform duration-100 ${isExpanded ? 'rotate-90' : ''}`}
-                            width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clipPath="url(#clip0_5667_4071)">
-                                <path d="M4.404 3.30273L7.835 6.62973C8.055 6.84273 8.055 7.15673 7.835 7.36973L1.205 13.7997C0.79 14.2007 0 13.9577 0 13.4297V7.70673L4.404 3.30273Z" fill="currentColor" />
-                                <path opacity="0.5" d="M0 6.29282V0.569821C0 0.0418214 0.79 -0.201179 1.205 0.199821L3.686 2.60582L0 6.29282Z" fill="currentColor" />
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_5667_4071">
-                                    <rect width="8" height="14" fill="white" />
-                                </clipPath>
-                            </defs>
-                        </svg>
+                        <div className={`flex gap-[22px] justify-start w-fit items-center transition-transform duration-100  group-active:scale-[.9] ${active && 'scale-[.9]'}`}>
+                            <svg
+                                className={`${hover && '!text-[#34446D]'} group-hover:text-[#34446D] text-black transition-transform duration-100 ${isExpanded ? 'rotate-90' : ''}`}
+                                width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clipPath="url(#clip0_5667_4071)">
+                                    <path d="M4.404 3.30273L7.835 6.62973C8.055 6.84273 8.055 7.15673 7.835 7.36973L1.205 13.7997C0.79 14.2007 0 13.9577 0 13.4297V7.70673L4.404 3.30273Z" fill="currentColor" />
+                                    <path opacity="0.5" d="M0 6.29282V0.569821C0 0.0418214 0.79 -0.201179 1.205 0.199821L3.686 2.60582L0 6.29282Z" fill="currentColor" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_5667_4071">
+                                        <rect width="8" height="14" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
 
-                        <h4 className={`line-after after:!bottom-[-5px] !m-0   ${hover  && 'active'}  transition-all duration-200 translate-y-[1px]`}>{service.title}</h4>
-                    </div>
+                            <h4 className={`line-after ${noActive ? 'noactive' : ''} after:!bottom-[-5px] !m-0   ${hover && 'active'}  transition-all duration-200 translate-y-[1px]`}>{service.title}</h4>
+                        </div>
                     </div>
                     <div className={`ml-[25px] xxxxl:mt-0 mt-[25px] xxxxl:grid flex gap-[20px] xxxxl:grid-cols-4 items-center flex-wrap transition-all duration-100 overflow-hidden ${isExpanded ? 'opacity-0 xxxxl:max-h-[100%] max-h-0 translate-y-full !mt-0' : 'opacity-100  translate-y-0 xxxxl:max-h-[100%] max-h-[350px]'}`}>
                         {service.items.map((item, itemIndex) => (
                             <AppNavigationItem
-                                onClick={(e) => {e.stopPropagation()}}
+                                onClick={(e) => { e.stopPropagation() }}
                                 dark={true}
                                 className='!w-[250px]'
                                 key={itemIndex}
