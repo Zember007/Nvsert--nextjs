@@ -75,7 +75,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
             <button
                 onClick={() => {
                     onToggle(index);
-                    setNoActive(!noActive);
+                    setNoActive(true);
                 }}
                 onMouseLeave={() => setNoActive(false)}
                 onMouseEnter={() => setNoActive(false)}
