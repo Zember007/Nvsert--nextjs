@@ -77,6 +77,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                     onToggle(index);
                     setNoActive(true);
                 }}
+                onMouseDown={() => setNoActive(false)}
                 onMouseLeave={() => setNoActive(false)}
                 onMouseEnter={() => setNoActive(false)}
                 className={`w-full`}
