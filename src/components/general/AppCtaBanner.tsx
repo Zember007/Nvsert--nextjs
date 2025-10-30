@@ -5,6 +5,7 @@ interface CtaBannerProps {
     text: string;
     description: string;
     onButtonClick: () => void;
+    descriptionClassName?: string;
     buttonLabel?: string;
     className?: string;
 }
@@ -12,6 +13,7 @@ interface CtaBannerProps {
 const AppCtaBanner: React.FC<CtaBannerProps> = ({
     text,
     description,
+    descriptionClassName = '',
     onButtonClick,
     buttonLabel = 'Связаться',
     className = ''
@@ -22,7 +24,7 @@ const AppCtaBanner: React.FC<CtaBannerProps> = ({
                 <h3 className="s:text-[24px] text-[20px] font-light tracking-[-0.04em] text-black max-w-[460px]">
                     {text}
                 </h3>
-                <p className="s:text-[16px] text-[14px] font-light tracking-[-0.01em] text-[rgba(0,0,0,0.6)] max-w-[378px] leading-[1.4]">
+                <p className={`s:text-[16px] text-[14px] font-light tracking-[-0.01em] text-[rgba(0,0,0,0.6)]  leading-[1.4] ${descriptionClassName || 'max-w-[378px]'}`}>
                     {description}
                 </p>
                 <Button

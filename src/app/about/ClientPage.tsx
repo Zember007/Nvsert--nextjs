@@ -185,6 +185,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
             <AppCtaBanner
                 key="cta-banner"
                 text={aboutData?.cta?.text || ''}
+                descriptionClassName="max-w-full"
                 description={aboutData?.cta?.description || ''}
                 onButtonClick={() => { openDefaultModal('introForm') }}
             />
