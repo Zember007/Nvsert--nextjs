@@ -30,7 +30,7 @@ const CollapseSection: React.FC<CollapseSectionProps> = ({ title, isOpen, onTogg
     return (
         <div className={`w-full ${className || ''}`}>
             <div className="flex items-center gap-[10px] pb-[10px] border-b border-[#93969d80] cursor-pointer" onClick={onToggle}>
-                <h2 className="text-[24px] transition-all duration-100 font-light !m-0 leading-[18px] tracking-[0] text-[#34446D] flex-1">{title}</h2>
+                <h4 className="!font-light text-[#34446D] flex-1">{title}</h4>
                 <ChevronIcon open={isOpen} />
             </div>
             {isOpen && (
