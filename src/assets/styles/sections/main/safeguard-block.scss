@@ -68,7 +68,7 @@
 }
 
 .safeguard-arrow-icon {
-  @apply min-w-[24px] rotate-[0deg] transition-all duration-100;
+  @apply min-w-[17px] rotate-[0deg] transition-all duration-100;
   
   &.active {
     transform: rotate(180deg);
