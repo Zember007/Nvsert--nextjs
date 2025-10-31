@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useAnimation } from 'framer-motion';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useId, useState } from 'react';
 
 type AppCollapsibleListProps<ItemType> = {
     title: React.ReactNode;
@@ -72,6 +72,8 @@ function AppCollapsibleList<ItemType = unknown>({
       };
     }, [isOpen]);
 
+    const clipPathId = useId();
+
     return (
         <div className={`flex flex-col ${className || ''}`}>
             <button
@@ -80,7 +82,7 @@ function AppCollapsibleList<ItemType = unknown>({
                 onClick={() => setIsOpen(prev => !prev)}
                 aria-expanded={isOpen}
             >
-                <div className={`flex items-center   group-active:scale-[0.95] transition-all duration-100 ${isOpen ? 'gap-[14px]' : 'gap-[10px]'}`}>
+                <span className={`flex items-center   group-active:scale-[0.95] transition-all duration-100 ${isOpen ? 'gap-[14px]' : 'gap-[10px]'}`}>
                     <svg
                         className={`group-hover:text-[#34446D] text-[black] transition-transform duration-100 ${isOpen ? 'rotate-90 translate-x-[4px]' : ''}`}
                         width="9"
@@ -90,19 +92,19 @@ function AppCollapsibleList<ItemType = unknown>({
                         xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true"
                     >
-                        <g clipPath="url(#clip0_7117_3111)">
+                        <g clipPath={`url(#${clipPathId})`}>
                             <path d="M4.95426 3.77441L8.81413 7.5767C9.06163 7.82013 9.06163 8.17899 8.81413 8.42241L1.35538 15.771C0.888506 16.2293 -0.000244141 15.9516 -0.000244141 15.3481V8.80756L4.95426 3.77441Z" fill="currentColor" />
                             <path opacity="0.5" d="M0 7.1918V0.651224C0 0.0477958 0.88875 -0.229919 1.35562 0.228367L4.14675 2.97808L0 7.1918Z" fill="currentColor" />
                         </g>
                         <defs>
-                            <clipPath id="clip0_7117_3111">
+                            <clipPath id={clipPathId}>
                                 <rect width="9" height="16" fill="white" />
                             </clipPath>
                         </defs>
                     </svg>
                     <span className="line-after after:!bottom-[-3px] text-[16px] text-[#161616] leading-[18px]  ">{title}</span>
 
-                </div>
+                </span>
             </button>
 
             <div className={`${!isOpen ? "overflow-y-hidden" : delayedVisible ? "overflow-y-visible" : "overflow-y-hidden"}`}>
