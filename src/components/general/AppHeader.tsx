@@ -119,7 +119,7 @@ const AppHeader = () => {
   return (
     <>
 
-      <div className="xl:flex hidden gap-[2px] fixed h-[60px] top-[2px] right-[196px] z-[51] mix-blend-difference">
+      <div className="xl:flex hidden gap-[2px] fixed h-[50px] top-[2px] right-[196px] z-[51] mix-blend-difference">
         <div
           className={`w-[368px] header__bg !backdrop-filter-none gap-[8px] mix-blend-difference  h-full`}>
           <AppMenuItem
@@ -140,7 +140,7 @@ const AppHeader = () => {
       </div>
 
       <div
-        className="z-[51] min-w-[192px] !backdrop-filter-none header__bg  xl:!flex !hidden fixed mix-blend-difference h-[60px] top-[2px] left-[2px]">
+        className="z-[51] min-w-[192px] !backdrop-filter-none header__bg  xl:!flex !hidden fixed mix-blend-difference h-[50px] top-[2px] left-[2px]">
         <AppLogo
           className={`xl:mx-auto`}
         />

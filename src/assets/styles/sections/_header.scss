@@ -18,11 +18,7 @@
 .header {
 	color: #FFF;
 	z-index: 50;
-	height: 64px;
-
-	@media (max-width: $media-xl) {
-		height: 54px;
-	}
+	height: 54px;
 
 	padding: 2px;
 	backdrop-filter: blur(15px);
@@ -361,10 +357,10 @@
 
 	&.active {
 		transform: translateY(0);
-		top: 124px;
+		top: 114px;
 
 		&.menu-headers {
-			top: 62px;
+			top: 52px;
 			transition-delay: 0s;
 		}
 
