@@ -16,7 +16,7 @@
 .skill-card-inner {
   @apply flex overflow-hidden relative flex-col xss:gap-[20px] gap-[15px] rounded-[6px] relative z-[1] justify-between h-full transition-all duration-500 border border-solid;
 
-  filter: blur(0.01px);
+  /* filter: blur(0.01px); */
 
   &.folder {
     @apply items-center justify-center  rounded-[6px] border-[transparent] xxl:border-[#93969D];
