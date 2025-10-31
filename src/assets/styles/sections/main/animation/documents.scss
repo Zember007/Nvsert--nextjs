@@ -140,7 +140,7 @@
     @apply  translate-y-[-1px] transition-all duration-200;
 
     &-wrap {
-      @apply hidden will-change-transform *:will-change-transform l:w-[41%] m:w-[330px] m:flex justify-between l:grid xl:grid-cols-[0.76fr_1fr_auto] grid-cols-[1fr_1fr] items-center justify-between justify-items-start  xl:pr-0 l:pr-[18px] pr-[20px];
+      @apply hidden will-change-transform *:will-change-transform l:w-[41%] m:w-[330px] m:flex justify-between xl:grid xl:grid-cols-[0.76fr_1fr_auto] items-center justify-between justify-items-start  xl:pr-0 l:pr-[18px] pr-[20px];
     }
   }
 
