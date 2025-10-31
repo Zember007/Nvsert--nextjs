@@ -44,19 +44,13 @@ const ContentBlockRenderer: React.FC<{
                     <h4 className="-my-[0.6%] group-active:scale-[0.98] transition-all duration-100  text-[#34446D] flex-1">
                         {heading}
                     </h4>
+                
+
                     <svg
                         className={`transition-transform duration-100 ${!isExpanded ? 'rotate-180' : ''}`}
-                        width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <g clipPath="url(#clip0_7117_2690)">
-                            <path d="M15 15L0.999999 0.999999" stroke="#93969D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M1 9L1 1L9 1" stroke="#93969D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_7117_2690">
-                                <rect width="16" height="16" fill="white" transform="matrix(-1 0 0 -1 16 16)" />
-                            </clipPath>
-                        </defs>
+                        width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.0459 1.0459L3.16722 3.16722M15.753 15.753L5.28854 5.28854" stroke="#93969D" stroke-width="2" />
+                        <path d="M15.7529 7.75293V14.4707L14.4717 15.7529H7.75293" stroke="#93969D" stroke-width="2" />
                     </svg>
                 </div>
 

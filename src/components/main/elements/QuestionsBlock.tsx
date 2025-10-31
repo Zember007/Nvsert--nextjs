@@ -24,7 +24,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
     useEffect(() => {
         let timer: NodeJS.Timeout | null = null;
         if (active) {
-             timer = setTimeout(() => {
+            timer = setTimeout(() => {
                 controls.start({
                     y: defaultSettings.openY, // Используем openY для отскока
                     opacity: defaultSettings.opacity,
@@ -65,11 +65,13 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                     <div className={`questions-content-container ${active ? 'active' : ''} transition-scale group-active:scale-[0.99]`}>
                         <h6 className={`questions-title ${active ? 'active' : ''} group-active:duration-[0] group-active:text-[#FFF]`}>{title}</h6>
 
+                     
+
                         <svg
                             className={`questions-arrow-icon ${active ? 'active' : ''}`}
-                            width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5 5L19 19" stroke="#93969D" strokeWidth="2" strokeLinejoin="round"  /> 
-                            <path d="M19 11L19 19L11 19" stroke="#93969D" strokeWidth="2" strokeLinejoin="round"  />
+                            width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.0459 1.0459L3.16722 3.16722M15.753 15.753L5.28854 5.28854" stroke="black" stroke-width="2" />
+                            <path d="M15.7529 7.75293V14.4707L14.4717 15.7529H7.75293" stroke="black" stroke-width="2" />
                         </svg>
 
 
