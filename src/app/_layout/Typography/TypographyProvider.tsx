@@ -2,7 +2,7 @@
 'use client';
 
 import React from 'react';
-/* import { useIsMac } from '@/hooks/useIsMac'; */
+import { useIsMac } from '@/hooks/useIsMac';
 import { getSystemFontFamily } from './utils';
 import { fontWeightsMac, fontWeightsWindows, FONT_SIZE_THRESHOLD } from './constants';
 import './TypographyProvider.css';
@@ -19,7 +19,7 @@ export function TypographyProvider({
   className = '',
   style = {} 
 }: TypographyProviderProps) {
-  const isMac = true;
+  const isMac = useIsMac();
   
   const weights = isMac ? fontWeightsMac : fontWeightsWindows;
   
