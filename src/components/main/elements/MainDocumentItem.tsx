@@ -369,7 +369,7 @@ const MainDocumentItem = memo(({
                                         <motion.div
                                             animate={controls}
                                             initial={{ y: 20 }}
-                                            className="tariff-wrap w-[280px]  l:w-[250px]" ref={setWrapperRef}>
+                                            className="tariff-wrap max-w-full w-[280px]  l:w-[250px]" ref={setWrapperRef}>
                                             <ActionButton
                                                 setRef={setButtonRef}
                                                 onClick={() => openDefaultModal('orderForm')}
@@ -398,7 +398,7 @@ const MainDocumentItem = memo(({
                                 <motion.div
                                     animate={controls}
                                     initial={{ y: 20 }}
-                                    className="tariff-wrap w-[280px]  l:w-[250px] " ref={setWrapperRef}>
+                                    className="tariff-wrap max-w-full w-[280px]  l:w-[250px] " ref={setWrapperRef}>
                                     <ActionButton
                                         setRef={setButtonRef}
                                         onClick={() => router.push('/services/' + link)}

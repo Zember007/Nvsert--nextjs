@@ -1,0 +1,46 @@
+.typography-provider * {
+  font-family: var(--font-family);
+}
+
+.typography-provider [class*="text-[11px]"],
+.typography-provider [class*="text-[12px]"],
+.typography-provider [class*="text-[13px]"],
+.typography-provider [class*="text-[14px]"],
+.typography-provider [class*="text-[16px]"],
+.typography-provider .text-xs,
+.typography-provider .text-sm,
+.typography-provider .text-base {
+  font-weight: var(--font-weight-small) !important;
+}
+
+.typography-provider [class*="text-[18px]"],
+.typography-provider [class*="text-[20px]"],
+.typography-provider [class*="text-[24px]"],
+.typography-provider [class*="text-[26px]"],
+.typography-provider [class*="text-[28px]"],
+.typography-provider [class*="text-[32px]"],
+.typography-provider .text-lg,
+.typography-provider .text-xl,
+.typography-provider .text-2xl,
+.typography-provider .text-3xl,
+.typography-provider .text-4xl,
+.typography-provider .text-5xl,
+.typography-provider .text-6xl {
+  font-weight: var(--font-weight-large) !important;
+}
+
+.typography-provider * {
+  font-weight: var(--font-weight-small);
+}
+
+/* Запасной вариант для заголовков, в теории можно убрать */
+.typography-provider h1,
+.typography-provider h2,
+.typography-provider h3,
+.typography-provider h4,
+.typography-provider h5,
+.typography-provider h6 {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-large);
+}
+
