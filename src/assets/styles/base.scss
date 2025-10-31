@@ -585,14 +585,26 @@ input:-webkit-autofill {
     height: 50px;
 
     .sendIconLeft {
-        @apply block duration-100 transition-all ease-in translate-x-0 xl:translate-x-[-10%] xl:opacity-0 min-w-[23px] w-[23px];
+        @apply block duration-100 transition-all ease-in translate-x-0 xl:translate-x-[-10%] xl:opacity-0 min-w-[16px] w-[16px] flex justify-end;
     }
 
 
 
     .sendText {
-        @apply block duration-100 transition-all relative ease-in xl:left-[6.6%] -translate-y-[1px] left-0;
+        @apply block duration-100 transition-all relative ease-in xl:left-[5.5%] -translate-y-[1px] left-0;
         line-height: .5;
+    }
+
+    &.width-23 {
+        .sendIconLeft {
+            @apply min-w-[23px] w-[23px];
+        }
+
+
+
+        .sendText {
+            @apply xl:left-[6.6%];
+        }
     }
 
     &:hover {

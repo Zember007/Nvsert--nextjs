@@ -152,7 +152,7 @@ const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ 
                             }
                         }}
                         ref={setButtonRef}
-                        className="btnIconAn tariff bg-[#F5F5F2] h-[50px] rounded-[4px] text-[20px] font-light border border-[#93969d] flex items-center justify-center"
+                        className="btnIconAn width-23 tariff bg-[#F5F5F2] h-[50px] rounded-[4px] text-[20px] font-light border border-[#93969d] flex items-center justify-center"
                     >
                         <span className="sendText">
                             {openGroups.length > 0 ? 'Свернуть услуги' : 'Показать услуги'}
