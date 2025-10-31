@@ -303,13 +303,13 @@ const SliderMain = () => {
                             </div>
                             <div className="slide-counter-container">
                                 <div className="slide-counter-overflow">
-                                    <div className="count-column rubik">
+                                    <div className="count-column">
                                         <h3 data-slide-count="step" className="count-heading ">01</h3>
                                     </div>
                                 </div>
                                 <span>/</span>
                                 <div className="count-column ">
-                                    <h3 data-slide-count="total" className="count-heading rubik">{slides.length}</h3>
+                                    <h3 data-slide-count="total" className="count-heading">{slides.length}</h3>
                                 </div>
                             </div>
                         </div>

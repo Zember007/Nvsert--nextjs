@@ -121,7 +121,7 @@ const AppHeader = () => {
 
       <div className="xl:flex hidden gap-[2px] fixed h-[60px] top-[2px] right-[196px] z-[51] mix-blend-difference">
         <div
-          className={`w-[368px] rubik header__bg !backdrop-filter-none gap-[8px] mix-blend-difference  h-full`}>
+          className={`w-[368px] header__bg !backdrop-filter-none gap-[8px] mix-blend-difference  h-full`}>
           <AppMenuItem
             className="w-[160px] !justify-center"
             onClick={(e) => {
@@ -148,7 +148,7 @@ const AppHeader = () => {
 
       <Link
         href={filterPhone('8 495 777-11-97')}
-        className={` w-[50px] justify-center rubik !p-0  xl:!hidden !backdrop-filter-none ${burgerMenuActive ? 'active' : 'mix-blend-difference'} header__bg fixed h-[50px] top-[2px] right-[58px] z-[51] `}
+        className={` w-[50px] justify-center !p-0  xl:!hidden !backdrop-filter-none ${burgerMenuActive ? 'active' : 'mix-blend-difference'} header__bg fixed h-[50px] top-[2px] right-[58px] z-[51] `}
         aria-label="8 495 777-11-97"
       >
         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -158,7 +158,7 @@ const AppHeader = () => {
 
 
       </Link>
-      <header className={`rubik header ${(servicesMenuActive || burgerMenuActive) ? 'active' : ''}`}>
+      <header className={`header ${(servicesMenuActive || burgerMenuActive) ? 'active' : ''}`}>
 
         <div
           className="header__bg min-w-[192px] xl:grow-0 grow xl:opacity-0 !px-[20px]">

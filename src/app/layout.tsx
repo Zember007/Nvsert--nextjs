@@ -3,14 +3,14 @@ import '@/assets/styles/base/_variables.scss'
 import '@/assets/styles/base/_mixins.scss'
 import '@/assets/styles/base/_icon.scss'
 import { ReactNode } from "react"
-import { Rubik } from 'next/font/google'
+import { Roboto } from 'next/font/google'
 import type { Metadata } from 'next'
 
-const rubik = Rubik({
+const font = Roboto({
   subsets: ['latin', 'cyrillic'],
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['100', '300', '400', '500', '700', '900'],
   display: 'swap',
-  variable: '--font-rubik',
+  variable: '--font-family',
 })
 
 export const metadata: Metadata = {
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="ru" className={rubik.variable}>
+    <html lang="ru" className={font.variable}>
       <body>
         <Provider>
           {children}

@@ -56,7 +56,7 @@ const FlightSuccess = ({ close, small = false, text, closeIcon = true }: { close
                     <FlyingPlane />
                 </div>
             </div>
-            <p className={`text-[#93969D] font-light text-[44px] rubik absolute bottom-[30px] left-[50%] translate-x-[-50%]`}>{time}</p>
+            <p className={`text-[#93969D] font-light text-[44px] absolute bottom-[30px] left-[50%] translate-x-[-50%]`}>{time}</p>
         </div>
 
     );
