@@ -257,11 +257,11 @@ const AppFooter = () => {
 
         <div className="m:max-w-full m:w-full m:mx-0 mx-auto max-w-[280px]  flex xl:gap-[8px] gap-[10px] flex-col xl:items-end items-start">
           <AppMenuItem
-            className="max-xl:!border-[#FFFFFF] xl:!h-[35px] !h-auto !text-left"
+            className="xl:!h-[35px] !h-auto !text-left"
 
             item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: t("footer.policy") }} isActive={false} />
           <AppMenuItem
-            className="max-xl:!border-[#FFFFFF] xl:!h-[35px] !h-auto !text-left"
+            className="xl:!h-[35px] !h-auto !text-left"
 
             item={{ href: '/soglashenie/polzovatelskoe-soglashenie/', label: 'Обработка персональных данных' }} isActive={false} />
         </div>
