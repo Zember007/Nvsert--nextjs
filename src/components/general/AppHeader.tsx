@@ -236,7 +236,7 @@ const AppHeader = () => {
               onClick={burgerHandler}
               aria-label="Toggle menu"
             >
-              <div className={`${burgerMenuActive ? '*:bg-black w-[34px]' : '*:bg-white w-[30px]'} relative  h-[24px] flex  flex-col justify-between items-center pointer-events-none`}>
+              <span className={`${burgerMenuActive ? '*:bg-black w-[34px]' : '*:bg-white w-[30px]'} relative  h-[24px] flex  flex-col justify-between items-center pointer-events-none`}>
                 <span
                   className={`rounded-[8px] block h-[4px] w-full  transition-transform duration-300 ease-in-out ${burgerMenuActive ? 'rotate-45 translate-y-[10px]' : ''
                     }`}
@@ -249,7 +249,7 @@ const AppHeader = () => {
                   className={`rounded-[8px] block h-[4px] w-full  transition-transform duration-300 ease-in-out ${burgerMenuActive ? '-rotate-45 -translate-y-[10px]' : ''
                     }`}
                 ></span>
-              </div>
+              </span>
             </button>
           </div>
         </div>

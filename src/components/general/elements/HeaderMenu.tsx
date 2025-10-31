@@ -175,12 +175,12 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                                                         onClick={() => handleItemClick(item)}
                                                         className={`${index_item === 0 ? 'first-child' : ''} ${'img' in item && item.img ? 'have-img' : ''} header__menu-mob-item group`}
                                                     >
-                                                        <div className="flex items-center gap-[20px] transition-transform will-change-transform duration-100 group-active:scale-[.95]">
+                                                        <span className="flex items-center gap-[20px] transition-transform will-change-transform duration-100 group-active:scale-[.95]">
                                                             {'img' in item && item.img?.url &&
                                                                 <Image src={'https://test11.audiosector.ru/cp' + item.img.url} alt="document" width={43} height={60} />
                                                             }
                                                             <span className='text-[20px] font-light text-black'>{item.title}</span>
-                                                        </div>
+                                                        </span>
                                                         {item.items && (
                                                             <Image
                                                                 className='translate-x-[5px]'
@@ -249,11 +249,11 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                                     <path fillRule="evenodd" clipRule="evenodd" d="M12.0601 0C5.4329 0 0.0600586 5.37284 0.0600586 12C0.0600586 18.6272 5.4329 24 12.0601 24C18.6872 24 24.0601 18.6272 24.0601 12C24.0601 5.37284 18.6872 0 12.0601 0ZM2.87332 8.19473C2.3736 9.40115 2.1164 10.6942 2.1164 12C2.1164 14.6372 3.16403 17.1664 5.02883 19.0312C6.89363 20.896 9.42284 21.9437 12.0601 21.9437C14.6973 21.9437 17.2265 20.896 19.0913 19.0312C20.9561 17.1664 22.0037 14.6372 22.0037 12C22.0037 10.6942 21.7465 9.40115 21.2468 8.19473C20.7471 6.98831 20.0146 5.89213 19.0913 4.96877C18.1679 4.04542 17.0718 3.31297 15.8653 2.81326C14.6589 2.31354 13.3659 2.05634 12.0601 2.05634C10.7542 2.05634 9.46121 2.31354 8.25479 2.81326C7.04837 3.31297 5.95219 4.04542 5.02883 4.96877C4.10548 5.89213 3.37303 6.98831 2.87332 8.19473Z" fill="url(#paint1_linear_5542_9235)" />
                                     <defs>
                                         <linearGradient id="paint0_linear_5542_9235" x1="593.414" y1="7.13379" x2="593.414" y2="997.528" gradientUnits="userSpaceOnUse">
-                                            <stop stopColor="#2AABEE" />
+                                            <stop offset="0" stopColor="#2AABEE" />
                                             <stop offset="1" stopColor="#229ED9" />
                                         </linearGradient>
                                         <linearGradient id="paint1_linear_5542_9235" x1="1200.15" y1="0" x2="1200.15" y2="2400" gradientUnits="userSpaceOnUse">
-                                            <stop stopColor="#2AABEE" />
+                                            <stop offset="0" stopColor="#2AABEE" />
                                             <stop offset="1" stopColor="#229ED9" />
                                         </linearGradient>
                                     </defs>
