@@ -286,7 +286,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                         ))}
                                     </div>
                                     {sortedContentBlocks.length > 0 && (
-                                        <div className="w-full flex justify-end pb-[20px] border-b border-[#93969d80]">
+                                        <div className="w-full flex justify-end">
                                             <p className='text-[12px] leading-[8px] text-[#93969D] font-light'>Статья написана 20.04.2025</p>
                                         </div>
                                     )}
