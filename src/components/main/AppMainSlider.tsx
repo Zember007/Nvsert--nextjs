@@ -329,7 +329,7 @@ const SliderMain = () => {
                         </div>
                     </div>
 
-                    <div className="main-button-wrap tariff-wrap" ref={setWrapperRef}>
+                    <div className="main-button-slider-wrap tariff-wrap" ref={setWrapperRef}>
                         <button
                             onClick={() => { openDefaultModal('orderForm') }}
                             ref={setButtonRef} className='slider__button group btnIconAn doc-btn tariff'>
