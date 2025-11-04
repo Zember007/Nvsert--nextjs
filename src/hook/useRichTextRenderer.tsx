@@ -36,7 +36,7 @@ export const useRichTextRenderer = () => {
                 ...(beforeSlider ? processContent(beforeSlider).map((content, index) => (
                     <div key={`before-${index}`}>{content}</div>
                 )) : []),
-                <div key="slider-container" ref={sliderRef} className="slider-container overflow-hidden 1k:max-w-[940px] l:max-w-[640px] max-w-[580px] mx-auto">
+                <div key="slider-container" ref={sliderRef} className="slider-container overflow-hidden l:max-w-[640px] max-w-[580px] mx-auto">
                     <div className="slider-wrapper flex  "
                     style={{ gap: `${gap}px` }}
                     >
@@ -119,7 +119,7 @@ export const useRichTextRenderer = () => {
                 ...(beforeGrid ? processContent(beforeGrid).map((content, index) => (
                     <div key={`before-grid-${index}`} className="mb-[30px]">{content}</div>
                 )) : []),
-                <div key="grid-container" className="grid gap-[20px] mb-[30px] 1k:grid-cols-[370px_1fr_1fr] xxs:grid-cols-2 grid-cols-1" >
+                <div key="grid-container" className="grid gap-[20px] mb-[30px] xxs:grid-cols-2 grid-cols-1" >
                     {gridBlocks.map((block: string, index: number) => {
                         // Проверяем, является ли блок изображением
                         const imageMatch = block?.replace(/^#\s*/, '').match(/^!\[(.*?)\]\((.*?)\)/);
@@ -131,15 +131,14 @@ export const useRichTextRenderer = () => {
                         const content = lines.slice(1).join('\n');
 
                         // Определяем стили для разных карточек по индексу
-                        let cardStyle: React.CSSProperties = {};
                         let cardClass = "p-[30px] border border-[#93969D] rounded-[6px] flex flex-col";
 
                         if (index === 0) {
-                            cardClass += " 1k:col-span-1 xxs:col-span-2  1k:row-span-2 1k:min-h-[620px] 1k:min-h-[300px] 1k:min-h-[200px]  justify-between  ";
+                            cardClass += " xxs:col-span-2    justify-between  ";
                         } else if (index >= 1 && index <= 4) {
                             cardClass += " justify-between items-end min-h-[300px]";
                         } else if (index === 5) {
-                            cardClass += " 1k:col-span-1 xxs:col-span-2 justify-between items-end min-h-[300px]";
+                            cardClass += " xxs:col-span-2 justify-between items-end min-h-[300px]";
                         } else if (index === 6) {
 
                             cardClass += " justify-between items-end xxs:col-span-2   min-h-[300px] ";
