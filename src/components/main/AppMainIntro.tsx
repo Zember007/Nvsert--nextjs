@@ -41,7 +41,7 @@ const AppMainIntro = () => {
                 <div className="wrapper">
                     <div className='main-banner__content'>
                         <div className="intro-content-container">
-                            <h1 className="main-banner__title">{filterPrepositions(t('mainIntro.title'))}</h1>
+                            <h1 className="main-banner__title pl-[33px]">{filterPrepositions(t('mainIntro.title'))}</h1>
                             <div className="intro-spacer"></div>
                         </div>
                         

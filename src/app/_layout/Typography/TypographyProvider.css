@@ -2,30 +2,30 @@
   font-family: var(--font-family);
 }
 
-.typography-provider [class*="text-[11px]"],
-.typography-provider [class*="text-[12px]"],
-.typography-provider [class*="text-[13px]"],
-.typography-provider [class*="text-[14px]"],
-.typography-provider [class*="text-[16px]"],
-.typography-provider .text-xs,
-.typography-provider .text-sm,
-.typography-provider .text-base {
+.typography-provider [class*="text-[11px]"]:not(.no-font-weight),
+.typography-provider [class*="text-[12px]"]:not(.no-font-weight),
+.typography-provider [class*="text-[13px]"]:not(.no-font-weight),
+.typography-provider [class*="text-[14px]"]:not(.no-font-weight),
+.typography-provider [class*="text-[16px]"]:not(.no-font-weight),
+.typography-provider .text-xs:not(.no-font-weight),
+.typography-provider .text-sm:not(.no-font-weight),
+.typography-provider .text-base:not(.no-font-weight) {
   font-weight: var(--font-weight-small) !important;
 }
 
-.typography-provider [class*="text-[18px]"],
-.typography-provider [class*="text-[20px]"],
-.typography-provider [class*="text-[24px]"],
-.typography-provider [class*="text-[26px]"],
-.typography-provider [class*="text-[28px]"],
-.typography-provider [class*="text-[32px]"],
-.typography-provider .text-lg,
-.typography-provider .text-xl,
-.typography-provider .text-2xl,
-.typography-provider .text-3xl,
-.typography-provider .text-4xl,
-.typography-provider .text-5xl,
-.typography-provider .text-6xl {
+.typography-provider [class*="text-[18px]"]:not(.no-font-weight),
+.typography-provider [class*="text-[20px]"]:not(.no-font-weight),
+.typography-provider [class*="text-[24px]"]:not(.no-font-weight),
+.typography-provider [class*="text-[26px]"]:not(.no-font-weight),
+.typography-provider [class*="text-[28px]"]:not(.no-font-weight),
+.typography-provider [class*="text-[32px]"]:not(.no-font-weight),
+.typography-provider .text-lg:not(.no-font-weight),
+.typography-provider .text-xl:not(.no-font-weight),
+.typography-provider .text-2xl:not(.no-font-weight),
+.typography-provider .text-3xl:not(.no-font-weight),
+.typography-provider .text-4xl:not(.no-font-weight),
+.typography-provider .text-5xl:not(.no-font-weight),
+.typography-provider .text-6xl:not(.no-font-weight) {
   font-weight: var(--font-weight-large) !important;
 }
 
