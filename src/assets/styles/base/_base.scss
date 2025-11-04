@@ -151,7 +151,7 @@ button,
   }
 }
 
-/* .leading-page { */
+.leading-page {
   .wrapper {
 
     min-width: map_get($wrapper, content-size--min);
@@ -170,21 +170,16 @@ button,
       padding-right: map_get($wrapper, padding-size-m);
     }
   }
-/* } */
+}
 
 .wrapper {
   height: 100%;
   position: relative;
   width: 100%;
-/*   padding-left: 135px;
-  padding-right: 135px;
-  max-width: 100%; */
+  padding-left: 38px;
+  padding-right: 38px;
+  max-width: 100%;
   margin: 0 auto;
-
-/*   @media (max-width: $media-xxl) {
-    padding-left: 40px;
-    padding-right: 40px;
-  }
 
   @media (min-width: $media-2k) {
     max-width: 1998px;
@@ -193,7 +188,7 @@ button,
   @media (max-width: $media-m) {
     padding-left: 20px;
     padding-right: 20px;
-  } */
+  }
 
 }
 
