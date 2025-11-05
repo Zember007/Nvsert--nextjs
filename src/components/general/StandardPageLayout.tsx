@@ -46,7 +46,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
                 <div className="flex gap-[40px] max-w-full">
                     <div className="flex flex-col gap-[50px] flex-1 max-w-full">
                         <div className="flex items-center justify-between gap-[20px] m:flex-row flex-col">
-                            <h1 className='m:text-left text-center'>
+                            <h1 className='m:text-left text-center m:!m-0'>
                                 {title}
                             </h1>
 
@@ -79,22 +79,23 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
                                 {children}
                             </div>
 
-                            {/* Right column */}
-                            <div className="hidden xl:block w-[250px] relative">
-                                <div className="sticky top-[104px] flex flex-col gap-[24px]">
-                                    {showButton && (
-                                        <Button
-                                            onClick={() => {
-                                                openDefaultModal('orderForm');
-                                            }}
-                                            label="Оформить заявку"
-                                        />
-                                    )}
-                                    {dotNavItems && dotNavItems.length > 0 && (
-                                        <DotNavList items={dotNavItems} />
-                                    )}
-                                </div>
-                            </div>
+
+                        </div>
+                    </div>
+                    {/* Right column */}
+                    <div className="hidden xl:block w-[250px] relative">
+                        <div className="sticky top-[104px] flex flex-col gap-[50px]">
+                            {showButton && (
+                                <Button
+                                    onClick={() => {
+                                        openDefaultModal('orderForm');
+                                    }}
+                                    label="Оформить заявку"
+                                />
+                            )}
+                            {dotNavItems && dotNavItems.length > 0 && (
+                                <DotNavList items={dotNavItems} />
+                            )}
                         </div>
                     </div>
                 </div>
