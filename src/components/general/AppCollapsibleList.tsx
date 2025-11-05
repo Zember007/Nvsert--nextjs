@@ -102,7 +102,7 @@ function AppCollapsibleList<ItemType = unknown>({
                             </clipPath>
                         </defs>
                     </svg>
-                    <span className=" text-[16px] text-[#161616] leading-[18px]  ">{title}</span>
+                    <span className="group-hover:text-[#34446D] transition-all duration-100 text-[16px] text-[#161616] leading-[18px]  ">{title}</span>
 
                 </span>
             </button>
