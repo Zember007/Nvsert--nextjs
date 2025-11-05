@@ -213,7 +213,7 @@ const AppHeader = () => {
 
         <div className=" hidden xl:flex gap-[2px]">
           <div className="w-[368px]"></div>
-        <div
+          <div
             className="header__bg w-[192px] !backdrop-filter-none  mix-blend-difference  h-full">
             <AppMenuItem
               className="mx-auto w-[170px] "
@@ -274,9 +274,9 @@ const AppHeader = () => {
                     <p className="text-1  line-after stop-color font-light">
                       {item.title}
                     </p>
-                    <div className=" sendIconLeft">
-                      <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3.66669 8.00011V6.00011H0.666687V8.00011H3.66669ZM9.63436 0.000106812L8.19576 1.43087L12.7759 5.98724H6.66669V8.01196H12.7759L8.19576 12.5683L9.63436 14.0001L16.6667 7.00011L15.9489 6.28473L15.2301 5.56833L9.63436 0.000106812Z" fill="white" />
+                    <div className="sendIconLeft !w-auto">
+                      <svg width="24" height="14" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 8V6H0V8H3ZM18 0L16.5 1.2957L20.5 6H6V8H20.5L16.5 12.7034L18 14L24 7L18 0Z" fill="white" />
                       </svg>
                     </div>
                   </Link>
