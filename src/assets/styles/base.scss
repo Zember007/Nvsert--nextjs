@@ -684,7 +684,7 @@ input:-webkit-autofill {
         left: 0;
         right: 0;
         bottom: -1px;
-        clip-path: inset(0 0 0 20%);
+        clip-path: inset(0 0 0 100%);
     }
 
     &:not(.noactive):hover {
