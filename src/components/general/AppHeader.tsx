@@ -260,7 +260,7 @@ const AppHeader = () => {
         closeMenu={closeNavMenues}
       />
       <div className={`services-menu-box menu-headers  ${servicesMenuActive && 'active'}`}>
-        <div className={`services-menu !py-[5px] js-services-menu relative `}>
+        <div className={`services-menu h-[50px] js-services-menu relative `}>
 
           <div className="services-menu__wrapper ">
             <div className="grid grid-cols-6 h-[50px] w-full xxxl:gap-[30px] gap-[8px]">
