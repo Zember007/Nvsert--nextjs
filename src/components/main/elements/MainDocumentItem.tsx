@@ -208,7 +208,7 @@ const MainDocumentItem = memo(({
 
     const commonButtonClasses = 'group btnIconAn doc-btn tariff ';
 
-    const hiddenList = windowWidth && windowWidth < 1240 ? 1 : 2;
+    const hiddenList = windowWidth && windowWidth < 1280 ? 1 : 2;
 
     const router = useRouter();
 

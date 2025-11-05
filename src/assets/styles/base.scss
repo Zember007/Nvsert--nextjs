@@ -38,7 +38,7 @@
 .PhotoView__Photo__attr {
     position: relative;
 
-    @media (min-width:1240px) {
+    @media (min-width:1280px) {
         width: 448px;
     }
 
@@ -95,7 +95,7 @@
     height: auto !important;
 
 
-    @media (min-width:1240px) {
+    @media (min-width:1280px) {
         position: fixed !important;
 
         top: 50%;
@@ -103,7 +103,7 @@
         transform: translate(400px, -370px);
     }
 
-    @media (max-width:1239px) {
+    @media (max-width:1279px) {
         .close {
             right: 20px;
             top: 20px;
@@ -258,7 +258,7 @@
 
     &::before {
 
-        @media (min-width:1240px) {
+        @media (min-width:1280px) {
             font-size: 20px;
             top: 50%;
             transform: translate(0, -368px);

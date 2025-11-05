@@ -16,7 +16,7 @@ module.exports = {
       xxs: { min: '640px' },
       m: { min: '900px' },
       l: { min: '1024px' },
-      xl: { min: '1240px' },
+      xl: { min: '1280px' },
       xxl: { min: '1440px' },
       xxxl: { min: '1580px' },
       xxxxl: { min: '1640px' },
@@ -25,7 +25,7 @@ module.exports = {
       'max-s': { max: '519px' },
       'max-m': { max: '767px' },
       'max-l': { max: '1023px' },
-      'max-xl': { max: '1239px' },
+      'max-xl': { max: '1279px' },
     },
 
   },

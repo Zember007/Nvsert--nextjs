@@ -40,7 +40,7 @@ const SliderMain = () => {
 
         if (timeLine.current) timeLine.current.destroy(); timeLine.current = null;
 
-        if (widthWindow && widthWindow >= 1240) {
+        if (widthWindow && widthWindow >= 1280) {
             let timeoutIdBg: NodeJS.Timeout | null = null;
 
 

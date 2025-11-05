@@ -276,7 +276,7 @@ export const useRichTextRenderer = () => {
             const loop: any = horizontalLoop(slides, {
                 paused: true,
                 draggable: true,
-                mobile: widthWindow && widthWindow < 1240,
+                mobile: widthWindow && widthWindow < 1280,
                 snap: true,
                 gap: widthWindow && widthWindow < 640 ? (widthWindow - (300)) / 2 : 20,
                 center: widthWindow && widthWindow < 640 ? true : false,
