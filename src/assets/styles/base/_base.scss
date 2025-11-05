@@ -176,13 +176,18 @@ button,
   height: 100%;
   position: relative;
   width: 100%;
-  padding-left: 38px;
-  padding-right: 38px;
+  padding-left: 122px;
+  padding-right: 122px;
   max-width: 100%;
   margin: 0 auto;
 
   @media (min-width: $media-2k) {
     max-width: 1998px;
+  }
+
+  @media (max-width: $media-1k) {
+    padding-left: 38px;
+    padding-right: 38px;
   }
 
   @media (max-width: $media-m) {

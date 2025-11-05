@@ -107,7 +107,7 @@ const DotNavList: React.FC<{
                 >
                     <div className={`pointer-events-none flex items-center justify-center min-w-[16px] w-[16px] h-[16px] relative transition-all duration-100 group-active:left-[15px] ${item.active ? 'left-0' : 'left-[15px]'}`}>
                         <div className={` border transition-all duration-100 group-active:w-[8px] group-active:h-[8px] group-active:border-[#34446D] ${!item.active ? 'border-transparent w-[8px] h-[8px]' : 'border-[#34446D] w-[16px] h-[16px]'} rounded-full relative`}>
-                            <div className={`w-[8px] h-[8px] transition-all duration-100 group-active:bg-[#34446D] ${item.active ? 'bg-[#34446D] border-transparent' : 'bg-transparent border-[#93969d80]'} border  rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}></div>
+                            <div className={`w-[8px] h-[8px] transition-all duration-100 group-hover:bg-[#34446D] ${item.active ? 'bg-[#34446D] border-transparent' : 'bg-transparent border-[#93969d80]'} border  rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}></div>
                         </div>
                     </div>
                     <span className={`pointer-events-none text-[16px] group-active:scale-[0.95] transition-transform duration-100 font-light  ${item.active ? 'text-[#34446D] ' : 'text-black '}`}>
