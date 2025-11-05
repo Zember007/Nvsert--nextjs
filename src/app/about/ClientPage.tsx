@@ -66,9 +66,9 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
             return (
                 <>
 
-                    {parts[0] && <div className="mb-[30px]">{processContent(parts[0])}</div>}
+                    {parts[0] && <div className="mb-[20px]">{processContent(parts[0])}</div>}
                     <Map />
-                    {parts[1] && <div>{processContent(parts[1])}</div>}
+                    {/* {parts[1] && <div>{processContent(parts[1])}</div>} */}
                 </>
             );
         }
