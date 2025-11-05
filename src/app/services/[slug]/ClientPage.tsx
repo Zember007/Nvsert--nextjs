@@ -38,13 +38,13 @@ const ContentBlockRenderer: React.FC<{
                 id={'block-' + block.id}
                 className="w-full">
                 <div
-                    className="flex justify-center group items-center gap-[10px] pb-[10px] border-b border-[#93969d80] cursor-pointer"
+                    className="flex justify-center group items-center gap-[10px] pb-[10px] border-b border-[#93969d80] cursor-pointer line-after after:!bottom-0"
                     onClick={onToggle}
                 >
-                    <h4 className="-my-[0.6%] group-active:scale-[0.98] transition-all duration-100  text-[#34446D] flex-1">
+                    <h4 className="-my-[0.6%] group-active:scale-[0.98] transition-all duration-100  group-hover:text-[#34446D] text-[#000] flex-1">
                         {heading}
                     </h4>
-                
+
 
                     <svg
                         className={`transition-transform duration-100 ${!isExpanded ? 'rotate-180' : ''}`}
@@ -302,6 +302,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                             listClassName='flex flex-col gap-[20px]'
                                             renderItem={(children) => (
                                                 <AppNavigationItem
+                                                    className='w-full'
                                                     dark={true}
                                                     link={children.slug}
                                                     key={children.id}

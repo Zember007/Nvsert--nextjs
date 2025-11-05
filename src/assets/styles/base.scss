@@ -674,7 +674,7 @@ input:-webkit-autofill {
         content: "";
         border-bottom: 1px solid;
         border-color: #34446D;
-        transition: clip-path .1s ease, border-color .1s ease;
+        transition: clip-path .2s ease, border-color .2s ease;
         transform: translateZ(0);
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
