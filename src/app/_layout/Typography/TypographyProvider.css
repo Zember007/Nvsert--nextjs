@@ -1,46 +1,4 @@
 .typography-provider * {
   font-family: var(--font-family);
+  font-weight: var(--tw-auto-weight, inherit);
 }
-
-.typography-provider [class*="text-[11px]"]:not(.no-font-weight),
-.typography-provider [class*="text-[12px]"]:not(.no-font-weight),
-.typography-provider [class*="text-[13px]"]:not(.no-font-weight),
-.typography-provider [class*="text-[14px]"]:not(.no-font-weight),
-.typography-provider [class*="text-[16px]"]:not(.no-font-weight),
-.typography-provider .text-xs:not(.no-font-weight),
-.typography-provider .text-sm:not(.no-font-weight),
-.typography-provider .text-base:not(.no-font-weight) {
-  font-weight: var(--font-weight-small) !important;
-}
-
-.typography-provider [class*="text-[18px]"]:not(.no-font-weight),
-.typography-provider [class*="text-[20px]"]:not(.no-font-weight),
-.typography-provider [class*="text-[24px]"]:not(.no-font-weight),
-.typography-provider [class*="text-[26px]"]:not(.no-font-weight),
-.typography-provider [class*="text-[28px]"]:not(.no-font-weight),
-.typography-provider [class*="text-[32px]"]:not(.no-font-weight),
-.typography-provider .text-lg:not(.no-font-weight),
-.typography-provider .text-xl:not(.no-font-weight),
-.typography-provider .text-2xl:not(.no-font-weight),
-.typography-provider .text-3xl:not(.no-font-weight),
-.typography-provider .text-4xl:not(.no-font-weight),
-.typography-provider .text-5xl:not(.no-font-weight),
-.typography-provider .text-6xl:not(.no-font-weight) {
-  font-weight: var(--font-weight-large) !important;
-}
-
-.typography-provider * {
-  font-weight: var(--font-weight-small);
-}
-
-/* Запасной вариант для заголовков, в теории можно убрать */
-.typography-provider h1,
-.typography-provider h2,
-.typography-provider h3,
-.typography-provider h4,
-.typography-provider h5,
-.typography-provider h6 {
-  font-family: var(--font-family);
-  font-weight: var(--font-weight-large);
-}
-

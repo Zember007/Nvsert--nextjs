@@ -13,7 +13,13 @@ import { TypographyProvider } from './Typography/TypographyProvider';
 
 function ReduxProvider({ children }: { children: ReactNode }) {
   return <Provider store={store}>
-    <TypographyProvider>
+    <TypographyProvider
+      threshold={16}
+      smallWeightMac={300}
+      largeWeightMac={400}
+      smallWeightWindows={350}
+      largeWeightWindows={400}
+    >
       <HeaderContextProvider>
         <Layout_wrapper>
           {children}
