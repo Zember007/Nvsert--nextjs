@@ -14,9 +14,9 @@ async function getNavigationData(slug: string): Promise<NavigationItem | null> {
 
 // Генерация статических путей
 export async function generateStaticParams() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/services/list`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/services`);
   const items = await res.json();
-  return items.map((item: { slug: string }) => ({ slug: item.slug }));
+  return items.data.map((item: { slug: string }) => ({ slug: item.slug }));
 }
 
 // Страница
