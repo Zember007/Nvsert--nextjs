@@ -9,7 +9,7 @@ import { useButton } from '@/hook/useButton';
 import { useHeaderContext } from '../contexts/HeaderContext';
 import { useTranslation } from 'react-i18next';
 import { useIntersectionObserver } from '@/hook/useIntersectionObserver';
-import useWindowWidth from '@/hook/useWindowWidth';
+import useWindowSize from '@/hook/useWindowSize';
 
 
 interface slideItem {
@@ -29,7 +29,7 @@ const settings = {
 
 const SliderMain = () => {
     const { ref, isVisible } = useIntersectionObserver({}, true);
-    const widthWindow = useWindowWidth();
+    const {width: widthWindow} = useWindowSize();
     const [activeIndex, setActive] = useState<number>(0)
     const whiteBgRef = useRef<HTMLDivElement | null>(null)
     const slider = useRef<HTMLDivElement>(null)

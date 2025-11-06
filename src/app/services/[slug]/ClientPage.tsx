@@ -15,6 +15,7 @@ import { filterPrepositions } from '@/hook/filter';
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/config/store';
+import useWindowSize from '@/hook/useWindowSize';
 
 // Component to render rich text with proper formatting
 const RichTextRenderer: React.FC<{ content: string }> = ({ content }) => {
@@ -85,6 +86,7 @@ interface ClientPageProps {
 const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, initialSlug }) => {
     const slug = initialSlug;
     const { openDefaultModal } = useHeaderContext();
+    const { height: windowHeight } = useWindowSize();
 
     const { navigation } = useSelector((state: RootState) => state.navigation);
 
@@ -146,6 +148,10 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [currentServiceIndex]);
+
+    const recomendedServices = useMemo(() => {
+        return [...navigation].sort((a, b) => a.category.name === currentService?.category.name ? -1 : 1).filter(item => item.slug !== currentService?.slug).slice(0, windowHeight >= 820 ? 3 : 2);
+    }, [navigation, currentService, windowHeight]);
 
 
 
@@ -233,11 +239,11 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                         </div>
 
                                         <div className="w-full m:block hidden">
-                                            {navigation?.filter(item => item.slug !== currentService?.slug) && (
+                                            {recomendedServices.length > 0 && (
                                                 <AppCollapsibleList
                                                     position='left'
                                                     title={'Рекомендуем к оформлению'}
-                                                    items={navigation.filter(item => item.category.name === currentService?.category.name && item.slug !== currentService?.slug).slice(0, 4)}
+                                                    items={recomendedServices}
                                                     defaultOpen={true}
                                                     listClassName='flex flex-col gap-[20px]'
                                                     renderItem={(children) => (
@@ -293,11 +299,11 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                 </div>
 
                                 <div className="w-full m:hidden block">
-                                    {navigation?.filter(item => item.slug !== currentService?.slug) && (
+                                    {recomendedServices.length > 0 && (
                                         <AppCollapsibleList
                                             position='left'
                                             title={'Рекомендуем к оформлению'}
-                                            items={navigation.filter(item => item.category.name === currentService?.category.name && item.slug !== currentService?.slug).slice(0, 4)}
+                                            items={recomendedServices}
                                             defaultOpen={true}
                                             listClassName='flex flex-col gap-[20px]'
                                             renderItem={(children) => (

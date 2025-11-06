@@ -2,10 +2,10 @@ import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { horizontalLoop } from '@/scripts/slider';
-import useWindowWidth from '@/hook/useWindowWidth';
+import useWindowSize from '@/hook/useWindowSize';
 
 export const useRichTextRenderer = () => {
-    const widthWindow = useWindowWidth();
+    const {width: widthWindow} = useWindowSize();
     const sliderRef = useRef(null);
     const [activeIndex, setActiveIndex] = useState<number>(0);
 

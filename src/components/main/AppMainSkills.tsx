@@ -7,7 +7,7 @@ import AppSkillBlock from './elements/AppSkillBlock';
 import '@/assets/styles/sections/main/animation/skills.scss'
 import '@/assets/styles/sections/main/main-skills-component.scss'
 import { useTranslation } from 'react-i18next';
-import useWindowWidth from '@/hook/useWindowWidth';
+import useWindowSize from '@/hook/useWindowSize';
 import { horizontalLoop } from '@/scripts/slider';
 import { filterPrepositions } from '@/hook/filter';
 import { useIntersectionObserver } from '@/hook/useIntersectionObserver';
@@ -18,7 +18,7 @@ gsap.registerPlugin(Draggable);
 const AppMainSkills = () => {
 
     const { t } = useTranslation()
-    const widthWindow = useWindowWidth()
+    const {width: widthWindow} = useWindowSize()
     const [isVisible, setIsVisible] = useState(false);
     const { ref, isVisible: isVisibleSection } = useIntersectionObserver({}, true);
     const skillsData = (widthWindow && widthWindow < 1440) ? skills.filter(item => !item.empty) : skills;

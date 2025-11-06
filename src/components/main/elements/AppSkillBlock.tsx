@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import { filterPrepositions } from '@/hook/filter';
-import useWindowWidth from '@/hook/useWindowWidth';
+import useWindowSize from '@/hook/useWindowSize';
 import '@/assets/styles/sections/main/skill-block.scss';
 
 interface AppSkillBlockProps {
@@ -14,7 +14,7 @@ interface AppSkillBlockProps {
 }
 
 const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBlockProps) => {
-  const widthWindow = useWindowWidth()
+  const {width: widthWindow} = useWindowSize()
 
   const cardRef = useRef<null | HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });

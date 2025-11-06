@@ -8,7 +8,7 @@ import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import { MainDocumentItemProps } from '@/types/documents';
 import SendIcon from '@/components/svg/SendIcon';
 import ServiceMoveIcon from '../svg/ServiceMoveIcon';
-import useWindowWidth from '@/hook/useWindowWidth';
+import useWindowSize from '@/hook/useWindowSize';
 import '@/assets/styles/sections/main/document-item.scss';
 import { useRouter } from 'next/navigation';
 
@@ -118,7 +118,7 @@ const MainDocumentItem = memo(({
     totalItems = 0,
     index = 0
 }: MainDocumentItemProps) => {
-    const windowWidth = useWindowWidth()
+    const {width: windowWidth} = useWindowSize()
     const controls = useAnimation();
     const [listHidden, setListHidden] = useState(true);
     const [photoWidth, setPhotoWidth] = useState(0);

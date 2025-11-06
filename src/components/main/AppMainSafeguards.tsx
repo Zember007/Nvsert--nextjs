@@ -9,13 +9,13 @@ import Img1 from '@/assets/images/safeguard/1.webp'
 import Img2 from '@/assets/images/safeguard/2.webp'
 import Img3 from '@/assets/images/safeguard/3.webp'
 import Img4 from '@/assets/images/safeguard/4.webp'
-import useWindowWidth from '@/hook/useWindowWidth';
+import useWindowSize from '@/hook/useWindowSize';
 import { horizontalLoop } from '@/scripts/slider';
 
 
 const AppMainSafeguards = () => {
 
-  const widthWindow = useWindowWidth()
+  const {width: widthWindow} = useWindowSize()
   const [isVisible, setIsVisible] = useState(false);
   const divRef = useRef<HTMLDivElement>(null);
 

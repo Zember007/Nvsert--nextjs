@@ -6,7 +6,7 @@ import { useButton } from '@/hook/useButton';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { useTranslation } from 'react-i18next';
-import useWindowWidth from '@/hook/useWindowWidth';
+import useWindowSize from '@/hook/useWindowSize';
 import '@/assets/styles/sections/main/main-feedback.scss';
 
 
@@ -14,7 +14,8 @@ import '@/assets/styles/sections/main/main-feedback.scss';
 
 const AppMainFeedback = () => {
 
-    const widthWindow = useWindowWidth();
+    const {width: widthWindow} = useWindowSize();
+    
     const ref = useRef(null)
 
     const [activeIndex, setActive] = useState<number>(0)
