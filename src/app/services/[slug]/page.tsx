@@ -16,14 +16,16 @@ async function getNavigationData(slug: string): Promise<NavigationItem | null> {
 export async function generateStaticParams() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/services`);
   const items = await res.json();
+  console.log(items, 'items');
   return items.data.map((item: { slug: string }) => ({ slug: item.slug }));
 }
 
 // Страница
-export default async function Page({ params }: { params: { slug: string } }) {
-  const navigation = await getNavigationData(params.slug);
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const navigation = await getNavigationData(slug);
   if (!navigation) return <div>Service not found</div>;
 
-  return <ClientPage initialNavigation={navigation} initialSlug={params.slug} />;
+  return <ClientPage initialNavigation={navigation} initialSlug={slug} />;
 }
 
