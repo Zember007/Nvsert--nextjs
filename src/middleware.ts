@@ -9,8 +9,6 @@ export function middleware(req: NextRequest) {
   // Проверяем, начинается ли путь с /api/
   if (pathname.startsWith('/api/')) {
     targetUrl = `${process.env.apiTarget}${pathname.replace('/api/', '')}`;
-  } else if (pathname.startsWith('/media/')) {
-    targetUrl = `${process.env.mediaTarget}${pathname.replace('/media/', '')}`;
   }
 
   // Если targetUrl определен (путь начинается с /api/ или /media/)

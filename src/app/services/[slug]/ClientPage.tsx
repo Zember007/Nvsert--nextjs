@@ -28,9 +28,8 @@ const ContentBlockRenderer: React.FC<{
     block: ContentBlock;
     isExpanded: boolean;
     onToggle: () => void;
-}> = ({ block, isExpanded, onToggle }) => {
+}> = ({ block, isExpanded = true, onToggle }) => {
     const { heading, richText, image, imageCaption } = block;
-
     // Extract first markdown image from content
     const firstImage = { alt: imageCaption, src: image?.url, width: image?.width, height: image?.height };
     if (richText && heading) {
@@ -90,15 +89,10 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
 
     const { navigation } = useSelector((state: RootState) => state.navigation);
 
-    const [expandedSections, setExpandedSections] = useState<number[]>([]);
+    const [expandedSections, setExpandedSections] = useState<number[]>(initialNavigation.content?.map(item => item.id) || []);
     const [currentServiceIndex, setCurrentServiceIndex] = useState<number>(0);
 
-    const currentService = useMemo(() => {
-        if (navigation && navigation.length > 0) {
-            return navigation[currentServiceIndex];
-        }
-        return initialNavigation || undefined;
-    }, [initialNavigation, currentServiceIndex, slug]);
+    const currentService = navigation[currentServiceIndex] || initialNavigation;
 
     // Sync index with slug
     React.useEffect(() => {
@@ -111,10 +105,6 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
         }
     }, [slug, navigation]);
 
-    const sortedContentBlocks = useMemo(() => {
-        if (!currentService?.content) return [] as ContentBlock[];
-        return currentService.content;
-    }, [currentService?.content]);
 
     const toggleSection = (blockId: number) => {
         setExpandedSections(prev =>
@@ -126,24 +116,24 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
 
     // Auto-expand first section when service changes
     React.useEffect(() => {
-        if (sortedContentBlocks.length > 0) {
-            setExpandedSections([sortedContentBlocks[0].id]);
+        if (currentService.content && currentService.content.length > 0) {
+            setExpandedSections([currentService.content[0].id]);
         }
-    }, [currentService?.id, sortedContentBlocks]);
+    }, [currentService]);
 
     // Auto-expand all sections on initial load (as per original)
     React.useEffect(() => {
-        if (sortedContentBlocks.length > 0) {
-            setExpandedSections(sortedContentBlocks.map(item => item.id));
+        if (currentService.content && currentService.content.length > 0) {
+            setExpandedSections(currentService.content.map(item => item.id));
         }
-    }, [sortedContentBlocks]);
+    }, [currentService]);
 
     // Track which content block is currently in view and reflect it in the right navigation
 
 
     const ctaInsertAfterIndex = useMemo(() => {
-        return Math.ceil(sortedContentBlocks.length / 2) - 1;
-    }, [sortedContentBlocks.length]);
+        return Math.ceil((currentService.content?.length || 0) / 2) - 1;
+    }, [currentService]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -191,7 +181,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
             </PhotoProvider>
 
             {/* Main Content */}
-            {slug && currentService &&
+            {(currentService) &&
                 <div className="wrapper pt-[50px] ">
                     <div className="flex gap-[40px]">
                         <div className="flex flex-col m:gap-[50px] gap-[40px] flex-1">
@@ -273,7 +263,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                         />
                                     </div>
                                     <div className="w-full flex flex-col items-center space-y-[50px]">
-                                        {sortedContentBlocks.map((block, index) => (
+                                        {currentService.content?.map((block, index) => (
                                             <React.Fragment key={block.id}>
                                                 {index === ctaInsertAfterIndex && (
                                                     <AppCtaBanner
@@ -291,7 +281,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                             </React.Fragment>
                                         ))}
                                     </div>
-                                    {sortedContentBlocks.length > 0 && (
+                                    {currentService.content && currentService.content.length > 0 && (
                                         <div className="w-full flex justify-end">
                                             <p className='text-[12px] leading-[8px] text-[#93969D] font-light'>Статья написана 20.04.2025</p>
                                         </div>
