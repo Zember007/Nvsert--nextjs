@@ -203,7 +203,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                             <div className="flex gap-[40px] items-stretch m:flex-row flex-col">
                                 {/* Left Column */}
                                 <div className="m:w-[250px] relative">
-                                    <div className="sticky top-[104px] flex flex-col xl:gap-[40px] gap-[20px]">
+                                    <div className="sticky top-[104px] flex flex-col xl:gap-[40px] gap-[20px] overflow-y-auto max-h-[calc(100vh-104px)]">
 
                                         <div className="flex  gap-[40px] flex-col-reverse">
                                             <div className="w-[250px] mx-auto">
@@ -323,7 +323,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                         </div>
 
                         <div className="w-[250px] relative xl:block hidden">
-                            <div className=" sticky top-[104px] flex flex-col gap-[50px]">
+                            <div className=" sticky top-[104px] flex flex-col gap-[50px] overflow-y-auto max-h-[calc(100vh-104px)]">
                                 <Button
                                     onClick={() => { openDefaultModal('orderForm') }}
                                     label='Оформить заявку'

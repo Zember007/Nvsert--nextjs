@@ -63,7 +63,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
                         <div className="flex gap-[40px] m:flex-row flex-col items-stretch max-w-full">
                             {/* Left sidebar */}
                             <div className="m:w-[250px] w-full relative">
-                                <div className="sticky top-[104px] flex flex-col gap-[40px]">
+                                <div className="sticky top-[104px] flex flex-col gap-[40px] overflow-y-auto max-h-[calc(100vh-104px)]">
                                     <SidebarNavButtons />
 
                                     <div className="xl:hidden">
@@ -84,7 +84,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
                     </div>
                     {/* Right column */}
                     <div className="hidden xl:block w-[250px] relative">
-                        <div className="sticky top-[104px] flex flex-col gap-[50px]">
+                        <div className="sticky top-[104px] flex flex-col gap-[50px] overflow-y-auto max-h-[calc(100vh-104px)]">
                             {showButton && (
                                 <Button
                                     onClick={() => {
