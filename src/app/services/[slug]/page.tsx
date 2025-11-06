@@ -1,37 +1,29 @@
+// app/[slug]/page.tsx
 import ClientPage from './ClientPage';
 import { NavigationItem } from '@/store/navigation';
 
-
 async function getNavigationData(slug: string): Promise<NavigationItem | null> {
-    const base = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/services/slug/${slug}`, {
+    // ⛔️ Убираем next: { revalidate } отсюда, он не нужен
+    cache: 'no-store',
+  });
 
-    const res = await fetch(`${base}/api/services/slug/${slug}`, { cache: 'no-store' });
-
-    if (!res.ok) return null;
-
-
-    const json = await res.json();
-
-    console.log('json', json);
-
-
-    const data: NavigationItem | null = json || null;
-
-    return data;
+  if (!res.ok) return null;
+  return res.json();
 }
 
-const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
-    const { slug: rawSlug } = await params;
-    const slug = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug;
-    const navigation = await getNavigationData(slug);
-    console.log('navigation', navigation, slug);
+// Генерация статических путей
+export async function generateStaticParams() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/services/list`);
+  const items = await res.json();
+  return items.map((item: { slug: string }) => ({ slug: item.slug }));
+}
 
-    if (!navigation) {
-        return <div>Service not found</div>;
-    }
+// Страница
+export default async function Page({ params }: { params: { slug: string } }) {
+  const navigation = await getNavigationData(params.slug);
+  if (!navigation) return <div>Service not found</div>;
 
-    return <ClientPage initialNavigation={navigation} initialSlug={slug || ''} />;
-};
-
-export default Page;
+  return <ClientPage initialNavigation={navigation} initialSlug={params.slug} />;
+}
 
