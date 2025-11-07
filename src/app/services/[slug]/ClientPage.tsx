@@ -16,6 +16,7 @@ import Image from 'next/image';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/config/store';
 import useWindowSize from '@/hook/useWindowSize';
+import { StrapiResponsiveImage } from '@/components/general/StrapiResponseImage';
 
 // Component to render rich text with proper formatting
 const RichTextRenderer: React.FC<{ content: string }> = ({ content }) => {
@@ -29,9 +30,8 @@ const ContentBlockRenderer: React.FC<{
     isExpanded: boolean;
     onToggle: () => void;
 }> = ({ block, isExpanded = true, onToggle }) => {
-    const { heading, richText, image, imageCaption } = block;
-    // Extract first markdown image from content
-    const firstImage = { alt: imageCaption, src: image?.url, width: image?.width, height: image?.height };
+    const { heading, richText, image } = block;
+
     if (richText && heading) {
         return (
             <div
@@ -61,12 +61,9 @@ const ContentBlockRenderer: React.FC<{
                 )}
 
                 {
-                    firstImage.src ? (
-                        <div className="xl:max-w-[630px] xxs:max-w-[560px] max-w-[280px] mx-auto mt-[50px]">
-                            <Image src={'https://test11.audiosector.ru/cp' + firstImage.src || ''} alt={firstImage.alt || ''} className="w-full h-auto"
-                                width={firstImage.width || 0}
-                                height={firstImage.height || 0}
-                            />
+                    image?.url ? (
+                        <div className="max-w-full mx-auto mx-auto mt-[50px] flex justify-center">
+                            <StrapiResponsiveImage image={image} baseUrl={'https://test11.audiosector.ru/cp'} />
                         </div>
                     ) : (<></>)
                 }
