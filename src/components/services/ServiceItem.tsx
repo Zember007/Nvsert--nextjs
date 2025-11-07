@@ -80,6 +80,8 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                 onMouseDown={() => setNoActive(false)}
                 onMouseLeave={() => setNoActive(false)}
                 onMouseEnter={() => setNoActive(false)}
+                onTouchStart={() => setNoActive(false)}
+                onTouchEnd={() => setNoActive(false)}
                 className={`w-full`}
             >
                 <div className={`line-after__box justify-between group wrapper xxxxl:!flex-row flex xxxxl:items-center py-[25px] overflow-hidden`}>
