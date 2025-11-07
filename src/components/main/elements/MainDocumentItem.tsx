@@ -273,7 +273,7 @@ const MainDocumentItem = memo(({
                 <div className={`document__hidden ${active && 'active bg-[#FFFFFF26]'}`}>
                     <div className="document__item  ">
                         <div className="document__list-photo">
-                            {windowWidth && windowWidth < 900 &&
+                            {windowWidth && windowWidth < 960 &&
                                 <>
 
                                     <div className="document-content-wrapper">
@@ -365,7 +365,7 @@ const MainDocumentItem = memo(({
 
 
 
-                                    {windowWidth && windowWidth >= 900 &&
+                                    {windowWidth && windowWidth >= 960 &&
                                         <motion.div
                                             animate={controls}
                                             initial={{ y: 20 }}
@@ -394,7 +394,7 @@ const MainDocumentItem = memo(({
                                 listHidden={listHidden}
                                 setListHidden={setListHidden}
                             />
-                            {windowWidth && windowWidth >= 900 &&
+                            {windowWidth && windowWidth >= 960 &&
                                 <motion.div
                                     animate={controls}
                                     initial={{ y: 20 }}

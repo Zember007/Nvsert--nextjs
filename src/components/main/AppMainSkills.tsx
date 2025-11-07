@@ -55,11 +55,11 @@ const AppMainSkills = () => {
     useEffect(() => {
         if (widthWindow && widthWindow < 1440 && isVisibleSection) {
             const slides = gsap.utils.toArray('[data-slider="slide-skill"]');
-            const gap = widthWindow < 900 ? (widthWindow - (250)) / 2 : 20;
+            const gap = widthWindow < 960 ? (widthWindow - (250)) / 2 : 20;
             
             timeLine.current = horizontalLoop(slides, {
                 paused: true,
-                center: widthWindow >= 900 ? false : true,
+                center: widthWindow >= 960 ? false : true,
                 draggable: true,
                 mobile: true,
                 gap: Math.round(gap),
@@ -111,7 +111,7 @@ const AppMainSkills = () => {
             <div className="skills__wrapper">
                 <div className="skills-content-container">
                     <div className="skills__box"
-                        style={{ ...(widthWindow && widthWindow < 900 && { gap: Math.round((widthWindow - (250)) / 2) }) }}
+                        style={{ ...(widthWindow && widthWindow < 960 && { gap: Math.round((widthWindow - (250)) / 2) }) }}
                     >
 
                         {

@@ -16,7 +16,7 @@ export const useCustomScroll = (options: CustomScrollOptions = {}) => {
     const {
         smoothScrollFactor = 0.15,
         scrollPadding = 2,
-        minWidth = 900,
+        minWidth = 960,
         enabled = true,
         target = 'window',
         containerRef,
