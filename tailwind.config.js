@@ -17,7 +17,7 @@ module.exports = {
       m: { min: '960px' },
       l: { min: '1024px' },
       xl: { min: '1280px' },
-      xxl: { min: '1440px' },
+      xxl: { min: '1407px' },
       xxxl: { min: '1580px' },
       xxxxl: { min: '1640px' },
       '1k': { min: '1740px' },

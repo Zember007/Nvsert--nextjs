@@ -219,7 +219,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                             </div>
 
                                             <Button
-                                                wrapperClassName='xl:hidden block'
+                                                wrapperClassName='xl:hidden block !max-w-[250px]'
                                                 onClick={() => { openDefaultModal('orderForm') }}
                                                 label='Оформить заявку'
                                             />
