@@ -36,7 +36,7 @@ export const useRichTextRenderer = () => {
                 ...(beforeSlider ? processContent(beforeSlider).map((content, index) => (
                     <div key={`before-${index}`}>{content}</div>
                 )) : []),
-                <div key="slider-container" ref={sliderRef} className="slider-container relative overflow-hidden mt-[15px] 1k:max-w-[940px] l:max-w-[640px] max-w-[580px] mx-auto">
+                <div key="slider-container" ref={sliderRef} className="slider-container relative overflow-hidden mt-[15px] 1k:max-w-[940px] l:max-w-[640px] xxs:max-w-[580px] xxs:mx-auto -mx-[26px] w-[calc(100%+52px)]">
                     <div className="slide-blur feedback-blur left-0">
                         <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
                         <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
