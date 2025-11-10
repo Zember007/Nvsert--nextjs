@@ -104,7 +104,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                             <h4 className={`line-after ${noActive ? 'noactive' : ''} after:!bottom-[-5px] !m-0   ${hover && 'active'}  transition-all duration-200 translate-y-[1px]`}>{service.title}</h4>
                         </div>
                     </div>
-                    <div className={`ml-[25px] xxl:mt-0 mt-[25px] xxl:grid flex gap-[20px] xxl:grid-cols-4 items-center flex-wrap transition-all duration-100 overflow-hidden ${isExpanded ? 'opacity-0 xxl:max-h-[100%] max-h-0 translate-y-full !mt-0' : 'opacity-100  translate-y-0 xxl:max-h-[100%] max-h-[350px]'}`}>
+                    <div className={`ml-[30px] xxl:mt-0 mt-[25px] xxl:grid flex gap-[20px] xxl:grid-cols-4 items-center flex-wrap transition-all duration-100 overflow-hidden ${isExpanded ? 'opacity-0 xxl:max-h-[100%] max-h-0 translate-y-full !mt-0' : 'opacity-100  translate-y-0 xxl:max-h-[100%] max-h-[350px]'}`}>
                         {service.items.map((item, itemIndex) => (
                             <AppNavigationItem
                                 onClick={(e) => { e.stopPropagation() }}
