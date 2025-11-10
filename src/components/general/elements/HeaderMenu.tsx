@@ -162,7 +162,7 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                                                             {item.img?.url && (
                                                                 <Image src={'https://test11.audiosector.ru/cp' + item.img.url} alt="document" width={43} height={60} />
                                                             )}
-                                                            <span className='text-[20px] font-light text-black'>{filterPrepositions(item.title)}</span>
+                                                            <span className={`${item.img?.url ? 'text-[18px]' : 'text-[20px]'} font-light text-black`}>{filterPrepositions(item.title)}</span>
                                                         </div>
                                                         {item.items && (
                                                             <Image src={ArrowIcon} alt="more" width={20} height={20} />
@@ -179,7 +179,7 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
                                                             {'img' in item && item.img?.url &&
                                                                 <Image src={'https://test11.audiosector.ru/cp' + item.img.url} alt="document" width={43} height={60} />
                                                             }
-                                                            <span className='text-[20px] font-light text-black'>{item.title}</span>
+                                                            <span className={`${'img' in item && item.img?.url ? 'text-[18px]' : 'text-[20px]'} font-light text-black`}>{item.title}</span>
                                                         </span>
                                                         {item.items && (
                                                             <Image
