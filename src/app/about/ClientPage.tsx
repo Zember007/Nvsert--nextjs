@@ -8,6 +8,7 @@ import Map from './_components/Map';
 import { AboutData, ContentBlock } from './page';
 import AppCtaBanner from '@/components/general/AppCtaBanner';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
+import { StrapiResponsiveImage } from '@/components/general/StrapiResponseImage';
 
 
 
@@ -120,7 +121,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
             <StandardPageLayout
                 title="О компании"
                 breadcrumbs={[{ id: 1, title: 'О компании', full_slug: '/about' }]}
-           
+
                 dotNavItems={[]}
                 showButton={true}
             >
@@ -136,7 +137,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
             <StandardPageLayout
                 title="О компании"
                 breadcrumbs={[{ id: 1, title: 'О компании', full_slug: '/about' }]}
-    
+
                 dotNavItems={[]}
                 showButton={true}
             >
@@ -151,12 +152,11 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
         <StandardPageLayout
             title={aboutData.title || "О компании"}
             breadcrumbs={[{ id: 1, title: 'О компании', full_slug: '/about' }]}
-          
+
             dotNavItems={dotNavItems}
             showButton={true}
         >
             {aboutData.content?.map((block, index) => {
-                const firstImage = { alt: block.imageCaption, src: block.image?.url, width: block.image?.width, height: block.image?.height };
 
                 return (
                     <div key={block.id} id={`block-${index + 1}`} className="w-full">
@@ -170,12 +170,9 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData: init
                             </div>
                         </CollapseSection>
                         {
-                            firstImage.src ? (
-                                <div className="max-w-[700px] mx-auto mt-[50px]">
-                                    <Image src={'https://test11.audiosector.ru/cp' + firstImage.src || ''} alt={firstImage.alt || ''} className="w-full h-auto"
-                                        width={firstImage.width || 0}
-                                        height={firstImage.height || 0}
-                                    />
+                            block.image?.url ? (
+                                <div className="max-w-full mx-auto mx-auto mt-[50px] flex justify-center">
+                                    <StrapiResponsiveImage image={block.image} baseUrl={'https://test11.audiosector.ru/cp'} />
                                 </div>
                             ) : (<></>)
                         }

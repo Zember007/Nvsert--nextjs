@@ -10,19 +10,19 @@ export const useRichTextRenderer = () => {
     const [activeIndex, setActiveIndex] = useState<number>(0);
 
     const processContent = (text: string, small?: boolean): React.ReactNode[] => {
-
+        text = text.trim();
 
         // Обработка [slider_start] ... [slider_end]
 
         if (text.includes('[slider_start]') && text.includes('[slider_end]')) {
             const gap = widthWindow && widthWindow < 640 ? (widthWindow - (300)) / 2 : 20
 
-            const beforeSlider = text.substring(0, text.indexOf('[slider_start]'));
+            const beforeSlider = text.substring(0, text.indexOf('[slider_start]')).trim();
             const sliderContent = text.substring(
                 text.indexOf('[slider_start]') + '[slider_start]'.length,
                 text.indexOf('[slider_end]')
-            );
-            const afterSlider = text.substring(text.indexOf('[slider_end]') + '[slider_end]'.length);
+            ).trim();
+            const afterSlider = text.substring(text.indexOf('[slider_end]') + '[slider_end]'.length).trim();
 
             // Разбиваем slider content на блоки по [block]
             const sliderBlocks = sliderContent
@@ -100,12 +100,12 @@ export const useRichTextRenderer = () => {
 
         // Обработка [grid_blocks_start] ... [grid_blocks_end]
         if (text.includes('[grid_blocks_start]') && text.includes('[grid_blocks_end]')) {
-            const beforeGrid = text.substring(0, text.indexOf('[grid_blocks_start]'));
+            const beforeGrid = text.substring(0, text.indexOf('[grid_blocks_start]')).trim();
             const gridContent = text.substring(
                 text.indexOf('[grid_blocks_start]') + '[grid_blocks_start]'.length,
                 text.indexOf('[grid_blocks_end]')
-            );
-            const afterGrid = text.substring(text.indexOf('[grid_blocks_end]') + '[grid_blocks_end]'.length);
+            ).trim();
+            const afterGrid = text.substring(text.indexOf('[grid_blocks_end]') + '[grid_blocks_end]'.length).trim();
 
             // Разбиваем grid content на блоки по заголовкам #
             const gridBlocks = gridContent
@@ -127,8 +127,8 @@ export const useRichTextRenderer = () => {
 
                         // Обычная текстовая карточка
                         const lines = block.split('\n').filter(line => line.trim());
-                        const title = lines[0]?.replace(/^#\s*/, '') || '';
-                        const content = lines.slice(1).join('\n');
+                        const title = lines[0]?.replace(/^#\s*/, '').trim() || '';
+                        const content = lines.slice(1).join('\n').trim();
 
                         // Определяем стили для разных карточек по индексу
                         let cardStyle: React.CSSProperties = {};
@@ -238,7 +238,7 @@ export const useRichTextRenderer = () => {
 
             // Handle list items (lines starting with -)
             if (trimmedLine.startsWith('- ')) {
-                currentListItems.push(trimmedLine.substring(2));
+                currentListItems.push(trimmedLine.substring(2).trim());
                 return;
             }
 
@@ -247,7 +247,7 @@ export const useRichTextRenderer = () => {
                 flushList();
                 elements.push(
                     <h6 key={`subheading-${index}`} className="mt-[9px] font-normal text-black">
-                        {trimmedLine.substring(2)}
+                        {trimmedLine.substring(2).trim()}
                     </h6>
                 );
                 return;
