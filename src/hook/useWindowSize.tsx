@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
-function useWindowSize(): { width: number | null, height: number } {
-  const [width, setWidth] = useState<number | null>(null);
+function useWindowSize(): { width: number, height: number } {
+  const [width, setWidth] = useState<number>(0);
   const [height, setHeight] = useState<number>(0);
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;

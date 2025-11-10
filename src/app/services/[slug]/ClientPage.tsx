@@ -82,7 +82,7 @@ interface ClientPageProps {
 const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, initialSlug }) => {
     const slug = initialSlug;
     const { openDefaultModal } = useHeaderContext();
-    const { height: windowHeight } = useWindowSize();
+    const { height: windowHeight, width: windowWidth } = useWindowSize();
 
     const { navigation } = useSelector((state: RootState) => state.navigation);
 
@@ -137,7 +137,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
     }, [currentServiceIndex]);
 
     const recomendedServices = useMemo(() => {
-        return [...navigation].sort((a, b) => a.category.name === currentService?.category.name ? -1 : 1).filter(item => item.slug !== currentService?.slug).slice(0, windowHeight >= 820 ? 3 : 2);
+        return [...navigation].sort((a, b) => a.category.name === currentService?.category.name ? -1 : 1).filter(item => item.slug !== currentService?.slug).slice(0, (windowHeight >= 820 || windowWidth < 960) ? 3 : 2);
     }, [navigation, currentService, windowHeight]);
 
 

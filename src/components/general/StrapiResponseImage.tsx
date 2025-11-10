@@ -8,8 +8,8 @@ export const StrapiResponsiveImage = ({ image, baseUrl }: { image: any, baseUrl:
         <img
           src={`${baseUrl}${image.formats?.small?.url}`}
           alt={image.alternativeText || ''}
-          width={image.width || 630}
-          height={image.height || 300}
+          width={image.width}
+          height={image.height}
           className="w-full h-auto rounded-[8px]"
         />
       </picture>
