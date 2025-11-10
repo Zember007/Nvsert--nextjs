@@ -457,6 +457,57 @@ body {
     }
 }
 
+$wall__line_bd-cr: hsl(0deg 0% 100% / 0%);
+
+.slide-blur {
+
+    &:not(.feedback-blur) {
+      @apply m:flex hidden;
+    }
+  
+    &.feedback-blur {
+      @apply xl:flex hidden;
+    }
+  
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  
+  
+    .line {
+      background-color: $wall__line_bd-cr;
+      width: 20px;
+      backdrop-filter: blur(var(--blur));
+  
+      &:nth-child(1) {
+        transition: all .2s ease;
+      }
+  
+      &:nth-child(2) {
+        transition: all .4s ease;
+      }
+  
+      &:nth-child(3) {
+        transition: all .6s ease;
+      }
+  
+      &:nth-child(4) {
+        transition: all .8s ease;
+      }
+  
+  
+    }
+  
+    &.white {
+      .line {
+        background-color: #FFF;
+      }
+    }
+  
+  }
 
 
 

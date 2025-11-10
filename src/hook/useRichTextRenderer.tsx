@@ -5,7 +5,7 @@ import { horizontalLoop } from '@/scripts/slider';
 import useWindowSize from '@/hook/useWindowSize';
 
 export const useRichTextRenderer = () => {
-    const {width: widthWindow} = useWindowSize();
+    const { width: widthWindow } = useWindowSize();
     const sliderRef = useRef(null);
     const [activeIndex, setActiveIndex] = useState<number>(0);
 
@@ -36,10 +36,21 @@ export const useRichTextRenderer = () => {
                 ...(beforeSlider ? processContent(beforeSlider).map((content, index) => (
                     <div key={`before-${index}`}>{content}</div>
                 )) : []),
-                <div key="slider-container" ref={sliderRef} className="slider-container overflow-hidden 1k:max-w-[940px] l:max-w-[640px] max-w-[580px] mx-auto">
+                <div key="slider-container" ref={sliderRef} className="slider-container relative overflow-hidden mt-[15px] 1k:max-w-[940px] l:max-w-[640px] max-w-[580px] mx-auto">
+                    <div className="slide-blur feedback-blur left-0">
+                        <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
+                        <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
+                        <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
+                    </div>
+                    <div className="slide-blur feedback-blur right-0 ">
+                        <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
+                        <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
+                        <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
+                    </div>
                     <div className="slider-wrapper flex  "
-                    style={{ gap: `${gap}px` }}
+                        style={{ gap: `${gap}px` }}
                     >
+
                         {sliderBlocks.map((block, index) => {
 
                             // Ищем заголовки ## (большой текст) и # (меньший)
