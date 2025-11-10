@@ -5,6 +5,7 @@ import '@/assets/styles/base/_icon.scss'
 import { ReactNode } from "react"
 import { Roboto } from 'next/font/google'
 import type { Metadata } from 'next'
+import { ScrollToTop } from '@/hook/scrollTop';
 
 const font = Roboto({
   subsets: ['latin', 'cyrillic'],
@@ -24,6 +25,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'ru_RU',
   },
+  themeColor: '#646467',
   verification: {
     yandex: '90db85a0cc46fb2c',
   },
@@ -46,6 +48,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="ru" className={font.variable}>
       <body>
         <Provider>
+          <ScrollToTop />
           {children}
         </Provider>
       </body>

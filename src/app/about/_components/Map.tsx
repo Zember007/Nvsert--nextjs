@@ -148,6 +148,47 @@ const Map = () => {
         setHoveredRegion(null);
     };
 
+    // Скрывать tooltip при скролле или других действиях
+    useEffect(() => {
+        const handleScroll = () => {
+            if (hoveredRegion) {
+                setHoveredRegion(null);
+            }
+        };
+
+        const handleResize = () => {
+            if (hoveredRegion) {
+                setHoveredRegion(null);
+            }
+        };
+
+        const handleClick = () => {
+            if (hoveredRegion) {
+                setHoveredRegion(null);
+            }
+        };
+
+        const handleTouchStart = () => {
+            if (hoveredRegion) {
+                setHoveredRegion(null);
+            }
+        };
+
+        // Добавляем обработчики событий
+        window.addEventListener('scroll', handleScroll, true);
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('click', handleClick);
+        window.addEventListener('touchstart', handleTouchStart);
+
+        // Очистка при размонтировании
+        return () => {
+            window.removeEventListener('scroll', handleScroll, true);
+            window.removeEventListener('resize', handleResize);
+            window.removeEventListener('click', handleClick);
+            window.removeEventListener('touchstart', handleTouchStart);
+        };
+    }, [hoveredRegion]);
+
     return (
         <div className="relative max-w-full">
             {hoveredRegion && (
