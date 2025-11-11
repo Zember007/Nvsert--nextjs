@@ -29,6 +29,7 @@ const ScrollableContainer: React.FC<ScrollableContainerProps> = ({
 
   const wrapperStyles: React.CSSProperties = {
     position: 'relative',
+    display: 'block',
     ...wrapperStyle
   };
 
@@ -53,7 +54,7 @@ const ScrollableContainer: React.FC<ScrollableContainerProps> = ({
 
 
   return (
-    <div className={wrapperClassName} style={wrapperStyles}>
+    <span className={wrapperClassName} style={wrapperStyles}>
       {processedChildren}
       
       <CustomScrollbar
@@ -72,7 +73,7 @@ const ScrollableContainer: React.FC<ScrollableContainerProps> = ({
           display: none;
         }
       `}</style>
-    </div>
+    </span>
   );
 };
 
