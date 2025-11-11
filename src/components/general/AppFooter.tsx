@@ -250,7 +250,7 @@ const AppFooter = () => {
           <div className="xxs:h-[23px] h-[60px] overflow-hidden text-[#FFF]">
             <div ref={stepsRef}>
               {slides.map((item, i) => (
-                <p key={i} className="font-light text-5 font-light xxs:h-[23px] h-[60px] flex items-center">
+                <p key={i} className="font-light text-2 font-light xxs:h-[23px] h-[60px] flex items-center">
                   {item}
                 </p>
               ))}
