@@ -14,7 +14,7 @@ const CustomScrollbar: React.FC<CustomScrollbarProps> = ({
   const { scrollbarRef } = useCustomScroll(scrollOptions);
 
   return (
-    <div 
+    <span 
       ref={scrollbarRef} 
       className={className}
       style={{
