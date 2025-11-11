@@ -1,4 +1,4 @@
-.typography-provider * {
+* {
   font-family: var(--font-family);
   font-weight: var(--tw-auto-weight, inherit);
 }
