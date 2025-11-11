@@ -309,7 +309,7 @@ const SliderMain = () => {
                                         <h3 data-slide-count="step" className="count-heading ">01</h3>
                                     </div>
                                 </div>
-                                <span>/</span>
+                                <span className='font-light'>/</span>
                                 <div className="count-column ">
                                     <h3 data-slide-count="total" className="count-heading">{slides.length}</h3>
                                 </div>
