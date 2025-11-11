@@ -15,7 +15,7 @@ import { horizontalLoop } from '@/scripts/slider';
 
 const AppMainSafeguards = () => {
 
-  const {width: widthWindow} = useWindowSize()
+  const { width: widthWindow } = useWindowSize()
   const [isVisible, setIsVisible] = useState(false);
   const divRef = useRef<HTMLDivElement>(null);
 
@@ -99,6 +99,8 @@ const AppMainSafeguards = () => {
 
 
 
+  const timeLine = useRef<any>(null)
+  const [activeIndex, setActive] = useState<number>(0)
 
   useEffect(() => {
 
@@ -106,6 +108,23 @@ const AppMainSafeguards = () => {
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
         if (divRef.current && entry.isIntersecting) {
+          if (widthWindow && widthWindow < 1407 && divRef.current) {
+
+            const slides = gsap.utils.toArray('[data-slider="slide-safeguard"]');
+            const gap = widthWindow < 960 ? (widthWindow - (250)) / 2 : 20
+            timeLine.current = horizontalLoop(slides, {
+              paused: true,
+              draggable: true,
+              center: widthWindow >= 960 ? false : true,
+              mobile: true,
+              gap: Math.round(gap),
+              snap: true,
+              onChange: (index: number) => {
+                setActive(index)
+              }
+            });
+
+          }
           observer.unobserve(divRef.current);
           timeLine.current?.next({ ease: "power3", duration: 0.725 })
         }
@@ -124,37 +143,13 @@ const AppMainSafeguards = () => {
         observer.unobserve(divRef.current);
       }
 
-    };
-  }, []);
-
-  const timeLine = useRef<any>(null)
-  const [activeIndex, setActive] = useState<number>(0)
-
-  useEffect(() => {
-    if (widthWindow && widthWindow < 1407 && divRef.current) {
-
-      const slides = gsap.utils.toArray('[data-slider="slide-safeguard"]');
-      const gap =  widthWindow < 960 ? (widthWindow - (250)) / 2 : 20
-      timeLine.current = horizontalLoop(slides, {
-        paused: true,
-        draggable: true,
-        center: widthWindow >= 960 ? false : true,
-        mobile: true,
-        gap: Math.round(gap),
-        snap: true,
-        onChange: (index: number) => {
-          setActive(index)
-        }
-      });
-
-    }
-
-    return () => {
       if (timeLine.current) {
         timeLine.current.destroy();
       }
-    }
-  }, [widthWindow])
+
+    };
+  }, [widthWindow]);
+
 
 
 
@@ -163,14 +158,14 @@ const AppMainSafeguards = () => {
     <>
       <section
         ref={divRef}
-      
+
         className="section ">
         <div id="safeguards" className="absolute top-[-50px] pointer-events-none" ></div>
 
         <h2 className="section__title">Гарантии и безупречный сервис</h2>
         <div className="safeguards-container">
-          <div className="safeguard__box"          
-          style={{...(widthWindow && widthWindow < 960 && {gap: Math.round((widthWindow - (250)) / 2)})}}
+          <div className="safeguard__box"
+            style={{ ...(widthWindow && widthWindow < 960 && { gap: Math.round((widthWindow - (250)) / 2) }) }}
           >
             {
               guarantees.map((item, index) => (
@@ -191,16 +186,16 @@ const AppMainSafeguards = () => {
             }
           </div>
 
-          <div className="slide-dots-box-container">            
-          <div className="slide-dots-box">
-            {guarantees.map((_, i) => (
-              <div 
-              onClick={() => {
-                timeLine.current.toIndex(i,{ ease: "power3", duration: 0.725 })
-            }}
-              key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
-            ))}
-          </div>
+          <div className="slide-dots-box-container">
+            <div className="slide-dots-box">
+              {guarantees.map((_, i) => (
+                <div
+                  onClick={() => {
+                    timeLine.current.toIndex(i, { ease: "power3", duration: 0.725 })
+                  }}
+                  key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
+              ))}
+            </div>
           </div>
         </div>
       </section >

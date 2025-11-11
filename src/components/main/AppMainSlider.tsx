@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { slides } from './utils';
 import { filterPrepositions } from '@/hook/filter';
-import HorizontalSlide from './elements/HorisontalSlide'
 import '@/assets/styles/sections/main/main-slider-component.scss'
 import { useButton } from '@/hook/useButton';
 import { useHeaderContext } from '../contexts/HeaderContext';
@@ -29,7 +28,7 @@ const settings = {
 
 const SliderMain = () => {
     const { ref, isVisible } = useIntersectionObserver({}, true);
-    const {width: widthWindow} = useWindowSize();
+    const { width: widthWindow } = useWindowSize();
     const [activeIndex, setActive] = useState<number>(0)
     const whiteBgRef = useRef<HTMLDivElement | null>(null)
     const slider = useRef<HTMLDivElement>(null)
@@ -40,71 +39,74 @@ const SliderMain = () => {
 
         if (timeLine.current) timeLine.current.destroy(); timeLine.current = null;
 
-        if (widthWindow && widthWindow >= 1280) {
-            let timeoutIdBg: NodeJS.Timeout | null = null;
 
-
-
-            timeLine.current = initSlider({
-                onChangeFunction: (index: number) => {
-
-                    setActive(index)
-
-                    if (slider.current && !slider.current.classList.contains('animate')) {
-                        slider.current.classList.add('animate')
-
-                        setTimeout(() => {
-                            if (!slider.current) return
-                            slider.current.classList.remove('animate')
-                        }, 400)
-                    }
-
-                },
-                onDragFunction: () => {
-
-                    whiteBgRef.current?.classList.remove('white')
-                    if (timeoutIdBg) {
-                        clearTimeout(timeoutIdBg)
-                    }
-
-                    timeoutIdBg = setTimeout(() => {
-                        whiteBgRef.current?.classList.add('white')
-                    }, 300)
-                },
-                mobile: false
-
-            })
-        } else {
-
-            whiteBgRef.current?.classList.remove('white')
-
-
-
-
-            timeLine.current = initSlider({
-                onChangeFunction: (index: number) => {
-
-                    setActive(index)
-
-                    if (slider.current && !slider.current.classList.contains('animate')) {
-                        slider.current.classList.add('animate')
-
-                        setTimeout(() => {
-                            if (!slider.current) return
-                            slider.current.classList.remove('animate')
-                        }, 400)
-                    }
-
-                },
-                onDragFunction: null,
-                mobile: true
-            })
-        }
 
 
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
+
+                    if (widthWindow && widthWindow >= 1280) {
+                        let timeoutIdBg: NodeJS.Timeout | null = null;
+
+
+
+                        timeLine.current = initSlider({
+                            onChangeFunction: (index: number) => {
+
+                                setActive(index)
+
+                                if (slider.current && !slider.current.classList.contains('animate')) {
+                                    slider.current.classList.add('animate')
+
+                                    setTimeout(() => {
+                                        if (!slider.current) return
+                                        slider.current.classList.remove('animate')
+                                    }, 400)
+                                }
+
+                            },
+                            onDragFunction: () => {
+
+                                whiteBgRef.current?.classList.remove('white')
+                                if (timeoutIdBg) {
+                                    clearTimeout(timeoutIdBg)
+                                }
+
+                                timeoutIdBg = setTimeout(() => {
+                                    whiteBgRef.current?.classList.add('white')
+                                }, 300)
+                            },
+                            mobile: false
+
+                        })
+                    } else {
+
+                        whiteBgRef.current?.classList.remove('white')
+
+
+
+
+                        timeLine.current = initSlider({
+                            onChangeFunction: (index: number) => {
+
+                                setActive(index)
+
+                                if (slider.current && !slider.current.classList.contains('animate')) {
+                                    slider.current.classList.add('animate')
+
+                                    setTimeout(() => {
+                                        if (!slider.current) return
+                                        slider.current.classList.remove('animate')
+                                    }, 400)
+                                }
+
+                            },
+                            onDragFunction: null,
+                            mobile: true
+                        })
+                    }
+
                     if (timeLine.current) timeLine.current.next({ ease: "power3", duration: 0.725 })
 
                     if (ref.current) {
@@ -266,13 +268,13 @@ const SliderMain = () => {
                                         <span className="navigation-button-icon">
                                             <svg
                                                 width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M10 21.957L2 13.404L2.00006 9.60268L10 2" stroke="white" strokeWidth="2.66667"  />
+                                                <path d="M10 21.957L2 13.404L2.00006 9.60268L10 2" stroke="white" strokeWidth="2.66667" />
                                             </svg>
                                         </span>
                                         <span className="navigation-button-icon">
                                             <svg
                                                 width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M10 21.957L2 13.404L2.00006 9.60268L10 2" stroke="white" strokeWidth="2.66667"  />
+                                                <path d="M10 21.957L2 13.404L2.00006 9.60268L10 2" stroke="white" strokeWidth="2.66667" />
                                             </svg>
                                         </span>
 
@@ -289,7 +291,7 @@ const SliderMain = () => {
                                         <span className="navigation-button-icon-next">
                                             <svg
                                                 width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M2 21.957L10 13.404L9.99994 9.60268L2 2" stroke="white" strokeWidth="2.66667"  />
+                                                <path d="M2 21.957L10 13.404L9.99994 9.60268L2 2" stroke="white" strokeWidth="2.66667" />
                                             </svg>
                                         </span>
                                         <span className="navigation-button-icon-next">

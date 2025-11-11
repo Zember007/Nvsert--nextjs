@@ -14,55 +14,59 @@ import '@/assets/styles/sections/main/main-feedback.scss';
 
 const AppMainFeedback = () => {
 
-    const {width: widthWindow} = useWindowSize();
-    
+    const { width: widthWindow } = useWindowSize();
+
     const ref = useRef(null)
 
     const [activeIndex, setActive] = useState<number>(0)
     const [activeIndex1, setActive1] = useState<number>(0)
 
-    useEffect(() => {
-        const slides = gsap.utils.toArray('[data-slider="slide-feedback"]');
-        const slides1 = gsap.utils.toArray('[data-slider="slide-feedback1"]');
-        const loop: any = horizontalLoop(slides, {
-            paused: true,
-            draggable: true,
-            speed: 0.5,
-            offsetLeft: 0,
-            repeat: -1,
-            center: true,
-            mobile: widthWindow && widthWindow < 1280,
-            snap: false,
-            gap: 20,
-            opacity: false,
-            onChange: (index: number) => {
-                setActive(index)
-            }
-        });
+    const loop = useRef<any>(null)
+    const loop1 = useRef<any>(null)
 
-        const loop1: any = horizontalLoop(slides1, {
-            paused: true,
-            draggable: true,
-            speed: 0.5,
-            offsetLeft: 0,
-            repeat: -1,
-            center: true,
-            snap: false,
-            gap: 20,
-            mobile: widthWindow && widthWindow < 1280,
-            reversed: true,
-            opacity: false,
-            onChange: (index: number) => {
-                setActive1(index)
-            }
-        });
+    useEffect(() => {
+
 
 
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
-                    loop.next({ ease: "power3", duration: 0.725 })
-                    loop1.previous({ ease: "power3", duration: 0.725 })
+                    const slides = gsap.utils.toArray('[data-slider="slide-feedback"]');
+                    const slides1 = gsap.utils.toArray('[data-slider="slide-feedback1"]');
+                    loop.current = horizontalLoop(slides, {
+                        paused: true,
+                        draggable: true,
+                        speed: 0.5,
+                        offsetLeft: 0,
+                        repeat: -1,
+                        center: true,
+                        mobile: widthWindow && widthWindow < 1280,
+                        snap: false,
+                        gap: 20,
+                        opacity: false,
+                        onChange: (index: number) => {
+                            setActive(index)
+                        }
+                    });
+
+                    loop1.current = horizontalLoop(slides1, {
+                        paused: true,
+                        draggable: true,
+                        speed: 0.5,
+                        offsetLeft: 0,
+                        repeat: -1,
+                        center: true,
+                        snap: false,
+                        gap: 20,
+                        mobile: widthWindow && widthWindow < 1280,
+                        reversed: true,
+                        opacity: false,
+                        onChange: (index: number) => {
+                            setActive1(index)
+                        }
+                    });
+                    loop.current?.next({ ease: "power3", duration: 0.725 })
+                    loop1.current?.previous({ ease: "power3", duration: 0.725 })
 
                     if (ref.current) {
                         observer.unobserve(ref.current);
@@ -78,8 +82,10 @@ const AppMainFeedback = () => {
 
 
         return () => {
-            loop.destroy();
-            loop1.destroy();
+            loop.current?.destroy();
+            loop1.current?.destroy();
+            loop.current = null;
+            loop1.current = null;
         }
     }, [widthWindow])
 
@@ -141,7 +147,7 @@ const AppMainFeedback = () => {
                                 <div
                                     data-slider="slide-feedback1" key={index} className="feedback-item">
                                     <PhotoView
-                                    src={`/feedbacks/big/${15 + index}.png`}>
+                                        src={`/feedbacks/big/${15 + index}.png`}>
                                         <Image
                                             className='feedback-image'
                                             src={`/feedbacks/small/${15 + index}.png`} alt='feedback' width={190} height={267} />
