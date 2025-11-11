@@ -745,6 +745,7 @@ input:-webkit-autofill {
     }
 
     &:not(.noactive):hover {
+        @apply text-[#34446D];
         &::after {
             clip-path: inset(0 0 0 0);
         }

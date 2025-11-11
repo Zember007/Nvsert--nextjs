@@ -6,7 +6,7 @@
         @apply flex flex-col;
 
         &-desc {
-            @include text-1;
+            @include text-2;
             @apply mt-[30px] font-light;
         }
 
