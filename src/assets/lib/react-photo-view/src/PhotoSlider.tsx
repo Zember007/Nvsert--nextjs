@@ -140,6 +140,10 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
   useEffect(() => {
     return () => {
       document.body.classList.remove('modal__nav-arrow--left', 'modal__nav-arrow--right');
+
+      setTimeout(() => {
+        document.body.classList.remove('modal__nav-arrow--left', 'modal__nav-arrow--right');
+      }, 1000);
     };
   }, []);
 
