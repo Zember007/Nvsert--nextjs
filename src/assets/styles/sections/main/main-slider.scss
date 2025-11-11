@@ -1,4 +1,5 @@
-@use '../../base/variables' as varibles;
+@import '../../base/variables';
+@import '../../base/mixins';
 
 .cloneable {
   @apply xl:flex-row flex-col xl:items-end xl:gap-0 gap-[30px];
@@ -17,7 +18,7 @@
 }
 
 .overlay-title {
-  @apply xl:h-[50px] xss:h-[65px] h-[60px] font-light xl:rounded-[6px] rounded-b-[5px] border-[#93969D] border-solid xl:border border-b border-0  flex items-center justify-center xl:p-[10px] p-[15px] w-full;
+  @apply xl:h-[50px] xss:h-[65px] h-[60px] font-light xl:rounded-[6px] rounded-b-[5px] border-[#93969D] border-solid xl:border border-b border-0 flex items-center justify-center xl:p-[10px] p-[15px] w-full;
 
   --color: rgba(25, 24, 35, 0.4);
 
@@ -32,12 +33,8 @@
 }
 
 .count-heading {
-
-  font-weight: 300;
-  font-size: 40px;
-  font-weight: 300;
-  font-size: 40px;
-  letter-spacing: -3%;
+  @include header-h-2;
+  font-weight: inherit !important;
   text-align: right;
   vertical-align: middle;
 
@@ -46,7 +43,7 @@
 
 
 .slider-wrap {
-  @apply xl:pt-[31px] p-[1px]  xl:justify-start xl:flex;
+  @apply xl:pt-[31px] p-[1px] xl:justify-start xl:flex;
   overflow: hidden;
   width: 100%;
   height: 100%;
@@ -54,7 +51,7 @@
 }
 
 .slider-list {
-  @apply xxl:translate-x-[638px] xl:translate-x-[600px] xl:justify-end  xl:gap-[75px] gap-[20px];
+  @apply xxl:translate-x-[638px] xl:translate-x-[600px] xl:justify-end xl:gap-[75px] gap-[20px];
   flex-flow: row;
   align-items: stretch;
   display: flex;
@@ -82,7 +79,7 @@
   width: 100%;
   overflow: hidden;
 
-  @media (max-width: varibles.$media-m) {
+  @media (max-width: $media-m) {
     width: calc(100% + 40px);
     margin: 0 -20px;
   }
@@ -190,7 +187,7 @@
   }
 
   &__button {
-    @apply justify-center w-full m:flex items-center relative overflow-hidden m:text-[20px] xss:text-[18px] text-[16px] bg-[#34446D] text-[#FFF] tracking-normal m:flex items-center gap-[10px] rounded-[4px] border-[#34446D] border border-solid ;
+    @apply justify-center w-full m:flex items-center relative overflow-hidden m:text-[20px] xss:text-[18px] text-[16px] bg-[#34446D] text-[#FFF] tracking-normal m:flex items-center gap-[10px] rounded-[4px] border-[#34446D] border border-solid;
   }
 }
 
@@ -202,7 +199,7 @@
   }
 
   &__h2 {
-    @apply  tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px]
+    @apply tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px]
   }
 }
 
