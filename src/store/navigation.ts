@@ -113,7 +113,32 @@ const initialState: NavigationState = {
 const navigationSlice = createSlice({
   name: 'navigation',
   initialState,
-  reducers: {},
+  reducers: {
+    // Action для инициализации навигации из серверных данных
+    initializeNavigation: (state, action: PayloadAction<NavigationItem[]>) => {
+      state.navigation = action.payload;
+
+      const services = action.payload.reduce<Services[]>((acc, item) => {
+        const catId = item.category.id;
+        let accFind = acc.find(entry => entry.id === catId);
+        if (!accFind) {
+          accFind = {
+            id: item.category.id,
+            name: item.category.name,
+            title: item.category.title,
+            description: item.category.description,
+            items: []
+          };
+          acc.push(accFind);
+        }
+        accFind.items.push(item);
+        return acc;
+      }, []);
+
+      state.services = services;
+      state.status = 'succeeded';
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(updateActionNavigation.fulfilled, (state, action: PayloadAction<NavigationItem[]>) => {
@@ -153,4 +178,5 @@ const navigationSlice = createSlice({
   },
 });
 
+export const { initializeNavigation } = navigationSlice.actions;
 export default navigationSlice.reducer;

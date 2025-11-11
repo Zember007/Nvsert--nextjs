@@ -2,26 +2,23 @@
 import '@/assets/styles/base.scss';
 import '@/assets/lib/react-photo-view/dist/react-photo-view.css';
 import AppHeader from '@/components/general/AppHeader';
-import { ReactNode, useEffect, useMemo } from 'react';
+import { ReactNode, useEffect, useLayoutEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AppFooter from '@/components/general/AppFooter';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import AppModalWrapper from '@/components/general/AppModalWrapper';
-import { AppDispatch, RootState } from '@/config/store';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CopyNotification from '@/components/general/elements/CopyNotification';
-import { updateActionNavigation } from '@/store/navigation';
-import CustomScrollbar from '@/components/general/CustomScrollbar';
 
 gsap.registerPlugin(ScrollTrigger);
 
 
-const LayoutContent = ({ children }: { children: ReactNode }) => {
-    const dispatch = useDispatch<AppDispatch>();
+const LayoutContent = ({ children }: { children: ReactNode; }) => {
 
     const { setDefaultModalActive, defaultModalActive, defaultModalName, resetCountModal, defaultModalCount, showCopyNotification, notificationPosition, hideNotification } = useHeaderContext();
-    const { configs: configsPure, file_configs: fileConfigsPure, status } = useSelector((state: RootState) => state.config);
+
+
     /* 
         const configs = useMemo(() => {
             if (!configsPure) return {};
@@ -49,20 +46,26 @@ const LayoutContent = ({ children }: { children: ReactNode }) => {
             }
         }, [configs, file_configs, dispatch]); */
 
+    // Инициализируем навигацию из серверных данных синхронно до первого рендера
+
+
     // Загружаем данные только один раз при монтировании, если они еще не загружены
-    useEffect(() => {
-        if (status === 'idle') {
-            /* dispatch(updateActionConfigs());
-            dispatch(updateActionFileConfigs()); */
-            dispatch(updateActionNavigation());
-        }
-    }, [dispatch, status]);
+    /*   useEffect(() => {
+          if (status === 'idle') {
+              // dispatch(updateActionConfigs());
+              // dispatch(updateActionFileConfigs());
+              // Загружаем навигацию только если она еще не была инициализирована
+              if (navigationStatus === 'idle' && navigation.length === 0 && !initialNavigation) {
+                  dispatch(updateActionNavigation());
+              }
+          }
+      }, [dispatch, status, navigationStatus, navigation.length, initialNavigation]); */
 
 
 
     return (
         <>
-             <AppModalWrapper
+            <AppModalWrapper
                 setDefaultModalActive={setDefaultModalActive}
                 defaultModalActive={defaultModalActive}
                 defaultModalName={defaultModalName}
@@ -75,7 +78,7 @@ const LayoutContent = ({ children }: { children: ReactNode }) => {
             <main >
                 {children}
             </main>
-              <AppFooter />
+            <AppFooter />
             <div className="bg-noise"></div>
             {/* <CustomScrollbar target="window" /> */}
 
@@ -89,7 +92,7 @@ const LayoutContent = ({ children }: { children: ReactNode }) => {
     );
 };
 
-const Layout_wrapper = ({ children }: { children: ReactNode }) => {
+const Layout_wrapper = ({ children }: { children: ReactNode; }) => {
     return (
         <LayoutContent>
             {children}

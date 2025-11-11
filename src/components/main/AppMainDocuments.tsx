@@ -13,6 +13,9 @@ const AppMainDocuments = () => {
     const { t } = useTranslation();
     const { navigation } = useSelector((state: RootState) => state.navigation);
 
+    console.log(navigation);
+    
+
 
 
 

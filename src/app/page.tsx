@@ -3,31 +3,14 @@ import dynamic from 'next/dynamic';
 import '@/assets/styles/main.scss'
 import AppMainIntro from '../components/main/AppMainIntro'
 import AppMainDocuments from '../components/main/AppMainDocuments'
-
+import AppMainSkills from '../components/main/AppMainSkills'
+import AppMainSlider from '../components/main/AppMainSlider'
+import AppMainSafeguards from '../components/main/AppMainSafeguards'
+import AppMainFeedback from '../components/main/AppMainFeedback'
+import AppMainQuestions from '../components/main/AppMainQuestions'
 
 
 export default function Home() {
-
-  const DynamicAppMainSkills = dynamic(() => import('../components/main/AppMainSkills'), {
-    ssr: false,
-  });
-
-  const DynamicAppMainSlider = dynamic(() => import('../components/main/AppMainSlider'), {
-    ssr: false,
-  });
-
-  const DynamicAppMainSafeguards = dynamic(() => import('../components/main/AppMainSafeguards'), {
-    ssr: false,
-  });
-
-  const DynamicAppMainFeedback = dynamic(() => import('../components/main/AppMainFeedback'), {
-    ssr: false,
-  });
-
-
-  const DynamicAppMainQuestions = dynamic(() => import('../components/main/AppMainQuestions'), {
-    ssr: false,
-  });
 
 
   return (
@@ -36,15 +19,15 @@ export default function Home() {
 
       <AppMainDocuments />
 
-      <DynamicAppMainSkills />
+      <AppMainSkills />
 
-      <DynamicAppMainSlider />
+      <AppMainSlider />
 
-      <DynamicAppMainSafeguards />
+      <AppMainSafeguards />
 
-      <DynamicAppMainFeedback />
+      <AppMainFeedback />
 
-      <DynamicAppMainQuestions />
+      <AppMainQuestions />
 
     </div>
   );
