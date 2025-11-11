@@ -34,11 +34,11 @@
 }
 
 .navigation-button-icon {
-  @apply transition-all duration-[.13s] translate-x-[32px] group-hover:-translate-x-[32px];
+  @apply block transition-all duration-[.13s] translate-x-[32px] group-hover:-translate-x-[32px];
 }
 
 .navigation-button-icon-next {
-  @apply transition-all duration-[.13s] -translate-x-[32px] group-hover:translate-x-[32px];
+  @apply block transition-all duration-[.13s] -translate-x-[32px] group-hover:translate-x-[32px];
 }
 
 .slide-counter-container {
