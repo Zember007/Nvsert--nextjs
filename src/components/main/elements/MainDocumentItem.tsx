@@ -11,6 +11,7 @@ import ServiceMoveIcon from '../svg/ServiceMoveIcon';
 import useWindowSize from '@/hook/useWindowSize';
 import '@/assets/styles/sections/main/document-item.scss';
 import { useRouter } from 'next/navigation';
+import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
 
 // Выносим анимационные настройки
 const ANIMATION_SETTINGS = {
@@ -118,7 +119,8 @@ const MainDocumentItem = memo(({
     totalItems = 0,
     index = 0
 }: MainDocumentItemProps) => {
-    const {width: windowWidth} = useWindowSize()
+    const { processContent } = useRichTextRenderer()
+    const { width: windowWidth } = useWindowSize()
     const controls = useAnimation();
     const [listHidden, setListHidden] = useState(true);
     const [photoWidth, setPhotoWidth] = useState(0);
@@ -257,10 +259,10 @@ const MainDocumentItem = memo(({
                             <h6 className="document__desc">{price}</h6>
 
 
-                            
+
                             <svg
-                            className={`${!active ? 'group-hover/window:*:stroke-black' : '*:stroke-[#FFF] rotate-[180deg]'}  hidden xl:block transition-all duration-200`}
-                            width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                className={`${!active ? 'group-hover/window:*:stroke-black' : '*:stroke-[#FFF] rotate-[180deg]'}  hidden xl:block transition-all duration-200`}
+                                width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1.0459 1.0459L3.16722 3.16722M15.753 15.753L5.28854 5.28854" stroke="#93969D" stroke-width="2" />
                                 <path d="M15.7529 7.75293V14.4707L14.4717 15.7529H7.75293" stroke="#93969D" stroke-width="2" />
                             </svg>
@@ -357,8 +359,8 @@ const MainDocumentItem = memo(({
                             <div ref={containerPhotoRef} className="document-photo-wrapper">
                                 <div className="document-content-column">
                                     <div className="document-text-content">
-                                        <p className='document-description whitespace-pre-line '>
-                                            {content}
+                                        <p className='document-description'>
+                                            {processContent(content)}
                                         </p>
 
                                     </div>
