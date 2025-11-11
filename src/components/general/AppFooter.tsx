@@ -209,43 +209,12 @@ const AppFooter = () => {
 
                 </>
             }} isActive={false} />
-          <PromtModal
-            classNameBox="!w-auto xl:!relative !absolute xl:bottom-0 xl:right-0 m:bottom-[-53px]  m:right-[34px] bottom-[-80px]  right-1/2 m:translate-x-0 translate-x-[140px]"
-            className='!py-[20px]'
-            content={
-              <div className="flex flex-col gap-[20px]">
-                {langs.map((lang, i) => (
-                  <button
-                    onClick={() => {
-                      changeLanguage(lang.code)
-                    }}
-                    key={i} className="h-[10px] flex items-center gap-[4px] group">
-                    <span className="w-[10px] h-[10px] flex items-center justify-center">
-                      <span className="block relative w-[6px] h-[6px]">
-                        <span className={`block transition-all duration-300 ease  ${i18n.language === lang.code ? 'bg-[#69D771]' : 'group-hover:bg-[#CCCCCC]'} absolute inset-0 rounded-full blur-sm opacity-70`} />
-                        <span className={`block transition-all duration-300 ease  ${i18n.language === lang.code ? 'bg-[#69D771]' : 'group-hover:bg-[#CCCCCC] bg-[#00000080]'} absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 inset-[4px] rounded-full  w-[4px] h-[4px]`} />
-                      </span>
-                    </span>
-                    <span className={`transition-all duration-300 ease text-[18px]  ${i18n.language === lang.code ? 'text-[#69D771]' : 'group-hover:text-[#CCCCCC] text-[#00000080]'}`}>{lang.lable}</span>
-                  </button>
-                ))}
-
-              </div>
-            }
-          >
+       
             <AppMenuItem
-              className="btn-lang m:!h-[35px] !h-[50px] m:w-auto w-[50px]"
+              className="xl:!relative !absolute xl:bottom-0 xl:right-0 m:bottom-[-53px]  m:right-[34px] bottom-[-80px]  right-1/2 m:translate-x-0 translate-x-[140px] btn-lang m:!h-[35px] !h-[50px]  "
               item={{
-                href: '#', label: <>
-                  <svg
-                    className="m:*:fill-black *:fill-white"
-                    width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.2676 18.8833C15.9735 17.9416 18.7776 14.7408 19.1293 10.8333H14.9785C14.8235 13.7891 13.8485 16.5391 12.2676 18.8833ZM19.1293 9.16664C18.7776 5.25831 15.971 2.05664 12.2643 1.11497C13.846 3.45997 14.8226 6.20997 14.9785 9.16664H19.1293ZM7.73678 1.11497C4.02845 2.05664 1.22345 5.25831 0.870117 9.16664H5.02178C5.17762 6.20997 6.15428 3.45997 7.73678 1.11497ZM0.87095 10.8333C1.04402 12.7192 1.79645 14.5054 3.02497 15.9466C4.2535 17.3879 5.89793 18.4137 7.73262 18.8833C6.15178 16.5391 5.17678 13.7891 5.02178 10.8333H0.87095ZM10.0001 19.135C8.07762 16.8141 6.87345 13.9508 6.69178 10.8333H13.3093C13.126 13.95 11.9226 16.8141 10.001 19.135M10.0001 0.869141C11.9226 3.18914 13.1251 6.05164 13.3085 9.16664H6.69178C6.87512 6.05164 8.07845 3.18914 10.0001 0.869141Z" fill="black" fillOpacity="1" />
-                  </svg>
-                  <span className="hidden">Языки</span>
-                </>
+                href: '#', label: 'RU'
               }} isActive={false} />
-          </PromtModal>
         </div>
       </div>
 
