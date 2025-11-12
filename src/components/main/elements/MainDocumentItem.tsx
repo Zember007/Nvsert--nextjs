@@ -359,9 +359,9 @@ const MainDocumentItem = memo(({
                             <div ref={containerPhotoRef} className="document-photo-wrapper">
                                 <div className="document-content-column">
                                     <div className="document-text-content">
-                                        <p className='document-description'>
+                                        <div className='document-description'>
                                             {processContent(content, true)}
-                                        </p>
+                                        </div>
 
                                     </div>
 
