@@ -2,7 +2,7 @@
 import '@/assets/styles/base.scss';
 import '@/assets/lib/react-photo-view/dist/react-photo-view.css';
 import AppHeader from '@/components/general/AppHeader';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import AppFooter from '@/components/general/AppFooter';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import AppModalWrapper from '@/components/general/AppModalWrapper';
@@ -14,6 +14,27 @@ import { groupServices } from '@/assets/lib/navigation';
 const LayoutContent = ({ children, initialNavigation }: { children: ReactNode; initialNavigation?: NavigationItem[]; }) => {
 
     const { setDefaultModalActive, defaultModalActive, defaultModalName, resetCountModal, defaultModalCount, showCopyNotification, notificationPosition, hideNotification } = useHeaderContext();
+    const bgNoiseRef = useRef<HTMLDivElement>(null);
+
+    // Отложенная загрузка фонового изображения для оптимизации
+    useEffect(() => {
+        // Загружаем изображение когда браузер свободен (приоритизация критического контента)
+        const loadBackground = () => {
+            if (bgNoiseRef.current) {
+                bgNoiseRef.current.classList.add('loaded');
+            }
+        };
+
+        // Используем requestIdleCallback для загрузки в свободное время
+        if ('requestIdleCallback' in window) {
+            const idleCallback = requestIdleCallback(loadBackground, { timeout: 2000 });
+            return () => cancelIdleCallback(idleCallback);
+        } else {
+            // Fallback для браузеров без поддержки requestIdleCallback
+            const timer = setTimeout(loadBackground, 100);
+            return () => clearTimeout(timer);
+        }
+    }, []);
 
 
     /* 
@@ -76,7 +97,7 @@ const LayoutContent = ({ children, initialNavigation }: { children: ReactNode; i
                 {children}
             </main>
             <AppFooter />
-            <div className="bg-noise"></div>
+            <div ref={bgNoiseRef} className="bg-noise" aria-hidden="true"></div>
             {/* <CustomScrollbar target="window" /> */}
 
             <CopyNotification

@@ -19,15 +19,20 @@ html {
 
 .bg-noise {
   --opacity: 0.6;
+  --bg-image: none;
   position: fixed;
   z-index: -1;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('../../images/150.webp');
+  background-image: var(--bg-image);
   pointer-events: none;
   opacity: var(--opacity);
+  
+  &.loaded {
+    --bg-image: url('../../images/150.webp');
+  }
 }
 
 .mask-custom {
