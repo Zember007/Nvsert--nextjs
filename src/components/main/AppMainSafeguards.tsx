@@ -1,6 +1,6 @@
 
 import { useEffect, useRef, useState } from 'react';
-import { gsap } from "gsap";
+
 
 import SafeguardBlock from './elements/AppSafeguardBlock';
 import '@/assets/styles/sections/main/animation/skills.scss'
@@ -10,7 +10,6 @@ import Img2 from '@/assets/images/safeguard/2.webp'
 import Img3 from '@/assets/images/safeguard/3.webp'
 import Img4 from '@/assets/images/safeguard/4.webp'
 import useWindowSize from '@/hook/useWindowSize';
-import { horizontalLoop } from '@/scripts/slider';
 
 
 const AppMainSafeguards = () => {
@@ -105,10 +104,16 @@ const AppMainSafeguards = () => {
   useEffect(() => {
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
+      async ([entry]) => {
         setIsVisible(entry.isIntersecting);
         if (divRef.current && entry.isIntersecting) {
           if (widthWindow && widthWindow < 1407 && divRef.current) {
+            const [gsapModule, sliderModule] = await Promise.all([
+              import('gsap'),
+              import('@/scripts/slider')
+          ]);
+          const gsap = gsapModule.default || gsapModule;
+          const { horizontalLoop } = sliderModule;
 
             const slides = gsap.utils.toArray('[data-slider="slide-safeguard"]');
             const gap = widthWindow < 960 ? (widthWindow - (250)) / 2 : 20

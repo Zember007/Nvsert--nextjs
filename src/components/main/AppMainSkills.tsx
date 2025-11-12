@@ -1,19 +1,14 @@
 
 import { useEffect, useRef, useState } from 'react';
-import { gsap } from "gsap";
-import { Draggable } from "gsap/Draggable";
 import { skills } from './utils';
 import AppSkillBlock from './elements/AppSkillBlock';
 import '@/assets/styles/sections/main/animation/skills.scss'
 import '@/assets/styles/sections/main/main-skills-component.scss'
 import { useTranslation } from 'react-i18next';
 import useWindowSize from '@/hook/useWindowSize';
-import { horizontalLoop } from '@/scripts/slider';
 import { filterPrepositions } from '@/hook/filter';
 import { useIntersectionObserver } from '@/hook/useIntersectionObserver';
 import Button from '@/components/ui/Button';
-
-gsap.registerPlugin(Draggable);
 
 const AppMainSkills = () => {
 
@@ -25,10 +20,18 @@ const AppMainSkills = () => {
     useEffect(() => {
 
         const observer = new IntersectionObserver(
-            ([entry]) => {
+            async ([entry]) => {
               
                 if (entry.isIntersecting && ref.current) {
                     if (widthWindow && widthWindow < 1407) {
+
+                        const [gsapModule, sliderModule] = await Promise.all([
+                            import('gsap'),
+                            import('@/scripts/slider')
+                        ]);
+                        const gsap = gsapModule.default || gsapModule;
+                        const { horizontalLoop } = sliderModule;
+
                         const slides = gsap.utils.toArray('[data-slider="slide-skill"]');
                         const gap = widthWindow < 960 ? (widthWindow - (250)) / 2 : 20;
 

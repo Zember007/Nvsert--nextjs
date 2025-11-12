@@ -1,10 +1,8 @@
 
 import { PhotoProvider, PhotoView } from '@/assets/lib/react-photo-view';
 import { useEffect, useRef, useState } from 'react';
-import { horizontalLoop } from '@/scripts/slider';
 import { useButton } from '@/hook/useButton';
 import Image from 'next/image';
-import gsap from 'gsap';
 import { useTranslation } from 'react-i18next';
 import useWindowSize from '@/hook/useWindowSize';
 import '@/assets/styles/sections/main/main-feedback.scss';
@@ -25,12 +23,18 @@ const AppMainFeedback = () => {
     const loop1 = useRef<any>(null)
 
     useEffect(() => {
-
-
-
+        // Ленивая загрузка GSAP и slider только когда секция видна
         const observer = new IntersectionObserver(
-            ([entry]) => {
+            async ([entry]) => {
                 if (entry.isIntersecting) {
+                    // Динамический импорт GSAP и slider для code splitting
+                    const [gsapModule, sliderModule] = await Promise.all([
+                        import('gsap'),
+                        import('@/scripts/slider')
+                    ]);
+                    const gsap = gsapModule.default || gsapModule;
+                    const { horizontalLoop } = sliderModule;
+                    
                     const slides = gsap.utils.toArray('[data-slider="slide-feedback"]');
                     const slides1 = gsap.utils.toArray('[data-slider="slide-feedback1"]');
                     loop.current = horizontalLoop(slides, {
@@ -125,7 +129,13 @@ const AppMainFeedback = () => {
                                     >
                                         <Image
                                             className='feedback-image'
-                                            src={`/feedbacks/small/${index + 1}.png`} alt='feedback' width={190} height={267} />
+                                            src={`/feedbacks/small/${index + 1}.png`} 
+                                            alt='feedback' 
+                                            width={190} 
+                                            height={267}
+                                            loading="lazy"
+                                            placeholder="blur"
+                                            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q==" />
                                     </PhotoView>
                                 </div>)}
 
@@ -150,7 +160,13 @@ const AppMainFeedback = () => {
                                         src={`/feedbacks/big/${15 + index}.png`}>
                                         <Image
                                             className='feedback-image'
-                                            src={`/feedbacks/small/${15 + index}.png`} alt='feedback' width={190} height={267} />
+                                            src={`/feedbacks/small/${15 + index}.png`} 
+                                            alt='feedback' 
+                                            width={190} 
+                                            height={267}
+                                            loading="lazy"
+                                            placeholder="blur"
+                                            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q==" />
                                     </PhotoView>
                                 </div>)}
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
-import { gsap } from 'gsap';
+
 import { horizontalLoop } from '@/scripts/slider';
 import '@/assets/styles/sections/main/horizontal-slide.scss';
 
