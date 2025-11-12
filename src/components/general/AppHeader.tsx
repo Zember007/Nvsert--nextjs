@@ -256,6 +256,7 @@ const AppHeader = ({ services }: { services: Services[] }) => {
 
       </header>
       <HeaderMenu
+        services={services}
         active={burgerMenuActive}
         closeMenu={closeNavMenues}
       />

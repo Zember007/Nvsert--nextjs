@@ -6,8 +6,6 @@ import { useButton } from '@/hook/useButton';
 import { useAnimation, motion } from "framer-motion";
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import { MainDocumentItemProps } from '@/types/documents';
-import SendIcon from '@/components/svg/SendIcon';
-import ServiceMoveIcon from '../svg/ServiceMoveIcon';
 import useWindowSize from '@/hook/useWindowSize';
 import '@/assets/styles/sections/main/document-item.scss';
 import { useRouter } from 'next/navigation';
@@ -245,7 +243,7 @@ const MainDocumentItem = memo(({
                         <Image
                             ref={smallPhotoRef}
                             alt='document'
-                            src={'https://test11.audiosector.ru/cp' + img?.url}
+                            src={'https://test11.audiosector.ru/cp' + img?.formats?.thumbnail?.url}
                             width={41}
                             height={58}
                             loading="lazy"

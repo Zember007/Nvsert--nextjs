@@ -2,8 +2,6 @@ import Link from 'next/link';
 import ArrowIcon from '@/assets/images/svg/menu/arrow.svg'
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { RootState } from '@/config/store';
-import { useSelector } from 'react-redux';
 import { Services } from '@/store/navigation';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import { filterPrepositions } from '@/hook/filter';
@@ -27,7 +25,7 @@ interface navigationStackItem {
 
 
 
-const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => void }) => {
+const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMenu: () => void, services: Services[] }) => {
 
 
 
@@ -54,7 +52,6 @@ const HeaderMenu = ({ active, closeMenu }: { active: boolean, closeMenu: () => v
         }
     ];
 
-    const { services } = useSelector((state: RootState) => state.navigation);
 
 
 
