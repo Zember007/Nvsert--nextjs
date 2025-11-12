@@ -74,12 +74,12 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                     </div>
                     <div className=' justify-between flex absolute bottom-[9px] left-[9px] right-[9px] xss:*:*:!leading-[0.68] *:*:!leading-[0.8]   flex p-[11px] bg-[#F5F5F580] rounded-[4px] border border-[#000] backdrop-blur-[4px]'>
                         <div className="flex flex-col gap-[10px]">
-                            <span className='text-5 tracking-[-0.4px]'>Срок оформления</span>
-                            <span className='text-1 tracking-[-0.4px] font-light'>{certificate.duration}</span>
+                            <span className='text-5 !tracking-[-0.4px]'>Срок оформления</span>
+                            <span className='text-1 !tracking-[-0.4px] font-light'>{certificate.duration}</span>
                         </div>
                         <div className="flex flex-col gap-[10px]">
-                            <span className='text-5 tracking-[-0.4px]'>Стоимость</span>
-                            <span className='text-1 tracking-[-0.4px] font-light'>{certificate.price}</span>
+                            <span className='text-5 !tracking-[-0.4px]'>Стоимость</span>
+                            <span className='text-1 !tracking-[-0.4px] font-light'>{certificate.price}</span>
                         </div>
                     </div>
                 </div>
