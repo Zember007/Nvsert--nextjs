@@ -1,6 +1,7 @@
 'use client';
 import React, { useMemo } from 'react';
 import AppCollapsibleList from './AppCollapsibleList';
+import { filterPrepositions } from '@/hook/filter';
 
 export type DotNavItem = {
     id: number | string;
@@ -111,7 +112,7 @@ const DotNavList: React.FC<{
                         </div>
                     </div>
                     <span className={`pointer-events-none text-[16px] group-active:scale-[0.95] transition-transform duration-100 font-light  ${item.active ? 'text-[#34446D] ' : 'text-black '}`}>
-                        {item.title}
+                        {filterPrepositions(item.title)}
                     </span>
                 </a>
             )}

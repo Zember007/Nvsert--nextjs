@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { horizontalLoop } from '@/scripts/slider';
 import useWindowSize from '@/hook/useWindowSize';
+import { filterPrepositions } from './filter';
 
 export const useRichTextRenderer = () => {
     const { width: widthWindow } = useWindowSize();
@@ -232,7 +233,7 @@ export const useRichTextRenderer = () => {
                                 className={liClassName}
                                 {...(typeToUse === 'ordered' && item.number !== undefined ? { value: item.number } : {})}
                             >
-                                {item.text}
+                                {filterPrepositions(item.text)}
                             </li>
                         ))
                     )
@@ -305,7 +306,7 @@ export const useRichTextRenderer = () => {
                 flushList();
                 elements.push(
                     <h6 key={`subheading-${index}`} className="mt-[9px] font-normal text-black">
-                        {trimmedLine.substring(2).trim()}
+                        {filterPrepositions(trimmedLine.substring(2).trim())}
                     </h6>
                 );
                 lastElementWasList = false;
@@ -317,7 +318,7 @@ export const useRichTextRenderer = () => {
             if (trimmedLine) {
                 elements.push(
                     <p key={`p-${index}`} className={`-my-[5px] ${small ? 'text-2' : 'text-base-post'}`}>
-                        {trimmedLine}
+                        {filterPrepositions(trimmedLine)}
                     </p>
                 );
                 lastElementWasList = false;
