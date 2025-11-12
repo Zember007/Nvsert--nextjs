@@ -47,7 +47,7 @@ const ServicesContent = () => {
 
             }
         }
-    }, [services, searchParams]);
+    }, [searchParams]);
 
 
 
