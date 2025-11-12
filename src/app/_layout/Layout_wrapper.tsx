@@ -6,13 +6,9 @@ import { ReactNode } from 'react';
 import AppFooter from '@/components/general/AppFooter';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import AppModalWrapper from '@/components/general/AppModalWrapper';
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CopyNotification from '@/components/general/elements/CopyNotification';
 import { NavigationItem, Services } from '@/store/navigation';
 import { groupServices } from '@/assets/lib/navigation';
-
-gsap.registerPlugin(ScrollTrigger);
 
 
 const LayoutContent = ({ children, initialNavigation }: { children: ReactNode; initialNavigation?: NavigationItem[]; }) => {

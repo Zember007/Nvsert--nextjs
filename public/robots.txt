@@ -18,7 +18,7 @@ Disallow: /adm/
 Disallow: /*?*
 
 # Host
-Host: https://audiosector.ru:8999
+Host: https://test11.audiosector.ru
 
 # Sitemaps
-Sitemap: https://audiosector.ru:8999/sitemap.xml
+Sitemap: https://test11.audiosector.ru/sitemap.xml

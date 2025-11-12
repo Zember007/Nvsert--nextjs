@@ -38,8 +38,10 @@ const AppMainQuestions = dynamic(() => import('../components/main/AppMainQuestio
 
 export default async function Home() {
 
-  const navigation = await getNavigationData();
-  const faqs = await getFaqs();
+  const [navigation, faqs] = await Promise.all([
+    getNavigationData(),
+    getFaqs()
+  ]);
 
   return (
     <div className="main text-[#000] overflow-hidden  relative leading-page">
