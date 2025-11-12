@@ -356,7 +356,8 @@ const MainDocumentItem = memo(({
                                             alt='document' src={'https://test11.audiosector.ru/cp' + img?.url}
                                             width={photoWidth || 190}
                                             height={photoWidth / img?.width * img?.height || 267}
-                                            loading="lazy"
+                                            loading={index === 1 ? 'eager' : 'lazy'}
+                                            priority={index === 1}
                                             sizes="(max-width: 960px) 280px, 475px"
                                         />
                                     </motion.div>

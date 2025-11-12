@@ -216,8 +216,14 @@ const SliderMain = () => {
                                         <div
                                             key={index} data-slider="slide" className="slider-slide slider-slide-item">
                                             <div className="slide-inner slide-inner-content">
-                                                <Image src={item.img} alt='slide' fill
-                                                    style={{ objectFit: 'cover' }} />
+                                                <Image 
+                                                    src={item.img} 
+                                                    alt='slide' 
+                                                    fill
+                                                    style={{ objectFit: 'cover' }}
+                                                    priority={index === 0}
+                                                    loading={index === 0 ? 'eager' : 'lazy'}
+                                                />
                                                 <div className="slide-overlay-blend"></div>
 
                                             </div>

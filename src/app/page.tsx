@@ -1,15 +1,16 @@
 import dynamic from 'next/dynamic';
-import AppMainIntro from '../components/main/AppMainIntro'
-import { getNavigationData } from '@/assets/lib/navigation';
 import { getFaqs } from '@/assets/lib/faq';
-import { useNavigationContext } from '@/components/contexts/NavigationContext';
+import AppMainBelowFold from '../components/main/AppMainBelowFold';
 
-// Code splitting для оптимизации загрузки JS бандла
-// SSR остается включенным для SEO - текстовый контент будет доступен поисковым роботам
+// Критический контент выше fold - загружаем с SSR для SEO
+const AppMainIntro = dynamic(() => import('../components/main/AppMainIntro'), {
+  loading: () => <div className="section wrapper min-h-[400px]" />,
+  ssr: true
+})
+
 const AppMainDocuments = dynamic(() => import('../components/main/AppMainDocuments'), {
   loading: () => <div className="section wrapper min-h-[400px]" />,
   ssr: true
-  // ssr: true по умолчанию - контент рендерится на сервере для SEO
 })
 
 const AppMainSkills = dynamic(() => import('../components/main/AppMainSkills'), {
@@ -24,16 +25,6 @@ const AppMainSlider = dynamic(() => import('../components/main/AppMainSlider'), 
 
 const AppMainSafeguards = dynamic(() => import('../components/main/AppMainSafeguards'), {
   loading: () => <div className="section min-h-[400px]" />,
-  ssr: true
-})
-
-const AppMainFeedback = dynamic(() => import('../components/main/AppMainFeedback'), {
-  loading: () => <div className="section wrapper min-h-[400px]" />,
-  ssr: true
-})
-
-const AppMainQuestions = dynamic(() => import('../components/main/AppMainQuestions'), {
-  loading: () => <div className="section wrapper min-h-[400px]" />,
   ssr: true
 })
 
@@ -55,9 +46,7 @@ export default async function Home() {
 
       <AppMainSafeguards />
 
-      <AppMainFeedback />
-
-      <AppMainQuestions faqs={faqs} />
+      <AppMainBelowFold faqs={faqs} />
 
     </div>
   );
