@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 import AppMainIntro from '../components/main/AppMainIntro'
+import InViewLazy from '../components/common/InViewLazy'
 
 // Code splitting для оптимизации загрузки JS бандла
 // SSR остается включенным для SEO - текстовый контент будет доступен поисковым роботам
@@ -16,22 +17,22 @@ const AppMainSkills = dynamic(() => import('../components/main/AppMainSkills'), 
 
 const AppMainSlider = dynamic(() => import('../components/main/AppMainSlider'), {
   loading: () => <div className="section wrapper min-h-[400px]" />,
-  ssr: true
+  ssr: false
 })
 
 const AppMainSafeguards = dynamic(() => import('../components/main/AppMainSafeguards'), {
   loading: () => <div className="section min-h-[400px]" />,
-  ssr: true
+  ssr: false
 })
 
 const AppMainFeedback = dynamic(() => import('../components/main/AppMainFeedback'), {
   loading: () => <div className="section wrapper min-h-[400px]" />,
-  ssr: true
+  ssr: false
 })
 
 const AppMainQuestions = dynamic(() => import('../components/main/AppMainQuestions'), {
   loading: () => <div className="section wrapper min-h-[400px]" />,
-  ssr: true
+  ssr: false
 })
 
 // Включаем ISR для главной страницы
@@ -48,13 +49,21 @@ export default function Home() {
 
       <AppMainSkills />
 
-      <AppMainSlider />
+      <InViewLazy placeholder={<div className="section wrapper min-h-[400px]" />}>
+        <AppMainSlider />
+      </InViewLazy>
 
-      <AppMainSafeguards />
+      <InViewLazy placeholder={<div className="section min-h-[400px]" />}>
+        <AppMainSafeguards />
+      </InViewLazy>
 
-      <AppMainFeedback />
+      <InViewLazy placeholder={<div className="section wrapper min-h-[400px]" />}>
+        <AppMainFeedback />
+      </InViewLazy>
 
-      <AppMainQuestions />
+      <InViewLazy placeholder={<div className="section wrapper min-h-[400px]" />}>
+        <AppMainQuestions />
+      </InViewLazy>
 
     </div>
   );

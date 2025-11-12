@@ -11,7 +11,7 @@ import { NavigationItem } from '@/store/navigation';
 
 const font = Roboto({
   subsets: ['latin', 'cyrillic'],
-  weight: ['100', '300', '400', '500', '700', '900'],
+  weight: ['400', '500', '700'],
   display: 'swap',
   variable: '--font-family',
 })
