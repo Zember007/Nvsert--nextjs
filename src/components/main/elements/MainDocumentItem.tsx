@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useEffect, useRef, useState, memo } from 'react';
+import { useEffect, useRef, useState, memo, useId } from 'react';
 import { filterPrepositions } from '@/hook/filter';
 import { PhotoView } from '@/assets/lib/react-photo-view';
 import { useButton } from '@/hook/useButton';
@@ -56,52 +56,57 @@ const ActionButton = memo(({ onClick, icon, text, className, setRef }: ActionBut
 ActionButton.displayName = 'ActionButton';
 
 
+
 // Компонент списка документов
-const DocumentList = memo(({ documentsList, listHidden, setListHidden, hiddenList }: DocumentListProps) => (
-    <div className="document__list">
-        <div className='document__list-item'>
-            <p className={`text-1`}>
-                Необходимые документы для оформления
-            </p>
-            <ul className='document__list-item-ul text-2'>
-                {documentsList.map((list, index) => (
+const DocumentList = memo(({ documentsList, listHidden, setListHidden, hiddenList }: DocumentListProps) => {
+    const clip0_4632_2058 = useId();
 
-                    <li
-                        className={` ${listHidden && (index >= hiddenList) ? 'hidden' : ''}`}
-                        key={index}
+    return (
+        <div className="document__list">
+            <div className='document__list-item'>
+                <p className={`text-1`}>
+                    Необходимые документы для оформления
+                </p>
+                <ul className='document__list-item-ul text-2'>
+                    {documentsList.map((list, index) => (
+
+                        <li
+                            className={` ${listHidden && (index >= hiddenList) ? 'hidden' : ''}`}
+                            key={index}
+                        >
+                            {filterPrepositions(list.value)}
+                        </li>
+                    ))}
+                </ul>
+                {documentsList.length > hiddenList && (
+
+
+                    <button
+                        className='document-list-show-button  line-after__box btnIconAn !gap-[5px]'
+                        onClick={() => setListHidden(!listHidden)}
                     >
-                        {filterPrepositions(list.value)}
-                    </li>
-                ))}
-            </ul>
-            {documentsList.length > hiddenList && (
+                        <span className=' line-after !leading-[1.2] whitespace-nowrap'>{listHidden ? 'Показать полный список документов' : 'Скрыть'}</span>
 
+                        <svg
+                            className={`sendIconLeft document-list-arrow ${!listHidden ? 'rotate-[180deg]' : ''}`}
+                            width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clipPath={`url(#${clip0_4632_2058})`}>
+                                <path d="M7 3.5H9V0.5H7L7 3.5ZM15 9.46767L13.5692 8.02908L9.01287 12.6092V6.5H6.98815V12.6092L2.43177 8.02908L1 9.46767L8 16.5L8.71538 15.7822L9.43177 15.0634L15 9.46767Z" fill="#34446D" />
+                            </g>
+                            <defs>
+                                <clipPath id={clip0_4632_2058}>
+                                    <rect width="16" height="16" fill="white" transform="matrix(0 1 -1 0 16 0.5)" />
+                                </clipPath>
+                            </defs>
+                        </svg>
 
-                <button
-                    className='document-list-show-button  line-after__box btnIconAn !gap-[5px]'
-                    onClick={() => setListHidden(!listHidden)}
-                >
-                    <span className=' line-after !leading-[1.2] whitespace-nowrap'>{listHidden ? 'Показать полный список документов' : 'Скрыть'}</span>
+                    </button>
+                )}
+            </div>
 
-                    <svg
-                        className={`sendIconLeft document-list-arrow ${!listHidden ? 'rotate-[180deg]' : ''}`}
-                        width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clipPath="url(#clip0_4632_2058)">
-                            <path d="M7 3.5H9V0.5H7L7 3.5ZM15 9.46767L13.5692 8.02908L9.01287 12.6092V6.5H6.98815V12.6092L2.43177 8.02908L1 9.46767L8 16.5L8.71538 15.7822L9.43177 15.0634L15 9.46767Z" fill="#34446D" />
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_4632_2058">
-                                <rect width="16" height="16" fill="white" transform="matrix(0 1 -1 0 16 0.5)" />
-                            </clipPath>
-                        </defs>
-                    </svg>
-
-                </button>
-            )}
         </div>
-
-    </div>
-));
+    )
+});
 
 DocumentList.displayName = 'DocumentList';
 
