@@ -7,8 +7,7 @@ export async function getNavigationData(): Promise<NavigationItem[]> {
       process.env.NEXT_PUBLIC_BASE_URL ||
       'https://nvsert.ru';
     const res = await fetch(`${baseUrl}/api/services`, {
-      // Enable Next.js caching on the server
-      next: { revalidate: 60 },
+      next: { revalidate: 60 }
     });
 
     if (!res.ok) {
