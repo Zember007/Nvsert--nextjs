@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic';
 import AppMainIntro from '../components/main/AppMainIntro'
-import InViewLazy from '../components/common/InViewLazy'
 
 // Code splitting для оптимизации загрузки JS бандла
 // SSR остается включенным для SEO - текстовый контент будет доступен поисковым роботам
@@ -43,27 +42,19 @@ export default function Home() {
 
   return (
     <div className="main text-[#000] overflow-hidden  relative leading-page">
-       <AppMainIntro />
+      <AppMainIntro />
 
       <AppMainDocuments />
 
       <AppMainSkills />
 
-      <InViewLazy placeholder={<div className="section wrapper min-h-[400px]" />}>
-        <AppMainSlider />
-      </InViewLazy>
+      <AppMainSlider />
 
-      <InViewLazy placeholder={<div className="section min-h-[400px]" />}>
-        <AppMainSafeguards />
-      </InViewLazy>
+      <AppMainSafeguards />
 
-      <InViewLazy placeholder={<div className="section wrapper min-h-[400px]" />}>
-        <AppMainFeedback />
-      </InViewLazy>
+      <AppMainFeedback />
 
-      <InViewLazy placeholder={<div className="section wrapper min-h-[400px]" />}>
-        <AppMainQuestions />
-      </InViewLazy>
+      <AppMainQuestions />
 
     </div>
   );
