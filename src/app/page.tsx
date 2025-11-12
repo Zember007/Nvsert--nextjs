@@ -17,22 +17,22 @@ const AppMainSkills = dynamic(() => import('../components/main/AppMainSkills'), 
 
 const AppMainSlider = dynamic(() => import('../components/main/AppMainSlider'), {
   loading: () => <div className="section wrapper min-h-[400px]" />,
-  ssr: false
+  ssr: true
 })
 
 const AppMainSafeguards = dynamic(() => import('../components/main/AppMainSafeguards'), {
   loading: () => <div className="section min-h-[400px]" />,
-  ssr: false
+  ssr: true
 })
 
 const AppMainFeedback = dynamic(() => import('../components/main/AppMainFeedback'), {
   loading: () => <div className="section wrapper min-h-[400px]" />,
-  ssr: false
+  ssr: true
 })
 
 const AppMainQuestions = dynamic(() => import('../components/main/AppMainQuestions'), {
   loading: () => <div className="section wrapper min-h-[400px]" />,
-  ssr: false
+  ssr: true
 })
 
 // Включаем ISR для главной страницы
