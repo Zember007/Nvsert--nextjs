@@ -2,7 +2,7 @@
 import '@/assets/styles/base.scss';
 import '@/assets/lib/react-photo-view/dist/react-photo-view.css';
 import AppHeader from '@/components/general/AppHeader';
-import { ReactNode, useEffect, useRef } from 'react';
+import { ReactNode, useEffect, useRef, cloneElement, isValidElement } from 'react';
 import AppFooter from '@/components/general/AppFooter';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import AppModalWrapper from '@/components/general/AppModalWrapper';
@@ -94,7 +94,15 @@ const LayoutContent = ({ children, initialNavigation }: { children: ReactNode; i
             <AppHeader services={(initialNavigation && initialNavigation.length > 0) ? groupServices(initialNavigation) : []} />
 
             <main >
+                {/* Вариант 1: Передача через Context (рекомендуется) - используйте useNavigationContext() в компонентах */}
+                {/* Вариант 2: Передача через children как проп (раскомментируйте, если нужно) */}
                 {children}
+                {/* Альтернативный вариант с передачей через cloneElement:
+                {isValidElement(children) 
+                    ? cloneElement(children, { initialNavigation } as any)
+                    : children
+                }
+                */}
             </main>
             <AppFooter />
             <div ref={bgNoiseRef} className="bg-noise" aria-hidden="true"></div>

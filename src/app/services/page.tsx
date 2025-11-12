@@ -6,6 +6,8 @@ import { RootState } from '@/config/store';
 import { useButton } from '@/hook/useButton';
 import AppBreadcrumbs from '@/components/general/AppBreadcrumbs';
 import ServiceItem from '@/components/services/ServiceItem';
+import { useNavigationContext } from '@/components/contexts/NavigationContext';
+import { groupServices } from '@/assets/lib/navigation';
 
 
 const ServicesContent = () => {
@@ -19,7 +21,9 @@ const ServicesContent = () => {
         );
     };
 
-    const { services } = useSelector((state: RootState) => state.navigation);
+    const { initialNavigation: navigation } = useNavigationContext();
+    const services = groupServices(navigation);
+
 
     const searchParams = useSearchParams();
 

@@ -17,6 +17,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/config/store';
 import useWindowSize from '@/hook/useWindowSize';
 import { StrapiResponsiveImage } from '@/components/general/StrapiResponseImage';
+import { useNavigationContext } from '@/components/contexts/NavigationContext';
 
 // Component to render rich text with proper formatting
 const RichTextRenderer: React.FC<{ content: string }> = ({ content }) => {
@@ -84,7 +85,8 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
     const { openDefaultModal } = useHeaderContext();
     const { height: windowHeight, width: windowWidth } = useWindowSize();
 
-    const { navigation } = useSelector((state: RootState) => state.navigation);
+    const { initialNavigation: navigation } = useNavigationContext();
+
 
     const [expandedSections, setExpandedSections] = useState<number[]>(initialNavigation.content?.map(item => item.id) || []);
     const [currentServiceIndex, setCurrentServiceIndex] = useState<number>(0);

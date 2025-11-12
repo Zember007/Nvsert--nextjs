@@ -6,10 +6,12 @@ import '@/assets/styles/sections/main/main-documents.scss'
 import { PhotoProvider } from '@/assets/lib/react-photo-view';
 import { useTranslation } from "react-i18next";
 import { NavigationItem } from "@/store/navigation";
+import { useNavigationContext } from "../contexts/NavigationContext";
 
-const AppMainDocuments = ({ navigation }: { navigation: NavigationItem[] }) => {
+const AppMainDocuments = () => {
     const [activeIndex, setActive] = useState<number | null>(null);
     const { t } = useTranslation();
+    const { initialNavigation: navigation } = useNavigationContext();
 
     const noop = useCallback(() => {}, []);
     const setActiveHandlers = useMemo(
