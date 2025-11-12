@@ -187,7 +187,7 @@ const MainDocumentItem = memo(({
                     times: ANIMATION_SETTINGS.times
                 }
             });
-        }, 150);
+        }, 50);
 
         const el = wrapperRef.current;
         let timerScroll: NodeJS.Timeout | null = null;
@@ -241,8 +241,10 @@ const MainDocumentItem = memo(({
                             ref={smallPhotoRef}
                             alt='document'
                             src={'https://test11.audiosector.ru/cp' + img?.url}
-                            width="41"
-                            height="58"
+                            width={41}
+                            height={58}
+                            loading="lazy"
+                            sizes="41px"
                         />
                     </div>
 
@@ -350,7 +352,10 @@ const MainDocumentItem = memo(({
                                         <Image
                                             alt='document' src={'https://test11.audiosector.ru/cp' + img?.url}
                                             width={photoWidth || 190}
-                                            height={photoWidth / img?.width * img?.height || 267} />
+                                            height={photoWidth / img?.width * img?.height || 267}
+                                            loading="lazy"
+                                            sizes="(max-width: 960px) 280px, 475px"
+                                        />
                                     </motion.div>
 
                                 </PhotoView>

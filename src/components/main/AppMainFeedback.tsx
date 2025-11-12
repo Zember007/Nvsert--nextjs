@@ -1,3 +1,4 @@
+ 'use client'
 
 import { PhotoProvider, PhotoView } from '@/assets/lib/react-photo-view';
 import { useEffect, useRef, useState } from 'react';

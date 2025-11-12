@@ -1,6 +1,6 @@
+ 'use client'
 import MainDocumentItem from "./elements/MainDocumentItem";
-import { documents } from "./utils";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import '@/assets/styles/sections/main/animation/documents.scss'
 import '@/assets/styles/sections/main/main-documents.scss'
 import { PhotoProvider } from '@/assets/lib/react-photo-view';
@@ -13,11 +13,11 @@ const AppMainDocuments = () => {
     const { t } = useTranslation();
     const { navigation } = useSelector((state: RootState) => state.navigation);
 
-    
-
-
-
-
+    const noop = useCallback(() => {}, []);
+    const setActiveHandlers = useMemo(
+        () => navigation.map((_, idx) => (value: boolean) => setActive(value ? idx : null)),
+        [navigation]
+    );
 
     return (
         <section className="section wrapper !overflow-visible">
@@ -39,9 +39,9 @@ const AppMainDocuments = () => {
                     {navigation.map((item, index) => (
                         <MainDocumentItem
                             link={item.slug}
-                            key={index}                       
-                            setPhoto={() => {}}
-                            setActive={(value: boolean) => setActive(value ? index : null)}
+                            key={item.slug || index}
+                            setPhoto={noop}
+                            setActive={setActiveHandlers[index]}
                             active={index === activeIndex}
                             content={item.description}
                             documentsList={item.documents}

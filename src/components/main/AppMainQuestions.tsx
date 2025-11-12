@@ -1,3 +1,5 @@
+'use client'
+
 import { useTranslation } from 'react-i18next';
 import QuestionsBlock from './elements/QuestionsBlock';
 import { useState, useEffect } from 'react';

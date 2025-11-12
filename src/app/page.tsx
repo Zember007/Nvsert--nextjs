@@ -1,14 +1,41 @@
-'use client'
 import dynamic from 'next/dynamic';
-import '@/assets/styles/main.scss'
 import AppMainIntro from '../components/main/AppMainIntro'
-import AppMainDocuments from '../components/main/AppMainDocuments'
-import AppMainSkills from '../components/main/AppMainSkills'
-import AppMainSlider from '../components/main/AppMainSlider'
-import AppMainSafeguards from '../components/main/AppMainSafeguards'
-import AppMainFeedback from '../components/main/AppMainFeedback'
-import AppMainQuestions from '../components/main/AppMainQuestions'
 
+// Code splitting для оптимизации загрузки JS бандла
+// SSR остается включенным для SEO - текстовый контент будет доступен поисковым роботам
+const AppMainDocuments = dynamic(() => import('../components/main/AppMainDocuments'), {
+  loading: () => <div className="section wrapper min-h-[400px]" />,
+  ssr: true
+  // ssr: true по умолчанию - контент рендерится на сервере для SEO
+})
+
+const AppMainSkills = dynamic(() => import('../components/main/AppMainSkills'), {
+  loading: () => <div className="section min-h-[400px]" />,
+  ssr: true
+})
+
+const AppMainSlider = dynamic(() => import('../components/main/AppMainSlider'), {
+  loading: () => <div className="section wrapper min-h-[400px]" />,
+  ssr: true
+})
+
+const AppMainSafeguards = dynamic(() => import('../components/main/AppMainSafeguards'), {
+  loading: () => <div className="section min-h-[400px]" />,
+  ssr: true
+})
+
+const AppMainFeedback = dynamic(() => import('../components/main/AppMainFeedback'), {
+  loading: () => <div className="section wrapper min-h-[400px]" />,
+  ssr: true
+})
+
+const AppMainQuestions = dynamic(() => import('../components/main/AppMainQuestions'), {
+  loading: () => <div className="section wrapper min-h-[400px]" />,
+  ssr: true
+})
+
+// Включаем ISR для главной страницы
+export const revalidate = 60;
 
 export default function Home() {
 

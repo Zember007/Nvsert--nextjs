@@ -2,6 +2,7 @@ import Provider from "./_layout/Provider"
 import '@/assets/styles/base/_variables.scss'
 import '@/assets/styles/base/_mixins.scss'
 import '@/assets/styles/base/_icon.scss'
+import '@/assets/styles/main.scss'
 import { ReactNode } from "react"
 import { Roboto } from 'next/font/google'
 import type { Metadata } from 'next'
