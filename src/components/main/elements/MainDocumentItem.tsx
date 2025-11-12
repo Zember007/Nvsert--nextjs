@@ -258,12 +258,12 @@ const MainDocumentItem = memo(({
                         className={`document__navigation-bg document__navigation-wrap container-scale transition-scale backface-hidden ${active ? 'active' : 'text-[#000]'} group-active/window:text-[#FFF]   `}
                     >
 
-                        <h6 className="document__title">
+                        <p className="document__title header-h-6">
                             {filterPrepositions(title)}
-                        </h6>
+                        </p>
                         <div className="document__desc-wrap">
-                            <h6 className="document__desc">{duration}</h6>
-                            <h6 className="document__desc">{price}</h6>
+                            <p className="document__desc header-h-6">{duration}</p>
+                            <p className="document__desc header-h-6">{price}</p>
 
 
 

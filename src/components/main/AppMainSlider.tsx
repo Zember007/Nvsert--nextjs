@@ -243,11 +243,11 @@ const SliderMain = () => {
 
 
                         <div className="overlay-content-container">
-                            <h6 className="overlay-title">
+                            <p className="overlay-title header-h-6">
                                 {
                                     filterPrepositions(slidesLang[activeIndex].title)
                                 }
-                            </h6>
+                            </p>
                             <p className={`slide-text-content text-3`}>
 
                                 {filterPrepositions(slidesLang[activeIndex].text)}

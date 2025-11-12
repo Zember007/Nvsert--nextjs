@@ -34,8 +34,8 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
         <div className="safeguard-card-inner">
           <div className="safeguard-image-container">
 
-            <h5 className="safeguard-title-overlay"
-            >{filterPrepositions(title)}</h5>
+            <p className="safeguard-title-overlay header-h-5"
+            >{filterPrepositions(title)}</p>
             <Image
               className='safeguard-image'
               alt='document' src={img}
