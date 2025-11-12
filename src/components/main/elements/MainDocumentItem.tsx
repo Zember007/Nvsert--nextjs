@@ -360,7 +360,7 @@ const MainDocumentItem = memo(({
                                 <div className="document-content-column">
                                     <div className="document-text-content">
                                         <p className='document-description'>
-                                            {processContent(content)}
+                                            {processContent(content, true)}
                                         </p>
 
                                     </div>

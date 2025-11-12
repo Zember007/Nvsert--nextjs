@@ -204,21 +204,42 @@ export const useRichTextRenderer = () => {
 
         const lines = text.split('\n');
         const elements: React.ReactNode[] = [];
-        let currentListItems: string[] = [];
+        let currentListItems: Array<{ text: string; number?: number }> = [];
+        let listType: 'ordered' | 'unordered' | null = null;
         let listKey = 0;
 
-        const flushList = () => {
+        let lastElementWasList = false;
+
+        const flushList = (forceType?: 'ordered' | 'unordered') => {
             if (currentListItems.length > 0) {
+                const typeToUse = forceType || listType || 'unordered';
+                const ListTag = typeToUse === 'ordered' ? 'ol' : 'ul';
+                const listClassName = typeToUse === 'ordered' ? 'list-decimal my-[10px]' : 'list-disc my-[10px]';
+                
+                // Для нумерованных списков с одним элементом убираем отступ слева
+                const isSingleOrdered = typeToUse === 'ordered' && currentListItems.length === 1;
+                const liClassName = isSingleOrdered 
+                    ? `font-light ${small ? 'text-2' : 'text-base-post'}`
+                    : `font-light ml-[25px] ${small ? 'text-2' : 'text-base-post'}`;
+                
                 elements.push(
-                    <ul key={`list-${listKey++}`} className="list-disc -my-[5px]">
-                        {currentListItems.map((item, idx) => (
-                            <li key={idx} className={`font-light ml-[25px] ${small ? 'text-2' : 'text-base-post'}`}>
-                                {item}
+                    React.createElement(
+                        ListTag,
+                        { key: `list-${listKey++}`, className: listClassName + ' space-y-[5px]' },
+                        currentListItems.map((item, idx) => (
+                            <li 
+                                key={idx} 
+                                className={liClassName}
+                                {...(typeToUse === 'ordered' && item.number !== undefined ? { value: item.number } : {})}
+                            >
+                                {item.text}
                             </li>
-                        ))}
-                    </ul>
+                        ))
+                    )
                 );
+                lastElementWasList = true;
                 currentListItems = [];
+                listType = null;
             }
         };
 
@@ -227,7 +248,15 @@ export const useRichTextRenderer = () => {
 
             if (!trimmedLine) {
                 flushList();
-                elements.push(<div key={`br-${index}`} className={`${small ? 'h-[20px]' : 'h-[15px]'}`} />);
+                // Проверяем, будет ли следующий элемент списком
+                const nextLine = index + 1 < lines.length ? lines[index + 1].trim() : '';
+                const willBeList = nextLine.match(/^(\d+)\.\s+(.+)$/) || nextLine.startsWith('- ');
+                
+                // Не добавляем отступ, если предыдущий или следующий элемент - список
+                if (!lastElementWasList && !willBeList) {
+                    elements.push(<div key={`br-${index}`} className={`${small ? 'h-[20px]' : 'h-[15px]'}`} />);
+                }
+                lastElementWasList = false;
                 return;
             }
 
@@ -247,9 +276,27 @@ export const useRichTextRenderer = () => {
                 }
             }
 
+            // Handle numbered list items (lines starting with number. )
+            const numberedMatch = trimmedLine.match(/^(\d+)\.\s+(.+)$/);
+            if (numberedMatch) {
+                // Если текущий список другого типа, закрываем его
+                if (listType !== null && listType !== 'ordered') {
+                    flushList();
+                }
+                listType = 'ordered';
+                const number = parseInt(numberedMatch[1], 10);
+                currentListItems.push({ text: numberedMatch[2].trim(), number });
+                return;
+            }
+
             // Handle list items (lines starting with -)
             if (trimmedLine.startsWith('- ')) {
-                currentListItems.push(trimmedLine.substring(2).trim());
+                // Если текущий список другого типа, закрываем его
+                if (listType !== null && listType !== 'unordered') {
+                    flushList();
+                }
+                listType = 'unordered';
+                currentListItems.push({ text: trimmedLine.substring(2).trim() });
                 return;
             }
 
@@ -261,6 +308,7 @@ export const useRichTextRenderer = () => {
                         {trimmedLine.substring(2).trim()}
                     </h6>
                 );
+                lastElementWasList = false;
                 return;
             }
 
@@ -272,6 +320,7 @@ export const useRichTextRenderer = () => {
                         {trimmedLine}
                     </p>
                 );
+                lastElementWasList = false;
             }
         });
 
