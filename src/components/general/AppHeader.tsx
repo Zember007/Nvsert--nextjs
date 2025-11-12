@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState, memo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import '@/assets/styles/sections/_header.scss'
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
@@ -13,15 +13,15 @@ import AppMenuItem from "./AppMenuItem";
 import { filterPhone } from "@/hook/filter";
 import { useButton } from "@/hook/useButton";
 import { useAnimation, motion } from "framer-motion";
-import { AppDispatch, RootState } from "@/config/store";
+import { AppDispatch } from "@/config/store";
 import HeaderMenu from "./elements/HeaderMenu";
+import { Services } from "@/store/navigation";
 
 
 
 
-const AppHeader = () => {
+const AppHeader = ({ services }: { services: Services[] }) => {
   const { openDefaultModal, handleCopy } = useHeaderContext();
-  const { services } = useSelector((state: RootState) => state.navigation);
 
   const pathname = usePathname();
   const [servicesMenuActive, setServicesMenuActive] = useState(false);
@@ -295,7 +295,7 @@ const AppHeader = () => {
           <div
             className={`services-menu !backdrop-blur-[20px] py-[20px]  js-services-menu relative ${servicesMenuActive && 'active'}`}>
             <div className="services-menu__wrapper">
-              <AppNavigation active={servicesMenuActive} />
+              <AppNavigation active={servicesMenuActive} services={services} />
             </div>
 
 

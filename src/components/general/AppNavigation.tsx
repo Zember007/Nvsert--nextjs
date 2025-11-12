@@ -4,16 +4,12 @@ import { useEffect } from "react";
 import { useHeaderContext } from "../contexts/HeaderContext";
 import { filterPrepositions } from "@/hook/filter";
 import { useButton } from "@/hook/useButton";
-import {  RootState } from "@/config/store";
-import {  useSelector } from "react-redux";
-import { NavigationItem } from "@/store/navigation";
+import { NavigationItem, Services } from "@/store/navigation";
 import Image from "next/image";
 
 
 
-const AppNavigation = ({ active }: { active: boolean }) => {
-
-    const { services } = useSelector((state: RootState) => state.navigation);
+const AppNavigation = ({ active, services }: { active: boolean, services: Services[] }) => {
 
     const controls = useAnimation();
 

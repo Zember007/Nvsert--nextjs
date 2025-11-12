@@ -2,19 +2,20 @@
 import '@/assets/styles/base.scss';
 import '@/assets/lib/react-photo-view/dist/react-photo-view.css';
 import AppHeader from '@/components/general/AppHeader';
-import { ReactNode, useEffect, useLayoutEffect, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { ReactNode } from 'react';
 import AppFooter from '@/components/general/AppFooter';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import AppModalWrapper from '@/components/general/AppModalWrapper';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CopyNotification from '@/components/general/elements/CopyNotification';
+import { NavigationItem, Services } from '@/store/navigation';
+import { groupServices } from '@/assets/lib/navigation';
 
 gsap.registerPlugin(ScrollTrigger);
 
 
-const LayoutContent = ({ children }: { children: ReactNode; }) => {
+const LayoutContent = ({ children, initialNavigation }: { children: ReactNode; initialNavigation?: NavigationItem[]; }) => {
 
     const { setDefaultModalActive, defaultModalActive, defaultModalName, resetCountModal, defaultModalCount, showCopyNotification, notificationPosition, hideNotification } = useHeaderContext();
 
@@ -73,7 +74,7 @@ const LayoutContent = ({ children }: { children: ReactNode; }) => {
                 countTrigger={defaultModalCount}
             />
 
-            <AppHeader />
+            <AppHeader services={(initialNavigation && initialNavigation.length > 0) ? groupServices(initialNavigation) : []} />
 
             <main >
                 {children}
@@ -92,9 +93,9 @@ const LayoutContent = ({ children }: { children: ReactNode; }) => {
     );
 };
 
-const Layout_wrapper = ({ children }: { children: ReactNode; }) => {
+const Layout_wrapper = ({ children, initialNavigation }: { children: ReactNode; initialNavigation?: NavigationItem[]; }) => {
     return (
-        <LayoutContent>
+        <LayoutContent initialNavigation={initialNavigation}>
             {children}
         </LayoutContent>
     );

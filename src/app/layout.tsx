@@ -8,6 +8,7 @@ import { Roboto } from 'next/font/google'
 import type { Metadata } from 'next'
 import { ScrollToTop } from '@/hook/scrollTop';
 import { NavigationItem } from '@/store/navigation';
+import { getNavigationData } from '@/assets/lib/navigation';
 
 const font = Roboto({
   subsets: ['latin', 'cyrillic'],
@@ -43,34 +44,6 @@ export const metadata: Metadata = {
     ],
   },
   manifest: '/site.webmanifest',
-}
-
-// Функция для загрузки навигации на сервере
-async function getNavigationData(): Promise<NavigationItem[]> {
-  try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_BASE_URL || 'https://nvsert.ru';
-    const res = await fetch(`${baseUrl}/api/services`, {
-      next: { revalidate: 60 }, // Кешируем на 60 секунд
-    });
-
-    if (!res.ok) {
-      console.error('Failed to fetch navigation:', res.statusText);
-      return [];
-    }
-
-    const data = await res.json();
-    const navigationItems: NavigationItem[] = data.data || [];
-    
-    // Сортируем по порядку категорий
-    const sortedData = navigationItems.sort(
-      (a, b) => (a?.category?.order || 0) - (b?.category?.order || 0)
-    );
-
-    return sortedData;
-  } catch (error) {
-    console.error('Error fetching navigation:', error);
-    return [];
-  }
 }
 
 export default async function RootLayout({ children }: { children: ReactNode }) {

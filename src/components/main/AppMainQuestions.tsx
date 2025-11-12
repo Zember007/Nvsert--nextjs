@@ -2,26 +2,16 @@
 
 import { useTranslation } from 'react-i18next';
 import QuestionsBlock from './elements/QuestionsBlock';
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchFaqs } from '@/store/faq';
-import type { AppDispatch, RootState } from '@/config/store';
+import { useState } from 'react';
+import type { FaqItem } from '@/store/faq';
 import '@/assets/styles/sections/main/animation/documents.scss'
 import '@/assets/styles/sections/main/main-questions.scss'
 
-const AppMainQuestions = () => {
+const AppMainQuestions = ({ faqs }: { faqs: FaqItem[] }) => {
 
   const { t } = useTranslation()
-  const dispatch = useDispatch<AppDispatch>();
-  const { faqs, status } = useSelector((state: RootState) => state.faq);
 
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
-
-  useEffect(() => {
-    if (status === 'idle') {
-      dispatch(fetchFaqs());
-    }
-  }, [dispatch, status]);
 
   return (
             <section className="section wrapper">

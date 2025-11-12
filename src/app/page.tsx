@@ -1,5 +1,7 @@
 import dynamic from 'next/dynamic';
 import AppMainIntro from '../components/main/AppMainIntro'
+import { getNavigationData } from '@/assets/lib/navigation';
+import { getFaqs } from '@/assets/lib/faq';
 
 // Code splitting для оптимизации загрузки JS бандла
 // SSR остается включенным для SEO - текстовый контент будет доступен поисковым роботам
@@ -34,14 +36,16 @@ const AppMainQuestions = dynamic(() => import('../components/main/AppMainQuestio
   ssr: true
 })
 
-export default function Home() {
+export default async function Home() {
 
+  const navigation = await getNavigationData();
+  const faqs = await getFaqs();
 
   return (
     <div className="main text-[#000] overflow-hidden  relative leading-page">
       <AppMainIntro />
 
-      <AppMainDocuments />
+      <AppMainDocuments navigation={navigation} />
 
       <AppMainSkills />
 
@@ -51,7 +55,7 @@ export default function Home() {
 
       <AppMainFeedback />
 
-      <AppMainQuestions />
+      <AppMainQuestions faqs={faqs} />
 
     </div>
   );

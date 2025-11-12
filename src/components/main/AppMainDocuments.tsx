@@ -5,13 +5,11 @@ import '@/assets/styles/sections/main/animation/documents.scss'
 import '@/assets/styles/sections/main/main-documents.scss'
 import { PhotoProvider } from '@/assets/lib/react-photo-view';
 import { useTranslation } from "react-i18next";
-import { RootState } from "@/config/store";
-import { useSelector } from "react-redux";
+import { NavigationItem } from "@/store/navigation";
 
-const AppMainDocuments = () => {
+const AppMainDocuments = ({ navigation }: { navigation: NavigationItem[] }) => {
     const [activeIndex, setActive] = useState<number | null>(null);
     const { t } = useTranslation();
-    const { navigation } = useSelector((state: RootState) => state.navigation);
 
     const noop = useCallback(() => {}, []);
     const setActiveHandlers = useMemo(
