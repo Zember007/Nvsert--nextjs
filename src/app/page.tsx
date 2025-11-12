@@ -34,9 +34,6 @@ const AppMainQuestions = dynamic(() => import('../components/main/AppMainQuestio
   ssr: true
 })
 
-// Включаем ISR для главной страницы
-export const revalidate = 60;
-
 export default function Home() {
 
 
