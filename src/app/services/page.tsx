@@ -1,8 +1,5 @@
 'use client';
 import React, { useState, useEffect, Suspense } from 'react';
-import { useSelector } from 'react-redux';
-import { useSearchParams } from 'next/navigation';
-import { RootState } from '@/config/store';
 import { useButton } from '@/hook/useButton';
 import AppBreadcrumbs from '@/components/general/AppBreadcrumbs';
 import ServiceItem from '@/components/services/ServiceItem';
@@ -24,15 +21,13 @@ const ServicesContent = () => {
     const { initialNavigation: navigation } = useNavigationContext();
     const services = groupServices(navigation);
 
-
-    const searchParams = useSearchParams();
-
-
-    // Get the type query parameter and auto-expand matching category
+    // Get the hash from URL and auto-expand matching category
     useEffect(() => {
+        // Используем window.location только на клиенте
+        if (typeof window === 'undefined') return;
 
-        const id = new URL(window.location.href).hash.substring(1);
-        if (id) {
+        const id = window.location.hash.substring(1);
+        if (id && services.length > 0) {
             const matchingIndex = services.findIndex((service) =>
                 service.name === id
             );
@@ -40,14 +35,16 @@ const ServicesContent = () => {
             if (matchingIndex !== -1) {
                 setExpandedServices([matchingIndex]);
 
-                setTimeout(() => {
-                    const element = document.getElementById(id);
-                    element?.scrollIntoView({ behavior: 'smooth' });
-                }, 200);
-
+                // Используем requestAnimationFrame для более плавного скролла
+                requestAnimationFrame(() => {
+                    setTimeout(() => {
+                        const element = document.getElementById(id);
+                        element?.scrollIntoView({ behavior: 'smooth' });
+                    }, 200);
+                });
             }
         }
-    }, [searchParams]);
+    }, [services]);
 
 
 

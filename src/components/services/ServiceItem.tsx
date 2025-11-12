@@ -136,7 +136,10 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                                 initial={{ y: 20 }}
                                 animate={controls}
                             >
-                                <ServiceCard serviceName={service.name} certificate={certificate} />
+                                <ServiceCard 
+                                    serviceName={service.name} 
+                                    certificate={certificate}
+                                />
                             </motion.div>
                         ))}
                     </div>

@@ -72,7 +72,15 @@ const AppNavigationItem = ({ img, title, controls, link, dark, className, onClic
                     <motion.div
                         className={` overflow-hidden h-[60px] rounded-[3px] min-w-[43px] w-[43px] border-solid border border-[#93969D] `}
                         animate={controls}>
-                        <Image src={img as string} className="h-full" width={43} height={60} alt="document" loading="lazy" />
+                        <Image 
+                            src={img as string} 
+                            className="h-full" 
+                            width={43} 
+                            height={60} 
+                            alt="document" 
+                            loading="lazy"
+                            sizes="43px"
+                        />
                     </motion.div>
                     <p className={`${dark ? 'text-[#000] text-1' : 'text-[#FFF] xxxxl:text-[18px] xxl:text-[16px] text-[14px] no-font-weight'}  !leading-[1.1] pr-[6px] whitespace-pre-line max-w-full`}>{filterPrepositions(title)}</p>
                 </Link>

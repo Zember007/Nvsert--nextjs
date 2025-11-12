@@ -42,6 +42,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                             width={249}
                             height={346}
                             className='h-[346px]'
+                            loading="lazy"
+                            sizes="(max-width: 640px) 282px, 312px"
                         />
                     </div>
                     <div className=' justify-between flex absolute bottom-[9px] left-[9px] right-[9px] xss:*:*:!leading-[0.68] *:*:!leading-[0.8]   flex p-[11px] bg-[#F5F5F580] rounded-[4px] border border-[#000] backdrop-blur-[4px]'>
@@ -70,6 +72,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                             width={249}
                             height={346}
                             className='h-[346px]'
+                            loading="lazy"
+                            sizes="(max-width: 640px) 282px, 312px"
                         />
                     </div>
                     <div className=' justify-between flex absolute bottom-[9px] left-[9px] right-[9px] xss:*:*:!leading-[0.68] *:*:!leading-[0.8]   flex p-[11px] bg-[#F5F5F580] rounded-[4px] border border-[#000] backdrop-blur-[4px]'>

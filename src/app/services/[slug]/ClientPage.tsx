@@ -27,7 +27,8 @@ const ContentBlockRenderer: React.FC<{
     block: ContentBlock;
     isExpanded: boolean;
     onToggle: () => void;
-}> = ({ block, isExpanded = true, onToggle }) => {
+    isFirst?: boolean;
+}> = ({ block, isExpanded = true, onToggle, isFirst = false }) => {
     const { heading, richText, image } = block;
 
     if (richText && heading) {
@@ -61,9 +62,13 @@ const ContentBlockRenderer: React.FC<{
                 {
                     image?.url ? (
                         <div className="max-w-full mx-auto mx-auto mt-[50px] flex justify-center">
-                            <StrapiResponsiveImage image={image} baseUrl={'https://test11.audiosector.ru/cp'} />
+                            <StrapiResponsiveImage 
+                                image={image} 
+                                baseUrl={'https://test11.audiosector.ru/cp'} 
+                                priority={isFirst && isExpanded}
+                            />
                         </div>
-                    ) : (<></>)
+                    ) : null
                 }
             </div>
         );
@@ -93,7 +98,6 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
     // Sync index with slug
     React.useEffect(() => {
         if (navigation && navigation.length > 0) {
-            console.log('navigation', navigation, slug);
             const index = navigation.findIndex(item => item.slug === slug);
             if (index !== -1) {
                 setCurrentServiceIndex(index);
@@ -110,14 +114,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
         );
     };
 
-    // Auto-expand first section when service changes
-    React.useEffect(() => {
-        if (currentService.content && currentService.content.length > 0) {
-            setExpandedSections([currentService.content[0].id]);
-        }
-    }, [currentService]);
-
-    // Auto-expand all sections on initial load (as per original)
+    // Auto-expand all sections on initial load
     React.useEffect(() => {
         if (currentService.content && currentService.content.length > 0) {
             setExpandedSections(currentService.content.map(item => item.id));
@@ -132,7 +129,10 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
     }, [currentService]);
 
     useEffect(() => {
-        window.scrollTo(0, 0);
+        // Используем requestAnimationFrame для плавного скролла
+        requestAnimationFrame(() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
     }, [currentServiceIndex]);
 
     const recomendedServices = useMemo(() => {
@@ -273,6 +273,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                                     block={block}
                                                     isExpanded={expandedSections.includes(block.id)}
                                                     onToggle={() => toggleSection(block.id)}
+                                                    isFirst={index === 0}
                                                 />
                                             </React.Fragment>
                                         ))}

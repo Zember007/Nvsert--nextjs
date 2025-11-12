@@ -1,7 +1,13 @@
-export const StrapiResponsiveImage = ({ image, baseUrl }: { image: any, baseUrl: string }) => {
+export const StrapiResponsiveImage = ({ 
+  image, 
+  baseUrl, 
+  priority = false 
+}: { 
+  image: any, 
+  baseUrl: string,
+  priority?: boolean 
+}) => {
   if (!image) return null;
-
-
 
   return (
     <picture>
@@ -12,7 +18,8 @@ export const StrapiResponsiveImage = ({ image, baseUrl }: { image: any, baseUrl:
         alt={image.alternativeText || ''}
         width={image.width}
         height={image.height}
-        loading="lazy"
+        loading={priority ? 'eager' : 'lazy'}
+        fetchPriority={priority ? 'high' : 'auto'}
         className="w-full h-auto rounded-[8px]"
       />
     </picture>

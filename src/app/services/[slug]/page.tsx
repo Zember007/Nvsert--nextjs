@@ -4,8 +4,7 @@ import { NavigationItem } from '@/store/navigation';
 
 async function getNavigationData(slug: string): Promise<NavigationItem | null> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/services/slug/${slug}`, {
-     /* next: { revalidate: 60 } , */
-    cache: 'no-store',
+    next: { revalidate: 3600 }, // Кешируем на 1 час для лучшей производительности
   });
 
   if (!res.ok) return null;
@@ -14,9 +13,10 @@ async function getNavigationData(slug: string): Promise<NavigationItem | null> {
 
 // Генерация статических путей
 export async function generateStaticParams() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/services`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/services`, {
+    next: { revalidate: 3600 } // Кешируем на 1 час
+  });
   const items = await res.json();
-  console.log(items, 'items');
   return items.data.map((item: { slug: string }) => ({ slug: item.slug }));
 }
 
