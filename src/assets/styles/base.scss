@@ -4,21 +4,11 @@
 @import 'base/variables';
 @import 'base/mixins';
 @import 'base/sprite';
-@import 'base/fonts';
-@import 'base/grid';
 @import 'base/base';
-@import 'base/icon';
 @import 'base/typography';
 @import 'base/button';
-@import 'base/loader';
-
-// @import 'vue-multiselect/dist/vue-multiselect.min.css';
-// @import 'blocks/vue-multiselect.scss';
-
-// @import 'blocks/vue-datapicker.scss';
 
 @import 'blocks/forms';
-@import 'blocks/selects';
 @import 'blocks/modals/modals';
 
 @import 'sections/header';
@@ -27,7 +17,15 @@
 @import 'base/print';
 @import 'blocks/breadcrumbs';
 
+.icon--logo {
+    @include mask;
+    display: block;
+    background-color: currentColor;
+    transition: color 0.2s ease-in-out 0s;
 
+    mask-image: url(../images/logo.svg);
+    -webkit-mask-image: url(../images/logo.svg);
+}
 
 .PhotoView__Photo {
     box-shadow: 0px 0px 10px 0px #000000CC;
@@ -462,52 +460,52 @@ $wall__line_bd-cr: hsl(0deg 0% 100% / 0%);
 .slide-blur {
 
     &:not(.feedback-blur) {
-      @apply m:flex hidden;
+        @apply m:flex hidden;
     }
-  
+
     &.feedback-blur {
-      @apply xl:flex hidden;
+        @apply xl:flex hidden;
     }
-  
+
     position: absolute;
     top: 0;
     bottom: 0;
     height: 100%;
     pointer-events: none;
     z-index: 1;
-  
-  
+
+
     .line {
-      background-color: $wall__line_bd-cr;
-      width: 20px;
-      backdrop-filter: blur(var(--blur));
-  
-      &:nth-child(1) {
-        transition: all .2s ease;
-      }
-  
-      &:nth-child(2) {
-        transition: all .4s ease;
-      }
-  
-      &:nth-child(3) {
-        transition: all .6s ease;
-      }
-  
-      &:nth-child(4) {
-        transition: all .8s ease;
-      }
-  
-  
+        background-color: $wall__line_bd-cr;
+        width: 20px;
+        backdrop-filter: blur(var(--blur));
+
+        &:nth-child(1) {
+            transition: all .2s ease;
+        }
+
+        &:nth-child(2) {
+            transition: all .4s ease;
+        }
+
+        &:nth-child(3) {
+            transition: all .6s ease;
+        }
+
+        &:nth-child(4) {
+            transition: all .8s ease;
+        }
+
+
     }
-  
+
     &.white {
-      .line {
-        background-color: #FFF;
-      }
+        .line {
+            background-color: #FFF;
+        }
     }
-  
-  }
+
+}
 
 
 
@@ -746,6 +744,7 @@ input:-webkit-autofill {
 
     &:not(.noactive):hover {
         @apply text-[#34446D];
+
         &::after {
             clip-path: inset(0 0 0 0);
         }
