@@ -12,9 +12,6 @@ import { PhotoProvider, PhotoView } from '@/assets/lib/react-photo-view';
 import DotNavList from '@/components/general/DotNavList';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
 import { filterPrepositions } from '@/hook/filter';
-import Image from 'next/image';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/config/store';
 import useWindowSize from '@/hook/useWindowSize';
 import { StrapiResponsiveImage } from '@/components/general/StrapiResponseImage';
 import { useNavigationContext } from '@/components/contexts/NavigationContext';
@@ -140,7 +137,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
 
     const recomendedServices = useMemo(() => {
         return [...navigation].sort((a, b) => a.category.name === currentService?.category.name ? -1 : 1).filter(item => item.slug !== currentService?.slug).slice(0, (windowHeight >= 820 || windowWidth < 960) ? 3 : 2);
-    }, [navigation, currentService, windowHeight]);
+    }, [navigation, currentService, windowHeight, windowWidth]);
 
 
 
