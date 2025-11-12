@@ -19,7 +19,6 @@ const AppMainSkills = () => {
 
     const { t } = useTranslation()
     const { width: widthWindow } = useWindowSize()
-    const [isVisible, setIsVisible] = useState(false);
     const { ref, isVisible: isVisibleSection } = useIntersectionObserver({}, true);
     const skillsData = (widthWindow && widthWindow < 1407) ? skills.filter(item => !item.empty) : skills;
 
@@ -27,9 +26,9 @@ const AppMainSkills = () => {
 
         const observer = new IntersectionObserver(
             ([entry]) => {
-                setIsVisible(entry.isIntersecting);
+              
                 if (entry.isIntersecting && ref.current) {
-                    if (widthWindow && widthWindow < 1407 && isVisibleSection) {
+                    if (widthWindow && widthWindow < 1407) {
                         const slides = gsap.utils.toArray('[data-slider="slide-skill"]');
                         const gap = widthWindow < 960 ? (widthWindow - (250)) / 2 : 20;
 
@@ -122,7 +121,7 @@ const AppMainSkills = () => {
                                         data-slider="slide-skill"
                                     >
                                         <AppSkillBlock
-                                            img={skill.img} title={t(`MainSkills.${skill.key}.title`)} isVisible={isVisible} text={t(`MainSkills.${skill.key}.text`, { returnObjects: true }) as string[]} bg={skill.bg} folder={skill.folder} />
+                                            img={skill.img} title={t(`MainSkills.${skill.key}.title`)} isVisible={isVisibleSection} text={t(`MainSkills.${skill.key}.text`, { returnObjects: true }) as string[]} bg={skill.bg} folder={skill.folder} />
 
                                     </div>
                                 );
