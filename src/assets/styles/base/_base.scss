@@ -29,21 +29,9 @@ html {
   background-image: var(--bg-image);
   pointer-events: none;
   opacity: var(--opacity);
-  /* Оптимизация загрузки фонового изображения */
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  will-change: opacity;
   
   &.loaded {
     --bg-image: url('../../images/150.webp');
-    /* Используем image-set для оптимизации, если браузер поддерживает */
-    background-image: 
-      image-set(
-        url('../../images/150.webp') type('image/webp') 1x,
-        url('../../images/150.webp') 1x
-      );
-    background-image: var(--bg-image); /* Fallback для браузеров без поддержки image-set */
   }
 }
 

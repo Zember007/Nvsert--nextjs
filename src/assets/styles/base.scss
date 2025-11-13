@@ -169,7 +169,7 @@
     height: 30px;
     transform-origin: bottom center;
     background: var(--close-color);
-    transition: transform 280ms ease-out, opacity 280ms ease-out;
+    transition: all ease-out 280ms;
 }
 
 .close-button-block:last-of-type {
@@ -377,7 +377,7 @@
     backface-visibility: hidden;
 
     &:not(.no-transitions) {
-        transition: transform 0.1s ease, opacity 0.1s ease;
+        transition: all 0.1s ease;
     }
 
     &.no-transitions {
@@ -481,19 +481,19 @@ $wall__line_bd-cr: hsl(0deg 0% 100% / 0%);
         backdrop-filter: blur(var(--blur));
 
         &:nth-child(1) {
-            transition: transform .2s ease, opacity .2s ease;
+            transition: all .2s ease;
         }
 
         &:nth-child(2) {
-            transition: transform .4s ease, opacity .4s ease;
+            transition: all .4s ease;
         }
 
         &:nth-child(3) {
-            transition: transform .6s ease, opacity .6s ease;
+            transition: all .6s ease;
         }
 
         &:nth-child(4) {
-            transition: transform .8s ease, opacity .8s ease;
+            transition: all .8s ease;
         }
 
 
@@ -817,7 +817,7 @@ input:-webkit-autofill {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        transition: transform .3s, opacity .3s;
+        transition: all .3s;
     }
 
     &-box {
@@ -857,7 +857,7 @@ input:-webkit-autofill {
         stroke-linejoin: bevel;
         stroke-linecap: square;
         isolation: isolate;
-        transition: transform 0.1s ease, opacity 0.1s ease;
+        transition: all 0.1s ease;
     }
 
     &>path {

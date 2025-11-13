@@ -163,12 +163,7 @@ export function horizontalLoop(items, config) {
                 repeat: config.repeat, 
                 onUpdate: function () {
                     onDragFunction && onDragFunction();
-                    // Принудительное выравнивание выполняем не чаще, чем раз в alignIntervalMs
-                    const now = (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now();
-                    if (now - lastAlignTs >= alignIntervalMs) {
-                        lastAlignTs = now;
-                        forcePixelAlignment();
-                    }
+                    forcePixelAlignment(); // Принудительное выравнивание на каждом обновлении
 
                     let i = tl.closestIndex();
                     if (lastIndex !== i) {
@@ -194,21 +189,12 @@ export function horizontalLoop(items, config) {
             timeOffset = 0,
             container = center === true ? items[0].parentNode : gsap.utils.toArray(center)[0] || items[0].parentNode,
             totalWidth,
-            // Ограничиваем частоту выравнивания, чтобы снизить принудительные перерасчёты
-            lastAlignTs = 0,
-            alignIntervalMs = 150,
             
             // Принудительное выравнивание к пиксельной сетке
             forcePixelAlignment = () => {
-                if (!items || items.length === 0) return;
-                
-                // Батчим чтение layout свойств для предотвращения принудительной компоновки
-                const containerRect = container.getBoundingClientRect();
-                const rects = items.map(item => item.getBoundingClientRect());
-                
-                // Затем применяем изменения
-                items.forEach((item, i) => {
-                    const rect = rects[i];
+                items && items.forEach((item, i) => {
+                    const rect = item.getBoundingClientRect();
+                    const containerRect = container.getBoundingClientRect();
                     
                     // Получаем текущую позицию относительно контейнера
                     const currentLeft = rect.left - containerRect.left;
@@ -231,22 +217,18 @@ export function horizontalLoop(items, config) {
             },
             
             populateWidths = () => {
+                let b1 = container.getBoundingClientRect(), b2;
+                
                 // Сначала сбрасываем все трансформации
                 gsap.set(items, { x: 0, xPercent: 0 });
                 
-                // Батчим чтение layout свойств для предотвращения принудительной компоновки
-                // Читаем все свойства в одном цикле перед любыми изменениями
-                let b1 = container.getBoundingClientRect();
-                const itemRects = items.map(el => el.getBoundingClientRect());
-                const itemWidths = items.map(el => el.offsetWidth);
-                
-                // Теперь обрабатываем данные без дополнительных чтений layout
                 items.forEach((el, i) => {
-                    widths[i] = Math.round(itemWidths[i]);
+                    widths[i] = Math.round(el.offsetWidth);
                     xPercents[i] = 0; // Изначально все элементы без смещения
                     
-                    const b2 = itemRects[i];
-                    spaceBefore[i] = Math.round(b2.left - (i ? itemRects[i - 1].right : b1.left));
+                    b2 = el.getBoundingClientRect();
+                    spaceBefore[i] = Math.round(b2.left - (i ? b1.right : b1.left));
+                    b1 = b2;
                 });
                 
                 totalWidth = getTotalWidth();
