@@ -5,6 +5,7 @@ import StandardPageLayout from '@/components/general/StandardPageLayout';
 import CollapseSection from '@/components/general/CollapseSection';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
 import Map from './_components/Map';
+import Slider from './_components/Slider';
 import { AboutData, ContentBlock } from './page';
 import AppCtaBanner from '@/components/general/AppCtaBanner';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
@@ -17,6 +18,7 @@ interface AboutCompanyClientProps {
 }
 
 const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) => {
+    const [showAbout, setShowAbout] = React.useState<boolean>(true);
     const [sectionsOpen, setSectionsOpen] = React.useState<number[]>([]);
     const { processContent } = useRichTextRenderer();
     const { openDefaultModal } = useHeaderContext();
@@ -28,6 +30,18 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
 
     // Функция для обработки специальных маркеров
     const renderRichText = (richText: string): React.ReactNode => {
+        // Обработка [slider]
+        if (richText.includes('[slider]')) {
+            const parts = richText.split('[slider]');
+            return (
+                <>
+                    {parts[0] && <div className="mb-[20px]">{processContent(parts[0])}</div>}
+                    <Slider />
+                    {parts[1] && <div>{processContent(parts[1])}</div>}
+                </>
+            );
+        }
+
         // Обработка [map]
         if (richText.includes('[map]')) {
             const parts = richText.split('[map]');
