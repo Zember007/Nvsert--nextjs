@@ -126,25 +126,13 @@ const MainDocumentItem = memo(({
     const { width: windowWidth } = useWindowSize()
     const controls = useAnimation();
     const [listHidden, setListHidden] = useState(true);
-    const [photoWidth, setPhotoWidth] = useState(0);
 
     const { setButtonRef, setWrapperRef } = useButton();
     const { openDefaultModal } = useHeaderContext();
 
     const wrapperRef = useRef<DivRef>(null);
-    const photoRef = useRef<DivRef>(null);
-    const containerPhotoRef = useRef<DivRef>(null);
-    const LinkServiceRef = useRef<DivRef>(null);
-    const smallPhotoRef = useRef<ImageRef>(null);
 
-    // Вычисление ширины фото
-    useEffect(() => {
-        const container = containerPhotoRef.current;
-        if (!container) return;
 
-        const width = img ? container.offsetHeight / img.height * img.width : 0;
-        setPhotoWidth(width >= 190 ? width : 190);
-    }, [containerPhotoRef.current, img?.height, img?.width]);
 
     const isInViewport = (el: HTMLElement | null): boolean => {
         if (!el) return false;
@@ -165,14 +153,6 @@ const MainDocumentItem = memo(({
             behavior: 'smooth',
             block: totalItems / 2 > index ? 'start' : 'end'
         };
-
-        // if (index === 0) {
-        //     documents_box.scrollIntoView({ ...scrollOptions, block: 'start' });
-        // } else if (index === 17) {
-        //     documents_box.scrollIntoView({ ...scrollOptions, block: 'start' });
-        // } else {
-        //     el.scrollIntoView(scrollOptions);
-        // }
 
         el.scrollIntoView(scrollOptions);
 
@@ -204,10 +184,7 @@ const MainDocumentItem = memo(({
         };
     }, [active, controls]);
 
-    const handleItemClick = (event: React.MouseEvent<HTMLDivElement>) => {
-        const target = event.target as HTMLElement;
-        if (photoRef.current?.contains(target)) return;
-        if (LinkServiceRef.current?.contains(target) && active) return;
+    const handleItemClick = () => {
         setActive(!active);
     };
 
@@ -241,7 +218,6 @@ const MainDocumentItem = memo(({
                         className={` ${active && 'active'} document__small-img `}
                     >
                         <Image
-                            ref={smallPhotoRef}
                             alt='document'
                             src={'https://test11.audiosector.ru/cp' + img?.formats?.thumbnail?.url}
                             width={41}
@@ -347,25 +323,23 @@ const MainDocumentItem = memo(({
                                 >
 
                                     <motion.div
-                                        ref={photoRef}
                                         onClick={() => setPhoto()}
                                         initial={{ y: 20 }}
                                         animate={controls}
                                         className="document__big-img ">
                                         <Image
                                             alt='document' src={'https://test11.audiosector.ru/cp' + img?.url}
-                                            width={photoWidth || 190}
-                                            height={photoWidth / img?.width * img?.height || 267}
+                                            width={img.width || 192}
+                                            height={img.height || 268}
                                             loading={index === 1 ? 'eager' : 'lazy'}
                                             priority={index === 1}
-                                            sizes="(max-width: 960px) 280px, 475px"
                                         />
                                     </motion.div>
 
                                 </PhotoView>
                             </div>
 
-                            <div ref={containerPhotoRef} className="document-photo-wrapper">
+                            <div className="document-photo-wrapper">
                                 <div className="document-content-column">
                                     <div className="document-text-content">
                                         <div className='document-description'>
