@@ -112,7 +112,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                                 className='xxs:!w-[250px] w-full'
                                 key={itemIndex}
                                 title={item.title}
-                                img={'https://test11.audiosector.ru/cp' + item.img?.url}
+                                img={'https://test11.audiosector.ru/cp' + item.img?.formats?.thumbnail?.url}
                                 link={item.slug}
                             />
                         ))}
