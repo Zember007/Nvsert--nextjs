@@ -851,6 +851,10 @@ input:-webkit-autofill {
 
 .map-company>path {
     transition: all 0.1s ease;
+    stroke-linejoin: miter;
+    stroke-linecap: butt;
+    paint-order: fill stroke;
+    shape-rendering: crispEdges;
 
     &:hover {
         fill: #34446D;
@@ -862,6 +866,13 @@ input:-webkit-autofill {
 
 .map-company>g {
     transition: all 0.1s ease;
+
+    &>path {
+        stroke-linejoin: miter;
+        stroke-linecap: butt;
+        paint-order: fill stroke;
+        shape-rendering: crispEdges;
+    }
 
     &:hover>path {
         fill: #34446D;

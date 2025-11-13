@@ -218,7 +218,12 @@ const Map = () => {
             )}
 
             <svg
-                className={`map-company max-w-full `} viewBox="0 0 1072 603" fill="none" xmlns="http://www.w3.org/2000/svg">
+                className={`map-company max-w-full `} 
+                viewBox="0 0 1072 603" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+                shapeRendering="crispEdges"
+                style={{ shapeRendering: 'crispEdges' }}>
                 <path
                     id='Калининградская область'
                     d="M72.702 163.918L68.0351 154.16L66.338 153.312L61.6711 146.948L58.2769 146.523L55.7313 148.645L54.8828 152.463L64.2167 168.585L72.702 163.918Z"
