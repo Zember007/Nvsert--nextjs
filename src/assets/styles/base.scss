@@ -858,8 +858,6 @@ input:-webkit-autofill {
         stroke-linecap: square;
         isolation: isolate;
         transition: all 0.1s ease;
-        stroke: transparent;
-    
     }
 
     &>path {
@@ -883,13 +881,6 @@ input:-webkit-autofill {
     }
 
 
-    .stroke-mask {
-        pointer-events: none;
 
-        path {
-            fill: transparent;
-        }
-
-    }
 }
 

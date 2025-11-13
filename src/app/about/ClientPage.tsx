@@ -35,9 +35,9 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
             const parts = richText.split('[slider]');
             return (
                 <>
-                    {parts[0] && <div className="mb-[20px]">{processContent(parts[0])}</div>}
+                    {parts[0] && <div className="mb-[20px]">{renderRichText(parts[0])}</div>}
                     <Slider />
-                    {parts[1] && <div>{processContent(parts[1])}</div>}
+                    {parts[1] && <div>{renderRichText(parts[1])}</div>}
                 </>
             );
         }
@@ -48,9 +48,9 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
             return (
                 <>
 
-                    {parts[0] && <div className="mb-[20px]">{processContent(parts[0])}</div>}
+                    {parts[0] && <div className="mb-[20px]">{renderRichText(parts[0])}</div>}
                     <Map />
-                    {/* {parts[1] && <div>{processContent(parts[1])}</div>} */}
+                    {parts[1] && <div>{renderRichText(parts[1])}</div>}
                 </>
             );
         }
