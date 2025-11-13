@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import AppMainForm from '../forms/AppMainForm';
 import { filterPrepositions } from '@/hook/filter';
 import { useAnimation, motion } from "framer-motion";
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 
 const AppMainIntro = () => {
