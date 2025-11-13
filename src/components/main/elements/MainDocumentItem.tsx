@@ -329,8 +329,8 @@ const MainDocumentItem = memo(({
                                         className="document__big-img ">
                                         <Image
                                             alt='document' src={'https://test11.audiosector.ru/cp' + img?.url}
-                                            width={img.width || 192}
-                                            height={img.height || 268}
+                                            width={192}
+                                            height={268}
                                             loading={index === 1 ? 'eager' : 'lazy'}
                                             priority={index === 1}
                                         />
