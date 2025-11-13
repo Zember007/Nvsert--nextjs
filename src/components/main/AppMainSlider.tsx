@@ -1,5 +1,5 @@
 'use client'
-import { initSlider } from '@/scripts/slider'
+// initSlider загружается асинхронно только при видимости компонента для оптимизации TBT
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { slides } from './utils';
@@ -44,8 +44,10 @@ const SliderMain = () => {
 
 
         const observer = new IntersectionObserver(
-            ([entry]) => {
+            async ([entry]) => {
                 if (entry.isIntersecting) {
+                    // Асинхронная загрузка initSlider для уменьшения TBT
+                    const { initSlider } = await import('@/scripts/slider');
 
                     if (widthWindow && widthWindow >= 1280) {
                         let timeoutIdBg: NodeJS.Timeout | null = null;
