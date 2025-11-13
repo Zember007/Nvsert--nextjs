@@ -856,11 +856,12 @@ input:-webkit-autofill {
     stroke-linejoin: bevel;
     stroke-linecap: square;
     isolation: isolate;
+    transition: all 0.1s ease;
+    filter: url(#inner-stroke);
+
 }
 
 .map-company>path {
-    transition: all 0.1s ease;
-
 
     &:hover {
         fill: #34446D;
@@ -871,9 +872,6 @@ input:-webkit-autofill {
 }
 
 .map-company>g {
-    transition: all 0.1s ease;
-
-  
 
     &:hover>path {
         fill: #34446D;
