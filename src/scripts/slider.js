@@ -163,7 +163,12 @@ export function horizontalLoop(items, config) {
                 repeat: config.repeat, 
                 onUpdate: function () {
                     onDragFunction && onDragFunction();
-                    forcePixelAlignment(); // Принудительное выравнивание на каждом обновлении
+                    // Принудительное выравнивание выполняем не чаще, чем раз в alignIntervalMs
+                    const now = (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now();
+                    if (now - lastAlignTs >= alignIntervalMs) {
+                        lastAlignTs = now;
+                        forcePixelAlignment();
+                    }
 
                     let i = tl.closestIndex();
                     if (lastIndex !== i) {
@@ -189,6 +194,9 @@ export function horizontalLoop(items, config) {
             timeOffset = 0,
             container = center === true ? items[0].parentNode : gsap.utils.toArray(center)[0] || items[0].parentNode,
             totalWidth,
+            // Ограничиваем частоту выравнивания, чтобы снизить принудительные перерасчёты
+            lastAlignTs = 0,
+            alignIntervalMs = 150,
             
             // Принудительное выравнивание к пиксельной сетке
             forcePixelAlignment = () => {
