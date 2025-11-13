@@ -1,4 +1,4 @@
-/* import AppMainDocuments from './AppMainDocuments'; */
+import AppMainDocuments from './AppMainDocuments';
 import AppMainSkills from './AppMainSkills';
 import AppMainSlider from './AppMainSlider';
 import AppMainSafeguards from './AppMainSafeguards';
@@ -7,7 +7,7 @@ import AppMainSafeguards from './AppMainSafeguards';
 export default function AppMainContent() {
   return (
     <>
-     {/*  <AppMainDocuments /> */}
+      <AppMainDocuments />
       <AppMainSkills />
       <AppMainSlider />
       <AppMainSafeguards />

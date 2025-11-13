@@ -9,10 +9,10 @@ const AppMainFeedback = dynamic(() => import('./AppMainFeedback'), {
   ssr: false
 })
 
-/* const AppMainQuestions = dynamic(() => import('./AppMainQuestions'), {
+const AppMainQuestions = dynamic(() => import('./AppMainQuestions'), {
   loading: () => <div className="section wrapper min-h-[400px]" />,
   ssr: false
-}) */
+})
 
 interface AppMainBelowFoldProps {
   faqs: any;
@@ -22,7 +22,7 @@ export default function AppMainBelowFold({ faqs }: AppMainBelowFoldProps) {
   return (
     <>
       <AppMainFeedback />
-      {/* <AppMainQuestions faqs={faqs} /> */}
+      <AppMainQuestions faqs={faqs} />
     </>
   );
 }

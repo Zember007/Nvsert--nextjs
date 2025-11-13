@@ -5,7 +5,6 @@ import '@/assets/styles/sections/main/animation/documents.scss'
 import '@/assets/styles/sections/main/main-documents.scss'
 import { PhotoProvider } from '@/assets/lib/react-photo-view';
 import { useTranslation } from "react-i18next";
-import { NavigationItem } from "@/store/navigation";
 import { useNavigationContext } from "../contexts/NavigationContext";
 
 const AppMainDocuments = () => {
