@@ -215,7 +215,7 @@ export const useRichTextRenderer = () => {
             if (currentListItems.length > 0) {
                 const typeToUse = forceType || listType || 'unordered';
                 const ListTag = typeToUse === 'ordered' ? 'ol' : 'ul';
-                const listClassName = typeToUse === 'ordered' ? 'list-decimal my-[10px]' : 'list-disc my-[10px]';
+                const listClassName = typeToUse === 'ordered' ? 'list-decimal list-inside my-[10px]' : 'list-disc my-[10px]';
                 
                 // Для нумерованных списков с одним элементом убираем отступ слева
                 const isSingleOrdered = typeToUse === 'ordered' && currentListItems.length === 1;

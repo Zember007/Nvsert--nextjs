@@ -55,7 +55,7 @@ const ContentBlockRenderer: React.FC<{
 
                 {isExpanded && (
                     <div className="pt-[30px]">
-                        <RichTextRenderer content={richText} />
+                        <RichTextRenderer content={richText.replace('📞 ','')} />
                     </div>
                 )}
 
@@ -90,7 +90,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
     const { initialNavigation: navigation } = useNavigationContext();
 
 
-    const [expandedSections, setExpandedSections] = useState<number[]>(initialNavigation.content?.map(item => item.id) || []);
+    const [expandedSections, setExpandedSections] = useState<number[]>([]);
     const [currentServiceIndex, setCurrentServiceIndex] = useState<number>(0);
 
     const currentService = navigation[currentServiceIndex] || initialNavigation;
@@ -113,13 +113,6 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                 : [...prev, blockId]
         );
     };
-
-    // Auto-expand all sections on initial load
-    React.useEffect(() => {
-        if (currentService.content && currentService.content.length > 0) {
-            setExpandedSections(currentService.content.map(item => item.id));
-        }
-    }, [currentService]);
 
     // Track which content block is currently in view and reflect it in the right navigation
 
@@ -186,10 +179,10 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                             </h1>
 
                             {/* Two Column Layout */}
-                            <div className="flex m:gap-[25px] gap-[40px] items-stretch m:flex-row flex-col">
+                            <div className="flex gap-[40px] items-stretch m:flex-row flex-col">
                                 {/* Left Column */}
                                 <div className="m:w-[265px] relative">
-                                    <div className="sticky top-[104px] flex flex-col xl:gap-[40px] gap-[20px] m:overflow-y-auto m:max-h-[calc(100vh-104px)] m:pr-[15px]">
+                                    <div className="sticky top-[104px] flex flex-col xl:gap-[40px] gap-[20px] m:overflow-y-auto m:max-h-[calc(100vh-104px)]">
 
                                         <div className="flex  gap-[20px] flex-col-reverse">
                                             <div className="w-[250px] mx-auto">
@@ -271,7 +264,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                                 )}
                                                 <ContentBlockRenderer
                                                     block={block}
-                                                    isExpanded={expandedSections.includes(block.id)}
+                                                    isExpanded={!expandedSections.includes(block.id)}
                                                     onToggle={() => toggleSection(block.id)}
                                                     isFirst={index === 0}
                                                 />
