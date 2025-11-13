@@ -11,7 +11,7 @@ export const StrapiResponsiveImage = ({
 
   return (
     <picture>
-      <source media="(min-width: 1280px)" srcSet={`${baseUrl}${image.url}`} />
+      {/* <source media="(min-width: 1280px)" srcSet={`${baseUrl}${image.url}`} /> */}
       <source media="(min-width: 640px)" srcSet={`${baseUrl}${image.formats?.medium?.url}`} />
       <img
         src={`${baseUrl}${image.formats?.small?.url}`}
