@@ -640,7 +640,7 @@ input:-webkit-autofill {
 
 
     .sendText {
-        @apply block duration-100 transition-all relative ease-in xl:left-[5.5%] -translate-y-[1px] left-0;
+        @apply block duration-100 transition-all relative ease-in xl:left-[5.5%]  left-0;
         line-height: .5;
     }
 
