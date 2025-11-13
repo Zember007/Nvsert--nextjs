@@ -107,7 +107,7 @@ function AppCollapsibleList<ItemType = unknown>({
                 </span>
             </button>
 
-            <div className={`${!isOpen ? "overflow-y-hidden" : delayedVisible ? "overflow-y-visible" : "overflow-y-hidden"}`}>
+            <div className={`${!isOpen ? "overflow-y-hidden" : delayedVisible ? "overflow-y-visible pb-[60px]" : "overflow-y-hidden"}`}>
 
                 <div
                     className={`  ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'} pt-[20px]  transition-all duration-100`}>
