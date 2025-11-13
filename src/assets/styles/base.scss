@@ -849,13 +849,18 @@ input:-webkit-autofill {
     }
 }
 
-.map-company>path {
-    transition: all 0.1s ease;
+.map-company path {
+    vector-effect: non-scaling-stroke;
+    paint-order: stroke fill;
+    shape-rendering: geometricPrecision;
     stroke-linejoin: bevel;
     stroke-linecap: square;
-    paint-order: fill stroke;
-    shape-rendering: optimizeSpeed;
-    stroke-miterlimit: 0;
+    isolation: isolate;
+}
+
+.map-company>path {
+    transition: all 0.1s ease;
+
 
     &:hover {
         fill: #34446D;
@@ -868,13 +873,7 @@ input:-webkit-autofill {
 .map-company>g {
     transition: all 0.1s ease;
 
-    &>path {
-        stroke-linejoin: bevel;
-        stroke-linecap: square;
-        paint-order: fill stroke;
-        shape-rendering: optimizeSpeed;
-        stroke-miterlimit: 0;
-    }
+  
 
     &:hover>path {
         fill: #34446D;
