@@ -6,14 +6,12 @@ import { ReactNode } from "react"
 import { Roboto } from 'next/font/google'
 import type { Metadata } from 'next'
 import { ScrollToTop } from '@/hook/scrollTop';
-import { NavigationItem } from '@/store/navigation';
 import { getNavigationData } from '@/assets/lib/navigation';
 
 const font = Roboto({
   subsets: ['latin', 'cyrillic'],
   weight: ['400', '500', '700'],
   display: 'swap',
-  variable: '--font-family',
 })
 
 export const metadata: Metadata = {
@@ -50,14 +48,14 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   const initialNavigation = await getNavigationData();
 
   return (
-    <html lang="ru" className={font.variable}>
+    <html lang="ru" >
       <head>
         <link rel="preconnect" href="https://test11.audiosector.ru" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://test11.audiosector.ru" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body>
+      <body className={font.className}>
         <Provider initialNavigation={initialNavigation}>
           <ScrollToTop />
           {children}
