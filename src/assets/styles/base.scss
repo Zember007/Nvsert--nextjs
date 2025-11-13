@@ -851,10 +851,11 @@ input:-webkit-autofill {
 
 .map-company>path {
     transition: all 0.1s ease;
-    stroke-linejoin: miter;
-    stroke-linecap: butt;
+    stroke-linejoin: bevel;
+    stroke-linecap: square;
     paint-order: fill stroke;
-    shape-rendering: crispEdges;
+    shape-rendering: optimizeSpeed;
+    stroke-miterlimit: 0;
 
     &:hover {
         fill: #34446D;
@@ -868,10 +869,11 @@ input:-webkit-autofill {
     transition: all 0.1s ease;
 
     &>path {
-        stroke-linejoin: miter;
-        stroke-linecap: butt;
+        stroke-linejoin: bevel;
+        stroke-linecap: square;
         paint-order: fill stroke;
-        shape-rendering: crispEdges;
+        shape-rendering: optimizeSpeed;
+        stroke-miterlimit: 0;
     }
 
     &:hover>path {
