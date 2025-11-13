@@ -38,7 +38,7 @@ export default async function Home() {
     <div className="main text-[#000] overflow-hidden  relative leading-page">
       <AppMainIntro />
 
-      <AppMainDocuments />
+{/*       <AppMainDocuments />
 
       <AppMainSkills />
 
@@ -46,7 +46,7 @@ export default async function Home() {
 
       <AppMainSafeguards />
 
-      <AppMainBelowFold faqs={faqs} />
+      <AppMainBelowFold faqs={faqs} /> */}
 
     </div>
   );
