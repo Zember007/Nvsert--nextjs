@@ -99,6 +99,7 @@ const Map = () => {
     const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const tooltipRef = useRef<HTMLDivElement | null>(null);
+    const containerRef = useRef<HTMLDivElement | null>(null);
     const [anchorRect, setAnchorRect] = useState<{ left: number; right: number; top: number; bottom: number } | null>(null);
 
     const handleMouseEnter = (event: React.MouseEvent) => {
@@ -115,30 +116,35 @@ const Map = () => {
     useEffect(() => {
         if (!hoveredRegion || !anchorRect) return;
         const tooltipBox = tooltipRef.current?.getBoundingClientRect();
-        if (!tooltipBox) return;
+        const containerBox = containerRef.current?.getBoundingClientRect();
+        if (!tooltipBox || !containerBox) return;
 
-        const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
-        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
         const padding = 12;
         const offsetAbove = 8; // small gap from the anchor when above
         const offsetBelow = 8; // small gap from the anchor when below
 
         const anchorCenterX = (anchorRect.left + anchorRect.right) / 2;
 
-        // Horizontal clamping using actual tooltip width
+        // Horizontal clamping using actual tooltip width and container bounds
         let left = anchorCenterX - tooltipBox.width / 2;
-        left = Math.max(padding, Math.min(left, viewportWidth - padding - tooltipBox.width));
+        const containerLeft = containerBox.left;
+        const containerRight = containerBox.right;
+        left = Math.max(containerLeft, Math.min(left, containerRight - tooltipBox.width));
 
-        // Prefer above if space allows; otherwise below; clamp vertically too
+        // Prefer above if space allows; otherwise below; clamp vertically too using container bounds
         const preferAboveTop = anchorRect.top - offsetAbove - tooltipBox.height;
-        const hasSpaceAbove = preferAboveTop >= padding;
+        const containerTop = containerBox.top;
+        const containerBottom = containerBox.bottom;
+        const hasSpaceAbove = preferAboveTop >= containerTop + padding;
         let top: number;
         if (hasSpaceAbove) {
             top = preferAboveTop;
+            // Ensure it doesn't go off the top of container
+            top = Math.max(top, containerTop + padding);
         } else {
             top = anchorRect.bottom + offsetBelow;
-            // Ensure it doesn't go off the bottom
-            top = Math.min(top, viewportHeight - padding - tooltipBox.height);
+            // Ensure it doesn't go off the bottom of container
+            top = Math.min(top, containerBottom - padding - tooltipBox.height);
         }
 
         setMousePosition({ x: left, y: top });
@@ -190,7 +196,7 @@ const Map = () => {
     }, [hoveredRegion]);
 
     return (
-        <div className="relative max-w-full">
+        <div ref={containerRef} className="relative max-w-full">
             {hoveredRegion && (
                 <div
                     ref={tooltipRef}
@@ -202,12 +208,12 @@ const Map = () => {
                 >
                     <div className="flex items-center gap-3">
                         {coatOfArmsMapping[hoveredRegion] && (
-                            <div className="w-[32px] h-[32px] flex-shrink-0">
+                            <div className="w-[30px] h-[30px] flex-shrink-0">
                                 <Image
                                     src={coatOfArmsMapping[hoveredRegion]}
                                     alt={`Герб ${hoveredRegion}`}
-                                    width={32}
-                                    height={32}
+                                    width={30}
+                                    height={30}
                                     className="h-full w-full"
                                 />
                             </div>
