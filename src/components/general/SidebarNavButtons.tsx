@@ -42,7 +42,7 @@ const SidebarNavButtons = () => {
         }
     ];
     return (
-        <div className={`m:flex xxs:grid xxs:grid-cols-2 xxs:gap-[20px] m:gap-0 flex flex-col`}>
+        <div className={`m:flex xxs:grid xxs:grid-cols-2 xxs:gap-[20px] m:gap-0 flex flex-col overflow-hidden`}>
             {items.map((item, index_item) => (
                 <Link
                     key={item.id}
