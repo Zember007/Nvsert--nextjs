@@ -91,9 +91,9 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
 
 
     const [expandedSections, setExpandedSections] = useState<number[]>([]);
-    const [currentServiceIndex, setCurrentServiceIndex] = useState<number>(0);
+    const [currentServiceIndex, setCurrentServiceIndex] = useState<number | null>(null);
 
-    const currentService = navigation[currentServiceIndex] || initialNavigation;
+    const currentService = currentServiceIndex ? navigation[currentServiceIndex] : initialNavigation;
 
     // Sync index with slug
     React.useEffect(() => {
@@ -122,7 +122,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
     }, [currentService]);
 
     useEffect(() => {
-        // Используем requestAnimationFrame для плавного скролла
+        if (currentServiceIndex === null) return;
         requestAnimationFrame(() => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
