@@ -46,7 +46,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                             sizes="(max-width: 640px) 282px, 312px"
                         />
                     </div>
-                    <div className='mix-blend-difference justify-between flex absolute bottom-[9px] left-[9px] right-[9px] xss:*:*:!leading-[0.68] *:*:!leading-[0.8]   flex p-[11px] bg-[#0A0A0A80] rounded-[4px] border border-[#fff] backdrop-blur-[4px] text-white'>
+                    <div className='justify-between flex absolute bottom-[9px] left-[9px] right-[9px] xss:*:*:!leading-[0.68] *:*:!leading-[0.8]   flex p-[11px] bg-[#F5F5F580] rounded-[4px] border border-[#000] backdrop-blur-[4px]'>
                         <div className="flex flex-col gap-[10px]">
                             <span className='text-5 !tracking-[-0.4px]'>Срок оформления</span>
                             <span className='text-1 !tracking-[-0.4px] font-light'>{certificate.duration}</span>
@@ -76,7 +76,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                             sizes="(max-width: 640px) 282px, 312px"
                         />
                     </div>
-                    <div className='mix-blend-difference justify-between flex absolute bottom-[9px] left-[9px] right-[9px] xss:*:*:!leading-[0.68] *:*:!leading-[0.8]   flex p-[11px] bg-[#F5F5F580] rounded-[4px] border border-[#000] backdrop-blur-[4px]'>
+                    <div className='justify-between flex absolute bottom-[9px] left-[9px] right-[9px] xss:*:*:!leading-[0.68] *:*:!leading-[0.8]   flex p-[11px] bg-[#F5F5F580] rounded-[4px] border border-[#000] backdrop-blur-[4px]'>
                         <div className="flex flex-col gap-[10px]">
                             <span className='text-5 !tracking-[-0.4px]'>Срок оформления</span>
                             <span className='text-1 !tracking-[-0.4px] font-light'>{certificate.duration}</span>

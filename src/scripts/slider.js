@@ -192,9 +192,15 @@ export function horizontalLoop(items, config) {
             
             // Принудительное выравнивание к пиксельной сетке
             forcePixelAlignment = () => {
-                items && items.forEach((item, i) => {
-                    const rect = item.getBoundingClientRect();
-                    const containerRect = container.getBoundingClientRect();
+                if (!items || items.length === 0) return;
+                
+                // Батчим чтение layout свойств для предотвращения принудительной компоновки
+                const containerRect = container.getBoundingClientRect();
+                const rects = items.map(item => item.getBoundingClientRect());
+                
+                // Затем применяем изменения
+                items.forEach((item, i) => {
+                    const rect = rects[i];
                     
                     // Получаем текущую позицию относительно контейнера
                     const currentLeft = rect.left - containerRect.left;
@@ -217,18 +223,22 @@ export function horizontalLoop(items, config) {
             },
             
             populateWidths = () => {
-                let b1 = container.getBoundingClientRect(), b2;
-                
                 // Сначала сбрасываем все трансформации
                 gsap.set(items, { x: 0, xPercent: 0 });
                 
+                // Батчим чтение layout свойств для предотвращения принудительной компоновки
+                // Читаем все свойства в одном цикле перед любыми изменениями
+                let b1 = container.getBoundingClientRect();
+                const itemRects = items.map(el => el.getBoundingClientRect());
+                const itemWidths = items.map(el => el.offsetWidth);
+                
+                // Теперь обрабатываем данные без дополнительных чтений layout
                 items.forEach((el, i) => {
-                    widths[i] = Math.round(el.offsetWidth);
+                    widths[i] = Math.round(itemWidths[i]);
                     xPercents[i] = 0; // Изначально все элементы без смещения
                     
-                    b2 = el.getBoundingClientRect();
-                    spaceBefore[i] = Math.round(b2.left - (i ? b1.right : b1.left));
-                    b1 = b2;
+                    const b2 = itemRects[i];
+                    spaceBefore[i] = Math.round(b2.left - (i ? itemRects[i - 1].right : b1.left));
                 });
                 
                 totalWidth = getTotalWidth();

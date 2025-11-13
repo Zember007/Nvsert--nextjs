@@ -140,11 +140,16 @@ const MainDocumentItem = memo(({
     // Вычисление ширины фото
     useEffect(() => {
         const container = containerPhotoRef.current;
-        if (!container) return;
+        if (!container || !img) return;
 
-        const width = img ? container.offsetHeight / img.height * img.width : 0;
-        setPhotoWidth(width >= 190 ? width : 190);
-    }, [containerPhotoRef.current, img?.height, img?.width]);
+        // Используем requestAnimationFrame для предотвращения принудительной компоновки
+        const rafId = requestAnimationFrame(() => {
+            const width = container.offsetHeight / img.height * img.width;
+            setPhotoWidth(width >= 190 ? width : 190);
+        });
+
+        return () => cancelAnimationFrame(rafId);
+    }, [img?.height, img?.width]);
 
     const isInViewport = (el: HTMLElement | null): boolean => {
         if (!el) return false;
