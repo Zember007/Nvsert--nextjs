@@ -166,7 +166,16 @@ const MainDocumentItem = memo(({
             block: totalItems / 2 > index ? 'start' : 'end'
         };
 
+        // if (index === 0) {
+        //     documents_box.scrollIntoView({ ...scrollOptions, block: 'start' });
+        // } else if (index === 17) {
+        //     documents_box.scrollIntoView({ ...scrollOptions, block: 'start' });
+        // } else {
+        //     el.scrollIntoView(scrollOptions);
+        // }
+
         el.scrollIntoView(scrollOptions);
+
     };
 
     useEffect(() => {
@@ -207,6 +216,7 @@ const MainDocumentItem = memo(({
     const hiddenList = windowWidth && windowWidth < 1280 ? 1 : 2;
 
     const router = useRouter();
+
 
     return (
         <div
