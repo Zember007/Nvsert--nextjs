@@ -849,33 +849,47 @@ input:-webkit-autofill {
     }
 }
 
-.map-company path {
-    vector-effect: non-scaling-stroke;
-    paint-order: stroke fill;
-    shape-rendering: geometricPrecision;
-    stroke-linejoin: bevel;
-    stroke-linecap: square;
-    isolation: isolate;
-    transition: all 0.1s ease;
+.map-company {
+    path {
+        vector-effect: non-scaling-stroke;
+        paint-order: stroke fill;
+        shape-rendering: geometricPrecision;
+        stroke-linejoin: bevel;
+        stroke-linecap: square;
+        isolation: isolate;
+        transition: all 0.1s ease;
+        stroke: transparent;
+    
+    }
 
-}
+    &>path {
 
-.map-company>path {
+        &:hover {
+            fill: #34446D;
+            fill-opacity: 0.5;
+            stroke: #000;
+            stroke-width: 1;
+        }
+    }
 
-    &:hover {
-        fill: #34446D;
-        fill-opacity: 0.5;
-        stroke: #000;
-        stroke-width: 1;
+    &>g {
+
+        &:hover>path {
+            fill: #34446D;
+            fill-opacity: 0.5;
+            stroke: #000;
+            stroke-width: 1;
+        }
+    }
+
+
+    .stroke-mask {
+        pointer-events: none;
+
+        path {
+            fill: transparent;
+        }
+
     }
 }
 
-.map-company>g {
-
-    &:hover>path {
-        fill: #34446D;
-        fill-opacity: 0.5;
-        stroke: #000;
-        stroke-width: 1;
-    }
-}
