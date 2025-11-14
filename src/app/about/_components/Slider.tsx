@@ -19,6 +19,7 @@ const Slider = () => {
                 draggable: true,
                 mobile: widthWindow && widthWindow < 1280,
                 snap: true,
+                offsetLeft: 80,
                 gap: widthWindow && widthWindow < 640 ? (widthWindow - (300)) / 2 : 20,
                 center: widthWindow && widthWindow < 640 ? true : false,
                 onChange: (index: number) => {
@@ -102,7 +103,7 @@ const Slider = () => {
 
 
     return (
-        <div key="slider-container" ref={sliderRef} className="slider-container relative overflow-hidden mt-[15px] 1k:max-w-[940px] l:max-w-[640px] xxs:max-w-[580px] xxs:mx-auto -mx-[26px] w-[calc(100%+52px)]">
+        <div key="slider-container" ref={sliderRef} className="slider-container relative overflow-hidden mt-[15px] 1k:max-w-[calc(100vw-824px)] xl:max-w-[calc(100vw-656px)] l:max-w-[640px] xxs:max-w-[580px] xxs:mx-auto -mx-[26px] w-[calc(100%+52px)]">
             <div className="slide-blur feedback-blur left-0">
                 <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
                 <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
