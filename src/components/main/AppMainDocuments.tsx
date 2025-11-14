@@ -35,7 +35,7 @@ const AppMainDocuments = () => {
                 maskClosable={false}
             >
                 <div className="documents-container">
-                    {navigation?.map((item, index) => (
+                    {navigation.map((item, index) => (
                         <MainDocumentItem
                             link={item.slug}
                             key={item.slug || index}
@@ -48,7 +48,7 @@ const AppMainDocuments = () => {
                             img={item.img}
                             price={item.price}
                             title={item.title}
-                            totalItems={navigation?.length || 0}
+                            totalItems={navigation.length || 0}
                             index={index + 1}
                         />
                     ))}

@@ -2,7 +2,7 @@
 
 import { useCopy } from '@/hook/useCopy';
 import { NavigationItem } from '@/store/navigation';
-import { createContext, useState, useContext, useCallback, ReactNode } from 'react';
+import { createContext, useState, useContext, ReactNode } from 'react';
 
 interface HeaderContextType {
     defaultModalActive: boolean;
@@ -15,7 +15,7 @@ interface HeaderContextType {
     notificationPosition: { x: number; y: number } | null;
     handleCopy: (text: string, event: React.MouseEvent) => void;
     hideNotification: () => void;
-    initialNavigation?: NavigationItem[];
+    initialNavigation: NavigationItem[];
 }
 
 const HeaderContext = createContext<HeaderContextType | undefined>(undefined);
@@ -28,7 +28,7 @@ export function useHeaderContext() {
     return context;
 }
 
-export function HeaderContextProvider({ children, initialNavigation }: { children: ReactNode; initialNavigation?: NavigationItem[] }) {
+export function HeaderContextProvider({ children, initialNavigation }: { children: ReactNode; initialNavigation: NavigationItem[] }) {
     const [defaultModalActive, setDefaultModalActive] = useState(false);
     const [defaultModalCount, setDefaultModalCount] = useState(0);
     const [defaultModalName, setDefaultModalName] = useState('');

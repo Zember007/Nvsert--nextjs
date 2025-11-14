@@ -9,7 +9,7 @@ import { TypographyProvider } from './Typography/TypographyProvider';
 import { NavigationItem } from '@/store/navigation';
 
 
-function ReduxProvider({ children, initialNavigation }: { children: ReactNode; initialNavigation?: NavigationItem[] }) {
+function ReduxProvider({ children, initialNavigation }: { children: ReactNode; initialNavigation: NavigationItem[] }) {
 
   return <TypographyProvider
     threshold={16}

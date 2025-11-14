@@ -44,9 +44,11 @@ export const metadata: Metadata = {
 }
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
-  // Загружаем навигацию на сервере до рендера
-  const initialNavigation = await getNavigationData();
 
+  const initialNavigation = await getNavigationData();
+  if (!initialNavigation) return <div>Navigation not found</div>;
+  if (initialNavigation.length === 0) return <div>Navigation is empty</div>;
+  
   return (
     <html lang="ru" >
       <head>

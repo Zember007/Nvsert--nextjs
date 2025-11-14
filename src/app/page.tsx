@@ -9,10 +9,12 @@ const AppMainIntro = dynamic(() => import('../components/main/AppMainIntro'), {
 })
 
 const AppMainDocuments = dynamic(() => import('../components/main/AppMainDocuments'), {
+  loading: () => <div className="section wrapper min-h-[400px]" />,
   ssr: true
 })
 
 const AppMainSkills = dynamic(() => import('../components/main/AppMainSkills'), {
+  loading: () => <div className="section wrapper min-h-[400px]" />,
   ssr: true
 })
 
