@@ -6,7 +6,7 @@ import CollapseSection from '@/components/general/CollapseSection';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
 import Map from './_components/Map';
 import Slider from './_components/Slider';
-import { AboutData, ContentBlock } from './page';
+import { AboutData } from './page';
 import AppCtaBanner from '@/components/general/AppCtaBanner';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import { StrapiResponsiveImage } from '@/components/general/StrapiResponseImage';

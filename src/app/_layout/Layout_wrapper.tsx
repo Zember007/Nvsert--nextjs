@@ -1,4 +1,3 @@
-'use client'
 import '@/assets/styles/base.scss';
 import '@/assets/lib/react-photo-view/dist/react-photo-view.css';
 import AppHeader from '@/components/general/AppHeader';

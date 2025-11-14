@@ -38,13 +38,16 @@ export interface AboutData {
 async function getAboutData(): Promise<AboutData | null> {
     try {
         const base = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
-        const response = await fetch(`${base}/api/about`, { next: { revalidate: 3600 } });
-        
+        const response = await fetch(`${base}/api/about`, {
+            /* next: { revalidate: 3600 }  */
+            cache: 'no-store'
+        });
+
         if (!response.ok) {
             throw new Error('Failed to fetch about data');
         }
 
-        
+
         const result = await response.json();
         console.log(result.data, 'result.data');
         return result.data;
@@ -74,7 +77,7 @@ async function getAboutData(): Promise<AboutData | null> {
 // Функция для генерации метаданных
 export async function generateMetadata(): Promise<Metadata> {
     const aboutData = await getAboutData();
-    
+
     if (!aboutData) {
         return {
             title: 'О компании',
@@ -99,7 +102,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const AboutCompany = async () => {
     const aboutData = await getAboutData();
-    
+
     return <ClientPage aboutData={aboutData} />;
 };
 
