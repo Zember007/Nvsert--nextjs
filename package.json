@@ -29,10 +29,7 @@
     "react-i18next": "^15.4.0",
     "react-lazy-load-image-component": "^1.6.3",
     "react-multi-date-picker": "^4.5.2",
-    "react-photo-view": "^1.2.7",
-    "react-redux": "^9.2.0",
-    "sass": "^1.84.0",
-    "simplebar-react": "^3.3.0"
+    "sass": "^1.84.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

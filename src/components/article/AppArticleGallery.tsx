@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { PhotoView } from 'react-photo-view';
-import { PhotoProvider } from 'react-photo-view';
+import { PhotoView } from '@/assets/lib/react-photo-view';
+import { PhotoProvider } from '@/assets/lib/react-photo-view';
 
 interface MediaItem {
     image_webp: string;

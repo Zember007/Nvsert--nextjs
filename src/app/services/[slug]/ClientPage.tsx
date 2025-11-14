@@ -183,7 +183,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                     <div className="sticky top-[104px] flex flex-col xl:gap-[40px] gap-[20px] m:overflow-y-auto m:max-h-[calc(100vh-104px)]">
 
                                         <div className="flex  gap-[20px] flex-col-reverse">
-                                            <div className="w-[250px] mx-auto">
+                                           {/*  <div className="w-[250px] mx-auto">
                                                 <ServiceCard
                                                     onClick={() => { document.getElementById('service-' + currentService?.id)?.click() }}
                                                     serviceName={currentService?.category?.name || ''}
@@ -207,7 +207,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                                     padding={false}
                                                     priority={true}
                                                 />
-                                            </div>
+                                            </div> */}
 
                                             <Button
                                                 wrapperClassName='xl:hidden block !max-w-[250px]'
