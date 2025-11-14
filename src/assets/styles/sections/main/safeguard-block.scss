@@ -70,13 +70,17 @@
 .safeguard-arrow-icon {
   @apply min-w-[17px] rotate-[0deg] transition-all duration-100;
   
+  color: #93969D;
+  
   &.active {
     transform: rotate(180deg);
+    color: #000;
   }
   
   @media (min-width: 1280px) {
     .safeguard-item:hover & {
       transform: rotate(180deg);
+      color: #000;
     }
   }
 }
