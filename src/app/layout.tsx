@@ -55,7 +55,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={font.className}>
+      <body className={`${font.className} bg-noise`}>
         <Provider initialNavigation={initialNavigation}>
           <ScrollToTop />
           {children}

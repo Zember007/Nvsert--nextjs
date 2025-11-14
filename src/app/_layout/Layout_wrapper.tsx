@@ -14,27 +14,6 @@ import { groupServices } from '@/assets/lib/navigation';
 const LayoutContent = ({ children, initialNavigation }: { children: ReactNode; initialNavigation?: NavigationItem[]; }) => {
 
     const { setDefaultModalActive, defaultModalActive, defaultModalName, resetCountModal, defaultModalCount, showCopyNotification, notificationPosition, hideNotification } = useHeaderContext();
-    const bgNoiseRef = useRef<HTMLDivElement>(null);
-
-    // Отложенная загрузка фонового изображения для оптимизации
-    useEffect(() => {
-        // Загружаем изображение когда браузер свободен (приоритизация критического контента)
-        const loadBackground = () => {
-            if (bgNoiseRef.current) {
-                bgNoiseRef.current.classList.add('loaded');
-            }
-        };
-
-        // Используем requestIdleCallback для загрузки в свободное время
-        if ('requestIdleCallback' in window) {
-            const idleCallback = requestIdleCallback(loadBackground, { timeout: 2000 });
-            return () => cancelIdleCallback(idleCallback);
-        } else {
-            // Fallback для браузеров без поддержки requestIdleCallback
-            const timer = setTimeout(loadBackground, 1000);
-            return () => clearTimeout(timer);
-        }
-    }, []);
 
 
     /* 
@@ -105,7 +84,7 @@ const LayoutContent = ({ children, initialNavigation }: { children: ReactNode; i
                 */}
             </main>
             <AppFooter />
-            <div ref={bgNoiseRef} className="bg-noise" aria-hidden="true"></div>
+
             {/* <CustomScrollbar target="window" /> */}
 
             <CopyNotification

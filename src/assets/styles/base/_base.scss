@@ -17,7 +17,20 @@ html {
   --mask-menu-item: transparent;
 }
 
-.bg-noise {
+body.bg-noise::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: url('/images/150.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* .bg-noise {
   --opacity: 0.6;
   --bg-image: none;
   position: fixed;
@@ -33,7 +46,7 @@ html {
   &.loaded {
     --bg-image: url('../../images/150.webp');
   }
-}
+} */
 
 .mask-custom {
   -webkit-mask-image: radial-gradient(circle at 120px 250px, transparent 80px, white 0);

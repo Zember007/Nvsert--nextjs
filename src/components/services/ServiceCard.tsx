@@ -26,6 +26,13 @@ const replaceValue = (value: string) => {
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, className, title = true, padding = true, onClick }) => {
     const href = certificate.slug ? `/services/${certificate.slug}` : '';
+    
+    // Используем medium формат если доступен, иначе полное изображение
+    const imageUrl = certificate.img?.formats?.medium?.url 
+        ? certificate.img.formats.medium.url 
+        : certificate.img?.url || '';
+    const imageWidth = certificate.img?.formats?.medium?.width || 249;
+    const imageHeight = certificate.img?.formats?.medium?.height || 346;
 
     return (
         href ? (
@@ -37,12 +44,13 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                 <div className="relative w-full ">
                     <div className="border border-[#93969d] rounded-[4px] overflow-hidden h-[346px]">
                         <Image
-                            src={'https://test11.audiosector.ru/cp' + certificate.img?.url}
+                            src={'https://test11.audiosector.ru/cp' + imageUrl}
                             alt={certificate.title}
-                            width={249}
-                            height={346}
-                            className='h-[346px]'
+                            width={imageWidth}
+                            height={imageHeight}
+                            className='h-[346px] object-cover'
                             loading="lazy"
+                            quality={85}
                             sizes="(max-width: 640px) 282px, 312px"
                         />
                     </div>
@@ -67,12 +75,13 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                 <div className="relative w-full ">
                     <div className="border border-[#93969d] rounded-[4px] overflow-hidden h-[346px]">
                         <Image
-                            src={'https://test11.audiosector.ru/cp' + certificate.img?.url}
+                            src={'https://test11.audiosector.ru/cp' + imageUrl}
                             alt={certificate.title}
-                            width={249}
-                            height={346}
-                            className='h-[346px]'
+                            width={imageWidth}
+                            height={imageHeight}
+                            className='h-[346px] object-cover'
                             loading="lazy"
+                            quality={85}
                             sizes="(max-width: 640px) 282px, 312px"
                         />
                     </div>
