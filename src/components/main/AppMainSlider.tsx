@@ -222,9 +222,11 @@ const SliderMain = () => {
                                                     src={item.img} 
                                                     alt='slide' 
                                                     fill
+                                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
                                                     style={{ objectFit: 'cover' }}
                                                     priority={index === 0}
                                                     loading={index === 0 ? 'eager' : 'lazy'}
+                                                    quality={index === 0 ? 90 : 75}
                                                 />
                                                 <div className="slide-overlay-blend"></div>
 

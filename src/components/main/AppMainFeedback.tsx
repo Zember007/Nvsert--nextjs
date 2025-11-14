@@ -134,7 +134,9 @@ const AppMainFeedback = () => {
                                             alt='feedback' 
                                             width={190} 
                                             height={267}
+                                            sizes="(max-width: 768px) 190px, 190px"
                                             loading="lazy"
+                                            quality={75}
                                             />
                                     </PhotoView>
                                 </div>)}

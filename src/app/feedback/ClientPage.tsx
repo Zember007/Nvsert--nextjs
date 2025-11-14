@@ -58,7 +58,16 @@ const FeedbackCard: React.FC<{ item: FeedbackItem }> = ({ item }) => {
                 {!!img && (
                     <div className="shrink-0 w-[190px] h-[267px] rounded-[6px] overflow-hidden bg-[#fff] border border-[#E2E4EA] xxs:mx-0 mx-auto">
                         {/* Using img to avoid Image domain config issues */}
-                        <Image src={'https://test11.audiosector.ru/cp' + img} alt={item.photo?.alternativeText || item.title} className="w-full h-full object-contain" width={190} height={267} />
+                        <Image 
+                            src={'https://test11.audiosector.ru/cp' + img} 
+                            alt={item.photo?.alternativeText || item.title} 
+                            className="w-full h-full object-contain" 
+                            width={190} 
+                            height={267}
+                            sizes="(max-width: 768px) 190px, 190px"
+                            loading="lazy"
+                            quality={75}
+                        />
                     </div>
                 )}
                 <div className="flex-1 flex flex-col gap-[20px]">

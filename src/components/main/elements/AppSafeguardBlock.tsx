@@ -41,7 +41,9 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
               alt='document' src={img}
               width="0"
               height="0"
-              sizes="100vw"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              loading="lazy"
+              quality={80}
             />
           </div>
           <div className="safeguard-content-container">

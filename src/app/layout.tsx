@@ -12,6 +12,9 @@ const font = Roboto({
   subsets: ['latin', 'cyrillic'],
   weight: ['400', '500', '700'],
   display: 'swap',
+  preload: true,
+  adjustFontFallback: true,
+  fallback: ['system-ui', 'arial'],
 })
 
 export const metadata: Metadata = {
@@ -41,6 +44,10 @@ export const metadata: Metadata = {
     ],
   },
   manifest: '/site.webmanifest',
+  other: {
+    'x-content-type-options': 'nosniff',
+    'x-frame-options': 'DENY',
+  },
 }
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
