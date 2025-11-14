@@ -5,16 +5,16 @@ import '@/assets/styles/sections/main/animation/documents.scss'
 import '@/assets/styles/sections/main/main-documents.scss'
 import { PhotoProvider } from '@/assets/lib/react-photo-view';
 import { useTranslation } from "react-i18next";
-import { useNavigationContext } from "../contexts/NavigationContext";
+import { useHeaderContext } from "../contexts/HeaderContext";
 
 const AppMainDocuments = () => {
     const [activeIndex, setActive] = useState<number | null>(null);
     const { t } = useTranslation();
-    const { initialNavigation: navigation } = useNavigationContext();
+    const { initialNavigation: navigation } = useHeaderContext();
 
     const noop = useCallback(() => { }, []);
     const setActiveHandlers = useMemo(
-        () => navigation.map((_, idx) => (value: boolean) => setActive(value ? idx : null)),
+        () => navigation?.map((_, idx) => (value: boolean) => setActive(value ? idx : null)) || [],
         [navigation]
     );
 
@@ -35,7 +35,7 @@ const AppMainDocuments = () => {
                 maskClosable={false}
             >
                 <div className="documents-container">
-                    {navigation.map((item, index) => (
+                    {navigation?.map((item, index) => (
                         <MainDocumentItem
                             link={item.slug}
                             key={item.slug || index}
@@ -48,7 +48,7 @@ const AppMainDocuments = () => {
                             img={item.img}
                             price={item.price}
                             title={item.title}
-                            totalItems={navigation.length}
+                            totalItems={navigation?.length || 0}
                             index={index + 1}
                         />
                     ))}

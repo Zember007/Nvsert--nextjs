@@ -14,7 +14,6 @@ import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
 import { filterPrepositions } from '@/hook/filter';
 import useWindowSize from '@/hook/useWindowSize';
 import { StrapiResponsiveImage } from '@/components/general/StrapiResponseImage';
-import { useNavigationContext } from '@/components/contexts/NavigationContext';
 
 // Component to render rich text with proper formatting
 const RichTextRenderer: React.FC<{ content: string }> = ({ content }) => {
@@ -84,16 +83,15 @@ interface ClientPageProps {
 
 const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, initialSlug }) => {
     const slug = initialSlug;
-    const { openDefaultModal } = useHeaderContext();
+    const { openDefaultModal, initialNavigation: navigation } = useHeaderContext();
     const { height: windowHeight, width: windowWidth } = useWindowSize();
 
-    const { initialNavigation: navigation } = useNavigationContext();
 
 
     const [expandedSections, setExpandedSections] = useState<number[]>([]);
     const [currentServiceIndex, setCurrentServiceIndex] = useState<number | null>(null);
 
-    const currentService = currentServiceIndex ? navigation[currentServiceIndex] : initialNavigation;
+    const currentService = currentServiceIndex && navigation ? navigation[currentServiceIndex] : initialNavigation;
 
     // Sync index with slug
     React.useEffect(() => {
@@ -129,7 +127,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
     }, [currentServiceIndex]);
 
     const recomendedServices = useMemo(() => {
-        return [...navigation].sort((a, b) => a.category.name === currentService?.category.name ? -1 : 1).filter(item => item.slug !== currentService?.slug).slice(0, (windowHeight >= 820 || windowWidth < 960) ? 3 : 2);
+        return [...(navigation || [])].sort((a, b) => a.category.name === currentService?.category.name ? -1 : 1).filter(item => item.slug !== currentService?.slug).slice(0, (windowHeight >= 820 || windowWidth < 960) ? 3 : 2);
     }, [navigation, currentService, windowHeight, windowWidth]);
 
 

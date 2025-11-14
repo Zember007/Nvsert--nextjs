@@ -4,7 +4,6 @@
 import '@/config/i18n';
 import { Provider } from 'react-redux';
 import { HeaderContextProvider } from '@/components/contexts/HeaderContext';
-import { NavigationContextProvider } from '@/components/contexts/NavigationContext';
 import { store } from '@/config/store'
 import Layout_wrapper from './Layout_wrapper';
 import { ReactNode } from 'react';
@@ -22,12 +21,10 @@ function ReduxProvider({ children, initialNavigation }: { children: ReactNode; i
       smallWeightWindows={350}
       largeWeightWindows={400}
     >
-      <HeaderContextProvider>
-        <NavigationContextProvider initialNavigation={initialNavigation}>
-          <Layout_wrapper initialNavigation={initialNavigation}>
-            {children}
-          </Layout_wrapper>
-        </NavigationContextProvider>
+      <HeaderContextProvider initialNavigation={initialNavigation}>
+        <Layout_wrapper initialNavigation={initialNavigation}>
+          {children}
+        </Layout_wrapper>
       </HeaderContextProvider>
     </TypographyProvider>
   </Provider>;

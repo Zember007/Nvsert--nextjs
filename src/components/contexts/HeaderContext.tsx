@@ -1,6 +1,7 @@
 'use client'
 
 import { useCopy } from '@/hook/useCopy';
+import { NavigationItem } from '@/store/navigation';
 import { createContext, useState, useContext, useCallback, ReactNode } from 'react';
 
 interface HeaderContextType {
@@ -14,6 +15,7 @@ interface HeaderContextType {
     notificationPosition: { x: number; y: number } | null;
     handleCopy: (text: string, event: React.MouseEvent) => void;
     hideNotification: () => void;
+    initialNavigation?: NavigationItem[];
 }
 
 const HeaderContext = createContext<HeaderContextType | undefined>(undefined);
@@ -26,7 +28,7 @@ export function useHeaderContext() {
     return context;
 }
 
-export function HeaderContextProvider({ children }: { children: ReactNode }) {
+export function HeaderContextProvider({ children, initialNavigation }: { children: ReactNode; initialNavigation?: NavigationItem[] }) {
     const [defaultModalActive, setDefaultModalActive] = useState(false);
     const [defaultModalCount, setDefaultModalCount] = useState(0);
     const [defaultModalName, setDefaultModalName] = useState('');
@@ -53,6 +55,7 @@ export function HeaderContextProvider({ children }: { children: ReactNode }) {
         setDefaultModalActive,
         resetCountModal,
         defaultModalCount,
+        initialNavigation,
         ...copyHook
     };
 
