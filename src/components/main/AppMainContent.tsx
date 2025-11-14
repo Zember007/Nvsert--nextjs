@@ -1,28 +1,32 @@
 'use client';
-
+import { FaqItem } from '@/store/faq';
 import dynamic from 'next/dynamic';
 
 
-export default function AppMainContent() {
-  const AppMainDocuments = dynamic(() => import('./AppMainDocuments'), {
-    ssr: false
-  })
-  const AppMainSkills = dynamic(() => import('./AppMainSkills'), {
-    ssr: false
-  })
+export default function AppMainContent({ faqs }: { faqs: FaqItem[] }) {
+
+
   const AppMainSlider = dynamic(() => import('./AppMainSlider'), {
     ssr: false
   })
   const AppMainSafeguards = dynamic(() => import('./AppMainSafeguards'), {
     ssr: false
   })
+  const AppMainFeedback = dynamic(() => import('./AppMainFeedback'), {
+    ssr: false
+  })
+  const AppMainQuestions = dynamic(() => import('./AppMainQuestions'), {
+    ssr: false
+  })
+
   return (
     <>
     
-      <AppMainDocuments />
-      <AppMainSkills />
+
       <AppMainSlider />
       <AppMainSafeguards />
+      <AppMainFeedback />
+      <AppMainQuestions faqs={faqs} />
     </>
   );
 }
