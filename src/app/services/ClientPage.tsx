@@ -42,7 +42,7 @@ const ServicesContent: React.FC<ServicesClientPageProps> = ({ initialNavigation 
 
         if (matchingIndex !== -1) {
             setExpandedServices(prev => {
-                // Предотвращаем лишние обновления состояния
+                
                 if (prev.length === 1 && prev[0] === matchingIndex) {
                     return prev;
                 }
