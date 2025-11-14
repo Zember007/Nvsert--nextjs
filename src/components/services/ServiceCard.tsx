@@ -11,6 +11,7 @@ interface ServiceCardProps {
     title?: boolean;
     padding?: boolean;
     onClick?: () => void;
+    priority?: boolean;
 }
 
 const replaceValue = (value: string) => {
@@ -24,7 +25,7 @@ const replaceValue = (value: string) => {
         .replace(/Обоснования\s+безопасности/gi, "Обоснования\u00A0безопасности");
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, className, title = true, padding = true, onClick }) => {
+const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, className, title = true, padding = true, onClick, priority = false }) => {
     const href = certificate.slug ? `/services/${certificate.slug}` : '';
     
     // Используем medium формат если доступен, иначе полное изображение
@@ -49,7 +50,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                             width={imageWidth}
                             height={imageHeight}
                             className='h-[346px] object-cover'
-                            loading="lazy"
+                            loading={priority ? "eager" : "lazy"}
+                            priority={priority}
+                            fetchPriority={priority ? "high" : "auto"}
                             quality={85}
                             sizes="(max-width: 640px) 282px, 312px"
                         />
@@ -80,7 +83,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                             width={imageWidth}
                             height={imageHeight}
                             className='h-[346px] object-cover'
-                            loading="lazy"
+                            loading={priority ? "eager" : "lazy"}
+                            priority={priority}
+                            fetchPriority={priority ? "high" : "auto"}
                             quality={85}
                             sizes="(max-width: 640px) 282px, 312px"
                         />

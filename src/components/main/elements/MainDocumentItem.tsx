@@ -333,6 +333,7 @@ const MainDocumentItem = memo(({
                                             height={268}
                                             loading={index === 1 ? 'eager' : 'lazy'}
                                             priority={index === 1}
+                                            fetchPriority={index === 1 ? 'high' : 'auto'}
                                         />
                                     </motion.div>
 

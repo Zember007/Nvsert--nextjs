@@ -205,6 +205,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                                     }}
                                                     title={false}
                                                     padding={false}
+                                                    priority={true}
                                                 />
                                             </div>
 

@@ -224,6 +224,7 @@ const SliderMain = () => {
                                                     fill
                                                     style={{ objectFit: 'cover' }}
                                                     priority={index === 0}
+                                                    fetchPriority={index === 0 ? 'high' : 'auto'}
                                                     loading={index === 0 ? 'eager' : 'lazy'}
                                                 />
                                                 <div className="slide-overlay-blend"></div>
