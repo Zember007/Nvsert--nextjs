@@ -23,9 +23,11 @@ function ReduxProvider({ children, initialNavigation }: { children: ReactNode; i
       largeWeightWindows={400}
     >
       <HeaderContextProvider>
+        <NavigationContextProvider initialNavigation={initialNavigation}>
           <Layout_wrapper initialNavigation={initialNavigation}>
             {children}
           </Layout_wrapper>
+        </NavigationContextProvider>
       </HeaderContextProvider>
     </TypographyProvider>
   </Provider>;

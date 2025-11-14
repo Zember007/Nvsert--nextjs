@@ -1,4 +1,4 @@
- 'use client'
+'use client'
 import MainDocumentItem from "./elements/MainDocumentItem";
 import { useCallback, useMemo, useState } from "react";
 import '@/assets/styles/sections/main/animation/documents.scss'
@@ -12,7 +12,7 @@ const AppMainDocuments = () => {
     const { t } = useTranslation();
     const { initialNavigation: navigation } = useNavigationContext();
 
-    const noop = useCallback(() => {}, []);
+    const noop = useCallback(() => { }, []);
     const setActiveHandlers = useMemo(
         () => navigation.map((_, idx) => (value: boolean) => setActive(value ? idx : null)),
         [navigation]
@@ -31,7 +31,7 @@ const AppMainDocuments = () => {
                 maskOpacity={0.4}
                 maskClassName="blurred-mask"
                 speed={() => 0}
-                onIndexChange={(index) => {setActive(index);}}
+                onIndexChange={(index) => { setActive(index); }}
                 maskClosable={false}
             >
                 <div className="documents-container">
@@ -48,7 +48,7 @@ const AppMainDocuments = () => {
                             img={item.img}
                             price={item.price}
                             title={item.title}
-                            totalItems={navigation.length }
+                            totalItems={navigation.length}
                             index={index + 1}
                         />
                     ))}
