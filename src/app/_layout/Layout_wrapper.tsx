@@ -31,7 +31,7 @@ const LayoutContent = ({ children, initialNavigation }: { children: ReactNode; i
             return () => cancelIdleCallback(idleCallback);
         } else {
             // Fallback для браузеров без поддержки requestIdleCallback
-            const timer = setTimeout(loadBackground, 100);
+            const timer = setTimeout(loadBackground, 1000);
             return () => clearTimeout(timer);
         }
     }, []);

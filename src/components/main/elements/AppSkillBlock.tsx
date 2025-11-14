@@ -101,14 +101,7 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
           {
             folder ?
               <>
-                {img && <Image 
-                  alt="folder" 
-                  className={`skill-folder-image`} 
-                  src={img} 
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  loading="lazy"
-                  quality={80}
-                />}
+                {img && <Image alt="folder" className={`skill-folder-image`} src={img} />}
               </>
               :
               <>
