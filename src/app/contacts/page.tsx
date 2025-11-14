@@ -3,27 +3,17 @@
 import AppSpoilerItem from '../../components/general/AppSpoilerItem';
 import AppDefaultForm from '../../components/forms/AppDefaultForm';
 import AppBreadcrumbs from '@/components/general/AppBreadcrumbs';
-import { updateActionContacts } from '@/store/contacts';
-import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
-import { filterEmail, filterPhone } from '@/hook/filter';
-import { AppDispatch, RootState } from '@/config/store';
 
 
 const Page = () => {
 
-    const dispatch = useDispatch<AppDispatch>()
 
     const { t } = useTranslation()
 
-    const { contacts } = useSelector((state:RootState) => state.contacts)
 
-    useEffect(() => {
-        dispatch(updateActionContacts())
-    }, [dispatch])
+
 
     return (
         <div className="article contacts">
@@ -35,7 +25,7 @@ const Page = () => {
                     <h1>{t('contacts.title')}</h1>
                     <div className="flex-wrapper">
 
-                        {contacts && contacts.length > 0 &&
+{/*                         {contacts && contacts.length > 0 &&
                             <>
                                 <div
                                     className="mtp__spoiler js-spoiler"
@@ -99,7 +89,7 @@ const Page = () => {
                                     </div>
                                 </div>
                             </>
-                        }
+                        } */}
                     </div >
                 </div >
             </div >

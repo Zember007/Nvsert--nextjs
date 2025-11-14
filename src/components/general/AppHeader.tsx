@@ -1,5 +1,4 @@
 import { useEffect, useLayoutEffect, useRef, useState, memo } from "react";
-import { useDispatch } from "react-redux";
 import '@/assets/styles/sections/_header.scss'
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
@@ -32,7 +31,6 @@ const AppHeader = ({ services }: { services: Services[] }) => {
 
   const { t } = useTranslation();
 
-  const dispatch = useDispatch<AppDispatch>();
 
 
   const controls = useAnimation();
@@ -68,7 +66,6 @@ const AppHeader = ({ services }: { services: Services[] }) => {
     setBurgerMenuActive(false);
     document.body.style.overflow = '';
     unlockScroll()
-    dispatch(disableOverflow());
   }
   let scrollY = 0;
 
@@ -96,7 +93,6 @@ const AppHeader = ({ services }: { services: Services[] }) => {
     } else {
       setBurgerMenuActive(false);
       unlockScroll()
-      dispatch(disableOverflow());
     }
   }
 
