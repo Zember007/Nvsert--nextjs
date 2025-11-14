@@ -40,13 +40,11 @@
 
 .questions-arrow-icon {
   @apply hidden xl:block transition-all duration-200;
-  
+
+  color: #93969D;
   &.active {
     transform: rotate(180deg);
-    
-    * {
-      stroke: #FFF;
-    }
+    color: #FFF;
   }
 }
 
