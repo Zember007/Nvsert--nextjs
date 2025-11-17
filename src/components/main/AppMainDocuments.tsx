@@ -12,11 +12,9 @@ const AppMainDocuments = () => {
     const { t } = useTranslation();
     const { initialNavigation: navigation } = useHeaderContext();
 
-    const noop = useCallback(() => { }, []);
-    const setActiveHandlers = useMemo(
-        () => navigation?.map((_, idx) => (value: boolean) => setActive(value ? idx : null)) || [],
-        [navigation]
-    );
+    const setActiveHandlers = (index: number, value: boolean) => {
+        setActive(value ? index : null)
+    }
 
     return (
         <section className="section wrapper !overflow-visible">
@@ -39,8 +37,7 @@ const AppMainDocuments = () => {
                         <MainDocumentItem
                             link={item.slug}
                             key={item.slug || index}
-                            setPhoto={noop}
-                            setActive={setActiveHandlers[index]}
+                            setActive={(value: boolean) => setActiveHandlers(index, value)}
                             active={index === activeIndex}
                             content={item.description}
                             documentsList={item.documents}

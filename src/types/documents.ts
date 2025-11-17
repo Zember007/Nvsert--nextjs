@@ -8,7 +8,6 @@ export interface documentsList {
 }
 
 export interface MainDocumentItemProps {
-    setPhoto: () => void;
     img?: any;
     title: string;
     link: string;

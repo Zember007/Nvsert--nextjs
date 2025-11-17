@@ -19,7 +19,7 @@ const Slider = () => {
                 draggable: true,
                 mobile: widthWindow && widthWindow < 1280,
                 snap: true,
-                offsetLeft: 80,
+                offsetLeft:  widthWindow && widthWindow < 1280 ? 0 : 80,
                 gap: widthWindow && widthWindow < 640 ? (widthWindow - (300)) / 2 : 20,
                 center: widthWindow && widthWindow < 640 ? true : false,
                 onChange: (index: number) => {

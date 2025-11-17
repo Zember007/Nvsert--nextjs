@@ -109,7 +109,6 @@ const DocumentList = memo(({ documentsList, listHidden, setListHidden, hiddenLis
 DocumentList.displayName = 'DocumentList';
 
 const MainDocumentItem = memo(({
-    setPhoto,
     img,
     title,
     content,
@@ -323,7 +322,6 @@ const MainDocumentItem = memo(({
                                 >
 
                                     <motion.div
-                                        onClick={() => setPhoto()}
                                         initial={{ y: 20 }}
                                         animate={controls}
                                         className="document__big-img ">
