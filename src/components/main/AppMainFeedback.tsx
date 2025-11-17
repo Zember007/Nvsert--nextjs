@@ -43,7 +43,6 @@ const AppMainFeedback = () => {
                         draggable: true,
                         speed: 0.5,
                         offsetLeft: 0,
-                        repeat: -1,
                         center: true,
                         mobile: widthWindow && widthWindow < 1280,
                         snap: false,
@@ -59,12 +58,10 @@ const AppMainFeedback = () => {
                         draggable: true,
                         speed: 0.5,
                         offsetLeft: 0,
-                        repeat: -1,
                         center: true,
+                        mobile: widthWindow && widthWindow < 1280,
                         snap: false,
                         gap: 20,
-                        mobile: widthWindow && widthWindow < 1280,
-                        reversed: true,
                         opacity: false,
                         onChange: (index: number) => {
                             setActive1(index)
