@@ -46,7 +46,6 @@ export default function SmoothScroll({children}: SmoothScrollProps) {
 
     const pathname = usePathname();
     const [showScrollbar, setShowScrollbar] = useState(true);
-    const [isOpen, setIsOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
 
     // Состояния для drag-to-scroll

@@ -26,38 +26,24 @@ export const useRichTextRenderer = () => {
                 .filter((block: string) => block.trim())
                 .map((block: string) => block.trim());
 
-            console.log(gridBlocks, 'gridBlocks');
 
             return [
                 ...(beforeGrid ? processContent(beforeGrid).map((content, index) => (
                     <div key={`before-grid-${index}`} className="mb-[30px]">{content}</div>
                 )) : []),
-                <div key="grid-container" className="grid gap-[20px] mb-[30px] 1k:grid-cols-[370px_1fr_1fr] xxs:grid-cols-2 grid-cols-1" >
+                <div key="grid-container" className="grid gap-[20px] mb-[30px] xxs:grid-cols-3 grid-cols-1" >
                     {gridBlocks.map((block: string, index: number) => {
                         // Проверяем, является ли блок изображением
                         const imageMatch = block?.replace(/^#\s*/, '').match(/^!\[(.*?)\]\((.*?)\)/);
-
 
                         // Обычная текстовая карточка
                         const lines = block.split('\n').filter(line => line.trim());
                         const title = lines[0]?.replace(/^#\s*/, '').trim() || '';
                         const content = lines.slice(1).join('\n').trim();
 
-                        // Определяем стили для разных карточек по индексу
-                        let cardStyle: React.CSSProperties = {};
-                        let cardClass = "p-[30px] border border-[#93969D] rounded-[6px] flex flex-col";
+                        let cardClass = "p-[20px] border border-[#93969D] rounded-[6px] flex flex-col relative  justify-between items-end min-h-[300px]";
 
-                        if (index === 0) {
-                            cardClass += " 1k:col-span-1 xxs:col-span-2  1k:row-span-2 1k:min-h-[620px] 1k:min-h-[300px] 1k:min-h-[200px]  justify-between  ";
-                        } else if (index >= 1 && index <= 4) {
-                            cardClass += " justify-between items-end min-h-[300px]";
-                        } else if (index === 5) {
-                            cardClass += " 1k:col-span-1 xxs:col-span-2 justify-between items-end min-h-[300px]";
-                        } else if (index === 6) {
 
-                            cardClass += " justify-between items-end xxs:col-span-2   min-h-[300px] ";
-
-                        }
 
                         if (imageMatch) {
                             // Это изображение - рендерим как grid блок с изображением
@@ -88,13 +74,16 @@ export const useRichTextRenderer = () => {
                                 key={index}
                                 className={cardClass}
                             >
-                                <div className="flex flex-col gap-[20px] w-full">
+                                <div className="flex flex-col gap-[15px] w-full">
                                     <h6 className="!font-normal">
                                         {title}
                                     </h6>
                                     <div>
                                         {processContent(content)}
                                     </div>
+                                    <Image
+                                    className='absolute bottom-[20px] right-[20px] w-auto h-[120px]'
+                                    src={`/about/${index + 1}.svg`} alt="arrow-right"  width={120} height={120} />
                                 </div>
                             </div>
                         );
