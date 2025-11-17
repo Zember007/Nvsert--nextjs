@@ -244,8 +244,8 @@ const MainDocumentItem = memo(({
                             <svg
                                 className={`${!active ? 'group-hover/window:*:stroke-black' : '*:stroke-[#FFF] rotate-[180deg]'}  hidden xl:block transition-all duration-200`}
                                 width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1.0459 1.0459L3.16722 3.16722M15.753 15.753L5.28854 5.28854" stroke="#93969D" stroke-width="2" />
-                                <path d="M15.7529 7.75293V14.4707L14.4717 15.7529H7.75293" stroke="#93969D" stroke-width="2" />
+                                <path d="M1.0459 1.0459L3.16722 3.16722M15.753 15.753L5.28854 5.28854" stroke="#93969D" strokeWidth="2" />
+                                <path d="M15.7529 7.75293V14.4707L14.4717 15.7529H7.75293" stroke="#93969D" strokeWidth="2" />
                             </svg>
 
 

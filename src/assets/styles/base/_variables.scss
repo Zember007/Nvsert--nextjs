@@ -1,7 +1,7 @@
+@use "sass:math";
+
 @function rem($px) {
-  $remValue: (
-    $px / 16) + rem;
-  @return $remValue;
+  @return math.div($px, 16) + rem;
 }
 
 $white-color: #ffffff;
