@@ -1,6 +1,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import useWindowSize from '@/hook/useWindowSize';
 
 // Mapping of region names to coat of arms files
 const coatOfArmsMapping: { [key: string]: string } = {
@@ -96,6 +97,8 @@ const coatOfArmsMapping: { [key: string]: string } = {
 };
 
 const Map = () => {
+    const {width, height} = useWindowSize();
+    const isMobile = (width && width < 768);
     const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const tooltipRef = useRef<HTMLDivElement | null>(null);
@@ -103,6 +106,7 @@ const Map = () => {
     const [anchorRect, setAnchorRect] = useState<{ left: number; right: number; top: number; bottom: number } | null>(null);
 
     const handleMouseEnter = (event: React.MouseEvent) => {
+        if (isMobile) return;
         setHoveredRegion(event.currentTarget.id);
         const rect = event.currentTarget.getBoundingClientRect();
         setAnchorRect({ left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom });
@@ -114,6 +118,7 @@ const Map = () => {
     };
 
     const handleTouchStart = (event: React.TouchEvent) => {
+        if (!isMobile) return;
         setHoveredRegion(event.currentTarget.id);
         const rect = event.currentTarget.getBoundingClientRect();
         setAnchorRect({ left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom });
@@ -161,6 +166,7 @@ const Map = () => {
     }, [hoveredRegion, anchorRect]);
 
     const handleMouseLeave = () => {
+        if (isMobile) return;
         setHoveredRegion(null);
     };
 
@@ -178,12 +184,6 @@ const Map = () => {
             }
         };
 
-        const handleClick = () => {
-            if (hoveredRegion) {
-                setHoveredRegion(null);
-            }
-        };
-
         const handleTouchStart = () => {
             if (hoveredRegion) {
                 setHoveredRegion(null);
@@ -193,14 +193,12 @@ const Map = () => {
         // Добавляем обработчики событий
         window.addEventListener('scroll', handleScroll, true);
         window.addEventListener('resize', handleResize);
-        window.addEventListener('click', handleClick);
         window.addEventListener('touchstart', handleTouchStart);
 
         // Очистка при размонтировании
         return () => {
             window.removeEventListener('scroll', handleScroll, true);
             window.removeEventListener('resize', handleResize);
-            window.removeEventListener('click', handleClick);
             window.removeEventListener('touchstart', handleTouchStart);
         };
     }, [hoveredRegion]);
