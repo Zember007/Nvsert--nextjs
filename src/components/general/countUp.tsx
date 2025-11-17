@@ -102,18 +102,17 @@ export default function CountUp({
                 const hasDecimals = maxDecimals > 0;
 
                 const options: Intl.NumberFormatOptions = {
-                    useGrouping: !!separator,
+                    useGrouping: true,
                     minimumFractionDigits: hasDecimals ? maxDecimals : 0,
                     maximumFractionDigits: hasDecimals ? maxDecimals : 0,
                 };
 
-                const formattedNumber = Intl.NumberFormat("en-US", options).format(
+                const formattedNumber = Intl.NumberFormat("ru-RU", options).format(
                     latest
                 );
 
-                ref.current.textContent = separator
-                    ? formattedNumber.replace(/,/g, separator) + '%'
-                    : formattedNumber;
+                const finalSeparator = separator || " ";
+                ref.current.textContent = formattedNumber.replace(/\s/g, finalSeparator);
             }
         });
 
