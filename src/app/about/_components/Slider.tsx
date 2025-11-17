@@ -9,21 +9,83 @@ const Slider = () => {
     const { width: widthWindow } = useWindowSize();
 
 
+
+
+    const sliderRef = useRef(null);
+    const [activeIndex, setActiveIndex] = useState<number>(0);
+
+    const gap = widthWindow && widthWindow < 640 ? (widthWindow - (300)) / 2 : 20
+
+    // Функция для парсинга числа и суффикса из строки
+    const parseProcent = (procent: string): { value: number; suffix: string } => {
+        const match = procent.match(/(\d+(?:\.\d+)?)([+%]?)/);
+        if (match) {
+            return {
+                value: parseFloat(match[1]),
+                suffix: match[2] || ''
+            };
+        }
+        return { value: 0, suffix: '' };
+    };
+
     // Инициализация слайдера
     useEffect(() => {
         const slides = gsap.utils.toArray('[data-slider="slider-cards"]');
-
         if (slides.length > 0) {
+
+
+            function updateOpacity() {
+
+                const rectContainer = (sliderRef.current as unknown as HTMLElement)?.getBoundingClientRect();
+
+                if (!rectContainer) return;
+                slides.forEach(item => {
+                    if (!(item instanceof HTMLElement)) return;
+                    const rect = item.getBoundingClientRect();
+
+
+                    // Насколько блок находится ВНЕ слева и справа
+                    const outLeft = Math.max(0, rectContainer.left - rect.left);
+                    const outRight = Math.max(0, rect.right - rectContainer.right);
+
+                    // Сколько всего блока вне контейнера по горизонтали
+                    const totalOutside = outLeft + outRight;
+
+                    console.log(totalOutside >= rect.width / 2, item, 'totalOutside');
+                    // Если больше половины элемента находится за пределами контейнера
+                    if (totalOutside >= rect.width / 2) {
+                        item.style.opacity = '0';
+                    } else {
+                        item.style.opacity = '1';
+                    }
+                });
+            }
+            let timeoutIdBg: NodeJS.Timeout | null = null;
+
             const loop: any = horizontalLoop(slides, {
                 paused: true,
                 draggable: true,
                 mobile: widthWindow && widthWindow < 1280,
                 snap: true,
-                offsetLeft:  widthWindow && widthWindow < 1280 ? 0 : 80,
                 gap: widthWindow && widthWindow < 640 ? (widthWindow - (300)) / 2 : 20,
-                center: widthWindow && widthWindow < 640 ? true : false,
+                center: widthWindow && (widthWindow < 640 || widthWindow >= 1280) ? true : false,
                 onChange: (index: number) => {
                     setActiveIndex(index);
+                },
+
+                onDragFunction: () => {
+                    slides.forEach(item => {
+                        if (!(item instanceof HTMLElement)) return;
+                        item.style.opacity = '1';
+                    });
+
+                    if (timeoutIdBg) {
+                        clearTimeout(timeoutIdBg);
+                    }
+
+                    timeoutIdBg = setTimeout(() => {
+                        updateOpacity();
+                    }, 100);
                 }
             });
 
@@ -49,23 +111,6 @@ const Slider = () => {
             };
         }
     }, [widthWindow]);
-
-    const sliderRef = useRef(null);
-    const [activeIndex, setActiveIndex] = useState<number>(0);
-
-    const gap = widthWindow && widthWindow < 640 ? (widthWindow - (300)) / 2 : 20
-
-    // Функция для парсинга числа и суффикса из строки
-    const parseProcent = (procent: string): { value: number; suffix: string } => {
-        const match = procent.match(/(\d+(?:\.\d+)?)([+%]?)/);
-        if (match) {
-            return {
-                value: parseFloat(match[1]),
-                suffix: match[2] || ''
-            };
-        }
-        return { value: 0, suffix: '' };
-    };
 
     const sliderBlocks: any[] = [
         {
@@ -114,7 +159,9 @@ const Slider = () => {
                 <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
                 <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
             </div>
-            <div className="slider-wrapper flex  "
+            <div
+                data-slider="slider-wrap"
+                className="slider-wrapper flex  "
                 style={{ gap: `${gap}px` }}
             >
 
@@ -126,7 +173,7 @@ const Slider = () => {
                         <div
                             key={index}
                             data-slider="slider-cards"
-                            className="p-[20px] l:w-[300px] l:min-w-[300px] xxs:w-[280px] xxs:min-w-[280px] xss:w-[300px] xss:min-w-[300px] w-[280px] min-w-[280px] l:min-h-[200px] min-h-[270px] relative border border-[#93969D] bg-[#93969d26] rounded-[4px] flex flex-col justify-between"
+                            className="p-[20px] l:w-[300px] l:min-w-[300px] xxs:w-[280px] xxs:min-w-[280px] xss:w-[300px] xss:min-w-[300px] w-[280px] min-w-[280px] l:min-h-[200px] min-h-[270px] relative border border-[#93969D] bg-[#93969d26] rounded-[4px] flex flex-col justify-between transition-opacity duration-300"
                         >
                             <svg
                                 className="absolute top-[10px] right-[10px]"
@@ -140,8 +187,8 @@ const Slider = () => {
                                         const { value, suffix } = parseProcent(block.procent);
                                         return (
                                             <>
-                                                <CountUp 
-                                                    to={value} 
+                                                <CountUp
+                                                    to={value}
                                                     duration={2}
                                                     delay={0.2}
                                                     className="inline-block"
