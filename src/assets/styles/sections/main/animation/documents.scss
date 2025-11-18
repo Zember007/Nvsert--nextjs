@@ -140,7 +140,7 @@
     @apply  translate-y-[-1px] transition-all duration-200 ;
 
     &-wrap {
-      @apply w-[485px] hidden will-change-transform *:will-change-transform  m:flex justify-between xl:grid xl:grid-cols-[0.76fr_1fr_auto] items-center justify-between justify-items-start  xl:pr-0 l:pr-[18px] pr-[20px];
+      @apply xl:w-[485px] m:w-[310px] w-full hidden will-change-transform *:will-change-transform  m:flex justify-between xl:grid xl:grid-cols-[0.76fr_1fr_auto] items-center justify-between justify-items-start  xl:pr-0 l:pr-[18px] pr-[20px];
     }
   }
 
@@ -173,7 +173,7 @@
     @apply flex gap-[10px] flex-col grow ;
 
     &-wrap {
-      @apply  w-[485px] items-start flex gap-[20px] flex-col justify-between   text-[#000];
+      @apply  xl:w-[485px] m:w-[310px] w-full items-start flex gap-[20px] flex-col justify-between   text-[#000];
     }
 
     &-item {

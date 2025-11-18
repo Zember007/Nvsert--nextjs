@@ -31,7 +31,7 @@
 }
 
 .document-photo-wrapper {
-  @apply grow flex justify-center ;
+  @apply grow flex justify-center xl:w-auto m:w-[310px] w-full;
 }
 
 .document-content-column {
