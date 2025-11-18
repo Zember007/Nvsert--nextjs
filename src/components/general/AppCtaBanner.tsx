@@ -28,7 +28,7 @@ const AppCtaBanner: React.FC<CtaBannerProps> = ({
                     {description}
                 </p>
                 <Button
-                    wrapperClassName='xs:!w-[250px] !w-full'
+                    wrapperClassName='xs:!w-[250px] xss:!w-[280px] !w-full'
                     onClick={onButtonClick}
                     label={buttonLabel}
                 />

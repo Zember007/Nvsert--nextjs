@@ -19,7 +19,7 @@ button {
 }
 
 .border-button {
-  @apply min-h-[50px] w-full items-center flex justify-between items-center w-full rounded-[4px] border-solid active:bg-[#34446d33] active:border-[#34446D] active:border;
+  @apply min-h-[50px] w-full items-center flex justify-between items-center w-full rounded-[4px] border-solid hover:bg-[#34446d33] hover:border-[#34446D] hover:border;
 
   padding: 10px 11px;
   text-align: left;
@@ -29,7 +29,9 @@ button {
   z-index: 0;
 
   &.active {
-    @apply bg-[#34446d33] border-[#34446D] border;
+    box-shadow: inset 2px 2px 4px 0 rgba(0, 0, 0, 0.8), inset -2px -2px 4px 0 rgba(0, 0, 0, 0.8);
+    background: #5b6788;
+    color: #fff;
   }
 
   &.have-img {
@@ -67,14 +69,6 @@ button {
 
   &.first-child::before {
     border-top: 1px solid;
-  }
-
-  &.first-child.m-responsive {
-    @media (max-width: $media-m) and (min-width: calc($media-xxs + 1px)) {
-      &::before {
-        border-top: 0;
-      }
-    }
   }
 
 }
