@@ -54,7 +54,7 @@ const FeedbackCard: React.FC<{ item: FeedbackItem }> = ({ item }) => {
             width={250}
             height={37}
         >
-            <div className="cursor-pointer active:scale-[0.95] transition-all duration-100 flex gap-[16px] xxs:flex-row flex-col p-[20px] border border-[#93969d] bg-[#f5f5f2] rounded-[10px] w-full">
+            <div className="cursor-pointer active:scale-[0.95] transition-all duration-100 flex gap-[16px] xxs:flex-row flex-col p-[20px] border border-[#93969d] bg-[#f5f5f2] hover:bg-[#34446d33] rounded-[10px] w-full">
                 {!!img && (
                     <div className="shrink-0 w-[190px] h-[267px] rounded-[6px] overflow-hidden bg-[#fff] border border-[#E2E4EA] xxs:mx-0 mx-auto">
                         {/* Using img to avoid Image domain config issues */}
@@ -160,7 +160,7 @@ const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ 
 
                         <span className="sendIconLeft">
                             <svg
-                                className={`${openGroups.length > 0 ? 'rotate-180' : ''} transition-all`}
+                                className={`${openGroups.length > 0 ? '' : 'rotate-180'} transition-all`}
                                 width="23"
                                 height="24"
                                 viewBox="0 0 23 24"
