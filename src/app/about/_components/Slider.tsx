@@ -189,8 +189,7 @@ const Slider = () => {
                                             <>
                                                 <CountUp
                                                     to={value}
-                                                    duration={2}
-                                                    delay={0.2}
+                                                    duration={0.5}
                                                     className="inline-block"
                                                 />
                                                 {suffix && <span>{suffix}</span>}
