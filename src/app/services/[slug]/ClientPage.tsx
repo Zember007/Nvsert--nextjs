@@ -18,7 +18,7 @@ import { StrapiResponsiveImage } from '@/components/general/StrapiResponseImage'
 // Component to render rich text with proper formatting
 const RichTextRenderer: React.FC<{ content: string }> = ({ content }) => {
     const { processContent } = useRichTextRenderer();
-    return <div>{processContent(content)}</div>;
+    return <div>{processContent(content.replace(/📞/g, '\n').replace('-', '\n'))}</div>;
 };
 
 // Component to render individual content blocks as collapsible sections
@@ -244,6 +244,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                                     renderItem={(children) => (
                                                         <AppNavigationItem
                                                             dark={true}
+                                                            classNameText='m:!whitespace-pre-line !whitespace-normal'
                                                             link={children.slug}
                                                             key={children.id}
                                                             title={children.title}
@@ -304,6 +305,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                             listClassName='flex flex-col gap-[20px]'
                                             renderItem={(children) => (
                                                 <AppNavigationItem
+                                                    classNameText='m:!whitespace-pre-line !whitespace-normal'
                                                     className='w-full'
                                                     dark={true}
                                                     link={children.slug}

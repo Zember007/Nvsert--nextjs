@@ -62,7 +62,7 @@ const AppNavigation = ({ active, services }: { active: boolean, services: Servic
     );
 };
 
-const AppNavigationItem = ({ img, title, controls, link, dark, className, onClick }: { link: string; img: string , title: string, controls?: AnimationControls, dark?: boolean, className?: string, onClick?: (e: React.MouseEvent<HTMLElement>) => void }) => {
+const AppNavigationItem = ({ img, title, controls, link, dark, className, onClick, classNameText }: { link: string; img: string , title: string, controls?: AnimationControls, dark?: boolean, className?: string, onClick?: (e: React.MouseEvent<HTMLElement>) => void, classNameText?: string }) => {
     const { setButtonRef, setWrapperRef } = useButton()
 
     return (
@@ -81,7 +81,7 @@ const AppNavigationItem = ({ img, title, controls, link, dark, className, onClic
                             sizes="43px"
                         />
                     </motion.div>
-                    <p className={`${dark ? 'text-[#000] text-1' : 'text-[#FFF] xxxxl:text-[18px] xxl:text-[16px] text-[14px] no-font-weight'}  !leading-[1.1] pr-[6px] whitespace-pre-line max-w-full`}>{filterPrepositions(title)}</p>
+                    <p className={`${classNameText ? classNameText : ''} ${dark ? 'text-[#000] text-1' : 'text-[#FFF] xxxxl:text-[18px] xxl:text-[16px] text-[14px] no-font-weight'}  !leading-[1.1] pr-[6px] whitespace-pre-line max-w-full`}>{filterPrepositions(title)}</p>
                 </Link>
             </div>
         </>

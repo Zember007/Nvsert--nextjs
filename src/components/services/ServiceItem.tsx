@@ -110,6 +110,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                                 onClick={(e) => { e.stopPropagation() }}
                                 dark={true}
                                 className='xxs:!w-[250px] w-full'
+                                classNameText='m:!whitespace-pre-line !whitespace-normal'
                                 key={itemIndex}
                                 title={item.title}
                                 img={'https://test11.audiosector.ru/cp' + item.img?.formats?.thumbnail?.url}
@@ -136,8 +137,8 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                                 initial={{ y: 20 }}
                                 animate={controls}
                             >
-                                <ServiceCard 
-                                    serviceName={service.name} 
+                                <ServiceCard
+                                    serviceName={service.name}
                                     certificate={certificate}
                                 />
                             </motion.div>
