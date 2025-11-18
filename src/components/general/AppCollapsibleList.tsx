@@ -60,8 +60,8 @@ function AppCollapsibleList<ItemType = unknown>({
       let timer: NodeJS.Timeout | null = null;
   
       if (isOpen) {
-        // включаем с задержкой 100мс
-        timer = setTimeout(() => setDelayedVisible(true), 50);
+        setDelayedVisible(true)
+        timer = setTimeout(() => setDelayedVisible(false), 100);
       } else {
         // если закрывается — сразу скрываем
         setDelayedVisible(false);
@@ -107,7 +107,7 @@ function AppCollapsibleList<ItemType = unknown>({
                 </span>
             </button>
 
-            <div className={`${!isOpen ? "overflow-y-hidden" : delayedVisible ? "overflow-y-visible pb-[60px]" : "overflow-y-hidden"}`}>
+            <div className={`${!isOpen ? "overflow-y-hidden max-h-0" : delayedVisible ? "overflow-y-visible pb-[60px]" : "overflow-y-hidden "} transition-all duration-100`}>
 
                 <div
                     className={`  ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'} pt-[20px]  transition-all duration-100`}>
