@@ -112,8 +112,6 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
         );
     };
 
-    // Track which content block is currently in view and reflect it in the right navigation
-
 
     const ctaInsertAfterIndex = useMemo(() => {
         return Math.ceil((currentService.content?.length || 0) / 2) - 1;
@@ -121,14 +119,27 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
 
     useEffect(() => {
         if (currentServiceIndex === null) return;
+        let timer: NodeJS.Timeout | null = null;
         const idQuery = window.location.hash.split('#')[1];
         if (idQuery) {
-            const element = document.getElementById(idQuery);
-            if (!element) return;
-            window.scrollTo({
-                top: (element?.offsetTop || 100) - 50,
-                behavior: 'smooth'
-            });
+            timer = setTimeout(() => {
+                const element = document.getElementById(idQuery);
+                if (!element) return;
+                window.scrollTo({
+                    top: (element?.offsetTop) - 50,
+                    behavior: 'smooth'
+                });
+            }, 1000);
+        } else {
+            if (timer) {
+                clearTimeout(timer);
+            }
+        }
+
+        return () => {
+            if (timer) {
+                clearTimeout(timer);
+            }
         }
     }, [currentServiceIndex]);
 
