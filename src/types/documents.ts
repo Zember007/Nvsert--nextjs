@@ -1,5 +1,4 @@
 import { DotNavItemProps } from '@/components/general/DotNavList';
-import { StaticImageData } from 'next/image';
 
 
 

@@ -3,8 +3,8 @@ import React from 'react';
 import AppBreadcrumbs from '@/components/general/AppBreadcrumbs';
 import Button from '@/components/ui/Button';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
-import SidebarNavButtons, { type SidebarItem } from '@/components/general/SidebarNavButtons';
-import DotNavList, { type DotNavItem } from '@/components/general/DotNavList';
+import SidebarNavButtons from '@/components/general/SidebarNavButtons';
+import DotNavList, { DotNavItemProps } from '@/components/general/DotNavList';
 
 type BreadcrumbItem = {
     id: number;
@@ -19,7 +19,7 @@ type StandardPageLayoutProps = {
     breadcrumbs: BreadcrumbItem[];
 
     /** Элементы для правой навигации (точки) */
-    dotNavItems?: DotNavItem[];
+    dotNavItems?: DotNavItemProps[];
     /** Контент страницы */
     children: React.ReactNode;
     /** Показывать ли кнопку "Оформить заявку" */
