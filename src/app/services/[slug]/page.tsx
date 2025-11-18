@@ -4,7 +4,7 @@ import { NavigationItem } from '@/store/navigation';
 
 async function getNavigationData(slug: string): Promise<NavigationItem | null> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/services/slug/${slug}`, {
-    next: { revalidate: 3600 }, // Кешируем на 1 час для лучшей производительности
+    next: { revalidate: 60 }, // Кешируем на 1 час для лучшей производительности
   });
 
   if (!res.ok) return null;
