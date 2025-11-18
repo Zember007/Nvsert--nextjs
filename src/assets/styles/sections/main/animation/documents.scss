@@ -137,15 +137,15 @@
   }
 
   &__desc {
-    @apply  translate-y-[-1px] transition-all duration-200;
+    @apply  translate-y-[-1px] transition-all duration-200 ;
 
     &-wrap {
-      @apply hidden will-change-transform *:will-change-transform l:w-[41%] m:w-[330px] m:flex justify-between xl:grid xl:grid-cols-[0.76fr_1fr_auto] items-center justify-between justify-items-start  xl:pr-0 l:pr-[18px] pr-[20px];
+      @apply w-[485px] hidden will-change-transform *:will-change-transform  m:flex justify-between xl:grid xl:grid-cols-[0.76fr_1fr_auto] items-center justify-between justify-items-start  xl:pr-0 l:pr-[18px] pr-[20px];
     }
   }
 
   &__title {
-    @apply m:translate-y-[-1px] transition-all duration-200  will-change-transform l:w-[59%] pl-[63px];
+    @apply m:translate-y-[-1px] transition-all duration-200  will-change-transform  pl-[63px] flex-1;
   }
 
   &__small-img {
@@ -167,13 +167,13 @@
   &__list {
 
     &-photo {
-      @apply l:w-[58%] xl:gap-[30px] gap-[20px] max-w-full items-center flex flex-col-reverse m:flex-row m:items-stretch;
+      @apply xl:gap-[30px] gap-[20px] flex-1 items-center flex flex-col-reverse m:flex-row m:items-stretch;
     }
 
-    @apply flex gap-[10px] flex-col grow m:max-w-[500px];
+    @apply flex gap-[10px] flex-col grow ;
 
     &-wrap {
-      @apply l:w-[41%] m:w-[310px] m:min-w-[310px] w-full items-start flex gap-[20px] flex-col   text-[#000];
+      @apply  w-[485px] items-start flex gap-[20px] flex-col justify-between   text-[#000];
     }
 
     &-item {
@@ -209,7 +209,7 @@
   }
 
   &__item {
-    @apply flex flex-col items-center m:items-stretch m:flex-row m:gap-[30px] gap-[20px]  p-[20px] ;
+    @apply flex flex-col items-center m:items-stretch m:flex-row m:gap-[30px] gap-[20px]  p-[23px] ;
     /* m:p-[30px] */
   }
 }

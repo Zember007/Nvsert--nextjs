@@ -1,3 +1,4 @@
+import { DotNavItemProps } from '@/components/general/DotNavList';
 import { StaticImageData } from 'next/image';
 
 
@@ -8,6 +9,7 @@ export interface documentsList {
 }
 
 export interface MainDocumentItemProps {
+    navigationList: DotNavItemProps[];
     img?: any;
     title: string;
     link: string;

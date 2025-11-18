@@ -10,6 +10,7 @@ import useWindowSize from '@/hook/useWindowSize';
 import '@/assets/styles/sections/main/document-item.scss';
 import { useRouter } from 'next/navigation';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
+import DotNavList, { DotNavItem } from '@/components/general/DotNavList';
 
 // Выносим анимационные настройки
 const ANIMATION_SETTINGS = {
@@ -113,6 +114,7 @@ const MainDocumentItem = memo(({
     title,
     content,
     documentsList,
+    navigationList,
     price,
     link,
     duration,
@@ -327,8 +329,8 @@ const MainDocumentItem = memo(({
                                         className="document__big-img ">
                                         <Image
                                             alt='document' src={'https://test11.audiosector.ru/cp' + img?.url}
-                                            width={192}
-                                            height={268}
+                                            width={250}
+                                            height={349}
                                             loading={index === 1 ? 'eager' : 'lazy'}
                                             priority={index === 1}
                                             fetchPriority={index === 1 ? 'high' : 'auto'}
@@ -344,7 +346,12 @@ const MainDocumentItem = memo(({
                                         <div className='document-description'>
                                             {processContent(content, true)}
                                         </div>
-
+                                        <DocumentList
+                                            hiddenList={hiddenList}
+                                            documentsList={documentsList}
+                                            listHidden={listHidden}
+                                            setListHidden={setListHidden}
+                                        />
                                     </div>
 
 
@@ -372,12 +379,14 @@ const MainDocumentItem = memo(({
                         </div>
 
                         <div className="document__list-wrap">
-                            <DocumentList
-                                hiddenList={hiddenList}
-                                documentsList={documentsList}
-                                listHidden={listHidden}
-                                setListHidden={setListHidden}
-                            />
+                            <div className="flex flex-col gap-[20px]">
+                                {navigationList.map((item, index) => (
+                                    <DotNavItem key={index} item={item} index={index} onClick={(item, event) => { event.preventDefault(); router.push('/services/' + link + '#block-' + item.id) }} 
+                                    disabledPadding={true}
+                                    />
+                                ))}
+                            </div>
+
                             {windowWidth && windowWidth >= 960 &&
                                 <motion.div
                                     animate={controls}

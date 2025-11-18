@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import AppCollapsibleList from './AppCollapsibleList';
 import { filterPrepositions } from '@/hook/filter';
 
-export type DotNavItem = {
+export type DotNavItemProps = {
     id: number | string;
     title: string;
     active?: boolean;
@@ -11,7 +11,7 @@ export type DotNavItem = {
 };
 
 const DotNavList: React.FC<{
-    items?: DotNavItem[];
+    items?: DotNavItemProps[];
     position?: 'right' | 'left' | null;
 }> = ({ items, position }) => {
 
@@ -78,14 +78,14 @@ const DotNavList: React.FC<{
         })) || [];
     }, [items, activeBlockId]);
 
-    const scrollToElement = (item: DotNavItem, event: React.MouseEvent<HTMLAnchorElement>) => {
+    const scrollToElement = (item: DotNavItemProps, event: React.MouseEvent<HTMLAnchorElement>) => {
         event.preventDefault();
 
         const target = event.target as HTMLAnchorElement;
         const href = target.href;
         const id = href.split('#')[1];
         const element = document.getElementById(id);
-        if(!element) return;
+        if (!element) return;
         setActiveBlockId(item.id);
         window.scrollTo({
             top: (element?.offsetTop || 100) - 50,
@@ -100,26 +100,32 @@ const DotNavList: React.FC<{
             defaultOpen={true}
             listClassName='flex flex-col gap-[20px]'
             renderItem={(item, index) => (
-                <a
-                    href={'#block-' + item.id}
-                    key={index}
-                    onClick={(event) => scrollToElement(item, event)}
-                    className={`flex items-center gap-[24px]  cursor-pointer text-left group`}
-                >
-                    <div className={`pointer-events-none flex items-center justify-center min-w-[16px] w-[16px] h-[16px] relative transition-all duration-100 group-active:left-[15px] ${item.active ? 'left-0' : 'left-[15px]'}`}>
-                        <div className={` border transition-all duration-100 group-active:w-[8px] group-active:h-[8px] group-active:border-[#34446D] ${!item.active ? 'border-transparent w-[8px] h-[8px]' : 'border-[#34446D] w-[16px] h-[16px]'} rounded-full relative`}>
-                            <div className={`w-[8px] h-[8px] transition-all duration-100 group-hover:bg-[#34446D] ${item.active ? 'bg-[#34446D] border-transparent' : 'bg-transparent border-[#93969d80]'} border  rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}></div>
-                        </div>
-                    </div>
-                    <span className={`pointer-events-none text-[16px] group-active:scale-[0.95] transition-transform duration-100 font-light  ${item.active ? 'text-[#34446D] ' : 'text-black '}`}>
-                        {filterPrepositions(item.title)}
-                    </span>
-                </a>
+              <DotNavItem item={item} index={index} onClick={scrollToElement} />
             )}
         />
     );
 };
 
 export default DotNavList;
+
+export const DotNavItem = ({ item, index, onClick, disabledPadding }: { item: DotNavItemProps, index: number, onClick: (item: DotNavItemProps, event: React.MouseEvent<HTMLAnchorElement>) => void, disabledPadding?: boolean }) => {
+    return (
+        <a
+            href={'#block-' + item.id}
+            key={index}
+            onClick={(event) => onClick(item, event)}
+            className={`flex items-center gap-[24px]  cursor-pointer text-left group`}
+        >
+            <div className={`pointer-events-none flex items-center justify-center min-w-[16px] w-[16px] h-[16px] relative transition-all duration-100 group-active:left-[15px] ${item.active || disabledPadding ? 'left-0' : 'left-[15px]'}`}>
+                <div className={` border transition-all duration-100 group-active:w-[8px] group-active:h-[8px] group-active:border-[#34446D] ${!item.active ? 'border-transparent w-[8px] h-[8px]' : 'border-[#34446D] w-[16px] h-[16px]'} rounded-full relative`}>
+                    <div className={`w-[8px] h-[8px] transition-all duration-100 group-hover:bg-[#34446D] ${item.active ? 'bg-[#34446D] border-transparent' : 'bg-transparent border-[#93969d80]'} border  rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}></div>
+                </div>
+            </div>
+            <span className={`pointer-events-none text-[16px] group-active:scale-[0.95] transition-transform duration-100 font-light  ${item.active ? 'text-[#34446D] ' : 'text-black '}`}>
+                {filterPrepositions(item.title)}
+            </span>
+        </a>
+    );
+};
 
 

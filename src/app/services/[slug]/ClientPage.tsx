@@ -54,16 +54,16 @@ const ContentBlockRenderer: React.FC<{
 
                 {isExpanded && (
                     <div className="pt-[30px]">
-                        <RichTextRenderer content={richText.replace('📞 ','')} />
+                        <RichTextRenderer content={richText.replace('📞 ', '')} />
                     </div>
                 )}
 
                 {
                     image?.url ? (
                         <div className="max-w-full mx-auto mx-auto mt-[50px] flex justify-center">
-                            <StrapiResponsiveImage 
-                                image={image} 
-                                baseUrl={'https://test11.audiosector.ru/cp'} 
+                            <StrapiResponsiveImage
+                                image={image}
+                                baseUrl={'https://test11.audiosector.ru/cp'}
                                 priority={isFirst && isExpanded}
                             />
                         </div>
@@ -121,9 +121,15 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
 
     useEffect(() => {
         if (currentServiceIndex === null) return;
-        requestAnimationFrame(() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        const idQuery = window.location.hash.split('#')[1];
+        if (idQuery) {
+            const element = document.getElementById(idQuery);
+            if (!element) return;
+            window.scrollTo({
+                top: (element?.offsetTop || 100) - 50,
+                behavior: 'smooth'
+            });
+        }
     }, [currentServiceIndex]);
 
     const recomendedServices = useMemo(() => {
