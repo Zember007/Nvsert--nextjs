@@ -4,9 +4,8 @@ import { NavigationItem } from '@/store/navigation';
 
 async function getNavigationData(slug: string): Promise<NavigationItem | null> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/services/slug/${slug}`, {
-    next: { revalidate: 60 }, // Кешируем на 1 час для лучшей производительности
+    next: { revalidate: 3600 }, // Кешируем на 1 час для лучшей производительности
   });
-
   if (!res.ok) return null;
   return res.json();
 }
@@ -26,6 +25,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   const { slug } = await params;
   const navigation = await getNavigationData(slug);
   if (!navigation) return <div>Service not found</div>;
+  console.log(navigation);
 
   return <ClientPage initialNavigation={navigation} initialSlug={slug} />;
 }
