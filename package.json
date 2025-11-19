@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.1",
+    "@svgr/webpack": "^8.1.0",
     "axios": "^1.7.9",
     "framer-motion": "^12.7.4",
     "gsap": "^3.12.7",

@@ -1,9 +1,13 @@
 import Image from 'next/image';
-import React, { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
-import { horizontalLoop } from '@/scripts/slider';
-import useWindowSize from '@/hook/useWindowSize';
+import React from 'react';
 import { filterPrepositions } from './filter';
+import IconAbout1 from '@/assets/images/about/1.svg';
+import IconAbout2 from '@/assets/images/about/2.svg';
+import IconAbout3 from '@/assets/images/about/3.svg';
+import IconAbout4 from '@/assets/images/about/4.svg';
+import IconAbout5 from '@/assets/images/about/5.svg';
+import IconAbout6 from '@/assets/images/about/6.svg';
+
 
 export const useRichTextRenderer = () => {
 
@@ -26,6 +30,15 @@ export const useRichTextRenderer = () => {
                 .filter((block: string) => block.trim())
                 .map((block: string) => block.trim());
 
+            const svgIcons = [
+                IconAbout1,
+                IconAbout2,
+                IconAbout3,
+                IconAbout4,
+                IconAbout5,
+                IconAbout6
+            ]
+
 
             return [
                 ...(beforeGrid ? processContent(beforeGrid).map((content, index) => (
@@ -42,6 +55,7 @@ export const useRichTextRenderer = () => {
                         const content = lines.slice(1).join('\n').trim();
 
                         let cardClass = "p-[20px] border border-[#93969D] rounded-[6px] flex flex-col relative  justify-between items-end min-h-[300px]";
+
 
 
 
@@ -81,9 +95,7 @@ export const useRichTextRenderer = () => {
                                     <div>
                                         {processContent(content)}
                                     </div>
-                                    <Image
-                                    className='absolute bottom-[20px] right-[20px] w-auto h-[120px]'
-                                    src={`/about/${index + 1}.svg`} alt="arrow-right"  width={120} height={120} />
+                                   {React.createElement(svgIcons[index % svgIcons.length], { className: 'absolute bottom-[20px] right-[20px]' })}
                                 </div>
                             </div>
                         );
@@ -106,20 +118,20 @@ export const useRichTextRenderer = () => {
                 const typeToUse = forceType || listType || 'unordered';
                 const ListTag = typeToUse === 'ordered' ? 'ol' : 'ul';
                 const listClassName = typeToUse === 'ordered' ? 'list-decimal list-inside my-[10px]' : 'list-disc my-[10px]';
-                
+
                 // Для нумерованных списков с одним элементом убираем отступ слева
                 const isSingleOrdered = typeToUse === 'ordered' && currentListItems.length === 1;
-                const liClassName = isSingleOrdered 
+                const liClassName = isSingleOrdered
                     ? `font-light ${small ? 'text-2' : 'text-base-post'}`
                     : `font-light ml-[25px] ${small ? 'text-2' : 'text-base-post'}`;
-                
+
                 elements.push(
                     React.createElement(
                         ListTag,
                         { key: `list-${listKey++}`, className: listClassName + ' space-y-[5px]' },
                         currentListItems.map((item, idx) => (
-                            <li 
-                                key={idx} 
+                            <li
+                                key={idx}
                                 className={liClassName}
                                 {...(typeToUse === 'ordered' && item.number !== undefined ? { value: item.number } : {})}
                             >
@@ -142,7 +154,7 @@ export const useRichTextRenderer = () => {
                 // Проверяем, будет ли следующий элемент списком
                 const nextLine = index + 1 < lines.length ? lines[index + 1].trim() : '';
                 const willBeList = nextLine.match(/^(\d+)\.\s+(.+)$/) || nextLine.startsWith('- ');
-                
+
                 // Не добавляем отступ, если предыдущий или следующий элемент - список
                 if (!lastElementWasList && !willBeList) {
                     elements.push(<div key={`br-${index}`} className={`${small ? 'h-[20px]' : 'h-[15px]'}`} />);
@@ -219,7 +231,7 @@ export const useRichTextRenderer = () => {
         return elements;
     };
 
- 
+
 
     return { processContent };
 };
