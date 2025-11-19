@@ -121,7 +121,7 @@ export const DotNavItem = ({ item, index, onClick, disabledPadding }: { item: Do
                     <div className={`w-[8px] h-[8px] transition-all duration-100 group-hover:bg-[#34446D] ${item.active ? 'bg-[#34446D] border-transparent' : 'bg-transparent border-[#93969d80]'} border  rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}></div>
                 </div>
             </div>
-            <span className={`pointer-events-none text-[16px] group-active:scale-[0.95] transition-transform duration-100 font-light  ${item.active ? 'text-[#34446D] ' : 'text-black '}`}>
+            <span className={`pointer-events-none text-[16px] leading-[1] group-active:scale-[0.95] transition-transform duration-100 font-light  ${item.active ? 'text-[#34446D] ' : 'text-black '}`}>
                 {filterPrepositions(item.title)}
             </span>
         </a>
