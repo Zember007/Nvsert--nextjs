@@ -122,9 +122,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                                 <button
                                     className='px-[6px]'
                                     onClick={handleGoBack}>
-                                    <Image
-                                        className='rotate-[180deg]'
-                                        src={ArrowIcon} alt='back' width={20} height={20} />
+                                    <ArrowIcon className='w-[20px] h-[20px] rotate-[180deg]' />
                                 </button>
 
                                 <h4 className='header-h-4 whitespace-nowrap text-center justify-self-center'>{currentLevel.title}</h4>
@@ -162,7 +160,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                                                             <span className={`${item.img?.url ? 'text-[18px]' : 'text-[20px]'} font-light text-black`}>{filterPrepositions(item.title)}</span>
                                                         </div>
                                                         {item.items && (
-                                                            <Image src={ArrowIcon} alt="more" width={20} height={20} />
+                                                            <ArrowIcon className='w-[20px] h-[20px]' />
                                                         )}
                                                     </Link>
 
@@ -179,9 +177,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                                                             <span className={`${'img' in item && item.img?.url ? 'text-[18px]' : 'text-[20px]'} font-light text-black`}>{item.title}</span>
                                                         </span>
                                                         {item.items && (
-                                                            <Image
-                                                                className='translate-x-[5px]'
-                                                                src={ArrowIcon} alt="more" width={20} height={20} />
+                                                            <ArrowIcon className='w-[20px] h-[20px] translate-x-[5px]' />
                                                         )}
                                                     </button>
                                                 )
