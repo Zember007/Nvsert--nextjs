@@ -219,9 +219,9 @@ export const useRichTextRenderer = () => {
             flushList();
             if (trimmedLine) {
                 elements.push(
-                    <h4 key={`p-${index}`} className={`-my-[5px] ${small ? 'text-2' : 'text-base-post'}`}>
+                    <p key={`p-${index}`} className={`-my-[5px] ${small ? 'text-2' : 'text-base-post'}`}>
                         {filterPrepositions(trimmedLine)}
-                    </h4>
+                    </p>
                 );
                 lastElementWasList = false;
             }
