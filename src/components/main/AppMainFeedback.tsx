@@ -41,6 +41,7 @@ const AppMainFeedback = () => {
                     loop.current = horizontalLoop(slides, {
                         paused: true,
                         draggable: true,
+                        center: true,
                         speed: 0.5,
                         offsetLeft: 0,
                         mobile: widthWindow && widthWindow < 1280,
@@ -54,6 +55,7 @@ const AppMainFeedback = () => {
 
                     loop1.current = horizontalLoop(slides1, {
                         paused: true,
+                        center: true,
                         draggable: true,
                         speed: 0.5,
                         offsetLeft: 0,
