@@ -105,9 +105,9 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
               </>
               :
               <>
-                <p className='header-h-6 !font-normal'>
+                <h3 className='header-h-6 !font-normal'>
                   {title && filterPrepositions(title)}
-                </p>
+                </h3>
                 <div className='skill-content-container'>
                   <ul className={`skill-list ${isVisible ? 'visible' : ''}`} >
                     {list.map((item, index) =>
