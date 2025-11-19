@@ -195,7 +195,7 @@ const Map = () => {
             {hoveredRegion && (
                 <div
                     ref={tooltipRef}
-                    className="px-[20px] py-[10px] fixed backdrop-blur-[7.85px] border-[#34446d] border rounded-[4px] pointer-events-none z-10"
+                    className="px-[20px] py-[10px] fixed backdrop-blur-[7.85px] pointer-events-none z-10"
                     style={{
                         left: mousePosition.x,
                         top: mousePosition.y
