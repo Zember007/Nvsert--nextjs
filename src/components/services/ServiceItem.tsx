@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useId, useState } from 'react';
 import { NavigationItem } from '@/store/navigation';
 import Link from 'next/link';
 import { AppNavigationItem } from '@/components/general/AppNavigation';
@@ -67,12 +67,14 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
             ;
     }
 
+    const clipId = useId();
+
     return (
         <div className={`overflow-hidden relative ${index === 0 ? 'border-t' : ''} border-[#93969d80]  ${last && isExpanded ? '' : 'border-b'}`}>
             {/* Заголовок спойлера */}
 
             <div id={service.name} className='absolute top-[-94px] left-0 w-full'></div>
-            <button
+            <div
                 onClick={() => {
                     onToggle(index);
                     setNoActive(true);
@@ -82,7 +84,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                 onMouseEnter={() => setNoActive(false)}
                 onTouchStart={() => setNoActive(false)}
                 onTouchEnd={() => setNoActive(false)}
-                className={`w-full`}
+                className={`w-full cursor-pointer`}
             >
                 <div className={`line-after__box justify-between group wrapper xxl:flex-row flex-col flex xxl:items-center py-[25px] overflow-hidden`}>
                     <div className="w-[250px]">
@@ -90,12 +92,12 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                             <svg
                                 className={`${hover && '!text-[#34446D]'} ${!noActive ? 'group-hover:text-[#34446D]' : ''} text-black transition-transform duration-100 ${isExpanded ? 'rotate-90' : ''}`}
                                 width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g clipPath="url(#clip0_5667_4071)">
+                                <g clipPath={`url(#${clipId})`}>
                                     <path d="M4.404 3.30273L7.835 6.62973C8.055 6.84273 8.055 7.15673 7.835 7.36973L1.205 13.7997C0.79 14.2007 0 13.9577 0 13.4297V7.70673L4.404 3.30273Z" fill="currentColor" />
                                     <path opacity="0.5" d="M0 6.29282V0.569821C0 0.0418214 0.79 -0.201179 1.205 0.199821L3.686 2.60582L0 6.29282Z" fill="currentColor" />
                                 </g>
                                 <defs>
-                                    <clipPath id="clip0_5667_4071">
+                                    <clipPath id={clipId}>
                                         <rect width="8" height="14" fill="white" />
                                     </clipPath>
                                 </defs>
@@ -119,15 +121,15 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                         ))}
                     </div>
                 </div>
-            </button>
+            </div>
 
             <div className={`${!isExpanded ? 'max-h-[0px]' : `max-h-[2370px] m:pb-[100px]  ${last ? 'pb-0' : 'pb-[80px]'}`} transition-all duration-200 overflow-hidden  `}>
                 {/* Описание услуги */}
                 <div className="wrapper">
 
-                    <p className="xxs:ml-[30px] text-[#000000] text-base-post mb-[10px] max-w-[1150px]">
+                    <h3 className="xxs:ml-[30px] text-[#000000] text-base-post mb-[10px] max-w-[1150px]">
                         {service.description}
-                    </p>
+                    </h3>
 
                     {/* Сертификаты */}
                     <div className={`flex l:gap-x-[118px] gap-x-[30px] gap-y-[30px] flex-wrap py-[20px] ${last ? 'pb-0' : ''} m:justify-start  justify-center`}>
