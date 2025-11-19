@@ -62,7 +62,7 @@ const FeedbackCard: React.FC<{ item: FeedbackItem }> = ({ item }) => {
                     </div>
                 )}
                 <div className="flex-1 flex flex-col gap-[20px]">
-                    <h6 className="!font-normal">{item.title}</h6>
+                    <h6 className="header-h-6 !font-normal">{item.title}</h6>
                     {item.content?.body && (
                         <>
                             <div>

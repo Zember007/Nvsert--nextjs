@@ -89,9 +89,9 @@ export const useRichTextRenderer = () => {
                                 className={cardClass}
                             >
                                 <div className="flex flex-col gap-[15px] w-full">
-                                    <h6 className="!font-normal">
+                                    <h3 className="header-h-6 !font-normal">
                                         {title}
-                                    </h6>
+                                    </h3>
                                     <div>
                                         {processContent(content)}
                                     </div>
@@ -207,9 +207,9 @@ export const useRichTextRenderer = () => {
             if (trimmedLine.startsWith('# ')) {
                 flushList();
                 elements.push(
-                    <h6 key={`subheading-${index}`} className="mt-[9px] font-normal text-black">
+                    <h3 key={`subheading-${index}`} className="header-h-6 mt-[9px] font-normal text-black">
                         {filterPrepositions(trimmedLine.substring(2).trim())}
-                    </h6>
+                    </h3>
                 );
                 lastElementWasList = false;
                 return;
@@ -219,9 +219,9 @@ export const useRichTextRenderer = () => {
             flushList();
             if (trimmedLine) {
                 elements.push(
-                    <p key={`p-${index}`} className={`-my-[5px] ${small ? 'text-2' : 'text-base-post'}`}>
+                    <h4 key={`p-${index}`} className={`-my-[5px] ${small ? 'text-2' : 'text-base-post'}`}>
                         {filterPrepositions(trimmedLine)}
-                    </p>
+                    </h4>
                 );
                 lastElementWasList = false;
             }

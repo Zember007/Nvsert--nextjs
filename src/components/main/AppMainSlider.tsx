@@ -184,7 +184,7 @@ const SliderMain = () => {
                 <div id="slider" className="absolute top-[-50px] pointer-events-none" ></div>
 
 
-                <h2 className='section__title'>Помогаем с документами по отраслям</h2>
+                <h2 className='section__title header-h-2'>Помогаем с документами по отраслям</h2>
                 <div className="cloneable">
 
 
@@ -252,11 +252,11 @@ const SliderMain = () => {
 
 
                         <div className="overlay-content-container">
-                            <p className="overlay-title header-h-6">
+                            <h3 className="overlay-title header-h-6">
                                 {
                                     filterPrepositions(slidesLang[activeIndex].title)
                                 }
-                            </p>
+                            </h3>
                             <p className={`slide-text-content text-3`}>
 
                                 {filterPrepositions(slidesLang[activeIndex].text)}
@@ -316,12 +316,12 @@ const SliderMain = () => {
                             <div className="slide-counter-container">
                                 <div className="slide-counter-overflow">
                                     <div className="count-column">
-                                        <h3 data-slide-count="step" className="count-heading ">01</h3>
+                                        <p data-slide-count="step" className="count-heading header-h-3">01</p>
                                     </div>
                                 </div>
                                 <span className='font-light'>/</span>
                                 <div className="count-column ">
-                                    <h3 data-slide-count="total" className="count-heading">{slides.length}</h3>
+                                    <p data-slide-count="total" className="count-heading header-h-3">{slides.length}</p>
                                 </div>
                             </div>
                         </div>

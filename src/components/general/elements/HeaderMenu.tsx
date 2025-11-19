@@ -127,7 +127,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                                         src={ArrowIcon} alt='back' width={20} height={20} />
                                 </button>
 
-                                <h4 className='whitespace-nowrap text-center justify-self-center'>{currentLevel.title}</h4>
+                                <h4 className='header-h-4 whitespace-nowrap text-center justify-self-center'>{currentLevel.title}</h4>
                             </>
                         }
                     </div>

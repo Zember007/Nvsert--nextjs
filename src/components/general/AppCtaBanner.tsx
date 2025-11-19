@@ -21,10 +21,10 @@ const AppCtaBanner: React.FC<CtaBannerProps> = ({
     return (
          text && description ? (
             <div className={`mx-auto text-center max-w-[700px] w-full xxs:min-h-[300px] bg-[rgba(52,68,109,0.2)] rounded-[8px] flex flex-col justify-center items-center gap-[16px] s:py-[40px] px-[14px] py-[20px] backdrop-blur-sm ${className}`}>
-                <h3 className="s:text-[24px] text-[20px] font-light tracking-[-0.04em] text-black max-w-[460px]">
+                <h3 className="text-black max-w-[460px] header-h-4">
                     {text}
                 </h3>
-                <p className={`s:text-[16px] text-[14px] font-light tracking-[-0.01em] text-[rgba(0,0,0,0.6)]  leading-[1.4] ${descriptionClassName || 'max-w-[378px]'}`}>
+                <p className={`text-3 text-[rgba(0,0,0,0.6)] ${descriptionClassName || 'max-w-[378px]'}`}>
                     {description}
                 </p>
                 <Button

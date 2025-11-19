@@ -198,7 +198,7 @@ const Slider = () => {
                                     })()}
                                 </h2>
 
-                                <h6 className="leading-[1.3] text-black !font-normal">
+                                <h6 className="header-h-6 leading-[1.3] text-black !font-normal">
                                     {block.title}
                                 </h6>
                                 <div>

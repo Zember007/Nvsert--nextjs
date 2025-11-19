@@ -39,9 +39,9 @@ const ContentBlockRenderer: React.FC<{
                     className="flex justify-center group items-center gap-[10px] pb-[10px] border-b border-[#93969d80] cursor-pointer line-after"
                     onClick={onToggle}
                 >
-                    <h4 className="-my-[0.6%] group-active:scale-[0.98] transition-all duration-100  group-hover:text-[#34446D] text-[#000] flex-1">
+                    <h2 className="header-h-4 -my-[0.6%] group-active:scale-[0.98] transition-all duration-100  group-hover:text-[#34446D] text-[#000] flex-1">
                         {heading}
-                    </h4>
+                    </h2>
 
 
                     <svg

@@ -21,7 +21,7 @@ const AppMainDocuments = () => {
 
             <div id="documents" className="absolute top-[-50px] pointer-events-none" ></div>
 
-            <h2 className="section__title">
+            <h2 className="section__title header-h-2">
                 {t('docs.heading')}
             </h2>
 

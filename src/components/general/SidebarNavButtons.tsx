@@ -49,7 +49,7 @@ const SidebarNavButtons = () => {
                     className={`border-button px-[15px] active:scale-[.98] transition-transform will-change-transform duration-100 group ${item.active ? 'active' : ''}`}
                     href={item.href}
                 >
-                    <h6 className={`font-light`}>{item.label}</h6>
+                    <h6 className={`header-h-6 font-light`}>{item.label}</h6>
                     <div className="group-active:scale-[.9] transition-transform will-change-transform duration-100">
                         {item.icon}
                     </div>

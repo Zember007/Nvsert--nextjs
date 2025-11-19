@@ -169,7 +169,7 @@ const AppMainSafeguards = () => {
         className="section ">
         <div id="safeguards" className="absolute top-[-50px] pointer-events-none" ></div>
 
-        <h2 className="section__title">Гарантии и безупречный сервис</h2>
+        <h2 className="section__title header-h-2">Гарантии и безупречный сервис</h2>
         <div className="safeguards-container">
           <div className="safeguard__box"
             style={{ ...(widthWindow && widthWindow < 960 && { gap: Math.round((widthWindow - (250)) / 2) }) }}

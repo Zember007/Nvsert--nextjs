@@ -59,28 +59,15 @@ h1 {
 }
 
 h2 {
-	@include header-h-2;
 	margin: -0.85% 0;
 }
 
-h3 {
-	@include header-h-3;
+.header-h-2 {
+	@include header-h-2;
 }
 
 .header-h-3 {
 	@include header-h-3;
-}
-
-h4 {
-	@include header-h-4;
-}
-
-h5 {
-	@include header-h-5;
-}
-
-h6 {
-	@include header-h-6;
 }
 
 .header-h-5 {

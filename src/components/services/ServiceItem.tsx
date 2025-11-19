@@ -101,7 +101,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                                 </defs>
                             </svg>
 
-                            <h4 className={`line-after ${noActive ? 'noactive' : ''} after:!bottom-[-5px] !m-0   ${hover && 'active'}  transition-all duration-200 translate-y-[1px]`}>{service.title}</h4>
+                            <h2 className={`header-h-4 line-after ${noActive ? 'noactive' : ''} after:!bottom-[-5px] !m-0   ${hover && 'active'}  transition-all duration-200 translate-y-[1px]`}>{service.title}</h2>
                         </div>
                     </div>
                     <div className={`xxs:ml-[30px] xxl:mt-0 mt-[25px] xxl:grid flex gap-[20px] xxl:grid-cols-4 items-center flex-wrap transition-all duration-100 overflow-hidden ${isExpanded ? 'opacity-0 xxl:max-h-[100%] max-h-0 translate-y-full !mt-0' : 'opacity-100  translate-y-0 xxl:max-h-[100%] max-h-[350px]'}`}>

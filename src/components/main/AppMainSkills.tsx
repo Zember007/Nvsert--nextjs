@@ -105,7 +105,7 @@ const AppMainSkills = () => {
             className="section ">
             <div id="skills" className="absolute top-[-50px] pointer-events-none" ></div>
 
-            <h2 className="section__title">Наши основные преимущества</h2>
+            <h2 className="section__title header-h-2">Наши основные преимущества</h2>
             <div className="skills__wrapper">
                 <div className="skills-content-container">
                     <div className="skills__box"

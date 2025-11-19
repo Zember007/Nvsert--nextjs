@@ -17,7 +17,7 @@ const AppMainQuestions = ({ faqs }: { faqs: FaqItem[] }) => {
             <section className="section wrapper">
         <div id="questions" className="absolute top-[-50px] pointer-events-none" ></div>
 
-        <h2 className="section__title">
+        <h2 className="section__title header-h-2">
           {t('MainQuestions.title')}
         </h2>
         <div className="questions-container">
