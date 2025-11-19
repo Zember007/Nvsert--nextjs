@@ -1,6 +1,9 @@
 import ClientPage from './ClientPage';
 import { Metadata } from 'next';
 
+// Оптимизация: кеширование данных на более длительный срок для ускорения навигации
+export const revalidate = 3600; // ISR: перевалидация каждые 60 минут
+
 // Интерфейсы для типизации данных
 export interface ContentBlock {
     id: number;
@@ -48,7 +51,6 @@ async function getAboutData(): Promise<AboutData | null> {
 
 
         const result = await response.json();
-        console.log(result.data, 'result.data');
         return result.data;
     } catch (error) {
         console.error('Error fetching about data:', error);

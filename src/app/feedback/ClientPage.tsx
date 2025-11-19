@@ -73,13 +73,14 @@ const FeedbackCard: React.FC<{ item: FeedbackItem }> = ({ item }) => {
                                 </div>
                             </div>
                             <button
-                                className={`${showServices ? 'hidden' : 'block xxl:hidden'} text-[#34446D] text-[16px] font-normal mt-[15px] ml-auto grow flex items-end justify-end`}
+                                className={`flex xxl:hidden text-[#34446D] text-[16px] font-normal pt-[15px] pl-auto grow flex items-end justify-end`}
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     e.preventDefault();
                                     setShowServices(!showServices)
                                 }}
-                            >Показать отзыв</button>
+                            >
+                                {showServices ? 'Свернуть отзыв' : 'Показать отзыв'}</button>
                         </>
                     )}
 

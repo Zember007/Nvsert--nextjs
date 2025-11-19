@@ -19,7 +19,7 @@ button {
 }
 
 .border-button {
-  @apply min-h-[50px] w-full items-center flex justify-between items-center w-full rounded-[4px] border-solid hover:bg-[#34446d33] hover:border-[#34446D] hover:border;
+  @apply min-h-[50px] w-full items-center flex justify-between items-center w-full rounded-[4px] border-solid hover:bg-[#34446d33] hover:border-[#34446D] border-[transparent]  border;
 
   padding: 10px 11px;
   text-align: left;
@@ -47,7 +47,9 @@ button {
   }
 
 
-
+  &:hover::before {
+    border-color: transparent;
+  }
 
 
   &::before {

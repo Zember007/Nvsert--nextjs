@@ -1,6 +1,7 @@
 import ClientPage from './ClientPage';
 
-export const revalidate = 60;
+// Оптимизация: кеширование данных на более длительный срок для ускорения навигации
+export const revalidate = 3600; // ISR: перевалидация каждые 60 минут
 
 type FeedbackPhoto = {
     url?: string;
@@ -38,10 +39,11 @@ type FeedbackCategoryGroup = {
 
 async function getFeedbacks(): Promise<FeedbackItem[]> {
     const base = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
-    const res = await fetch(`${base}/api/feedbacks`, { cache: 'no-store' });
+    const res = await fetch(`${base}/api/feedbacks`, {
+        next: { revalidate: 3600 }, // Кешируем на 1 час для лучшей производительности
+    });
     if (!res.ok) return [];
     const json = await res.json();
-    console.log(json, 'json');
     return Array.isArray(json?.data) ? json.data : [];
 }
 
