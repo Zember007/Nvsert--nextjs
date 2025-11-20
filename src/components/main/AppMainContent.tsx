@@ -21,8 +21,6 @@ export default function AppMainContent({ faqs }: { faqs: FaqItem[] }) {
 
   return (
     <>
-    
-
       <AppMainSlider />
       <AppMainSafeguards />
       <AppMainFeedback />
