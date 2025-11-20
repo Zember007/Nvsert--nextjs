@@ -42,12 +42,8 @@ const AppMainFeedback = () => {
                         paused: true,
                         draggable: true,
                         center: true,
-                        speed: 0.5,
-                        offsetLeft: 0,
-                        mobile: widthWindow && widthWindow < 1280,
                         snap: false,
                         gap: 20,
-                        opacity: false,
                         onChange: (index: number) => {
                             setActive(index)
                         }
@@ -57,18 +53,15 @@ const AppMainFeedback = () => {
                         paused: true,
                         center: true,
                         draggable: true,
-                        speed: 0.5,
                         offsetLeft: 0,
-                        mobile: widthWindow && widthWindow < 1280,
                         snap: false,
                         gap: 20,
-                        opacity: false,
                         onChange: (index: number) => {
                             setActive1(index)
                         }
                     });
                     loop.current?.next({ ease: "power3", duration: 0.725 })
-                    loop1.current?.previous({ ease: "power3", duration: 0.725 })
+                    loop1.current?.next({ ease: "power3", duration: 0.725 })
 
                     if (ref.current) {
                         observer.unobserve(ref.current);
