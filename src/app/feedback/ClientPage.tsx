@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useId } from 'react';
 import StandardPageLayout from '@/components/general/StandardPageLayout';
 import CollapseSection from '@/components/general/CollapseSection';
 import Image from 'next/image';
@@ -48,6 +48,8 @@ const FeedbackCard: React.FC<{ item: FeedbackItem }> = ({ item }) => {
     const { processContent } = useRichTextRenderer();
     const [showServices, setShowServices] = React.useState<boolean>(false);
 
+    const clip0_4632_2058 = useId()
+
     return (
         <PhotoView
             src={'https://test11.audiosector.ru/cp' + img}
@@ -72,15 +74,31 @@ const FeedbackCard: React.FC<{ item: FeedbackItem }> = ({ item }) => {
                                     {processContent(item.content.body.split('\n').slice(1).join('\n'))}
                                 </div>
                             </div>
+                
                             <button
-                                className={`flex xxl:hidden text-[#34446D] text-[16px] font-normal pt-[15px] pl-auto grow flex items-end justify-end`}
+                                className='text-2 font-normal text-[#34446D] flex xxl:hidden pt-[15px] pl-auto grow justify-end items-end line-after__box btnIconAn !gap-[5px]'
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     e.preventDefault();
                                     setShowServices(!showServices)
                                 }}
                             >
-                                {showServices ? 'Свернуть отзыв' : 'Показать отзыв'}</button>
+                                <span className=' line-after !leading-[1.2] whitespace-nowrap'>{!showServices ? 'Показать отзыв' : 'Свернуть отзыв'}</span>
+
+                                <svg
+                                    className={`sendIconLeft transition-all duration-100 ${showServices ? 'rotate-[180deg]' : ''}`}
+                                    width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clipPath={`url(#${clip0_4632_2058})`}>
+                                        <path d="M7 3.5H9V0.5H7L7 3.5ZM15 9.46767L13.5692 8.02908L9.01287 12.6092V6.5H6.98815V12.6092L2.43177 8.02908L1 9.46767L8 16.5L8.71538 15.7822L9.43177 15.0634L15 9.46767Z" fill="#34446D" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id={clip0_4632_2058}>
+                                            <rect width="16" height="16" fill="white" transform="matrix(0 1 -1 0 16 0.5)" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+
+                            </button>
                         </>
                     )}
 
