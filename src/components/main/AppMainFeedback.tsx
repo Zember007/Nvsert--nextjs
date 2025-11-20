@@ -1,4 +1,4 @@
- 'use client'
+'use client'
 
 import { PhotoProvider, PhotoView } from '@/assets/lib/react-photo-view';
 import { useEffect, useRef, useState } from 'react';
@@ -35,14 +35,15 @@ const AppMainFeedback = () => {
                     ]);
                     const gsap = gsapModule.default || gsapModule;
                     const { horizontalLoop } = sliderModule;
-                    
+
                     const slides = gsap.utils.toArray('[data-slider="slide-feedback"]');
                     const slides1 = gsap.utils.toArray('[data-slider="slide-feedback1"]');
                     loop.current = horizontalLoop(slides, {
                         paused: true,
                         draggable: true,
+                        mobile: widthWindow && widthWindow < 1280,
                         center: true,
-                        snap: false,
+                        snap: widthWindow && widthWindow < 1280,
                         gap: 20,
                         onChange: (index: number) => {
                             setActive(index)
@@ -54,7 +55,8 @@ const AppMainFeedback = () => {
                         center: true,
                         draggable: true,
                         offsetLeft: 0,
-                        snap: false,
+                        mobile: widthWindow && widthWindow < 1280,
+                        snap: widthWindow && widthWindow < 1280,
                         gap: 20,
                         onChange: (index: number) => {
                             setActive1(index)
@@ -120,12 +122,12 @@ const AppMainFeedback = () => {
                                     >
                                         <Image
                                             className='feedback-image'
-                                            src={`/feedbacks/small/${index + 1}.png`} 
-                                            alt='feedback' 
-                                            width={190} 
+                                            src={`/feedbacks/small/${index + 1}.png`}
+                                            alt='feedback'
+                                            width={190}
                                             height={267}
                                             loading="lazy"
-                                            />
+                                        />
                                     </PhotoView>
                                 </div>)}
 
@@ -150,9 +152,9 @@ const AppMainFeedback = () => {
                                         src={`/feedbacks/big/${15 + index}.png`}>
                                         <Image
                                             className='feedback-image'
-                                            src={`/feedbacks/small/${15 + index}.png`} 
-                                            alt='feedback' 
-                                            width={190} 
+                                            src={`/feedbacks/small/${15 + index}.png`}
+                                            alt='feedback'
+                                            width={190}
                                             height={267}
                                             loading="lazy" />
                                     </PhotoView>
