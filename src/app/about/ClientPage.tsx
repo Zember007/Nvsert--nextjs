@@ -9,6 +9,7 @@ import { AboutData } from './page';
 import AppCtaBanner from '@/components/general/AppCtaBanner';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import { StrapiResponsiveImage } from '@/components/general/StrapiResponseImage';
+import GridBox from './_components/Grid';
 
 
 
@@ -52,6 +53,27 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
                     {parts[1] && <div>{renderRichText(parts[1])}</div>}
                 </>
             );
+        }
+
+        // Обработка [grid_blocks_start] ... [grid_blocks_end]
+        if (richText.includes('[grid_blocks_start]') && richText.includes('[grid_blocks_end]')) {
+            const beforeGrid = richText.substring(0, richText.indexOf('[grid_blocks_start]')).trim();
+            const gridContent = richText.substring(
+                richText.indexOf('[grid_blocks_start]') + '[grid_blocks_start]'.length,
+                richText.indexOf('[grid_blocks_end]')
+            ).trim();
+            const afterGrid = richText.substring(richText.indexOf('[grid_blocks_end]') + '[grid_blocks_end]'.length).trim();
+
+            return [
+                <>
+                    {beforeGrid && <div className="mb-[30px]">{renderRichText(beforeGrid)}</div>}
+                    <GridBox
+                        gridContent={gridContent}
+                        processContent={processContent}
+                    />
+                    {afterGrid && <div>{renderRichText(afterGrid)}</div>}
+                </>
+            ];
         }
 
 

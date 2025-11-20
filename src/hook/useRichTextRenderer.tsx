@@ -1,109 +1,11 @@
-import Image from 'next/image';
 import React from 'react';
 import { filterPrepositions } from './filter';
-import IconAbout1 from '@/assets/images/about/1.svg';
-import IconAbout2 from '@/assets/images/about/2.svg';
-import IconAbout3 from '@/assets/images/about/3.svg';
-import IconAbout4 from '@/assets/images/about/4.svg';
-import IconAbout5 from '@/assets/images/about/5.svg';
-import IconAbout6 from '@/assets/images/about/6.svg';
 
 
 export const useRichTextRenderer = () => {
 
     const processContent = (text: string, small?: boolean): React.ReactNode[] => {
         text = text.trim();
-
-
-        // Обработка [grid_blocks_start] ... [grid_blocks_end]
-        if (text.includes('[grid_blocks_start]') && text.includes('[grid_blocks_end]')) {
-            const beforeGrid = text.substring(0, text.indexOf('[grid_blocks_start]')).trim();
-            const gridContent = text.substring(
-                text.indexOf('[grid_blocks_start]') + '[grid_blocks_start]'.length,
-                text.indexOf('[grid_blocks_end]')
-            ).trim();
-            const afterGrid = text.substring(text.indexOf('[grid_blocks_end]') + '[grid_blocks_end]'.length).trim();
-
-            // Разбиваем grid content на блоки по заголовкам #
-            const gridBlocks = gridContent
-                .split(/(?=\n# )/)
-                .filter((block: string) => block.trim())
-                .map((block: string) => block.trim());
-
-            const svgIcons = [
-                IconAbout1,
-                IconAbout2,
-                IconAbout3,
-                IconAbout4,
-                IconAbout5,
-                IconAbout6
-            ]
-
-
-            return [
-                ...(beforeGrid ? processContent(beforeGrid).map((content, index) => (
-                    <div key={`before-grid-${index}`} className="mb-[30px]">{content}</div>
-                )) : []),
-                <div key="grid-container" className="grid gap-[20px] mb-[30px] xxs:grid-cols-3 grid-cols-1" >
-                    {gridBlocks.map((block: string, index: number) => {
-                        // Проверяем, является ли блок изображением
-                        const imageMatch = block?.replace(/^#\s*/, '').match(/^!\[(.*?)\]\((.*?)\)/);
-
-                        // Обычная текстовая карточка
-                        const lines = block.split('\n').filter(line => line.trim());
-                        const title = lines[0]?.replace(/^#\s*/, '').trim() || '';
-                        const content = lines.slice(1).join('\n').trim();
-
-                        let cardClass = "p-[20px] border border-[#93969D] rounded-[6px] flex flex-col relative  justify-between items-end min-h-[300px]";
-
-
-
-
-                        if (imageMatch) {
-                            // Это изображение - рендерим как grid блок с изображением
-                            const alt = imageMatch[1];
-                            const src = imageMatch[2];
-
-
-                            return (
-                                <div
-                                    key={index}
-
-                                    className={`border border-[#93969D] rounded-[6px] relative overflow-hidden ${cardClass}`}
-                                >
-                                    <Image
-                                        src={src}
-                                        alt={alt}
-                                        fill
-                                        className="object-cover"
-                                        unoptimized={src.startsWith('http')}
-                                    />
-                                </div>
-                            );
-                        }
-
-
-                        return (
-                            <div
-                                key={index}
-                                className={cardClass}
-                            >
-                                <div className="flex flex-col gap-[15px] w-full">
-                                    <h3 className="header-h-6 !font-normal">
-                                        {title}
-                                    </h3>
-                                    <div>
-                                        {processContent(content)}
-                                    </div>
-                                   {React.createElement(svgIcons[index % svgIcons.length], { className: 'absolute bottom-[20px] right-[20px]' })}
-                                </div>
-                            </div>
-                        );
-                    })}
-                </div>,
-                ...(afterGrid ? processContent(afterGrid) : [])
-            ];
-        }
 
         const lines = text.split('\n');
         const elements: React.ReactNode[] = [];
