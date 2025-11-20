@@ -57,7 +57,17 @@
 
 .document-list-show-button {
   @include text-2;
-  @apply text-[#34446D] font-normal text-left inline-flex gap-[5px];
+  @apply hover:text-[#34446D] transition-all duration-100 text-[#000] font-normal text-left inline-flex gap-[5px];
+
+  .document-list-arrow {
+    @apply  text-[#000] transition-all duration-100;
+  }
+
+  &:hover {
+    .document-list-arrow {
+      @apply  text-[#34446D];
+    }
+  }
 }
 
 
