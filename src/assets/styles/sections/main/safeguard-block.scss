@@ -2,11 +2,11 @@
 @use '../../base/mixins' as mixins;
 
 .safeguard-card-wrapper {
-  @apply z-[0]     xxs:w-[310px] xss:w-[320px] w-[280px] relative xxs:h-[520px] xss:h-[525px] h-[457px] translate-y-[0] transition-all duration-500;
+  @apply z-[0]     xxs:w-[310px] xss:w-[320px] w-[280px] relative xxs:h-[520px] xss:h-[525px] h-[457px] xxl:translate-y-[0] transition-all duration-500;
   
   &:not(.visible) {
-    transform: translateY(30px);
-    opacity: 0;
+    @apply xxl:translate-y-[30px] xxl:opacity-0;
+  
   }
 }
 
