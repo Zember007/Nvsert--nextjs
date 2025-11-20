@@ -76,7 +76,7 @@ const FeedbackCard: React.FC<{ item: FeedbackItem }> = ({ item }) => {
                             </div>
                 
                             <button
-                                className='text-2 font-normal text-[#34446D] flex pt-[15px] pl-auto grow justify-end items-end line-after__box btnIconAn !gap-[5px]'
+                                className='text-2 font-normal text-[#34446D] flex pt-[15px] pl-auto grow justify-end !items-end line-after__box btnIconAn !gap-[5px]'
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     e.preventDefault();
