@@ -8,10 +8,10 @@ const AppMainIntro = dynamic(() => import('../components/main/AppMainIntro'), {
   ssr: true
 })
 
-/* const AppMainDocuments = dynamic(() => import('../components/main/AppMainDocuments'), {
+const AppMainDocuments = dynamic(() => import('../components/main/AppMainDocuments'), {
   loading: () => <div className="section wrapper min-h-[400px]" />,
   ssr: true
-}) */
+})
 
 const AppMainSkills = dynamic(() => import('../components/main/AppMainSkills'), {
   loading: () => <div className="section wrapper min-h-[400px]" />,
@@ -28,7 +28,7 @@ export default async function Home() {
     <div className="main text-[#000] overflow-hidden  relative leading-page">
       <AppMainIntro />
 
-     {/*  <AppMainDocuments /> */}
+      <AppMainDocuments />
       <AppMainSkills />
       <AppMainContent faqs={faqs} />
 
