@@ -112,7 +112,7 @@ function AppCollapsibleList<ItemType = unknown>({
                 <div
                     className={`  ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'} pt-[20px]  transition-all duration-100`}>
                     <motion.div
-                        initial={{ y: 20 }}
+                      
                         animate={controls}
                         className={`${listClassName} relative`}
                     >
