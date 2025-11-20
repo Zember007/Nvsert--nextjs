@@ -18,7 +18,7 @@ const FlightSuccess = ({ close, small = false, text, closeIcon = true }: { close
             });
         }, 1000);
         return () => clearInterval(timer);
-    }, [])
+    }, [close])
 
 
 
@@ -26,7 +26,7 @@ const FlightSuccess = ({ close, small = false, text, closeIcon = true }: { close
     return (
 
 
-        <div className="active  pt-[100px]">
+        <div className="active  s:pt-[100px] pt-[50px]">
 
             {closeIcon && <button
                 onClick={() => { close() }}
@@ -52,7 +52,7 @@ const FlightSuccess = ({ close, small = false, text, closeIcon = true }: { close
                     <p className="m:text-[20px] text-[16px]">Мы свяжемся с Вами <br /> в течение 10 минут!</p>
                 </div>
                 <div
-                    className={`${small ? 'top-[220px]' : 'top-[256px]'} left-0 right-0 absolute`}>
+                    className={`${small ? 's:top-[220px] top-[150px]' : 's:top-[256px] top-[160px]'} left-0 right-0 absolute`}>
                     <FlyingPlane />
                 </div>
             </div>

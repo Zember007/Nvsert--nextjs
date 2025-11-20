@@ -1,10 +1,13 @@
+import useWindowSize from "@/hook/useWindowSize";
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 
 export default function FlyingPlane() {
 
+    const {width} = useWindowSize()
+
     const lineAnimation = {
-        x: "-400px",
+        x: width >= 540 ? "-400px" : "-320px",
         y: `213px`,
     };
 
