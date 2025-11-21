@@ -145,35 +145,36 @@ const SliderMain = () => {
 
 
     useEffect(() => {
+        if (!overlayText.current) return;
 
-        if (!overlayText.current) return
-
+        const element = overlayText.current;
         let startX = 0;
 
-        overlayText.current.addEventListener('touchstart', function (e) {
+        const handleTouchStart = (e: TouchEvent) => {
             startX = e.touches[0].clientX;
-        });
+        };
 
-        overlayText.current.addEventListener('touchend', function (e) {
+        const handleTouchEnd = (e: TouchEvent) => {
             const endX = e.changedTouches[0].clientX;
             const diffX = endX - startX;
 
             if (Math.abs(diffX) > 50) {
                 if (diffX > 0) {
-                    timeLine.current.previous({ ease: "power3", duration: 0.725 })
-
+                    timeLine.current?.previous({ ease: "power3", duration: 0.725 });
                 } else {
-                    timeLine.current.next({ ease: "power3", duration: 0.725 })
-
+                    timeLine.current?.next({ ease: "power3", duration: 0.725 });
                 }
             }
-        });
+        };
+
+        element.addEventListener('touchstart', handleTouchStart);
+        element.addEventListener('touchend', handleTouchEnd);
 
         return () => {
-            overlayText.current?.removeEventListener('touchend', function () { })
-            overlayText.current?.removeEventListener('touchstart', function () { })
-        }
-    }, [overlayText, timeLine])
+            element.removeEventListener('touchstart', handleTouchStart);
+            element.removeEventListener('touchend', handleTouchEnd);
+        };
+    }, [])
 
 
 

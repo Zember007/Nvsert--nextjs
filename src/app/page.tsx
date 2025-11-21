@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import { getFaqs } from '@/assets/lib/faq';
 import AppMainIntro from '../components/main/AppMainIntro';
 import AppMainDocuments from '../components/main/AppMainDocuments';

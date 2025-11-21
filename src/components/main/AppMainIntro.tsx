@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import AppMainForm from '../forms/AppMainForm';
 import { filterPrepositions } from '@/hook/filter';
 import { useAnimation, motion } from "framer-motion";
-import { useRef } from 'react';
 
 
 const AppMainIntro = () => {
@@ -30,13 +29,9 @@ const AppMainIntro = () => {
         });
     }
 
-    const ref = useRef<HTMLDivElement>(null)
-
- 
-
     return (
         <>
-            <section ref={ref} id="intro" className="main-banner">
+            <section id="intro" className="main-banner">
 
                 <div className="wrapper">
                     <div className='main-banner__content'>
@@ -52,7 +47,7 @@ const AppMainIntro = () => {
                                 BounceWrapper={() => {
                                     animation()
                                 }}
-                                btnText={'Оформить заявку'} />
+                                btnText={t('mainIntro.btnText') || 'Оформить заявку'} />
                         </motion.div>
 
                     </div>

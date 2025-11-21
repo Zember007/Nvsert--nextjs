@@ -7,8 +7,7 @@ export async function getFaqs(): Promise<FaqItem[]> {
       process.env.NEXT_PUBLIC_BASE_URL ||
       'https://nvsert.ru';
     const res = await fetch(`${baseUrl}/api/faqs`, {
-      cache: 'no-store'
-      /* next: { revalidate: 60 }, */
+      next: { revalidate: 3600 } // Кэширование на 1 час для оптимизации
     });
     if (!res.ok) {
       console.error('Failed to fetch FAQs:', res.statusText);

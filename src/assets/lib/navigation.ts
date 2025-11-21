@@ -7,7 +7,7 @@ export async function getNavigationData(): Promise<NavigationItem[]> {
       process.env.NEXT_PUBLIC_BASE_URL ||
       'https://nvsert.ru';
     const res = await fetch(`${baseUrl}/api/services`, {
-      next: { revalidate: 60 }
+      next: { revalidate: 3600 }
     });
 
     if (!res.ok) {
