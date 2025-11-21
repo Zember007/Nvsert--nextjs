@@ -1,18 +1,15 @@
 'use client'
-import '@/assets/styles/sections/main/main-banner.scss';
-import '@/assets/styles/sections/main/main-intro.scss';
 import { useTranslation } from 'react-i18next';
-import AppMainForm from '../forms/AppMainForm';
+/* import AppMainForm from '../forms/AppMainForm'; */
 import { filterPrepositions } from '@/hook/filter';
-import { useAnimation, motion } from "framer-motion";
-import { useRef } from 'react';
+/* import { useAnimation, motion } from "framer-motion"; */
 
 
 const AppMainIntro = () => {
 
     const { t } = useTranslation()
 
-    const controls = useAnimation();
+ /*    const controls = useAnimation();
     const defaultSettings = {
         duration: 0.6,
         ease: [0.34, 1.56, 0.64, 1],
@@ -28,15 +25,14 @@ const AppMainIntro = () => {
                 times: defaultSettings.times
             }
         });
-    }
+    } */
 
-    const ref = useRef<HTMLDivElement>(null)
 
  
 
     return (
         <>
-            <section ref={ref} id="intro" className="main-banner">
+            <section  id="intro" className="main-banner">
 
                 <div className="wrapper">
                     <div className='main-banner__content'>
@@ -46,14 +42,14 @@ const AppMainIntro = () => {
                         </div>
                         
 
-                        <motion.div
+                        {/* <motion.div
                             animate={controls}>
                             <AppMainForm
                                 BounceWrapper={() => {
                                     animation()
                                 }}
                                 btnText={'Оформить заявку'} />
-                        </motion.div>
+                        </motion.div> */}
 
                     </div>
                 </div >
