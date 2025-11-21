@@ -1,11 +1,16 @@
 'use client'
+import '@/assets/styles/sections/main/main-banner.scss';
+import '@/assets/styles/sections/main/main-intro.scss';
 import { useTranslation } from 'react-i18next';
 import AppMainForm from '../forms/AppMainForm';
 import { filterPrepositions } from '@/hook/filter';
 import { useAnimation, motion } from "framer-motion";
+import { useRef } from 'react';
+
 
 const AppMainIntro = () => {
-    const { t } = useTranslation();
+
+    const { t } = useTranslation()
 
     const controls = useAnimation();
     const defaultSettings = {
@@ -14,10 +19,9 @@ const AppMainIntro = () => {
         times: [0, 0.2, 0.5, 0.8, 1],
         openY: [-100, -80, 10, 0, 0],
     };
-    
     const animation = () => {
         controls.start({
-            y: defaultSettings.openY,
+            y: defaultSettings.openY, // Используем openY для отскока
             transition: {
                 duration: defaultSettings.duration,
                 ease: [0.34, 1.56, 0.64, 1] as const,
@@ -26,9 +30,13 @@ const AppMainIntro = () => {
         });
     }
 
+    const ref = useRef<HTMLDivElement>(null)
+
+ 
+
     return (
         <>
-            <section id="intro" className="main-banner">
+            <section ref={ref} id="intro" className="main-banner">
 
                 <div className="wrapper">
                     <div className='main-banner__content'>
@@ -37,7 +45,9 @@ const AppMainIntro = () => {
                             <div className="intro-spacer"></div>
                         </div>
                         
-                        <motion.div animate={controls}>
+
+                        <motion.div
+                            animate={controls}>
                             <AppMainForm
                                 BounceWrapper={() => {
                                     animation()

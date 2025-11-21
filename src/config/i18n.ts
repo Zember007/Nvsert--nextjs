@@ -17,15 +17,7 @@ i18n
     fallbackLng: 'ru', 
     interpolation: {
       escapeValue: false 
-    },
-    // Оптимизация для производительности
-    react: {
-      useSuspense: false, // Отключаем Suspense для уменьшения TBT
-    },
-    // Снижаем потребление памяти
-    compatibilityJSON: 'v4',
-    // Кэширование
-    load: 'currentOnly',
+    }
   });
 
 export default i18n;

@@ -35,12 +35,11 @@
 
 .count-heading {
   @include header-h-2;
-  
-  & {
-    font-weight: inherit !important;
-    text-align: right;
-    vertical-align: middle;
-  }
+  font-weight: inherit !important;
+  text-align: right;
+  vertical-align: middle;
+
+
 }
 
 

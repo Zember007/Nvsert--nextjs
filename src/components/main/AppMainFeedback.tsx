@@ -8,15 +8,8 @@ import { useTranslation } from 'react-i18next';
 import useWindowSize from '@/hook/useWindowSize';
 import '@/assets/styles/sections/main/main-feedback.scss';
 
-// Lazy load CSS для react-photo-view
-if (typeof window !== 'undefined') {
-  import('@/assets/lib/react-photo-view/dist/react-photo-view.css');
-}
 
-// Константы для изображений отзывов
-const FEEDBACK_FIRST_ROW_COUNT = 14;
-const FEEDBACK_SECOND_ROW_START = 15;
-const FEEDBACK_SECOND_ROW_COUNT = 14;
+
 
 const AppMainFeedback = () => {
 
@@ -122,7 +115,7 @@ const AppMainFeedback = () => {
 
 
                         <div className="feedback-slider-container">
-                            {[...Array(FEEDBACK_FIRST_ROW_COUNT)].map((_, index) =>
+                            {[...Array(14)].map((_, index) =>
                                 <div
                                     data-slider="slide-feedback" key={index} className="feedback-item">
                                     <PhotoView src={`/feedbacks/big/${index + 1}.png`}
@@ -142,7 +135,7 @@ const AppMainFeedback = () => {
                         <div className="slide-dots-box-container !flex xl:!hidden">
 
                             <div className="slide-dots-box !flex xl:!hidden">
-                                {[...Array(FEEDBACK_FIRST_ROW_COUNT)].map((_, i) => (
+                                {[...Array(14)].map((_, i) => (
                                     <div key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
                                 ))}
                             </div>
@@ -152,14 +145,14 @@ const AppMainFeedback = () => {
                     <div className="feedback-slider-section">
 
                         <div className="feedback-slider-container">
-                            {[...Array(FEEDBACK_SECOND_ROW_COUNT)].map((_, index) =>
+                            {[...Array(14)].map((_, index) =>
                                 <div
                                     data-slider="slide-feedback1" key={index} className="feedback-item">
                                     <PhotoView
-                                        src={`/feedbacks/big/${FEEDBACK_SECOND_ROW_START + index}.png`}>
+                                        src={`/feedbacks/big/${15 + index}.png`}>
                                         <Image
                                             className='feedback-image'
-                                            src={`/feedbacks/small/${FEEDBACK_SECOND_ROW_START + index}.png`}
+                                            src={`/feedbacks/small/${15 + index}.png`}
                                             alt='feedback'
                                             width={190}
                                             height={267}
@@ -171,7 +164,7 @@ const AppMainFeedback = () => {
 
                         <div className="slide-dots-box-container !flex xl:!hidden">
                             <div className="slide-dots-box !flex xl:!hidden">
-                                {[...Array(FEEDBACK_SECOND_ROW_COUNT)].map((_, i) => (
+                                {[...Array(14)].map((_, i) => (
                                     <div key={i} className={`${activeIndex1 === i ? 'active' : ""} slide-dots`}></div>
                                 ))}
                             </div>

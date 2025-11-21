@@ -139,44 +139,41 @@ const SliderMain = () => {
 
     const { t } = useTranslation()
 
-    // Защита от ошибок при загрузке переводов
-    const slidesLangRaw = t('MainSlider.items', { returnObjects: true }) as slideItem[] | undefined;
-    const slidesLang = Array.isArray(slidesLangRaw) ? slidesLangRaw : [];
+    const slidesLang = t('MainSlider.items', { returnObjects: true }) as slideItem[]
 
     const overlayText = useRef<HTMLDivElement>(null)
 
 
     useEffect(() => {
-        if (!overlayText.current) return;
 
-        const element = overlayText.current;
+        if (!overlayText.current) return
+
         let startX = 0;
 
-        const handleTouchStart = (e: TouchEvent) => {
+        overlayText.current.addEventListener('touchstart', function (e) {
             startX = e.touches[0].clientX;
-        };
+        });
 
-        const handleTouchEnd = (e: TouchEvent) => {
+        overlayText.current.addEventListener('touchend', function (e) {
             const endX = e.changedTouches[0].clientX;
             const diffX = endX - startX;
 
             if (Math.abs(diffX) > 50) {
                 if (diffX > 0) {
-                    timeLine.current?.previous({ ease: "power3", duration: 0.725 });
+                    timeLine.current.previous({ ease: "power3", duration: 0.725 })
+
                 } else {
-                    timeLine.current?.next({ ease: "power3", duration: 0.725 });
+                    timeLine.current.next({ ease: "power3", duration: 0.725 })
+
                 }
             }
-        };
-
-        element.addEventListener('touchstart', handleTouchStart);
-        element.addEventListener('touchend', handleTouchEnd);
+        });
 
         return () => {
-            element.removeEventListener('touchstart', handleTouchStart);
-            element.removeEventListener('touchend', handleTouchEnd);
-        };
-    }, [])
+            overlayText.current?.removeEventListener('touchend', function () { })
+            overlayText.current?.removeEventListener('touchstart', function () { })
+        }
+    }, [overlayText, timeLine])
 
 
 
@@ -257,12 +254,12 @@ const SliderMain = () => {
                         <div className="overlay-content-container">
                             <h3 className="overlay-title header-h-6">
                                 {
-                                    slidesLang[activeIndex] && filterPrepositions(slidesLang[activeIndex].title)
+                                    filterPrepositions(slidesLang[activeIndex].title)
                                 }
                             </h3>
                             <p className={`slide-text-content text-3`}>
 
-                                {slidesLang[activeIndex] && filterPrepositions(slidesLang[activeIndex].text)}
+                                {filterPrepositions(slidesLang[activeIndex].text)}
 
                             </p>
                         </div>

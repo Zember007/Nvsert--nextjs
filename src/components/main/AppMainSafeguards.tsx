@@ -104,20 +104,21 @@ const AppMainSafeguards = () => {
   const [activeIndex, setActive] = useState<number>(0)
 
   useEffect(() => {
+
     const observer = new IntersectionObserver(
       async ([entry]) => {
         setIsVisible(entry.isIntersecting);
         if (divRef.current && entry.isIntersecting) {
-          if (widthWindow && widthWindow < 1407) {
+          if (widthWindow && widthWindow < 1407 && divRef.current) {
             const [gsapModule, sliderModule] = await Promise.all([
               import('gsap'),
               import('@/scripts/slider')
-            ]);
-            const gsap = gsapModule.default || gsapModule;
-            const { horizontalLoop } = sliderModule;
+          ]);
+          const gsap = gsapModule.default || gsapModule;
+          const { horizontalLoop } = sliderModule;
 
             const slides = gsap.utils.toArray('[data-slider="slide-safeguard"]');
-            const gap = widthWindow < 960 ? (widthWindow - (250)) / 2 : 20;
+            const gap = widthWindow < 960 ? (widthWindow - (250)) / 2 : 20
             timeLine.current = horizontalLoop(slides, {
               paused: true,
               draggable: true,
@@ -126,15 +127,15 @@ const AppMainSafeguards = () => {
               gap: Math.round(gap),
               snap: true,
               onChange: (index: number) => {
-                setActive(index);
+                setActive(index)
               }
             });
+
           }
-          if (divRef.current) {
-            observer.unobserve(divRef.current);
-          }
-          timeLine.current?.next({ ease: "power3", duration: 0.725 });
+          observer.unobserve(divRef.current);
+          timeLine.current?.next({ ease: "power3", duration: 0.725 })
         }
+
       },
       { threshold: 0.3 }
     );
@@ -143,6 +144,7 @@ const AppMainSafeguards = () => {
       observer.observe(divRef.current);
     }
 
+
     return () => {
       if (divRef.current) {
         observer.unobserve(divRef.current);
@@ -150,8 +152,8 @@ const AppMainSafeguards = () => {
 
       if (timeLine.current) {
         timeLine.current.destroy();
-        timeLine.current = null;
       }
+
     };
   }, [widthWindow]);
 

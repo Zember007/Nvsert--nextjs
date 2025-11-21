@@ -12,41 +12,30 @@ import { useEffect, useId, useRef, useState, useMemo, useCallback } from "react"
 import AppCheckbox from './elements/AppCheckbox';
 import { BounceEffect } from "@/hook/useBounce";
 import FlightSuccess from "../modals/FlightSuccess";
-import { filterPrepositions } from "@/hook/filter";
 import { useAnimation, motion } from "framer-motion";
+import { filterPrepositions } from "@/hook/filter";
 
 
 const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }: { btnText: string; bg?: boolean; close?: () => void; BounceWrapper?: () => void; active?: boolean; countTrigger?: number }) => {
     const { setButtonRef, setWrapperRef } = useButton();
 
     const onSubmit = async (e: any) => {
-        console.log('Form data received:', e);
-        console.log('Contact data:', contactData);
-        console.log('isEmail:', isEmail, 'isPhone:', isPhone);
+
 
         const formData = new FormData();
 
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const phoneRegex = /^(?:\+7|8)?[\s(-]*\d[\s(-]*\d{2}[\s)-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}$/;
 
-        // Проверяем, что выбран хотя бы один тип контакта
-        if (!isEmail && !isPhone) {
-            console.log('No contact type selected');
-            setFailCheck(true);
-            bounceCheckbox();
-            return;
-        }
-
-        // Валидация контакта
         if ((!emailRegex.test(e.contact.trim()) && isEmail) || (!phoneRegex.test(e.contact.trim()) && isPhone)) {
-            console.log('Contact validation failed');
-            setEmailError(true);
+            setEmailError(true)
             return;
         } else {
-            setEmailError(false);
+            setEmailError(false)
         }
 
-        // Подготовка данных для отправки
+
+
         for (const key in e) {
             if (e.hasOwnProperty(key)) {
                 formData.append(key, e[key]);
@@ -56,33 +45,31 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
         formData.append('email', contactData.email);
         formData.append('phone', contactData.phone);
 
-        console.log('FormData prepared, sending...');
-        
-        try {
+        /* try {
             const response = await axios.post('/api/feedback', formData);
-            console.log('Response:', response);
-            if (response.status === 200 || response.status === 201) {
+            if (response.status === 200 || 201) {
                 reset();
                 setIsPhone(false);
                 setIsEmail(false);
                 setContactData({
                     email: '',
                     phone: ''
-                });
-                successVisible();
+                })
+                successVisible()
+
             }
         } catch (error) {
-            console.error('Error sending form:', error);
-            // Показываем сообщение об успехе даже при ошибке (для теста)
-            reset();
-            setIsPhone(false);
-            setIsEmail(false);
-            setContactData({
-                email: '',
-                phone: ''
-            });
-            successVisible();
-        }
+            console.log(error);
+        } */
+        reset();
+        setIsPhone(false);
+        setIsEmail(false);
+        setContactData({
+            email: '',
+            phone: ''
+        })
+        successVisible()
+
     };
 
     const successVisible = () => {
@@ -114,11 +101,6 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
     const validContact = useCallback((value: string) => {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const phoneRegex = /^(?:\+7|8)?[\s(-]*\d[\s(-]*\d{2}[\s)-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}$/;
-        
-        if (!value || value.trim() === '') {
-            return;
-        }
-
         if (value !== '' && ((!emailRegex.test(value.trim()) && isEmail) || (!phoneRegex.test(value.trim()) && isPhone))) {
             setEmailError(true)
 
@@ -147,7 +129,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                         email: value.trim()
                     }
                 ))
-            } else if (isPhone) {
+            } else {
                 setContactData(prev => (
                     {
                         ...prev,
@@ -156,7 +138,9 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                 ))
             }
         }
-    }, [isEmail, isPhone])
+
+
+    }, [isEmail, isPhone, setContactData])
 
     const methods = useForm({
         mode: "onTouched", shouldFocusError: false,
@@ -202,43 +186,17 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
 
 
         }
-    }, [submitCount, bounceCheckbox, contactValue, validContact, isEmail, isPhone])
+    }, [submitCount,  bounceCheckbox, contactValue, validContact])
 
     useEffect(() => {
         if (emailError && contactValue.length > 0) {
             setEmailError(false)
         }
-
-        // Автоматическое определение типа контакта
-        if (contactValue && contactValue.length > 3 && !isPhone && !isEmail) {
-            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            const phoneRegex = /^(?:\+7|8)?[\s(-]*\d[\s(-]*\d{2}[\s)-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}$/;
-            
-            // Проверяем, похоже ли на email
-            if (contactValue.includes('@') || emailRegex.test(contactValue.trim())) {
-                setIsEmail(true);
-                setIsPhone(false);
-                setContactData(prev => ({ ...prev, email: contactValue.trim() }));
-            } 
-            // Проверяем, похоже ли на телефон
-            else if (contactValue.match(/[\d\+\-\(\)\s]/g) || phoneRegex.test(contactValue.trim())) {
-                setIsPhone(true);
-                setIsEmail(false);
-                setContactData(prev => ({ ...prev, phone: contactValue.trim() }));
-            }
-        }
-    }, [contactValue, isPhone, isEmail, emailError])
+    }, [contactValue,isPhone, isEmail])
 
     useEffect(() => {
         setFailCheck(false)
     }, [isPhone, isEmail])
-
-    // Синхронизация contactValue с contactData
-    useEffect(() => {
-        if (contactValue && (isPhone || isEmail)) {
-            validContact(contactValue);
-        }
-    }, [contactValue, isPhone, isEmail, validContact])
 
     // Функция для безопасного переключения типов контакта
     const handleContactTypeChange = (type: 'phone' | 'email', value: boolean) => {
@@ -391,6 +349,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                     }
                 </AppValidationObserver >
             </div>
+
         </motion.div>
     );
 };

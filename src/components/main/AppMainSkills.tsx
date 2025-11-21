@@ -18,7 +18,6 @@ const AppMainSkills = () => {
     const skillsData = (widthWindow && widthWindow < 1407) ? skills.filter(item => !item.empty) : skills;
 
     useEffect(() => {
-        let alignInterval: NodeJS.Timeout | null = null;
 
         const observer = new IntersectionObserver(
             async ([entry]) => {
@@ -47,22 +46,28 @@ const AppMainSkills = () => {
                                 setActive(index);
                                 // Принудительное выравнивание после изменения активного слайда
                                 if (timeLine.current && timeLine.current.alignPositions) {
-                                    setTimeout(() => timeLine.current?.alignPositions(), 50);
+                                    setTimeout(() => timeLine.current.alignPositions(), 50);
                                 }
                             }
                         });
 
                         // Принудительное выравнивание через короткий интервал
-                        alignInterval = setInterval(() => {
+                        const alignInterval = setInterval(() => {
                             if (timeLine.current && timeLine.current.alignPositions) {
                                 timeLine.current.alignPositions();
                             }
                         }, 100);
+
+                        // Очищаем интервал при размонтировании
+                        return () => {
+                            clearInterval(alignInterval);
+                            if (timeLine.current) {
+                                timeLine.current.destroy();
+                                timeLine.current = null;
+                            }
+                        };
                     }
-                    if (ref.current) {
-                        observer.unobserve(ref.current);
-                    }
-                    timeLine.current?.next({ ease: "power3", duration: 0.725 });
+                    observer.unobserve(ref.current); timeLine.current?.next({ ease: "power3", duration: 0.725 });
                 }
             },
             { threshold: 0.3 }
@@ -72,19 +77,19 @@ const AppMainSkills = () => {
             observer.observe(ref.current);
         }
 
+
+
+
         return () => {
             if (ref.current) {
                 observer.unobserve(ref.current);
-            }
-
-            if (alignInterval) {
-                clearInterval(alignInterval);
             }
 
             if (timeLine.current) {
                 timeLine.current.destroy();
                 timeLine.current = null;
             }
+
         };
     }, [widthWindow]);
 

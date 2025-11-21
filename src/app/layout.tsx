@@ -12,9 +12,6 @@ const font = Roboto({
   subsets: ['latin', 'cyrillic'],
   weight: ['400', '500', '700'],
   display: 'swap',
-  preload: true,
-  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Arial', 'sans-serif'],
-  adjustFontFallback: true,
 })
 
 export const metadata: Metadata = {
@@ -28,6 +25,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'ru_RU',
   },
+  themeColor: '#646467',
   verification: {
     yandex: '90db85a0cc46fb2c',
   },
@@ -45,11 +43,6 @@ export const metadata: Metadata = {
   manifest: '/site.webmanifest',
 }
 
-// Viewport configuration (themeColor перенесен сюда согласно Next.js 14+)
-export const viewport = {
-  themeColor: '#646467',
-}
-
 export default async function RootLayout({ children }: { children: ReactNode }) {
 
   const initialNavigation = await getNavigationData();
@@ -63,8 +56,6 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <link rel="dns-prefetch" href="https://test11.audiosector.ru" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* Preload критических ресурсов для улучшения LCP */}
-        <link rel="preload" href="/api/navigation" as="fetch" crossOrigin="anonymous" />
       </head>
       <body className={`${font.className} bg-noise`}>
         <Provider initialNavigation={initialNavigation}>

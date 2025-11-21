@@ -76,8 +76,7 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
     }, 1000));
   };
 
-  // Защита от ошибок при асинхронной загрузке i18n
-  const list: string[] = Array.isArray(text) ? text : [];
+  const list: string[] = text;
 
   return (
     <div
@@ -111,7 +110,7 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
                 </h3>
                 <div className='skill-content-container'>
                   <ul className={`skill-list ${isVisible ? 'visible' : ''}`} >
-                    {list.length > 0 && list.map((item, index) =>
+                    {list.map((item, index) =>
                       <li key={index}>{filterPrepositions(item)}</li>
                     )}
                   </ul>

@@ -8,7 +8,9 @@ import { ReactNode } from 'react';
 import { TypographyProvider } from './Typography/TypographyProvider';
 import { NavigationItem } from '@/store/navigation';
 
+
 function ReduxProvider({ children, initialNavigation }: { children: ReactNode; initialNavigation: NavigationItem[] }) {
+
   return <TypographyProvider
     threshold={16}
     smallWeightMac={300}
