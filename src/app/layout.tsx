@@ -28,7 +28,6 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'ru_RU',
   },
-  themeColor: '#646467',
   verification: {
     yandex: '90db85a0cc46fb2c',
   },
@@ -44,6 +43,11 @@ export const metadata: Metadata = {
     ],
   },
   manifest: '/site.webmanifest',
+}
+
+// Viewport configuration (themeColor перенесен сюда согласно Next.js 14+)
+export const viewport = {
+  themeColor: '#646467',
 }
 
 export default async function RootLayout({ children }: { children: ReactNode }) {

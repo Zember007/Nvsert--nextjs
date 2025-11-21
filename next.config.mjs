@@ -22,7 +22,7 @@ const nextConfig = {
   
   // Оптимизация для мобильных устройств
   experimental: {
-    optimizeCss: true, // Минификация CSS
+    // optimizeCss: true, // Отключено - требует установки critters
     optimizePackageImports: ['react-i18next', 'gsap'], // Tree shaking для тяжелых библиотек
   },
 
