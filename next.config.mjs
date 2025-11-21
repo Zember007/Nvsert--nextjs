@@ -17,7 +17,6 @@ const nextConfig = {
   },
   // Оптимизации производительности
   reactStrictMode: true,
-  swcMinify: true,
   compress: true,
   poweredByHeader: false,
 

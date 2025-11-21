@@ -29,15 +29,9 @@ const LayoutContent = ({ children, initialNavigation }: { children: ReactNode; i
             <AppHeader services={(initialNavigation && initialNavigation.length > 0) ? groupServices(initialNavigation) : []} />
 
             <main >
-                {/* Вариант 1: Передача через Context (рекомендуется) - используйте useNavigationContext() в компонентах */}
-                {/* Вариант 2: Передача через children как проп (раскомментируйте, если нужно) */}
+    
                 {children}
-                {/* Альтернативный вариант с передачей через cloneElement:
-                {isValidElement(children) 
-                    ? cloneElement(children, { initialNavigation } as any)
-                    : children
-                }
-                */}
+           
             </main>
             <AppFooter />
 
