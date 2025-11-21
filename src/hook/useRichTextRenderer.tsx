@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { filterPrepositions } from './filter';
 
 
 export const useRichTextRenderer = () => {
 
-    const processContent = (text: string, small?: boolean): React.ReactNode[] => {
+    const processContent = useCallback((text: string, small?: boolean): React.ReactNode[] => {
         text = text.trim();
 
         const lines = text.split('\n');
@@ -131,7 +131,7 @@ export const useRichTextRenderer = () => {
 
         flushList(); // Flush any remaining list items
         return elements;
-    };
+    }, []);
 
 
 

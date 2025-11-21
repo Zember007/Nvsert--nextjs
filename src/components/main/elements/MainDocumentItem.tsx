@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useEffect, useRef, useState, memo, useId } from 'react';
+import { useEffect, useRef, useState, memo, useId, useMemo, useCallback } from 'react';
 import { filterPrepositions } from '@/hook/filter';
 import { PhotoView } from '@/assets/lib/react-photo-view';
 import { useButton } from '@/hook/useButton';
@@ -23,9 +23,38 @@ const ANIMATION_SETTINGS = {
     closeY: [60, -6, 0, 0, 0],
 };
 
+// Выносим SVG иконки в константы
+const ArrowRightIcon = memo(() => (
+    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 9.48438V7.48438H0V9.48438H3ZM8.96767 1.48438L7.52908 2.91514L12.1092 7.47151H6V9.49623H12.1092L7.52908 14.0526L8.96767 15.4844L16 8.48438L15.2822 7.76899L14.5634 7.0526L8.96767 1.48438Z" fill="white" />
+    </svg>
+));
+ArrowRightIcon.displayName = 'ArrowRightIcon';
+
+// Утилита для проверки видимости элемента
+const isInViewport = (el: HTMLElement | null): boolean => {
+    if (!el) return false;
+    const rect = el.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+};
+
+// Утилита для скролла к элементу
+const scrollToElement = (el: HTMLElement | null, totalItems: number, index: number) => {
+    if (!el) return;
+    const scrollOptions: ScrollIntoViewOptions = {
+        behavior: 'smooth',
+        block: totalItems / 2 > index ? 'start' : 'end'
+    };
+    el.scrollIntoView(scrollOptions);
+};
+
 interface ActionButtonProps {
     onClick: () => void;
-    icon: React.ReactNode;
     text: string;
     className: string;
     setRef: (el: HTMLButtonElement) => void
@@ -40,14 +69,13 @@ interface DocumentListProps {
 
 // Типы для рефов
 type DivRef = HTMLDivElement | null;
-type ImageRef = HTMLImageElement | null;
 
-// Компонент кнопки
-const ActionButton = memo(({ onClick, icon, text, className, setRef }: ActionButtonProps) => (
+// Компонент кнопки (убрали icon prop, используем ArrowRightIcon)
+const ActionButton = memo(({ onClick, text, className, setRef }: ActionButtonProps) => (
     <button ref={setRef} onClick={onClick} className={`document__button ${className}`}>
         <span className="sendText ">{text}</span>
         <span className="sendIconLeft">
-            {icon}
+            <ArrowRightIcon />
         </span>
     </button>
 ));
@@ -123,42 +151,58 @@ const MainDocumentItem = memo(({
     totalItems = 0,
     index = 0
 }: MainDocumentItemProps) => {
-    const { processContent } = useRichTextRenderer()
-    const { width: windowWidth } = useWindowSize()
+    const { processContent } = useRichTextRenderer();
+    const { width: windowWidth } = useWindowSize();
     const controls = useAnimation();
     const [listHidden, setListHidden] = useState(true);
 
     const { setButtonRef, setWrapperRef } = useButton();
     const { openDefaultModal } = useHeaderContext();
+    const router = useRouter();
 
     const wrapperRef = useRef<DivRef>(null);
 
+    // Мемоизация вычисляемых значений
+    const hiddenList = useMemo(() => {
+        return windowWidth && windowWidth < 1280 ? 1 : 2;
+    }, [windowWidth]);
 
+    const isMobile = useMemo(() => {
+        return windowWidth && windowWidth < 960;
+    }, [windowWidth]);
 
-    const isInViewport = (el: HTMLElement | null): boolean => {
-        if (!el) return false;
-        const rect = el.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    };
+    const commonButtonClasses = 'group btnIconAn doc-btn tariff ';
 
-    const scrollToElement = (el: HTMLElement | null) => {
+    // Мемоизация обработанного контента
+    const processedContent = useMemo(() => {
+        return processContent(content, true);
+    }, [content, processContent]);
 
-        if (!el) return;
+    // Мемоизация URL изображений
+    const imageUrls = useMemo(() => ({
+        thumbnail: 'https://test11.audiosector.ru/cp' + img?.formats?.thumbnail?.url,
+        full: 'https://test11.audiosector.ru/cp' + img?.url
+    }), [img]);
 
-        const scrollOptions: ScrollIntoViewOptions = {
-            behavior: 'smooth',
-            block: totalItems / 2 > index ? 'start' : 'end'
-        };
+    // Мемоизация обработчиков
+    const handleItemClick = useCallback(() => {
+        setActive(!active);
+    }, [active, setActive]);
 
-        el.scrollIntoView(scrollOptions);
+    const handleOrderClick = useCallback(() => {
+        openDefaultModal('orderForm');
+    }, [openDefaultModal]);
 
-    };
+    const handleServiceClick = useCallback(() => {
+        router.push('/services/' + link);
+    }, [router, link]);
 
+    const handleNavigationClick = useCallback((item: any, event: React.MouseEvent) => {
+        event.preventDefault();
+        router.push('/services/' + link + '#block-' + item.id);
+    }, [router, link]);
+
+    // Эффект для анимации и скролла
     useEffect(() => {
         if (!active) return;
 
@@ -176,24 +220,14 @@ const MainDocumentItem = memo(({
         const el = wrapperRef.current;
         let timerScroll: NodeJS.Timeout | null = null;
         if (el && !isInViewport(el)) {
-            timerScroll = setTimeout(() => scrollToElement(el), 400);
+            timerScroll = setTimeout(() => scrollToElement(el, totalItems, index), 400);
         }
 
         return () => {
-            if (timer) clearTimeout(timer);
+            clearTimeout(timer);
             if (timerScroll) clearTimeout(timerScroll);
         };
-    }, [active, controls]);
-
-    const handleItemClick = () => {
-        setActive(!active);
-    };
-
-    const commonButtonClasses = 'group btnIconAn doc-btn tariff ';
-
-    const hiddenList = windowWidth && windowWidth < 1280 ? 1 : 2;
-
-    const router = useRouter();
+    }, [active, controls, totalItems, index]);
 
 
     return (
@@ -220,7 +254,7 @@ const MainDocumentItem = memo(({
                     >
                         <Image
                             alt='document'
-                            src={'https://test11.audiosector.ru/cp' + img?.formats?.thumbnail?.url}
+                            src={imageUrls.thumbnail}
                             width={41}
                             height={58}
                             loading="lazy"
@@ -257,7 +291,7 @@ const MainDocumentItem = memo(({
                 <div className={`document__hidden ${active && 'active bg-[#FFFFFF26]'}`}>
                     <div className="document__item  ">
                         <div className="document__list-photo">
-                            {windowWidth && windowWidth < 960 &&
+                            {isMobile &&
                                 <>
 
                                     <div className="document-content-wrapper">
@@ -267,13 +301,7 @@ const MainDocumentItem = memo(({
                                             className="tariff-wrap w-[280px] l:mx-0 mx-auto l:w-[250px] " ref={setWrapperRef}>
                                             <ActionButton
                                                 setRef={setButtonRef}
-                                                onClick={() => openDefaultModal('orderForm')}
-                                                icon={
-                                                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M3 9.48438V7.48438H0V9.48438H3ZM8.96767 1.48438L7.52908 2.91514L12.1092 7.47151H6V9.49623H12.1092L7.52908 14.0526L8.96767 15.4844L16 8.48438L15.2822 7.76899L14.5634 7.0526L8.96767 1.48438Z" fill="white" />
-                                                    </svg>
-
-                                                }
+                                                onClick={handleOrderClick}
                                                 text="Оформить заявку"
                                                 className={commonButtonClasses}
                                             />
@@ -281,16 +309,10 @@ const MainDocumentItem = memo(({
                                         <motion.div
                                             animate={controls}
                                             initial={{ y: 20 }}
-                                            className="tariff-wrap w-[280px] l:mx-0 mx-auto l:w-[250px] " ref={setWrapperRef}>
+                                            className="tariff-wrap w-[280px] l:mx-0 mx-auto l:w-[250px] ">
                                             <ActionButton
                                                 setRef={setButtonRef}
-                                                onClick={() => router.push('/services/' + link)}
-                                                icon={
-                                                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M3 9.48438V7.48438H0V9.48438H3ZM8.96767 1.48438L7.52908 2.91514L12.1092 7.47151H6V9.49623H12.1092L7.52908 14.0526L8.96767 15.4844L16 8.48438L15.2822 7.76899L14.5634 7.0526L8.96767 1.48438Z" fill="white" />
-                                                    </svg>
-
-                                                }
+                                                onClick={handleServiceClick}
                                                 text="Перейти в услугу"
                                                 className={commonButtonClasses}
                                             />
@@ -318,7 +340,7 @@ const MainDocumentItem = memo(({
                                             <span>{price}</span>
                                         </>
                                     }
-                                    src={'https://test11.audiosector.ru/cp' + img?.url}
+                                    src={imageUrls.full}
                                     width={475}
                                     height={667}
                                 >
@@ -328,7 +350,7 @@ const MainDocumentItem = memo(({
                                         animate={controls}
                                         className="document__big-img ">
                                         <Image
-                                            alt='document' src={'https://test11.audiosector.ru/cp' + img?.url}
+                                            alt='document' src={imageUrls.full}
                                             width={250}
                                             height={349}
                                             loading={index === 1 ? 'eager' : 'lazy'}
@@ -344,7 +366,7 @@ const MainDocumentItem = memo(({
                                 <div className="document-content-column">
                                     <div className="document-text-content">
                                         <div className='document-description'>
-                                            {processContent(content, true)}
+                                            {processedContent}
                                         </div>
                                         <DocumentList
                                             hiddenList={hiddenList}
@@ -356,19 +378,14 @@ const MainDocumentItem = memo(({
 
 
 
-                                    {windowWidth && windowWidth >= 960 &&
+                                    {!isMobile &&
                                         <motion.div
                                             animate={controls}
                                             initial={{ y: 20 }}
                                             className="tariff-wrap max-w-full w-[280px]  l:w-[250px]" ref={setWrapperRef}>
                                             <ActionButton
                                                 setRef={setButtonRef}
-                                                onClick={() => openDefaultModal('orderForm')}
-                                                icon={
-                                                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M3 9.48438V7.48438H0V9.48438H3ZM8.96767 1.48438L7.52908 2.91514L12.1092 7.47151H6V9.49623H12.1092L7.52908 14.0526L8.96767 15.4844L16 8.48438L15.2822 7.76899L14.5634 7.0526L8.96767 1.48438Z" fill="white" />
-                                                    </svg>
-                                                }
+                                                onClick={handleOrderClick}
                                                 text="Оформить заявку"
                                                 className={commonButtonClasses}
                                             />
@@ -381,25 +398,24 @@ const MainDocumentItem = memo(({
                         <div className="document__list-wrap">
                             <div className="flex flex-col gap-[20px]">
                                 {navigationList.map((item, index) => (
-                                    <DotNavItem key={index} item={item} index={index} onClick={(item, event) => { event.preventDefault(); router.push('/services/' + link + '#block-' + item.id) }} 
-                                    disabledPadding={true}
+                                    <DotNavItem 
+                                        key={index} 
+                                        item={item} 
+                                        index={index} 
+                                        onClick={handleNavigationClick} 
+                                        disabledPadding={true}
                                     />
                                 ))}
                             </div>
 
-                            {windowWidth && windowWidth >= 960 &&
+                            {!isMobile &&
                                 <motion.div
                                     animate={controls}
                                     initial={{ y: 20 }}
-                                    className="tariff-wrap max-w-full w-[280px]  l:w-[250px] " ref={setWrapperRef}>
+                                    className="tariff-wrap max-w-full w-[280px]  l:w-[250px] ">
                                     <ActionButton
                                         setRef={setButtonRef}
-                                        onClick={() => router.push('/services/' + link)}
-                                        icon={
-                                            <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M3 9.48438V7.48438H0V9.48438H3ZM8.96767 1.48438L7.52908 2.91514L12.1092 7.47151H6V9.49623H12.1092L7.52908 14.0526L8.96767 15.4844L16 8.48438L15.2822 7.76899L14.5634 7.0526L8.96767 1.48438Z" fill="white" />
-                                            </svg>
-                                        }
+                                        onClick={handleServiceClick}
                                         text="Перейти в услугу"
                                         className={commonButtonClasses}
                                     />

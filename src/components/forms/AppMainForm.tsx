@@ -253,6 +253,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
     const contactInputProps = useMemo(() => ({
         defaultValue: isEmail ? contactData.email : isPhone ? contactData.phone : '',
         title: isPhone ? 'Телефон' : isEmail ? 'Email' : '',
+        placeholder: isPhone ? 'Введите номер телефона' : isEmail ? 'Введите email' : '',
         inputName: "contact",
         mask: isPhone ? "phone" : '',
         type: isPhone ? "tel" : 'text',
