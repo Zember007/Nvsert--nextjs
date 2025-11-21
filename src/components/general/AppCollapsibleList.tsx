@@ -1,7 +1,7 @@
 'use client';
 
-import { motion, useAnimation } from 'framer-motion';
-import React, { useEffect, useId, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import React, { useId, useState } from 'react';
 
 type AppCollapsibleListProps<ItemType> = {
     title: React.ReactNode;
@@ -25,52 +25,6 @@ function AppCollapsibleList<ItemType = unknown>({
     position = 'right',
 }: AppCollapsibleListProps<ItemType>) {
     const [isOpen, setIsOpen] = useState<boolean>(defaultOpen);
-
-    const controls = useAnimation();
-    const ANIMATION_SETTINGS = {
-        duration: 0.6,
-        bounce: 5,
-        delay: 0,
-        ease: [0.34, 1.56, 0.64, 1],
-        times: [0, 0.2, 0.5, 0.8, 1],
-        openY: [0, 26, 0, 0, 0],
-        closeY: [60, -6, 0, 0, 0],
-    };
-
-    const animation = () => {
-        controls.start({
-            y: ANIMATION_SETTINGS.openY,
-            transition: {
-                duration: ANIMATION_SETTINGS.duration,
-                ease: ANIMATION_SETTINGS.ease,
-                times: ANIMATION_SETTINGS.times
-            }
-        });
-    }
-
-    useEffect(() => {
-        if (isOpen) {
-            animation()
-        }
-    }, [isOpen])
-
-    const [delayedVisible, setDelayedVisible] = useState(false);
-
-    useEffect(() => {
-      let timer: NodeJS.Timeout | null = null;
-  
-      if (isOpen) {
-        setDelayedVisible(true)
-        timer = setTimeout(() => setDelayedVisible(false), 100);
-      } else {
-        // если закрывается — сразу скрываем
-        setDelayedVisible(false);
-      }
-  
-      return () => {
-        if (timer) clearTimeout(timer);
-      };
-    }, [isOpen]);
 
     const clipPathId = useId();
 
@@ -103,26 +57,54 @@ function AppCollapsibleList<ItemType = unknown>({
                         </defs>
                     </svg>
                     <span className="group-hover:text-[#34446D] transition-all duration-100 text-[16px] text-[#161616] leading-[18px]  ">{title}</span>
-
                 </span>
             </button>
 
-            <div className={`${!isOpen ? "overflow-y-hidden max-h-0" : delayedVisible ? "overflow-y-visible pb-[60px]" : "overflow-y-hidden "} transition-all duration-100`}>
-
-                <div
-                    className={`  ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'} pt-[20px]  transition-all duration-100`}>
+            <AnimatePresence initial={false}>
+                {isOpen && (
                     <motion.div
-                      
-                        animate={controls}
-                        className={`${listClassName} relative`}
+                        initial={{ height: 0 }}
+                        animate={{ 
+                            height: 'auto', 
+                            transition: {
+                                height: {
+                                    duration: 0.1,
+                                    ease: [0.4, 0, 0.2, 1]
+                                }
+                            }
+                        }}
+                        exit={{ 
+                            height: 0, 
+                            transition: {
+                                height: {
+                                    duration: 0.1,
+                                    ease: [0.4, 0, 0.2, 1]
+                                }
+                            }
+                        }}
+                        style={{ overflow: 'visible' }}
+                        className="pb-[60px]"
                     >
-                        {typeof renderItem === 'function' && Array.isArray(items)
-                            ? items.map((item, index) => renderItem(item, index))
-                            : null}
+                        <motion.div
+                            initial={{ y: 0 }}
+                            animate={{ 
+                                y: [0, 26, 0, 0, 0],
+                                transition: {
+                                    delay: 0.1,
+                                    duration: 0.6,
+                                    ease: [0.34, 1.56, 0.64, 1],
+                                    times: [0, 0.2, 0.5, 0.8, 1]
+                                }
+                            }}
+                            className={`${listClassName} relative pt-[20px]`}
+                        >
+                            {typeof renderItem === 'function' && Array.isArray(items)
+                                ? items.map((item, index) => renderItem(item, index))
+                                : null}
+                        </motion.div>
                     </motion.div>
-
-                </div>
-            </div >
+                )}
+            </AnimatePresence>
         </div>
     );
 }
