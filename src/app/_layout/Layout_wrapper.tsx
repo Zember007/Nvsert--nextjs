@@ -1,13 +1,14 @@
 import '@/assets/styles/base.scss';
-import '@/assets/lib/react-photo-view/dist/react-photo-view.css';
 import AppHeader from '@/components/general/AppHeader';
-import { ReactNode, useEffect, useRef, cloneElement, isValidElement } from 'react';
-import AppFooter from '@/components/general/AppFooter';
+import { ReactNode, lazy, Suspense } from 'react';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import AppModalWrapper from '@/components/general/AppModalWrapper';
 import CopyNotification from '@/components/general/elements/CopyNotification';
 import { NavigationItem } from '@/store/navigation';
 import { groupServices } from '@/assets/lib/navigation';
+
+// Lazy load footer для уменьшения TBT
+const AppFooter = lazy(() => import('@/components/general/AppFooter'));
 
 
 const LayoutContent = ({ children, initialNavigation }: { children: ReactNode; initialNavigation?: NavigationItem[]; }) => {
@@ -33,7 +34,9 @@ const LayoutContent = ({ children, initialNavigation }: { children: ReactNode; i
                 {children}
            
             </main>
-            <AppFooter />
+            <Suspense fallback={<div style={{ minHeight: '200px' }} />}>
+                <AppFooter />
+            </Suspense>
 
             {/* <CustomScrollbar target="window" /> */}
 

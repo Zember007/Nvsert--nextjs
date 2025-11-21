@@ -1,11 +1,16 @@
 'use client'
 import MainDocumentItem from "./elements/MainDocumentItem";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState, useEffect } from "react";
 import '@/assets/styles/sections/main/animation/documents.scss'
 import '@/assets/styles/sections/main/main-documents.scss'
 import { PhotoProvider } from '@/assets/lib/react-photo-view';
 import { useTranslation } from "react-i18next";
 import { useHeaderContext } from "../contexts/HeaderContext";
+
+// Lazy load CSS для react-photo-view
+if (typeof window !== 'undefined') {
+  import('@/assets/lib/react-photo-view/dist/react-photo-view.css');
+}
 
 const AppMainDocuments = () => {
     const [activeIndex, setActive] = useState<number | null>(null);

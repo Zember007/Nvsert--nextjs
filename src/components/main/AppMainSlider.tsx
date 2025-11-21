@@ -139,7 +139,9 @@ const SliderMain = () => {
 
     const { t } = useTranslation()
 
-    const slidesLang = t('MainSlider.items', { returnObjects: true }) as slideItem[]
+    // Защита от ошибок при загрузке переводов
+    const slidesLangRaw = t('MainSlider.items', { returnObjects: true }) as slideItem[] | undefined;
+    const slidesLang = Array.isArray(slidesLangRaw) ? slidesLangRaw : [];
 
     const overlayText = useRef<HTMLDivElement>(null)
 
@@ -255,12 +257,12 @@ const SliderMain = () => {
                         <div className="overlay-content-container">
                             <h3 className="overlay-title header-h-6">
                                 {
-                                    filterPrepositions(slidesLang[activeIndex].title)
+                                    slidesLang[activeIndex] && filterPrepositions(slidesLang[activeIndex].title)
                                 }
                             </h3>
                             <p className={`slide-text-content text-3`}>
 
-                                {filterPrepositions(slidesLang[activeIndex].text)}
+                                {slidesLang[activeIndex] && filterPrepositions(slidesLang[activeIndex].text)}
 
                             </p>
                         </div>

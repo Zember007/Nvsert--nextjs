@@ -8,6 +8,11 @@ import { useTranslation } from 'react-i18next';
 import useWindowSize from '@/hook/useWindowSize';
 import '@/assets/styles/sections/main/main-feedback.scss';
 
+// Lazy load CSS для react-photo-view
+if (typeof window !== 'undefined') {
+  import('@/assets/lib/react-photo-view/dist/react-photo-view.css');
+}
+
 // Константы для изображений отзывов
 const FEEDBACK_FIRST_ROW_COUNT = 14;
 const FEEDBACK_SECOND_ROW_START = 15;
