@@ -4,7 +4,10 @@ import AppHeader from '@/components/general/AppHeader';
 import { ReactNode, useEffect, useRef, cloneElement, isValidElement } from 'react';
 import AppFooter from '@/components/general/AppFooter';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
-import AppModalWrapper from '@/components/general/AppModalWrapper';
+import dynamic from 'next/dynamic';
+const AppModalWrapper = dynamic(() => import('@/components/general/AppModalWrapper'), {
+    loading: () => <div>Loading...</div>,
+});
 import CopyNotification from '@/components/general/elements/CopyNotification';
 import { NavigationItem } from '@/store/navigation';
 import { groupServices } from '@/assets/lib/navigation';
