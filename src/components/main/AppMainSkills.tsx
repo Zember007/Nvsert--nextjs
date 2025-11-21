@@ -13,11 +13,11 @@ import Button from '@/components/ui/Button';
 const AppMainSkills = () => {
 
     const { t } = useTranslation()
-    const { width: widthWindow } = useWindowSize()
-    const { ref, isVisible: isVisibleSection } = useIntersectionObserver({}, true);
-    const skillsData = (widthWindow && widthWindow < 1407) ? skills.filter(item => !item.empty) : skills;
+/*     const { width: widthWindow } = useWindowSize() */
+/*     const { ref, isVisible: isVisibleSection } = useIntersectionObserver({}, true); */
+/*     const skillsData = (widthWindow && widthWindow < 1407) ? skills.filter(item => !item.empty) : skills; */
 
-    useEffect(() => {
+/*     useEffect(() => {
 
         const observer = new IntersectionObserver(
             async ([entry]) => {
@@ -91,9 +91,9 @@ const AppMainSkills = () => {
             }
 
         };
-    }, [widthWindow]);
+    }, [widthWindow]); */
 
-    const timeLine = useRef<any>(null)
+/*     const timeLine = useRef<any>(null) */
     const [activeIndex, setActive] = useState<number>(0)
 
 
@@ -101,7 +101,6 @@ const AppMainSkills = () => {
     return (
 
         <section
-            ref={ref}
             className="section ">
             <div id="skills" className="absolute top-[-50px] pointer-events-none" ></div>
 
@@ -109,11 +108,10 @@ const AppMainSkills = () => {
             <div className="skills__wrapper">
                 <div className="skills-content-container">
                     <div className="skills__box"
-                        style={{ ...(widthWindow && widthWindow < 960 && { gap: Math.round((widthWindow - (250)) / 2) }) }}
                     >
 
                         {
-                            skillsData.map((skill, index) => {
+                            skills.map((skill, index) => {
                                 if (skill.empty) return <div key={index}></div>;
 
 
@@ -124,7 +122,7 @@ const AppMainSkills = () => {
                                         data-slider="slide-skill"
                                     >
                                         <AppSkillBlock
-                                            img={skill.img} title={t(`MainSkills.${skill.key}.title`)} isVisible={isVisibleSection} text={t(`MainSkills.${skill.key}.text`, { returnObjects: true }) as string[]} bg={skill.bg} folder={skill.folder} />
+                                            img={skill.img} title={t(`MainSkills.${skill.key}.title`)} isVisible={true} text={t(`MainSkills.${skill.key}.text`, { returnObjects: true }) as string[]} bg={skill.bg} folder={skill.folder} />
 
                                     </div>
                                 );
@@ -133,11 +131,9 @@ const AppMainSkills = () => {
                     </div>
                     <div className="slide-dots-box-container">
                         <div className="slide-dots-box">
-                            {skillsData.map((_, i) => (
+                            {skills.map((_, i) => (
                                 <div
-                                    onClick={() => {
-                                        timeLine.current.toIndex(i, { ease: "power3", duration: 0.725 })
-                                    }}
+                                   
                                     key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
                             ))}
                         </div>
