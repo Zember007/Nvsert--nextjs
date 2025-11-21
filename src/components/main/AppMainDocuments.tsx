@@ -41,7 +41,7 @@ const AppMainDocuments = () => {
                             active={index === activeIndex}
                             content={item.description}
                             documentsList={item.documents}
-                            navigationList={item.content?.map((list) => ({ id: list.id, title: list.heading })) || []}
+                            navigationList={item.content?.map((list, index) => ({ id: index, title: list.heading })) || []}
                             duration={item.duration}
                             img={item.img}
                             price={item.price}

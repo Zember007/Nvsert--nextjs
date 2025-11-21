@@ -10,14 +10,7 @@ interface CopyNotificationProps {
 
 const CopyNotification = ({ isVisible, onHide, duration = 3000, position }: CopyNotificationProps) => {
   const { t } = useTranslation();
-  const [isRightSide, setIsRightSide] = useState(false);
-
-  useEffect(() => {
-    if (position && typeof window !== 'undefined') {
-      setIsRightSide(position.x > window.innerWidth / 2);
-    }
-  }, [position]);
-
+  
   useEffect(() => {
     if (!isVisible) return;
 
@@ -32,11 +25,11 @@ const CopyNotification = ({ isVisible, onHide, duration = 3000, position }: Copy
 
   return (
     <div 
-      className="fixed z-50 animate-fade-in"
+      key={`${position.x}-${position.y}`}
+      className="fixed z-50 animate-copy-notification"
       style={{
         left: `${position.x}px`,
         top: `${position.y}px`,
-        transform:'translateX(-100%)'
       }}
     >
       <div className="flex items-center gap-2 bg-[#00000080] backdrop-blur-[20px] rounded-[4px] px-4 py-3 text-white">

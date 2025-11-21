@@ -151,6 +151,7 @@ const MainDocumentItem = memo(({
     totalItems = 0,
     index = 0
 }: MainDocumentItemProps) => {
+    console.log(navigationList, 'navigationList');
     const { processContent } = useRichTextRenderer();
     const { width: windowWidth } = useWindowSize();
     const controls = useAnimation();

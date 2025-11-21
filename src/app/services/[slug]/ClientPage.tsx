@@ -27,13 +27,14 @@ const ContentBlockRenderer: React.FC<{
     isExpanded: boolean;
     onToggle: () => void;
     isFirst?: boolean;
-}> = ({ block, isExpanded = true, onToggle, isFirst = false }) => {
+    index?: number;
+}> = ({ block, isExpanded = true, onToggle, isFirst = false, index }) => {
     const { heading, richText, image } = block;
 
     if (richText && heading) {
         return (
             <div
-                id={'block-' + block.id}
+                id={'block-' + index}
                 className="w-full">
                 <div
                     className="flex justify-center group items-center gap-[10px] pb-[10px] border-b border-[#93969d80] cursor-pointer line-after"
@@ -88,6 +89,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
 
 
 
+
     const [expandedSections, setExpandedSections] = useState<number[]>([]);
     const [currentServiceIndex, setCurrentServiceIndex] = useState<number | null>(null);
 
@@ -119,28 +121,18 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
 
     useEffect(() => {
         if (currentServiceIndex === null) return;
-        let timer: NodeJS.Timeout | null = null;
+        
+        
         const idQuery = window.location.hash.split('#')[1];
         if (idQuery) {
-            timer = setTimeout(() => {
-                const element = document.getElementById(idQuery);
-                if (!element) return;
-                window.scrollTo({
-                    top: (element?.offsetTop) - 50,
-                    behavior: 'smooth'
-                });
-            }, 1000);
-        } else {
-            if (timer) {
-                clearTimeout(timer);
-            }
-        }
+            const element = document.getElementById(idQuery);
+            if (!element) return;
+            window.scrollTo({
+                top: (element?.offsetTop) - 50,
+                behavior: 'smooth'
+            });
+        } 
 
-        return () => {
-            if (timer) {
-                clearTimeout(timer);
-            }
-        }
     }, [currentServiceIndex]);
 
     const recomendedServices = useMemo(() => {
@@ -280,6 +272,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                                     />
                                                 )}
                                                 <ContentBlockRenderer
+                                                    index={index}
                                                     block={block}
                                                     isExpanded={!expandedSections.includes(block.id)}
                                                     onToggle={() => toggleSection(block.id)}
