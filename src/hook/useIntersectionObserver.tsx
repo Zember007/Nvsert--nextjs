@@ -1,39 +1,48 @@
+import { useEffect, useState, useRef, useMemo } from 'react';
 
-
-import { useEffect, useState, useRef } from 'react';
-
-export function useIntersectionObserver(options: IntersectionObserverInit = {}, disconnect: boolean = false) {
+export function useIntersectionObserver(
+  options: IntersectionObserverInit = {},
+  disconnect: boolean = false
+) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
 
+  // Мемоизируем options, чтобы избежать пересоздания observer
+  const memoizedOptions = useMemo(() => options, [
+    options.root,
+    options.rootMargin,
+    options.threshold,
+  ]);
+
   useEffect(() => {
-    if (!ref.current) return;
+    const element = ref.current;
+    if (!element) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
 
+          // Отключаем observer, если нужно срабатывание только один раз
           if (disconnect) {
             observer.disconnect();
           }
         } else {
-          setIsVisible(false);
+          // Не сбрасываем isVisible, если уже отключились
+          if (!disconnect) {
+            setIsVisible(false);
+          }
         }
       },
-      {
-        ...options,
-      },
+      memoizedOptions
     );
 
-    observer.observe(ref.current);
-
-
+    observer.observe(element);
 
     return () => {
       observer.disconnect();
     };
-  }, [options]);
+  }, [memoizedOptions, disconnect]);
 
   return { ref, isVisible };
 }

@@ -1,16 +1,16 @@
 'use client'
-/* import MainDocumentItem from "./elements/MainDocumentItem"; */
-import { useState } from "react";
+import MainDocumentItem from "./elements/MainDocumentItem";
+import { useCallback, useMemo, useState } from "react";
 import '@/assets/styles/sections/main/animation/documents.scss'
 import '@/assets/styles/sections/main/main-documents.scss'
 import { PhotoProvider } from '@/assets/lib/react-photo-view';
 import { useTranslation } from "react-i18next";
-/* import { useHeaderContext } from "../contexts/HeaderContext"; */
+import { useHeaderContext } from "../contexts/HeaderContext";
 
 const AppMainDocuments = () => {
     const [activeIndex, setActive] = useState<number | null>(null);
     const { t } = useTranslation();
-  /*   const { initialNavigation: navigation } = useHeaderContext(); */
+    const { initialNavigation: navigation } = useHeaderContext();
 
     const setActiveHandlers = (index: number, value: boolean) => {
         setActive(value ? index : null)
@@ -33,7 +33,7 @@ const AppMainDocuments = () => {
                 maskClosable={false}
             >
                 <div className="documents-container">
-                {/*     {navigation.map((item, index) => (
+                    {navigation.map((item, index) => (
                         <MainDocumentItem
                             link={item.slug}
                             key={item.slug || index}
@@ -49,7 +49,7 @@ const AppMainDocuments = () => {
                             totalItems={navigation.length || 0}
                             index={index + 1}
                         />
-                    ))} */}
+                    ))}
                 </div>
             </PhotoProvider>
         </section>
