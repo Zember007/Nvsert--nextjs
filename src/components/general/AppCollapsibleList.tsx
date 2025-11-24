@@ -85,7 +85,7 @@ function AppCollapsibleList<ItemType = unknown>({
                         style={{ overflow: 'visible' }}
                         className="pb-[60px]"
                     >
-                        <motion.div
+                        <motion.ul
                             initial={{ y: 0 }}
                             animate={{ 
                                 y: [0, 26, 0, 0, 0],
@@ -99,9 +99,13 @@ function AppCollapsibleList<ItemType = unknown>({
                             className={`${listClassName} relative pt-[20px]`}
                         >
                             {typeof renderItem === 'function' && Array.isArray(items)
-                                ? items.map((item, index) => renderItem(item, index))
+                                ? items.map((item, index) => (
+                                    <li key={index}>
+                                        {renderItem(item, index)}
+                                    </li>
+                                ))
                                 : null}
-                        </motion.div>
+                        </motion.ul>
                     </motion.div>
                 )}
             </AnimatePresence>

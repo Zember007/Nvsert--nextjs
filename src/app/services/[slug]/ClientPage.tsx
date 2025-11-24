@@ -30,7 +30,7 @@ const ContentBlockRenderer: React.FC<{
     index?: number;
 }> = ({ block, isExpanded = true, onToggle, isFirst = false, index }) => {
     const { heading, richText, image } = block;
-
+    console.log(image, 'image');
     if (richText && heading) {
         return (
             <div
@@ -58,7 +58,6 @@ const ContentBlockRenderer: React.FC<{
                         <RichTextRenderer content={richText.replace('📞 ', '')} />
                     </div>
                 )}
-
                 {
                     image?.url ? (
                         <div className="max-w-full mx-auto mx-auto mt-[50px] flex justify-center">
@@ -238,7 +237,6 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                                             dark={true}
                                                             classNameText='m:!whitespace-pre-line !whitespace-normal'
                                                             link={children.slug}
-                                                            key={children.id}
                                                             title={children.title}
                                                             img={'https://test11.audiosector.ru/cp' + children.img?.url}
                                                         />
