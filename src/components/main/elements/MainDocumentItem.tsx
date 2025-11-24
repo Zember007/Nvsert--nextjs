@@ -10,7 +10,7 @@ import useWindowSize from '@/hook/useWindowSize';
 import '@/assets/styles/sections/main/document-item.scss';
 import { useRouter } from 'next/navigation';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
-
+import { DotNavItem } from '@/components/general/DotNavList';
 
 // Выносим анимационные настройки
 const ANIMATION_SETTINGS = {
