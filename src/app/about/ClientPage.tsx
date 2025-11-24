@@ -85,10 +85,10 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
 
     // Генерируем элементы для правой навигации на основе загруженных данных
     const dotNavItems = aboutData?.content?.map((block, index) => ({
-        id: index + 1,
+        id: index,
         title: block.heading,
-        active: sectionsOpen.includes(index + 1),
-        href: `#block-${index + 1}`
+        active: sectionsOpen.includes(index),
+        href: `#block-${index}`
     })) || [];
 
     if (!aboutData) {

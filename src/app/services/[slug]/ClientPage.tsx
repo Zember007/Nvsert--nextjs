@@ -30,7 +30,6 @@ const ContentBlockRenderer: React.FC<{
     index?: number;
 }> = ({ block, isExpanded = true, onToggle, isFirst = false, index }) => {
     const { heading, richText, image } = block;
-    console.log(image, 'image');
     if (richText && heading) {
         return (
             <div
@@ -255,7 +254,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                     <div className="xl:hidden block w-full">
                                         <DotNavList
                                             position={null}
-                                            items={currentService?.content?.map(item => ({ id: item.id, title: item.heading }))}
+                                            items={currentService?.content?.map((item, index) => ({ id: index, title: item.heading, index: index }))}
                                         />
                                     </div>
                                     <div className="w-full flex flex-col items-center space-y-[50px]">
@@ -319,7 +318,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                                 />
 
                                 <DotNavList
-                                    items={currentService?.content?.map(item => ({ id: item.id, title: item.heading }))}
+                                    items={currentService?.content?.map((item, index) => ({ id: index, title: item.heading, index: index }))}
                                 />
                             </div>
                         </div>

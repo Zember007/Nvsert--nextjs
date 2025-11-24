@@ -10,7 +10,7 @@ import useWindowSize from '@/hook/useWindowSize';
 import '@/assets/styles/sections/main/document-item.scss';
 import { useRouter } from 'next/navigation';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
-import { DotNavItem } from '@/components/general/DotNavList';
+
 
 // Выносим анимационные настройки
 const ANIMATION_SETTINGS = {
@@ -151,7 +151,6 @@ const MainDocumentItem = memo(({
     totalItems = 0,
     index = 0
 }: MainDocumentItemProps) => {
-    console.log(navigationList, 'navigationList');
     const { processContent } = useRichTextRenderer();
     const { width: windowWidth } = useWindowSize();
     const controls = useAnimation();
