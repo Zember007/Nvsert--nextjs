@@ -16,6 +16,7 @@ const Button: FC<TariffButtonProps> = ({
     buttonClassName,
     onClick,
 }) => {
+    
     const { setButtonRef, setWrapperRef } = useButton();
 
     return (

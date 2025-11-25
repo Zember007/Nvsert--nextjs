@@ -59,6 +59,7 @@ function AppCollapsibleList<ItemType = unknown>({
                     <span className="group-hover:text-[#34446D] transition-all duration-100 text-[16px] text-[#161616] leading-[18px]  ">{title}</span>
                 </span>
             </button>
+            
 
             <AnimatePresence initial={false}>
                 {isOpen && (

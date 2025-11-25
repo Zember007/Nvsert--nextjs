@@ -8,6 +8,7 @@ export const StrapiResponsiveImage = ({
   priority?: boolean 
 }) => {
   if (!image) return null;
+  
 
   return (
     <picture>

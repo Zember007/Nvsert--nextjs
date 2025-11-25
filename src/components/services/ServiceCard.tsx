@@ -36,6 +36,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
     const imageHeight = certificate.img?.formats?.medium?.height || 346;
 
     return (
+        
         href ? (
             <Link
                 href={href}

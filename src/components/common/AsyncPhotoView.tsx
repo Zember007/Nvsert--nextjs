@@ -17,6 +17,7 @@ export const AsyncPhotoView = dynamic(
   {
     ssr: false,
   }
+  
 ) as React.ComponentType<ComponentProps<any>>;
 
 

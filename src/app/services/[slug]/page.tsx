@@ -28,6 +28,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   const navigation = await getNavigationData(slug);
   if (!navigation) return <div>Service not found</div>;
 
+  
   return <ClientPage initialNavigation={navigation} initialSlug={slug} />;
 }
 

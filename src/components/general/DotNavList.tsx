@@ -69,6 +69,7 @@ const DotNavList: React.FC<{
             observer.disconnect();
         };
     }, [items]);
+    
 
     const navigationItems = useMemo(() => {
         return items?.map(item => ({

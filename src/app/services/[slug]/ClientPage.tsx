@@ -75,6 +75,7 @@ const ContentBlockRenderer: React.FC<{
     return null;
 };
 
+
 interface ClientPageProps {
     initialNavigation: NavigationItem;
     initialSlug: string;

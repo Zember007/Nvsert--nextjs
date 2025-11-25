@@ -86,6 +86,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                 onTouchEnd={() => setNoActive(false)}
                 className={`w-full cursor-pointer`}
             >
+                
                 <div className={`line-after__box justify-between group wrapper xxl:flex-row flex-col flex xxl:items-center py-[25px] overflow-hidden`}>
                     <div className="w-[250px]">
                         <div className={`flex gap-[22px] justify-start w-fit items-center transition-transform duration-100  group-active:scale-[.9] ${active && 'scale-[.9]'}`}>
