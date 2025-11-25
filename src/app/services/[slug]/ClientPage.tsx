@@ -147,7 +147,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                 maskOpacity={0.4} maskClassName="blurred-mask"
                 speed={() => 0}
                 loop={true}
-                onIndexChange={(index) => {
+                onIndexChange={(index: number) => {
                     setCurrentServiceIndex(index);
                     if (navigation?.[index]) {
                         const newUrl = `/services/${navigation[index].slug}`;
