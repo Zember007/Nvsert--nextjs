@@ -4,7 +4,7 @@ import StandardPageLayout from '@/components/general/StandardPageLayout';
 import CollapseSection from '@/components/general/CollapseSection';
 import Image from 'next/image';
 import { useButton } from '@/hook/useButton';
-import { PhotoProvider, PhotoView } from '@/assets/lib/react-photo-view';
+import { AsyncPhotoProvider, AsyncPhotoView } from '@/components/common/AsyncPhotoView';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
 
 type FeedbackPhoto = {
@@ -51,7 +51,7 @@ const FeedbackCard: React.FC<{ item: FeedbackItem }> = ({ item }) => {
     const clip0_4632_2058 = useId()
 
     return (
-        <PhotoView
+        <AsyncPhotoView
             src={'https://test11.audiosector.ru/cp' + img}
             width={250}
             height={37}
@@ -105,7 +105,7 @@ const FeedbackCard: React.FC<{ item: FeedbackItem }> = ({ item }) => {
 
                 </div>
             </div>
-        </PhotoView>
+        </AsyncPhotoView>
     );
 };
 
@@ -132,7 +132,7 @@ const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ 
     }));
 
     return (
-        <PhotoProvider
+        <AsyncPhotoProvider
             maskOpacity={0.4}
             maskClassName="blurred-mask"
             speed={() => 0}
@@ -228,7 +228,7 @@ const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ 
                     );
                 })}
             </StandardPageLayout>
-        </PhotoProvider>
+        </AsyncPhotoProvider>
     );
 };
 

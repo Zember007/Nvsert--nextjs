@@ -3,16 +3,10 @@ import Provider from "./_layout/Provider"
 import '@/assets/styles/base/_mixins.scss' */
 import '@/assets/styles/main.scss'
 import { ReactNode } from "react"
-import { Roboto } from 'next/font/google'
 import type { Metadata } from 'next'
 import { ScrollToTop } from '@/hook/scrollTop';
 import { getNavigationData } from '@/assets/lib/navigation';
-
-const font = Roboto({
-  subsets: ['latin', 'cyrillic'],
-  weight: ['400', '500', '700'],
-  display: 'swap',
-})
+import { robotoLocal } from './_fonts/robotoLocal';
 
 export const metadata: Metadata = {
   title: 'NVSERT - Декларирование, сертификация, лицензирование',
@@ -51,13 +45,8 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   
   return (
     <html lang="ru" >
-      <head>
-        <link rel="preconnect" href="https://test11.audiosector.ru" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://test11.audiosector.ru" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      </head>
-      <body className={`${font.className} bg-noise`}>
+      <head />
+      <body className={`${robotoLocal.className} bg-noise`}>
         <Provider initialNavigation={initialNavigation}>
           <ScrollToTop />
           {children}

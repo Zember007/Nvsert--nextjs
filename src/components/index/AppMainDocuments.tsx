@@ -1,9 +1,9 @@
 'use client'
 import MainDocumentItem from "./elements/MainDocumentItem";
-import { useCallback, useMemo, useState } from "react";
+import { useState } from "react";
 import '@/assets/styles/sections/main/animation/documents.scss'
 import '@/assets/styles/sections/main/main-documents.scss'
-import { PhotoProvider } from '@/assets/lib/react-photo-view';
+import { AsyncPhotoProvider } from '@/components/common/AsyncPhotoView';
 import { useTranslation } from "react-i18next";
 import { useHeaderContext } from "../contexts/HeaderContext";
 
@@ -25,11 +25,11 @@ const AppMainDocuments = () => {
                 {t('docs.heading')}
             </h2>
 
-            <PhotoProvider
+            <AsyncPhotoProvider
                 maskOpacity={0.4}
                 maskClassName="blurred-mask"
                 speed={() => 0}
-                onIndexChange={(index) => { setActive(index); }}
+                onIndexChange={(index: number) => { setActive(index); }}
                 maskClosable={false}
             >
                 <div className="documents-container">
@@ -51,7 +51,7 @@ const AppMainDocuments = () => {
                         />
                     ))}
                 </div>
-            </PhotoProvider>
+            </AsyncPhotoProvider>
         </section>
     );
 };

@@ -8,7 +8,7 @@ import Button from '@/components/ui/Button';
 import AppCtaBanner from '@/components/general/AppCtaBanner';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import { ContentBlock, NavigationItem } from '@/store/navigation';
-import { PhotoProvider, PhotoView } from '@/assets/lib/react-photo-view';
+import { AsyncPhotoProvider, AsyncPhotoView } from '@/components/common/AsyncPhotoView';
 import DotNavList from '@/components/general/DotNavList';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
 import { filterPrepositions } from '@/hook/filter';
@@ -143,7 +143,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
         <div className="main text-[#000]  mb-[100px]">
             <AppBreadcrumbs root={'/'} breadcrumbs={[{ id: 2, title: 'Все услуги', full_slug: '/services' }, { id: 3, title: currentService?.title || '', full_slug: '/services/' + currentService?.slug }]} />
 
-            <PhotoProvider
+            <AsyncPhotoProvider
                 maskOpacity={0.4} maskClassName="blurred-mask"
                 speed={() => 0}
                 loop={true}
@@ -156,7 +156,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                 }}
                 maskClosable={false}
             >
-                {navigation?.map((item) => <PhotoView
+                {navigation?.map((item) => <AsyncPhotoView
                     key={item.id}
                     title={item.title}
                     description={
@@ -171,8 +171,8 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                 >
                     <div id={'service-' + item.id}>
                     </div>
-                </PhotoView>)}
-            </PhotoProvider>
+                </AsyncPhotoView>)}
+            </AsyncPhotoProvider>
 
             {/* Main Content */}
             {(currentService) &&

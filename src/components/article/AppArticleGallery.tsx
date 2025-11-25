@@ -1,6 +1,5 @@
 import Image from "next/image";
-import { PhotoView } from '@/assets/lib/react-photo-view';
-import { PhotoProvider } from '@/assets/lib/react-photo-view';
+import { AsyncPhotoProvider, AsyncPhotoView } from '@/components/common/AsyncPhotoView';
 
 interface MediaItem {
     image_webp: string;
@@ -15,22 +14,22 @@ const AppArticleGallery: React.FC<AppArticleGalleryProps> = ({ media }) => {
 
     return (
         <div className="mtp__gallery js-mtp-gallery">
-            <PhotoProvider maskOpacity={0.4}>
+            <AsyncPhotoProvider maskOpacity={0.4}>
                 <div className="mtp__gallery-wrapper">
                     {
                         media.map((item, index) => (
                             <div key={index} className="mtp__gallery-item js-mtp-gallery-item">
-                                <PhotoView src={item.image_webp}>
+                                <AsyncPhotoView src={item.image_webp}>
                                     <Image src={item.image_webp} alt={'gallery'} width="0"
                                         height="0"
                                         sizes="100vw"
                                         className="w-full h-auto" loading="lazy" />
-                                </PhotoView>
+                                </AsyncPhotoView>
                             </div>
                         ))
                     }
                 </div>
-            </PhotoProvider>
+            </AsyncPhotoProvider>
         </div >
     );
 };

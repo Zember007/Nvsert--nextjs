@@ -1,6 +1,6 @@
 'use client'
 
-import { PhotoProvider, PhotoView } from '@/assets/lib/react-photo-view';
+import { AsyncPhotoProvider, AsyncPhotoView } from '@/components/common/AsyncPhotoView';
 import { useEffect, useRef, useState } from 'react';
 import { useButton } from '@/hook/useButton';
 import Image from 'next/image';
@@ -96,7 +96,7 @@ const AppMainFeedback = () => {
             <div id="feedback" className="absolute top-[-50px] pointer-events-none" ></div>
 
             <h2 className="section__title header-h-2">{t('MainFeedback.title')}</h2>
-            <PhotoProvider maskOpacity={0.4} maskClassName="blurred-mask"
+            <AsyncPhotoProvider maskOpacity={0.4} maskClassName="blurred-mask"
                 speed={() => 0}
 
                 maskClosable={false}
@@ -118,8 +118,7 @@ const AppMainFeedback = () => {
                             {[...Array(14)].map((_, index) =>
                                 <div
                                     data-slider="slide-feedback" key={index} className="feedback-item">
-                                    <PhotoView src={`/feedbacks/big/${index + 1}.png`}
-                                    >
+                                    <AsyncPhotoView src={`/feedbacks/big/${index + 1}.png`}>
                                         <Image
                                             className='feedback-image'
                                             src={`/feedbacks/small/${index + 1}.png`}
@@ -128,7 +127,7 @@ const AppMainFeedback = () => {
                                             height={267}
                                             loading="lazy"
                                         />
-                                    </PhotoView>
+                                    </AsyncPhotoView>
                                 </div>)}
 
                         </div>
@@ -148,8 +147,7 @@ const AppMainFeedback = () => {
                             {[...Array(14)].map((_, index) =>
                                 <div
                                     data-slider="slide-feedback1" key={index} className="feedback-item">
-                                    <PhotoView
-                                        src={`/feedbacks/big/${15 + index}.png`}>
+                                    <AsyncPhotoView src={`/feedbacks/big/${15 + index}.png`}>
                                         <Image
                                             className='feedback-image'
                                             src={`/feedbacks/small/${15 + index}.png`}
@@ -157,7 +155,7 @@ const AppMainFeedback = () => {
                                             width={190}
                                             height={267}
                                             loading="lazy" />
-                                    </PhotoView>
+                                    </AsyncPhotoView>
                                 </div>)}
 
                         </div>
@@ -179,7 +177,7 @@ const AppMainFeedback = () => {
                     </div>
 
                 </div>
-            </PhotoProvider>
+            </AsyncPhotoProvider>
         </section>
 
     );
