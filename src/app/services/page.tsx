@@ -24,6 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
 const Page = async () => {
     // Загружаем навигацию на сервере
     const initialNavigation = await getNavigationData();
+    
 
     return (
         <Suspense fallback={<div>Loading...</div>}>
