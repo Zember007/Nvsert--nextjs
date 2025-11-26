@@ -7,6 +7,7 @@ import AppCtaBanner from '@/components/general/AppCtaBanner';
 import ServiceCard from '@/components/services/ServiceCard';
 import ServiceContentBlock from '@/components/services/ServiceContentBlock';
 import ServiceRecommendedList from '@/components/services/ServiceRecommendedList';
+import ServiceArticleDate from '@/components/services/ServiceArticleDate';
 import { NavigationItem } from '@/store/navigation';
 import { filterPrepositions } from '@/hook/filter';
 
@@ -122,11 +123,9 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
                                 ))}
                             </div>
                             {currentService.content && currentService.content.length > 0 && (
-                                <div className="w-full flex justify-end">
-                                    <p className="text-[12px] leading-[8px] text-[#93969D] font-light">
-                                        Статья написана 20.04.2025
-                                    </p>
-                                </div>
+                                <ServiceArticleDate
+                                    date={currentService.createdAt}
+                                />
                             )}
                         </div>
 

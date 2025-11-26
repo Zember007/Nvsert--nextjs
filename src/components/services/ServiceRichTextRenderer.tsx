@@ -7,6 +7,7 @@ interface ServiceRichTextRendererProps {
     content: string;
 }
 
+
 const ServiceRichTextRenderer: React.FC<ServiceRichTextRendererProps> = ({ content }) => {
     const { processContent } = useRichTextRenderer();
 

@@ -21,6 +21,7 @@ const ServiceRecommendedList: React.FC<ServiceRecommendedListProps> = ({
     if (!items || items.length === 0) {
         return null;
     }
+    
 
     return (
         <div className={wrapperClassName}>

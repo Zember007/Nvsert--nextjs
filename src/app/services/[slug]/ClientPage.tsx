@@ -65,6 +65,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
         return [...(navigation || [])].sort((a, b) => a.category.name === currentService?.category.name ? -1 : 1).filter(item => item.slug !== currentService?.slug).slice(0, (windowHeight >= 820 || windowWidth < 960) ? 3 : 2);
     }, [navigation, currentService, windowHeight, windowWidth]);
 
+    
 
 
     return (

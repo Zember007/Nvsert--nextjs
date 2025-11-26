@@ -13,6 +13,7 @@ interface ServiceContentBlockProps {
     index?: number;
 }
 
+
 const ServiceContentBlock: React.FC<ServiceContentBlockProps> = ({
     block,
     isExpanded,
