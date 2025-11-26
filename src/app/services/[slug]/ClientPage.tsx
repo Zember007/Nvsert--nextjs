@@ -17,27 +17,20 @@ interface ClientPageProps {
     initialSlug: string;
 }
 
+const ctaInsertAfterIndex = 1;
+
+
 const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, initialSlug }) => {
     const slug = initialSlug;
     const { openDefaultModal, initialNavigation: navigation } = useHeaderContext();
     const { height: windowHeight, width: windowWidth } = useWindowSize();
 
     const [expandedSections, setExpandedSections] = useState<number[]>([]);
-    const [currentServiceIndex, setCurrentServiceIndex] = useState<number | null>(navigation.findIndex(item => item.slug === slug) || null);
+    const [currentServiceIndex, setCurrentServiceIndex] = useState<number | null>(null);
 
     const currentService = currentServiceIndex !== null && navigation
         ? navigation[currentServiceIndex]
         : initialNavigation;
-
-    // Sync index with slug
-    /* React.useEffect(() => {
-        if (navigation && navigation.length > 0) {
-            const index = navigation.findIndex(item => item.slug === slug);
-            if (index !== -1) {
-                setCurrentServiceIndex(index);
-            }
-        }
-    }, [slug, navigation]); */
 
 
     const toggleSection = (blockId: number) => {
@@ -49,9 +42,6 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
     };
 
 
-    const ctaInsertAfterIndex = useMemo(() => {
-        return Math.ceil((currentService.content?.length || 0) / 2) - 1;
-    }, [currentService]);
 
     useEffect(() => {
         if (currentServiceIndex === null) return;
@@ -67,9 +57,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
         }
     }, [currentServiceIndex]);
 
-    const recomendedServices = useMemo(() => {
-        return [...(navigation || [])].sort((a, b) => a.category.name === currentService?.category.name ? -1 : 1).filter(item => item.slug !== currentService?.slug).slice(0, (windowHeight >= 820 || windowWidth < 960) ? 3 : 2);
-    }, [navigation, currentService, windowHeight, windowWidth]);
+    const recomendedServices: NavigationItem[] = [];
 
     
 
