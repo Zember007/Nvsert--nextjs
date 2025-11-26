@@ -79,12 +79,12 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
                                     />
                                 </div>
 
-                                {/* <ServiceRecommendedList
+                                <ServiceRecommendedList
                                     items={recomendedServices}
                                     wrapperClassName="w-full m:block hidden"
                                     itemClassName={undefined}
                                     textClassName="m:!whitespace-pre-line !whitespace-normal"
-                                /> */}
+                                />
                             </div>
                         </div>
 
@@ -92,14 +92,14 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
                         <div className="flex-1 flex flex-col items-center gap-[50px]">
                             {/* Dynamic Content Blocks */}
                             <div className="xl:hidden block w-full">
-                               {/*  <DotNavList
+                                <DotNavList
                                     position={null}
                                     items={currentService?.content?.map((item, index) => ({
                                         id: index,
                                         title: item.heading,
                                         index: index,
                                     }))}
-                                /> */}
+                                />
                             </div>
                             <div className="w-full flex flex-col items-center space-y-[50px]">
                                 {currentService.content?.map((block, index) => (
@@ -130,12 +130,12 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
                         </div>
 
                         <div className="w-full m:hidden block">
-                            {/* <ServiceRecommendedList
+                            <ServiceRecommendedList
                                 items={recomendedServices}
                                 wrapperClassName="w-full m:hidden block"
                                 itemClassName="w-full"
                                 textClassName="m:!whitespace-pre-line !whitespace-normal"
-                            /> */}
+                            />
                         </div>
                     </div>
                 </div>
@@ -147,13 +147,13 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
                             label="Оформить заявку"
                         />
 
-                      {/*   <DotNavList
+                        <DotNavList
                             items={currentService?.content?.map((item, index) => ({
                                 id: index,
                                 title: item.heading,
                                 index: index,
                             }))}
-                        /> */}
+                        />
                     </div>
                 </div>
             </div>
