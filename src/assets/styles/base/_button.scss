@@ -1,3 +1,6 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
 button {
   cursor: pointer;
   font-family: $font-family;

@@ -1,5 +1,5 @@
-@import '../../base/variables' ;
-@import '../../base/mixins' ;
+@use '../../base/variables' as *;
+@use '../../base/mixins' as *;
 
 .skill-card-wrapper {
   @apply hover:z-[12] relative xss:h-[224px] h-[172px] xxl:w-[310px] xss:w-[320px] w-[280px];

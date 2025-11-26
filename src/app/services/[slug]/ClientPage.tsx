@@ -1,11 +1,17 @@
 'use client';
 import React, { Suspense, useEffect, useMemo, useState } from 'react';
+import dynamic from 'next/dynamic';
 import AppBreadcrumbs from '@/components/general/AppBreadcrumbs';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import { NavigationItem } from '@/store/navigation';
 import useWindowSize from '@/hook/useWindowSize';
-import ServiceGallery from '@/components/services/ServiceGallery';
 import ServiceDetailLayout from '@/components/services/ServiceDetailLayout';
+
+// Галерея с ленивой загрузкой, чтобы её JS не блокировал первый рендер
+const ServiceGallery = dynamic(
+    () => import('@/components/services/ServiceGallery'),
+    { ssr: false }
+);
 interface ClientPageProps {
     initialNavigation: NavigationItem;
     initialSlug: string;

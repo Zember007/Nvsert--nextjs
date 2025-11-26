@@ -1,21 +1,19 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@import 'base/variables';
-@import 'base/mixins';
-@import 'base/sprite';
-@import 'base/base';
-@import 'base/typography';
-@import 'base/button';
 
-@import 'blocks/forms';
-@import 'blocks/modals/modals';
+@use 'base/variables' as *;
+@use 'base/mixins' as *;
+@use 'base/sprite' as *;
+@use 'base/base' as *;
+@use 'base/typography' as *;
+@use 'base/button' as *;
 
-@import 'sections/header';
-@import 'sections/footer';
+@use 'blocks/forms' as *;
+@use 'blocks/modals/modals' as *;
 
-@import 'base/print';
-@import 'blocks/breadcrumbs';
+@use 'sections/header' as *;
+@use 'sections/footer' as *;
+
+@use 'base/print' as *;
+@use 'blocks/breadcrumbs' as *;
 
 .icon--logo {
     @include mask;

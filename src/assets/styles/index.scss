@@ -1,7 +1,7 @@
 
 //стили страницы
-@import 'base/variables';
-@import 'base/mixins';
+@use 'base/variables' as *;
+@use 'base/mixins' as *;
 
 // Анимации
 @keyframes fadeIn {

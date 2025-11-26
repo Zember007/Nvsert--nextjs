@@ -1,13 +1,11 @@
 //стили страницы
-@import 'base/variables';
-@import 'base/mixins';
+@use 'base/variables' as *;
+@use 'base/mixins' as *;
 
-@import 'sections/main/main-adv';
-@import 'sections/main/main-slider';
-@import 'sections/main/main-spoiler';
-@import 'sections/main/main-skills';
-@import 'sections/main/main-banner';
-@import 'sections/main/main-intro';
+@use 'sections/main/main-slider' as *;
+@use 'sections/main/main-skills' as *;
+@use 'sections/main/main-banner' as *;
+@use 'sections/main/main-intro' as *;
 
 
 .bg-secondary {
