@@ -56,7 +56,7 @@ const ServiceContentBlock: React.FC<ServiceContentBlockProps> = ({
 
             {isExpanded && (
                 <div className="pt-[30px]">
-                    <ServiceRichTextRenderer content={richText.replace('📞 ', '')} />
+                    {/* <ServiceRichTextRenderer content={richText} /> */}
                 </div>
             )}
 

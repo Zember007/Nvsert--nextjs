@@ -44,7 +44,7 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
                         <div className="m:w-[265px] relative">
                             <div className="sticky top-[104px] flex flex-col xl:gap-[40px] gap-[20px] m:overflow-y-auto m:max-h-[calc(100vh-104px)]">
                                 <div className="flex  gap-[20px] flex-col-reverse">
-                                  {/*   <div className="w-[250px] mx-auto">
+                                    <div className="w-[250px] mx-auto">
                                         <ServiceCard
                                             onClick={() => {
                                                 document.getElementById('service-' + currentService?.id)?.click();
@@ -71,7 +71,7 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
                                             priority={true}
                                         />
                                     </div>
- */}
+
                                     <Button
                                         wrapperClassName="xl:hidden block !max-w-[250px]"
                                         onClick={onOpenOrderForm}
