@@ -24,7 +24,7 @@ const ServiceArticleDate: React.FC<ServiceArticleDateProps> = ({
     
     return (
         <div className="w-full flex justify-end">
-            <p className="text-[12px] leading-[8px] text-[#93969D] font-light">
+            <p className="text-[12px] leading-[8px] text-[#000] font-light">
                 Статья написана {formatDate(date)}
             </p>
         </div>

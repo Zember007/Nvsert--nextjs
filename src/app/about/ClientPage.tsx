@@ -3,13 +3,13 @@ import React, { useEffect, useState } from 'react';
 import StandardPageLayout from '@/components/general/StandardPageLayout';
 import CollapseSection from '@/components/general/CollapseSection';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
-import Map from './_components/Map';
-import Slider from './_components/Slider';
+import Map from '../../components/about/Map';
+import Slider from '../../components/about/Slider';
 import { AboutData } from './page';
 import AppCtaBanner from '@/components/general/AppCtaBanner';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import { StrapiResponsiveImage } from '@/components/general/StrapiResponseImage';
-import GridBox from './_components/Grid';
+import GridBox from '../../components/about/Grid';
 
 
 

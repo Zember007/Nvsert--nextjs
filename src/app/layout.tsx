@@ -1,9 +1,10 @@
+import React from "react"
 import Provider from "./_layout/Provider"
 /* import '@/assets/styles/base/_variables.scss'
 import '@/assets/styles/base/_mixins.scss' */
 import '@/assets/styles/main.scss'
 import { ReactNode } from "react"
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { ScrollToTop } from '@/hook/scrollTop';
 import { getNavigationData } from '@/assets/lib/navigation';
 import { robotoLocal } from './_fonts/robotoLocal';
@@ -19,7 +20,6 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'ru_RU',
   },
-  themeColor: '#646467',
   verification: {
     yandex: '90db85a0cc46fb2c',
   },
@@ -35,6 +35,10 @@ export const metadata: Metadata = {
     ],
   },
   manifest: '/site.webmanifest',
+}
+
+export const viewport: Viewport = {
+  themeColor: '#646467',
 }
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
