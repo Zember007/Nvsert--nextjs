@@ -56,11 +56,10 @@ const ServiceContentBlock: React.FC<ServiceContentBlockProps> = ({
 
             {isExpanded && (
                 <div className="pt-[30px]">
-                    {/* <ServiceRichTextRenderer content={richText} /> */}
+                    <ServiceRichTextRenderer content={richText} />
                 </div>
             )}
 
-            {image?.url}
 
             {image ? (
                 <div className="max-w-full mx-auto mt-[50px] flex justify-center">
