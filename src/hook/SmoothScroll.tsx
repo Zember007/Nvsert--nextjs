@@ -345,8 +345,6 @@ export default function SmoothScroll({children}: SmoothScrollProps) {
     }, [isDragging, handleMouseMove, handleMouseUp]);
 
     useEffect(() => {
-        // На мобилках используем нативный скролл
-        console.log(!scrollbarRef.current);
 
         if (isMobile) return;
 
@@ -442,7 +440,6 @@ export default function SmoothScroll({children}: SmoothScrollProps) {
 
         const handleAnchorClick = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
-            console.log(target.tagName);
             if (target.tagName === "A") {
                 const anchor = target.getAttribute("href");
                 if (anchor?.startsWith("#")) {

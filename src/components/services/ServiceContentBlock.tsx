@@ -27,7 +27,6 @@ const ServiceContentBlock: React.FC<ServiceContentBlockProps> = ({
         return null;
     }
 
-    console.log(image);
 
     return (
         <div

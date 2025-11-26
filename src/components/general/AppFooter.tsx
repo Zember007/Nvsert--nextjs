@@ -66,7 +66,6 @@ const AppFooter = () => {
     }, 3000);
 
     return () => {
-      console.log('clear interval');
       clearInterval(interval)
     };
   }, [isVisible, totalSlides]);

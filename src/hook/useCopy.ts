@@ -33,10 +33,7 @@ export const useCopy = () => {
     if (y < 0) {
       y = rect.bottom + 10;
     }
-    console.log({
-      x,
-      y
-    });
+
 
     setNotificationPosition({
       x,

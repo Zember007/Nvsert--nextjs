@@ -23,7 +23,6 @@ const GridBox: React.FC<GridBoxProps> = ({ gridContent, processContent }) => {
 
                 if (entry.isIntersecting && ref.current) {
                     if (widthWindow && widthWindow < 1280) {
-                        console.log(123);
 
 
                         const [gsapModule, sliderModule] = await Promise.all([

@@ -51,7 +51,6 @@ const Slider = () => {
                     // Сколько всего блока вне контейнера по горизонтали
                     const totalOutside = outLeft + outRight;
 
-                    console.log(totalOutside >= rect.width / 2, item, 'totalOutside');
                     // Если больше половины элемента находится за пределами контейнера
                     if (totalOutside >= rect.width / 2) {
                         item.style.opacity = '0';
