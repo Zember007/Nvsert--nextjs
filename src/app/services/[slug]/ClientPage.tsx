@@ -16,7 +16,7 @@ interface ClientPageProps {
     initialSlug: string;
 }
 
-const ctaInsertAfterIndex = 1;
+const ctaInsertAfterIndex = 2;
 
 
 const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, initialSlug }) => {

@@ -46,7 +46,7 @@ jobs:
             npm install  # Or yarn install, or pnpm install
 
             # Generate navigation
-            npm run generate-navigation
+            # npm run generate-navigation
 
             # Build the Next.js application
             npm run build
