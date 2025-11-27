@@ -51,7 +51,7 @@ export const StrapiResponsiveImage = ({
         loading={priority ? 'eager' : 'lazy'}
         fetchPriority={priority ? 'high' : 'auto'}
         decoding="async"
-        sizes="(max-width: 640px) 560px, 320px"
+        sizes="(max-width: 640px) 100vw, 800px"
         className="rounded-[8px]"
         style={{ display: 'block', maxWidth: '100%', height: 'auto' }}
       />
