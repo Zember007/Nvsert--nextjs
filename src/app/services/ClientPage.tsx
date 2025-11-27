@@ -5,12 +5,13 @@ import { NavigationItem } from '@/store/navigation';
 import ServicesBreadcrumbs from '@/components/services/ServicesBreadcrumbs';
 import ServicesHeader from '@/components/services/ServicesHeader';
 import ServicesList from '@/components/services/ServicesList';
+import { useHeaderContext } from '@/components/contexts/HeaderContext';
 
-interface ServicesClientPageProps {
-    initialNavigation: NavigationItem[];
-}
 
-const ServicesContent: React.FC<ServicesClientPageProps> = ({ initialNavigation }) => {
+
+const ServicesContent = () => {
+
+    const { initialNavigation } = useHeaderContext();
     const [expandedServices, setExpandedServices] = useState<number[]>([]);
     const [active, setActive] = useState(false);
     const [hover, setHover] = useState(false);
