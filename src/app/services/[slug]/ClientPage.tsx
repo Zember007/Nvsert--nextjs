@@ -13,25 +13,24 @@ import ServiceDetailLayout from '@/components/services/ServiceDetailLayout';
 ); */
 interface ClientPageProps {
     initialNavigation: NavigationItem;
-    initialSlug: string;
 }
 
 const ctaInsertAfterIndex = 2;
 
 
-const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, initialSlug }) => {
-    const slug = initialSlug;
+const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation }) => {
     const { openDefaultModal, initialNavigation: navigation } = useHeaderContext();
     const { height: windowHeight, width: windowWidth } = useWindowSize();
 
     const [expandedSections, setExpandedSections] = useState<number[]>([]);
     const [currentServiceIndex, setCurrentServiceIndex] = useState<number | null>(null);
 
-    const currentService = currentServiceIndex !== null && navigation
-        ? navigation[currentServiceIndex]
-        : initialNavigation;
+    const currentService = useMemo(() => {
+        if (currentServiceIndex === null || !navigation) return initialNavigation;
+        return navigation[currentServiceIndex];
+    }, [currentServiceIndex, navigation, initialNavigation]);
 
-
+    // toggleSection без изменений, т.к. безопасно
     const toggleSection = (blockId: number) => {
         setExpandedSections(prev =>
             prev.includes(blockId)
@@ -40,27 +39,39 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
         );
     };
 
-
-
+    // Scroll только после first paint
     useEffect(() => {
         if (currentServiceIndex === null) return;
 
-        const idQuery = window.location.hash.split('#')[1];
-        if (idQuery) {
-            const element = document.getElementById(idQuery);
-            if (!element) return;
-            window.scrollTo({
-                top: element.offsetTop - 50,
-                behavior: 'smooth',
-            });
-        }
+        // откладываем scroll до next frame
+        requestAnimationFrame(() => {
+            const idQuery = window.location.hash.split('#')[1];
+            if (idQuery) {
+                const element = document.getElementById(idQuery);
+                if (!element) return;
+                window.scrollTo({
+                    top: element.offsetTop - 50,
+                    behavior: "smooth",
+                });
+            }
+        });
     }, [currentServiceIndex]);
 
+    // recomendedServices разбиваем на две useMemo: сначала сортировка, потом slice
     const recomendedServices = useMemo(() => {
-        return [...(navigation || [])].sort((a, b) => a.category.name === currentService?.category.name ? -1 : 1).filter(item => item.slug !== currentService?.slug).slice(0, (windowHeight >= 820 || windowWidth < 960) ? 3 : 2);
+        if (!navigation || !currentService) return [];
+
+        const sorted = navigation
+            .filter(item => item.slug !== currentService.slug)
+            .sort((a, b) =>
+                a.category.name === currentService.category.name ? -1 : 1
+            );
+
+        const count = (windowHeight >= 820 || windowWidth < 960) ? 3 : 2;
+        return sorted.slice(0, count);
     }, [navigation, currentService, windowHeight, windowWidth]);
 
-    
+
 
 
     return (
@@ -94,9 +105,9 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
     );
 };
 
-const ClientPage = ({ initialNavigation, initialSlug }: ClientPageProps) => {
+const ClientPage = ({ initialNavigation }: ClientPageProps) => {
     return (
-            <ServiceDetailContent initialNavigation={initialNavigation} initialSlug={initialSlug} />
+        <ServiceDetailContent initialNavigation={initialNavigation} />
     );
 };
 

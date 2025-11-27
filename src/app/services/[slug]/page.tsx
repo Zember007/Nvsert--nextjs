@@ -42,5 +42,5 @@ export default async function Page({
     return <div>Service not found</div>;
   }
 
-  return <ClientPage initialNavigation={navigation} initialSlug={slug} />;
+  return <ClientPage initialNavigation={navigation} />;
 }
