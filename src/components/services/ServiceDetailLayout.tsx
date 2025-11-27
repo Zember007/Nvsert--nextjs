@@ -3,7 +3,7 @@
 import React from 'react';
 import Button from '@/components/ui/Button';
 import AppCtaBanner from '@/components/general/AppCtaBanner';
-import ServiceCard from '@/components/services/ServiceCard';
+/* import ServiceCard from '@/components/services/ServiceCard'; */
 import ServiceContentBlock from '@/components/services/ServiceContentBlock';
 import ServiceArticleDate from '@/components/services/ServiceArticleDate';
 import { NavigationItem } from '@/store/navigation';
@@ -53,7 +53,7 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
                             <div className="sticky top-[104px] flex flex-col xl:gap-[40px] gap-[20px] m:overflow-y-auto m:max-h-[calc(100vh-104px)]">
                                 <div className="flex  gap-[20px] flex-col-reverse">
                                     <div className="w-[250px] mx-auto">
-                                        <ServiceCard
+                                     {/*    <ServiceCard
                                             onClick={() => {
                                                 document.getElementById('service-' + currentService?.id)?.click();
                                             }}
@@ -77,7 +77,7 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
                                             title={false}
                                             padding={false}
                                             priority={true}
-                                        />
+                                        /> */}
                                     </div>
 
                                     <Button

@@ -1,9 +1,9 @@
 import '@/assets/styles/global.scss';
 import '@/assets/styles/base.scss';
 import '@/assets/lib/react-photo-view/dist/react-photo-view.css';
-import AppHeader from '@/components/general/AppHeader';
+/* import AppHeader from '@/components/general/AppHeader'; */
 import { ReactNode, useEffect, useRef, cloneElement, isValidElement } from 'react';
-import AppFooter from '@/components/general/AppFooter';
+/* import AppFooter from '@/components/general/AppFooter'; */
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import dynamic from 'next/dynamic';
 const AppModalWrapper = dynamic(() => import('@/components/general/AppModalWrapper'), {
@@ -30,15 +30,15 @@ const LayoutContent = ({ children, initialNavigation }: { children: ReactNode; i
                 countTrigger={defaultModalCount}
             />
 
-            <AppHeader services={(initialNavigation && initialNavigation.length > 0) ? groupServices(initialNavigation) : []} />
+            {/* <AppHeader services={(initialNavigation && initialNavigation.length > 0) ? groupServices(initialNavigation) : []} /> */}
 
             <main >
     
                 {children}
            
             </main>
-            <AppFooter />
-
+          {/*   <AppFooter />
+ */}
             {/* <CustomScrollbar target="window" /> */}
 
             <CopyNotification
