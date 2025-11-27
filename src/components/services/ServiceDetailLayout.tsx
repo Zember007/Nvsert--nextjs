@@ -109,7 +109,7 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
                                     }))}
                                 /> */}
                             </div>
-                            <div className="w-full flex flex-col items-center space-y-[50px]">
+                          {/*   <div className="w-full flex flex-col items-center space-y-[50px]">
                                 {currentService.content?.map((block, index) => (
                                     <React.Fragment key={block.id}>
                                         {index === ctaInsertAfterIndex && (
@@ -129,7 +129,7 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
                                         />
                                     </React.Fragment>
                                 ))}
-                            </div>
+                            </div> */}
                             {currentService.content && currentService.content.length > 0 && (
                                 <ServiceArticleDate
                                     date={currentService.createdAt}
