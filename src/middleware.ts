@@ -5,13 +5,26 @@ export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   let targetUrl: string | null = null; // Определяем целевой URL
-  
-  // Проверяем, начинается ли путь с /api/
-  if (pathname.startsWith('/api/')) {
-    targetUrl = `${process.env.apiTarget}${pathname.replace('/api/', '')}`;
+
+  const apiTarget = process.env.apiTarget;
+
+  // Если не задан apiTarget, то ничего не проксируем
+  if (!apiTarget) {
+    return NextResponse.next();
   }
 
-  // Если targetUrl определен (путь начинается с /api/ или /media/)
+  // Убираем завершающий слэш, чтобы не получить /apiservices и т.п.
+  const normalizedTarget = apiTarget.replace(/\/$/, '');
+
+  // Проверяем, начинается ли путь с /api/
+  if (pathname.startsWith('/api/')) {
+    // /api/services -> /services
+    const apiPath = pathname.replace(/^\/api/, '');
+    // http://localhost:1337/api + /services -> http://localhost:1337/api/services
+    targetUrl = `${normalizedTarget}${apiPath}`;
+  }
+
+  // Если targetUrl определен (путь начинается с /api/)
   if (targetUrl) {
     const requestHeaders = new Headers(req.headers);
 
