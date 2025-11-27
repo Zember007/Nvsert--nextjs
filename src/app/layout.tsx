@@ -49,13 +49,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   
   return (
     <html lang="ru" >
-      <head>
-        <link
-          rel="preconnect"
-          href="https://test11.audiosector.ru"
-          crossOrigin="anonymous"
-        />
-      </head>
+      <head />
       <body className={`${robotoLocal.className} bg-noise`}>
         <Provider initialNavigation={initialNavigation as NavigationItem[]}>
        {/*    <ScrollToTop /> */}

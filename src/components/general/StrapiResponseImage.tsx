@@ -8,19 +8,50 @@ export const StrapiResponsiveImage = ({
   priority?: boolean 
 }) => {
   if (!image) return null;
-  
+
+  // Используем более лёгкие форматы на мобильных
+  const small = image.formats?.small || image.formats?.thumbnail || image;
+  const medium = image.formats?.medium;
+  const large = image.formats?.large;
+
+  const getDimensions = () => {
+    if (small?.width && small?.height) {
+      return { width: small.width, height: small.height };
+    }
+    if (medium?.width && medium?.height) {
+      return { width: medium.width, height: medium.height };
+    }
+    if (large?.width && large?.height) {
+      return { width: large.width, height: large.height };
+    }
+    return { width: image.width || 0, height: image.height || 0 };
+  };
+
+  const { width, height } = getDimensions();
 
   return (
     <picture>
-      <source media="(min-width: 640px)" srcSet={`${baseUrl}${image.formats?.large?.url}`} />
-      <source media="(min-width: 360px)" srcSet={`${baseUrl}${image.formats?.medium?.url}`} />
+      {large?.url && (
+        <source
+          media="(min-width: 1024px)"
+          srcSet={`${baseUrl}${large.url}`}
+        />
+      )}
+      {medium?.url && (
+        <source
+          media="(min-width: 640px)"
+          srcSet={`${baseUrl}${medium.url}`}
+        />
+      )}
       <img
-        src={`${baseUrl}${image.formats?.small?.url}`}
+        src={`${baseUrl}${small?.url || image.url}`}
         alt={image.alternativeText || ''}
-        width={image.formats?.large?.width}
-        height={image.formats?.large?.height}
+        width={width}
+        height={height}
         loading={priority ? 'eager' : 'lazy'}
         fetchPriority={priority ? 'high' : 'auto'}
+        decoding="async"
+        sizes="(max-width: 640px) 100vw, 800px"
         className="w-full h-auto rounded-[8px]"
       />
     </picture>
