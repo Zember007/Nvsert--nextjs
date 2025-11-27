@@ -5,10 +5,11 @@ import { NavigationItem, Services } from '@/store/navigation';
 // чтобы навигация подгружалась один раз при билде и не дергала API на каждой странице.
 export const getNavigationData = cache(async (): Promise<NavigationItem[]> => {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
     const res = await fetch(`${baseUrl}/api/services`, {
       cache: 'force-cache',
     });
+
 
     if (!res.ok) {
       console.error('Failed to fetch navigation:', res.statusText);
@@ -16,6 +17,8 @@ export const getNavigationData = cache(async (): Promise<NavigationItem[]> => {
     }
 
     const data = await res.json();
+    console.log('data', data);
+
     const navigationItems: NavigationItem[] = data.data || [];
 
     // Sort by category order to ensure stable UI
