@@ -56,8 +56,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                             loading={priority ? "eager" : "lazy"}
                             priority={priority}
                             fetchPriority={priority ? "high" : "auto"}
-                            quality={85}
-                            sizes="(max-width: 640px) 282px, 312px"
+                            quality={70}
+                            sizes="(max-width: 768px) 282px, 312px"
                         />
                     </div>
                     <div className='justify-between flex absolute bottom-[9px] left-[9px] right-[9px] xss:*:*:!leading-[0.68] *:*:!leading-[0.8]   flex py-[10px] px-[6px] bg-[#F5F5F580] rounded-[4px] border border-[#000] backdrop-blur-[4px]'>
@@ -89,8 +89,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                             loading={priority ? "eager" : "lazy"}
                             priority={priority}
                             fetchPriority={priority ? "high" : "auto"}
-                            quality={85}
-                            sizes="(max-width: 640px) 282px, 312px"
+                            quality={70}
+                            sizes="(max-width: 768px) 282px, 312px"
                         />
                     </div>
                     <div className='justify-between flex absolute bottom-[9px] left-[9px] right-[9px] xss:*:*:!leading-[0.68] *:*:!leading-[0.8]   flex py-[10px] px-[6px] bg-[#F5F5F580] rounded-[4px] border border-[#000] backdrop-blur-[4px]'>

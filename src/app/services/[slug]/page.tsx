@@ -33,9 +33,9 @@ export async function generateStaticParams() {
 export default async function Page({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
-  const { slug } = await params;
+  const { slug } = params;
   const navigation = await getNavigationDataBySlug(slug);
 
   if (!navigation) {
