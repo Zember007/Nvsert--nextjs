@@ -1,7 +1,5 @@
 import React from "react"
 import Provider from "./_layout/Provider"
-/* import '@/assets/styles/base/_variables.scss'
-import '@/assets/styles/base/_mixins.scss' */
 import '@/assets/styles/main.scss'
 import { ReactNode } from "react"
 import type { Metadata, Viewport } from 'next'
@@ -43,20 +41,20 @@ export const viewport: Viewport = {
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
 
-  // const initialNavigation = await getNavigationData();
-  // if (!initialNavigation) return <div>Navigation not found</div>;
-  // if (initialNavigation.length === 0) return <div>Navigation is empty</div>;
+  const initialNavigation = await getNavigationData();
+  if (!initialNavigation) return <div>Navigation not found</div>;
+  if (initialNavigation.length === 0) return <div>Navigation is empty</div>;
   
   return (
     <html lang="ru" >
       <head />
       <body className={`${robotoLocal.className} bg-noise`}>
-        <Provider initialNavigation={[]}>
+        <Provider initialNavigation={initialNavigation}>
           <ScrollToTop />
           {children}
         </Provider>
       </body>
     </html>
   )
-  
+
 }

@@ -1,13 +1,13 @@
+import { cache } from 'react';
 import { NavigationItem, Services } from '@/store/navigation';
 
-export async function getNavigationData(): Promise<NavigationItem[]> {
+// Кэшируем результат на уровне модуля и используем build‑time fetch,
+// чтобы навигация подгружалась один раз при билде и не дергала API на каждой странице.
+export const getNavigationData = cache(async (): Promise<NavigationItem[]> => {
   try {
-    const baseUrl =
-      process.env.NEXT_PUBLIC_SITE_URL ||
-      process.env.NEXT_PUBLIC_BASE_URL ||
-      'https://nvsert.ru';
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
     const res = await fetch(`${baseUrl}/api/services`, {
-      next: { revalidate: 3600 }
+      cache: 'force-cache',
     });
 
     if (!res.ok) {
@@ -28,7 +28,7 @@ export async function getNavigationData(): Promise<NavigationItem[]> {
     console.error('Error fetching navigation:', error);
     return [];
   }
-}
+});
 
 export function groupServices(navigation: NavigationItem[]): Services[] {
   return navigation.reduce<Services[]>((acc, item) => {
