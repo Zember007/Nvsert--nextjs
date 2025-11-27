@@ -56,7 +56,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                             loading={priority ? "eager" : "lazy"}
                             priority={priority}
                             fetchPriority={priority ? "high" : "auto"}
-                            quality={70}
+                            quality={50}
                             sizes="(max-width: 768px) 282px, 312px"
                         />
                     </div>
@@ -89,7 +89,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                             loading={priority ? "eager" : "lazy"}
                             priority={priority}
                             fetchPriority={priority ? "high" : "auto"}
-                            quality={70}
+                            quality={50}
                             sizes="(max-width: 768px) 282px, 312px"
                         />
                     </div>
