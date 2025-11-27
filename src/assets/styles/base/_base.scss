@@ -1,6 +1,7 @@
 @use 'variables' as *;
 @use 'mixins' as *;
 @use 'sass:map';
+
 *,
 *::after,
 *::before {
@@ -20,19 +21,23 @@ html {
   --mask-menu-item: transparent;
 }
 
-body.bg-noise::before {
-  content: "";
-  --opacity: 0.6;
-  --bg-image: url('../../images/150.webp');
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: var(--bg-image);
-  pointer-events: none;
-  opacity: var(--opacity);
+body.bg-noise {
+  @media (min-width: calc($media-m + 1px)) {
+    &::before {
+      content: "";
+      --opacity: 0.6;
+      --bg-image: url('../../images/150.webp');
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: var(--bg-image);
+      pointer-events: none;
+      opacity: var(--opacity);
+    }
+  }
 }
 
 /* .bg-noise {
