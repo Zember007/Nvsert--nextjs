@@ -1,10 +1,9 @@
 'use client';
-import React, { Suspense, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import AppBreadcrumbs from '@/components/general/AppBreadcrumbs';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import { NavigationItem } from '@/store/navigation';
-import useWindowSize from '@/hook/useWindowSize';
 import ServiceDetailLayout from '@/components/services/ServiceDetailLayout';
 
 const ServiceGallery = dynamic(
@@ -20,10 +19,10 @@ const ctaInsertAfterIndex = 2;
 
 const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation }) => {
     const { openDefaultModal, initialNavigation: navigation } = useHeaderContext();
-    const { height: windowHeight, width: windowWidth } = useWindowSize();
 
     const [expandedSections, setExpandedSections] = useState<number[]>([]);
     const [currentServiceIndex, setCurrentServiceIndex] = useState<number | null>(null);
+    const [showGallery, setShowGallery] = useState(false);
 
     const currentService = useMemo(() => {
         if (currentServiceIndex === null || !navigation) return initialNavigation;
@@ -38,6 +37,24 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation }) 
                 : [...prev, blockId]
         );
     };
+
+    // Откладываем инициализацию тяжёлой галереи до idle,
+    // чтобы уменьшить влияние на первый рендер
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        const ric = window.requestIdleCallback as
+            | ((cb: () => void) => number)
+            | undefined;
+
+        if (ric) {
+            const id = ric(() => setShowGallery(true));
+            return () => window.cancelIdleCallback && window.cancelIdleCallback(id);
+        }
+
+        const timeoutId = window.setTimeout(() => setShowGallery(true), 0);
+        return () => window.clearTimeout(timeoutId);
+    }, []);
 
     // Scroll только после first paint
     useEffect(() => {
@@ -57,7 +74,8 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation }) 
         });
     }, [currentServiceIndex]);
 
-    // recomendedServices разбиваем на две useMemo: сначала сортировка, потом slice
+    // recomendedServices: считаем на клиенте без завязки на размеры окна,
+    // чтобы убрать лишние перерендеры и логику useWindowSize
     const recomendedServices = useMemo(() => {
         if (!navigation || !currentService) return [];
 
@@ -67,9 +85,9 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation }) 
                 a.category.name === currentService.category.name ? -1 : 1
             );
 
-        const count = (windowHeight >= 820 || windowWidth < 960) ? 3 : 2;
-        return sorted.slice(0, count);
-    }, [navigation, currentService, windowHeight, windowWidth]);
+        // Берём фиксированное количество, чтобы сократить клиентскую логику
+        return sorted.slice(0, 3);
+    }, [navigation, currentService]);
 
 
 
@@ -78,16 +96,18 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation }) 
         <div className="main text-[#000]  mb-[100px]">
             <AppBreadcrumbs root={'/'} breadcrumbs={[{ id: 2, title: 'Все услуги', full_slug: '/services' }, { id: 3, title: currentService?.title || '', full_slug: '/services/' + currentService?.slug }]} />
 
-            <ServiceGallery
-                navigation={navigation}
-                onChange={(index: number) => {
-                    setCurrentServiceIndex(index);
-                    if (navigation?.[index]) {
-                        const newUrl = `/services/${navigation[index].slug}`;
-                        window.history.replaceState({}, '', newUrl);
-                    }
-                }}
-            />
+            {showGallery && (
+                <ServiceGallery
+                    navigation={navigation}
+                    onChange={(index: number) => {
+                        setCurrentServiceIndex(index);
+                        if (navigation?.[index]) {
+                            const newUrl = `/services/${navigation[index].slug}`;
+                            window.history.replaceState({}, '', newUrl);
+                        }
+                    }}
+                />
+            )}
 
             {/* Main Content */}
             {currentService && (
