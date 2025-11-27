@@ -43,15 +43,15 @@ export const viewport: Viewport = {
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
 
-  const initialNavigation = await getNavigationData();
-  if (!initialNavigation) return <div>Navigation not found</div>;
-  if (initialNavigation.length === 0) return <div>Navigation is empty</div>;
+  // const initialNavigation = await getNavigationData();
+  // if (!initialNavigation) return <div>Navigation not found</div>;
+  // if (initialNavigation.length === 0) return <div>Navigation is empty</div>;
   
   return (
     <html lang="ru" >
       <head />
       <body className={`${robotoLocal.className} bg-noise`}>
-        <Provider initialNavigation={initialNavigation}>
+        <Provider initialNavigation={[]}>
           <ScrollToTop />
           {children}
         </Provider>
