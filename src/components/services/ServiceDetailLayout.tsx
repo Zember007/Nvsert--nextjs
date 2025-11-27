@@ -2,14 +2,22 @@
 
 import React from 'react';
 import Button from '@/components/ui/Button';
-import DotNavList from '@/components/general/DotNavList';
 import AppCtaBanner from '@/components/general/AppCtaBanner';
 import ServiceCard from '@/components/services/ServiceCard';
 import ServiceContentBlock from '@/components/services/ServiceContentBlock';
-import ServiceRecommendedList from '@/components/services/ServiceRecommendedList';
 import ServiceArticleDate from '@/components/services/ServiceArticleDate';
 import { NavigationItem } from '@/store/navigation';
 import { filterPrepositions } from '@/hook/filter';
+import dynamic from 'next/dynamic';
+
+
+const ServiceRecommendedList = dynamic(() => import('@/components/services/ServiceRecommendedList'), {
+    ssr: false,
+});
+
+const DotNavList = dynamic(() => import('@/components/general/DotNavList'), {
+    ssr: false,
+});
 
 interface ServiceDetailLayoutProps {
     currentService: NavigationItem;
