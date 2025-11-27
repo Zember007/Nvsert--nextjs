@@ -98,6 +98,7 @@ const AppMenuItem: React.FC<{
             ) : (
                 <Link
                     href={item.href}
+                    prefetch={false}
                     className={getClassName()}
                     data-text={extractTextFromReactNode(item.label)}
                     onMouseMove={handleMouseMove}

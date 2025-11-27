@@ -149,6 +149,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                                             {
                                                 'slug' in item && item.slug ? (
                                                     <Link
+                                                        prefetch={false}
                                                         onClick={() => closeMenu()}
                                                         href={(currentLevel.parentId === 'services' || navigationStack.some(level => level.parentId === 'services')) ? ('/services/' + item.slug) : item.slug}
                                                         className={`${index_item === 0 ? 'first-child' : ''} ${item.img ? 'have-img' : ''} header__menu-mob-item group`}
