@@ -7,10 +7,10 @@ import { NavigationItem } from '@/store/navigation';
 import useWindowSize from '@/hook/useWindowSize';
 import ServiceDetailLayout from '@/components/services/ServiceDetailLayout';
 
-const ServiceGallery = dynamic(
+/* const ServiceGallery = dynamic(
     () => import('@/components/services/ServiceGallery'),
     { ssr: false }
-);
+); */
 interface ClientPageProps {
     initialNavigation: NavigationItem;
     initialSlug: string;
@@ -67,7 +67,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
         <div className="main text-[#000]  mb-[100px]">
             <AppBreadcrumbs root={'/'} breadcrumbs={[{ id: 2, title: 'Все услуги', full_slug: '/services' }, { id: 3, title: currentService?.title || '', full_slug: '/services/' + currentService?.slug }]} />
 
-            <ServiceGallery
+            {/* <ServiceGallery
                 navigation={navigation}
                 onChange={(index: number) => {
                     setCurrentServiceIndex(index);
@@ -76,7 +76,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
                         window.history.replaceState({}, '', newUrl);
                     }
                 }}
-            />
+            /> */}
 
             {/* Main Content */}
             {currentService && (
