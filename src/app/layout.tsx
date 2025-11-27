@@ -3,9 +3,11 @@ import Provider from "./_layout/Provider"
 import '@/assets/styles/main.scss'
 import { ReactNode } from "react"
 import type { Metadata, Viewport } from 'next'
-import { ScrollToTop } from '@/hook/scrollTop';
-import { getNavigationData } from '@/assets/lib/navigation';
+/* import { ScrollToTop } from '@/hook/scrollTop'; */
+/* import { getNavigationData } from '@/assets/lib/navigation'; */
 import { robotoLocal } from './_fonts/robotoLocal';
+import initialNavigation from '@/assets/lib/navigation.json';
+import { NavigationItem } from "@/store/navigation"
 
 export const metadata: Metadata = {
   title: 'NVSERT - Декларирование, сертификация, лицензирование',
@@ -41,16 +43,16 @@ export const viewport: Viewport = {
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
 
-  const initialNavigation = await getNavigationData();
+/*   const initialNavigation = await getNavigationData();
   if (!initialNavigation) return <div>Navigation not found</div>;
-  if (initialNavigation.length === 0) return <div>Navigation is empty</div>;
+  if (initialNavigation.length === 0) return <div>Navigation is empty</div>; */
   
   return (
     <html lang="ru" >
       <head />
       <body className={`${robotoLocal.className} bg-noise`}>
-        <Provider initialNavigation={initialNavigation}>
-          <ScrollToTop />
+        <Provider initialNavigation={initialNavigation as NavigationItem[]}>
+       {/*    <ScrollToTop /> */}
           {children}
         </Provider>
       </body>
