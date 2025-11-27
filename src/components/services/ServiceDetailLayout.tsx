@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@/components/ui/Button';
 import AppCtaBanner from '@/components/general/AppCtaBanner';
 import ServiceCard from '@/components/services/ServiceCard';
@@ -38,6 +38,25 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
     onOpenOrderForm,
     onOpenIntroForm,
 }) => {
+    const [showSecondaryUI, setShowSecondaryUI] = useState(false);
+
+    // Откладываем отрисовку второстепенных блоков (списки с анимациями),
+    // чтобы не нагружать первый рендер
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        const ric = window.requestIdleCallback as
+            | ((cb: () => void) => number)
+            | undefined;
+
+        if (ric) {
+            const id = ric(() => setShowSecondaryUI(true));
+            return () => window.cancelIdleCallback && window.cancelIdleCallback(id);
+        }
+
+        const timeoutId = window.setTimeout(() => setShowSecondaryUI(true), 0);
+        return () => window.clearTimeout(timeoutId);
+    }, []);
     return (
         <div className="wrapper pt-[50px] ">
             <div className="flex gap-[40px]">
@@ -87,12 +106,14 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
                                     />
                                 </div>
 
-                                <ServiceRecommendedList
-                                    items={recomendedServices}
-                                    wrapperClassName="w-full m:block hidden"
-                                    itemClassName={undefined}
-                                    textClassName="m:!whitespace-pre-line !whitespace-normal"
-                                />
+                                {showSecondaryUI && (
+                                    <ServiceRecommendedList
+                                        items={recomendedServices}
+                                        wrapperClassName="w-full m:block hidden"
+                                        itemClassName={undefined}
+                                        textClassName="m:!whitespace-pre-line !whitespace-normal"
+                                    />
+                                )}
                             </div>
                         </div>
 
@@ -100,14 +121,16 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
                         <div className="flex-1 flex flex-col items-center gap-[50px]">
                             {/* Dynamic Content Blocks */}
                             <div className="xl:hidden block w-full">
-                                <DotNavList
-                                    position={null}
-                                    items={currentService?.content?.map((item, index) => ({
-                                        id: index,
-                                        title: item.heading,
-                                        index: index,
-                                    }))}
-                                />
+                                {showSecondaryUI && (
+                                    <DotNavList
+                                        position={null}
+                                        items={currentService?.content?.map((item, index) => ({
+                                            id: index,
+                                            title: item.heading,
+                                            index: index,
+                                        }))}
+                                    />
+                                )}
                             </div>
                             <div className="w-full flex flex-col items-center space-y-[50px]">
                                 {currentService.content?.map((block, index) => (
@@ -138,12 +161,14 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
                         </div>
 
                         <div className="w-full m:hidden block">
-                          {/*   <ServiceRecommendedList
-                                items={recomendedServices}
-                                wrapperClassName="w-full m:hidden block"
-                                itemClassName="w-full"
-                                textClassName="m:!whitespace-pre-line !whitespace-normal"
-                            /> */}
+                            {showSecondaryUI && (
+                                <ServiceRecommendedList
+                                    items={recomendedServices}
+                                    wrapperClassName="w-full m:hidden block"
+                                    itemClassName="w-full"
+                                    textClassName="m:!whitespace-pre-line !whitespace-normal"
+                                />
+                            )}
                         </div>
                     </div>
                 </div>
@@ -155,13 +180,15 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
                             label="Оформить заявку"
                         />
 
-                        <DotNavList
-                            items={currentService?.content?.map((item, index) => ({
-                                id: index,
-                                title: item.heading,
-                                index: index,
-                            }))}
-                        />
+                        {showSecondaryUI && (
+                            <DotNavList
+                                items={currentService?.content?.map((item, index) => ({
+                                    id: index,
+                                    title: item.heading,
+                                    index: index,
+                                }))}
+                            />
+                        )}
                     </div>
                 </div>
             </div>
