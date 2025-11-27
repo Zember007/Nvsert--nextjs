@@ -2,14 +2,13 @@
 import ClientPage from './ClientPage';
 import { NavigationItem } from '@/store/navigation';
 
-// Оптимизация: кеширование данных на более длительный срок для ускорения навигации
-export const revalidate = 3600; // ISR: перевалидация каждые 60 минут
+export const dynamic = "force-static";
 
 async function getNavigationDataBySlug(slug: string): Promise<NavigationItem | null> {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SITE_URL}/api/services/slug/${slug}`,
     {
-      next: { revalidate: 3600 }, // Кешируем на 1 час для лучшей производительности
+      cache: "force-cache",
     }
   );
 
@@ -22,7 +21,7 @@ export async function generateStaticParams() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SITE_URL}/api/services`,
     {
-      next: { revalidate: 3600 }, // Кешируем на 1 час
+      cache: "force-cache",
     }
   );
 
