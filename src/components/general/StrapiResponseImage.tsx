@@ -1,11 +1,13 @@
-export const StrapiResponsiveImage = ({ 
-  image, 
-  baseUrl, 
-  priority = false 
-}: { 
-  image: any, 
+import Image from "next/image";
+
+export const StrapiResponsiveImage = ({
+  image,
+  baseUrl,
+  priority = false
+}: {
+  image: any,
   baseUrl: string,
-  priority?: boolean 
+  priority?: boolean
 }) => {
   if (!image) return null;
 
@@ -23,23 +25,31 @@ export const StrapiResponsiveImage = ({
         <source
           media="(min-width: 1024px)"
           srcSet={`${baseUrl}${large.url}`}
+          width={large?.width}
+          height={large?.height}
         />
       )}
       {medium?.url && (
         <source
           media="(min-width: 640px)"
           srcSet={`${baseUrl}${medium.url}`}
+          width={medium?.width}
+          height={medium?.height}
         />
       )}
-      <img
+      <Image
         src={`${baseUrl}${small?.url}`}
+        width={small?.width}
+        height={small?.height}
         alt={image.alternativeText || ''}
         loading={priority ? 'eager' : 'lazy'}
         fetchPriority={priority ? 'high' : 'auto'}
+        quality={40}
         decoding="async"
         className="rounded-[8px]"
         style={{ display: 'block', maxWidth: '100%', height: 'auto' }}
       />
+
     </picture>
   );
 };
