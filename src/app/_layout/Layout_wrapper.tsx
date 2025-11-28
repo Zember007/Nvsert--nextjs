@@ -9,7 +9,6 @@ import { NavigationItem } from '@/store/navigation';
 import { groupServices } from '@/assets/lib/navigation';
 
 const AppModalWrapper = dynamic(() => import('@/components/general/AppModalWrapper'), {
-    loading: () => <div>Loading...</div>,
     ssr: false
 });
 

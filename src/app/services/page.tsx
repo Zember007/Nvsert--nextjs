@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import { Suspense } from 'react';
 import ServicesContent from './ClientPage';
 
 // Функция для генерации метаданных
@@ -21,12 +20,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const Page = async () => {
-    
+
 
     return (
-        <Suspense fallback={<div>Loading...</div>}>
-            <ServicesContent />
-        </Suspense>
+        <ServicesContent />
     );
 };
 

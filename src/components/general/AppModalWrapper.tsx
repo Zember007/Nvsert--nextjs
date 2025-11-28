@@ -7,13 +7,11 @@ import AppMainForm from '../forms/AppMainForm';
 import { useAnimation, motion } from "framer-motion";
 
 const AppKnowCostForm = dynamic(() => import('@/components/forms/AppKnowCostForm'), {
-    loading: () => <p>Loading...</p>,
 });
 
 
 
 const AppSuccessMessage = dynamic(() => import('@/components/modals/AppSuccessMessage'), {
-    loading: () => <p>Loading...</p>,
 });
 
 interface AppModalWrapperProps {
