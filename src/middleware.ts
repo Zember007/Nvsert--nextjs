@@ -4,6 +4,10 @@ import type { NextRequest } from 'next/server';
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
+  if (req.headers.get("x-nextjs-data")) {
+    return NextResponse.next();
+  }
+
   let targetUrl: string | null = null; // Определяем целевой URL
 
   const apiTarget = process.env.apiTarget;

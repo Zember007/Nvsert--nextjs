@@ -21,7 +21,7 @@ html {
   --mask-menu-item: transparent;
 }
 
-body.bg-noise {
+body {
   @media (min-width: calc($media-m + 1px)) {
     &::before {
       content: "";

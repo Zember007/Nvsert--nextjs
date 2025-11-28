@@ -21,7 +21,7 @@ export async function generateStaticParams() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SITE_URL}/api/services`,
     {
-      cache: "force-cache",
+      next: { revalidate: 3600 },
     }
   );
 

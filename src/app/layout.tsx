@@ -50,7 +50,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   return (
     <html lang="ru" >
       <head />
-      <body className={`${robotoLocal.className} bg-noise`}>
+      <body className={`${robotoLocal.className}`}>
         <Provider initialNavigation={initialNavigation as NavigationItem[]}>
        {/*    <ScrollToTop /> */}
           {children}
