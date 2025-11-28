@@ -1,5 +1,7 @@
 @use '../../base/variables' as *;
 @use '../../base/mixins' as *;
+@use '../forms' as *;
+
 .modal {
 
   &__wrapper {
