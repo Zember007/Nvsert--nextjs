@@ -5,7 +5,6 @@ import { ReactNode } from "react"
 import type { Metadata, Viewport } from 'next'
 /* import { ScrollToTop } from '@/hook/scrollTop'; */
 /* import { getNavigationData } from '@/assets/lib/navigation'; */
-import { robotoLocal } from './_fonts/robotoLocal';
 import initialNavigation from '@/assets/lib/navigation.json';
 import { NavigationItem } from "@/store/navigation"
 
@@ -50,7 +49,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   return (
     <html lang="ru" >
       <head />
-      <body className={`${robotoLocal.className}`}>
+      <body>
         <Provider initialNavigation={initialNavigation as NavigationItem[]}>
        {/*    <ScrollToTop /> */}
           {children}
