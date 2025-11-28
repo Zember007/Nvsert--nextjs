@@ -32,8 +32,6 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
     const imageUrl = certificate.img?.formats?.medium?.url 
         ? certificate.img.formats.medium.url 
         : certificate.img?.url || '';
-    const imageWidth = certificate.img?.formats?.medium?.width || 249;
-    const imageHeight = certificate.img?.formats?.medium?.height || 346;
 
     
 
@@ -50,14 +48,14 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                         <Image
                             src={'https://test11.audiosector.ru/cp' + imageUrl}
                             alt={certificate.title}
-                            width={imageWidth}
-                            height={imageHeight}
+                            width={250}
+                            height={346}
                             className='h-[346px] object-cover'
                             loading={priority ? "eager" : "lazy"}
                             priority={priority}
                             fetchPriority={priority ? "high" : "auto"}
                             quality={40}
-                            sizes="(max-width: 768px) 250px, 250px"
+                            sizes="250px"
                         />
                     </div>
                     <div className='justify-between flex absolute bottom-[9px] left-[9px] right-[9px] xss:*:*:!leading-[0.68] *:*:!leading-[0.8]   flex py-[10px] px-[6px] bg-[#F5F5F580] rounded-[4px] border border-[#000] backdrop-blur-[4px]'>
@@ -83,14 +81,15 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                         <Image
                             src={'https://test11.audiosector.ru/cp' + imageUrl}
                             alt={certificate.title}
-                            width={imageWidth}
-                            height={imageHeight}
+                            width={250}
+                            height={346}
                             className='h-[346px] object-cover'
                             loading={priority ? "eager" : "lazy"}
                             priority={priority}
                             fetchPriority={priority ? "high" : "auto"}
                             quality={40}
-                            sizes="(max-width: 768px) 250px, 250px"
+                            sizes="250px"
+
                         />
                     </div>
                     <div className='justify-between flex absolute bottom-[9px] left-[9px] right-[9px] xss:*:*:!leading-[0.68] *:*:!leading-[0.8]   flex py-[10px] px-[6px] bg-[#F5F5F580] rounded-[4px] border border-[#000] backdrop-blur-[4px]'>

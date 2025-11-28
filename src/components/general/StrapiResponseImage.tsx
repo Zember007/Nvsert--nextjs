@@ -14,20 +14,8 @@ export const StrapiResponsiveImage = ({
   const medium = image.formats?.medium;
   const large = image.formats?.large;
 
-  const getDimensions = () => {
-    if (small?.width && small?.height) {
-      return { width: small.width, height: small.height };
-    }
-    if (medium?.width && medium?.height) {
-      return { width: medium.width, height: medium.height };
-    }
-    if (large?.width && large?.height) {
-      return { width: large.width, height: large.height };
-    }
-    return { width: image.width || 0, height: image.height || 0 };
-  };
 
-  const { width, height } = getDimensions();
+
 
   return (
     <picture>
@@ -44,14 +32,11 @@ export const StrapiResponsiveImage = ({
         />
       )}
       <img
-        src={`${baseUrl}${small?.url || image.url}`}
+        src={`${baseUrl}${small?.url}`}
         alt={image.alternativeText || ''}
-        width={width}
-        height={height}
         loading={priority ? 'eager' : 'lazy'}
         fetchPriority={priority ? 'high' : 'auto'}
         decoding="async"
-        sizes="(max-width: 640px) 100vw, 800px"
         className="rounded-[8px]"
         style={{ display: 'block', maxWidth: '100%', height: 'auto' }}
       />
