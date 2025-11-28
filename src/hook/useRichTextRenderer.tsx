@@ -20,13 +20,13 @@ export const useRichTextRenderer = () => {
             if (currentListItems.length > 0) {
                 const typeToUse = forceType || listType || 'unordered';
                 const ListTag = typeToUse === 'ordered' ? 'ol' : 'ul';
-                const listClassName = typeToUse === 'ordered' ? 'list-decimal list-inside my-[10px]' : 'pl-[18px] list-disc my-[10px]';
+                const listClassName = typeToUse === 'ordered' ? 'list-decimal list-inside my-[10px]' : ' list-disc my-[10px]';
 
                 // Для нумерованных списков с одним элементом убираем отступ слева
                 const isSingleOrdered = typeToUse === 'ordered' && currentListItems.length === 1;
                 const liClassName = isSingleOrdered
                     ? `font-light ${small ? 'text-2' : 'text-base-post'}`
-                    : `font-light ml-[25px] ${small ? 'text-2' : 'text-base-post'}`;
+                    : `font-light ${small ? 'text-2' : 'text-base-post'}`;
 
                 elements.push(
                     React.createElement(
@@ -36,6 +36,7 @@ export const useRichTextRenderer = () => {
                             <li
                                 key={idx}
                                 className={liClassName}
+                                style={{...(!isSingleOrdered ? { marginLeft: '18px' } : {})}}
                                 {...(typeToUse === 'ordered' && item.number !== undefined ? { value: item.number } : {})}
                             >
                                 {filterPrepositions(item.text)}
