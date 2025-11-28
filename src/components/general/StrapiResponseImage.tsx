@@ -18,7 +18,6 @@ export const StrapiResponsiveImage = ({
 
 
 
-
   return (
     <picture>
       {large?.url && (
@@ -37,17 +36,15 @@ export const StrapiResponsiveImage = ({
           height={medium?.height}
         />
       )}
-      <Image
+      <img
         src={`${baseUrl}${small?.url}`}
         width={small?.width}
         height={small?.height}
         alt={image.alternativeText || ''}
         loading={priority ? 'eager' : 'lazy'}
         fetchPriority={priority ? 'high' : 'auto'}
-        quality={60}
         decoding="async"
-        className="rounded-[8px]"
-        style={{ display: 'block', maxWidth: '100%', height: 'auto' }}
+        className="rounded-[8px] w-full h-full"
       />
 
     </picture>
