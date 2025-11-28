@@ -1,6 +1,6 @@
 import React from "react"
 import Provider from "./_layout/Provider"
-import '@/assets/styles/main.scss'
+
 import { ReactNode } from "react"
 import type { Metadata, Viewport } from 'next'
 /* import { ScrollToTop } from '@/hook/scrollTop'; */

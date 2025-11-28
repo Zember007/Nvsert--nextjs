@@ -1,6 +1,4 @@
-import '@/assets/styles/global.scss';
 import '@/assets/styles/base.scss';
-import '@/assets/lib/react-photo-view/dist/react-photo-view.css';
 import AppHeader from '@/components/general/AppHeader';
 import { ReactNode, useEffect, useRef, cloneElement, isValidElement } from 'react';
 import AppFooter from '@/components/general/AppFooter';

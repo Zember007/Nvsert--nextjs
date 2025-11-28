@@ -1,6 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import '@/assets/lib/react-photo-view/dist/react-photo-view.css';
 import type { ComponentProps } from 'react';
 
 // Ленивая загрузка PhotoProvider

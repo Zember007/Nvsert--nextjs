@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { useEffect, useRef, useState, memo, useId, useMemo, useCallback } from 'react';
 import { filterPrepositions } from '@/hook/filter';
+import '@/assets/lib/react-photo-view/dist/react-photo-view.css';
+
 import { PhotoView } from '@/assets/lib/react-photo-view';
 import { useButton } from '@/hook/useButton';
 import { useAnimation, motion } from "framer-motion";
