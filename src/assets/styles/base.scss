@@ -1,18 +1,15 @@
 
 @use 'base/variables' as *;
 @use 'base/mixins' as *;
-@use 'base/sprite' as *;
 @use 'base/base' as *;
 @use 'base/typography' as *;
 @use 'base/button' as *;
 
 @use 'blocks/forms' as *;
-@use 'blocks/modals/modals' as *;
 
 @use 'sections/header' as *;
 @use 'sections/footer' as *;
 
-@use 'base/print' as *;
 @use 'blocks/breadcrumbs' as *;
 
 .icon--logo {

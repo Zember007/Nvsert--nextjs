@@ -1,4 +1,4 @@
-import { useHeaderContext } from '@/components/contexts/HeaderContext'
+import '@/assets/styles/blocks/modals/modals.scss';
 import dynamic from 'next/dynamic';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import AppIntroForm from '@/components/forms/AppIntroForm'
