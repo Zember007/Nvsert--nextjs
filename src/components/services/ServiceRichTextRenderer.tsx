@@ -15,7 +15,7 @@ const ServiceRichTextRenderer: React.FC<ServiceRichTextRendererProps> = ({ conte
         .replace(/📞/g, '\n')
         .replace('-', '\n');
 
-    return <div>{processContent(preparedContent)}</div>;
+    return <>{processContent(preparedContent)}</>;
 };
 
 export default ServiceRichTextRenderer;
