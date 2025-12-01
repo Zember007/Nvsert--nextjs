@@ -42,16 +42,43 @@ export const viewport: Viewport = {
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
 
-/*   const initialNavigation = await getNavigationData();
-  if (!initialNavigation) return <div>Navigation not found</div>;
-  if (initialNavigation.length === 0) return <div>Navigation is empty</div>; */
-  
+  /*   const initialNavigation = await getNavigationData();
+    if (!initialNavigation) return <div>Navigation not found</div>;
+    if (initialNavigation.length === 0) return <div>Navigation is empty</div>; */
+
   return (
     <html lang="ru" >
-      <head />
+      <head>
+        <link
+          rel="preconnect"
+          href="https://test11.audiosector.ru"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/Roboto-Regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/Roboto-Medium.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/Roboto-Bold.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body>
         <Provider initialNavigation={initialNavigation as NavigationItem[]}>
-       {/*    <ScrollToTop /> */}
+          {/*    <ScrollToTop /> */}
           {children}
         </Provider>
       </body>
