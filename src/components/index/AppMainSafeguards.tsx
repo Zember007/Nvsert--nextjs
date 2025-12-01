@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from 'react';
 
 
 import SafeguardBlock from './elements/AppSafeguardBlock';
-import '@/assets/styles/sections/main/animation/skills.scss'
 import '@/assets/styles/sections/main/main-safeguards.scss'
 import Img1 from '@/assets/images/safeguard/1.webp'
 import Img2 from '@/assets/images/safeguard/2.webp'
