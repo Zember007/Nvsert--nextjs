@@ -1,0 +1,150 @@
+.PhotoView__Photo {
+    box-shadow: 0px 0px 10px 0px #000000CC;
+    cursor: inherit !important;
+
+}
+
+.PhotoView__Photo__attr {
+    position: relative;
+
+    @media (min-width:1280px) {
+        width: 448px;
+    }
+
+
+
+    text-align: center;
+
+
+
+
+}
+
+.PhotoView__Photo__description {
+
+    position: absolute;
+    bottom: -48px;
+    left: 0;
+    right: 0;
+
+    color: #FFF;
+    font-size: 20px;
+
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.PhotoView__Photo__title {
+    color: #FFF;
+    font-size: 24px;
+    font-weight: 300;
+    white-space: nowrap;
+    position: absolute;
+    top: -52px;
+    left: 0;
+    right: 0;
+    user-select: none;
+}
+
+
+.PhotoView__PhotoWrap {
+    height: 100vh !important;
+}
+
+.PhotoView__PhotoBox {
+    right: auto !important;
+    width: auto !important;
+}
+
+
+
+.PhotoView-Slider__BannerRight {
+    height: auto !important;
+
+
+    @media (min-width:1280px) {
+        position: fixed !important;
+
+        top: 50%;
+        right: 50%;
+        transform: translate(400px, -370px);
+    }
+
+    @media (max-width:1279px) {
+        .close {
+            right: 20px;
+            top: 20px;
+        }
+    }
+
+    .close {
+        --close-color: #FFF;
+    }
+
+
+
+}
+
+
+
+
+
+
+
+.PhotoView-Slider__ArrowLeft svg,
+.PhotoView-Slider__ArrowRight svg {
+    display: none !important;
+
+}
+
+
+.PhotoView-Slider__Backdrop {
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    background: #000000CC !important;
+}
+
+.PhotoView-Slider__BannerWrap {
+    top: 0 !important;
+    background-color: transparent !important;
+    opacity: 1 !important;
+
+    &::before {
+
+        @media (min-width:1280px) {
+            font-size: 20px;
+            top: 50%;
+            transform: translate(0, -368px);
+            white-space: nowrap;
+        }
+
+        font-size: 18px;
+
+        transform: translate(0, 50px);
+        width: calc(100vw);
+        justify-content: center;
+        content: attr(data-before);
+        position: fixed;
+        left: 0;
+        text-align: center;
+        right: 0;
+        display: flex;
+        align-items: end;
+    }
+}
+
+.modal__nav-arrow--left {
+    --arrow: url(../images/svg/left-arrow-modalphoto.svg);
+    cursor: var(--arrow) 25 25, auto;
+}
+
+.modal__nav-arrow--right {
+    --arrow: url(../images/svg/right-arrow-modalphoto.svg);
+    cursor: var(--arrow) 25 25, auto;
+}
+
+.PhotoView-Slider__Counter {
+    opacity: 0 !important;
+}

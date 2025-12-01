@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { skills } from './utils';
 import AppSkillBlock from './elements/AppSkillBlock';
-import '@/assets/styles/sections/main/animation/skills.scss'
 import '@/assets/styles/sections/main/main-skills-component.scss'
 import { useTranslation } from 'react-i18next';
 import useWindowSize from '@/hook/useWindowSize';
