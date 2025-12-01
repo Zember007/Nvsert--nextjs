@@ -9,6 +9,8 @@ import type { Metadata, Viewport } from 'next'
 /* import { getNavigationData } from '@/assets/lib/navigation'; */
 import initialNavigation from '@/assets/lib/navigation.json';
 import { NavigationItem } from "@/store/navigation"
+import '@/assets/styles/base.scss';
+
 
 export const metadata: Metadata = {
   title: 'NVSERT - Декларирование, сертификация, лицензирование',
