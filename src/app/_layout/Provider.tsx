@@ -1,6 +1,8 @@
 
 
 "use client";
+import '@/assets/styles/base.scss';
+
 import '@/config/i18n';
 import { HeaderContextProvider } from '@/components/contexts/HeaderContext';
 import Layout_wrapper from './Layout_wrapper';

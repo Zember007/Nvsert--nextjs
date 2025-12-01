@@ -1,4 +1,3 @@
-import '@/assets/styles/base.scss';
 
 
 import React from "react"
@@ -42,6 +41,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: '#646467',
 }
+
+
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
 
