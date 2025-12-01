@@ -1,3 +1,6 @@
+import '@/assets/styles/base.scss';
+
+
 import React from "react"
 import Provider from "./_layout/Provider"
 
@@ -75,6 +78,8 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           type="font/woff2"
           crossOrigin="anonymous"
         />
+
+
       </head>
       <body>
         <Provider initialNavigation={initialNavigation as NavigationItem[]}>

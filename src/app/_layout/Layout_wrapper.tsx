@@ -1,4 +1,3 @@
-import '@/assets/styles/base.scss';
 import AppHeader from '@/components/general/AppHeader';
 import { ReactNode, useEffect, useRef, cloneElement, isValidElement } from 'react';
 import AppFooter from '@/components/general/AppFooter';
