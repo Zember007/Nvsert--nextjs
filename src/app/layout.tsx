@@ -1,7 +1,7 @@
 
 
 import React from "react"
-import Provider from "./_layout/Provider"
+import Provider from "./_layout/ClientProvider"
 
 import { ReactNode } from "react"
 import type { Metadata, Viewport } from 'next'

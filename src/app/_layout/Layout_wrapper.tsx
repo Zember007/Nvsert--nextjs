@@ -1,3 +1,5 @@
+'use client';
+
 import AppHeader from '@/components/general/AppHeader';
 import { ReactNode, useEffect, useRef, cloneElement, isValidElement } from 'react';
 import AppFooter from '@/components/general/AppFooter';
