@@ -55,11 +55,6 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
     <html lang="ru" >
       <head>
         <link
-          rel="preconnect"
-          href="https://test11.audiosector.ru"
-          crossOrigin="anonymous"
-        />
-        <link
           rel="preload"
           href="/fonts/Roboto-Regular.woff2"
           as="font"
@@ -81,6 +76,14 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           crossOrigin="anonymous"
         />
 
+        {(initialNavigation as NavigationItem[]).map ((item) => (
+          <link
+            key={item.id}
+            rel="preconnect"
+            href={item.img?.url ? 'https://test11.audiosector.ru/cp' + (item.img?.formats?.medium?.url || item.img?.url) : ''}
+            crossOrigin="anonymous"
+          />
+        ))}
 
       </head>
       <body>
