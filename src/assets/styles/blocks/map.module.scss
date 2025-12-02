@@ -1,0 +1,34 @@
+.mapCompany {
+
+    path {
+        vector-effect: non-scaling-stroke;
+        paint-order: stroke fill;
+        shape-rendering: geometricPrecision;
+        stroke-linejoin: bevel;
+        stroke-linecap: square;
+        isolation: isolate;
+        transition: all 0.1s ease;
+        stroke: transparent;
+    }
+
+    &>path {
+
+        &:hover {
+            fill: #34446D;
+            fill-opacity: 0.5;
+         
+        }
+    }
+
+    &>g {
+
+        &:hover>path {
+            fill: #34446D;
+            fill-opacity: 0.5;
+         
+        }
+    }
+
+
+
+}

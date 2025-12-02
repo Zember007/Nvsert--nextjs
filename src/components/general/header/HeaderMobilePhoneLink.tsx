@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { filterPhone } from "@/hook/filter";
+import headerStyles from "@/assets/styles/sections/header.module.scss";
 
 interface HeaderMobilePhoneLinkProps {
   burgerMenuActive: boolean;
@@ -12,9 +13,9 @@ const HeaderMobilePhoneLink: React.FC<HeaderMobilePhoneLinkProps> = ({
   return (
     <Link
       href={filterPhone("8 495 777-11-97")}
-      className={` w-[50px] justify-center !p-0  xl:!hidden !backdrop-filter-none ${
+      className={` ${headerStyles.header__bg} w-[50px] justify-center !p-0  xl:!hidden !backdrop-filter-none ${
         burgerMenuActive ? "active" : "mix-blend-difference"
-      } header__bg fixed h-[50px] top-[2px] right-[58px] z-[51] `}
+      } fixed h-[50px] top-[2px] right-[58px] z-[51] `}
       aria-label="8 495 777-11-97"
     >
       <svg

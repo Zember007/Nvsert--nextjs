@@ -7,6 +7,8 @@ import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import useWindowSize from '@/hook/useWindowSize';
 import '@/assets/styles/sections/main/main-feedback.scss';
+import stylesSlider from '@/assets/styles/blocks/slider.module.scss';
+import textSize from '@/assets/styles/base/text-size.module.scss';
 
 
 
@@ -95,17 +97,17 @@ const AppMainFeedback = () => {
         <section className="section wrapper">
             <div id="feedback" className="absolute top-[-50px] pointer-events-none" ></div>
 
-            <h2 className="section__title header-h-2">{t('MainFeedback.title')}</h2>
+            <h2 className={`${textSize.headerH2} section__title`}>{t('MainFeedback.title')}</h2>
             <AsyncPhotoProvider maskOpacity={0.4} maskClassName="blurred-mask"
                 speed={() => 0}
                 maskClosable={false}
             >
                 <div ref={ref} className="feedback-slider-box">
 
-                    <div className="slide-blur feedback-blur left-0">
-                        <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
-                        <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
-                        <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
+                    <div className={`${stylesSlider.slideBlur} ${stylesSlider.feedbackBlur} left-0`}>
+                        <span className={stylesSlider.line} style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
+                        <span className={stylesSlider.line} style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
+                        <span className={stylesSlider.line} style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
                     </div>
 
                     <div className="feedback-slider-section">
@@ -129,11 +131,11 @@ const AppMainFeedback = () => {
                                 </div>)}
 
                         </div>
-                        <div className="slide-dots-box-container !flex xl:!hidden">
+                        <div className={`${stylesSlider.slideDotsBoxContainer} !flex xl:!hidden`}>
 
-                            <div className="slide-dots-box !flex xl:!hidden">
+                            <div className={`${stylesSlider.slideDotsBox} !flex xl:!hidden`}>
                                 {[...Array(14)].map((_, i) => (
-                                    <div key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
+                                    <div key={i} className={`${activeIndex === i ? stylesSlider.activeDots : ""} ${stylesSlider.slideDots}`}></div>
                                 ))}
                             </div>
                         </div>
@@ -158,20 +160,20 @@ const AppMainFeedback = () => {
 
                         </div>
 
-                        <div className="slide-dots-box-container !flex xl:!hidden">
-                            <div className="slide-dots-box !flex xl:!hidden">
+                        <div className={`${stylesSlider.slideDotsBoxContainer} !flex xl:!hidden`}>
+                            <div className={`${stylesSlider.slideDotsBox} !flex xl:!hidden`}>
                                 {[...Array(14)].map((_, i) => (
-                                    <div key={i} className={`${activeIndex1 === i ? 'active' : ""} slide-dots`}></div>
+                                    <div key={i} className={`${activeIndex1 === i ? stylesSlider.activeDots : ""} ${stylesSlider.slideDots}`}></div>
                                 ))}
                             </div>
                         </div>
                     </div>
 
 
-                    <div className="slide-blur feedback-blur right-0 ">
-                        <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
-                        <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
-                        <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
+                    <div className={`${stylesSlider.slideBlur} ${stylesSlider.feedbackBlur} right-0 `}>
+                        <span className={stylesSlider.line} style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
+                        <span className={stylesSlider.line} style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
+                        <span className={stylesSlider.line} style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
                     </div>
 
                 </div>

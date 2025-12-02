@@ -1,6 +1,7 @@
 import React from "react";
 import AppMenuItem from "../AppMenuItem";
 import { filterPhone } from "@/hook/filter";
+import headerStyles from "@/assets/styles/sections/header.module.scss";
 
 interface HeaderTopContactsProps {
   onCopyEmail: (value: string, event: any) => void;
@@ -9,7 +10,9 @@ interface HeaderTopContactsProps {
 const HeaderTopContacts: React.FC<HeaderTopContactsProps> = ({ onCopyEmail }) => {
   return (
     <div className="xl:flex hidden gap-[2px] fixed h-[50px] top-[2px] right-[196px] z-[51] mix-blend-difference">
-      <div className="w-[368px] header__bg !backdrop-filter-none gap-[8px] mix-blend-difference  h-full">
+      <div
+        className={`w-[368px] ${headerStyles.header__bg} !backdrop-filter-none gap-[8px] mix-blend-difference  h-full`}
+      >
         <AppMenuItem
           className="w-[160px] !justify-center"
           onClick={(e) => {

@@ -5,7 +5,9 @@ import Image from 'next/image';
 import { Services } from '@/store/navigation';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import { filterPrepositions } from '@/hook/filter';
-
+import headerStyles from '@/assets/styles/sections/header.module.scss';
+import stylesBtn from '@/assets/styles/base/_button.module.scss';
+import textSize from '@/assets/styles/base/text-size.module.scss';
 
 export interface Navigation {
     items?: Services[];
@@ -113,10 +115,10 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
 
 
     return (
-        <div className={`header__menu-mob ${active && 'active'}`}>
-            <div className="header__menu-mob-inner">
-                <nav className="header-nav flex flex-col  relative overflow-hidden w-full">
-                    <div className="header-nav__list !grid grid-cols-3 h-[50px] !items-center ">
+        <div className={`${headerStyles["header__menu-mob"]} ${active ? headerStyles.active : ''}`}>
+            <div className={headerStyles["header__menu-mob-inner"]}>
+                <nav className={`${headerStyles["header-nav"]} flex flex-col  relative overflow-hidden w-full`}>
+                    <div className={`${headerStyles["header-nav__list"]} !grid grid-cols-3 h-[50px] !items-center `}>
                         {canGoBack &&
                             <>
                                 <button
@@ -125,7 +127,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                                     <ArrowIcon className='w-[20px] h-[20px] rotate-[180deg]' />
                                 </button>
 
-                                <h4 className='header-h-4 whitespace-nowrap text-center justify-self-center'>{currentLevel.title}</h4>
+                                <h4 className={`${textSize.headerH4} whitespace-nowrap text-center justify-self-center`}>{currentLevel.title}</h4>
                             </>
                         }
                     </div>
@@ -142,7 +144,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                             {navigationStack.map((level, index) => (
                                 <ul
                                     key={index}
-                                    className="header-nav__list !py-[1px] min-w-full flex-shrink-0"
+                                    className={`${headerStyles["header-nav__list"]} !py-[1px] min-w-full flex-shrink-0`}
                                 >
                                     {level.items.map((item, index_item) =>
                                         <li key={item.name} className='w-full'>
@@ -152,7 +154,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                                                         prefetch={false}
                                                         onClick={() => closeMenu()}
                                                         href={(currentLevel.parentId === 'services' || navigationStack.some(level => level.parentId === 'services')) ? ('/services/' + item.slug) : item.slug}
-                                                        className={`${index_item === 0 ? 'first-child' : ''} ${item.img ? 'have-img' : ''} header__menu-mob-item group`}
+                                                        className={`${headerStyles["header__menu-mob-item"]} ${index_item === 0 ? headerStyles["first-child"] : ''} ${item.img ? headerStyles["have-img"] : ''} group`}
                                                     >
                                                         <div className="flex items-center gap-[20px] transition-transform will-change-transform duration-100 group-active:scale-[.98]">
                                                             {item.img?.url && (
@@ -169,7 +171,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                                                     <button
 
                                                         onClick={() => handleItemClick(item)}
-                                                        className={`${index_item === 0 ? 'first-child' : ''} ${'img' in item && item.img ? 'have-img' : ''} header__menu-mob-item group`}
+                                                        className={`${headerStyles["header__menu-mob-item"]} ${index_item === 0 ? headerStyles["first-child"] : ''} ${'img' in item && item.img ? headerStyles["have-img"] : ''} group`}
                                                     >
                                                         <span className="flex items-center gap-[20px] transition-transform will-change-transform duration-100 group-active:scale-[.95]">
                                                             {'img' in item && item.img?.url &&
@@ -192,11 +194,11 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
 
                     {(currentLevel.parentId === 'services' ||
                         navigationStack.some(level => level.parentId === 'services')) && (
-                            <div className="header-nav__list !my-[15px]">
+                            <div className={`${headerStyles["header-nav__list"]} !my-[15px]`}>
                                 <Link
                                     onClick={() => closeMenu()}
                                     href="/services"
-                                    className={`header__menu-mob-item text-[#93969D] before:hidden`}
+                                    className={`${headerStyles["header__menu-mob-item"]} text-[#93969D] before:hidden`}
                                 >
                                     <span className='text-[20px] font-light'>Полный список услуг</span>
                                 </Link>
@@ -231,7 +233,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                     </button>
 
                     <div className="text-[#000] flex items-center mt-[13px] gap-[10px]">
-                        <div className="tariff-wrap">
+                        <div className={`${stylesBtn.tariffWrap}`}>
                             <button
                                 onClick={(e) => handleCopy('@nvsert', e)}
                                 className="flex items-center px-[8px] gap-[8px]">
@@ -254,7 +256,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                                 </svg>
                             </button>
                         </div>
-                        <div className="tariff-wrap">
+                        <div className={`${stylesBtn.tariffWrap}`}>
                             <button
                                 onClick={(e) => handleCopy('@nvsert', e)}
                                 className="flex items-center px-[8px] gap-[8px]">

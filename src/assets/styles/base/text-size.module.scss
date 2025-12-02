@@ -1,0 +1,45 @@
+@use 'mixins' as *;
+
+.headerH2 {
+	@include header-h-2;
+}
+
+.headerH3 {
+	@include header-h-3;
+}
+
+.headerH5 {
+	@include header-h-5;
+}
+
+.headerH4 {
+	@include header-h-4;
+}
+
+.headerH6 {
+	@include header-h-6;
+}
+
+.text1 {
+	@include text-1;
+}
+
+.text2 {
+	@include text-2;
+}
+
+.text3 {
+	@include text-3;
+}
+
+.text4 {
+	@include text-4;
+}
+
+.text5 {
+	@include text-5;
+}
+
+.textBasePost {
+	@include text-base-post;
+}

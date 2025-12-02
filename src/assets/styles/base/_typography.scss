@@ -11,10 +11,6 @@ p {
 	margin: 0;
 }
 
-.text-base-post {
-	@include text-base-post;
-}
-
 a:not([class]) {
 	@include transition();
 	// color: $link-base-text-normal;
@@ -66,46 +62,6 @@ h1 {
 
 h2 {
 	margin: -0.85% 0;
-}
-
-.header-h-2 {
-	@include header-h-2;
-}
-
-.header-h-3 {
-	@include header-h-3;
-}
-
-.header-h-5 {
-	@include header-h-5;
-}
-
-.header-h-4 {
-	@include header-h-4;
-}
-
-.header-h-6 {
-	@include header-h-6;
-}
-
-.text-1 {
-	@include text-1;
-}
-
-.text-2 {
-	@include text-2;
-}
-
-.text-3 {
-	@include text-3;
-}
-
-.text-4 {
-	@include text-4;
-}
-
-.text-5 {
-	@include text-5;
 }
 
 //цитаты

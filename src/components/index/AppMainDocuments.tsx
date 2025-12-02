@@ -5,7 +5,8 @@ import '@/assets/styles/sections/main/animation/documents.scss'
 import '@/assets/styles/sections/main/main-documents.scss'
 import { AsyncPhotoProvider } from '@/components/common/AsyncPhotoView';
 import { useTranslation } from "react-i18next";
-import { useHeaderContext } from "../contexts/HeaderContext";
+import { useHeaderContext } from "../contexts/HeaderContext"
+import textSize from '@/assets/styles/base/text-size.module.scss';
 
 const AppMainDocuments = () => {
     const [activeIndex, setActive] = useState<number | null>(null);
@@ -21,7 +22,7 @@ const AppMainDocuments = () => {
 
             <div id="documents" className="absolute top-[-50px] pointer-events-none" ></div>
 
-            <h2 className="section__title header-h-2">
+            <h2 className={`${textSize.headerH2} section__title`}>
                 {t('docs.heading')}
             </h2>
 

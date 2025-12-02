@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import { filterPrepositions } from '@/hook/filter';
 import '@/assets/styles/sections/main/safeguard-block.scss';
+import textSize from '@/assets/styles/base/text-size.module.scss';
 
 interface GuaranteeCardProps {
   img: StaticImageData;
@@ -34,7 +35,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
         <div className="safeguard-card-inner">
           <div className="safeguard-image-container">
 
-            <p className="safeguard-title-overlay header-h-5"
+            <p className={`${textSize.headerH5} safeguard-title-overlay`}
             >{filterPrepositions(title)}</p>
             <Image
               className='safeguard-image'
@@ -54,7 +55,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
                 }}
                 key={index} className={`safeguard-item group/stroke ${index === items.length - 1 ? '' : ''}`}>
                 <div className="safeguard-item-header">
-                  <p className='safeguard-item-title text-1'>{item.subtitle.split(' ').length === 2 ?
+                  <p className={`${textSize.text1} safeguard-item-title`}>{item.subtitle.split(' ').length === 2 ?
                     <>
                       {item.subtitle.split(' ')[0]} <br />
                       {item.subtitle.split(' ')[1]}
@@ -82,7 +83,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
                     className={`safeguard-item-list`}>
 
                     <li className={`safeguard-list-item ${activeBlock === index ? 'active' : ''}`} key={index}>
-                      <p className='text-2'>{filterPrepositions(item.text)}</p>
+                      <p className={`${textSize.text2}`}>{filterPrepositions(item.text)}</p>
                     </li>
 
                   </ul>

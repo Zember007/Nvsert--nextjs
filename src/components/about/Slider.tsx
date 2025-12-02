@@ -3,6 +3,8 @@ import { horizontalLoop } from '@/scripts/slider';
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import CountUp from '@/components/general/countUp';
+import styles from '@/assets/styles/blocks/slider.module.scss';
+import textSize from '@/assets/styles/base/text-size.module.scss';
 
 const Slider = () => {
 
@@ -148,15 +150,15 @@ const Slider = () => {
 
     return (
         <div key="slider-container" ref={sliderRef} className="slider-container relative overflow-hidden mt-[15px] 1k:max-w-[calc(100vw-824px)] xl:max-w-[calc(100vw-656px)] l:max-w-[640px] xxs:max-w-[580px] xxs:mx-auto -mx-[26px] w-[calc(100%+52px)]">
-            <div className="slide-blur feedback-blur left-0">
-                <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
-                <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
-                <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
+            <div className={`${styles.slideBlur} ${styles.feedbackBlur} left-0`}>
+                <span className={styles.line} style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
+                <span className={styles.line} style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
+                <span className={styles.line} style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
             </div>
-            <div className="slide-blur feedback-blur right-0 ">
-                <span className="line" style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
-                <span className="line" style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
-                <span className="line" style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
+            <div className={`${styles.slideBlur} ${styles.feedbackBlur} right-0 `}>
+                <span className={styles.line} style={{ '--blur': '2px', '--lightness': '100%' } as React.CSSProperties}></span>
+                <span className={styles.line} style={{ '--blur': '5px', '--lightness': '100%' } as React.CSSProperties}></span>
+                <span className={styles.line} style={{ '--blur': '10px', '--lightness': '100%' } as React.CSSProperties}></span>
             </div>
             <div
                 data-slider="slider-wrap"
@@ -197,7 +199,7 @@ const Slider = () => {
                                     })()}
                                 </h2>
 
-                                <h6 className="header-h-6 leading-[1.3] text-black !font-normal">
+                                <h6 className={`${textSize.headerH6} leading-[1.3] text-black !font-normal`}>
                                     {block.title}
                                 </h6>
                                 <div>
@@ -209,10 +211,10 @@ const Slider = () => {
                 })}
             </div>
 
-            <div className="slide-dots-box-container !flex my-[20px]">
-                <div className="slide-dots-box !flex">
+            <div className={`${styles.slideDotsBoxContainer} !flex my-[20px]`}>
+                <div className={`${styles.slideDotsBox} !flex`}>
                     {sliderBlocks.map((_, i) => (
-                        <div key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
+                        <div key={i} className={`${activeIndex === i ? styles.activeDots : ""} ${styles.slideDots}`}></div>
                     ))}
                 </div>
             </div>

@@ -1,13 +1,17 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import AppMenuItem from "../AppMenuItem";
+import footerStyles from "@/assets/styles/sections/footer.module.scss";
+import textSize from "@/assets/styles/base/text-size.module.scss";
 
 const FooterBottomLegal: React.FC = () => {
   const { t } = useTranslation();
 
   return (
     <>
-      <div className="xl:!flex m:!grid footer__dark bottom-top m:justify-between  m:grid-cols-2 m:gap-[10px]  xl:gap-[0px] xl:h-auto m:h-[135px]">
+      <div
+        className={`xl:!flex m:!grid ${footerStyles.footer__dark} bottom-top m:justify-between  m:grid-cols-2 m:gap-[10px]  xl:gap-[0px] xl:h-auto m:h-[135px]`}
+      >
         <div className="m:flex hidden text-[16px] items-start  flex-col gap-[18px] font-ligh whitespace-nowrap">
           <span>{t("footer.inn")}</span>
           <span>{t("footer.company")}</span>
@@ -33,7 +37,9 @@ const FooterBottomLegal: React.FC = () => {
         </div>
       </div>
 
-      <div className="m:!hidden footer__white flex-col gap-[5.5px] !p-[18px] h-[96px] text-2">
+      <div
+        className={`m:!hidden ${footerStyles.footer__white} flex-col gap-[5.5px] !p-[18px] h-[96px] ${textSize.text2}`}
+      >
         <span className="font-normal">«ЦЕНТР СТАНДАРТИЗАЦИИ»</span>
         <span className="font-normal">ИНН 6027189146</span>
         <span className="font-light">© 2025&nbsp;NVSERT</span>

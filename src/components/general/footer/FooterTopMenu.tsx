@@ -1,6 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import AppMenuItem from "../AppMenuItem";
+import footerStyles from "@/assets/styles/sections/footer.module.scss";
+import textSize from "@/assets/styles/base/text-size.module.scss";
 
 const FooterTopMenu: React.FC = () => {
   const { t } = useTranslation();
@@ -14,8 +16,10 @@ const FooterTopMenu: React.FC = () => {
   ];
 
   return (
-    <div className="footer__white change-style xl:row-start-auto row-start-2   xl:justify-between m:gap-[62px]   xl:gap-[0px]">
-      <p className="m:block hidden xl:relative absolute xl:left-0 left-[34px] xl:top-0 top-1/2 xl:-translate-y-0 -translate-y-1/2 text-1 font-light col-start-1 col-end-3 whitespace-nowrap">
+    <div
+      className={`${footerStyles.footer__white} change-style xl:row-start-auto row-start-2   xl:justify-between m:gap-[62px]   xl:gap-[0px]`}
+    >
+      <p className={`m:block hidden xl:relative absolute xl:left-0 left-[34px] xl:top-0 top-1/2 xl:-translate-y-0 -translate-y-1/2 ${textSize.text1} font-light col-start-1 col-end-3 whitespace-nowrap`}>
         © 2025&nbsp;NVSERT
       </p>
 

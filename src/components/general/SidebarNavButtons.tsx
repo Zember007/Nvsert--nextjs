@@ -2,6 +2,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
+import stylesBtn from '@/assets/styles/base/_button.module.scss';
+import textSize from '@/assets/styles/base/text-size.module.scss';
 
 export type SidebarItem = {
     id: string;
@@ -46,11 +48,11 @@ const SidebarNavButtons = () => {
             {items.map((item, index_item) => (
                 <Link
                     key={item.id}
-                    className={`border-button px-[15px] active:scale-[.98] transition-transform will-change-transform duration-100 group ${item.active ? 'active' : ''}`}
+                    className={`${stylesBtn.borderButton} px-[15px] active:scale-[.98] transition-transform will-change-transform duration-100 group ${item.active ? 'active' : ''}`}
                     prefetch={false}
                     href={item.href}
                 >
-                    <h6 className={`header-h-6 font-light`}>{item.label}</h6>
+                    <h6 className={`${textSize.headerH6} font-light`}>{item.label}</h6>
                     <div className="group-active:scale-[.9] transition-transform will-change-transform duration-100">
                         {item.icon}
                     </div>

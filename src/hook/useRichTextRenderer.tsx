@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { filterPrepositions } from './filter';
-
+import textSize from '@/assets/styles/base/text-size.module.scss';
 
 export const useRichTextRenderer = () => {
     
@@ -25,8 +25,8 @@ export const useRichTextRenderer = () => {
                 // Для нумерованных списков с одним элементом убираем отступ слева
                 const isSingleOrdered = typeToUse === 'ordered' && currentListItems.length === 1;
                 const liClassName = isSingleOrdered
-                    ? `font-light ${small ? 'text-2' : 'text-base-post'}`
-                    : `font-light ${small ? 'text-2' : 'text-base-post'}`;
+                    ? `font-light ${small ? `${textSize.text2}` : `${textSize.textBasePost}`}`
+                    : `font-light ${small ? `${textSize.text2}` : `${textSize.textBasePost}`}`;
 
                 elements.push(
                     React.createElement(
@@ -111,7 +111,7 @@ export const useRichTextRenderer = () => {
             if (trimmedLine.startsWith('# ')) {
                 flushList();
                 elements.push(
-                    <h3 key={`subheading-${index}`} className="header-h-6 mt-[9px] font-normal text-black">
+                    <h3 key={`subheading-${index}`} className={`${textSize.headerH6} mt-[9px] font-normal text-black`}>
                         {filterPrepositions(trimmedLine.substring(2).trim())}
                     </h3>
                 );
@@ -123,7 +123,7 @@ export const useRichTextRenderer = () => {
             flushList();
             if (trimmedLine) {
                 elements.push(
-                    <p key={`p-${index}`} className={`-my-[5px] ${small ? 'text-2' : 'text-base-post'}`}>
+                    <p key={`p-${index}`} className={`-my-[5px] ${small ? `${textSize.text2}` : `${textSize.textBasePost}`}`}>
                         {filterPrepositions(trimmedLine)}
                     </p>
                 );

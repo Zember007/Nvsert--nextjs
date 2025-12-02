@@ -1,4 +1,5 @@
 import Link from "next/link";
+import stylesBreadcrumbs from '@/assets/styles/blocks/breadcrumbs.module.scss';
 
 interface Breadcrumb {
   id: number;
@@ -21,19 +22,19 @@ const AppBreadcrumbs = ({ root, title = '', breadcrumbs = [] }: AppBreadcrumbsPr
 
   return (
     <>
-      <ul className="breadcrumbs">
-        <li className="breadcrumbs__item">
+      <ul className={stylesBreadcrumbs.breadcrumbs}>
+        <li className={stylesBreadcrumbs.breadcrumbs__item}>
           <Link
-            className='breadcrumbs__link'
+            className={stylesBreadcrumbs.breadcrumbs__link}
             href={'/'}
           >Главная</Link>
         </li>
 
         {breadcrumbs.map(item => (
-          <li className="breadcrumbs__item" key={item.id}>
+          <li className={stylesBreadcrumbs.breadcrumbs__item} key={item.id}>
             <Link
               href={(item.full_slug ? item.full_slug + '/' : '/' + item.id)}
-              className="breadcrumbs__link"
+              className={stylesBreadcrumbs.breadcrumbs__link}
             >
               {crumbTitle(item)}
             </Link>

@@ -4,6 +4,8 @@ import React from 'react';
 import { ContentBlock } from '@/store/navigation';
 import { StrapiResponsiveImage } from '@/components/general/StrapiResponseImage';
 import ServiceRichTextRenderer from '@/components/services/ServiceRichTextRenderer';
+import stylesBtn from '@/assets/styles/base/_button.module.scss';
+import textSize from '@/assets/styles/base/text-size.module.scss';
 
 interface ServiceContentBlockProps {
     block: ContentBlock;
@@ -34,10 +36,10 @@ const ServiceContentBlock: React.FC<ServiceContentBlockProps> = ({
             className="w-full"
         >
             <div
-                className="flex justify-center group items-center gap-[10px] pb-[10px] border-b border-[#93969d80] cursor-pointer line-after"
+                className={`flex justify-center group items-center gap-[10px] pb-[10px] border-b border-[#93969d80] cursor-pointer ${stylesBtn.lineAfter}`}
                 onClick={onToggle}
             >
-                <h2 className="header-h-4 -my-[0.6%] group-active:scale-[0.98] transition-all duration-100  group-hover:text-[#34446D] text-[#000] flex-1">
+                <h2 className={`${textSize.headerH4} -my-[0.6%] group-active:scale-[0.98] transition-all duration-100  group-hover:text-[#34446D] text-[#000] flex-1`}>
                     {heading}
                 </h2>
 

@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { useButton } from '@/hook/useButton';
+import styles from '@/assets/styles/base/_button.module.scss';
 
 type TariffButtonProps = {
     label?: string;
@@ -20,10 +21,10 @@ const Button: FC<TariffButtonProps> = ({
     const { setButtonRef, setWrapperRef } = useButton();
 
     return (
-        <div className={` main-button-wrap tariff-wrap ${wrapperClassName}`} ref={setWrapperRef}>
-            <button ref={setButtonRef} className={` main-button btnIconAn doc-btn tariff ${buttonClassName}`} onClick={onClick}>
-                <span className="sendText">{label}</span>
-                <span className="sendIconLeft">
+        <div className={` ${styles.mainButtonWrap} ${styles.tariffWrap} ${wrapperClassName}`} ref={setWrapperRef}>
+            <button ref={setButtonRef} className={` ${styles.mainButton} ${styles.btnIconAn} ${styles.tariff} ${buttonClassName}`} onClick={onClick}>
+                <span className={`${styles.sendText}`}>{label}</span>
+                <span className={`${styles.sendIconLeft}`}>
                     {icon ?
                         icon :
 

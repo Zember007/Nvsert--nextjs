@@ -4,6 +4,8 @@ import { useAnimation, motion } from "framer-motion";
 import QuestionArrow from '../svg/QuestionArrow';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
 import '@/assets/styles/sections/main/questions-block.scss';
+import stylesBtn from '@/assets/styles/base/_button.module.scss';
+import textSize from '@/assets/styles/base/text-size.module.scss';
 
 const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive: (value: boolean) => void, active: boolean, number: number, title: string, text: string }) => {
     const controls = useAnimation();
@@ -63,7 +65,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                         <p className={`questions-number-text ${active ? 'active' : ''} l:group-hover:text-[50px] group-active:duration-[0] group-active:text-[#FFF]`}>{number}</p>
                     </div>
                     <div className={`questions-content-container ${active ? 'active' : ''} transition-scale group-active:scale-[0.99]`}>
-                        <p className={` header-h-6 questions-title ${active ? 'active' : ''} group-active:duration-[0] group-active:text-[#FFF]`}>{title}</p>
+                        <p className={`${textSize.headerH6} questions-title ${active ? 'active' : ''} group-active:duration-[0] group-active:text-[#FFF]`}>{title}</p>
 
                      
 
@@ -86,15 +88,15 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                         <motion.div
                             animate={controls}
                             initial={{ y: 20 }}
-                            className="questions-button-wrap tariff-wrap" ref={setWrapperRef}>
+                            className={`${stylesBtn.tariffWrap} questions-button-wrap`} ref={setWrapperRef}>
                             <button
-                                ref={setButtonRef} className='questions-button group tariff btnIconAn'>
+                                ref={setButtonRef} className={`questions-button group ${stylesBtn.tariff} ${stylesBtn.btnIconAn}`}>
 
                                 <span
-                                    className="sendText"
+                                    className={`${stylesBtn.sendText}`}
                                 >Подробнее</span>
 
-                                <span className="sendIconLeft">
+                                <span className={`${stylesBtn.sendIconLeft}`}>
                                     <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M3 9.48438V7.48438H0V9.48438H3ZM8.96767 1.48438L7.52908 2.91514L12.1092 7.47151H6V9.49623H12.1092L7.52908 14.0526L8.96767 15.4844L16 8.48438L15.2822 7.76899L14.5634 7.0526L8.96767 1.48438Z" fill="white" />
                                     </svg>

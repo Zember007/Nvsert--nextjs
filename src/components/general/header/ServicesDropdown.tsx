@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useAnimation, motion } from "framer-motion";
 import { AppNavigation } from "../AppNavigation";
 import { Services } from "@/store/navigation";
+import headerStyles from "@/assets/styles/sections/header.module.scss";
 
 interface ServicesDropdownProps {
   services: Services[];
@@ -29,14 +30,18 @@ const ServicesDropdown: React.FC<ServicesDropdownProps> = ({
   }, [active, controls]);
 
   return (
-    <div className={`services-menu-box ${active ? "active" : ""}`}>
+    <div
+      className={`${headerStyles["services-menu-box"]} ${
+        active ? headerStyles.active : ""
+      }`}
+    >
       <motion.div animate={controls} className=" relative">
         <div
-          className={`services-menu !backdrop-blur-[20px] py-[20px]  js-services-menu relative ${
-            active ? "active" : ""
+          className={`${headerStyles["services-menu"]} !backdrop-blur-[20px] py-[20px]  js-services-menu relative ${
+            active ? headerStyles.active : ""
           }`}
         >
-          <div className="services-menu__wrapper">
+          <div className={headerStyles["services-menu__wrapper"]}>
             <AppNavigation active={active} services={services} />
           </div>
         </div>

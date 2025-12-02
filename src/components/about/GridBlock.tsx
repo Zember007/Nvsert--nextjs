@@ -7,6 +7,7 @@ import IconAbout3 from '@/assets/images/about/3.svg';
 import IconAbout4 from '@/assets/images/about/4.svg';
 import IconAbout5 from '@/assets/images/about/5.svg';
 import IconAbout6 from '@/assets/images/about/6.svg';
+import textSize from '@/assets/styles/base/text-size.module.scss';
 
 interface GridBlockProps {
     block: string;
@@ -63,7 +64,7 @@ const GridBlock: React.FC<GridBlockProps> = ({ block, index, processContent }) =
             className={cardClass}
         >
             <div className="flex flex-col gap-[15px] w-full">
-                <h3 className="header-h-6 !font-normal">
+                <h3 className={`${textSize.headerH6} !font-normal`}>
                     {title}
                 </h3>
                 <div>

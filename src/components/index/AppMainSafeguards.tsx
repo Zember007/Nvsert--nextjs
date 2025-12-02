@@ -11,6 +11,8 @@ import Img2 from '@/assets/images/safeguard/2.webp'
 import Img3 from '@/assets/images/safeguard/3.webp'
 import Img4 from '@/assets/images/safeguard/4.webp'
 import useWindowSize from '@/hook/useWindowSize';
+import stylesSlider from '@/assets/styles/blocks/slider.module.scss';
+import textSize from '@/assets/styles/base/text-size.module.scss';
 
 
 const AppMainSafeguards = () => {
@@ -168,7 +170,7 @@ const AppMainSafeguards = () => {
         className="section ">
         <div id="safeguards" className="absolute top-[-50px] pointer-events-none" ></div>
 
-        <h2 className="section__title header-h-2">Гарантии и безупречный сервис</h2>
+        <h2 className={`${textSize.headerH2} section__title`}>Гарантии и безупречный сервис</h2>
         <div className="safeguards-container">
           <div className="safeguard__box"
             style={{ ...(widthWindow && widthWindow < 960 && { gap: Math.round((widthWindow - (250)) / 2) }) }}
@@ -192,14 +194,14 @@ const AppMainSafeguards = () => {
             }
           </div>
 
-          <div className="slide-dots-box-container">
-            <div className="slide-dots-box">
+          <div className={`${stylesSlider.slideDotsBoxContainer} !flex my-[20px]`}>
+            <div className={`${stylesSlider.slideDotsBox} !flex`}>
               {guarantees.map((_, i) => (
                 <div
                   onClick={() => {
                     timeLine.current.toIndex(i, { ease: "power3", duration: 0.725 })
                   }}
-                  key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
+                  key={i} className={`${activeIndex === i ? stylesSlider.activeDots : ""} ${stylesSlider.slideDots}`}></div>
               ))}
             </div>
           </div>

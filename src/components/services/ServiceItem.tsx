@@ -1,12 +1,11 @@
 'use client';
-import Image from 'next/image';
 import React, { useEffect, useId, useState } from 'react';
 import { NavigationItem } from '@/store/navigation';
-import Link from 'next/link';
 import { AppNavigationItem } from '@/components/general/AppNavigation';
 import { motion, useAnimation } from "framer-motion";
 import ServiceCard from '@/components/services/ServiceCard';
-import { filterPrepositions } from '@/hook/filter';
+import stylesBtn from '@/assets/styles/base/_button.module.scss';
+import textSize from '@/assets/styles/base/text-size.module.scss';
 
 interface ServiceItemProps {
     service: {
@@ -88,7 +87,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
             >
                 
                 
-                <div className={`line-after__box justify-between group wrapper xxl:flex-row flex-col flex xxl:items-center py-[25px] overflow-hidden`}>
+                <div className={`${stylesBtn.lineAfterBox} justify-between group wrapper xxl:flex-row flex-col flex xxl:items-center py-[25px] overflow-hidden`}>
                     <div className="w-[250px]">
                         <div className={`flex gap-[22px] justify-start w-fit items-center transition-transform duration-100  group-active:scale-[.9] ${active && 'scale-[.9]'}`}>
                             <svg
@@ -105,7 +104,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                                 </defs>
                             </svg>
 
-                            <h2 className={`header-h-4 line-after ${noActive ? 'noactive' : ''} after:!bottom-[-5px] !m-0   ${hover && 'active'}  transition-all duration-200 translate-y-[1px]`}>{service.title}</h2>
+                            <h2 className={`${textSize.headerH4} ${stylesBtn.lineAfter} ${noActive ? stylesBtn.noactive : ''} after:!bottom-[-5px] !m-0   ${hover && 'active'}  transition-all duration-200 translate-y-[1px]`}>{service.title}</h2>
                         </div>
                     </div>
                     <div className={`xxs:ml-[30px] xxl:mt-0 mt-[25px] xxl:grid flex gap-[20px] xxl:grid-cols-4 items-center flex-wrap transition-all duration-100 overflow-hidden ${isExpanded ? 'opacity-0 xxl:max-h-[100%] max-h-0 translate-y-full !mt-0' : 'opacity-100  translate-y-0 xxl:max-h-[100%] max-h-[350px]'}`}>
@@ -129,7 +128,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                 {/* Описание услуги */}
                 <div className="wrapper">
 
-                    <h3 className="xxs:ml-[30px] text-[#000000] text-base-post mb-[10px] max-w-[1150px]">
+                    <h3 className={`xxs:ml-[30px] text-[#000000] ${textSize.textBasePost} mb-[10px] max-w-[1150px]`}>
                         {service.description}
                     </h3>
 

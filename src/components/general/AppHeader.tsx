@@ -1,6 +1,5 @@
 import React, { memo, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import "@/assets/styles/sections/_header.scss";
 import { usePathname } from "next/navigation";
 import { useHeaderContext } from "../contexts/HeaderContext";
 import { Services } from "@/store/navigation";

@@ -2,8 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import GridBlock from './GridBlock';
 import useWindowSize from '@/hook/useWindowSize';
-import { useIntersectionObserver } from '@/hook/useIntersectionObserver';
-
+import stylesSlider from '@/assets/styles/blocks/slider.module.scss';
 interface GridBoxProps {
     gridContent: string;
     processContent: (content: string) => React.ReactNode;
@@ -113,10 +112,10 @@ const GridBox: React.FC<GridBoxProps> = ({ gridContent, processContent }) => {
                 ))}
             </div>
 
-            <div className="slide-dots-box-container !flex my-[20px]">
-                <div className="slide-dots-box !flex">
+            <div className={`${stylesSlider.slideDotsBoxContainer} !flex my-[20px]`}>
+                <div className={`${stylesSlider.slideDotsBox} !flex`}>
                     {gridBlocks.map((_, i) => (
-                        <div key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
+                        <div key={i} className={`${activeIndex === i ? stylesSlider.activeDots : ""} ${stylesSlider.slideDots}`}></div>
                     ))}
                 </div>
             </div>

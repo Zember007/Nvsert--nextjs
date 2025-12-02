@@ -1,7 +1,9 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import styles from '@/assets/styles/blocks/map.module.scss';
 import useWindowSize from '@/hook/useWindowSize';
+import textSize from '@/assets/styles/base/text-size.module.scss';
 
 // Mapping of region names to coat of arms files
 const coatOfArmsMapping: { [key: string]: string } = {
@@ -213,13 +215,13 @@ const Map = () => {
                                 />
                             </div>
                         )}
-                        <span className="text-1 !font-light whitespace-nowrap">{hoveredRegion}</span>
+                        <span className={`${textSize.text1} !font-light whitespace-nowrap`}>{hoveredRegion}</span>
                     </div>
                 </div>
             )}
 
             <svg
-                className={`map-company max-w-full `}
+                className={`${styles.mapCompany} max-w-full `}
                 viewBox="0 0 1072 603"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

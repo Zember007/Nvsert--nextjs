@@ -14,6 +14,8 @@ import { BounceEffect } from "@/hook/useBounce";
 import FlightSuccess from "../modals/FlightSuccess";
 import { useAnimation, motion } from "framer-motion";
 import { filterPrepositions } from "@/hook/filter";
+import stylesBtn from '@/assets/styles/base/_button.module.scss';
+import textSize from '@/assets/styles/base/text-size.module.scss';
 
 
 const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }: { btnText: string; bg?: boolean; close?: () => void; BounceWrapper?: () => void; active?: boolean; countTrigger?: number }) => {
@@ -273,7 +275,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
             {successMessageVisible && <FlightSuccess closeIcon={bg} text="Спасибо за заявку" close={() => { setSuccessMessageVisible(false) }} />}
 
 
-            <span className={` form__title header-h-3  ${successMessageVisible && 'opacity-0'} `}>Оформить заявку</span>
+            <span className={`${textSize.headerH3} form__title  ${successMessageVisible && 'opacity-0'} `}>Оформить заявку</span>
 
 
             <div className={`${successMessageVisible && 'opacity-0'}`}>
@@ -316,21 +318,21 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                 inputName="comment"
                             />
 
-                            <div ref={setWrapperRef} className="tariff-wrap relative">
+                            <div ref={setWrapperRef} className={`${stylesBtn.tariffWrap} relative`}>
                                 <button
                                     type="submit"
                                     ref={setButtonRef}
-                                    className="form__button no-drag btnIconAn group tariff"
+                                    className={`${stylesBtn.btnIconAn} form__button no-drag group ${stylesBtn.tariff}`}
                                     style={{
                                         verticalAlign: 'middle'
                                     }}
                                 >
 
                                     <span
-                                        className="sendText"
+                                        className={`${stylesBtn.sendText}`}
                                     >{btnText}</span>
 
-                                    <span className="sendIconLeft">
+                                    <span className={`${stylesBtn.sendIconLeft}`}>
                                         <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M3 8.5V6.5H0V8.5H3ZM8.96767 0.5L7.52908 1.93076L12.1092 6.48713H6V8.51185H12.1092L7.52908 13.0682L8.96767 14.5L16 7.5L15.2822 6.78462L14.5634 6.06823L8.96767 0.5Z" fill="#fff" />
                                         </svg>
@@ -341,7 +343,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
 
                             <span className="form__desc">
                                 {filterPrepositions('Нажимая на кнопку «Оформить заявку» вы соглашаетесь с ')}
-                                <Link href="/soglashenie/polzovatelskoe-soglashenie/" className="line-after no-drag" target="_blank">
+                                <Link href="/soglashenie/polzovatelskoe-soglashenie/" className={`${stylesBtn.lineAfter} no-drag`} target="_blank">
                                     политикой конфиденциальности
                                 </Link>
                             </span>

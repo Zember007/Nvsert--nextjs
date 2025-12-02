@@ -6,6 +6,8 @@ import { filterPrepositions } from "@/hook/filter";
 import { useButton } from "@/hook/useButton";
 import { NavigationItem, Services } from "@/store/navigation";
 import Image from "next/image";
+import stylesBtn from '@/assets/styles/base/_button.module.scss';
+import textSize from '@/assets/styles/base/text-size.module.scss';
 
 
 
@@ -67,13 +69,13 @@ const AppNavigationItem = ({ img, title, controls, link, dark, className, onClic
 
     return (
         <>
-            <div ref={setWrapperRef} className={`tariff-wrap ${className ?? 'xxs:!max-w-[250px]'}`}>
+            <div ref={setWrapperRef} className={`${stylesBtn.tariffWrap} ${className ?? 'xxs:!max-w-[250px]'}`}>
                 <Link
                     ref={setButtonRef}
                     href={'/services/' + link}
                     prefetch={false}
                     onClick={onClick}
-                    className={`tariff text-left  no-transitions overflow-hidden not-backdrop flex  gap-[10px] group/img  rounded-[3px] items-center    border-solid  border border-[transparent] h-[72px] p-[5px] ${dark ? 'hover:border-[#34446D] hover:bg-[#F5F5F2] ' : ' hover:border-[#fff] hover:bg-[#34446d33]'}`}>
+                    className={` ${stylesBtn.tariff} ${stylesBtn.noTransitions} text-left overflow-hidden ${stylesBtn.notBackdrop} flex  gap-[10px] group/img  rounded-[3px] items-center    border-solid  border border-[transparent] h-[72px] p-[5px] ${dark ? 'hover:border-[#34446D] hover:bg-[#F5F5F2] ' : ' hover:border-[#fff] hover:bg-[#34446d33]'}`}>
                     <motion.div
                         className={` overflow-hidden h-[60px] rounded-[3px] min-w-[43px] w-[43px] border-solid border border-[#93969D] `}
                         animate={controls}>
@@ -86,7 +88,7 @@ const AppNavigationItem = ({ img, title, controls, link, dark, className, onClic
                             sizes="43px"
                         />
                     </motion.div>
-                    <p className={`${classNameText ? classNameText : ''} ${dark ? 'text-[#000] text-1' : 'text-[#FFF] xxxxl:text-[18px] xxl:text-[16px] text-[14px] no-font-weight'}  !leading-[1.1] pr-[6px] whitespace-pre-line max-w-full`}>{filterPrepositions(title)}</p>
+                    <p className={`${classNameText ? classNameText : ''} ${dark ? `text-[#000] ${textSize.text1}` : 'text-[#FFF] xxxxl:text-[18px] xxl:text-[16px] text-[14px] no-font-weight'}  !leading-[1.1] pr-[6px] whitespace-pre-line max-w-full`}>{filterPrepositions(title)}</p>
                 </Link>
             </div>
         </>

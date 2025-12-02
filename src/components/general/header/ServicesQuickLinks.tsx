@@ -2,6 +2,9 @@ import React from "react";
 import Link from "next/link";
 import { useButton } from "@/hook/useButton";
 import { Services } from "@/store/navigation";
+import headerStyles from "@/assets/styles/sections/header.module.scss";
+import stylesBtn from '@/assets/styles/base/_button.module.scss';
+import textSize from "@/assets/styles/base/text-size.module.scss";
 
 interface ServicesQuickLinksProps {
   services: Services[];
@@ -18,25 +21,27 @@ const ServicesQuickLinks: React.FC<ServicesQuickLinksProps> = ({
 
   return (
     <div
-      className={`services-menu-box menu-headers  ${
-        active ? "active" : ""
+      className={`${headerStyles["services-menu-box"]} ${headerStyles["menu-headers"]}  ${
+        active ? headerStyles.active : ""
       }`}
     >
-      <div className="services-menu h-[50px] js-services-menu relative ">
-        <div className="services-menu__wrapper ">
+      <div
+        className={`${headerStyles["services-menu"]} h-[50px] js-services-menu relative `}
+      >
+        <div className={`${headerStyles["services-menu__wrapper"]} `}>
           <div className="grid grid-cols-6 h-[50px] w-full xxxl:gap-[30px] gap-[8px]">
             {services.map((item, i) => (
-              <div ref={setWrapperRef} key={i} className="tariff-wrap ">
+              <div ref={setWrapperRef} key={i} className={`${stylesBtn.tariffWrap}`}>
                 <Link
                   onClick={onLinkClick}
                   href={`/services#${item.name}`}
                   ref={setButtonRef}
-                  className="text-[#FFF] line-after__box xxl:pl-[5px] h-full text-center btnIconAn transition-all duration-100 active:scale-95 flex !gap-[9px]"
+                  className={`text-[#FFF] ${stylesBtn.lineAfterBox} xxl:pl-[5px] h-full text-center ${stylesBtn.btnIconAn} transition-all duration-100 active:scale-95 flex !gap-[9px]`}
                 >
-                  <p className="text-1  line-after stop-color font-light">
+                  <p className={`${textSize.text1}  ${stylesBtn.lineAfter} ${stylesBtn.stopColor} font-light`}>
                     {item.title}
                   </p>
-                  <div className="sendIconLeft !w-auto">
+                  <div className={`${stylesBtn.sendIconLeft} !w-auto`}>
                     <svg
                       width="24"
                       height="14"

@@ -13,6 +13,8 @@ import '@/assets/styles/sections/main/document-item.scss';
 import { useRouter } from 'next/navigation';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
 import { DotNavItem } from '@/components/general/DotNavList';
+import stylesBtn from '@/assets/styles/base/_button.module.scss';
+import textSize from '@/assets/styles/base/text-size.module.scss';
 
 // Выносим анимационные настройки
 const ANIMATION_SETTINGS = {
@@ -93,10 +95,10 @@ const DocumentList = memo(({ documentsList, listHidden, setListHidden, hiddenLis
     return (
         <div className="document__list">
             <div className='document__list-item'>
-                <p className={`text-1`}>
+                <p className={`${textSize.text1}`}>
                     Необходимые документы для оформления
                 </p>
-                <ul className='document__list-item-ul text-2'>
+                <ul className={`document__list-item-ul ${textSize.text2}`}>
                     {documentsList.map((list, index) => (
 
                         <li
@@ -111,13 +113,13 @@ const DocumentList = memo(({ documentsList, listHidden, setListHidden, hiddenLis
 
 
                     <button
-                        className='document-list-show-button  line-after__box btnIconAn !gap-[5px]'
+                        className={`document-list-show-button  ${stylesBtn.lineAfterBox}  !gap-[5px] ${stylesBtn.btnIconAn}`}
                         onClick={() => setListHidden(!listHidden)}
                     >
-                        <span className=' line-after !leading-[1.2] whitespace-nowrap'>{listHidden ? 'Показать полный список документов' : 'Скрыть'}</span>
+                        <span className={`${stylesBtn.lineAfter} !leading-[1.2] whitespace-nowrap`}>{listHidden ? 'Показать полный список документов' : 'Скрыть'}</span>
 
                         <svg
-                            className={`sendIconLeft document-list-arrow ${!listHidden ? 'rotate-[180deg]' : ''}`}
+                            className={`${stylesBtn.sendIconLeft} document-list-arrow ${!listHidden ? 'rotate-[180deg]' : ''}`}
                             width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clipPath={`url(#${clip0_4632_2058})`}>
                                 <path d="M7 3.5H9V0.5H7L7 3.5ZM15 9.46767L13.5692 8.02908L9.01287 12.6092V6.5H6.98815V12.6092L2.43177 8.02908L1 9.46767L8 16.5L8.71538 15.7822L9.43177 15.0634L15 9.46767Z" fill="currentColor" />
@@ -173,7 +175,7 @@ const MainDocumentItem = memo(({
         return windowWidth && windowWidth < 960;
     }, [windowWidth]);
 
-    const commonButtonClasses = 'group btnIconAn doc-btn tariff ';
+    const commonButtonClasses = `group  ${stylesBtn.tariff} ${stylesBtn.btnIconAn}`;
 
     // Мемоизация обработанного контента
     const processedContent = useMemo(() => {
@@ -269,12 +271,12 @@ const MainDocumentItem = memo(({
                         className={`document__navigation-bg document__navigation-wrap container-scale transition-scale backface-hidden ${active ? 'active' : 'text-[#000]'} group-active/window:text-[#FFF]   `}
                     >
 
-                        <h3 className="document__title header-h-6">
+                        <h3 className={`${textSize.headerH6} document__title`}>
                             {filterPrepositions(title)}
                         </h3>
                         <div className="document__desc-wrap">
-                            <p className="document__desc header-h-6">{duration}</p>
-                            <p className="document__desc header-h-6">{price}</p>
+                            <p className={`${textSize.headerH6} document__desc`}>{duration}</p>
+                            <p className={`${textSize.headerH6} document__desc`}>{price}</p>
 
 
 
@@ -300,7 +302,7 @@ const MainDocumentItem = memo(({
                                         <motion.div
                                             animate={controls}
                                             initial={{ y: 20 }}
-                                            className="tariff-wrap w-[280px] l:mx-0 mx-auto l:w-[250px] " ref={setWrapperRef}>
+                                            className={`${stylesBtn.tariffWrap} w-[280px] l:mx-0 mx-auto l:w-[250px] `} ref={setWrapperRef}>
                                             <ActionButton
                                                 setRef={setButtonRef}
                                                 onClick={handleOrderClick}
@@ -311,7 +313,7 @@ const MainDocumentItem = memo(({
                                         <motion.div
                                             animate={controls}
                                             initial={{ y: 20 }}
-                                            className="tariff-wrap w-[280px] l:mx-0 mx-auto l:w-[250px] ">
+                                            className={`${stylesBtn.tariffWrap} w-[280px] l:mx-0 mx-auto l:w-[250px] `}>
                                             <ActionButton
                                                 setRef={setButtonRef}
                                                 onClick={handleServiceClick}
@@ -384,7 +386,7 @@ const MainDocumentItem = memo(({
                                         <motion.div
                                             animate={controls}
                                             initial={{ y: 20 }}
-                                            className="tariff-wrap max-w-full w-[280px]  l:w-[250px]" ref={setWrapperRef}>
+                                            className={`${stylesBtn.tariffWrap} max-w-full w-[280px]  l:w-[250px]`} ref={setWrapperRef}>
                                             <ActionButton
                                                 setRef={setButtonRef}
                                                 onClick={handleOrderClick}
@@ -414,7 +416,7 @@ const MainDocumentItem = memo(({
                                 <motion.div
                                     animate={controls}
                                     initial={{ y: 20 }}
-                                    className="tariff-wrap max-w-full w-[280px]  l:w-[250px] ">
+                                    className={`${stylesBtn.tariffWrap} max-w-full w-[280px]  l:w-[250px] `}>
                                     <ActionButton
                                         setRef={setButtonRef}
                                         onClick={handleServiceClick}

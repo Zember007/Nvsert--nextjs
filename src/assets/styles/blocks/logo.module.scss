@@ -1,0 +1,11 @@
+@use '../base/mixins' as mixins;
+
+.icon_logo {
+    @include mixins.mask;
+    display: block;
+    background-color: currentColor;
+    transition: color 0.2s ease-in-out 0s;
+
+    mask-image: url('../../images/logo.svg');
+    -webkit-mask-image: url('../../images/logo.svg');
+}

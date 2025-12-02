@@ -1,4 +1,6 @@
 import Link from "next/link";
+import logoStyles from '@/assets/styles/blocks/logo.module.scss';
+import headerStyles from '@/assets/styles/sections/header.module.scss';
 
 interface AppLogoProps {
   inverted?: boolean;
@@ -6,9 +8,16 @@ interface AppLogoProps {
 }
 
 const AppLogo = ({ inverted = false, className }: AppLogoProps) => {
+
   return (
-    <Link href="/" className={`logo active:scale-[.9] ${className} ${inverted ? 'invert' : ''}`} title="NVSERT">
-      <i className="icon icon--logo"></i>
+    <Link
+      href="/"
+      className={`${headerStyles.logo} active:scale-[.9] ${className} ${
+        inverted ? headerStyles.invert : ""
+      }`}
+      title="NVSERT"
+    >
+      <i className={`${headerStyles.icon} ${logoStyles.icon_logo}`}></i>
     </Link>
   );
 };

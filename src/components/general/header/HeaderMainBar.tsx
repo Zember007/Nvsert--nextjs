@@ -2,6 +2,7 @@ import React from "react";
 import AppLogo from "../AppLogo";
 import AppMenuItem from "../AppMenuItem";
 import { useTranslation } from "react-i18next";
+import headerStyles from "@/assets/styles/sections/header.module.scss";
 
 interface HeaderMainBarProps {
   pathname: string;
@@ -22,13 +23,15 @@ const HeaderMainBar: React.FC<HeaderMainBarProps> = ({
 }) => {
   return (
     <header
-      className={`header ${
-        servicesMenuActive || burgerMenuActive ? "active" : ""
+      className={`${headerStyles.header} ${
+        servicesMenuActive || burgerMenuActive ? headerStyles.active : ""
       }`}
     >
       <InlineLogo burgerMenuActive={burgerMenuActive} />
 
-      <div className="header__menu header__bg ">
+      <div
+        className={`${headerStyles.header__menu} ${headerStyles.header__bg}`}
+      >
         <HeaderNav
           pathname={pathname}
           servicesMenuActive={servicesMenuActive}
@@ -54,7 +57,9 @@ interface InlineLogoProps {
 
 const InlineLogo: React.FC<InlineLogoProps> = ({ burgerMenuActive }) => {
   return (
-    <div className="header__bg min-w-[192px] xl:grow-0 grow xl:opacity-0 !px-[20px]">
+    <div
+      className={`${headerStyles.header__bg} min-w-[192px] xl:grow-0 grow xl:opacity-0 !px-[20px]`}
+    >
       <AppLogo
         className={`xl:mx-auto ${burgerMenuActive ? "!text-[#000]" : ""}`}
       />
@@ -76,8 +81,8 @@ const HeaderNav: React.FC<HeaderNavProps> = ({
   const { t } = useTranslation();
 
   return (
-    <nav className="header-nav">
-      <ul className="header-nav__list">
+    <nav className={headerStyles["header-nav"]}>
+      <ul className={headerStyles["header-nav__list"]}>
         <li>
           <AppMenuItem
             isActive={pathname === "/"}
@@ -146,7 +151,9 @@ const DesktopOrderButton: React.FC<DesktopOrderButtonProps> = ({
   return (
     <div className=" hidden xl:flex gap-[2px]">
       <div className="w-[368px]"></div>
-      <div className="header__bg w-[192px] !backdrop-filter-none  mix-blend-difference  h-full">
+      <div
+        className={`${headerStyles.header__bg} w-[192px] !backdrop-filter-none  mix-blend-difference  h-full`}
+      >
         <AppMenuItem
           className="mx-auto w-[170px] "
           onClick={onOpenOrder}
@@ -173,7 +180,9 @@ const MobileBurgerButton: React.FC<MobileBurgerButtonProps> = ({
   return (
     <div className=" xl:hidden flex gap-[2px]">
       <div className="w-[50px]"></div>
-      <div className="header__bg !p-0 w-[50px] justify-center">
+      <div
+        className={`${headerStyles.header__bg} !p-0 w-[50px] justify-center`}
+      >
         <button
           type="button"
           className={`relative ${

@@ -1,0 +1,84 @@
+$wall__line_bd-cr: hsl(0deg 0% 100% / 0%);
+
+.slideBlur {
+
+    &:not(.feedbackBlur) {
+        @apply m:flex hidden;
+    }
+
+    &.feedbackBlur {
+        @apply xl:flex hidden;
+    }
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+
+
+    .line {
+        background-color: $wall__line_bd-cr;
+        width: 20px;
+        backdrop-filter: blur(var(--blur));
+
+        &:nth-child(1) {
+            transition: all .2s ease;
+        }
+
+        &:nth-child(2) {
+            transition: all .4s ease;
+        }
+
+        &:nth-child(3) {
+            transition: all .6s ease;
+        }
+
+        &:nth-child(4) {
+            transition: all .8s ease;
+        }
+
+
+    }
+
+    &.white {
+        .line {
+            background-color: #FFF;
+        }
+    }
+
+}
+
+
+.slideDots {
+    @apply w-[8px] h-[8px] relative border border-solid border-[#93969D] rounded-full;
+
+    &.activeDots {
+        @apply bg-[#34446D] border-[#34446D];
+
+        &::before {
+            @apply opacity-100;
+            transform: translate(-50%, -50%) scale(2);
+
+        }
+    }
+
+    &::before {
+        @apply w-[8px] h-[8px] relative border border-solid border-[#34446D] rounded-full opacity-0 content-[''];
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: all .3s;
+    }
+
+    &Box {
+        @apply flex xxl:hidden justify-center gap-[7px] absolute bottom-0 left-1/2 -translate-x-1/2;
+
+        &Container {
+            @apply xxl:hidden h-[8px] w-full relative;
+        }
+    }
+}

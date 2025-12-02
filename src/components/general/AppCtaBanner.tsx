@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '@/components/ui/Button';
+import textSize from '@/assets/styles/base/text-size.module.scss';
 
 interface CtaBannerProps {
     text: string;
@@ -21,10 +22,10 @@ const AppCtaBanner: React.FC<CtaBannerProps> = ({
     return (
          text && description ? (
             <div className={`mx-auto text-center max-w-[700px] w-full xxs:min-h-[300px] bg-[rgba(52,68,109,0.2)] rounded-[8px] flex flex-col justify-center items-center gap-[16px] s:py-[40px] px-[14px] py-[20px] backdrop-blur-sm ${className}`}>
-                <h3 className="text-black max-w-[460px] header-h-4">
+                <h3 className={`${textSize.headerH4} text-black max-w-[460px]`}>
                     {text}
                 </h3>
-                <p className={`text-3 text-[rgba(0,0,0,0.6)] ${descriptionClassName || 'max-w-[378px]'}`}>
+                <p className={`${textSize.text3} text-[rgba(0,0,0,0.6)] ${descriptionClassName || 'max-w-[378px]'}`}>
                     {description}
                 </p>
                 <Button

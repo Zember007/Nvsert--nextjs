@@ -1,5 +1,6 @@
 import React from 'react';
 import { useButton } from '@/hook/useButton';
+import stylesBtn from '@/assets/styles/base/_button.module.scss';
 
 interface ServicesToggleButtonProps {
     isExpanded: boolean;
@@ -21,7 +22,7 @@ const ServicesToggleButton: React.FC<ServicesToggleButtonProps> = ({
     const { setWrapperRef, setButtonRef } = useButton();
 
     return (
-        <div ref={setWrapperRef} className="tariff-wrap w-[250px]">
+        <div ref={setWrapperRef} className={`${stylesBtn.tariffWrap} w-[250px]`}>
             <button
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
@@ -44,13 +45,13 @@ const ServicesToggleButton: React.FC<ServicesToggleButtonProps> = ({
                     setHover(false);
                 }}
                 ref={setButtonRef}
-                className="btnIconAn width-23 tariff bg-[#F5F5F2]   h-[50px] rounded-[4px] btn-text border border-[#93969d] flex items-center justify-center"
+                className={`${stylesBtn.btnIconAn} ${stylesBtn.width_23} ${stylesBtn.tariff} bg-[#F5F5F2]   h-[50px] rounded-[4px] ${stylesBtn.btnText} border border-[#93969d] flex items-center justify-center`}
             >
-                <span className="sendText">
+                <span className={`${stylesBtn.sendText}`}>
                     {isExpanded ? 'Свернуть услуги' : 'Показать услуги'}
                 </span>
 
-                <span className="sendIconLeft">
+                <span className={`${stylesBtn.sendIconLeft}`}>
                     <svg
                         className={`${isExpanded ? 'rotate-180' : ''} transition-all`}
                         width="23"

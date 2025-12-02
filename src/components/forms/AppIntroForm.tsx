@@ -15,6 +15,8 @@ import FlightSuccess from "../modals/FlightSuccess";
 import { useHeaderContext } from "../contexts/HeaderContext";
 import { useAnimation, motion } from "framer-motion";
 import { filterPrepositions } from "@/hook/filter";
+import stylesBtn from '@/assets/styles/base/_button.module.scss';
+import textSize from '@/assets/styles/base/text-size.module.scss';
 
 
 const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrapper?: () => void }) => {
@@ -110,7 +112,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
             className='s:h-[590px] h-[475px] border border-solid border-[#93969d] rounded-[6px] flex flex-col s:gap-[20px] s:justify-start justify-between py-[30px] px-[20px] s:p-[40px] relative'>
 
             <div className={`${successMessageVisible && 'opacity-0'} flex flex-col s:gap-[44px] gap-[20px]`}>
-                <span className={`form__title header-h-3`}>Заказать звонок</span>
+                <span className={`${textSize.headerH3} form__title`}>Заказать звонок</span>
 
                 <div className="w-full s:h-[113px] h-[120px] overflow-hidden pointer-events-none rounded-[4px] border border-solid border-[#93969D]">
                     <Image className="w-full s:hidden" src={ImgCallMob} alt='order-call'></Image>
@@ -141,18 +143,18 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
 
 
 
-                        <div ref={setWrapperRef} className="tariff-wrap relative s:mt-[24px]">
+                        <div ref={setWrapperRef} className={`${stylesBtn.tariffWrap} relative s:mt-[24px]`}>
                             <button
                                 type="submit"
                                 ref={setButtonRef}
-                                className="form__button no-drag btnIconAn group tariff"
+                                className={`${stylesBtn.btnIconAn} form__button no-drag group ${stylesBtn.tariff}`}
                             >
 
                                 <span
-                                    className="sendText"
+                                    className={`${stylesBtn.sendText}`}
                                 >Заказать звонок</span>
 
-                                <span className="sendIconLeft">
+                                <span className={`${stylesBtn.sendIconLeft}`}>
                                     <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M3 9.48438V7.48438H0V9.48438H3ZM8.96767 1.48438L7.52908 2.91514L12.1092 7.47151H6V9.49623H12.1092L7.52908 14.0526L8.96767 15.4844L16 8.48438L15.2822 7.76899L14.5634 7.0526L8.96767 1.48438Z" fill="#fff" />
                                     </svg>
@@ -163,7 +165,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
 
                         <span className="form__desc">
                             {filterPrepositions('Нажимая на кнопку «Оформить заявку» вы соглашаетесь с ')}
-                            <Link href="/soglashenie/polzovatelskoe-soglashenie/" className="line-after no-drag" target="_blank">
+                            <Link href="/soglashenie/polzovatelskoe-soglashenie/" className={`${stylesBtn.lineAfter} no-drag`} target="_blank">
                                 политикой конфиденциальности
                             </Link>
                         </span>

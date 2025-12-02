@@ -5,11 +5,9 @@
     .btn-lang {
       @media (min-width: 960px) {
         --color-item-menu: #000;
-     
       }
 
       --color-item-menu: #fff;
-
     }
 
     --color-item-menu: #000;
@@ -24,7 +22,6 @@
   }
 
   .dark-style {
-
     --color-item-menu: #FFF;
     color: #FFF;
     display: flex;
@@ -36,7 +33,7 @@
   }
 
   &__white {
-    @apply  xl:!px-[15px] xl:!py-[15px] xss:p-[27px] p-[20px] m:px-[34px] m:py-[15px];
+    @apply xl:!px-[15px] xl:!py-[15px] xss:p-[27px] p-[20px] m:px-[34px] m:py-[15px];
 
     &:not(.change-style) {
       @apply white-style;
@@ -52,7 +49,7 @@
   }
 
   &__dark {
-    @apply dark-style  xl:!px-[15px] xl:!py-[15px] xss:p-[27px] p-[20px] m:px-[34px] m:py-[15px];
+    @apply dark-style xl:!px-[15px] xl:!py-[15px] xss:p-[27px] p-[20px] m:px-[34px] m:py-[15px];
 
     &.bottom-top {
       @media (max-width: 1279px) {
@@ -83,3 +80,5 @@
     }
   }
 }
+
+

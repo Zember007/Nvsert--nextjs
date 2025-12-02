@@ -1,6 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import AudioLogo from "@/assets/images/svg/audio-selector.svg";
 import { useIntersectionObserver } from "@/hook/useIntersectionObserver";
+import footerStyles from "@/assets/styles/sections/footer.module.scss";
+import stylesSlider from "@/assets/styles/blocks/slider.module.scss";
+import textSize from "@/assets/styles/base/text-size.module.scss";
 
 const slides = [
   "Помогаем сотрудникам не терять информацию",
@@ -132,7 +135,7 @@ const FooterMarquee: React.FC = () => {
   return (
     <div
       ref={ref}
-      className="footer__dark m:justify-start justify-center gap-[16px] xl:h-auto m:h-[135px] h-[96px]"
+      className={`${footerStyles.footer__dark} m:justify-start justify-center gap-[16px] xl:h-auto m:h-[135px] h-[96px]`}
     >
       <AudioLogo className="xl:ml-[35px]" />
       <div className="pl-[16px] border-l border-[#FFF] border-solid flex flex-col gap-[4px]">
@@ -141,7 +144,7 @@ const FooterMarquee: React.FC = () => {
             {slides.map((item, i) => (
               <p
                 key={i}
-                className="font-light text-2 font-light xxs:h-[23px] h-[60px] flex items-center"
+                className={`font-light ${textSize.text2} font-light xxs:h-[23px] h-[60px] flex items-center`}
               >
                 {item}
               </p>
@@ -153,7 +156,7 @@ const FooterMarquee: React.FC = () => {
             <div
               onClick={() => handleDotClick(i)}
               key={i}
-              className={`${currentIndex === i ? "active" : ""} slide-dots`}
+              className={`${currentIndex === i ? stylesSlider.activeDots : ""} ${stylesSlider.slideDots}`}
             ></div>
           ))}
         </div>

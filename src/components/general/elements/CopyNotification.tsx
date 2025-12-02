@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import styles from '@/assets/styles/blocks/copy-notification.module.scss';
 
 interface CopyNotificationProps {
   isVisible: boolean;
@@ -26,7 +27,7 @@ const CopyNotification = ({ isVisible, onHide, duration = 3000, position }: Copy
   return (
     <div 
       key={`${position.x}-${position.y}`}
-      className="fixed z-50 animate-copy-notification"
+      className={`fixed z-50 ${styles.animateCopyNotification}`}
       style={{
         left: `${position.x}px`,
         top: `${position.y}px`,

@@ -1,5 +1,7 @@
 'use client';
 import React from 'react';
+import stylesBtn from '@/assets/styles/base/_button.module.scss';
+import textSize from '@/assets/styles/base/text-size.module.scss';
 
 interface CollapseSectionProps {
     title: string;
@@ -24,10 +26,10 @@ const CollapseSection: React.FC<CollapseSectionProps> = ({ title, isOpen, onTogg
         <div className={`w-full ${className || ''}`}>
 
             <div
-                className="flex justify-center group items-center gap-[10px] pb-[10px] border-b border-[#93969d80] cursor-pointer line-after"
+                className={`flex justify-center group items-center gap-[10px] pb-[10px] border-b border-[#93969d80] cursor-pointer ${stylesBtn.lineAfter}`}
                 onClick={onToggle}
             >
-                <h4 className="header-h-4 -my-[0.6%] group-active:scale-[0.98] transition-all duration-100  group-hover:text-[#34446D] text-[#000] flex-1">
+                <h4 className={`${textSize.headerH4} -my-[0.6%] group-active:scale-[0.98] transition-all duration-100  group-hover:text-[#34446D] text-[#000] flex-1`}>
                     {title}
                 </h4>
 

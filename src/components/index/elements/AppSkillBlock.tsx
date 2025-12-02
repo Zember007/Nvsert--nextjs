@@ -3,6 +3,7 @@ import Image, { StaticImageData } from 'next/image';
 import { filterPrepositions } from '@/hook/filter';
 import useWindowSize from '@/hook/useWindowSize';
 import '@/assets/styles/sections/main/skill-block.scss';
+import textSize from '@/assets/styles/base/text-size.module.scss';
 
 interface AppSkillBlockProps {
   text: string[];
@@ -105,7 +106,7 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
               </>
               :
               <>
-                <h3 className='header-h-6 !font-normal'>
+                <h3 className={`${textSize.headerH6} !font-normal`}>
                   {title && filterPrepositions(title)}
                 </h3>
                 <div className='skill-content-container'>

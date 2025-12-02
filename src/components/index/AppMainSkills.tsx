@@ -8,6 +8,8 @@ import useWindowSize from '@/hook/useWindowSize';
 import { filterPrepositions } from '@/hook/filter';
 import { useIntersectionObserver } from '@/hook/useIntersectionObserver';
 import Button from '@/components/ui/Button';
+import stylesSlider from '@/assets/styles/blocks/slider.module.scss';
+import textSize from '@/assets/styles/base/text-size.module.scss';
 
 const AppMainSkills = () => {
 
@@ -104,7 +106,7 @@ const AppMainSkills = () => {
             className="section ">
             <div id="skills" className="absolute top-[-50px] pointer-events-none" ></div>
 
-            <h2 className="section__title header-h-2">Наши основные преимущества</h2>
+            <h2 className={`${textSize.headerH2} section__title`}>Наши основные преимущества</h2>
             <div className="skills__wrapper">
                 <div className="skills-content-container">
                     <div className="skills__box"
@@ -130,14 +132,14 @@ const AppMainSkills = () => {
                             })
                         }
                     </div>
-                    <div className="slide-dots-box-container">
-                        <div className="slide-dots-box">
+                    <div className={`${stylesSlider.slideDotsBoxContainer} !flex my-[20px]`}>
+                        <div className={`${stylesSlider.slideDotsBox} !flex`}>
                             {skillsData.map((_, i) => (
                                 <div
                                     onClick={() => {
                                         timeLine.current.toIndex(i, { ease: "power3", duration: 0.725 })
                                     }}
-                                    key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
+                                    key={i} className={`${activeIndex === i ? stylesSlider.activeDots : ""} ${stylesSlider.slideDots}`}></div>
                             ))}
                         </div>
                     </div>

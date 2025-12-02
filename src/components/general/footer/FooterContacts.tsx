@@ -1,12 +1,15 @@
 import React from "react";
 import AppMenuItem from "../AppMenuItem";
 import { useHeaderContext } from "@/components/contexts/HeaderContext";
+import footerStyles from "@/assets/styles/sections/footer.module.scss";
 
 const FooterContacts: React.FC = () => {
   const { handleCopy, openDefaultModal } = useHeaderContext();
 
   return (
-    <div className="footer__white m:justify-center xl:justify-start justify-start">
+    <div
+      className={`${footerStyles.footer__white} m:justify-center xl:justify-start justify-start`}
+    >
       <div className="xl:flex m:grid grid-cols-2 place-items-center flex gap-[10px] m:flex-row flex-col xl:w-full m:w-auto w-full">
         <button
           onClick={() => {
@@ -45,14 +48,14 @@ const FooterContacts: React.FC = () => {
 
         <AppMenuItem
           onClick={(e) => handleCopy("info@nvsert.ru", e)}
-          className="sendBtn max-xl:!border-[#93969D] gap-[8px] max-xl:!bg-[#F5F5F2]   xl:!h-[35px] xss:w-[280px] w-[260px] xl:mx-0 mx-auto !h-[50px] xl:w-auto cursor-pointer"
+          className={`${footerStyles.sendBtn} max-xl:!border-[#93969D] gap-[8px] max-xl:!bg-[#F5F5F2]   xl:!h-[35px] xss:w-[280px] w-[260px] xl:mx-0 mx-auto !h-[50px] xl:w-auto cursor-pointer`}
           item={{
             href: "#",
             label: (
               <>
-                <span className="sendTextFooter">info@nvsert.ru</span>
+                <span className={footerStyles.sendTextFooter}>info@nvsert.ru</span>
                 <svg
-                  className="sendIconFooter"
+                  className={footerStyles.sendIconFooter}
                   width="24"
                   height="25"
                   viewBox="0 0 24 25"
@@ -72,14 +75,14 @@ const FooterContacts: React.FC = () => {
 
         <AppMenuItem
           onClick={(e) => handleCopy("@nvsert", e)}
-          className="sendBtn max-xl:!border-[#93969D] max-xl:!bg-[#F5F5F2]   xl:!h-[35px] xl:w-auto xss:w-[280px] w-[260px] xl:mx-0 mx-auto  !h-[50px]  group cursor-pointer"
+          className={`${footerStyles.sendBtn} max-xl:!border-[#93969D] max-xl:!bg-[#F5F5F2]   xl:!h-[35px] xl:w-auto xss:w-[280px] w-[260px] xl:mx-0 mx-auto  !h-[50px]  group cursor-pointer`}
           item={{
             href: "#",
             label: (
               <>
-                <span className="sendTextFooter">Telegram</span>
+                <span className={footerStyles.sendTextFooter}>Telegram</span>
                 <svg
-                  className="sendIconFooter"
+                  className={footerStyles.sendIconFooter}
                   width="24"
                   height="25"
                   viewBox="0 0 24 25"
@@ -122,14 +125,14 @@ const FooterContacts: React.FC = () => {
 
         <AppMenuItem
           onClick={(e) => handleCopy("+7 (999) 123-45-67", e)}
-          className="sendBtn max-xl:!border-[#93969D]  max-xl:!bg-[#F5F5F2]   xl:!h-[35px] xl:w-auto xss:w-[280px] w-[260px] xl:mx-0 mx-auto !h-[50px]  group cursor-pointer"
+          className={`${footerStyles.sendBtn} max-xl:!border-[#93969D]  max-xl:!bg-[#F5F5F2]   xl:!h-[35px] xl:w-auto xss:w-[280px] w-[260px] xl:mx-0 mx-auto !h-[50px]  group cursor-pointer`}
           item={{
             href: "#",
             label: (
               <>
-                <span className="sendTextFooter">WhatsApp</span>
+                <span className={footerStyles.sendTextFooter}>WhatsApp</span>
                 <svg
-                  className="sendIconFooter"
+                  className={footerStyles.sendIconFooter}
                   width="24"
                   height="25"
                   viewBox="0 0 24 25"

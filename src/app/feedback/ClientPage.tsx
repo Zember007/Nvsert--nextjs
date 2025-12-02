@@ -6,6 +6,8 @@ import Image from 'next/image';
 import { useButton } from '@/hook/useButton';
 import { AsyncPhotoProvider, AsyncPhotoView } from '@/components/common/AsyncPhotoView';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
+import stylesBtn from '@/assets/styles/base/_button.module.scss';
+import textSize from '@/assets/styles/base/text-size.module.scss';
 
 type FeedbackPhoto = {
     url?: string;
@@ -64,7 +66,7 @@ const FeedbackCard: React.FC<{ item: FeedbackItem }> = ({ item }) => {
                     </div>
                 )}
                 <div className="flex-1 flex flex-col gap-[20px]">
-                    <h6 className="header-h-6 !font-normal">{item.title}</h6>
+                    <h6 className={`${textSize.headerH6} !font-normal`}>{item.title}</h6>
                     {item.content?.body && (
                         <>
                             <div>
@@ -74,19 +76,19 @@ const FeedbackCard: React.FC<{ item: FeedbackItem }> = ({ item }) => {
                                     {processContent(item.content.body.split('\n').slice(1).join('\n'))}
                                 </div>
                             </div>
-                
+
                             <button
-                                className='text-2 font-normal text-[#34446D] flex pt-[15px] pl-auto grow justify-end !items-end line-after__box btnIconAn !gap-[5px]'
+                                className={`${textSize.text2} font-normal text-[#34446D] flex pt-[15px] pl-auto grow justify-end !items-end ${stylesBtn.lineAfterBox} ${stylesBtn.btnIconAn} !gap-[5px]`}
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     e.preventDefault();
                                     setShowServices(!showServices)
                                 }}
                             >
-                                <span className=' line-after !leading-[1.2] whitespace-nowrap'>{!showServices ? 'Показать отзыв' : 'Свернуть отзыв'}</span>
+                                <span className={`${stylesBtn.lineAfter} !leading-[1.2] whitespace-nowrap`}>{!showServices ? 'Показать отзыв' : 'Свернуть отзыв'}</span>
 
                                 <svg
-                                    className={`sendIconLeft transition-all duration-100 ${showServices ? 'rotate-[180deg]' : ''}`}
+                                    className={`${stylesBtn.sendIconLeft} transition-all duration-100 ${showServices ? 'rotate-[180deg]' : ''}`}
                                     width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clipPath={`url(#${clip0_4632_2058})`}>
                                         <path d="M7 3.5H9V0.5H7L7 3.5ZM15 9.46767L13.5692 8.02908L9.01287 12.6092V6.5H6.98815V12.6092L2.43177 8.02908L1 9.46767L8 16.5L8.71538 15.7822L9.43177 15.0634L15 9.46767Z" fill="#34446D" />
@@ -161,7 +163,7 @@ const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ 
                     </div>
                 </CollapseSection>
 
-                <div ref={setWrapperRef} className="tariff-wrap w-[250px] self-end">
+                <div ref={setWrapperRef} className={`${stylesBtn.tariffWrap} w-[250px] self-end`}>
                     <button
                         onClick={() => {
                             if (openGroups.length > 0) {
@@ -171,43 +173,25 @@ const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ 
                             }
                         }}
                         ref={setButtonRef}
-                        className="btnIconAn width-23 tariff bg-[#F5F5F2] h-[50px] rounded-[4px] text-[20px] font-light border border-[#93969d] flex items-center justify-center"
+                        className={`${stylesBtn.btnIconAn} ${stylesBtn.width_23} ${stylesBtn.tariff} bg-[#F5F5F2] h-[50px] rounded-[4px] text-[20px] font-light border border-[#93969d] flex items-center justify-center`}
                     >
-                        <span className="sendText">
+                        <span className={`${stylesBtn.sendText}`}>
                             {openGroups.length > 0 ? 'Свернуть отзывы' : 'Показать отзывы'}
                         </span>
-
-                        <span className="sendIconLeft">
+                        <span className={`${stylesBtn.sendIconLeft}`}>
                             <svg
                                 className={`${openGroups.length > 0 ? '' : 'rotate-180'} transition-all`}
-                                width="23"
-                                height="24"
-                                viewBox="0 0 23 24"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <g clipPath="url(#clip0_6557_2555)">
-                                    <path
-                                        fillRule="evenodd"
-                                        clipRule="evenodd"
-                                        d="M15.1049 7.72888L17.1338 7.73442L17.1533 15.6286L17.155 16.6434L17.1567 17.6568L7.23434 17.6339L7.22952 15.6043L13.69 15.621L9.37014 11.3012L10.8018 9.86951L15.1217 14.1894L15.1049 7.72888Z"
-                                        fill="black"
-                                    />
-                                    <path
-                                        d="M7.2572 9.1715L8.67142 7.75728L6.5501 5.63596L5.13588 7.05018L7.2572 9.1715Z"
-                                        fill="black"
-                                    />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_6557_2555">
-                                        <rect
-                                            width="16"
-                                            height="16"
-                                            fill="white"
-                                            transform="translate(11.5 0.686523) rotate(45)"
-                                        />
-                                    </clipPath>
-                                </defs>
+                                width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    fillRule="evenodd"
+                                    clipRule="evenodd"
+                                    d="M15.1049 7.72888L17.1338 7.73442L17.1533 15.6286L17.155 16.6434L17.1567 17.6568L7.23434 17.6339L7.22952 15.6043L13.69 15.621L9.37014 11.3012L10.8018 9.86951L15.1217 14.1894L15.1049 7.72888Z"
+                                    fill="black"
+                                />
+                                <path
+                                    d="M7.2572 9.1715L8.67142 7.75728L6.5501 5.63596L5.13588 7.05018L7.2572 9.1715Z"
+                                    fill="black"
+                                />
                             </svg>
                         </span>
                     </button>

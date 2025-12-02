@@ -10,6 +10,10 @@ import { useHeaderContext } from '../contexts/HeaderContext';
 import { useTranslation } from 'react-i18next';
 import { useIntersectionObserver } from '@/hook/useIntersectionObserver';
 import useWindowSize from '@/hook/useWindowSize';
+import stylesBtn from '@/assets/styles/base/_button.module.scss';
+import stylesSlider from '@/assets/styles/blocks/slider.module.scss';
+import textSize from '@/assets/styles/base/text-size.module.scss';
+
 
 
 interface slideItem {
@@ -31,12 +35,13 @@ const SliderMain = () => {
     const { ref, isVisible } = useIntersectionObserver({}, true);
     const { width: widthWindow } = useWindowSize();
     const [activeIndex, setActive] = useState<number>(0)
-    const whiteBgRef = useRef<HTMLDivElement | null>(null)
     const slider = useRef<HTMLDivElement>(null)
     const timeLine = useRef<any>(null)
+    const [whiteBgBlur, setWhiteBgBlur] = useState(true)
+
 
     useEffect(() => {
-        if (!whiteBgRef.current || !isVisible || !ref.current) return
+        if (!isVisible || !ref.current) return
 
         if (timeLine.current) timeLine.current.destroy(); timeLine.current = null;
 
@@ -71,13 +76,13 @@ const SliderMain = () => {
                             },
                             onDragFunction: () => {
 
-                                whiteBgRef.current?.classList.remove('white')
+                                setWhiteBgBlur(false)
                                 if (timeoutIdBg) {
                                     clearTimeout(timeoutIdBg)
                                 }
 
                                 timeoutIdBg = setTimeout(() => {
-                                    whiteBgRef.current?.classList.add('white')
+                                    setWhiteBgBlur(true)
                                 }, 300)
                             },
                             mobile: false
@@ -85,7 +90,7 @@ const SliderMain = () => {
                         })
                     } else {
 
-                        whiteBgRef.current?.classList.remove('white')
+                        setWhiteBgBlur(false)
 
 
 
@@ -131,7 +136,7 @@ const SliderMain = () => {
             }
 
         };
-    }, [whiteBgRef, ref, isVisible, widthWindow])
+    }, [ref, isVisible, widthWindow])
 
     const { setButtonRef, setWrapperRef } = useButton()
 
@@ -184,25 +189,25 @@ const SliderMain = () => {
                 <div id="slider" className="absolute top-[-50px] pointer-events-none" ></div>
 
 
-                <h2 className='section__title header-h-2'>Помогаем с документами по отраслям</h2>
+                <h2 className={`${textSize.headerH2} section__title`}>Помогаем с документами по отраслям</h2>
                 <div className="cloneable">
 
 
                     <div className="slide-main">
 
                         <div className="slider-wrap">
-                            <div ref={whiteBgRef} className={`slide-blur slide-blur-left`}>
-                                <span className="line hidden xl:block white" style={{ '--blur': '4px', '--lightness': '100%' } as React.CSSProperties}></span>
-                                <span className="line" style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
-                                <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
-                                <span className="line" style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>
+                            <div className={`${stylesSlider.slideBlur} slide-blur-left ${whiteBgBlur ? stylesSlider.white : ''}`}>
+                                <span className={`${stylesSlider.line} hidden xl:block white`} style={{ '--blur': '4px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className={stylesSlider.line} style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className={stylesSlider.line} style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className={stylesSlider.line} style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>
                             </div>
 
 
-                            <div className="slide-blur right-0">
-                                <span className="line" style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>
-                                <span className="line" style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
-                                <span className="line" style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
+                            <div className={`${stylesSlider.slideBlur} right-0`}>
+                                <span className={stylesSlider.line} style={{ '--blur': '3px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className={stylesSlider.line} style={{ '--blur': '6px', '--lightness': '100%' } as React.CSSProperties}></span>
+                                <span className={stylesSlider.line} style={{ '--blur': '9px', '--lightness': '100%' } as React.CSSProperties}></span>
                             </div>
                             <div data-slider="list" className={`slider-list`}
                                 style={{
@@ -237,10 +242,10 @@ const SliderMain = () => {
                         </div>
                     </div>
 
-                    <div className="slide-dots-box-container xl:!hidden">
-                        <div className="slide-dots-box xl:!hidden">
+                    <div className={`${stylesSlider.slideDotsBoxContainer} xl:!hidden`}>
+                        <div className={`${stylesSlider.slideDotsBox} xl:!hidden`}>
                             {slides.map((_, i) => (
-                                <div key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
+                                <div key={i} className={`${activeIndex === i ? stylesSlider.activeDots : ""} ${stylesSlider.slideDots}`}></div>
                             ))}
                         </div>
                     </div>
@@ -252,12 +257,12 @@ const SliderMain = () => {
 
 
                         <div className="overlay-content-container">
-                            <h3 className="overlay-title header-h-6">
+                            <h3 className={`${textSize.headerH6} overlay-title`}>
                                 {
                                     filterPrepositions(slidesLang[activeIndex].title)
                                 }
                             </h3>
-                            <p className={`slide-text-content text-3`}>
+                            <p className={`slide-text-content ${textSize.text3}`}>
 
                                 {filterPrepositions(slidesLang[activeIndex].text)}
 
@@ -269,11 +274,11 @@ const SliderMain = () => {
                             <div className="slider-navigation-container">
                                 <div
                                     ref={setWrapperRef}
-                                    className="navigation-button-wrap tariff-wrap">
+                                    className={`${stylesBtn.tariffWrap} navigation-button-wrap`}>
                                     <button
                                         ref={setButtonRef}
                                         aria-label="previous slide" data-slider="button-prev"
-                                        className="tariff item group">
+                                        className={`${stylesBtn.tariff} item group`}>
 
                                         <span className="navigation-button-icon">
                                             <svg
@@ -292,11 +297,11 @@ const SliderMain = () => {
                                 </div>
                                 <div
                                     ref={setWrapperRef}
-                                    className="navigation-button-wrap tariff-wrap">
+                                    className={`${stylesBtn.tariffWrap} navigation-button-wrap`}>
                                     <button
                                         ref={setButtonRef}
                                         aria-label="previous slide" data-slider="button-next"
-                                        className=" tariff item group">
+                                        className={`${stylesBtn.tariff} item group`}>
 
                                         <span className="navigation-button-icon-next">
                                             <svg
@@ -316,12 +321,12 @@ const SliderMain = () => {
                             <div className="slide-counter-container">
                                 <div className="slide-counter-overflow">
                                     <div className="count-column">
-                                        <p data-slide-count="step" className="count-heading header-h-3">01</p>
+                                        <p data-slide-count="step" className={`${textSize.headerH3} count-heading`}>01</p>
                                     </div>
                                 </div>
                                 <span className='font-light'>/</span>
                                 <div className="count-column ">
-                                    <p data-slide-count="total" className="count-heading header-h-3">{slides.length}</p>
+                                    <p data-slide-count="total" className={`${textSize.headerH3} count-heading`}>{slides.length}</p>
                                 </div>
                             </div>
                         </div>
@@ -329,27 +334,27 @@ const SliderMain = () => {
 
                     </div>
 
-                    <div className="slide-dots-box-container xl:!hidden">
-                        <div className="slide-dots-box xl:!hidden">
+                    <div className={`${stylesSlider.slideDotsBoxContainer} xl:!hidden`}>
+                        <div className={`${stylesSlider.slideDotsBox} xl:!hidden`}>
                             {slides.map((_, i) => (
                                 <div
                                     onClick={() => {
                                         timeLine.current.toIndex(i, { ease: "power3", duration: 0.725 })
                                     }}
-                                    key={i} className={`${activeIndex === i ? 'active' : ""} slide-dots`}></div>
+                                    key={i} className={`${activeIndex === i ? stylesSlider.activeDots : ""} ${stylesSlider.slideDots}`}></div>
                             ))}
                         </div>
                     </div>
 
-                    <div className="main-button-slider-wrap tariff-wrap" ref={setWrapperRef}>
+                    <div className="main-button-slider-wrap  ${stylesBtn.tariffWrap}" ref={setWrapperRef}>
                         <button
                             onClick={() => { openDefaultModal('orderForm') }}
-                            ref={setButtonRef} className='slider__button group btnIconAn doc-btn tariff'>
+                            ref={setButtonRef} className={`${stylesBtn.btnIconAn} slider__button group  ${stylesBtn.tariff}`}>
 
                             <span
-                                className="sendText"
+                                className={`${stylesBtn.sendText}`}
                             >Оформить заявку</span>
-                            <span className="sendIconLeft">
+                            <span className={`${stylesBtn.sendIconLeft}`}>
                                 <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M3 9.48438V7.48438H0V9.48438H3ZM8.96767 1.48438L7.52908 2.91514L12.1092 7.47151H6V9.49623H12.1092L7.52908 14.0526L8.96767 15.4844L16 8.48438L15.2822 7.76899L14.5634 7.0526L8.96767 1.48438Z" fill="white" />
                                 </svg>
