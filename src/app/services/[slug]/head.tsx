@@ -1,5 +1,5 @@
 import React from 'react';
-import { getNavigationDataBySlug, resolveServiceOgImageUrl } from './page';
+import { getNavigationDataBySlug, resolveServiceOgImageUrl } from './seo-helpers';
 
 type HeadProps = {
   params: { slug: string };

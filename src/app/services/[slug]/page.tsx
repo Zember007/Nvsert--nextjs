@@ -2,45 +2,9 @@
 import { Metadata } from 'next';
 import ClientPage from './ClientPage';
 import { NavigationItem } from '@/store/navigation';
+import { getNavigationDataBySlug, resolveServiceOgImageUrl } from './seo-helpers';
 
 export const dynamic = 'force-static';
-
-export async function getNavigationDataBySlug(slug: string): Promise<any | null> {
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://nvsert.ru').replace(/\/$/, '');
-
-  const res = await fetch(`${base}/api/services/slug/${slug}`, {
-    cache: 'force-cache',
-  });
-
-  if (!res.ok) return null;
-  return res.json();
-}
-
-// Единое вычисление основного URL картинки услуги (OG / главная фотка)
-export function resolveServiceOgImageUrl(navigation: any): string | undefined {
-  const cmsBase = 'https://test11.audiosector.ru/cp';
-
-  // 1. Явный og_image
-  if (navigation?.og_image && typeof navigation.og_image === 'string') {
-    return navigation.og_image.startsWith('http')
-      ? navigation.og_image
-      : `${cmsBase}${navigation.og_image}`;
-  }
-
-  // 2. Картинка в формате medium
-  const mediumUrl = navigation?.img?.formats?.medium?.url;
-  if (typeof mediumUrl === 'string' && mediumUrl) {
-    return mediumUrl.startsWith('http') ? mediumUrl : `${cmsBase}${mediumUrl}`;
-  }
-
-  // 3. Обычный URL картинки
-  const imgUrl = navigation?.img?.url;
-  if (typeof imgUrl === 'string' && imgUrl) {
-    return imgUrl.startsWith('http') ? imgUrl : `${cmsBase}${imgUrl}`;
-  }
-
-  return undefined;
-}
 
 // Генерация статических путей
 export async function generateStaticParams() {
