@@ -8,6 +8,8 @@ import dynamic from 'next/dynamic';
 import CopyNotification from '@/components/general/elements/CopyNotification';
 import { NavigationItem } from '@/store/navigation';
 import { groupServices } from '@/assets/lib/navigation';
+import '@/assets/styles/base.scss';
+
 
 const AppModalWrapper = dynamic(() => import('@/components/general/AppModalWrapper'), {
     ssr: false
