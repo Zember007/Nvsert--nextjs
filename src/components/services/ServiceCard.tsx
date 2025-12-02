@@ -5,7 +5,7 @@ import React from 'react';
 import { NavigationItem } from '@/store/navigation';
 import textSize from '@/assets/styles/base/text-size.module.scss';
 
-interface ServiceCardProps {
+interface ServiceCardProps {    
     serviceName?: string;
     certificate: NavigationItem;
     className?: string;
@@ -28,16 +28,16 @@ const replaceValue = (value: string) => {
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, className, title = true, padding = true, onClick, priority = false }) => {
     const href = certificate.slug ? `/services/${certificate.slug}` : '';
-
+    
     // Используем medium формат если доступен, иначе полное изображение
-    const imageUrl = certificate.img?.formats?.medium?.url
-        ? certificate.img.formats.medium.url
+    const imageUrl = certificate.img?.formats?.medium?.url 
+        ? certificate.img.formats.medium.url 
         : certificate.img?.url || '';
 
-
+    
 
     return (
-
+        
         href ? (
             <Link
                 href={href}
@@ -46,15 +46,18 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                 {title && <p className={`${textSize.headerH6} flex items-center xss:h-[38px] h-[34px] max-w-[230px] whitespace-pre-line !font-normal`}>{replaceValue(certificate.title)}</p>}
                 <div className="relative w-full ">
                     <div className="border border-[#93969d] rounded-[4px] overflow-hidden h-[346px]">
-                        <img
+                        <Image
                             src={'https://test11.audiosector.ru/cp' + imageUrl}
                             alt={certificate.title}
                             width={250}
                             height={346}
                             className='h-[346px] object-cover'
                             loading={priority ? "eager" : "lazy"}
+                            priority={priority}
                             fetchPriority={priority ? "high" : "auto"}
+                            quality={40}
                             sizes="250px"
+                            unoptimized={true}
                         />
                     </div>
                     <div className='justify-between flex absolute bottom-[9px] left-[9px] right-[9px] xss:*:*:!leading-[0.68] *:*:!leading-[0.8]   flex py-[10px] px-[6px] bg-[#F5F5F580] rounded-[4px] border border-[#000] backdrop-blur-[4px]'>
@@ -77,15 +80,18 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                 {title && <p className={`${textSize.headerH6} flex items-center xss:h-[38px] h-[34px] max-w-[230px] whitespace-pre-line`}>{replaceValue(certificate.title)}</p>}
                 <div className="relative w-full ">
                     <div className="border border-[#93969d] rounded-[4px] overflow-hidden h-[346px]">
-                        <img
+                        <Image
                             src={'https://test11.audiosector.ru/cp' + imageUrl}
                             alt={certificate.title}
                             width={250}
                             height={346}
                             className='h-[346px] object-cover'
                             loading={priority ? "eager" : "lazy"}
+                            priority={priority}
                             fetchPriority={priority ? "high" : "auto"}
+                            quality={40}
                             sizes="250px"
+
                         />
                     </div>
                     <div className='justify-between flex absolute bottom-[9px] left-[9px] right-[9px] xss:*:*:!leading-[0.68] *:*:!leading-[0.8]   flex py-[10px] px-[6px] bg-[#F5F5F580] rounded-[4px] border border-[#000] backdrop-blur-[4px]'>
