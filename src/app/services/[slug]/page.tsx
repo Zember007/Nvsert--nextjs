@@ -19,13 +19,13 @@ export async function generateStaticParams() {
 }
 
 type GenerateMetadataParams = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateMetadata(
   { params }: GenerateMetadataParams
 ): Promise<Metadata> {
-  const { slug } = params;
+  const { slug } = await params;
   const navigation = await getNavigationDataBySlug(slug);
 
   if (!navigation) {
