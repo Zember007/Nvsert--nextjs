@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { skills } from '../utils';
+import { skills as skillsData } from '../utils';
 import AppSkillBlock from './AppSkillBlock';
 import '@/assets/styles/sections/main/main-skills-component.scss';
 import { useTranslation } from 'react-i18next';
@@ -19,8 +19,6 @@ const AppMainSkills = () => {
 
   const timeLine = useRef<any>(null);
   const [activeIndex, setActive] = useState<number>(0);
-
-  const skillsData = widthWindow && widthWindow < 1407 ? skills.filter((item) => !item.empty) : skills;
 
   // Инициализация горизонтального слайдера только на мобильных/узких экранах
   useEffect(() => {
@@ -123,7 +121,7 @@ const AppMainSkills = () => {
 export default AppMainSkills;
 
 interface SkillsGridProps {
-  skillsData: typeof skills;
+  skillsData: typeof skillsData;
   widthWindow: number | null | undefined;
   isVisibleSection: boolean;
 }
@@ -142,12 +140,9 @@ const SkillsGrid: React.FC<SkillsGridProps> = ({ skillsData, widthWindow, isVisi
     <div className="skills-content-container">
       <div className="skills__box" style={gapStyle}>
         {skillsData.map((skill, index) => {
-          if (skill.empty) {
-            return <div key={index}></div>;
-          }
 
           return (
-            <div key={index} data-slider="slide-skill">
+            <div key={index} data-slider="slide-skill" className={`slide-skill`}>
               <AppSkillBlock
                 img={skill.img}
                 title={skill.key ? t(`MainSkills.${skill.key}.title`) : ''}

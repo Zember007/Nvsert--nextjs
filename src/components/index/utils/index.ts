@@ -135,19 +135,19 @@ export const skills = [
         empty: false,
         folder: false
     },
-    {
+  /*   {
         empty: true,
         folder: false
-    },
+    }, */
     {
         empty: false,
         folder: true,
         img: Folder1Img
     },
-    {
+  /*   {
         empty: true,
         folder: false
-    },
+    }, */
     {
         key: 'skill3',
         action: '',
@@ -162,10 +162,10 @@ export const skills = [
         empty: false,
         folder: false
     },
-    {
+  /*   {
         empty: true,
         folder: false
-    },
+    }, */
     {
         empty: false,
         folder: true,
@@ -179,10 +179,10 @@ export const skills = [
         empty: false,
         folder: false
     },
-    {
+   /*  {
         empty: true,
         folder: false
-    },
+    }, */
     {
         key: 'skill6',
         action: '',
