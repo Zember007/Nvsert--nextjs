@@ -9,6 +9,8 @@ import type { Metadata, Viewport } from 'next'
 /* import { getNavigationData } from '@/assets/lib/navigation'; */
 import initialNavigation from '@/assets/lib/navigation.json';
 import { NavigationItem } from "@/store/navigation"
+import { Roboto } from 'next/font/google';
+
 
 
 export const metadata: Metadata = {
@@ -43,6 +45,12 @@ export const viewport: Viewport = {
   themeColor: '#646467',
 }
 
+
+const roboto = Roboto({
+  subsets: ['latin', 'cyrillic'], // нужные языки
+  weight: ['400', '500', '700'], // только используемые
+  display: 'swap',
+});
 
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
@@ -79,7 +87,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
        
 
       </head>
-      <body>
+      <body className={roboto.className}>
         <Provider initialNavigation={initialNavigation as NavigationItem[]}>
           {/*    <ScrollToTop /> */}
           {children}
