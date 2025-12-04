@@ -1,5 +1,4 @@
 import { useRef, useState, memo, useMemo, useCallback } from 'react';
-import '@/assets/lib/react-photo-view/dist/react-photo-view.css';
 
 import { useButton } from '@/hook/useButton';
 import { motion } from 'framer-motion';
