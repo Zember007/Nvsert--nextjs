@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import { slides } from '../utils';
 import { filterPrepositions } from '@/hook/filter';
 import stylesMainSkills from '@/assets/styles/sections/main/main-skills.module.scss';
+import stylesMainSlider from '@/assets/styles/sections/main/main-slider.module.scss';
 import { useButton } from '@/hook/useButton';
 import { useHeaderContext } from '../../contexts/HeaderContext';
 import { useTranslation } from 'react-i18next';
@@ -162,9 +163,9 @@ const AppMainSlider = () => {
 
       <h2 className={`${textSize.headerH2} section__title`}>Помогаем с&nbsp;документами по&nbsp;отраслям</h2>
 
-      <div className="cloneable">
-        <div className="slide-main">
-          <div className="slider-wrap">
+      <div className={stylesMainSlider.cloneable}>
+        <div className={stylesMainSlider['slide-main']}>
+          <div className={stylesMainSlider['slider-wrap']}>
             <SliderBlur whiteBgBlur={whiteBgBlur} />
             <SliderImageList widthWindow={widthWindow} />
           </div>
@@ -178,11 +179,11 @@ const AppMainSlider = () => {
           boxClassName={`${stylesSlider.slideDotsBox} xl:!hidden`}
         />
 
-        <div ref={overlayText} className="overlay">
-          <div className="overlay-slider"></div>
+        <div ref={overlayText} className={stylesMainSlider.overlay}>
+          <div className={stylesMainSlider['overlay-slider']}></div>
 
           <div className={stylesMainSkills['overlay-content-container']}>
-            <h3 className={`${textSize.headerH6} overlay-title`}>
+            <h3 className={`${textSize.headerH6} ${stylesMainSlider['overlay-title']}`}>
               {slidesLang[activeIndex]?.title || ''}
             </h3>
             <p className={`${stylesMainSkills['slide-text-content']} ${textSize.text3}`}>
@@ -190,7 +191,7 @@ const AppMainSlider = () => {
             </p>
           </div>
 
-          <div className="slider__navigations">
+          <div className={stylesMainSlider.slider__navigations}>
             <div className={stylesMainSkills['slider-navigation-container']}>
               <SliderNavButton
                 direction="prev"
@@ -206,15 +207,21 @@ const AppMainSlider = () => {
 
             <div className={stylesMainSkills['slide-counter-container']}>
               <div className={stylesMainSkills['slide-counter-overflow']}>
-                <div className="count-column">
-                  <p data-slide-count="step" className={`${textSize.headerH3} count-heading`}>
+                <div className={stylesMainSlider['count-column']}>
+                  <p
+                    data-slide-count="step"
+                    className={`${textSize.headerH3} ${stylesMainSlider['count-heading']}`}
+                  >
                     01
                   </p>
                 </div>
               </div>
               <span className="font-light">/</span>
-              <div className="count-column ">
-                <p data-slide-count="total" className={`${textSize.headerH3} count-heading`}>
+              <div className={stylesMainSlider['count-column']}>
+                <p
+                  data-slide-count="total"
+                  className={`${textSize.headerH3} ${stylesMainSlider['count-heading']}`}
+                >
                   {slides.length}
                 </p>
               </div>
@@ -415,7 +422,7 @@ const SliderCtaButton: React.FC<SliderCtaButtonProps> = memo(
       <button
         onClick={onClick}
         ref={setButtonRef}
-        className={`${stylesBtn.btnIconAn} slider__button group  ${stylesBtn.tariff}`}
+        className={`${stylesBtn.btnIconAn} ${stylesMainSlider.slider__button} group  ${stylesBtn.tariff}`}
       >
         <span className={stylesBtn.sendText}>Оформить заявку</span>
         <span className={stylesBtn.sendIconLeft}>

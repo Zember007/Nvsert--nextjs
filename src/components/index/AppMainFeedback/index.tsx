@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import useWindowSize from '@/hook/useWindowSize';
-import '@/assets/styles/sections/main/main-feedback.scss';
+import stylesMainFeedback from '@/assets/styles/sections/main/main-feedback.module.scss';
 import stylesSlider from '@/assets/styles/blocks/slider.module.scss';
 import textSize from '@/assets/styles/base/text-size.module.scss';
 
@@ -18,19 +18,19 @@ const FeedbackSliderSection = ({
   dataSlider,
   startIndex,
 }: FeedbackSliderProps) => (
-  <div className="feedback-slider-section">
-    <div className="feedback-slider-container">
+  <div className={stylesMainFeedback['feedback-slider-section']}>
+    <div className={stylesMainFeedback['feedback-slider-container']}>
       {[...Array(14)].map((_, index) => (
         <div
           data-slider={dataSlider}
           key={index}
-          className="feedback-item"
+          className={stylesMainFeedback['feedback-item']}
         >
           <AsyncPhotoView
             src={`/feedbacks/big/${startIndex + index}.png`}
           >
             <Image
-              className="feedback-image"
+              className={stylesMainFeedback['feedback-image']}
               src={`/feedbacks/small/${startIndex + index}.png`}
               alt="feedback"
               width={190}
@@ -174,10 +174,10 @@ const AppMainFeedback = () => {
         speed={() => 0}
         maskClosable={false}
       >
-        <div ref={ref} className="feedback-slider-box">
+        <div ref={ref} className={stylesMainFeedback['feedback-slider-box']}>
           <FeedbackBlur position="left" />
 
-          <div className="feedback-slider-section">
+          <div className={stylesMainFeedback['feedback-slider-section']}>
             <FeedbackSliderSection
               dataSlider="slide-feedback"
               startIndex={1}
@@ -185,7 +185,7 @@ const AppMainFeedback = () => {
             <FeedbackDots activeIndex={activeIndex} />
           </div>
 
-          <div className="feedback-slider-section">
+          <div className={stylesMainFeedback['feedback-slider-section']}>
             <FeedbackSliderSection
               dataSlider="slide-feedback1"
               startIndex={15}

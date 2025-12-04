@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import AppMainForm from '../../forms/AppMainForm';
 import { filterPrepositions } from '@/hook/filter';
 import { useAnimation, motion } from 'framer-motion';
+import stylesMainBanner from '@/assets/styles/sections/main/main-banner.module.scss';
 
 const AppMainIntro = () => {
   const { t } = useTranslation();
@@ -28,14 +29,14 @@ const AppMainIntro = () => {
   };
 
   return (
-    <section id="intro" className="main-banner">
+    <section id="intro" className={stylesMainBanner.mainBanner}>
       <div className="wrapper">
-        <div className="main-banner__content">
-          <div className="intro-content-container">
-            <h1 className="main-banner__title xl:pl-[33px]">
+        <div className={stylesMainBanner.mainBannerContent}>
+          <div className={stylesMainBanner['intro-content-container']}>
+            <h1 className={`${stylesMainBanner.mainBannerTitle} xl:pl-[33px]`}>
               {filterPrepositions(t('mainIntro.title'))}
             </h1>
-            <div className="intro-spacer" />
+            <div className={stylesMainBanner['intro-spacer']} />
           </div>
 
           <motion.div animate={controls}>

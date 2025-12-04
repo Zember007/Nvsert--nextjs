@@ -1,6 +1,41 @@
 @use '../../base/variables' as variables;
 @use '../../base/mixins' as mixins;
 
+.safeguards-container {
+  @apply flex flex-col gap-[20px];
+
+  @media (min-width:  calc(variables.$media-xxl + 1px)) {
+    margin: 0 auto;
+
+    max-width: 1340px;
+    padding: 0 20px;
+  }
+
+}
+
+.safeguard-slide-item {
+  @apply w-full;
+}
+
+.card {
+  text-rendering: optimizeLegibility;
+  transform-style: preserve-3d;
+}
+
+.card-wrap {
+  transform: perspective(800px);
+  transform-style: preserve-3d;
+  z-index: 10;
+  will-change: transform;
+
+  img {
+      -ms-high-contrast-adjust: none;
+      -webkit-user-drag: none;
+      width: 100%;
+      object-fit: cover;
+  }
+}
+
 .safeguard-card-wrapper {
   @apply z-[0]     xxs:w-[310px] xss:w-[320px] w-[280px] relative xxs:h-[520px] xss:h-[525px] h-[457px] xxl:translate-y-[0] transition-all duration-500;
   
@@ -118,3 +153,5 @@
     }
   }
 }
+
+

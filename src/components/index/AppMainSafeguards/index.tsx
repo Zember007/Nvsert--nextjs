@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 import SafeguardBlock from './AppSafeguardBlock';
-import '@/assets/styles/sections/main/main-safeguards.scss';
+import stylesSafeguards from '@/assets/styles/sections/main/main-safeguards.module.scss';
 import Img1 from '@/assets/images/safeguard/1.webp';
 import Img2 from '@/assets/images/safeguard/2.webp';
 import Img3 from '@/assets/images/safeguard/3.webp';
@@ -152,7 +152,7 @@ const AppMainSafeguards = () => {
 
       <h2 className={`${textSize.headerH2} section__title`}>Гарантии и безупречный сервис</h2>
 
-      <div className="safeguards-container">
+      <div className={stylesSafeguards['safeguards-container']}>
         <div
           className="safeguard__box"
           style={{
@@ -163,7 +163,7 @@ const AppMainSafeguards = () => {
           {guarantees.map((item, index) => (
             <div
               key={index}
-              className="safeguard-slide-item"
+              className={stylesSafeguards['safeguard-slide-item']}
               data-slider="slide-safeguard"
             >
               <SafeguardBlock

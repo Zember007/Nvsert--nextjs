@@ -3,9 +3,9 @@ import React, { useEffect } from 'react';
 import { useAnimation, motion } from "framer-motion";
 import QuestionArrow from '../svg/QuestionArrow';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
-import '@/assets/styles/sections/main/questions-block.scss';
 import stylesBtn from '@/assets/styles/base/_button.module.scss';
 import textSize from '@/assets/styles/base/text-size.module.scss';
+import stylesQuestions from '@/assets/styles/sections/main/main-questions.module.scss';
 
 const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive: (value: boolean) => void, active: boolean, number: number, title: string, text: string }) => {
     const controls = useAnimation();
@@ -61,16 +61,16 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                     }}
                     className={`${active ? ' active !bg-[#5B6788] !shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] ' : ' '} document__navigation-bg  bg-[transparent]   h-[70px] relative  active:bg-[#5B6788]  active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset]   group cursor-pointer  rounded-[6px]  flex items-center gap-[9px] xl:gap-[40px] l:pr-[23px]  transition-scale`}>
 
-                    <div className={`questions-number-container ${active ? 'active' : ''} transition-scale group-active:scale-[0.9]`}>
-                        <p className={`questions-number-text ${active ? 'active' : ''} l:group-hover:text-[50px] group-active:duration-[0] group-active:text-[#FFF]`}>{number}</p>
+                    <div className={`${stylesQuestions['questions-number-container']} ${active ? stylesQuestions.active : ''} ${stylesQuestions['transition-scale']} group-active:scale-[0.9]`}>
+                        <p className={`${stylesQuestions['questions-number-text']} ${active ? stylesQuestions.active : ''} l:group-hover:text-[50px] group-active:duration-[0] group-active:text-[#FFF]`}>{number}</p>
                     </div>
-                    <div className={`questions-content-container ${active ? 'active' : ''} transition-scale group-active:scale-[0.99]`}>
-                        <p className={`${textSize.headerH6} questions-title ${active ? 'active' : ''} group-active:duration-[0] group-active:text-[#FFF]`}>{title}</p>
+                    <div className={`${stylesQuestions['questions-content-container']} ${active ? stylesQuestions.active : ''} ${stylesQuestions['transition-scale']} group-active:scale-[0.99]`}>
+                        <p className={`${textSize.headerH6} ${stylesQuestions['questions-title']} ${active ? stylesQuestions.active : ''} group-active:duration-[0] group-active:text-[#FFF]`}>{title}</p>
 
                      
 
                         <svg
-                            className={`questions-arrow-icon  ${active ? 'active ' : 'group-hover:text-[#000]'}`}
+                            className={`${stylesQuestions['questions-arrow-icon']}  ${active ? stylesQuestions.active : 'group-hover:text-[#000]'}`}
                             width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.0459 1.0459L3.16722 3.16722M15.753 15.753L5.28854 5.28854" stroke="currentColor" strokeWidth="2" />
                             <path d="M15.7529 7.75293V14.4707L14.4717 15.7529H7.75293" stroke="currentColor" strokeWidth="2" />
@@ -79,8 +79,8 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
 
                     </div>
                 </div>
-                <div className={`questions-content-wrapper ${active ? 'active' : ''}`}>
-                    <div className="questions-inner-content">
+                <div className={`${stylesQuestions['questions-content-wrapper']} ${active ? stylesQuestions.active : ''}`}>
+                    <div className={stylesQuestions['questions-inner-content']}>
                         <div
                         >{processContent(text, true)}</div>
 
@@ -88,9 +88,9 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                         <motion.div
                             animate={controls}
                             initial={{ y: 20 }}
-                            className={`${stylesBtn.tariffWrap} questions-button-wrap`} ref={setWrapperRef}>
+                            className={`${stylesBtn.tariffWrap} ${stylesQuestions['questions-button-wrap']}`} ref={setWrapperRef}>
                             <button
-                                ref={setButtonRef} className={`questions-button group ${stylesBtn.tariff} ${stylesBtn.btnIconAn}`}>
+                                ref={setButtonRef} className={`${stylesQuestions['questions-button']} group ${stylesBtn.tariff} ${stylesBtn.btnIconAn}`}>
 
                                 <span
                                     className={`${stylesBtn.sendText}`}

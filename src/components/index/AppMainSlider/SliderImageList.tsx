@@ -6,6 +6,7 @@ import Image from 'next/image';
 
 import { slides } from '../utils';
 import stylesMainSkills from '@/assets/styles/sections/main/main-skills.module.scss';
+import stylesMainSlider from '@/assets/styles/sections/main/main-slider.module.scss';
 
 export interface SliderImageListProps {
   widthWindow: number | null | undefined;
@@ -22,14 +23,18 @@ const SliderImageListComponent: React.FC<SliderImageListProps> = ({
       : {};
 
   return (
-    <div data-slider="list" className="slider-list" style={gap}>
+    <div
+      data-slider="list"
+      className={stylesMainSlider['slider-list']}
+      style={gap}
+    >
       {slides.map((item, index) => (
         <div
           key={index}
           data-slider="slide"
-          className={`slider-slide ${stylesMainSkills['slider-slide-item']}`}
+          className={`${stylesMainSlider['slider-slide']} ${stylesMainSkills['slider-slide-item']}`}
         >
-          <div className={`slide-inner ${stylesMainSkills['slide-inner-content']}`}>
+          <div className={`${stylesMainSlider['slide-inner']} ${stylesMainSkills['slide-inner-content']}`}>
             <Image
               src={item.img}
               alt="slide"

@@ -14,7 +14,6 @@
   z-index: 2;
   inset: 0% auto 0% 0%;
   background: linear-gradient(270deg, rgba(245, 245, 245, 0) 0%, #FFF 76px);
-
 }
 
 .overlay-title {
@@ -25,11 +24,10 @@
   background-color: var(--color);
   /* background-image: url('../../../images/150.webp'); */
   background-repeat: repeat;
-
 }
 
 .count-column {
-  height: 30px;
+  height: 44px;
   font-weight: 300;
 }
 
@@ -38,10 +36,7 @@
   font-weight: inherit !important;
   text-align: right;
   vertical-align: middle;
-
-
 }
-
 
 .slider-wrap {
   @apply xl:pt-[31px] p-[1px] xl:justify-start xl:flex;
@@ -65,15 +60,12 @@
   position: relative;
 }
 
-
-
 .slide-inner {
   width: 100%;
   height: 100%;
   position: relative;
   overflow: hidden;
 }
-
 
 .slide-main {
   @apply xl:inset-[0%] xl:absolute xl:h-[100%] top-0 z-0;
@@ -86,8 +78,6 @@
   }
 }
 
-
-
 .caption-dot {
   background-color: var(--color-dark);
   border-radius: 10em;
@@ -95,7 +85,6 @@
   width: .5em;
   height: .5em;
 }
-
 
 .overlay-slider {
   @apply absolute top-0 xl:right-[76px] left-0 bottom-0 z-[-2] transition-all duration-300;
@@ -119,10 +108,7 @@
     animation: slideIn 0.4s ease-out forwards;
   }
 
-
-
   &.wrapper-slide4 {
-
     pointer-events: all;
     width: 100%;
 
@@ -152,7 +138,6 @@
 
     .slider {
       left: -300%;
-
     }
   }
 
@@ -161,7 +146,6 @@
 
     .slider {
       left: -400%;
-
     }
   }
 
@@ -183,7 +167,7 @@
     @apply justify-between items-end w-full relative z-[10] m:flex hidden xl:p-0 p-[20px];
 
     .item {
-      @apply bg-[#34446D] h-[50px] rounded-[4px] border-[#34446D] border border-solid flex gap-[50px] items-center justify-center
+      @apply bg-[#34446D] h-[50px] rounded-[4px] border-[#34446D] border border-solid flex gap-[50px] items-center justify-center;
     }
   }
 
@@ -192,19 +176,16 @@
   }
 }
 
-
 .sliders {
   &__button {
     @apply justify-center m:flex items-center px-[16px] py-[9px] relative overflow-hidden border-[#34446D] border border-solid text-[20px] transition-all duration-300 font-bold tracking-normal gap-[6px] text-[#34446D] hover:text-[#FFF] rounded-[4px] hover:bg-[#34446D];
-
   }
 
   &__h2 {
-    @apply tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px]
+    @apply tracking-[-0.04em] text-center text-[24px] xs:text-[40px] l:text-[56px];
   }
 }
 
-/* Определение анимации slideIn */
 @keyframes slideIn {
   0% {
     transform: translateX(-20%);
@@ -216,3 +197,5 @@
     opacity: 1;
   }
 }
+
+

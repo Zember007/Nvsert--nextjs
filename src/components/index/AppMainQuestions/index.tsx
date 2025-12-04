@@ -5,7 +5,7 @@ import QuestionsBlock from './QuestionsBlock';
 import { useState } from 'react';
 import type { FaqItem } from '@/store/faq';
 import '@/assets/styles/sections/main/animation/documents.scss';
-import '@/assets/styles/sections/main/main-questions.scss';
+import stylesQuestions from '@/assets/styles/sections/main/main-questions.module.scss';
 import textSize from '@/assets/styles/base/text-size.module.scss';
 
 type AppMainQuestionsProps = {
@@ -25,7 +25,7 @@ const AppMainQuestions = ({ faqs }: AppMainQuestionsProps) => {
         {t('MainQuestions.title')}
       </h2>
 
-      <div className="questions-container">
+      <div className={stylesQuestions['questions-container']}>
         {faqs.map((item, index) => (
           <QuestionsBlock
             number={index + 1}
