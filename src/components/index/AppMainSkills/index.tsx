@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { skills as skillsData } from '../utils';
 import AppSkillBlock from './AppSkillBlock';
-import '@/assets/styles/sections/main/main-skills-component.scss';
 import { useTranslation } from 'react-i18next';
 import useWindowSize from '@/hook/useWindowSize';
 import { filterPrepositions } from '@/hook/filter';
@@ -138,7 +137,7 @@ const SkillsGrid: React.FC<SkillsGridProps> = ({ skillsData, widthWindow, isVisi
       : {};
 
   return (
-    <div className="skills-content-container">
+    <div className={stylesMainSkills['skills-content-container']}>
       <div className={stylesMainSkills['skills__box']} style={gapStyle}>
         {skillsData.map((skill, index) => {
 

@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import { filterPrepositions } from '@/hook/filter';
 import useWindowSize from '@/hook/useWindowSize';
-import '@/assets/styles/sections/main/skill-block.scss';
 import textSize from '@/assets/styles/base/text-size.module.scss';
+import stylesMainSkills from '@/assets/styles/sections/main/main-skills.module.scss';
 
 interface AppSkillBlockProps {
   text: string[];
@@ -81,13 +81,13 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
 
   return (
     <div
-      className={`skill-card-wrapper card-wrap ${!folder ? '' : 'folder'}`}
+      className={`${stylesMainSkills['skill-card-wrapper']} ${!folder ? '' : stylesMainSkills['folder']}`}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       ref={cardRef} >
       <div
-        className={`skill-card-content card group/item`}
+        className={`${stylesMainSkills['skill-card-content']} card group/item`}
       >
 
         <div
@@ -97,20 +97,20 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
             }),
             ...(mousePX && { ...cardStyle })
           }}
-          className={`skill-card-inner ${folder ? 'folder' : ''}`}
+          className={`${stylesMainSkills['skill-card-inner']} ${folder ? stylesMainSkills['folder'] : ''}`}
         >
           {
             folder ?
               <>
-                {img && <Image alt="folder" className={`skill-folder-image`} src={img} />}
+                {img && <Image alt="folder" className={stylesMainSkills['skill-folder-image']} src={img} />}
               </>
               :
               <>
                 <h3 className={`${textSize.headerH6} !font-normal`}>
                   {title && filterPrepositions(title)}
                 </h3>
-                <div className='skill-content-container'>
-                  <ul className={`skill-list ${isVisible ? 'visible' : ''}`} >
+                <div className={stylesMainSkills['skill-content-container']}>
+                  <ul className={`${stylesMainSkills['skill-list']} ${isVisible ? stylesMainSkills['visible'] : ''}`} >
                     {list.map((item, index) =>
                       <li key={index}>{filterPrepositions(item)}</li>
                     )}
