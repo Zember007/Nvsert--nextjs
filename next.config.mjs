@@ -28,7 +28,10 @@ const nextConfig = {
     });
 
     return config;
-  }
+  },
+  experimental: {
+    esmExternals: true,
+  },
 
 };
 
