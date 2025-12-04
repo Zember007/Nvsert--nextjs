@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import useWindowSize from '@/hook/useWindowSize';
-import stylesMainFeedback from '@/assets/styles/sections/main/main-feedback.module.scss';
+import stylesMainFeedback from '@/assets/styles/main.module.scss';
 import stylesSlider from '@/assets/styles/blocks/slider.module.scss';
 import textSize from '@/assets/styles/base/text-size.module.scss';
 

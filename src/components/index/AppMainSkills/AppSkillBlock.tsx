@@ -3,7 +3,7 @@ import Image, { StaticImageData } from 'next/image';
 import { filterPrepositions } from '@/hook/filter';
 import useWindowSize from '@/hook/useWindowSize';
 import textSize from '@/assets/styles/base/text-size.module.scss';
-import stylesMainSkills from '@/assets/styles/sections/main/main-skills.module.scss';
+import stylesMainSkills from '@/assets/styles/main.module.scss';
 
 interface AppSkillBlockProps {
   text: string[];

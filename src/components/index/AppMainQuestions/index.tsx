@@ -5,7 +5,7 @@ import QuestionsBlock from './QuestionsBlock';
 import { useState } from 'react';
 import type { FaqItem } from '@/store/faq';
 import '@/assets/styles/sections/main/animation/documents.scss';
-import stylesQuestions from '@/assets/styles/sections/main/main-questions.module.scss';
+import stylesQuestions from '@/assets/styles/main.module.scss';
 import textSize from '@/assets/styles/base/text-size.module.scss';
 
 type AppMainQuestionsProps = {

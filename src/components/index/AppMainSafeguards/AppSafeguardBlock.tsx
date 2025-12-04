@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import { filterPrepositions } from '@/hook/filter';
 import textSize from '@/assets/styles/base/text-size.module.scss';
-import stylesSafeguards from '@/assets/styles/sections/main/main-safeguards.module.scss';
+import stylesSafeguards from '@/assets/styles/main.module.scss';
 
 interface GuaranteeCardProps {
   img: StaticImageData;

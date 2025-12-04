@@ -1,0 +1,13 @@
+//стили страницы
+@use 'base/variables' as *;
+@use 'base/mixins' as *;
+
+@import 'sections/main/main-slider';
+@import 'sections/main/main-banner';
+@import 'sections/main/main-safeguards';
+@import 'sections/main/main-questions';
+@import 'sections/main/main-feedback';
+@import 'sections/main/main-skills';
+
+
+

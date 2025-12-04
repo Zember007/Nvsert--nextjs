@@ -5,7 +5,7 @@ import QuestionArrow from '../svg/QuestionArrow';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
 import stylesBtn from '@/assets/styles/base/_button.module.scss';
 import textSize from '@/assets/styles/base/text-size.module.scss';
-import stylesQuestions from '@/assets/styles/sections/main/main-questions.module.scss';
+import stylesQuestions from '@/assets/styles/main.module.scss';
 
 const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive: (value: boolean) => void, active: boolean, number: number, title: string, text: string }) => {
     const controls = useAnimation();

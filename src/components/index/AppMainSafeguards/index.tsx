@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 import SafeguardBlock from './AppSafeguardBlock';
-import stylesSafeguards from '@/assets/styles/sections/main/main-safeguards.module.scss';
+import stylesSafeguards from '@/assets/styles/main.module.scss';
 import Img1 from '@/assets/images/safeguard/1.webp';
 import Img2 from '@/assets/images/safeguard/2.webp';
 import Img3 from '@/assets/images/safeguard/3.webp';
@@ -154,7 +154,7 @@ const AppMainSafeguards = () => {
 
       <div className={stylesSafeguards['safeguards-container']}>
         <div
-          className="safeguard__box"
+          className={stylesSafeguards['safeguard__box']}
           style={{
             ...(widthWindow &&
               widthWindow < 960 && { gap: Math.round((widthWindow - 250) / 2) }),

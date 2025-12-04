@@ -1,4 +1,3 @@
-import '@/assets/styles/main.scss'
 import { getFaqs } from '@/assets/lib/faq';
 import AppMainIntro from '../components/index/AppMainIntro';
 import AppMainSkills from '../components/index/AppMainSkills';

@@ -19,6 +19,10 @@ html {
 :root {
   --color-item-menu: #FFF;
   --mask-menu-item: transparent;
+  --cr-white: 0, 0%, 100%;
+  --cr-malachite: 133, 79%, 51%;
+  --cr-java: 180, 87%, 38%;
+  --cr-mirage: 240, 25%, 12%;
 }
 
 input:auto-fill {
@@ -160,5 +164,14 @@ button,
           content: "";
           display: none;
       }
+  }
+}
+
+.section {
+  @apply py-[40px] s:py-[75px] relative flex flex-col gap-[20px] s:gap-[50px];
+
+
+  &__title {
+      @apply text-center;
   }
 }

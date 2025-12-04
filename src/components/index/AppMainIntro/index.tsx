@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import AppMainForm from '../../forms/AppMainForm';
 import { filterPrepositions } from '@/hook/filter';
 import { useAnimation, motion } from 'framer-motion';
-import stylesMainBanner from '@/assets/styles/sections/main/main-banner.module.scss';
+import stylesMainBanner from '@/assets/styles/main.module.scss';
 
 const AppMainIntro = () => {
   const { t } = useTranslation();
