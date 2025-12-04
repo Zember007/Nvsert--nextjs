@@ -9,7 +9,7 @@ import Img2 from '@/assets/images/safeguard/2.webp';
 import Img3 from '@/assets/images/safeguard/3.webp';
 import Img4 from '@/assets/images/safeguard/4.webp';
 import useWindowSize from '@/hook/useWindowSize';
-import stylesSlider from '@/assets/styles/blocks/slider.module.scss';
+import stylesSlider from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/main.module.scss';
 
 const guarantees = [
@@ -181,6 +181,7 @@ const AppMainSafeguards = () => {
           <div className={`${stylesSlider.slideDotsBox} !flex`}>
             {guarantees.map((_, i) => (
               <button
+                aria-label={`Слайдер гарантий ${i + 1}`}
                 type="button"
                 onClick={() => {
                   timeLine.current?.toIndex(i, { ease: 'power3', duration: 0.725 });

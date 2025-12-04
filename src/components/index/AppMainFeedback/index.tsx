@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import useWindowSize from '@/hook/useWindowSize';
 import stylesMainFeedback from '@/assets/styles/main.module.scss';
-import stylesSlider from '@/assets/styles/blocks/slider.module.scss';
+import stylesSlider from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/main.module.scss';
 
 type FeedbackSliderProps = {

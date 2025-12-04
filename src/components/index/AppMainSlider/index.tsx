@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { useIntersectionObserver } from '@/hook/useIntersectionObserver';
 import useWindowSize from '@/hook/useWindowSize';
 import stylesBtn from '@/assets/styles/main.module.scss';
-import stylesSlider from '@/assets/styles/blocks/slider.module.scss';
+import stylesSlider from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/main.module.scss';
 
 interface SlideItem {
