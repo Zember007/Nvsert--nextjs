@@ -11,9 +11,9 @@ import { useHeaderContext } from '../../contexts/HeaderContext';
 import { useTranslation } from 'react-i18next';
 import { useIntersectionObserver } from '@/hook/useIntersectionObserver';
 import useWindowSize from '@/hook/useWindowSize';
-import stylesBtn from '@/assets/styles/base/_button.module.scss';
+import stylesBtn from '@/assets/styles/base/base.module.scss';
 import stylesSlider from '@/assets/styles/blocks/slider.module.scss';
-import textSize from '@/assets/styles/base/text-size.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 
 interface SlideItem {
   title: string;

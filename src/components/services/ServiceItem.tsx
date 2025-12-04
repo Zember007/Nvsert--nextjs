@@ -4,8 +4,8 @@ import { NavigationItem } from '@/store/navigation';
 import { AppNavigationItem } from '@/components/general/AppNavigation';
 import { motion, useAnimation } from "framer-motion";
 import ServiceCard from '@/components/services/ServiceCard';
-import stylesBtn from '@/assets/styles/base/_button.module.scss';
-import textSize from '@/assets/styles/base/text-size.module.scss';
+import stylesBtn from '@/assets/styles/base/base.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 
 interface ServiceItemProps {
     service: {

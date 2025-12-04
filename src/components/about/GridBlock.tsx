@@ -7,7 +7,7 @@ import IconAbout3 from '@/assets/images/about/3.svg';
 import IconAbout4 from '@/assets/images/about/4.svg';
 import IconAbout5 from '@/assets/images/about/5.svg';
 import IconAbout6 from '@/assets/images/about/6.svg';
-import textSize from '@/assets/styles/base/text-size.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 
 interface GridBlockProps {
     block: string;

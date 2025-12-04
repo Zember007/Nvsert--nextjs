@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import CountUp from '@/components/general/countUp';
 import styles from '@/assets/styles/blocks/slider.module.scss';
-import textSize from '@/assets/styles/base/text-size.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 
 const Slider = () => {
 

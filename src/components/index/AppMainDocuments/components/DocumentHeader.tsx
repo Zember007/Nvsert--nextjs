@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { FC, memo } from 'react';
 
 import { filterPrepositions } from '@/hook/filter';
-import textSize from '@/assets/styles/base/text-size.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 
 export interface DocumentHeaderProps {
   title: string;

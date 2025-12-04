@@ -3,7 +3,7 @@ import AudioLogo from "@/assets/images/svg/audio-selector.svg";
 import { useIntersectionObserver } from "@/hook/useIntersectionObserver";
 import footerStyles from "@/assets/styles/sections/footer.module.scss";
 import stylesSlider from "@/assets/styles/blocks/slider.module.scss";
-import textSize from "@/assets/styles/base/text-size.module.scss";
+import textSize from "@/assets/styles/base/base.module.scss";
 
 const slides = [
   "Помогаем сотрудникам не терять информацию",

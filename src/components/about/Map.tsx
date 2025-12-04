@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import styles from '@/assets/styles/blocks/map.module.scss';
 import useWindowSize from '@/hook/useWindowSize';
-import textSize from '@/assets/styles/base/text-size.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 
 // Mapping of region names to coat of arms files
 const coatOfArmsMapping: { [key: string]: string } = {

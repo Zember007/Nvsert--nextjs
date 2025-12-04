@@ -6,8 +6,8 @@ import { Services } from '@/store/navigation';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import { filterPrepositions } from '@/hook/filter';
 import headerStyles from '@/assets/styles/sections/header.module.scss';
-import stylesBtn from '@/assets/styles/base/_button.module.scss';
-import textSize from '@/assets/styles/base/text-size.module.scss';
+import stylesBtn from '@/assets/styles/base/base.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 
 export interface Navigation {
     items?: Services[];

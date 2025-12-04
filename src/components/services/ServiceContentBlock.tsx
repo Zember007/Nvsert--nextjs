@@ -4,8 +4,8 @@ import React from 'react';
 import { ContentBlock } from '@/store/navigation';
 import { StrapiResponsiveImage } from '@/components/general/StrapiResponseImage';
 import ServiceRichTextRenderer from '@/components/services/ServiceRichTextRenderer';
-import stylesBtn from '@/assets/styles/base/_button.module.scss';
-import textSize from '@/assets/styles/base/text-size.module.scss';
+import stylesBtn from '@/assets/styles/base/base.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 
 interface ServiceContentBlockProps {
     block: ContentBlock;

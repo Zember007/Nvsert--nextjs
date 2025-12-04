@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@/components/ui/Button';
-import textSize from '@/assets/styles/base/text-size.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 
 interface CtaBannerProps {
     text: string;

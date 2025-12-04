@@ -2,8 +2,8 @@ import { FC, memo, useId } from 'react';
 
 import { filterPrepositions } from '@/hook/filter';
 import { MainDocumentItemProps } from '@/types/documents';
-import stylesBtn from '@/assets/styles/base/_button.module.scss';
-import textSize from '@/assets/styles/base/text-size.module.scss';
+import stylesBtn from '@/assets/styles/base/base.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 
 export interface DocumentListProps {
   documentsList: MainDocumentItemProps['documentsList'];

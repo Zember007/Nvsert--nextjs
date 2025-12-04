@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import { filterPrepositions } from '@/hook/filter';
 import useWindowSize from '@/hook/useWindowSize';
-import textSize from '@/assets/styles/base/text-size.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 import stylesMainSkills from '@/assets/styles/main.module.scss';
 
 interface AppSkillBlockProps {

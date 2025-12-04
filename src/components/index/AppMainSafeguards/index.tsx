@@ -10,7 +10,7 @@ import Img3 from '@/assets/images/safeguard/3.webp';
 import Img4 from '@/assets/images/safeguard/4.webp';
 import useWindowSize from '@/hook/useWindowSize';
 import stylesSlider from '@/assets/styles/blocks/slider.module.scss';
-import textSize from '@/assets/styles/base/text-size.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 
 const guarantees = [
   {

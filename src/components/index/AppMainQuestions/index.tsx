@@ -6,7 +6,7 @@ import { useState } from 'react';
 import type { FaqItem } from '@/store/faq';
 import '@/assets/styles/sections/main/animation/documents.scss';
 import stylesQuestions from '@/assets/styles/main.module.scss';
-import textSize from '@/assets/styles/base/text-size.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 
 type AppMainQuestionsProps = {
   faqs: FaqItem[];

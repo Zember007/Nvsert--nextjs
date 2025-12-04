@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { filterPrepositions } from './filter';
-import textSize from '@/assets/styles/base/text-size.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 
 export const useRichTextRenderer = () => {
     

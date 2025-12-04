@@ -3,8 +3,8 @@ import Link from "next/link";
 import { useButton } from "@/hook/useButton";
 import { Services } from "@/store/navigation";
 import headerStyles from "@/assets/styles/sections/header.module.scss";
-import stylesBtn from '@/assets/styles/base/_button.module.scss';
-import textSize from "@/assets/styles/base/text-size.module.scss";
+import stylesBtn from '@/assets/styles/base/base.module.scss';
+import textSize from "@/assets/styles/base/base.module.scss";
 
 interface ServicesQuickLinksProps {
   services: Services[];

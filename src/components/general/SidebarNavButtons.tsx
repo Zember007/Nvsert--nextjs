@@ -2,8 +2,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
-import stylesBtn from '@/assets/styles/base/_button.module.scss';
-import textSize from '@/assets/styles/base/text-size.module.scss';
+import stylesBtn from '@/assets/styles/base/base.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 
 export type SidebarItem = {
     id: string;

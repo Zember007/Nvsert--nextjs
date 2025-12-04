@@ -1,6 +1,6 @@
 import React from 'react';
 import { useButton } from '@/hook/useButton';
-import stylesBtn from '@/assets/styles/base/_button.module.scss';
+import stylesBtn from '@/assets/styles/base/base.module.scss';
 
 interface ServicesToggleButtonProps {
     isExpanded: boolean;

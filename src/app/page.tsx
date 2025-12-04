@@ -2,7 +2,7 @@ import { getFaqs } from '@/assets/lib/faq';
 import AppMainIntro from '../components/index/AppMainIntro';
 import AppMainSkills from '../components/index/AppMainSkills';
 import AppMainContent from '../components/index/AppMainContent';
-import HomeDocumentsClient from './_components/HomeDocumentsClient';
+/* import HomeDocumentsClient from './_components/HomeDocumentsClient'; */
 
 export default async function Home() {
   const [faqs] = await Promise.all([getFaqs()]);
@@ -10,7 +10,7 @@ export default async function Home() {
   return (
     <div className="main text-[#000] overflow-hidden relative leading-page">
       <AppMainIntro />
-      <HomeDocumentsClient />
+     {/*  <HomeDocumentsClient /> */}
       <AppMainSkills />
       <AppMainContent faqs={faqs} />
     </div>

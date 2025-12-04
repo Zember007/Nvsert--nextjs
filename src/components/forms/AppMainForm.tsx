@@ -14,8 +14,8 @@ import { BounceEffect } from "@/hook/useBounce";
 import FlightSuccess from "../modals/FlightSuccess";
 import { useAnimation, motion } from "framer-motion";
 import { filterPrepositions } from "@/hook/filter";
-import stylesBtn from '@/assets/styles/base/_button.module.scss';
-import textSize from '@/assets/styles/base/text-size.module.scss';
+import stylesBtn from '@/assets/styles/base/base.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 import formStyles from '@/assets/styles/blocks/forms.module.scss';
 
 

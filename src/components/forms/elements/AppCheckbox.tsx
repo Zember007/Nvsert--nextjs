@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import textSize from '@/assets/styles/base/text-size.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 
 interface CustomCheckboxProps {
     focus?: boolean;

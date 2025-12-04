@@ -6,8 +6,8 @@ import { filterPrepositions } from "@/hook/filter";
 import { useButton } from "@/hook/useButton";
 import { NavigationItem, Services } from "@/store/navigation";
 import Image from "next/image";
-import stylesBtn from '@/assets/styles/base/_button.module.scss';
-import textSize from '@/assets/styles/base/text-size.module.scss';
+import stylesBtn from '@/assets/styles/base/base.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 
 
 

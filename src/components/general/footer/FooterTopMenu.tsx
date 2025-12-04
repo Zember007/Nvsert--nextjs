@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import AppMenuItem from "../AppMenuItem";
 import footerStyles from "@/assets/styles/sections/footer.module.scss";
-import textSize from "@/assets/styles/base/text-size.module.scss";
+import textSize from "@/assets/styles/base/base.module.scss";
 
 const FooterTopMenu: React.FC = () => {
   const { t } = useTranslation();

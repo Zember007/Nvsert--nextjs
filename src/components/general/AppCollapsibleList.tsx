@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import React, { useId, useState } from 'react';
-import stylesBtn from '@/assets/styles/base/_button.module.scss';
+import stylesBtn from '@/assets/styles/base/base.module.scss';
 
 type AppCollapsibleListProps<ItemType> = {
     title: React.ReactNode;

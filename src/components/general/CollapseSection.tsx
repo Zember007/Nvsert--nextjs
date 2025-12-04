@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
-import stylesBtn from '@/assets/styles/base/_button.module.scss';
-import textSize from '@/assets/styles/base/text-size.module.scss';
+import stylesBtn from '@/assets/styles/base/base.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 
 interface CollapseSectionProps {
     title: string;

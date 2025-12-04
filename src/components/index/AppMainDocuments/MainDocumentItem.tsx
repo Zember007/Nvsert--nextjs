@@ -8,7 +8,7 @@ import useWindowSize from '@/hook/useWindowSize';
 import '@/assets/styles/sections/main/document-item.scss';
 import { useRouter } from 'next/navigation';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
-import stylesBtn from '@/assets/styles/base/_button.module.scss';
+import stylesBtn from '@/assets/styles/base/base.module.scss';
 import { useOpenAnimation } from './components/useOpenAnimation';
 import { DocumentMobileInfo } from './components/DocumentMobileInfo';
 import { DocumentHeader } from './components/DocumentHeader';
