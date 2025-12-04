@@ -366,8 +366,8 @@ const SliderNavButton: React.FC<SliderNavButtonProps> = memo(({ direction, setWr
         <span
           className={
             isPrev
-              ? stylesMainSkills['navigation-button-icon']
-              : stylesMainSkills['navigation-button-icon-next']
+              ? `${stylesMainSkills['navigation-button-icon']} group-hover:-translate-x-[32px]`
+              : `${stylesMainSkills['navigation-button-icon-next']} group-hover:translate-x-[32px]`
           }
         >
           <svg {...commonSvgProps}>
@@ -381,8 +381,8 @@ const SliderNavButton: React.FC<SliderNavButtonProps> = memo(({ direction, setWr
         <span
           className={
             isPrev
-              ? stylesMainSkills['navigation-button-icon']
-              : stylesMainSkills['navigation-button-icon-next']
+              ? `${stylesMainSkills['navigation-button-icon']} group-hover:-translate-x-[32px]`
+              : `${stylesMainSkills['navigation-button-icon-next']} group-hover:translate-x-[32px]`
           }
         >
           <svg {...commonSvgProps}>
