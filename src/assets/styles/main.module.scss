@@ -1,6 +1,7 @@
 //стили страницы
 @use 'base/variables' as *;
 @use 'base/mixins' as *;
+@use 'base/base.module' as *;
 
 @import 'sections/main/main-slider';
 @import 'sections/main/main-banner';

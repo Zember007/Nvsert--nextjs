@@ -8,7 +8,7 @@ import '@/assets/styles/sections/main/main-documents.scss';
 import { AsyncPhotoProvider } from '@/components/common/AsyncPhotoView';
 import { useTranslation } from 'react-i18next';
 import { useHeaderContext } from '../../contexts/HeaderContext';
-import textSize from '@/assets/styles/base/base.module.scss';
+import textSize from '@/assets/styles/main.module.scss';
 
 const MainDocumentItem = dynamic(
   () => import('./MainDocumentItem'),
