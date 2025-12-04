@@ -11,6 +11,7 @@ import { useIntersectionObserver } from '@/hook/useIntersectionObserver';
 import Button from '@/components/ui/Button';
 import stylesSlider from '@/assets/styles/blocks/slider.module.scss';
 import textSize from '@/assets/styles/base/text-size.module.scss';
+import stylesMainSkills from '@/assets/styles/sections/main/main-skills.module.scss';
 
 const AppMainSkills = () => {
   const { t } = useTranslation();
@@ -99,7 +100,7 @@ const AppMainSkills = () => {
 
       <h2 className={`${textSize.headerH2} section__title`}>Наши основные преимущества</h2>
 
-      <div className="skills__wrapper">
+      <div className={stylesMainSkills['skills__wrapper']}>
         <SkillsGrid
           skillsData={skillsData}
           widthWindow={widthWindow}
@@ -138,11 +139,11 @@ const SkillsGrid: React.FC<SkillsGridProps> = ({ skillsData, widthWindow, isVisi
 
   return (
     <div className="skills-content-container">
-      <div className="skills__box" style={gapStyle}>
+      <div className={stylesMainSkills['skills__box']} style={gapStyle}>
         {skillsData.map((skill, index) => {
 
           return (
-            <div key={index} data-slider="slide-skill" className={`slide-skill`}>
+            <div key={index} data-slider="slide-skill" className={stylesMainSkills[`slide-skill`]}>
               <AppSkillBlock
                 img={skill.img}
                 title={skill.key ? t(`MainSkills.${skill.key}.title`) : ''}
@@ -170,8 +171,8 @@ interface SkillsDotsProps {
 }
 
 const SkillsDots: React.FC<SkillsDotsProps> = ({ itemsCount, activeIndex, onDotClick }) => (
-  <div className={`${stylesSlider.slideDotsBoxContainer} !flex my-[20px]`}>
-    <div className={`${stylesSlider.slideDotsBox} !flex`}>
+  <div className={`${stylesSlider.slideDotsBoxContainer} my-[20px]`}>
+    <div className={`${stylesSlider.slideDotsBox}`}>
       {Array.from({ length: itemsCount }).map((_, i) => (
         <div
           key={i}
@@ -188,8 +189,8 @@ interface SkillsDescriptionProps {
 }
 
 const SkillsDescription: React.FC<SkillsDescriptionProps> = ({ t }) => (
-  <div className="wrapper flex flex-col">
-    <h3 className="skills__wrapper-desc ">
+  <div className={`wrapper ${stylesMainSkills['overlay-content-container']}`}>
+    <h3 className={stylesMainSkills['skills__wrapper-desc']}>
       {filterPrepositions(
         'Наша компания признана одной из ведущих на рынке сертификации в Российской Федерации и стран Евразийского Экономического Союза. Специалисты NVSERT предоставляют широкий спектр услуг, направленный на оформление обязательной и добровольной сертификации, декларирования, соответствия требованиям технических регламентов и др. документов, подтверждающих качество выпускаемой продукции.'
       )}

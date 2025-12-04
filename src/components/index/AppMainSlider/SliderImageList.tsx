@@ -5,7 +5,7 @@ import { memo } from 'react';
 import Image from 'next/image';
 
 import { slides } from '../utils';
-import stylesSlider from '@/assets/styles/blocks/slider.module.scss';
+import stylesMainSkills from '@/assets/styles/sections/main/main-skills.module.scss';
 
 export interface SliderImageListProps {
   widthWindow: number | null | undefined;
@@ -27,9 +27,9 @@ const SliderImageListComponent: React.FC<SliderImageListProps> = ({
         <div
           key={index}
           data-slider="slide"
-          className="slider-slide slider-slide-item"
+          className={`slider-slide ${stylesMainSkills['slider-slide-item']}`}
         >
-          <div className="slide-inner slide-inner-content">
+          <div className={`slide-inner ${stylesMainSkills['slide-inner-content']}`}>
             <Image
               src={item.img}
               alt="slide"
@@ -39,7 +39,7 @@ const SliderImageListComponent: React.FC<SliderImageListProps> = ({
               fetchPriority={index === 0 ? 'high' : 'auto'}
               loading={index === 0 ? 'eager' : 'lazy'}
             />
-            <div className="slide-overlay-blend"></div>
+            <div className={stylesMainSkills['slide-overlay-blend']}></div>
           </div>
         </div>
       ))}

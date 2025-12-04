@@ -5,7 +5,7 @@ import { useEffect, useRef, useState, useMemo, useCallback, memo } from 'react';
 import dynamic from 'next/dynamic';
 import { slides } from '../utils';
 import { filterPrepositions } from '@/hook/filter';
-import '@/assets/styles/sections/main/main-slider-component.scss';
+import stylesMainSkills from '@/assets/styles/sections/main/main-skills.module.scss';
 import { useButton } from '@/hook/useButton';
 import { useHeaderContext } from '../../contexts/HeaderContext';
 import { useTranslation } from 'react-i18next';
@@ -181,17 +181,17 @@ const AppMainSlider = () => {
         <div ref={overlayText} className="overlay">
           <div className="overlay-slider"></div>
 
-          <div className="overlay-content-container">
+          <div className={stylesMainSkills['overlay-content-container']}>
             <h3 className={`${textSize.headerH6} overlay-title`}>
               {slidesLang[activeIndex]?.title || ''}
             </h3>
-            <p className={`slide-text-content ${textSize.text3}`}>
+            <p className={`${stylesMainSkills['slide-text-content']} ${textSize.text3}`}>
               {slidesLang[activeIndex]?.text || ''}
             </p>
           </div>
 
           <div className="slider__navigations">
-            <div className="slider-navigation-container">
+            <div className={stylesMainSkills['slider-navigation-container']}>
               <SliderNavButton
                 direction="prev"
                 setWrapperRef={setWrapperRef}
@@ -204,8 +204,8 @@ const AppMainSlider = () => {
               />
             </div>
 
-            <div className="slide-counter-container">
-              <div className="slide-counter-overflow">
+            <div className={stylesMainSkills['slide-counter-container']}>
+              <div className={stylesMainSkills['slide-counter-overflow']}>
                 <div className="count-column">
                   <p data-slide-count="step" className={`${textSize.headerH3} count-heading`}>
                     01
@@ -253,7 +253,11 @@ interface SliderBlurProps {
 const SliderBlur: React.FC<SliderBlurProps> = memo(({ whiteBgBlur }) => {
   return (
     <>
-      <div className={`${stylesSlider.slideBlur} slide-blur-left ${whiteBgBlur ? stylesSlider.white : ''}`}>
+      <div
+        className={`${stylesSlider.slideBlur} ${stylesMainSkills['slide-blur-left']} ${
+          whiteBgBlur ? stylesSlider.white : ''
+        }`}
+      >
         <span
           className={`${stylesSlider.line} hidden xl:block white`}
           style={{ '--blur': '4px', '--lightness': '100%' } as React.CSSProperties}
@@ -349,14 +353,23 @@ const SliderNavButton: React.FC<SliderNavButtonProps> = memo(({ direction, setWr
   } as const;
 
   return (
-    <div ref={setWrapperRef} className={`${stylesBtn.tariffWrap} navigation-button-wrap`}>
+    <div
+      ref={setWrapperRef}
+      className={`${stylesBtn.tariffWrap} ${stylesMainSkills['navigation-button-wrap']}`}
+    >
       <button
         ref={setButtonRef}
         aria-label={isPrev ? 'previous slide' : 'next slide'}
         data-slider={isPrev ? 'button-prev' : 'button-next'}
         className={`${stylesBtn.tariff} item group`}
       >
-        <span className={isPrev ? 'navigation-button-icon' : 'navigation-button-icon-next'}>
+        <span
+          className={
+            isPrev
+              ? stylesMainSkills['navigation-button-icon']
+              : stylesMainSkills['navigation-button-icon-next']
+          }
+        >
           <svg {...commonSvgProps}>
             <path
               d={isPrev ? 'M10 21.957L2 13.404L2.00006 9.60268L10 2' : 'M2 21.957L10 13.404L9.99994 9.60268L2 2'}
@@ -365,7 +378,13 @@ const SliderNavButton: React.FC<SliderNavButtonProps> = memo(({ direction, setWr
             />
           </svg>
         </span>
-        <span className={isPrev ? 'navigation-button-icon' : 'navigation-button-icon-next'}>
+        <span
+          className={
+            isPrev
+              ? stylesMainSkills['navigation-button-icon']
+              : stylesMainSkills['navigation-button-icon-next']
+          }
+        >
           <svg {...commonSvgProps}>
             <path
               d={isPrev ? 'M10 21.957L2 13.404L2.00006 9.60268L10 2' : 'M2 21.957L10 13.404L9.99994 9.60268L2 2'}
@@ -390,7 +409,7 @@ interface SliderCtaButtonProps {
 const SliderCtaButton: React.FC<SliderCtaButtonProps> = memo(
   ({ setWrapperRef, setButtonRef, onClick }) => (
     <div
-      className={`main-button-slider-wrap ${stylesBtn.tariffWrap}`}
+      className={`${stylesMainSkills['main-button-slider-wrap']} ${stylesBtn.tariffWrap}`}
       ref={setWrapperRef}
     >
       <button

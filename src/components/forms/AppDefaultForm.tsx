@@ -6,6 +6,7 @@ import AppTextarea from "./elements/AppTextarea";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useHeaderContext } from "../contexts/HeaderContext";
+import formStyles from '@/assets/styles/blocks/forms.module.scss';
 
 const AppDefaultForm = ({ btnText }:{ btnText:string }) => {
 
@@ -54,10 +55,10 @@ const AppDefaultForm = ({ btnText }:{ btnText:string }) => {
                         {btnText}
                     </button>
 
-                    <div className="policy">
-                        <label className="field-check">
-                            <input className="field-check__input" type="checkbox" required />
-                            <span className="field-check__name">
+                    <div className={formStyles.policy}>
+                        <label className={formStyles['field-check']}>
+                            <input className={formStyles['field-check__input']} type="checkbox" required />
+                            <span className={formStyles['field-check__name']}>
                                 Нажимая на кнопку «Связаться» вы соглашаетесь с
                                 <Link href="/soglashenie/polzovatelskoe-soglashenie/" target="_blank">
                                     политикой конфиденциальности

@@ -17,6 +17,7 @@ import { useAnimation, motion } from "framer-motion";
 import { filterPrepositions } from "@/hook/filter";
 import stylesBtn from '@/assets/styles/base/_button.module.scss';
 import textSize from '@/assets/styles/base/text-size.module.scss';
+import formStyles from '@/assets/styles/blocks/forms.module.scss';
 
 
 const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrapper?: () => void }) => {
@@ -112,7 +113,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
             className='s:h-[590px] h-[475px] border border-solid border-[#93969d] rounded-[6px] flex flex-col s:gap-[20px] s:justify-start justify-between py-[30px] px-[20px] s:p-[40px] relative'>
 
             <div className={`${successMessageVisible && 'opacity-0'} flex flex-col s:gap-[44px] gap-[20px]`}>
-                <span className={`${textSize.headerH3} form__title`}>Заказать звонок</span>
+                <span className={`${textSize.headerH3} ${formStyles.form__title}`}>Заказать звонок</span>
 
                 <div className="w-full s:h-[113px] h-[120px] overflow-hidden pointer-events-none rounded-[4px] border border-solid border-[#93969D]">
                     <Image className="w-full s:hidden" src={ImgCallMob} alt='order-call'></Image>
@@ -147,7 +148,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
                             <button
                                 type="submit"
                                 ref={setButtonRef}
-                                className={`${stylesBtn.btnIconAn} form__button no-drag group ${stylesBtn.tariff}`}
+                                className={`${stylesBtn.btnIconAn} ${formStyles.form__button} no-drag group ${stylesBtn.tariff}`}
                             >
 
                                 <span
@@ -163,7 +164,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
                         </div>
 
 
-                        <span className="form__desc">
+                        <span className={formStyles.form__desc}>
                             {filterPrepositions('Нажимая на кнопку «Оформить заявку» вы соглашаетесь с ')}
                             <Link href="/soglashenie/polzovatelskoe-soglashenie/" className={`${stylesBtn.lineAfter} no-drag`} target="_blank">
                                 политикой конфиденциальности

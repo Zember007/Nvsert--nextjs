@@ -1,0 +1,210 @@
+@use '../../base/variables' as *;
+@use '../../base/mixins' as *;
+
+.skills {
+    &__wrapper {
+        @apply flex flex-col;
+
+        &-desc {
+            @include text-4;
+            max-width: 1060px;
+            @apply mt-[30px] font-light;
+        }
+
+        &-move {
+            @apply flex items-center gap-[8px] mt-[28px];
+
+            span {
+                @apply text-[#34446D] text-[18px];
+            }
+        }
+    }
+
+    &__box {
+        @apply flex xxl:grid grid-cols-4 gap-[20px];
+
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-areas:
+            "a b . c"
+            ". d e ."
+            "f g . h";
+        gap: 20px;
+
+        .slide-skill:nth-child(1) {
+            grid-area: a;
+        }
+
+        .slide-skill:nth-child(2) {
+            grid-area: b;
+        }
+
+        .slide-skill:nth-child(3) {
+            grid-area: c;
+        }
+
+        .slide-skill:nth-child(4) {
+            grid-area: d;
+        }
+
+        .slide-skill:nth-child(5) {
+            grid-area: e;
+        }
+
+        .slide-skill:nth-child(6) {
+            grid-area: f;
+        }
+
+        .slide-skill:nth-child(7) {
+            grid-area: g;
+        }
+
+        .slide-skill:nth-child(8) {
+            grid-area: h;
+        }
+
+        .slide-skill:nth-child(9) {
+            grid-area: i;
+        }
+
+        .slide-skill:nth-child(10) {
+            grid-area: j;
+        }
+
+        .slide-skill:nth-child(11) {
+            grid-area: k;
+        }
+
+        .slide-skill:nth-child(12) {
+            grid-area: l;
+        }
+
+        @media (max-width: $media-xxl) {
+            width: 1002px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        @media (max-width: $media-l) {
+            width: 660px;
+        }
+
+        @media (max-width: $media-m) {
+            width: 100%;
+
+            overflow: visible !important;
+        }
+    }
+}
+
+/* Стили слайдера, перенесённые из main-slider-component.scss */
+
+.slide-blur-left {
+    @apply xxl:left-[561px] xl:left-[562px] left-0;
+}
+
+.slider-slide-item {
+    @apply xl:w-[336px] xl:h-[336px] xss:w-[320px] xss:h-[320px] w-[280px] h-[280px] rounded-[6px];
+}
+
+.slide-inner-content {
+    @apply relative bg-[#FFF] overflow-hidden rounded-[6px];
+}
+
+.slide-overlay-blend {
+    @apply absolute scale-[-0.9] w-full h-auto bg-[#34446D] mix-blend-hue;
+}
+
+.overlay-content-container {
+    @apply flex flex-col xl:gap-[15px] grow relative w-full overflow-hidden;
+}
+
+.slide-text-content {
+    @apply grow xl:p-0 w-full h-full;
+}
+
+.slider-navigation-container {
+    @apply flex gap-[10px];
+}
+
+.navigation-button-wrap {
+    @apply overflow-hidden w-[100px];
+}
+
+.navigation-button-icon {
+    @apply block transition-all duration-[.13s] translate-x-[32px] group-hover:-translate-x-[32px];
+}
+
+.navigation-button-icon-next {
+    @apply block transition-all duration-[.13s] -translate-x-[32px] group-hover:translate-x-[32px];
+}
+
+.slide-counter-container {
+    @apply flex items-center text-[40px] font-[300] text-[#93969D];
+}
+
+.slide-counter-overflow {
+    @apply h-[30px] overflow-hidden;
+}
+
+.main-button-slider-wrap {
+    @apply xl:w-[242px] xss:w-[280px] w-[260px] xl:mx-0 mx-auto;
+}
+
+
+.skill-card-wrapper {
+    @apply hover:z-[12] relative xss:h-[224px] h-[172px] xxl:w-[310px] xss:w-[320px] w-[280px];
+
+    &:not(.folder) {
+        @apply xl:cursor-pointer;
+    }
+}
+
+.skill-card-content {
+    @apply relative z-[0] h-full text-[#000] w-full;
+}
+
+.skill-card-inner {
+    @apply flex overflow-hidden relative flex-col xss:gap-[20px] gap-[15px] rounded-[6px] relative z-[1] justify-between h-full transition-all duration-500 border border-solid;
+
+    /* filter: blur(0.01px); */
+
+    &.folder {
+        @apply items-center justify-center rounded-[6px] border-[transparent] xxl:border-[#93969D];
+    }
+
+    &:not(.folder) {
+        @apply p-[20px] border-[#93969D];
+
+
+    }
+
+
+}
+
+.skill-folder-image {
+    @apply transition-all object-cover duration-300 rounded-[6px] h-full;
+}
+
+.skill-content-container {
+    @apply grow max-w-[270px];
+}
+
+.skill-list {
+    @include text-2;
+    @apply font-light pl-[17px] transition-all duration-500 flex flex-col gap-[5px];
+
+    &:not(.visible) {
+        transform: translateY(10px);
+    }
+
+    li {
+        position: relative;
+
+        &::before {
+            content: "•";
+            position: absolute;
+            left: -17px;
+            top: -1px;
+        }
+    }
+}

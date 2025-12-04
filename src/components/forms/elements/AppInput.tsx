@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from "react-hook-form";
+import formStyles from '@/assets/styles/blocks/forms.module.scss';
 
 const AppInput = ({ title, defaultValue, disable, fail, message = true, inputName, type, required, autocomplete, mask, className, classNameTitle, onBlur, onFocus, placeholder }: { onClick?: () => void, onFocus?: (value: string) => void, onBlur?: (value: string) => void, disable?: boolean, fail?: boolean, message?: boolean, title: string, inputName: string, type?: string, required?: boolean, autocomplete?: string, mask?: string, className?: string, classNameTitle?: string, defaultValue?: string, placeholder?: string }) => {
     const { register, formState: { errors, isSubmitted, submitCount }, setValue, clearErrors } = useFormContext();
@@ -66,13 +67,13 @@ const AppInput = ({ title, defaultValue, disable, fail, message = true, inputNam
 
     return (
         <div className={`relative z-[0] `}>
-            <label className={`field  ${visibleError && ((errors[inputName]) || fail) && isSubmitted && 'bounce'}`}>
+            <label className={`${formStyles.field}  ${visibleError && ((errors[inputName]) || fail) && isSubmitted ? formStyles.bounce : ''}`}>
                 <input         
                     {...register(inputName, {
                         required
                     })}
                     type={type}
-                    className={`field__input no-drag ${disable && 'active:scale-[0.95] pointer-events-none'} transition-transform duration-300  ${className || ''} ${(fail) && 'error !text-[#FF3030]'} `}
+                    className={`${formStyles['field__input']} no-drag ${disable && 'active:scale-[0.95] pointer-events-none'} transition-transform duration-300  ${className || ''} ${fail ? `${formStyles.error} !text-[#FF3030]` : ''} `}
                     name={inputName}
                     placeholder={placeholder || title}
                     autoComplete={autocomplete}
@@ -95,10 +96,10 @@ const AppInput = ({ title, defaultValue, disable, fail, message = true, inputNam
                 />
                 {( !disableVisible)  &&
                     <>
-                        <span className={` field__title !delay-100  ${(errors[inputName]) && '!text-[#FF3030]'} ${classNameTitle}`}>
+                        <span className={`${formStyles['field__title']} !delay-100  ${(errors[inputName]) && '!text-[#FF3030]'} ${classNameTitle}`}>
                             {title}
                         </span>
-                        <span className={`field__title-top  ${(errors[inputName]) && '!text-[#FF3030]'} ${classNameTitle}`}>
+                        <span className={`${formStyles['field__title-top']}  ${(errors[inputName]) && '!text-[#FF3030]'} ${classNameTitle}`}>
                             {title}
                         </span>
                     </>}

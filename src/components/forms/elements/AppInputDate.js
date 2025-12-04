@@ -3,6 +3,7 @@ import DatePicker from "react-multi-date-picker";
 import { ru } from "react-multi-date-picker";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
+import formStyles from '@/assets/styles/blocks/forms.module.scss';
 
 const AppInputDate = ({ title, inputName, required }) => {
     const [date, setDate] = useState(null);
@@ -10,10 +11,10 @@ const AppInputDate = ({ title, inputName, required }) => {
 
     return (
 
-        <label className='field'>
+        <label className={formStyles.field}>
 
 
-            {errors[inputName] && <ul className="error-list" >
+            {errors[inputName] && <ul className={formStyles['error-list']} >
                 <li className="error-item">
                     Это поле обязательно
                 </li>
@@ -31,7 +32,7 @@ const AppInputDate = ({ title, inputName, required }) => {
                 // containerClassName="mx-datepicker"
             />
 
-            <span className="field__title">
+            <span className={formStyles['field__title']}>
                 {title}
             </span>
 

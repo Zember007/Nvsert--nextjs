@@ -5,6 +5,8 @@ import AppIntroForm from '@/components/forms/AppIntroForm'
 import Draggable from 'react-draggable';
 import AppMainForm from '../forms/AppMainForm';
 import { useAnimation, motion } from "framer-motion";
+import formStyles from '@/assets/styles/blocks/forms.module.scss';
+import '@/assets/styles/blocks/close-btn.scss'
 
 const AppKnowCostForm = dynamic(() => import('@/components/forms/AppKnowCostForm'), {
 });
@@ -74,7 +76,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ reset, countTrigger, 
                             animate={controls}
                             className={`modal__box  modal ${defaultModalActive && 'active'}`} onClick={(e) => { e.stopPropagation() }}>
                             {defaultModalActive &&
-                                <div id='modal-default' className=" modal__content main-form">
+                                <div id='modal-default' className={`modal__content ${formStyles['main-form']}`}>
                                     <button
                                         onClick={() => { setDefaultModalActive(false) }}
                                         className={`no-drag absolute s:top-[20px] s:right-[20px] top-[5px] right-[5px] s:p-[5px] p-[6px] z-[3000]`}>

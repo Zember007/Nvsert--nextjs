@@ -16,6 +16,7 @@ import { useAnimation, motion } from "framer-motion";
 import { filterPrepositions } from "@/hook/filter";
 import stylesBtn from '@/assets/styles/base/_button.module.scss';
 import textSize from '@/assets/styles/base/text-size.module.scss';
+import formStyles from '@/assets/styles/blocks/forms.module.scss';
 
 
 const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }: { btnText: string; bg?: boolean; close?: () => void; BounceWrapper?: () => void; active?: boolean; countTrigger?: number }) => {
@@ -271,11 +272,11 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
         <motion.div
             animate={controls}
             initial={{ x: 0 }}
-            className={`relative main-form h-[475px] s:h-[590px] border border-solid border-[#93969d]  ${bg ? 'bg-[#93969d26]  ' : ''} py-[30px] px-[20px] s:p-[40px] max-w-[320px] s:max-w-[400px] flex flex-col gap-[20px] rounded-[6px]`}>
+            className={`relative ${formStyles['main-form']} h-[475px] s:h-[590px] border border-solid border-[#93969d]  ${bg ? 'bg-[#93969d26]  ' : ''} py-[30px] px-[20px] s:p-[40px] max-w-[320px] s:max-w-[400px] flex flex-col gap-[20px] rounded-[6px]`}>
             {successMessageVisible && <FlightSuccess closeIcon={bg} text="Спасибо за заявку" close={() => { setSuccessMessageVisible(false) }} />}
 
 
-            <span className={`${textSize.headerH3} form__title  ${successMessageVisible && 'opacity-0'} `}>Оформить заявку</span>
+            <span className={`${textSize.headerH3} ${formStyles.form__title}  ${successMessageVisible && 'opacity-0'} `}>Оформить заявку</span>
 
 
             <div className={`${successMessageVisible && 'opacity-0'}`}>
@@ -322,7 +323,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                 <button
                                     type="submit"
                                     ref={setButtonRef}
-                                    className={`${stylesBtn.btnIconAn} form__button no-drag group ${stylesBtn.tariff}`}
+                                    className={`${stylesBtn.btnIconAn} ${formStyles.form__button} no-drag group ${stylesBtn.tariff}`}
                                     style={{
                                         verticalAlign: 'middle'
                                     }}
@@ -341,7 +342,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                             </div>
 
 
-                            <span className="form__desc">
+                            <span className={formStyles.form__desc}>
                                 {filterPrepositions('Нажимая на кнопку «Оформить заявку» вы соглашаетесь с ')}
                                 <Link href="/soglashenie/polzovatelskoe-soglashenie/" className={`${stylesBtn.lineAfter} no-drag`} target="_blank">
                                     политикой конфиденциальности

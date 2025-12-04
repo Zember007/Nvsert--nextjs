@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 import axios from 'axios';
+import formStyles from '@/assets/styles/blocks/forms.module.scss';
 
 const AppKnowCostForm = () => {
 
@@ -55,7 +56,7 @@ const AppKnowCostForm = () => {
                         {t('form.knowCost.btn')}
                     </button>
 
-                    <div className="policy">
+                    <div className={formStyles.policy}>
                         Нажимая на кнопку «Связаться» вы соглашаетесь с
                         <Link href="/soglashenie/polzovatelskoe-soglashenie/" target="_blank">политикой конфиденциальности</Link>
                     </div>

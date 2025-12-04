@@ -1,6 +1,7 @@
 import ScrollableContainer from '@/components/general/ScrollableContainer';
 import React, { useEffect, useId, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import formStyles from '@/assets/styles/blocks/forms.module.scss';
 
 const AppTextarea = ({ title, inputName, required, className }: { title: string, inputName: string, required?: boolean, className?: string }) => {
 
@@ -21,21 +22,21 @@ const AppTextarea = ({ title, inputName, required, className }: { title: string,
 
     return (
         <div className="relative no-drag">
-            {isSubmitted && errors[inputName] && <ul className="error-list" >
-                <li className={`error-item ${visibleError && 'bounce'}`}>
+            {isSubmitted && errors[inputName] && <ul className={formStyles['error-list']} >
+                <li className={`error-item ${visibleError ? formStyles.bounce : ''}`}>
                     Это поле обязательно
                 </li>
             </ul>}
             <label
                 htmlFor={id}
 
-                className={`field ${visibleError && isSubmitted && errors[inputName] && 'bounce'}`}>
+                className={`${formStyles.field} ${visibleError && isSubmitted && errors[inputName] ? formStyles.bounce : ''}`}>
 
                 <ScrollableContainer smoothScrollFactor={0.1} priorityScroll={true}>
                     <textarea
                         id={id}
                         {...registerData}
-                        className={`field__textarea ${className}`}
+                        className={`${formStyles['field__textarea']} ${className || ''}`}
                         name={inputName}
                         placeholder={title}
                         onFocus={() => setIsFocused(true)}
@@ -47,11 +48,11 @@ const AppTextarea = ({ title, inputName, required, className }: { title: string,
                     ></textarea>
                 </ScrollableContainer>
 
-                <span className={`field__title textarea-title ${isFocused ? 'focused' : ''}`}>
+                <span className={`${formStyles['field__title']} ${formStyles['textarea-title']} ${isFocused ? formStyles.focused : ''}`}>
                     {title}
                 </span>
 
-                <span className={`field__title-top textarea-title ${isFocused ? 'focused' : ''}`}>
+                <span className={`${formStyles['field__title-top']} ${formStyles['textarea-title']} ${isFocused ? formStyles.focused : ''}`}>
                     {title}
                 </span>
             </label>
