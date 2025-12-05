@@ -22,14 +22,10 @@
     "carousel"
   ],
   "scripts": {
-    "build": "rimraf ./dist && microbundle --external react,react-dom --format modern",
+   "build": "rimraf ./dist && microbundle --external react,react-dom --format esm,modern --target modern --no-compress --source-map"
+,
     "prepublishOnly": "npm run build"
   },
-  "presets": ["@babel/preset-env"],
-  "targets": {
-    "esmodules": true
-  },
-  "exclude": ["@babel/plugin-transform-classes", "@babel/plugin-transform-spread"],
   "peerDependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

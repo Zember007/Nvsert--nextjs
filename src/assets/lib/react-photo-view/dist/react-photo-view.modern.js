@@ -1,2 +1,1805 @@
-import e,{useRef as t,useReducer as n,createContext as o,useEffect as r,useLayoutEffect as i,useMemo as a,useCallback as c,useState as l,useContext as s,Children as u,cloneElement as d}from"react";import{createPortal as h}from"react-dom";function m(){return m=Object.assign?Object.assign.bind():function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var o in n)({}).hasOwnProperty.call(n,o)&&(e[o]=n[o])}return e},m.apply(null,arguments)}function f(e,t){if(null==e)return{};var n={};for(var o in e)if({}.hasOwnProperty.call(e,o)){if(-1!==t.indexOf(o))continue;n[o]=e[o]}return n}function v(e){const{current:n}=t({fn:e,curr:void 0});if(n.fn=e,!n.curr){const t=Object.create(null);Object.keys(e).forEach(e=>{t[e]=(...t)=>n.fn[e].call(n.fn,...t)}),n.curr=t}return n.curr}function g(e){return n((e,t)=>m({},e,"function"==typeof t?t(e):t),e)}var p=o(void 0);const w="cubic-bezier(0.25, 0.8, 0.25, 1)",_=20,b=1,y="undefined"!=typeof window&&"ontouchstart"in window,C=(e,t,n)=>Math.max(Math.min(e,n),t),x=(e,t=0,n=0)=>C(e,1*(1-n),Math.max(6,t)*(1+n));var E="undefined"==typeof window||/ServerSideRendering/.test(navigator&&navigator.userAgent)?r:i;function P(e,n,o){const i=t(n);i.current=n,r(()=>{function t(e){i.current(e)}return e&&window.addEventListener(e,t,o),()=>{e&&window.removeEventListener(e,t)}},[e])}const k=["container"];function N(t){let{container:n=document.body}=t,o=f(t,k);return h(e.createElement("div",m({},o)),n)}function X(t){return e.createElement("button",m({},t),e.createElement("div",{className:"in"},e.createElement("div",{className:"close-button-block"}),e.createElement("div",{className:"close-button-block"})),e.createElement("div",{className:"out"},e.createElement("div",{className:"close-button-block"}),e.createElement("div",{className:"close-button-block"})))}function Y(t){return e.createElement("svg",m({width:"44",height:"44",viewBox:"0 0 768 768"},t),e.createElement("path",{d:"M640.5 352.5v63h-390l178.5 180-45 45-256.5-256.5 256.5-256.5 45 45-178.5 180h390z"}))}function $(t){return e.createElement("svg",m({width:"44",height:"44",viewBox:"0 0 768 768"},t),e.createElement("path",{d:"M384 127.5l256.5 256.5-256.5 256.5-45-45 178.5-180h-390v-63h390l-178.5-180z"}))}function M(){return r(()=>{const{style:e}=document.body,t=e.overflow;return e.overflow="hidden",()=>{e.overflow=t}},[]),null}function W(e){const{clientX:t,clientY:n}=e.touches[0];if(e.touches.length>=2){const{clientX:o,clientY:r}=e.touches[1];return[(t+o)/2,(n+r)/2,Math.sqrt((o-t)**2+(r-n)**2)]}return[t,n,0]}const V=(e,t,n,o)=>{const r=n*t,i=(r-o)/2;let a,c=e;return r<=o?(a=1,c=0):e>0&&i-e<=0?(a=2,c=i):e<0&&i+e<=0&&(a=3,c=-i),[a,c]};function S(e,t,n,o,r,i,a=innerWidth/2,c=innerHeight/2,l=0,s=0){const[u]=V(e,i,n,innerWidth),[d]=V(t,i,o,innerHeight),h=innerWidth/2,m=innerHeight/2;return{x:a-i/r*(a-(h+e))-h+(o/n>=3&&n*i===innerWidth?0:u?l/2:l),y:c-i/r*(c-(m+t))-m+(d?s/2:s),lastCX:a,lastCY:c}}function T(e,t,n){const o=e%180!=0;return o?[n,t,o]:[t,n,o]}function R(e,t,n){const[o,r,i]=T(n,innerWidth,innerHeight);let a=0,c=o,l=r;const s=e/t*r,u=t/e*o;return e<o&&t<r?(c=e,l=t):e<o&&t>=r?c=s:e>=o&&t<r||e/t>o/r?l=u:t/e>=3&&!i?(l=u,a=(l-r)/2):c=s,c>448?(c=448,l=t/e*448):(c-=30,l=t/e*c),{width:c,height:l,x:0,y:a,pause:!0}}function L(e,{leading:n=!1,maxWait:o,wait:r=o||0}){const i=t(e);i.current=e;const a=t(0),l=t(null),s=()=>l.current&&clearTimeout(l.current),u=c((...e)=>{const t=Date.now();function c(){a.current=t,s(),i.current.apply(null,e)}const u=a.current,d=t-u;if(0===u&&(n&&c(),a.current=t),void 0!==o){if(d>o)return void c()}else d<r&&(a.current=t);s(),l.current=setTimeout(()=>{c(),a.current=0},r)},[r,o,n]);return u.cancel=s,u}const A=(e,t,n)=>H(e,t,n,100,e=>e,()=>H(t,e,n)),I=e=>1-(1-e)**4;function H(e,t,n,o=400,r=I,i){const a=t-e;if(0===a)return;const c=Date.now();let l=0;const s=()=>{const t=Math.min(1,(Date.now()-c)/o);n(e+r(t)*a)&&t<1?u():(cancelAnimationFrame(l),t>=1&&i&&i())};function u(){l=requestAnimationFrame(s)}u()}const B={T:0,L:0,W:0,H:0,FIT:void 0},F=()=>{const e=t(!1);return r(()=>(e.current=!0,()=>{e.current=!1}),[]),e},D=["className"];function O(t){let{className:n=""}=t,o=f(t,D);return e.createElement("div",m({className:`PhotoView__Spinner ${n}`},o),e.createElement("svg",{viewBox:"0 0 32 32",width:"36",height:"36",fill:"white"},e.createElement("path",{opacity:".25",d:"M16 0 A16 16 0 0 0 16 32 A16 16 0 0 0 16 0 M16 4 A12 12 0 0 1 16 28 A12 12 0 0 1 16 4"}),e.createElement("path",{d:"M16 0 A16 16 0 0 1 32 16 L28 16 A12 12 0 0 0 16 4z"})))}const z=["src","loaded","broken","className","onPhotoLoad","loadingElement","brokenElement","title","description"];function j(t){let{src:n,loaded:o,broken:r,className:i,onPhotoLoad:a,loadingElement:c,brokenElement:l,title:s,description:u}=t,d=f(t,z);const h=F();return n&&!r?e.createElement(e.Fragment,null,e.createElement("div",{className:`PhotoView__Photo__attr ${!o&&"loaded"}`},o&&s&&e.createElement("div",{className:"PhotoView__Photo__title"},s),e.createElement("img",m({className:"PhotoView__Photo"+(i?` ${i}`:""),src:n,onLoad:function(e){const{naturalWidth:t,naturalHeight:n}=e.target;h.current&&a({loaded:!0,naturalWidth:t,naturalHeight:n})},onError:function(){h.current&&a({broken:!0})},draggable:!1,alt:"document"},d)),o&&u&&e.createElement("div",{className:"PhotoView__Photo__description"},u)),!o&&(c?e.createElement("span",{className:"PhotoView__icon"},c):e.createElement(O,{className:"PhotoView__icon"}))):l?e.createElement("span",{className:"PhotoView__icon"},"function"==typeof l?l({src:n}):l):null}const q={naturalWidth:void 0,naturalHeight:void 0,width:void 0,height:void 0,loaded:void 0,broken:!1,x:0,y:0,touched:!1,maskTouched:!1,rotate:0,scale:1,CX:0,CY:0,lastX:0,lastY:0,lastCX:0,lastCY:0,lastScale:1,touchTime:0,touchLength:0,pause:!0,stopRaf:!0,reach:void 0};function K({item:{src:n,render:o,width:i=0,height:a=0,originRef:c,title:s,description:u},visible:d,speed:h,easing:f,wrapClassName:p,className:w,style:_,loadingElement:b,brokenElement:C,onPhotoTap:k,onMaskTap:N,onReachMove:X,onReachUp:Y,onPhotoResize:$,isActive:M,expose:I}){const[D,O]=g(q),z=t(0),K=F(),{naturalWidth:U=i,naturalHeight:G=a,width:J=i,height:Q=a,loaded:Z=!n,broken:ee,x:te,y:ne,touched:oe,stopRaf:re,maskTouched:ie,rotate:ae,scale:ce,CX:le,CY:se,lastX:ue,lastY:de,lastCX:he,lastCY:me,lastScale:fe,touchTime:ve,touchLength:ge,pause:pe,reach:we}=D,_e=v({onScale:e=>be(x(e)),onRotate(e){ae!==e&&(I({rotate:e}),O(m({rotate:e},R(U,G,e))))}});function be(e,t,n){ce!==e&&(I({scale:e}),O(m({scale:e},S(te,ne,J,Q,ce,e,t,n),e<=1&&{x:0,y:0})))}const ye=L((e,t,n=0)=>{if((oe||ie)&&M){const[o,r]=T(ae,J,Q);if(0===n&&0===z.current){const n=Math.abs(e-le)<=20,o=Math.abs(t-se)<=20;if(n&&o)return void O({lastCX:e,lastCY:t});z.current=n?t>se?3:2:1}const i=e-he,a=t-me;let c;if(0===n){const[n]=V(i+ue,ce,o,innerWidth),[l]=V(a+de,ce,r,innerHeight);c=((e,t,n,o)=>t&&1===e||"x"===o?"x":n&&e>1||"y"===o?"y":void 0)(z.current,n,l,we),void 0!==c&&X(c,e,t,ce)}if("x"===c||ie)return void O({reach:"x"});const l=x(ce+(n-ge)/100/2*ce,U/J,.2);I({scale:l}),O(m({touchLength:n,reach:c,scale:l},S(te,ne,J,Q,ce,l,e,t,i,a)))}},{maxWait:8});function Ce(e){return!re&&!oe&&(K.current&&O(m({},e,{pause:d})),K.current)}const xe=function(){const e=v({X:e=>Ce({x:e}),Y:e=>Ce({y:e}),S:e=>{return t=e,K.current&&(I({scale:t}),O({scale:t})),!oe&&K.current;var t}});return(t,n,o,r,i,a,c,l,s,u,d)=>{const[h,m]=T(u,i,a),[f,v]=V(t,l,h,innerWidth),[g,p]=V(n,l,m,innerHeight),w=Date.now()-d;if(w>=200||l!==c||Math.abs(s-c)>1){const{x:o,y:r}=S(t,n,i,a,c,l),s=f?v:o!==t?o:null,u=g?p:r!==n?r:null;return null!==s&&H(t,s,e.X),null!==u&&H(n,u,e.Y),void(l!==c&&H(c,l,e.S))}const _=(t-o)/w,b=(n-r)/w,y=Math.sqrt(_**2+b**2);let C=!1,x=!1;!function(e,t){let n,o=e,r=0,i=0;const a=i=>{n||(n=i);const a=i-n,s=Math.sign(e),u=-.001*s,d=Math.sign(-o)*o**2*2e-4,h=o*a+(u+d)*a**2/2;o+=(u+d)*a,r+=h,n=i,s*o<=0?l():t(r)?c():l()};function c(){i=requestAnimationFrame(a)}function l(){cancelAnimationFrame(i)}c()}(y,o=>{const r=t+o*(_/y),i=n+o*(b/y),[a,l]=V(r,c,h,innerWidth),[s,u]=V(i,c,m,innerHeight);if(a&&!C&&(C=!0,f?H(r,l,e.X):A(l,r+(r-l),e.X)),s&&!x&&(x=!0,g?H(i,u,e.Y):A(u,i+(i-u),e.Y)),C&&x)return!1;const d=C||e.X(l),v=x||e.Y(u);return d&&v})}}(),Ee=function(e){const n=t(0),o=L((...t)=>{n.current=0,e(...t)},{wait:300});return function(...e){n.current+=1,o(...e),n.current>=2&&(o.cancel(),n.current=0,((e,t)=>{we||be(1!==ce?1:Math.max(2,U/J),e,t)})(...e))}}(k);function Pe(e,t){if(z.current=0,(oe||ie)&&M){O({touched:!1,maskTouched:!1,pause:!1,stopRaf:!1,reach:void 0});const n=x(ce,U/J);if(xe(te,ne,ue,de,J,Q,ce,n,fe,ae,ve),Y(e,t),le===e&&se===t){if(oe)return void Ee(e,t);ie&&N(e,t)}}}function ke(e,t,n=0){O({touched:!0,CX:e,CY:t,lastCX:e,lastCY:t,lastX:te,lastY:ne,lastScale:ce,touchLength:n,touchTime:Date.now()})}function Ne(e){O({maskTouched:!0,CX:e.clientX,CY:e.clientY,lastX:te,lastY:ne})}P(y?void 0:"mousemove",e=>{e.preventDefault(),ye(e.clientX,e.clientY)}),P(y?void 0:"mouseup",e=>{Pe(e.clientX,e.clientY)}),P(y?"touchmove":void 0,e=>{e.preventDefault();const t=W(e);ye(...t)},{passive:!1}),P(y?"touchend":void 0,({changedTouches:e})=>{const t=e[0];Pe(t.clientX,t.clientY)},{passive:!1}),P("resize",L(()=>{Z&&!oe&&(O(R(U,G,ae)),$())},{maxWait:8})),E(()=>{M&&I(m({scale:ce,rotate:ae},_e))},[M]);const[Xe,Ye,$e,Me,We,Ve,Se,Te]=function(e,n,o,i,a,c,s,u,d,h){const[m,f,p]=function(e,n,o,r,i){const a=t(!1),[{lead:c,scale:l},s]=g({lead:!0,scale:o}),u=L(async e=>{i(!0),s({lead:!1,scale:e})},{wait:r});return E(()=>{a.current?(i(!1),s({lead:!0}),u(o)):a.current=!0},[o]),c?[e*l,n*l,o/l]:[e*o,n*o,1]}(c,s,u,d,h),[w,_]=function(e,n,o,i,a){const[c,s]=l(B),[u,d]=l(0),h=t(null),m=v({OK:()=>e&&d(4)});function f(e){a(!1),d(e)}return r(()=>{if(h.current||(h.current=Date.now()),o){if(function(e,t){const n=e&&e.current;if(n&&1===n.nodeType){const{top:e,left:o,width:r,height:i}=n.getBoundingClientRect();t({T:e,L:o,W:r,H:i,FIT:"IMG"===n.tagName?getComputedStyle(n).objectFit:void 0})}}(n,s),e)return Date.now()-h.current<250?(d(1),requestAnimationFrame(()=>{d(2),requestAnimationFrame(()=>f(3))}),void setTimeout(m.OK,i)):void d(4);f(5)}},[e,o]),[u,c]}(e,n,o,d,h),{T:b,L:y,W:C,H:x,FIT:P}=_,k=innerWidth/2,N=innerHeight/2,X=w<3||w>4;return[X?C?y:k:i+(k-c*u/2),X?C?b:N:a+(N-s*u/2),m,X&&P?m*(x/C):f,0===w?p:X?C/(c*u)||.01:p,X?P?1:0:1,w,P]}(d,c,Z,te,ne,J,Q,ce,h,e=>O({pause:e})),Re=`transform ${h}ms ${f}`,Le={className:w,onMouseDown:y?void 0:function(e){e.stopPropagation(),0===e.button&&ke(e.clientX,e.clientY,0)},onTouchStart:y?function(e){e.stopPropagation(),ke(...W(e))}:void 0,onWheel:function(e){if(!we){const t=x(ce-e.deltaY/100/2,U/J);O({stopRaf:!0}),be(t,e.clientX,e.clientY)}},style:{width:`${$e}px`,height:`${Me}px`,opacity:Ve,objectFit:4===Se?void 0:Te,transform:ae?`rotate(${ae}deg)`:void 0,transition:Se>2?`${Re}, opacity ${h}ms ease, height ${Se<4?h/2:Se>4?h:0}ms ${f}`:void 0}};return e.createElement("div",{className:"PhotoView__PhotoWrap"+(p?` ${p}`:""),style:_,onMouseDown:!y&&M?Ne:void 0,onTouchStart:y&&M?e=>Ne(e.touches[0]):void 0},e.createElement("div",{className:"PhotoView__PhotoBox",style:{transform:`matrix(${We}, 0, 0, ${We}, ${Xe}, ${Ye})`,transition:oe||pe?void 0:Re,willChange:M?"transform":void 0}},n?e.createElement(j,m({title:s,description:u,src:n,loaded:Z,broken:ee},Le,{onPhotoLoad:function(e){O(m({},e,e.loaded&&R(e.naturalWidth||0,e.naturalHeight||0,ae)))},loadingElement:b,brokenElement:C})):o&&o({attrs:Le,scale:We,rotate:ae})))}const U={x:0,touched:!1,pause:!1,lastCX:void 0,lastCY:void 0,bg:void 0,lastBg:void 0,overlay:!0,minimal:!0,scale:1,rotate:0};function G(o){const{loop:i=3,speed:c,easing:s,photoClosable:u,maskClosable:d=!0,maskOpacity:h=b,pullClosable:m=!0,bannerVisible:f=!0,overlayRender:p,toolbarRender:x,className:k,maskClassName:W,photoClassName:V,photoWrapClassName:S,loadingElement:T,brokenElement:R,images:L,index:A=0,onIndexChange:I,visible:H,onClose:B,afterClose:F,portalContainer:D}=o,[O,z]=g(U),[j,q]=l(0),{x:G,touched:J,pause:Q,lastCX:Z,lastCY:ee,bg:te=h,lastBg:ne,overlay:oe,minimal:re,scale:ie,rotate:ae,onScale:ce,onRotate:le}=O,se=o.hasOwnProperty("index"),ue=se?A:j,de=se?I:q,he=t(ue);r(()=>()=>{document.body.classList.remove("modal__nav-arrow--left","modal__nav-arrow--right"),setTimeout(()=>{document.body.classList.remove("modal__nav-arrow--left","modal__nav-arrow--right")},1e3)},[]);const me=L.length,fe=L[ue],ve="boolean"==typeof i?i:me>i,[ge,pe,we]=function(e,o){const[,r]=n(e=>!e,!1),i=t(0),[c,l]=function(n){const o=t(n);function r(e){o.current=e}return a(()=>{(t=>{e?(t(e),i.current=1):i.current=2})(r)},[n]),[o.current,r]}(e);return[c,i.current,function(){r(),2===i.current&&(l(!1),o&&o()),i.current=0}]}(H,F);E(()=>{if(ge)return z({pause:!0,x:ue*-(innerWidth+_)}),void(he.current=ue);z(U)},[ge]);const{close:_e,changeIndex:be}=v({close(e){le&&le(0),document.body.classList.remove("modal__nav-arrow--left","modal__nav-arrow--right"),z({overlay:!0,lastBg:te}),B(e)},changeIndex(e,t=!1){const n=ve?he.current+(e-ue):e,o=me-1,r=C(n,0,o),i=ve?n:r,a=innerWidth+_;z({touched:!1,lastCX:void 0,lastCY:void 0,x:-a*i,pause:t}),he.current=i,de&&de(ve?e<0?o:e>o?0:e:r)}});function ye(e){return e?_e():z({overlay:!oe})}function Ce(){z({x:-(innerWidth+_)*ue,lastCX:void 0,lastCY:void 0,pause:!0}),he.current=ue}function xe(e,t,n,o){"x"===e?function(e){if(void 0===Z)return void z({touched:!0,lastCX:e,x:G,pause:!1});const t=e-Z;let n=t;!ve&&(0===ue&&t>0||ue===me-1&&t<0)&&(n=t/2),z({touched:!0,lastCX:Z,x:-(innerWidth+_)*he.current+n,pause:!1})}(t):"y"===e&&function(e,t){if(void 0===ee)return void z({touched:!0,lastCY:e,bg:te,minimal:!0});const n=null===h?null:C(h,.01,h-Math.abs(e-ee)/100/4);z({touched:!0,lastCY:ee,bg:1===t?n:h,minimal:1===t})}(n,o)}function Ee(e,t){const n=e-(null!=Z?Z:e),o=t-(null!=ee?ee:t);let r=!1;if(n<-100)return void be(ue+1);if(n>100)return void be(ue-1);const i=-(innerWidth+_)*he.current;Math.abs(o)>100&&re&&m&&(r=!0,_e()),z({touched:!1,x:i,lastCX:void 0,lastCY:void 0,bg:h,overlay:!!r||oe})}P("keydown",e=>{if(H)switch(e.key){case"ArrowLeft":be(ue-1,!0);break;case"ArrowRight":be(ue+1,!0);break;case"Escape":_e()}});const Pe=function(e,t,n){return a(()=>{const o=e.length;return n?e.concat(e).concat(e).slice(o+t-1,o+t+2):e.slice(Math.max(t-1,0),Math.min(t+2,o+1))},[e,t,n])}(L,ue,ve);if(!ge)return null;const ke=oe&&!pe,Ne=H?te:ne,Xe=ce&&le&&{images:L,index:ue,visible:H,onClose:_e,onIndexChange:be,overlayVisible:ke,overlay:fe&&fe.overlay,scale:ie,rotate:ae,onScale:ce,onRotate:le},Ye=c?c(pe):400,$e=s?s(pe):w,Me=c?c(3):600,We=s?s(3):w;return e.createElement(N,{className:`PhotoView-Portal${ke?"":" PhotoView-Slider__clean"}${H?"":" PhotoView-Slider__willClose"}${k?` ${k}`:""}`,role:"dialog",onClick:e=>{e.stopPropagation(),(e=>{const t=e.target;if(null!=t&&t.closest(".PhotoView-Slider__BannerRight")||null!=t&&t.closest(".PhotoView-Slider__ArrowLeft")||null!=t&&t.closest(".PhotoView-Slider__ArrowRight"))return;const n=e.currentTarget.getBoundingClientRect();e.clientX-n.left<=n.width/2?(ve||0!==ue)&&be(ue-1,!0):(ve||ue+1<me)&&be(ue+1,!0)})(e)},onMouseMove:e=>{const t=e.currentTarget.getBoundingClientRect(),n=e.clientX-t.left,o=t.width/2;document.body.classList.remove("modal__nav-arrow--left","modal__nav-arrow--right"),n<=o?document.body.classList.add("modal__nav-arrow--left"):document.body.classList.add("modal__nav-arrow--right")},onMouseLeave:e=>{document.body.classList.remove("modal__nav-arrow--left","modal__nav-arrow--right")},container:D},H&&e.createElement(M,null),e.createElement("div",{className:`PhotoView-Slider__Backdrop${W?` ${W}`:""}${1===pe?" PhotoView-Slider__fadeIn":2===pe?" PhotoView-Slider__fadeOut":""}`,style:{background:Ne?`rgba(0, 0, 0, ${Ne})`:void 0,transitionTimingFunction:$e,transitionDuration:`${J?0:Ye}ms`,animationDuration:`${Ye}ms`},onAnimationEnd:we}),f&&e.createElement("div",{className:"PhotoView-Slider__BannerWrap"},e.createElement("div",{className:"PhotoView-Slider__Counter"},ue+1," / ",me),e.createElement("div",{className:"PhotoView-Slider__BannerRight"},x&&Xe&&x(Xe),e.createElement(X,{className:"close",onClick:_e}))),Pe.map((t,n)=>{const o=ve||0!==ue?he.current-1+n:ue+n;return e.createElement(K,{key:ve?`${t.key}/${t.src}/${o}`:t.key,item:t,speed:Ye,easing:$e,visible:H,onReachMove:xe,onReachUp:Ee,onPhotoTap:()=>ye(u),onMaskTap:()=>ye(d),wrapClassName:S,className:V,style:{left:(innerWidth+_)*o+"px",transform:`translate3d(${G}px, 0px, 0)`,transition:J||Q?void 0:`transform ${Me}ms ${We}`},loadingElement:T,brokenElement:R,onPhotoResize:Ce,isActive:he.current===o,expose:z})}),!y&&f&&e.createElement(e.Fragment,null,(ve||0!==ue)&&e.createElement("div",{className:"PhotoView-Slider__ArrowLeft",onClick:()=>be(ue-1,!0)},e.createElement(Y,null)),(ve||ue+1<me)&&e.createElement("div",{className:"PhotoView-Slider__ArrowRight",onClick:()=>be(ue+1,!0)},e.createElement($,null))),p&&Xe&&e.createElement("div",{className:"PhotoView-Slider__Overlay"},p(Xe)))}const J=["children","onIndexChange","onVisibleChange"],Q={images:[],visible:!1,index:0};function Z(n){let{children:o,onIndexChange:r,onVisibleChange:i}=n,c=f(n,J);const[l,s]=g(Q),u=t(0),{images:d,visible:h,index:w}=l,_=v({nextId:()=>u.current+=1,update(e){const t=d.findIndex(t=>t.key===e.key);if(t>-1){const n=d.slice();return n.splice(t,1,e),void s({images:n})}s(t=>({images:t.images.concat(e)}))},remove(e){s(t=>{const n=t.images.filter(t=>t.key!==e);return{images:n,index:Math.min(n.length-1,w)}})},show(e){const t=d.findIndex(t=>t.key===e);s({visible:!0,index:t}),i&&i(!0,t,l)}}),b=v({close(){s({visible:!1}),i&&i(!1,w,l)},changeIndex(e){s({index:e}),r&&r(e,l)}}),y=a(()=>m({},l,_),[l,_]);return e.createElement(p.Provider,{value:y},o,e.createElement(G,m({images:d,visible:h,index:w,onIndexChange:b.changeIndex,onClose:b.close},c)))}const ee=({src:e,render:n,overlay:o,width:i,height:c,triggers:l=["onClick"],children:h,title:f,description:g})=>{const w=s(p),_=function(){const{current:e}=t({sign:!1,fn:void 0});return e.sign||(e.sign=!0,e.fn=w.nextId()),e.fn}(),b=t(null);r(()=>()=>{w.remove(_)},[]);const y=v({render:e=>n&&n(e),show(e,t){w.show(_),function(e,t){if(h){const n=h.props[e];n&&n(t)}}(e,t)}}),C=a(()=>{const e={};return l.forEach(t=>{e[t]=y.show.bind(null,t)}),e},[]);return r(()=>{w.update({key:_,src:e,originRef:b,render:y.render,overlay:o,width:i,height:c,title:f,description:g})},[e]),h?u.only(d(h,m({},C,{ref:b}))):null};export{Z as PhotoProvider,G as PhotoSlider,ee as PhotoView};
+import React, { useRef, useReducer, createContext, useEffect, useLayoutEffect, useMemo, useCallback, useState, useContext, Children, cloneElement } from 'react';
+import { createPortal } from 'react-dom';
+
+function _extends() {
+  return _extends = Object.assign ? Object.assign.bind() : function (n) {
+    for (var e = 1; e < arguments.length; e++) {
+      var t = arguments[e];
+      for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]);
+    }
+    return n;
+  }, _extends.apply(null, arguments);
+}
+function _objectWithoutPropertiesLoose(r, e) {
+  if (null == r) return {};
+  var t = {};
+  for (var n in r) if ({}.hasOwnProperty.call(r, n)) {
+    if (-1 !== e.indexOf(n)) continue;
+    t[n] = r[n];
+  }
+  return t;
+}
+
+/**
+ * Hook of persistent methods
+ */
+function useMethods(fn) {
+  const {
+    current
+  } = useRef({
+    fn,
+    curr: undefined
+  });
+  current.fn = fn;
+  if (!current.curr) {
+    const curr = Object.create(null);
+    Object.keys(fn).forEach(key => {
+      curr[key] = (...args) => current.fn[key].call(current.fn, ...args);
+    });
+    current.curr = curr;
+  }
+  return current.curr;
+}
+
+function useSetState(initialState) {
+  return useReducer((state, action) => _extends({}, state, typeof action === 'function' ? action(state) : action), initialState);
+}
+
+var PhotoContext = createContext(undefined);
+
+/**
+ * 最大触摸时间
+ */
+const maxTouchTime = 200;
+/**
+ * 默认动画速度
+ */
+const defaultSpeed = 400;
+/**
+ * 默认动画函数
+ */
+const defaultEasing = 'cubic-bezier(0.25, 0.8, 0.25, 1)';
+/**
+ * 最大滑动切换图片距离
+ */
+const maxMoveOffset = 100;
+/**
+ * 图片的间隔
+ */
+const horizontalOffset = 20;
+/**
+ * 最小初始响应距离
+ */
+const minStartTouchOffset = 20;
+/**
+ * 默认背景透明度
+ */
+const defaultOpacity = 1;
+/**
+ * 最小缩放度
+ */
+const minScale = 1;
+/**
+ * 最大缩放度（若图片足够大，则会超出）
+ */
+const maxScale = 6;
+/**
+ * 最小长图模式比例
+ */
+const longModeRatio = 3;
+/**
+ * 缩放弹性缓冲
+ */
+const scaleBuffer = 0.2;
+/**
+ * 最大等待动画时间
+ */
+const maxWaitAnimationTime = 250;
+
+/**
+ * 是否支持触摸设备
+ */
+const isTouchDevice = typeof window !== 'undefined' && 'ontouchstart' in window;
+
+const limitNumber = (value, min, max) => {
+  return Math.max(Math.min(value, max), min);
+};
+/**
+ * 限制最大/最小缩放
+ */
+const limitScale = (scale, max = 0, buffer = 0) => {
+  return limitNumber(scale, minScale * (1 - buffer), Math.max(maxScale, max) * (1 + buffer));
+};
+
+const isSSR = typeof window === 'undefined' || /ServerSideRendering/.test(navigator && navigator.userAgent);
+var useIsomorphicLayoutEffect = isSSR ? useEffect : useLayoutEffect;
+
+/**
+ * 截取相邻三张图片
+ */
+function useAdjacentImages(images, index, loop) {
+  return useMemo(() => {
+    const imageLength = images.length;
+    if (loop) {
+      const connected = images.concat(images).concat(images);
+      return connected.slice(imageLength + index - 1, imageLength + index + 2);
+    }
+    return images.slice(Math.max(index - 1, 0), Math.min(index + 2, imageLength + 1));
+  }, [images, index, loop]);
+}
+
+function useEventListener(type, fn, options) {
+  const latest = useRef(fn);
+  latest.current = fn;
+  useEffect(() => {
+    function wrapper(evt) {
+      latest.current(evt);
+    }
+    if (type) {
+      window.addEventListener(type, wrapper, options);
+    }
+    return () => {
+      if (type) {
+        window.removeEventListener(type, wrapper);
+      }
+    };
+  }, [type]);
+}
+
+/**
+ * 逻辑分叉变量处理
+ * 此 hook 不触发额外渲染
+ */
+function useForkedVariable(initial, updater) {
+  // 初始分叉变量
+  const forkedRef = useRef(initial);
+  function modify(next) {
+    forkedRef.current = next;
+  }
+  useMemo(() => {
+    // 参数变化之后同步内部分叉变量
+    updater(modify);
+  }, [initial]);
+  return [forkedRef.current, modify];
+}
+
+/**
+ * 动画关闭处理真实关闭状态
+ * 通过 onAnimationEnd 回调实现 leaveCallback
+ */
+function useAnimationVisible(visible, afterClose) {
+  const [, handleRender] = useReducer(c => !c, false);
+  const activeAnimation = useRef(0);
+  // 可见状态分支
+  const [realVisible, modifyRealVisible] = useForkedVariable(visible, modify => {
+    // 可见状态：设置进入动画
+    if (visible) {
+      modify(visible);
+      activeAnimation.current = 1;
+    } else {
+      activeAnimation.current = 2;
+    }
+  });
+  function onAnimationEnd() {
+    // 动画结束后触发渲染
+    handleRender();
+    // 结束动画：设置隐藏状态
+    if (activeAnimation.current === 2) {
+      modifyRealVisible(false);
+      // 触发隐藏回调
+      if (afterClose) {
+        afterClose();
+      }
+    }
+    // 重置状态
+    activeAnimation.current = 0;
+  }
+  return [
+  /**
+   * 真实可见状态
+   */
+  realVisible,
+  /**
+   * 正在进行的动画
+   */
+  activeAnimation.current,
+  /**
+   * 动画结束后回调
+   */
+  onAnimationEnd];
+}
+
+const _excluded$3 = ["container"];
+function SlidePortal(_ref) {
+  let {
+      container = document.body
+    } = _ref,
+    rest = _objectWithoutPropertiesLoose(_ref, _excluded$3);
+  return createPortal(React.createElement("div", _extends({}, rest)), container);
+}
+
+function CloseIcon(props) {
+  return React.createElement("button", _extends({}, props), React.createElement("div", {
+    className: "in"
+  }, React.createElement("div", {
+    className: "close-button-block"
+  }), React.createElement("div", {
+    className: "close-button-block"
+  })), React.createElement("div", {
+    className: "out"
+  }, React.createElement("div", {
+    className: "close-button-block"
+  }), React.createElement("div", {
+    className: "close-button-block"
+  })));
+}
+
+function ArrowLeft(props) {
+  return React.createElement("svg", _extends({
+    width: "44",
+    height: "44",
+    viewBox: "0 0 768 768"
+  }, props), React.createElement("path", {
+    d: "M640.5 352.5v63h-390l178.5 180-45 45-256.5-256.5 256.5-256.5 45 45-178.5 180h390z"
+  }));
+}
+
+function ArrowRight(props) {
+  return React.createElement("svg", _extends({
+    width: "44",
+    height: "44",
+    viewBox: "0 0 768 768"
+  }, props), React.createElement("path", {
+    d: "M384 127.5l256.5 256.5-256.5 256.5-45-45 178.5-180h-390v-63h390l-178.5-180z"
+  }));
+}
+
+function PreventScroll() {
+  useEffect(() => {
+    const {
+      style
+    } = document.body;
+    const lastOverflow = style.overflow;
+    style.overflow = 'hidden';
+    return () => {
+      style.overflow = lastOverflow;
+    };
+  }, []);
+  return null;
+}
+
+/**
+ * 从 Touch 事件中获取两个触控中心位置
+ */
+function getMultipleTouchPosition(evt) {
+  const {
+    clientX,
+    clientY
+  } = evt.touches[0];
+  if (evt.touches.length >= 2) {
+    const {
+      clientX: nextClientX,
+      clientY: nextClientY
+    } = evt.touches[1];
+    return [(clientX + nextClientX) / 2, (clientY + nextClientY) / 2, Math.sqrt((nextClientX - clientX) ** 2 + (nextClientY - clientY) ** 2)];
+  }
+  return [clientX, clientY, 0];
+}
+
+/**
+ * 获取接触边缘类型
+ */
+const getReachType = (initialTouchState, horizontalCloseEdge, verticalCloseEdge, reachPosition) => {
+  if (horizontalCloseEdge && initialTouchState === 1 || reachPosition === 'x') {
+    return 'x';
+  }
+  if (verticalCloseEdge && initialTouchState > 1 || reachPosition === 'y') {
+    return 'y';
+  }
+  return undefined;
+};
+/**
+ * 计算接触边缘位置
+ * @param position - x/y
+ * @param scale
+ * @param size - width/height
+ * @param innerSize - innerWidth/innerHeight
+ * @return [CloseEdgeType, position]
+ */
+const computePositionEdge = (position, scale, size, innerSize) => {
+  const currentWidth = size * scale;
+  // 图片超出的宽度
+  const outOffset = (currentWidth - innerSize) / 2;
+  let closedEdge;
+  let current = position;
+  if (currentWidth <= innerSize) {
+    closedEdge = 1;
+    current = 0;
+  } else if (position > 0 && outOffset - position <= 0) {
+    closedEdge = 2;
+    current = outOffset;
+  } else if (position < 0 && outOffset + position <= 0) {
+    closedEdge = 3;
+    current = -outOffset;
+  }
+  return [closedEdge, current];
+};
+
+/**
+ * 获取移动或缩放之后的中心点
+ */
+function getPositionOnMoveOrScale(x, y, width, height, scale, toScale, clientX = innerWidth / 2, clientY = innerHeight / 2, offsetX = 0, offsetY = 0) {
+  // 是否接触边缘
+  const [closedEdgeX] = computePositionEdge(x, toScale, width, innerWidth);
+  const [closedEdgeY] = computePositionEdge(y, toScale, height, innerHeight);
+  const centerClientX = innerWidth / 2;
+  const centerClientY = innerHeight / 2;
+  // 坐标偏移
+  const lastPositionX = centerClientX + x;
+  const lastPositionY = centerClientY + y;
+  // 偏移位置
+  const originX = clientX - (clientX - lastPositionX) * (toScale / scale) - centerClientX;
+  const originY = clientY - (clientY - lastPositionY) * (toScale / scale) - centerClientY;
+  // 长图模式无左右反馈
+  const longModeEdge = height / width >= longModeRatio && width * toScale === innerWidth;
+  // 超出边缘距离减半
+  return {
+    x: originX + (longModeEdge ? 0 : closedEdgeX ? offsetX / 2 : offsetX),
+    y: originY + (closedEdgeY ? offsetY / 2 : offsetY),
+    lastCX: clientX,
+    lastCY: clientY
+  };
+}
+
+/**
+ * 获取旋转后的宽高
+ */
+function getRotateSize(rotate, width, height) {
+  const isVertical = rotate % 180 !== 0;
+  // 若图片不是水平则调换属性
+  if (isVertical) {
+    return [height, width, isVertical];
+  }
+  return [width, height, isVertical];
+}
+
+/**
+ * 获取图片合适的大小
+ */
+function getSuitableImageSize(naturalWidth, naturalHeight, rotate) {
+  const [currentWidth, currentHeight, isVertical] = getRotateSize(rotate, innerWidth, innerHeight);
+  let y = 0;
+  let width = currentWidth;
+  let height = currentHeight;
+  // 自适应宽高
+  const autoWidth = naturalWidth / naturalHeight * currentHeight;
+  const autoHeight = naturalHeight / naturalWidth * currentWidth;
+  const maxWidth = 448;
+  if (naturalWidth < currentWidth && naturalHeight < currentHeight) {
+    width = naturalWidth;
+    height = naturalHeight;
+  } else if (naturalWidth < currentWidth && naturalHeight >= currentHeight) {
+    width = autoWidth;
+  } else if (naturalWidth >= currentWidth && naturalHeight < currentHeight) {
+    height = autoHeight;
+  } else if (naturalWidth / naturalHeight > currentWidth / currentHeight) {
+    height = autoHeight;
+  }
+  // 长图模式
+  else if (naturalHeight / naturalWidth >= longModeRatio && !isVertical) {
+    height = autoHeight;
+    y = (height - currentHeight) / 2;
+  } else {
+    width = autoWidth;
+  }
+  if (width > maxWidth) {
+    width = maxWidth;
+    height = naturalHeight / naturalWidth * maxWidth; // Сохраняем пропорции
+  } else {
+    width -= 30;
+    height = naturalHeight / naturalWidth * width;
+  }
+  return {
+    width,
+    height,
+    x: 0,
+    y,
+    pause: true
+  };
+}
+
+function useDebounceCallback(callback, {
+  leading = false,
+  maxWait,
+  wait = maxWait || 0
+}) {
+  const callbackRef = useRef(callback);
+  callbackRef.current = callback;
+  const prev = useRef(0);
+  const trailingTimeout = useRef(null);
+  const clearTrailing = () => trailingTimeout.current && clearTimeout(trailingTimeout.current);
+  const fn = useCallback((...args) => {
+    const now = Date.now();
+    function call() {
+      prev.current = now;
+      clearTrailing();
+      callbackRef.current.apply(null, args);
+    }
+    const last = prev.current;
+    const offset = now - last;
+    // leading
+    if (last === 0) {
+      if (leading) {
+        call();
+      }
+      prev.current = now;
+    }
+    // body
+    if (maxWait !== undefined) {
+      if (offset > maxWait) {
+        call();
+        return;
+      }
+    } else if (offset < wait) {
+      prev.current = now;
+    }
+    // trailing
+    clearTrailing();
+    trailingTimeout.current = setTimeout(() => {
+      call();
+      prev.current = 0;
+    }, wait);
+  }, [wait, maxWait, leading]);
+  fn.cancel = clearTrailing;
+  return fn;
+}
+
+/**
+ * 单击和双击事件处理
+ * @param singleTap - 单击事件
+ * @param doubleTap - 双击事件
+ * @return invokeTap
+ */
+function useContinuousTap(singleTap, doubleTap) {
+  // 当前连续点击次数
+  const continuousClick = useRef(0);
+  const debounceTap = useDebounceCallback((...args) => {
+    continuousClick.current = 0;
+    singleTap(...args);
+  }, {
+    wait: 300
+  });
+  return function invokeTap(...args) {
+    continuousClick.current += 1;
+    debounceTap(...args);
+    // 双击
+    if (continuousClick.current >= 2) {
+      debounceTap.cancel();
+      continuousClick.current = 0;
+      doubleTap(...args);
+    }
+  };
+}
+
+// 触边运动反馈
+const rebound = (start, bound, callback) => easeOutMove(start, bound, callback, defaultSpeed / 4, t => t, () => easeOutMove(bound, start, callback));
+/**
+ * 物理滚动到具体位置
+ */
+function useScrollPosition(callbackX, callbackY, callbackS) {
+  const callback = useMethods({
+    X: spatial => callbackX(spatial),
+    Y: spatial => callbackY(spatial),
+    S: spatial => callbackS(spatial)
+  });
+  return (x, y, lastX, lastY, width, height, scale, safeScale, lastScale, rotate, touchedTime) => {
+    const [currentWidth, currentHeight] = getRotateSize(rotate, width, height);
+    // 开始状态下边缘触发状态
+    const [beginEdgeX, beginX] = computePositionEdge(x, safeScale, currentWidth, innerWidth);
+    const [beginEdgeY, beginY] = computePositionEdge(y, safeScale, currentHeight, innerHeight);
+    const moveTime = Date.now() - touchedTime;
+    // 时间过长、超出安全范围的情况下不执行滚动逻辑，恢复安全范围
+    if (moveTime >= maxTouchTime || safeScale !== scale || Math.abs(lastScale - scale) > 1) {
+      // 计算中心缩放点
+      const {
+        x: nextX,
+        y: nextY
+      } = getPositionOnMoveOrScale(x, y, width, height, scale, safeScale);
+      const targetX = beginEdgeX ? beginX : nextX !== x ? nextX : null;
+      const targetY = beginEdgeY ? beginY : nextY !== y ? nextY : null;
+      if (targetX !== null) {
+        easeOutMove(x, targetX, callback.X);
+      }
+      if (targetY !== null) {
+        easeOutMove(y, targetY, callback.Y);
+      }
+      if (safeScale !== scale) {
+        easeOutMove(scale, safeScale, callback.S);
+      }
+      return;
+    }
+    // 初始速度
+    const speedX = (x - lastX) / moveTime;
+    const speedY = (y - lastY) / moveTime;
+    const speedT = Math.sqrt(speedX ** 2 + speedY ** 2);
+    // 是否接触到边缘
+    let edgeX = false;
+    let edgeY = false;
+    scrollMove(speedT, spatial => {
+      const nextX = x + spatial * (speedX / speedT);
+      const nextY = y + spatial * (speedY / speedT);
+      const [isEdgeX, currentX] = computePositionEdge(nextX, scale, currentWidth, innerWidth);
+      const [isEdgeY, currentY] = computePositionEdge(nextY, scale, currentHeight, innerHeight);
+      if (isEdgeX && !edgeX) {
+        edgeX = true;
+        if (beginEdgeX) {
+          easeOutMove(nextX, currentX, callback.X);
+        } else {
+          rebound(currentX, nextX + (nextX - currentX), callback.X);
+        }
+      }
+      if (isEdgeY && !edgeY) {
+        edgeY = true;
+        if (beginEdgeY) {
+          easeOutMove(nextY, currentY, callback.Y);
+        } else {
+          rebound(currentY, nextY + (nextY - currentY), callback.Y);
+        }
+      }
+      // 同时接触边缘的情况下停止滚动
+      if (edgeX && edgeY) {
+        return false;
+      }
+      const resultX = edgeX || callback.X(currentX);
+      const resultY = edgeY || callback.Y(currentY);
+      return resultX && resultY;
+    });
+  };
+}
+// 加速度
+const acceleration = -0.001;
+// 阻力
+const resistance = 0.0002;
+/**
+ * 通过速度滚动到停止
+ */
+function scrollMove(initialSpeed, callback) {
+  let v = initialSpeed;
+  let s = 0;
+  let lastTime;
+  let frameId = 0;
+  const calcMove = now => {
+    if (!lastTime) {
+      lastTime = now;
+    }
+    const dt = now - lastTime;
+    const direction = Math.sign(initialSpeed);
+    const a = direction * acceleration;
+    const f = Math.sign(-v) * v ** 2 * resistance;
+    const ds = v * dt + (a + f) * dt ** 2 / 2;
+    v += (a + f) * dt;
+    s += ds;
+    // move to s
+    lastTime = now;
+    if (direction * v <= 0) {
+      caf();
+      return;
+    }
+    if (callback(s)) {
+      raf();
+      return;
+    }
+    caf();
+  };
+  raf();
+  function raf() {
+    frameId = requestAnimationFrame(calcMove);
+  }
+  function caf() {
+    cancelAnimationFrame(frameId);
+  }
+}
+/**
+ * 缓动函数
+ */
+const easeOutQuart = x => 1 - (1 - x) ** 4;
+/**
+ * 缓动回调
+ */
+function easeOutMove(start, end, callback, speed = defaultSpeed, easing = easeOutQuart, complete) {
+  const distance = end - start;
+  if (distance === 0) {
+    return;
+  }
+  const startTime = Date.now();
+  let frameId = 0;
+  const calcMove = () => {
+    const time = Math.min(1, (Date.now() - startTime) / speed);
+    const result = callback(start + easing(time) * distance);
+    if (result && time < 1) {
+      raf();
+      return;
+    }
+    cancelAnimationFrame(frameId);
+    if (time >= 1 && complete) {
+      complete();
+    }
+  };
+  raf();
+  function raf() {
+    frameId = requestAnimationFrame(calcMove);
+  }
+}
+
+const initialRect = {
+  T: 0,
+  L: 0,
+  W: 0,
+  H: 0,
+  // 图像填充方式
+  FIT: undefined
+};
+function useAnimationOrigin(visible, originRef, loaded, speed, updateEasing) {
+  const [originRect, updateOriginRect] = useState(initialRect);
+  // 动画状态
+  const [easingMode, updateEasingMode] = useState(0);
+  const initialTime = useRef(null);
+  const fn = useMethods({
+    OK: () => visible && updateEasingMode(4)
+  });
+  useEffect(() => {
+    // 记录初始打开的时间
+    if (!initialTime.current) {
+      initialTime.current = Date.now();
+    }
+    if (!loaded) {
+      return;
+    }
+    handleUpdateOrigin(originRef, updateOriginRect);
+    // 打开动画处理
+    if (visible) {
+      // 小于最大允许动画时间，则执行缩放动画
+      if (Date.now() - initialTime.current < maxWaitAnimationTime) {
+        updateEasingMode(1);
+        // 延时执行动画，保持 transition 生效
+        requestAnimationFrame(() => {
+          updateEasingMode(2);
+          requestAnimationFrame(() => handleToShape(3));
+        });
+        setTimeout(fn.OK, speed);
+        return;
+      }
+      // 超出则不执行
+      updateEasingMode(4);
+      return;
+    }
+    // 关闭动画处理
+    handleToShape(5);
+  }, [visible, loaded]);
+  function handleToShape(currentShape) {
+    updateEasing(false);
+    updateEasingMode(currentShape);
+  }
+  return [easingMode, originRect];
+}
+/**
+ * 更新缩略图位置信息
+ */
+function handleUpdateOrigin(originRef, updateOriginRect) {
+  const element = originRef && originRef.current;
+  if (element && element.nodeType === 1) {
+    // 获取触发时节点位置
+    const {
+      top,
+      left,
+      width,
+      height
+    } = element.getBoundingClientRect();
+    const isImage = element.tagName === 'IMG';
+    updateOriginRect({
+      T: top,
+      L: left,
+      W: width,
+      H: height,
+      FIT: isImage ? getComputedStyle(element).objectFit : undefined
+    });
+  }
+}
+
+/**
+ * 目标缩放延迟处理
+ */
+function useTargetScale(realWidth, realHeight, realScale, speed, updateEasing) {
+  const execRef = useRef(false);
+  const [{
+    lead,
+    scale
+  }, updateState] = useSetState({
+    lead: true,
+    scale: realScale
+  });
+  const moveScale = useDebounceCallback(async current => {
+    updateEasing(true);
+    updateState({
+      lead: false,
+      scale: current
+    });
+  }, {
+    wait: speed
+  });
+  useIsomorphicLayoutEffect(() => {
+    if (!execRef.current) {
+      execRef.current = true;
+      return;
+    }
+    updateEasing(false);
+    updateState({
+      lead: true
+    });
+    moveScale(realScale);
+  }, [realScale]);
+  // 运动开始
+  if (lead) {
+    return [realWidth * scale, realHeight * scale, realScale / scale];
+  }
+  // 运动结束
+  return [realWidth * realScale, realHeight * realScale, 1];
+}
+
+function useAnimationPosition(visible, originRef, loaded, x, y, width, height, scale, speed, updateEasing) {
+  // 延迟更新 width/height
+  const [autoWidth, autoHeight, autoScale] = useTargetScale(width, height, scale, speed, updateEasing);
+  // 动画源处理
+  const [easingMode, originRect] = useAnimationOrigin(visible, originRef, loaded, speed, updateEasing);
+  // 计算动画位置
+  const {
+    T,
+    L,
+    W,
+    H,
+    FIT
+  } = originRect;
+  // 偏移量，x: 0, y: 0 居中为初始
+  const centerWidth = innerWidth / 2;
+  const centerHeight = innerHeight / 2;
+  const offsetX = centerWidth - width * scale / 2;
+  const offsetY = centerHeight - height * scale / 2;
+  // 缩略图状态
+  const miniMode = easingMode < 3 || easingMode > 4;
+  // 有缩略图时，则为缩略图的位置，否则居中
+  const translateX = miniMode ? W ? L : centerWidth : x + offsetX;
+  const translateY = miniMode ? W ? T : centerHeight : y + offsetY;
+  // 最小值缩放
+  const minScale = W / (width * scale) || 0.01;
+  // 适应 objectFit 保持缩略图宽高比
+  const currentHeight = miniMode && FIT ? autoWidth * (H / W) : autoHeight;
+  // 初始加载情况无缩放
+  const currentScale = easingMode === 0 ? autoScale : miniMode ? minScale : autoScale;
+  const opacity = miniMode ? FIT ? 1 : 0 : 1;
+  return [translateX, translateY, autoWidth, currentHeight, currentScale, opacity, easingMode, FIT];
+}
+
+const useMountedRef = () => {
+  const mountedRef = useRef(false);
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
+  return mountedRef;
+};
+
+const _excluded$2 = ["className"];
+// eslint-disable-next-line react/prop-types
+function Spinner(_ref) {
+  let {
+      className = ''
+    } = _ref,
+    props = _objectWithoutPropertiesLoose(_ref, _excluded$2);
+  return React.createElement("div", _extends({
+    className: `PhotoView__Spinner ${className}`
+  }, props), React.createElement("svg", {
+    viewBox: "0 0 32 32",
+    width: "36",
+    height: "36",
+    fill: "white"
+  }, React.createElement("path", {
+    opacity: ".25",
+    d: "M16 0 A16 16 0 0 0 16 32 A16 16 0 0 0 16 0 M16 4 A12 12 0 0 1 16 28 A12 12 0 0 1 16 4"
+  }), React.createElement("path", {
+    d: "M16 0 A16 16 0 0 1 32 16 L28 16 A12 12 0 0 0 16 4z"
+  })));
+}
+
+const _excluded$1 = ["src", "loaded", "broken", "className", "onPhotoLoad", "loadingElement", "brokenElement", "title", "description"];
+function Photo(_ref) {
+  let {
+      src,
+      loaded,
+      broken,
+      className,
+      onPhotoLoad,
+      loadingElement,
+      brokenElement,
+      title,
+      description
+    } = _ref,
+    restProps = _objectWithoutPropertiesLoose(_ref, _excluded$1);
+  const mountedRef = useMountedRef();
+  function handleImageLoaded(e) {
+    const {
+      naturalWidth,
+      naturalHeight
+    } = e.target;
+    if (mountedRef.current) {
+      onPhotoLoad({
+        loaded: true,
+        naturalWidth,
+        naturalHeight
+      });
+    }
+  }
+  function handleImageBroken() {
+    if (mountedRef.current) {
+      onPhotoLoad({
+        broken: true
+      });
+    }
+  }
+  if (src && !broken) {
+    return React.createElement(React.Fragment, null, React.createElement("div", {
+      className: `PhotoView__Photo__attr ${!loaded && 'loaded'}`
+    }, loaded && title && React.createElement("div", {
+      className: "PhotoView__Photo__title"
+    }, title), React.createElement("img", _extends({
+      className: `PhotoView__Photo${className ? ` ${className}` : ''}`,
+      src: src,
+      onLoad: handleImageLoaded,
+      onError: handleImageBroken,
+      draggable: false,
+      alt: "document"
+    }, restProps)), loaded && description && React.createElement("div", {
+      className: "PhotoView__Photo__description"
+    }, description)), !loaded && (loadingElement ? React.createElement("span", {
+      className: "PhotoView__icon"
+    }, loadingElement) : React.createElement(Spinner, {
+      className: "PhotoView__icon"
+    })));
+  }
+  if (brokenElement) {
+    return React.createElement("span", {
+      className: "PhotoView__icon"
+    }, typeof brokenElement === 'function' ? brokenElement({
+      src
+    }) : brokenElement);
+  }
+  return null;
+}
+
+const initialState$2 = {
+  // 真实宽度
+  naturalWidth: undefined,
+  // 真实高度
+  naturalHeight: undefined,
+  // 宽度
+  width: undefined,
+  // 高度
+  height: undefined,
+  // 加载成功状态
+  loaded: undefined,
+  // 破碎状态
+  broken: false,
+  // 图片 X 偏移量
+  x: 0,
+  // 图片 y 偏移量
+  y: 0,
+  // 图片处于触摸的状态
+  touched: false,
+  // 背景处于触摸状态
+  maskTouched: false,
+  // 旋转状态
+  rotate: 0,
+  // 放大缩小
+  scale: 1,
+  // 触摸开始时 x 原始坐标
+  CX: 0,
+  // 触摸开始时 y 原始坐标
+  CY: 0,
+  // 触摸开始时图片 x 偏移量
+  lastX: 0,
+  // 触摸开始时图片 y 偏移量
+  lastY: 0,
+  // 上一个触摸状态 x 原始坐标
+  lastCX: 0,
+  // 上一个触摸状态 y 原始坐标
+  lastCY: 0,
+  // 上一个触摸状态的 scale
+  lastScale: 1,
+  // 触摸开始时时间
+  touchTime: 0,
+  // 多指触控间距
+  touchLength: 0,
+  // 是否暂停 transition
+  pause: true,
+  // 停止 Raf
+  stopRaf: true,
+  // 当前边缘触发状态
+  reach: undefined
+};
+function PhotoBox({
+  item: {
+    src,
+    render,
+    width: customWidth = 0,
+    height: customHeight = 0,
+    originRef,
+    title,
+    description
+  },
+  visible,
+  speed,
+  easing,
+  wrapClassName,
+  className,
+  style,
+  loadingElement,
+  brokenElement,
+  onPhotoTap,
+  onMaskTap,
+  onReachMove,
+  onReachUp,
+  onPhotoResize,
+  isActive,
+  expose
+}) {
+  const [state, updateState] = useSetState(initialState$2);
+  const initialTouchRef = useRef(0);
+  const mounted = useMountedRef();
+  const {
+    naturalWidth = customWidth,
+    naturalHeight = customHeight,
+    width = customWidth,
+    height = customHeight,
+    loaded = !src,
+    broken,
+    x,
+    y,
+    touched,
+    stopRaf,
+    maskTouched,
+    rotate,
+    scale,
+    CX,
+    CY,
+    lastX,
+    lastY,
+    lastCX,
+    lastCY,
+    lastScale,
+    touchTime,
+    touchLength,
+    pause,
+    reach
+  } = state;
+  const fn = useMethods({
+    onScale: current => onScale(limitScale(current)),
+    onRotate(current) {
+      if (rotate !== current) {
+        expose({
+          rotate: current
+        });
+        updateState(_extends({
+          rotate: current
+        }, getSuitableImageSize(naturalWidth, naturalHeight, current)));
+      }
+    }
+  });
+  // 默认为屏幕中心缩放
+  function onScale(current, clientX, clientY) {
+    if (scale !== current) {
+      expose({
+        scale: current
+      });
+      updateState(_extends({
+        scale: current
+      }, getPositionOnMoveOrScale(x, y, width, height, scale, current, clientX, clientY), current <= 1 && {
+        x: 0,
+        y: 0
+      }));
+    }
+  }
+  const handleMove = useDebounceCallback((nextClientX, nextClientY, currentTouchLength = 0) => {
+    if ((touched || maskTouched) && isActive) {
+      // 通过旋转调换宽高
+      const [currentWidth, currentHeight] = getRotateSize(rotate, width, height);
+      // 单指最小缩放下，以初始移动距离来判断意图
+      if (currentTouchLength === 0 && initialTouchRef.current === 0) {
+        const isStillX = Math.abs(nextClientX - CX) <= minStartTouchOffset;
+        const isStillY = Math.abs(nextClientY - CY) <= minStartTouchOffset;
+        // 初始移动距离不足
+        if (isStillX && isStillY) {
+          // 方向记录上次移动距离，以便平滑过渡
+          updateState({
+            lastCX: nextClientX,
+            lastCY: nextClientY
+          });
+          return;
+        }
+        // 设置响应状态
+        initialTouchRef.current = !isStillX ? 1 : nextClientY > CY ? 3 : 2;
+      }
+      const offsetX = nextClientX - lastCX;
+      const offsetY = nextClientY - lastCY;
+      // 边缘触发状态
+      let currentReach;
+      if (currentTouchLength === 0) {
+        // 边缘超出状态
+        const [horizontalCloseEdge] = computePositionEdge(offsetX + lastX, scale, currentWidth, innerWidth);
+        const [verticalCloseEdge] = computePositionEdge(offsetY + lastY, scale, currentHeight, innerHeight);
+        // 边缘触发检测
+        currentReach = getReachType(initialTouchRef.current, horizontalCloseEdge, verticalCloseEdge, reach);
+        // 接触边缘
+        if (currentReach !== undefined) {
+          onReachMove(currentReach, nextClientX, nextClientY, scale);
+        }
+      }
+      // 横向边缘触发、背景触发禁用当前滑动
+      if (currentReach === 'x' || maskTouched) {
+        updateState({
+          reach: 'x'
+        });
+        return;
+      }
+      // 目标倍数
+      const toScale = limitScale(scale + (currentTouchLength - touchLength) / 100 / 2 * scale, naturalWidth / width, scaleBuffer);
+      // 导出变量
+      expose({
+        scale: toScale
+      });
+      updateState(_extends({
+        touchLength: currentTouchLength,
+        reach: currentReach,
+        scale: toScale
+      }, getPositionOnMoveOrScale(x, y, width, height, scale, toScale, nextClientX, nextClientY, offsetX, offsetY)));
+    }
+  }, {
+    maxWait: 8
+  });
+  function updateRaf(position) {
+    if (stopRaf || touched) {
+      return false;
+    }
+    if (mounted.current) {
+      // 下拉关闭时可以有动画
+      updateState(_extends({}, position, {
+        pause: visible
+      }));
+    }
+    return mounted.current;
+  }
+  const slideToPosition = useScrollPosition(nextX => updateRaf({
+    x: nextX
+  }), nextY => updateRaf({
+    y: nextY
+  }), nextScale => {
+    if (mounted.current) {
+      expose({
+        scale: nextScale
+      });
+      updateState({
+        scale: nextScale
+      });
+    }
+    return !touched && mounted.current;
+  });
+  const handlePhotoTap = useContinuousTap(onPhotoTap, (currentClientX, currentClientY) => {
+    if (!reach) {
+      // 若图片足够大，则放大适应的倍数
+      const endScale = scale !== 1 ? 1 : Math.max(2, naturalWidth / width);
+      onScale(endScale, currentClientX, currentClientY);
+    }
+  });
+  function handleUp(nextClientX, nextClientY) {
+    // 重置响应状态
+    initialTouchRef.current = 0;
+    if ((touched || maskTouched) && isActive) {
+      updateState({
+        touched: false,
+        maskTouched: false,
+        pause: false,
+        stopRaf: false,
+        reach: undefined
+      });
+      const safeScale = limitScale(scale, naturalWidth / width);
+      // Go
+      slideToPosition(x, y, lastX, lastY, width, height, scale, safeScale, lastScale, rotate, touchTime);
+      onReachUp(nextClientX, nextClientY);
+      // 触发 Tap 事件
+      if (CX === nextClientX && CY === nextClientY) {
+        if (touched) {
+          handlePhotoTap(nextClientX, nextClientY);
+          return;
+        }
+        if (maskTouched) {
+          onMaskTap(nextClientX, nextClientY);
+        }
+      }
+    }
+  }
+  useEventListener(isTouchDevice ? undefined : 'mousemove', e => {
+    e.preventDefault();
+    handleMove(e.clientX, e.clientY);
+  });
+  useEventListener(isTouchDevice ? undefined : 'mouseup', e => {
+    handleUp(e.clientX, e.clientY);
+  });
+  useEventListener(isTouchDevice ? 'touchmove' : undefined, e => {
+    e.preventDefault();
+    const position = getMultipleTouchPosition(e);
+    handleMove(...position);
+  }, {
+    passive: false
+  });
+  useEventListener(isTouchDevice ? 'touchend' : undefined, ({
+    changedTouches
+  }) => {
+    const touch = changedTouches[0];
+    handleUp(touch.clientX, touch.clientY);
+  }, {
+    passive: false
+  });
+  useEventListener('resize', useDebounceCallback(() => {
+    if (loaded && !touched) {
+      updateState(getSuitableImageSize(naturalWidth, naturalHeight, rotate));
+      onPhotoResize();
+    }
+  }, {
+    maxWait: 8
+  }));
+  useIsomorphicLayoutEffect(() => {
+    if (isActive) {
+      expose(_extends({
+        scale,
+        rotate
+      }, fn));
+    }
+  }, [isActive]);
+  function handlePhotoLoad(params) {
+    updateState(_extends({}, params, params.loaded && getSuitableImageSize(params.naturalWidth || 0, params.naturalHeight || 0, rotate)));
+  }
+  function handleStart(currentClientX, currentClientY, currentTouchLength = 0) {
+    updateState({
+      touched: true,
+      CX: currentClientX,
+      CY: currentClientY,
+      lastCX: currentClientX,
+      lastCY: currentClientY,
+      lastX: x,
+      lastY: y,
+      lastScale: scale,
+      touchLength: currentTouchLength,
+      touchTime: Date.now()
+    });
+  }
+  function handleWheel(e) {
+    if (!reach) {
+      // 限制最大倍数和最小倍数
+      const toScale = limitScale(scale - e.deltaY / 100 / 2, naturalWidth / width);
+      updateState({
+        stopRaf: true
+      });
+      onScale(toScale, e.clientX, e.clientY);
+    }
+  }
+  function handleMaskStart(e) {
+    updateState({
+      maskTouched: true,
+      CX: e.clientX,
+      CY: e.clientY,
+      lastX: x,
+      lastY: y
+    });
+  }
+  function handleTouchStart(e) {
+    e.stopPropagation();
+    handleStart(...getMultipleTouchPosition(e));
+  }
+  function handleMouseDown(e) {
+    e.stopPropagation();
+    if (e.button === 0) {
+      handleStart(e.clientX, e.clientY, 0);
+    }
+  }
+  // 计算位置
+  const [translateX, translateY, currentWidth, currentHeight, currentScale, opacity, easingMode, FIT] = useAnimationPosition(visible, originRef, loaded, x, y, width, height, scale, speed, isPause => updateState({
+    pause: isPause
+  }));
+  // 图片 objectFit 渐变时间
+  const transitionLayoutTime = easingMode < 4 ? speed / 2 : easingMode > 4 ? speed : 0;
+  const transitionCSS = `transform ${speed}ms ${easing}`;
+  const attrs = {
+    className,
+    onMouseDown: isTouchDevice ? undefined : handleMouseDown,
+    onTouchStart: isTouchDevice ? handleTouchStart : undefined,
+    onWheel: handleWheel,
+    style: {
+      width: `${currentWidth}px`,
+      height: `${currentHeight}px`,
+      opacity,
+      objectFit: easingMode === 4 ? undefined : FIT,
+      transform: rotate ? `rotate(${rotate}deg)` : undefined,
+      transition:
+      // 初始状态无渐变
+      easingMode > 2 ? `${transitionCSS}, opacity ${speed}ms ease, height ${transitionLayoutTime}ms ${easing}` : undefined
+    }
+  };
+  return React.createElement("div", {
+    className: `PhotoView__PhotoWrap${wrapClassName ? ` ${wrapClassName}` : ''}`,
+    style: style,
+    onMouseDown: !isTouchDevice && isActive ? handleMaskStart : undefined,
+    onTouchStart: isTouchDevice && isActive ? e => handleMaskStart(e.touches[0]) : undefined
+  }, React.createElement("div", {
+    className: "PhotoView__PhotoBox",
+    style: {
+      transform: `matrix(${currentScale}, 0, 0, ${currentScale}, ${translateX}, ${translateY})`,
+      transition: touched || pause ? undefined : transitionCSS,
+      willChange: isActive ? 'transform' : undefined
+    }
+  }, src ? React.createElement(Photo, _extends({
+    title: title,
+    description: description,
+    src: src,
+    loaded: loaded,
+    broken: broken
+  }, attrs, {
+    onPhotoLoad: handlePhotoLoad,
+    loadingElement: loadingElement,
+    brokenElement: brokenElement
+  })) : render && render({
+    attrs,
+    scale: currentScale,
+    rotate
+  })));
+}
+
+const initialState$1 = {
+  x: 0,
+  touched: false,
+  pause: false,
+  lastCX: undefined,
+  lastCY: undefined,
+  bg: undefined,
+  lastBg: undefined,
+  overlay: true,
+  minimal: true,
+  scale: 1,
+  rotate: 0
+};
+function PhotoSlider(props) {
+  const {
+    loop = 3,
+    speed: speedFn,
+    easing: easingFn,
+    photoClosable,
+    maskClosable = true,
+    maskOpacity = defaultOpacity,
+    pullClosable = true,
+    bannerVisible = true,
+    overlayRender,
+    toolbarRender,
+    className,
+    maskClassName,
+    photoClassName,
+    photoWrapClassName,
+    loadingElement,
+    brokenElement,
+    images,
+    index: controlledIndex = 0,
+    onIndexChange: controlledIndexChange,
+    visible,
+    onClose,
+    afterClose,
+    portalContainer
+  } = props;
+  const [state, updateState] = useSetState(initialState$1);
+  const [innerIndex, updateInnerIndex] = useState(0);
+  const {
+    x,
+    touched,
+    pause,
+    lastCX,
+    lastCY,
+    bg = maskOpacity,
+    lastBg,
+    overlay,
+    minimal,
+    scale,
+    rotate,
+    onScale,
+    onRotate
+  } = state;
+  // 受控 index
+  const isControlled = props.hasOwnProperty('index');
+  const index = isControlled ? controlledIndex : innerIndex;
+  const onIndexChange = isControlled ? controlledIndexChange : updateInnerIndex;
+  // 内部虚拟 index
+  const virtualIndexRef = useRef(index);
+  // Очищаем классы при размонтировании компонента
+  useEffect(() => {
+    return () => {
+      document.body.classList.remove('modal__nav-arrow--left', 'modal__nav-arrow--right');
+      setTimeout(() => {
+        document.body.classList.remove('modal__nav-arrow--left', 'modal__nav-arrow--right');
+      }, 1000);
+    };
+  }, []);
+  // 当前图片
+  const imageLength = images.length;
+  const currentImage = images[index];
+  // 是否开启
+  // noinspection SuspiciousTypeOfGuard
+  const enableLoop = typeof loop === 'boolean' ? loop : imageLength > loop;
+  // 显示动画处理
+  const [realVisible, activeAnimation, onAnimationEnd] = useAnimationVisible(visible, afterClose);
+  useIsomorphicLayoutEffect(() => {
+    // 显示弹出层，修正正确的指向
+    if (realVisible) {
+      updateState({
+        pause: true,
+        x: index * -(innerWidth + horizontalOffset)
+      });
+      virtualIndexRef.current = index;
+      return;
+    }
+    // 关闭后清空状态
+    updateState(initialState$1);
+  }, [realVisible]);
+  const {
+    close,
+    changeIndex
+  } = useMethods({
+    close(evt) {
+      if (onRotate) {
+        onRotate(0);
+      }
+      // Очищаем классы при закрытии
+      document.body.classList.remove('modal__nav-arrow--left', 'modal__nav-arrow--right');
+      updateState({
+        overlay: true,
+        // 记录当前关闭时的透明度
+        lastBg: bg
+      });
+      onClose(evt);
+    },
+    changeIndex(nextIndex, isPause = false) {
+      // 当前索引
+      const currentIndex = enableLoop ? virtualIndexRef.current + (nextIndex - index) : nextIndex;
+      const max = imageLength - 1;
+      // 虚拟 index
+      // 非循环模式，限制区间
+      const limitIndex = limitNumber(currentIndex, 0, max);
+      const nextVirtualIndex = enableLoop ? currentIndex : limitIndex;
+      // 单个屏幕宽度
+      const singlePageWidth = innerWidth + horizontalOffset;
+      updateState({
+        touched: false,
+        lastCX: undefined,
+        lastCY: undefined,
+        x: -singlePageWidth * nextVirtualIndex,
+        pause: isPause
+      });
+      virtualIndexRef.current = nextVirtualIndex;
+      // 更新真实的 index
+      const realLoopIndex = nextIndex < 0 ? max : nextIndex > max ? 0 : nextIndex;
+      if (onIndexChange) {
+        onIndexChange(enableLoop ? realLoopIndex : limitIndex);
+      }
+    }
+  });
+  useEventListener('keydown', evt => {
+    if (visible) {
+      switch (evt.key) {
+        case 'ArrowLeft':
+          changeIndex(index - 1, true);
+          break;
+        case 'ArrowRight':
+          changeIndex(index + 1, true);
+          break;
+        case 'Escape':
+          close();
+          break;
+      }
+    }
+  });
+  function handlePhotoTap(closeable) {
+    return closeable ? close() : updateState({
+      overlay: !overlay
+    });
+  }
+  function handleResize() {
+    updateState({
+      x: -(innerWidth + horizontalOffset) * index,
+      lastCX: undefined,
+      lastCY: undefined,
+      pause: true
+    });
+    virtualIndexRef.current = index;
+  }
+  function handleReachVerticalMove(clientY, nextScale) {
+    if (lastCY === undefined) {
+      updateState({
+        touched: true,
+        lastCY: clientY,
+        bg,
+        minimal: true
+      });
+      return;
+    }
+    const opacity = maskOpacity === null ? null : limitNumber(maskOpacity, 0.01, maskOpacity - Math.abs(clientY - lastCY) / 100 / 4);
+    updateState({
+      touched: true,
+      lastCY,
+      bg: nextScale === 1 ? opacity : maskOpacity,
+      minimal: nextScale === 1
+    });
+  }
+  function handleReachHorizontalMove(clientX) {
+    if (lastCX === undefined) {
+      updateState({
+        touched: true,
+        lastCX: clientX,
+        x,
+        pause: false
+      });
+      return;
+    }
+    const originOffsetClientX = clientX - lastCX;
+    let offsetClientX = originOffsetClientX;
+    // 第一张和最后一张超出距离减半
+    if (!enableLoop && (index === 0 && originOffsetClientX > 0 || index === imageLength - 1 && originOffsetClientX < 0)) {
+      offsetClientX = originOffsetClientX / 2;
+    }
+    updateState({
+      touched: true,
+      lastCX,
+      x: -(innerWidth + horizontalOffset) * virtualIndexRef.current + offsetClientX,
+      pause: false
+    });
+  }
+  function handleReachMove(reachPosition, clientX, clientY, nextScale) {
+    if (reachPosition === 'x') {
+      handleReachHorizontalMove(clientX);
+    } else if (reachPosition === 'y') {
+      handleReachVerticalMove(clientY, nextScale);
+    }
+  }
+  function handleReachUp(clientX, clientY) {
+    const offsetClientX = clientX - (lastCX != null ? lastCX : clientX);
+    const offsetClientY = clientY - (lastCY != null ? lastCY : clientY);
+    let willClose = false;
+    // 下一张
+    if (offsetClientX < -maxMoveOffset) {
+      changeIndex(index + 1);
+      return;
+    }
+    // 上一张
+    if (offsetClientX > maxMoveOffset) {
+      changeIndex(index - 1);
+      return;
+    }
+    const singlePageWidth = innerWidth + horizontalOffset;
+    // 当前偏移
+    const currentTranslateX = -singlePageWidth * virtualIndexRef.current;
+    if (Math.abs(offsetClientY) > 100 && minimal && pullClosable) {
+      willClose = true;
+      close();
+    }
+    updateState({
+      touched: false,
+      x: currentTranslateX,
+      lastCX: undefined,
+      lastCY: undefined,
+      bg: maskOpacity,
+      overlay: willClose ? true : overlay
+    });
+  }
+  // 截取相邻的图片
+  const adjacentImages = useAdjacentImages(images, index, enableLoop);
+  // Обработчики для кликов по порталу
+  const handlePortalMouseMove = e => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const cursorX = e.clientX - rect.left;
+    const halfWidth = rect.width / 2;
+    // Удаляем оба класса перед добавлением нового
+    document.body.classList.remove('modal__nav-arrow--left', 'modal__nav-arrow--right');
+    // Добавляем класс в зависимости от положения курсора
+    if (cursorX <= halfWidth) {
+      document.body.classList.add('modal__nav-arrow--left');
+    } else {
+      document.body.classList.add('modal__nav-arrow--right');
+    }
+  };
+  const handlePortalMouseLeave = e => {
+    document.body.classList.remove('modal__nav-arrow--left', 'modal__nav-arrow--right');
+  };
+  const handlePortalClick = e => {
+    const target = e.target;
+    // Не обрабатываем клики по элементам управления
+    if (target != null && target.closest('.PhotoView-Slider__BannerRight') || target != null && target.closest('.PhotoView-Slider__ArrowLeft') || target != null && target.closest('.PhotoView-Slider__ArrowRight')) {
+      return;
+    }
+    const rect = e.currentTarget.getBoundingClientRect();
+    const cursorX = e.clientX - rect.left;
+    const halfWidth = rect.width / 2;
+    // Переключаем слайд в зависимости от позиции клика
+    if (cursorX <= halfWidth) {
+      if (enableLoop || index !== 0) {
+        changeIndex(index - 1, true);
+      }
+    } else {
+      if (enableLoop || index + 1 < imageLength) {
+        changeIndex(index + 1, true);
+      }
+    }
+  };
+  if (!realVisible) {
+    return null;
+  }
+  const currentOverlayVisible = overlay && !activeAnimation;
+  // 关闭过程中使用下拉保存的透明度
+  const currentOpacity = visible ? bg : lastBg;
+  // 覆盖物参数
+  const overlayParams = onScale && onRotate && {
+    images,
+    index,
+    visible,
+    onClose: close,
+    onIndexChange: changeIndex,
+    overlayVisible: currentOverlayVisible,
+    overlay: currentImage && currentImage.overlay,
+    scale,
+    rotate,
+    onScale,
+    onRotate
+  };
+  // 动画时间
+  const currentSpeed = speedFn ? speedFn(activeAnimation) : defaultSpeed;
+  const currentEasing = easingFn ? easingFn(activeAnimation) : defaultEasing;
+  const slideSpeed = speedFn ? speedFn(3) : defaultSpeed + 200;
+  const slideEasing = easingFn ? easingFn(3) : defaultEasing;
+  return React.createElement(SlidePortal, {
+    className: `PhotoView-Portal${!currentOverlayVisible ? ' PhotoView-Slider__clean' : ''}${!visible ? ' PhotoView-Slider__willClose' : ''}${className ? ` ${className}` : ''}`,
+    role: "dialog",
+    onClick: e => {
+      e.stopPropagation();
+      handlePortalClick(e);
+    },
+    onMouseMove: handlePortalMouseMove,
+    onMouseLeave: handlePortalMouseLeave,
+    container: portalContainer
+  }, visible && React.createElement(PreventScroll, null), React.createElement("div", {
+    className: `PhotoView-Slider__Backdrop${maskClassName ? ` ${maskClassName}` : ''}${activeAnimation === 1 ? ' PhotoView-Slider__fadeIn' : activeAnimation === 2 ? ' PhotoView-Slider__fadeOut' : ''}`,
+    style: {
+      background: currentOpacity ? `rgba(0, 0, 0, ${currentOpacity})` : undefined,
+      transitionTimingFunction: currentEasing,
+      transitionDuration: `${touched ? 0 : currentSpeed}ms`,
+      animationDuration: `${currentSpeed}ms`
+    },
+    onAnimationEnd: onAnimationEnd
+  }), bannerVisible && React.createElement("div", {
+    className: "PhotoView-Slider__BannerWrap"
+  }, React.createElement("div", {
+    className: "PhotoView-Slider__Counter"
+  }, index + 1, " / ", imageLength), React.createElement("div", {
+    className: "PhotoView-Slider__BannerRight"
+  }, toolbarRender && overlayParams && toolbarRender(overlayParams), React.createElement(CloseIcon, {
+    className: "close",
+    onClick: close
+  }))), adjacentImages.map((item, currentIndex) => {
+    // 截取之前的索引位置
+    const nextIndex = !enableLoop && index === 0 ? index + currentIndex : virtualIndexRef.current - 1 + currentIndex;
+    return React.createElement(PhotoBox, {
+      key: enableLoop ? `${item.key}/${item.src}/${nextIndex}` : item.key,
+      item: item,
+      speed: currentSpeed,
+      easing: currentEasing,
+      visible: visible,
+      onReachMove: handleReachMove,
+      onReachUp: handleReachUp,
+      onPhotoTap: () => handlePhotoTap(photoClosable),
+      onMaskTap: () => handlePhotoTap(maskClosable),
+      wrapClassName: photoWrapClassName,
+      className: photoClassName,
+      style: {
+        left: `${(innerWidth + horizontalOffset) * nextIndex}px`,
+        transform: `translate3d(${x}px, 0px, 0)`,
+        transition: touched || pause ? undefined : `transform ${slideSpeed}ms ${slideEasing}`
+      },
+      loadingElement: loadingElement,
+      brokenElement: brokenElement,
+      onPhotoResize: handleResize,
+      isActive: virtualIndexRef.current === nextIndex,
+      expose: updateState
+    });
+  }), !isTouchDevice && bannerVisible && React.createElement(React.Fragment, null, (enableLoop || index !== 0) && React.createElement("div", {
+    className: "PhotoView-Slider__ArrowLeft",
+    onClick: () => changeIndex(index - 1, true)
+  }, React.createElement(ArrowLeft, null)), (enableLoop || index + 1 < imageLength) && React.createElement("div", {
+    className: "PhotoView-Slider__ArrowRight",
+    onClick: () => changeIndex(index + 1, true)
+  }, React.createElement(ArrowRight, null))), overlayRender && overlayParams && React.createElement("div", {
+    className: "PhotoView-Slider__Overlay"
+  }, overlayRender(overlayParams)));
+}
+
+const _excluded = ["children", "onIndexChange", "onVisibleChange"];
+const initialState = {
+  images: [],
+  visible: false,
+  index: 0
+};
+function PhotoProvider(_ref) {
+  let {
+      children,
+      onIndexChange,
+      onVisibleChange
+    } = _ref,
+    restProps = _objectWithoutPropertiesLoose(_ref, _excluded);
+  const [state, updateState] = useSetState(initialState);
+  const uniqueIdRef = useRef(0);
+  const {
+    images,
+    visible,
+    index
+  } = state;
+  const methods = useMethods({
+    nextId() {
+      return uniqueIdRef.current += 1;
+    },
+    update(imageItem) {
+      const currentIndex = images.findIndex(n => n.key === imageItem.key);
+      if (currentIndex > -1) {
+        const nextImages = images.slice();
+        nextImages.splice(currentIndex, 1, imageItem);
+        updateState({
+          images: nextImages
+        });
+        return;
+      }
+      updateState(prev => ({
+        images: prev.images.concat(imageItem)
+      }));
+    },
+    remove(key) {
+      updateState(prev => {
+        const nextImages = prev.images.filter(item => item.key !== key);
+        const nextEndIndex = nextImages.length - 1;
+        return {
+          images: nextImages,
+          index: Math.min(nextEndIndex, index)
+        };
+      });
+    },
+    show(key) {
+      const currentIndex = images.findIndex(item => item.key === key);
+      updateState({
+        visible: true,
+        index: currentIndex
+      });
+      if (onVisibleChange) {
+        onVisibleChange(true, currentIndex, state);
+      }
+    }
+  });
+  const fn = useMethods({
+    close() {
+      updateState({
+        visible: false
+      });
+      if (onVisibleChange) {
+        onVisibleChange(false, index, state);
+      }
+    },
+    changeIndex(nextIndex) {
+      updateState({
+        index: nextIndex
+      });
+      if (onIndexChange) {
+        onIndexChange(nextIndex, state);
+      }
+    }
+  });
+  const value = useMemo(() => _extends({}, state, methods), [state, methods]);
+  return React.createElement(PhotoContext.Provider, {
+    value: value
+  }, children, React.createElement(PhotoSlider, _extends({
+    images: images,
+    visible: visible,
+    index: index,
+    onIndexChange: fn.changeIndex,
+    onClose: fn.close
+  }, restProps)));
+}
+
+function useInitial(callback) {
+  const {
+    current
+  } = useRef({
+    sign: false,
+    fn: undefined
+  });
+  if (!current.sign) {
+    current.sign = true;
+    current.fn = callback();
+  }
+  return current.fn;
+}
+
+const PhotoView = ({
+  src,
+  render,
+  overlay,
+  width,
+  height,
+  triggers: _triggers = ['onClick'],
+  children,
+  title,
+  description
+}) => {
+  const photoContext = useContext(PhotoContext);
+  const key = useInitial(() => photoContext.nextId());
+  const originRef = useRef(null);
+  // useImperativeHandle((children as React.FunctionComponentElement<HTMLElement>)?.ref, () => originRef.current);
+  useEffect(() => {
+    return () => {
+      photoContext.remove(key);
+    };
+  }, []);
+  function invokeChildrenFn(eventName, e) {
+    if (children) {
+      const eventFn = children.props[eventName];
+      if (eventFn) {
+        eventFn(e);
+      }
+    }
+  }
+  const fn = useMethods({
+    render(props) {
+      return render && render(props);
+    },
+    show(eventName, e) {
+      photoContext.show(key);
+      invokeChildrenFn(eventName, e);
+    }
+  });
+  const eventListeners = useMemo(() => {
+    const listener = {};
+    _triggers.forEach(eventName => {
+      listener[eventName] = fn.show.bind(null, eventName);
+    });
+    return listener;
+  }, []);
+  useEffect(() => {
+    photoContext.update({
+      key,
+      src,
+      originRef,
+      render: fn.render,
+      overlay,
+      width,
+      height,
+      title,
+      description
+    });
+  }, [src]);
+  if (children) {
+    return Children.only(cloneElement(children, _extends({}, eventListeners, {
+      ref: originRef
+    })));
+  }
+  return null;
+};
+
+export { PhotoProvider, PhotoSlider, PhotoView };
 //# sourceMappingURL=react-photo-view.modern.js.map
