@@ -14,10 +14,11 @@ export interface DocumentImageProps {
   };
   index: number;
   controls: AnimationControls;
+  isPriority?: boolean;
 }
 
 export const DocumentImage: FC<DocumentImageProps> = memo(
-  ({ title, duration, price, imageUrls, index, controls }) => (
+  ({ title, duration, price, imageUrls, index, controls, isPriority = false }) => (
     <AsyncPhotoView
       title={title}
       description={
@@ -41,7 +42,8 @@ export const DocumentImage: FC<DocumentImageProps> = memo(
           src={imageUrls.full}
           width={250}
           height={349}
-          loading="lazy"
+          loading={isPriority ? "eager" : "lazy"}
+          fetchPriority={isPriority ? "high" : "auto"}
         />
       </motion.div>
     </AsyncPhotoView>

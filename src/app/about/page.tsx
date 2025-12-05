@@ -2,7 +2,6 @@ import ClientPage from './ClientPage';
 import { Metadata } from 'next';
 
 // Оптимизация: кеширование данных на более длительный срок для ускорения навигации
-export const revalidate = 3600; // ISR: перевалидация каждые 60 минут
 
 // Интерфейсы для типизации данных
 export interface ContentBlock {

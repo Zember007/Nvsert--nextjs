@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import StandardPageLayout from '@/components/general/StandardPageLayout';
 import CollapseSection from '@/components/general/CollapseSection';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
@@ -9,28 +9,25 @@ import { AboutData } from './page';
 import AppCtaBanner from '@/components/general/AppCtaBanner';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import { StrapiResponsiveImage } from '@/components/general/StrapiResponseImage';
-import GridBox from '../../components/about/Grid';
-
-
+import GridBox from '@/components/about/Grid';
 
 interface AboutCompanyClientProps {
     aboutData: AboutData | null;
 }
 
 const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) => {
-    const [showAbout, setShowAbout] = React.useState<boolean>(true);
     const [sectionsOpen, setSectionsOpen] = React.useState<number[]>([]);
     const { processContent } = useRichTextRenderer();
     const { openDefaultModal } = useHeaderContext();
 
-
     const toggleSection = (id: number) => {
-        setSectionsOpen(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
+        setSectionsOpen(prev => 
+            prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
+        );
     };
 
-    // Функция для обработки специальных маркеров
+    // Исправленная функция — теперь возвращает один элемент, а не массив!
     const renderRichText = (richText: string): React.ReactNode => {
-        // Обработка [slider]
         if (richText.includes('[slider]')) {
             const parts = richText.split('[slider]');
             return (
@@ -42,12 +39,10 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
             );
         }
 
-        // Обработка [map]
         if (richText.includes('[map]')) {
             const parts = richText.split('[map]');
             return (
                 <>
-
                     {parts[0] && <div className="mb-[20px]">{renderRichText(parts[0])}</div>}
                     <Map />
                     {parts[1] && <div>{renderRichText(parts[1])}</div>}
@@ -55,7 +50,6 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
             );
         }
 
-        // Обработка [grid_blocks_start] ... [grid_blocks_end]
         if (richText.includes('[grid_blocks_start]') && richText.includes('[grid_blocks_end]')) {
             const beforeGrid = richText.substring(0, richText.indexOf('[grid_blocks_start]')).trim();
             const gridContent = richText.substring(
@@ -64,26 +58,19 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
             ).trim();
             const afterGrid = richText.substring(richText.indexOf('[grid_blocks_end]') + '[grid_blocks_end]'.length).trim();
 
-            return [
+            // ВОТ ГЛАВНОЕ ИСПРАВЛЕНИЕ: возвращаем один <>, а не массив
+            return (
                 <>
                     {beforeGrid && <div className="mb-[30px]">{renderRichText(beforeGrid)}</div>}
-                    <GridBox
-                        gridContent={gridContent}
-                        processContent={processContent}
-                    />
-                    {afterGrid && <div>{renderRichText(afterGrid)}</div>}
+                    <GridBox gridContent={gridContent} processContent={processContent} />
+                    {afterGrid && <div className="mt-[30px]">{renderRichText(afterGrid)}</div>}
                 </>
-            ];
+            );
         }
 
-
-
-        // Обычный текст
         return processContent(richText);
     };
 
-
-    // Генерируем элементы для правой навигации на основе загруженных данных
     const dotNavItems = aboutData?.content?.map((block, index) => ({
         id: index,
         title: block.heading,
@@ -96,7 +83,6 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
             <StandardPageLayout
                 title="О компании"
                 breadcrumbs={[{ id: 1, title: 'О компании', full_slug: '/about' }]}
-
                 dotNavItems={[]}
                 showButton={true}
             >
@@ -111,43 +97,41 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
         <StandardPageLayout
             title={aboutData.title || "О компании"}
             breadcrumbs={[{ id: 1, title: 'О компании', full_slug: '/about' }]}
-
             dotNavItems={dotNavItems}
             showButton={true}
         >
-            {aboutData.content?.map((block, index) => {
+            {aboutData.content?.map((block, index) => (
+                <div key={block.id} id={`block-${index + 1}`} className="w-full">
+                    <CollapseSection
+                        title={block.heading}
+                        isOpen={!sectionsOpen.includes(index + 1)}
+                        onToggle={() => toggleSection(index + 1)}
+                    >
+                        <div className="text-[16px] leading-[1.5] text-[#000] font-light tracking-[-0.01em]">
+                            {renderRichText(block.richText)}
+                        </div>
+                    </CollapseSection>
 
-                return (
-                    <div key={block.id} id={`block-${index + 1}`} className="w-full">
-                        <CollapseSection
-                            title={block.heading}
-                            isOpen={!sectionsOpen.includes(index + 1)}
-                            onToggle={() => toggleSection(index + 1)}
-                        >
-                            <div className="text-[16px] leading-[1.5] text-[#000] font-light tracking-[-0.01em]">
-                                {renderRichText(block.richText)}
-                            </div>
-                        </CollapseSection>
-                        {
-                            block.image?.url ? (
-                                <div className="max-w-full mx-auto mx-auto mt-[50px] flex justify-center">
-                                    <StrapiResponsiveImage image={block.image} baseUrl={'https://test11.audiosector.ru/cp'} />
-                                </div>
-                            ) : (<></>)
-                        }
-                    </div>
-                )
-            })}
+                    {block.image?.url && (
+                        <div className="max-w-full mx-auto mt-[50px] flex justify-center">
+                            <StrapiResponsiveImage 
+                                image={block.image} 
+                                baseUrl="https://test11.audiosector.ru/cp" 
+                            />
+                        </div>
+                    )}
+                </div>
+            ))}
+
+            {/* Убрали ненужный key — и так уникально */}
             <AppCtaBanner
-                key="cta-banner"
-                text={aboutData?.cta?.text || ''}
+                text={aboutData.cta?.text || ''}
                 descriptionClassName="max-w-full"
-                description={aboutData?.cta?.description || ''}
-                onButtonClick={() => { openDefaultModal('introForm') }}
+                description={aboutData.cta?.description || ''}
+                onButtonClick={() => openDefaultModal('introForm')}
             />
         </StandardPageLayout>
     );
 };
 
 export default AboutCompanyClient;
-

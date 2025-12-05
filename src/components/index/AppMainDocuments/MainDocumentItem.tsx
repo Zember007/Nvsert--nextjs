@@ -166,6 +166,7 @@ const MainDocumentItem = memo(({
                                     imageUrls={imageUrls}
                                     index={index || 0}
                                     controls={controls}
+                                    isPriority={(index || 0) <= 2}
                                 />
                             </div>
 

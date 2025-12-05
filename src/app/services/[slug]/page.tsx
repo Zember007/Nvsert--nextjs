@@ -4,7 +4,6 @@ import ClientPage from './ClientPage';
 import { NavigationItem } from '@/store/navigation';
 import { getNavigationDataBySlug, resolveServiceOgImageUrl } from './seo-helpers';
 
-export const dynamic = 'force-static';
 
 // Генерация статических путей
 export async function generateStaticParams() {

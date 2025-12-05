@@ -10,7 +10,7 @@ import { TypographyProvider } from './Typography/TypographyProvider';
 import { NavigationItem } from '@/store/navigation';
 
 
-function ReduxProvider({ children, initialNavigation }: { children: ReactNode; initialNavigation: NavigationItem[] }) {
+function Provider({ children, initialNavigation }: { children: ReactNode; initialNavigation: NavigationItem[] }) {
 
   return <HeaderContextProvider initialNavigation={initialNavigation}>
       <Layout_wrapper initialNavigation={initialNavigation}>
@@ -29,4 +29,4 @@ function ReduxProvider({ children, initialNavigation }: { children: ReactNode; i
     
 }
 
-export default ReduxProvider
+export default Provider

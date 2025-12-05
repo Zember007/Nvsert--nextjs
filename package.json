@@ -21,7 +21,7 @@
     "i18next": "^24.2.2",
     "lil-gui": "^0.20.0",
     "lodash": "^4.17.21",
-    "next": "15.1.7",
+    "next": "^16.1.0-canary.14",
     "next-i18next": "^15.4.2",
     "next-sitemap": "^4.2.3",
     "node-fetch": "^3.3.2",

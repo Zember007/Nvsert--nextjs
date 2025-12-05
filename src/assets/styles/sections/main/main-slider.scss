@@ -166,7 +166,7 @@
   &__navigations {
     @apply justify-between items-end w-full relative z-[10] m:flex hidden xl:p-0 p-[20px];
 
-    .item {
+    &_item {
       @apply bg-[#34446D] h-[50px] rounded-[4px] border-[#34446D] border border-solid flex gap-[50px] items-center justify-center;
     }
   }

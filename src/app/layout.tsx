@@ -62,12 +62,18 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   return (
     <html lang="ru" >
       <head>
+        {/* Preconnect для внешних доменов */}
+        <link rel="preconnect" href="https://test11.audiosector.ru" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://test11.audiosector.ru" />
+        
+        {/* Критические шрифты с высоким приоритетом */}
         <link
           rel="preload"
           href="/fonts/Roboto-Regular.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
+          fetchPriority="high"
         />
         <link
           rel="preload"
@@ -75,6 +81,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
+          fetchPriority="high"
         />
         <link
           rel="preload"
@@ -82,6 +89,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
+          fetchPriority="high"
         />
 
        

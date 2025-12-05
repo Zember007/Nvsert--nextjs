@@ -367,7 +367,7 @@ const SliderNavButton: React.FC<SliderNavButtonProps> = memo(({ direction, setWr
         ref={setButtonRef}
         aria-label={isPrev ? 'previous slide' : 'next slide'}
         data-slider={isPrev ? 'button-prev' : 'button-next'}
-        className={`${stylesBtn.tariff} item group`}
+        className={`${stylesBtn.tariff} ${stylesMainSlider.slider__navigations_item} group`}
       >
         <span
           className={

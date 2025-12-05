@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import ArrowIcon from '@/assets/images/svg/menu/arrow.svg'
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Services } from '@/store/navigation';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
@@ -124,7 +124,11 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                                 <button
                                     className='px-[6px]'
                                     onClick={handleGoBack}>
-                                    <ArrowIcon className='w-[20px] h-[20px] rotate-[180deg]' />
+                                    <img
+                                        src={ArrowIcon}
+                                        alt="arrow"
+                                        className="w-[20px] h-[20px] rotate-[180deg]"
+                                    />
                                 </button>
 
                                 <h4 className={`${textSize.headerH4} whitespace-nowrap text-center justify-self-center`}>{currentLevel.title}</h4>
@@ -163,7 +167,11 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                                                             <span className={`${item.img?.url ? 'text-[18px]' : 'text-[20px]'} font-light text-black`}>{filterPrepositions(item.title)}</span>
                                                         </div>
                                                         {item.items && (
-                                                            <ArrowIcon className='w-[20px] h-[20px]' />
+                                                             <img
+                                                             src={ArrowIcon}
+                                                             alt="arrow"
+                                                             className="w-[20px] h-[20px] "
+                                                         />
                                                         )}
                                                     </Link>
 
@@ -180,7 +188,12 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                                                             <span className={`${'img' in item && item.img?.url ? 'text-[18px]' : 'text-[20px]'} font-light text-black`}>{item.title}</span>
                                                         </span>
                                                         {item.items && (
-                                                            <ArrowIcon className='w-[20px] h-[20px] translate-x-[5px]' />
+                                                            
+                                                            <img
+                                                            src={ArrowIcon}
+                                                            alt="arrow"
+                                                            className="w-[20px] h-[20px] translate-x-[5px]"
+                                                        />
                                                         )}
                                                     </button>
                                                 )

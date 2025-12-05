@@ -1,7 +1,6 @@
 import ClientPage from './ClientPage';
 
 // Оптимизация: кеширование данных на более длительный срок для ускорения навигации
-export const revalidate = 3600; // ISR: перевалидация каждые 60 минут
 
 type FeedbackPhoto = {
     url?: string;
