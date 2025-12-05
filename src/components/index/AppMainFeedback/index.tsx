@@ -8,15 +8,12 @@ import useWindowSize from '@/hook/useWindowSize';
 import stylesMainFeedback from '@/assets/styles/main.module.scss';
 import stylesSlider from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/main.module.scss';
-import { VirtualizedList } from '../utils/VirtualizedList';
 
 type FeedbackSliderProps = {
   dataSlider: 'slide-feedback' | 'slide-feedback1';
   startIndex: number;
 };
 
-const FEEDBACK_ITEMS_TOTAL = 28;
-const ESTIMATED_FEEDBACK_ITEM_SIZE = 320;
 
 const FeedbackSliderSection = ({
   dataSlider,
@@ -186,38 +183,7 @@ const AppMainFeedback = () => {
         maskClosable={false}
       >
         <div ref={ref} className={stylesMainFeedback['feedback-slider-box']}>
-          {isMobileListMode ? (
-            <VirtualizedList<number>
-              items={Array.from(
-                { length: FEEDBACK_ITEMS_TOTAL },
-                (_, i) => i + 1,
-              )}
-              estimatedItemSize={ESTIMATED_FEEDBACK_ITEM_SIZE}
-              renderItem={(itemIndex) => (
-                <div className={stylesMainFeedback['feedback-slider-section']}>
-                  <div
-                    className={stylesMainFeedback['feedback-slider-container']}
-                  >
-                    <div className={stylesMainFeedback['feedback-item']}>
-                      <AsyncPhotoView
-                        src={`/feedbacks/big/${itemIndex}.png`}
-                      >
-                        <Image
-                          decoding="async"
-                          className={stylesMainFeedback['feedback-image']}
-                          src={`/feedbacks/small/${itemIndex}.png`}
-                          alt="feedback"
-                          width={190}
-                          height={267}
-                          loading="lazy"
-                        />
-                      </AsyncPhotoView>
-                    </div>
-                  </div>
-                </div>
-              )}
-            />
-          ) : (
+(
             <>
               <FeedbackBlur position="left" />
 
@@ -239,7 +205,6 @@ const AppMainFeedback = () => {
 
               <FeedbackBlur position="right" />
             </>
-          )}
         </div>
       </AsyncPhotoProvider>
     </section>
