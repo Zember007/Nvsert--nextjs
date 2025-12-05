@@ -75,22 +75,6 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           crossOrigin="anonymous"
           fetchPriority="high"
         />
-        <link
-          rel="preload"
-          href="/fonts/Roboto-Medium.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-          fetchPriority="high"
-        />
-        <link
-          rel="preload"
-          href="/fonts/Roboto-Bold.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-          fetchPriority="high"
-        />
 
        
 
