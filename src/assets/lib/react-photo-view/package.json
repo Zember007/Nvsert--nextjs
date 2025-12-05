@@ -22,8 +22,7 @@
     "carousel"
   ],
   "scripts": {
-   "build": "rimraf ./dist && microbundle --external react,react-dom --format esm,modern --target modern --no-compress --source-map"
-,
+   "build": "rimraf ./dist && microbundle --external react,react-dom --format esm,modern --target modern --no-compress --source-map",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
