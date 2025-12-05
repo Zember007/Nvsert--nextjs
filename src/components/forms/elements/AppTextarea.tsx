@@ -1,7 +1,7 @@
 import ScrollableContainer from '@/components/general/ScrollableContainer';
 import React, { useEffect, useId, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import formStyles from '@/assets/styles/blocks/forms.module.scss';
+import formStyles from '@/assets/styles/base/base.module.scss';
 
 const AppTextarea = ({ title, inputName, required, className }: { title: string, inputName: string, required?: boolean, className?: string }) => {
 

@@ -5,7 +5,7 @@ import AppIntroForm from '@/components/forms/AppIntroForm'
 import Draggable from 'react-draggable';
 import AppMainForm from '../forms/AppMainForm';
 import { useAnimation, motion } from "framer-motion";
-import formStyles from '@/assets/styles/blocks/forms.module.scss';
+import formStyles from '@/assets/styles/base/base.module.scss';
 import '@/assets/styles/blocks/close-btn.scss'
 
 const AppKnowCostForm = dynamic(() => import('@/components/forms/AppKnowCostForm'), {

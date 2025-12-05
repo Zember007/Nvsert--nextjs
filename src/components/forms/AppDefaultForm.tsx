@@ -6,7 +6,7 @@ import AppTextarea from "./elements/AppTextarea";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useHeaderContext } from "../contexts/HeaderContext";
-import formStyles from '@/assets/styles/blocks/forms.module.scss';
+import formStyles from '@/assets/styles/base/base.module.scss';
 
 const AppDefaultForm = ({ btnText }:{ btnText:string }) => {
 

@@ -3,7 +3,7 @@ import DatePicker from "react-multi-date-picker";
 import { ru } from "react-multi-date-picker";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
-import formStyles from '@/assets/styles/blocks/forms.module.scss';
+import formStyles from '@/assets/styles/base/base.module.scss';
 
 const AppInputDate = ({ title, inputName, required }) => {
     const [date, setDate] = useState(null);

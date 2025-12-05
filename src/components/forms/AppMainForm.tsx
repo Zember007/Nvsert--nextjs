@@ -16,7 +16,7 @@ import { useAnimation, motion } from "framer-motion";
 import { filterPrepositions } from "@/hook/filter";
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/base/base.module.scss';
-import formStyles from '@/assets/styles/blocks/forms.module.scss';
+import formStyles from '@/assets/styles/base/base.module.scss';
 
 
 const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }: { btnText: string; bg?: boolean; close?: () => void; BounceWrapper?: () => void; active?: boolean; countTrigger?: number }) => {

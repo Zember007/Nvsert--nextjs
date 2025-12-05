@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 import axios from 'axios';
-import formStyles from '@/assets/styles/blocks/forms.module.scss';
+import formStyles from '@/assets/styles/base/base.module.scss';
 
 const AppKnowCostForm = () => {
 

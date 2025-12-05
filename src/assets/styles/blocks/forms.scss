@@ -57,15 +57,6 @@
       }
     }
 
-    /*   &:hover,
-    &:focus {
-
-      &~.field__title {
-        opacity: 0;
-      }
-
-    } */
-
     &:focus {
 
       border: 1px solid #000;
@@ -340,10 +331,7 @@
   }
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:focus {
-  transition: background-color 600000s 0s, color 600000s 0s;
-}
+
 
 
 .main-form {
@@ -452,3 +440,5 @@ input:-webkit-autofill:focus {
     @apply overflow-hidden p-[9px] px-[20px] relative flex items-center justify-center border border-solid border-[#34446D] bg-[#34446D] xss:text-[18px] text-[16px] s:text-[20px] text-[#FFF] rounded-[4px];
   }
 }
+
+
