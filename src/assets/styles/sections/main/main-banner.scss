@@ -15,6 +15,9 @@
 }
 
 .mainBannerTitle {
+  content-visibility: auto;
+  contain-intrinsic-size: 100px 60px;
+  
   max-width: 734px;
   width: 100%;
   color: #000;
