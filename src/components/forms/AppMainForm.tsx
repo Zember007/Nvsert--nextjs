@@ -256,14 +256,14 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
     const contactInputProps = useMemo(() => ({
         defaultValue: isEmail ? contactData.email : isPhone ? contactData.phone : '',
         title: isPhone ? 'Телефон' : isEmail ? 'Email' : '',
-        placeholder: isPhone ? 'Введите номер телефона' : isEmail ? 'Введите email' : '',
+        placeholder: isPhone ? 'Введите номер телефона' : 'Введите email',
         inputName: "contact",
         mask: isPhone ? "phone" : '',
         type: isPhone ? "tel" : 'text',
         fail: emailError,
         required: true,
         message: false,
-        disable: !isPhone && !isEmail,
+        disable: (Boolean(isPhone) || Boolean(isEmail)),
         onFocus: () => { setFocusContact(true) },
         onBlur: () => { setFocusContact(false); validContact(contactValue);  }
     }), [isEmail, isPhone, contactData.email, contactData.phone, emailError, contactValue, validContact])
