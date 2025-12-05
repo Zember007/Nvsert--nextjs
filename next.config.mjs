@@ -29,8 +29,10 @@ const nextConfig = {
 
     return config;
   },
+
   experimental: {
-    esmExternals: true,
+    legacyBrowsers: false,
+    browsersListForSwc: true,
   },
 
 };

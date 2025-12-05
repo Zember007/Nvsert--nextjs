@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import GridBlock from './GridBlock';
 import useWindowSize from '@/hook/useWindowSize';
-import stylesSlider from '@/assets/styles/blocks/slider.module.scss';
+import stylesSlider from '@/assets/styles/base/base.module.scss';
 interface GridBoxProps {
     gridContent: string;
     processContent: (content: string) => React.ReactNode;

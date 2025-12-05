@@ -3,7 +3,7 @@ import { horizontalLoop } from '@/scripts/slider';
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import CountUp from '@/components/general/countUp';
-import styles from '@/assets/styles/blocks/slider.module.scss';
+import styles from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/base/base.module.scss';
 
 const Slider = () => {
