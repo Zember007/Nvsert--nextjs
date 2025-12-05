@@ -9,7 +9,7 @@ import type { Metadata, Viewport } from 'next'
 /* import { getNavigationData } from '@/assets/lib/navigation'; */
 import initialNavigation from '@/assets/lib/navigation.json';
 import { NavigationItem } from "@/store/navigation"
-import { Roboto } from 'next/font/google';
+/* import { Roboto } from 'next/font/google'; */
 
 
 
@@ -46,11 +46,11 @@ export const viewport: Viewport = {
 }
 
 
-const roboto = Roboto({
+/* const roboto = Roboto({
   subsets: ['latin', 'cyrillic'], // нужные языки
   weight: ['400', '500', '700'], // только используемые
   display: 'swap',
-});
+}); */
 
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
@@ -61,8 +61,33 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 
   return (
     <html lang="ru" >
-      <head />
-      <body className={roboto.className}>
+      <head>
+        <link
+          rel="preload"
+          href="/fonts/Roboto-Regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/Roboto-Medium.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/Roboto-Bold.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+
+       
+
+      </head>
+      <body >
         <Provider initialNavigation={initialNavigation as NavigationItem[]}>
           {/*    <ScrollToTop /> */}
           {children}
