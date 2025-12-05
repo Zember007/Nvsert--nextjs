@@ -44,6 +44,8 @@ jobs:
 
             # Install dependencies
             npm install  # Or yarn install, or pnpm install
+            npm uninstall core-js-compat regenerator-runtime
+            npm install react@latest react-dom@latest react-photo-view@latest
 
             # Generate navigation
             # npm run generate-navigation

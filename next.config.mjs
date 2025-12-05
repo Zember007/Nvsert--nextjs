@@ -29,7 +29,7 @@ const nextConfig = {
 
     return config;
   },
-
+  swcMinify: true,
   experimental: {
     legacyBrowsers: false,
     browsersListForSwc: true,
