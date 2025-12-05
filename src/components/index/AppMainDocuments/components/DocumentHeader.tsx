@@ -13,21 +13,24 @@ export interface DocumentHeaderProps {
   };
   active: boolean;
   onClick: () => void;
+  index: number;
 }
 
 export const DocumentHeader: FC<DocumentHeaderProps> = memo(
-  ({ title, duration, price, imageUrls, active, onClick }) => (
+  ({ title, duration, price, imageUrls, active, onClick, index }) => (
     <div
       onClick={onClick}
       className={`document__navigation group/window ${!active ? '' : 'active'} `}
     >
       <div className={`${active && 'active'} document__small-img `}>
         <Image
+          decoding="async"
           alt="document"
           src={imageUrls.thumbnail}
           width={41}
           height={58}
-          loading="lazy"
+          priority={index < 2 ? true : false}
+          loading={index < 2 ? "eager" : "lazy"}
           sizes="41px"
         />
       </div>

@@ -1,18 +1,8 @@
-'use client';
+import AppMainDocuments from '@/components/index/AppMainDocuments';
 
-import dynamic from 'next/dynamic';
-
-// Клиентский обёртчик для секции с документами.
-// Здесь можно безопасно использовать ssr: false,
-// чтобы избежать SSR этого тяжёлого блока и возможных гидратационных ошибок.
-const AppMainDocuments = dynamic(
-  () => import('@/components/index/AppMainDocuments'),
-  {
-    ssr: false,
-    loading: () => null,
-  }
-);
-
+// Обёртка для секции с документами.
+// Теперь AppMainDocuments может рендериться на сервере,
+// а внутри него применяется гибридная виртуализация.
 const HomeDocumentsClient = () => {
   return <AppMainDocuments />;
 };

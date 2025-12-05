@@ -43,6 +43,7 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
               width="0"
               height="0"
               sizes="100vw"
+              loading="lazy"
             />
           </div>
           <div className={stylesSafeguards['safeguard-content-container']}>

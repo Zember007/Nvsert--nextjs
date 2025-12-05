@@ -17,8 +17,8 @@ const SliderImageListComponent: React.FC<SliderImageListProps> = ({
   const gap =
     widthWindow && widthWindow < 960
       ? {
-          gap: (widthWindow - 250) / 2,
-        }
+        gap: (widthWindow - 250) / 2,
+      }
       : {};
 
   return (
@@ -35,13 +35,12 @@ const SliderImageListComponent: React.FC<SliderImageListProps> = ({
         >
           <div className={`${stylesMainSkills['slide-inner']} ${stylesMainSkills['slide-inner-content']}`}>
             <Image
+              decoding="async"
               src={item.img}
               alt="slide"
               fill
               style={{ objectFit: 'cover' }}
-              priority={index === 0}
-              fetchPriority={index === 0 ? 'high' : 'auto'}
-              loading={index === 0 ? 'eager' : 'lazy'}
+              loading="lazy"
             />
             <div className={stylesMainSkills['slide-overlay-blend']}></div>
           </div>

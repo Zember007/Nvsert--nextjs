@@ -1,7 +1,6 @@
 'use client';
 
 import { useCallback, useMemo, useState } from 'react';
-import dynamic from 'next/dynamic';
 
 import '@/assets/styles/sections/main/animation/documents.scss';
 import '@/assets/styles/sections/main/main-documents.scss';
@@ -9,13 +8,11 @@ import { AsyncPhotoProvider } from '@/components/common/AsyncPhotoView';
 import { useTranslation } from 'react-i18next';
 import { useHeaderContext } from '../../contexts/HeaderContext';
 import textSize from '@/assets/styles/main.module.scss';
+import MainDocumentItem from './MainDocumentItem';
+import { VirtualizedList } from '../utils/VirtualizedList';
 
-const MainDocumentItem = dynamic(
-  () => import('./MainDocumentItem'),
-  {
-    ssr: false,
-  },
-);
+const SSR_ITEMS_COUNT = 5;
+const ESTIMATED_ITEM_SIZE = 520;
 
 const AppMainDocuments = () => {
   const [activeIndex, setActive] = useState<number | null>(null);
@@ -49,6 +46,9 @@ const AppMainDocuments = () => {
     [preparedNavigation, setActiveHandlers],
   );
 
+  const ssrItems = preparedNavigation.slice(0, SSR_ITEMS_COUNT);
+  const virtualizedItems = preparedNavigation.slice(SSR_ITEMS_COUNT);
+
   return (
     <section className="section wrapper !overflow-visible">
       <div id="documents" className="absolute top-[-50px] pointer-events-none" />
@@ -67,23 +67,58 @@ const AppMainDocuments = () => {
         maskClosable={false}
       >
         <div className="documents-container">
-          {preparedNavigation.map((item, index) => (
-            <MainDocumentItem
-              link={item.slug}
-              key={item.slug || index}
-              setActive={itemSetActiveHandlers[index]}
-              active={index === activeIndex}
-              content={item.description}
-              documentsList={item.documents}
-              navigationList={item.navigationList}
-              duration={item.duration}
-              img={item.img}
-              price={item.price}
-              title={item.title}
-              totalItems={totalItems}
-              index={index + 1}
+          {ssrItems.map((item, index) => {
+            const globalIndex = index;
+
+            return (
+              <MainDocumentItem
+                link={item.slug}
+                key={item.slug || globalIndex}
+                setActive={itemSetActiveHandlers[globalIndex]}
+                active={globalIndex === activeIndex}
+                content={item.description}
+                documentsList={item.documents}
+                navigationList={item.navigationList}
+                duration={item.duration}
+                img={item.img}
+                price={item.price}
+                title={item.title}
+                totalItems={totalItems}
+                index={globalIndex + 1}
+              />
+            );
+          })}
+
+          {virtualizedItems.length > 0 && (
+            <VirtualizedList
+              items={virtualizedItems}
+              estimatedItemSize={ESTIMATED_ITEM_SIZE}
+              getItemKey={(item, index) =>
+                item.slug || SSR_ITEMS_COUNT + index
+              }
+              renderItem={(item, index) => {
+                const globalIndex = SSR_ITEMS_COUNT + index;
+
+                return (
+                  <MainDocumentItem
+                    link={item.slug}
+                    key={item.slug || globalIndex}
+                    setActive={itemSetActiveHandlers[globalIndex]}
+                    active={globalIndex === activeIndex}
+                    content={item.description}
+                    documentsList={item.documents}
+                    navigationList={item.navigationList}
+                    duration={item.duration}
+                    img={item.img}
+                    price={item.price}
+                    title={item.title}
+                    totalItems={totalItems}
+                    index={globalIndex + 1}
+                  />
+                );
+              }}
             />
-          ))}
+          )}
         </div>
       </AsyncPhotoProvider>
     </section>

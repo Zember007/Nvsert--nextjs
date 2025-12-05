@@ -36,13 +36,12 @@ export const DocumentImage: FC<DocumentImageProps> = memo(
         className="document__big-img "
       >
         <Image
+          decoding="async"
           alt="document"
           src={imageUrls.full}
           width={250}
           height={349}
-          loading={index === 1 ? 'eager' : 'lazy'}
-          priority={index === 1}
-          fetchPriority={index === 1 ? 'high' : 'auto'}
+          loading="lazy"
         />
       </motion.div>
     </AsyncPhotoView>

@@ -2,6 +2,7 @@
 
 import { FaqItem } from '@/store/faq';
 import dynamic from 'next/dynamic';
+import AppMainQuestions from '../AppMainQuestions';
 
 const AppMainSlider = dynamic(() => import('../AppMainSlider'), {
   ssr: false,
@@ -14,13 +15,6 @@ const AppMainSafeguards = dynamic(() => import('../AppMainSafeguards'), {
 const AppMainFeedback = dynamic(() => import('../AppMainFeedback'), {
   ssr: false,
 });
-
-const AppMainQuestions = dynamic<{ faqs: FaqItem[] }>(
-  () => import('../AppMainQuestions'),
-  {
-    ssr: false,
-  },
-);
 
 type AppMainContentProps = {
   faqs: FaqItem[];

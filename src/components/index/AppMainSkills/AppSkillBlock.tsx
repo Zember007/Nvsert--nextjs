@@ -102,7 +102,7 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
           {
             folder ?
               <>
-                {img && <Image alt="folder" className={stylesMainSkills['skill-folder-image']} src={img} />}
+                {img && <Image decoding="async" alt="folder" className={stylesMainSkills['skill-folder-image']} src={img} loading="lazy" />}
               </>
               :
               <>
