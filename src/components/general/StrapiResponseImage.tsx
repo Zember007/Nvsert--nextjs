@@ -12,9 +12,9 @@ export const StrapiResponsiveImage = ({
   if (!image) return null;
 
   // Используем более лёгкие форматы на мобильных
-  const small = image.formats?.small || image.formats?.thumbnail || image;
+  const small = image.formats?.small || image.formats?.thumbnail;
   const medium = image.formats?.medium;
-  const large = image.formats?.large;
+  const large = image.formats?.large || image;
 
 
 

@@ -107,22 +107,23 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
                 return (
                     (
                         <div key={block.id} id={`block-${index + 1}`} className="w-full">
-                            {block.image?.url && startImg && (
-                                <div className="max-w-full mx-auto mb-[50px] flex justify-center">
-                                    <StrapiResponsiveImage
-                                        image={block.image}
-                                        baseUrl="https://test11.audiosector.ru/cp"
-                                    />
-                                </div>
-                            )}
+
 
                             <CollapseSection
                                 title={block.heading}
                                 isOpen={!sectionsOpen.includes(index + 1)}
                                 onToggle={() => toggleSection(index + 1)}
                             >
+                                {block.image?.url && startImg && (
+                                    <div className="max-w-full mx-auto mb-[50px] mt-[30px] flex justify-center">
+                                        <StrapiResponsiveImage
+                                            image={block.image}
+                                            baseUrl="https://test11.audiosector.ru/cp"
+                                        />
+                                    </div>
+                                )}
                                 <div className="text-[16px] leading-[1.5] text-[#000] font-light tracking-[-0.01em]">
-                                    {renderRichText(block.richText)}
+                                    {renderRichText(block.richText.replace('[start_img]', ''))}
                                 </div>
                             </CollapseSection>
 

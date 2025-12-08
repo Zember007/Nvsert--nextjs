@@ -104,6 +104,9 @@ export async function generateMetadata(): Promise<Metadata> {
 const AboutCompany = async () => {
     const aboutData = await getAboutData();
 
+    console.log(aboutData);
+    
+
     return <ClientPage aboutData={aboutData} />;
 };
 
