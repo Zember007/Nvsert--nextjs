@@ -9,8 +9,7 @@ const nextConfig = {
   turbopack: {}, // Это официально рекомендованный способ заглушить ошибку
 
   images: {
-    // domains — удаляем полностью
-    // domains: ['test11.audiosector.ru'],
+    domains: ['test11.audiosector.ru'],
 
     // Заменяем на новый безопасный формат
     remotePatterns: [
