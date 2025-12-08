@@ -20,7 +20,7 @@ const ensurePhotoViewStylesLoaded = () => {
 type AnyProps = ComponentProps<any>;
 
 // Базовые лениво загружаемые компоненты
-const DynamicPhotoProvider = dynamic(
+/* const DynamicPhotoProvider = dynamic(
   () => import('@/assets/lib/react-photo-view').then((m) => m.PhotoProvider),
   {
     ssr: false,
@@ -32,22 +32,23 @@ const DynamicPhotoView = dynamic(
   {
     ssr: false,
   }
-) as React.ComponentType<AnyProps>;
+) as React.ComponentType<AnyProps>; */
 
 // Обёртки, которые один раз инициализируют стили
 export const AsyncPhotoProvider: React.FC<AnyProps> = (props) => {
-  useEffect(() => {
+/*   useEffect(() => {
     ensurePhotoViewStylesLoaded();
-  }, []);
+  }, []); */
 
-  return <DynamicPhotoProvider {...props} />;
+  return <>
+  {props.children}</>;
 };
 
 export const AsyncPhotoView: React.FC<AnyProps> = (props) => {
-  useEffect(() => {
+/*   useEffect(() => {
     ensurePhotoViewStylesLoaded();
-  }, []);
+  }, []); */
 
-  return <DynamicPhotoView {...props} />;
+  return <>{props.children}</>;
 };
 
