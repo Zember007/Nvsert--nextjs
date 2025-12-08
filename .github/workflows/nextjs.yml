@@ -42,6 +42,8 @@ jobs:
               git pull origin ${{ github.ref_name }}
             fi
 
+            nvm use 21
+            nvm alias default 21
             # Install dependencies
             npm install  # Or yarn install, or pnpm install
 
