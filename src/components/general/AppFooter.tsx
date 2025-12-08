@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import FooterTopMenu from "./footer/FooterTopMenu";
 import FooterContacts from "./footer/FooterContacts";
 import FooterBottomLegal from "./footer/FooterBottomLegal";
-import footerStyles from "@/assets/styles/sections/footer.module.scss";
+import footerStyles from "@/assets/styles/base/base.module.scss";
 
 const DynamicFooterMarquee = dynamic(
   () => import("./footer/FooterMarquee"),

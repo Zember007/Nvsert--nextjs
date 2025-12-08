@@ -1,7 +1,7 @@
 import React from "react";
 import AppMenuItem from "../AppMenuItem";
 import { filterPhone } from "@/hook/filter";
-import headerStyles from "@/assets/styles/sections/header.module.scss";
+import headerStyles from "@/assets/styles/base/base.module.scss";
 
 interface HeaderTopContactsProps {
   onCopyEmail: (value: string, event: any) => void;

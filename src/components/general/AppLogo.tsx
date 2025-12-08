@@ -1,6 +1,6 @@
 import Link from "next/link";
 import logoStyles from '@/assets/styles/blocks/logo.module.scss';
-import headerStyles from '@/assets/styles/sections/header.module.scss';
+import headerStyles from '@/assets/styles/base/base.module.scss';
 
 interface AppLogoProps {
   inverted?: boolean;

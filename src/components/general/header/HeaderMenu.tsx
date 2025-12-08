@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Services } from '@/types/navigation';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import { filterPrepositions } from '@/hook/filter';
-import headerStyles from '@/assets/styles/sections/header.module.scss';
+import headerStyles from '@/assets/styles/base/base.module.scss';
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/base/base.module.scss';
 

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import AudioLogo from "@/assets/images/svg/audio-selector.svg";
 import { useIntersectionObserver } from "@/hook/useIntersectionObserver";
-import footerStyles from "@/assets/styles/sections/footer.module.scss";
+import footerStyles from "@/assets/styles/base/base.module.scss";
 import stylesSlider from "@/assets/styles/base/base.module.scss";
 import textSize from "@/assets/styles/base/base.module.scss";
 import Image from "next/image";

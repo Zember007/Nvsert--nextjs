@@ -1,7 +1,7 @@
 import React from "react";
 import AppMenuItem from "../AppMenuItem";
 import { useHeaderContext } from "@/components/contexts/HeaderContext";
-import footerStyles from "@/assets/styles/sections/footer.module.scss";
+import footerStyles from "@/assets/styles/base/base.module.scss";
 
 const FooterContacts: React.FC = () => {
   const { handleCopy, openDefaultModal } = useHeaderContext();

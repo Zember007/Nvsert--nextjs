@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { filterPhone } from "@/hook/filter";
-import headerStyles from "@/assets/styles/sections/header.module.scss";
+import headerStyles from "@/assets/styles/base/base.module.scss";
 
 interface HeaderMobilePhoneLinkProps {
   burgerMenuActive: boolean;

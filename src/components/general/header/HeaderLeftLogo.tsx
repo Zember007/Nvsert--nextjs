@@ -1,6 +1,6 @@
 import React from "react";
 import AppLogo from "../AppLogo";
-import headerStyles from "@/assets/styles/sections/header.module.scss";
+import headerStyles from "@/assets/styles/base/base.module.scss";
 
 const HeaderLeftLogo: React.FC = () => {
   return (
