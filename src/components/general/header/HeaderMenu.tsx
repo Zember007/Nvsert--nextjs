@@ -9,6 +9,7 @@ import headerStyles from '@/assets/styles/sections/header.module.scss';
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/base/base.module.scss';
 
+
 export interface Navigation {
     items?: Services[];
     id?: number;
@@ -223,7 +224,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                     <button
                         onClick={() => { openDefaultModal('orderForm') }}
 
-                        className="button-menu bg-[#F5F5F2] w-[280px] mx-auto">
+                        className={`${headerStyles['button-menu']} bg-[#F5F5F2] w-[280px] mx-auto`}>
                         <span className='text-[#000]'>Оформить заявку</span>
                         <svg width="23" height="26" viewBox="0 0 23 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M4.44659 13H13.2633M4.44659 16.449H16.7899M4.44659 19.898H9.73659M22.0799 21.6225V9.55104L13.2633 0.928589H4.44659C3.51126 0.928589 2.61424 1.29196 1.95286 1.93877C1.29148 2.58558 0.919922 3.46284 0.919922 4.37757V21.6225C0.919922 22.5372 1.29148 23.4145 1.95286 24.0613C2.61424 24.7081 3.51126 25.0714 4.44659 25.0714H18.5533C19.4886 25.0714 20.3856 24.7081 21.047 24.0613C21.7084 23.4145 22.0799 22.5372 22.0799 21.6225Z" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -234,7 +235,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                     <button
                         onClick={() => { openDefaultModal('introForm') }}
 
-                        className="button-menu bg-[#F5F5F2] w-[280px] mx-auto">
+                        className={`${headerStyles['button-menu']} bg-[#F5F5F2] w-[280px] mx-auto`}>
                         <span className='text-[#000]'>Заказать звонок</span>
                         <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7.17703 1.09094C7.82059 1.09094 10.3948 6.88296 10.3948 7.52652C10.3948 8.81364 8.46415 10.1008 7.82059 11.3879C7.17703 12.675 8.46415 13.9621 9.75126 15.2492C10.2532 15.7512 12.3255 17.8234 13.6126 17.1799C14.8997 16.5363 16.1868 14.6057 17.474 14.6057C18.1175 14.6057 23.9095 17.1799 23.9095 17.8234C23.9095 20.3977 21.9789 22.3284 20.0482 22.9719C18.1175 23.6155 16.8304 23.6155 14.2562 22.9719C11.6819 22.3284 9.75126 21.6848 6.53347 18.467C3.31568 15.2492 2.67212 13.3185 2.02857 10.7443C1.38501 8.17008 1.38501 6.88296 2.02857 4.95229C2.67212 3.02162 4.6028 1.09094 7.17703 1.09094Z" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
