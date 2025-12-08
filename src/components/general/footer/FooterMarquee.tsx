@@ -137,11 +137,7 @@ const FooterMarquee: React.FC = () => {
       ref={ref}
       className={`${footerStyles.footer__dark} m:justify-start justify-center gap-[16px] xl:h-auto m:h-[135px] h-[96px]`}
     >
-      <img
-        src={AudioLogo}
-        alt="audio-logo"
-        className="xl:ml-[35px]"
-      />
+      <AudioLogo />
       <div className="pl-[16px] border-l border-[#FFF] border-solid flex flex-col gap-[4px]">
         <div className="xxs:h-[23px] h-[60px] overflow-hidden text-[#FFF]">
           <div ref={stepsRef}>

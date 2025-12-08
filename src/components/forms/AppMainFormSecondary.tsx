@@ -50,7 +50,7 @@ const AppMainFormSecondary = () => {
                     <button type="submit" className="mt-[40px] text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] bg-[#000000] flex items-center gap-[20px] justify-center p-[5px] rounded-[4px]">
                         Заказать звонок
                        
-                            <Image alt="message" src={MessageImg} width={35} height={35} />
+                            <MessageImg />
                         
                     </button>
 

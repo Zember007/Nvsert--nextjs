@@ -124,11 +124,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                                 <button
                                     className='px-[6px]'
                                     onClick={handleGoBack}>
-                                    <img
-                                        src={ArrowIcon}
-                                        alt="arrow"
-                                        className="w-[20px] h-[20px] rotate-[180deg]"
-                                    />
+                                    <ArrowIcon />
                                 </button>
 
                                 <h4 className={`${textSize.headerH4} whitespace-nowrap text-center justify-self-center`}>{currentLevel.title}</h4>
