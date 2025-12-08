@@ -1,4 +1,4 @@
-import { FaqItem } from '@/store/faq';
+import { FaqItem } from '@/types/faq';
 
 export async function getFaqs(): Promise<FaqItem[]> {
   try {

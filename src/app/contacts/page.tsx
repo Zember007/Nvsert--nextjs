@@ -4,7 +4,6 @@ import AppSpoilerItem from '../../components/general/AppSpoilerItem';
 import AppDefaultForm from '../../components/forms/AppDefaultForm';
 import AppBreadcrumbs from '@/components/general/AppBreadcrumbs';
 import { useTranslation } from 'react-i18next';
-import "react-lazy-load-image-component/src/effects/blur.css";
 
 
 const Page = () => {

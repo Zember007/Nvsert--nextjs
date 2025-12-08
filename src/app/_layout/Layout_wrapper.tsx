@@ -6,7 +6,7 @@ import AppFooter from '@/components/general/AppFooter';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import dynamic from 'next/dynamic';
 import CopyNotification from '@/components/general/elements/CopyNotification';
-import { NavigationItem } from '@/store/navigation';
+import { NavigationItem } from '@/types/navigation';
 import { groupServices } from '@/assets/lib/navigation';
 import '@/assets/styles/base.scss';
 

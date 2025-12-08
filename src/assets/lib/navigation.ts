@@ -1,5 +1,5 @@
 import { cache } from 'react';
-import { NavigationItem, Services } from '@/store/navigation';
+import { NavigationItem, Services } from '@/types/navigation';
 
 // Кэшируем результат на уровне модуля и используем build‑time fetch,
 // чтобы навигация подгружалась один раз при билде и не дергала API на каждой странице.

@@ -1,7 +1,7 @@
 'use client';
 
 import { Suspense } from 'react';
-import { FaqItem } from '@/store/faq';
+import { FaqItem } from '@/types/faq';
 import dynamic from 'next/dynamic';
 import AppMainQuestions from '../AppMainQuestions';
 import { 

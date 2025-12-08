@@ -1,7 +1,7 @@
 'use client'
 
 import { useCopy } from '@/hook/useCopy';
-import { NavigationItem } from '@/store/navigation';
+import { NavigationItem } from '@/types/navigation';
 import { createContext, useState, useContext, ReactNode } from 'react';
 
 interface HeaderContextType {

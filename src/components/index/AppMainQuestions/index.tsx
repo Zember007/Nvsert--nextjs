@@ -3,7 +3,7 @@
 import { useTranslation } from 'react-i18next';
 import QuestionsBlock from './QuestionsBlock';
 import { useState } from 'react';
-import type { FaqItem } from '@/store/faq';
+import type { FaqItem } from '@/types/faq';
 import '@/assets/styles/sections/main/animation/documents.scss';
 import stylesQuestions from '@/assets/styles/main.module.scss';
 import textSize from '@/assets/styles/main.module.scss';

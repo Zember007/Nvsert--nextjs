@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect, useMemo } from 'react';
 import { groupServices } from '@/assets/lib/navigation';
-import { NavigationItem } from '@/store/navigation';
+import { NavigationItem } from '@/types/navigation';
 import ServicesBreadcrumbs from '@/components/services/ServicesBreadcrumbs';
 import ServicesHeader from '@/components/services/ServicesHeader';
 import ServicesList from '@/components/services/ServicesList';
