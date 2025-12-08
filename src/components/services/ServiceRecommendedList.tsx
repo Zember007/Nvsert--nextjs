@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { NavigationItem } from '@/types/navigation';
+import { NavigationItem } from '@/store/navigation';
 import AppCollapsibleList from '@/components/general/AppCollapsibleList';
 import { AppNavigationItem } from '@/components/general/AppNavigation';
 

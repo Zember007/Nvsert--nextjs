@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { ContentBlock } from '@/types/navigation';
+import { ContentBlock } from '@/store/navigation';
 import { StrapiResponsiveImage } from '@/components/general/StrapiResponseImage';
 import ServiceRichTextRenderer from '@/components/services/ServiceRichTextRenderer';
 import stylesBtn from '@/assets/styles/base/base.module.scss';

@@ -34,14 +34,6 @@ const nextConfig = {
 
   // webpack конфиг остаётся (он нужен для @svgr/webpack)
   // Turbopack его игнорирует, но Next.js больше не ругается благодаря turbopack: {}
-  webpack: (config) => {
-    config.module.rules.push({
-      test: /\.svg$/i,
-      issuer: /\.[jt]sx?$/,
-      use: ['@svgr/webpack'],
-    });
-    return config;
-  },
 };
 
 export default nextConfig;

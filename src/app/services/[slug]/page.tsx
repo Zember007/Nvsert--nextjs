@@ -1,7 +1,7 @@
 // app/services/[slug]/page.tsx
 import { Metadata } from 'next';
 import ClientPage from './ClientPage';
-import { NavigationItem } from '@/types/navigation';
+import { NavigationItem } from '@/store/navigation';
 import { getNavigationDataBySlug, resolveServiceOgImageUrl } from './seo-helpers';
 
 

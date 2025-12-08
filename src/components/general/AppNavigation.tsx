@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useHeaderContext } from "../contexts/HeaderContext";
 import { filterPrepositions } from "@/hook/filter";
 import { useButton } from "@/hook/useButton";
-import { NavigationItem, Services } from "@/types/navigation";
+import { NavigationItem, Services } from "@/store/navigation";
 import Image from "next/image";
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/base/base.module.scss';

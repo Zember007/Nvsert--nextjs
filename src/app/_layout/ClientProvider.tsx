@@ -7,7 +7,7 @@ import { HeaderContextProvider } from '@/components/contexts/HeaderContext';
 import Layout_wrapper from './Layout_wrapper';
 import { ReactNode } from 'react';
 import { TypographyProvider } from './Typography/TypographyProvider';
-import { NavigationItem } from '@/types/navigation';
+import { NavigationItem } from '@/store/navigation';
 
 
 function Provider({ children, initialNavigation }: { children: ReactNode; initialNavigation: NavigationItem[] }) {

@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { NavigationItem } from '@/types/navigation';
+import { NavigationItem } from '@/store/navigation';
 import textSize from '@/assets/styles/base/base.module.scss';
 
 interface ServiceCardProps {    

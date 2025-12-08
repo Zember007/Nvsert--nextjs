@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useAnimation, motion } from "framer-motion";
 import { AppNavigation } from "../AppNavigation";
-import { Services } from "@/types/navigation";
+import { Services } from "@/store/navigation";
 import headerStyles from "@/assets/styles/sections/header.module.scss";
 
 interface ServicesDropdownProps {

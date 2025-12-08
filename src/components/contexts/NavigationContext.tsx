@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, useContext, ReactNode, useMemo } from 'react';
-import { NavigationItem } from '@/types/navigation';
+import { NavigationItem } from '@/store/navigation';
 
 interface NavigationContextType {
     initialNavigation: NavigationItem[];

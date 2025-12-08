@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import ClientProvider from "./ClientProvider";
-import { NavigationItem } from "@/types/navigation";
+import { NavigationItem } from "@/store/navigation";
 
 export default function Provider({
   children,

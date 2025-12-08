@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { useButton } from "@/hook/useButton";
-import { Services } from "@/types/navigation";
+import { Services } from "@/store/navigation";
 import headerStyles from "@/assets/styles/sections/header.module.scss";
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 import textSize from "@/assets/styles/base/base.module.scss";

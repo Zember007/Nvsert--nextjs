@@ -8,7 +8,7 @@ import type { Metadata, Viewport } from 'next'
 /* import { ScrollToTop } from '@/hook/scrollTop'; */
 /* import { getNavigationData } from '@/assets/lib/navigation'; */
 import initialNavigation from '@/assets/lib/navigation.json';
-import { NavigationItem } from "@/types/navigation"
+import { NavigationItem } from "@/store/navigation"
 /* import { Roboto } from 'next/font/google'; */
 
 

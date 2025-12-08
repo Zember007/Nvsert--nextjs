@@ -2,7 +2,7 @@ import Link from 'next/link';
 import ArrowIcon from '@/assets/images/svg/menu/arrow.svg'
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { Services } from '@/types/navigation';
+import { Services } from '@/store/navigation';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import { filterPrepositions } from '@/hook/filter';
 import headerStyles from '@/assets/styles/sections/header.module.scss';
@@ -124,7 +124,11 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                                 <button
                                     className='px-[6px]'
                                     onClick={handleGoBack}>
-                                    <ArrowIcon />
+                                    <img
+                                        src={ArrowIcon}
+                                        alt="arrow"
+                                        className="w-[20px] h-[20px] rotate-[180deg]"
+                                    />
                                 </button>
 
                                 <h4 className={`${textSize.headerH4} whitespace-nowrap text-center justify-self-center`}>{currentLevel.title}</h4>

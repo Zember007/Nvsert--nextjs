@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import AppBreadcrumbs from '@/components/general/AppBreadcrumbs';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
-import { NavigationItem } from '@/types/navigation';
+import { NavigationItem } from '@/store/navigation';
 import ServiceDetailLayout from '@/components/services/ServiceDetailLayout';
 
 const ServiceGallery = dynamic(
