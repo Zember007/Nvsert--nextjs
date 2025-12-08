@@ -1,7 +1,7 @@
 'use client';
 
 import AppHeader from '@/components/general/AppHeader';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import AppFooter from '@/components/general/AppFooter';
 import { useHeaderContext } from '@/components/contexts/HeaderContext';
 import dynamic from 'next/dynamic';
@@ -20,8 +20,6 @@ const LayoutContent = ({ children, initialNavigation }: { children: ReactNode; i
 
     const { setDefaultModalActive, defaultModalActive, defaultModalName, resetCountModal, defaultModalCount, showCopyNotification, notificationPosition, hideNotification } = useHeaderContext();
 
-
-
     return (
         <>
             <AppModalWrapper
@@ -35,9 +33,9 @@ const LayoutContent = ({ children, initialNavigation }: { children: ReactNode; i
             <AppHeader services={(initialNavigation && initialNavigation.length > 0) ? groupServices(initialNavigation) : []} />
 
             <main >
-    
+
                 {children}
-           
+
             </main>
             <AppFooter />
 

@@ -6,14 +6,15 @@ import React, { useEffect } from 'react';
 import type { ComponentProps } from 'react';
 
 
+
 const ensurePhotoViewStylesLoaded = () => {
-  if (!window || (window as any).photoViewStylesLoaded) return;
+  if (typeof window === 'undefined' || (window as any).photoViewStylesLoaded) return;
   (window as any).photoViewStylesLoaded = true;
 
-  // Динамически подключаем стили только при первом использовании
-  void import('@/assets/lib/react-photo-view/dist/react-photo-view.css').then(() => {
-    void import('@/assets/styles/blocks/photoviews.scss');
-  });
+  void Promise.all([
+    import('@/assets/lib/react-photo-view/dist/react-photo-view.css'),
+    import('@/assets/styles/blocks/photoviews.scss')
+  ]);
 };
 
 type AnyProps = ComponentProps<any>;
@@ -35,17 +36,14 @@ const DynamicPhotoView = dynamic(
 
 // Обёртки, которые один раз инициализируют стили
 export const AsyncPhotoProvider: React.FC<AnyProps> = (props) => {
- /*  useEffect(() => {
+  useEffect(() => {
     ensurePhotoViewStylesLoaded();
-  }, []); */
+  }, []);
 
   return <DynamicPhotoProvider {...props} />;
 };
 
 export const AsyncPhotoView: React.FC<AnyProps> = (props) => {
- /*  useEffect(() => {
-    ensurePhotoViewStylesLoaded();
-  }, []); */
 
   return <DynamicPhotoView {...props} />;
 };
