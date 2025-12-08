@@ -58,7 +58,7 @@ const AppKnowCostForm = () => {
 
                     <div className={formStyles.policy}>
                         Нажимая на кнопку «Связаться» вы соглашаетесь с
-                        <Link href="/soglashenie/polzovatelskoe-soglashenie/" target="_blank">политикой конфиденциальности</Link>
+                        <Link href="#" target="_blank">политикой конфиденциальности</Link>
                     </div>
                 </>
             )}

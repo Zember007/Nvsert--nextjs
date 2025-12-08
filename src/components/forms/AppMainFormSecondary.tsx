@@ -56,7 +56,7 @@ const AppMainFormSecondary = () => {
 
 
                     <span className=" mt-[10px] text-[#A4A4A4] text-[13px]">
-                        Нажимая на кнопку «Связаться» вы соглашаетесь с <Link href="/soglashenie/polzovatelskoe-soglashenie/" target="_blank">политикой конфиденциальности</Link>
+                        Нажимая на кнопку «Связаться» вы соглашаетесь с <Link href="#" target="_blank">политикой конфиденциальности</Link>
                     </span>
 
                 </div>

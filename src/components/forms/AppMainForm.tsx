@@ -344,7 +344,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
 
                             <span className={formStyles.form__desc}>
                                 {filterPrepositions('Нажимая на кнопку «Оформить заявку» вы соглашаетесь с ')}
-                                <Link href="/soglashenie/polzovatelskoe-soglashenie/" className={`${stylesBtn.lineAfter} no-drag`} target="_blank">
+                                <Link href="#" className={`${stylesBtn.lineAfter} no-drag`} target="_blank">
                                     политикой конфиденциальности
                                 </Link>
                             </span>

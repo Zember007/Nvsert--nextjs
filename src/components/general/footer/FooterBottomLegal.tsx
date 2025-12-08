@@ -21,7 +21,7 @@ const FooterBottomLegal: React.FC = () => {
           <AppMenuItem
             className="xl:!h-[35px] !h-auto !text-left"
             item={{
-              href: "/soglashenie/polzovatelskoe-soglashenie/",
+              href: "#",
               label: t("footer.policy"),
             }}
             isActive={false}
@@ -29,7 +29,7 @@ const FooterBottomLegal: React.FC = () => {
           <AppMenuItem
             className="xl:!h-[35px] !h-auto !text-left"
             item={{
-              href: "/soglashenie/polzovatelskoe-soglashenie/",
+              href: "#",
               label: "Обработка персональных данных",
             }}
             isActive={false}
