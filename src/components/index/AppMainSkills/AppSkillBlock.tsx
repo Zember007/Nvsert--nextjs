@@ -87,7 +87,7 @@ const AppSkillBlock = ({ text, folder, bg, title, img, isVisible }: AppSkillBloc
       onMouseLeave={handleMouseLeave}
       ref={cardRef} >
       <div
-        className={`${stylesMainSkills['skill-card-content']} card group/item`}
+        className={`${stylesMainSkills['skill-card-content']} group/item`}
       >
 
         <div

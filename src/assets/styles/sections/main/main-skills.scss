@@ -131,11 +131,11 @@
 }
 
 .navigation-button-icon {
-    @apply block transition-all duration-[.13s] translate-x-[32px] ;
+    @apply block transition-all duration-[.13s] translate-x-[32px];
 }
 
 .navigation-button-icon-next {
-    @apply block transition-all duration-[.13s] -translate-x-[32px] ;
+    @apply block transition-all duration-[.13s] -translate-x-[32px];
 }
 
 .slide-counter-container {
@@ -148,15 +148,6 @@
 
 .main-button-slider-wrap {
     @apply xl:w-[242px] xss:w-[280px] w-[260px] xl:mx-0 mx-auto;
-}
-
-
-.skill-card-wrapper {
-    @apply hover:z-[12] relative xss:h-[224px] h-[172px] xxl:w-[310px] xss:w-[320px] w-[280px];
-
-    &:not(.folder) {
-        @apply xl:cursor-pointer;
-    }
 }
 
 .skill-card-content {
@@ -211,10 +202,10 @@
 
 .skills-content-container {
     @apply flex flex-col gap-[20px] items-center;
-  }
-  
-  /* Стили для предотвращения субпиксельных смещений */
-  .skills__box {
+}
+
+/* Стили для предотвращения субпиксельных смещений */
+.skills__box {
     transform: translateZ(0) translate3d(0, 0, 0);
     /* Принудительное аппаратное ускорение */
     backface-visibility: hidden;
@@ -223,120 +214,121 @@
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
     image-rendering: crisp-edges;
-  }
-  
-  .slide-skill {
+}
+
+.slide-skill {
     transform: translateZ(0) translate3d(0, 0, 0);
     /* Принудительное аппаратное ускорение */
     backface-visibility: hidden;
     will-change: transform;
-  
+
     /* Принудительное пиксельное выравнивание */
     position: relative;
-  
+
     /* Предотвращение сглаживания */
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
     image-rendering: crisp-edges;
-  }
-  
-  /* Дополнительные стили для четкого позиционирования */
-  .skills__box,
-  .slide-skill {
+}
+
+/* Дополнительные стили для четкого позиционирования */
+.skills__box,
+.slide-skill {
     /* Предотвращение размытия при трансформациях */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  
+
     /* Точное позиционирование */
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
-  }
-  
-  /* Если используете центрирование */
-  .skills__box.centered {
+}
+
+/* Если используете центрирование */
+.skills__box.centered {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-  }
-  
-  .skills-tariff-wrap {
+}
+
+.skills-tariff-wrap {
     @apply xl:w-[250px] xss:w-[280px] w-[260px] xl:mx-0 mx-auto mt-[20px];
-  }
-  
-  
-  .card {
+}
+
+
+.card {
     text-rendering: optimizeLegibility;
     transform-style: preserve-3d;
-  }
-  
-  .card-wrap {
+}
+
+.skill-card-wrapper {
+    @apply hover:z-[12] relative xss:h-[224px] h-[172px] xxl:w-[310px] xss:w-[320px] w-[280px];
+
     transform: perspective(800px);
     transform-style: preserve-3d;
     z-index: 10;
     will-change: transform;
-  
+
     img {
         -ms-high-contrast-adjust: none;
         -webkit-user-drag: none;
         width: 100%;
         object-fit: cover;
     }
-  }
 
-  .skill-card-wrapper {
-    @apply hover:z-[12] relative xss:h-[224px] h-[172px] xxl:w-[310px] xss:w-[320px] w-[280px];
-  
     &:not(.folder) {
-      @apply xl:cursor-pointer;
+        @apply xl:cursor-pointer;
     }
-  }
-  
-  .skill-card-content {
+}
+
+.skill-card-content {
     @apply relative z-[0] h-full text-[#000] w-full;
-  }
-  
-  .skill-card-inner {
+
+    text-rendering: optimizeLegibility;
+    transform-style: preserve-3d;
+}
+
+.skill-card-inner {
     @apply flex overflow-hidden relative flex-col xss:gap-[20px] gap-[15px] rounded-[6px] relative z-[1] justify-between h-full transition-all duration-500 border border-solid;
-  
+
     /* filter: blur(0.01px); */
-  
+
     &.folder {
-      @apply items-center justify-center  rounded-[6px] border-[transparent] xxl:border-[#93969D];
+        @apply items-center justify-center rounded-[6px] border-[transparent] xxl:border-[#93969D];
     }
-  
+
     &:not(.folder) {
-      @apply p-[20px] border-[#93969D];
-  
-  
+        @apply p-[20px] border-[#93969D];
+
+
     }
-  
-  
-  }
-  
-  .skill-folder-image {
+
+
+}
+
+.skill-folder-image {
     @apply transition-all object-cover duration-300 rounded-[6px] h-full;
-  }
-  
-  .skill-content-container {
+}
+
+.skill-content-container {
     @apply grow max-w-[270px];
-  }
-  
-  .skill-list {
+}
+
+.skill-list {
     @include text-2;
     @apply font-light pl-[17px] transition-all duration-500 flex flex-col gap-[5px];
-  
+
     &:not(.visible) {
-      transform: translateY(10px);
+        transform: translateY(10px);
     }
-  
+
     li {
-      position: relative;
-  
-      &::before {
-        content: "•";
-        position: absolute;
-        left: -17px;
-        top: -1px;
-      }
+        position: relative;
+
+        &::before {
+            content: "•";
+            position: absolute;
+            left: -17px;
+            top: -1px;
+        }
     }
-  }
+}
