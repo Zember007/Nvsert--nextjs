@@ -232,7 +232,6 @@ const AppMainSlider = () => {
         <SliderDots
           count={slides.length}
           activeIndex={activeIndex}
-          onDotClick={handleDotClick}
           containerClassName={`${stylesSlider.slideDotsBoxContainer} xl:!hidden`}
           boxClassName={`${stylesSlider.slideDotsBox} xl:!hidden`}
         />
@@ -310,7 +309,6 @@ const SliderImageList = dynamic(
 interface SliderDotsProps {
   count: number;
   activeIndex: number;
-  onDotClick?: (index: number) => void;
   containerClassName?: string;
   boxClassName?: string;
 }
@@ -319,7 +317,6 @@ const SliderDots: React.FC<SliderDotsProps> = memo(
   ({
     count,
     activeIndex,
-    onDotClick,
     containerClassName = '',
     boxClassName = '',
   }) => {
@@ -330,7 +327,6 @@ const SliderDots: React.FC<SliderDotsProps> = memo(
             <div
               key={i}
               className={`${activeIndex === i ? stylesSlider.activeDots : ''} ${stylesSlider.slideDots}`}
-              onClick={onDotClick ? () => onDotClick(i) : undefined}
             ></div>
           ))}
         </div>

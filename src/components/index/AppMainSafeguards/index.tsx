@@ -180,12 +180,8 @@ const AppMainSafeguards = () => {
         <div className={`${stylesSlider.slideDotsBoxContainer} !flex my-[20px]`}>
           <div className={`${stylesSlider.slideDotsBox} !flex`}>
             {guarantees.map((_, i) => (
-              <button
-                aria-label={`Слайдер гарантий ${i + 1}`}
-                type="button"
-                onClick={() => {
-                  timeLine.current?.toIndex(i, { ease: 'power3', duration: 0.725 });
-                }}
+              <div
+                
                 key={i}
                 className={`${activeIndex === i ? stylesSlider.activeDots : ''} ${stylesSlider.slideDots}`}
               />
