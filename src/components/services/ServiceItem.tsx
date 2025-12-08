@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useId, useState } from 'react';
-import { NavigationItem } from '@/store/navigation';
+import { NavigationItem } from '@/types/navigation';
 import { AppNavigationItem } from '@/components/general/AppNavigation';
 import { motion, useAnimation } from "framer-motion";
 import ServiceCard from '@/components/services/ServiceCard';

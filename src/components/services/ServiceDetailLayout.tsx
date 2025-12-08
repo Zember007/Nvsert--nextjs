@@ -6,7 +6,7 @@ import AppCtaBanner from '@/components/general/AppCtaBanner';
 import ServiceCard from '@/components/services/ServiceCard';
 import ServiceContentBlock from '@/components/services/ServiceContentBlock';
 import ServiceArticleDate from '@/components/services/ServiceArticleDate';
-import { NavigationItem } from '@/store/navigation';
+import { NavigationItem } from '@/types/navigation';
 import { filterPrepositions } from '@/hook/filter';
 import dynamic from 'next/dynamic';
 

@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { useHeaderContext } from "../contexts/HeaderContext";
-import { Services } from "@/store/navigation";
+import { Services } from "@/types/navigation";
 import HeaderTopContacts from "./header/HeaderTopContacts";
 import HeaderLeftLogo from "./header/HeaderLeftLogo";
 import HeaderMobilePhoneLink from "./header/HeaderMobilePhoneLink";

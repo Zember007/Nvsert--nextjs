@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { NavigationItem } from '@/store/navigation';
+import { NavigationItem } from '@/types/navigation';
 import { AsyncPhotoProvider, AsyncPhotoView } from '@/components/common/AsyncPhotoView';
 
 interface ServiceGalleryProps {

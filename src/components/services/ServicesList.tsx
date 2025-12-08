@@ -1,6 +1,6 @@
 import React from 'react';
 import ServiceItem from '@/components/services/ServiceItem';
-import { Services } from '@/store/navigation';
+import { Services } from '@/types/navigation';
 
 interface ServicesListProps {
     services: Services[];
