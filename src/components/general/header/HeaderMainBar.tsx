@@ -58,7 +58,7 @@ interface InlineLogoProps {
 const InlineLogo: React.FC<InlineLogoProps> = ({ burgerMenuActive }) => {
   return (
     <div
-      className={`${headerStyles.header__bg} min-w-[192px] xl:grow-0 grow xl:opacity-0 !px-[20px]`}
+      className={`${headerStyles.header__bg} min-w-[192px] xl:grow-0 grow xl:opacity-0 xss:!px-[20px] !px-[14px]`}
     >
       <AppLogo
         className={`xl:mx-auto ${burgerMenuActive ? "!text-[#000]" : ""}`}
