@@ -21,7 +21,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
     const { openDefaultModal } = useHeaderContext();
 
     const toggleSection = (id: number) => {
-        setSectionsOpen(prev => 
+        setSectionsOpen(prev =>
             prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
         );
     };
@@ -78,6 +78,8 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
         href: `#block-${index}`
     })) || [];
 
+
+
     if (!aboutData) {
         return (
             <StandardPageLayout
@@ -100,28 +102,42 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
             dotNavItems={dotNavItems}
             showButton={true}
         >
-            {aboutData.content?.map((block, index) => (
-                <div key={block.id} id={`block-${index + 1}`} className="w-full">
-                    <CollapseSection
-                        title={block.heading}
-                        isOpen={!sectionsOpen.includes(index + 1)}
-                        onToggle={() => toggleSection(index + 1)}
-                    >
-                        <div className="text-[16px] leading-[1.5] text-[#000] font-light tracking-[-0.01em]">
-                            {renderRichText(block.richText)}
-                        </div>
-                    </CollapseSection>
+            {aboutData.content?.map((block, index) => {
+                const startImg = block.richText.includes('[start_img]')
+                return (
+                    (
+                        <div key={block.id} id={`block-${index + 1}`} className="w-full">
+                            {block.image?.url && startImg && (
+                                <div className="max-w-full mx-auto mb-[50px] flex justify-center">
+                                    <StrapiResponsiveImage
+                                        image={block.image}
+                                        baseUrl="https://test11.audiosector.ru/cp"
+                                    />
+                                </div>
+                            )}
 
-                    {block.image?.url && (
-                        <div className="max-w-full mx-auto mt-[50px] flex justify-center">
-                            <StrapiResponsiveImage 
-                                image={block.image} 
-                                baseUrl="https://test11.audiosector.ru/cp" 
-                            />
+                            <CollapseSection
+                                title={block.heading}
+                                isOpen={!sectionsOpen.includes(index + 1)}
+                                onToggle={() => toggleSection(index + 1)}
+                            >
+                                <div className="text-[16px] leading-[1.5] text-[#000] font-light tracking-[-0.01em]">
+                                    {renderRichText(block.richText)}
+                                </div>
+                            </CollapseSection>
+
+                            {block.image?.url && !startImg && (
+                                <div className="max-w-full mx-auto mt-[50px] flex justify-center">
+                                    <StrapiResponsiveImage
+                                        image={block.image}
+                                        baseUrl="https://test11.audiosector.ru/cp"
+                                    />
+                                </div>
+                            )}
                         </div>
-                    )}
-                </div>
-            ))}
+                    )
+                );
+            })}
 
             {/* Убрали ненужный key — и так уникально */}
             <AppCtaBanner
