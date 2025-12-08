@@ -1,6 +1,6 @@
 
 import React, { Key, useRef } from 'react';
-import { useWindowVirtualizer } from '@tanstack/react-virtual';
+import { useVirtualizer } from '@tanstack/react-virtual';
 
 export interface VirtualizedListProps<T> {
   items: T[];
@@ -25,9 +25,9 @@ export function VirtualizedList<T>({
 }: VirtualizedListProps<T>) {
   const parentRef = useRef<HTMLDivElement>(null);
 
-  const virtualizer = useWindowVirtualizer({
+  const virtualizer = useVirtualizer({
     count: items.length,
-    getScrollElement: () => window,
+    getScrollElement: () => parentRef.current,
     estimateSize: () => estimatedItemSize, // Начальная оценка
     overscan,
     // Ключ для динамической высоты: измеряем реальную высоту элементов
@@ -64,7 +64,7 @@ export function VirtualizedList<T>({
             <div
               key={key}
               data-index={virtualRow.index}
-              ref={virtualizer.measureElement} // Автоматическое измерение высоты
+              ref={(el) => el ? virtualizer.measureElement(el) : undefined}
               style={{
                 position: 'absolute',
                 top: 0,
