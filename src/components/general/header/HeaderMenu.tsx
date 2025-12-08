@@ -124,7 +124,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                                 <button
                                     className='px-[6px]'
                                     onClick={handleGoBack}>
-                                    <img
+                                    <Image
                                         src={ArrowIcon}
                                         alt="arrow"
                                         className="w-[20px] h-[20px] rotate-[180deg]"
@@ -167,7 +167,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                                                             <span className={`${item.img?.url ? 'text-[18px]' : 'text-[20px]'} font-light text-black`}>{filterPrepositions(item.title)}</span>
                                                         </div>
                                                         {item.items && (
-                                                             <img
+                                                             <Image
                                                              src={ArrowIcon}
                                                              alt="arrow"
                                                              className="w-[20px] h-[20px] "
@@ -189,7 +189,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                                                         </span>
                                                         {item.items && (
                                                             
-                                                            <img
+                                                            <Image
                                                             src={ArrowIcon}
                                                             alt="arrow"
                                                             className="w-[20px] h-[20px] translate-x-[5px]"

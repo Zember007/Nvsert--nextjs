@@ -4,6 +4,7 @@ import { useIntersectionObserver } from "@/hook/useIntersectionObserver";
 import footerStyles from "@/assets/styles/sections/footer.module.scss";
 import stylesSlider from "@/assets/styles/base/base.module.scss";
 import textSize from "@/assets/styles/base/base.module.scss";
+import Image from "next/image";
 
 const slides = [
   "Помогаем сотрудникам не терять информацию",
@@ -137,7 +138,7 @@ const FooterMarquee: React.FC = () => {
       ref={ref}
       className={`${footerStyles.footer__dark} m:justify-start justify-center gap-[16px] xl:h-auto m:h-[135px] h-[96px]`}
     >
-      <img
+      <Image
         src={AudioLogo}
         alt="audio-logo"
         className="xl:ml-[35px]"
