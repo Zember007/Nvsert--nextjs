@@ -1,12 +1,12 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
-import IconAbout1 from '@/assets/images/about/1.svg?react';
-import IconAbout2 from '@/assets/images/about/2.svg?react';
-import IconAbout3 from '@/assets/images/about/3.svg?react';
-import IconAbout4 from '@/assets/images/about/4.svg?react';
-import IconAbout5 from '@/assets/images/about/5.svg?react';
-import IconAbout6 from '@/assets/images/about/6.svg?react';
+import IconAbout1 from '@/assets/images/about/1.svg';
+import IconAbout2 from '@/assets/images/about/2.svg';
+import IconAbout3 from '@/assets/images/about/3.svg';
+import IconAbout4 from '@/assets/images/about/4.svg';
+import IconAbout5 from '@/assets/images/about/5.svg';
+import IconAbout6 from '@/assets/images/about/6.svg';
 import textSize from '@/assets/styles/base/base.module.scss';
 
 interface GridBlockProps {
@@ -70,7 +70,7 @@ const GridBlock: React.FC<GridBlockProps> = ({ block, index, processContent }) =
                 <div>
                     {processContent(content)}
                 </div>
-                {/* {React.createElement(svgIcons[index % svgIcons.length], { className: 'absolute bottom-[20px] right-[20px]' })} */}
+                {React.createElement(svgIcons[index % svgIcons.length], { className: 'absolute bottom-[20px] right-[20px]' })}
             </div>
         </div>
     );
