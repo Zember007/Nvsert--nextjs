@@ -1,13 +1,10 @@
 'use client';
 
 import { useCallback, useMemo, useState } from 'react';
-
-import '@/assets/styles/sections/main/animation/documents.scss';
-import '@/assets/styles/sections/main/main-documents.scss';
 import { AsyncPhotoProvider } from '@/components/common/AsyncPhotoView';
 import { useTranslation } from 'react-i18next';
 import { useHeaderContext } from '../../contexts/HeaderContext';
-import textSize from '@/assets/styles/main.module.scss';
+import mainDocumentsStyles from '@/assets/styles/main.module.scss';
 import MainDocumentItem from './MainDocumentItem';
 import { VirtualizedList } from '../utils/VirtualizedList';
 
@@ -53,7 +50,7 @@ const AppMainDocuments = () => {
     <section className="section wrapper !overflow-visible">
       <div id="documents" className="absolute top-[-50px] pointer-events-none" />
 
-      <h2 className={`${textSize.headerH2} section__title`}>
+      <h2 className={`${mainDocumentsStyles.headerH2} section__title`}>
         {t('docs.heading')}
       </h2>
 
@@ -66,7 +63,7 @@ const AppMainDocuments = () => {
         }}
         maskClosable={false}
       >
-        <div className="documents-container">
+        <div className={mainDocumentsStyles['documents-container']}>
           {ssrItems.map((item, index) => {
             const globalIndex = index;
 

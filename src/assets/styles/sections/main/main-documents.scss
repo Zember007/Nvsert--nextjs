@@ -1,6 +1,295 @@
-@use '../../base/variables' as variables;
-@use '../../base/mixins' as mixins;
+@use '../../base/variables' as *;
+@use '../../base/mixins' as *;
 
 .documents-container {
   @apply flex flex-col;
 } 
+
+.document-wrapper-border {
+  position: relative;
+  z-index: 0;
+}
+
+.document-wrapper-border:first-child .border-group {
+  border-top-width: 1px;
+}
+
+.document-wrapper-border .border-group {
+  border-bottom-width: 1px;
+  border-style: solid;
+  height: calc(100% + 1px);
+  transform: translateY(1px);
+}
+
+.drop,
+.drop-reverse {
+  display: block;
+  position: absolute;
+  border-radium: 100%;
+  transform: scale(0);
+  pointer-eventm: none;
+
+}
+
+.drop-reverse {
+  z-index: 1;
+}
+
+.drop.animate {
+  background: #34446D;
+  animation: drop 1s ease-out;
+  animation-fill-mode: forwards;
+}
+
+.drop-reverse.animate {
+  background: #FFF;
+  animation: drop 1s ease-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes drop {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(2.5);
+  }
+}
+
+
+.document-wrapper-border:last-child .border-group {
+  border-bottom-width: 1px;
+}
+
+
+
+@keyframes border_bounce {
+  0% {
+    transform: scaleY(0);
+  }
+
+  50% {}
+
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+.box-scale {
+  .container-scale {
+    transform: scale(1);
+    transform-origin: center;
+    will-change: transform;
+
+    &.active {
+      transform: scale(.99);
+    }
+  }
+
+  &:active {
+    .container-scale {
+      transform: scale(.99);
+    }
+  }
+}
+
+
+.transition-scale {
+  transition: background .3s ease, transform .2s ease-in, box-shadow .2s ease;
+}
+
+.document {
+  &__box {
+    @apply xl:mx-[-23px] mx-[-5px] flex flex-col rounded-[6px] relative;
+
+    &.active {
+      @apply hover:bg-[#34446D33] bg-[transparent] ;
+    }
+  }
+
+  &__border {
+    @apply border-[#93969D] absolute bottom-[0] border-group right-[0] left-[0];
+
+    &.active {
+      @apply border-[transparent];
+    }
+  }
+
+  &__navigation {
+    @apply rounded-[6px] overflow-hidden h-[70px] text-left box-scale transition-scale active:bg-[#5B6788] xl:px-[23px] relative z-[0];
+
+    &:active {
+      box-shadow: 2px 2px 4px 0px #000000CC inset, -2px -2px 4px 0px #000000CC inset;
+    }
+
+    &-bg.active {
+      background-image: url('../../../images/150.webp');
+      background-repeat: repeat;
+    }
+
+    &.active {
+      @apply bg-[#5B6788];
+      border-color: #000 !important;
+      box-shadow: 2px 2px 4px 0px #000000CC inset, -2px -2px 4px 0px #000000CC inset;
+    }
+
+    &-wrap {
+      @apply w-full relative z-[2] gap-[10px] flex items-center justify-between h-full  m:py-[23px] relative;
+
+      &.active {
+        @apply text-[#FFF];
+      }
+    }
+  }
+
+  &__desc {
+    @apply  translate-y-[-1px] transition-all duration-200 ;
+
+    &-wrap {
+      @apply xl:w-[485px] m:w-[310px] w-full hidden will-change-transform *:will-change-transform  m:flex justify-between xl:grid xl:grid-cols-[0.76fr_1fr_auto] items-center justify-between justify-items-start  xl:pr-0 l:pr-[18px] pr-[20px];
+    }
+  }
+
+  &__title {
+    @apply m:translate-y-[-1px] transition-all duration-200  will-change-transform  pl-[63px] flex-1;
+  }
+
+  &__small-img {
+    @apply overflow-hidden border border-solid border-[#93969D] rounded-[3px] transition-all duration-100 z-[2] absolute top-1/2 -translate-y-1/2 left-[6px] xl:left-[23px];
+
+    &.active {
+      @apply translate-y-[100%];
+    }
+  }
+
+  &__big-img {
+    @apply border border-solid border-[#A4A4A4] overflow-hidden rounded-[5px];
+
+    img {
+      @apply transition-all duration-200 h-auto;
+    }
+  }
+
+  &__list {
+
+    &-photo {
+      @apply xl:gap-[30px] gap-[20px] flex-1 items-center flex flex-col-reverse m:flex-row m:items-stretch;
+    }
+
+    @apply flex gap-[10px] flex-col grow ;
+
+    &-wrap {
+      @apply  xl:w-[485px] m:w-[310px] w-full items-start flex gap-[20px] flex-col justify-between   text-[#000];
+    }
+
+    &-item {
+      @apply flex gap-[10px] flex-col items-start;
+
+      &-ul {
+        @apply  pl-[20px] flex flex-col gap-[6px];
+
+        li {
+          position: relative;
+      
+          &::before {
+            content: "•";
+            position: absolute;
+            left: -16px;
+            top: 1px;
+          }
+        }
+      }
+    }
+  }
+
+  &__button {
+    @apply justify-center w-full m:flex items-center relative overflow-hidden m:text-[20px] text-[18px] bg-[#34446D] text-[#FFF] tracking-normal m:flex items-center gap-[10px]  rounded-[4px] border-[#34446D] border border-solid ;
+  }
+
+  &__hidden {
+    @apply transition-all ease-in duration-200 overflow-hidden max-h-0  rounded-b-[6px];
+
+    &.active {
+      max-height: 1400px !important;
+    }
+  }
+
+  &__item {
+    @apply flex flex-col items-center m:items-stretch m:flex-row m:gap-[30px] gap-[20px]  p-[23px] ;
+    /* m:p-[30px] */
+  }
+}
+
+.document-content-wrapper {
+  @apply flex flex-col gap-[10px] w-full;
+}
+
+.document-actions-mobile {
+  @apply  w-[280px] m:mx-0 mx-auto m:w-[250px];
+}
+
+.document-mobile-info {
+  @apply flex gap-[10px];
+}
+
+.document-info-item {
+  @apply flex flex-col gap-[5px] items-center;
+}
+
+.document-info-label {
+  @include text-5;
+  @apply text-[#00000080];
+}
+
+.document-info-value {
+  @include text-1;
+}
+
+.document-photo-container {
+  @apply m:m-0 m-auto transition-all duration-100 active:scale-[0.95] cursor-pointer flex-shrink-0 ;
+}
+
+.document-photo-wrapper {
+  @apply grow flex justify-center xl:w-auto m:w-[310px] w-full;
+}
+
+.document-content-column {
+  @apply flex flex-col justify-between items-start;
+}
+
+.document-text-content {
+  @apply  flex flex-col gap-[20px];
+}
+
+.document-description {
+  @include text-2;
+  @apply text-[#000000];
+}
+
+.document-desktop-actions {
+  @apply  w-[280px] m:mx-0 mx-auto m:w-[250px];
+}
+
+.document-list-actions {
+  @apply  w-[280px] m:mx-0 mx-auto m:w-[250px];
+}
+
+.document-list-show-button {
+  @include text-2;
+  @apply hover:text-[#34446D] transition-all duration-100 text-[#000] font-normal text-left inline-flex gap-[5px];
+
+  .document-list-arrow {
+    @apply  text-[#000] transition-all duration-100;
+  }
+
+  &:hover {
+    .document-list-arrow {
+      @apply  text-[#34446D];
+    }
+  }
+}
+
+
+
+

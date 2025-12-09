@@ -1,7 +1,6 @@
 import { useButton } from '@/hook/useButton';
 import React, { useEffect } from 'react';
 import { useAnimation, motion } from "framer-motion";
-import QuestionArrow from '../svg/QuestionArrow';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
 import stylesBtn from '@/assets/styles/main.module.scss';
 import textSize from '@/assets/styles/main.module.scss';
@@ -47,12 +46,12 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
 
     return (
         <div
-            className={` document-wrapper-border group/main`}
+            className={`${stylesQuestions['document-wrapper-border']} group/main`}
         >
             <div
-                className={`document__border ${!active ? 'group-active/main:!border-[transparent] group-hover/main:!border-[transparent]' : 'active'}`}
+                className={`${stylesQuestions['document__border']} ${!active ? 'group-active/main:!border-[transparent] group-hover/main:!border-[transparent]' : stylesQuestions.active}`}
             />
-            <div className={` document__box   ${!active ? 'active' : ''}`}>
+            <div className={`${stylesQuestions['document__box']}   ${!active ? stylesQuestions.active : ''}`}>
 
                 <div className={`pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[-1] rounded-[6px]  ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-[transparent]  border-solid border`}></div>
                 <div

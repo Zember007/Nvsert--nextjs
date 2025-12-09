@@ -5,7 +5,6 @@ import Link from "next/link";
 import AppValidationObserver from "./AppValidationObserver";
 import AppInput from "./elements/AppInput";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import Image from "next/image";
 import ImgCall from '@/assets/images/order-call.png'
 import ImgCallMob from '@/assets/images/order-call-mob.png'

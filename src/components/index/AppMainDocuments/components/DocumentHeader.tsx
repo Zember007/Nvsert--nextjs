@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { FC, memo } from 'react';
-
+import mainDocumentsStyles from '@/assets/styles/main.module.scss';
 import { filterPrepositions } from '@/hook/filter';
 import textSize from '@/assets/styles/main.module.scss';
 
@@ -20,9 +20,9 @@ export const DocumentHeader: FC<DocumentHeaderProps> = memo(
   ({ title, duration, price, imageUrls, active, onClick, index }) => (
     <div
       onClick={onClick}
-      className={`document__navigation group/window ${!active ? '' : 'active'} `}
+      className={`${mainDocumentsStyles['document__navigation']} group/window ${!active ? '' : mainDocumentsStyles.active} `}
     >
-      <div className={`${active && 'active'} document__small-img `}>
+      <div className={`${active && mainDocumentsStyles.active} ${mainDocumentsStyles['document__small-img']} `}>
         <Image
           decoding="async"
           alt="document"
@@ -36,16 +36,16 @@ export const DocumentHeader: FC<DocumentHeaderProps> = memo(
       </div>
 
       <div
-        className={`document__navigation-bg document__navigation-wrap container-scale transition-scale backface-hidden ${
-          active ? 'active' : 'text-[#000]'
+        className={`${mainDocumentsStyles['document__navigation-bg']} ${mainDocumentsStyles['document__navigation-wrap']} ${mainDocumentsStyles['container-scale']} ${mainDocumentsStyles['transition-scale']} ${mainDocumentsStyles['backface-hidden']} ${
+          active ? mainDocumentsStyles.active : 'text-[#000]'
         } group-active/window:text-[#FFF]   `}
       >
-        <h3 className={`${textSize.headerH6} document__title`}>
+        <h3 className={`${textSize.headerH6} ${mainDocumentsStyles['document__title']} `}>
           {filterPrepositions(title)}
         </h3>
-        <div className="document__desc-wrap">
-          <p className={`${textSize.headerH6} document__desc`}>{duration}</p>
-          <p className={`${textSize.headerH6} document__desc`}>{price}</p>
+        <div className={`${mainDocumentsStyles['document__desc-wrap']} `}>
+          <p className={`${textSize.headerH6} ${mainDocumentsStyles['document__desc']} `}>{duration}</p>
+          <p className={`${textSize.headerH6} ${mainDocumentsStyles['document__desc']} `}>{price}</p>
 
           <svg
             className={`${

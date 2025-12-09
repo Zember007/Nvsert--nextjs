@@ -1,4 +1,6 @@
 import { FC, memo } from 'react';
+import stylesBtn from '@/assets/styles/base/base.module.scss';
+import mainDocumentsStyles from '@/assets/styles/main.module.scss';
 
 // Локальная иконка стрелки
 const ArrowRightIcon: FC = memo(() => (
@@ -28,10 +30,10 @@ export const ActionButton: FC<ActionButtonProps> = memo(
     <button
       ref={setRef}
       onClick={onClick}
-      className={`document__button ${className}`}
+      className={`${mainDocumentsStyles['document__button']} group  ${stylesBtn.tariff} ${stylesBtn.btnIconAn}`}
     >
-      <span className="sendText ">{text}</span>
-      <span className="sendIconLeft">
+      <span className={`${stylesBtn.sendText} `}>{text}</span>
+      <span className={`${stylesBtn.sendIconLeft} `}>
         <ArrowRightIcon />
       </span>
     </button>

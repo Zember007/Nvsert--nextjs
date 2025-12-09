@@ -4,6 +4,8 @@ import { filterPrepositions } from '@/hook/filter';
 import { MainDocumentItemProps } from '@/types/documents';
 import stylesBtn from '@/assets/styles/main.module.scss';
 import textSize from '@/assets/styles/main.module.scss';
+import mainDocumentsStyles from '@/assets/styles/main.module.scss';
+
 
 export interface DocumentListProps {
   documentsList: MainDocumentItemProps['documentsList'];
@@ -18,12 +20,12 @@ export const DocumentList: FC<DocumentListProps> = memo(
     const clip0_4632_2058 = useId();
 
     return (
-      <div className="document__list">
-        <div className="document__list-item">
+      <div className={`${mainDocumentsStyles['document__list']} `}>
+        <div className={`${mainDocumentsStyles['document__list-item']} `}>
           <p className={textSize.text1}>
             Необходимые документы для оформления
           </p>
-          <ul className={`document__list-item-ul ${textSize.text2}`}>
+          <ul className={`${mainDocumentsStyles['document__list-item-ul']} ${textSize.text2}`}>
             {documentsList.map((list, index) => (
               <li
                 className={`${
@@ -37,7 +39,7 @@ export const DocumentList: FC<DocumentListProps> = memo(
           </ul>
           {documentsList.length > hiddenList && (
             <button
-              className={`document-list-show-button  ${stylesBtn.lineAfterBox}  !gap-[5px] ${stylesBtn.btnIconAn}`}
+              className={`${mainDocumentsStyles['document-list-show-button']}  ${stylesBtn.lineAfterBox}  !gap-[5px] ${stylesBtn.btnIconAn}`}
               onClick={() => setListHidden(!listHidden)}
             >
               <span
@@ -49,7 +51,7 @@ export const DocumentList: FC<DocumentListProps> = memo(
               </span>
 
               <svg
-                className={`${stylesBtn.sendIconLeft} document-list-arrow ${
+                className={`${stylesBtn.sendIconLeft} ${mainDocumentsStyles['document-list-arrow']} ${
                   !listHidden ? 'rotate-[180deg]' : ''
                 }`}
                 width="16"

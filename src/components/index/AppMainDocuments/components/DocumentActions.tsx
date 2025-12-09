@@ -2,8 +2,9 @@ import { FC, memo } from 'react';
 import type { AnimationControls } from 'framer-motion';
 import { motion } from 'framer-motion';
 
-import stylesBtn from '@/assets/styles/main.module.scss';
+import stylesBtn from '@/assets/styles/base/base.module.scss';
 import { ActionButton } from './ActionButton';
+import mainDocumentsStyles from '@/assets/styles/main.module.scss';
 
 export interface DocumentActionsProps {
   controls: AnimationControls;
@@ -27,7 +28,7 @@ export const DocumentActions: FC<DocumentActionsProps> = memo(
   }) => {
     if (isMobile) {
       return (
-        <div className="document-content-wrapper">
+        <div className={`${mainDocumentsStyles['document-content-wrapper']} `}>
           <motion.div
             animate={controls}
             initial={{ y: 20 }}
