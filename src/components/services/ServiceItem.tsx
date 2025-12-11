@@ -3,9 +3,11 @@ import React, { useEffect, useId, useState } from 'react';
 import { NavigationItem } from '@/types/navigation';
 import { AppNavigationItem } from '@/components/general/AppNavigation';
 import { motion, useAnimation } from "framer-motion";
-import ServiceCard from '@/components/services/ServiceCard';
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/base/base.module.scss';
+import dynamic from 'next/dynamic';
+
+const ServiceCard = dynamic(() => import('@/components/services/ServiceCard'), { ssr: false });
 
 interface ServiceItemProps {
     service: {
@@ -140,10 +142,10 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                                 initial={{ y: 20 }}
                                 animate={controls}
                             >
-                                <ServiceCard
-                                    serviceName={service.name}
-                                    certificate={certificate}
-                                />
+                                    <ServiceCard
+                                        serviceName={service.name}
+                                        certificate={certificate}
+                                    />
                             </motion.div>
                         ))}
                     </div>
