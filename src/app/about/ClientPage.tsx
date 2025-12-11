@@ -103,7 +103,6 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
             showButton={true}
         >
             {aboutData.content?.map((block, index) => {
-                const startImg = block.richText.includes('[start_img]')
                 return (
                     (
                         <div key={block.id} id={`block-${index + 1}`} className="w-full">
@@ -114,7 +113,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
                                 isOpen={!sectionsOpen.includes(index + 1)}
                                 onToggle={() => toggleSection(index + 1)}
                             >
-                                {block.image?.url && startImg && (
+                                {block.image?.url && index === 0 && (
                                     <div className="max-w-full mx-auto mb-[50px] mt-[30px] flex justify-center">
                                         <StrapiResponsiveImage
                                             image={block.image}
@@ -128,7 +127,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
                                 </div>
                             </CollapseSection>
 
-                            {block.image?.url && !startImg && (
+                            {block.image?.url && index !== 0 && (
                                 <div className="max-w-full mx-auto mt-[50px] flex justify-center">
                                     <StrapiResponsiveImage
                                         image={block.image}
