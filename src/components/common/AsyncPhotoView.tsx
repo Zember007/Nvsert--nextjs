@@ -23,28 +23,33 @@ type AnyProps = ComponentProps<any>;
 const DynamicPhotoProvider = dynamic(
   () => import('@/assets/lib/react-photo-view').then((m) => m.PhotoProvider),
   {
-    ssr: false,
+    ssr: false
   }
 ) as React.ComponentType<AnyProps>;
 
 const DynamicPhotoView = dynamic(
   () => import('@/assets/lib/react-photo-view').then((m) => m.PhotoView),
   {
-    ssr: false,
+    ssr: false
   }
 ) as React.ComponentType<AnyProps>;
 
 // Обёртки, которые один раз инициализируют стили
 export const AsyncPhotoProvider: React.FC<AnyProps> = (props) => {
+
+
   useEffect(() => {
     ensurePhotoViewStylesLoaded();
   }, []);
 
   return <DynamicPhotoProvider {...props} />;
+
 };
 
 export const AsyncPhotoView: React.FC<AnyProps> = (props) => {
 
+
   return <DynamicPhotoView {...props} />;
+
 };
 

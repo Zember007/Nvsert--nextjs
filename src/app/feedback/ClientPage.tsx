@@ -1,119 +1,18 @@
 'use client';
-import React, { useId } from 'react';
+import React from 'react';
 import StandardPageLayout from '@/components/general/StandardPageLayout';
 import CollapseSection from '@/components/general/CollapseSection';
-import Image from 'next/image';
 import { useButton } from '@/hook/useButton';
-import { AsyncPhotoProvider, AsyncPhotoView } from '@/components/common/AsyncPhotoView';
-import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
 import stylesBtn from '@/assets/styles/base/base.module.scss';
-import textSize from '@/assets/styles/base/base.module.scss';
-
-type FeedbackPhoto = {
-    url?: string;
-    formats?: { thumbnail?: { url?: string } };
-    width?: number;
-    height?: number;
-    name?: string;
-    alternativeText?: string;
-};
-
-type FeedbackCategory = {
-    id: number;
-    title?: string;
-    slug?: string;
-    order?: number;
-};
-
-type FeedbackItem = {
-    id: number;
-    title: string;
-    slug?: string;
-    order?: number;
-    photo?: FeedbackPhoto;
-    content?: { body?: string };
-    category?: FeedbackCategory;
-};
-
-export type FeedbackCategoryGroup = {
-    id: number;
-    title: string;
-    slug: string;
-    order: number;
-    items: FeedbackItem[];
-};
+import { FeedbackCategoryGroup } from '@/types/feedback';
+import FeedbackCard from '@/components/feedback/FeedbackCard';
 
 
-const FeedbackCard: React.FC<{ item: FeedbackItem }> = ({ item }) => {
-    const img = item.photo?.url || item.photo?.formats?.thumbnail?.url || '';
-
-    const { processContent } = useRichTextRenderer();
-    const [showServices, setShowServices] = React.useState<boolean>(false);
-
-    const clip0_4632_2058 = useId()
-
-    return (
-        <AsyncPhotoView
-            src={'https://test11.audiosector.ru/cp' + img}
-            width={250}
-            height={37}
-        >
-            <div className="cursor-pointer active:scale-[0.95] transition-all duration-100 flex gap-[16px] xxs:flex-row flex-col p-[20px] border border-[#93969d] hover:border-[#34446D] bg-[#f5f5f2] hover:bg-[#34446d33] rounded-[10px] w-full">
-                {!!img && (
-                    <div className="shrink-0 w-[190px] rounded-[6px] overflow-hidden bg-[#fff] border border-[#93969D] xxs:mx-0 mx-auto">
-                        {/* Using img to avoid Image domain config issues */}
-                        <Image src={'https://test11.audiosector.ru/cp' + img} alt={item.photo?.alternativeText || item.title} className="w-full h-full object-contain" width={190} height={267} />
-                    </div>
-                )}
-                <div className="flex-1 flex flex-col gap-[20px]">
-                    <h6 className={`${textSize.headerH6} !font-normal`}>{item.title}</h6>
-                    {item.content?.body && (
-                        <>
-                            <div>
-                                {processContent(item.content.body.split('\n')[0])}
-
-                                <div className={`${showServices ? 'block' : 'hidden'}`}>
-                                    {processContent(item.content.body.split('\n').slice(1).join('\n'))}
-                                </div>
-                            </div>
-
-                            <button
-                                className={`${textSize.text2} font-normal text-[#34446D] flex pt-[15px] pl-auto grow justify-end !items-end ${stylesBtn.lineAfterBox} ${stylesBtn.btnIconAn} !gap-[5px]`}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    e.preventDefault();
-                                    setShowServices(!showServices)
-                                }}
-                            >
-                                <span className={`${stylesBtn.lineAfter} !leading-[1.2] whitespace-nowrap`}>{!showServices ? 'Показать отзыв' : 'Свернуть отзыв'}</span>
-
-                                <svg
-                                    className={`${stylesBtn.sendIconLeft} transition-all duration-100 ${showServices ? 'rotate-[180deg]' : ''}`}
-                                    width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clipPath={`url(#${clip0_4632_2058})`}>
-                                        <path d="M7 3.5H9V0.5H7L7 3.5ZM15 9.46767L13.5692 8.02908L9.01287 12.6092V6.5H6.98815V12.6092L2.43177 8.02908L1 9.46767L8 16.5L8.71538 15.7822L9.43177 15.0634L15 9.46767Z" fill="#34446D" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id={clip0_4632_2058}>
-                                            <rect width="16" height="16" fill="white" transform="matrix(0 1 -1 0 16 0.5)" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-
-                            </button>
-                        </>
-                    )}
 
 
-                </div>
-            </div>
-        </AsyncPhotoView>
-    );
-};
 
 const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ initialCategories }) => {
     const [openGroups, setOpenGroups] = React.useState<number[]>(() => initialCategories.map(c => c.id));
-    const [showServices, setShowServices] = React.useState<boolean>(true);
 
     const toggleGroup = (id: number) => {
         setOpenGroups(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
@@ -134,85 +33,79 @@ const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ 
     }));
 
     return (
-        <AsyncPhotoProvider
-            maskOpacity={0.4}
-            maskClassName="blurred-mask"
-            speed={() => 0}
-            loop={true}
-            maskClosable={false}
+
+        <StandardPageLayout
+            title="Благодарственные письма"
+            breadcrumbs={[{ id: 2, title: 'Отзывы', full_slug: '/feedback' }]}
+            dotNavItems={dotNavItems}
+            showButton={true}
         >
-            <StandardPageLayout
-                title="Благодарственные письма"
-                breadcrumbs={[{ id: 2, title: 'Отзывы', full_slug: '/feedback' }]}
-                dotNavItems={dotNavItems}
-                showButton={true}
+            <CollapseSection
+                title={'Партнерство, подтвержденное клиентами'}
+                isOpen={mainOpen}
+                onToggle={() => {
+                    setMainOpen(!mainOpen);
+                }}
             >
-                <CollapseSection
-                    title={'Партнерство, подтвержденное клиентами'}
-                    isOpen={mainOpen}
-                    onToggle={() => {
-                        setMainOpen(!mainOpen);
-                    }}
-                >
-                    <div className="text-[16px] leading-[1.5] text-[#000] font-light tracking-[-0.01em]">
-                        В современном бизнесе надёжность партнёра играет ключевую роль. Компании выбирают тех, кто способен обеспечить стабильность, качество и точное соблюдение требований.
-                    </div>
-                    <div className="h-[15px]"></div>
-                    <div className="text-[16px] leading-[1.5] text-[#000] font-light tracking-[-0.01em]">
-                        За годы работы Центр Стандартизации зарекомендовал себя как надёжный партнёр в области сертификации и стандартизации. Наши клиенты — промышленные предприятия, производственные компании, торговые организации и государственные структуры — отмечают профессионализм, оперативность и внимательное отношение к задачам.
-                    </div>
-                </CollapseSection>
-
-                <div ref={setWrapperRef} className={`${stylesBtn.tariffWrap} w-[250px] self-end`}>
-                    <button
-                        onClick={() => {
-                            if (openGroups.length > 0) {
-                                setOpenGroups([]);
-                            } else {
-                                setOpenGroups(initialCategories.map(c => c.id));
-                            }
-                        }}
-                        ref={setButtonRef}
-                        className={`${stylesBtn.btnIconAn} ${stylesBtn.width_23} ${stylesBtn.tariff} bg-[#F5F5F2] h-[50px] rounded-[4px] text-[20px] font-light border border-[#93969d] flex items-center justify-center`}
-                    >
-                        <span className={`${stylesBtn.sendText}`}>
-                            {openGroups.length > 0 ? 'Свернуть отзывы' : 'Показать отзывы'}
-                        </span>
-                        <span className={`${stylesBtn.sendIconLeft}`}>
-                            <svg
-                                className={`${openGroups.length > 0 ? '' : 'rotate-180'} transition-all`}
-                                width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    fillRule="evenodd"
-                                    clipRule="evenodd"
-                                    d="M15.1049 7.72888L17.1338 7.73442L17.1533 15.6286L17.155 16.6434L17.1567 17.6568L7.23434 17.6339L7.22952 15.6043L13.69 15.621L9.37014 11.3012L10.8018 9.86951L15.1217 14.1894L15.1049 7.72888Z"
-                                    fill="black"
-                                />
-                                <path
-                                    d="M7.2572 9.1715L8.67142 7.75728L6.5501 5.63596L5.13588 7.05018L7.2572 9.1715Z"
-                                    fill="black"
-                                />
-                            </svg>
-                        </span>
-                    </button>
+                <div className="text-[16px] leading-[1.5] text-[#000] font-light tracking-[-0.01em]">
+                    В современном бизнесе надёжность партнёра играет ключевую роль. Компании выбирают тех, кто способен обеспечить стабильность, качество и точное соблюдение требований.
                 </div>
+                <div className="h-[15px]"></div>
+                <div className="text-[16px] leading-[1.5] text-[#000] font-light tracking-[-0.01em]">
+                    За годы работы Центр Стандартизации зарекомендовал себя как надёжный партнёр в области сертификации и стандартизации. Наши клиенты — промышленные предприятия, производственные компании, торговые организации и государственные структуры — отмечают профессионализм, оперативность и внимательное отношение к задачам.
+                </div>
+            </CollapseSection>
 
-                {initialCategories.map(cat => {
-                    const isOpen = openGroups.includes(cat.id);
-                    return (
-                        <div key={cat.id} id={'block-' + cat.id} className="w-full">
-                            <CollapseSection title={cat.title} isOpen={isOpen} onToggle={() => toggleGroup(cat.id)}>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
-                                    {cat.items.map(item => (
-                                        <FeedbackCard key={item.id} item={item} />
-                                    ))}
-                                </div>
-                            </CollapseSection>
-                        </div>
-                    );
-                })}
-            </StandardPageLayout>
-        </AsyncPhotoProvider>
+            <div ref={setWrapperRef} className={`${stylesBtn.tariffWrap} w-[250px] self-end`}>
+                <button
+                    onClick={() => {
+                        if (openGroups.length > 0) {
+                            setOpenGroups([]);
+                        } else {
+                            setOpenGroups(initialCategories.map(c => c.id));
+                        }
+                    }}
+                    ref={setButtonRef}
+                    className={`${stylesBtn.btnIconAn} ${stylesBtn.width_23} ${stylesBtn.tariff} bg-[#F5F5F2] h-[50px] rounded-[4px] text-[20px] font-light border border-[#93969d] flex items-center justify-center`}
+                >
+                    <span className={`${stylesBtn.sendText}`}>
+                        {openGroups.length > 0 ? 'Свернуть отзывы' : 'Показать отзывы'}
+                    </span>
+                    <span className={`${stylesBtn.sendIconLeft}`}>
+                        <svg
+                            className={`${openGroups.length > 0 ? '' : 'rotate-180'} transition-all`}
+                            width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                fillRule="evenodd"
+                                clipRule="evenodd"
+                                d="M15.1049 7.72888L17.1338 7.73442L17.1533 15.6286L17.155 16.6434L17.1567 17.6568L7.23434 17.6339L7.22952 15.6043L13.69 15.621L9.37014 11.3012L10.8018 9.86951L15.1217 14.1894L15.1049 7.72888Z"
+                                fill="black"
+                            />
+                            <path
+                                d="M7.2572 9.1715L8.67142 7.75728L6.5501 5.63596L5.13588 7.05018L7.2572 9.1715Z"
+                                fill="black"
+                            />
+                        </svg>
+                    </span>
+                </button>
+            </div>
+
+            {initialCategories.map(cat => {
+                const isOpen = openGroups.includes(cat.id);
+                return (
+                    <div key={cat.id} id={'block-' + cat.id} className="w-full">
+                        <CollapseSection title={cat.title} isOpen={isOpen} onToggle={() => toggleGroup(cat.id)}>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
+                                {cat.items.map(item => (
+                                    <FeedbackCard key={item.id} item={item} />
+                                ))}
+                            </div>
+                        </CollapseSection>
+                    </div>
+                );
+            })}
+        </StandardPageLayout>
+
     );
 };
 
