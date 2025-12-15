@@ -8,17 +8,17 @@ const nextConfig = {
   // Убираем ошибку Turbopack + webpack
   turbopack: {}, // Это официально рекомендованный способ заглушить ошибку
   images: {
-},
-  images: {
     domains: ['test11.audiosector.ru'],
 
-    // Заменяем на новый безопасный формат
-/*     remotePatterns: [
+    remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**', // или конкретно: 'test11.audiosector.ru', 'img.youtube.com' и т.д.
+        hostname: 'test11.audiosector.ru',
+        port: '', // пусто, если стандартный 443
+        pathname: '/**', // позволяет все пути, или укажи '/cp/uploads/**' для точности
       },
-    ], */
+      // Если нужно больше доменов — добавляй сюда
+    ],
 
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
