@@ -67,7 +67,7 @@ const AppNavigation = ({ active, services }: { active: boolean, services: Servic
 const AppNavigationItem = ({ img, title, controls, link, dark, className, onClick, classNameText }: { link: string; img: string , title: string, controls?: AnimationControls, dark?: boolean, className?: string, onClick?: (e: React.MouseEvent<HTMLElement>) => void, classNameText?: string }) => {
     const { setButtonRef, setWrapperRef } = useButton()
 
-    const active = window.location.pathname.includes(link);
+    const active = typeof window !== 'undefined' && window.location.pathname.includes(link);
 
     const hoverStyle = dark ? 'hover:border-[#34446D] hover:bg-[#F5F5F2] ' : ' hover:border-[#fff] hover:bg-[#34446d33]'
 
