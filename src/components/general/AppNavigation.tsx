@@ -67,6 +67,12 @@ const AppNavigation = ({ active, services }: { active: boolean, services: Servic
 const AppNavigationItem = ({ img, title, controls, link, dark, className, onClick, classNameText }: { link: string; img: string , title: string, controls?: AnimationControls, dark?: boolean, className?: string, onClick?: (e: React.MouseEvent<HTMLElement>) => void, classNameText?: string }) => {
     const { setButtonRef, setWrapperRef } = useButton()
 
+    const active = window.location.pathname.includes(link);
+
+    const hoverStyle = dark ? 'hover:border-[#34446D] hover:bg-[#F5F5F2] ' : ' hover:border-[#fff] hover:bg-[#34446d33]'
+
+    const activeStyle = dark ? 'border-[#34446D] bg-[#F5F5F2] ' : ' border-[#fff] bg-[#34446d33]'
+
     return (
         <>
             <div ref={setWrapperRef} className={`${stylesBtn.tariffWrap} ${className ?? 'xxs:!max-w-[250px]'}`}>
@@ -75,7 +81,7 @@ const AppNavigationItem = ({ img, title, controls, link, dark, className, onClic
                     href={'/services/' + link}
                     prefetch={false}
                     onClick={onClick}
-                    className={` ${stylesBtn.tariff} ${stylesBtn.noTransitions} text-left overflow-hidden ${stylesBtn.notBackdrop} flex  gap-[10px] group/img  rounded-[3px] items-center    border-solid  border border-[transparent] h-[72px] p-[5px] ${dark ? 'hover:border-[#34446D] hover:bg-[#F5F5F2] ' : ' hover:border-[#fff] hover:bg-[#34446d33]'}`}>
+                    className={` ${stylesBtn.tariff} ${stylesBtn.noTransitions} text-left overflow-hidden ${stylesBtn.notBackdrop} flex  gap-[10px] group/img  rounded-[3px] items-center    border-solid  border border-[transparent] h-[72px] p-[5px] ${active ? activeStyle : ''} ${hoverStyle}`}>
                     <motion.div
                         className={` overflow-hidden h-[60px] rounded-[3px] min-w-[43px] w-[43px] border-solid border border-[#93969D] `}
                         animate={controls}>
