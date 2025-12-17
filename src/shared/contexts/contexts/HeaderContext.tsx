@@ -1,6 +1,6 @@
 'use client'
 
-import { useCopy } from '@/hook/useCopy';
+import { useCopy } from '@/shared/hooks/useCopy';
 import { NavigationItem } from '@/types/navigation';
 import { createContext, useState, useContext, ReactNode } from 'react';
 

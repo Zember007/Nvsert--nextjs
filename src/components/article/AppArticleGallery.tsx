@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { AsyncPhotoProvider, AsyncPhotoView } from '@/components/common/AsyncPhotoView';
+import { AsyncPhotoProvider, AsyncPhotoView } from '@/shared/common/AsyncPhotoView';
 
 interface MediaItem {
     image_webp: string;

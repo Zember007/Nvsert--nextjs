@@ -1,10 +1,9 @@
-
-const page = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+const Page = () => {
+  return (
+    <main>
+      {/* TODO: добавить контент страницы расчёта стоимости */}
+    </main>
+  );
 };
 
-export default page;
+export default Page;

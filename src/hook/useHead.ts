@@ -1,0 +1,78 @@
+interface SEOConfig {
+  seo_title?: string;
+  seo_h1?: string;
+  title?: string;
+  seo_description?: string;
+  seo_keywords?: string;
+  og_title?: string;
+  og_description?: string;
+  og_image?: string;
+}
+
+interface RouteConfig {
+  routePath?: string;
+}
+
+interface HeadMetadata {
+  title: string;
+  description: string;
+  keywords: string;
+  openGraph: {
+    title: string;
+    description: string;
+    images: string[];
+  };
+  alternates: {
+    canonical: string;
+  };
+  additionalMeta: Array<{
+    hid: string;
+    name: string;
+    content: string;
+  }>;
+}
+
+export function generateMetadata(configs: RouteConfig, SEO: SEOConfig): HeadMetadata {
+  const headMetadata = {
+    title: SEO?.seo_title || SEO?.seo_h1 || SEO?.title || '',
+    description: SEO?.seo_description || '',
+    keywords: SEO?.seo_keywords || '',
+    openGraph: {
+      title: SEO?.og_title || SEO?.seo_title || '',
+      description: SEO?.og_description || SEO?.seo_description || '',
+      images: SEO?.og_image
+        ? [`${process.env.NEXT_PUBLIC_BASE_URL ?? ''}${SEO.og_image}`]
+        : [],
+    },
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL ?? ''}${configs?.routePath || ''}`,
+    },
+  } as const;
+
+  return {
+    title: headMetadata.title,
+    description: headMetadata.description,
+    keywords: headMetadata.keywords,
+    openGraph: headMetadata.openGraph,
+    alternates: headMetadata.alternates,
+    additionalMeta: [
+      { hid: 'keywords', name: 'keywords', content: headMetadata.keywords },
+      { hid: 'description', name: 'description', content: headMetadata.description },
+      {
+        hid: 'og:title',
+        name: 'og:title',
+        content: headMetadata.openGraph.title,
+      },
+      {
+        hid: 'og:description',
+        name: 'og:description',
+        content: headMetadata.openGraph.description,
+      },
+      {
+        hid: 'og:image',
+        name: 'og:image',
+        content: headMetadata.openGraph.images[0] ?? '',
+      },
+    ],
+  };
+}

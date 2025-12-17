@@ -2,9 +2,9 @@ import { useRef, useState, memo, useMemo, useCallback } from 'react';
 
 import { useButton } from '@/hook/useButton';
 import { motion } from 'framer-motion';
-import { useHeaderContext } from '@/components/contexts/HeaderContext';
+import { useHeaderContext } from '@/shared/contexts/contexts/HeaderContext';
 import { MainDocumentItemProps } from '@/types/documents';
-import useWindowSize from '@/hook/useWindowSize';
+import useWindowSize from '@/shared/hooks/useWindowSize';
 import { useRouter } from 'next/navigation';
 import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
 import stylesBtn from '@/assets/styles/main.module.scss';

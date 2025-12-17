@@ -1,10 +1,10 @@
-import Image from 'next/image';
-import { FC, memo } from 'react';
-import type { AnimationControls } from 'framer-motion';
-import { motion } from 'framer-motion';
+import Image from "next/image";
+import { FC, memo } from "react";
+import type { AnimationControls } from "framer-motion";
+import { motion } from "framer-motion";
 
-import { AsyncPhotoView } from '@/components/common/AsyncPhotoView';
-import mainDocumentsStyles from '@/assets/styles/main.module.scss';
+import { AsyncPhotoView } from "shared/common/AsyncPhotoView";
+import mainDocumentsStyles from "@/assets/styles/main.module.scss";
 
 export interface DocumentImageProps {
   title: string;
@@ -35,7 +35,7 @@ export const DocumentImage: FC<DocumentImageProps> = memo(
       <motion.div
         initial={{ y: 20 }}
         animate={controls}
-        className={`${mainDocumentsStyles['document__big-img']} `}
+        className={`${mainDocumentsStyles["document__big-img"]} `}
       >
         <Image
           decoding="async"
@@ -51,6 +51,4 @@ export const DocumentImage: FC<DocumentImageProps> = memo(
   ),
 );
 
-DocumentImage.displayName = 'DocumentImage';
-
-
+DocumentImage.displayName = "DocumentImage";

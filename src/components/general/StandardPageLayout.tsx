@@ -1,8 +1,9 @@
 'use client';
 import React from 'react';
+
 import AppBreadcrumbs from '@/components/general/AppBreadcrumbs';
-import Button from '@/components/ui/Button';
-import { useHeaderContext } from '@/components/contexts/HeaderContext';
+import { Button } from 'shared/ui';
+import { useHeaderContext } from 'shared/contexts';
 import SidebarNavButtons from '@/components/general/SidebarNavButtons';
 import DotNavList, { DotNavItemProps } from '@/components/general/DotNavList';
 
@@ -105,4 +106,3 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
 };
 
 export default StandardPageLayout;
-

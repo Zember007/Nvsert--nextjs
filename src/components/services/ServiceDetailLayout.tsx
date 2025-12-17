@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Button from '@/components/ui/Button';
+import { Button } from '@/shared/ui';
 import AppCtaBanner from '@/components/general/AppCtaBanner';
 import ServiceCard from '@/components/services/ServiceCard';
 import ServiceContentBlock from '@/components/services/ServiceContentBlock';

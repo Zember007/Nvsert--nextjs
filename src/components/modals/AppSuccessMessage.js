@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useHeaderContext } from "../contexts/HeaderContext";
+import { useHeaderContext } from "@/shared/contexts/contexts/HeaderContext";
 import { useRouter } from "next/navigation";
 
 

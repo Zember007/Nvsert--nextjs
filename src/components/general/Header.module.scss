@@ -1,7 +1,9 @@
+@use "@/shared/styles/tokens" as *;
+
 .menu-item {
   -webkit-background-clip: text;
   align-items: center;
-  color: var(--color-item-menu);
+  color: $color-item-menu;
   display: flex;
   font-size: 18px;
   font-weight: 300;
@@ -23,11 +25,6 @@
   }
 }
 
-
-
-
-
-
 .menu-item-active span {
   display: flex;
   align-items: center;
@@ -35,31 +32,21 @@
   height: 100%;
   transition: color 0.15s ease;
   will-change: color;
-  color: var(--color-item-menu);
+  color: $color-item-menu;
 }
 
 .menu-item:hover {
-  color: var(--color-item-menu);
-  border-color: var(--color-item-menu);
+  color: $color-item-menu;
+  border-color: $color-item-menu;
 }
 
-
-
-
-
-
-
-
 .menu-item-active:active {
-  color: #FFF;
+  color: #fff;
 }
 
 .menu-item-active {
-  border-color: #FFF;
-
+  border-color: #fff;
 }
-
-
 
 .menu-item:active,
 .menu-item.fast-click {
@@ -67,13 +54,10 @@
   transform-origin: center;
   will-change: transform, color, border-color;
   transition: transform 0.2s ease, border-color 0.3s ease;
-  color: var(--color-item-menu);
+  color: $color-item-menu;
   background: none;
   box-shadow: none;
-
 }
-
-
 
 .menu-item-active:active,
 .menu-item-active.fast-click {
@@ -81,23 +65,23 @@
   transform-origin: center;
   will-change: transform, color, border-color;
   transition: transform 0.2s ease, color 0.15s ease, border-color 0.3s ease;
-  color: var(--color-item-menu) !important;
+  color: $color-item-menu !important;
   background: none;
   box-shadow: none;
 }
 
 .menu-item-active:active span,
 .menu-item-active.fast-click span {
-  color: var(--color-item-menu) !important;
+  color: $color-item-menu !important;
   transition: color 0.15s ease, -webkit-text-fill-color 0.15s ease;
   will-change: color, -webkit-text-fill-color;
   background: none !important;
   -webkit-background-clip: none !important;
   background-clip: none !important;
-  -webkit-text-fill-color: var(--color-item-menu) !important;
+  -webkit-text-fill-color: $color-item-menu !important;
 }
 
 .menu-item-active:hover {
-  color: var(--color-item-menu);
-  border-color: var(--color-item-menu);
+  color: $color-item-menu;
+  border-color: $color-item-menu;
 }

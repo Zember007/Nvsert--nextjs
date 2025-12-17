@@ -1,10 +1,10 @@
 'use client';
 
-import { AsyncPhotoProvider, AsyncPhotoView } from '@/components/common/AsyncPhotoView';
+import { AsyncPhotoProvider, AsyncPhotoView } from '@/shared/common/AsyncPhotoView';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
-import useWindowSize from '@/hook/useWindowSize';
+import useWindowSize from '@/shared/hooks/useWindowSize';
 import stylesMainFeedback from '@/assets/styles/main.module.scss';
 import stylesSlider from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/main.module.scss';

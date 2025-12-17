@@ -7,7 +7,7 @@ import Map from '../../components/about/Map';
 import Slider from '../../components/about/Slider';
 import { AboutData } from './page';
 import AppCtaBanner from '@/components/general/AppCtaBanner';
-import { useHeaderContext } from '@/components/contexts/HeaderContext';
+import { useHeaderContext } from '@/shared/contexts/contexts/HeaderContext';
 import { StrapiResponsiveImage } from '@/components/general/StrapiResponseImage';
 import GridBox from '@/components/about/Grid';
 

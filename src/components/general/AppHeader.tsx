@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
-import { useHeaderContext } from "../contexts/HeaderContext";
+import { useHeaderContext } from "@/shared/contexts/contexts/HeaderContext";
 import { Services } from "@/types/navigation";
 import HeaderTopContacts from "./header/HeaderTopContacts";
 import HeaderLeftLogo from "./header/HeaderLeftLogo";

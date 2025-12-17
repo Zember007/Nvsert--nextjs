@@ -10,7 +10,7 @@ import axios from "axios";
 import { useButton } from "@/hook/useButton";
 import { useEffect, useId, useRef, useState, useMemo, useCallback } from "react";
 import AppCheckbox from './elements/AppCheckbox';
-import { BounceEffect } from "@/hook/useBounce";
+import { BounceEffect } from "@/shared/hooks/useBounce";
 import FlightSuccess from "../modals/FlightSuccess";
 import { useAnimation, motion } from "framer-motion";
 import { filterPrepositions } from "@/hook/filter";

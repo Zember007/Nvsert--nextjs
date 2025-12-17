@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import AppTextarea from "./elements/AppTextarea";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useHeaderContext } from "../contexts/HeaderContext";
+import { useHeaderContext } from "@/shared/contexts/contexts/HeaderContext";
 import formStyles from '@/assets/styles/base/base.module.scss';
 
 const AppDefaultForm = ({ btnText }:{ btnText:string }) => {

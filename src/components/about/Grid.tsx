@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import GridBlock from './GridBlock';
-import useWindowSize from '@/hook/useWindowSize';
+import useWindowSize from '@/shared/hooks/useWindowSize';
 import stylesSlider from '@/assets/styles/base/base.module.scss';
 interface GridBoxProps {
     gridContent: string;

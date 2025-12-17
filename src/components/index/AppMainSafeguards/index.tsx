@@ -8,7 +8,7 @@ import Img1 from '@/assets/images/safeguard/1.webp';
 import Img2 from '@/assets/images/safeguard/2.webp';
 import Img3 from '@/assets/images/safeguard/3.webp';
 import Img4 from '@/assets/images/safeguard/4.webp';
-import useWindowSize from '@/hook/useWindowSize';
+import useWindowSize from '@/shared/hooks/useWindowSize';
 import stylesSlider from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/main.module.scss';
 

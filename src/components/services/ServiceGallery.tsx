@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { NavigationItem } from '@/types/navigation';
-import { AsyncPhotoProvider, AsyncPhotoView } from '@/components/common/AsyncPhotoView';
+import { AsyncPhotoProvider, AsyncPhotoView } from '@/shared/common/AsyncPhotoView';
 
 interface ServiceGalleryProps {
     navigation?: NavigationItem[] | null;

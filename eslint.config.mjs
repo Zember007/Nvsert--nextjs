@@ -9,6 +9,40 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-const eslintConfig = [...compat.extends("next/core-web-vitals")];
+/** @type {import("eslint").Linter.FlatConfig[]} */
+const eslintConfig = [
+  ...compat.extends("next/core-web-vitals"),
+  {
+    files: ["**/*.{ts,tsx,js,jsx}"];
+    languageOptions: {
+      parserOptions: {
+        project: true,
+      },
+    },
+    plugins: {
+      "@typescript-eslint": require("@typescript-eslint/eslint-plugin"),
+      "react-hooks": require("eslint-plugin-react-hooks"),
+      "jsx-a11y": require("eslint-plugin-jsx-a11y"),
+    },
+    rules: {
+      // React hooks
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+
+      // A11y
+      "jsx-a11y/anchor-is-valid": "warn",
+
+      // Imports ordering and structure
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            "@/components/*",
+          ],
+        },
+      ],
+    },
+  },
+];
 
 export default eslintConfig;

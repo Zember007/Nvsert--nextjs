@@ -1,7 +1,7 @@
 import React from 'react';
 import AppInput from './elements/AppInput';
 import AppValidationObserver from './AppValidationObserver';
-import { useHeaderContext } from '../contexts/HeaderContext';
+import { useHeaderContext } from '@/shared/contexts/contexts/HeaderContext';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';

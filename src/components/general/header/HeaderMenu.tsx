@@ -3,7 +3,7 @@ import ArrowIcon from '@/assets/images/svg/menu/arrow.svg'
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Services } from '@/types/navigation';
-import { useHeaderContext } from '@/components/contexts/HeaderContext';
+import { useHeaderContext } from '@/shared/contexts/contexts/HeaderContext';
 import { filterPrepositions } from '@/hook/filter';
 import headerStyles from '@/assets/styles/base/base.module.scss';
 import stylesBtn from '@/assets/styles/base/base.module.scss';

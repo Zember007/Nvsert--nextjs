@@ -1,9 +1,9 @@
 'use client';
 
 import { useCallback, useMemo, useState } from 'react';
-import { AsyncPhotoProvider } from '@/components/common/AsyncPhotoView';
+import { AsyncPhotoProvider } from '@/shared/common/AsyncPhotoView';
 import { useTranslation } from 'react-i18next';
-import { useHeaderContext } from '../../contexts/HeaderContext';
+import { useHeaderContext } from '@/shared/contexts/contexts/HeaderContext';
 import mainDocumentsStyles from '@/assets/styles/main.module.scss';
 import MainDocumentItem from './MainDocumentItem';
 import { VirtualizedList } from '../utils/VirtualizedList';

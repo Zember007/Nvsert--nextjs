@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import AppTextarea from "./elements/AppTextarea";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useHeaderContext } from "../contexts/HeaderContext";
+import { useHeaderContext } from "@/shared/contexts/contexts/HeaderContext";
 import MessageImg from '@/assets/images/svg/Phone.svg'
 import Image from "next/image";
 

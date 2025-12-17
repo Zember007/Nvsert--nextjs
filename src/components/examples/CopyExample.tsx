@@ -1,5 +1,5 @@
 
-import { useHeaderContext } from '../contexts/HeaderContext';
+import { useHeaderContext } from '@/shared/contexts/contexts/HeaderContext;
 
 const CopyExample = () => {
   const { handleCopy } = useHeaderContext();

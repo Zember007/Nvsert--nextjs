@@ -1,4 +1,6 @@
-import { FaqItem } from '@/types/faq';
+import type { FaqItem } from '@/types/faq';
+
+const ONE_HOUR_SECONDS = 60 * 60;
 
 export async function getFaqs(): Promise<FaqItem[]> {
   try {
@@ -6,13 +8,16 @@ export async function getFaqs(): Promise<FaqItem[]> {
       process.env.NEXT_PUBLIC_SITE_URL ||
       process.env.NEXT_PUBLIC_BASE_URL ||
       'https://nvsert.ru';
-    const res = await fetch(`${baseUrl}/api/faqs`, {      
-      next: { revalidate: 3600 },
+
+    const res = await fetch(`${baseUrl}/api/faqs`, {
+      next: { revalidate: ONE_HOUR_SECONDS },
     });
+
     if (!res.ok) {
       console.error('Failed to fetch FAQs:', res.statusText);
       return [];
     }
+
     const data = await res.json();
     const faqs: FaqItem[] = data.data || [];
     return faqs;
@@ -21,5 +26,3 @@ export async function getFaqs(): Promise<FaqItem[]> {
     return [];
   }
 }
-
-

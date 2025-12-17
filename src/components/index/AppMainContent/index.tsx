@@ -8,7 +8,7 @@ import {
   SliderSkeleton, 
   SafeguardsSkeleton, 
   FeedbackSkeleton 
-} from '@/components/common/SectionSkeleton';
+} from '@/shared/common/SectionSkeleton';
 
 // Ленивая загрузка тяжелых компонентов с приоритетами
 const AppMainSlider = dynamic(() => import('../AppMainSlider'), {

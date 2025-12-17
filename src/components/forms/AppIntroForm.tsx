@@ -11,7 +11,7 @@ import ImgCallMob from '@/assets/images/order-call-mob.png'
 import { useButton } from "@/hook/useButton";
 import { useEffect, useRef, useState } from "react";
 import FlightSuccess from "../modals/FlightSuccess";
-import { useHeaderContext } from "../contexts/HeaderContext";
+import { useHeaderContext } from '@/shared/contexts/contexts/HeaderContext';
 import { useAnimation, motion } from "framer-motion";
 import { filterPrepositions } from "@/hook/filter";
 import stylesBtn from '@/assets/styles/base/base.module.scss';

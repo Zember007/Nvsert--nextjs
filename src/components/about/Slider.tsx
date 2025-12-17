@@ -1,4 +1,4 @@
-import useWindowSize from '@/hook/useWindowSize';
+import useWindowSize from '@/shared/hooks/useWindowSize';
 import { horizontalLoop } from '@/scripts/slider';
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';

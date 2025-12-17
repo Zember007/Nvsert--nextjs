@@ -3,7 +3,7 @@
 import AppHeader from '@/components/general/AppHeader';
 import { ReactNode, useEffect } from 'react';
 import AppFooter from '@/components/general/AppFooter';
-import { useHeaderContext } from '@/components/contexts/HeaderContext';
+import { useHeaderContext } from '@/shared/contexts/contexts/HeaderContext';
 import dynamic from 'next/dynamic';
 import CopyNotification from '@/components/general/elements/CopyNotification';
 import { NavigationItem } from '@/types/navigation';

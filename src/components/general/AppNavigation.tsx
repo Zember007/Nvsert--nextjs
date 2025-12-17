@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useAnimation, motion, AnimationControls } from "framer-motion";
 import { useEffect } from "react";
-import { useHeaderContext } from "../contexts/HeaderContext";
+import { useHeaderContext } from "@/shared/contexts/contexts/HeaderContext";
 import { filterPrepositions } from "@/hook/filter";
 import { useButton } from "@/hook/useButton";
 import { NavigationItem, Services } from "@/types/navigation";

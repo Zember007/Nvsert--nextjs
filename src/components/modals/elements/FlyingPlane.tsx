@@ -1,4 +1,4 @@
-import useWindowSize from "@/hook/useWindowSize";
+import useWindowSize from "@/shared/hooks/useWindowSize";
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 
