@@ -2,7 +2,7 @@
 'use client';
 
 import React from 'react';
-import { useIntersectionObserver } from './useIntersectionObserver';
+import { useIntersectionObserver } from '@/shared/hooks/useIntersectionObserver';
 
 interface LazyLoadSectionProps {
   component: React.ComponentType;
