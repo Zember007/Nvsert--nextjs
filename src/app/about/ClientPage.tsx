@@ -118,7 +118,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
                                         <StrapiResponsiveImage
                                             image={block.image}
                                             priority={true}
-                                            baseUrl="https://test11.audiosector.ru/cp"
+                                            baseUrl=""
                                         />
                                     </div>
                                 )}
@@ -131,7 +131,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
                                 <div className="max-w-full mx-auto mt-[50px] flex justify-center">
                                     <StrapiResponsiveImage
                                         image={block.image}
-                                        baseUrl="https://test11.audiosector.ru/cp"
+                                        baseUrl=""
                                     />
                                 </div>
                             )}

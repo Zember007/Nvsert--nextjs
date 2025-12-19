@@ -86,8 +86,8 @@ const MainDocumentItem = memo(({
 
     // Мемоизация URL изображений
     const imageUrls = useMemo(() => ({
-        thumbnail: 'https://test11.audiosector.ru/cp' + img?.formats?.thumbnail?.url,
-        full: 'https://test11.audiosector.ru/cp' + img?.url
+        thumbnail: '' + img?.formats?.thumbnail?.url,
+        full: '' + img?.url
     }), [img]);
 
     // Мемоизация обработчиков

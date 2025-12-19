@@ -12,7 +12,7 @@ const FeedbackCard: React.FC<{ item: FeedbackItem }> = ({ item }) => {
                     {!!img && (
                         <div className="shrink-0 w-[190px] rounded-[6px] overflow-hidden bg-[#fff] border border-[#93969D] xxs:mx-0 mx-auto">
                             {/* Using img to avoid Image domain config issues */}
-                            <Image src={'https://test11.audiosector.ru/cp' + img} alt={item.photo?.alternativeText || item.title} className="w-full h-full object-contain" width={190} height={267} />
+                            <Image src={'' + img} alt={item.photo?.alternativeText || item.title} className="w-full h-full object-contain" width={190} height={267} />
                         </div>
                     )}
                     <FeedbackList content={item.content?.body || ''} title={item.title || ''} />

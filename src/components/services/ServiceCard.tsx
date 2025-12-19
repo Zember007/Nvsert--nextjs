@@ -47,7 +47,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                 <div className="relative w-full ">
                     <div className="border border-[#93969d] rounded-[4px] overflow-hidden h-[346px]">
                         <Image
-                            src={'https://test11.audiosector.ru/cp' + imageUrl}
+                            src={'' + imageUrl}
                             alt={certificate.title}
                             width={250}
                             height={346}
@@ -80,7 +80,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                 <div className="relative w-full ">
                     <div className="border border-[#93969d] rounded-[4px] overflow-hidden h-[346px]">
                         <Image
-                            src={'https://test11.audiosector.ru/cp' + imageUrl}
+                            src={'' + imageUrl}
                             alt={certificate.title}
                             width={250}
                             height={346}

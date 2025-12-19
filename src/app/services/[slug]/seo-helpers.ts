@@ -13,7 +13,7 @@ export async function getNavigationDataBySlug(slug: string): Promise<any | null>
 
 // Единое вычисление основного URL картинки услуги (OG / главная фотка)
 export function resolveServiceOgImageUrl(navigation: any): string | undefined {
-  const cmsBase = 'https://test11.audiosector.ru/cp';
+  const cmsBase = '';
 
   // 1. Явный og_image
   if (navigation?.og_image && typeof navigation.og_image === 'string') {
