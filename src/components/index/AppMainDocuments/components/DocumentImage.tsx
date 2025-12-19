@@ -38,6 +38,7 @@ export const DocumentImage: FC<DocumentImageProps> = memo(
         className={`${mainDocumentsStyles["document__big-img"]} `}
       >
         <Image
+          unoptimized={true}
           decoding="async"
           alt="document"
           src={imageUrls.full}

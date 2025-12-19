@@ -91,6 +91,7 @@ const AppNavigationItem = ({ img, title, controls, link, dark, className, onClic
                             width={43} 
                             height={60} 
                             alt="document" 
+                            unoptimized={true}
                             sizes="43px"
                         />
                     </motion.div>

@@ -24,6 +24,7 @@ export const DocumentHeader: FC<DocumentHeaderProps> = memo(
     >
       <div className={`${active && mainDocumentsStyles.active} ${mainDocumentsStyles['document__small-img']} `}>
         <Image
+          unoptimized={true}
           decoding="async"
           alt="document"
           src={imageUrls.thumbnail}
