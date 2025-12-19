@@ -13,23 +13,22 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'test11.audiosector.ru',
-        port: '', // пусто, если стандартный 443
-        pathname: '/**', // позволяет все пути, или укажи '/cp/uploads/**' для точности
+        pathname: '/uploads/**',
       },
-      // Если нужно больше доменов — добавляй сюда
+      
     ],
 
-    formats: ['image/avif', 'image/webp'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+formats: ['image/avif', 'image/webp'],
+  deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60,
-    dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+      minimumCacheTTL: 60,
+        dangerouslyAllowSVG: true,
+          contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
-  reactStrictMode: true,
+reactStrictMode: true,
   compress: true,
-  poweredByHeader: false,
+    poweredByHeader: false,
 
   // webpack конфиг остаётся (он нужен для @svgr/webpack)
   // Turbopack его игнорирует, но Next.js больше не ругается благодаря turbopack: {}
