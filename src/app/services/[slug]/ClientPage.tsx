@@ -2,13 +2,13 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 
-import AppBreadcrumbs from '@/components/general/AppBreadcrumbs';
 import { useHeaderContext } from 'shared/contexts';
 import { NavigationItem } from '@/types/navigation';
-import ServiceDetailLayout from '@/components/services/ServiceDetailLayout';
+import { AppBreadcrumbs } from 'widgets/layout';
+import { ServiceDetailLayout } from 'widgets/services';
 
 const ServiceGallery = dynamic(
-  () => import('@/components/services/ServiceGallery'),
+  () => import('widgets/services').then((m) => m.ServiceGallery),
   { ssr: false },
 );
 

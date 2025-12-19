@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import { useIsMac } from '@/shared/hooks/useIsMac';
+import { useIsMac } from 'shared/hooks/useIsMac';
 import { 
   getSystemFontFamily, 
   processElementsBatched,

@@ -1,10 +1,8 @@
 import { Suspense } from 'react';
 import { getFaqs } from 'entities/faq';
-import AppMainIntro from '@/components/index/AppMainIntro';
-import AppMainSkills from '@/components/index/AppMainSkills';
-import AppMainContent from '@/components/index/AppMainContent';
+import { AppMainContent, AppMainIntro, AppMainSkills } from 'widgets/home';
 import HomeDocumentsClient from './_components/HomeDocumentsClient';
-import { DocumentsSkeleton } from '@/shared/common/SectionSkeleton';
+import { DocumentsSkeleton } from 'shared/common/SectionSkeleton';
 
 export default async function Home() {
   const [faqs] = await Promise.all([getFaqs()]);

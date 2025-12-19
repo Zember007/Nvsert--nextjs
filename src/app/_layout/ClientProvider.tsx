@@ -1,11 +1,11 @@
 "use client";
 
-import "@/config/i18n";
+import "shared/config/i18n";
 import { ReactNode } from "react";
 import Layout_wrapper from "./Layout_wrapper";
 import { TypographyProvider } from "./Typography/TypographyProvider";
 import { NavigationItem } from "@/types/navigation";
-import { HeaderContextProvider } from "shared/contexts/contexts/HeaderContext";
+import { HeaderContextProvider } from "shared/contexts";
 
 interface ClientProviderProps {
   children: ReactNode;

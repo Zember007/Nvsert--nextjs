@@ -37,7 +37,22 @@ const eslintConfig = [
         "error",
         {
           patterns: [
+            // legacy folders / legacy style aliases
             "@/components/*",
+            "@/hook/*",
+            "@/config/*",
+
+            // FSD layers should be imported via layer aliases, not via @/shared etc
+            "@/shared/*",
+            "@/entities/*",
+            "@/features/*",
+            "@/widgets/*",
+            "@/app/*",
+
+            // legacy directories (direct)
+            "components/*",
+            "hook/*",
+            "config/*",
           ],
         },
       ],

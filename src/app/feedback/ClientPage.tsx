@@ -1,11 +1,10 @@
 'use client';
 import React from 'react';
-import StandardPageLayout from '@/components/general/StandardPageLayout';
-import CollapseSection from '@/components/general/CollapseSection';
-import { useButton } from '@/hook/useButton';
+import { CollapseSection, StandardPageLayout } from 'widgets/layout';
+import { useButton } from 'shared/hooks';
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 import { FeedbackCategoryGroup } from '@/types/feedback';
-import FeedbackCard from '@/components/feedback/FeedbackCard';
+import FeedbackCard from 'widgets/feedback/FeedbackCard';
 
 
 

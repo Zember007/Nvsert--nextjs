@@ -1,4 +1,4 @@
-import { DotNavItemProps } from '@/components/general/DotNavList';
+import type { DotNavItemProps } from 'widgets/layout';
 
 
 

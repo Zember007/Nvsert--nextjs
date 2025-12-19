@@ -1,15 +1,15 @@
 'use client';
 import React from 'react';
-import StandardPageLayout from '@/components/general/StandardPageLayout';
-import CollapseSection from '@/components/general/CollapseSection';
-import { useRichTextRenderer } from '@/hook/useRichTextRenderer';
-import Map from '../../components/about/Map';
-import Slider from '../../components/about/Slider';
+import { useRichTextRenderer } from 'shared/lib';
+import { useHeaderContext } from 'shared/contexts';
+import { GridBox, Map, Slider } from 'widgets/about';
+import {
+  AppCtaBanner,
+  CollapseSection,
+  StandardPageLayout,
+  StrapiResponsiveImage,
+} from 'widgets/layout';
 import { AboutData } from './page';
-import AppCtaBanner from '@/components/general/AppCtaBanner';
-import { useHeaderContext } from '@/shared/contexts/contexts/HeaderContext';
-import { StrapiResponsiveImage } from '@/components/general/StrapiResponseImage';
-import GridBox from '@/components/about/Grid';
 
 interface AboutCompanyClientProps {
     aboutData: AboutData | null;

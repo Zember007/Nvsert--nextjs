@@ -1,4 +1,4 @@
-import AppMainDocuments from '@/components/index/AppMainDocuments';
+import { AppMainDocuments } from 'widgets/home';
 
 // Обёртка для секции с документами.
 // Теперь AppMainDocuments может рендериться на сервере,

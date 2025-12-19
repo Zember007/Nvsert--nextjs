@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useButton } from '@/hook/useButton';
+import { useButton } from 'shared/hooks';
 import styles from '@/assets/styles/base/base.module.scss';
 
 type TariffButtonProps = {

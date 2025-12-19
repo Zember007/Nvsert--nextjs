@@ -3,10 +3,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 import { groupServices } from '@/assets/lib/navigation';
 import type { NavigationItem, Services } from '@/types/navigation';
-import ServicesBreadcrumbs from '@/components/services/ServicesBreadcrumbs';
-import ServicesHeader from '@/components/services/ServicesHeader';
-import ServicesList from '@/components/services/ServicesList';
 import { useHeaderContext } from 'shared/contexts';
+import { ServicesBreadcrumbs, ServicesHeader, ServicesList } from 'widgets/services';
 
 const ServicesContent = () => {
   const { initialNavigation } = useHeaderContext();

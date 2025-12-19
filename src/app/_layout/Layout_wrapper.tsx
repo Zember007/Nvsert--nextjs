@@ -1,18 +1,17 @@
 'use client';
 
-import AppHeader from '@/components/general/AppHeader';
+import { AppFooter, AppHeader } from 'widgets/layout';
 import { ReactNode, useEffect } from 'react';
-import AppFooter from '@/components/general/AppFooter';
-import { useHeaderContext } from '@/shared/contexts/contexts/HeaderContext';
+import { useHeaderContext } from 'shared/contexts';
 import dynamic from 'next/dynamic';
-import CopyNotification from '@/components/general/elements/CopyNotification';
+import CopyNotification from 'widgets/layout/elements/CopyNotification';
 import { NavigationItem } from '@/types/navigation';
 import { groupServices } from '@/assets/lib/navigation';
 import '@/assets/styles/base.scss';
 
 
-const AppModalWrapper = dynamic(() => import('@/components/general/AppModalWrapper'), {
-    ssr: false
+const AppModalWrapper = dynamic(() => import('widgets/layout').then((m) => m.AppModalWrapper), {
+  ssr: false,
 });
 
 
