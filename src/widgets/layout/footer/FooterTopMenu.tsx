@@ -12,7 +12,7 @@ const FooterTopMenu: React.FC = () => {
     { label: t("navigation.blog"), href: "#" },
     { label: t("navigation.reviews"), href: "/feedback" },
     { label: t("navigation.tnved"), href: "/class/tnved/" },
-    { label: t("navigation.okp"), href: "/class/okp/" },
+    { label: t("navigation.okp"), href: "/okpd/" },
   ];
 
   return (
