@@ -1,6 +1,6 @@
 
 import React, { Key, useRef } from 'react';
-import { useVirtualizer } from '@tanstack/react-virtual';
+import { useVirtualizer, useWindowVirtualizer } from '@tanstack/react-virtual';
 
 export interface VirtualizedListProps<T> {
   items: T[];
@@ -12,6 +12,8 @@ export interface VirtualizedListProps<T> {
   className?: string;
   /** Высота контейнера (по умолчанию 100%) */
   height?: string | number;
+  /** Виртуализация по скроллу окна (без внутреннего скролл-контейнера) */
+  useWindowScroll?: boolean;
 }
 
 export function VirtualizedList<T>({
@@ -22,21 +24,35 @@ export function VirtualizedList<T>({
   getItemKey,
   className,
   height = '100%',
+  useWindowScroll = false,
 }: VirtualizedListProps<T>) {
   const parentRef = useRef<HTMLDivElement>(null);
 
-  const virtualizer = useVirtualizer({
-    count: items.length,
-    getScrollElement: () => parentRef.current,
-    estimateSize: () => estimatedItemSize, // Начальная оценка
-    overscan,
-    // Ключ для динамической высоты: измеряем реальную высоту элементов
-    measureElement: (element) =>
-      element ? element.getBoundingClientRect().height : 0,
-    // Опционально: padding для стабильности при измерении
-    paddingStart: 0,
-    paddingEnd: 0,
-  });
+  const virtualizer = useWindowScroll
+    ? useWindowVirtualizer({
+        count: items.length,
+        estimateSize: () => estimatedItemSize, // Начальная оценка
+        overscan,
+        scrollMargin: parentRef.current?.offsetTop ?? 0,
+        // Ключ для динамической высоты: измеряем реальную высоту элементов
+        measureElement: (element) =>
+          element ? element.getBoundingClientRect().height : 0,
+        // Опционально: padding для стабильности при измерении
+        paddingStart: 0,
+        paddingEnd: 0,
+      })
+    : useVirtualizer({
+        count: items.length,
+        getScrollElement: () => parentRef.current,
+        estimateSize: () => estimatedItemSize, // Начальная оценка
+        overscan,
+        // Ключ для динамической высоты: измеряем реальную высоту элементов
+        measureElement: (element) =>
+          element ? element.getBoundingClientRect().height : 0,
+        // Опционально: padding для стабильности при измерении
+        paddingStart: 0,
+        paddingEnd: 0,
+      });
 
   const virtualItems = virtualizer.getVirtualItems();
   const totalSize = virtualizer.getTotalSize();
@@ -46,7 +62,9 @@ export function VirtualizedList<T>({
       ref={parentRef}
       className={className}
       style={{
-        height: typeof height === 'number' ? `${height}px` : height,
+        ...(useWindowScroll
+          ? null
+          : { height: typeof height === 'number' ? `${height}px` : height }),
       }}
     >
       <div
@@ -59,6 +77,9 @@ export function VirtualizedList<T>({
         {virtualItems.map((virtualRow) => {
           const item = items[virtualRow.index];
           const key = getItemKey ? getItemKey(item, virtualRow.index) : virtualRow.key;
+          const y = useWindowScroll
+            ? virtualRow.start - (virtualizer.options.scrollMargin ?? 0)
+            : virtualRow.start;
 
           return (
             <div
@@ -70,7 +91,7 @@ export function VirtualizedList<T>({
                 top: 0,
                 left: 0,
                 width: '100%',
-                transform: `translateY(${virtualRow.start}px)`,
+                transform: `translateY(${y}px)`,
                 boxSizing: 'border-box',
               }}
             >

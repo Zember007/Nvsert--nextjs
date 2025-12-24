@@ -18,7 +18,7 @@ export default function ClientProvider({
 }: ClientProviderProps) {
   return (
     <HeaderContextProvider initialNavigation={initialNavigation}>
-      {/*
+      
       <TypographyProvider
         threshold={16}
         smallWeightMac={300}
@@ -26,11 +26,11 @@ export default function ClientProvider({
         smallWeightWindows={350}
         largeWeightWindows={400}
       >
-      */}
+     
       <Layout_wrapper initialNavigation={initialNavigation}>
         {children}
       </Layout_wrapper>
-      {/* </TypographyProvider> */}
+      </TypographyProvider>
     </HeaderContextProvider>
   );
 }

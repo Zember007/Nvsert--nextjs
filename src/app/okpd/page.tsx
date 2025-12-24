@@ -22,7 +22,8 @@ async function fetchOkpd2Items(): Promise<Okpd2Item[]> {
     ).replace(/\/$/, '');
 
     const res = await fetch(`${base}/api/okpd2s?pagination[pageSize]=21000`, {
-        cache: 'force-cache',
+        // Большой справочник: лучше отдавать из кэша и периодически перевалидировать
+        next: { revalidate: 60 * 60 * 24 }, // 24h
     });
 
     if (!res.ok) {
@@ -31,7 +32,6 @@ async function fetchOkpd2Items(): Promise<Okpd2Item[]> {
 
     const json = await res.json();
     const data = Array.isArray(json?.data) ? json.data : Array.isArray(json) ? json : [];
-    console.log(data);
     return data as Okpd2Item[];
 }
 

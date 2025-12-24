@@ -4,6 +4,7 @@ import React from 'react';
 import { CollapseSection } from 'widgets/layout';
 import textSize from '@/assets/styles/base/base.module.scss';
 import OkpdPrefix from '@/widgets/okpd/OkpdPrefix';
+import { VirtualizedList } from '@/widgets/home/utils/VirtualizedList';
 
 export type Okpd2Item = {
     id: number;
@@ -18,6 +19,7 @@ export type Okpd2Item = {
     publishedAt: string | null;
 };
 
+// функция для сравнения кодов
 function compareOkpdCodes(a: string, b: string) {
     const aParts = a.split('.').map(x => Number(x));
     const bParts = b.split('.').map(x => Number(x));
@@ -30,38 +32,112 @@ function compareOkpdCodes(a: string, b: string) {
     return 0;
 }
 
+/**
+ * Автовычисление родителя по логике ОКПД2.
+ *
+ * Важный нюанс: родитель не всегда получается простым "отрезать сегмент по '.'".
+ * Пример:
+ * - 01.11 → родитель 01.1 (отрезаем последний символ внутри сегмента "11")
+ * - 01.11.1 → родитель 01.11 (убираем сегмент ".1")
+ */
+function inferOkpdParentCandidate(code: string): string | null {
+    const trimmed = code.trim();
+    if (!trimmed.includes('.')) return null;
+
+    const parts = trimmed.split('.');
+    if (parts.length === 0) return null;
+
+    const lastIdx = parts.length - 1;
+    const last = parts[lastIdx] ?? '';
+
+    // если последний сегмент длиннее 1 символа — укорачиваем сегмент на 1 символ
+    if (last.length > 1) {
+        parts[lastIdx] = last.slice(0, -1);
+        return parts.join('.');
+    }
+
+    // иначе убираем сегмент целиком
+    parts.pop();
+    return parts.length ? parts.join('.') : null;
+}
+
+function inferExistingParentCode(code: string, codesSet: Set<string>): string | null {
+    let parent = inferOkpdParentCandidate(code);
+    while (parent && !codesSet.has(parent)) {
+        parent = inferOkpdParentCandidate(parent);
+    }
+    return parent;
+}
+
 function formatNodeTitle(node: Pick<Okpd2Item, 'code' | 'name'>) {
     return `${node.code} ${node.name}`;
 }
 
+type OkpdRow =
+    | { kind: 'h5'; item: Okpd2Item; depth: number }
+    | { kind: 'h6'; item: Okpd2Item; depth: number; sectionCode: string }
+    | { kind: 'text'; item: Okpd2Item; depth: number; sectionCode: string };
+
 export default function OkpdHierarchy({ items }: { items: Okpd2Item[] }) {
-    const normalized = React.useMemo(() => {
+    const model = React.useMemo(() => {
         const filtered = (items || []).filter(Boolean);
-        return [...filtered].sort((a, b) => compareOkpdCodes(a.code, b.code));
+
+        // нормализуем код (trim) и убираем дубликаты по code
+        const byCode = new Map<string, Okpd2Item>();
+        for (const it of filtered) {
+            const code = (it.code ?? '').trim();
+            if (!code) continue;
+            if (!byCode.has(code)) {
+                byCode.set(code, { ...it, code });
+            }
+        }
+
+        const codes = [...byCode.keys()].sort(compareOkpdCodes);
+        const codesSet = new Set(codes);
+
+        // вычисляем parent по логике ОКПД (игнорируем item.parentCode — он может быть неверным)
+        const parentByCode = new Map<string, string | null>();
+        for (const code of codes) {
+            parentByCode.set(code, inferExistingParentCode(code, codesSet));
+        }
+
+        // собираем дерево: parent -> children[]
+        const childrenByParent = new Map<string | null, string[]>();
+        for (const code of codes) {
+            const parent = parentByCode.get(code) ?? null;
+            const arr = childrenByParent.get(parent);
+            if (arr) arr.push(code);
+            else childrenByParent.set(parent, [code]);
+        }
+        for (const [k, arr] of childrenByParent.entries()) {
+            childrenByParent.set(k, [...arr].sort(compareOkpdCodes));
+        }
+
+        return {
+            byCode,
+            codes,
+            parentByCode,
+            childrenByParent,
+        };
     }, [items]);
 
     const byParent = React.useMemo(() => {
         const map = new Map<string | null, Okpd2Item[]>();
-        for (const item of normalized) {
-            const key = item.parentCode ?? null;
-            const arr = map.get(key);
-            if (arr) arr.push(item);
-            else map.set(key, [item]);
-        }
-        // ensure children are sorted
-        for (const [k, arr] of map.entries()) {
-            map.set(k, [...arr].sort((a, b) => compareOkpdCodes(a.code, b.code)));
+        for (const [parent, childCodes] of model.childrenByParent.entries()) {
+            map.set(
+                parent,
+                childCodes.map(code => model.byCode.get(code)!).filter(Boolean),
+            );
         }
         return map;
-    }, [normalized]);
+    }, [model]);
+
 
     const roots = React.useMemo(() => byParent.get(null) ?? [], [byParent]);
-    const [openRoots, setOpenRoots] = React.useState<string[]>(
-        roots.map(c => c.code)
-    );
+
+    const [openRoots, setOpenRoots] = React.useState<string[]>([]);
 
     React.useEffect(() => {
-        // If data loads/changes, keep at least first root open.
         if (roots.length === 0) return;
         setOpenRoots(prev => (prev.length ? prev : [roots[0].code]));
     }, [roots]);
@@ -72,36 +148,87 @@ export default function OkpdHierarchy({ items }: { items: Okpd2Item[] }) {
         );
     };
 
-    const renderChildRows = (parentCode: string, nestedDepth: number) => {
-        const children = byParent.get(parentCode) ?? [];
-        if (!children.length) return null;
+    const flattenSubtreeRows = React.useCallback(
+        (rootCode: string): OkpdRow[] => {
+            const result: OkpdRow[] = [];
 
-        return (
-            <>
-                {children.map((child, idx) => {
-                    const position = 'middle';
-                    const textClass =
-                        child.hasChildren || child.level >= 4
-                            ? `${textSize.text2} font-light`
-                            : `${textSize.text2} font-normal`;
+            const walk = (code: string, depth: number, sectionCode: string | null) => {
+                const children = byParent.get(code) ?? [];
 
-                    return (
-                        <React.Fragment key={child.id ?? child.code}>
-                            <div className="pl-[12px] relative">
-                                <OkpdPrefix position={position} hasChild={child.hasChildren} />
-                                <span className={textClass}>{formatNodeTitle(child)}</span>
-                            </div>
-                            {child.hasChildren ? (
-                                <div className="border-l border-[#34446D] ml-[12px] relative flex flex-col gap-[15px]">
-                                    {renderChildRows(child.code, nestedDepth + 1)}
-                                </div>
-                            ) : null}
-                        </React.Fragment>
-                    );
-                })}
-            </>
-        );
-    };
+                for (const child of children) {
+                    const childHasChildren = (byParent.get(child.code)?.length ?? 0) > 0;
+                    if (depth === 0) {
+                        // первый уровень после корня — заголовки
+                        if (childHasChildren) {
+                            result.push({
+                                kind: 'h6',
+                                item: child,
+                                depth: 0,
+                                sectionCode: child.code,
+                            });
+                            walk(child.code, 1, child.code); // рекурсия
+                        } else {
+                            result.push({
+                                kind: 'h5',
+                                item: child,
+                                depth: 0,
+                            });
+                        }
+                    } else {
+                        result.push({
+                            kind: 'text',
+                            item: child,
+                            depth,
+                            sectionCode: sectionCode!,
+                        });
+
+                        if (childHasChildren) {
+                            walk(child.code, depth + 1, sectionCode);
+                        }
+                    }
+                }
+            };
+
+            walk(rootCode, 0, null);
+            return result;
+        },
+        [byParent],
+    );
+
+
+    const OkpdRowContainer = React.useCallback(
+        ({ row, children }: { row: OkpdRow; children: React.ReactNode }) => {
+            const inSection = row.kind !== 'h5';
+            const blueLinesCount = Math.max(0, row.depth - 1);
+
+            return (
+                <div className="relative">
+                    {inSection && (
+                        <span
+                            aria-hidden
+                            className="absolute left-0 top-0 bottom-0 border-l border-[#93969d]"
+                        />
+                    )}
+
+                    {inSection &&
+                        Array.from({ length: blueLinesCount }).map((_, idx) => {
+                            const level = idx + 1;
+                            return (
+                                <span
+                                    key={level}
+                                    aria-hidden
+                                    className="absolute top-0 bottom-0 border-l border-[#34446D]"
+                                    style={{ left: `${level * 12}px` }}
+                                />
+                            );
+                        })}
+
+                    {children}
+                </div>
+            );
+        },
+        [],
+    );
 
     if (!items?.length) {
         return (
@@ -113,9 +240,8 @@ export default function OkpdHierarchy({ items }: { items: Okpd2Item[] }) {
 
     return (
         <div className="flex flex-col gap-[20px]">
-            {roots.map((root, index) => {
-                const level2 = byParent.get(root.code) ?? [];
-
+            {roots.map(root => {
+                const rows = flattenSubtreeRows(root.code);
                 return (
                     <CollapseSection
                         key={root.code}
@@ -123,36 +249,58 @@ export default function OkpdHierarchy({ items }: { items: Okpd2Item[] }) {
                         isOpen={openRoots.includes(root.code)}
                         onToggle={() => toggleRoot(root.code)}
                     >
-                        <div className="flex flex-col gap-[10px]">
-                            {level2.map((child) => {
-                                if (!child.hasChildren) {
+                        <VirtualizedList
+                            items={rows}
+                            estimatedItemSize={40}
+                            overscan={20}
+                            useWindowScroll
+                            getItemKey={row => row.item.code}
+                            renderItem={row => {
+                                const item = row.item;
+
+                                if (row.kind === 'h5') {
                                     return (
-                                        <h5 key={child.code} className={`${textSize.headerH6}`}>
-                                            {formatNodeTitle(child)}
-                                        </h5>
+                                        <OkpdRowContainer row={row}>
+                                            <h5 className={`${textSize.headerH6}`}>
+                                                {formatNodeTitle(item)}
+                                            </h5>
+                                        </OkpdRowContainer>
                                     );
                                 }
 
-                                return (
-                                    <div
-                                        key={child.code}
-                                        className="border-l border-[#93969d] relative py-[5px] flex flex-col gap-[15px]"
-                                    >
-                                        <OkpdPrefix position={index === 0 ? "bottom" : "middle"} hasChild={true} />
-                                        <h6 className={`${textSize.text1} pl-[12px]`}>
-                                            {formatNodeTitle(child)}
-                                        </h6>
+                                if (row.kind === 'h6') {
+                                    return (
+                                        <OkpdRowContainer row={row}>
+                                            <div className="relative py-[5px]">
+                                                <OkpdPrefix position="middle" hasChild={true} />
+                                                <h6 className={`${textSize.text1} pl-[12px]`}>
+                                                    {formatNodeTitle(item)}
+                                                </h6>
+                                            </div>
+                                        </OkpdRowContainer>
+                                    );
+                                }
 
-                                        {renderChildRows(child.code, 1)}
-                                    </div>
+                                const textClass =
+                                    item.hasChildren || item.level >= 4
+                                        ? `${textSize.text2} font-light`
+                                        : `${textSize.text2} font-normal`;
+
+                                return (
+                                    <OkpdRowContainer row={row}>
+                                        <div style={{ paddingLeft: `${Math.max(0, row.depth - 1) * 12}px` }}>
+                                            <div className="pl-[12px] relative">
+                                                <OkpdPrefix position="middle" hasChild={item.hasChildren} />
+                                                <span className={textClass}>{formatNodeTitle(item)}</span>
+                                            </div>
+                                        </div>
+                                    </OkpdRowContainer>
                                 );
-                            })}
-                        </div>
+                            }}
+                        />
                     </CollapseSection>
                 );
             })}
         </div>
     );
 }
-
-
