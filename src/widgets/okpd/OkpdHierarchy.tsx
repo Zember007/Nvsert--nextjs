@@ -158,23 +158,28 @@ export default function OkpdHierarchy({ items }: { items: Okpd2Item[] }) {
                 for (const child of children) {
                     const childHasChildren = (byParent.get(child.code)?.length ?? 0) > 0;
                     if (depth === 0) {
-                        // первый уровень после корня — заголовки
+                        // первый уровень после корня — всегда h5 (без префикса)
+                        result.push({
+                            kind: 'h5',
+                            item: child,
+                            depth: 0,
+                        });
                         if (childHasChildren) {
-                            result.push({
-                                kind: 'h6',
-                                item: child,
-                                depth: 0,
-                                sectionCode: child.code,
-                            });
                             walk(child.code, 1, child.code); // рекурсия
-                        } else {
-                            result.push({
-                                kind: 'h5',
-                                item: child,
-                                depth: 0,
-                            });
+                        }
+                    } else if (depth === 1) {
+                        // второй уровень — h6
+                        result.push({
+                            kind: 'h6',
+                            item: child,
+                            depth: 1,
+                            sectionCode: sectionCode!,
+                        });
+                        if (childHasChildren) {
+                            walk(child.code, 2, sectionCode);
                         }
                     } else {
+                        // третий уровень и далее — text
                         result.push({
                             kind: 'text',
                             item: child,
@@ -262,7 +267,7 @@ export default function OkpdHierarchy({ items }: { items: Okpd2Item[] }) {
                                     return (
                                         <OkpdRowContainer row={row}>
                                             <h5 className={`${textSize.headerH6}`}>
-                                                {formatNodeTitle(item)}
+                                             {formatNodeTitle(item)}
                                             </h5>
                                         </OkpdRowContainer>
                                     );
@@ -272,7 +277,7 @@ export default function OkpdHierarchy({ items }: { items: Okpd2Item[] }) {
                                     return (
                                         <OkpdRowContainer row={row}>
                                             <div className="relative py-[5px]">
-                                                <OkpdPrefix position="middle" hasChild={true} />
+                                                <OkpdPrefix position="bottom" hasChild={true} />
                                                 <h6 className={`${textSize.text1} pl-[12px]`}>
                                                     {formatNodeTitle(item)}
                                                 </h6>
