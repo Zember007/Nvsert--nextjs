@@ -85,7 +85,6 @@ function AppCollapsibleList<ItemType = unknown>({
                             }
                         }}
                         style={{ overflow: 'visible' }}
-                        className="pb-[60px]"
                     >
                         <motion.ul
                             initial={{ y: 0 }}

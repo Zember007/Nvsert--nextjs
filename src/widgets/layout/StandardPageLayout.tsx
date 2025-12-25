@@ -26,6 +26,8 @@ type StandardPageLayoutProps = {
     showButton?: boolean;
     /** Дополнительный className для обертки */
     className?: string;
+    /** Дополнительный контент для левой колонки */
+    contentColumn?: React.ReactNode;
 };
 
 const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
@@ -36,6 +38,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
     children,
     showButton = true,
     className = '',
+    contentColumn,
 }) => {
     const { openDefaultModal } = useHeaderContext();
 
@@ -70,6 +73,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
                                         {dotNavItems && dotNavItems.length > 0 && (
                                             <DotNavList items={dotNavItems} />
                                         )}
+                                        {contentColumn}
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +88,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
                     </div>
                     {/* Right column */}
                     <div className="hidden xl:block w-[250px] relative">
-                        <div className="sticky top-[104px] flex flex-col gap-[50px] overflow-y-auto max-h-[calc(100vh-104px)]">
+                        <div className="sticky top-[104px] flex flex-col gap-[50px] overflow-y-auto pb-[60px] max-h-[calc(100vh-104px)]">
                             {showButton && (
                                 <Button
                                     onClick={() => {
@@ -96,6 +100,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
                             {dotNavItems && dotNavItems.length > 0 && (
                                 <DotNavList items={dotNavItems} />
                             )}
+                            {contentColumn}
                         </div>
                     </div>
                 </div>
