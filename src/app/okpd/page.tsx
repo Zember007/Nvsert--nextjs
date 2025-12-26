@@ -23,7 +23,7 @@ async function fetchOkpd2Data(): Promise<{ items: Okpd2Item[]; pageData: OkpdPag
         'https://nvsert.ru'
     ).replace(/\/$/, '');
 
-    const res = await fetch(`${base}/api/okpd2s/with-page`, {
+    const res = await fetch(`${base}/api/okpd2s/with-page?pagination[pageSize]=21000`, {
         cache: 'force-cache',
     });
 
