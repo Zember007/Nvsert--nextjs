@@ -24,7 +24,7 @@ const ClientPage = ({ initialItems, pageData }: { initialItems: Okpd2Item[]; pag
             showButton={true}
         >
             <OkpdQuickSearchSection items={initialItems} />
-      {/*       <OkpdClassifierSection items={initialItems} /> */}
+            <OkpdClassifierSection items={initialItems} />
 
             <OkpdInfoSections
                 pageData={pageData}
