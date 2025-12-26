@@ -207,7 +207,7 @@ export default function OkpdHierarchy({ items }: { items: Okpd2Item[] }) {
             const blueLinesCount = Math.max(0, row.depth - 1);
 
             return (
-                <div className="relative">
+                <div className="relative pb-[20px]">
                     {inSection && (
                         <span
                             aria-hidden

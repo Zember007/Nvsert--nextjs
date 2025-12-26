@@ -69,7 +69,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
                                 <div className="sticky top-[104px] flex flex-col gap-[40px]">
                                     <SidebarNavButtons />
 
-                                    <div className="xl:hidden">
+                                    <div className="xl:hidden flex flex-col gap-[20px]">
                                         {dotNavItems && dotNavItems.length > 0 && (
                                             <DotNavList items={dotNavItems} />
                                         )}

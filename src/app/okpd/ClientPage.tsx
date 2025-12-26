@@ -23,8 +23,8 @@ const ClientPage = ({ initialItems, pageData }: { initialItems: Okpd2Item[]; pag
             contentColumn={<FilesList />}
             showButton={true}
         >
-            <OkpdQuickSearchSection items={initialItems} />
-            <OkpdClassifierSection items={initialItems} />
+           {/*  <OkpdQuickSearchSection items={initialItems} />
+            <OkpdClassifierSection items={initialItems} /> */}
 
             <OkpdInfoSections
                 pageData={pageData}
