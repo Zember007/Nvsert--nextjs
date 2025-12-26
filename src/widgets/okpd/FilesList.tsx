@@ -32,9 +32,9 @@ const FilesList = () => {
             defaultOpen={true}
             listClassName='flex flex-col gap-[20px]'
             renderItem={(item, index) => (
-                <Link key={index} href={item.link} target="_blank" className="flex items-center gap-[10px]">
+                <Link key={index} href={item.link} target="_blank" className="flex items-center gap-[10px] group">
                     <Image src={item.icon} alt={item.title} width={40} height={40} className="min-w-[40px]" />
-                    <span className={`${textSize.text3}`}>{item.title}</span>
+                    <span className={`${textSize.text3} group-active:scale-[0.95] transition-transform duration-100`}>{item.title}</span>
                 </Link>
             )}
         />

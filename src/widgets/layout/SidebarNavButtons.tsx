@@ -69,7 +69,7 @@ const SidebarNavButtons = () => {
                     prefetch={false}
                     href={item.href}
                 >
-                    <h6 className={`${textSize.headerH6} font-light`}>{item.label}</h6>
+                    <span className={`${textSize.headerH6} font-light`}>{item.label}</span>
                     <div className="group-active:scale-[.9] transition-transform will-change-transform duration-100">
                         {item.icon}
                     </div>
