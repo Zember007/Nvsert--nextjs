@@ -6,7 +6,17 @@ import OkpdHierarchy, { Okpd2Item } from '@/widgets/okpd/OkpdHierarchy';
 
 const OkpdHierarchyMemo = React.memo(OkpdHierarchy);
 
-function OkpdClassifierSectionImpl({ items }: { items: Okpd2Item[] }) {
+function OkpdClassifierSectionImpl({
+  items,
+  onSectionVisible,
+  isSectionLoaded,
+  isSectionLoading,
+}: {
+  items: Okpd2Item[];
+  onSectionVisible?: (section: string) => void;
+  isSectionLoaded?: (section: string) => boolean;
+  isSectionLoading?: (section: string) => boolean;
+}) {
   return (
     <>
       <h2 className={`${textSize.headerH3}`}>Классификатор ОКПД 2</h2>
@@ -14,7 +24,12 @@ function OkpdClassifierSectionImpl({ items }: { items: Okpd2Item[] }) {
         РАЗДЕЛ&nbsp;A&nbsp;— ПРОДУКЦИЯ СЕЛЬСКОГО, ЛЕСНОГО И&nbsp;РЫБНОГО ХОЗЯЙСТВА
       </p>
 
-      <OkpdHierarchyMemo items={items} />
+      <OkpdHierarchyMemo
+        items={items}
+        onSectionVisible={onSectionVisible}
+        isSectionLoaded={isSectionLoaded}
+        isSectionLoading={isSectionLoading}
+      />
     </>
   );
 }

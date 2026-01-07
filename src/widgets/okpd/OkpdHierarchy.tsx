@@ -78,7 +78,17 @@ type OkpdRow =
     | { kind: 'h6'; item: Okpd2Item; depth: number; sectionCode: string }
     | { kind: 'text'; item: Okpd2Item; depth: number; sectionCode: string };
 
-export default function OkpdHierarchy({ items }: { items: Okpd2Item[] }) {
+export default function OkpdHierarchy({
+    items,
+    onSectionVisible,
+    isSectionLoaded,
+    isSectionLoading,
+}: {
+    items: Okpd2Item[];
+    onSectionVisible?: (section: string) => void;
+    isSectionLoaded?: (section: string) => boolean;
+    isSectionLoading?: (section: string) => boolean;
+}) {
     const model = React.useMemo(() => {
         const filtered = (items || []).filter(Boolean);
 
@@ -135,6 +145,41 @@ export default function OkpdHierarchy({ items }: { items: Okpd2Item[] }) {
 
     const roots = React.useMemo(() => byParent.get(null) ?? [], [byParent]);
 
+    // Observe root section headers (CollapseSection wrappers) and prefetch section data when visible.
+    const rootElsRef = React.useRef<Map<string, HTMLDivElement | null>>(new Map());
+
+    const setRootEl = React.useCallback(
+        (code: string) => (el: HTMLDivElement | null) => {
+            rootElsRef.current.set(code, el);
+        },
+        [],
+    );
+
+    React.useEffect(() => {
+        if (!onSectionVisible) return;
+        if (typeof IntersectionObserver === 'undefined') return;
+        if (!roots.length) return;
+
+        const io = new IntersectionObserver(
+            entries => {
+                for (const e of entries) {
+                    if (!e.isIntersecting) continue;
+                    const section = (e.target as HTMLElement).dataset.section;
+                    if (!section) continue;
+                    onSectionVisible(section);
+                }
+            },
+            { root: null, rootMargin: '200px 0px', threshold: 0.01 },
+        );
+
+        for (const r of roots) {
+            const el = rootElsRef.current.get(r.code);
+            if (el) io.observe(el);
+        }
+
+        return () => io.disconnect();
+    }, [onSectionVisible, roots]);
+
     const [openRoots, setOpenRoots] = React.useState<string[]>([]);
 
     React.useEffect(() => {
@@ -147,6 +192,19 @@ export default function OkpdHierarchy({ items }: { items: Okpd2Item[] }) {
             prev.includes(code) ? prev.filter(x => x !== code) : [...prev, code]
         );
     };
+
+    const handleToggleRoot = React.useCallback(
+        (code: string) => {
+            const currentlyOpen = openRoots.includes(code);
+            const willOpen = !currentlyOpen;
+            if (willOpen && onSectionVisible) {
+                const loaded = isSectionLoaded ? isSectionLoaded(code) : true;
+                if (!loaded) onSectionVisible(code);
+            }
+            toggleRoot(code);
+        },
+        [openRoots, onSectionVisible, isSectionLoaded],
+    );
 
     const flattenSubtreeRows = React.useCallback(
         (rootCode: string): OkpdRow[] => {
@@ -247,63 +305,78 @@ export default function OkpdHierarchy({ items }: { items: Okpd2Item[] }) {
         <div className="flex flex-col gap-[20px]">
             {roots.map(root => {
                 const rows = flattenSubtreeRows(root.code);
+                const loaded = isSectionLoaded ? isSectionLoaded(root.code) : true;
+                const loading = isSectionLoading ? isSectionLoading(root.code) : false;
                 return (
-                    <CollapseSection
+                    <div
                         key={root.code}
-                        title={formatNodeTitle(root)}
-                        isOpen={openRoots.includes(root.code)}
-                        onToggle={() => toggleRoot(root.code)}
+                        ref={setRootEl(root.code)}
+                        data-section={root.code}
                     >
-                        <VirtualizedList
-                            items={rows}
-                            estimatedItemSize={40}
-                            overscan={20}
-                            useWindowScroll
-                            getItemKey={row => row.item.code}
-                            renderItem={row => {
-                                const item = row.item;
+                        <CollapseSection
+                            title={formatNodeTitle(root)}
+                            isOpen={openRoots.includes(root.code)}
+                            onToggle={() => handleToggleRoot(root.code)}
+                        >
+                            {!loaded && (
+                                <div className={`${textSize.text2} font-light text-[#93969d]`}>
+                                    {loading ? 'Загрузка…' : 'Нет данных (ожидаем подгрузку)'}
+                                </div>
+                            )}
 
-                                if (row.kind === 'h5') {
-                                    return (
-                                        <OkpdRowContainer row={row}>
-                                            <h5 className={`${textSize.headerH6}`}>
-                                             {formatNodeTitle(item)}
-                                            </h5>
-                                        </OkpdRowContainer>
-                                    );
-                                }
+                            {loaded && (
+                                <VirtualizedList
+                                    items={rows}
+                                    estimatedItemSize={40}
+                                    overscan={20}
+                                    useWindowScroll
+                                    getItemKey={row => row.item.code}
+                                    renderItem={row => {
+                                        const item = row.item;
 
-                                if (row.kind === 'h6') {
-                                    return (
-                                        <OkpdRowContainer row={row}>
-                                            <div className="relative py-[5px]">
-                                                <OkpdPrefix position="bottom" hasChild={true} />
-                                                <h6 className={`${textSize.text1} pl-[12px]`}>
-                                                    {formatNodeTitle(item)}
-                                                </h6>
-                                            </div>
-                                        </OkpdRowContainer>
-                                    );
-                                }
+                                        if (row.kind === 'h5') {
+                                            return (
+                                                <OkpdRowContainer row={row}>
+                                                    <h5 className={`${textSize.headerH6}`}>
+                                                        {formatNodeTitle(item)}
+                                                    </h5>
+                                                </OkpdRowContainer>
+                                            );
+                                        }
 
-                                const textClass =
-                                    item.hasChildren || item.level >= 4
-                                        ? `${textSize.text2} font-light`
-                                        : `${textSize.text2} font-normal`;
+                                        if (row.kind === 'h6') {
+                                            return (
+                                                <OkpdRowContainer row={row}>
+                                                    <div className="relative py-[5px]">
+                                                        <OkpdPrefix position="bottom" hasChild={true} />
+                                                        <h6 className={`${textSize.text1} pl-[12px]`}>
+                                                            {formatNodeTitle(item)}
+                                                        </h6>
+                                                    </div>
+                                                </OkpdRowContainer>
+                                            );
+                                        }
 
-                                return (
-                                    <OkpdRowContainer row={row}>
-                                        <div style={{ paddingLeft: `${Math.max(0, row.depth - 1) * 12}px` }}>
-                                            <div className="pl-[12px] relative">
-                                                <OkpdPrefix position="middle" hasChild={item.hasChildren} />
-                                                <span className={textClass}>{formatNodeTitle(item)}</span>
-                                            </div>
-                                        </div>
-                                    </OkpdRowContainer>
-                                );
-                            }}
-                        />
-                    </CollapseSection>
+                                        const textClass =
+                                            item.hasChildren || item.level >= 4
+                                                ? `${textSize.text2} font-light`
+                                                : `${textSize.text2} font-normal`;
+
+                                        return (
+                                            <OkpdRowContainer row={row}>
+                                                <div style={{ paddingLeft: `${Math.max(0, row.depth - 1) * 12}px` }}>
+                                                    <div className="pl-[12px] relative">
+                                                        <OkpdPrefix position="middle" hasChild={item.hasChildren} />
+                                                        <span className={textClass}>{formatNodeTitle(item)}</span>
+                                                    </div>
+                                                </div>
+                                            </OkpdRowContainer>
+                                        );
+                                    }}
+                                />
+                            )}
+                        </CollapseSection>
+                    </div>
                 );
             })}
         </div>
