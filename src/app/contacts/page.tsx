@@ -76,9 +76,9 @@ const Page = () => {
                 Но география не ограничивает сотрудничество — мы успешно оформляем документы дистанционно, с компаниями из любой точки России и СНГ.
               </p>
 
-              <div className="flex gap-[26px]">
+              <div className="flex xl:gap-[26px] gap-[20px] xl:flex-row flex-col">
                 {contacts.map((contact) => (
-                  <div className='p-[30px] flex flex-col gap-[20px] w-full bg-[#f1f1ed] rounded-[6px] border border-[#93969d]' key={contact.city}>
+                  <div className='p-[30px] flex xl:flex-col m:flex-row flex-col gap-[20px] w-full bg-[#f1f1ed] rounded-[6px] border border-[#93969d]' key={contact.city}>
                     <div className="relative overflow-hidden rounded-[6px]">
                       <Image className='w-full h-full object-cover' src={contact.image} alt={contact.city} />
                       <span
@@ -157,7 +157,7 @@ const Page = () => {
           </div>
 
           <div className="flex flex-col gap-[20px]">
-            <div className="p-[40px] bg-[#f1f1ed] rounded-[8px] border border-[#93969d] flex justify-between">
+            <div className="p-[40px] bg-[#f1f1ed] rounded-[8px] border border-[#93969d] flex justify-between m:flex-row flex-col-reverse gap-[30px] items-center">
               <div className="flex flex-col gap-[30px]">
                 <span className={textSize.headerH3}>Начните оформление с бесплатной консультации</span>
                 <p className={textSize.text3 + ' max-w-[660px]'}>
@@ -177,7 +177,7 @@ const Page = () => {
                 <Image src={Consultation} alt="Consultation" />
               </div>
             </div>
-            <div className="flex gap-[26px]">
+            <div className="flex m:gap-[26px] gap-[20px] xl:flex-row flex-col">
               <div className="relative p-[40px] bg-[#f1f1ed] w-full rounded-[8px] border border-[#93969d] flex flex-col gap-[20px]">
                 <span className={textSize.headerH6}>Получите ответ уже сегодня</span>
                 <p className={textSize.textBasePost}>
@@ -261,29 +261,29 @@ const Page = () => {
             </p>
           </div>
 
-          <div className="p-[40px] bg-[#f1f1ed] rounded-[8px] border border-[#93969d] flex justify-between">
+          <div className="p-[40px] bg-[#f1f1ed] rounded-[8px] border border-[#93969d] flex justify-between m:flex-row flex-col-reverse gap-[30px] items-center">
             <div className="flex flex-col gap-[16px]">
-              <div className="flex items-center gap-[10px]">
+              <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
                 <span className={textSize.text1 + ' font-normal text-[#000]'}>Полное наименование:</span>
                 <span className={textSize.text3}>Общество с ограниченной ответственностью «ЦЕНТР СТАНДАРТИЗАЦИИ»</span>
               </div>
-              <div className="flex items-center gap-[10px]">
+              <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
                 <span className={textSize.text1 + ' font-normal text-[#000]'}>Юридический адрес:</span>
                 <span className={textSize.text3}>180007, Псковская область, г.о. город Псков, г Псков, пр-кт Рижский, д. 16, помещение 10001, каб. 9</span>
               </div>
-              <div className="flex items-center gap-[10px]">
+              <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
                 <span className={textSize.text1 + ' font-normal text-[#000]'}>ИНН:</span>
                 <span className={textSize.text3}>6027189146</span>
               </div>
-              <div className="flex items-center gap-[10px]">
+              <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
                 <span className={textSize.text1 + ' font-normal text-[#000]'}>ОГРН:</span>
                 <span className={textSize.text3}>1186027004217</span>
               </div>
-              <div className="flex items-center gap-[10px]">
+              <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
                 <span className={textSize.text1 + ' font-normal text-[#000]'}>Генеральный директор:</span>
                 <span className={textSize.text3}>Владимиров Владимир Михайлович</span>
               </div>
-              <div className="flex items-center gap-[10px]">
+              <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
                 <span className={textSize.text1 + ' font-normal text-[#000]'}>Почта:</span>
                 <span className={textSize.text3}>info@nvsert.ru </span>
               </div>
