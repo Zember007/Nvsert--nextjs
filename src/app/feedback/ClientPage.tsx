@@ -31,6 +31,8 @@ const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ 
         href: '#block-' + cat.id
     }));
 
+    
+
     return (
 
         <StandardPageLayout
