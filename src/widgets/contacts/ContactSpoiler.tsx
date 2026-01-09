@@ -37,8 +37,8 @@ const ContactSpoiler = ({ isExpanded, onToggle, title, children }: { isExpanded:
                 </div>
             </div>
 
-            <div className={`${!isExpanded ? 'max-h-[0px]' : `max-h-[2370px] m:pt-[100px] pt-[50px] `} transition-all duration-200 overflow-hidden  `}>
-                <div className="wrapper">
+            <div className={`${!isExpanded ? 'max-h-[0px]' : `max-h-[2370px] m:pt-[100px] pt-[50px] m:pr-[290px]`} transition-all duration-200 overflow-hidden  `}>
+                <div className="wrapper ">
 
                     {children}
 
