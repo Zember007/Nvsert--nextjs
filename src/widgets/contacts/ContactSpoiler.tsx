@@ -1,9 +1,39 @@
-import { useId } from 'react';
+'use client';
+
+import { useEffect, useId, useRef, useState } from 'react';
 import styles from '@/assets/styles/base/base.module.scss';
 
 
 const ContactSpoiler = ({ isExpanded, onToggle, title, children }: { isExpanded: boolean, onToggle: () => void, title: string, children: React.ReactNode }) => {
     const clipId = useId();
+    const contentRef = useRef<HTMLDivElement | null>(null);
+    const [shouldAnimateIn, setShouldAnimateIn] = useState(false);
+
+    // При каждом закрытии сбрасываем анимацию, чтобы при следующем открытии
+    // контент снова мог "въехать" при попадании в viewport.
+    useEffect(() => {
+        if (!isExpanded) setShouldAnimateIn(false);
+    }, [isExpanded]);
+
+    useEffect(() => {
+        if (!isExpanded) return;
+        const el = contentRef.current;
+        if (!el) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const entry = entries[0];
+                if (entry?.isIntersecting) {
+                    setShouldAnimateIn(true);
+                }
+            },
+            { threshold: 0.15 }
+        );
+
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, [isExpanded]);
+
     return (
         <div className={`overflow-hidden relative  `}>
 
@@ -38,7 +68,10 @@ const ContactSpoiler = ({ isExpanded, onToggle, title, children }: { isExpanded:
             </div>
 
             <div className={`${!isExpanded ? 'max-h-[0px]' : `max-h-[2370px] m:pt-[100px] pt-[50px] m:pr-[290px]`} transition-all duration-200 overflow-hidden  `}>
-                <div className="wrapper ">
+                <div
+                    ref={contentRef}
+                    className={`wrapper transition-all duration-500 ease-out ${isExpanded ? 'will-change-transform' : ''} ${shouldAnimateIn ? 'translate-x-0 opacity-100' : 'translate-x-[60px] opacity-0'}`}
+                >
 
                     {children}
 
