@@ -19,6 +19,31 @@ export type Okpd2Item = {
     publishedAt: string | null;
 };
 
+// Массив разделов ОКПД с номерами, перед которыми их нужно показывать
+const OKPD_SECTIONS = [
+    { letter: 'A', name: 'ПРОДУКЦИЯ СЕЛЬСКОГО, ЛЕСНОГО И РЫБНОГО ХОЗЯЙСТВА', codePrefix: '01' },
+    { letter: 'B', name: 'ПРОДУКЦИЯ ГОРНОДОБЫВАЮЩИХ ПРОИЗВОДСТВ', codePrefix: '05' },
+    { letter: 'C', name: 'ПРОДУКЦИЯ ОБРАБАТЫВАЮЩИХ ПРОИЗВОДСТВ', codePrefix: '10' },
+    { letter: 'D', name: 'ЭЛЕКТРОЭНЕРГИЯ, ГАЗ, ПАР И КОНДИЦИОНИРОВАНИЕ ВОЗДУХА', codePrefix: '35' },
+    { letter: 'E', name: 'ВОДОСНАБЖЕНИЕ; ВОДООТВЕДЕНИЕ, УСЛУГИ ПО УДАЛЕНИЮ И РЕКУЛЬТИВАЦИИ ОТХОДОВ', codePrefix: '36' },
+    { letter: 'F', name: 'СООРУЖЕНИЯ И СТРОИТЕЛЬНЫЕ РАБОТЫ', codePrefix: '41' },
+    { letter: 'G', name: 'УСЛУГИ ПО ОПТОВОЙ И РОЗНИЧНОЙ ТОРГОВЛЕ; УСЛУГИ ПО РЕМОНТУ АВТОТРАНСПОРТНЫХ СРЕДСТВ И МОТОЦИКЛОВ', codePrefix: '45' },
+    { letter: 'H', name: 'УСЛУГИ ТРАНСПОРТА И СКЛАДСКОГО ХОЗЯЙСТВА', codePrefix: '49' },
+    { letter: 'I', name: 'УСЛУГИ ГОСТИНИЧНОГО ХОЗЯЙСТВА И ОБЩЕСТВЕННОГО ПИТАНИЯ', codePrefix: '55' },
+    { letter: 'J', name: 'УСЛУГИ В ОБЛАСТИ ИНФОРМАЦИИ И СВЯЗИ', codePrefix: '58' },
+    { letter: 'K', name: 'УСЛУГИ ФИНАНСОВЫЕ И СТРАХОВЫЕ', codePrefix: '64' },
+    { letter: 'L', name: 'УСЛУГИ, СВЯЗАННЫЕ С НЕДВИЖИМЫМ ИМУЩЕСТВОМ', codePrefix: '68' },
+    { letter: 'M', name: 'УСЛУГИ, СВЯЗАННЫЕ С НАУЧНОЙ, ИНЖЕНЕРНО-ТЕХНИЧЕСКОЙ И ПРОФЕССИОНАЛЬНОЙ ДЕЯТЕЛЬНОСТЬЮ', codePrefix: '69' },
+    { letter: 'N', name: 'УСЛУГИ АДМИНИСТРАТИВНЫЕ И ВСПОМОГАТЕЛЬНЫЕ', codePrefix: '77' },
+    { letter: 'O', name: 'УСЛУГИ В СФЕРЕ ГОСУДАРСТВЕННОГО УПРАВЛЕНИЯ И ОБЕСПЕЧЕНИЯ ВОЕННОЙ БЕЗОПАСНОСТИ; УСЛУГИ ПО ОБЯЗАТЕЛЬНОМУ СОЦИАЛЬНОМУ ОБЕСПЕЧЕНИЮ', codePrefix: '84' },
+    { letter: 'P', name: 'УСЛУГИ В ОБЛАСТИ ОБРАЗОВАНИЯ', codePrefix: '85' },
+    { letter: 'Q', name: 'УСЛУГИ В ОБЛАСТИ ЗДРАВООХРАНЕНИЯ И СОЦИАЛЬНЫЕ УСЛУГИ', codePrefix: '86' },
+    { letter: 'R', name: 'УСЛУГИ В ОБЛАСТИ ИСКУССТВА, РАЗВЛЕЧЕНИЙ, ОТДЫХА И СПОРТА', codePrefix: '90' },
+    { letter: 'S', name: 'ПРОЧИЕ УСЛУГИ', codePrefix: '94' },
+    { letter: 'T', name: 'ТОВАРЫ И УСЛУГИ РАЗЛИЧНЫЕ, ПРОИЗВОДИМЫЕ ДОМАШНИМИ ХОЗЯЙСТВАМИ ДЛЯ СОБСТВЕННОГО ПОТРЕБЛЕНИЯ, ВКЛЮЧАЯ УСЛУГИ РАБОТОДАТЕЛЯ ДЛЯ ДОМАШНЕГО ПЕРСОНАЛА', codePrefix: '97' },
+    { letter: 'U', name: 'УСЛУГИ, ПРЕДОСТАВЛЯЕМЫЕ ЭКСТЕРРИТОРИАЛЬНЫМИ ОРГАНИЗАЦИЯМИ И ОРГАНАМИ', codePrefix: '99' },
+] as const;
+
 // функция для сравнения кодов
 function compareOkpdCodes(a: string, b: string) {
     const aParts = a.split('.').map(x => Number(x));
@@ -182,11 +207,6 @@ export default function OkpdHierarchy({
 
     const [openRoots, setOpenRoots] = React.useState<string[]>([]);
 
-    React.useEffect(() => {
-        if (roots.length === 0) return;
-        setOpenRoots(prev => (prev.length ? prev : [roots[0].code]));
-    }, [roots]);
-
     const toggleRoot = (code: string) => {
         setOpenRoots(prev =>
             prev.includes(code) ? prev.filter(x => x !== code) : [...prev, code]
@@ -293,6 +313,21 @@ export default function OkpdHierarchy({
         [],
     );
 
+    // Функция для определения раздела по коду
+    const getSectionForCode = React.useCallback((code: string) => {
+        const codeStart = code.split('.')[0]?.trim();
+        if (!codeStart) return null;
+        
+        // Ищем раздел, префикс которого точно совпадает с началом кода
+        // Сортируем по длине префикса в убывающем порядке, чтобы сначала проверять более длинные префиксы
+        const sortedSections = [...OKPD_SECTIONS].sort((a, b) => b.codePrefix.length - a.codePrefix.length);
+        
+        return sortedSections.find(section => {
+            // Точное совпадение или код начинается с префикса раздела
+            return codeStart === section.codePrefix || codeStart.startsWith(section.codePrefix);
+        }) || null;
+    }, []);
+
     if (!items?.length) {
         return (
             <div className={`${textSize.text2} font-light text-[#93969d]`}>
@@ -302,81 +337,95 @@ export default function OkpdHierarchy({
     }
 
     return (
-        <div className="flex flex-col gap-[20px]">
-            {roots.map(root => {
+        <div className="flex flex-col gap-[50px]">
+            {roots.map((root, index) => {
+                const section = getSectionForCode(root.code);
+                const prevRoot = index > 0 ? roots[index - 1] : null;
+                const prevSection = prevRoot ? getSectionForCode(prevRoot.code) : null;
+                
+                // Показываем раздел только если он отличается от предыдущего
+                const shouldShowSection = section && section !== prevSection;
+                
                 const rows = flattenSubtreeRows(root.code);
                 const loaded = isSectionLoaded ? isSectionLoaded(root.code) : true;
                 const loading = isSectionLoading ? isSectionLoading(root.code) : false;
+                
                 return (
-                    <div
-                        key={root.code}
-                        ref={setRootEl(root.code)}
-                        data-section={root.code}
-                    >
-                        <CollapseSection
-                            title={formatNodeTitle(root)}
-                            isOpen={openRoots.includes(root.code)}
-                            onToggle={() => handleToggleRoot(root.code)}
+                    <React.Fragment key={root.code}>
+                        {shouldShowSection && (
+                            <p className={`${textSize.text2} font-normal text-[#93969D]`}>
+                                РАЗДЕЛ&nbsp;{section.letter}&nbsp;— {section.name}
+                            </p>
+                        )}
+                        <div
+                            ref={setRootEl(root.code)}
+                            data-section={root.code}
                         >
-                            {!loaded && (
-                                <div className={`${textSize.text2} font-light text-[#93969d]`}>
-                                    {loading ? 'Загрузка…' : 'Нет данных (ожидаем подгрузку)'}
-                                </div>
-                            )}
+                            <CollapseSection
+                                title={formatNodeTitle(root)}
+                                isOpen={!openRoots.includes(root.code)}
+                                onToggle={() => handleToggleRoot(root.code)}
+                            >
+                                {!loaded && (
+                                    <div className={`${textSize.text2} font-light text-[#93969d]`}>
+                                        {loading ? 'Загрузка…' : 'Нет данных (ожидаем подгрузку)'}
+                                    </div>
+                                )}
 
-                            {loaded && (
-                                <VirtualizedList
-                                    items={rows}
-                                    estimatedItemSize={40}
-                                    overscan={20}
-                                    useWindowScroll
-                                    getItemKey={row => row.item.code}
-                                    renderItem={row => {
-                                        const item = row.item;
+                                {loaded && (
+                                    <VirtualizedList
+                                        items={rows}
+                                        estimatedItemSize={40}
+                                        overscan={20}
+                                        useWindowScroll
+                                        getItemKey={row => row.item.code}
+                                        renderItem={row => {
+                                            const item = row.item;
 
-                                        if (row.kind === 'h5') {
-                                            return (
-                                                <OkpdRowContainer row={row}>
-                                                    <h5 className={`${textSize.headerH6}`}>
-                                                        {formatNodeTitle(item)}
-                                                    </h5>
-                                                </OkpdRowContainer>
-                                            );
-                                        }
-
-                                        if (row.kind === 'h6') {
-                                            return (
-                                                <OkpdRowContainer row={row}>
-                                                    <div className="relative py-[5px]">
-                                                        <OkpdPrefix position="bottom" hasChild={true} />
-                                                        <h6 className={`${textSize.text1} pl-[12px]`}>
+                                            if (row.kind === 'h5') {
+                                                return (
+                                                    <OkpdRowContainer row={row}>
+                                                        <h5 className={`${textSize.headerH6}`}>
                                                             {formatNodeTitle(item)}
-                                                        </h6>
+                                                        </h5>
+                                                    </OkpdRowContainer>
+                                                );
+                                            }
+
+                                            if (row.kind === 'h6') {
+                                                return (
+                                                    <OkpdRowContainer row={row}>
+                                                        <div className="relative py-[5px]">
+                                                            <OkpdPrefix position="bottom" hasChild={true} />
+                                                            <h6 className={`${textSize.text1} pl-[12px]`}>
+                                                                {formatNodeTitle(item)}
+                                                            </h6>
+                                                        </div>
+                                                    </OkpdRowContainer>
+                                                );
+                                            }
+
+                                            const textClass =
+                                                item.hasChildren || item.level >= 4
+                                                    ? `${textSize.text2} font-light`
+                                                    : `${textSize.text2} font-normal`;
+
+                                            return (
+                                                <OkpdRowContainer row={row}>
+                                                    <div style={{ paddingLeft: `${Math.max(0, row.depth - 1) * 12}px` }}>
+                                                        <div className="pl-[12px] relative">
+                                                            <OkpdPrefix position="middle" hasChild={item.hasChildren} />
+                                                            <span className={textClass}>{formatNodeTitle(item)}</span>
+                                                        </div>
                                                     </div>
                                                 </OkpdRowContainer>
                                             );
-                                        }
-
-                                        const textClass =
-                                            item.hasChildren || item.level >= 4
-                                                ? `${textSize.text2} font-light`
-                                                : `${textSize.text2} font-normal`;
-
-                                        return (
-                                            <OkpdRowContainer row={row}>
-                                                <div style={{ paddingLeft: `${Math.max(0, row.depth - 1) * 12}px` }}>
-                                                    <div className="pl-[12px] relative">
-                                                        <OkpdPrefix position="middle" hasChild={item.hasChildren} />
-                                                        <span className={textClass}>{formatNodeTitle(item)}</span>
-                                                    </div>
-                                                </div>
-                                            </OkpdRowContainer>
-                                        );
-                                    }}
-                                />
-                            )}
-                        </CollapseSection>
-                    </div>
+                                        }}
+                                    />
+                                )}
+                            </CollapseSection>
+                        </div>
+                    </React.Fragment>
                 );
             })}
         </div>

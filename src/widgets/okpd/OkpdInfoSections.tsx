@@ -89,7 +89,8 @@ export function OkpdInfoSections({
     <>
       {pageData?.content?.map((block, index) => {
         return (
-          <div key={block.id} id={`block-${index + 1}`} className="w-full">
+          <div key={block.id} id={`block-${block.id}`} className="w-full">
+            
             <CollapseSection
               title={block.heading}
               isOpen={!sectionsOpen.includes(index + 1)}

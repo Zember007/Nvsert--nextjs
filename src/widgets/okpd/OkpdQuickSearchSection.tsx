@@ -34,7 +34,7 @@ function OkpdQuickSearchSectionImpl({ items }: { items: Okpd2Item[] }) {
   }, [inputValue, startTransition]);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col" id="block-1">
       <p className={`${textSize.headerH4} text-[#34446D] border-b border-[#34446D] mb-[20px]`}>
         Быстрый поиск кода ОКПД&nbsp;2
       </p>

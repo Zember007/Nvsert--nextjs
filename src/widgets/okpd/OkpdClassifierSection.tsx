@@ -19,10 +19,8 @@ function OkpdClassifierSectionImpl({
 }) {
   return (
     <>
-      <h2 className={`${textSize.headerH3}`}>Классификатор ОКПД 2</h2>
-      <p className={`${textSize.text2} font-normal text-[#93969D]`}>
-        РАЗДЕЛ&nbsp;A&nbsp;— ПРОДУКЦИЯ СЕЛЬСКОГО, ЛЕСНОГО И&nbsp;РЫБНОГО ХОЗЯЙСТВА
-      </p>
+      <h2 id="block-2" className={`${textSize.headerH3}`}>Классификатор ОКПД 2</h2>
+  
 
       <OkpdHierarchyMemo
         items={items}
