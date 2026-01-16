@@ -2,39 +2,34 @@
 import React from 'react';
 import { StandardPageLayout } from 'widgets/layout';
 import { useHeaderContext } from 'shared/contexts';
-import FilesList from '@/widgets/okpd/FilesList';
-import { OkpdQuickSearchSection } from '@/widgets/okpd/OkpdQuickSearchSection';
-import { OkpdClassifierSection } from '@/widgets/okpd/OkpdClassifierSection';
-import type { Okpd2Item } from '@/widgets/okpd/OkpdHierarchy';
-import type { OkpdPageData } from '@/widgets/okpd/types';
-import { useOkpdSections } from '@/widgets/okpd/useOkpdSections';
-import { OkpdInfoSections } from '@/widgets/okpd/OkpdInfoSections';
+import FilesList from '@/widgets/tnved/FilesList';
+import { TnvedQuickSearchSection } from '@/widgets/tnved/TnvedQuickSearchSection';
+import { TnvedClassifierSection } from '@/widgets/tnved/TnvedClassifierSection';
+import type { TnvedItem } from '@/widgets/tnved/TnvedHierarchy';
+import type { TnvedPageData } from '@/widgets/tnved/types';
+import { useTnvedSections } from '@/widgets/tnved/useTnvedSections';
+import { TnvedInfoSections } from '@/widgets/tnved/TnvedInfoSections';
 
-const ClientPage = ({ initialItems, pageData }: { initialItems: Okpd2Item[]; pageData: OkpdPageData | null }) => {
+const ClientPage = ({ initialItems, pageData }: { initialItems: TnvedItem[]; pageData: TnvedPageData | null }) => {
     const { openDefaultModal } = useHeaderContext();
-    const { sectionsOpen, toggleSection, dotNavItems } = useOkpdSections(pageData);
+    const { sectionsOpen, toggleSection, dotNavItems } = useTnvedSections(pageData);
 
-    const [hierarchyItems, setHierarchyItems] = React.useState<Okpd2Item[]>(() => initialItems || []);
-
-    // Full dataset for search (loaded separately so the tree can stay lazy/fast).
-    const [searchItems, setSearchItems] = React.useState<Okpd2Item[]>(() => initialItems || []);
+    const [hierarchyItems, setHierarchyItems] = React.useState<TnvedItem[]>(() => initialItems || []);
 
     const [loadedSections, setLoadedSections] = React.useState<Set<string>>(() => new Set(['01']));
     const [loadingSections, setLoadingSections] = React.useState<Set<string>>(() => new Set());
     const loadingRef = React.useRef<Set<string>>(new Set());
 
-    const mergeByCode = React.useCallback((prev: Okpd2Item[], next: Okpd2Item[]) => {
-        const map = new Map<string, Okpd2Item>();
+    const mergeByNodeId = React.useCallback((prev: TnvedItem[], next: TnvedItem[]) => {
+        const map = new Map<number, TnvedItem>();
         for (const it of prev) {
-            const code = (it?.code ?? '').trim();
-            if (!code) continue;
-            map.set(code, { ...it, code });
+            if (!it || typeof it.nodeId !== 'number') continue;
+            map.set(it.nodeId, it);
         }
         for (const it of next) {
-            const code = (it?.code ?? '').trim();
-            if (!code) continue;
-            const existing = map.get(code);
-            map.set(code, existing ? ({ ...existing, ...it, code } as Okpd2Item) : ({ ...it, code } as Okpd2Item));
+            if (!it || typeof it.nodeId !== 'number') continue;
+            const existing = map.get(it.nodeId);
+            map.set(it.nodeId, existing ? ({ ...existing, ...it } as TnvedItem) : (it as TnvedItem));
         }
         return [...map.values()];
     }, []);
@@ -54,12 +49,16 @@ const ClientPage = ({ initialItems, pageData }: { initialItems: Okpd2Item[]; pag
             });
 
             try {
-                const res = await fetch(`/api/okpd2s/section/${s}`);
+                const res = await fetch(`/api/tnveds/chapter/${s}`);
                 if (!res.ok) return;
                 const json = await res.json();
-                const data = Array.isArray(json?.data) ? (json.data as Okpd2Item[]) : Array.isArray(json) ? (json as Okpd2Item[]) : [];
+                const data = Array.isArray(json?.data)
+                    ? (json.data as TnvedItem[])
+                    : Array.isArray(json)
+                      ? (json as TnvedItem[])
+                      : [];
 
-                setHierarchyItems(prev => mergeByCode(prev, data));
+                setHierarchyItems(prev => mergeByNodeId(prev, data));
                 setLoadedSections(prev => {
                     const next = new Set(prev);
                     next.add(s);
@@ -74,7 +73,7 @@ const ClientPage = ({ initialItems, pageData }: { initialItems: Okpd2Item[]; pag
                 });
             }
         },
-        [loadedSections, mergeByCode],
+        [loadedSections, mergeByNodeId],
     );
 
     const onSectionVisible = React.useCallback(
@@ -87,45 +86,24 @@ const ClientPage = ({ initialItems, pageData }: { initialItems: Okpd2Item[]; pag
     const isSectionLoaded = React.useCallback((section: string) => loadedSections.has(section), [loadedSections]);
     const isSectionLoading = React.useCallback((section: string) => loadingSections.has(section), [loadingSections]);
 
-    // Load full dataset for fast search (fields-only to reduce payload).
-    React.useEffect(() => {
-        let cancelled = false;
-        (async () => {
-            try {
-                const res = await fetch(
-                    `/api/okpd2s?pagination[pageSize]=21000&fields[0]=code&fields[1]=name&fields[2]=level&fields[3]=hasChildren`,
-                );
-                if (!res.ok) return;
-                const json = await res.json();
-                const data = Array.isArray(json?.data) ? (json.data as Okpd2Item[]) : Array.isArray(json) ? (json as Okpd2Item[]) : [];
-                if (!cancelled && data.length) setSearchItems(data);
-            } catch {
-                // ignore
-            }
-        })();
-        return () => {
-            cancelled = true;
-        };
-    }, []);
-
     return (
 
         <StandardPageLayout
-            title={pageData?.title || "ОКПД 2"}
-            breadcrumbs={[{ id: 2, title: 'ОКПД 2', full_slug: '/okpd' }]}
+            title={pageData?.title || "ТН ВЭД"}
+            breadcrumbs={[{ id: 2, title: 'ТН ВЭД', full_slug: '/tnved' }]}
             dotNavItems={dotNavItems}
             contentColumn={<FilesList />}
             showButton={true}
         >
-            <OkpdQuickSearchSection items={searchItems} />
-            <OkpdClassifierSection
+            <TnvedQuickSearchSection />
+            <TnvedClassifierSection
                 items={hierarchyItems}
                 onSectionVisible={onSectionVisible}
                 isSectionLoaded={isSectionLoaded}
                 isSectionLoading={isSectionLoading}
             />
 
-            <OkpdInfoSections
+            <TnvedInfoSections
                 pageData={pageData}
                 sectionsOpen={sectionsOpen}
                 onToggleSection={toggleSection}
