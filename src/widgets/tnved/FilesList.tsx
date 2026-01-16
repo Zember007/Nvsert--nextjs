@@ -12,21 +12,9 @@ const FilesList = () => {
       title={'Документация'}
       items={[
         {
-          id: 1,
-          title: 'ТН ВЭД ЕАЭС (актуальная редакция)',
-          icon: PdfImg,
-          link: '#',
-        },
-        {
           id: 2,
-          title: 'Пояснения к ТН ВЭД',
+          title: 'ТН ВЭД',
           icon: WordImg,
-          link: '#',
-        },
-        {
-          id: 3,
-          title: 'Правила интерпретации ТН ВЭД (ОПИ)',
-          icon: PdfImg,
           link: '#',
         },
       ]}

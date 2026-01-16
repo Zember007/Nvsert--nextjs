@@ -18,6 +18,7 @@ const SidebarNavButtons = () => {
     const isAbout = pathname.includes('/about');
     const isFeedback = pathname.includes('/feedback');
     const isOkpd = pathname.includes('/okpd');
+    const isTnved = pathname.includes('/tnved');
     const items = [
         {
             id: 'about',
@@ -58,6 +59,21 @@ const SidebarNavButtons = () => {
                 </svg>
 
             )
+        },
+        {
+            id: 'tnved',
+            label: 'ТН ВЭД',
+            href: '/tnved',
+            active: isTnved,
+            icon: <svg
+            className={`${isTnved ? 'text-white' : 'text-[#93969D]'}`}
+            width="21" height="23" viewBox="0 0 21 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.0161 0.530273H14.3191H19.6222V21.5303H14.3191H9.0161V0.530273Z" fill="currentColor" />
+                <path d="M3.8357 0.847321L8.07812 1.43065L5.03883 21.5303L0.53125 20.9469L3.8357 0.847321Z" fill="currentColor" />
+                <path d="M14.3191 0.530273H9.0161V21.5303H14.3191M14.3191 0.530273V21.5303M14.3191 0.530273H19.6222V21.5303H14.3191M3.8357 0.847321L8.07812 1.43065L5.03883 21.5303L0.53125 20.9469L3.8357 0.847321Z" stroke={isTnved ? '#34446D' : '#93969D'} stroke-width="1.06061" stroke-linejoin="round" />
+                <path d="M17.0762 8.03027V5.03027M11.5762 8.03027V5.03027" stroke={isTnved ? '#34446D' : 'white'} stroke-linejoin="round" />
+            </svg>
+
         }
     ];
     return (

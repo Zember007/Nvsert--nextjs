@@ -77,7 +77,7 @@ export function TnvedQuickSearchSection() {
   }, [inputValue, startTransition]);
 
   return (
-    <div className="flex flex-col" id="block-search">
+    <div className="flex flex-col" id="block-1">
       <p className={`${textSize.headerH4} text-[#34446D] border-b border-[#34446D] mb-[20px]`}>
         Быстрый поиск кода ТН&nbsp;ВЭД
       </p>

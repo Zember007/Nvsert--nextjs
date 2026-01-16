@@ -32,6 +32,8 @@ async function fetchTnvedData(): Promise<{ items: TnvedItem[]; pageData: TnvedPa
     const data = Array.isArray(json?.data) ? json.data : Array.isArray(json) ? json : [];
     const pageData = json?.page || null;
 
+    console.log(data);
+
     return { items: data as TnvedItem[], pageData: pageData as TnvedPageData | null };
 }
 

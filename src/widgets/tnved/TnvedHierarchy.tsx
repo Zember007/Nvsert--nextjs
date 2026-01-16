@@ -62,11 +62,51 @@ export default function TnvedHierarchy({
       childrenByParent.set(p, [...arr].sort((a, b) => String(a.path).localeCompare(String(b.path))));
     }
 
+    // Находим разделы (level: 1, пустой код или название содержит "РАЗДЕЛ")
+    const sections = [...byNodeId.values()]
+      .filter((it) => {
+        if (it.level !== 1) return false;
+        const hasNoCode = (!it.code || !it.code.trim()) && (!it.codeNorm || !it.codeNorm.trim());
+        const isSectionName = it.name.toUpperCase().includes('РАЗДЕЛ');
+        return hasNoCode || isSectionName;
+      })
+      .sort((a, b) => String(a.path).localeCompare(String(b.path)));
+
+    // Находим главы (level: 2, есть код)
     const chapters = [...byNodeId.values()]
       .filter((it) => it.level === 2 && (it.codeNorm || it.code))
       .sort((a, b) => String(a.codeNorm || a.code || '').localeCompare(String(b.codeNorm || b.code || '')));
 
-    return { byNodeId, childrenByParent, chapters };
+    // Функция для поиска раздела главы (поднимаемся по parentNodeId до level: 1)
+    const getSectionForChapter = (chapter: TnvedItem): TnvedItem | null => {
+      let current: TnvedItem | undefined = chapter;
+      while (current && current.parentNodeId !== null) {
+        const parent = byNodeId.get(current.parentNodeId);
+        if (!parent) break;
+        if (parent.level === 1) {
+          const hasNoCode = (!parent.code || !parent.code.trim()) && (!parent.codeNorm || !parent.codeNorm.trim());
+          const isSectionName = parent.name.toUpperCase().includes('РАЗДЕЛ');
+          if (hasNoCode || isSectionName) {
+            return parent;
+          }
+        }
+        current = parent;
+      }
+      return null;
+    };
+
+    // Группируем главы по разделам
+    const chaptersBySection = new Map<number, TnvedItem[]>();
+    for (const chapter of chapters) {
+      const section = getSectionForChapter(chapter);
+      if (section) {
+        const arr = chaptersBySection.get(section.nodeId);
+        if (arr) arr.push(chapter);
+        else chaptersBySection.set(section.nodeId, [chapter]);
+      }
+    }
+
+    return { byNodeId, childrenByParent, chapters, sections, chaptersBySection, getSectionForChapter };
   }, [items]);
 
   const chapterElsRef = React.useRef<Map<string, HTMLDivElement | null>>(new Map());
@@ -173,9 +213,26 @@ export default function TnvedHierarchy({
     return <div className={`${textSize.text2} font-light text-[#93969d]`}>Нет данных ТН ВЭД</div>;
   }
 
+  // Собираем плоский список глав с их разделами для рендеринга
+  const chaptersWithSections = React.useMemo(() => {
+    const result: Array<{ chapter: TnvedItem; section: TnvedItem | null; isFirstInSection: boolean }> = [];
+    const sectionFirstChapter = new Set<number>();
+
+    for (const chapterNode of model.chapters) {
+      const section = model.getSectionForChapter(chapterNode);
+      const isFirst = section && !sectionFirstChapter.has(section.nodeId);
+      if (isFirst && section) {
+        sectionFirstChapter.add(section.nodeId);
+      }
+      result.push({ chapter: chapterNode, section, isFirstInSection: isFirst || false });
+    }
+
+    return result;
+  }, [model.chapters, model.getSectionForChapter]);
+
   return (
     <div className="flex flex-col gap-[50px]">
-      {model.chapters.map((chapterNode) => {
+      {chaptersWithSections.map(({ chapter: chapterNode, section, isFirstInSection }) => {
         const chapter = String(chapterNode.codeNorm || chapterNode.code || '').slice(0, 2);
         if (!/^\d{2}$/.test(chapter)) return null;
 
@@ -184,65 +241,70 @@ export default function TnvedHierarchy({
         const loading = isSectionLoading ? isSectionLoading(chapter) : false;
 
         return (
-          <div key={chapterNode.nodeId} ref={setChapterEl(chapter)} data-chapter={chapter}>
-            <CollapseSection
-              title={formatNodeTitle(chapterNode)}
-              isOpen={!openChapters.includes(chapter)}
-              onToggle={() => handleToggleChapter(chapter)}
-            >
-              {!loaded && (
-                <div className={`${textSize.text2} font-light text-[#93969d]`}>
-                  {loading ? 'Загрузка…' : 'Нет данных (ожидаем подгрузку)'}
-                </div>
-              )}
+          <React.Fragment key={chapterNode.nodeId}>
+            {isFirstInSection && section && (
+              <p className={`${textSize.text2} font-normal text-[#93969D]`}>{section.name}</p>
+            )}
+            <div ref={setChapterEl(chapter)} data-chapter={chapter}>
+              <CollapseSection
+                title={formatNodeTitle(chapterNode)}
+                isOpen={openChapters.includes(chapter)}
+                onToggle={() => handleToggleChapter(chapter)}
+              >
+                {!loaded && (
+                  <div className={`${textSize.text2} font-light text-[#93969d]`}>
+                    {loading ? 'Загрузка…' : 'Нет данных (ожидаем подгрузку)'}
+                  </div>
+                )}
 
-              {loaded && (
-                <VirtualizedList
-                  items={rows}
-                  estimatedItemSize={40}
-                  overscan={20}
-                  useWindowScroll
-                  getItemKey={(row) => String(row.item.nodeId)}
-                  renderItem={(row) => {
-                    const item = row.item;
-                    const title = formatNodeTitle(item);
+                {loaded && (
+                  <VirtualizedList
+                    items={rows}
+                    estimatedItemSize={40}
+                    overscan={20}
+                    useWindowScroll
+                    getItemKey={(row) => String(row.item.nodeId)}
+                    renderItem={(row) => {
+                      const item = row.item;
+                      const title = formatNodeTitle(item);
 
-                    if (row.kind === 'h5') {
+                      if (row.kind === 'h5') {
+                        return (
+                          <RowContainer row={row}>
+                            <h5 className={`${textSize.headerH6}`}>{title}</h5>
+                          </RowContainer>
+                        );
+                      }
+
+                      if (row.kind === 'h6') {
+                        return (
+                          <RowContainer row={row}>
+                            <div className="relative py-[5px]">
+                              <OkpdPrefix position="bottom" hasChild={true} />
+                              <h6 className={`${textSize.text1} pl-[12px]`}>{title}</h6>
+                            </div>
+                          </RowContainer>
+                        );
+                      }
+
+                      const textClass = item.hasChildren ? `${textSize.text2} font-normal` : `${textSize.text2} font-light`;
+
                       return (
                         <RowContainer row={row}>
-                          <h5 className={`${textSize.headerH6}`}>{title}</h5>
-                        </RowContainer>
-                      );
-                    }
-
-                    if (row.kind === 'h6') {
-                      return (
-                        <RowContainer row={row}>
-                          <div className="relative py-[5px]">
-                            <OkpdPrefix position="bottom" hasChild={true} />
-                            <h6 className={`${textSize.text1} pl-[12px]`}>{title}</h6>
+                          <div style={{ paddingLeft: `${Math.max(0, row.depth - 1) * 12}px` }}>
+                            <div className="pl-[12px] relative">
+                              <OkpdPrefix position="middle" hasChild={item.hasChildren} />
+                              <span className={textClass}>{title}</span>
+                            </div>
                           </div>
                         </RowContainer>
                       );
-                    }
-
-                    const textClass = item.hasChildren ? `${textSize.text2} font-normal` : `${textSize.text2} font-light`;
-
-                    return (
-                      <RowContainer row={row}>
-                        <div style={{ paddingLeft: `${Math.max(0, row.depth - 1) * 12}px` }}>
-                          <div className="pl-[12px] relative">
-                            <OkpdPrefix position="middle" hasChild={item.hasChildren} />
-                            <span className={textClass}>{title}</span>
-                          </div>
-                        </div>
-                      </RowContainer>
-                    );
-                  }}
-                />
-              )}
-            </CollapseSection>
-          </div>
+                    }}
+                  />
+                )}
+              </CollapseSection>
+            </div>
+          </React.Fragment>
         );
       })}
     </div>

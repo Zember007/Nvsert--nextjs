@@ -19,7 +19,7 @@ export function TnvedClassifierSection({
 }) {
   return (
     <>
-      <h2 id="block-classifier" className={`${textSize.headerH3}`}>
+      <h2 id="block-2" className={`${textSize.headerH3}`}>
         Классификатор ТН ВЭД
       </h2>
 
