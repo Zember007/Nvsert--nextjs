@@ -88,7 +88,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
                     </div>
                     {/* Right column */}
                     <div className="hidden xl:block w-[250px] relative">
-                        <div className="sticky top-[104px] flex flex-col gap-[50px] overflow-y-auto pb-[60px] max-h-[calc(100vh-104px)]">
+                        <div className="sticky top-[104px] flex flex-col gap-[50px] overflow-y-auto no-scrollbar pb-[60px] max-h-[calc(100vh-104px)]">
                             {showButton && (
                                 <Button
                                     onClick={() => {
