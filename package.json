@@ -6,6 +6,7 @@
     "dev": "next dev",
     "generate-navigation": "node src/assets/scripts/generate-navigation.js",
     "okpd-convert": "cd script && node okpd-convert.js",
+    "tnved-import": "cd script && node tnved-import.js",
     "build": "NODE_ENV=production next build",
     "start": "next start -p 3000",
     "export": "next export",
