@@ -207,6 +207,11 @@ export default function OkpdHierarchy({
 
     const [openRoots, setOpenRoots] = React.useState<string[]>(['01']);
 
+    // Внутреннее раскрытие внутри раздела (одна активная ветка).
+    // Храним "путь раскрытия" начиная с depth=1 (строки kind='h6').
+    const [openPathByRoot, setOpenPathByRoot] = React.useState<Record<string, string[]>>({});
+    const [selectedCodeByRoot, setSelectedCodeByRoot] = React.useState<Record<string, string | null>>({});
+
     const toggleRoot = (code: string) => {
         setOpenRoots(prev =>
             prev.includes(code) ? prev.filter(x => x !== code) : [...prev, code]
@@ -226,54 +231,37 @@ export default function OkpdHierarchy({
         [openRoots, onSectionVisible, isSectionLoaded],
     );
 
-    const flattenSubtreeRows = React.useCallback(
-        (rootCode: string): OkpdRow[] => {
-            const result: OkpdRow[] = [];
+    const buildVisibleRows = React.useCallback(
+        (rootCode: string, openPath: string[]): OkpdRow[] => {
+            const rows: OkpdRow[] = [];
 
-            const walk = (code: string, depth: number, sectionCode: string | null) => {
-                const children = byParent.get(code) ?? [];
+            // depth=0 (после корня) — заголовки h5
+            const h5Items = byParent.get(rootCode) ?? [];
+            for (const h5 of h5Items) {
+                rows.push({ kind: 'h5', item: h5, depth: 0 });
 
-                for (const child of children) {
-                    const childHasChildren = (byParent.get(child.code)?.length ?? 0) > 0;
-                    if (depth === 0) {
-                        // первый уровень после корня — всегда h5 (без префикса)
-                        result.push({
-                            kind: 'h5',
-                            item: child,
-                            depth: 0,
-                        });
-                        if (childHasChildren) {
-                            walk(child.code, 1, child.code); // рекурсия
-                        }
-                    } else if (depth === 1) {
-                        // второй уровень — h6
-                        result.push({
-                            kind: 'h6',
-                            item: child,
-                            depth: 1,
-                            sectionCode: sectionCode!,
-                        });
-                        if (childHasChildren) {
-                            walk(child.code, 2, sectionCode);
-                        }
-                    } else {
-                        // третий уровень и далее — text
-                        result.push({
-                            kind: 'text',
-                            item: child,
-                            depth,
-                            sectionCode: sectionCode!,
-                        });
+                // depth=1 — список h6 под этим h5 (видим всегда)
+                const h6Items = byParent.get(h5.code) ?? [];
+                for (const h6 of h6Items) {
+                    rows.push({ kind: 'h6', item: h6, depth: 1, sectionCode: h5.code });
 
-                        if (childHasChildren) {
-                            walk(child.code, depth + 1, sectionCode);
-                        }
+                    // дальнейшие уровни показываем только по активному пути
+                    if (openPath[0] === h6.code) {
+                        const walk = (parentCode: string, depth: number, pathIdx: number, sectionCode: string) => {
+                            const children = byParent.get(parentCode) ?? [];
+                            for (const child of children) {
+                                rows.push({ kind: 'text', item: child, depth, sectionCode });
+                                if (openPath[pathIdx] === child.code) {
+                                    walk(child.code, depth + 1, pathIdx + 1, sectionCode);
+                                }
+                            }
+                        };
+                        walk(h6.code, 2, 1, h5.code);
                     }
                 }
-            };
+            }
 
-            walk(rootCode, 0, null);
-            return result;
+            return rows;
         },
         [byParent],
     );
@@ -282,7 +270,7 @@ export default function OkpdHierarchy({
     const OkpdRowContainer = React.useCallback(
         ({ row, children }: { row: OkpdRow; children: React.ReactNode }) => {
             const inSection = row.kind !== 'h5';
-            const blueLinesCount = Math.max(0, row.depth - 1);
+            const levelLinesCount = Math.max(0, row.depth - 1);
 
             return (
                 <div className="relative pb-[20px]">
@@ -294,13 +282,13 @@ export default function OkpdHierarchy({
                     )}
 
                     {inSection &&
-                        Array.from({ length: blueLinesCount }).map((_, idx) => {
+                        Array.from({ length: levelLinesCount }).map((_, idx) => {
                             const level = idx + 1;
                             return (
                                 <span
                                     key={level}
                                     aria-hidden
-                                    className="absolute top-0 bottom-0 border-l border-[#34446D]"
+                                    className="absolute top-0 bottom-0 border-l border-[#93969d]"
                                     style={{ left: `${level * 12}px` }}
                                 />
                             );
@@ -346,7 +334,9 @@ export default function OkpdHierarchy({
                 // Показываем раздел только если он отличается от предыдущего
                 const shouldShowSection = section && section !== prevSection;
                 
-                const rows = flattenSubtreeRows(root.code);
+                const openPath = openPathByRoot[root.code] ?? [];
+                const selectedCode = selectedCodeByRoot[root.code] ?? null;
+                const rows = buildVisibleRows(root.code, openPath);
                 const loaded = isSectionLoaded ? isSectionLoaded(root.code) : true;
                 const loading = isSectionLoading ? isSectionLoading(root.code) : false;
                 
@@ -381,6 +371,18 @@ export default function OkpdHierarchy({
                                         getItemKey={row => row.item.code}
                                         renderItem={row => {
                                             const item = row.item;
+                                            const actualHasChildren = (byParent.get(item.code)?.length ?? 0) > 0 || item.hasChildren;
+
+                                            // openPath индексируется начиная с depth=1 (kind='h6')
+                                            const pathIdx = row.kind === 'h6' ? 0 : row.kind === 'text' ? row.depth - 1 : null;
+                                            const isExpanded =
+                                                pathIdx !== null ? openPath[pathIdx] === item.code : false;
+                                            const hasExpandedChild =
+                                                pathIdx !== null ? Boolean(openPath[pathIdx + 1]) && isExpanded : false;
+
+                                            const isActive = isExpanded && pathIdx !== null && pathIdx === openPath.length - 1;
+                                            const prefixState: 'default' | 'active' | 'ancestor' =
+                                                isActive ? 'active' : hasExpandedChild ? 'ancestor' : 'default';
 
                                             if (row.kind === 'h5') {
                                                 return (
@@ -396,10 +398,42 @@ export default function OkpdHierarchy({
                                                 return (
                                                     <OkpdRowContainer row={row}>
                                                         <div className="relative py-[5px]">
-                                                            <OkpdPrefix position="bottom" hasChild={true} />
-                                                            <h6 className={`${textSize.text1} pl-[12px]`}>
+                                                            <OkpdPrefix
+                                                                position="bottom"
+                                                                hasChild={actualHasChildren}
+                                                                expanded={isExpanded}
+                                                                state={prefixState}
+                                                            />
+
+                                                            <button
+                                                                type="button"
+                                                                className={[
+                                                                    `${textSize.text1} pl-[12px] text-left`,
+                                                                    // hover: "толще"
+                                                                    'font-light hover:font-normal',
+                                                                    // active: underline + вжатие
+                                                                    'active:translate-y-[1px] active:underline active:decoration-[#34446D] active:underline-offset-4',
+                                                                    // selected/active
+                                                                    isActive ? 'text-[#34446D]' : 'text-inherit',
+                                                                    selectedCode === item.code
+                                                                        ? 'underline decoration-[#34446D] underline-offset-4'
+                                                                        : 'no-underline',
+                                                                ].join(' ')}
+                                                                aria-expanded={actualHasChildren ? isExpanded : undefined}
+                                                                onClick={() => {
+                                                                    setSelectedCodeByRoot(prev => ({ ...prev, [root.code]: item.code }));
+                                                                    if (!actualHasChildren) return;
+                                                                    setOpenPathByRoot(prev => {
+                                                                        const curr = prev[root.code] ?? [];
+                                                                        const idx = 0;
+                                                                        const already = curr[idx] === item.code;
+                                                                        const next = already ? [] : [item.code];
+                                                                        return { ...prev, [root.code]: next };
+                                                                    });
+                                                                }}
+                                                            >
                                                                 {formatNodeTitle(item)}
-                                                            </h6>
+                                                            </button>
                                                         </div>
                                                     </OkpdRowContainer>
                                                 );
@@ -414,8 +448,43 @@ export default function OkpdHierarchy({
                                                 <OkpdRowContainer row={row}>
                                                     <div style={{ paddingLeft: `${Math.max(0, row.depth - 1) * 12}px` }}>
                                                         <div className="pl-[12px] relative">
-                                                            <OkpdPrefix position="middle" hasChild={item.hasChildren} />
-                                                            <span className={textClass}>{formatNodeTitle(item)}</span>
+                                                            <OkpdPrefix
+                                                                position="middle"
+                                                                hasChild={actualHasChildren}
+                                                                expanded={isExpanded}
+                                                                state={prefixState}
+                                                            />
+                                                            <button
+                                                                type="button"
+                                                                className={[
+                                                                    textClass,
+                                                                    'text-left',
+                                                                    'hover:font-normal',
+                                                                    'active:translate-y-[1px] active:underline active:decoration-[#34446D] active:underline-offset-4',
+                                                                    isActive ? 'text-[#34446D]' : 'text-inherit',
+                                                                    selectedCode === item.code
+                                                                        ? 'underline decoration-[#34446D] underline-offset-4'
+                                                                        : 'no-underline',
+                                                                ].join(' ')}
+                                                                aria-expanded={actualHasChildren ? isExpanded : undefined}
+                                                                onClick={() => {
+                                                                    setSelectedCodeByRoot(prev => ({ ...prev, [root.code]: item.code }));
+                                                                    if (!actualHasChildren) return;
+
+                                                                    setOpenPathByRoot(prev => {
+                                                                        const curr = prev[root.code] ?? [];
+                                                                        const idx = row.depth - 1; // depth=2 -> 1, depth=3 -> 2, ...
+                                                                        const already = curr[idx] === item.code;
+                                                                        // оставляем путь до родителя
+                                                                        const base = curr.slice(0, idx);
+                                                                        // если клик по текущему активному — схлопываем этот уровень (и глубже)
+                                                                        const next = already ? base : [...base, item.code];
+                                                                        return { ...prev, [root.code]: next };
+                                                                    });
+                                                                }}
+                                                            >
+                                                                {formatNodeTitle(item)}
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </OkpdRowContainer>
