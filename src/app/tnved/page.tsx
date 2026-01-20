@@ -25,7 +25,7 @@ async function fetchTnvedData(): Promise<{ items: TnvedItem[]; pageData: TnvedPa
         'https://nvsert.ru'
     ).replace(/\/$/, '');
 
-    const res = await fetch(`${base}/api/tnveds/with-page`, { cache: 'force-cache' });
+    const res = await fetch(`${base}/api/tnveds/with-page`);
     if (!res.ok) return { items: [], pageData: null };
 
     const json = await res.json();
