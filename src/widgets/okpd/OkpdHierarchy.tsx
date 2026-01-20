@@ -205,7 +205,7 @@ export default function OkpdHierarchy({
         return () => io.disconnect();
     }, [onSectionVisible, roots]);
 
-    const [openRoots, setOpenRoots] = React.useState<string[]>([]);
+    const [openRoots, setOpenRoots] = React.useState<string[]>(['01']);
 
     const toggleRoot = (code: string) => {
         setOpenRoots(prev =>
@@ -363,7 +363,7 @@ export default function OkpdHierarchy({
                         >
                             <CollapseSection
                                 title={formatNodeTitle(root)}
-                                isOpen={!openRoots.includes(root.code)}
+                                isOpen={openRoots.includes(root.code)}
                                 onToggle={() => handleToggleRoot(root.code)}
                             >
                                 {!loaded && (
