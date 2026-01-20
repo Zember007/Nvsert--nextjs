@@ -146,9 +146,18 @@ export default function TnvedHierarchy({
   }, [onSectionVisible, model.chapters]);
 
   const [openChapters, setOpenChapters] = React.useState<string[]>([]);
+  const [openSections, setOpenSections] = React.useState<number[]>([]);
+
+  // Внутреннее раскрытие внутри главы (мульти-раскрытие: старые пункты не сворачиваются).
+  const [expandedByChapter, setExpandedByChapter] = React.useState<Record<string, number[]>>({});
+  const [selectedNodeIdByChapter, setSelectedNodeIdByChapter] = React.useState<Record<string, number | null>>({});
 
   const toggleChapter = React.useCallback((chapter: string) => {
     setOpenChapters((prev) => (prev.includes(chapter) ? prev.filter((x) => x !== chapter) : [...prev, chapter]));
+  }, []);
+
+  const toggleSection = React.useCallback((sectionNodeId: number) => {
+    setOpenSections((prev) => (prev.includes(sectionNodeId) ? prev.filter((x) => x !== sectionNodeId) : [...prev, sectionNodeId]));
   }, []);
 
   const handleToggleChapter = React.useCallback(
@@ -163,8 +172,8 @@ export default function TnvedHierarchy({
     [openChapters, onSectionVisible, isSectionLoaded, toggleChapter],
   );
 
-  const flattenChapterRows = React.useCallback(
-    (rootNodeId: number): TnvedRow[] => {
+  const buildVisibleChapterRows = React.useCallback(
+    (rootNodeId: number, expandedSet: Set<number>): TnvedRow[] => {
       const root = model.byNodeId.get(rootNodeId);
       if (!root) return [];
       const rows: TnvedRow[] = [];
@@ -173,9 +182,20 @@ export default function TnvedHierarchy({
         const children = model.childrenByParent.get(parentNodeId) ?? [];
         for (const child of children) {
           const relDepth = Math.max(0, child.level - root.level - 1);
-          const kind: RowKind = relDepth === 0 ? 'h5' : relDepth === 1 ? 'h6' : 'text';
-          rows.push({ kind, item: child, depth: relDepth });
-          walk(child.nodeId);
+          // Первый уровень (relDepth=0) пропускаем: показываем сразу со второго уровня
+          // и считаем этот уровень "всегда раскрытым" для прохода дальше.
+          if (relDepth === 0) {
+            walk(child.nodeId);
+            continue;
+          }
+
+          const shiftedDepth = relDepth - 1; // relDepth=1 -> 0
+          const kind: RowKind = shiftedDepth === 0 ? 'h6' : 'text';
+          rows.push({ kind, item: child, depth: shiftedDepth });
+
+          if (expandedSet.has(child.nodeId)) {
+            walk(child.nodeId);
+          }
         }
       };
 
@@ -187,19 +207,19 @@ export default function TnvedHierarchy({
 
   const RowContainer = React.useCallback(({ row, children }: { row: TnvedRow; children: React.ReactNode }) => {
     const inSection = row.kind !== 'h5';
-    const blueLinesCount = Math.max(0, row.depth - 1);
+    const levelLinesCount = Math.max(0, row.depth - 1);
 
     return (
       <div className="relative pb-[20px]">
         {inSection && <span aria-hidden className="absolute left-0 top-0 bottom-0 border-l border-[#93969d]" />}
         {inSection &&
-          Array.from({ length: blueLinesCount }).map((_, idx) => {
+          Array.from({ length: levelLinesCount }).map((_, idx) => {
             const level = idx + 1;
             return (
               <span
                 key={level}
                 aria-hidden
-                className="absolute top-0 bottom-0 border-l border-[#34446D]"
+                className="absolute top-0 bottom-0 border-l border-[#93969d]"
                 style={{ left: `${level * 12}px` }}
               />
             );
@@ -213,98 +233,197 @@ export default function TnvedHierarchy({
     return <div className={`${textSize.text2} font-light text-[#93969d]`}>Нет данных ТН ВЭД</div>;
   }
 
-  // Собираем плоский список глав с их разделами для рендеринга
-  const chaptersWithSections = React.useMemo(() => {
-    const result: Array<{ chapter: TnvedItem; section: TnvedItem | null; isFirstInSection: boolean }> = [];
-    const sectionFirstChapter = new Set<number>();
-
-    for (const chapterNode of model.chapters) {
-      const section = model.getSectionForChapter(chapterNode);
-      const isFirst = section && !sectionFirstChapter.has(section.nodeId);
-      if (isFirst && section) {
-        sectionFirstChapter.add(section.nodeId);
-      }
-      result.push({ chapter: chapterNode, section, isFirstInSection: isFirst || false });
-    }
-
-    return result;
-  }, [model.chapters, model.getSectionForChapter]);
+  const sectionsWithChapters = React.useMemo(() => {
+    return model.sections.map((sectionNode) => {
+      const chapters = model.chaptersBySection.get(sectionNode.nodeId) ?? [];
+      return { section: sectionNode, chapters };
+    });
+  }, [model.sections, model.chaptersBySection]);
 
   return (
     <div className="flex flex-col gap-[50px]">
-      {chaptersWithSections.map(({ chapter: chapterNode, section, isFirstInSection }) => {
-        const chapter = String(chapterNode.codeNorm || chapterNode.code || '').slice(0, 2);
-        if (!/^\d{2}$/.test(chapter)) return null;
-
-        const rows = flattenChapterRows(chapterNode.nodeId);
-        const loaded = isSectionLoaded ? isSectionLoaded(chapter) : true;
-        const loading = isSectionLoading ? isSectionLoading(chapter) : false;
-
+      {sectionsWithChapters.map(({ section, chapters }) => {
+        const sectionId = section.nodeId;
         return (
-          <React.Fragment key={chapterNode.nodeId}>
-            {isFirstInSection && section && (
-              <p className={`${textSize.text2} font-normal text-[#93969D]`}>{section.name}</p>
-            )}
-            <div ref={setChapterEl(chapter)} data-chapter={chapter}>
-              <CollapseSection
-                title={formatNodeTitle(chapterNode)}
-                isOpen={openChapters.includes(chapter)}
-                onToggle={() => handleToggleChapter(chapter)}
-              >
-                {!loaded && (
-                  <div className={`${textSize.text2} font-light text-[#93969d]`}>
-                    {loading ? 'Загрузка…' : 'Нет данных (ожидаем подгрузку)'}
-                  </div>
-                )}
+          <div key={sectionId}>
+            <CollapseSection title={section.name} isOpen={openSections.includes(sectionId)} onToggle={() => toggleSection(sectionId)}>
+              {chapters.map((chapterNode) => {
+                const chapter = String(chapterNode.codeNorm || chapterNode.code || '').slice(0, 2);
+                if (!/^\d{2}$/.test(chapter)) return null;
 
-                {loaded && (
-                  <VirtualizedList
-                    items={rows}
-                    estimatedItemSize={40}
-                    overscan={20}
-                    useWindowScroll
-                    getItemKey={(row) => String(row.item.nodeId)}
-                    renderItem={(row) => {
-                      const item = row.item;
-                      const title = formatNodeTitle(item);
+                const expandedCodes = expandedByChapter[chapter] ?? [];
+                const expandedSet = new Set(expandedCodes);
+                const selectedNodeId = selectedNodeIdByChapter[chapter] ?? null;
 
-                      if (row.kind === 'h5') {
-                        return (
-                          <RowContainer row={row}>
-                            <h5 className={`${textSize.headerH6}`}>{title}</h5>
-                          </RowContainer>
-                        );
-                      }
+                // Активная цепочка для подсветки (синий "переезжает" по последнему выбранному пункту).
+                const activeChain = new Set<number>();
+                const activeChildByParent = new Map<number, number>();
+                if (selectedNodeId !== null) {
+                  let cur: number | null = selectedNodeId;
+                  while (cur !== null) {
+                    activeChain.add(cur);
+                    const parentNodeId: number | null = model.byNodeId.get(cur)?.parentNodeId ?? null;
+                    if (parentNodeId === null) break;
+                    activeChildByParent.set(parentNodeId, cur);
+                    if (parentNodeId === chapterNode.nodeId) {
+                      activeChain.add(parentNodeId);
+                      break;
+                    }
+                    cur = parentNodeId;
+                  }
+                }
 
-                      if (row.kind === 'h6') {
-                        return (
-                          <RowContainer row={row}>
-                            <div className="relative py-[5px]">
-                              <OkpdPrefix position="bottom" hasChild={true} />
-                              <h6 className={`${textSize.text1} pl-[12px]`}>{title}</h6>
-                            </div>
-                          </RowContainer>
-                        );
-                      }
+                const rows = buildVisibleChapterRows(chapterNode.nodeId, expandedSet);
+                const loaded = isSectionLoaded ? isSectionLoaded(chapter) : true;
+                const loading = isSectionLoading ? isSectionLoading(chapter) : false;
+                const chapterOpen = openChapters.includes(chapter);
 
-                      const textClass = item.hasChildren ? `${textSize.text2} font-normal` : `${textSize.text2} font-light`;
+                return (
+                  <div key={chapterNode.nodeId} ref={setChapterEl(chapter)} data-chapter={chapter}>
+                    <button
+                      type="button"
+                      className={[
+                        `${textSize.headerH6} text-left`,
+                        'text-black',
+                        'hover:font-semibold',
+                        'active:translate-y-[1px] active:underline active:underline-offset-4',
+                      ].join(' ')}
+                      aria-expanded={chapterOpen}
+                      onClick={() => handleToggleChapter(chapter)}
+                    >
+                      {formatNodeTitle(chapterNode)}
+                    </button>
 
-                      return (
-                        <RowContainer row={row}>
-                          <div style={{ paddingLeft: `${Math.max(0, row.depth - 1) * 12}px` }}>
-                            <div className="pl-[12px] relative">
-                              <OkpdPrefix position="middle" hasChild={item.hasChildren} />
-                              <span className={textClass}>{title}</span>
-                            </div>
+                    {chapterOpen && (
+                      <>
+                        {!loaded && (
+                          <div className={`${textSize.text2} font-light text-[#93969d]`}>
+                            {loading ? 'Загрузка…' : 'Нет данных (ожидаем подгрузку)'}
                           </div>
-                        </RowContainer>
-                      );
-                    }}
-                  />
-                )}
-              </CollapseSection>
-            </div>
-          </React.Fragment>
+                        )}
+
+                        {loaded && (
+                          <VirtualizedList
+                            items={rows}
+                            estimatedItemSize={40}
+                            overscan={20}
+                            useWindowScroll
+                            getItemKey={(row) => String(row.item.nodeId)}
+                            renderItem={(row) => {
+                              const item = row.item;
+                              const title = formatNodeTitle(item);
+                              const actualHasChildren =
+                                (model.childrenByParent.get(item.nodeId)?.length ?? 0) > 0 || item.hasChildren;
+                              const isExpanded = expandedSet.has(item.nodeId);
+                              const isActive = selectedNodeId === item.nodeId;
+                              const hasActiveChild = Boolean(activeChildByParent.get(item.nodeId));
+                              const prefixState: 'default' | 'active' | 'ancestor' =
+                                isActive ? 'active' : hasActiveChild && activeChain.has(item.nodeId) ? 'ancestor' : 'default';
+
+                              // h5 больше не используем (первый уровень пропущен), но оставим безопасный fallback
+                              if (row.kind === 'h5') {
+                                return (
+                                  <RowContainer row={row}>
+                                    <h5 className={`${textSize.headerH6}`}>{title}</h5>
+                                  </RowContainer>
+                                );
+                              }
+
+                              if (row.kind === 'h6') {
+                                return (
+                                  <RowContainer row={row}>
+                                    <div className="relative py-[5px]">
+                                      <OkpdPrefix
+                                        position="middle"
+                                        hasChild={actualHasChildren}
+                                        expanded={isExpanded}
+                                        state={prefixState}
+                                      />
+                                      <button
+                                        type="button"
+                                        className={[
+                                          `${textSize.text1} pl-[12px] text-left`,
+                                          'font-light hover:font-normal',
+                                          'active:translate-y-[1px] active:underline active:decoration-[#34446D] active:underline-offset-4',
+                                          isActive ? 'text-[#34446D]' : 'text-inherit',
+                                          selectedNodeId === item.nodeId
+                                            ? 'underline decoration-[#34446D] underline-offset-4'
+                                            : 'no-underline',
+                                        ].join(' ')}
+                                        aria-expanded={actualHasChildren ? isExpanded : undefined}
+                                        onClick={() => {
+                                          setSelectedNodeIdByChapter((prev) => ({ ...prev, [chapter]: item.nodeId }));
+                                          if (!actualHasChildren) return;
+                                          setExpandedByChapter((prev) => {
+                                            const curr = prev[chapter] ?? [];
+                                            const next = new Set(curr);
+                                            if (next.has(item.nodeId)) next.delete(item.nodeId);
+                                            else next.add(item.nodeId);
+                                            return { ...prev, [chapter]: [...next] };
+                                          });
+                                        }}
+                                      >
+                                        {title}
+                                      </button>
+                                    </div>
+                                  </RowContainer>
+                                );
+                              }
+
+                              const textClass = item.hasChildren ? `${textSize.text2} font-normal` : `${textSize.text2} font-light`;
+
+                              return (
+                                <RowContainer row={row}>
+                                  <div style={{ paddingLeft: `${Math.max(0, row.depth - 1) * 12}px` }}>
+                                    <div className="pl-[12px] relative">
+                                      <OkpdPrefix
+                                        position="middle"
+                                        hasChild={actualHasChildren}
+                                        expanded={isExpanded}
+                                        state={prefixState}
+                                      />
+                                      <button
+                                        type="button"
+                                        className={[
+                                          textClass,
+                                          'text-left',
+                                          'hover:font-normal',
+                                          'active:translate-y-[1px] active:underline active:decoration-[#34446D] active:underline-offset-4',
+                                          isActive ? 'text-[#34446D]' : 'text-inherit',
+                                          selectedNodeId === item.nodeId
+                                            ? 'underline decoration-[#34446D] underline-offset-4'
+                                            : 'no-underline',
+                                        ].join(' ')}
+                                        aria-expanded={actualHasChildren ? isExpanded : undefined}
+                                        onClick={() => {
+                                          setSelectedNodeIdByChapter((prev) => ({ ...prev, [chapter]: item.nodeId }));
+                                          if (!actualHasChildren) return;
+
+                                          setExpandedByChapter((prev) => {
+                                            const curr = prev[chapter] ?? [];
+                                            const next = new Set(curr);
+                                            if (next.has(item.nodeId)) next.delete(item.nodeId);
+                                            else next.add(item.nodeId);
+                                            return { ...prev, [chapter]: [...next] };
+                                          });
+                                        }}
+                                      >
+                                        {title}
+                                      </button>
+                                    </div>
+                                  </div>
+                                </RowContainer>
+                              );
+                            }}
+                          />
+                        )}
+                      </>
+                    )}
+                  </div>
+                );
+              })}
+            </CollapseSection>
+          </div>
         );
       })}
     </div>

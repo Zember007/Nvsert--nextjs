@@ -207,9 +207,8 @@ export default function OkpdHierarchy({
 
     const [openRoots, setOpenRoots] = React.useState<string[]>(['01']);
 
-    // Внутреннее раскрытие внутри раздела (одна активная ветка).
-    // Храним "путь раскрытия" начиная с depth=1 (строки kind='h6').
-    const [openPathByRoot, setOpenPathByRoot] = React.useState<Record<string, string[]>>({});
+    // Внутреннее раскрытие внутри раздела (мульти-раскрытие: старые пункты не сворачиваются).
+    const [expandedByRoot, setExpandedByRoot] = React.useState<Record<string, string[]>>({});
     const [selectedCodeByRoot, setSelectedCodeByRoot] = React.useState<Record<string, string | null>>({});
 
     const toggleRoot = (code: string) => {
@@ -232,7 +231,7 @@ export default function OkpdHierarchy({
     );
 
     const buildVisibleRows = React.useCallback(
-        (rootCode: string, openPath: string[]): OkpdRow[] => {
+        (rootCode: string, expandedSet: Set<string>): OkpdRow[] => {
             const rows: OkpdRow[] = [];
 
             // depth=0 (после корня) — заголовки h5
@@ -245,18 +244,19 @@ export default function OkpdHierarchy({
                 for (const h6 of h6Items) {
                     rows.push({ kind: 'h6', item: h6, depth: 1, sectionCode: h5.code });
 
-                    // дальнейшие уровни показываем только по активному пути
-                    if (openPath[0] === h6.code) {
-                        const walk = (parentCode: string, depth: number, pathIdx: number, sectionCode: string) => {
-                            const children = byParent.get(parentCode) ?? [];
-                            for (const child of children) {
-                                rows.push({ kind: 'text', item: child, depth, sectionCode });
-                                if (openPath[pathIdx] === child.code) {
-                                    walk(child.code, depth + 1, pathIdx + 1, sectionCode);
-                                }
+                    // дальнейшие уровни показываем по раскрытым узлам
+                    const walk = (parentCode: string, depth: number, sectionCode: string) => {
+                        const children = byParent.get(parentCode) ?? [];
+                        for (const child of children) {
+                            rows.push({ kind: 'text', item: child, depth, sectionCode });
+                            if (expandedSet.has(child.code)) {
+                                walk(child.code, depth + 1, sectionCode);
                             }
-                        };
-                        walk(h6.code, 2, 1, h5.code);
+                        }
+                    };
+
+                    if (expandedSet.has(h6.code)) {
+                        walk(h6.code, 2, h5.code);
                     }
                 }
             }
@@ -334,9 +334,25 @@ export default function OkpdHierarchy({
                 // Показываем раздел только если он отличается от предыдущего
                 const shouldShowSection = section && section !== prevSection;
                 
-                const openPath = openPathByRoot[root.code] ?? [];
                 const selectedCode = selectedCodeByRoot[root.code] ?? null;
-                const rows = buildVisibleRows(root.code, openPath);
+                const expandedCodes = expandedByRoot[root.code] ?? [];
+                const expandedSet = new Set(expandedCodes);
+
+                // Активная цепочка для подсветки (синий "переезжает" по последнему выбранному пункту).
+                const activeChain = new Set<string>();
+                const activeChildByParent = new Map<string, string>();
+                if (selectedCode) {
+                    let cur: string | null = selectedCode;
+                    while (cur) {
+                        activeChain.add(cur);
+                        const parent: string | null = model.parentByCode.get(cur) ?? null;
+                        if (!parent) break;
+                        activeChildByParent.set(parent, cur);
+                        cur = parent;
+                    }
+                }
+
+                const rows = buildVisibleRows(root.code, expandedSet);
                 const loaded = isSectionLoaded ? isSectionLoaded(root.code) : true;
                 const loading = isSectionLoading ? isSectionLoading(root.code) : false;
                 
@@ -373,16 +389,11 @@ export default function OkpdHierarchy({
                                             const item = row.item;
                                             const actualHasChildren = (byParent.get(item.code)?.length ?? 0) > 0 || item.hasChildren;
 
-                                            // openPath индексируется начиная с depth=1 (kind='h6')
-                                            const pathIdx = row.kind === 'h6' ? 0 : row.kind === 'text' ? row.depth - 1 : null;
-                                            const isExpanded =
-                                                pathIdx !== null ? openPath[pathIdx] === item.code : false;
-                                            const hasExpandedChild =
-                                                pathIdx !== null ? Boolean(openPath[pathIdx + 1]) && isExpanded : false;
-
-                                            const isActive = isExpanded && pathIdx !== null && pathIdx === openPath.length - 1;
+                                            const isExpanded = expandedSet.has(item.code);
+                                            const isActive = selectedCode === item.code;
+                                            const hasActiveChild = Boolean(activeChildByParent.get(item.code));
                                             const prefixState: 'default' | 'active' | 'ancestor' =
-                                                isActive ? 'active' : hasExpandedChild ? 'ancestor' : 'default';
+                                                isActive ? 'active' : hasActiveChild && activeChain.has(item.code) ? 'ancestor' : 'default';
 
                                             if (row.kind === 'h5') {
                                                 return (
@@ -399,7 +410,7 @@ export default function OkpdHierarchy({
                                                     <OkpdRowContainer row={row}>
                                                         <div className="relative py-[5px]">
                                                             <OkpdPrefix
-                                                                position="bottom"
+                                                                position="middle"
                                                                 hasChild={actualHasChildren}
                                                                 expanded={isExpanded}
                                                                 state={prefixState}
@@ -423,12 +434,12 @@ export default function OkpdHierarchy({
                                                                 onClick={() => {
                                                                     setSelectedCodeByRoot(prev => ({ ...prev, [root.code]: item.code }));
                                                                     if (!actualHasChildren) return;
-                                                                    setOpenPathByRoot(prev => {
+                                                                    setExpandedByRoot(prev => {
                                                                         const curr = prev[root.code] ?? [];
-                                                                        const idx = 0;
-                                                                        const already = curr[idx] === item.code;
-                                                                        const next = already ? [] : [item.code];
-                                                                        return { ...prev, [root.code]: next };
+                                                                        const next = new Set(curr);
+                                                                        if (next.has(item.code)) next.delete(item.code);
+                                                                        else next.add(item.code);
+                                                                        return { ...prev, [root.code]: [...next] };
                                                                     });
                                                                 }}
                                                             >
@@ -471,15 +482,12 @@ export default function OkpdHierarchy({
                                                                     setSelectedCodeByRoot(prev => ({ ...prev, [root.code]: item.code }));
                                                                     if (!actualHasChildren) return;
 
-                                                                    setOpenPathByRoot(prev => {
+                                                                    setExpandedByRoot(prev => {
                                                                         const curr = prev[root.code] ?? [];
-                                                                        const idx = row.depth - 1; // depth=2 -> 1, depth=3 -> 2, ...
-                                                                        const already = curr[idx] === item.code;
-                                                                        // оставляем путь до родителя
-                                                                        const base = curr.slice(0, idx);
-                                                                        // если клик по текущему активному — схлопываем этот уровень (и глубже)
-                                                                        const next = already ? base : [...base, item.code];
-                                                                        return { ...prev, [root.code]: next };
+                                                                        const next = new Set(curr);
+                                                                        if (next.has(item.code)) next.delete(item.code);
+                                                                        else next.add(item.code);
+                                                                        return { ...prev, [root.code]: [...next] };
                                                                     });
                                                                 }}
                                                             >
