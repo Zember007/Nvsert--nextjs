@@ -171,6 +171,8 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
                           width={typeof imgSrc === 'string' ? imgW : undefined}
                           height={typeof imgSrc === 'string' ? imgH : undefined}
                           alt={office.city}
+                          unoptimized={true}
+
                         />
                         <span
                           style={{
@@ -277,6 +279,8 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
                   width={typeof consultationImageSrc === 'string' ? consultationW : undefined}
                   height={typeof consultationImageSrc === 'string' ? consultationH : undefined}
                   alt={data.connectSection.consultationImage?.alternativeText || 'Consultation'}
+                  unoptimized={true}
+
                 />
               </div>
             </div>
@@ -357,6 +361,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
                 width={typeof financeImageSrc === 'string' ? financeW : undefined}
                 height={typeof financeImageSrc === 'string' ? financeH : undefined}
                 alt={data.requisitesSection.image?.alternativeText || 'FinanceIcon'}
+                unoptimized={true}
               />
             </div>
           </div>
