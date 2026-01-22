@@ -1,15 +1,12 @@
 import type { FaqItem } from '@/types/faq';
+import { SITE_URL } from 'shared/config/env';
 
 const ONE_HOUR_SECONDS = 60 * 60;
 
-export async function getFaqs(): Promise<FaqItem[]> {
+export async function getFaqs(locale?: string): Promise<FaqItem[]> {
   try {
-    const baseUrl =
-      process.env.NEXT_PUBLIC_SITE_URL ||
-      process.env.NEXT_PUBLIC_BASE_URL ||
-      'https://nvsert.ru';
-
-    const res = await fetch(`${baseUrl}/api/faqs`, {
+    const qs = locale ? `?locale=${encodeURIComponent(locale)}` : '';
+    const res = await fetch(`${SITE_URL}/api/faqs${qs}`, {
       next: { revalidate: ONE_HOUR_SECONDS },
     });
 

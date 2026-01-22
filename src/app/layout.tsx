@@ -1,18 +1,19 @@
 import React, { ReactNode } from "react";
 import type { Metadata, Viewport } from "next";
+import { cookies } from "next/headers";
+import { headers } from "next/headers";
 
 import initialNavigation from "@/assets/lib/navigation.json";
 import { NavigationItem } from "@/types/navigation";
 import ClientProvider from "./_layout/ClientProvider";
+import { BASE_URL, STRAPI_ORIGIN, normalizeLocale } from "shared/config/env";
 
 export const metadata: Metadata = {
   title: "NVSERT - Декларирование, сертификация, лицензирование",
   description:
     "Профессиональные услуги по декларированию, сертификации и лицензированию продукции",
   keywords: "декларирование, сертификация, лицензирование, NVSERT",
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL || "https://nvsert.ru",
-  ),
+  metadataBase: new URL(BASE_URL),
   openGraph: {
     title: "NVSERT - Декларирование, сертификация, лицензирование",
     description:
@@ -46,16 +47,21 @@ export default async function RootLayout({
 }: {
   children: ReactNode;
 }) {
+  const hdrs = await headers();
+  const cks = await cookies();
+  const locale = normalizeLocale(
+    hdrs.get('x-nvsert-locale') || cks.get('nvsert_locale')?.value,
+  );
   return (
-    <html lang="ru">
+    <html lang={locale}>
       <head>
-        {/* Preconnect для внешних доменов */}
-        <link
-          rel="preconnect"
-          href="https://test11.audiosector.ru"
-          crossOrigin="anonymous"
-        />
-        <link rel="dns-prefetch" href="https://test11.audiosector.ru" />
+        {/* Preconnect для домена CMS (медиа-файлы) */}
+        {STRAPI_ORIGIN ? (
+          <>
+            <link rel="preconnect" href={STRAPI_ORIGIN} crossOrigin="anonymous" />
+            <link rel="dns-prefetch" href={STRAPI_ORIGIN} />
+          </>
+        ) : null}
 
         {/* Критические шрифты с высоким приоритетом */}
         <link

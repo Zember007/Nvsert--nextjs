@@ -4,7 +4,12 @@ const axios = require("axios");
 
 async function main() {
   try {
-    const res = await axios.get(`https://test11.audiosector.ru/cp/api/services`);
+    const strapiPublic = process.env.NEXT_PUBLIC_STRAPI_PUBLIC_URL;
+    const cmsApi =
+      process.env.NVSERT_CMS_API_URL ||
+      (strapiPublic ? `${strapiPublic.replace(/\/$/, '')}/api` : null) ||
+      'http://localhost:1337/api';
+    const res = await axios.get(`${cmsApi}/services`);
     const data = res.data;
     const navigationItems = data.data || [];
 

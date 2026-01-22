@@ -49,7 +49,8 @@ const ClientPage = ({ initialItems, pageData }: { initialItems: TnvedItem[]; pag
             });
 
             try {
-                const res = await fetch(`/api/tnveds/chapter/${s}`);
+                const locale = document?.documentElement?.lang === 'en' ? 'en' : 'ru';
+                const res = await fetch(`/api/tnveds/chapter/${s}?locale=${locale}`);
                 if (!res.ok) return;
                 const json = await res.json();
                 const data = Array.isArray(json?.data)

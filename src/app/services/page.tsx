@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import ServicesContent from './ClientPage';
+import { BASE_URL } from 'shared/config/env';
 
 // Функция для генерации метаданных
 export async function generateMetadata(): Promise<Metadata> {
@@ -14,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
             locale: 'ru_RU',
         },
         alternates: {
-            canonical: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://nvsert.ru'}/services`,
+            canonical: `${BASE_URL}/services`,
         },
     };
 }

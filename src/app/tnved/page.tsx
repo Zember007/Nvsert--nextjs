@@ -1,6 +1,8 @@
 import ClientPage from './ClientPage';
 import { Metadata } from 'next';
 import type { TnvedPageData } from '@/widgets/tnved/types';
+import { BASE_URL, SITE_URL } from 'shared/config/env';
+import { getRequestLocale } from 'shared/i18n/server-locale';
 
 type TnvedItem = {
     id: number;
@@ -19,20 +21,13 @@ type TnvedItem = {
 };
 
 async function fetchTnvedData(): Promise<{ items: TnvedItem[]; pageData: TnvedPageData | null }> {
-    const base = (
-        process.env.NEXT_PUBLIC_SITE_URL ||
-        process.env.NEXT_PUBLIC_BASE_URL ||
-        'https://nvsert.ru'
-    ).replace(/\/$/, '');
-
-    const res = await fetch(`${base}/api/tnveds/with-page`, { cache: 'force-cache' });
+    const locale = await getRequestLocale();
+    const res = await fetch(`${SITE_URL}/api/tnveds/with-page?locale=${locale}`, { cache: 'force-cache' });
     if (!res.ok) return { items: [], pageData: null };
 
     const json = await res.json();
     const data = Array.isArray(json?.data) ? json.data : Array.isArray(json) ? json : [];
     const pageData = json?.page || null;
-
-    console.log(data);
 
     return { items: data as TnvedItem[], pageData: pageData as TnvedPageData | null };
 }
@@ -51,7 +46,7 @@ export async function generateMetadata(): Promise<Metadata> {
         title: pageData.seo.metaTitle || pageData.title || 'ТН ВЭД',
         description: pageData.seo.metaDescription || pageData.description || 'Классификатор ТН ВЭД',
         alternates: {
-            canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://nvsert.ru'}/tnved`,
+            canonical: `${BASE_URL}/tnved`,
         },
     };
 }

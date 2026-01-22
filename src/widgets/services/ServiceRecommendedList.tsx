@@ -3,6 +3,7 @@
 import React from 'react';
 import { NavigationItem } from '@/types/navigation';
 import { AppCollapsibleList, AppNavigationItem } from 'widgets/layout';
+import { STRAPI_PUBLIC_URL } from 'shared/config/env';
 
 interface ServiceRecommendedListProps {
     items: NavigationItem[];
@@ -37,7 +38,7 @@ const ServiceRecommendedList: React.FC<ServiceRecommendedListProps> = ({
                         classNameText={textClassName}
                         link={children.slug}
                         title={children.title}
-                        img={'https://test11.audiosector.ru/cp' + children.img?.url}
+                        img={STRAPI_PUBLIC_URL + (children.img?.url || '')}
                     />
                 )}
             />

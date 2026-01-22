@@ -1,5 +1,7 @@
 import ClientPage from './ClientPage';
 import { Metadata } from 'next';
+import { BASE_URL, SITE_URL, STRAPI_PUBLIC_URL } from 'shared/config/env';
+import { getRequestLocale } from 'shared/i18n/server-locale';
 
 // Оптимизация: кеширование данных на более длительный срок для ускорения навигации
 
@@ -39,8 +41,8 @@ export interface AboutData {
 // Функция для получения данных о компании
 async function getAboutData(): Promise<AboutData | null> {
     try {
-        const base = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
-        const response = await fetch(`${base}/api/about`, {
+        const locale = await getRequestLocale();
+        const response = await fetch(`${SITE_URL}/api/about?locale=${locale}`, {
             next: { revalidate: 3600 }
         });
 
@@ -92,10 +94,10 @@ export async function generateMetadata(): Promise<Metadata> {
         openGraph: {
             title: aboutData.og_title || aboutData.seo_title || aboutData.title || 'О компании',
             description: aboutData.og_description || aboutData.seo_description || 'Информация о нашей компании',
-            images: aboutData.og_image ? [`${process.env.NEXT_PUBLIC_BASE_URL}${aboutData.og_image}`] : [],
+            images: aboutData.og_image ? [`${STRAPI_PUBLIC_URL}${aboutData.og_image}`] : [],
         },
         alternates: {
-            canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/about`,
+            canonical: `${BASE_URL}/about`,
         },
         
     };
@@ -103,9 +105,6 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const AboutCompany = async () => {
     const aboutData = await getAboutData();
-
-    console.log(aboutData);
-    
 
     return <ClientPage aboutData={aboutData} />;
 };

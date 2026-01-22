@@ -1,4 +1,6 @@
 import ClientPage from './ClientPage';
+import { SITE_URL } from 'shared/config/env';
+import { getRequestLocale } from 'shared/i18n/server-locale';
 
 // Оптимизация: кеширование данных на более длительный срок для ускорения навигации
 
@@ -37,8 +39,8 @@ type FeedbackCategoryGroup = {
 };
 
 async function getFeedbacks(): Promise<FeedbackItem[]> {
-    const base = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
-    const res = await fetch(`${base}/api/feedbacks`, {
+    const locale = await getRequestLocale();
+    const res = await fetch(`${SITE_URL}/api/feedbacks?locale=${locale}`, {
         next: { revalidate: 3600 }, // Кешируем на 1 час для лучшей производительности
     });
     if (!res.ok) return [];

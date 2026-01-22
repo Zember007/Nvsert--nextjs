@@ -3,13 +3,12 @@ import { Metadata } from 'next';
 import ClientPage from './ClientPage';
 import { NavigationItem } from '@/types/navigation';
 import { getNavigationDataBySlug, resolveServiceOgImageUrl } from './seo-helpers';
+import { BASE_URL, SITE_URL } from 'shared/config/env';
 
 
 // Генерация статических путей
 export async function generateStaticParams() {
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://nvsert.ru').replace(/\/$/, '');
-
-  const res = await fetch(`${base}/api/services`, {
+  const res = await fetch(`${SITE_URL}/api/services`, {
     cache: 'force-cache',
   });
 
@@ -42,15 +41,10 @@ export async function generateMetadata(
         locale: 'ru_RU',
       },
       alternates: {
-        canonical: `${(process.env.NEXT_PUBLIC_BASE_URL || 'https://nvsert.ru').replace(
-          /\/$/,
-          ''
-        )}/services/${slug}`,
+        canonical: `${BASE_URL}/services/${slug}`,
       },
     };
   }
-
-  const base = (process.env.NEXT_PUBLIC_BASE_URL || 'https://nvsert.ru').replace(/\/$/, '');
 
   const title =
     navigation.seo?.metaTitle ||
@@ -82,7 +76,7 @@ export async function generateMetadata(
       locale: 'ru_RU',
     },
     alternates: {
-      canonical: `${base}/services/${slug}`,
+      canonical: `${BASE_URL}/services/${slug}`,
     },
   };
 }

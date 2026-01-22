@@ -54,7 +54,8 @@ const ClientPage = ({ initialItems, pageData }: { initialItems: Okpd2Item[]; pag
             });
 
             try {
-                const res = await fetch(`/api/okpd2s/section/${s}`);
+                const locale = document?.documentElement?.lang === 'en' ? 'en' : 'ru';
+                const res = await fetch(`/api/okpd2s/section/${s}?locale=${locale}`);
                 if (!res.ok) return;
                 const json = await res.json();
                 const data = Array.isArray(json?.data) ? (json.data as Okpd2Item[]) : Array.isArray(json) ? (json as Okpd2Item[]) : [];

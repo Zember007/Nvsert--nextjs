@@ -2,6 +2,8 @@
 import ClientPage from './ClientPage';
 import { Metadata } from 'next';
 import type { OkpdPageData } from '@/widgets/okpd/types';
+import { BASE_URL, SITE_URL } from 'shared/config/env';
+import { getRequestLocale } from 'shared/i18n/server-locale';
 
 type Okpd2Item = {
     id: number;
@@ -17,13 +19,8 @@ type Okpd2Item = {
 };
 
 async function fetchOkpd2Data(): Promise<{ items: Okpd2Item[]; pageData: OkpdPageData | null }> {
-    const base = (
-        process.env.NEXT_PUBLIC_SITE_URL ||
-        process.env.NEXT_PUBLIC_BASE_URL ||
-        'https://nvsert.ru'
-    ).replace(/\/$/, '');
-
-    const res = await fetch(`${base}/api/okpd2s/with-page?pagination[pageSize]=21000`, {
+    const locale = await getRequestLocale();
+    const res = await fetch(`${SITE_URL}/api/okpd2s/with-page?pagination[pageSize]=21000&locale=${locale}`, {
         cache: 'force-cache',
     });
 
@@ -55,7 +52,7 @@ export async function generateMetadata(): Promise<Metadata> {
         title: pageData.seo.metaTitle || pageData.title || 'ОКПД 2',
         description: pageData.seo.metaDescription || pageData.description || 'Классификатор ОКПД 2',
         alternates: {
-            canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://nvsert.ru'}/okpd`,
+            canonical: `${BASE_URL}/okpd`,
         },
     };
 }

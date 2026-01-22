@@ -3,6 +3,7 @@
 import React from 'react';
 import { NavigationItem } from '@/types/navigation';
 import { AsyncPhotoProvider, AsyncPhotoView } from 'shared/common/AsyncPhotoView';
+import { STRAPI_PUBLIC_URL } from 'shared/config/env';
 
 interface ServiceGalleryProps {
     navigation?: NavigationItem[] | null;
@@ -35,7 +36,7 @@ const ServiceGallery: React.FC<ServiceGalleryProps> = ({ navigation, onChange })
                             <span>{item.price}</span>
                         </>
                     }
-                    src={'https://test11.audiosector.ru/cp' + item?.img?.url}
+                    src={STRAPI_PUBLIC_URL + (item?.img?.url || '')}
                     width={250}
                     height={37}
                 >

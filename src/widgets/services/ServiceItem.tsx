@@ -6,6 +6,7 @@ import { motion, useAnimation } from "framer-motion";
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/base/base.module.scss';
 import dynamic from 'next/dynamic';
+import { STRAPI_PUBLIC_URL } from 'shared/config/env';
 
 const ServiceCard = dynamic(() => import('widgets/services').then((m) => m.ServiceCard), {
   ssr: false,
@@ -120,7 +121,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                                 classNameText='m:!whitespace-pre-line !whitespace-normal'
                                 key={itemIndex}
                                 title={item.title}
-                                img={'https://test11.audiosector.ru/cp' + item.img?.formats?.thumbnail?.url}
+                                img={STRAPI_PUBLIC_URL + (item.img?.formats?.thumbnail?.url || '')}
                                 link={item.slug}
                             />
                         ))}

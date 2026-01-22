@@ -1,10 +1,12 @@
 import ClientPage, { type ContactsPageData } from './ClientPage';
 import type { Metadata } from 'next';
+import { BASE_URL, SITE_URL } from 'shared/config/env';
+import { getRequestLocale } from 'shared/i18n/server-locale';
 
 async function getContactsPageData(): Promise<ContactsPageData> {
   try {
-    const base = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
-    const res = await fetch(`${base}/api/contacts-page`, {
+    const locale = await getRequestLocale();
+    const res = await fetch(`${SITE_URL}/api/contacts-page?locale=${locale}`, {
       next: { revalidate: 3600 },
     });
     if (!res.ok) throw new Error('Failed to fetch contacts-page');
@@ -103,7 +105,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description,
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://nvsert.ru'}/contacts`,
+      canonical: `${BASE_URL}/contacts`,
     },
   };
 }

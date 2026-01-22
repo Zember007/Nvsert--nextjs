@@ -1,9 +1,8 @@
 // Вспомогательные функции для страницы услуг (SEO и данные)
+import { SITE_URL, STRAPI_PUBLIC_URL } from 'shared/config/env';
 
 export async function getNavigationDataBySlug(slug: string): Promise<any | null> {
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://nvsert.ru').replace(/\/$/, '');
-
-  const res = await fetch(`${base}/api/services/slug/${slug}`, {
+  const res = await fetch(`${SITE_URL}/api/services/slug/${slug}`, {
     cache: 'force-cache',
   });
 
@@ -13,7 +12,7 @@ export async function getNavigationDataBySlug(slug: string): Promise<any | null>
 
 // Единое вычисление основного URL картинки услуги (OG / главная фотка)
 export function resolveServiceOgImageUrl(navigation: any): string | undefined {
-  const cmsBase = '';
+  const cmsBase = STRAPI_PUBLIC_URL;
 
   // 1. Явный og_image
   if (navigation?.og_image && typeof navigation.og_image === 'string') {

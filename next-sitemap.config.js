@@ -1,10 +1,14 @@
 /** @type {import('next-sitemap').IConfig} */
 const nextConfig = {
-    siteUrl: process.env.baseUrl || 'https://example.com',
+    siteUrl:
+        process.env.NEXT_PUBLIC_SITE_URL ||
+        process.env.NEXT_PUBLIC_BASE_URL ||
+        process.env.baseUrl ||
+        'https://example.com',
     generateRobotsTxt: true,
     robotsTxtOptions: {
         additionalSitemaps: [
-            `${process.env.baseUrl}/sitemap.xml`,
+            `${(process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_BASE_URL || process.env.baseUrl || 'https://example.com').replace(/\/$/, '')}/sitemap.xml`,
         ],
         policies: [
             {

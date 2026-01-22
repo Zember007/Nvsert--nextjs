@@ -1,12 +1,13 @@
 import Image from "next/image";
+import { STRAPI_PUBLIC_URL } from "shared/config/env";
 
 export const StrapiResponsiveImage = ({
   image,
-  baseUrl,
+  baseUrl = STRAPI_PUBLIC_URL,
   priority = false
 }: {
   image: any,
-  baseUrl: string,
+  baseUrl?: string,
   priority?: boolean
 }) => {
   if (!image) return null;

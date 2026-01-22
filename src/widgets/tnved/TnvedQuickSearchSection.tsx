@@ -53,7 +53,8 @@ export function TnvedQuickSearchSection() {
 
     (async () => {
       try {
-        const res = await fetch(`/cp/api/tnveds/search?q=${encodeURIComponent(q)}&limit=10`, {
+        const locale = document?.documentElement?.lang === 'en' ? 'en' : 'ru';
+        const res = await fetch(`/api/tnveds/search?q=${encodeURIComponent(q)}&limit=10&locale=${locale}`, {
           signal: ac.signal,
         });
         if (!res.ok) return;
