@@ -8,12 +8,28 @@ import { BASE_URL, SITE_URL } from 'shared/config/env';
 
 // Генерация статических путей
 export async function generateStaticParams() {
-  const res = await fetch(`${SITE_URL}/api/services`, {
-    cache: 'force-cache',
-  });
+  try {
+    const res = await fetch(`${SITE_URL}/api/services`, {
+      cache: 'force-cache',
+    });
 
-  const items = await res.json();
-  return items.data.map((item: { slug: string }) => ({ slug: item.slug }));
+    if (!res.ok) {
+      console.error(
+        `[services][slug] generateStaticParams: failed to fetch services list (${res.status} ${res.statusText})`,
+      );
+      return [];
+    }
+
+    const items = await res.json();
+    if (!items?.data || !Array.isArray(items.data)) return [];
+
+    return items.data
+      .map((item: { slug?: string }) => (item?.slug ? { slug: item.slug } : null))
+      .filter(Boolean) as Array<{ slug: string }>;
+  } catch (error) {
+    console.error('[services][slug] generateStaticParams failed:', error);
+    return [];
+  }
 }
 
 type GenerateMetadataParams = {

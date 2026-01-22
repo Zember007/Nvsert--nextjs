@@ -12,10 +12,13 @@ export { generateStaticParams };
 export async function generateMetadata({
   params,
 }: {
-  params: { locale: string; slug: string };
+  params: Promise<{ locale: string; slug: string }> | { locale: string; slug: string };
 }): Promise<Metadata> {
-  const locale = normalizeLocale(params.locale);
-  const meta = await baseGenerateMetadata({ params: Promise.resolve({ slug: params.slug }) });
+  const resolvedParams = await Promise.resolve(params);
+  const locale = normalizeLocale(resolvedParams.locale);
+  const meta = await baseGenerateMetadata({
+    params: Promise.resolve({ slug: resolvedParams.slug }),
+  });
   return {
     ...meta,
     openGraph: meta.openGraph
@@ -23,10 +26,10 @@ export async function generateMetadata({
       : meta.openGraph,
     alternates: {
       ...meta.alternates,
-      canonical: `${BASE_URL}/${locale}/services/${params.slug}`,
+      canonical: `${BASE_URL}/${locale}/services/${resolvedParams.slug}`,
       languages: {
-        ru: `${BASE_URL}/ru/services/${params.slug}`,
-        en: `${BASE_URL}/en/services/${params.slug}`,
+        ru: `${BASE_URL}/ru/services/${resolvedParams.slug}`,
+        en: `${BASE_URL}/en/services/${resolvedParams.slug}`,
       },
     },
   };

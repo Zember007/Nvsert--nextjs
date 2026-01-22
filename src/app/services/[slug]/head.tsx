@@ -2,11 +2,11 @@ import React from 'react';
 import { getNavigationDataBySlug, resolveServiceOgImageUrl } from './seo-helpers';
 
 type HeadProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }> | { slug: string };
 };
 
 export default async function Head({ params }: HeadProps) {
-  const { slug } = params;
+  const { slug } = await Promise.resolve(params);
 
   const navigation = await getNavigationDataBySlug(slug);
 

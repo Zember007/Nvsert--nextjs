@@ -8,9 +8,10 @@ export default ServicesPage;
 export async function generateMetadata({
   params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }> | { locale: string };
 }): Promise<Metadata> {
-  const locale = normalizeLocale(params.locale);
+  const resolvedParams = await Promise.resolve(params);
+  const locale = normalizeLocale(resolvedParams.locale);
   const meta = await baseGenerateMetadata();
   return {
     ...meta,

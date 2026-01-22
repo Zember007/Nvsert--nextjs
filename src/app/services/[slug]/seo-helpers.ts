@@ -2,12 +2,17 @@
 import { SITE_URL, STRAPI_PUBLIC_URL } from 'shared/config/env';
 
 export async function getNavigationDataBySlug(slug: string): Promise<any | null> {
-  const res = await fetch(`${SITE_URL}/api/services/slug/${slug}`, {
-    cache: 'force-cache',
-  });
+  try {
+    const res = await fetch(`${SITE_URL}/api/services/slug/${slug}`, {
+      cache: 'force-cache',
+    });
 
-  if (!res.ok) return null;
-  return res.json();
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (error) {
+    console.error('[services][slug] getNavigationDataBySlug failed:', error);
+    return null;
+  }
 }
 
 // Единое вычисление основного URL картинки услуги (OG / главная фотка)
