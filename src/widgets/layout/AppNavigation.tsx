@@ -54,7 +54,7 @@ const AppNavigation = ({ active, services }: { active: boolean, services: Servic
 
                         <div key={i} className="flex flex-col gap-[20px]">
                             {item.items.map((children:NavigationItem) => (
-                                <AppNavigationItem link={children.slug} key={children.id} title={children.title} img={''+children.img?.formats?.thumbnail?.url} controls={controls} />
+                                <AppNavigationItem link={children.slug} key={children.id} title={children.title} img={children.img?.formats?.thumbnail?.url} controls={controls} />
                             ))}
                         </div>
                     )

@@ -121,7 +121,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                                 classNameText='m:!whitespace-pre-line !whitespace-normal'
                                 key={itemIndex}
                                 title={item.title}
-                                img={STRAPI_PUBLIC_URL + (item.img?.formats?.thumbnail?.url || '')}
+                                img={(item.img?.formats?.thumbnail?.url || '')}
                                 link={item.slug}
                             />
                         ))}

@@ -38,7 +38,7 @@ const ServiceRecommendedList: React.FC<ServiceRecommendedListProps> = ({
                         classNameText={textClassName}
                         link={children.slug}
                         title={children.title}
-                        img={STRAPI_PUBLIC_URL + (children.img?.url || '')}
+                        img={(children.img?.formats?.thumbnail?.url || '')}
                     />
                 )}
             />
