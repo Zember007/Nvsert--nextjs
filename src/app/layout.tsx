@@ -6,7 +6,13 @@ import { headers } from "next/headers";
 import initialNavigation from "@/assets/lib/navigation.json";
 import { NavigationItem } from "@/types/navigation";
 import ClientProvider from "./_layout/ClientProvider";
-import { BASE_URL, STRAPI_ORIGIN, normalizeLocale } from "shared/config/env";
+import {
+  BASE_URL,
+  DEFAULT_LOCALE,
+  STRAPI_ORIGIN,
+  normalizeLocale,
+  type SupportedLocale,
+} from "shared/config/env";
 
 export const metadata: Metadata = {
   title: "NVSERT - Декларирование, сертификация, лицензирование",
@@ -47,11 +53,25 @@ export default async function RootLayout({
 }: {
   children: ReactNode;
 }) {
-  const hdrs = await headers();
-  const cks = await cookies();
-  const locale = normalizeLocale(
-    hdrs.get('x-nvsert-locale') || cks.get('nvsert_locale')?.value,
-  );
+  // Root layout is executed during prerender/build as well.
+  // Avoid request-bound APIs (headers/cookies) in build phase to keep static generation working.
+  let locale: SupportedLocale = DEFAULT_LOCALE;
+  if (process.env.NEXT_PHASE !== 'phase-production-build') {
+    try {
+      const hdrs = await headers();
+      locale = normalizeLocale(hdrs.get('x-nvsert-locale'));
+    } catch {
+      // ignore
+    }
+    if (locale === DEFAULT_LOCALE) {
+      try {
+        const cks = await cookies();
+        locale = normalizeLocale(cks.get('nvsert_locale')?.value);
+      } catch {
+        // ignore
+      }
+    }
+  }
   return (
     <html lang={locale}>
       <head>

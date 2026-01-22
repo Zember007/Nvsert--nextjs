@@ -1,0 +1,24 @@
+# *
+User-agent: *
+Allow: */?page
+Disallow: /adm/
+Disallow: /*?*
+
+# Yandex
+User-agent: Yandex
+Allow: */?page
+Disallow: /adm/
+Disallow: /*?*
+
+# Googlebot
+User-agent: Googlebot
+Allow: */?page
+Allow: */?utm
+Disallow: /adm/
+Disallow: /*?*
+
+# Host
+Host: https://test11.audiosector.ru/cp
+
+# Sitemaps
+Sitemap: https://test11.audiosector.ru/cp/sitemap.xml

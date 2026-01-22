@@ -1,2 +1,2 @@
-export { default } from '../../../../services/[slug]/head';
+export { default } from '../../../services/[slug]/head';
 

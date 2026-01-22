@@ -2,8 +2,9 @@
 const nextConfig = {
   output: 'standalone',
 
-  // Partial Prerendering включён (это то, ради чего всё затевалось)
-  cacheComponents: true,
+  // NOTE: cacheComponents (PPR/Cache Components) is still evolving in canary
+  // and currently causes build-time prerender failures in this project.
+  cacheComponents: false,
 
   // Убираем ошибку Turbopack + webpack
   turbopack: {}, // Это официально рекомендованный способ заглушить ошибку

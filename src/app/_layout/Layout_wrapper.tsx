@@ -1,7 +1,7 @@
 'use client';
 
 import { AppFooter, AppHeader } from 'widgets/layout';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, Suspense, useEffect } from 'react';
 import { useHeaderContext } from 'shared/contexts';
 import dynamic from 'next/dynamic';
 import CopyNotification from 'widgets/layout/elements/CopyNotification';
@@ -29,7 +29,11 @@ const LayoutContent = ({ children, initialNavigation }: { children: ReactNode; i
                 countTrigger={defaultModalCount}
             />
 
-            <AppHeader services={(initialNavigation && initialNavigation.length > 0) ? groupServices(initialNavigation) : []} />
+            {/* Next.js canary treats routing data (used by AppHeader via usePathname) as dynamic.
+                Keep it under Suspense to avoid blocking-route prerender errors. */}
+            <Suspense fallback={null}>
+                <AppHeader services={(initialNavigation && initialNavigation.length > 0) ? groupServices(initialNavigation) : []} />
+            </Suspense>
 
             <main >
 
