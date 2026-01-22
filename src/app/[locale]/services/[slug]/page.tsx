@@ -2,12 +2,16 @@ import type { Metadata } from 'next';
 
 import ServicePage, {
   generateMetadata as baseGenerateMetadata,
-  generateStaticParams,
+  generateStaticParams as baseGenerateStaticParams,
 } from '../../../services/[slug]/page';
-import { BASE_URL, normalizeLocale } from 'shared/config/env';
+import { BASE_URL, normalizeLocale, SUPPORTED_LOCALES } from 'shared/config/env';
 
 export default ServicePage;
-export { generateStaticParams };
+
+export async function generateStaticParams() {
+  const baseParams = await baseGenerateStaticParams();
+  return SUPPORTED_LOCALES.flatMap((locale) => baseParams.map((p) => ({ locale, ...p })));
+}
 
 export async function generateMetadata({
   params,
