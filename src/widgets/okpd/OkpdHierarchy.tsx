@@ -420,8 +420,9 @@ export default function OkpdHierarchy({
                                                                 type="button"
                                                                 className={[
                                                                     `${textSize.text1} pl-[12px] text-left`,
-                                                                    // hover: "толще"
-                                                                    'font-light hover:font-normal',
+                                                                    // hover: underline
+                                                                    'font-light',
+                                                                    'hover:underline hover:decoration-[#34446D] hover:underline-offset-4',
                                                                     // active: underline + вжатие
                                                                     'active:translate-y-[1px] active:underline active:decoration-[#34446D] active:underline-offset-4',
                                                                     // selected/active
@@ -470,7 +471,7 @@ export default function OkpdHierarchy({
                                                                 className={[
                                                                     textClass,
                                                                     'text-left',
-                                                                    'hover:font-normal',
+                                                                    'hover:underline hover:decoration-[#34446D] hover:underline-offset-4',
                                                                     'active:translate-y-[1px] active:underline active:decoration-[#34446D] active:underline-offset-4',
                                                                     isActive ? 'text-[#34446D]' : 'text-inherit',
                                                                     selectedCode === item.code

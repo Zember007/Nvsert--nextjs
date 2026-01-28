@@ -284,9 +284,9 @@ export default function TnvedHierarchy({
                       type="button"
                       className={[
                         `${textSize.headerH6} text-left`,
-                        'text-black',
-                        'hover:font-semibold',
-                        'active:translate-y-[1px] active:underline active:underline-offset-4',
+                        'text-black font-semibold',
+                        'hover:underline hover:underline-offset-4',
+                        'active:translate-y-[1px] active:underline active:underline-offset-4 mb-[10px]',
                       ].join(' ')}
                       aria-expanded={chapterOpen}
                       onClick={() => handleToggleChapter(chapter)}
@@ -343,7 +343,8 @@ export default function TnvedHierarchy({
                                         type="button"
                                         className={[
                                           `${textSize.text1} pl-[12px] text-left`,
-                                          'font-light hover:font-normal',
+                                          'font-light',
+                                          'hover:underline hover:decoration-[#34446D] hover:underline-offset-4',
                                           'active:translate-y-[1px] active:underline active:decoration-[#34446D] active:underline-offset-4',
                                           isActive ? 'text-[#34446D]' : 'text-inherit',
                                           selectedNodeId === item.nodeId
@@ -387,7 +388,7 @@ export default function TnvedHierarchy({
                                         className={[
                                           textClass,
                                           'text-left',
-                                          'hover:font-normal',
+                                          'hover:underline hover:decoration-[#34446D] hover:underline-offset-4',
                                           'active:translate-y-[1px] active:underline active:decoration-[#34446D] active:underline-offset-4',
                                           isActive ? 'text-[#34446D]' : 'text-inherit',
                                           selectedNodeId === item.nodeId
