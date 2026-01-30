@@ -9,7 +9,7 @@ import Image from "next/image";
 import ImgCall from '@/assets/images/order-call.png'
 import ImgCallMob from '@/assets/images/order-call-mob.png'
 import { useButton } from 'shared/hooks';
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import FlightSuccess from "../modals/FlightSuccess";
 import { useHeaderContext } from 'shared/contexts';
 import { useAnimation, motion } from "framer-motion";
@@ -92,7 +92,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
         openY: [-30, 0, -10, 0, 0],
     };
 
-    const animation = () => {
+    const animation = useCallback(() => {
         controls.start({
             y: defaultSettings.openY,
             transition: {
@@ -101,12 +101,12 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
                 times: defaultSettings.times
             }
         });
-    }
+    }, [controls, defaultSettings.duration, defaultSettings.openY, defaultSettings.times])
 
     useEffect(() => {
         if (!defaultModalActive) return
         animation()
-    }, [defaultModalActive, defaultModalCount])
+    }, [defaultModalActive, defaultModalCount, animation])
     return (
         <motion.div
             animate={controls}

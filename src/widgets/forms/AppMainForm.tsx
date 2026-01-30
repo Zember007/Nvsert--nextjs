@@ -191,13 +191,13 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
 
 
         }
-    }, [submitCount,  bounceCheckbox, contactValue, validContact])
+    }, [submitCount,  bounceCheckbox, contactValue, validContact, isEmail, isPhone])
 
     useEffect(() => {
         if (emailError && contactValue.length > 0) {
             setEmailError(false)
         }
-    }, [contactValue,isPhone, isEmail])
+    }, [contactValue,isPhone, isEmail, emailError])
 
     useEffect(() => {
         setFailCheck(false)

@@ -21,11 +21,12 @@ const AppMainSkills = () => {
 
   // Инициализация горизонтального слайдера только на мобильных/узких экранах
   useEffect(() => {
-    if (!ref.current || !widthWindow || widthWindow >= 1407) return;
+    const currentRef = ref.current;
+    if (!currentRef || !widthWindow || widthWindow >= 1407) return;
 
     const observer = new IntersectionObserver(
       async ([entry]) => {
-        if (!entry.isIntersecting || !ref.current) return;
+        if (!entry.isIntersecting) return;
 
         const [gsapModule, sliderModule] = await Promise.all([
           import('gsap'),
@@ -60,7 +61,7 @@ const AppMainSkills = () => {
           }
         }, 100);
 
-        observer.unobserve(ref.current);
+        observer.unobserve(currentRef);
         timeLine.current?.next({ ease: 'power3', duration: 0.725 });
 
         return () => {
@@ -74,12 +75,10 @@ const AppMainSkills = () => {
       { threshold: 0.3 }
     );
 
-    observer.observe(ref.current);
+    observer.observe(currentRef);
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
+      observer.unobserve(currentRef);
       if (timeLine.current) {
         timeLine.current.destroy();
         timeLine.current = null;

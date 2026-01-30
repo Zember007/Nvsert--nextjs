@@ -56,7 +56,7 @@ export function TnvedInfoSections({
       }
       return processContent(richText);
     },
-    [processContent, renderSliderItem],
+    [processContent, renderSliderItem, defaultSliderBlocks],
   );
 
   return (

@@ -30,7 +30,7 @@ export function useOkpdSections(pageData: OkpdPageData | null) {
     })) || [];
 
     return [...base, ...content];
-  }, [pageData, sectionsOpen, t]);
+  }, [pageData, t]);
 
   return { sectionsOpen, toggleSection, dotNavItems };
 }

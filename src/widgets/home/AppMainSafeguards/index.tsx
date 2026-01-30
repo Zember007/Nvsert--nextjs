@@ -30,11 +30,14 @@ const AppMainSafeguards = () => {
   const guarantees = groups.map((g, i) => ({ ...g, img: images[i] }));
 
   useEffect(() => {
+    const currentRef = divRef.current;
+    if (!currentRef) return;
+
     const observer = new IntersectionObserver(
       async ([entry]) => {
         setIsVisible(entry.isIntersecting);
-        if (divRef.current && entry.isIntersecting) {
-          if (widthWindow && widthWindow < 1407 && divRef.current) {
+        if (entry.isIntersecting) {
+          if (widthWindow && widthWindow < 1407) {
             const [gsapModule, sliderModule] = await Promise.all([
               import('gsap'),
               import('@/scripts/slider'),
@@ -58,21 +61,17 @@ const AppMainSafeguards = () => {
             });
           }
 
-          observer.unobserve(divRef.current);
+          observer.unobserve(currentRef);
           timeLine.current?.next({ ease: 'power3', duration: 0.725 });
         }
       },
       { threshold: 0.3 },
     );
 
-    if (divRef.current) {
-      observer.observe(divRef.current);
-    }
+    observer.observe(currentRef);
 
     return () => {
-      if (divRef.current) {
-        observer.unobserve(divRef.current);
-      }
+      observer.unobserve(currentRef);
 
       if (timeLine.current) {
         timeLine.current.destroy();

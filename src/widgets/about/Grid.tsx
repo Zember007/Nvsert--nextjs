@@ -16,11 +16,13 @@ const GridBox: React.FC<GridBoxProps> = ({ gridContent, processContent }) => {
     const timeLine = useRef<any>(null)
 
     useEffect(() => {
+        const currentRef = ref.current;
+        if (!currentRef) return;
 
         const observer = new IntersectionObserver(
             async ([entry]) => {
 
-                if (entry.isIntersecting && ref.current) {
+                if (entry.isIntersecting) {
                     if (widthWindow && widthWindow < 1280) {
 
 
@@ -65,23 +67,16 @@ const GridBox: React.FC<GridBoxProps> = ({ gridContent, processContent }) => {
                             }
                         };
                     }
-                    observer.unobserve(ref.current); timeLine.current?.next({ ease: "power3", duration: 0.725 });
+                    observer.unobserve(currentRef); timeLine.current?.next({ ease: "power3", duration: 0.725 });
                 }
             },
             { threshold: 0.3 }
         );
 
-        if (ref.current) {
-            observer.observe(ref.current);
-        }
-
-
-
+        observer.observe(currentRef);
 
         return () => {
-            if (ref.current) {
-                observer.unobserve(ref.current);
-            }
+            observer.unobserve(currentRef);
 
             if (timeLine.current) {
                 timeLine.current.destroy();

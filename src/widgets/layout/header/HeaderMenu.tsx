@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import ArrowIcon from '@/assets/images/svg/menu/arrow.svg'
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Services } from '@/types/navigation';
 import { useHeaderContext } from 'shared/contexts';
@@ -33,7 +33,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
 
     const { t } = useTranslation();
 
-    const navigationData: Navigation[] = [
+    const navigationData: Navigation[] = React.useMemo(() => [
         {
             name: 'main',
             title: t('navigation.main'),
@@ -54,7 +54,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
             title: t('navigation.contacts'),
             slug: '/contacts'
         }
-    ];
+    ], [t]);
 
 
 
@@ -109,7 +109,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
         }
 
 
-    }, [active, services]);
+    }, [active, services, navigationData]);
 
     const currentLevel = navigationStack[navigationStack.length - 1];
     const { openDefaultModal } = useHeaderContext();

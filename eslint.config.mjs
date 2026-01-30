@@ -21,6 +21,8 @@ const eslintConfig = [
       "out/**",
       "node_modules/**",
       "src/assets/lib/react-photo-view/**",
+      "playwright-report/**",
+      "test-results/**",
     ],
   },
   ...compat.extends("next/core-web-vitals"),

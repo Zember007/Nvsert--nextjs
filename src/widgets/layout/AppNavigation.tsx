@@ -39,7 +39,7 @@ const AppNavigation = ({ active, services }: { active: boolean, services: Servic
                 }
             });
         }
-    }, [active]);
+    }, [active, controls, defaultSettings.duration, defaultSettings.opacity, defaultSettings.openY, defaultSettings.times]);
 
 
     

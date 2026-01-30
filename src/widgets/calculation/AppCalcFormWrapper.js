@@ -18,7 +18,7 @@ const AppCalcFormWrapper = ({ currentStep, documents, discount }) => {
             default:
                 return '';
         }
-    },[currentStep])
+    },[currentStep, t])
 
     const formSubtitle = useMemo(() => {
         switch (currentStep) {
@@ -31,7 +31,7 @@ const AppCalcFormWrapper = ({ currentStep, documents, discount }) => {
             default:
                 return '';
         }
-    },[currentStep])
+    },[currentStep, t])
 
     return (
         <div className="cost-calc__form">

@@ -8,11 +8,7 @@ export function useIntersectionObserver(
   const ref = useRef<HTMLDivElement | null>(null);
 
   // Мемоизируем options, чтобы избежать пересоздания observer
-  const memoizedOptions = useMemo(() => options, [
-    options.root,
-    options.rootMargin,
-    options.threshold,
-  ]);
+  const memoizedOptions = useMemo(() => options, [options]);
 
   useEffect(() => {
     const element = ref.current;

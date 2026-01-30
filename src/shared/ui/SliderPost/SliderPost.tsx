@@ -37,6 +37,9 @@ function SliderPost<ItemType = unknown>({
     useEffect(() => {
         if (!items || items.length === 0) return;
 
+        const currentRef = sliderRef.current;
+        if (!currentRef) return;
+
         const slides = gsap.utils.toArray(`[data-slider="${DataSlider}"]`);
         if (slides.length === 0) return;
 
@@ -97,28 +100,24 @@ function SliderPost<ItemType = unknown>({
                 if (entry.isIntersecting) {
                     loop.next({ ease: 'power3', duration: 0.725 });
 
-                    if (sliderRef.current) {
-                        observer.unobserve(sliderRef.current);
+                    if (currentRef) {
+                        observer.unobserve(currentRef);
                     }
                 }
             },
             { threshold: 0.5 }
         );
 
-        if (sliderRef.current) {
-            observer.observe(sliderRef.current);
-        }
+        observer.observe(currentRef);
 
         return () => {
             loop.destroy();
-            if (sliderRef.current) {
-                observer.unobserve(sliderRef.current);
-            }
+            observer.unobserve(currentRef);
             if (timeoutIdBg) {
                 clearTimeout(timeoutIdBg);
             }
         };
-    }, [widthWindow, items]);
+    }, [widthWindow, items, DataSlider]);
 
     if (!items || items.length === 0) {
         return null;

@@ -5,13 +5,18 @@ const PromtModal = ({className = '', children, content, timer, classNameBox = ''
     const [timerId, setTimerId] = useState<NodeJS.Timeout | null>(null)
 
     useEffect(() => {
-        if(timerId) clearTimeout(timerId)
         if (!active || !timer) return
 
-        setTimerId(setTimeout(() => {
+        const id = setTimeout(() => {
             setActive(false)
-        },timer))
-    }, [active])
+        },timer)
+        setTimerId(id)
+        
+        return () => {
+            clearTimeout(id)
+            setTimerId(null)
+        }
+    }, [active, timer])
     return (
         <div className={`${classNameBox} relative s:w-auto w-full`}>
             <div className={`${!active ? 'opacity-0 unvisible pointer-events-none' : ''} ${className} duration-300 ease transition-all  absolute right-0 top-[-8px] translate-y-[-100%] bg-[#00000080] backdrop-blur-[20px] rounded-[4px] p-[15px]`}>

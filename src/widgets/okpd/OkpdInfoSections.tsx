@@ -57,7 +57,7 @@ export function OkpdInfoSections({
       }
       return processContent(richText);
     },
-    [processContent, renderSliderItem],
+    [processContent, renderSliderItem, defaultSliderBlocks],
   );
 
   return (

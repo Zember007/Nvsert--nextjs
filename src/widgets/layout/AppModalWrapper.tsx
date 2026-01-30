@@ -1,6 +1,6 @@
 import '@/assets/styles/blocks/modals/modals.scss';
 import dynamic from 'next/dynamic';
-import { Suspense, useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState, useCallback } from 'react';
 import AppIntroForm from 'widgets/forms/AppIntroForm'
 import Draggable from 'react-draggable';
 import AppMainForm from '../forms/AppMainForm';
@@ -36,7 +36,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ reset, countTrigger, 
         openY: [-100, 10, 0, 0],
     };
 
-    const animation = () => {
+    const animation = useCallback(() => {
         controls.start({
             y: defaultSettings.openY, // Используем openY для отскока
             transition: {
@@ -45,7 +45,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ reset, countTrigger, 
                 times: defaultSettings.times
             }
         });
-    }
+    }, [controls, defaultSettings.duration, defaultSettings.openY, defaultSettings.times])
 
     useEffect(() => {
         if (defaultModalActive) {
@@ -54,7 +54,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ reset, countTrigger, 
             reset()
             resetDrag()
         }
-    }, [defaultModalActive, countTrigger])
+    }, [defaultModalActive, countTrigger, animation, reset])
 
     const [position, setPosition] = useState({ x: 0, y: 0 });
 

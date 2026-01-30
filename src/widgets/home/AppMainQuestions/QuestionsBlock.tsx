@@ -43,7 +43,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
         return () => {
             if (timer) clearTimeout(timer);
         };
-    }, [active]);
+    }, [active, controls, defaultSettings.duration, defaultSettings.opacity, defaultSettings.openY, defaultSettings.times]);
 
 
     return (

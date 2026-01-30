@@ -31,7 +31,7 @@ export function useTnvedSections(pageData: TnvedPageData | null) {
       })) || [];
 
     return [...base, ...content];
-  }, [pageData, sectionsOpen, t]);
+  }, [pageData, t]);
 
   return { sectionsOpen, toggleSection, dotNavItems };
 }
