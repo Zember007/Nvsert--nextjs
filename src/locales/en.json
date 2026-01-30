@@ -1,2 +1,741 @@
-{}
+{
+  "mainIntro": {
+    "title": "Certification of equipment, products, and services"
+  },
+  "MainSkills": {
+    "skill1": {
+      "title": "Flexible payment terms",
+      "text": [
+        "We work on a prepayment basis.",
+        "Payment after the service is delivered is possible.",
+        "We can offer installment payments."
+      ]
+    },
+    "skill2": {
+      "title": "Cooperation terms",
+      "text": [
+        "Personal support at every stage.",
+        "Selection of the required documents.",
+        "Free courier delivery."
+      ]
+    },
+    "skill3": {
+      "title": "We work under a contract",
+      "text": [
+        "We offer transparent cooperation terms.",
+        "Minimum document package to get started."
+      ]
+    },
+    "skill4": {
+      "title": "Extensive accreditation",
+      "text": [
+        "We work across all industries.",
+        "We prepare any type of documents.",
+        "We conduct tests and can visit the production site."
+      ]
+    },
+    "skill5": {
+      "title": "Fast turnaround",
+      "text": [
+        "Documents issued as quickly as possible, without delays.",
+        "Many documents can be issued within 24 hours."
+      ]
+    },
+    "skill6": {
+      "title": "15+ years of experience",
+      "text": [
+        "Issued 1M documents.",
+        "We focus on results and trust.",
+        "Clients recommend us and come back."
+      ]
+    }
+  },
+  "MainSlider": {
+    "items": [
+      {
+        "title": "Construction materials",
+        "text": "All construction materials must comply with safety, environmental, and strength requirements. Certification includes laboratory tests confirming resistance to loads, moisture, fire and other external factors. Without a certificate, it is impossible to sell cement, bricks, double-glazed units, insulation panels and other construction materials in Russia and the Customs Union countries. Special attention is paid to materials used in residential premises, since they must be safe for human health. Obtaining permits helps avoid claims from regulators and confirms compliance with modern quality standards."
+      },
+      {
+        "title": "Children’s goods and toys",
+        "text": "Toys and children’s products must meet high quality and safety standards, as they are intended for the most vulnerable consumers — children. Certification includes comprehensive laboratory testing aimed at detecting toxic substances, checking mechanical strength, fire safety and the presence of small parts that may be hazardous. Products that come into contact with a child’s skin or mucous membranes (for example, pacifiers, bottles, rattles) undergo additional tests for hypoallergenicity and sanitary requirements. Only after successful completion of all checks a document confirming compliance is issued."
+      },
+      {
+        "title": "Food products",
+        "text": "Food products must comply with sanitary standards and pass mandatory certification. Laboratory tests verify composition, the presence of harmful additives, shelf life and production conditions. Additional requirements apply to products containing allergens, supplements and GMOs. Certification also confirms compliance with food safety standards, which is important for both manufacturers and consumers. Without the required documents, production and sale are prohibited, and violations may lead to serious fines and product recalls."
+      },
+      {
+        "title": "Beverages",
+        "text": "Beverages such as juices, water, alcoholic and non-alcoholic drinks are subject to mandatory certification to confirm their safety and compliance with quality standards. During certification, components, storage conditions and packaging are checked to prevent possible adverse effects on consumers’ health. It is important that beverages do not contain prohibited substances, such as excessive preservatives, chemical additives or allergens. Without an appropriate certificate, selling beverages on the market is not possible."
+      },
+      {
+        "title": "Furniture",
+        "text": "Furniture products, including wardrobes, beds, tables and other interior items, are subject to mandatory certification. This process confirms compliance with safety requirements, environmental standards and quality norms. Laboratory tests check the durability of materials, the toxicity of coatings and other important characteristics. Only after successful completion of all stages a certificate or declaration of conformity is issued. Without this document it is prohibited to manufacture, import or sell furniture in Russia and the Customs Union countries. Especially strict requirements apply to children’s furniture and products that may contain potentially harmful components."
+      },
+      {
+        "title": "Lubricants",
+        "text": "Lubricants, oils and technical fluids must comply with strict regulations governing their composition, viscosity, resistance to extreme temperatures and other important properties. Certification includes laboratory tests that determine chemical composition, toxicity level and environmental impact. Depending on the field of application — industrial equipment, cars or aviation — certification requirements can differ significantly. Obtaining a certificate or declaration of conformity allows manufacturers and importers to legally sell their products in Russia and the Customs Union countries."
+      },
+      {
+        "title": "Light industry",
+        "text": "Light industry goods, including clothing, footwear, textiles and other products, are subject to mandatory certification. The certification process includes checking compliance with sanitary and environmental standards, as well as testing the safety of materials used in production. For children’s goods, safety requirements are particularly strict. Without confirmation of compliance, selling such goods is not permitted."
+      },
+      {
+        "title": "Household chemicals",
+        "text": "Detergents, disinfectants and household chemicals require certification to confirm safe use. Without these documents, sales are not allowed. It is important that chemicals do not contain dangerous components such as carcinogens or toxic substances that may harm health. Products that come into contact with food or are intended for children undergo stricter checks."
+      },
+      {
+        "title": "Low-voltage equipment",
+        "text": "Low-voltage equipment, including transformers, electrical panels, contactors and other devices, is subject to mandatory certification to confirm safety and compliance with established standards. Certification includes testing electrical safety, durability and resistance to environmental factors such as temperature and humidity. This is a prerequisite for selling products on the Russian market. Without certification, low-voltage equipment cannot be sold or used in Russian institutions."
+      },
+      {
+        "title": "Network equipment",
+        "text": "Network equipment, including routers, switches and cables, is also subject to mandatory certification to confirm compliance with safety and quality standards. It is important that equipment meets electromagnetic compatibility requirements and does not interfere with other devices. Certification includes checks for durability, energy efficiency and functionality. Without certification, selling network equipment in Russia is not permitted."
+      },
+      {
+        "title": "Industrial equipment",
+        "text": "Industrial equipment must comply with strict safety and quality regulations. During certification, all aspects of equipment operation are checked, including resistance to loads, electrical safety, environmental impact and compliance with energy efficiency standards. Certification confirms that equipment meets the requirements for use across industries such as mechanical engineering, metallurgy and petrochemicals."
+      },
+      {
+        "title": "Packaging",
+        "text": "Any packaging products, including cardboard boxes, plastic containers and glass bottles, must comply with established safety and environmental requirements. During certification, packaging is tested for strength, resistance to external influences and safety of materials in contact with food. This is especially important for the food, pharmaceutical and cosmetic industries, where packaging is key to preserving product quality. In addition to compliance, packaging must meet disposal and recycling requirements, increasing trust from consumers and regulators."
+      },
+      {
+        "title": "Household goods",
+        "text": "Products for home and household needs include a wide range of goods, from household appliances to cleaning products, and require mandatory certification. Certification guarantees that products are safe to use, do not contain toxic substances and comply with established quality standards. Laboratory tests analyze materials, durability and resistance to moisture, temperature and mechanical loads. Goods that come into contact with food or are intended for children undergo additional tests. This is a mandatory requirement for both manufacturers and importers who want to sell products in Russia and the Customs Union countries."
+      },
+      {
+        "title": "Stationery",
+        "text": "Stationery products, including paper, pens, glue and school supplies, must comply with established quality and safety standards. Certification checks for toxic substances, material stability and product durability. Goods intended for children undergo additional tests confirming safety during long-term use. Without the required documents, selling stationery on the Russian market is not permitted."
+      },
+      {
+        "title": "Cosmetics and hygiene products",
+        "text": "Cosmetics and hygiene products are subject to mandatory quality control because they directly contact human skin and mucous membranes. Certification checks composition, toxic and allergenic substances, pH level, microbiological purity and the effectiveness of claimed properties. Products intended for children and people with sensitive skin undergo additional tests. Without certification, selling cosmetics and hygiene products is not permitted, and non-compliance may lead to product recalls and financial penalties."
+      },
+      {
+        "title": "Pet products",
+        "text": "Pet products, including food, toys and accessories, are also subject to certification to confirm safety. Certification checks the composition and nutritional value of pet food, the presence of prohibited or harmful additives, and the safety of toys and accessories. This is a prerequisite for import and sale in Russia and the Customs Union countries. Non-compliance may lead to product withdrawal from the market and financial sanctions."
+      },
+      {
+        "title": "Medical devices",
+        "text": "Medical devices are subject to mandatory certification to confirm safety, effectiveness and compliance with established standards. This applies to diagnostic and surgical equipment as well as consumables such as syringes, bandages and catheters. Laboratory tests check sterility, resistance to external influences, device accuracy and possible impact on human health. Depending on the type of device, certification may follow different schemes and include additional clinical tests. Only after obtaining the relevant document products can be manufactured, sold and used in medical institutions."
+      },
+      {
+        "title": "Personal protective equipment",
+        "text": "Personal protective equipment (PPE) is a key element of ensuring worker safety in manufacturing, construction and other areas. Products such as gloves, helmets, safety glasses and workwear must pass certification to confirm effectiveness and compliance with sanitary standards. Certification includes testing material strength, usability and protective properties."
+      },
+      {
+        "title": "Transport and special machinery",
+        "text": "Vehicles and special machinery are subject to mandatory certification to confirm compliance with safety, efficiency and environmental standards. Certification checks mechanical characteristics, system safety and performance. Products are also tested for compliance with environmental standards, including emissions."
+      },
+      {
+        "title": "High-voltage equipment",
+        "text": "High-voltage equipment is subject to mandatory certification to confirm safety, effectiveness and durability. Products are tested for compliance with safety standards, electromagnetic compatibility and energy efficiency. Without certification, high-voltage equipment cannot be used in industry, energy and other areas requiring high reliability."
+      },
+      {
+        "title": "Services",
+        "text": "Certain types of services, such as medical, educational and construction services, are subject to mandatory certification. This confirms compliance with established quality standards, staff qualifications and safety requirements. Service certification is needed to increase customer trust and protect their rights. For example, medical institutions must have licenses and certificates confirming staff qualifications and compliance of equipment with sanitary norms."
+      }
+    ]
+  },
+  "MainDocuments": {
+    "doc1": {
+      "title": "GOST R Certificate of Conformity",
+      "content": {
+        "text": "Confirms that products comply with Russian national standards. Required for selling certain goods on the Russian market.",
+        "text1": "Full list of CU technical regulations"
+      },
+      "content1": [
+        {
+          "title": "Documents required for issuance",
+          "list": [
+            "Standard according to which the product is manufactured — for example, GOST or Technical Specifications (TU)",
+            "Application form (we provide the template)",
+            "Product passport",
+            "User manual",
+            "TN VED, OKPD-2 — we help select for free",
+            "If you do not have a document — we can prepare it"
+          ]
+        }
+      ],
+      "price": "from 6,800 ₽",
+      "duration": "from 2 days"
+    },
+    "doc2": {
+      "title": "GOST R Declaration of Conformity",
+      "content": {
+        "text": "Confirms compliance with established standards and technical specifications. Simplifies market entry and builds consumer trust.",
+        "text1": "Full list of DC technical regulations"
+      },
+      "content1": [
+        {
+          "title": "Documents required for issuance",
+          "list": [
+            "Standard according to which the product is manufactured — for example, GOST or Technical Specifications (TU)",
+            "Application form (we provide the template)",
+            "Product passport — if missing, we can prepare it",
+            "User manual",
+            "Operating manual",
+            "TN VED, OKPD-2 (we help select for free)",
+            "If you do not have a document — we can prepare it"
+          ]
+        }
+      ],
+      "price": "from 8,700 ₽",
+      "duration": "from 2 days"
+    },
+    "doc3": {
+      "title": "Seismic Resistance Certificate",
+      "content": {
+        "text": "Confirms compliance with established standards and technical specifications. Simplifies market entry and builds consumer trust.",
+        "text1": "Full list of DC technical regulations"
+      },
+      "content1": [
+        {
+          "title": "Documents required for issuance",
+          "list": [
+            "Standard according to which the product is manufactured — for example, GOST or Technical Specifications (TU)",
+            "Application form (we provide the template)",
+            "Product passport — if missing, we can prepare it",
+            "User manual",
+            "Operating manual",
+            "TN VED, OKPD-2 (we help select for free)",
+            "If you do not have a document — we can prepare it"
+          ]
+        }
+      ],
+      "price": "from 15,000 ₽",
+      "duration": "from 2 days"
+    },
+    "doc4": {
+      "title": "Customs Union Declaration of Conformity",
+      "content": {
+        "text": "Manufacturer’s statement of product compliance with CU TR requirements. Reduces bureaucracy and simplifies market entry within the Customs Union."
+      },
+      "content1": [
+        {
+          "title": "Documents required for issuance",
+          "list": [
+            "(applicable for scheme 3D)",
+            "Standard according to which the product is manufactured — for example, GOST or Technical Specifications (TU) — if missing, we can prepare it",
+            "Application form (we provide the template)",
+            "Product passport — if missing, we can prepare it",
+            "Operating manual — if missing, we can prepare it",
+            "User manual — if missing, we can prepare it",
+            "TN VED, OKPD-2 — we help select for free"
+          ]
+        }
+      ],
+      "price": "from 8,700 ₽",
+      "duration": "from 2 days"
+    },
+    "doc5": {
+      "title": "Customs Union Certificate of Conformity",
+      "content": {
+        "text": "Confirms compliance with the technical regulations of the EAEU member states. A key requirement for trade within the Eurasian Economic Union."
+      },
+      "content1": [
+        {
+          "title": "Documents required for issuance",
+          "list": [
+            "Standard according to which the product is manufactured — for example, GOST or Technical Specifications (TU)",
+            "Application form (we provide the template)",
+            "Product passport — if missing, we can prepare it",
+            "User manual",
+            "Operating manual",
+            "TN VED, OKPD-2 (we help select for free)",
+            "If you do not have a document — we can prepare it"
+          ]
+        }
+      ],
+      "price": "from 35,000 ₽",
+      "duration": "from 2 weeks"
+    },
+    "doc6": {
+      "title": "Fire Safety Certificate",
+      "content": {
+        "text": "Confirms compliance with fire safety standards. Ensures reliable use of goods, protecting life and property."
+      },
+      "content1": [
+        {
+          "title": "If a mandatory Fire Safety Certificate requires testing:",
+          "list": [
+            "Technical Specifications (TU)",
+            "Application form (we provide the template)",
+            "Product passport",
+            "User manual",
+            "Samples for testing (depends on the product)",
+            "Production documents (we provide templates if missing)",
+            "Documented procedures or documents describing requirements and rules for process organization (regulations/instructions):",
+            "Quality manual (if available)",
+            "Quality policy (if available)",
+            "On changes to technical documentation and organizational/administrative documents",
+            "On incoming inspection",
+            "On organizing the production process",
+            "On management of measuring instruments",
+            "On management of production equipment",
+            "On organizing quality control of finished products",
+            "On handling nonconforming products",
+            "On receiving to warehouse, storage and shipment of finished products",
+            "On handling claims",
+            "Logs: note about electronic logs",
+            "Incoming inspection log",
+            "In-process inspection log",
+            "Equipment repair and maintenance log",
+            "Finished goods log (rejected products)",
+            "Claims log",
+            "Orders or job descriptions for those responsible for:",
+            "Orders or job descriptions",
+            "Incoming inspection",
+            "Production (in-process inspection)",
+            "Verification and storage of measuring instruments",
+            "Equipment",
+            "Quality control of finished products",
+            "Storage of finished products",
+            "Claims",
+            "Measuring instrument verification schedules + current verification certificates, equipment maintenance schedules, schedule templates"
+          ]
+        }
+      ],
+      "price": "from 15,000 ₽",
+      "duration": "from 2 days"
+    },
+    "doc7": {
+      "title": "Annual inspection control",
+      "content": {
+        "text": "Regular verification that certified products continue to meet declared standards. Ensures stable quality and reliability over the long term."
+      },
+      "content1": [
+        {
+          "title": "Documents required for issuance",
+          "list": [
+            "Application form (we provide the template)",
+            "Company documents: TIN, OGRN, Charter",
+            "Technical Specifications (TU) — if missing, we can prepare it"
+          ]
+        }
+      ],
+      "price": "from 28,000 ₽",
+      "duration": "from 1 week"
+    },
+    "doc15": {
+      "title": "State registration certificate",
+      "content": {
+        "text": "Confirms product registration with state authorities. Required for legal circulation and use in Russia."
+      },
+      "content1": [
+        {
+          "title": "We offer registration in RU/KG/BY",
+          "list": [
+            "Company documents: TIN, OGRN, Charter",
+            "Formulation/composition in % (we provide the template)",
+            "Technical Specifications (TU) — if missing, we can prepare it",
+            "Application form (we provide the template)",
+            "Product passport — if missing, we can prepare it",
+            "User manual — if missing, we can prepare it",
+            "Label/label layout — we can help prepare if missing",
+            "Lease agreement or ownership certificate for production premises — we help with preparation"
+          ]
+        }
+      ],
+      "price": "from 38,000 ₽",
+      "duration": "from 4 weeks"
+    },
+    "doc16": {
+      "title": "Expert opinion",
+      "content": {
+        "text": "Contains a specialist’s assessment of product quality and safety. Needed to confirm compliance for complex or specific goods."
+      },
+      "content1": [
+        {
+          "title": "Documents required for issuance",
+          "list": [
+            "Company documents: TIN, OGRN, Charter",
+            "Formulation/composition in % (we provide the template)",
+            "Technical Specifications (TU) — if missing, we can prepare it",
+            "Application form (we provide the template)",
+            "Product passport — if missing, we can prepare it",
+            "User manual — if missing, we can prepare it",
+            "Label/label layout — we can help prepare if missing",
+            "Lease agreement or ownership certificate for production premises — we help with preparation"
+          ]
+        }
+      ],
+      "price": "from 33,000 ₽",
+      "duration": "from 3 weeks"
+    },
+    "doc21": {
+      "title": "Rospotrebnadzor refusal letter",
+      "content": {
+        "text": "An official response from Rospotrebnadzor confirming that the product is not subject to (state registration certificate) mandatory registration under the Customs Union (EAEU) regulations or Russian legislation."
+      },
+      "content1": [
+        {
+          "title": "Documents required for issuance",
+          "list": [
+            "Application form (we provide the template)",
+            "TU (GOST)"
+          ]
+        }
+      ],
+      "price": "from 20,000 ₽",
+      "duration": "from 3 weeks"
+    },
+    "doc17": {
+      "title": "Test (research) report",
+      "content": {
+        "text": "Records the results of laboratory tests of products. Serves as evidence of their quality and safety."
+      },
+      "content1": [
+        {
+          "title": "An integral part of the documents:",
+          "list": [
+            "Declaration",
+            "GOST R / CU TR certificate",
+            "Standard according to which the product is manufactured — for example, GOST or Technical Specifications (TU) — if missing, we can prepare it",
+            "Application form (we provide the template)",
+            "Product passport — if missing, we can prepare it",
+            "Operating manual — if missing, we can prepare it",
+            "User manual — if missing, we can prepare it"
+          ]
+        }
+      ],
+      "price": "from 8,000 ₽",
+      "duration": "from 2 days"
+    },
+    "doc18": {
+      "title": "Technical Specifications (TU)",
+      "content": {
+        "text": "Defines technical parameters of the product. Ensures compliance with industry requirements and customer expectations."
+      },
+      "content1": [
+        {
+          "title": "Documents required for issuance",
+          "list": ["Application form (we provide the template)"]
+        }
+      ],
+      "price": "from 10,000 ₽",
+      "duration": "from 5 days"
+    },
+    "doc22": {
+      "title": "Product passport",
+      "content": {
+        "text": "A technical document containing key characteristics, parameters and instructions for operation, installation, storage and disposal of the product."
+      },
+      "content1": [
+        {
+          "title": "Documents required for issuance",
+          "list": [
+            "Application form (we provide the template)",
+            "TU (GOST)",
+            "Product passport"
+          ]
+        }
+      ],
+      "price": "from 10,000 ₽",
+      "duration": "from 5 days"
+    },
+    "doc23": {
+      "title": "Safety justification",
+      "content": {
+        "text": "A document confirming that products comply with safety requirements established by the technical regulations of the Customs Union (EAEU), Russian laws or other regulations. It serves as an evidence base for certification, declaration or voluntary conformity assessment."
+      },
+      "content1": [
+        {
+          "title": "Documents required for issuance",
+          "list": [
+            "Application form (we provide the template)",
+            "TU (GOST)",
+            "Product passport"
+          ]
+        }
+      ],
+      "price": "from 12,000 ₽",
+      "duration": "from 5 days"
+    },
+    "doc12": {
+      "title": "GOST R ISO 9001–2015 (Company standard)",
+      "content": {
+        "text": "Confirms that the quality management system meets established requirements. Helps improve efficiency, product quality and customer satisfaction."
+      },
+      "content1": [
+        {
+          "title": "Documents required for issuance",
+          "list": [
+            "Company documents (scans of TIN, OGRN, Charter)",
+            "Application form (we provide the template)",
+            "Staffing chart by positions (if missing, we provide an example)",
+            "Order appointing the director (we provide an example)",
+            "Lease agreement or ownership certificate for premises (we provide a template and help with preparation)"
+          ]
+        }
+      ],
+      "price": "from 12,000 ₽",
+      "duration": "from 2 days"
+    },
+    "doc13": {
+      "title": "GOST R ISO 14001–2016 (Environmental management)",
+      "content": {
+        "text": "Confirms implementation of an environmental management system compliant with global standards. Strengthens environmental responsibility and trust from clients and partners."
+      },
+      "content1": [
+        {
+          "title": "Documents required for issuance",
+          "list": [
+            "Company documents (scans of TIN, OGRN, Charter)",
+            "Application form (we provide the template)",
+            "Staffing chart by positions (if missing, we provide an example)",
+            "Order appointing the director (we provide an example)",
+            "Lease agreement or ownership certificate for premises (we provide a template and help with preparation)"
+          ]
+        }
+      ],
+      "price": "from 12,000 ₽",
+      "duration": "from 2 days"
+    },
+    "doc14": {
+      "title": "GOST R ISO 22000–2007 (Food safety management)",
+      "content": {
+        "text": "Regulates compliance with food safety standards at all stages of production. Important for the food industry, strengthening consumer trust."
+      },
+      "content1": [
+        {
+          "title": "Documents required for issuance",
+          "list": [
+            "Company documents (scans of TIN, OGRN, Charter)",
+            "Application form (we provide the template)",
+            "Staffing chart by positions (if missing, we provide an example)",
+            "Order appointing the director (we provide an example)",
+            "Lease agreement or ownership certificate for premises (we provide a template and help with preparation)"
+          ]
+        }
+      ],
+      "price": "from 15,000 ₽",
+      "duration": "from 2 days"
+    },
+    "doc8": {
+      "title": "Informational refusal letter",
+      "content": {
+        "text": "Confirms that the product does not require mandatory certification. Helps avoid unnecessary administrative procedures when entering the market."
+      },
+      "content1": [
+        {
+          "title": "Documents required for issuance",
+          "list": [
+            "Application form (we provide the template)",
+            "TN VED, OKPD-2 — we help select for free"
+          ]
+        }
+      ],
+      "price": "from 6,000 ₽",
+      "duration": "from 2 days"
+    },
+    "doc9": {
+      "title": "Product type certificate",
+      "content": {
+        "text": "Confirms compliance of a specific product type with established standards. A key regulatory document for serial production."
+      },
+      "content1": [
+        {
+          "title": "If a mandatory Fire Safety Certificate requires testing:",
+          "list": [
+            "(applicable for scheme 3D)",
+            "Standard according to which the product is manufactured — for example, GOST or Technical Specifications (TU) — if missing, we can prepare it",
+            "Application form (we provide the template)",
+            "Product passport — if missing, we can prepare it",
+            "Operating manual — if missing, we can prepare it",
+            "User manual — if missing, we can prepare it",
+            "TN VED, OKPD-2 — we help select for free"
+          ]
+        }
+      ],
+      "price": "from 12,000 ₽",
+      "duration": "from 2 days"
+    },
+    "doc10": {
+      "title": "Certificate of origin (ST-1)",
+      "content": {
+        "text": "A document confirming the country of origin of goods for customs clearance and trade. Provides duty benefits and simplifies export operations."
+      },
+      "content1": [
+        {
+          "title": "Documents required for issuance",
+          "list": ["Application form (we provide the template)"]
+        },
+        {
+          "title": "Below is the mandatory documentation list to be provided. We can help prepare each item as part of issuing ST-1; the cost depends on the completeness of the provided documentation:",
+          "list": [
+            "Exporter registration documents — charter, registration certificate",
+            "Tax registration certificate, etc.",
+            "Contract with the importer, appendix/specification, payment documents (invoice, bill, etc.)",
+            "Purchase contract if the exporter is not the manufacturer, invoices, delivery notes",
+            "From the manufacturer: documents confirming product origin — certificates/declarations/passports, etc.",
+            "From the manufacturer: list of raw materials and components used with TN VED codes for imported raw materials — for each position",
+            "From the manufacturer: documents confirming origin of raw materials — passports, certificates, declarations",
+            "From the manufacturer: TU (we can help develop), process charts, process description",
+            "From the manufacturer: if there is no change of the HS code at the first 4 digits level between imported raw materials and the finished product: cost calculation (price structure) ex-works with cost of all used raw materials/components with country of origin, customs value or documented purchase price in Russia, and TN VED EAEU codes (at least first four digits). Must include references to specifications and documents, purchase contracts, invoices, delivery notes for all materials.",
+            "Copy of the certificate of origin for re-export of imported goods and/or customs declaration, CMR, passports, certificates, etc.",
+            "License or other permit required by law",
+            "Customs declaration with customs stamp (if shipped)",
+            "Packing list with number of packages, packaging type, gross/net weight (per item and total)",
+            "Exporter contract with the applicant/payer, power of attorney (template provided if needed)"
+          ]
+        }
+      ],
+      "price": "from 18,000 ₽",
+      "duration": "from 1 week"
+    },
+    "doc11": {
+      "title": "Chemical product safety data sheet",
+      "content": {
+        "text": "Contains information about properties and safe handling methods for chemical substances. Protects users, employees and the environment."
+      },
+      "content1": [
+        {
+          "title": "Documents required for issuance",
+          "subtitle": "Issued in two formats:",
+          "list": [
+            "RF format with subsequent registration (we register after turnkey preparation)",
+            "EU-format MSDS",
+            "Application form (we provide the template)",
+            "Composition in % with components and all CAS numbers for each component (if missing, we help select CAS numbers for free)"
+          ]
+        }
+      ],
+      "price": "from 15,000 ₽",
+      "duration": "from 1 week"
+    }
+  },
+  "MainFeedback": {
+    "title": "Real customer reviews"
+  },
+  "MainQuestions": {
+    "title": "FAQ: Frequently asked questions",
+    "items": [
+      {
+        "title": "How does product certification work?",
+        "text": "<p>Product certification is the process of confirming that a product complies with established safety, quality and technical regulations. It starts with submitting an application to an accredited body. The applicant provides a set of documents: technical specifications (if available), instructions, product description, contract, labels and more. The certification body then sends product samples to an accredited laboratory for testing. Based on test reports, a conformity decision is made. In some cases, an additional production inspection is conducted. After all stages, a certificate of conformity is issued, registered in the state register and provided to the applicant. Without such a document, products cannot be legally sold in Russia or the EAEU countries if they are included in the mandatory certification list.</p>"
+      },
+      {
+        "title": "Where to start importing goods?",
+        "text": "<p>Import starts with legal and logistics preparation. The first step is to determine the TN VED code of the product. It defines whether certification, registration, sanitary documents, permits or other controls are required. Next, a contract with the foreign supplier is prepared, along with an invoice and packing list. If required, certification documents are submitted so that permits are available by the time of import. Then shipment is arranged and the goods pass customs clearance at the border. The declarant provides all necessary documents, including certificates or declarations of conformity. Without them, goods may not be released into circulation. The importer must consider risks: incorrect codes, document errors or border delays can lead to fines and downtime. It is recommended to consult logistics and certification specialists at the preparation stage.</p>"
+      },
+      {
+        "title": "Where to start launching production?",
+        "text": "<p>Launching production is a complex process with several key stages. First is registering a legal entity and tax registration. Next is choosing an appropriate OKVED code and preparing technical documentation: TU (technical specifications), formulations, drawings and process charts. At this stage, it is also important to determine whether the product is subject to mandatory certification, declaration, registration or licensing. After that come selecting/setting up a production facility, purchasing equipment, hiring staff and tuning the production process. Even small batches must meet safety requirements; otherwise they cannot be legally sold. You should also consider logistics, packaging, labeling and legal risks. It is advisable to set up quality control before entering the market to avoid claims and fines.</p>"
+      },
+      {
+        "title": "Which goods require a GOST R certificate?",
+        "text": "<p>A GOST R certificate is required for products included in the mandatory certification list approved by the Government of the Russian Federation. It includes various product groups that may pose risks: electrical goods, household appliances, construction materials, cables, furniture, children’s goods, PPE, certain types of clothing, footwear and toys. The key criterion is potential risk to health and safety. If a product is not in the list, you can obtain a refusal letter or pass voluntary certification. Since the 2010s, most products have moved under Customs Union technical regulations, and GOST R remains only for goods not covered by CU TR. Always check the current list and consult specialists — mistakes may lead to fines and customs arrest.</p>"
+      },
+      {
+        "title": "What is the difference between a CU TR certificate and a CU TR declaration?",
+        "text": "<p>Both a certificate and a declaration of conformity to CU TR confirm that products meet the requirements of the Customs Union technical regulations. The main difference is the procedure and the level of responsibility. A certificate is issued through an accredited body: testing is performed by a third-party laboratory, everything is verified externally, and responsibility is shared between the body and the applicant. A declaration is registered by the applicant: they may use their own or third-party test reports, but the applicant bears full legal responsibility for the data. The form depends on the regulation list. In some cases both are allowed, and businesses often choose a declaration as it is cheaper and faster. However, liability for violations is higher for declarations, including administrative and criminal consequences.</p>"
+      },
+      {
+        "title": "What are the fines for an incorrect EAEU declaration?",
+        "text": "<p>Providing a false or invalid EAEU declaration is a serious offense. If it turns out that the product does not comply with the declared requirements, a company can be fined up to 1 million rubles under Article 14.43 of the Code of Administrative Offenses. Confiscation of goods, withdrawal of the declaration from the register, a ban on sales in the EAEU, and removal from marketplaces are also possible. Repeated violations may result in temporary suspension of activities. If consequences affected health or property, sanctions are stricter up to criminal liability. The applicant must store evidence (test reports, labeling samples, etc.) for 10 years. Any discrepancy between the declaration and reality (e.g., different manufacturer, composition or country) is a reason for inspection and fines.</p>"
+      },
+      {
+        "title": "Is certification required for custom-made goods?",
+        "text": "<p>Yes. A custom order does not exempt you from legal requirements if the product falls under mandatory certification or declaration. For example, custom clothing, made-to-order furniture or custom equipment still require documents if they are sold, supplied or exported. The only exception is goods used strictly for personal needs and not placed into circulation. This is especially relevant for marketplaces: without a declaration/certificate a product listing can be blocked. In some cases, TU may be required if there is no applicable GOST. Custom-made goods are subject to the same safety, labeling and packaging requirements as mass production — it is important to consider this from the start to avoid issues later.</p>"
+      },
+      {
+        "title": "What to do with inventory after a certificate expires?",
+        "text": "<p>If you have inventory in stock and the certificate/declaration has expired, it depends on the import/production date. By law, you may sell remaining stock if it was received before the document expired, provided you have supporting documents (invoices, acceptance acts, internal records). Such stock is considered legal. But if the product was received after expiration, selling it is a violation. In that case, fines, returns and suspension of activities are possible. The optimal solution is to re-issue a new certificate for the batch or register a separate declaration for the remaining stock. You can also temporarily pause sales and, if needed, repackage with updated labeling. This is especially important for marketplaces and offline retail under inspections.</p>"
+      },
+      {
+        "title": "Can one declaration cover multiple manufacturers?",
+        "text": "<p>No, not under standard rules. A declaration of conformity is registered for a specific manufacturer with its exact name, address and country. Even if products are identical, but made by different manufacturers, each requires its own set of documents. This is because each manufacturer bears individual responsibility for safety. An exception may be possible if manufacturers are within one group, use the same formulation and production lines and this is documented. In typical practice: one declaration = one manufacturer. Violations may lead to document annulment, fines and blocking at customs or online platforms.</p>"
+      },
+      {
+        "title": "Do I need to re-issue a certificate if the address changes?",
+        "text": "<p>Yes. Changing the legal address or the actual location of the manufacturer requires re-issuing a certificate or declaration. By law, conformity documents must contain accurate information about the applicant and manufacturer. If the address changes (e.g., a new workshop, relocation to another region/country), the document becomes invalid. This applies to both Russian and foreign manufacturers. If a mismatch is found during an inspection, the products may be considered illegal. To avoid sanctions, you must either apply for amendments (if allowed) or register a new document. Labeling, packaging and accompanying documents must also be updated.</p>"
+      },
+      {
+        "title": "Can I list multiple goods in one refusal letter?",
+        "text": "<p>Yes, but only under certain conditions. One refusal letter can include multiple goods if they belong to one product group, fall under the same classifier section and are not subject to mandatory certification or declaration. All TN VED codes must be correct, with product descriptions and a reference to the regulation confirming that certification is not required. Such a document is often requested for customs clearance or marketplaces. However, if goods differ significantly by purpose/composition or belong to different groups, it is recommended to issue separate refusal letters to avoid misunderstandings and additional requests. The more precise the wording, the lower the risks.</p>"
+      }
+    ]
+  },
+  "staff": {
+    "search": {
+      "placeholder": "Enter employee name",
+      "reset": "Reset"
+    },
+    "noResults": "No employees found"
+  },
+  "docs": {
+    "title": "Documents for download",
+    "heading": "We prepare the following documents"
+  },
+  "navigation": {
+    "main": "Home",
+    "services": "Services",
+    "articles": "Articles",
+    "about": "About",
+    "okp": "OKPD 2",
+    "tnved": "TN VED",
+    "contacts": "Contacts",
+    "order": "Request a call",
+    "blog": "Blog",
+    "reviews": "Reviews",
+    "gostR": {
+      "title": "GOST R",
+      "gostR1": "GOST R Certificate of Conformity",
+      "gostR2": "GOST R Declaration of Conformity",
+      "gostR3": "Seismic Resistance Certificate"
+    },
+    "tamozhennySoyuz": {
+      "title": "Customs Union",
+      "tamozhennySoyuz1": "Customs Union Declaration",
+      "tamozhennySoyuz2": "Customs Union Certificate",
+      "tamozhennySoyuz3": "Fire Safety Certificate",
+      "tamozhennySoyuz4": "Inspection control"
+    },
+    "sertifikatsiya": {
+      "title": "Certification",
+      "sertifikatsiya1": "Informational refusal letter",
+      "sertifikatsiya2": "Product type certificate",
+      "sertifikatsiya3": "Certificate of origin (ST-1)",
+      "sertifikatsiya4": "Chemical product safety data sheet"
+    },
+    "iso": {
+      "title": "ISO (QMS)",
+      "iso1": "GOST R ISO 9001–2015 (Company standard)",
+      "iso2": "GOST R ISO 14001–2016 (Environmental management)",
+      "iso3": "GOST R ISO 22000–2007 (Food safety management)"
+    },
+    "rospotrebnadzor": {
+      "title": "Rospotrebnadzor",
+      "rospotrebnadzor1": "State registration certificate (SRC)",
+      "rospotrebnadzor2": "Expert opinion",
+      "rospotrebnadzor3": "Rospotrebnadzor refusal letter"
+    },
+    "tekhDokumentatsiya": {
+      "title": "Technical documentation",
+      "tekhDokumentatsiya1": "Test report",
+      "tekhDokumentatsiya2": "Technical Specifications (TU)",
+      "tekhDokumentatsiya3": "Product passport",
+      "tekhDokumentatsiya4": "Safety justification"
+    }
+  },
+  "copied": "Copied",
+  "footer": {
+    "inn": "TIN 6027189146",
+    "company": "CERTIFICATION CENTER",
+    "policy": "Privacy policy"
+  },
+  "error": {
+    "404": {
+      "title": "Page not found",
+      "message": "The address is incorrect or this page no longer exists"
+    },
+    "500": {
+      "title": "Server error",
+      "message": "An unexpected error occurred on the server. Please wait — we are already working on fixing it"
+    },
+    "toMain": "Go to home"
+  }
+}
 

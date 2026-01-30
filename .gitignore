@@ -3,6 +3,10 @@
 # dependencies
 /node_modules
 /src/assets/lib/react-photo-view/react-photo-view/node_modules
+/src/assets/lib/react-photo-view/node_modules
+
+# react-photo-view build output (vendored lib)
+/src/assets/lib/react-photo-view/dist
 /.pnp
 .pnp.*
 .yarn/*
