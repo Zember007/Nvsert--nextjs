@@ -1,4 +1,5 @@
 @use 'variables' as *;
+@use "sass:list";
 
 
 
@@ -351,7 +352,7 @@
 }
 
 @mixin transition($properties...) {
-  @if length($properties)>=1 {
+  @if list.length($properties)>=1 {
     transition: $properties;
   }
 

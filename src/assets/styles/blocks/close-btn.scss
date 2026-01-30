@@ -8,13 +8,12 @@
     cursor: pointer;
     position: relative;
     z-index: 3000;
+    --close-color: #93969D;
 
     @media (max-width: $media-s) {
         width: 20px;
         height: 20px;
     }
-
-    --close-color: #93969D;
 }
 
 .close>div {

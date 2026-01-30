@@ -3,13 +3,13 @@
 @use 'base/mixins' as *;
 @use 'base/base.module' as *;
 
-@import 'sections/main/main-slider';
-@import 'sections/main/main-banner';
-@import 'sections/main/main-safeguards';
-@import 'sections/main/main-questions';
-@import 'sections/main/main-feedback';
-@import 'sections/main/main-skills';
-@import 'sections/main/main-documents';
+@use 'sections/main/main-slider';
+@use 'sections/main/main-banner';
+@use 'sections/main/main-safeguards';
+@use 'sections/main/main-questions';
+@use 'sections/main/main-feedback';
+@use 'sections/main/main-skills';
+@use 'sections/main/main-documents';
 
 
 

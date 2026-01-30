@@ -6,14 +6,11 @@
 
 .PhotoView__Photo__attr {
     position: relative;
+    text-align: center;
 
     @media (min-width:1280px) {
         width: 448px;
     }
-
-
-
-    text-align: center;
 
 
 
@@ -112,16 +109,7 @@
     opacity: 1 !important;
 
     &::before {
-
-        @media (min-width:1280px) {
-            font-size: 20px;
-            top: 50%;
-            transform: translate(0, -368px);
-            white-space: nowrap;
-        }
-
         font-size: 18px;
-
         transform: translate(0, 50px);
         width: calc(100vw);
         justify-content: center;
@@ -132,6 +120,13 @@
         right: 0;
         display: flex;
         align-items: end;
+
+        @media (min-width:1280px) {
+            font-size: 20px;
+            top: 50%;
+            transform: translate(0, -368px);
+            white-space: nowrap;
+        }
     }
 }
 
