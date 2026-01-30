@@ -1,12 +1,41 @@
 import React from "react";
+import { usePathname, useRouter } from "next/navigation";
 import AppMenuItem from "../AppMenuItem";
 import { useHeaderContext } from "shared/contexts";
 import { useTranslation } from "react-i18next";
 import footerStyles from "@/assets/styles/base/base.module.scss";
 
+const LOCALE_COOKIE = "nvsert_locale";
+const SUPPORTED_LOCALES = ["ru", "en"] as const;
+
 const FooterContacts: React.FC = () => {
   const { handleCopy, openDefaultModal } = useHeaderContext();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const currentLang = ((): "ru" | "en" => {
+    const seg0 = pathname.split("/").filter(Boolean)[0];
+    if (seg0 === "ru" || seg0 === "en") return seg0;
+    const docLang = typeof document !== "undefined" ? document.documentElement?.lang : undefined;
+    if (docLang === "ru" || docLang === "en") return docLang;
+    const i18nLang = i18n.language?.slice(0, 2);
+    return i18nLang === "en" ? "en" : "ru";
+  })();
+
+  const switchLang: "ru" | "en" = currentLang === "ru" ? "en" : "ru";
+  const langLabel = switchLang.toUpperCase();
+
+  const handleLangClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    document.cookie = `${LOCALE_COOKIE}=${switchLang}; path=/; sameSite=lax; max-age=31536000`;
+    i18n.changeLanguage(switchLang);
+    const segments = pathname.split("/").filter(Boolean);
+    const hasLocalePrefix = SUPPORTED_LOCALES.includes(segments[0] as (typeof SUPPORTED_LOCALES)[number]);
+    const pathWithoutLocale = hasLocalePrefix ? segments.slice(1).join("/") : pathname.replace(/^\//, "");
+    const newPath = pathWithoutLocale ? `/${switchLang}/${pathWithoutLocale}` : `/${switchLang}`;
+    router.push(newPath);
+  };
 
   return (
     <div
@@ -161,10 +190,11 @@ const FooterContacts: React.FC = () => {
         />
 
         <AppMenuItem
-          className="xl:!relative !absolute xl:bottom-0 xl:right-0 m:bottom-[-53px]  m:right-[34px] bottom-[-80px]  right-1/2 m:translate-x-0 translate-x-[140px] btn-lang m:!h-[35px] !h-[50px]  "
+          onClick={handleLangClick}
+          className="xl:!relative !absolute xl:bottom-0 xl:right-0 m:bottom-[-53px]  m:right-[34px] bottom-[-80px]  right-1/2 m:translate-x-0 translate-x-[140px] btn-lang m:!h-[35px] !h-[50px] cursor-pointer"
           item={{
             href: "#",
-            label: "RU",
+            label: langLabel,
           }}
           isActive={false}
         />
