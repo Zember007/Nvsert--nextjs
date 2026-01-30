@@ -159,7 +159,7 @@ const AppMainSlider = () => {
     <section ref={ref} className="section wrapper">
       <div id="slider" className="absolute top-[-50px] pointer-events-none"></div>
 
-      <h2 className={`${textSize.headerH2} section__title`}>Помогаем с&nbsp;документами по&nbsp;отраслям</h2>
+      <h2 className={`${textSize.headerH2} section__title`}>{t('MainSlider.title')}</h2>
 
       <div className={stylesMainSlider.cloneable}>
         <div className={stylesMainSlider['slide-main']}>
@@ -408,17 +408,19 @@ interface SliderCtaButtonProps {
 }
 
 const SliderCtaButton: React.FC<SliderCtaButtonProps> = memo(
-  ({ setWrapperRef, setButtonRef, onClick }) => (
-    <div
-      className={`${stylesMainSlider['main-button-slider-wrap']} ${stylesBtn.tariffWrap}`}
-      ref={setWrapperRef}
-    >
-      <button
-        onClick={onClick}
-        ref={setButtonRef}
-        className={`${stylesBtn.btnIconAn} ${stylesMainSlider.slider__button} group  ${stylesBtn.tariff}`}
+  ({ setWrapperRef, setButtonRef, onClick }) => {
+    const { t } = useTranslation();
+    return (
+      <div
+        className={`${stylesMainSlider['main-button-slider-wrap']} ${stylesBtn.tariffWrap}`}
+        ref={setWrapperRef}
       >
-        <span className={stylesBtn.sendText}>Оформить заявку</span>
+        <button
+          onClick={onClick}
+          ref={setButtonRef}
+          className={`${stylesBtn.btnIconAn} ${stylesMainSlider.slider__button} group  ${stylesBtn.tariff}`}
+        >
+          <span className={stylesBtn.sendText}>{t('form.buttons.submitApplication')}</span>
         <span className={stylesBtn.sendIconLeft}>
           <svg
             width="16"
@@ -433,9 +435,10 @@ const SliderCtaButton: React.FC<SliderCtaButtonProps> = memo(
             />
           </svg>
         </span>
-      </button>
-    </div>
-  ),
+        </button>
+      </div>
+    );
+  },
 );
 
 SliderCtaButton.displayName = 'SliderCtaButton';

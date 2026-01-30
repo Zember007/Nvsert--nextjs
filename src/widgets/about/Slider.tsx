@@ -1,3 +1,5 @@
+'use client';
+
 import { useWindowSize } from 'shared/hooks';
 import { horizontalLoop } from '@/scripts/slider';
 import React, { useEffect, useRef, useState } from 'react';
@@ -5,8 +7,10 @@ import gsap from 'gsap';
 import { CountUp } from 'widgets/layout';
 import styles from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/base/base.module.scss';
+import { useTranslation } from 'react-i18next';
 
 const Slider = () => {
+    const { t } = useTranslation();
 
     const { width: widthWindow } = useWindowSize();
 
@@ -113,38 +117,10 @@ const Slider = () => {
         }
     }, [widthWindow]);
 
-    const sliderBlocks: any[] = [
-        {
-            procent: "15+",
-            title: "Лет на рынке сертификации",
-            description: "Являемся надёжным партнёром с глубоким пониманием требований и процедур в разных отраслях"
-        },
-        {
-            procent: "7",
-            title: "Этапов комплексного сопровождения",
-            description: "Ведём клиента от первой консультации до регистрации документов в реестре и передачи оригиналов в установленные сроки."
-        },
-        {
-            procent: "75+",
-            title: "Квалифицированных экспертов в команде",
-            description: "Каждый проект сопровождает команда специалистов с опытом от 5 лет, что гарантирует точность и надёжность результата."
-        },
-        {
-            procent: "10000+",
-            title: "Компаний доверяют нам работу",
-            description: "NVSERT выбрали компании по всей России, ЕАЭС и зарубежные партнёры. Среди наших клиентов — крупные холдинги и корпорации."
-        },
-        {
-            procent: "25+",
-            title: "Отраслей в нашей практике",
-            description: "Мы работаем с промышленностью, пищевой продукцией, строительными материалами, и другими сегментами рынка."
-        },
-        {
-            procent: "99%",
-            title: "Заказов выполняем раньше срока",
-            description: "Документы подготавливаются быстрее, чем указано в договоре, при этом качество и юридическая сила остаются безупречными."
-        }
-    ];
+    const sliderBlocks = React.useMemo(
+        () => t('about.sliderBlocks', { returnObjects: true }) as any[],
+        [t],
+    );
 
 
 

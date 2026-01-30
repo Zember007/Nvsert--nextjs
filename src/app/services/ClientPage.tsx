@@ -5,8 +5,10 @@ import { groupServices } from '@/assets/lib/navigation';
 import type { NavigationItem, Services } from '@/types/navigation';
 import { useHeaderContext } from 'shared/contexts';
 import { ServicesBreadcrumbs, ServicesHeader, ServicesList } from 'widgets/services';
+import { useTranslation } from 'react-i18next';
 
 const ServicesContent = () => {
+  const { t } = useTranslation();
   const { initialNavigation } = useHeaderContext();
   const [expandedServices, setExpandedServices] = useState<number[]>([]);
   const [active, setActive] = useState(false);
@@ -65,7 +67,7 @@ const ServicesContent = () => {
       <ServicesBreadcrumbs />
 
       <ServicesHeader
-        title="Полный список услуг"
+        title={t('services.page.title')}
         isExpanded={isAnyExpanded}
         onToggleAll={handleToggleAll}
         hover={hover}

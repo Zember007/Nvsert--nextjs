@@ -1,10 +1,11 @@
 'use client';
 
 import * as React from 'react';
-import type { Okpd2Item } from '@/widgets/okpd/OkpdHierarchy';
-import { VirtualizedList } from '@/widgets/home/utils/VirtualizedList';
+import type { Okpd2Item } from 'widgets/okpd/OkpdHierarchy';
+import { VirtualizedList } from 'widgets/home/utils/VirtualizedList';
 import textSize from '@/assets/styles/base/base.module.scss';
-import { useCopy } from '@/shared/hooks/useCopy';
+import { useCopy } from 'shared/hooks/useCopy';
+import { useTranslation } from 'react-i18next';
 
 function formatTitle(item: Pick<Okpd2Item, 'code' | 'name'>) {
   return `${item.code} ${item.name}`;
@@ -19,6 +20,7 @@ export function OkpdSearchResults({
   results: Okpd2Item[];
   isPending?: boolean;
 }) {
+  const { t } = useTranslation();
   const { showCopyNotification, notificationPosition, handleCopy, hideNotification } = useCopy();
 
   if (!query.trim()) return null;
@@ -27,15 +29,15 @@ export function OkpdSearchResults({
     <div className="mt-[10px]">
       <div className="flex items-center justify-between gap-[12px] mb-[10px]">
         <span className={`${textSize.text3} font-light text-[#93969D]`}>
-          {isPending ? 'Поиск…' : `Найдено: ${results.length}`}
+          {isPending ? t('common.searching') : t('okpd.searchResults.found', { count: results.length })}
         </span>
         <span className={`${textSize.text3} font-light text-[#93969D]`}>
-          {results.length >= 200 ? 'Показаны первые 200' : ''}
+          {results.length >= 200 ? t('okpd.searchResults.firstN', { count: 200 }) : ''}
         </span>
       </div>
 
       {results.length === 0 && !isPending ? (
-        <div className={`${textSize.text2} font-light text-[#93969D]`}>Ничего не найдено</div>
+        <div className={`${textSize.text2} font-light text-[#93969D]`}>{t('common.nothingFound')}</div>
       ) : (
         <div className="border border-[#E7E8EA] rounded-[6px] overflow-hidden">
           <VirtualizedList
@@ -61,10 +63,10 @@ export function OkpdSearchResults({
                       type="button"
                       onClick={(e) => handleCopy(item.code, e)}
                       className={`${textSize.text3} font-light text-[#34446D] whitespace-nowrap active:scale-[0.98] transition-transform`}
-                      aria-label={`Скопировать код ${item.code}`}
-                      title={`Скопировать: ${formatTitle(item)}`}
+                      aria-label={t('common.copyCodeAria', { code: item.code })}
+                      title={t('common.copyTitle', { text: formatTitle(item) })}
                     >
-                      Скопировать
+                      {t('common.copy')}
                     </button>
                   </div>
                 </div>
@@ -81,7 +83,7 @@ export function OkpdSearchResults({
           className="fixed z-[9999] bg-[#34446D] text-white px-[10px] py-[6px] rounded-[6px] shadow"
           style={{ left: notificationPosition.x, top: notificationPosition.y }}
         >
-          Скопировано
+          {t('copied')}
         </button>
       )}
     </div>

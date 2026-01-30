@@ -44,7 +44,7 @@ const AppMainIntro = () => {
               BounceWrapper={() => {
                 animation();
               }}
-              btnText="Оформить заявку"
+              btnText={t('form.buttons.submitApplication')}
             />
           </motion.div>
         </div>

@@ -1,5 +1,7 @@
+'use client';
 import Link from "next/link";
 import stylesBreadcrumbs from '@/assets/styles/blocks/breadcrumbs.module.scss';
+import { useTranslation } from "react-i18next";
 
 interface Breadcrumb {
   id: number;
@@ -15,6 +17,7 @@ interface AppBreadcrumbsProps {
 }
 
 const AppBreadcrumbs = ({ root, title = '', breadcrumbs = [] }: AppBreadcrumbsProps) => {
+  const { t } = useTranslation();
 
   function crumbTitle(item: Breadcrumb): string {
     return item.seo_h1 ? item.seo_h1 : item.title;
@@ -27,7 +30,7 @@ const AppBreadcrumbs = ({ root, title = '', breadcrumbs = [] }: AppBreadcrumbsPr
           <Link
             className={stylesBreadcrumbs.breadcrumbs__link}
             href={'/'}
-          >Главная</Link>
+          >{t('navigation.main')}</Link>
         </li>
 
         {breadcrumbs.map(item => (

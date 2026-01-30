@@ -1,10 +1,12 @@
 import React from "react";
 import AppMenuItem from "../AppMenuItem";
 import { useHeaderContext } from "shared/contexts";
+import { useTranslation } from "react-i18next";
 import footerStyles from "@/assets/styles/base/base.module.scss";
 
 const FooterContacts: React.FC = () => {
   const { handleCopy, openDefaultModal } = useHeaderContext();
+  const { t } = useTranslation();
 
   return (
     <div
@@ -17,7 +19,7 @@ const FooterContacts: React.FC = () => {
           }}
           className="xl:hidden  border border-solid  text-[18px] flex items-center justify-between px-[15px] text-[#FFF]  border-[#93969D] h-[50px] xss:w-[280px] w-[260px] mx-auto rounded-[3px] bg-[#34446D]"
         >
-          <span>Заказать звонок</span>
+          <span>{t("navigation.order")}</span>
           <svg
             width="24"
             height="24"

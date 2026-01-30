@@ -1,6 +1,7 @@
 import { FC, memo } from 'react';
 import type { AnimationControls } from 'framer-motion';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 import { ActionButton } from './ActionButton';
@@ -26,6 +27,8 @@ export const DocumentActions: FC<DocumentActionsProps> = memo(
     handleServiceClick,
     isMobile,
   }) => {
+    const { t } = useTranslation();
+
     if (isMobile) {
       return (
         <div className={`${mainDocumentsStyles['document-content-wrapper']} `}>
@@ -38,7 +41,7 @@ export const DocumentActions: FC<DocumentActionsProps> = memo(
             <ActionButton
               setRef={setButtonRef}
               onClick={handleOrderClick}
-              text="Оформить заявку"
+              text={t('form.buttons.submitApplication')}
               className={commonButtonClasses}
             />
           </motion.div>
@@ -50,7 +53,7 @@ export const DocumentActions: FC<DocumentActionsProps> = memo(
             <ActionButton
               setRef={setButtonRef}
               onClick={handleServiceClick}
-              text="Перейти в услугу"
+              text={t('documents.goToService')}
               className={commonButtonClasses}
             />
           </motion.div>
@@ -68,7 +71,7 @@ export const DocumentActions: FC<DocumentActionsProps> = memo(
         <ActionButton
           setRef={setButtonRef}
           onClick={handleOrderClick}
-          text="Оформить заявку"
+          text={t('form.buttons.submitApplication')}
           className={commonButtonClasses}
         />
       </motion.div>

@@ -96,7 +96,7 @@ const AppMainSkills = () => {
     <section ref={ref} className="section ">
       <div id="skills" className="absolute top-[-50px] pointer-events-none"></div>
 
-      <h2 className={`${textSize.headerH2} section__title`}>Наши основные преимущества</h2>
+      <h2 className={`${textSize.headerH2} section__title`}>{t('MainSkills.sectionTitle')}</h2>
 
       <div className={stylesMainSkills['skills__wrapper']}>
         <SkillsGrid
@@ -190,7 +190,7 @@ const SkillsDescription: React.FC<SkillsDescriptionProps> = ({ t }) => (
   <div className={`wrapper ${stylesMainSkills['overlay-content-container']}`}>
     <h3 className={stylesMainSkills['skills__wrapper-desc']}>
       {filterPrepositions(
-        'Наша компания признана одной из ведущих на рынке сертификации в Российской Федерации и стран Евразийского Экономического Союза. Специалисты NVSERT предоставляют широкий спектр услуг, направленный на оформление обязательной и добровольной сертификации, декларирования, соответствия требованиям технических регламентов и др. документов, подтверждающих качество выпускаемой продукции.'
+        t('MainSkills.description')
       )}
     </h3>
 

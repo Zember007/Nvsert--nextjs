@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { NavigationItem } from '@/types/navigation';
+import { useTranslation } from 'react-i18next';
 import textSize from '@/assets/styles/base/base.module.scss';
 
 interface ServiceCardProps {    
@@ -27,6 +28,7 @@ const replaceValue = (value: string) => {
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, className, title = true, padding = true, onClick, priority = false }) => {
+    const { t } = useTranslation();
     const href = certificate.slug ? `/services/${certificate.slug}` : '';
     
     // Используем medium формат если доступен, иначе полное изображение
@@ -62,11 +64,11 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                     </div>
                     <div className='justify-between flex absolute bottom-[9px] left-[9px] right-[9px] xss:*:*:!leading-[0.68] *:*:!leading-[0.8]   flex py-[10px] px-[6px] bg-[#F5F5F580] rounded-[4px] border border-[#000] backdrop-blur-[4px]'>
                         <div className="flex flex-col gap-[10px]">
-                            <span className={`${textSize.text5} !tracking-[-0.4px]`}>Срок оформления</span>
+                            <span className={`${textSize.text5} !tracking-[-0.4px]`}>{t('services.labels.duration')}</span>
                             <span className={`${textSize.text1} !tracking-[-0.4px] font-light`}>{certificate.duration}</span>
                         </div>
                         <div className="flex flex-col gap-[10px]">
-                            <span className={`${textSize.text5} !tracking-[-0.4px]`}>Стоимость</span>
+                            <span className={`${textSize.text5} !tracking-[-0.4px]`}>{t('services.labels.price')}</span>
                             <span className={`${textSize.text1} !tracking-[-0.4px] font-light`}>{certificate.price}</span>
                         </div>
                     </div>
@@ -96,11 +98,11 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                     </div>
                     <div className='justify-between flex absolute bottom-[9px] left-[9px] right-[9px] xss:*:*:!leading-[0.68] *:*:!leading-[0.8]   flex py-[10px] px-[6px] bg-[#F5F5F580] rounded-[4px] border border-[#000] backdrop-blur-[4px]'>
                         <div className="flex flex-col gap-[10px]">
-                            <span className={`${textSize.text5} !tracking-[-0.4px]`}>Срок оформления</span>
+                            <span className={`${textSize.text5} !tracking-[-0.4px]`}>{t('services.labels.duration')}</span>
                             <span className={`${textSize.text1} !tracking-[-0.4px] font-light`}>{certificate.duration}</span>
                         </div>
                         <div className="flex flex-col gap-[10px]">
-                            <span className={`${textSize.text5} !tracking-[-0.4px]`}>Стоимость</span>
+                            <span className={`${textSize.text5} !tracking-[-0.4px]`}>{t('services.labels.price')}</span>
                             <span className={`${textSize.text1} !tracking-[-0.4px] font-light`}>{certificate.price}</span>
                         </div>
                     </div>

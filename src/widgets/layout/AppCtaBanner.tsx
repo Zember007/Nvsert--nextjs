@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'shared/ui';
+import { useTranslation } from 'react-i18next';
 import textSize from '@/assets/styles/base/base.module.scss';
 
 interface CtaBannerProps {
@@ -16,9 +17,12 @@ const AppCtaBanner: React.FC<CtaBannerProps> = ({
     description,
     descriptionClassName = '',
     onButtonClick,
-    buttonLabel = 'Связаться',
+    buttonLabel,
     className = ''
 }) => {
+    const { t } = useTranslation();
+    const resolvedButtonLabel = buttonLabel ?? t('form.buttons.contact');
+
     return (
          text && description ? (
             <div className={`mx-auto text-center max-w-[700px] w-full xxs:min-h-[300px] bg-[rgba(52,68,109,0.2)] rounded-[8px] flex flex-col justify-center items-center gap-[16px] s:py-[40px] px-[14px] py-[20px] backdrop-blur-sm ${className}`}>
@@ -31,7 +35,7 @@ const AppCtaBanner: React.FC<CtaBannerProps> = ({
                 <Button
                     wrapperClassName='xs:!w-[250px] xss:!w-[280px] !w-full'
                     onClick={onButtonClick}
-                    label={buttonLabel}
+                    label={resolvedButtonLabel}
                 />
             </div>
         ) : <></>

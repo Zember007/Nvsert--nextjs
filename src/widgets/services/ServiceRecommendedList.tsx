@@ -4,6 +4,7 @@ import React from 'react';
 import { NavigationItem } from '@/types/navigation';
 import { AppCollapsibleList, AppNavigationItem } from 'widgets/layout';
 import { STRAPI_PUBLIC_URL } from 'shared/config/env';
+import { useTranslation } from 'react-i18next';
 
 interface ServiceRecommendedListProps {
     items: NavigationItem[];
@@ -18,6 +19,7 @@ const ServiceRecommendedList: React.FC<ServiceRecommendedListProps> = ({
     itemClassName,
     textClassName,
 }) => {
+    const { t } = useTranslation();
     if (!items || items.length === 0) {
         return null;
     }
@@ -27,7 +29,7 @@ const ServiceRecommendedList: React.FC<ServiceRecommendedListProps> = ({
         <div className={wrapperClassName}>
             <AppCollapsibleList
                 position="left"
-                title={'Рекомендуем к оформлению'}
+                title={t('services.recommended.title')}
                 items={items}
                 defaultOpen={true}
                 listClassName="flex flex-col gap-[20px]"

@@ -6,6 +6,7 @@ import { GridBox, Map } from 'widgets/about';
 import { SliderPost } from 'shared/ui';
 import { CountUp } from 'widgets/layout';
 import textSize from '@/assets/styles/base/base.module.scss';
+import { useTranslation } from 'react-i18next';
 import {
     AppCtaBanner,
     CollapseSection,
@@ -19,39 +20,6 @@ type SliderBlock = {
     title: string;
     description: string;
 };
-
-const defaultSliderBlocks: SliderBlock[] = [
-    {
-        procent: '15+',
-        title: 'Лет на рынке сертификации',
-        description: 'Являемся надёжным партнёром с глубоким пониманием требований и процедур в разных отраслях',
-    },
-    {
-        procent: '7',
-        title: 'Этапов комплексного сопровождения',
-        description: 'Ведём клиента от первой консультации до регистрации документов в реестре и передачи оригиналов в установленные сроки.',
-    },
-    {
-        procent: '75+',
-        title: 'Квалифицированных экспертов в команде',
-        description: 'Каждый проект сопровождает команда специалистов с опытом от 5 лет, что гарантирует точность и надёжность результата.',
-    },
-    {
-        procent: '10000+',
-        title: 'Компаний доверяют нам работу',
-        description: 'NVSERT выбрали компании по всей России, ЕАЭС и зарубежные партнёры. Среди наших клиентов — крупные холдинги и корпорации.',
-    },
-    {
-        procent: '25+',
-        title: 'Отраслей в нашей практике',
-        description: 'Мы работаем с промышленностью, пищевой продукцией, строительными материалами, и другими сегментами рынка.',
-    },
-    {
-        procent: '99%',
-        title: 'Заказов выполняем раньше срока',
-        description: 'Документы подготавливаются быстрее, чем указано в договоре, при этом качество и юридическая сила остаются безупречными.',
-    },
-];
 
 // Функция для парсинга числа и суффикса из строки
 const parseProcent = (procent: string): { value: number; suffix: string } => {
@@ -73,6 +41,11 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
     const [sectionsOpen, setSectionsOpen] = React.useState<number[]>([]);
     const { processContent } = useRichTextRenderer();
     const { openDefaultModal } = useHeaderContext();
+    const { t } = useTranslation();
+    const defaultSliderBlocks = React.useMemo(
+        () => t('about.sliderBlocks', { returnObjects: true }) as SliderBlock[],
+        [t],
+    );
 
     const toggleSection = (id: number) => {
         setSectionsOpen(prev =>
@@ -179,13 +152,13 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
     if (!aboutData) {
         return (
             <StandardPageLayout
-                title="О компании"
-                breadcrumbs={[{ id: 1, title: 'О компании', full_slug: '/about' }]}
+                title={t('navigation.about')}
+                breadcrumbs={[{ id: 1, title: t('navigation.about'), full_slug: '/about' }]}
                 dotNavItems={[]}
                 showButton={true}
             >
                 <div className="w-full text-center py-[50px]">
-                    <span className="text-[16px] text-gray-500">Данные не найдены</span>
+                    <span className="text-[16px] text-gray-500">{t('common.dataNotFound')}</span>
                 </div>
             </StandardPageLayout>
         );
@@ -193,8 +166,8 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
 
     return (
         <StandardPageLayout
-            title={aboutData.title || "О компании"}
-            breadcrumbs={[{ id: 1, title: 'О компании', full_slug: '/about' }]}
+            title={aboutData.title || t('navigation.about')}
+            breadcrumbs={[{ id: 1, title: t('navigation.about'), full_slug: '/about' }]}
             dotNavItems={dotNavItems}
             showButton={true}
         >

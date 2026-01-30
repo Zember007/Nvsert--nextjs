@@ -14,6 +14,7 @@ import { BounceEffect } from 'shared/hooks';
 import FlightSuccess from "../modals/FlightSuccess";
 import { useAnimation, motion } from "framer-motion";
 import { filterPrepositions } from 'shared/lib';
+import { useTranslation } from "react-i18next";
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/base/base.module.scss';
 import formStyles from '@/assets/styles/base/base.module.scss';
@@ -21,6 +22,7 @@ import formStyles from '@/assets/styles/base/base.module.scss';
 
 const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }: { btnText: string; bg?: boolean; close?: () => void; BounceWrapper?: () => void; active?: boolean; countTrigger?: number }) => {
     const { setButtonRef, setWrapperRef } = useButton();
+    const { t } = useTranslation();
 
     const onSubmit = async (e: any) => {
 
@@ -255,8 +257,8 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
     // Мемоизируем пропсы для предотвращения мерцания при смене типа инпута
     const contactInputProps = useMemo(() => ({
         defaultValue: isEmail ? contactData.email : isPhone ? contactData.phone : '',
-        title: isPhone ? 'Телефон' : isEmail ? 'Email' : '',
-        placeholder: isPhone ? 'Введите номер телефона' : 'Введите email',
+        title: isPhone ? t('form.input.titles.phone') : isEmail ? t('form.input.titles.email') : '',
+        placeholder: isPhone ? t('form.input.placeholders.phone') : t('form.input.placeholders.email'),
         inputName: "contact",
         mask: isPhone ? "phone" : '',
         type: isPhone ? "tel" : 'text',
@@ -266,17 +268,25 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
         disable: (Boolean(isPhone) || Boolean(isEmail)),
         onFocus: () => { setFocusContact(true) },
         onBlur: () => { setFocusContact(false); validContact(contactValue);  }
-    }), [isEmail, isPhone, contactData.email, contactData.phone, emailError, contactValue, validContact])
+    }), [isEmail, isPhone, contactData.email, contactData.phone, emailError, contactValue, validContact, t])
 
     return (
         <motion.div
             animate={controls}
             initial={{ x: 0 }}
             className={`relative ${formStyles['main-form']} h-[475px] s:h-[590px] border border-solid border-[#93969d]  ${bg ? 'bg-[#93969d26]  ' : ''} py-[30px] px-[20px] s:p-[40px] max-w-[320px] s:max-w-[400px] flex flex-col gap-[20px] rounded-[6px]`}>
-            {successMessageVisible && <FlightSuccess closeIcon={bg} text="Спасибо за заявку" close={() => { setSuccessMessageVisible(false) }} />}
+            {successMessageVisible && (
+                <FlightSuccess
+                    closeIcon={bg}
+                    text={t("modals.flightSuccess.thankYouForApplication")}
+                    close={() => { setSuccessMessageVisible(false) }}
+                />
+            )}
 
 
-            <span className={`${textSize.headerH3} ${formStyles.form__title}  ${successMessageVisible && 'opacity-0'} `}>Оформить заявку</span>
+            <span className={`${textSize.headerH3} ${formStyles.form__title}  ${successMessageVisible && 'opacity-0'} `}>
+                {t('form.buttons.submitApplication')}
+            </span>
 
 
             <div className={`${successMessageVisible && 'opacity-0'}`}>
@@ -284,7 +294,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                     {({ register, errors }) => (
                         <div className="flex flex-col gap-[20px]">
                             <AppInput
-                                title={'ФИО'}
+                                title={t("form.input.titles.fullName")}
                                 inputName="name"
                                 required={true}
                             />
@@ -308,14 +318,14 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                                     onClick={() => { clearErrors('contact') }}
                                 >
                                     <AppCheckbox id={`check-phone${ids}`} successful={contactData.phone !== ''} focus={focusContact} fail={failCheck} checked={isPhone || contactData.phone !== ''}
-                                        onChange={(value) => handleContactTypeChange('phone', value)} label="Телефон" />
+                                        onChange={(value) => handleContactTypeChange('phone', value)} label={t('form.input.titles.phone')} />
                                     <AppCheckbox focus={focusContact} id={`check-email${ids}`} successful={contactData.email !== ''} fail={failCheck} checked={isEmail || contactData.email !== ''}
-                                        onChange={(value) => handleContactTypeChange('email', value)} label="Email" />
+                                        onChange={(value) => handleContactTypeChange('email', value)} label={t('form.input.titles.email')} />
                                 </div>
                             </div>
 
                             <AppTextarea
-                                title={'Комментарий'}
+                                title={t("form.input.titles.comment")}
                                 inputName="comment"
                             />
 
@@ -343,9 +353,9 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
 
 
                             <span className={formStyles.form__desc}>
-                                {filterPrepositions('Нажимая на кнопку «Оформить заявку» вы соглашаетесь с ')}
+                                {t('form.policy.prefix', { button: t('form.buttons.submitApplication') })}{' '}
                                 <Link href="#" className={`${stylesBtn.lineAfter} no-drag`} target="_blank">
-                                    политикой конфиденциальности
+                                    {t('form.policy.privacyPolicy')}
                                 </Link>
                             </span>
                         </div>

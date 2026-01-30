@@ -1,9 +1,10 @@
 'use client';
 
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import textSize from '@/assets/styles/base/base.module.scss';
-import { TnvedSearchBar } from '@/widgets/tnved/TnvedSearchBar';
-import { TnvedSearchResults } from '@/widgets/tnved/TnvedSearchResults';
+import { TnvedSearchBar } from 'widgets/tnved/TnvedSearchBar';
+import { TnvedSearchResults } from 'widgets/tnved/TnvedSearchResults';
 
 export type TnvedSearchItem = {
   id: number;
@@ -28,6 +29,7 @@ function useDebouncedValue<T>(value: T, delayMs: number) {
 }
 
 export function TnvedQuickSearchSection() {
+  const { t } = useTranslation();
   const [inputValue, setInputValue] = React.useState('');
   const debouncedInput = useDebouncedValue(inputValue, 300);
   const [committedQuery, setCommittedQuery] = React.useState('');
@@ -80,12 +82,12 @@ export function TnvedQuickSearchSection() {
   return (
     <div className="flex flex-col" id="block-1">
       <p className={`${textSize.headerH4} text-[#34446D] border-b border-[#34446D] mb-[20px]`}>
-        Быстрый поиск кода ТН&nbsp;ВЭД
+        {t('tnved.quickSearch.title')}
       </p>
 
       <TnvedSearchBar value={inputValue} onChange={setInputValue} onSubmit={submit} />
 
-      <span className={`${textSize.text3} font-light`}>например: «лошади», «мебель», 0101210000</span>
+      <span className={`${textSize.text3} font-light`}>{t('tnved.quickSearch.example')}</span>
 
       <TnvedSearchResults query={committedQuery} results={results} isPending={isPending} />
     </div>

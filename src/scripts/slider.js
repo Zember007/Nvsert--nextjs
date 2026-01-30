@@ -7,14 +7,14 @@ gsap.registerPlugin(Draggable, InertiaPlugin);
 export function initSlider({ onChangeFunction, onDragFunction, mobile }) {
     const wrapper = document.querySelector('[data-slider="list"]');
     if (!wrapper) {
-        console.error("Контейнер слайдера не найден");
+        console.error("Slider container not found");
         return null;
     }
 
     const slides = gsap.utils.toArray('[data-slider="slide"]');
     const slidesHtml = document.querySelectorAll('[data-slider="slide"]');
     if (!slides.length) {
-        console.error("Слайды не найдены");
+        console.error("Slides not found");
         return null;
     }
 
@@ -25,7 +25,7 @@ export function initSlider({ onChangeFunction, onDragFunction, mobile }) {
     const stepsParent = stepElement.parentElement;
 
     if (!stepsParent || !stepElement) {
-        console.error("Элементы шагов не найдены");
+        console.error("Step elements not found");
         return null;
     }
 

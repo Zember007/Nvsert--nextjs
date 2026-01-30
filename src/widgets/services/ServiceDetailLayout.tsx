@@ -9,6 +9,7 @@ import ServiceArticleDate from 'widgets/services/ServiceArticleDate';
 import { NavigationItem } from '@/types/navigation';
 import { filterPrepositions } from 'shared/lib';
 import dynamic from 'next/dynamic';
+import { useTranslation } from 'react-i18next';
 
 
 const ServiceRecommendedList = dynamic(
@@ -40,6 +41,7 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
     onOpenIntroForm,
 }) => {
     const [showSecondaryUI, setShowSecondaryUI] = useState(false);
+    const { t } = useTranslation();
 
     // Откладываем отрисовку второстепенных блоков (списки с анимациями),
     // чтобы не нагружать первый рендер
@@ -103,7 +105,7 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
                                     <Button
                                         wrapperClassName="xl:hidden block !max-w-[250px]"
                                         onClick={onOpenOrderForm}
-                                        label="Оформить заявку"
+                                        label={t('form.buttons.submitApplication')}
                                     />
                                 </div>
 
@@ -178,7 +180,7 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
                     <div className=" sticky top-[104px] flex flex-col gap-[50px] no-scrollbar overflow-y-auto max-h-[calc(100vh-104px)]">
                         <Button
                             onClick={onOpenOrderForm}
-                            label="Оформить заявку"
+                            label={t('form.buttons.submitApplication')}
                         />
 
                         {showSecondaryUI && (

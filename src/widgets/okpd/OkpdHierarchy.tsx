@@ -1,10 +1,11 @@
 'use client';
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { CollapseSection } from 'widgets/layout';
 import textSize from '@/assets/styles/base/base.module.scss';
-import OkpdPrefix from '@/widgets/okpd/OkpdPrefix';
-import { VirtualizedList } from '@/widgets/home/utils/VirtualizedList';
+import OkpdPrefix from 'widgets/okpd/OkpdPrefix';
+import { VirtualizedList } from 'widgets/home/utils/VirtualizedList';
 
 export type Okpd2Item = {
     id: number;
@@ -19,30 +20,7 @@ export type Okpd2Item = {
     publishedAt: string | null;
 };
 
-// Массив разделов ОКПД с номерами, перед которыми их нужно показывать
-const OKPD_SECTIONS = [
-    { letter: 'A', name: 'ПРОДУКЦИЯ СЕЛЬСКОГО, ЛЕСНОГО И РЫБНОГО ХОЗЯЙСТВА', codePrefix: '01' },
-    { letter: 'B', name: 'ПРОДУКЦИЯ ГОРНОДОБЫВАЮЩИХ ПРОИЗВОДСТВ', codePrefix: '05' },
-    { letter: 'C', name: 'ПРОДУКЦИЯ ОБРАБАТЫВАЮЩИХ ПРОИЗВОДСТВ', codePrefix: '10' },
-    { letter: 'D', name: 'ЭЛЕКТРОЭНЕРГИЯ, ГАЗ, ПАР И КОНДИЦИОНИРОВАНИЕ ВОЗДУХА', codePrefix: '35' },
-    { letter: 'E', name: 'ВОДОСНАБЖЕНИЕ; ВОДООТВЕДЕНИЕ, УСЛУГИ ПО УДАЛЕНИЮ И РЕКУЛЬТИВАЦИИ ОТХОДОВ', codePrefix: '36' },
-    { letter: 'F', name: 'СООРУЖЕНИЯ И СТРОИТЕЛЬНЫЕ РАБОТЫ', codePrefix: '41' },
-    { letter: 'G', name: 'УСЛУГИ ПО ОПТОВОЙ И РОЗНИЧНОЙ ТОРГОВЛЕ; УСЛУГИ ПО РЕМОНТУ АВТОТРАНСПОРТНЫХ СРЕДСТВ И МОТОЦИКЛОВ', codePrefix: '45' },
-    { letter: 'H', name: 'УСЛУГИ ТРАНСПОРТА И СКЛАДСКОГО ХОЗЯЙСТВА', codePrefix: '49' },
-    { letter: 'I', name: 'УСЛУГИ ГОСТИНИЧНОГО ХОЗЯЙСТВА И ОБЩЕСТВЕННОГО ПИТАНИЯ', codePrefix: '55' },
-    { letter: 'J', name: 'УСЛУГИ В ОБЛАСТИ ИНФОРМАЦИИ И СВЯЗИ', codePrefix: '58' },
-    { letter: 'K', name: 'УСЛУГИ ФИНАНСОВЫЕ И СТРАХОВЫЕ', codePrefix: '64' },
-    { letter: 'L', name: 'УСЛУГИ, СВЯЗАННЫЕ С НЕДВИЖИМЫМ ИМУЩЕСТВОМ', codePrefix: '68' },
-    { letter: 'M', name: 'УСЛУГИ, СВЯЗАННЫЕ С НАУЧНОЙ, ИНЖЕНЕРНО-ТЕХНИЧЕСКОЙ И ПРОФЕССИОНАЛЬНОЙ ДЕЯТЕЛЬНОСТЬЮ', codePrefix: '69' },
-    { letter: 'N', name: 'УСЛУГИ АДМИНИСТРАТИВНЫЕ И ВСПОМОГАТЕЛЬНЫЕ', codePrefix: '77' },
-    { letter: 'O', name: 'УСЛУГИ В СФЕРЕ ГОСУДАРСТВЕННОГО УПРАВЛЕНИЯ И ОБЕСПЕЧЕНИЯ ВОЕННОЙ БЕЗОПАСНОСТИ; УСЛУГИ ПО ОБЯЗАТЕЛЬНОМУ СОЦИАЛЬНОМУ ОБЕСПЕЧЕНИЮ', codePrefix: '84' },
-    { letter: 'P', name: 'УСЛУГИ В ОБЛАСТИ ОБРАЗОВАНИЯ', codePrefix: '85' },
-    { letter: 'Q', name: 'УСЛУГИ В ОБЛАСТИ ЗДРАВООХРАНЕНИЯ И СОЦИАЛЬНЫЕ УСЛУГИ', codePrefix: '86' },
-    { letter: 'R', name: 'УСЛУГИ В ОБЛАСТИ ИСКУССТВА, РАЗВЛЕЧЕНИЙ, ОТДЫХА И СПОРТА', codePrefix: '90' },
-    { letter: 'S', name: 'ПРОЧИЕ УСЛУГИ', codePrefix: '94' },
-    { letter: 'T', name: 'ТОВАРЫ И УСЛУГИ РАЗЛИЧНЫЕ, ПРОИЗВОДИМЫЕ ДОМАШНИМИ ХОЗЯЙСТВАМИ ДЛЯ СОБСТВЕННОГО ПОТРЕБЛЕНИЯ, ВКЛЮЧАЯ УСЛУГИ РАБОТОДАТЕЛЯ ДЛЯ ДОМАШНЕГО ПЕРСОНАЛА', codePrefix: '97' },
-    { letter: 'U', name: 'УСЛУГИ, ПРЕДОСТАВЛЯЕМЫЕ ЭКСТЕРРИТОРИАЛЬНЫМИ ОРГАНИЗАЦИЯМИ И ОРГАНАМИ', codePrefix: '99' },
-] as const;
+type OkpdSection = { letter: string; name: string; codePrefix: string };
 
 // функция для сравнения кодов
 function compareOkpdCodes(a: string, b: string) {
@@ -114,6 +92,11 @@ export default function OkpdHierarchy({
     isSectionLoaded?: (section: string) => boolean;
     isSectionLoading?: (section: string) => boolean;
 }) {
+    const { t } = useTranslation();
+    const OKPD_SECTIONS = React.useMemo(
+        () => (t('okpd.hierarchy.sections', { returnObjects: true }) as OkpdSection[]),
+        [t],
+    );
     const model = React.useMemo(() => {
         const filtered = (items || []).filter(Boolean);
 
@@ -314,12 +297,12 @@ export default function OkpdHierarchy({
             // Точное совпадение или код начинается с префикса раздела
             return codeStart === section.codePrefix || codeStart.startsWith(section.codePrefix);
         }) || null;
-    }, []);
+    }, [OKPD_SECTIONS]);
 
     if (!items?.length) {
         return (
             <div className={`${textSize.text2} font-light text-[#93969d]`}>
-                Нет данных ОКПД 2
+                {t('okpd.hierarchy.noData')}
             </div>
         );
     }
@@ -360,7 +343,7 @@ export default function OkpdHierarchy({
                     <React.Fragment key={root.code}>
                         {shouldShowSection && (
                             <p className={`${textSize.text2} font-normal text-[#93969D]`}>
-                                РАЗДЕЛ&nbsp;{section.letter}&nbsp;— {section.name}
+                                {t('okpd.hierarchy.sectionLabel', { letter: section.letter, name: section.name })}
                             </p>
                         )}
                         <div
@@ -374,7 +357,7 @@ export default function OkpdHierarchy({
                             >
                                 {!loaded && (
                                     <div className={`${textSize.text2} font-light text-[#93969d]`}>
-                                        {loading ? 'Загрузка…' : 'Нет данных (ожидаем подгрузку)'}
+                                        {loading ? t('common.loading') : t('common.noDataExpected')}
                                     </div>
                                 )}
 

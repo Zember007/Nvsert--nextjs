@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import React from 'react';
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/base/base.module.scss';
+import { useTranslation } from 'react-i18next';
 
 export type SidebarItem = {
     id: string;
@@ -14,6 +15,7 @@ export type SidebarItem = {
 };
 
 const SidebarNavButtons = () => {
+    const { t } = useTranslation();
     const pathname = usePathname();
     const isAbout = pathname.includes('/about');
     const isFeedback = pathname.includes('/feedback');
@@ -22,7 +24,7 @@ const SidebarNavButtons = () => {
     const items = [
         {
             id: 'about',
-            label: 'О компании',
+            label: t('navigation.about'),
             active: isAbout,
             href: '/about',
             icon: (
@@ -35,7 +37,7 @@ const SidebarNavButtons = () => {
         },
         {
             id: 'feedback',
-            label: 'Отзывы',
+            label: t('navigation.reviews'),
             href: '/feedback',
             active: isFeedback,
             icon: (
@@ -49,7 +51,7 @@ const SidebarNavButtons = () => {
         },
         {
             id: 'okpd',
-            label: 'ОКПД 2',
+            label: t('navigation.okp'),
             href: '/okpd',
             active: isOkpd,
             icon: (
@@ -62,7 +64,7 @@ const SidebarNavButtons = () => {
         },
         {
             id: 'tnved',
-            label: 'ТН ВЭД',
+            label: t('navigation.tnved'),
             href: '/tnved',
             active: isTnved,
             icon: <svg

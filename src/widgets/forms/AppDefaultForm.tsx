@@ -59,9 +59,9 @@ const AppDefaultForm = ({ btnText }:{ btnText:string }) => {
                         <label className={formStyles['field-check']}>
                             <input className={formStyles['field-check__input']} type="checkbox" required />
                             <span className={formStyles['field-check__name']}>
-                                Нажимая на кнопку «Связаться» вы соглашаетесь с
+                                {t('form.policy.prefix', { button: btnText })}
                                 <Link href="#" target="_blank">
-                                    политикой конфиденциальности
+                                    {t('form.policy.privacyPolicy')}
                                 </Link>
                             </span>
                         </label>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useButton } from 'shared/hooks';
 import stylesBtn from '@/assets/styles/base/base.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface ServicesToggleButtonProps {
     isExpanded: boolean;
@@ -20,6 +21,7 @@ const ServicesToggleButton: React.FC<ServicesToggleButtonProps> = ({
     setActive,
 }) => {
     const { setWrapperRef, setButtonRef } = useButton();
+    const { t } = useTranslation();
 
     return (
         <div ref={setWrapperRef} className={`${stylesBtn.tariffWrap} w-[250px]`}>
@@ -48,7 +50,7 @@ const ServicesToggleButton: React.FC<ServicesToggleButtonProps> = ({
                 className={`${stylesBtn.btnIconAn} ${stylesBtn.width_23} ${stylesBtn.tariff} bg-[#F5F5F2]   h-[50px] rounded-[4px] ${stylesBtn.btnText} border border-[#93969d] flex items-center justify-center`}
             >
                 <span className={`${stylesBtn.sendText}`}>
-                    {isExpanded ? 'Свернуть услуги' : 'Показать услуги'}
+                    {isExpanded ? t('services.toggle.collapse') : t('services.toggle.expand')}
                 </span>
 
                 <span className={`${stylesBtn.sendIconLeft}`}>

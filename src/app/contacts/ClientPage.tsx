@@ -1,18 +1,19 @@
 'use client';
 
 import { AppBreadcrumbs } from 'widgets/layout';
-import { Button } from '@/shared/ui';
-import { useHeaderContext } from '@/shared/contexts';
+import { Button } from 'shared/ui';
+import { useHeaderContext } from 'shared/contexts';
 import textSize from '@/assets/styles/base/base.module.scss';
 import Image from 'next/image';
 import Moscow from '@/assets/images/contacts/towns/moscow.jpg';
 import SaintPetersburg from '@/assets/images/contacts/towns/spb.jpg';
 import Pskov from '@/assets/images/contacts/towns/pskov.jpg';
-import ContactSpoiler from '@/widgets/contacts/ContactSpoiler';
+import ContactSpoiler from 'widgets/contacts/ContactSpoiler';
 import { useMemo, useState } from 'react';
 import ConsultationFallback from '@/assets/images/contacts/docs_icon.png';
 import FinanceIconFallback from '@/assets/images/contacts/finance_icon.png';
 import { useRichTextRenderer } from 'shared/lib';
+import { useTranslation } from 'react-i18next';
 
 export type StrapiMedia = {
   url?: string;
@@ -102,6 +103,7 @@ function encodeDownloadHref(url: string): string {
 const ClientPage = ({ data }: { data: ContactsPageData }) => {
   const { openDefaultModal } = useHeaderContext();
   const { processContent } = useRichTextRenderer();
+  const { t } = useTranslation();
 
   const [isExpandeds, setIsExpandeds] = useState([true, true]);
 
@@ -129,21 +131,21 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
     <div className={`main text-[#000] mb-[100px] flex flex-col gap-[150px]`}>
       <AppBreadcrumbs
         root={'/'}
-        breadcrumbs={[{ id: 1, title: data.title || 'Контакты', full_slug: '/contacts' }]}
+        breadcrumbs={[{ id: 1, title: data.title || t('navigation.contacts'), full_slug: '/contacts' }]}
       />
 
       <div className="wrapper pt-[50px] ">
         <div className="flex gap-[40px] max-w-full">
           <div className="flex flex-col gap-[50px] flex-1 max-w-full">
             <div className="flex items-center justify-between gap-[20px] m:flex-row flex-col">
-              <h1 className="m:text-left text-center m:!m-0">{data.title || 'Контакты'}</h1>
+              <h1 className="m:text-left text-center m:!m-0">{data.title || t('navigation.contacts')}</h1>
 
               <div className="xl:hidden">
                 <Button
                   onClick={() => {
                     openDefaultModal('orderForm');
                   }}
-                  label="Оформить заявку"
+                  label={t('form.buttons.submitApplication')}
                 />
               </div>
             </div>
@@ -238,7 +240,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
                 onClick={() => {
                   openDefaultModal('orderForm');
                 }}
-                label="Оформить заявку"
+                label={t('form.buttons.submitApplication')}
               />
             </div>
           </div>
@@ -321,36 +323,48 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
           <div className="p-[40px] bg-[#f1f1ed] rounded-[8px] border border-[#93969d] flex justify-between m:flex-row flex-col-reverse gap-[30px] items-center">
             <div className="flex flex-col gap-[16px]">
               <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
-                <span className={textSize.text1 + ' font-normal text-[#000]'}>Полное наименование:</span>
+                <span className={textSize.text1 + ' font-normal text-[#000]'}>
+                  {t('contacts.requisites.labels.fullName')}:
+                </span>
                 <span className={textSize.text3}>{data.requisitesSection.legal.fullName}</span>
               </div>
               {data.requisitesSection.legal.legalAddress && (
                 <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
-                  <span className={textSize.text1 + ' font-normal text-[#000]'}>Юридический адрес:</span>
+                  <span className={textSize.text1 + ' font-normal text-[#000]'}>
+                    {t('contacts.requisites.labels.legalAddress')}:
+                  </span>
                   <span className={textSize.text3}>{data.requisitesSection.legal.legalAddress}</span>
                 </div>
               )}
               {data.requisitesSection.legal.inn && (
                 <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
-                  <span className={textSize.text1 + ' font-normal text-[#000]'}>ИНН:</span>
+                  <span className={textSize.text1 + ' font-normal text-[#000]'}>
+                    {t('contacts.requisites.labels.inn')}:
+                  </span>
                   <span className={textSize.text3}>{data.requisitesSection.legal.inn}</span>
                 </div>
               )}
               {data.requisitesSection.legal.ogrn && (
                 <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
-                  <span className={textSize.text1 + ' font-normal text-[#000]'}>ОГРН:</span>
+                  <span className={textSize.text1 + ' font-normal text-[#000]'}>
+                    {t('contacts.requisites.labels.ogrn')}:
+                  </span>
                   <span className={textSize.text3}>{data.requisitesSection.legal.ogrn}</span>
                 </div>
               )}
               {data.requisitesSection.legal.director && (
                 <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
-                  <span className={textSize.text1 + ' font-normal text-[#000]'}>Генеральный директор:</span>
+                  <span className={textSize.text1 + ' font-normal text-[#000]'}>
+                    {t('contacts.requisites.labels.director')}:
+                  </span>
                   <span className={textSize.text3}>{data.requisitesSection.legal.director}</span>
                 </div>
               )}
               {data.requisitesSection.legal.email && (
                 <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
-                  <span className={textSize.text1 + ' font-normal text-[#000]'}>Почта:</span>
+                  <span className={textSize.text1 + ' font-normal text-[#000]'}>
+                    {t('contacts.requisites.labels.email')}:
+                  </span>
                   <span className={textSize.text3}>{data.requisitesSection.legal.email}</span>
                 </div>
               )}

@@ -1,8 +1,9 @@
 'use client';
 
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import textSize from '@/assets/styles/base/base.module.scss';
-import TnvedHierarchy, { TnvedItem } from '@/widgets/tnved/TnvedHierarchy';
+import TnvedHierarchy, { TnvedItem } from 'widgets/tnved/TnvedHierarchy';
 
 const TnvedHierarchyMemo = React.memo(TnvedHierarchy);
 
@@ -17,10 +18,11 @@ export function TnvedClassifierSection({
   isSectionLoaded?: (chapter: string) => boolean;
   isSectionLoading?: (chapter: string) => boolean;
 }) {
+  const { t } = useTranslation();
   return (
     <>
       <h2 id="block-2" className={`${textSize.headerH3}`}>
-        Классификатор ТН ВЭД
+        {t('tnved.classifier.title')}
       </h2>
 
       <TnvedHierarchyMemo

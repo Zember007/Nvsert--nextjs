@@ -1,19 +1,20 @@
 import { AppCollapsibleList } from '../layout';
 import WordImg from '@/assets/images/svg/Word.svg';
-import PdfImg from '@/assets/images/svg/PDF.svg';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 import textSize from '@/assets/styles/base/base.module.scss';
-import { filterPrepositions } from '@/shared/lib/text/textFormat';
+import { filterPrepositions } from 'shared/lib/text/textFormat';
 
 const FilesList = () => {
+  const { t } = useTranslation();
   return (
     <AppCollapsibleList
-      title={'Документация'}
+      title={t('tnved.files.title')}
       items={[
         {
           id: 2,
-          title: 'ТН ВЭД',
+          title: t('tnved.files.itemTitle'),
           icon: WordImg,
           link: '#',
         },

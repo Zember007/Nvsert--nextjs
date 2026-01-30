@@ -5,6 +5,7 @@ import AppIntroForm from 'widgets/forms/AppIntroForm'
 import Draggable from 'react-draggable';
 import AppMainForm from '../forms/AppMainForm';
 import { useAnimation, motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import formStyles from '@/assets/styles/base/base.module.scss';
 import '@/assets/styles/blocks/close-btn.scss'
 
@@ -27,6 +28,7 @@ interface AppModalWrapperProps {
 const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ reset, countTrigger, setDefaultModalActive, defaultModalActive, defaultModalName }) => {
     const nodeRef = useRef<HTMLDivElement>(null);
     const controls = useAnimation();
+    const { t } = useTranslation();
     const defaultSettings = {
         duration: 0.3,
         ease: [0.34, 1.56, 0.64, 1],
@@ -112,7 +114,7 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ reset, countTrigger, 
 
                                             <AppMainForm
                                                 active={defaultModalActive}
-                                                bg={false} btnText='Оформить заявку' />
+                                                bg={false} btnText={t('form.buttons.submitApplication')} />
 
                                         </>
                                     }

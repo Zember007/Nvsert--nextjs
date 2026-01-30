@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import SafeguardBlock from './AppSafeguardBlock';
 import stylesSafeguards from '@/assets/styles/main.module.scss';
@@ -12,88 +13,21 @@ import { useWindowSize } from 'shared/hooks';
 import stylesSlider from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/main.module.scss';
 
-const guarantees = [
-  {
-    img: Img1,
-    title: 'Гарантии и честность',
-    items: [
-      {
-        subtitle: 'Фиксированная стоимость',
-        text: 'После заключения договора цена не изменится.',
-      },
-      {
-        subtitle: 'Бесплатные корректировки',
-        text: 'До полного утверждения документов, мы вносим все необходимые изменения без дополнительной платы.',
-      },
-      {
-        subtitle: 'Возврат денежных средств',
-        text: 'Если сертификация невозможна или есть ошибка, устраним её или вернём средства.',
-      },
-    ],
-  },
-  {
-    img: Img2,
-    title: 'Надёжность и защита',
-    items: [
-      {
-        subtitle: 'Соответствие всем стандартам',
-        text: 'Сертификация проводится в полном соответствии с российскими государственными стандартами.',
-      },
-      {
-        subtitle: 'Официальность документов',
-        text: 'Все сертификаты оформляются легитимно, регистрируются в государственных реестрах Российской Федерации.',
-      },
-      {
-        subtitle: 'Защита персональных данных',
-        text: 'Мы гарантируем конфиденциальность и надёжную защиту ваших данных.',
-      },
-    ],
-  },
-  {
-    img: Img3,
-    title: 'Оперативность и удобство',
-    items: [
-      {
-        subtitle: 'Строгое соблюдение сроков',
-        text: 'Мы гарантируем выполнение всех работ в срок.',
-      },
-      {
-        subtitle: 'Экспресс-сертификация документов ',
-        text: 'Срочная обработка документов, чтобы выйти на рынок как можно быстрее.',
-      },
-      {
-        subtitle: 'Персональный менеджер',
-        text: 'Специалист, который будет сопровождать вас на всех этапах.',
-      },
-    ],
-  },
-  {
-    img: Img4,
-    title: 'Поддержка после сертификации',
-    items: [
-      {
-        subtitle: 'Переоформление документов',
-        text: 'Продлеваем документы, оформленные другими компаниями. Без рисков и несоответствий.',
-      },
-      {
-        subtitle: 'Подготовка к повторной сертификации',
-        text: 'Заранее напомним о сроках, проверим документы по наличию, разработаем недостающие.',
-      },
-      {
-        subtitle: 'Бесплатные консультации',
-        text: 'Подробно расскажем о всех этапах оформления разрешительного документа.',
-      },
-    ],
-  },
-];
+type SafeguardItem = { subtitle: string; text: string };
+type SafeguardGroup = { title: string; items: SafeguardItem[] };
 
 const AppMainSafeguards = () => {
+  const { t } = useTranslation();
   const { width: widthWindow } = useWindowSize();
   const [isVisible, setIsVisible] = useState(false);
   const divRef = useRef<HTMLDivElement | null>(null);
 
   const timeLine = useRef<any>(null);
   const [activeIndex, setActive] = useState<number>(0);
+
+  const images = [Img1, Img2, Img3, Img4] as const;
+  const groups = t('safeguards.items', { returnObjects: true }) as SafeguardGroup[];
+  const guarantees = groups.map((g, i) => ({ ...g, img: images[i] }));
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -150,7 +84,7 @@ const AppMainSafeguards = () => {
     <section ref={divRef} className="section ">
       <div id="safeguards" className="absolute top-[-50px] pointer-events-none" />
 
-      <h2 className={`${textSize.headerH2} section__title`}>Гарантии и безупречный сервис</h2>
+      <h2 className={`${textSize.headerH2} section__title`}>{t('safeguards.title')}</h2>
 
       <div className={stylesSafeguards['safeguards-container']}>
         <div

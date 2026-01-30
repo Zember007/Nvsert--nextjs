@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { Okpd2Item } from '@/widgets/okpd/OkpdHierarchy';
+import type { Okpd2Item } from 'widgets/okpd/OkpdHierarchy';
 
 type OkpdIndexEntry = {
   item: Okpd2Item;

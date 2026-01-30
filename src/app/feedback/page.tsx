@@ -1,6 +1,7 @@
 import ClientPage from './ClientPage';
 import { SITE_URL } from 'shared/config/env';
 import { getRequestLocale } from 'shared/i18n/server-locale';
+import { tStatic } from 'shared/i18n/static';
 
 // Оптимизация: кеширование данных на более длительный срок для ускорения навигации
 
@@ -48,7 +49,7 @@ async function getFeedbacks(): Promise<FeedbackItem[]> {
     return Array.isArray(json?.data) ? json.data : [];
 }
 
-function groupByCategory(items: FeedbackItem[]): FeedbackCategoryGroup[] {
+function groupByCategory(items: FeedbackItem[], uncategorizedTitle: string): FeedbackCategoryGroup[] {
     const map = new Map<number, FeedbackCategoryGroup>();
     for (const item of items) {
         const catId = item.category?.id ?? -1;
@@ -56,7 +57,7 @@ function groupByCategory(items: FeedbackItem[]): FeedbackCategoryGroup[] {
         if (!current) {
             map.set(catId, {
                 id: catId,
-                title: item.category?.title || 'Без категории',
+                title: item.category?.title || uncategorizedTitle,
                 slug: item.category?.slug || 'uncategorized',
                 order: item.category?.order ?? 0,
                 items: [item]
@@ -75,7 +76,8 @@ function groupByCategory(items: FeedbackItem[]): FeedbackCategoryGroup[] {
 
 const Page = async () => {
     const items = await getFeedbacks();
-    const categories = groupByCategory(items);
+    const locale = await getRequestLocale();
+    const categories = groupByCategory(items, tStatic(locale, 'feedback.uncategorized'));
     return <ClientPage initialCategories={categories} />;
 };
 

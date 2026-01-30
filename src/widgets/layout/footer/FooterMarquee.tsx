@@ -5,14 +5,11 @@ import footerStyles from "@/assets/styles/base/base.module.scss";
 import stylesSlider from "@/assets/styles/base/base.module.scss";
 import textSize from "@/assets/styles/base/base.module.scss";
 import Image from "next/image";
-
-const slides = [
-  "Помогаем сотрудникам не терять информацию",
-  "Оцифровываем бизнесу переговоры в текст",
-  "Конспектируем переговоры и встречи с помощью ИИ",
-];
+import { useTranslation } from "react-i18next";
 
 const FooterMarquee: React.FC = () => {
+  const { t } = useTranslation();
+  const slides = React.useMemo(() => t("footer.marquee.slides", { returnObjects: true }) as string[], [t]);
   const { ref, isVisible } = useIntersectionObserver();
   const stepsRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);

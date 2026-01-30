@@ -1,10 +1,11 @@
 'use client';
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { CollapseSection } from 'widgets/layout';
 import textSize from '@/assets/styles/base/base.module.scss';
-import OkpdPrefix from '@/widgets/okpd/OkpdPrefix';
-import { VirtualizedList } from '@/widgets/home/utils/VirtualizedList';
+import OkpdPrefix from 'widgets/okpd/OkpdPrefix';
+import { VirtualizedList } from 'widgets/home/utils/VirtualizedList';
 
 export type TnvedItem = {
   id: number;
@@ -41,6 +42,7 @@ export default function TnvedHierarchy({
   isSectionLoaded?: (chapter: string) => boolean;
   isSectionLoading?: (chapter: string) => boolean;
 }) {
+  const { t } = useTranslation();
   const model = React.useMemo(() => {
     const filtered = (items || []).filter(Boolean);
 
@@ -108,6 +110,13 @@ export default function TnvedHierarchy({
 
     return { byNodeId, childrenByParent, chapters, sections, chaptersBySection, getSectionForChapter };
   }, [items]);
+
+  const sectionsWithChapters = React.useMemo(() => {
+    return model.sections.map((sectionNode) => {
+      const chapters = model.chaptersBySection.get(sectionNode.nodeId) ?? [];
+      return { section: sectionNode, chapters };
+    });
+  }, [model.sections, model.chaptersBySection]);
 
   const chapterElsRef = React.useRef<Map<string, HTMLDivElement | null>>(new Map());
 
@@ -230,15 +239,8 @@ export default function TnvedHierarchy({
   }, []);
 
   if (!items?.length) {
-    return <div className={`${textSize.text2} font-light text-[#93969d]`}>Нет данных ТН ВЭД</div>;
+    return <div className={`${textSize.text2} font-light text-[#93969d]`}>{t('tnved.hierarchy.noData')}</div>;
   }
-
-  const sectionsWithChapters = React.useMemo(() => {
-    return model.sections.map((sectionNode) => {
-      const chapters = model.chaptersBySection.get(sectionNode.nodeId) ?? [];
-      return { section: sectionNode, chapters };
-    });
-  }, [model.sections, model.chaptersBySection]);
 
   return (
     <div className="flex flex-col gap-[50px]">
@@ -298,7 +300,7 @@ export default function TnvedHierarchy({
                       <>
                         {!loaded && (
                           <div className={`${textSize.text2} font-light text-[#93969d]`}>
-                            {loading ? 'Загрузка…' : 'Нет данных (ожидаем подгрузку)'}
+                            {loading ? t('common.loading') : t('common.noDataExpected')}
                           </div>
                         )}
 

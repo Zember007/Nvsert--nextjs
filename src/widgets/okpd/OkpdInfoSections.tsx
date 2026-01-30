@@ -4,41 +4,14 @@ import * as React from 'react';
 import { CollapseSection, AppCtaBanner, StrapiResponsiveImage } from 'widgets/layout';
 import { SliderPost } from 'shared/ui';
 import { useRichTextRenderer } from 'shared/lib';
+import { useTranslation } from 'react-i18next';
 import textSize from '@/assets/styles/base/base.module.scss';
-import type { OkpdPageData } from '@/widgets/okpd/types';
+import type { OkpdPageData } from 'widgets/okpd/types';
 
 type SliderBlock = {
   title: string;
   description: string;
 };
-
-const defaultSliderBlocks: SliderBlock[] = [
-  {
-    title: 'Сертификация и стандартизация',
-    description: 'Код ОКПД 2 является основным идентификатором для определения того, какой именно документ требуется для подтверждения соответствия товара.',
-  },
-  {
-    title: 'Государственная статистика',
-    description: 'Используется для сбора, обработки и анализа данных об объёме и структуре производства, продаж и потребления в стране.',
-  },
-  {
-    title: 'Госзакупки (44-ФЗ и 223-ФЗ)',
-    description: 'Применяется для идентификации объекта закупки, составления документации и формирования идентификационного кода закупки.',
-  },
-  {
-    title: 'Сертификация и стандартизация',
-    description: 'Код ОКПД 2 является основным идентификатором для определения того, какой именно документ требуется для подтверждения соответствия товара.',
-  },
-  {
-    title: 'Государственная статистика',
-    description: 'Используется для сбора, обработки и анализа данных об объёме и структуре производства, продаж и потребления в стране.',
-  },
-  {
-    title: 'Госзакупки (44-ФЗ и 223-ФЗ)',
-    description: 'Применяется для идентификации объекта закупки, составления документации и формирования идентификационного кода закупки.',
-  }
-];
-
 
 export function OkpdInfoSections({
   pageData,
@@ -51,7 +24,9 @@ export function OkpdInfoSections({
   onToggleSection: (id: number) => void;
   onCtaClick: () => void;
 }) {
+  const { t } = useTranslation();
   const { processContent } = useRichTextRenderer();
+  const defaultSliderBlocks = t('okpd.info.sliderBlocks', { returnObjects: true }) as SliderBlock[];
 
   const renderSliderItem = React.useCallback(
     (block: SliderBlock, index: number) => {

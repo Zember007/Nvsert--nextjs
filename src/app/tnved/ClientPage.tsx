@@ -1,17 +1,19 @@
 'use client';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { StandardPageLayout } from 'widgets/layout';
 import { useHeaderContext } from 'shared/contexts';
-import FilesList from '@/widgets/tnved/FilesList';
-import { TnvedQuickSearchSection } from '@/widgets/tnved/TnvedQuickSearchSection';
-import { TnvedClassifierSection } from '@/widgets/tnved/TnvedClassifierSection';
-import type { TnvedItem } from '@/widgets/tnved/TnvedHierarchy';
-import type { TnvedPageData } from '@/widgets/tnved/types';
-import { useTnvedSections } from '@/widgets/tnved/useTnvedSections';
-import { TnvedInfoSections } from '@/widgets/tnved/TnvedInfoSections';
+import FilesList from 'widgets/tnved/FilesList';
+import { TnvedQuickSearchSection } from 'widgets/tnved/TnvedQuickSearchSection';
+import { TnvedClassifierSection } from 'widgets/tnved/TnvedClassifierSection';
+import type { TnvedItem } from 'widgets/tnved/TnvedHierarchy';
+import type { TnvedPageData } from 'widgets/tnved/types';
+import { useTnvedSections } from 'widgets/tnved/useTnvedSections';
+import { TnvedInfoSections } from 'widgets/tnved/TnvedInfoSections';
 
 const ClientPage = ({ initialItems, pageData }: { initialItems: TnvedItem[]; pageData: TnvedPageData | null }) => {
     const { openDefaultModal } = useHeaderContext();
+    const { t } = useTranslation();
     const { sectionsOpen, toggleSection, dotNavItems } = useTnvedSections(pageData);
 
     const [hierarchyItems, setHierarchyItems] = React.useState<TnvedItem[]>(() => initialItems || []);
@@ -90,8 +92,8 @@ const ClientPage = ({ initialItems, pageData }: { initialItems: TnvedItem[]; pag
     return (
 
         <StandardPageLayout
-            title={pageData?.title || "ТН ВЭД"}
-            breadcrumbs={[{ id: 2, title: 'ТН ВЭД', full_slug: '/tnved' }]}
+            title={pageData?.title || t('tnved.page.title')}
+            breadcrumbs={[{ id: 2, title: t('tnved.page.title'), full_slug: '/tnved' }]}
             dotNavItems={dotNavItems}
             contentColumn={<FilesList />}
             showButton={true}

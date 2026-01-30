@@ -718,13 +718,444 @@
       "tekhDokumentatsiya2": "Technical Specifications (TU)",
       "tekhDokumentatsiya3": "Product passport",
       "tekhDokumentatsiya4": "Safety justification"
+    },
+    "fullServicesList": "Full list of services"
+  },
+  "form": {
+    "input": {
+      "titles": {
+        "name": "Name",
+        "fullName": "Full name",
+        "phone": "Phone",
+        "email": "Email",
+        "question": "Your question",
+        "comment": "Comment"
+      },
+      "placeholders": {
+        "phone": "Enter your phone number",
+        "email": "Enter your email"
+      }
+    },
+    "buttons": {
+      "submitApplication": "Submit an application",
+      "contact": "Contact us"
+    },
+    "policy": {
+      "prefix": "By clicking the “{{button}}” button you agree to the",
+      "privacyPolicy": "privacy policy"
+    },
+    "knowCost": {
+      "title": "Find out the cost",
+      "text": "Leave your phone number — we will call you back and clarify the details.",
+      "btn": "Contact us"
     }
   },
   "copied": "Copied",
   "footer": {
     "inn": "TIN 6027189146",
     "company": "CERTIFICATION CENTER",
-    "policy": "Privacy policy"
+    "policy": "Privacy policy",
+    "personalDataProcessing": "Personal data processing",
+    "copyright": "© {{year}} NVSERT",
+    "marquee": {
+      "slides": [
+        "Helping employees not to lose information",
+        "Turning business negotiations into text",
+        "Summarizing meetings and negotiations with AI"
+      ]
+    }
+  },
+  "modals": {
+    "flightSuccess": {
+      "followUp": "We will contact you <br/> within {{minutes}} minutes!",
+      "thankYou": "Thank you",
+      "thankYouForApplication": "Thank you for your request"
+    }
+  },
+  "about": {
+    "sliderBlocks": [
+      {
+        "procent": "15+",
+        "title": "Years in the certification market",
+        "description": "A reliable partner with deep understanding of requirements and procedures across industries"
+      },
+      {
+        "procent": "7",
+        "title": "Stages of end-to-end support",
+        "description": "We guide the client from the first consultation to registration in the registry and delivery of originals on time."
+      },
+      {
+        "procent": "75+",
+        "title": "Qualified experts on the team",
+        "description": "Each project is handled by specialists with 5+ years of experience, ensuring accuracy and reliability."
+      },
+      {
+        "procent": "10000+",
+        "title": "Companies trust us with their work",
+        "description": "NVSERT is chosen by companies across Russia, the EAEU and international partners. Our clients include large holdings and corporations."
+      },
+      {
+        "procent": "25+",
+        "title": "Industries in our practice",
+        "description": "We work with industry, food products, construction materials and other market segments."
+      },
+      {
+        "procent": "99%",
+        "title": "Orders delivered ahead of schedule",
+        "description": "Documents are prepared faster than stated in the contract, while quality and legal validity remain impeccable."
+      }
+    ],
+    "map": {
+      "coatOfArmsAlt": "Coat of arms of {{region}}"
+    }
+  },
+  "documents": {
+    "goToService": "Go to the service",
+    "requiredDocuments": "Required documents",
+    "showFullList": "Show full document list",
+    "hide": "Hide"
+  },
+  "services": {
+    "labels": {
+      "duration": "Turnaround time",
+      "price": "Price"
+    },
+    "article": {
+      "written": "Article written {{date}}"
+    },
+    "page": {
+      "title": "Full list of services"
+    },
+    "toggle": {
+      "expand": "Show services",
+      "collapse": "Hide services"
+    },
+    "recommended": {
+      "title": "Recommended to proceed with"
+    },
+    "breadcrumbs": {
+      "allServices": "All services"
+    },
+    "notFound": "Service not found"
+  },
+  "common": {
+    "moreDetails": "Learn more",
+    "showReview": "Show review",
+    "hideReview": "Hide review",
+    "searching": "Searching…",
+    "loading": "Loading…",
+    "noDataExpected": "No data (waiting for load)",
+    "serviceNavigation": "Service navigation",
+    "dataNotFound": "No data found",
+    "nothingFound": "Nothing found",
+    "copy": "Copy",
+    "copyTitle": "Copy: {{text}}",
+    "copyCodeAria": "Copy code {{code}}",
+    "copyTextAria": "Copy: {{text}}"
+  },
+  "tnved": {
+    "files": {
+      "title": "Documentation",
+      "itemTitle": "TN VED"
+    },
+    "search": {
+      "placeholder": "Search by name or code",
+      "submit": "Search"
+    },
+    "quickSearch": {
+      "title": "Quick TN VED code search",
+      "example": "e.g.: “horses”, “furniture”, 0101210000"
+    },
+    "searchResults": {
+      "found": "Found: {{count}}",
+      "firstN": "Showing first {{count}}"
+    },
+    "info": {
+      "sliderBlocks": [
+        {
+          "title": "Customs clearance",
+          "description": "The TN VED code is used to classify goods and calculate customs duties."
+        },
+        {
+          "title": "Certification and permits",
+          "description": "The TN VED code is often used to determine whether declarations, certificates or other documents are required."
+        },
+        {
+          "title": "Foreign trade statistics",
+          "description": "Used to collect and analyze import/export data."
+        }
+      ]
+    },
+    "classifier": {
+      "title": "TN VED classifier"
+    },
+    "sections": {
+      "search": "Quick TN VED code search",
+      "classifier": "TN VED classifier"
+    },
+    "hierarchy": {
+      "noData": "No TN VED data"
+    },
+    "page": {
+      "title": "TN VED"
+    }
+  },
+  "okpd": {
+    "search": {
+      "placeholder": "Search by product or code",
+      "submit": "Search"
+    },
+    "quickSearch": {
+      "title": "Quick OKPD 2 code search",
+      "example": "e.g.: “children’s furniture”, “medical devices”, 25.11.23"
+    },
+    "searchResults": {
+      "found": "Found: {{count}}",
+      "firstN": "Showing first {{count}}"
+    },
+    "classifier": {
+      "title": "OKPD 2 classifier"
+    },
+    "sections": {
+      "search": "Quick OKPD 2 code search",
+      "classifier": "OKPD 2 classifier"
+    },
+    "info": {
+      "sliderBlocks": [
+        {
+          "title": "Certification and standardization",
+          "description": "The OKPD 2 code is the primary identifier used to determine which document is required to confirm product conformity."
+        },
+        {
+          "title": "Government statistics",
+          "description": "Used to collect, process and analyze data on the volume and structure of production, sales and consumption in the country."
+        },
+        {
+          "title": "Public procurement (44-FZ and 223-FZ)",
+          "description": "Used to identify the procurement item, prepare documentation and form the procurement identification code."
+        }
+      ]
+    },
+    "files": {
+      "title": "Documentation",
+      "item1": "OKPD 2 01-99",
+      "item2": "Structure and usage of OKVED 2 and OKPD 2",
+      "item3": "Rosstandart Order of January 31, 2014 No. 14-st"
+    },
+    "hierarchy": {
+      "noData": "No OKPD 2 data",
+      "sectionLabel": "SECTION {{letter}} — {{name}}",
+      "sections": [
+        { "letter": "A", "name": "AGRICULTURE, FORESTRY AND FISHING PRODUCTS", "codePrefix": "01" },
+        { "letter": "B", "name": "MINING PRODUCTS", "codePrefix": "05" },
+        { "letter": "C", "name": "MANUFACTURED PRODUCTS", "codePrefix": "10" },
+        { "letter": "D", "name": "ELECTRICITY, GAS, STEAM AND AIR CONDITIONING", "codePrefix": "35" },
+        { "letter": "E", "name": "WATER SUPPLY; SEWERAGE, WASTE MANAGEMENT AND REMEDIATION SERVICES", "codePrefix": "36" },
+        { "letter": "F", "name": "CONSTRUCTIONS AND CONSTRUCTION WORKS", "codePrefix": "41" },
+        { "letter": "G", "name": "WHOLESALE AND RETAIL TRADE; REPAIR OF MOTOR VEHICLES AND MOTORCYCLES", "codePrefix": "45" },
+        { "letter": "H", "name": "TRANSPORTATION AND STORAGE SERVICES", "codePrefix": "49" },
+        { "letter": "I", "name": "ACCOMMODATION AND FOOD SERVICE ACTIVITIES", "codePrefix": "55" },
+        { "letter": "J", "name": "INFORMATION AND COMMUNICATION SERVICES", "codePrefix": "58" },
+        { "letter": "K", "name": "FINANCIAL AND INSURANCE SERVICES", "codePrefix": "64" },
+        { "letter": "L", "name": "REAL ESTATE SERVICES", "codePrefix": "68" },
+        { "letter": "M", "name": "PROFESSIONAL, SCIENTIFIC AND TECHNICAL SERVICES", "codePrefix": "69" },
+        { "letter": "N", "name": "ADMINISTRATIVE AND SUPPORT SERVICES", "codePrefix": "77" },
+        { "letter": "O", "name": "PUBLIC ADMINISTRATION AND DEFENCE; COMPULSORY SOCIAL SECURITY", "codePrefix": "84" },
+        { "letter": "P", "name": "EDUCATION SERVICES", "codePrefix": "85" },
+        { "letter": "Q", "name": "HUMAN HEALTH AND SOCIAL WORK ACTIVITIES", "codePrefix": "86" },
+        { "letter": "R", "name": "ARTS, ENTERTAINMENT AND RECREATION SERVICES", "codePrefix": "90" },
+        { "letter": "S", "name": "OTHER SERVICES", "codePrefix": "94" },
+        { "letter": "T", "name": "HOUSEHOLD GOODS AND SERVICES FOR OWN USE, INCLUDING EMPLOYER SERVICES FOR DOMESTIC STAFF", "codePrefix": "97" },
+        { "letter": "U", "name": "SERVICES PROVIDED BY EXTRATERRITORIAL ORGANIZATIONS AND BODIES", "codePrefix": "99" }
+      ]
+    },
+    "page": {
+      "title": "OKPD 2"
+    }
+  },
+  "safeguards": {
+    "title": "Guarantees and impeccable service",
+    "items": [
+      {
+        "title": "Guarantees and integrity",
+        "items": [
+          {
+            "subtitle": "Fixed price",
+            "text": "After signing the contract, the price will not change."
+          },
+          {
+            "subtitle": "Free adjustments",
+            "text": "Until the documents are fully approved, we make all necessary changes at no additional cost."
+          },
+          {
+            "subtitle": "Money-back",
+            "text": "If certification is impossible or there is an issue, we will resolve it or refund your payment."
+          }
+        ]
+      },
+      {
+        "title": "Reliability and protection",
+        "items": [
+          {
+            "subtitle": "Compliance with all standards",
+            "text": "Certification is carried out in full compliance with Russian state standards."
+          },
+          {
+            "subtitle": "Official documentation",
+            "text": "All certificates are issued legitimately and registered in official state registries."
+          },
+          {
+            "subtitle": "Personal data protection",
+            "text": "We guarantee confidentiality and reliable protection of your data."
+          }
+        ]
+      },
+      {
+        "title": "Speed and convenience",
+        "items": [
+          {
+            "subtitle": "Strict deadlines",
+            "text": "We guarantee completion of all work on time."
+          },
+          {
+            "subtitle": "Express document certification",
+            "text": "Urgent processing so you can enter the market as quickly as possible."
+          },
+          {
+            "subtitle": "Personal manager",
+            "text": "A specialist who will support you at every stage."
+          }
+        ]
+      },
+      {
+        "title": "Post-certification support",
+        "items": [
+          {
+            "subtitle": "Re-issuing documents",
+            "text": "We extend documents issued by other companies — without risks or non-compliance."
+          },
+          {
+            "subtitle": "Preparation for re-certification",
+            "text": "We will remind you about deadlines in advance, check your documents, and prepare missing ones."
+          },
+          {
+            "subtitle": "Free consultations",
+            "text": "We will explain all stages of obtaining permit documentation in detail."
+          }
+        ]
+      }
+    ]
+  },
+  "pages": {
+    "contacts": {
+      "fallback": {
+        "title": "Contacts",
+        "intro": "<p>The contacts page content has not been filled in the CMS yet. Please try again later.</p>",
+        "connect": {
+          "spoilerTitle": "Contact us",
+          "heading": "Not sure which document you need?",
+          "description": "<p>Leave a request — we will advise which document is required for your case.</p>",
+          "consultationTitle": "Start with a free consultation",
+          "consultationText": "<p>Submit a request — and our specialist will contact you to clarify the details.</p>"
+        },
+        "requisites": {
+          "spoilerTitle": "Requisites",
+          "heading": "Legal details",
+          "description": "<p>This section will be available after it is filled in the CMS.</p>",
+          "downloadButtonLabel": "Download requisites"
+        },
+        "seo": {
+          "metaTitle": "Contacts - NVSERT",
+          "metaDescription": "NVSERT company contacts."
+        }
+      }
+    }
+  },
+  "meta": {
+    "site": {
+      "title": "NVSERT — declarations, certification, licensing",
+      "description": "Professional services for declarations, certification and licensing of products",
+      "keywords": "declarations, certification, licensing, NVSERT"
+    },
+    "pages": {
+      "contacts": {
+        "title": "Contacts",
+        "description": "Company contacts"
+      },
+      "serviceDetail": {
+        "fallbackTitle": "Service — NVSERT",
+        "fallbackDescription": "Detailed information about a service for declarations, certification and licensing of products.",
+        "fallbackKeywords": "certification services, declarations, licensing, NVSERT"
+      },
+      "services": {
+        "title": "All services — NVSERT",
+        "description": "Full list of services for declarations, certification and licensing of products. Professional certification services in Russia.",
+        "keywords": "certification services, declarations, product certification, licensing, all services NVSERT",
+        "ogTitle": "All services — NVSERT",
+        "ogDescription": "Full list of services for declarations, certification and licensing of products"
+      },
+      "about": {
+        "title": "About",
+        "description": "Information about our company, principles of work and a team of professionals",
+        "descriptionShort": "Information about our company",
+        "keywords": "about, team, principles",
+        "ogTitle": "About — NVSERT",
+        "ogDescription": "Information about our company, principles of work and a team of professionals"
+      },
+      "okpd": {
+        "title": "OKPD 2",
+        "description": "OKPD 2 classifier"
+      },
+      "tnved": {
+        "title": "TN VED",
+        "description": "TN VED classifier"
+      }
+    }
+  },
+  "feedback": {
+    "uncategorized": "Uncategorized",
+    "page": {
+      "title": "Letters of appreciation",
+      "introTitle": "Partnership proven by clients",
+      "introText1": "In modern business, the reliability of a partner plays a key role. Companies choose those who can ensure stability, quality and strict compliance with requirements.",
+      "introText2": "Over the years, the Certification Center has proven itself as a reliable partner in certification and standardization. Our clients—industrial enterprises, manufacturing companies, trading organizations and public institutions—note professionalism, efficiency and careful attention to their needs."
+    },
+    "toggle": {
+      "expand": "Show reviews",
+      "collapse": "Hide reviews"
+    }
+  },
+  "contacts": {
+    "requisites": {
+      "labels": {
+        "fullName": "Full legal name",
+        "legalAddress": "Legal address",
+        "inn": "TIN",
+        "ogrn": "OGRN",
+        "director": "CEO",
+        "email": "Email"
+      }
+    }
+  },
+  "calc": {
+    "total": "Total",
+    "submitOrder": "Place an order"
+  },
+  "MainSlider": {
+    "title": "Helping with documents by industry"
+  },
+  "MainSkills": {
+    "sectionTitle": "Our key advantages",
+    "description": "Our company is recognized as one of the leading players in the certification market in the Russian Federation and the countries of the Eurasian Economic Union. NVSERT specialists provide a wide range of services focused on mandatory and voluntary certification, declarations, compliance with technical regulations and other documents confirming product quality."
+  },
+  "examples": {
+    "copy": {
+      "title": "Copy examples",
+      "sampleText": "This text was copied from the example!",
+      "copyText": "Copy text",
+      "copyEmail": "Copy email",
+      "copyPhone": "Copy phone"
+    }
   },
   "error": {
     "404": {

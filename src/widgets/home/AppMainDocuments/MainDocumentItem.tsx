@@ -13,6 +13,7 @@ import { DocumentMobileInfo } from './components/DocumentMobileInfo';
 import { DocumentHeader } from './components/DocumentHeader';
 import dynamic from 'next/dynamic';
 import mainDocumentsStyles from '@/assets/styles/main.module.scss';
+import { useTranslation } from 'react-i18next';
 
 const DocumentList = dynamic(
     () => import('./components/DocumentList').then((mod) => mod.DocumentList),
@@ -58,6 +59,7 @@ const MainDocumentItem = memo(({
     totalItems = 0,
     index = 0
 }: MainDocumentItemProps) => {
+    const { t } = useTranslation();
     const { processContent } = useRichTextRenderer();
     const { width: windowWidth } = useWindowSize();
     const [listHidden, setListHidden] = useState(true);
@@ -218,7 +220,7 @@ const MainDocumentItem = memo(({
                                     <ActionButton
                                         setRef={setButtonRef}
                                         onClick={handleServiceClick}
-                                        text="Перейти в услугу"
+                                        text={t('documents.goToService')}
                                         className={commonButtonClasses}
                                     />
                                 </motion.div>

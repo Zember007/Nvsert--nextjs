@@ -1,5 +1,6 @@
 import { useRichTextRenderer } from 'shared/lib';
 import { useId, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import textSize from '@/assets/styles/base/base.module.scss';
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 
@@ -7,6 +8,7 @@ const FeedbackList = ({ content, title }: { content: string, title: string }) =>
 
     const { processContent } = useRichTextRenderer();
     const [showServices, setShowServices] = useState<boolean>(false);
+    const { t } = useTranslation();
 
     const clip0_4632_2058 = useId()
     return (
@@ -30,7 +32,9 @@ const FeedbackList = ({ content, title }: { content: string, title: string }) =>
                             setShowServices(!showServices)
                         }}
                     >
-                        <span className={`${stylesBtn.lineAfter} !leading-[1.2] whitespace-nowrap`}>{!showServices ? 'Показать отзыв' : 'Свернуть отзыв'}</span>
+                        <span className={`${stylesBtn.lineAfter} !leading-[1.2] whitespace-nowrap`}>
+                            {!showServices ? t('common.showReview') : t('common.hideReview')}
+                        </span>
 
                         <svg
                             className={`${stylesBtn.sendIconLeft} transition-all duration-100 ${showServices ? 'rotate-[180deg]' : ''}`}

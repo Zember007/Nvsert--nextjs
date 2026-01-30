@@ -6,6 +6,7 @@ import { useHeaderContext } from 'shared/contexts';
 import { NavigationItem } from '@/types/navigation';
 import { AppBreadcrumbs } from 'widgets/layout';
 import { ServiceDetailLayout } from 'widgets/services';
+import { useTranslation } from 'react-i18next';
 
 const ServiceGallery = dynamic(
   () => import('widgets/services').then((m) => m.ServiceGallery),
@@ -20,6 +21,7 @@ const ctaInsertAfterIndex = 2;
 
 const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation }) => {
   const { openDefaultModal, initialNavigation: navigation } = useHeaderContext();
+  const { t } = useTranslation();
 
   const [expandedSections, setExpandedSections] = useState<number[]>([]);
   const [currentServiceIndex, setCurrentServiceIndex] = useState<number | null>(null);
@@ -85,7 +87,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation }) 
       <AppBreadcrumbs
         root="/"
         breadcrumbs={[
-          { id: 2, title: 'Все услуги', full_slug: '/services' },
+          { id: 2, title: t('services.breadcrumbs.allServices'), full_slug: '/services' },
           {
             id: 3,
             title: currentService?.title || '',

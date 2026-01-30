@@ -1,6 +1,9 @@
 import { dirname } from "path";
 import { fileURLToPath } from "url";
+import { createRequire } from "module";
 import { FlatCompat } from "@eslint/eslintrc";
+
+const require = createRequire(import.meta.url);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -11,9 +14,18 @@ const compat = new FlatCompat({
 
 /** @type {import("eslint").Linter.FlatConfig[]} */
 const eslintConfig = [
+  {
+    ignores: [
+      ".next/**",
+      "dist/**",
+      "out/**",
+      "node_modules/**",
+      "src/assets/lib/react-photo-view/**",
+    ],
+  },
   ...compat.extends("next/core-web-vitals"),
   {
-    files: ["**/*.{ts,tsx,js,jsx}"];
+    files: ["**/*.{ts,tsx,js,jsx}"],
     languageOptions: {
       parserOptions: {
         project: true,

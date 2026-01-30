@@ -6,6 +6,7 @@ import textSize from "@/assets/styles/base/base.module.scss";
 
 const FooterBottomLegal: React.FC = () => {
   const { t } = useTranslation();
+  const year = new Date().getFullYear();
 
   return (
     <>
@@ -30,7 +31,7 @@ const FooterBottomLegal: React.FC = () => {
             className="xl:!h-[35px] !h-auto !text-left"
             item={{
               href: "#",
-              label: "Обработка персональных данных",
+              label: t("footer.personalDataProcessing"),
             }}
             isActive={false}
           />
@@ -40,9 +41,9 @@ const FooterBottomLegal: React.FC = () => {
       <div
         className={`m:!hidden ${footerStyles.footer__white} flex-col gap-[5.5px] !p-[18px] h-[96px] ${textSize.text2}`}
       >
-        <span className="font-normal">«ЦЕНТР СТАНДАРТИЗАЦИИ»</span>
-        <span className="font-normal">ИНН 6027189146</span>
-        <span className="font-light">© 2025&nbsp;NVSERT</span>
+        <span className="font-normal">{t("footer.company")}</span>
+        <span className="font-normal">{t("footer.inn")}</span>
+        <span className="font-light">{t("footer.copyright", { year })}</span>
       </div>
     </>
   );

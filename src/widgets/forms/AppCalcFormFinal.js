@@ -1,6 +1,9 @@
+'use client';
 
+import { useTranslation } from 'react-i18next';
 
 const AppCalcFormFinal = () => {
+    const { t } = useTranslation();
     return (
         <form onSubmit={(e) => {e.preventDefault(); makeOrder(e)}} >
         <div class="product-list">
@@ -12,7 +15,7 @@ const AppCalcFormFinal = () => {
         </div>
         <div class="form-bottom">
           <div class="form-bottom__price">
-            <div class="form-bottom__price-txt">Итого:</div>
+            <div class="form-bottom__price-txt">{t('calc.total')}:</div>
             <div class="form-bottom__price-wrapper">
               <div class="form-bottom__price-outdated" v-if="price.old_price">
                 { price.old_price | filterRub } ₽
@@ -23,7 +26,7 @@ const AppCalcFormFinal = () => {
             </div>
           </div>
           <button class="btn btn-send-order btn--primary btn--l" type="submit">
-            Оформить заказ
+            {t('calc.submitOrder')}
           </button>
         </div>
       </form >

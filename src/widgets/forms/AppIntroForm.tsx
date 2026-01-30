@@ -14,6 +14,7 @@ import FlightSuccess from "../modals/FlightSuccess";
 import { useHeaderContext } from 'shared/contexts';
 import { useAnimation, motion } from "framer-motion";
 import { filterPrepositions } from 'shared/lib';
+import { useTranslation } from "react-i18next";
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/base/base.module.scss';
 import formStyles from '@/assets/styles/base/base.module.scss';
@@ -21,6 +22,7 @@ import formStyles from '@/assets/styles/base/base.module.scss';
 
 const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrapper?: () => void }) => {
     const { setButtonRef, setWrapperRef } = useButton();
+    const { t } = useTranslation();
 
     const onSubmit = async (e: any) => {
 
@@ -112,7 +114,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
             className='s:h-[590px] h-[475px] border border-solid border-[#93969d] rounded-[6px] flex flex-col s:gap-[20px] s:justify-start justify-between py-[30px] px-[20px] s:p-[40px] relative'>
 
             <div className={`${successMessageVisible && 'opacity-0'} flex flex-col s:gap-[44px] gap-[20px]`}>
-                <span className={`${textSize.headerH3} ${formStyles.form__title}`}>Заказать звонок</span>
+                <span className={`${textSize.headerH3} ${formStyles.form__title}`}>{t("navigation.order")}</span>
 
                 <div className="w-full s:h-[113px] h-[120px] overflow-hidden pointer-events-none rounded-[4px] border border-solid border-[#93969D]">
                     <Image className="w-full s:hidden" src={ImgCallMob} alt='order-call'></Image>
@@ -120,19 +122,26 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
                 </div>
             </div>
 
-            {successMessageVisible && <FlightSuccess small={true} closeIcon={false} text="Спасибо" close={() => { setSuccessMessageVisible(false) }} />}
+            {successMessageVisible && (
+                <FlightSuccess
+                    small={true}
+                    closeIcon={false}
+                    text={t("modals.flightSuccess.thankYou")}
+                    close={() => { setSuccessMessageVisible(false) }}
+                />
+            )}
 
             <AppValidationObserver methods={methods} onSubmit={onSubmit}>
                 {({ register, errors }) => (
                     <div className={`${successMessageVisible && 'opacity-0'} flex flex-col gap-[20px]`}>
                         <AppInput
-                            title={'ФИО'}
+                            title={t("form.input.titles.fullName")}
                             inputName="name"
                             required={true}
                         />
 
                         <AppInput
-                            title={'Телефон'}
+                            title={t("form.input.titles.phone")}
                             inputName="Contact"
                             mask={"phone"}
                             type={"tel"}
@@ -152,7 +161,7 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
 
                                 <span
                                     className={`${stylesBtn.sendText}`}
-                                >Заказать звонок</span>
+                                >{t("navigation.order")}</span>
 
                                 <span className={`${stylesBtn.sendIconLeft}`}>
                                     <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -164,9 +173,9 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
 
 
                         <span className={formStyles.form__desc}>
-                            {filterPrepositions('Нажимая на кнопку «Оформить заявку» вы соглашаетесь с ')}
+                            {t('form.policy.prefix', { button: t('form.buttons.submitApplication') })}{' '}
                             <Link href="#" className={`${stylesBtn.lineAfter} no-drag`} target="_blank">
-                                политикой конфиденциальности
+                                {t('form.policy.privacyPolicy')}
                             </Link>
                         </span>
                     </div>

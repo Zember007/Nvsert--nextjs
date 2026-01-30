@@ -1,9 +1,11 @@
+'use client';
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import styles from '@/assets/styles/blocks/map.module.scss';
 import { useWindowSize } from 'shared/hooks';
 import textSize from '@/assets/styles/base/base.module.scss';
+import { useTranslation } from 'react-i18next';
 
 // Mapping of region names to coat of arms files
 const coatOfArmsMapping: { [key: string]: string } = {
@@ -99,6 +101,7 @@ const coatOfArmsMapping: { [key: string]: string } = {
 };
 
 const Map = () => {
+    const { t } = useTranslation();
     const {width, height} = useWindowSize();
     const isMobile = (width && width < 768);
     const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
@@ -208,7 +211,7 @@ const Map = () => {
                             <div className="w-[30px] h-[30px] flex-shrink-0">
                                 <Image
                                     src={coatOfArmsMapping[hoveredRegion]}
-                                    alt={`Герб ${hoveredRegion}`}
+                                    alt={t('about.map.coatOfArmsAlt', { region: hoveredRegion })}
                                     width={30}
                                     height={30}
                                     className="h-full w-full"

@@ -1,10 +1,11 @@
 'use client';
 
 import * as React from 'react';
-import { VirtualizedList } from '@/widgets/home/utils/VirtualizedList';
+import { VirtualizedList } from 'widgets/home/utils/VirtualizedList';
 import textSize from '@/assets/styles/base/base.module.scss';
-import { useCopy } from '@/shared/hooks/useCopy';
-import type { TnvedSearchItem } from '@/widgets/tnved/TnvedQuickSearchSection';
+import { useCopy } from 'shared/hooks/useCopy';
+import { useTranslation } from 'react-i18next';
+import type { TnvedSearchItem } from 'widgets/tnved/TnvedQuickSearchSection';
 
 function formatTitle(item: Pick<TnvedSearchItem, 'code' | 'codeNorm' | 'name'>) {
   const code = (item.code || item.codeNorm || '').trim();
@@ -20,6 +21,7 @@ export function TnvedSearchResults({
   results: TnvedSearchItem[];
   isPending?: boolean;
 }) {
+  const { t } = useTranslation();
   const { showCopyNotification, notificationPosition, handleCopy, hideNotification } = useCopy();
 
   if (!query.trim()) return null;
@@ -28,15 +30,15 @@ export function TnvedSearchResults({
     <div className="mt-[10px]">
       <div className="flex items-center justify-between gap-[12px] mb-[10px]">
         <span className={`${textSize.text3} font-light text-[#93969D]`}>
-          {isPending ? 'Поиск…' : `Найдено: ${results.length}`}
+          {isPending ? t('common.searching') : t('tnved.searchResults.found', { count: results.length })}
         </span>
         <span className={`${textSize.text3} font-light text-[#93969D]`}>
-          {results.length >= 200 ? 'Показаны первые 200' : ''}
+          {results.length >= 200 ? t('tnved.searchResults.firstN', { count: 200 }) : ''}
         </span>
       </div>
 
       {results.length === 0 && !isPending ? (
-        <div className={`${textSize.text2} font-light text-[#93969D]`}>Ничего не найдено</div>
+        <div className={`${textSize.text2} font-light text-[#93969D]`}>{t('common.nothingFound')}</div>
       ) : (
         <div className="border border-[#E7E8EA] rounded-[6px] overflow-hidden">
           <VirtualizedList
@@ -61,10 +63,18 @@ export function TnvedSearchResults({
                       type="button"
                       onClick={(e) => handleCopy(code || item.name, e)}
                       className={`${textSize.text3} font-light text-[#34446D] whitespace-nowrap active:scale-[0.98] transition-transform`}
-                      aria-label={code ? `Скопировать код ${code}` : `Скопировать: ${item.name}`}
-                      title={code ? `Скопировать: ${formatTitle(item)}` : `Скопировать: ${item.name}`}
+                      aria-label={
+                        code
+                          ? t('common.copyCodeAria', { code })
+                          : t('common.copyTextAria', { text: item.name })
+                      }
+                      title={
+                        code
+                          ? t('common.copyTitle', { text: formatTitle(item) })
+                          : t('common.copyTitle', { text: item.name })
+                      }
                     >
-                      Скопировать
+                      {t('common.copy')}
                     </button>
                   </div>
                 </div>
@@ -81,7 +91,7 @@ export function TnvedSearchResults({
           className="fixed z-[9999] bg-[#34446D] text-white px-[10px] py-[6px] rounded-[6px] shadow"
           style={{ left: notificationPosition.x, top: notificationPosition.y }}
         >
-          Скопировано
+          {t('copied')}
         </button>
       )}
     </div>

@@ -1,8 +1,9 @@
 import ClientPage from './ClientPage';
 import { Metadata } from 'next';
-import type { TnvedPageData } from '@/widgets/tnved/types';
+import type { TnvedPageData } from 'widgets/tnved/types';
 import { BASE_URL, SITE_URL } from 'shared/config/env';
 import { getRequestLocale } from 'shared/i18n/server-locale';
+import { tStatic } from 'shared/i18n/static';
 
 type TnvedItem = {
     id: number;
@@ -34,17 +35,19 @@ async function fetchTnvedData(): Promise<{ items: TnvedItem[]; pageData: TnvedPa
 
 export async function generateMetadata(): Promise<Metadata> {
     const { pageData } = await fetchTnvedData();
+    const locale = await getRequestLocale();
 
     if (!pageData?.seo) {
         return {
-            title: 'ТН ВЭД',
-            description: 'Классификатор ТН ВЭД',
+            title: tStatic(locale, 'meta.pages.tnved.title'),
+            description: tStatic(locale, 'meta.pages.tnved.description'),
         };
     }
 
     return {
-        title: pageData.seo.metaTitle || pageData.title || 'ТН ВЭД',
-        description: pageData.seo.metaDescription || pageData.description || 'Классификатор ТН ВЭД',
+        title: pageData.seo.metaTitle || pageData.title || tStatic(locale, 'meta.pages.tnved.title'),
+        description:
+            pageData.seo.metaDescription || pageData.description || tStatic(locale, 'meta.pages.tnved.description'),
         alternates: {
             canonical: `${BASE_URL}/tnved`,
         },

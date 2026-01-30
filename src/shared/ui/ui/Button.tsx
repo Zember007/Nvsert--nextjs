@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { useButton } from 'shared/hooks';
+import { useTranslation } from 'react-i18next';
 import styles from '@/assets/styles/base/base.module.scss';
 
 type TariffButtonProps = {
@@ -11,7 +12,7 @@ type TariffButtonProps = {
 };
 
 const Button: FC<TariffButtonProps> = ({
-    label = 'Подробнее',
+    label,
     icon,
     wrapperClassName,
     buttonClassName,
@@ -19,11 +20,13 @@ const Button: FC<TariffButtonProps> = ({
 }) => {
     
     const { setButtonRef, setWrapperRef } = useButton();
+    const { t } = useTranslation();
+    const resolvedLabel = label ?? t('common.moreDetails');
 
     return (
         <div className={` ${styles.mainButtonWrap} ${styles.tariffWrap} ${wrapperClassName}`} ref={setWrapperRef}>
             <button ref={setButtonRef} className={` ${styles.mainButton} ${styles.btnIconAn} ${styles.tariff} ${buttonClassName}`} onClick={onClick}>
-                <span className={`${styles.sendText}`}>{label}</span>
+                <span className={`${styles.sendText}`}>{resolvedLabel}</span>
                 <span className={`${styles.sendIconLeft}`}>
                     {icon ?
                         icon :

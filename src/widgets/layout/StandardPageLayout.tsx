@@ -5,6 +5,7 @@ import { Button } from 'shared/ui';
 import { useHeaderContext } from 'shared/contexts';
 import { AppBreadcrumbs, DotNavList, SidebarNavButtons } from 'widgets/layout';
 import type { DotNavItemProps } from 'widgets/layout';
+import { useTranslation } from 'react-i18next';
 
 type BreadcrumbItem = {
     id: number;
@@ -41,6 +42,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
     contentColumn,
 }) => {
     const { openDefaultModal } = useHeaderContext();
+    const { t } = useTranslation();
 
     return (
         <div className={`main text-[#000] mb-[100px] ${className}`}>
@@ -58,7 +60,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
                                     onClick={() => {
                                         openDefaultModal('orderForm');
                                     }}
-                                    label="Оформить заявку"
+                                    label={t('form.buttons.submitApplication')}
                                 />
                             </div>
 
@@ -94,7 +96,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
                                     onClick={() => {
                                         openDefaultModal('orderForm');
                                     }}
-                                    label="Оформить заявку"
+                                    label={t('form.buttons.submitApplication')}
                                 />
                             )}
                             {dotNavItems && dotNavItems.length > 0 && (

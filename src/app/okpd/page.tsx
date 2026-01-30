@@ -1,9 +1,10 @@
 // app/okpd/page.tsx
 import ClientPage from './ClientPage';
 import { Metadata } from 'next';
-import type { OkpdPageData } from '@/widgets/okpd/types';
+import type { OkpdPageData } from 'widgets/okpd/types';
 import { BASE_URL, SITE_URL } from 'shared/config/env';
 import { getRequestLocale } from 'shared/i18n/server-locale';
+import { tStatic } from 'shared/i18n/static';
 
 type Okpd2Item = {
     id: number;
@@ -40,17 +41,19 @@ async function fetchOkpd2Data(): Promise<{ items: Okpd2Item[]; pageData: OkpdPag
 
 export async function generateMetadata(): Promise<Metadata> {
     const { pageData } = await fetchOkpd2Data();
+    const locale = await getRequestLocale();
 
     if (!pageData?.seo) {
         return {
-            title: 'ОКПД 2',
-            description: 'Классификатор ОКПД 2',
+            title: tStatic(locale, 'meta.pages.okpd.title'),
+            description: tStatic(locale, 'meta.pages.okpd.description'),
         };
     }
 
     return {
-        title: pageData.seo.metaTitle || pageData.title || 'ОКПД 2',
-        description: pageData.seo.metaDescription || pageData.description || 'Классификатор ОКПД 2',
+        title: pageData.seo.metaTitle || pageData.title || tStatic(locale, 'meta.pages.okpd.title'),
+        description:
+            pageData.seo.metaDescription || pageData.description || tStatic(locale, 'meta.pages.okpd.description'),
         alternates: {
             canonical: `${BASE_URL}/okpd`,
         },

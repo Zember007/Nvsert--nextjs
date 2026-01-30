@@ -13,36 +13,57 @@ import {
   normalizeLocale,
   type SupportedLocale,
 } from "shared/config/env";
+import { tStatic } from "shared/i18n/static";
 
-export const metadata: Metadata = {
-  title: "NVSERT - Декларирование, сертификация, лицензирование",
-  description:
-    "Профессиональные услуги по декларированию, сертификации и лицензированию продукции",
-  keywords: "декларирование, сертификация, лицензирование, NVSERT",
-  metadataBase: new URL(BASE_URL),
-  openGraph: {
-    title: "NVSERT - Декларирование, сертификация, лицензирование",
-    description:
-      "Профессиональные услуги по декларированию, сертификации и лицензированию продукции",
-    type: "website",
-    locale: "ru_RU",
-  },
-  verification: {
-    yandex: "90db85a0cc46fb2c",
-  },
-  icons: {
-    icon: [
-      { url: "/favicon.ico" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
-    ],
-    apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-    ],
-  },
-  manifest: "/site.webmanifest",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  let locale: SupportedLocale = DEFAULT_LOCALE;
+  if (process.env.NEXT_PHASE !== "phase-production-build") {
+    try {
+      const hdrs = await headers();
+      locale = normalizeLocale(hdrs.get("x-nvsert-locale"));
+    } catch {
+      // ignore
+    }
+    if (locale === DEFAULT_LOCALE) {
+      try {
+        const cks = await cookies();
+        locale = normalizeLocale(cks.get("nvsert_locale")?.value);
+      } catch {
+        // ignore
+      }
+    }
+  }
+
+  const title = tStatic(locale, "meta.site.title");
+  const description = tStatic(locale, "meta.site.description");
+  const keywords = tStatic(locale, "meta.site.keywords");
+
+  return {
+    title,
+    description,
+    keywords,
+    metadataBase: new URL(BASE_URL),
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      locale: locale === "en" ? "en_US" : "ru_RU",
+    },
+    verification: {
+      yandex: "90db85a0cc46fb2c",
+    },
+    icons: {
+      icon: [
+        { url: "/favicon.ico" },
+        { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+        { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+        { url: "/favicon.svg", type: "image/svg+xml" },
+      ],
+      apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    },
+    manifest: "/site.webmanifest",
+  };
+}
 
 export const viewport: Viewport = {
   themeColor: "#646467",

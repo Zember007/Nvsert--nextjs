@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import FlyingPlane from './elements/FlyingPlane';
 import { useAnimation, motion } from 'framer-motion';
+import { Trans, useTranslation } from 'react-i18next';
 
 const FlightSuccess = ({ close, small = false, text, closeIcon = true }: { closeIcon?:boolean; close: () => void; small?: boolean; text: string }) => {
 
     const [time, setTime] = React.useState(10);
+    const { t } = useTranslation();
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -49,7 +51,13 @@ const FlightSuccess = ({ close, small = false, text, closeIcon = true }: { close
                         <p className="text-[24px] m:text-[32px] tracking-[-0.03em]">{text}</p>
                     </div>
 
-                    <p className="m:text-[20px] text-[16px]">Мы свяжемся с Вами <br /> в течение 10 минут!</p>
+                    <p className="m:text-[20px] text-[16px]">
+                        <Trans
+                            i18nKey="modals.flightSuccess.followUp"
+                            values={{ minutes: 10 }}
+                            components={{ br: <br /> }}
+                        />
+                    </p>
                 </div>
                 <div
                     className={`${small ? 's:top-[220px] top-[150px]' : 's:top-[256px] top-[160px]'} left-0 right-0 absolute`}>

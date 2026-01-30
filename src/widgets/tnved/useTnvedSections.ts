@@ -1,5 +1,6 @@
 import * as React from 'react';
-import type { TnvedPageData } from '@/widgets/tnved/types';
+import { useTranslation } from 'react-i18next';
+import type { TnvedPageData } from 'widgets/tnved/types';
 
 export type DotNavItem = {
   id: number;
@@ -9,6 +10,7 @@ export type DotNavItem = {
 };
 
 export function useTnvedSections(pageData: TnvedPageData | null) {
+  const { t } = useTranslation();
   const [sectionsOpen, setSectionsOpen] = React.useState<number[]>([]);
 
   const toggleSection = React.useCallback((id: number) => {
@@ -17,8 +19,8 @@ export function useTnvedSections(pageData: TnvedPageData | null) {
 
   const dotNavItems = React.useMemo<DotNavItem[]>(() => {
     const base: DotNavItem[] = [
-      { id: 1, title: 'Быстрый поиск кода ТН\u00A0ВЭД', href: `#block-search` },
-      { id: 2, title: 'Классификатор ТН\u00A0ВЭД', href: `#block-classifier` },
+      { id: 1, title: t('tnved.sections.search'), href: `#block-search` },
+      { id: 2, title: t('tnved.sections.classifier'), href: `#block-classifier` },
     ];
 
     const content =
@@ -29,7 +31,7 @@ export function useTnvedSections(pageData: TnvedPageData | null) {
       })) || [];
 
     return [...base, ...content];
-  }, [pageData, sectionsOpen]);
+  }, [pageData, sectionsOpen, t]);
 
   return { sectionsOpen, toggleSection, dotNavItems };
 }

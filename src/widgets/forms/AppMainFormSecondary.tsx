@@ -48,7 +48,7 @@ const AppMainFormSecondary = () => {
                         type="phone" required={true} />
 
                     <button type="submit" className="mt-[40px] text-[20px] text-[#FFFFFF] font-bold border border-solid border-[#737373] bg-[#000000] flex items-center gap-[20px] justify-center p-[5px] rounded-[4px]">
-                        Заказать звонок
+                        {t('navigation.order')}
                        
                             <Image alt="message" src={MessageImg} width={35} height={35} />
                         
@@ -56,7 +56,8 @@ const AppMainFormSecondary = () => {
 
 
                     <span className=" mt-[10px] text-[#A4A4A4] text-[13px]">
-                        Нажимая на кнопку «Связаться» вы соглашаетесь с <Link href="#" target="_blank">политикой конфиденциальности</Link>
+                        {t('form.policy.prefix', { button: t('navigation.order') })}{' '}
+                        <Link href="#" target="_blank">{t('form.policy.privacyPolicy')}</Link>
                     </span>
 
                 </div>

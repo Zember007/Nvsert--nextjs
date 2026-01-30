@@ -1,3 +1,5 @@
+'use client';
+
 import { FC, memo, useId } from 'react';
 
 import { filterPrepositions } from 'shared/lib';
@@ -5,6 +7,7 @@ import { MainDocumentItemProps } from '@/types/documents';
 import stylesBtn from '@/assets/styles/main.module.scss';
 import textSize from '@/assets/styles/main.module.scss';
 import mainDocumentsStyles from '@/assets/styles/main.module.scss';
+import { useTranslation } from 'react-i18next';
 
 
 export interface DocumentListProps {
@@ -18,12 +21,13 @@ export interface DocumentListProps {
 export const DocumentList: FC<DocumentListProps> = memo(
   ({ documentsList, listHidden, setListHidden, hiddenList }) => {
     const clip0_4632_2058 = useId();
+    const { t } = useTranslation();
 
     return (
       <div className={`${mainDocumentsStyles['document__list']} `}>
         <div className={`${mainDocumentsStyles['document__list-item']} `}>
           <p className={textSize.text1}>
-            Необходимые документы для оформления
+            {t('documents.requiredDocuments')}
           </p>
           <ul className={`${mainDocumentsStyles['document__list-item-ul']} ${textSize.text2}`}>
             {documentsList.map((list, index) => (
@@ -46,8 +50,8 @@ export const DocumentList: FC<DocumentListProps> = memo(
                 className={`${stylesBtn.lineAfter} !leading-[1.2] whitespace-nowrap`}
               >
                 {listHidden
-                  ? 'Показать полный список документов'
-                  : 'Скрыть'}
+                  ? t('documents.showFullList')
+                  : t('documents.hide')}
               </span>
 
               <svg

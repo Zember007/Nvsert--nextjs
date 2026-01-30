@@ -5,12 +5,14 @@ import { useButton } from 'shared/hooks';
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 import { FeedbackCategoryGroup } from '@/types/feedback';
 import FeedbackCard from 'widgets/feedback/FeedbackCard';
+import { useTranslation } from 'react-i18next';
 
 
 
 
 
 const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ initialCategories }) => {
+    const { t } = useTranslation();
     const [openGroups, setOpenGroups] = React.useState<number[]>(() => initialCategories.map(c => c.id));
 
     const toggleGroup = (id: number) => {
@@ -36,24 +38,24 @@ const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ 
     return (
 
         <StandardPageLayout
-            title="Благодарственные письма"
-            breadcrumbs={[{ id: 2, title: 'Отзывы', full_slug: '/feedback' }]}
+            title={t('feedback.page.title')}
+            breadcrumbs={[{ id: 2, title: t('navigation.reviews'), full_slug: '/feedback' }]}
             dotNavItems={dotNavItems}
             showButton={true}
         >
             <CollapseSection
-                title={'Партнерство, подтвержденное клиентами'}
+                title={t('feedback.page.introTitle')}
                 isOpen={mainOpen}
                 onToggle={() => {
                     setMainOpen(!mainOpen);
                 }}
             >
                 <div className="text-[16px] leading-[1.5] text-[#000] font-light tracking-[-0.01em]">
-                    В современном бизнесе надёжность партнёра играет ключевую роль. Компании выбирают тех, кто способен обеспечить стабильность, качество и точное соблюдение требований.
+                    {t('feedback.page.introText1')}
                 </div>
                 <div className="h-[15px]"></div>
                 <div className="text-[16px] leading-[1.5] text-[#000] font-light tracking-[-0.01em]">
-                    За годы работы Центр Стандартизации зарекомендовал себя как надёжный партнёр в области сертификации и стандартизации. Наши клиенты — промышленные предприятия, производственные компании, торговые организации и государственные структуры — отмечают профессионализм, оперативность и внимательное отношение к задачам.
+                    {t('feedback.page.introText2')}
                 </div>
             </CollapseSection>
 
@@ -70,7 +72,7 @@ const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ 
                     className={`${stylesBtn.btnIconAn} ${stylesBtn.width_23} ${stylesBtn.tariff} bg-[#F5F5F2] h-[50px] rounded-[4px] text-[20px] font-light border border-[#93969d] flex items-center justify-center`}
                 >
                     <span className={`${stylesBtn.sendText}`}>
-                        {openGroups.length > 0 ? 'Свернуть отзывы' : 'Показать отзывы'}
+                        {openGroups.length > 0 ? t('feedback.toggle.collapse') : t('feedback.toggle.expand')}
                     </span>
                     <span className={`${stylesBtn.sendIconLeft}`}>
                         <svg

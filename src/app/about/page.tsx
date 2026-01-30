@@ -2,6 +2,7 @@ import ClientPage from './ClientPage';
 import { Metadata } from 'next';
 import { BASE_URL, SITE_URL, STRAPI_PUBLIC_URL } from 'shared/config/env';
 import { getRequestLocale } from 'shared/i18n/server-locale';
+import { tStatic } from 'shared/i18n/static';
 
 // Оптимизация: кеширование данных на более длительный срок для ускорения навигации
 
@@ -55,21 +56,22 @@ async function getAboutData(): Promise<AboutData | null> {
         return result.data;
     } catch (error) {
         console.error('Error fetching about data:', error);
+        const locale = await getRequestLocale();
         // Возвращаем fallback данные вместо null
         return {
             id: 1,
-            title: 'О компании',
+            title: tStatic(locale, 'meta.pages.about.title'),
             content: [],
             seo: {
-                metaTitle: 'О компании - NVSERT',
-                metaDescription: 'Информация о нашей компании, принципах работы и команде профессионалов',
-                metaKeywords: 'о компании, веб-разработка, команда, принципы',
+                metaTitle: tStatic(locale, 'meta.pages.about.ogTitle'),
+                metaDescription: tStatic(locale, 'meta.pages.about.description'),
+                metaKeywords: tStatic(locale, 'meta.pages.about.keywords'),
             },
-            seo_title: 'О компании - NVSERT',
-            seo_description: 'Информация о нашей компании, принципах работы и команде профессионалов',
-            seo_keywords: 'о компании, веб-разработка, команда, принципы',
-            og_title: 'О компании - NVSERT',
-            og_description: 'Информация о нашей компании, принципах работы и команде профессионалов'
+            seo_title: tStatic(locale, 'meta.pages.about.ogTitle'),
+            seo_description: tStatic(locale, 'meta.pages.about.description'),
+            seo_keywords: tStatic(locale, 'meta.pages.about.keywords'),
+            og_title: tStatic(locale, 'meta.pages.about.ogTitle'),
+            og_description: tStatic(locale, 'meta.pages.about.ogDescription')
         };
     }
 }
@@ -79,21 +81,29 @@ async function getAboutData(): Promise<AboutData | null> {
 // Функция для генерации метаданных
 export async function generateMetadata(): Promise<Metadata> {
     const aboutData = await getAboutData();
+    const locale = await getRequestLocale();
 
     if (!aboutData) {
         return {
-            title: 'О компании',
-            description: 'Информация о нашей компании',
+            title: tStatic(locale, 'meta.pages.about.title'),
+            description: tStatic(locale, 'meta.pages.about.descriptionShort'),
         };
     }
 
     return {
-        title: aboutData.seo.metaTitle || aboutData.title || 'О компании',
-        description: aboutData.seo.metaDescription || 'Информация о нашей компании',
+        title: aboutData.seo.metaTitle || aboutData.title || tStatic(locale, 'meta.pages.about.title'),
+        description: aboutData.seo.metaDescription || tStatic(locale, 'meta.pages.about.descriptionShort'),
         keywords: aboutData.seo.metaKeywords || '',
         openGraph: {
-            title: aboutData.og_title || aboutData.seo_title || aboutData.title || 'О компании',
-            description: aboutData.og_description || aboutData.seo_description || 'Информация о нашей компании',
+            title:
+                aboutData.og_title ||
+                aboutData.seo_title ||
+                aboutData.title ||
+                tStatic(locale, 'meta.pages.about.ogTitle'),
+            description:
+                aboutData.og_description ||
+                aboutData.seo_description ||
+                tStatic(locale, 'meta.pages.about.ogDescription'),
             images: aboutData.og_image ? [`${STRAPI_PUBLIC_URL}${aboutData.og_image}`] : [],
         },
         alternates: {

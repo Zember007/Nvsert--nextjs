@@ -1,5 +1,6 @@
 import * as React from 'react';
-import type { OkpdPageData } from '@/widgets/okpd/types';
+import { useTranslation } from 'react-i18next';
+import type { OkpdPageData } from 'widgets/okpd/types';
 
 export type DotNavItem = {
   id: number;
@@ -9,6 +10,7 @@ export type DotNavItem = {
 };
 
 export function useOkpdSections(pageData: OkpdPageData | null) {
+  const { t } = useTranslation();
   const [sectionsOpen, setSectionsOpen] = React.useState<number[]>([]);
 
   const toggleSection = React.useCallback((id: number) => {
@@ -17,8 +19,8 @@ export function useOkpdSections(pageData: OkpdPageData | null) {
 
   const dotNavItems = React.useMemo<DotNavItem[]>(() => {
     const base: DotNavItem[] = [
-      { id: 1, title: 'Быстрый поиск кода ОКПД\u00A02', href: `#block-search` },
-      { id: 2, title: 'Классификатор ОКПД 2', href: `#block-classifier` },
+      { id: 1, title: t('okpd.sections.search'), href: `#block-search` },
+      { id: 2, title: t('okpd.sections.classifier'), href: `#block-classifier` },
     ];
 
     const content = pageData?.content?.map((block, _) => ({
@@ -28,7 +30,7 @@ export function useOkpdSections(pageData: OkpdPageData | null) {
     })) || [];
 
     return [...base, ...content];
-  }, [pageData, sectionsOpen]);
+  }, [pageData, sectionsOpen, t]);
 
   return { sectionsOpen, toggleSection, dotNavItems };
 }

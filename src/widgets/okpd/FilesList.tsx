@@ -3,29 +3,31 @@ import WordImg from '@/assets/images/svg/Word.svg';
 import PdfImg from '@/assets/images/svg/PDF.svg';
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 import textSize from "@/assets/styles/base/base.module.scss";
-import { filterPrepositions } from "@/shared/lib/text/textFormat";
+import { filterPrepositions } from "shared/lib/text/textFormat";
 
 const FilesList = () => {
+    const { t } = useTranslation();
     return (
         <AppCollapsibleList
-            title={'Документация'}
+            title={t("okpd.files.title")}
             items={[
                 {
                     id: 1,
-                    title: 'ОКПД 2 01-99',
+                    title: t("okpd.files.item1"),
                     icon: WordImg,
                     link: '#'
                 },
                 {
                     id: 2,
-                    title: 'Особенности построения и применения ОКВЭД 2 и ОКПД 2',
+                    title: t("okpd.files.item2"),
                     icon: WordImg,
                     link: '#'
                 },
                 {
                     id: 3,
-                    title: 'Приказ Росстандарта от 31 января 2014 г. № 14-ст',
+                    title: t("okpd.files.item3"),
                     icon: PdfImg,
                     link: '#'
                 },

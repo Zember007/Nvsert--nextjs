@@ -1,8 +1,9 @@
 'use client';
 
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import textSize from '@/assets/styles/base/base.module.scss';
-import OkpdHierarchy, { Okpd2Item } from '@/widgets/okpd/OkpdHierarchy';
+import OkpdHierarchy, { Okpd2Item } from 'widgets/okpd/OkpdHierarchy';
 
 const OkpdHierarchyMemo = React.memo(OkpdHierarchy);
 
@@ -17,9 +18,10 @@ function OkpdClassifierSectionImpl({
   isSectionLoaded?: (section: string) => boolean;
   isSectionLoading?: (section: string) => boolean;
 }) {
+  const { t } = useTranslation();
   return (
     <>
-      <h2 id="block-2" className={`${textSize.headerH3}`}>Классификатор ОКПД 2</h2>
+      <h2 id="block-2" className={`${textSize.headerH3}`}>{t('okpd.classifier.title')}</h2>
   
 
       <OkpdHierarchyMemo

@@ -2,6 +2,7 @@
 import React, { useMemo } from 'react';
 import AppCollapsibleList from './AppCollapsibleList';
 import { filterPrepositions } from 'shared/lib';
+import { useTranslation } from 'react-i18next';
 
 export type DotNavItemProps = {
     id: number | string;
@@ -14,6 +15,7 @@ const DotNavList: React.FC<{
     items?: DotNavItemProps[];
     position?: 'right' | 'left' | null;
 }> = ({ items, position }) => {
+    const { t } = useTranslation();
 
     const [activeBlockId, setActiveBlockId] = React.useState<number | string | null>(
         items?.[0]?.id ?? null
@@ -96,7 +98,7 @@ const DotNavList: React.FC<{
     return (
         <AppCollapsibleList
             position={position}
-            title={'Навигация по услуге'}
+            title={t('common.serviceNavigation')}
             items={navigationItems}
             defaultOpen={true}
             listClassName='flex flex-col gap-[20px]'

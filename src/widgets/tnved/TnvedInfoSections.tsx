@@ -4,28 +4,14 @@ import * as React from 'react';
 import { CollapseSection, AppCtaBanner, StrapiResponsiveImage } from 'widgets/layout';
 import { SliderPost } from 'shared/ui';
 import { useRichTextRenderer } from 'shared/lib';
+import { useTranslation } from 'react-i18next';
 import textSize from '@/assets/styles/base/base.module.scss';
-import type { TnvedPageData } from '@/widgets/tnved/types';
+import type { TnvedPageData } from 'widgets/tnved/types';
 
 type SliderBlock = {
   title: string;
   description: string;
 };
-
-const defaultSliderBlocks: SliderBlock[] = [
-  {
-    title: 'Таможенное оформление',
-    description: 'Код ТН ВЭД используется для классификации товара и расчёта таможенных платежей.',
-  },
-  {
-    title: 'Сертификация и разрешительные документы',
-    description: 'По коду ТН ВЭД часто определяется, нужны ли декларации, сертификаты или другие документы.',
-  },
-  {
-    title: 'Статистика внешней торговли',
-    description: 'Применяется для сбора и анализа данных по импорту и экспорту товаров.',
-  },
-];
 
 export function TnvedInfoSections({
   pageData,
@@ -38,7 +24,9 @@ export function TnvedInfoSections({
   onToggleSection: (id: number) => void;
   onCtaClick: () => void;
 }) {
+  const { t } = useTranslation();
   const { processContent } = useRichTextRenderer();
+  const defaultSliderBlocks = t('tnved.info.sliderBlocks', { returnObjects: true }) as SliderBlock[];
 
   const renderSliderItem = React.useCallback((block: SliderBlock, index: number) => {
     return (

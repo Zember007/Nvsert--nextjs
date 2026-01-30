@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface ServiceArticleDateProps {
     date?: string;
@@ -7,6 +8,7 @@ interface ServiceArticleDateProps {
 const ServiceArticleDate: React.FC<ServiceArticleDateProps> = ({ 
     date = '20.04.2025' 
 }) => {
+    const { t } = useTranslation();
     const formatDate = (dateString: string) => {
         try {
             const date = new Date(dateString);
@@ -25,7 +27,7 @@ const ServiceArticleDate: React.FC<ServiceArticleDateProps> = ({
     return (
         <div className="w-full flex justify-end">
             <p className="text-[12px] leading-[8px] text-[#000] font-light">
-                Статья написана {formatDate(date)}
+                {t('services.article.written', { date: formatDate(date) })}
             </p>
         </div>
     );

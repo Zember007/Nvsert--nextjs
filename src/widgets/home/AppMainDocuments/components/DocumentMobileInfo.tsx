@@ -1,4 +1,7 @@
+'use client';
+
 import { FC, memo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export interface DocumentMobileInfoProps {
   duration: string;
@@ -6,18 +9,21 @@ export interface DocumentMobileInfoProps {
 }
 
 export const DocumentMobileInfo: FC<DocumentMobileInfoProps> = memo(
-  ({ duration, price }) => (
-    <div className="document-mobile-info">
-      <div className="document-info-item">
-        <span className="document-info-label">Срок оформления</span>
-        <span className="document-info-value">{duration}</span>
+  ({ duration, price }) => {
+    const { t } = useTranslation();
+    return (
+      <div className="document-mobile-info">
+        <div className="document-info-item">
+          <span className="document-info-label">{t('services.labels.duration')}</span>
+          <span className="document-info-value">{duration}</span>
+        </div>
+        <div className="document-info-item">
+          <span className="document-info-label">{t('services.labels.price')}</span>
+          <span className="document-info-value">{price}</span>
+        </div>
       </div>
-      <div className="document-info-item">
-        <span className="document-info-label">Стоимость</span>
-        <span className="document-info-value">{price}</span>
-      </div>
-    </div>
-  ),
+    );
+  },
 );
 
 DocumentMobileInfo.displayName = 'DocumentMobileInfo';

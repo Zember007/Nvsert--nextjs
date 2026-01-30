@@ -1,17 +1,19 @@
 'use client';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { StandardPageLayout } from 'widgets/layout';
 import { useHeaderContext } from 'shared/contexts';
-import FilesList from '@/widgets/okpd/FilesList';
-import { OkpdQuickSearchSection } from '@/widgets/okpd/OkpdQuickSearchSection';
-import { OkpdClassifierSection } from '@/widgets/okpd/OkpdClassifierSection';
-import type { Okpd2Item } from '@/widgets/okpd/OkpdHierarchy';
-import type { OkpdPageData } from '@/widgets/okpd/types';
-import { useOkpdSections } from '@/widgets/okpd/useOkpdSections';
-import { OkpdInfoSections } from '@/widgets/okpd/OkpdInfoSections';
+import FilesList from 'widgets/okpd/FilesList';
+import { OkpdQuickSearchSection } from 'widgets/okpd/OkpdQuickSearchSection';
+import { OkpdClassifierSection } from 'widgets/okpd/OkpdClassifierSection';
+import type { Okpd2Item } from 'widgets/okpd/OkpdHierarchy';
+import type { OkpdPageData } from 'widgets/okpd/types';
+import { useOkpdSections } from 'widgets/okpd/useOkpdSections';
+import { OkpdInfoSections } from 'widgets/okpd/OkpdInfoSections';
 
 const ClientPage = ({ initialItems, pageData }: { initialItems: Okpd2Item[]; pageData: OkpdPageData | null }) => {
     const { openDefaultModal } = useHeaderContext();
+    const { t } = useTranslation();
     const { sectionsOpen, toggleSection, dotNavItems } = useOkpdSections(pageData);
 
     const [hierarchyItems, setHierarchyItems] = React.useState<Okpd2Item[]>(() => initialItems || []);
@@ -112,8 +114,8 @@ const ClientPage = ({ initialItems, pageData }: { initialItems: Okpd2Item[]; pag
     return (
 
         <StandardPageLayout
-            title={pageData?.title || "ОКПД 2"}
-            breadcrumbs={[{ id: 2, title: 'ОКПД 2', full_slug: '/okpd' }]}
+            title={pageData?.title || t('okpd.page.title')}
+            breadcrumbs={[{ id: 2, title: t('okpd.page.title'), full_slug: '/okpd' }]}
             dotNavItems={dotNavItems}
             contentColumn={<FilesList />}
             showButton={true}

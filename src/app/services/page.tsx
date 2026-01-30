@@ -1,18 +1,22 @@
 import { Metadata } from 'next';
 import ServicesContent from './ClientPage';
 import { BASE_URL } from 'shared/config/env';
+import { getRequestLocale } from 'shared/i18n/server-locale';
+import { tStatic } from 'shared/i18n/static';
 
 // Функция для генерации метаданных
 export async function generateMetadata(): Promise<Metadata> {
+    const locale = await getRequestLocale();
+    const ogLocale = locale === 'en' ? 'en_US' : 'ru_RU';
     return {
-        title: 'Все услуги - NVSERT',
-        description: 'Полный список услуг по декларированию, сертификации и лицензированию продукции. Профессиональные услуги сертификации в России.',
-        keywords: 'услуги сертификации, декларирование, сертификация продукции, лицензирование, все услуги NVSERT',
+        title: tStatic(locale, 'meta.pages.services.title'),
+        description: tStatic(locale, 'meta.pages.services.description'),
+        keywords: tStatic(locale, 'meta.pages.services.keywords'),
         openGraph: {
-            title: 'Все услуги - NVSERT',
-            description: 'Полный список услуг по декларированию, сертификации и лицензированию продукции',
+            title: tStatic(locale, 'meta.pages.services.ogTitle'),
+            description: tStatic(locale, 'meta.pages.services.ogDescription'),
             type: 'website',
-            locale: 'ru_RU',
+            locale: ogLocale,
         },
         alternates: {
             canonical: `${BASE_URL}/services`,

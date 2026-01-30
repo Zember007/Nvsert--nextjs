@@ -5,11 +5,13 @@ import { useRichTextRenderer } from 'shared/lib';
 import stylesBtn from '@/assets/styles/main.module.scss';
 import textSize from '@/assets/styles/main.module.scss';
 import stylesQuestions from '@/assets/styles/main.module.scss';
+import { useTranslation } from 'react-i18next';
 
 const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive: (value: boolean) => void, active: boolean, number: number, title: string, text: string }) => {
     const controls = useAnimation();
     const { setButtonRef, setWrapperRef } = useButton();
     const { processContent } = useRichTextRenderer();
+    const { t } = useTranslation();
 
     const defaultSettings = {
         duration: 0.6,
@@ -93,7 +95,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
 
                                 <span
                                     className={`${stylesBtn.sendText}`}
-                                >Подробнее</span>
+                                >{t('common.moreDetails')}</span>
 
                                 <span className={`${stylesBtn.sendIconLeft}`}>
                                     <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
