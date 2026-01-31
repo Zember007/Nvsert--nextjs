@@ -3,6 +3,7 @@ import AppLogo from "../AppLogo";
 import AppMenuItem from "../AppMenuItem";
 import { useTranslation } from "react-i18next";
 import headerStyles from "@/assets/styles/base/base.module.scss";
+import { getLocaleFromPathname, stripLocalePrefix, withLocalePrefix } from "shared/i18n/client-locale";
 
 interface HeaderMainBarProps {
   pathname: string;
@@ -79,14 +80,17 @@ const HeaderNav: React.FC<HeaderNavProps> = ({
   onServicesToggle,
 }) => {
   const { t } = useTranslation();
+  const locale = getLocaleFromPathname(pathname);
+  const pathWithoutLocale = stripLocalePrefix(pathname);
+  const localizePath = (path: string) => withLocalePrefix(path, locale);
 
   return (
     <nav className={headerStyles["header-nav"]}>
       <ul className={headerStyles["header-nav__list"]}>
         <li>
           <AppMenuItem
-            isActive={pathname === "/"}
-            item={{ href: "/", label: t("navigation.main") }}
+            isActive={pathWithoutLocale === "/"}
+            item={{ href: localizePath("/"), label: t("navigation.main") }}
           />
         </li>
         <li className="group">
@@ -124,14 +128,14 @@ const HeaderNav: React.FC<HeaderNavProps> = ({
         </li>
         <li>
           <AppMenuItem
-            isActive={pathname.includes("/about")}
-            item={{ href: "/about/", label: t("navigation.about") }}
+            isActive={pathWithoutLocale.includes("/about")}
+            item={{ href: localizePath("/about/"), label: t("navigation.about") }}
           />
         </li>
         <li>
           <AppMenuItem
-            isActive={pathname.includes("/contacts")}
-            item={{ href: "/contacts/", label: t("navigation.contacts") }}
+            isActive={pathWithoutLocale.includes("/contacts")}
+            item={{ href: localizePath("/contacts/"), label: t("navigation.contacts") }}
           />
         </li>
       </ul>

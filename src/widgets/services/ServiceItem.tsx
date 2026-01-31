@@ -7,6 +7,8 @@ import stylesBtn from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/base/base.module.scss';
 import dynamic from 'next/dynamic';
 import { STRAPI_PUBLIC_URL } from 'shared/config/env';
+import { usePathname } from 'next/navigation';
+import { getLocaleFromPathname, withLocalePrefix } from 'shared/i18n/client-locale';
 
 const ServiceCard = dynamic(() => import('widgets/services').then((m) => m.ServiceCard), {
   ssr: false,
@@ -41,6 +43,9 @@ const ANIMATION_SETTINGS = {
 const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, onToggle, active, hover, last }) => {
 
     const controls = useAnimation();
+    const pathname = usePathname();
+    const locale = getLocaleFromPathname(pathname);
+    const localizePath = (path: string) => withLocalePrefix(path, locale);
 
     const [noActive, setNoActive] = useState(false);
 
@@ -123,6 +128,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                                 title={item.title}
                                 img={(item.img?.formats?.thumbnail?.url || '')}
                                 link={item.slug}
+                                localizePath={localizePath}
                             />
                         ))}
                     </div>

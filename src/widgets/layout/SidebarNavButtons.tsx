@@ -5,6 +5,7 @@ import React from 'react';
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/base/base.module.scss';
 import { useTranslation } from 'react-i18next';
+import { getLocaleFromPathname, withLocalePrefix } from 'shared/i18n/client-locale';
 
 export type SidebarItem = {
     id: string;
@@ -17,6 +18,8 @@ export type SidebarItem = {
 const SidebarNavButtons = () => {
     const { t } = useTranslation();
     const pathname = usePathname();
+    const locale = getLocaleFromPathname(pathname);
+    const localizePath = (path: string) => withLocalePrefix(path, locale);
     const isAbout = pathname.includes('/about');
     const isFeedback = pathname.includes('/feedback');
     const isOkpd = pathname.includes('/okpd');
@@ -26,7 +29,7 @@ const SidebarNavButtons = () => {
             id: 'about',
             label: t('navigation.about'),
             active: isAbout,
-            href: '/about',
+            href: localizePath('/about'),
             icon: (
                 <svg className='text-[#93969D]' width="20" height="26" viewBox="0 0 20 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" clipRule="evenodd" d="M11.8519 1.21429V7.28572C11.8519 7.56988 11.9689 7.8424 12.1773 8.04333C12.3857 8.24426 12.6683 8.35714 12.963 8.35714H19.2593L11.8519 1.21429Z" fill={!isAbout ? '#34446D' : "#FFF"} />
@@ -38,7 +41,7 @@ const SidebarNavButtons = () => {
         {
             id: 'feedback',
             label: t('navigation.reviews'),
-            href: '/feedback',
+            href: localizePath('/feedback'),
             active: isFeedback,
             icon: (
                 <svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,7 +55,7 @@ const SidebarNavButtons = () => {
         {
             id: 'okpd',
             label: t('navigation.okp'),
-            href: '/okpd',
+            href: localizePath('/okpd'),
             active: isOkpd,
             icon: (
                 <svg className={`${isOkpd ? 'text-white' : 'text-[#93969D]'}`} width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -65,7 +68,7 @@ const SidebarNavButtons = () => {
         {
             id: 'tnved',
             label: t('navigation.tnved'),
-            href: '/tnved',
+            href: localizePath('/tnved'),
             active: isTnved,
             icon: <svg
             className={`${isTnved ? 'text-white' : 'text-[#93969D]'}`}

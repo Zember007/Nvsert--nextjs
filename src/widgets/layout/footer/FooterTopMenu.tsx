@@ -3,16 +3,21 @@ import { useTranslation } from "react-i18next";
 import AppMenuItem from "../AppMenuItem";
 import footerStyles from "@/assets/styles/base/base.module.scss";
 import textSize from "@/assets/styles/base/base.module.scss";
+import { usePathname } from "next/navigation";
+import { getLocaleFromPathname, withLocalePrefix } from "shared/i18n/client-locale";
 
 const FooterTopMenu: React.FC = () => {
   const { t } = useTranslation();
+  const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname);
+  const localizePath = (path: string) => withLocalePrefix(path, locale);
 
   const menuItems = [
     { label: "FAQ", href: "#" },
     { label: t("navigation.blog"), href: "#" },
-    { label: t("navigation.reviews"), href: "/feedback" },
-    { label: t("navigation.tnved"), href: "/tnved/" },
-    { label: t("navigation.okp"), href: "/okpd/" },
+    { label: t("navigation.reviews"), href: localizePath("/feedback") },
+    { label: t("navigation.tnved"), href: localizePath("/tnved/") },
+    { label: t("navigation.okp"), href: localizePath("/okpd/") },
   ];
 
   return (

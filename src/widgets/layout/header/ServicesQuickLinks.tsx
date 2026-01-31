@@ -5,6 +5,8 @@ import { Services } from "@/types/navigation";
 import headerStyles from "@/assets/styles/base/base.module.scss";
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 import textSize from "@/assets/styles/base/base.module.scss";
+import { usePathname } from "next/navigation";
+import { getLocaleFromPathname, withLocalePrefix } from "shared/i18n/client-locale";
 
 interface ServicesQuickLinksProps {
   services: Services[];
@@ -18,6 +20,9 @@ const ServicesQuickLinks: React.FC<ServicesQuickLinksProps> = ({
   onLinkClick,
 }) => {
   const { setButtonRef, setWrapperRef } = useButton();
+  const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname);
+  const localizePath = (path: string) => withLocalePrefix(path, locale);
 
   return (
     <div
@@ -34,7 +39,7 @@ const ServicesQuickLinks: React.FC<ServicesQuickLinksProps> = ({
               <div ref={setWrapperRef} key={i} className={`${stylesBtn.tariffWrap}`}>
                 <Link
                   onClick={onLinkClick}
-                  href={`/services#${item.name}`}
+                  href={localizePath(`/services#${item.name}`)}
                   ref={setButtonRef}
                   className={`text-[#FFF] ${stylesBtn.lineAfterBox} xxl:pl-[5px] h-full text-center ${stylesBtn.btnIconAn} transition-all duration-100 active:scale-95 flex !gap-[9px]`}
                 >

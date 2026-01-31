@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useHeaderContext } from "shared/contexts";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import { getLocaleFromPathname, withLocalePrefix } from "shared/i18n/client-locale";
 
 
 const AppSuccessMessage = () => {
@@ -8,10 +9,12 @@ const AppSuccessMessage = () => {
     const { t } = useTranslation()
 
     const router = useRouter()
+    const pathname = usePathname()
+    const locale = getLocaleFromPathname(pathname)
 
     const close = () => {
         setDefaultModalActive(false)
-        router.push('/')
+        router.push(withLocalePrefix('/', locale))
     }
     return (
         <div className="success-message__wrapper">

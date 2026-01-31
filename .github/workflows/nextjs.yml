@@ -84,9 +84,6 @@ jobs:
             # Install dependencies
             npm install  # Or yarn install, or pnpm install
 
-            # Build vendored react-photo-view before Next build
-            (cd src/assets/lib/react-photo-view && npm install && npm run build)
-
             # Generate navigation
             # npm run generate-navigation
 

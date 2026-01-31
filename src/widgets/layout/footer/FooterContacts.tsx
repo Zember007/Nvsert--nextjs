@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import AppMenuItem from "../AppMenuItem";
 import { useHeaderContext } from "shared/contexts";
 import { useTranslation } from "react-i18next";
 import footerStyles from "@/assets/styles/base/base.module.scss";
+import { SupportedLocale } from "shared/config/env";
+import {
+  getLocaleFromI18n,
+  getLocaleFromPathname,
+  stripLocalePrefix,
+  withLocalePrefix,
+} from "shared/i18n/client-locale";
 
 const LOCALE_COOKIE = "nvsert_locale";
-const SUPPORTED_LOCALES = ["ru", "en"] as const;
 
 const FooterContacts: React.FC = () => {
   const { handleCopy, openDefaultModal } = useHeaderContext();
@@ -14,26 +20,25 @@ const FooterContacts: React.FC = () => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const currentLang = ((): "ru" | "en" => {
-    const seg0 = pathname.split("/").filter(Boolean)[0];
-    if (seg0 === "ru" || seg0 === "en") return seg0;
-    const docLang = typeof document !== "undefined" ? document.documentElement?.lang : undefined;
-    if (docLang === "ru" || docLang === "en") return docLang;
-    const i18nLang = i18n.language?.slice(0, 2);
-    return i18nLang === "en" ? "en" : "ru";
-  })();
+  const i18nLocale = getLocaleFromI18n(i18n.language);
+  const [currentLang, setCurrentLang] = useState<SupportedLocale>(
+    () => getLocaleFromPathname(pathname, i18nLocale)
+  );
 
-  const switchLang: "ru" | "en" = currentLang === "ru" ? "en" : "ru";
+  useEffect(() => {
+    setCurrentLang(getLocaleFromPathname(pathname, i18nLocale));
+  }, [pathname, i18nLocale]);
+
+  const switchLang: SupportedLocale = currentLang === "ru" ? "en" : "ru";
   const langLabel = switchLang.toUpperCase();
 
   const handleLangClick = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
+    setCurrentLang(switchLang);
     document.cookie = `${LOCALE_COOKIE}=${switchLang}; path=/; sameSite=lax; max-age=31536000`;
     i18n.changeLanguage(switchLang);
-    const segments = pathname.split("/").filter(Boolean);
-    const hasLocalePrefix = SUPPORTED_LOCALES.includes(segments[0] as (typeof SUPPORTED_LOCALES)[number]);
-    const pathWithoutLocale = hasLocalePrefix ? segments.slice(1).join("/") : pathname.replace(/^\//, "");
-    const newPath = pathWithoutLocale ? `/${switchLang}/${pathWithoutLocale}` : `/${switchLang}`;
+    const pathWithoutLocale = stripLocalePrefix(pathname);
+    const newPath = withLocalePrefix(pathWithoutLocale, switchLang);
     router.push(newPath);
   };
 

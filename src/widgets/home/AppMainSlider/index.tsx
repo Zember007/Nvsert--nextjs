@@ -30,16 +30,20 @@ const AppMainSlider = () => {
   const { openDefaultModal } = useHeaderContext();
   const { t } = useTranslation();
 
-  const slidesLang = useMemo(
-    () =>
-      (t('MainSlider.items', { returnObjects: true }) as SlideItem[]).map(
-        (item) => ({
-          title: filterPrepositions(item.title),
-          text: filterPrepositions(item.text),
-        }),
-      ),
-    [t],
-  );
+  const slidesLang = useMemo(() => {
+    const raw = t('MainSlider.items', { returnObjects: true }) as unknown;
+
+    const list: SlideItem[] = Array.isArray(raw)
+      ? (raw as SlideItem[])
+      : raw && typeof raw === 'object'
+        ? (Object.values(raw as Record<string, SlideItem>) as SlideItem[])
+        : [];
+
+    return list.map((item) => ({
+      title: filterPrepositions(item?.title ?? ''),
+      text: filterPrepositions(item?.text ?? ''),
+    }));
+  }, [t]);
   const overlayText = useRef<HTMLDivElement>(null);
 
   // Инициализация слайдера только при появлении секции в зоне видимости

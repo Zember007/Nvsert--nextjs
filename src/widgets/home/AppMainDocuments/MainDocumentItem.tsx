@@ -14,6 +14,8 @@ import { DocumentHeader } from './components/DocumentHeader';
 import dynamic from 'next/dynamic';
 import mainDocumentsStyles from '@/assets/styles/main.module.scss';
 import { useTranslation } from 'react-i18next';
+import { usePathname } from 'next/navigation';
+import { getLocaleFromPathname, withLocalePrefix } from 'shared/i18n/client-locale';
 
 const DocumentList = dynamic(
     () => import('./components/DocumentList').then((mod) => mod.DocumentList),
@@ -67,6 +69,8 @@ const MainDocumentItem = memo(({
     const { setButtonRef, setWrapperRef } = useButton();
     const { openDefaultModal } = useHeaderContext();
     const router = useRouter();
+    const pathname = usePathname();
+    const locale = getLocaleFromPathname(pathname);
 
     const wrapperRef = useRef<DivRef>(null);
 
@@ -102,13 +106,13 @@ const MainDocumentItem = memo(({
     }, [openDefaultModal]);
 
     const handleServiceClick = useCallback(() => {
-        router.push('/services/' + link);
-    }, [router, link]);
+        router.push(withLocalePrefix(`/services/${link}`, locale));
+    }, [router, link, locale]);
 
     const handleNavigationClick = useCallback((item: any, event: React.MouseEvent) => {
         event.preventDefault();
-        router.push('/services/' + link + '#block-' + item.id);
-    }, [router, link]);
+        router.push(withLocalePrefix(`/services/${link}#block-${item.id}`, locale));
+    }, [router, link, locale]);
 
     const controls = useOpenAnimation(
         active,

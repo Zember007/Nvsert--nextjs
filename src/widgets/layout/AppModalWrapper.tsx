@@ -23,38 +23,35 @@ interface AppModalWrapperProps {
     countTrigger: number
 }
 
+const DEFAULT_MODAL_ANIMATION_SETTINGS: {
+    duration: number;
+    ease: number[];
+    times: number[];
+    openY: number[];
+} = {
+    duration: 0.3,
+    ease: [0.34, 1.56, 0.64, 1],
+    times: [0, 0.2, 0.5, 0.8, 1],
+    openY: [-100, 10, 0, 0],
+};
+
 
 
 const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ reset, countTrigger, setDefaultModalActive, defaultModalActive, defaultModalName }) => {
     const nodeRef = useRef<HTMLDivElement>(null);
     const controls = useAnimation();
     const { t } = useTranslation();
-    const defaultSettings = {
-        duration: 0.3,
-        ease: [0.34, 1.56, 0.64, 1],
-        times: [0, 0.2, 0.5, 0.8, 1],
-        openY: [-100, 10, 0, 0],
-    };
 
     const animation = useCallback(() => {
         controls.start({
-            y: defaultSettings.openY, // Используем openY для отскока
+            y: DEFAULT_MODAL_ANIMATION_SETTINGS.openY, // Используем openY для отскока
             transition: {
-                duration: defaultSettings.duration,
-                ease: [0.34, 1.56, 0.64, 1] as const,
-                times: defaultSettings.times
+                duration: DEFAULT_MODAL_ANIMATION_SETTINGS.duration,
+                ease: DEFAULT_MODAL_ANIMATION_SETTINGS.ease,
+                times: DEFAULT_MODAL_ANIMATION_SETTINGS.times
             }
         });
-    }, [controls, defaultSettings.duration, defaultSettings.openY, defaultSettings.times])
-
-    useEffect(() => {
-        if (defaultModalActive) {
-            animation()
-        } else {
-            reset()
-            resetDrag()
-        }
-    }, [defaultModalActive, countTrigger, animation, reset])
+    }, [controls])
 
     const [position, setPosition] = useState({ x: 0, y: 0 });
 
@@ -62,9 +59,23 @@ const AppModalWrapper: React.FC<AppModalWrapperProps> = ({ reset, countTrigger, 
         setPosition({ x: data.x, y: data.y });
     };
 
-    const resetDrag = () => {
-        setPosition({ x: 0, y: 0 });
-    };
+    const resetDrag = useCallback(() => {
+        setPosition((prev) => (prev.x === 0 && prev.y === 0 ? prev : { x: 0, y: 0 }));
+    }, []);
+
+    const resetRef = useRef(reset);
+    useEffect(() => {
+        resetRef.current = reset;
+    }, [reset]);
+
+    useEffect(() => {
+        if (defaultModalActive) {
+            animation();
+        } else {
+            resetRef.current();
+            resetDrag();
+        }
+    }, [defaultModalActive, countTrigger, animation, resetDrag]);
     return (
         <>
             <div className={`modal__wrapper ${defaultModalActive && 'active'}`}>

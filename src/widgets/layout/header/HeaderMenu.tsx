@@ -9,6 +9,8 @@ import { useTranslation } from 'react-i18next';
 import headerStyles from '@/assets/styles/base/base.module.scss';
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/base/base.module.scss';
+import { usePathname } from 'next/navigation';
+import { getLocaleFromPathname, withLocalePrefix } from 'shared/i18n/client-locale';
 
 
 export interface Navigation {
@@ -31,7 +33,9 @@ interface navigationStackItem {
 
 const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMenu: () => void, services: Services[] }) => {
 
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
+    const pathname = usePathname();
+    const locale = getLocaleFromPathname(pathname, i18n.language?.slice(0, 2) === 'en' ? 'en' : 'ru');
 
     const navigationData: Navigation[] = React.useMemo(() => [
         {
@@ -54,7 +58,17 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
             title: t('navigation.contacts'),
             slug: '/contacts'
         }
-    ], [t]);
+    ], [i18n.language, t]);
+
+    const navigationDataWithServices = React.useMemo(() => {
+        return navigationData.map((item) => {
+            if (item.name !== 'services') return item;
+            return {
+                ...item,
+                items: services,
+            };
+        });
+    }, [navigationData, services]);
 
 
 
@@ -62,7 +76,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
 
 
     const [navigationStack, setNavigationStack] = useState<navigationStackItem[]>([
-        { items: navigationData, title: 'NVSERT' }
+        { items: navigationDataWithServices, title: 'NVSERT' }
     ]);
 
     const canGoBack = navigationStack.length > 1;
@@ -90,26 +104,17 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
     };
 
     useEffect(() => {
+        if (active && !services.length) return;
+        const timeoutId = window.setTimeout(() => {
+            setNavigationStack([{ items: navigationDataWithServices, title: 'NVSERT' }]);
+        }, 300);
+        return () => window.clearTimeout(timeoutId);
+    }, [active, services.length, navigationDataWithServices]);
 
-        if (services.length) {
-            const data = navigationData.find(item => item.name === 'services')
-            if (data && data.items) {
-                data.items = services
-            }
-
-            setTimeout(() => {
-                setNavigationStack([{ items: navigationData, title: 'NVSERT' }]);
-            }, 300);
-        }
-
-        if (!active) {
-            setTimeout(() => {
-                setNavigationStack([{ items: navigationData, title: 'NVSERT' }]);
-            }, 300);
-        }
-
-
-    }, [active, services, navigationData]);
+    const localizePath = React.useCallback(
+        (path: string) => withLocalePrefix(path, locale),
+        [locale]
+    );
 
     const currentLevel = navigationStack[navigationStack.length - 1];
     const { openDefaultModal } = useHeaderContext();
@@ -159,7 +164,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                                                     <Link
                                                         prefetch={false}
                                                         onClick={() => closeMenu()}
-                                                        href={(currentLevel.parentId === 'services' || navigationStack.some(level => level.parentId === 'services')) ? ('/services/' + item.slug) : item.slug}
+                                                        href={localizePath((currentLevel.parentId === 'services' || navigationStack.some(level => level.parentId === 'services')) ? (`/services/${String(item.slug).replace(/^\/+/, '')}`) : String(item.slug))}
                                                         className={`${headerStyles["header__menu-mob-item"]} ${index_item === 0 ? headerStyles["first-child"] : ''} ${item.img ? headerStyles["have-img"] : ''} group`}
                                                     >
                                                         <div className="flex items-center gap-[20px] transition-transform will-change-transform duration-100 group-active:scale-[.98]">
@@ -212,7 +217,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                             <div className={`${headerStyles["header-nav__list"]} !my-[15px]`}>
                                 <Link
                                     onClick={() => closeMenu()}
-                                    href="/services"
+                                    href={localizePath('/services')}
                                     className={`${headerStyles["header__menu-mob-item"]} text-[#93969D] before:hidden`}
                                 >
                                     <span className='text-[20px] font-light'>{t('navigation.fullServicesList')}</span>

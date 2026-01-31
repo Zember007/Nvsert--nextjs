@@ -5,6 +5,8 @@ import React from 'react';
 import { NavigationItem } from '@/types/navigation';
 import { useTranslation } from 'react-i18next';
 import textSize from '@/assets/styles/base/base.module.scss';
+import { usePathname } from 'next/navigation';
+import { getLocaleFromPathname, withLocalePrefix } from 'shared/i18n/client-locale';
 
 interface ServiceCardProps {    
     serviceName?: string;
@@ -29,7 +31,9 @@ const replaceValue = (value: string) => {
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, className, title = true, padding = true, onClick, priority = false }) => {
     const { t } = useTranslation();
-    const href = certificate.slug ? `/services/${certificate.slug}` : '';
+    const pathname = usePathname();
+    const locale = getLocaleFromPathname(pathname);
+    const href = certificate.slug ? withLocalePrefix(`/services/${certificate.slug}`, locale) : '';
     
     // Используем medium формат если доступен, иначе полное изображение
     const imageUrl = certificate.img?.formats?.medium?.url 

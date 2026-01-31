@@ -1,19 +1,24 @@
+'use client';
 import Link from "next/link";
 import { useAnimation, motion, AnimationControls } from "framer-motion";
 import { useEffect } from "react";
-import { useHeaderContext } from "shared/contexts";
 import { filterPrepositions } from 'shared/lib';
 import { useButton } from 'shared/hooks';
 import { NavigationItem, Services } from "@/types/navigation";
 import Image from "next/image";
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/base/base.module.scss';
+import { usePathname } from "next/navigation";
+import { getLocaleFromPathname, withLocalePrefix } from "shared/i18n/client-locale";
 
 
 
 const AppNavigation = ({ active, services }: { active: boolean, services: Services[] }) => {
 
     const controls = useAnimation();
+    const pathname = usePathname();
+    const locale = getLocaleFromPathname(pathname);
+    const localizePath = (path: string) => withLocalePrefix(path, locale);
 
     const defaultSettings = {
         duration: 0.6,
@@ -54,7 +59,7 @@ const AppNavigation = ({ active, services }: { active: boolean, services: Servic
 
                         <div key={i} className="flex flex-col gap-[20px]">
                             {item.items.map((children:NavigationItem) => (
-                                <AppNavigationItem link={children.slug} key={children.id} title={children.title} img={children.img?.formats?.thumbnail?.url} controls={controls} />
+                                <AppNavigationItem link={children.slug} key={children.id} title={children.title} img={children.img?.formats?.thumbnail?.url} controls={controls} localizePath={localizePath} />
                             ))}
                         </div>
                     )
@@ -64,10 +69,11 @@ const AppNavigation = ({ active, services }: { active: boolean, services: Servic
     );
 };
 
-const AppNavigationItem = ({ img, title, controls, link, dark, className, onClick, classNameText }: { link: string; img: string , title: string, controls?: AnimationControls, dark?: boolean, className?: string, onClick?: (e: React.MouseEvent<HTMLElement>) => void, classNameText?: string }) => {
+const AppNavigationItem = ({ img, title, controls, link, dark, className, onClick, classNameText, localizePath }: { link: string; img: string , title: string, controls?: AnimationControls, dark?: boolean, className?: string, onClick?: (e: React.MouseEvent<HTMLElement>) => void, classNameText?: string, localizePath?: (path: string) => string }) => {
     const { setButtonRef, setWrapperRef } = useButton()
+    const resolvePath = localizePath ?? ((path: string) => path);
 
-    const active = typeof window !== 'undefined' && window.location.pathname.includes(link);
+    const active = typeof window !== 'undefined' && window.location.pathname.includes(`/services/${link}`);
 
     const hoverStyle = dark ? 'hover:border-[#34446D] hover:bg-[#F5F5F2] ' : ' hover:border-[#fff] hover:bg-[#34446d33]'
 
@@ -78,7 +84,7 @@ const AppNavigationItem = ({ img, title, controls, link, dark, className, onClic
             <div ref={setWrapperRef} className={`${stylesBtn.tariffWrap} ${className ?? 'xxs:!max-w-[250px]'}`}>
                 <Link
                     ref={setButtonRef}
-                    href={'/services/' + link}
+                    href={resolvePath(`/services/${link}`)}
                     prefetch={false}
                     onClick={onClick}
                     className={` ${stylesBtn.tariff} ${stylesBtn.noTransitions} text-left overflow-hidden ${stylesBtn.notBackdrop} flex  gap-[10px] group/img  rounded-[3px] items-center    border-solid  border border-[transparent] h-[72px] p-[5px] ${active ? activeStyle : ''} ${hoverStyle}`}>

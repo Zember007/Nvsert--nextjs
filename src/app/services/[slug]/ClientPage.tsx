@@ -7,6 +7,8 @@ import { NavigationItem } from '@/types/navigation';
 import { AppBreadcrumbs } from 'widgets/layout';
 import { ServiceDetailLayout } from 'widgets/services';
 import { useTranslation } from 'react-i18next';
+import { usePathname } from 'next/navigation';
+import { getLocaleFromPathname, withLocalePrefix } from 'shared/i18n/client-locale';
 
 const ServiceGallery = dynamic(
   () => import('widgets/services').then((m) => m.ServiceGallery),
@@ -22,6 +24,8 @@ const ctaInsertAfterIndex = 2;
 const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation }) => {
   const { openDefaultModal, initialNavigation: navigation } = useHeaderContext();
   const { t } = useTranslation();
+  const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname);
 
   const [expandedSections, setExpandedSections] = useState<number[]>([]);
   const [currentServiceIndex, setCurrentServiceIndex] = useState<number | null>(null);
@@ -103,7 +107,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation }) 
             setCurrentServiceIndex(index);
             if (navigation?.[index]) {
               const newUrl = `/services/${navigation[index].slug}`;
-              window.history.replaceState({}, '', newUrl);
+              window.history.replaceState({}, '', withLocalePrefix(newUrl, locale));
             }
           }}
         />
