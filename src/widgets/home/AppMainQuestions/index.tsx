@@ -7,6 +7,7 @@ import type { FaqItem } from '@/types/faq';
 import stylesQuestions from '@/assets/styles/main.module.scss';
 import textSize from '@/assets/styles/main.module.scss';
 import { VirtualizedList } from '../utils/VirtualizedList';
+import LinkButtonTitle from '../utils/ButtonTitle';
 
 type AppMainQuestionsProps = {
   faqs: FaqItem[];
@@ -27,9 +28,13 @@ const AppMainQuestions = ({ faqs }: AppMainQuestionsProps) => {
     <section className="section wrapper">
       <div id="questions" className="absolute top-[-50px] pointer-events-none" />
 
-      <h2 className={`${textSize.headerH2} section__title`}>
-        {t('MainQuestions.title')}
-      </h2>
+
+      <div className="flex justify-between items-center">
+        <h2 className={`${textSize.headerH2} section__title`}>
+          {t('MainQuestions.title')}
+        </h2>
+        <LinkButtonTitle title="Читать подробнее" link="#" />
+      </div>
 
       <div className={stylesQuestions['questions-container']}>
         {ssrFaqs.map((item, index) => {

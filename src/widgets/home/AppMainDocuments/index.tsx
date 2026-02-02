@@ -7,6 +7,7 @@ import { useHeaderContext } from 'shared/contexts';
 import mainDocumentsStyles from '@/assets/styles/main.module.scss';
 import MainDocumentItem from './MainDocumentItem';
 import { VirtualizedList } from '../utils/VirtualizedList';
+import LinkButtonTitle from '../utils/ButtonTitle';
 
 const SSR_ITEMS_COUNT = 5;
 const ESTIMATED_ITEM_SIZE = 520;
@@ -50,9 +51,12 @@ const AppMainDocuments = () => {
     <section className="section wrapper !overflow-visible">
       <div id="documents" className="absolute top-[-50px] pointer-events-none" />
 
-      <h2 className={`${mainDocumentsStyles.headerH2} section__title`}>
-        {t('docs.heading')}
-      </h2>
+      <div className="flex justify-between items-center">
+        <h2 className={`${mainDocumentsStyles.headerH2} section__title`}>
+          {t('docs.heading')}
+        </h2>
+        <LinkButtonTitle title="Посмотреть документы" link="/services" />
+      </div>
 
       <AsyncPhotoProvider
         maskOpacity={0.4}

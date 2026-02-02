@@ -12,6 +12,9 @@ import Img4 from '@/assets/images/safeguard/4.webp';
 import { useWindowSize } from 'shared/hooks';
 import stylesSlider from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/main.module.scss';
+import { Button } from 'shared/ui';
+import { useHeaderContext } from 'shared/contexts/contexts/HeaderContext';
+
 
 type SafeguardItem = { subtitle: string; text: string };
 type SafeguardGroup = { title: string; items: SafeguardItem[] };
@@ -21,6 +24,8 @@ const AppMainSafeguards = () => {
   const { width: widthWindow } = useWindowSize();
   const [isVisible, setIsVisible] = useState(false);
   const divRef = useRef<HTMLDivElement | null>(null);
+  const { openDefaultModal } = useHeaderContext();
+
 
   const timeLine = useRef<any>(null);
   const [activeIndex, setActive] = useState<number>(0);
@@ -83,7 +88,15 @@ const AppMainSafeguards = () => {
     <section ref={divRef} className="section ">
       <div id="safeguards" className="absolute top-[-50px] pointer-events-none" />
 
-      <h2 className={`${textSize.headerH2} section__title`}>{t('safeguards.title')}</h2>
+      <div className="flex justify-between items-center wrapper">
+        <h2 className={`${textSize.headerH2} section__title`}>{t('safeguards.title')}</h2>
+        <Button
+          onClick={() => {
+            openDefaultModal('orderForm');
+          }}
+          label={t('form.buttons.submitApplication')}
+        />
+      </div>
 
       <div className={stylesSafeguards['safeguards-container']}>
         <div
@@ -110,11 +123,11 @@ const AppMainSafeguards = () => {
           ))}
         </div>
 
-        <div className={`${stylesSlider.slideDotsBoxContainer} !flex my-[20px]`}>
-          <div className={`${stylesSlider.slideDotsBox} !flex`}>
+        <div className={`${stylesSlider.slideDotsBoxContainer}  my-[20px]`}>
+          <div className={`${stylesSlider.slideDotsBox}`}>
             {guarantees.map((_, i) => (
               <div
-                
+
                 key={i}
                 className={`${activeIndex === i ? stylesSlider.activeDots : ''} ${stylesSlider.slideDots}`}
               />

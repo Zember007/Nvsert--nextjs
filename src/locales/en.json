@@ -48,9 +48,12 @@
         "We focus on results and trust.",
         "Clients recommend us and come back."
       ]
-    }
+    },
+    "sectionTitle": "Our key advantages",
+    "description": "Our company is recognized as one of the leading players in the certification market in the Russian Federation and the countries of the Eurasian Economic Union. NVSERT specialists provide a wide range of services focused on mandatory and voluntary certification, declarations, compliance with technical regulations and other documents confirming product quality."
   },
   "MainSlider": {
+    "title": "Helping with documents by industry",
     "items": [
       {
         "title": "Construction materials",
@@ -1140,13 +1143,6 @@
   "calc": {
     "total": "Total",
     "submitOrder": "Place an order"
-  },
-  "MainSlider": {
-    "title": "Helping with documents by industry"
-  },
-  "MainSkills": {
-    "sectionTitle": "Our key advantages",
-    "description": "Our company is recognized as one of the leading players in the certification market in the Russian Federation and the countries of the Eurasian Economic Union. NVSERT specialists provide a wide range of services focused on mandatory and voluntary certification, declarations, compliance with technical regulations and other documents confirming product quality."
   },
   "examples": {
     "copy": {

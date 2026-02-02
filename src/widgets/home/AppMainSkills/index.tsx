@@ -6,10 +6,10 @@ import AppSkillBlock from './AppSkillBlock';
 import { useTranslation } from 'react-i18next';
 import { useIntersectionObserver, useWindowSize } from 'shared/hooks';
 import { filterPrepositions } from 'shared/lib';
-import { Button } from 'shared/ui';
 import stylesSlider from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/main.module.scss';
 import stylesMainSkills from '@/assets/styles/main.module.scss';
+import LinkButtonTitle from '../utils/ButtonTitle';
 
 const AppMainSkills = () => {
   const { t } = useTranslation();
@@ -95,7 +95,11 @@ const AppMainSkills = () => {
     <section ref={ref} className="section ">
       <div id="skills" className="absolute top-[-50px] pointer-events-none"></div>
 
-      <h2 className={`${textSize.headerH2} section__title`}>{t('MainSkills.sectionTitle')}</h2>
+      <div className="flex justify-between items-center wrapper">
+        <h2 className={`${textSize.headerH2} section__title`}>{t('MainSkills.sectionTitle')}</h2>
+
+        <LinkButtonTitle  title="Подробнее о компании" link="/services" />
+      </div>
 
       <div className={stylesMainSkills['skills__wrapper']}>
         <SkillsGrid
@@ -130,8 +134,8 @@ const SkillsGrid: React.FC<SkillsGridProps> = ({ skillsData, widthWindow, isVisi
   const gapStyle =
     widthWindow && widthWindow < 960
       ? {
-          gap: Math.round((widthWindow - 250) / 2),
-        }
+        gap: Math.round((widthWindow - 250) / 2),
+      }
       : {};
 
   return (
@@ -193,7 +197,6 @@ const SkillsDescription: React.FC<SkillsDescriptionProps> = ({ t }) => (
       )}
     </h3>
 
-    <Button wrapperClassName="mt-[20px]" />
   </div>
 );
 

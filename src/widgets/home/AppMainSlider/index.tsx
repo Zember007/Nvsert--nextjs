@@ -13,6 +13,7 @@ import { useIntersectionObserver, useWindowSize } from 'shared/hooks';
 import stylesBtn from '@/assets/styles/main.module.scss';
 import stylesSlider from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/main.module.scss';
+import LinkButtonTitle from '../utils/ButtonTitle';
 
 interface SlideItem {
   title: string;
@@ -163,7 +164,12 @@ const AppMainSlider = () => {
     <section ref={ref} className="section wrapper">
       <div id="slider" className="absolute top-[-50px] pointer-events-none"></div>
 
-      <h2 className={`${textSize.headerH2} section__title`}>{t('MainSlider.title')}</h2>
+      <div className="flex justify-between items-center wrapper">
+        <h2 className={`${textSize.headerH2} section__title`}>{t('MainSlider.title')}</h2>
+
+
+        <LinkButtonTitle title="Посмотреть все документы" link="/services" />
+      </div>
 
       <div className={stylesMainSlider.cloneable}>
         <div className={stylesMainSlider['slide-main']}>
@@ -239,14 +245,7 @@ const AppMainSlider = () => {
           boxClassName={`${stylesSlider.slideDotsBox} xl:!hidden`}
         />
 
-        <SliderCtaButton
-          setWrapperRef={setWrapperRef}
-          setButtonRef={setButtonRef}
-          onClick={useCallback(
-            () => openDefaultModal('orderForm'),
-            [openDefaultModal],
-          )}
-        />
+
       </div>
     </section>
   );
@@ -262,9 +261,8 @@ const SliderBlur: React.FC<SliderBlurProps> = memo(({ whiteBgBlur }) => {
   return (
     <>
       <div
-        className={`${stylesSlider.slideBlur} ${stylesMainSlider['slide-blur-left']} ${
-          whiteBgBlur ? stylesSlider.white : ''
-        }`}
+        className={`${stylesSlider.slideBlur} ${stylesMainSlider['slide-blur-left']} ${whiteBgBlur ? stylesSlider.white : ''
+          }`}
       >
         <span
           className={`${stylesSlider.line} hidden xl:block white`}
@@ -405,46 +403,9 @@ const SliderNavButton: React.FC<SliderNavButtonProps> = memo(({ direction, setWr
 
 SliderNavButton.displayName = 'SliderNavButton';
 
-interface SliderCtaButtonProps {
-  setWrapperRef: (element: HTMLDivElement | null) => void;
-  setButtonRef: (element: HTMLButtonElement | null) => void;
-  onClick: () => void;
-}
 
-const SliderCtaButton: React.FC<SliderCtaButtonProps> = memo(
-  ({ setWrapperRef, setButtonRef, onClick }) => {
-    const { t } = useTranslation();
-    return (
-      <div
-        className={`${stylesMainSlider['main-button-slider-wrap']} ${stylesBtn.tariffWrap}`}
-        ref={setWrapperRef}
-      >
-        <button
-          onClick={onClick}
-          ref={setButtonRef}
-          className={`${stylesBtn.btnIconAn} ${stylesMainSlider.slider__button} group  ${stylesBtn.tariff}`}
-        >
-          <span className={stylesBtn.sendText}>{t('form.buttons.submitApplication')}</span>
-        <span className={stylesBtn.sendIconLeft}>
-          <svg
-            width="16"
-            height="17"
-            viewBox="0 0 16 17"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M3 9.48438V7.48438H0V9.48438H3ZM8.96767 1.48438L7.52908 2.91514L12.1092 7.47151H6V9.49623H12.1092L7.52908 14.0526L8.96767 15.4844L16 8.48438L15.2822 7.76899L14.5634 7.0526L8.96767 1.48438Z"
-              fill="white"
-            />
-          </svg>
-        </span>
-        </button>
-      </div>
-    );
-  },
-);
 
-SliderCtaButton.displayName = 'SliderCtaButton';
+
+
 
 

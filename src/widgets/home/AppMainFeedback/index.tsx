@@ -8,6 +8,7 @@ import { useWindowSize } from 'shared/hooks';
 import stylesMainFeedback from '@/assets/styles/main.module.scss';
 import stylesSlider from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/main.module.scss';
+import LinkButtonTitle from '../utils/ButtonTitle';
 
 type FeedbackSliderProps = {
   dataSlider: 'slide-feedback' | 'slide-feedback1';
@@ -65,9 +66,8 @@ const FeedbackDots = ({ activeIndex }: FeedbackDotsProps) => (
 
 const FeedbackBlur = ({ position }: { position: 'left' | 'right' }) => (
   <div
-    className={`${stylesSlider.slideBlur} ${stylesSlider.feedbackBlur} ${
-      position === 'left' ? 'left-0' : 'right-0'
-    }`}
+    className={`${stylesSlider.slideBlur} ${stylesSlider.feedbackBlur} ${position === 'left' ? 'left-0' : 'right-0'
+      }`}
   >
     <span
       className={stylesSlider.line}
@@ -172,9 +172,13 @@ const AppMainFeedback = () => {
     <section className="section wrapper">
       <div id="feedback" className="absolute top-[-50px] pointer-events-none" />
 
-      <h2 className={`${textSize.headerH2} section__title`}>
-        {t('MainFeedback.title')}
-      </h2>
+
+      <div className="flex justify-between items-center">
+        <h2 className={`${textSize.headerH2} section__title`}>
+          {t('MainFeedback.title')}
+        </h2>
+        <LinkButtonTitle title="Посмотреть все отзывы" link="/feedbacks" />
+      </div>
 
       <AsyncPhotoProvider
         maskOpacity={0.4}
@@ -183,28 +187,26 @@ const AppMainFeedback = () => {
         maskClosable={false}
       >
         <div ref={ref} className={stylesMainFeedback['feedback-slider-box']}>
-(
-            <>
-              <FeedbackBlur position="left" />
 
-              <div className={stylesMainFeedback['feedback-slider-section']}>
-                <FeedbackSliderSection
-                  dataSlider="slide-feedback"
-                  startIndex={1}
-                />
-                <FeedbackDots activeIndex={activeIndex} />
-              </div>
+          <FeedbackBlur position="left" />
 
-              <div className={stylesMainFeedback['feedback-slider-section']}>
-                <FeedbackSliderSection
-                  dataSlider="slide-feedback1"
-                  startIndex={15}
-                />
-                <FeedbackDots activeIndex={activeIndex1} />
-              </div>
+          <div className={stylesMainFeedback['feedback-slider-section']}>
+            <FeedbackSliderSection
+              dataSlider="slide-feedback"
+              startIndex={1}
+            />
+            <FeedbackDots activeIndex={activeIndex} />
+          </div>
 
-              <FeedbackBlur position="right" />
-            </>
+          <div className={stylesMainFeedback['feedback-slider-section']}>
+            <FeedbackSliderSection
+              dataSlider="slide-feedback1"
+              startIndex={15}
+            />
+            <FeedbackDots activeIndex={activeIndex1} />
+          </div>
+
+          <FeedbackBlur position="right" />
         </div>
       </AsyncPhotoProvider>
     </section>
