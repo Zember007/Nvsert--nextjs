@@ -50,12 +50,9 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
         <div
             className={`${stylesQuestions['document-wrapper-border']} group/main`}
         >
-            <div
-                className={`${stylesQuestions['document__border']} ${!active ? 'group-active/main:!border-[transparent] group-hover/main:!border-[transparent]' : stylesQuestions.active}`}
-            />
             <div className={`${stylesQuestions['document__box']}   ${!active ? stylesQuestions.active : ''}`}>
 
-                <div className={`pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[-1] rounded-[6px]  ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-[transparent]  border-solid border`}></div>
+                <div className={`pointer-events-none absolute -top-[1px] -bottom-[1px] right-0 left-0 z-[3] rounded-[6px]  ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border border-solid border-[transparent]`}></div>
                 <div
                     onClick={() => {
                         setActive(!active)

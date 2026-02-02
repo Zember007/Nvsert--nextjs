@@ -8,17 +8,14 @@
 .document-wrapper-border {
   position: relative;
   z-index: 0;
+  isolation: isolate;
+  &:hover {
+    z-index: 5;
+  }
 }
 
-.document-wrapper-border:first-child .border-group {
-  border-top-width: 1px;
-}
-
-.document-wrapper-border .border-group {
-  border-bottom-width: 1px;
-  border-style: solid;
-  height: calc(100% + 1px);
-  transform: translateY(1px);
+.document-wrapper-border-active {
+  z-index: 6;
 }
 
 .drop,
@@ -102,6 +99,7 @@
 .document {
   &__box {
     @apply xl:mx-[-23px] mx-[-5px] flex flex-col rounded-[6px] relative;
+    z-index: 1;
 
     &.active {
       @apply hover:bg-[#34446D33] bg-[transparent] ;
@@ -110,6 +108,8 @@
 
   &__border {
     @apply border-[#93969D] absolute bottom-[0] border-group right-[0] left-[0];
+    pointer-events: none;
+    z-index: 0;
 
     &.active {
       @apply border-[transparent];
@@ -117,7 +117,7 @@
   }
 
   &__navigation {
-    @apply rounded-[6px] overflow-hidden h-[70px] text-left box-scale transition-scale active:bg-[#5B6788] xl:px-[23px] relative z-[0];
+    @apply rounded-[6px] overflow-hidden h-[68px] text-left box-scale transition-scale active:bg-[#5B6788] xl:px-[23px] relative z-[0];
 
     &:active {
       box-shadow: 2px 2px 4px 0px #000000CC inset, -2px -2px 4px 0px #000000CC inset;

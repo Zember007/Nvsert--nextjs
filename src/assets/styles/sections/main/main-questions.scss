@@ -6,7 +6,7 @@
 } 
 
 .questions-number-container {
-  @apply xl:w-[70px] xl:min-w-[70px] w-[44px] min-w-[44px] h-[70px] flex items-center justify-center;
+  @apply xl:w-[70px] xl:min-w-[70px] w-[44px] min-w-[44px] h-[68px] flex items-center justify-center;
   
   &.active {
     transform: scale(0.9);

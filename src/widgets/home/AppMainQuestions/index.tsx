@@ -41,16 +41,22 @@ const AppMainQuestions = ({ faqs }: AppMainQuestionsProps) => {
           const globalIndex = index;
 
           return (
-            <QuestionsBlock
-              number={globalIndex + 1}
-              key={item.id}
-              title={item.heading}
-              text={item.content}
-              active={activeIndex === globalIndex}
-              setActive={(value) => {
-                setActiveIndex(value ? globalIndex : null);
-              }}
-            />
+            <>
+            {index === 0 && (
+              <hr className='w-full h-[1px] bg-[#93969D] m-0' />
+            )}
+              <QuestionsBlock
+                number={globalIndex + 1}
+                key={item.id}
+                title={item.heading}
+                text={item.content}
+                active={activeIndex === globalIndex}
+                setActive={(value) => {
+                  setActiveIndex(value ? globalIndex : null);
+                }}
+              />
+              <hr className='w-full h-[1px] bg-[#93969D] m-0' />
+            </>
           );
         })}
 
@@ -63,16 +69,19 @@ const AppMainQuestions = ({ faqs }: AppMainQuestionsProps) => {
               const globalIndex = SSR_FAQ_ITEMS_COUNT + index;
 
               return (
-                <QuestionsBlock
-                  number={globalIndex + 1}
-                  key={item.id}
-                  title={item.heading}
-                  text={item.content}
-                  active={activeIndex === globalIndex}
-                  setActive={(value) => {
-                    setActiveIndex(value ? globalIndex : null);
-                  }}
-                />
+                <>
+                  <QuestionsBlock
+                    number={globalIndex + 1}
+                    key={item.id}
+                    title={item.heading}
+                    text={item.content}
+                    active={activeIndex === globalIndex}
+                    setActive={(value) => {
+                      setActiveIndex(value ? globalIndex : null);
+                    }}
+                  />
+                  <hr className='w-full h-[1px] bg-[#93969D] m-0' />
+                </>
               );
             }}
           />

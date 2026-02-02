@@ -72,21 +72,27 @@ const AppMainDocuments = () => {
             const globalIndex = index;
 
             return (
-              <MainDocumentItem
-                link={item.slug}
-                key={item.slug || globalIndex}
-                setActive={itemSetActiveHandlers[globalIndex]}
-                active={globalIndex === activeIndex}
-                content={item.description}
-                documentsList={item.documents}
-                navigationList={item.navigationList}
-                duration={item.duration}
-                img={item.img}
-                price={item.price}
-                title={item.title}
-                totalItems={totalItems}
-                index={globalIndex + 1}
-              />
+              <>
+                {index === 0 && (
+                  <hr className='w-full h-[1px] bg-[#93969D] m-0' />
+                )}
+                <MainDocumentItem
+                  link={item.slug}
+                  key={item.slug || globalIndex}
+                  setActive={itemSetActiveHandlers[globalIndex]}
+                  active={globalIndex === activeIndex}
+                  content={item.description}
+                  documentsList={item.documents}
+                  navigationList={item.navigationList}
+                  duration={item.duration}
+                  img={item.img}
+                  price={item.price}
+                  title={item.title}
+                  totalItems={totalItems}
+                  index={globalIndex + 1}
+                />
+                <hr className='w-full h-[1px] bg-[#93969D] m-0' />
+              </>
             );
           })}
 
@@ -101,21 +107,24 @@ const AppMainDocuments = () => {
                 const globalIndex = SSR_ITEMS_COUNT + index;
 
                 return (
-                  <MainDocumentItem
-                    link={item.slug}
-                    key={item.slug || globalIndex}
-                    setActive={itemSetActiveHandlers[globalIndex]}
-                    active={globalIndex === activeIndex}
-                    content={item.description}
-                    documentsList={item.documents}
-                    navigationList={item.navigationList}
-                    duration={item.duration}
-                    img={item.img}
-                    price={item.price}
-                    title={item.title}
-                    totalItems={totalItems}
-                    index={globalIndex + 1}
-                  />
+                  <>
+                    <MainDocumentItem
+                      link={item.slug}
+                      key={item.slug || globalIndex}
+                      setActive={itemSetActiveHandlers[globalIndex]}
+                      active={globalIndex === activeIndex}
+                      content={item.description}
+                      documentsList={item.documents}
+                      navigationList={item.navigationList}
+                      duration={item.duration}
+                      img={item.img}
+                      price={item.price}
+                      title={item.title}
+                      totalItems={totalItems}
+                      index={globalIndex + 1}
+                    />
+                    <hr className='w-full h-[1px] bg-[#93969D] m-0' />
+                  </>
                 );
               }}
             />

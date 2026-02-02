@@ -124,18 +124,18 @@ const MainDocumentItem = memo(({
 
     return (
         <div
-            className={`${mainDocumentsStyles['document-wrapper-border']} group/main`}
+            className={`${mainDocumentsStyles['document-wrapper-border']} ${active ? mainDocumentsStyles['document-wrapper-border-active'] : ''} group/main`}
         >
 
-            <div
-                className={`${mainDocumentsStyles['document__border']} ${!active ? 'group-active/main:!border-[transparent] group-hover/main:!border-[transparent]' : mainDocumentsStyles.active}`}
-            />
+           
 
             <div
                 ref={wrapperRef}
                 className={` ${mainDocumentsStyles['document__box']} ${!active ? mainDocumentsStyles.active : ''}`}>
 
-                <div className={`pointer-events-none absolute top-0 bottom-0 right-0 left-0 z-[1] rounded-[6px]  ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border-[transparent]  border-solid border`}></div>
+                <div
+                    className={`pointer-events-none absolute -top-[1px] -bottom-[1px] right-0 left-0 z-[3] rounded-[6px]  ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border border-solid border-[transparent]`}
+                />
 
                 <DocumentHeader
                     index={index || 0}
