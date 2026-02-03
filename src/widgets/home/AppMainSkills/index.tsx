@@ -98,7 +98,7 @@ const AppMainSkills = () => {
       <div className="flex justify-between items-center wrapper">
         <h2 className={`${textSize.headerH2} section__title`}>{t('MainSkills.sectionTitle')}</h2>
 
-        <LinkButtonTitle  title="Подробнее о компании" link="/services" />
+        <LinkButtonTitle  title="Подробнее о компании" link="/about" />
       </div>
 
       <div className={stylesMainSkills['skills__wrapper']}>

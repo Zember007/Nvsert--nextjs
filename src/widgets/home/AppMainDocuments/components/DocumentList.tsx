@@ -47,7 +47,7 @@ export const DocumentList: FC<DocumentListProps> = memo(
               onClick={() => setListHidden(!listHidden)}
             >
               <span
-                className={`${stylesBtn.lineAfter} !leading-[1.2] whitespace-nowrap`}
+                className={`${stylesBtn.lineAfter} !leading-[1.2] whitespace-nowrap !font-normal`}
               >
                 {listHidden
                   ? t('documents.showFullList')
