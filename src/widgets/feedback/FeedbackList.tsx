@@ -11,7 +11,7 @@ const FeedbackList = ({ content, title, showServices, setShowServices }: { conte
 
     const clip0_4632_2058 = useId()
     return (
-        <div className="flex-1 flex flex-col gap-[20px]">
+        <div className="flex-1 flex flex-col gap-[20px] h-full">
             <h6 className={`${textSize.headerH6} !font-normal`}>{title}</h6>
             {content && (
                 <>
