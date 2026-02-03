@@ -68,9 +68,15 @@ function groupByCategory(items: FeedbackItem[], uncategorizedTitle: string): Fee
     }
     const groups = Array.from(map.values());
     for (const g of groups) {
-        g.items.sort((a, b) => (a.order ?? 0) - (b.order ?? 0) || a.title.localeCompare(b.title));
+        g.items.sort((a, b) => a.title.localeCompare(b.title) || (a.order ?? 0) - (b.order ?? 0));
     }
-    groups.sort((a, b) => a.order - b.order || a.title.localeCompare(b.title));
+    groups.sort((a, b) => a.title.localeCompare(b.title) || (a.order ?? 0) - (b.order ?? 0));
+    // Группа «другие категории» (без категории) всегда в конце
+    const uncategorizedIndex = groups.findIndex((g) => g.id === -1 || g.slug === 'uncategorized');
+    if (uncategorizedIndex !== -1) {
+        const [uncategorized] = groups.splice(uncategorizedIndex, 1);
+        groups.push(uncategorized);
+    }
     return groups;
 }
 
