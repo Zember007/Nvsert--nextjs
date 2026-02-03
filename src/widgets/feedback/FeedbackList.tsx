@@ -4,10 +4,9 @@ import { useTranslation } from 'react-i18next';
 import textSize from '@/assets/styles/base/base.module.scss';
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 
-const FeedbackList = ({ content, title }: { content: string, title: string }) => {
+const FeedbackList = ({ content, title, showServices, setShowServices }: { content: string, title: string, showServices: boolean, setShowServices: (showServices: boolean) => void }) => {
 
     const { processContent } = useRichTextRenderer();
-    const [showServices, setShowServices] = useState<boolean>(false);
     const { t } = useTranslation();
 
     const clip0_4632_2058 = useId()
@@ -25,12 +24,7 @@ const FeedbackList = ({ content, title }: { content: string, title: string }) =>
                     </div>
 
                     <button
-                        className={`${textSize.text2} font-normal text-[#34446D] flex pt-[15px] pl-auto grow justify-end !items-end ${stylesBtn.lineAfterBox} ${stylesBtn.btnIconAn} !gap-[5px]`}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            e.preventDefault();
-                            setShowServices(!showServices)
-                        }}
+                        className={`${textSize.text2} font-normal text-[#34446D] flex pt-[15px] pl-auto grow justify-end !items-end  ${stylesBtn.btnIconAn} !gap-[5px]`}
                     >
                         <span className={`${stylesBtn.lineAfter} !leading-[1.2] whitespace-nowrap`}>
                             {!showServices ? t('common.showReview') : t('common.hideReview')}
