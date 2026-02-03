@@ -24,6 +24,7 @@ jobs:
 
       - name: Build vendored react-photo-view
         run: |
+          npm install 
           cd src/assets/lib/react-photo-view
           npm ci
           npm run build
