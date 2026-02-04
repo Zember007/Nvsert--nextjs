@@ -107,8 +107,8 @@ const GridBox: React.FC<GridBoxProps> = ({ gridContent, processContent }) => {
                 ))}
             </div>
 
-            <div className={`${stylesSlider.slideDotsBoxContainer} !flex my-[20px]`}>
-                <div className={`${stylesSlider.slideDotsBox} !flex`}>
+            <div className={`${stylesSlider.slideDotsBoxContainer} my-[20px]`}>
+                <div className={`${stylesSlider.slideDotsBox}`}>
                     {gridBlocks.map((_, i) => (
                         <div key={i} className={`${activeIndex === i ? stylesSlider.activeDots : ""} ${stylesSlider.slideDots}`}></div>
                     ))}

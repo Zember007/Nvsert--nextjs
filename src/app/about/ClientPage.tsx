@@ -174,13 +174,13 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
             {aboutData.content?.map((block, index) => {
                 return (
                     (
-                        <div key={block.id} id={`block-${index + 1}`} className="w-full">
+                        <div key={block.id} id={`block-${index}`} className="w-full">
 
 
                             <CollapseSection
                                 title={block.heading}
-                                isOpen={!sectionsOpen.includes(index + 1)}
-                                onToggle={() => toggleSection(index + 1)}
+                                isOpen={!sectionsOpen.includes(index)}
+                                onToggle={() => toggleSection(index)}
                             >
                                 {block.image?.url && index === 0 && (
                                     <div className="max-w-full mx-auto mb-[50px] mt-[30px] flex justify-center">
