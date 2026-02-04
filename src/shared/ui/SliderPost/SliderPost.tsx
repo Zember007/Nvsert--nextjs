@@ -2,7 +2,7 @@
 
 import { useWindowSize } from 'shared/hooks';
 import { horizontalLoop } from '@/scripts/slider';
-import React, { useCallback, useEffect, useId, useRef, useState } from 'react';
+import React, { useEffect, useId, useRef, useState } from 'react';
 import gsap from 'gsap';
 import styles from '@/assets/styles/base/base.module.scss';
 
@@ -70,7 +70,7 @@ function SliderPost<ItemType = unknown>({
 
         let timeoutIdBg: NodeJS.Timeout | null = null;
 
-         timeLine.current = horizontalLoop(slides, {
+        timeLine.current = horizontalLoop(slides, {
             paused: true,
             draggable: true,
             mobile: widthWindow && widthWindow < 1280,
@@ -124,10 +124,10 @@ function SliderPost<ItemType = unknown>({
     if (!items || items.length === 0) {
         return null;
     }
-    const handleDotClick = useCallback((index: number) => {
+    const handleDotClick = (index: number) => {
         if (!timeLine.current) return;
         timeLine.current.toIndex(index, { ease: 'power3', duration: 0.725 });
-    }, []);
+    };
 
     return (
         <div
