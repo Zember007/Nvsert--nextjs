@@ -2,7 +2,7 @@
 
 import { useWindowSize } from 'shared/hooks';
 import { horizontalLoop } from '@/scripts/slider';
-import React, { useEffect, useId, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useId, useRef, useState } from 'react';
 import gsap from 'gsap';
 import styles from '@/assets/styles/base/base.module.scss';
 
@@ -29,13 +29,14 @@ function SliderPost<ItemType = unknown>({
 }: SliderPostProps<ItemType>) {
     const { width: widthWindow } = useWindowSize();
     const sliderRef = useRef<HTMLDivElement>(null);
+    const timeLine = useRef<any>(null);
     const [activeIndex, setActiveIndex] = useState<number>(0);
     const DataSlider = useId();
     const gap = widthWindow && widthWindow < 640 ? (widthWindow - 300) / 2 : 20;
 
     // Инициализация слайдера
     useEffect(() => {
-        if (!items || items.length === 0) return;
+        if (!items || items.length === 0 || timeLine.current) return;
 
         const currentRef = sliderRef.current;
         if (!currentRef) return;
@@ -69,7 +70,7 @@ function SliderPost<ItemType = unknown>({
 
         let timeoutIdBg: NodeJS.Timeout | null = null;
 
-        const loop: any = horizontalLoop(slides, {
+         timeLine.current = horizontalLoop(slides, {
             paused: true,
             draggable: true,
             mobile: widthWindow && widthWindow < 1280,
@@ -98,7 +99,7 @@ function SliderPost<ItemType = unknown>({
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
-                    loop.next({ ease: 'power3', duration: 0.725 });
+                    timeLine.current?.next({ ease: 'power3', duration: 0.725 });
 
                     if (currentRef) {
                         observer.unobserve(currentRef);
@@ -111,7 +112,8 @@ function SliderPost<ItemType = unknown>({
         observer.observe(currentRef);
 
         return () => {
-            loop.destroy();
+            timeLine.current?.destroy();
+            timeLine.current = null;
             observer.unobserve(currentRef);
             if (timeoutIdBg) {
                 clearTimeout(timeoutIdBg);
@@ -122,6 +124,10 @@ function SliderPost<ItemType = unknown>({
     if (!items || items.length === 0) {
         return null;
     }
+    const handleDotClick = useCallback((index: number) => {
+        if (!timeLine.current) return;
+        timeLine.current.toIndex(index, { ease: 'power3', duration: 0.725 });
+    }, []);
 
     return (
         <div
@@ -163,14 +169,14 @@ function SliderPost<ItemType = unknown>({
             >
                 {typeof renderItem === 'function' && Array.isArray(items)
                     ? items.map((item, index) => (
-                          <div
-                              key={index}
-                              data-slider={DataSlider}
-                              className={`transition-opacity duration-300  ${itemClassName || ''}`}
-                          >
-                              {renderItem(item, index)}
-                          </div>
-                      ))
+                        <div
+                            key={index}
+                            data-slider={DataSlider}
+                            className={`transition-opacity duration-300  ${itemClassName || ''}`}
+                        >
+                            {renderItem(item, index)}
+                        </div>
+                    ))
                     : null}
             </div>
 
@@ -179,6 +185,7 @@ function SliderPost<ItemType = unknown>({
                     <div className={`${styles.slideDotsBox} !flex`}>
                         {items.map((_, i) => (
                             <div
+                                onClick={() => handleDotClick(i)}
                                 key={i}
                                 className={`${activeIndex === i ? styles.activeDots : ''} ${styles.slideDots}`}
                             ></div>

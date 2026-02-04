@@ -185,6 +185,7 @@ const AppMainSlider = () => {
           activeIndex={activeIndex}
           containerClassName={`${stylesSlider.slideDotsBoxContainer} xl:!hidden`}
           boxClassName={`${stylesSlider.slideDotsBox} xl:!hidden`}
+          handleDotClick={handleDotClick}
         />
 
         <div ref={overlayText} className={stylesMainSlider.overlay}>
@@ -243,6 +244,7 @@ const AppMainSlider = () => {
           activeIndex={activeIndex}
           containerClassName={`${stylesSlider.slideDotsBoxContainer} xl:!hidden`}
           boxClassName={`${stylesSlider.slideDotsBox} xl:!hidden`}
+          handleDotClick={handleDotClick}
         />
 
 
@@ -312,6 +314,7 @@ interface SliderDotsProps {
   activeIndex: number;
   containerClassName?: string;
   boxClassName?: string;
+  handleDotClick: (index: number) => void;
 }
 
 const SliderDots: React.FC<SliderDotsProps> = memo(
@@ -320,6 +323,7 @@ const SliderDots: React.FC<SliderDotsProps> = memo(
     activeIndex,
     containerClassName = '',
     boxClassName = '',
+    handleDotClick,
   }) => {
     return (
       <div className={containerClassName}>
@@ -327,6 +331,7 @@ const SliderDots: React.FC<SliderDotsProps> = memo(
           {Array.from({ length: count }).map((_, i) => (
             <div
               key={i}
+              onClick={() => handleDotClick(i)}
               className={`${activeIndex === i ? stylesSlider.activeDots : ''} ${stylesSlider.slideDots}`}
             ></div>
           ))}
