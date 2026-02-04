@@ -349,7 +349,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
           <div className="flex flex-col gap-[20px]">
             <div className="flex items-center justify-between">
               <span className={textSize.headerH2}>{data.requisitesSection.heading}</span>
-              <a href={pdfHref} download rel="noopener noreferrer">
+              <a href={pdfHref} download rel="noopener noreferrer" className='no-underline'>
                 <Button label={data.requisitesSection.downloadButtonLabel} />
               </a>
             </div>
@@ -359,14 +359,14 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
           <div className="p-[40px] bg-[#f1f1ed] rounded-[8px] border border-[#93969d] flex justify-between m:flex-row flex-col-reverse gap-[30px] items-center">
             <div className="flex flex-col gap-[16px]">
               <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
-                <span className={textSize.text1 + ' font-normal text-[#000]'}>
+                <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
                   {t('contacts.requisites.labels.fullName')}:
                 </span>
                 <span className={textSize.text3}>{data.requisitesSection.legal.fullName}</span>
               </div>
               {data.requisitesSection.legal.legalAddress && (
                 <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
-                  <span className={textSize.text1 + ' font-normal text-[#000]'}>
+                  <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
                     {t('contacts.requisites.labels.legalAddress')}:
                   </span>
                   <span className={textSize.text3}>{data.requisitesSection.legal.legalAddress}</span>
@@ -374,7 +374,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
               )}
               {data.requisitesSection.legal.inn && (
                 <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
-                  <span className={textSize.text1 + ' font-normal text-[#000]'}>
+                  <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
                     {t('contacts.requisites.labels.inn')}:
                   </span>
                   <span className={textSize.text3}>{data.requisitesSection.legal.inn}</span>
@@ -382,7 +382,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
               )}
               {data.requisitesSection.legal.ogrn && (
                 <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
-                  <span className={textSize.text1 + ' font-normal text-[#000]'}>
+                  <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
                     {t('contacts.requisites.labels.ogrn')}:
                   </span>
                   <span className={textSize.text3}>{data.requisitesSection.legal.ogrn}</span>
@@ -390,7 +390,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
               )}
               {data.requisitesSection.legal.director && (
                 <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
-                  <span className={textSize.text1 + ' font-normal text-[#000]'}>
+                  <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
                     {t('contacts.requisites.labels.director')}:
                   </span>
                   <span className={textSize.text3}>{data.requisitesSection.legal.director}</span>
@@ -398,7 +398,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
               )}
               {data.requisitesSection.legal.email && (
                 <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
-                  <span className={textSize.text1 + ' font-normal text-[#000]'}>
+                  <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
                     {t('contacts.requisites.labels.email')}:
                   </span>
                   <span className={textSize.text3}>{data.requisitesSection.legal.email}</span>
