@@ -163,7 +163,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
 
                   return (
                     <div
-                      className="p-[30px] flex xl:flex-col m:flex-row flex-col gap-[20px] w-full bg-[#f1f1ed] rounded-[6px] border border-[#93969d]"
+                      className="p-[30px] flex xl:flex-col m:flex-row flex-col gap-[20px] w-full bg-[#93969d26] rounded-[6px] border border-[#93969d]"
                       key={office.city}
                     >
                       <div className="relative overflow-hidden rounded-[6px]">
@@ -261,7 +261,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
           </div>
 
           <div className="flex flex-col gap-[20px]">
-            <div className="p-[40px] bg-[#f1f1ed] rounded-[8px] border border-[#93969d] flex justify-between m:flex-row flex-col-reverse gap-[30px] items-center">
+            <div className="p-[40px] bg-[#93969d26] rounded-[8px] border border-[#93969d] flex justify-between m:flex-row flex-col-reverse gap-[30px] items-center">
               <div className="flex flex-col gap-[30px]">
                 <span className={textSize.headerH3}>{data.connectSection.consultationTitle}</span>
                 <div className={textSize.text3 + ' max-w-[660px]'}>
@@ -356,7 +356,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
             <div className={textSize.text3}>{processContent(data.requisitesSection.description)}</div>
           </div>
 
-          <div className="p-[40px] bg-[#f1f1ed] rounded-[8px] border border-[#93969d] flex justify-between m:flex-row flex-col-reverse gap-[30px] items-center">
+          <div className="p-[40px] bg-[#93969d26] rounded-[8px] border border-[#93969d] flex justify-between m:flex-row flex-col-reverse gap-[30px] items-center">
             <div className="flex flex-col gap-[16px]">
               <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
                 <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
