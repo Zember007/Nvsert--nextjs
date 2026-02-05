@@ -79,9 +79,26 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation }) 
   const recomendedServices = useMemo(() => {
     if (!navigation || !currentService) return [] as NavigationItem[];
 
+    const currentCategoryName = currentService?.category?.name ?? null;
+
     const sorted = navigation
-      .filter((item) => item.slug !== currentService.slug)
-      .sort((a, b) => (a.category.name === currentService.category.name ? -1 : 1));
+      .filter((item) => item?.slug && item.slug !== currentService.slug)
+      // guard: some services can have null category during SSG/SSR
+      .filter((item) => Boolean(item?.category?.name))
+      .sort((a, b) => {
+        const aName = a?.category?.name ?? '';
+        const bName = b?.category?.name ?? '';
+
+        if (currentCategoryName) {
+          const aMatches = aName === currentCategoryName;
+          const bMatches = bName === currentCategoryName;
+          if (aMatches && !bMatches) return -1;
+          if (!aMatches && bMatches) return 1;
+        }
+
+        // stable-ish secondary ordering to avoid inconsistent sort output
+        return (a?.title ?? '').localeCompare(b?.title ?? '');
+      });
 
     return sorted.slice(0, 3);
   }, [navigation, currentService]);
