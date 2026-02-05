@@ -4,7 +4,9 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { CollapseSection } from 'widgets/layout';
 import textSize from '@/assets/styles/base/base.module.scss';
+import stylesBtn from '@/assets/styles/base/base.module.scss';
 import OkpdPrefix from 'widgets/okpd/OkpdPrefix';
+import OkpdUnderlineText from 'widgets/okpd/OkpdUnderlineText';
 import { VirtualizedList } from 'widgets/home/utils/VirtualizedList';
 
 export type TnvedItem = {
@@ -284,16 +286,15 @@ export default function TnvedHierarchy({
                   <div key={chapterNode.nodeId} ref={setChapterEl(chapter)} data-chapter={chapter}>
                     <button
                       type="button"
-                      className={[
-                        `${textSize.headerH6} text-left`,
-                        'text-black font-semibold',
-                        'hover:underline hover:underline-offset-4',
-                        'active:translate-y-[1px] active:underline active:underline-offset-4 mb-[10px]',
-                      ].join(' ')}
+                      className={`text-left active:translate-y-[1px] mb-[10px] ${stylesBtn.lineAfterBox}`}
                       aria-expanded={chapterOpen}
                       onClick={() => handleToggleChapter(chapter)}
                     >
-                      {formatNodeTitle(chapterNode)}
+                      <OkpdUnderlineText
+                        text={formatNodeTitle(chapterNode)}
+                        className={`${textSize.headerH6} text-black font-semibold`}
+                        active={false}
+                      />
                     </button>
 
                     {chapterOpen && (
@@ -343,16 +344,7 @@ export default function TnvedHierarchy({
                                       />
                                       <button
                                         type="button"
-                                        className={[
-                                          `${textSize.text1} pl-[12px] text-left`,
-                                          'font-light',
-                                          'hover:underline hover:decoration-[#34446D] hover:underline-offset-4',
-                                          'active:translate-y-[1px] active:underline active:decoration-[#34446D] active:underline-offset-4',
-                                          isActive ? 'text-[#34446D]' : 'text-inherit',
-                                          selectedNodeId === item.nodeId
-                                            ? 'underline decoration-[#34446D] underline-offset-4'
-                                            : 'no-underline',
-                                        ].join(' ')}
+                                        className={`pl-[12px] text-left active:translate-y-[1px] ${stylesBtn.lineAfterBox}`}
                                         aria-expanded={actualHasChildren ? isExpanded : undefined}
                                         onClick={() => {
                                           setSelectedNodeIdByChapter((prev) => ({ ...prev, [chapter]: item.nodeId }));
@@ -366,7 +358,11 @@ export default function TnvedHierarchy({
                                           });
                                         }}
                                       >
-                                        {title}
+                                        <OkpdUnderlineText
+                                          text={title}
+                                          className={`${textSize.text1} font-light`}
+                                          active={isActive}
+                                        />
                                       </button>
                                     </div>
                                   </RowContainer>
@@ -387,16 +383,7 @@ export default function TnvedHierarchy({
                                       />
                                       <button
                                         type="button"
-                                        className={[
-                                          textClass,
-                                          'text-left',
-                                          'hover:underline hover:decoration-[#34446D] hover:underline-offset-4',
-                                          'active:translate-y-[1px] active:underline active:decoration-[#34446D] active:underline-offset-4',
-                                          isActive ? 'text-[#34446D]' : 'text-inherit',
-                                          selectedNodeId === item.nodeId
-                                            ? 'underline decoration-[#34446D] underline-offset-4'
-                                            : 'no-underline',
-                                        ].join(' ')}
+                                        className={`text-left active:translate-y-[1px] ${stylesBtn.lineAfterBox}`}
                                         aria-expanded={actualHasChildren ? isExpanded : undefined}
                                         onClick={() => {
                                           setSelectedNodeIdByChapter((prev) => ({ ...prev, [chapter]: item.nodeId }));
@@ -411,7 +398,11 @@ export default function TnvedHierarchy({
                                           });
                                         }}
                                       >
-                                        {title}
+                                        <OkpdUnderlineText
+                                          text={title}
+                                          className={textClass}
+                                          active={isActive}
+                                        />
                                       </button>
                                     </div>
                                   </div>

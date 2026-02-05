@@ -4,7 +4,9 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { CollapseSection } from 'widgets/layout';
 import textSize from '@/assets/styles/base/base.module.scss';
+import stylesBtn from '@/assets/styles/base/base.module.scss';
 import OkpdPrefix from 'widgets/okpd/OkpdPrefix';
+import OkpdUnderlineText from 'widgets/okpd/OkpdUnderlineText';
 import { VirtualizedList } from 'widgets/home/utils/VirtualizedList';
 
 export type Okpd2Item = {
@@ -401,19 +403,7 @@ export default function OkpdHierarchy({
 
                                                             <button
                                                                 type="button"
-                                                                className={[
-                                                                    `${textSize.text1} pl-[12px] text-left`,
-                                                                    // hover: underline
-                                                                    'font-light',
-                                                                    'hover:underline hover:decoration-[#34446D] hover:underline-offset-4',
-                                                                    // active: underline + вжатие
-                                                                    'active:translate-y-[1px] active:underline active:decoration-[#34446D] active:underline-offset-4',
-                                                                    // selected/active
-                                                                    isActive ? 'text-[#34446D]' : 'text-inherit',
-                                                                    selectedCode === item.code
-                                                                        ? 'underline decoration-[#34446D] underline-offset-4'
-                                                                        : 'no-underline',
-                                                                ].join(' ')}
+                                                                className={`pl-[12px] text-left active:translate-y-[1px] ${stylesBtn.lineAfterBox}`}
                                                                 aria-expanded={actualHasChildren ? isExpanded : undefined}
                                                                 onClick={() => {
                                                                     setSelectedCodeByRoot(prev => ({ ...prev, [root.code]: item.code }));
@@ -427,7 +417,11 @@ export default function OkpdHierarchy({
                                                                     });
                                                                 }}
                                                             >
-                                                                {formatNodeTitle(item)}
+                                                                <OkpdUnderlineText
+                                                                    text={formatNodeTitle(item)}
+                                                                    className={`${textSize.text1} font-light`}
+                                                                    active={isActive}
+                                                                />
                                                             </button>
                                                         </div>
                                                     </OkpdRowContainer>
@@ -451,16 +445,7 @@ export default function OkpdHierarchy({
                                                             />
                                                             <button
                                                                 type="button"
-                                                                className={[
-                                                                    textClass,
-                                                                    'text-left',
-                                                                    'hover:underline hover:decoration-[#34446D] hover:underline-offset-4',
-                                                                    'active:translate-y-[1px] active:underline active:decoration-[#34446D] active:underline-offset-4',
-                                                                    isActive ? 'text-[#34446D]' : 'text-inherit',
-                                                                    selectedCode === item.code
-                                                                        ? 'underline decoration-[#34446D] underline-offset-4'
-                                                                        : 'no-underline',
-                                                                ].join(' ')}
+                                                                className={`text-left active:translate-y-[1px] ${stylesBtn.lineAfterBox}`}
                                                                 aria-expanded={actualHasChildren ? isExpanded : undefined}
                                                                 onClick={() => {
                                                                     setSelectedCodeByRoot(prev => ({ ...prev, [root.code]: item.code }));
@@ -475,7 +460,11 @@ export default function OkpdHierarchy({
                                                                     });
                                                                 }}
                                                             >
-                                                                {formatNodeTitle(item)}
+                                                                <OkpdUnderlineText
+                                                                    text={formatNodeTitle(item)}
+                                                                    className={textClass}
+                                                                    active={isActive}
+                                                                />
                                                             </button>
                                                         </div>
                                                     </div>

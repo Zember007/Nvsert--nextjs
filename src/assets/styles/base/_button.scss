@@ -183,6 +183,29 @@
       }
   }
 
+  // Многострочный режим — скрываем стандартный ::after, 
+  // т.к. отдельные линии рендерятся через JS
+  &.multiline {
+      &:after {
+          display: none;
+      }
+
+      // Активное состояние — линии видны
+      &.active .lineAfterLine {
+          clip-path: inset(0 0 0 0);
+      }
+  }
+
+  // Hover из родительского lineAfterBox для многострочных линий
+  &Box:hover .lineAfter.multiline:not(.noactive) .lineAfterLine {
+      clip-path: inset(0 0 0 0);
+  }
+
+  // Hover на самом элементе
+  &.multiline:not(.noactive):hover .lineAfterLine {
+      clip-path: inset(0 0 0 0);
+  }
+
   --rule-path: inset(0 0 0 100%);
 
   &.right {
@@ -242,4 +265,11 @@
           clip-path: inset(0 0 0 0);
       }
   }
+}
+
+// Отдельные линии для многострочного подчеркивания
+// Определяем на верхнем уровне для корректного экспорта CSS-модулем
+.lineAfterLine {
+    clip-path: inset(0 0 0 100%);
+    transition: clip-path .2s ease;
 }
