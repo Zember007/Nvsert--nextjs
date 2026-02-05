@@ -7,15 +7,13 @@ import type { Okpd2Item } from 'widgets/okpd/OkpdHierarchy';
 import { OkpdSearchBar } from 'widgets/okpd/OkpdSearchBar';
 import { OkpdSearchResults } from 'widgets/okpd/OkpdSearchResults';
 import { useDebouncedValue } from 'widgets/okpd/search/useDebouncedValue';
-import { useOkpdSearchIndex } from 'widgets/okpd/search/useOkpdSearchIndex';
 
-function OkpdQuickSearchSectionImpl({ items }: { items: Okpd2Item[] }) {
+function OkpdQuickSearchSectionImpl() {
   const { t } = useTranslation();
   const [inputValue, setInputValue] = React.useState('');
   const debouncedInput = useDebouncedValue(inputValue, 250);
   const [committedQuery, setCommittedQuery] = React.useState('');
 
-  const { search } = useOkpdSearchIndex(items);
   const [isPending, startTransition] = React.useTransition();
   const [results, setResults] = React.useState<Okpd2Item[]>([]);
 
@@ -25,10 +23,34 @@ function OkpdQuickSearchSectionImpl({ items }: { items: Okpd2Item[] }) {
   }, [debouncedInput, startTransition]);
 
   React.useEffect(() => {
+    const q = committedQuery.trim();
+    if (!q) {
+      setResults([]);
+      return;
+    }
+
+    const ac = new AbortController();
     startTransition(() => {
-      setResults(search(committedQuery, 200));
+      // keep pending state, but fetch outside transition (state updates inside)
     });
-  }, [committedQuery, search, startTransition]);
+
+    (async () => {
+      try {
+        const locale = document?.documentElement?.lang === 'en' ? 'en' : 'ru';
+        const res = await fetch(`/api/okpd2s/search?q=${encodeURIComponent(q)}&limit=10&locale=${locale}`, {
+          signal: ac.signal,
+        });
+        if (!res.ok) return;
+        const json = await res.json();
+        const data = Array.isArray(json?.data) ? (json.data as Okpd2Item[]) : Array.isArray(json) ? (json as Okpd2Item[]) : [];
+        startTransition(() => setResults(data));
+      } catch {
+        // ignore
+      }
+    })();
+
+    return () => ac.abort();
+  }, [committedQuery, startTransition]);
 
   const submit = React.useCallback(() => {
     // мгновенно применяем текущий ввод

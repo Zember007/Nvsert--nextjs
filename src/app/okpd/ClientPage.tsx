@@ -18,9 +18,6 @@ const ClientPage = ({ initialItems, pageData }: { initialItems: Okpd2Item[]; pag
 
     const [hierarchyItems, setHierarchyItems] = React.useState<Okpd2Item[]>(() => initialItems || []);
 
-    // Full dataset for search (loaded separately so the tree can stay lazy/fast).
-    const [searchItems, setSearchItems] = React.useState<Okpd2Item[]>(() => initialItems || []);
-
     const [loadedSections, setLoadedSections] = React.useState<Set<string>>(() => new Set(['01']));
     const [loadingSections, setLoadingSections] = React.useState<Set<string>>(() => new Set());
     const loadingRef = React.useRef<Set<string>>(new Set());
@@ -90,27 +87,6 @@ const ClientPage = ({ initialItems, pageData }: { initialItems: Okpd2Item[]; pag
     const isSectionLoaded = React.useCallback((section: string) => loadedSections.has(section), [loadedSections]);
     const isSectionLoading = React.useCallback((section: string) => loadingSections.has(section), [loadingSections]);
 
-    // Load full dataset for fast search (fields-only to reduce payload).
-    React.useEffect(() => {
-        let cancelled = false;
-        (async () => {
-            try {
-                const res = await fetch(
-                    `/api/okpd2s?pagination[pageSize]=21000&fields[0]=code&fields[1]=name&fields[2]=level&fields[3]=hasChildren`,
-                );
-                if (!res.ok) return;
-                const json = await res.json();
-                const data = Array.isArray(json?.data) ? (json.data as Okpd2Item[]) : Array.isArray(json) ? (json as Okpd2Item[]) : [];
-                if (!cancelled && data.length) setSearchItems(data);
-            } catch {
-                // ignore
-            }
-        })();
-        return () => {
-            cancelled = true;
-        };
-    }, []);
-
     return (
 
         <StandardPageLayout
@@ -120,7 +96,7 @@ const ClientPage = ({ initialItems, pageData }: { initialItems: Okpd2Item[]; pag
             contentColumn={<FilesList />}
             showButton={true}
         >
-            <OkpdQuickSearchSection items={searchItems} />
+            <OkpdQuickSearchSection />
             <OkpdClassifierSection
                 items={hierarchyItems}
                 onSectionVisible={onSectionVisible}
