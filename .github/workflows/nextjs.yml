@@ -71,6 +71,8 @@ jobs:
               git pull origin ${{ github.ref_name }}
             fi
 
+            rm -rf .next
+
             export NVM_DIR="$HOME/.nvm"
             if [ ! -d "$NVM_DIR" ]; then
               curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.6/install.sh | bash
