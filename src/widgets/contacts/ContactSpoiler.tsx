@@ -47,7 +47,7 @@ const ContactSpoiler = ({ isExpanded, onToggle, title, children }: { isExpanded:
 
                     <div className={`flex gap-[22px] justify-start w-fit items-center transition-transform duration-100  group-active:scale-[.9]`}>
                         <svg
-                            className={` text-black transition-transform duration-100 ${isExpanded ? 'rotate-90 translate-x-[4px] translate-y-[4px]' : ''}`}
+                            className={` text-black transition-transform duration-100 ${isExpanded ? 'rotate-90 translate-x-[4px] translate-y-[2px]' : ''}`}
                             width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clipPath={`url(#${clipId})`}>
                                 <path d="M4.404 3.30273L7.835 6.62973C8.055 6.84273 8.055 7.15673 7.835 7.36973L1.205 13.7997C0.79 14.2007 0 13.9577 0 13.4297V7.70673L4.404 3.30273Z" fill="currentColor" />

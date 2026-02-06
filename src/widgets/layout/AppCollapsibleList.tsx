@@ -39,7 +39,7 @@ function AppCollapsibleList<ItemType = unknown>({
             >
                 <span className={`flex items-center   group-active:scale-[0.95] transition-all duration-100 ${isOpen ? 'gap-[14px]' : 'gap-[10px]'}`}>
                     <svg
-                        className={`group-hover:text-[#34446D] text-[black] transition-transform duration-100 ${isOpen ? 'rotate-90 translate-x-[4px] translate-y-[4px]' : ''}`}
+                        className={`group-hover:text-[#34446D] text-[black] transition-transform duration-100 ${isOpen ? 'rotate-90 translate-x-[4px] translate-y-[2px]' : ''}`}
                         width="9"
                         height="16"
                         viewBox="0 0 9 16"

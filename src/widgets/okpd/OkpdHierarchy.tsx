@@ -224,24 +224,26 @@ export default function OkpdHierarchy({
             for (const h5 of h5Items) {
                 rows.push({ kind: 'h5', item: h5, depth: 0 });
 
-                // depth=1 — список h6 под этим h5 (видим всегда)
-                const h6Items = byParent.get(h5.code) ?? [];
-                for (const h6 of h6Items) {
-                    rows.push({ kind: 'h6', item: h6, depth: 1, sectionCode: h5.code });
+                // depth=1 — список h6 под этим h5 (видим только если h5 раскрыт)
+                if (expandedSet.has(h5.code)) {
+                    const h6Items = byParent.get(h5.code) ?? [];
+                    for (const h6 of h6Items) {
+                        rows.push({ kind: 'h6', item: h6, depth: 1, sectionCode: h5.code });
 
-                    // дальнейшие уровни показываем по раскрытым узлам
-                    const walk = (parentCode: string, depth: number, sectionCode: string) => {
-                        const children = byParent.get(parentCode) ?? [];
-                        for (const child of children) {
-                            rows.push({ kind: 'text', item: child, depth, sectionCode });
-                            if (expandedSet.has(child.code)) {
-                                walk(child.code, depth + 1, sectionCode);
+                        // дальнейшие уровни показываем по раскрытым узлам
+                        const walk = (parentCode: string, depth: number, sectionCode: string) => {
+                            const children = byParent.get(parentCode) ?? [];
+                            for (const child of children) {
+                                rows.push({ kind: 'text', item: child, depth, sectionCode });
+                                if (expandedSet.has(child.code)) {
+                                    walk(child.code, depth + 1, sectionCode);
+                                }
                             }
-                        }
-                    };
+                        };
 
-                    if (expandedSet.has(h6.code)) {
-                        walk(h6.code, 2, h5.code);
+                        if (expandedSet.has(h6.code)) {
+                            walk(h6.code, 2, h5.code);
+                        }
                     }
                 }
             }
@@ -384,7 +386,28 @@ export default function OkpdHierarchy({
                                                 return (
                                                     <OkpdRowContainer row={row}>
                                                         <h5 className={`${textSize.headerH6}`}>
-                                                            {formatNodeTitle(item)}
+                                                            <button
+                                                                type="button"
+                                                                className={`text-left active:translate-y-[1px] ${stylesBtn.lineAfterBox}`}
+                                                                aria-expanded={actualHasChildren ? isExpanded : undefined}
+                                                                onClick={() => {
+                                                                    setSelectedCodeByRoot(prev => ({ ...prev, [root.code]: item.code }));
+                                                                    if (!actualHasChildren) return;
+                                                                    setExpandedByRoot(prev => {
+                                                                        const curr = prev[root.code] ?? [];
+                                                                        const next = new Set(curr);
+                                                                        if (next.has(item.code)) next.delete(item.code);
+                                                                        else next.add(item.code);
+                                                                        return { ...prev, [root.code]: [...next] };
+                                                                    });
+                                                                }}
+                                                            >
+                                                                <OkpdUnderlineText
+                                                                    text={formatNodeTitle(item)}
+                                                                    className={`${textSize.headerH6}`}
+                                                                    active={isActive}
+                                                                />
+                                                            </button>
                                                         </h5>
                                                     </OkpdRowContainer>
                                                 );
