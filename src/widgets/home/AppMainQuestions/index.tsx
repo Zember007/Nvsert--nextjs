@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import QuestionsBlock from './QuestionsBlock';
 import { useState } from 'react';
@@ -41,13 +42,12 @@ const AppMainQuestions = ({ faqs }: AppMainQuestionsProps) => {
           const globalIndex = index;
 
           return (
-            <>
-            {index === 0 && (
-              <hr className='w-full h-[1px] bg-[#93969D] m-0' />
-            )}
+            <React.Fragment key={item.id}>
+              {index === 0 && (
+                <hr className="w-full h-[1px] bg-[#93969D] m-0" />
+              )}
               <QuestionsBlock
                 number={globalIndex + 1}
-                key={item.id}
                 title={item.heading}
                 text={item.content}
                 active={activeIndex === globalIndex}
@@ -55,8 +55,8 @@ const AppMainQuestions = ({ faqs }: AppMainQuestionsProps) => {
                   setActiveIndex(value ? globalIndex : null);
                 }}
               />
-              <hr className='w-full h-[1px] bg-[#93969D] m-0' />
-            </>
+              <hr className="w-full h-[1px] bg-[#93969D] m-0" />
+            </React.Fragment>
           );
         })}
 
@@ -69,10 +69,9 @@ const AppMainQuestions = ({ faqs }: AppMainQuestionsProps) => {
               const globalIndex = SSR_FAQ_ITEMS_COUNT + index;
 
               return (
-                <>
+                <React.Fragment key={item.id}>
                   <QuestionsBlock
                     number={globalIndex + 1}
-                    key={item.id}
                     title={item.heading}
                     text={item.content}
                     active={activeIndex === globalIndex}
@@ -80,8 +79,8 @@ const AppMainQuestions = ({ faqs }: AppMainQuestionsProps) => {
                       setActiveIndex(value ? globalIndex : null);
                     }}
                   />
-                  <hr className='w-full h-[1px] bg-[#93969D] m-0' />
-                </>
+                  <hr className="w-full h-[1px] bg-[#93969D] m-0" />
+                </React.Fragment>
               );
             }}
           />
