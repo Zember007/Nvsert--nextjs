@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       type: "website",
-      locale: locale === "en" ? "en_US" : "ru_RU",
+      locale: "ru_RU",
     },
     verification: {
       yandex: "90db85a0cc46fb2c",
