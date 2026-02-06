@@ -1,7 +1,5 @@
 import React, { ReactNode } from "react";
 import type { Metadata, Viewport } from "next";
-import { cookies } from "next/headers";
-import { headers } from "next/headers";
 
 import initialNavigation from "@/assets/lib/navigation.json";
 import { NavigationItem } from "@/types/navigation";
@@ -10,29 +8,15 @@ import {
   BASE_URL,
   DEFAULT_LOCALE,
   STRAPI_ORIGIN,
-  normalizeLocale,
   type SupportedLocale,
 } from "shared/config/env";
 import { tStatic } from "shared/i18n/static";
 
 export async function generateMetadata(): Promise<Metadata> {
-  let locale: SupportedLocale = DEFAULT_LOCALE;
-  if (process.env.NEXT_PHASE !== "phase-production-build") {
-    try {
-      const hdrs = await headers();
-      locale = normalizeLocale(hdrs.get("x-nvsert-locale"));
-    } catch {
-      // ignore
-    }
-    if (locale === DEFAULT_LOCALE) {
-      try {
-        const cks = await cookies();
-        locale = normalizeLocale(cks.get("nvsert_locale")?.value);
-      } catch {
-        // ignore
-      }
-    }
-  }
+  // IMPORTANT: Do not use request-bound APIs (cookies/headers) here.
+  // This project pre-renders many pages as static/SSG, and accessing cookies/headers
+  // would crash in production with "Page changed from static to dynamic at runtime".
+  const locale: SupportedLocale = DEFAULT_LOCALE;
 
   const title = tStatic(locale, "meta.site.title");
   const description = tStatic(locale, "meta.site.description");
@@ -74,25 +58,7 @@ export default async function RootLayout({
 }: {
   children: ReactNode;
 }) {
-  // Root layout is executed during prerender/build as well.
-  // Avoid request-bound APIs (headers/cookies) in build phase to keep static generation working.
-  let locale: SupportedLocale = DEFAULT_LOCALE;
-  if (process.env.NEXT_PHASE !== 'phase-production-build') {
-    try {
-      const hdrs = await headers();
-      locale = normalizeLocale(hdrs.get('x-nvsert-locale'));
-    } catch {
-      // ignore
-    }
-    if (locale === DEFAULT_LOCALE) {
-      try {
-        const cks = await cookies();
-        locale = normalizeLocale(cks.get('nvsert_locale')?.value);
-      } catch {
-        // ignore
-      }
-    }
-  }
+  const locale: SupportedLocale = DEFAULT_LOCALE;
   return (
     <html lang={locale}>
       <head>
