@@ -21,7 +21,7 @@ export async function generateMetadata({
   const resolvedParams = await Promise.resolve(params);
   const locale = normalizeLocale(resolvedParams.locale);
   const meta = await baseGenerateMetadata({
-    params: Promise.resolve({ slug: resolvedParams.slug }),
+    params: Promise.resolve({ slug: resolvedParams.slug, locale }),
   });
   return {
     ...meta,

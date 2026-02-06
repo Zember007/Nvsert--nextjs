@@ -3,8 +3,7 @@ import { Metadata } from 'next';
 import ClientPage from './ClientPage';
 import { NavigationItem } from '@/types/navigation';
 import { getNavigationDataBySlug, resolveServiceOgImageUrl } from './seo-helpers';
-import { BASE_URL, SITE_URL } from 'shared/config/env';
-import { getRequestLocale } from 'shared/i18n/server-locale';
+import { BASE_URL, DEFAULT_LOCALE, normalizeLocale, SITE_URL } from 'shared/config/env';
 import { tStatic } from 'shared/i18n/static';
 
 
@@ -35,14 +34,14 @@ export async function generateStaticParams() {
 }
 
 type GenerateMetadataParams = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale?: string }>;
 };
 
 export async function generateMetadata(
   { params }: GenerateMetadataParams
 ): Promise<Metadata> {
-  const { slug } = await params;
-  const locale = await getRequestLocale();
+  const { slug, locale: localeParam } = await params;
+  const locale = normalizeLocale(localeParam);
   const ogLocale = locale === 'en' ? 'en_US' : 'ru_RU';
   const navigation = await getNavigationDataBySlug(slug);
 
@@ -104,17 +103,16 @@ export async function generateMetadata(
 export default async function Page({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale?: string }>;
 }) {
   try {
     const resolvedParams = await params;
     const slug = resolvedParams?.slug;
+    const locale = normalizeLocale(resolvedParams?.locale ?? DEFAULT_LOCALE);
     if (!slug) {
-      const locale = await getRequestLocale();
       return <div>{tStatic(locale, 'services.notFound')}</div>;
     }
 
-    const locale = await getRequestLocale();
     const navigation = await getNavigationDataBySlug(slug);
 
     if (!navigation) {
@@ -124,7 +122,7 @@ export default async function Page({
     return <ClientPage initialNavigation={navigation as NavigationItem} />;
   } catch (error) {
     console.error('[services][slug] Page render failed:', error);
-    const locale = await getRequestLocale().catch(() => 'ru' as const);
+    const locale = DEFAULT_LOCALE;
     return (
       <div className="p-6 text-center">
         {tStatic(locale, 'services.notFound')}
