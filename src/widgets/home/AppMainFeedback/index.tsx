@@ -177,7 +177,7 @@ const AppMainFeedback = () => {
         <h2 className={`${textSize.headerH2} section__title`}>
           {t('MainFeedback.title')}
         </h2>
-        <LinkButtonTitle title="Посмотреть все отзывы" link="/feedbacks" />
+        <LinkButtonTitle title="Посмотреть все отзывы" link="/feedback" />
       </div>
 
       <AsyncPhotoProvider
