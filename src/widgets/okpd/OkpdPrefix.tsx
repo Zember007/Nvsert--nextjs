@@ -20,7 +20,7 @@ const OkpdPrefix = ({
 
     const splitAt =
         position === 'middle'
-            ? '50%'
+            ? 'calc(50% - 3px)'
             : 'calc(100% - 3px)'; // примерно перед кончиком треугольника
 
     const lineStyle: React.CSSProperties =
