@@ -7,6 +7,7 @@ import { useAnimation, motion } from 'framer-motion';
 import stylesMainBanner from '@/assets/styles/main.module.scss';
 import { Button } from 'shared/ui';
 import { useHeaderContext } from 'shared/contexts/contexts/HeaderContext';
+import CountUp from '../../layout/countUp';
 
 const AppMainIntro = () => {
   const { t } = useTranslation();
@@ -46,9 +47,34 @@ const AppMainIntro = () => {
 };
 
 const AppMainIntroBadge = ({ title, description, side }: { title: string, description: string, side: 'left' | 'right' }) => {
+  const parseProcent = (procent: string): { value: number; suffix: string } => {
+    const match = procent.match(/(\d+(?:\.\d+)?)([+%]?)/);
+    if (match) {
+      return {
+        value: parseFloat(match[1]),
+        suffix: match[2] || ''
+      };
+    }
+    return { value: 0, suffix: '' };
+  };
+
   return (
     <div className={`flex flex-col gap-[20px] ${side === 'left' ? 'pl-[10px] border-l border-l-[#34446D]' : 'pr-[10px] border-r border-r-[#34446D] text-right'} text-[#34446D] font-light`}>
-      <span className="text-[40px] -my-[2%]">{title}</span>
+      <span className="text-[40px] -my-[2%]">
+        {(() => {
+          const { value, suffix } = parseProcent(title);
+          return (
+            <>
+              <CountUp
+                to={value}
+                duration={0.5}
+                className="inline-block"
+              />
+              {suffix && <span>{suffix}</span>}
+            </>
+          );
+        })()}
+      </span>
       <span className="text-[16px] max-w-[170px] -my-[2%]">{description}</span>
     </div>
   )
