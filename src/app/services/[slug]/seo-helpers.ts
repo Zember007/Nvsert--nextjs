@@ -1,6 +1,19 @@
 // Вспомогательные функции для страницы услуг (SEO и данные)
 import { SITE_URL, STRAPI_PUBLIC_URL } from 'shared/config/env';
 
+/**
+ * Returns a plain serializable copy of the API response.
+ * Avoids "Internal Server Error" when passing props to Client Components
+ * (Strapi/API may return circular refs or non-JSON-serializable values).
+ */
+function toSerializable<T>(data: T): T {
+  try {
+    return JSON.parse(JSON.stringify(data)) as T;
+  } catch {
+    return data;
+  }
+}
+
 export async function getNavigationDataBySlug(slug: string): Promise<any | null> {
   try {
     const res = await fetch(`${SITE_URL}/api/services/slug/${slug}`, {
@@ -8,7 +21,8 @@ export async function getNavigationDataBySlug(slug: string): Promise<any | null>
     });
 
     if (!res.ok) return null;
-    return await res.json();
+    const raw = await res.json();
+    return toSerializable(raw);
   } catch (error) {
     console.error('[services][slug] getNavigationDataBySlug failed:', error);
     return null;

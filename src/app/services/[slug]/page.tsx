@@ -106,13 +106,29 @@ export default async function Page({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params;
-  const locale = await getRequestLocale();
-  const navigation = await getNavigationDataBySlug(slug);
+  try {
+    const resolvedParams = await params;
+    const slug = resolvedParams?.slug;
+    if (!slug) {
+      const locale = await getRequestLocale();
+      return <div>{tStatic(locale, 'services.notFound')}</div>;
+    }
 
-  if (!navigation) {
-    return <div>{tStatic(locale, 'services.notFound')}</div>;
+    const locale = await getRequestLocale();
+    const navigation = await getNavigationDataBySlug(slug);
+
+    if (!navigation) {
+      return <div>{tStatic(locale, 'services.notFound')}</div>;
+    }
+
+    return <ClientPage initialNavigation={navigation as NavigationItem} />;
+  } catch (error) {
+    console.error('[services][slug] Page render failed:', error);
+    const locale = await getRequestLocale().catch(() => 'ru' as const);
+    return (
+      <div className="p-6 text-center">
+        {tStatic(locale, 'services.notFound')}
+      </div>
+    );
   }
-
-  return <ClientPage initialNavigation={navigation as NavigationItem} />;
 }
