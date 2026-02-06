@@ -358,14 +358,14 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
 
           <div className="p-[40px] bg-[#93969d26] rounded-[8px] border border-[#93969d] flex justify-between m:flex-row flex-col-reverse gap-[30px] items-center">
             <div className="flex flex-col gap-[16px]">
-              <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
+              <div className="flex  gap-[10px] m:flex-row flex-col">
                 <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
                   {t('contacts.requisites.labels.fullName')}:
                 </span>
                 <span className={textSize.text3}>{data.requisitesSection.legal.fullName}</span>
               </div>
               {data.requisitesSection.legal.legalAddress && (
-                <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
+                <div className="flex  gap-[10px] m:flex-row flex-col">
                   <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
                     {t('contacts.requisites.labels.legalAddress')}:
                   </span>
@@ -373,7 +373,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
                 </div>
               )}
               {data.requisitesSection.legal.inn && (
-                <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
+                <div className="flex gap-[10px] m:flex-row flex-col">
                   <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
                     {t('contacts.requisites.labels.inn')}:
                   </span>
@@ -381,7 +381,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
                 </div>
               )}
               {data.requisitesSection.legal.ogrn && (
-                <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
+                <div className="flex gap-[10px] m:flex-row flex-col">
                   <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
                     {t('contacts.requisites.labels.ogrn')}:
                   </span>
@@ -389,7 +389,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
                 </div>
               )}
               {data.requisitesSection.legal.director && (
-                <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
+                <div className="flex gap-[10px] m:flex-row flex-col">
                   <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
                     {t('contacts.requisites.labels.director')}:
                   </span>
@@ -397,7 +397,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
                 </div>
               )}
               {data.requisitesSection.legal.email && (
-                <div className="flex m:items-center gap-[10px] m:flex-row flex-col">
+                <div className="flex gap-[10px] m:flex-row flex-col">
                   <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
                     {t('contacts.requisites.labels.email')}:
                   </span>

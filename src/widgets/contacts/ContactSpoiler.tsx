@@ -27,7 +27,7 @@ const ContactSpoiler = ({ isExpanded, onToggle, title, children }: { isExpanded:
                     setShouldAnimateIn(true);
                 }
             },
-            { threshold: 0.15 }
+            { threshold: 0.01 }
         );
 
         observer.observe(el);
@@ -70,7 +70,7 @@ const ContactSpoiler = ({ isExpanded, onToggle, title, children }: { isExpanded:
             <div className={`${!isExpanded ? 'max-h-[0px]' : `max-h-[2370px] m:pt-[100px] pt-[50px] m:pr-[290px]`} transition-all duration-200 overflow-hidden  `}>
                 <div
                     ref={contentRef}
-                    className={`wrapper transition-all duration-500 ease-out ${isExpanded ? 'will-change-transform' : ''} ${shouldAnimateIn ? 'translate-x-0 opacity-100' : 'translate-x-[60px] opacity-0'}`}
+                    className={`wrapper transition-all duration-500 ease-out ${isExpanded ? 'will-change-transform' : ''} ${shouldAnimateIn ? 'translate-x-0 opacity-100' : 'translate-x-[calc(100%+60px)] opacity-0 '}`}
                 >
 
                     {children}
