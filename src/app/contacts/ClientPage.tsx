@@ -260,7 +260,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
             <div className={textSize.text3}>{processContent(data.connectSection.description)}</div>
           </div>
 
-          <div className="flex flex-col gap-[20px]">
+          <div className="flex flex-col m:gap-[30px] gap-[20px]">
             <div className="p-[40px] bg-[#93969d26] rounded-[8px] border border-[#93969d] flex justify-between m:flex-row flex-col-reverse gap-[30px] items-center">
               <div className="flex flex-col gap-[30px]">
                 <span className={textSize.headerH3}>{data.connectSection.consultationTitle}</span>
@@ -287,7 +287,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
               </div>
             </div>
 
-            <div className="flex m:gap-[26px] gap-[20px] xl:flex-row flex-col">
+            <div className="flex m:gap-[30px] gap-[20px] xl:flex-row flex-col">
               {(data.connectSection.featureCards || []).map((card, index) => (
                 <div
                   key={card.title}
