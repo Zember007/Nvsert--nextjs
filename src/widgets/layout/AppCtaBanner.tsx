@@ -25,7 +25,7 @@ const AppCtaBanner: React.FC<CtaBannerProps> = ({
 
     return (
          text && description ? (
-            <div className={`mx-auto text-center l:max-w-[560px] xxs:max-w-[320px] m:max-w-[280px] w-full xxs:min-h-[300px] bg-[rgba(52,68,109,0.2)] rounded-[8px] flex flex-col justify-center items-center gap-[16px] s:py-[40px] px-[14px] py-[20px] backdrop-blur-sm ${className}`}>
+            <div className={`mx-auto text-center l:max-w-[560px] xxs:max-w-[320px] m:max-w-[280px] w-full xxs:min-h-[280px] bg-[rgba(52,68,109,0.2)] rounded-[8px] flex flex-col justify-center items-center gap-[16px] s:py-[40px] px-[14px] py-[20px] backdrop-blur-sm ${className}`}>
                 <h3 className={`${textSize.headerH4} text-black max-w-[460px]`}>
                     {text}
                 </h3>
