@@ -5,6 +5,8 @@ type OkpdPrefixState = 'default' | 'active' | 'ancestor';
 const BLUE = '#34446D';
 const GREY = '#93969D';
 
+const TRIANGLE_H = 6;
+
 const OkpdPrefix = ({
     position,
     hasChild = true,
@@ -17,11 +19,12 @@ const OkpdPrefix = ({
     state?: OkpdPrefixState;
 }) => {
     const showTriangle = hasChild && expanded;
+    const showVerticalLine = hasChild && state !== 'default' && showTriangle;
 
     const splitAt =
         position === 'middle'
             ? 'calc(50% - 3px)'
-            : 'calc(100% - 3px)'; // примерно перед кончиком треугольника
+            : 'calc(100% - 3px)';
 
     const lineStyle: React.CSSProperties =
         state === 'ancestor'
@@ -32,6 +35,9 @@ const OkpdPrefix = ({
                   backgroundColor: state === 'active' ? BLUE : GREY,
               };
 
+    const lineHeight =
+        position === 'middle' ? '50%' : `calc(100% - ${TRIANGLE_H}px)`;
+
     const triangleFill = state === 'active' || state === 'ancestor' ? BLUE : GREY;
     const dashStroke = state === 'active' ? BLUE : GREY;
 
@@ -39,8 +45,13 @@ const OkpdPrefix = ({
         <>
             {hasChild ? (
                 <span aria-hidden className="absolute left-0 top-0 bottom-0 z-10">
-                    {/* вертикальная линия */}
-                    <span className="absolute left-0 top-0 bottom-0 w-[1px]" style={lineStyle} />
+                    {/* вертикальная линия только при выделении и только до треугольника */}
+                    {showVerticalLine && (
+                        <span
+                            className="absolute left-0 top-0 w-[1px]"
+                            style={{ ...lineStyle, height: lineHeight }}
+                        />
+                    )}
 
                     {/* треугольник появляется только при раскрытии */}
                     {showTriangle && (
