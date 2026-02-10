@@ -4,12 +4,12 @@ import { AppBreadcrumbs } from 'widgets/layout';
 import { Button } from 'shared/ui';
 import { useHeaderContext } from 'shared/contexts';
 import textSize from '@/assets/styles/base/base.module.scss';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import Moscow from '@/assets/images/contacts/towns/moscow.jpg';
 import SaintPetersburg from '@/assets/images/contacts/towns/spb.jpg';
 import Pskov from '@/assets/images/contacts/towns/pskov.jpg';
 import ContactSpoiler from 'widgets/contacts/ContactSpoiler';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import ConsultationFallback from '@/assets/images/contacts/docs_icon.png';
 import FinanceIconFallback from '@/assets/images/contacts/finance_icon.png';
 import { useRichTextRenderer } from 'shared/lib';
@@ -275,16 +275,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
                   label={data.connectSection.consultationButtonLabel}
                 />
               </div>
-              <div className="w-[368px]">
-                <Image
-                  src={consultationImageSrc}
-                  width={typeof consultationImageSrc === 'string' ? consultationW : undefined}
-                  height={typeof consultationImageSrc === 'string' ? consultationH : undefined}
-                  alt={data.connectSection.consultationImage?.alternativeText || 'Consultation'}
-                  unoptimized={true}
-
-                />
-              </div>
+              <ImageAnimated src={consultationImageSrc} width={consultationW} height={consultationH} alt={data.connectSection.consultationImage?.alternativeText || 'Consultation'} unoptimized={true} />
             </div>
 
             <div className="flex m:gap-[30px] gap-[20px] xl:flex-row flex-col">
@@ -405,15 +396,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
                 </div>
               )}
             </div>
-            <div className="w-[368px]">
-              <Image
-                src={financeImageSrc}
-                width={typeof financeImageSrc === 'string' ? financeW : undefined}
-                height={typeof financeImageSrc === 'string' ? financeH : undefined}
-                alt={data.requisitesSection.image?.alternativeText || 'FinanceIcon'}
-                unoptimized={true}
-              />
-            </div>
+            <ImageAnimated src={financeImageSrc} width={financeW} height={financeH} alt={data.requisitesSection.image?.alternativeText || 'FinanceIcon'} unoptimized={true} />
           </div>
         </div>
       </ContactSpoiler>
@@ -423,3 +406,38 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
 
 export default ClientPage;
 
+
+const ImageAnimated = ({ src, width, height, alt, unoptimized }: { src: string | StaticImageData, width: number, height: number, alt: string, unoptimized: boolean }) => {
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const [shouldAnimateIn, setShouldAnimateIn] = useState(false);
+  useEffect(() => {
+    const el = contentRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry?.isIntersecting) {
+          setShouldAnimateIn(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.01 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+  return (
+    <div ref={contentRef} className={`flex-1 max-w-[368px] ${shouldAnimateIn ? 'translate-x-0 opacity-100' : 'translate-x-[calc(100%+60px)] opacity-0 '} transition-all duration-300`}>
+      <Image
+        className='w-full h-full object-cover'
+        src={src}
+        width={width}
+        height={height}
+        alt={alt}
+        unoptimized={unoptimized}
+      />
+    </div>
+  );
+};
