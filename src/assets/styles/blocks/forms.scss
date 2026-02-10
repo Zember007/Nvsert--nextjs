@@ -103,13 +103,13 @@
   }
 
   &__title {
+    @include transition();
+    @include text-2;
+
     position: absolute;
     top: 40px;
     left: 10px;
     z-index: 1;
-    
-    @include transition();
-    @include text-2;
 
     color: $input-placeholder-normal;
     max-width: calc(100% - 40px);

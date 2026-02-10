@@ -17,7 +17,7 @@
 }
 
 .borderButton {
-  @apply min-h-[50px] w-full items-center flex justify-between items-center w-full rounded-[4px] border-solid hover:bg-[#34446d33] hover:border-[#34446D] border-[transparent]  border;
+  @apply min-h-[50px] w-full items-center flex justify-between items-center w-full rounded-[4px] border-solid hover:bg-[#34446d33] hover:border-[#34446D] border-[transparent] border;
 
   padding: 10px 11px;
   text-align: left;
@@ -95,8 +95,8 @@
   box-sizing: border-box;
 
   &:not(.notBackdrop) {
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
   }
 
 
@@ -109,11 +109,11 @@
   backface-visibility: hidden;
 
   &:not(.noTransitions) {
-      transition: all 0.1s ease;
+    transition: all 0.1s ease;
   }
 
   &.noTransitions {
-      transition: transform 0.1s ease;
+    transition: transform 0.1s ease;
   }
 
 
@@ -134,38 +134,38 @@
   height: 50px;
 
   .sendIconLeft {
-      @apply block duration-100 transition-all ease-in translate-x-0 xl:translate-x-[-10%] xl:opacity-0 min-w-[16px] w-[16px] flex justify-end;
+    @apply block duration-100 transition-all ease-in translate-x-0 xl:translate-x-[-10%] xl:opacity-0 min-w-[16px] w-[16px] flex justify-end;
   }
 
 
 
   .sendText {
-      @apply block duration-100 transition-all relative ease-in xl:left-[5.5%] -translate-y-[1px] left-0;
-      line-height: .5;
+    @apply block duration-100 transition-all relative ease-in xl:left-[5.5%] -translate-y-[1px] left-0;
+    line-height: .5;
   }
 
   &.width_23 {
-      .sendIconLeft {
-          @apply min-w-[23px] w-[23px];
-      }
+    .sendIconLeft {
+      @apply min-w-[23px] w-[23px];
+    }
 
 
 
-      .sendText {
-          @apply xl:left-[6.6%];
-      }
+    .sendText {
+      @apply xl:left-[6.6%];
+    }
   }
 
   &:hover {
 
-      .sendText {
-          @apply xl:left-0
-      }
+    .sendText {
+      @apply xl:left-0
+    }
 
 
-      .sendIconLeft {
-          @apply xl:translate-x-0 xl:opacity-100;
-      }
+    .sendIconLeft {
+      @apply xl:translate-x-0 xl:opacity-100;
+    }
 
   }
 
@@ -176,100 +176,97 @@
 .lineAfter {
 
   &.stopColor {
-      color: inherit !important;
+    color: inherit !important;
 
-      &:after {
-          border-color: #FFF !important;
-      }
+    &:after {
+      border-color: #FFF !important;
+    }
   }
 
   // Многострочный режим — скрываем стандартный ::after, 
   // т.к. отдельные линии рендерятся через JS
   &.multiline {
-      &:after {
-          display: none;
-      }
+    &:after {
+      display: none;
+    }
 
-      // Активное состояние — линии видны
-      &.active .lineAfterLine {
-          clip-path: inset(0 0 0 0);
-      }
+    // Активное состояние — линии видны
+    &.active .lineAfterLine {
+      clip-path: inset(0 0 0 0);
+    }
   }
 
   // Hover из родительского lineAfterBox для многострочных линий
   &Box:hover .lineAfter.multiline:not(.noactive) .lineAfterLine {
-      clip-path: inset(0 0 0 0);
+    clip-path: inset(0 0 0 0);
   }
 
   // Hover на самом элементе
   &.multiline:not(.noactive):hover .lineAfterLine {
-      clip-path: inset(0 0 0 0);
+    clip-path: inset(0 0 0 0);
   }
 
   --rule-path: inset(0 0 0 100%);
 
   &.right {
-      --rule-path: inset(0 100% 0 0);
+    --rule-path: inset(0 100% 0 0);
   }
 
 
 
   transition: transform .1s ease;
-  will-change: transform,
-  color,
+  will-change: color,
   clip-path;
   position: relative;
 
   &.active {
-      @apply text-[#34446D];
+    @apply text-[#34446D];
 
-      &:after {
-          clip-path: inset(0 0 0 0);
-      }
+    &:after {
+      clip-path: inset(0 0 0 0);
+    }
   }
 
   &Box {
-      &:hover {
-          .lineAfter:not(.noactive) {
-              @apply text-[#34446D];
+    &:hover {
+      .lineAfter:not(.noactive) {
+        @apply text-[#34446D];
 
-              &:after {
-                  clip-path: inset(0 0 0 0);
-              }
-          }
-
+        &:after {
+          clip-path: inset(0 0 0 0);
+        }
       }
+
+    }
   }
 
   &:after {
-      content: "";
-      border-bottom: 1px solid;
-      border-color: #34446D;
-      transition: clip-path .2s ease, border-color .2s ease;
-      transform: translateZ(0);
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-z-index: -1;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: -1px;
-      clip-path: var(--rule-path);
+    content: "";
+    border-bottom: 1px solid;
+    border-color: #34446D;
+    transition: clip-path .2s ease, border-color .2s ease;
+
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    clip-path: var(--rule-path);
   }
 
   &:not(.noactive):hover {
-      @apply text-[#34446D];
+    @apply text-[#34446D];
 
-      &::after {
-          clip-path: inset(0 0 0 0);
-      }
+    &::after {
+      clip-path: inset(0 0 0 0);
+    }
   }
 }
 
 // Отдельные линии для многострочного подчеркивания
 // Определяем на верхнем уровне для корректного экспорта CSS-модулем
 .lineAfterLine {
-    clip-path: inset(0 0 0 100%);
-    transition: clip-path .2s ease;
+  clip-path: inset(0 0 0 100%);
+  transition: clip-path .2s ease;
 }
