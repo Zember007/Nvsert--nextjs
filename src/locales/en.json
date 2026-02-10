@@ -886,6 +886,18 @@
         {
           "title": "Foreign trade statistics",
           "description": "Used to collect and analyze import/export data."
+        },
+        {
+          "title": "Customs clearance",
+          "description": "The TN VED code is used to classify goods and calculate customs duties."
+        },
+        {
+          "title": "Certification and permits",
+          "description": "The TN VED code is often used to determine whether declarations, certificates or other documents are required."
+        },
+        {
+          "title": "Foreign trade statistics",
+          "description": "Used to collect and analyze import/export data."
         }
       ]
     },
@@ -925,6 +937,18 @@
     },
     "info": {
       "sliderBlocks": [
+        {
+          "title": "Certification and standardization",
+          "description": "The OKPD 2 code is the primary identifier used to determine which document is required to confirm product conformity."
+        },
+        {
+          "title": "Government statistics",
+          "description": "Used to collect, process and analyze data on the volume and structure of production, sales and consumption in the country."
+        },
+        {
+          "title": "Public procurement (44-FZ and 223-FZ)",
+          "description": "Used to identify the procurement item, prepare documentation and form the procurement identification code."
+        },
         {
           "title": "Certification and standardization",
           "description": "The OKPD 2 code is the primary identifier used to determine which document is required to confirm product conformity."
