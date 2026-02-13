@@ -88,7 +88,7 @@ const coatOfArmsMapping: { [key: string]: string } = {
     'Красноярский край': '/gerbs/Krasnoyarsk_Krai.svg',
     'Республика Саха (Якутия)': '/gerbs/Sakha_(Yakutia).svg',
     'Магаданская область': '/gerbs/Magadan_oblast.svg',
-    'Чукотский автономный округ': '/gerbs/Coat_of_Arms_of_Chukotka.svg',
+    'Чукотский авт. округ': '/gerbs/Coat_of_Arms_of_Chukotka.svg',
     'Камчатский край': '/gerbs/Kamchatka_Krai.svg',
     'Приморский край': '/gerbs/Primorsky_Krai.svg',
     'Хабаровский край': '/gerbs/Khabarovsk_Krai.svg',
