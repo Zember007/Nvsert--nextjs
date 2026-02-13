@@ -11,7 +11,7 @@ const FeedbackList = ({ content, title, showServices, setShowServices }: { conte
 
     const clip0_4632_2058 = useId()
     return (
-        <div className="flex-1 flex flex-col gap-[20px] h-full">
+        <div className="flex-1 flex flex-col h-full">
             <h6 className={`${textSize.headerH6} !font-normal`}>{title}</h6>
             {content && (
                 <>
@@ -24,7 +24,7 @@ const FeedbackList = ({ content, title, showServices, setShowServices }: { conte
                     </div>
 
                     <button
-                        className={`${textSize.text2} font-normal text-[#34446D] flex pt-[15px] pl-auto grow justify-end !items-end ${stylesBtn.lineAfterBox}  ${stylesBtn.btnIconAn} !gap-[5px]`}
+                        className={`${textSize.text2} !h-[auto] font-normal text-[#34446D] flex pt-[15px] pl-auto grow justify-end !items-end ${stylesBtn.lineAfterBox}  ${stylesBtn.btnIconAn} !gap-[5px]`}
                     >
                         <span className={`${stylesBtn.lineAfter} !leading-[1.2] whitespace-nowrap`}>
                             {!showServices ? t('common.showReview') : t('common.hideReview')}

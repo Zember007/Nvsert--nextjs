@@ -286,7 +286,7 @@ export default function TnvedHierarchy({
                   <div key={chapterNode.nodeId} ref={setChapterEl(chapter)} data-chapter={chapter}>
                     <button
                       type="button"
-                      className={`text-left active:translate-y-[1px] mb-[10px] ${stylesBtn.lineAfterBox}`}
+                      className={`text-left active:translate-y-[1px] pb-[20px] ${stylesBtn.lineAfterBox}`}
                       aria-expanded={chapterOpen}
                       onClick={() => handleToggleChapter(chapter)}
                     >

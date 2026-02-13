@@ -6,6 +6,7 @@ import stylesBtn from '@/assets/styles/base/base.module.scss';
 import { FeedbackCategoryGroup } from '@/types/feedback';
 import FeedbackCard from 'widgets/feedback/FeedbackCard';
 import { useTranslation } from 'react-i18next';
+import { AsyncPhotoProvider } from '../../shared/common/AsyncPhotoView';
 
 
 
@@ -37,7 +38,7 @@ const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ 
         href: '#block-' + cat.id
     }));
 
-    
+
 
     return (
 
@@ -97,20 +98,28 @@ const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ 
                 </button>
             </div>
 
-            {initialCategories.map(cat => {
-                const isOpen = openGroups.includes(cat.id);
-                return (
-                    <div key={cat.id} id={'block-' + cat.id} className="w-full">
-                        <CollapseSection title={cat.title} isOpen={isOpen} onToggle={() => toggleGroup(cat.id)}>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
-                                {cat.items.map(item => (
-                                    <FeedbackCard key={item.id} item={item} />
-                                ))}
-                            </div>
-                        </CollapseSection>
-                    </div>
-                );
-            })}
+            <AsyncPhotoProvider 
+               maskOpacity={0.4}
+               maskClassName="blurred-mask"
+               speed={() => 0}
+               maskClosable={false}
+            >
+                
+                {initialCategories.map(cat => {
+                    const isOpen = openGroups.includes(cat.id);
+                    return (
+                        <div key={cat.id} id={'block-' + cat.id} className="w-full">
+                            <CollapseSection title={cat.title} isOpen={isOpen} onToggle={() => toggleGroup(cat.id)}>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
+                                    {cat.items.map(item => (
+                                        <FeedbackCard key={item.id} item={item} />
+                                    ))}
+                                </div>
+                            </CollapseSection>
+                        </div>
+                    );
+                })}
+            </AsyncPhotoProvider>
         </StandardPageLayout>
 
     );
