@@ -13,7 +13,11 @@ import { useTranslation } from 'react-i18next';
 
 const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ initialCategories }) => {
     const { t } = useTranslation();
-    const [openGroups, setOpenGroups] = React.useState<number[]>(() => initialCategories.map(c => c.id));
+    // Оптимизация LCP: по умолчанию открываем только первую категорию,
+    // чтобы не рендерить все карточки и изображения сразу
+    const [openGroups, setOpenGroups] = React.useState<number[]>(() =>
+        initialCategories.length > 0 ? [initialCategories[0].id] : []
+    );
 
     const toggleGroup = (id: number) => {
         setOpenGroups(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
