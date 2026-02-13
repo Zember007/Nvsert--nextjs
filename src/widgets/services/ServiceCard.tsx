@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import textSize from '@/assets/styles/base/base.module.scss';
 import { usePathname } from 'next/navigation';
 import { getLocaleFromPathname, withLocalePrefix } from 'shared/i18n/client-locale';
+import { BASE_URL } from '../../shared/config/env';
 
 interface ServiceCardProps {    
     serviceName?: string;
@@ -53,7 +54,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                 <div className="relative w-full ">
                     <div className="border border-[#93969d] rounded-[4px] overflow-hidden h-[346px]">
                         <Image
-                            src={'' + imageUrl}
+                            src={BASE_URL + imageUrl}
                             alt={certificate.title}
                             width={250}
                             height={346}
@@ -61,8 +62,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                             loading={priority ? "eager" : "lazy"}
                             priority={priority}
                             fetchPriority={priority ? "high" : "auto"}
-                            /* quality={40} */
-                            unoptimized={true}
+                            quality={40}
                             sizes="250px"
                         />
                     </div>
@@ -87,7 +87,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                 <div className="relative w-full ">
                     <div className="border border-[#93969d] rounded-[4px] overflow-hidden h-[346px]">
                         <Image
-                            src={'' + imageUrl}
+                            src={BASE_URL + imageUrl}
                             alt={certificate.title}
                             width={250}
                             height={346}
@@ -95,8 +95,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                             loading={priority ? "eager" : "lazy"}
                             priority={priority}
                             fetchPriority={priority ? "high" : "auto"}
-                            /* quality={40} */
-                            unoptimized={true}
+                            quality={40}
                             sizes="250px"
                         />
                     </div>
