@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { FeedbackItem } from '@/types/feedback';
 import Image from 'next/image';
 import FeedbackList from './FeedbackList';
-import { BASE_URL } from '../../shared/config/env';
 
 const FeedbackCard: React.FC<{ item: FeedbackItem }> = ({ item }) => {
     const img = item.photo?.url || item.photo?.formats?.thumbnail?.url || '';
@@ -17,7 +16,7 @@ const FeedbackCard: React.FC<{ item: FeedbackItem }> = ({ item }) => {
                     {!!img && (
                         <div className="shrink-0 w-[190px] rounded-[6px] overflow-hidden border border-[#93969D] xxs:mx-0 mx-auto">
                             <Image
-                                src={BASE_URL + img}
+                                src={img}
                                 alt={item.photo?.alternativeText || item.title}
                                 className="w-full h-full object-contain"
                                 width={190}
