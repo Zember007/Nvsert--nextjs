@@ -16,7 +16,7 @@ const FeedbackCard: React.FC<{ item: FeedbackItem }> = ({ item }) => {
                     {!!img && (
                         <div className="shrink-0 w-[190px] rounded-[6px] overflow-hidden border border-[#93969D] xxs:mx-0 mx-auto">
                             <Image
-                                src={img}
+                                src={'/cp' + img}
                                 alt={item.photo?.alternativeText || item.title}
                                 className="w-full h-full object-contain"
                                 width={190}
