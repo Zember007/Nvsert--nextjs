@@ -59,7 +59,7 @@ function OkpdQuickSearchSectionImpl() {
 
   return (
     <div className="flex flex-col" id="block-1">
-      <p className={`${textSize.headerH4} text-[#34446D] border-b border-[#34446D] mb-[20px]`}>
+      <p className={`${textSize.headerH4} text-[#34446D] border-b border-[#34446D] mb-[20px] h-[29px]`}>
         {t('okpd.quickSearch.title')}
       </p>
 
