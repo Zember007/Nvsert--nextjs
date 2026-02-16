@@ -12,9 +12,9 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'test11.audiosector.ru',
+        hostname: 'test11-admin.audiosector.ru',
         port: '',
-        pathname: '/cp/uploads/**',
+        pathname: '/uploads/**',
       },
     ],
   

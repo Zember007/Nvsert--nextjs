@@ -10,7 +10,7 @@ export default async function Home() {
   const [faqs] = await Promise.all([getFaqs(locale)]);
 
   return (
-    <main className="main text-[#000] overflow-hidden relative leading-page">
+    <div className="main text-[#000] overflow-hidden relative leading-page">
       {/* Критический контент - рендерится сразу */}
       <AppMainIntro />
 
@@ -24,6 +24,6 @@ export default async function Home() {
 
       {/* Остальной контент - ленивая загрузка */}
       <AppMainContent faqs={faqs} />
-    </main>
+    </div>
   );
 }

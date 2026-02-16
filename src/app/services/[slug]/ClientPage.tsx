@@ -104,7 +104,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation }) 
   }, [navigation, currentService]);
 
   return (
-    <main className="main text-[#000]  mb-[100px]">
+    <div className="main text-[#000]  mb-[100px]">
       <AppBreadcrumbs
         root="/"
         breadcrumbs={[
@@ -141,7 +141,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation }) 
           onOpenIntroForm={() => openDefaultModal('introForm')}
         />
       )}
-    </main>
+    </div>
   );
 };
 

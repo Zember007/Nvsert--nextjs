@@ -19,7 +19,6 @@ export function middleware(req: NextRequest) {
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api/') ||
     pathname.startsWith('/media/') ||
-    pathname.startsWith('/cp') ||
     pathname === '/favicon.ico';
 
   if (!shouldSkipLocaleRedirect) {
@@ -70,14 +69,7 @@ export function middleware(req: NextRequest) {
   if (targetUrl) {
     const requestHeaders = new Headers(req.headers);
 
-    // Добавляем заголовки
-    const accessToken = process.env.apiToken || process.env.API_TOKEN || '';
-    if (accessToken) requestHeaders.set('X-Access-Token', accessToken);
 
-    // Avoid hardcoding credentials in the repository.
-    // If nginx/Strapi requires Basic auth for API, provide it via env (already including "Basic ...").
-    const basicAuth = process.env.API_BASIC_AUTH || process.env.apiBasicAuth;
-    if (basicAuth) requestHeaders.set('Authorization', basicAuth);
 
     // Перезаписываем запрос с новыми заголовками
     return NextResponse.rewrite(new URL(targetUrl, req.url), {

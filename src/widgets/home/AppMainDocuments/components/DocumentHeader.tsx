@@ -3,6 +3,7 @@ import { FC, memo } from 'react';
 import mainDocumentsStyles from '@/assets/styles/main.module.scss';
 import { filterPrepositions } from 'shared/lib';
 import textSize from '@/assets/styles/main.module.scss';
+import { STRAPI_PUBLIC_URL } from '../../../../shared/config/env';
 
 export interface DocumentHeaderProps {
   title: string;
@@ -27,7 +28,7 @@ export const DocumentHeader: FC<DocumentHeaderProps> = memo(
           unoptimized={true}
           decoding="async"
           alt="document"
-          src={imageUrls.thumbnail}
+          src={STRAPI_PUBLIC_URL + imageUrls.thumbnail}
           width={41}
           height={58}
           priority={index < 2 ? true : false}

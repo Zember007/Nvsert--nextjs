@@ -14,7 +14,7 @@ export const BASE_URL = trimTrailingSlash(process.env.NEXT_PUBLIC_BASE_URL || SI
 
 // Where Strapi is reachable from the browser for media files (uploads).
 // Typical VPS setup: Strapi is mounted under /cp behind nginx.
-export const STRAPI_BASE_PATH = process.env.NEXT_PUBLIC_STRAPI_BASE_PATH || '/cp';
+export const STRAPI_BASE_PATH = process.env.NEXT_PUBLIC_STRAPI_BASE_PATH ;
 export const STRAPI_PUBLIC_URL = trimTrailingSlash(
   process.env.NEXT_PUBLIC_STRAPI_PUBLIC_URL || `${BASE_URL}${STRAPI_BASE_PATH}`,
 );

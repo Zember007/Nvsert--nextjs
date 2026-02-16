@@ -10,6 +10,7 @@ import stylesBtn from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/base/base.module.scss';
 import { usePathname } from "next/navigation";
 import { getLocaleFromPathname, withLocalePrefix } from "shared/i18n/client-locale";
+import { STRAPI_PUBLIC_URL } from "../../shared/config/env";
 
 
 
@@ -59,7 +60,7 @@ const AppNavigation = ({ active, services }: { active: boolean, services: Servic
 
                         <div key={i} className="flex flex-col gap-[20px]">
                             {item.items.map((children:NavigationItem) => (
-                                <AppNavigationItem link={children.slug} key={children.id} title={children.title} img={children.img?.formats?.thumbnail?.url} controls={controls} localizePath={localizePath} />
+                                <AppNavigationItem link={children.slug} key={children.id} title={children.title} img={ STRAPI_PUBLIC_URL + children.img?.formats?.thumbnail?.url} controls={controls} localizePath={localizePath} />
                             ))}
                         </div>
                     )

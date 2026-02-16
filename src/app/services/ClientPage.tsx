@@ -63,7 +63,7 @@ const ServicesContent = () => {
   const isAnyExpanded = expandedServices.length > 0;
 
   return (
-    <main className="main text-[#000] overflow-hidden relativ mb-[100px] ">
+    <div className="main text-[#000] overflow-hidden relativ mb-[100px] ">
       <ServicesBreadcrumbs />
 
       <ServicesHeader
@@ -83,7 +83,7 @@ const ServicesContent = () => {
         active={active}
         onToggleService={toggleService}
       />
-    </main>
+    </div>
   );
 };
 

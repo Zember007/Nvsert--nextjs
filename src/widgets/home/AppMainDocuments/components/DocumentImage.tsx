@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 
 import { AsyncPhotoView } from "shared/common/AsyncPhotoView";
 import mainDocumentsStyles from "@/assets/styles/main.module.scss";
+import { STRAPI_PUBLIC_URL } from "../../../../shared/config/env";
 
 export interface DocumentImageProps {
   title: string;
@@ -41,7 +42,7 @@ export const DocumentImage: FC<DocumentImageProps> = memo(
           unoptimized={true}
           decoding="async"
           alt="document"
-          src={imageUrls.full}
+          src={STRAPI_PUBLIC_URL + imageUrls.full}
           width={250}
           height={349}
           loading={isPriority ? "eager" : "lazy"}
