@@ -10,6 +10,7 @@ import type { Okpd2Item } from 'widgets/okpd/OkpdHierarchy';
 import type { OkpdPageData } from 'widgets/okpd/types';
 import { useOkpdSections } from 'widgets/okpd/useOkpdSections';
 import { OkpdInfoSections } from 'widgets/okpd/OkpdInfoSections';
+import { STRAPI_PUBLIC_URL } from 'shared/config/env';
 
 const ClientPage = ({ initialItems, pageData }: { initialItems: Okpd2Item[]; pageData: OkpdPageData | null }) => {
     const { openDefaultModal } = useHeaderContext();
@@ -54,7 +55,7 @@ const ClientPage = ({ initialItems, pageData }: { initialItems: Okpd2Item[]; pag
 
             try {
                 const locale = document?.documentElement?.lang === 'en' ? 'en' : 'ru';
-                const res = await fetch(`/api/okpd2s/section/${s}?locale=${locale}`);
+                const res = await fetch(`${STRAPI_PUBLIC_URL}/api/okpd2s/section/${s}?locale=${locale}`);
                 if (!res.ok) return;
                 const json = await res.json();
                 const data = Array.isArray(json?.data) ? (json.data as Okpd2Item[]) : Array.isArray(json) ? (json as Okpd2Item[]) : [];

@@ -7,6 +7,7 @@ import type { Okpd2Item } from 'widgets/okpd/OkpdHierarchy';
 import { OkpdSearchBar } from 'widgets/okpd/OkpdSearchBar';
 import { OkpdSearchResults } from 'widgets/okpd/OkpdSearchResults';
 import { useDebouncedValue } from 'widgets/okpd/search/useDebouncedValue';
+import { STRAPI_PUBLIC_URL } from 'shared/config/env';
 
 function OkpdQuickSearchSectionImpl() {
   const { t } = useTranslation();
@@ -37,7 +38,7 @@ function OkpdQuickSearchSectionImpl() {
     (async () => {
       try {
         const locale = document?.documentElement?.lang === 'en' ? 'en' : 'ru';
-        const res = await fetch(`/api/okpd2s/search?q=${encodeURIComponent(q)}&limit=10&locale=${locale}`, {
+        const res = await fetch(`${STRAPI_PUBLIC_URL}/api/okpd2s/search?q=${encodeURIComponent(q)}&limit=10&locale=${locale}`, {
           signal: ac.signal,
         });
         if (!res.ok) return;

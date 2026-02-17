@@ -10,6 +10,7 @@ import type { TnvedItem } from 'widgets/tnved/TnvedHierarchy';
 import type { TnvedPageData } from 'widgets/tnved/types';
 import { useTnvedSections } from 'widgets/tnved/useTnvedSections';
 import { TnvedInfoSections } from 'widgets/tnved/TnvedInfoSections';
+import { STRAPI_PUBLIC_URL } from 'shared/config/env';
 
 const ClientPage = ({ initialItems, pageData }: { initialItems: TnvedItem[]; pageData: TnvedPageData | null }) => {
     const { openDefaultModal } = useHeaderContext();
@@ -52,7 +53,7 @@ const ClientPage = ({ initialItems, pageData }: { initialItems: TnvedItem[]; pag
 
             try {
                 const locale = document?.documentElement?.lang === 'en' ? 'en' : 'ru';
-                const res = await fetch(`/api/tnveds/chapter/${s}?locale=${locale}`);
+                const res = await fetch(`${STRAPI_PUBLIC_URL}/api/tnveds/chapter/${s}?locale=${locale}`);
                 if (!res.ok) return;
                 const json = await res.json();
                 const data = Array.isArray(json?.data)

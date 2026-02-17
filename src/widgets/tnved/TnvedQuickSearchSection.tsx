@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import textSize from '@/assets/styles/base/base.module.scss';
 import { TnvedSearchBar } from 'widgets/tnved/TnvedSearchBar';
 import { TnvedSearchResults } from 'widgets/tnved/TnvedSearchResults';
+import { STRAPI_PUBLIC_URL } from 'shared/config/env';
 
 export type TnvedSearchItem = {
   id: number;
@@ -56,7 +57,7 @@ export function TnvedQuickSearchSection() {
     (async () => {
       try {
         const locale = document?.documentElement?.lang === 'en' ? 'en' : 'ru';
-        const res = await fetch(`/api/tnveds/search?q=${encodeURIComponent(q)}&limit=10&locale=${locale}`, {
+        const res = await fetch(`${STRAPI_PUBLIC_URL}/api/tnveds/search?q=${encodeURIComponent(q)}&limit=10&locale=${locale}`, {
           signal: ac.signal,
         });
         if (!res.ok) return;
