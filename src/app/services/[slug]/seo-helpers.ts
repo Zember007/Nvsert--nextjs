@@ -1,5 +1,5 @@
 // Вспомогательные функции для страницы услуг (SEO и данные)
-import { SITE_URL, STRAPI_PUBLIC_URL } from 'shared/config/env';
+import { STRAPI_PUBLIC_URL } from 'shared/config/env';
 
 /**
  * Returns a plain serializable copy of the API response.
@@ -16,7 +16,7 @@ function toSerializable<T>(data: T): T {
 
 export async function getNavigationDataBySlug(slug: string): Promise<any | null> {
   try {
-    const res = await fetch(`${SITE_URL}/api/services/slug/${slug}`, {
+    const res = await fetch(`${STRAPI_PUBLIC_URL}/api/services/slug/${slug}`, {
       cache: 'force-cache',
     });
 

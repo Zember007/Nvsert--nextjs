@@ -1,12 +1,12 @@
 import type { FaqItem } from '@/types/faq';
-import { SITE_URL } from 'shared/config/env';
+import { STRAPI_PUBLIC_URL } from 'shared/config/env';
 
 const ONE_HOUR_SECONDS = 60 * 60;
 
 export async function getFaqs(locale?: string): Promise<FaqItem[]> {
   try {
     const qs = locale ? `?locale=${encodeURIComponent(locale)}` : '';
-    const res = await fetch(`${SITE_URL}/api/faqs${qs}`, {
+    const res = await fetch(`${STRAPI_PUBLIC_URL}/api/faqs${qs}`, {
       next: { revalidate: ONE_HOUR_SECONDS },
     });
 
