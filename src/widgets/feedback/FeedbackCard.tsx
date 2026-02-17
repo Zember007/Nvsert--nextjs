@@ -25,7 +25,6 @@ const FeedbackCard: React.FC<{ item: FeedbackItem }> = ({ item }) => {
                             width={190}
                             height={267}
                             sizes="190px"
-                            unoptimized={true}
                         />
                     </AsyncPhotoView>
                 </div>

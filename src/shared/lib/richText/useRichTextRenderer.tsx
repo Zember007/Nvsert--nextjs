@@ -3,6 +3,89 @@ import React, { useCallback } from 'react';
 import textSize from '@/assets/styles/base/base.module.scss';
 import { filterPrepositions } from 'shared/lib';
 
+/** Парсит инлайн-разметку в строке: **жирный**, _курсив_, <u>подчёркивание</u>, ~~зачёркивание~~, [текст](url) */
+function parseInlineRichText(text: string): React.ReactNode[] {
+  const nodes: React.ReactNode[] = [];
+  let remaining = text;
+  let key = 0;
+
+  while (remaining.length > 0) {
+    type MatchInfo = { index: number; match: RegExpMatchArray; type: string };
+    let earliest: MatchInfo | null = null;
+
+    const tryMatch = (regex: RegExp, type: string): MatchInfo | null => {
+      const m = remaining.match(regex);
+      return m && m.index !== undefined ? { index: m.index, match: m, type } : null;
+    };
+
+    const candidates: MatchInfo[] = [
+      tryMatch(/\*\*(.+?)\*\*/, 'bold'),
+      tryMatch(/_(.+?)_/, 'italic'),
+      tryMatch(/<u>(.+?)<\/u>/i, 'underline'),
+      tryMatch(/~~(.+?)~~/, 'strikethrough'),
+      tryMatch(/\[(.+?)\]\((.+?)\)/, 'link'),
+    ].filter((m): m is MatchInfo => m !== null);
+
+    for (const c of candidates) {
+      if (!earliest || c.index < earliest.index) earliest = c;
+    }
+    
+
+    if (!earliest) {
+      nodes.push(filterPrepositions(remaining));
+      break;
+    }
+
+    if (earliest.index > 0) {
+      nodes.push(filterPrepositions(remaining.slice(0, earliest.index)));
+    }
+
+    const fullMatch = earliest.match[0];
+    const content = earliest.match[1];
+    const href = earliest.match[2];
+
+    if (earliest.type === 'bold') {
+      nodes.push(
+        React.createElement('strong', { key: `inline-${key++}` }, ...parseInlineRichText(content)),
+      );
+    } else if (earliest.type === 'italic') {
+      nodes.push(
+        React.createElement('em', { key: `inline-${key++}` }, ...parseInlineRichText(content)),
+      );
+    } else if (earliest.type === 'underline') {
+      nodes.push(
+        React.createElement('u', { key: `inline-${key++}` }, ...parseInlineRichText(content)),
+      );
+    } else if (earliest.type === 'strikethrough') {
+      nodes.push(
+        React.createElement(
+          's',
+          { key: `inline-${key++}`, style: { textDecoration: 'line-through' } },
+          ...parseInlineRichText(content),
+        ),
+      );
+    } else if (earliest.type === 'link' && href) {
+      nodes.push(
+        React.createElement(
+          'a',
+          {
+            key: `inline-${key++}`,
+            href,
+            target: '_blank',
+            rel: 'noopener noreferrer',
+            className: 'underline text-inherit hover:opacity-80',
+          },
+          ...parseInlineRichText(content),
+        ),
+      );
+    }
+
+    remaining = remaining.slice(earliest.index + fullMatch.length);
+  }
+
+  return nodes;
+}
+
 export const useRichTextRenderer = () => {
   const processContent = useCallback(
     (text: string, small?: boolean): React.ReactNode[] => {
@@ -43,7 +126,7 @@ export const useRichTextRenderer = () => {
                     ? { value: item.number }
                     : {})}
                 >
-                  {filterPrepositions(item.text)}
+                  {parseInlineRichText(item.text)}
                 </li>
               )),
             ),
@@ -108,7 +191,7 @@ export const useRichTextRenderer = () => {
               key={`subheading-${index}`}
               className={`${textSize.headerH6} mt-[9px] font-normal text-black`}
             >
-              {filterPrepositions(trimmedLine.substring(2).trim())}
+              {parseInlineRichText(trimmedLine.substring(2).trim())}
             </h3>,
           );
           lastElementWasList = false;
@@ -123,7 +206,7 @@ export const useRichTextRenderer = () => {
               small ? `${textSize.text2}` : `${textSize.textBasePost}`
             }`}
           >
-            {filterPrepositions(trimmedLine)}
+            {parseInlineRichText(trimmedLine)}
           </p>,
         );
         lastElementWasList = false;

@@ -16,9 +16,7 @@ const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ 
     const { t } = useTranslation();
     // Оптимизация LCP: по умолчанию открываем только первую категорию,
     // чтобы не рендерить все карточки и изображения сразу
-    const [openGroups, setOpenGroups] = React.useState<number[]>(() =>
-        initialCategories.length > 0 ? [initialCategories[0].id] : []
-    );
+    const [openGroups, setOpenGroups] = React.useState<number[]>([]);
 
     const toggleGroup = (id: number) => {
         setOpenGroups(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
@@ -34,7 +32,7 @@ const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ 
     const dotNavItems = initialCategories.map(cat => ({
         id: cat.id,
         title: cat.title,
-        active: openGroups.includes(cat.id),
+        active: !openGroups.includes(cat.id),
         href: '#block-' + cat.id
     }));
 
