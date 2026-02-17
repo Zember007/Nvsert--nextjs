@@ -2,9 +2,12 @@
 import ClientPage from './ClientPage';
 import { Metadata } from 'next';
 import type { OkpdPageData } from 'widgets/okpd/types';
-import { BASE_URL } from 'shared/config/env';
+import { BASE_URL, STRAPI_PUBLIC_URL } from 'shared/config/env';
 import { getRequestLocale } from 'shared/i18n/server-locale';
 import { tStatic } from 'shared/i18n/static';
+
+// Тяжёлые данные (до 21k записей) — рендерим по запросу, не блокируем билд
+export const dynamic = 'force-dynamic';
 
 type Okpd2Item = {
     id: number;
@@ -20,23 +23,24 @@ type Okpd2Item = {
 };
 
 async function fetchOkpd2Data(): Promise<{ items: Okpd2Item[]; pageData: OkpdPageData | null }> {
-    const locale = await getRequestLocale();
-    const res = await fetch(`/api/okpd2s/with-page?pagination[pageSize]=21000&locale=${locale}`, {
-        cache: 'force-cache',
-    });
+    try {
+        const locale = await getRequestLocale();
+        const res = await fetch(
+            `${STRAPI_PUBLIC_URL}/api/okpd2s/with-page?pagination[pageSize]=21000&locale=${locale}`,
+            { next: { revalidate: 3600 } },
+        );
+        if (!res.ok) return { items: [], pageData: null };
 
-    if (!res.ok) {
+        const json = await res.json();
+        const data = Array.isArray(json?.data) ? json.data : Array.isArray(json) ? json : [];
+        const pageData = json?.page || null;
+        return {
+            items: data as Okpd2Item[],
+            pageData: pageData as OkpdPageData | null,
+        };
+    } catch {
         return { items: [], pageData: null };
     }
-
-    const json = await res.json();
-    const data = Array.isArray(json?.data) ? json.data : Array.isArray(json) ? json : [];
-    const pageData = json?.page || null;
-
-    return {
-        items: data as Okpd2Item[],
-        pageData: pageData as OkpdPageData | null,
-    };
 }
 
 export async function generateMetadata(): Promise<Metadata> {
