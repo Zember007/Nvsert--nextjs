@@ -18,6 +18,7 @@ export interface ContentBlock {
     image: any;
 }
 
+
 export interface AboutData {
     id: number;
     title: string;
