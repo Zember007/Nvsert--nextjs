@@ -1,7 +1,7 @@
 import ClientPage from './ClientPage';
 import { Metadata } from 'next';
 import type { TnvedPageData } from 'widgets/tnved/types';
-import { BASE_URL, STRAPI_PUBLIC_URL } from 'shared/config/env';
+import { BASE_URL } from 'shared/config/env';
 import { getRequestLocale } from 'shared/i18n/server-locale';
 import { tStatic } from 'shared/i18n/static';
 
@@ -23,7 +23,7 @@ type TnvedItem = {
 
 async function fetchTnvedData(): Promise<{ items: TnvedItem[]; pageData: TnvedPageData | null }> {
     const locale = await getRequestLocale();
-    const res = await fetch(`${STRAPI_PUBLIC_URL}/api/tnveds/with-page?locale=${locale}`, { cache: 'force-cache' });
+    const res = await fetch(`/api/tnveds/with-page?locale=${locale}`, { cache: 'force-cache' });
     if (!res.ok) return { items: [], pageData: null };
 
     const json = await res.json();

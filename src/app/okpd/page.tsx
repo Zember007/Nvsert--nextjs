@@ -2,7 +2,7 @@
 import ClientPage from './ClientPage';
 import { Metadata } from 'next';
 import type { OkpdPageData } from 'widgets/okpd/types';
-import { BASE_URL, STRAPI_PUBLIC_URL } from 'shared/config/env';
+import { BASE_URL } from 'shared/config/env';
 import { getRequestLocale } from 'shared/i18n/server-locale';
 import { tStatic } from 'shared/i18n/static';
 
@@ -21,7 +21,7 @@ type Okpd2Item = {
 
 async function fetchOkpd2Data(): Promise<{ items: Okpd2Item[]; pageData: OkpdPageData | null }> {
     const locale = await getRequestLocale();
-    const res = await fetch(`${STRAPI_PUBLIC_URL}/api/okpd2s/with-page?pagination[pageSize]=21000&locale=${locale}`, {
+    const res = await fetch(`/api/okpd2s/with-page?pagination[pageSize]=21000&locale=${locale}`, {
         cache: 'force-cache',
     });
 
