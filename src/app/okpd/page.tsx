@@ -2,12 +2,9 @@
 import ClientPage from './ClientPage';
 import { Metadata } from 'next';
 import type { OkpdPageData } from 'widgets/okpd/types';
-import { BASE_URL, STRAPI_PUBLIC_URL } from 'shared/config/env';
+import { BASE_URL, STRAPI_API_URL } from 'shared/config/env';
 import { getRequestLocale } from 'shared/i18n/server-locale';
 import { tStatic } from 'shared/i18n/static';
-
-// Тяжёлые данные (до 21k записей) — рендерим по запросу, не блокируем билд
-export const dynamic = 'force-dynamic';
 
 type Okpd2Item = {
     id: number;
@@ -23,41 +20,49 @@ type Okpd2Item = {
 };
 
 async function fetchOkpd2Data(): Promise<{ items: Okpd2Item[]; pageData: OkpdPageData | null }> {
+    const locale = await getRequestLocale();
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
+
     try {
-        const locale = await getRequestLocale();
         const res = await fetch(
-            `${STRAPI_PUBLIC_URL}/api/okpd2s/with-page?pagination[pageSize]=21000&locale=${locale}`,
-            { next: { revalidate: 3600 } },
+            `${STRAPI_API_URL}/okpd2s/with-page?pagination[pageSize]=21000&locale=${locale}`,
+            {
+                cache: 'force-cache',
+                signal: controller.signal,
+            },
         );
-        if (!res.ok) return { items: [], pageData: null };
+
+        if (!res.ok) {
+            console.error('Failed to fetch OKPD2 data:', res.status, res.statusText);
+            return { items: [], pageData: null };
+        }
 
         const json = await res.json();
         const data = Array.isArray(json?.data) ? json.data : Array.isArray(json) ? json : [];
         const pageData = json?.page || null;
+
         return {
             items: data as Okpd2Item[],
             pageData: pageData as OkpdPageData | null,
         };
-    } catch {
+    } catch (error) {
+        console.error('Error fetching OKPD2 data:', error);
         return { items: [], pageData: null };
+    } finally {
+        clearTimeout(timeoutId);
     }
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-    const { pageData } = await fetchOkpd2Data();
     const locale = await getRequestLocale();
 
-    if (!pageData?.seo) {
-        return {
-            title: tStatic(locale, 'meta.pages.okpd.title'),
-            description: tStatic(locale, 'meta.pages.okpd.description'),
-        };
-    }
+    const title = tStatic(locale, 'meta.pages.okpd.title');
+    const description = tStatic(locale, 'meta.pages.okpd.description');
 
     return {
-        title: pageData.seo.metaTitle || pageData.title || tStatic(locale, 'meta.pages.okpd.title'),
-        description:
-            pageData.seo.metaDescription || pageData.description || tStatic(locale, 'meta.pages.okpd.description'),
+        title,
+        description,
         alternates: {
             canonical: `${BASE_URL}/okpd`,
         },

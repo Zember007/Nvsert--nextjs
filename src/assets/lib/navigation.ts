@@ -1,12 +1,12 @@
 import { cache } from 'react';
 import { NavigationItem, Services } from '@/types/navigation';
-import { STRAPI_PUBLIC_URL } from 'shared/config/env';
+import { STRAPI_API_URL } from 'shared/config/env';
 
 // Кэшируем результат на уровне модуля и используем build‑time fetch,
 // чтобы навигация подгружалась один раз при билде и не дергала API на каждой странице.
 export const getNavigationData = cache(async (): Promise<NavigationItem[]> => {
   try {
-    const res = await fetch(`${STRAPI_PUBLIC_URL}/api/services`, {
+    const res = await fetch(`${STRAPI_API_URL}/services`, {
       cache: 'force-cache',
     });
 

@@ -1,13 +1,13 @@
 import ClientPage, { type ContactsPageData } from './ClientPage';
 import type { Metadata } from 'next';
-import { BASE_URL, SITE_URL } from 'shared/config/env';
+import { BASE_URL, STRAPI_API_URL } from 'shared/config/env';
 import { getRequestLocale } from 'shared/i18n/server-locale';
 import { tStatic } from 'shared/i18n/static';
 
 async function getContactsPageData(): Promise<ContactsPageData> {
   try {
     const locale = await getRequestLocale();
-    const res = await fetch(`${SITE_URL}/api/contacts-page?locale=${locale}`, {
+    const res = await fetch(`${STRAPI_API_URL}/contacts-page?locale=${locale}`, {
       next: { revalidate: 3600 },
     });
     if (!res.ok) throw new Error('Failed to fetch contacts-page');

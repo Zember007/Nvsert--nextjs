@@ -1,12 +1,9 @@
 import ClientPage from './ClientPage';
 import { Metadata } from 'next';
 import type { TnvedPageData } from 'widgets/tnved/types';
-import { BASE_URL, STRAPI_PUBLIC_URL } from 'shared/config/env';
+import { BASE_URL, STRAPI_API_URL } from 'shared/config/env';
 import { getRequestLocale } from 'shared/i18n/server-locale';
 import { tStatic } from 'shared/i18n/static';
-
-// Тяжёлые данные с Strapi — рендерим по запросу, не блокируем билд
-export const dynamic = 'force-dynamic';
 
 type TnvedItem = {
     id: number;
@@ -25,37 +22,42 @@ type TnvedItem = {
 };
 
 async function fetchTnvedData(): Promise<{ items: TnvedItem[]; pageData: TnvedPageData | null }> {
+    const locale = await getRequestLocale();
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
+
     try {
-        const locale = await getRequestLocale();
-        const res = await fetch(`${STRAPI_PUBLIC_URL}/api/tnveds/with-page?locale=${locale}`, {
-            next: { revalidate: 3600 },
+        const res = await fetch(`${STRAPI_API_URL}/tnveds/with-page?locale=${locale}`, {
+            cache: 'force-cache',
+            signal: controller.signal,
         });
-        if (!res.ok) return { items: [], pageData: null };
+        if (!res.ok) {
+            console.error('Failed to fetch TN VED data:', res.status, res.statusText);
+            return { items: [], pageData: null };
+        }
 
         const json = await res.json();
         const data = Array.isArray(json?.data) ? json.data : Array.isArray(json) ? json : [];
         const pageData = json?.page || null;
+
         return { items: data as TnvedItem[], pageData: pageData as TnvedPageData | null };
-    } catch {
+    } catch (error) {
+        console.error('Error fetching TN VED data:', error);
         return { items: [], pageData: null };
+    } finally {
+        clearTimeout(timeoutId);
     }
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-    const { pageData } = await fetchTnvedData();
     const locale = await getRequestLocale();
 
-    if (!pageData?.seo) {
-        return {
-            title: tStatic(locale, 'meta.pages.tnved.title'),
-            description: tStatic(locale, 'meta.pages.tnved.description'),
-        };
-    }
+    const title = tStatic(locale, 'meta.pages.tnved.title');
+    const description = tStatic(locale, 'meta.pages.tnved.description');
 
     return {
-        title: pageData.seo.metaTitle || pageData.title || tStatic(locale, 'meta.pages.tnved.title'),
-        description:
-            pageData.seo.metaDescription || pageData.description || tStatic(locale, 'meta.pages.tnved.description'),
+        title,
+        description,
         alternates: {
             canonical: `${BASE_URL}/tnved`,
         },

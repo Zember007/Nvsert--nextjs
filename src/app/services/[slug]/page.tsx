@@ -3,14 +3,14 @@ import { Metadata } from 'next';
 import ClientPage from './ClientPage';
 import { NavigationItem } from '@/types/navigation';
 import { getNavigationDataBySlug, resolveServiceOgImageUrl } from './seo-helpers';
-import { BASE_URL, DEFAULT_LOCALE, normalizeLocale, STRAPI_PUBLIC_URL } from 'shared/config/env';
+import { BASE_URL, DEFAULT_LOCALE, STRAPI_API_URL, normalizeLocale } from 'shared/config/env';
 import { tStatic } from 'shared/i18n/static';
 
 
 // Генерация статических путей
 export async function generateStaticParams() {
   try {
-    const res = await fetch(`${STRAPI_PUBLIC_URL}/api/services`, {
+    const res = await fetch(`${STRAPI_API_URL}/services`, {
       cache: 'force-cache',
     });
 

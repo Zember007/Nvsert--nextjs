@@ -1,6 +1,6 @@
 import ClientPage from './ClientPage';
 import { Metadata } from 'next';
-import { BASE_URL, STRAPI_PUBLIC_URL, type SupportedLocale } from 'shared/config/env';
+import { BASE_URL, STRAPI_API_URL, STRAPI_PUBLIC_URL } from 'shared/config/env';
 import { getRequestLocale } from 'shared/i18n/server-locale';
 import { tStatic } from 'shared/i18n/static';
 
@@ -43,26 +43,22 @@ export interface AboutData {
 async function getAboutData(): Promise<AboutData | null> {
     try {
         const locale = await getRequestLocale();
-        const response = await fetch(`${STRAPI_PUBLIC_URL}/api/about?locale=${locale}`, {
+        const response = await fetch(`${STRAPI_API_URL}/about?locale=${locale}`, {
             next: { revalidate: 3600 }
         });
 
         if (!response.ok) {
-            const locale = await getRequestLocale();
-            return getAboutFallback(locale);
+            throw new Error('Failed to fetch about data');
         }
+
 
         const result = await response.json();
         return result.data;
     } catch (error) {
         console.error('Error fetching about data:', error);
         const locale = await getRequestLocale();
-        return getAboutFallback(locale);
-    }
-}
-
-function getAboutFallback(locale: SupportedLocale) {
-    return {
+        // Возвращаем fallback данные вместо null
+        return {
             id: 1,
             title: tStatic(locale, 'meta.pages.about.title'),
             content: [],
@@ -77,6 +73,7 @@ function getAboutFallback(locale: SupportedLocale) {
             og_title: tStatic(locale, 'meta.pages.about.ogTitle'),
             og_description: tStatic(locale, 'meta.pages.about.ogDescription')
         };
+    }
 }
 
 

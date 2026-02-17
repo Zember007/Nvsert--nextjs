@@ -1,5 +1,5 @@
 import ClientPage from './ClientPage';
-import { SITE_URL } from 'shared/config/env';
+import { STRAPI_API_URL } from 'shared/config/env';
 import { getRequestLocale } from 'shared/i18n/server-locale';
 import { tStatic } from 'shared/i18n/static';
 
@@ -40,13 +40,18 @@ type FeedbackCategoryGroup = {
 };
 
 async function getFeedbacks(): Promise<FeedbackItem[]> {
-    const locale = await getRequestLocale();
-    const res = await fetch(`${SITE_URL}/api/feedbacks?locale=${locale}`, {
-        next: { revalidate: 3600 }, // Кешируем на 1 час для лучшей производительности
-    });
-    if (!res.ok) return [];
-    const json = await res.json();
-    return Array.isArray(json?.data) ? json.data : [];
+    try {
+        const locale = await getRequestLocale();
+        const res = await fetch(`${STRAPI_API_URL}/feedbacks?locale=${locale}`, {
+            next: { revalidate: 3600 }, // Кешируем на 1 час для лучшей производительности
+        });
+        if (!res.ok) return [];
+        const json = await res.json();
+        return Array.isArray(json?.data) ? json.data : [];
+    } catch (error) {
+        console.error('Error fetching feedbacks:', error);
+        return [];
+    }
 }
 
 function groupByCategory(items: FeedbackItem[], uncategorizedTitle: string): FeedbackCategoryGroup[] {
