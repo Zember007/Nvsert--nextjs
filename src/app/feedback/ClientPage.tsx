@@ -104,7 +104,7 @@ const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ 
             >
                 
                 {initialCategories.map(cat => {
-                    const isOpen = openGroups.includes(cat.id);
+                    const isOpen = !openGroups.includes(cat.id);
                     return (
                         <div key={cat.id} id={'block-' + cat.id} className="w-full">
                             <CollapseSection title={cat.title} isOpen={isOpen} onToggle={() => toggleGroup(cat.id)}>
