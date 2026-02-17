@@ -73,9 +73,9 @@ function groupByCategory(items: FeedbackItem[], uncategorizedTitle: string): Fee
     }
     const groups = Array.from(map.values());
     for (const g of groups) {
-        g.items.sort((a, b) => a.title.localeCompare(b.title) || (a.order ?? 0) - (b.order ?? 0));
+        g.items.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
     }
-    groups.sort((a, b) => a.title.localeCompare(b.title) || (a.order ?? 0) - (b.order ?? 0));
+    groups.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
     // Группа «другие категории» (без категории) всегда в конце
     const uncategorizedIndex = groups.findIndex((g) => g.id === -1 || g.slug === 'uncategorized');
     if (uncategorizedIndex !== -1) {
