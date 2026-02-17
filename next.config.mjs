@@ -10,6 +10,7 @@ const nextConfig = {
   turbopack: {}, // Это официально рекомендованный способ заглушить ошибку
   images: {
     remotePatterns: [
+      
       {
         protocol: 'https',
         hostname: 'test11-admin.audiosector.ru',
