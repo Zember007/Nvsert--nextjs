@@ -2,13 +2,16 @@ import { useWindowSize } from 'shared/hooks';
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 
-export default function FlyingPlane() {
+const BREAKPOINT = 540;
 
-    const {width} = useWindowSize()
+export default function FlyingPlane() {
+    const { width } = useWindowSize();
+    // Избегаем смены значения при первом рендере (width === 0), чтобы анимация не «прыгала»
+    const effectiveWidth = width > 0 ? width : BREAKPOINT;
 
     const lineAnimation = {
-        x: width >= 540 ? "-400px" : "-320px",
-        y: `213px`,
+        x: effectiveWidth >= BREAKPOINT ? "-400px" : "-320px",
+        y: "213px",
     };
 
     const lineTransitions = {
@@ -20,7 +23,7 @@ export default function FlyingPlane() {
 
 
     return (
-        <div className="relative w-full overflow-hidden h-[213px] flex items-center justify-center">
+        <div className="relative w-full overflow-hidden h-[213px] flex items-center justify-center isolate">
 
 
             {[...Array(3)].map((_, i) => (

@@ -60,7 +60,7 @@ const FlightSuccess = ({ close, small = false, text, closeIcon = true }: { close
                     </p>
                 </div>
                 <div
-                    className={`${small ? 's:top-[220px] top-[150px]' : 's:top-[256px] top-[160px]'} left-0 right-0 absolute`}>
+                    className={`${small ? 's:top-[220px] top-[150px]' : 's:top-[256px] top-[160px]'} left-0 right-0 absolute isolate will-change-transform`}>
                     <FlyingPlane />
                 </div>
             </div>

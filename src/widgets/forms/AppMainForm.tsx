@@ -178,30 +178,28 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
         }
     }, [ids])
 
+    // При отправке: проверка выбора типа и формата контакта
     useEffect(() => {
         if (!submitCount) return;
 
         if (!isEmail && !isPhone) {
-            bounceCheckbox()
-            setFailCheck(true)
-
+            bounceCheckbox();
+            setFailCheck(true);
         } else {
-            setFailCheck(false)
-            validContact(contactValue)
-
-
+            setFailCheck(false);
+            validContact(contactValue);
         }
-    }, [submitCount,  bounceCheckbox, contactValue, validContact, isEmail, isPhone])
+    }, [submitCount, bounceCheckbox, contactValue, validContact, isEmail, isPhone]);
 
+    // Сбрасываем подсветку чекбоксов при выборе типа
     useEffect(() => {
-        if (emailError && contactValue.length > 0) {
-            setEmailError(false)
-        }
-    }, [contactValue,isPhone, isEmail, emailError])
+        setFailCheck(false);
+    }, [isPhone, isEmail]);
 
+    // Сбрасываем ошибку формата при смене типа контакта
     useEffect(() => {
-        setFailCheck(false)
-    }, [isPhone, isEmail])
+        setEmailError(false);
+    }, [isPhone, isEmail]);
 
     // Функция для безопасного переключения типов контакта
     const handleContactTypeChange = (type: 'phone' | 'email', value: boolean) => {
@@ -254,6 +252,18 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
         animation()
     }, [active, countTrigger, animation])
 
+    // Валидация контакта по формату при потере фокуса (onBlur)
+    const handleContactBlur = useCallback((valueFromInput?: string) => {
+        setFocusContact(false);
+        const value = (valueFromInput ?? contactValue).trim();
+        if (!value) {
+            setEmailError(false);
+            return;
+        }
+        if (!isEmail && !isPhone) return;
+        validContact(value);
+    }, [contactValue, isEmail, isPhone, validContact]);
+
     // Мемоизируем пропсы для предотвращения мерцания при смене типа инпута
     const contactInputProps = useMemo(() => ({
         defaultValue: isEmail ? contactData.email : isPhone ? contactData.phone : '',
@@ -262,13 +272,13 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
         inputName: "contact",
         mask: isPhone ? "phone" : '',
         type: isPhone ? "tel" : 'text',
-        fail: emailError,
+        fail: emailError && !focusContact,
         required: true,
         message: false,
         disable: (!Boolean(isPhone) && !Boolean(isEmail)),
-        onFocus: () => { setFocusContact(true) },
-        onBlur: () => { setFocusContact(false); validContact(contactValue);  }
-    }), [isEmail, isPhone, contactData.email, contactData.phone, emailError, contactValue, validContact, t])
+        onFocus: () => setFocusContact(true),
+        onBlur: handleContactBlur,
+    }), [isEmail, isPhone, contactData.email, contactData.phone, emailError, focusContact, handleContactBlur, t])
 
     return (
         <motion.div
@@ -300,27 +310,45 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
                             />
                             <div className="flex flex-col gap-[10px]">
                                 <div
+                                    className="w-full relative z-[1]"
                                     onClick={() => {
                                         if (!isEmail && !isPhone) {
-                                            bounceCheckbox()
-                                            setFailCheck(true)
+                                            bounceCheckbox();
+                                            setFailCheck(true);
                                         } else {
-                                            setFailCheck(false)
-
+                                            setFailCheck(false);
                                         }
-                                        setEmailError(false)
                                     }}
-                                    className="w-full relative z-[1]">
+                                >
                                     <AppInput {...contactInputProps} />
                                 </div>
 
-                                <div id={`bounce-checkbox${ids}`} className=" flex items-center gap-[20px]"
-                                    onClick={() => { clearErrors('contact') }}
+                                <div
+                                    id={`bounce-checkbox${ids}`}
+                                    className="flex items-center gap-[20px]"
+                                    onClick={() => {
+                                        clearErrors('contact');
+                                        setFailCheck(false);
+                                    }}
                                 >
-                                    <AppCheckbox id={`check-phone${ids}`} successful={contactData.phone !== ''} focus={focusContact} fail={failCheck} checked={isPhone || contactData.phone !== ''}
-                                        onChange={(value) => handleContactTypeChange('phone', value)} label={t('form.input.titles.phone')} />
-                                    <AppCheckbox focus={focusContact} id={`check-email${ids}`} successful={contactData.email !== ''} fail={failCheck} checked={isEmail || contactData.email !== ''}
-                                        onChange={(value) => handleContactTypeChange('email', value)} label={t('form.input.titles.email')} />
+                                    <AppCheckbox
+                                        id={`check-phone${ids}`}
+                                        successful={contactData.phone !== ''}
+                                        focus={focusContact}
+                                        fail={failCheck}
+                                        checked={isPhone || contactData.phone !== ''}
+                                        onChange={(value) => handleContactTypeChange('phone', value)}
+                                        label={t('form.input.titles.phone')}
+                                    />
+                                    <AppCheckbox
+                                        id={`check-email${ids}`}
+                                        focus={focusContact}
+                                        successful={contactData.email !== ''}
+                                        fail={failCheck}
+                                        checked={isEmail || contactData.email !== ''}
+                                        onChange={(value) => handleContactTypeChange('email', value)}
+                                        label={t('form.input.titles.email')}
+                                    />
                                 </div>
                             </div>
 
