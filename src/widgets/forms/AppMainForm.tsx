@@ -265,7 +265,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
         fail: emailError,
         required: true,
         message: false,
-        disable: (Boolean(isPhone) || Boolean(isEmail)),
+        disable: (!Boolean(isPhone) && !Boolean(isEmail)),
         onFocus: () => { setFocusContact(true) },
         onBlur: () => { setFocusContact(false); validContact(contactValue);  }
     }), [isEmail, isPhone, contactData.email, contactData.phone, emailError, contactValue, validContact, t])
@@ -284,7 +284,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
             )}
 
 
-            <span className={`${textSize.headerH3} ${formStyles.form__title}  ${successMessageVisible && 'opacity-0'} `}>
+            <span className={`${textSize.headerH3} ${formStyles.form__title} text-black  ${successMessageVisible && 'opacity-0'} `}>
                 {t('form.buttons.submitApplication')}
             </span>
 
