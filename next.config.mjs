@@ -17,6 +17,11 @@ const nextConfig = {
         port: '',
         pathname: '/uploads/**',
       },
+        {
+          protocol: 'https',
+          hostname: 'test11.audiosector.ru',
+          pathname: '/uploads/**',
+        },
     ],
   
     formats: ['image/avif', 'image/webp'],
