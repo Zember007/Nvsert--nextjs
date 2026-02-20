@@ -39,7 +39,7 @@ export function OkpdSearchBar({
         onClick={onSubmit}
         className="text-[20px] py-[16px] px-[15px] bg-[#34446D] font-normal text-[#FFF] flex items-center gap-[10px]"
       >
-        <Image src={SearchIcon} alt="search" width={18} height={18} />
+        <Image src={SearchIcon} alt="search" width={18} height={18} unoptimized={true} />
         <span>{t('okpd.search.submit')}</span>
       </button>
     </div>

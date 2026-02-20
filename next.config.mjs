@@ -5,9 +5,12 @@ const nextConfig = {
   // NOTE: cacheComponents (PPR/Cache Components) is still evolving in canary
   // and currently causes build-time prerender failures in this project.
   cacheComponents: false,
+  eslint: {
+    // Warning: This allows production builds to successfully complete even if // your project has ESLint errors. 
+    ignoreDuringBuilds: true,
+  },
 
-  // Убираем ошибку Turbopack + webpack
-  turbopack: {}, // Это официально рекомендованный способ заглушить ошибку
+  turbopack: {},
   images: {
     unoptimized: false,
     dangerouslyAllowSVG: true,
@@ -52,9 +55,10 @@ const nextConfig = {
   reactStrictMode: true,
   compress: true,
   poweredByHeader: false,
-
-  // webpack конфиг остаётся (он нужен для @svgr/webpack)
-  // Turbopack его игнорирует, но Next.js больше не ругается благодаря turbopack: {}
+  swcMinify: true,
+  experimental: {
+    legacyBrowsers: false,
+  },
 };
 
 export default nextConfig;

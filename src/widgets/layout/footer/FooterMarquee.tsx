@@ -137,6 +137,7 @@ const FooterMarquee: React.FC = () => {
     >
       <Image
         src={AudioLogo}
+        unoptimized={true}
         alt="audio-logo"
         className="xl:ml-[35px]"
       />

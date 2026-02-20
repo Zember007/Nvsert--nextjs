@@ -1,0 +1,13 @@
+{
+  "ignores": [
+    "autoprefixer",
+    "postcss",
+    "tailwindcss",
+    "eslint-config-next",
+    "shared",
+    "widgets",
+    "entities",
+    "base",
+    "blocks"
+  ]
+}

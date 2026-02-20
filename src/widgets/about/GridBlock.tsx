@@ -72,7 +72,7 @@ const GridBlock: React.FC<GridBlockProps> = ({ block, index, processContent }) =
                 <div>
                     {processContent(content)}
                 </div>
-                <Image src={svgIcons[index % svgIcons.length]} alt={`Icon ${index + 1}`} className="absolute bottom-[20px] right-[20px]" />
+                <Image src={svgIcons[index % svgIcons.length]} alt={`Icon ${index + 1}`} className="absolute bottom-[20px] right-[20px]" unoptimized={true} />
             </div>
         </div>
     );

@@ -215,6 +215,7 @@ const Map = () => {
                                     width={30}
                                     height={30}
                                     className="h-full w-full"
+                                    unoptimized={true}
                                 />
                             </div>
                         )}

@@ -134,6 +134,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                                     onClick={handleGoBack}>
                                     <Image
                                         src={ArrowIcon}
+                                        unoptimized={true}
                                         alt="arrow"
                                         className="w-[20px] h-[20px] rotate-[180deg]"
                                     />

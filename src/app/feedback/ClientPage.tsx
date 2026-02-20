@@ -1,12 +1,13 @@
 'use client';
-import React from 'react';
+import React, { useRef, useEffect, useMemo } from 'react';
 import { CollapseSection, StandardPageLayout } from 'widgets/layout';
 import { useButton } from 'shared/hooks';
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 import { FeedbackCategoryGroup } from '@/types/feedback';
 import FeedbackCard from 'widgets/feedback/FeedbackCard';
 import { useTranslation } from 'react-i18next';
-import { AsyncPhotoProvider } from '../../shared/common/AsyncPhotoView';
+import { AsyncPhotoProvider, AsyncPhotoView } from '../../shared/common/AsyncPhotoView';
+import { getStrapiImageApiPath } from '../../shared/lib/strapi-image';
 
 
 
@@ -26,7 +27,28 @@ const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ 
 
     const [mainOpen, setMainOpen] = React.useState<boolean>(true);
 
+    const photosFlat = useMemo(() => {
+        const list: string[] = [];
+        initialCategories.forEach(cat => {
+            cat.items.forEach(item => {
+                const img = item.photo?.url || item.photo?.formats?.thumbnail?.url || '';
+                if (img) list.push(getStrapiImageApiPath(img) || img);
+            });
+        });
+        return list;
+    }, [initialCategories]);
 
+    const [photoIndexToOpen, setPhotoIndexToOpen] = React.useState<number | null>(null);
+    const triggerRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+    useEffect(() => {
+        if (photoIndexToOpen == null || photoIndexToOpen < 0 || photoIndexToOpen >= photosFlat.length) return;
+        const id = setTimeout(() => {
+            triggerRefs.current[photoIndexToOpen]?.click();
+            setPhotoIndexToOpen(null);
+        }, 0);
+        return () => clearTimeout(id);
+    }, [photoIndexToOpen, photosFlat.length]);
 
     // Элементы для правой навигации
     const dotNavItems = initialCategories.map(cat => ({
@@ -96,28 +118,49 @@ const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ 
                 </button>
             </div>
 
-            <AsyncPhotoProvider 
-               maskOpacity={0.4}
-               maskClassName="blurred-mask"
-               speed={() => 0}
-               maskClosable={false}
+            <AsyncPhotoProvider
+                maskOpacity={0.4}
+                maskClassName="blurred-mask"
+                speed={() => 0}
+                maskClosable={false}
             >
-                
-                {initialCategories.map(cat => {
+                {photosFlat.map((src, index) => (
+                    <AsyncPhotoView key={index} src={src}>
+                        <div
+                            ref={el => { triggerRefs.current[index] = el; }}
+                            style={{ position: 'absolute', left: -9999, width: 1, height: 1, overflow: 'hidden' }}
+                            aria-hidden
+                        />
+                    </AsyncPhotoView>
+                ))}
+            </AsyncPhotoProvider>
+
+            {(() => {
+                let photoIndex = 0;
+                return initialCategories.map(cat => {
                     const isOpen = !openGroups.includes(cat.id);
                     return (
                         <div key={cat.id} id={'block-' + cat.id} className="w-full">
                             <CollapseSection title={cat.title} isOpen={isOpen} onToggle={() => toggleGroup(cat.id)}>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
-                                    {cat.items.map(item => (
-                                        <FeedbackCard key={item.id} item={item} />
-                                    ))}
+                                    {cat.items.map(item => {
+                                        const img = item.photo?.url || item.photo?.formats?.thumbnail?.url || '';
+                                        const currentPhotoIndex = img ? photoIndex++ : undefined;
+                                        return (
+                                            <FeedbackCard
+                                                key={item.id}
+                                                item={item}
+                                                photoIndex={currentPhotoIndex}
+                                                onPhotoClick={setPhotoIndexToOpen}
+                                            />
+                                        );
+                                    })}
                                 </div>
                             </CollapseSection>
                         </div>
                     );
-                })}
-            </AsyncPhotoProvider>
+                });
+            })()}
         </StandardPageLayout>
 
     );
