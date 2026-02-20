@@ -1,6 +1,7 @@
 // app/services/[slug]/page.tsx
 import { Metadata } from 'next';
 import ClientPage from './ClientPage';
+import ServicePageShell from './ServicePageShell';
 import { NavigationItem } from '@/types/navigation';
 import { getNavigationDataBySlug, resolveServiceOgImageUrl } from './seo-helpers';
 import { BASE_URL, DEFAULT_LOCALE, STRAPI_API_URL, normalizeLocale } from 'shared/config/env';
@@ -121,7 +122,13 @@ export default async function Page({
 
     return (
       <div className="main text-[#000] mb-[100px]">
-        <ClientPage initialNavigation={navigation as NavigationItem} />
+        <ServicePageShell
+          title={navigation.title || ''}
+          slug={slug}
+          locale={locale}
+        >
+          <ClientPage initialNavigation={navigation as NavigationItem} insideShell />
+        </ServicePageShell>
       </div>
     );
   } catch (error) {

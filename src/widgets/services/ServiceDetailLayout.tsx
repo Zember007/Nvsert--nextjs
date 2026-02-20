@@ -29,6 +29,8 @@ interface ServiceDetailLayoutProps {
     ctaInsertAfterIndex: number;
     onOpenOrderForm: () => void;
     onOpenIntroForm: () => void;
+    /** Когда true: не рендерить обёртку и h1 (LCP уже в серверном shell) */
+    contentOnly?: boolean;
 }
 
 const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
@@ -39,6 +41,7 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
     ctaInsertAfterIndex,
     onOpenOrderForm,
     onOpenIntroForm,
+    contentOnly = false,
 }) => {
     const [showSecondaryUI, setShowSecondaryUI] = useState(false);
     const { t } = useTranslation();
@@ -60,15 +63,7 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
         const timeoutId = window.setTimeout(() => setShowSecondaryUI(true), 0);
         return () => window.clearTimeout(timeoutId);
     }, []);
-    return (
-        <div className="wrapper pt-[50px] ">
-            <div className="flex gap-[40px]">
-                <div className="flex flex-col m:gap-[50px] gap-[40px] flex-1">
-                    <h1 className="!m-0  m:text-left text-center">
-                        {filterPrepositions(currentService?.title || '')}
-                    </h1>
-
-                    {/* Two Column Layout */}
+    const twoColumnContent = (
                     <div className="flex gap-[40px] items-stretch m:flex-row flex-col">
                         {/* Left Column */}
                         <div className="m:w-[265px] relative">
@@ -174,8 +169,9 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
                             )}
                         </div>
                     </div>
-                </div>
+    );
 
+    const sidebar = (
                 <div className="w-[250px] relative xl:block hidden">
                     <div className=" sticky top-[104px] flex flex-col gap-[50px] no-scrollbar overflow-y-auto max-h-[calc(100vh-104px)]">
                         <Button
@@ -193,6 +189,27 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
                             />
                         )}
                     </div>
+                </div>
+    );
+
+    if (contentOnly) {
+        return (
+            <div className="flex gap-[40px]">
+                {twoColumnContent}
+                {sidebar}
+            </div>
+        );
+    }
+
+    return (
+        <div className="wrapper pt-[50px] ">
+            <div className="flex gap-[40px]">
+                <div className="flex flex-col m:gap-[50px] gap-[40px] flex-1">
+                    <h1 className="!m-0  m:text-left text-center">
+                        {filterPrepositions(currentService?.title || '')}
+                    </h1>
+                    {twoColumnContent}
+                    {sidebar}
                 </div>
             </div>
         </div>
