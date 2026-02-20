@@ -63,8 +63,58 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
         const timeoutId = window.setTimeout(() => setShowSecondaryUI(true), 0);
         return () => window.clearTimeout(timeoutId);
     }, []);
-    const rightColumnContent = (
-                        <>
+    const twoColumnContent = (
+                    <div className="flex gap-[40px] items-stretch m:flex-row flex-col">
+                        {/* Left Column */}
+                        <div className="m:w-[265px] relative">
+                            <div className="sticky top-[104px] flex flex-col xl:gap-[40px] gap-[20px] no-scrollbar m:overflow-y-auto m:max-h-[calc(100vh-104px)]">
+                                <div className="flex  gap-[20px] flex-col-reverse">
+                                    <div className="w-[250px] mx-auto">
+                                        <ServiceCard
+                                            onClick={() => {
+                                                document.getElementById('service-' + currentService?.id)?.click();
+                                            }}
+                                            serviceName={currentService?.category?.name || ''}
+                                            certificate={{
+                                                ...currentService,
+                                                slug: '',
+                                                id: currentService?.id || 0,
+                                                documentId: currentService?.documentId || '',
+                                                title: currentService?.title || '',
+                                                duration: currentService?.duration || '',
+                                                price: currentService?.price || '',
+                                                description: currentService?.description || '',
+                                                createdAt: currentService?.createdAt || '',
+                                                updatedAt: currentService?.updatedAt || '',
+                                                publishedAt: currentService?.publishedAt || '',
+                                                documents: currentService?.documents || [],
+                                                img: currentService?.img || null,
+                                                category: currentService?.category || null,
+                                            }}
+                                            title={false}
+                                            padding={false}
+                                            priority={true}
+                                        />
+                                    </div>
+
+                                    <Button
+                                        wrapperClassName="xl:hidden block !max-w-[250px]"
+                                        onClick={onOpenOrderForm}
+                                        label={t('form.buttons.submitApplication')}
+                                    />
+                                </div>
+
+                                {showSecondaryUI && (
+                                    <ServiceRecommendedList
+                                        items={recomendedServices}
+                                        wrapperClassName="w-full m:block hidden"
+                                        itemClassName={undefined}
+                                        textClassName="m:!whitespace-pre-line !whitespace-normal"
+                                    />
+                                )}
+                            </div>
+                        </div>
+
                         {/* Right Column */}
                         <div className="flex-1 flex flex-col items-center gap-[50px]">
                             {/* Dynamic Content Blocks */}
@@ -118,64 +168,6 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
                                 />
                             )}
                         </div>
-                        </>
-    );
-
-    const leftColumnContent = !contentOnly && (
-                        <div className="m:w-[265px] relative">
-                            <div className="sticky top-[104px] flex flex-col xl:gap-[40px] gap-[20px] no-scrollbar m:overflow-y-auto m:max-h-[calc(100vh-104px)]">
-                                <div className="flex  gap-[20px] flex-col-reverse">
-                                    <div className="w-[250px] mx-auto">
-                                        <ServiceCard
-                                            onClick={() => {
-                                                document.getElementById('service-' + currentService?.id)?.click();
-                                            }}
-                                            serviceName={currentService?.category?.name || ''}
-                                            certificate={{
-                                                ...currentService,
-                                                slug: '',
-                                                id: currentService?.id || 0,
-                                                documentId: currentService?.documentId || '',
-                                                title: currentService?.title || '',
-                                                duration: currentService?.duration || '',
-                                                price: currentService?.price || '',
-                                                description: currentService?.description || '',
-                                                createdAt: currentService?.createdAt || '',
-                                                updatedAt: currentService?.updatedAt || '',
-                                                publishedAt: currentService?.publishedAt || '',
-                                                documents: currentService?.documents || [],
-                                                img: currentService?.img || null,
-                                                category: currentService?.category || null,
-                                            }}
-                                            title={false}
-                                            padding={false}
-                                            priority={true}
-                                        />
-                                    </div>
-
-                                    <Button
-                                        wrapperClassName="xl:hidden block !max-w-[250px]"
-                                        onClick={onOpenOrderForm}
-                                        label={t('form.buttons.submitApplication')}
-                                    />
-                                </div>
-
-                                {showSecondaryUI && (
-                                    <ServiceRecommendedList
-                                        items={recomendedServices}
-                                        wrapperClassName="w-full m:block hidden"
-                                        itemClassName={undefined}
-                                        textClassName="m:!whitespace-pre-line !whitespace-normal"
-                                    />
-                                )}
-                            </div>
-                        </div>
-    );
-
-    const twoColumnContent = (
-                    <div className="flex gap-[40px] items-stretch m:flex-row flex-col">
-                        {leftColumnContent}
-                        {rightColumnContent}
                     </div>
     );
 

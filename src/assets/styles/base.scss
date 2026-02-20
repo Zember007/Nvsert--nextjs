@@ -9,12 +9,7 @@
 }
 
 .no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-/* Скрыть серверное LCP-изображение в левой колонке, когда пользователь переключил услугу в галерее */
-body.service-lcp-image-hidden .service-lcp-image {
-  display: none;
+    display: none;
 }
 
 
