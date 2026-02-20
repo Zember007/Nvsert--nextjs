@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { filterPrepositions } from 'shared/lib';
 import { tStatic } from 'shared/i18n/static';
 import type { SupportedLocale } from 'shared/config/env';
@@ -15,18 +16,34 @@ interface ServicePageShellProps {
   slug: string;
   locale: SupportedLocale;
   children: ReactNode;
+  /** Слот для оверлея карточки (клиент) — рендерится поверх серверного изображения в левой колонке */
+  leftSlot?: ReactNode;
+  /** URL изображения карточки (LCP) — рендерится в левом sticky-столбце */
+  lcpImageSrc?: string;
+  lcpImageAlt?: string;
 }
 
 /**
- * Серверная оболочка: крошки + один wrapper с h1 (LCP) и слотом для клиентского контента.
- * Структура не ломается — один wrapper, внутри h1 и затем children (галерея + две колонки).
+ * Серверная оболочка: крошки, h1, левый sticky-столбец с одним изображением (LCP) + leftSlot (оверлей),
+ * затем children (правая колонка + сайдбар от клиента).
  */
-export default function ServicePageShell({ title, slug, locale, children }: ServicePageShellProps) {
+export default function ServicePageShell({
+  title,
+  slug,
+  locale,
+  children,
+  leftSlot,
+  lcpImageSrc,
+  lcpImageAlt,
+}: ServicePageShellProps) {
   const mainLabel = tStatic(locale, 'navigation.main');
   const allServicesLabel = tStatic(locale, 'services.breadcrumbs.allServices');
 
   return (
     <>
+      {lcpImageSrc && (
+        <link rel="preload" as="image" href={lcpImageSrc} />
+      )}
       <ul className={stylesBreadcrumbs.breadcrumbs}>
         <li className={stylesBreadcrumbs.breadcrumbs__item}>
           <Link
@@ -60,7 +77,38 @@ export default function ServicePageShell({ title, slug, locale, children }: Serv
             <h1 className="!m-0 m:text-left text-center">
               {filterPrepositions(title)}
             </h1>
-            {children}
+
+            <div className="flex gap-[40px] items-stretch m:flex-row flex-col">
+              {/* Левый sticky-столбец: одно изображение (LCP) + слот оверлея от клиента */}
+              <div className="m:w-[265px] relative">
+                <div className="sticky top-[104px] flex flex-col xl:gap-[40px] gap-[20px] no-scrollbar m:overflow-y-auto m:max-h-[calc(100vh-104px)]">
+                  <div className="flex gap-[20px] flex-col-reverse">
+                    <div className="w-[250px] mx-auto relative">
+                      {lcpImageSrc && (
+                        <div
+                          className="service-lcp-image border border-[#93969d] rounded-[4px] overflow-hidden h-[346px]"
+                          aria-hidden
+                        >
+                          <Image
+                            src={lcpImageSrc}
+                            alt={lcpImageAlt || title}
+                            width={250}
+                            height={346}
+                            className="h-[346px] w-[250px] object-cover"
+                            priority
+                            fetchPriority="high"
+                            sizes="250px"
+                          />
+                        </div>
+                      )}
+                      {leftSlot}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {children}
+            </div>
           </div>
         </div>
       </div>

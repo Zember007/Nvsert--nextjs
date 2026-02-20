@@ -2,9 +2,11 @@
 import { Metadata } from 'next';
 import ClientPage from './ClientPage';
 import ServicePageShell from './ServicePageShell';
+import ServiceLeftColumnContent from 'widgets/services/ServiceLeftColumnContent';
 import { NavigationItem } from '@/types/navigation';
 import { getNavigationDataBySlug, resolveServiceOgImageUrl } from './seo-helpers';
 import { BASE_URL, DEFAULT_LOCALE, STRAPI_API_URL, normalizeLocale } from 'shared/config/env';
+import { getStrapiImageApiPath } from 'shared/lib/strapi-image';
 import { tStatic } from 'shared/i18n/static';
 
 
@@ -120,12 +122,19 @@ export default async function Page({
       return <div>{tStatic(locale, 'services.notFound')}</div>;
     }
 
+    const lcpImageUrl = navigation.img?.formats?.medium?.url ?? navigation.img?.url;
+    const lcpImageSrc = lcpImageUrl ? getStrapiImageApiPath(lcpImageUrl) : undefined;
+    const lcpImageAlt = navigation.title || '';
+
     return (
       <div className="main text-[#000] mb-[100px]">
         <ServicePageShell
           title={navigation.title || ''}
           slug={slug}
           locale={locale}
+          lcpImageSrc={lcpImageSrc}
+          lcpImageAlt={lcpImageAlt}
+          leftSlot={<ServiceLeftColumnContent initialSlug={slug} />}
         >
           <ClientPage initialNavigation={navigation as NavigationItem} insideShell />
         </ServicePageShell>
