@@ -92,7 +92,7 @@ const AppNavigationItem = ({ img, title, controls, link, dark, className, onClic
                     <motion.div
                         className={` overflow-hidden h-[60px] rounded-[3px] min-w-[43px] w-[43px] border-solid border border-[#93969D] bg-[#f0f0f0] `}
                         animate={controls}>
-                        {img && img.startsWith('http') ? (
+                        {img  ? (
                           <Image
                               src={img}
                               className="h-full object-cover"
