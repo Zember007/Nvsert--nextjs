@@ -13,6 +13,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import ConsultationFallback from '@/assets/images/contacts/docs_icon.png';
 import FinanceIconFallback from '@/assets/images/contacts/finance_icon.png';
 import { useRichTextRenderer } from 'shared/lib';
+import { getStrapiImageApiPath } from 'shared/lib/strapi-image';
 import { useTranslation } from 'react-i18next';
 
 export type StrapiMedia = {
@@ -117,8 +118,10 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
     ]);
   }, []);
 
-  const consultationImageSrc = data.connectSection.consultationImage?.url || ConsultationFallback;
-  const financeImageSrc = data.requisitesSection.image?.url || FinanceIconFallback;
+  const consultationImageSrc =
+    (data.connectSection.consultationImage?.url && getStrapiImageApiPath(data.connectSection.consultationImage.url)) || ConsultationFallback;
+  const financeImageSrc =
+    (data.requisitesSection.image?.url && getStrapiImageApiPath(data.requisitesSection.image.url)) || FinanceIconFallback;
 
   const consultationW = data.connectSection.consultationImage?.width ?? 368;
   const consultationH = data.connectSection.consultationImage?.height ?? 260;
@@ -157,7 +160,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
                 {offices.map((office) => {
                   const phoneList = normalizePhones(office.phones);
                   const imageUrl = office.image?.url;
-                  const imgSrc = imageUrl || fallbackImageByCity.get(office.city);
+                  const imgSrc = (imageUrl && getStrapiImageApiPath(imageUrl)) || fallbackImageByCity.get(office.city);
                   const imgW = office.image?.width ?? 1200;
                   const imgH = office.image?.height ?? 800;
 
@@ -173,8 +176,6 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
                           width={typeof imgSrc === 'string' ? imgW : undefined}
                           height={typeof imgSrc === 'string' ? imgH : undefined}
                           alt={office.city}
-                          unoptimized={true}
-
                         />
                         <span
                           style={{
@@ -275,7 +276,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
                   label={data.connectSection.consultationButtonLabel}
                 />
               </div>
-              <ImageAnimated src={consultationImageSrc} width={consultationW} height={consultationH} alt={data.connectSection.consultationImage?.alternativeText || 'Consultation'} unoptimized={true} />
+              <ImageAnimated src={consultationImageSrc} width={consultationW} height={consultationH} alt={data.connectSection.consultationImage?.alternativeText || 'Consultation'} />
             </div>
 
             <div className="flex m:gap-[30px] gap-[20px] xl:flex-row flex-col">
@@ -396,7 +397,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
                 </div>
               )}
             </div>
-            <ImageAnimated src={financeImageSrc} width={financeW} height={financeH} alt={data.requisitesSection.image?.alternativeText || 'FinanceIcon'} unoptimized={true} />
+            <ImageAnimated src={financeImageSrc} width={financeW} height={financeH} alt={data.requisitesSection.image?.alternativeText || 'FinanceIcon'} />
           </div>
         </div>
       </ContactSpoiler>
@@ -407,7 +408,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
 export default ClientPage;
 
 
-const ImageAnimated = ({ src, width, height, alt, unoptimized }: { src: string | StaticImageData, width: number, height: number, alt: string, unoptimized: boolean }) => {
+const ImageAnimated = ({ src, width, height, alt }: { src: string | StaticImageData; width: number; height: number; alt: string }) => {
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [shouldAnimateIn, setShouldAnimateIn] = useState(false);
   useEffect(() => {
@@ -436,7 +437,6 @@ const ImageAnimated = ({ src, width, height, alt, unoptimized }: { src: string |
         width={width}
         height={height}
         alt={alt}
-        unoptimized={unoptimized}
       />
     </div>
   );

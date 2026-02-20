@@ -3,7 +3,7 @@
 import React from 'react';
 import { NavigationItem } from '@/types/navigation';
 import { AsyncPhotoProvider, AsyncPhotoView } from 'shared/common/AsyncPhotoView';
-import { STRAPI_PUBLIC_URL } from 'shared/config/env';
+import { getStrapiImageApiPath } from 'shared/lib/strapi-image';
 
 interface ServiceGalleryProps {
     navigation?: NavigationItem[] | null;
@@ -36,7 +36,7 @@ const ServiceGallery: React.FC<ServiceGalleryProps> = ({ navigation, onChange })
                             <span>{item.price}</span>
                         </>
                     }
-                    src={STRAPI_PUBLIC_URL + (item?.img?.url || '')}
+                    src={getStrapiImageApiPath(item?.img?.url) || item?.img?.url || ''}
                     width={250}
                     height={37}
                 >

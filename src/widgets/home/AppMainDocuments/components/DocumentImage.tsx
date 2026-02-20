@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 import { AsyncPhotoView } from "shared/common/AsyncPhotoView";
 import mainDocumentsStyles from "@/assets/styles/main.module.scss";
-import { STRAPI_PUBLIC_URL } from "../../../../shared/config/env";
+import { getStrapiImageApiPath } from "../../../../shared/lib/strapi-image";
 
 export interface DocumentImageProps {
   title: string;
@@ -29,7 +29,7 @@ export const DocumentImage: FC<DocumentImageProps> = memo(
           <span>{price}</span>
         </>
       }
-      src={imageUrls.full}
+      src={getStrapiImageApiPath(imageUrls.full) || imageUrls.full}
       width={475}
       height={667}
     >
@@ -39,10 +39,9 @@ export const DocumentImage: FC<DocumentImageProps> = memo(
         className={`${mainDocumentsStyles["document__big-img"]} `}
       >
         <Image
-          unoptimized={true}
           decoding="async"
           alt="document"
-          src={STRAPI_PUBLIC_URL + imageUrls.full}
+          src={getStrapiImageApiPath(imageUrls.full) || imageUrls.full}
           width={250}
           height={349}
           loading={isPriority ? "eager" : "lazy"}

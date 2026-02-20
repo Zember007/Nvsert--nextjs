@@ -7,7 +7,8 @@ import { useTranslation } from 'react-i18next';
 import textSize from '@/assets/styles/base/base.module.scss';
 import { usePathname } from 'next/navigation';
 import { getLocaleFromPathname, withLocalePrefix } from 'shared/i18n/client-locale';
-import { BASE_URL, STRAPI_PUBLIC_URL } from '../../shared/config/env';
+import { BASE_URL } from '../../shared/config/env';
+import { getStrapiImageApiPath } from '../../shared/lib/strapi-image';
 
 interface ServiceCardProps {    
     serviceName?: string;
@@ -54,7 +55,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                 <div className="relative w-full ">
                     <div className="border border-[#93969d] rounded-[4px] overflow-hidden h-[346px]">
                         <Image
-                            src={STRAPI_PUBLIC_URL + imageUrl}
+                            src={getStrapiImageApiPath(imageUrl) || imageUrl}
                             alt={certificate.title}
                             width={250}
                             height={346}
@@ -87,7 +88,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
                 <div className="relative w-full ">
                     <div className="border border-[#93969d] rounded-[4px] overflow-hidden h-[346px]">
                         <Image
-                            src={STRAPI_PUBLIC_URL + imageUrl}
+                            src={getStrapiImageApiPath(imageUrl) || imageUrl}
                             alt={certificate.title}
                             width={250}
                             height={346}

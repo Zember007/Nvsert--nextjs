@@ -11,7 +11,7 @@ import stylesBtn from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/base/base.module.scss';
 import { usePathname } from 'next/navigation';
 import { getLocaleFromPathname, withLocalePrefix } from 'shared/i18n/client-locale';
-import { STRAPI_PUBLIC_URL } from '../../../shared/config/env';
+import { getStrapiImageApiPath } from '../../../shared/lib/strapi-image';
 
 
 export interface Navigation {
@@ -170,7 +170,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                                                     >
                                                         <div className="flex items-center gap-[20px] transition-transform will-change-transform duration-100 group-active:scale-[.98]">
                                                             {item.img?.url && (
-                                                                <Image src={STRAPI_PUBLIC_URL + item.img.url} alt="document" width={43} height={60} unoptimized={true} />
+                                                                <Image src={getStrapiImageApiPath(item.img.url)} alt="document" width={43} height={60} />
                                                             )}
                                                             <span className={`${item.img?.url ? 'text-[18px]' : 'text-[20px]'} font-light text-black`}>{filterPrepositions(item.title)}</span>
                                                         </div>
@@ -191,7 +191,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                                                     >
                                                         <span className="flex items-center gap-[20px] transition-transform will-change-transform duration-100 group-active:scale-[.95]">
                                                             {'img' in item && item.img?.url &&
-                                                                <Image src={STRAPI_PUBLIC_URL + item.img.url} alt="document" width={43} height={60} unoptimized={true} />
+                                                                <Image src={getStrapiImageApiPath(item.img.url)} alt="document" width={43} height={60} />
                                                             }
                                                             <span className={`${'img' in item && item.img?.url ? 'text-[18px]' : 'text-[20px]'} font-light text-black`}>{item.title}</span>
                                                         </span>

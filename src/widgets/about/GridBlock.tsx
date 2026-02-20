@@ -8,7 +8,7 @@ import IconAbout4 from '@/assets/images/about/4.svg';
 import IconAbout5 from '@/assets/images/about/5.svg';
 import IconAbout6 from '@/assets/images/about/6.svg';
 import textSize from '@/assets/styles/base/base.module.scss';
-import { STRAPI_PUBLIC_URL } from '../../shared/config/env';
+import { getStrapiImageApiPath } from '../../shared/lib/strapi-image';
 
 interface GridBlockProps {
     block: string;
@@ -39,7 +39,8 @@ const GridBlock: React.FC<GridBlockProps> = ({ block, index, processContent }) =
     if (imageMatch) {
         // Это изображение - рендерим как grid блок с изображением
         const alt = imageMatch[1];
-        const src = STRAPI_PUBLIC_URL + imageMatch[2];
+        const rawPath = imageMatch[2];
+        const src = /\/uploads\/?/.test(rawPath) || rawPath.startsWith('uploads') ? (getStrapiImageApiPath(rawPath) || rawPath) : rawPath;
 
         return (
             <div
@@ -52,7 +53,7 @@ const GridBlock: React.FC<GridBlockProps> = ({ block, index, processContent }) =
                     alt={alt}
                     fill
                     className="object-cover"
-                    unoptimized={src.startsWith('http')}
+                    unoptimized={typeof src === 'string' && src.startsWith('http')}
                 />
             </div>
         );

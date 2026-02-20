@@ -1,6 +1,7 @@
 // app/services/[slug]/page.tsx
 import { Metadata } from 'next';
 import ClientPage from './ClientPage';
+import ServicePageHero from './ServicePageHero';
 import { NavigationItem } from '@/types/navigation';
 import { getNavigationDataBySlug, resolveServiceOgImageUrl } from './seo-helpers';
 import { BASE_URL, DEFAULT_LOCALE, STRAPI_API_URL, normalizeLocale } from 'shared/config/env';
@@ -119,7 +120,16 @@ export default async function Page({
       return <div>{tStatic(locale, 'services.notFound')}</div>;
     }
 
-    return <ClientPage initialNavigation={navigation as NavigationItem} />;
+    return (
+      <div className="main text-[#000] mb-[100px]">
+        <ServicePageHero
+          title={navigation.title || ''}
+          slug={slug}
+          locale={locale}
+        />
+        <ClientPage initialNavigation={navigation as NavigationItem} skipHero />
+      </div>
+    );
   } catch (error) {
     console.error('[services][slug] Page render failed:', error);
     const locale = DEFAULT_LOCALE;

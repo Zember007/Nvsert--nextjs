@@ -11,8 +11,18 @@ const nextConfig = {
   images: {
     unoptimized: false,
     dangerouslyAllowSVG: true,
+    localPatterns: [
+      {
+        pathname: '/api/image',
+        // search omitted — разрешаем любую query-строку (?file=...)
+      },
+      {
+        pathname: '/**',
+        search: '',
+        // изображения из public (например /feedbacks/small/1.png)
+      },
+    ],
     remotePatterns: [
-
       {
         protocol: 'https',
         hostname: 'test11-admin.audiosector.ru',
@@ -24,6 +34,12 @@ const nextConfig = {
         hostname: 'test11.audiosector.ru',
         pathname: '/uploads/**',
       },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3000',
+        pathname: '/api/image/**',
+      },
     ],
 
     formats: ['image/avif', 'image/webp'],
@@ -31,9 +47,6 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 192, 256, 384],
     minimumCacheTTL: 86400,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-  },
-  experimental: {
-    allowedRevalidateHeaderKeys: [],
   },
 
   reactStrictMode: true,

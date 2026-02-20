@@ -6,7 +6,6 @@ import { StrapiResponsiveImage } from 'widgets/layout';
 import ServiceRichTextRenderer from 'widgets/services/ServiceRichTextRenderer';
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/base/base.module.scss';
-import { STRAPI_PUBLIC_URL } from 'shared/config/env';
 
 interface ServiceContentBlockProps {
     block: ContentBlock;
@@ -68,7 +67,6 @@ const ServiceContentBlock: React.FC<ServiceContentBlockProps> = ({
                 <div className="max-w-full mx-auto mt-[50px] flex justify-center">
                     <StrapiResponsiveImage
                         image={image}
-                        baseUrl={STRAPI_PUBLIC_URL}
                         priority={isFirst && isExpanded}
                     />
                 </div>

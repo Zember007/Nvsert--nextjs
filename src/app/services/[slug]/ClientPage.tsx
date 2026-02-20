@@ -17,11 +17,13 @@ const ServiceGallery = dynamic(
 
 interface ClientPageProps {
   initialNavigation: NavigationItem;
+  /** When true, breadcrumbs and h1 are rendered by server (ServicePageHero) */
+  skipHero?: boolean;
 }
 
 const ctaInsertAfterIndex = 2;
 
-const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation }) => {
+const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, skipHero }) => {
   const { openDefaultModal, initialNavigation: navigation } = useHeaderContext();
   const { t } = useTranslation();
   const pathname = usePathname();
@@ -104,18 +106,20 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation }) 
   }, [navigation, currentService]);
 
   return (
-    <div className="main text-[#000]  mb-[100px]">
-      <AppBreadcrumbs
-        root="/"
-        breadcrumbs={[
-          { id: 2, title: t('services.breadcrumbs.allServices'), full_slug: '/services' },
-          {
-            id: 3,
-            title: currentService?.title || '',
-            full_slug: `/services/${currentService?.slug}`,
-          },
-        ]}
-      />
+    <>
+      {!skipHero && (
+        <AppBreadcrumbs
+          root="/"
+          breadcrumbs={[
+            { id: 2, title: t('services.breadcrumbs.allServices'), full_slug: '/services' },
+            {
+              id: 3,
+              title: currentService?.title || '',
+              full_slug: `/services/${currentService?.slug}`,
+            },
+          ]}
+        />
+      )}
 
       {showGallery && (
         <ServiceGallery
@@ -139,14 +143,15 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation }) 
           ctaInsertAfterIndex={ctaInsertAfterIndex}
           onOpenOrderForm={() => openDefaultModal('orderForm')}
           onOpenIntroForm={() => openDefaultModal('introForm')}
+          skipTitle={skipHero}
         />
       )}
-    </div>
+    </>
   );
 };
 
-const ClientPage = ({ initialNavigation }: ClientPageProps) => {
-  return <ServiceDetailContent initialNavigation={initialNavigation} />;
+const ClientPage = ({ initialNavigation, skipHero }: ClientPageProps) => {
+  return <ServiceDetailContent initialNavigation={initialNavigation} skipHero={skipHero} />;
 };
 
 export default ClientPage;

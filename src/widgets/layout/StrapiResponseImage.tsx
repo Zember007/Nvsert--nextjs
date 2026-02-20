@@ -1,9 +1,8 @@
-import Image from "next/image";
-import { STRAPI_PUBLIC_URL } from "shared/config/env";
+import { getStrapiImageApiPath } from "shared/lib/strapi-image";
 
 export const StrapiResponsiveImage = ({
   image,
-  baseUrl = STRAPI_PUBLIC_URL,
+  baseUrl = "",
   priority = false
 }: {
   image: any,
@@ -12,42 +11,47 @@ export const StrapiResponsiveImage = ({
 }) => {
   if (!image) return null;
 
-  // Используем более лёгкие форматы на мобильных
   const small = image.formats?.small || image.formats?.thumbnail;
   const medium = image.formats?.medium;
   const large = image.formats?.large || image;
 
+  const smallSrc = getStrapiImageApiPath(small?.url);
+  const mediumSrc = getStrapiImageApiPath(medium?.url);
+  const largeSrc = getStrapiImageApiPath(large?.url);
 
+  const fallbackSrc = smallSrc || mediumSrc || largeSrc;
+  if (!fallbackSrc) return null;
+
+  const width = large?.width ?? medium?.width ?? small?.width ?? image.width;
+  const height = large?.height ?? medium?.height ?? small?.height ?? image.height;
+  const w = width ?? 800;
+  const h = height ?? 600;
+  const alt = image.alternativeText || "";
 
   return (
     <picture>
-      {large?.url && (
+      {largeSrc && (
         <source
           media="(min-width: 1024px)"
-          srcSet={`${baseUrl}${large.url}`}
-          width={large?.width}
-          height={large?.height}
+          srcSet={largeSrc}
         />
       )}
-      {medium?.url && (
+      {mediumSrc && (
         <source
           media="(min-width: 640px)"
-          srcSet={`${baseUrl}${medium.url}`}
-          width={medium?.width}
-          height={medium?.height}
+          srcSet={mediumSrc}
         />
       )}
       <img
-        src={`${baseUrl}${small?.url}`}
-        width={small?.width}
-        height={small?.height}
-        alt={image.alternativeText || ''}
-        loading={priority ? 'eager' : 'lazy'}
-        fetchPriority={priority ? 'high' : 'auto'}
+        src={fallbackSrc}
+        width={w}
+        height={h}
+        alt={alt}
+        loading={priority ? "eager" : "lazy"}
+        fetchPriority={priority ? "high" : "auto"}
         decoding="async"
-        className="rounded-[8px] w-full h-full"
+        className="rounded-[8px] w-full h-full object-cover"
       />
-
     </picture>
   );
 };

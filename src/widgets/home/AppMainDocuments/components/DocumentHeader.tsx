@@ -3,7 +3,7 @@ import { FC, memo } from 'react';
 import mainDocumentsStyles from '@/assets/styles/main.module.scss';
 import { filterPrepositions } from 'shared/lib';
 import textSize from '@/assets/styles/main.module.scss';
-import { STRAPI_PUBLIC_URL } from '../../../../shared/config/env';
+import { getStrapiImageApiPath } from '../../../../shared/lib/strapi-image';
 
 export interface DocumentHeaderProps {
   title: string;
@@ -25,10 +25,9 @@ export const DocumentHeader: FC<DocumentHeaderProps> = memo(
     >
       <div className={`${active && mainDocumentsStyles.active} ${mainDocumentsStyles['document__small-img']} `}>
         <Image
-          unoptimized={true}
           decoding="async"
           alt="document"
-          src={STRAPI_PUBLIC_URL + imageUrls.thumbnail}
+          src={getStrapiImageApiPath(imageUrls.thumbnail) || imageUrls.thumbnail}
           width={41}
           height={58}
           priority={index < 2 ? true : false}

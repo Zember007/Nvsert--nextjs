@@ -29,6 +29,8 @@ interface ServiceDetailLayoutProps {
     ctaInsertAfterIndex: number;
     onOpenOrderForm: () => void;
     onOpenIntroForm: () => void;
+    /** When true, h1 is rendered by server (ServicePageHero) for LCP */
+    skipTitle?: boolean;
 }
 
 const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
@@ -39,6 +41,7 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
     ctaInsertAfterIndex,
     onOpenOrderForm,
     onOpenIntroForm,
+    skipTitle = false,
 }) => {
     const [showSecondaryUI, setShowSecondaryUI] = useState(false);
     const { t } = useTranslation();
@@ -61,12 +64,14 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
         return () => window.clearTimeout(timeoutId);
     }, []);
     return (
-        <div className="wrapper pt-[50px] ">
+        <div className={skipTitle ? 'wrapper' : 'wrapper pt-[50px] '}>
             <div className="flex gap-[40px]">
                 <div className="flex flex-col m:gap-[50px] gap-[40px] flex-1">
-                    <h1 className="!m-0  m:text-left text-center">
-                        {filterPrepositions(currentService?.title || '')}
-                    </h1>
+                    {!skipTitle && (
+                      <h1 className="!m-0  m:text-left text-center">
+                          {filterPrepositions(currentService?.title || '')}
+                      </h1>
+                    )}
 
                     {/* Two Column Layout */}
                     <div className="flex gap-[40px] items-stretch m:flex-row flex-col">

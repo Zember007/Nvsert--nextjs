@@ -10,7 +10,7 @@ import stylesBtn from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/base/base.module.scss';
 import { usePathname } from "next/navigation";
 import { getLocaleFromPathname, withLocalePrefix } from "shared/i18n/client-locale";
-import { STRAPI_PUBLIC_URL } from "../../shared/config/env";
+import { getStrapiImageApiPath } from "../../shared/lib/strapi-image";
 
 
 
@@ -60,7 +60,7 @@ const AppNavigation = ({ active, services }: { active: boolean, services: Servic
 
                         <div key={i} className="flex flex-col gap-[20px]">
                             {item.items.map((children:NavigationItem) => (
-                                <AppNavigationItem link={children.slug} key={children.id} title={children.title} img={ STRAPI_PUBLIC_URL + children.img?.formats?.thumbnail?.url} controls={controls} localizePath={localizePath} />
+                                <AppNavigationItem link={children.slug} key={children.id} title={children.title} img={children.img?.formats?.thumbnail?.url ? getStrapiImageApiPath(children.img.formats.thumbnail.url) : ''} controls={controls} localizePath={localizePath} />
                             ))}
                         </div>
                     )
@@ -90,17 +90,21 @@ const AppNavigationItem = ({ img, title, controls, link, dark, className, onClic
                     onClick={onClick}
                     className={` ${stylesBtn.tariff} ${stylesBtn.noTransitions} text-left overflow-hidden ${stylesBtn.notBackdrop} flex  gap-[10px] group/img  rounded-[3px] items-center    border-solid  border border-[transparent] h-[72px] p-[5px] ${active ? activeStyle : ''} ${hoverStyle}`}>
                     <motion.div
-                        className={` overflow-hidden h-[60px] rounded-[3px] min-w-[43px] w-[43px] border-solid border border-[#93969D] `}
+                        className={` overflow-hidden h-[60px] rounded-[3px] min-w-[43px] w-[43px] border-solid border border-[#93969D] bg-[#f0f0f0] `}
                         animate={controls}>
-                        <Image 
-                            src={img as string} 
-                            className="h-full" 
-                            width={43} 
-                            height={60} 
-                            alt="document" 
-                            unoptimized={true}
-                            sizes="43px"
-                        />
+                        {img && img.startsWith('http') ? (
+                          <Image
+                              src={img}
+                              className="h-full object-cover"
+                              width={43}
+                              height={60}
+                              alt={title || 'document'}
+                              sizes="43px"
+                              quality={60}
+                              loading="lazy"
+                              fetchPriority="low"
+                          />
+                        ) : null}
                     </motion.div>
                     <p className={`${classNameText ? classNameText : ''} ${dark ? `text-[#000] ${textSize.text1}` : 'text-[#FFF] xxxxl:text-[18px] xxl:text-[16px] text-[14px] no-font-weight'}  !leading-[1.1] pr-[6px] whitespace-pre-line max-w-full`}>{filterPrepositions(title)}</p>
                 </Link>

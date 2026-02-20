@@ -3,7 +3,7 @@
 import React from 'react';
 import { NavigationItem } from '@/types/navigation';
 import { AppCollapsibleList, AppNavigationItem } from 'widgets/layout';
-import { STRAPI_PUBLIC_URL } from 'shared/config/env';
+import { getStrapiImageApiPath } from 'shared/lib/strapi-image';
 import { useTranslation } from 'react-i18next';
 import { usePathname } from 'next/navigation';
 import { getLocaleFromPathname, withLocalePrefix } from 'shared/i18n/client-locale';
@@ -45,7 +45,7 @@ const ServiceRecommendedList: React.FC<ServiceRecommendedListProps> = ({
                         classNameText={textClassName}
                         link={children.slug}
                         title={children.title}
-                        img={(children.img?.formats?.thumbnail?.url || '')}
+                        img={children.img?.formats?.thumbnail?.url ? getStrapiImageApiPath(children.img.formats.thumbnail.url) : ''}
                         localizePath={localizePath}
                     />
                 )}
