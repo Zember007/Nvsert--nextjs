@@ -17,13 +17,11 @@ const ServiceGallery = dynamic(
 
 interface ClientPageProps {
   initialNavigation: NavigationItem;
-  /** When true, breadcrumbs and h1 are rendered by server (ServicePageHero) */
-  skipHero?: boolean;
 }
 
 const ctaInsertAfterIndex = 2;
 
-const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, skipHero }) => {
+const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation }) => {
   const { openDefaultModal, initialNavigation: navigation } = useHeaderContext();
   const { t } = useTranslation();
   const pathname = usePathname();
@@ -107,19 +105,17 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, sk
 
   return (
     <>
-      {!skipHero && (
-        <AppBreadcrumbs
-          root="/"
-          breadcrumbs={[
-            { id: 2, title: t('services.breadcrumbs.allServices'), full_slug: '/services' },
-            {
-              id: 3,
-              title: currentService?.title || '',
-              full_slug: `/services/${currentService?.slug}`,
-            },
-          ]}
-        />
-      )}
+      <AppBreadcrumbs
+        root="/"
+        breadcrumbs={[
+          { id: 2, title: t('services.breadcrumbs.allServices'), full_slug: '/services' },
+          {
+            id: 3,
+            title: currentService?.title || '',
+            full_slug: `/services/${currentService?.slug}`,
+          },
+        ]}
+      />
 
       {showGallery && (
         <ServiceGallery
@@ -143,15 +139,14 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, sk
           ctaInsertAfterIndex={ctaInsertAfterIndex}
           onOpenOrderForm={() => openDefaultModal('orderForm')}
           onOpenIntroForm={() => openDefaultModal('introForm')}
-          skipTitle={skipHero}
         />
       )}
     </>
   );
 };
 
-const ClientPage = ({ initialNavigation, skipHero }: ClientPageProps) => {
-  return <ServiceDetailContent initialNavigation={initialNavigation} skipHero={skipHero} />;
+const ClientPage = ({ initialNavigation }: ClientPageProps) => {
+  return <ServiceDetailContent initialNavigation={initialNavigation} />;
 };
 
 export default ClientPage;

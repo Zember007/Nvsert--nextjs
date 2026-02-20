@@ -70,13 +70,14 @@ export default async function RootLayout({
           </>
         ) : null}
 
-        {/* Preload основного шрифта (без блокировки отрисовки благодаря font-display: swap) */}
+        {/* Критические шрифты с высоким приоритетом */}
         <link
           rel="preload"
           href="/fonts/Roboto-Regular.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
+          fetchPriority="high"
         />
       </head>
       <body>
