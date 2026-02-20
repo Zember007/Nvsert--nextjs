@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
-const UPLOADS_DIR = '/var/www/html/strapi/public/uploads';
+const UPLOADS_DIR = '/home/user_test11/test11/strapi/public/uploads';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
