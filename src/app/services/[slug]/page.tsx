@@ -122,12 +122,12 @@ export default async function Page({
 
     return (
       <div className="main text-[#000] mb-[100px]">
-     {/*    <ServicePageHero
+        <ServicePageHero
           title={navigation.title || ''}
           slug={slug}
           locale={locale}
-        /> */}
-        <ClientPage initialNavigation={navigation as NavigationItem}  />
+        />
+        <ClientPage initialNavigation={navigation as NavigationItem} skipHero />
       </div>
     );
   } catch (error) {
