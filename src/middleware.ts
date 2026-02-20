@@ -59,9 +59,13 @@ export function middleware(req: NextRequest) {
 
   // Проверяем, начинается ли путь с /api/
   if (pathname.startsWith('/api/')) {
+    // Исключаем наш route handler
+    if (pathname.startsWith('/api/image')) {
+      return NextResponse.next();
+    }
+    
     // /api/services -> /services
     const apiPath = pathname.replace(/^\/api/, '');
-    // http://localhost:1337/api + /services -> http://localhost:1337/api/services
     targetUrl = `${normalizedTarget}${apiPath}${req.nextUrl.search || ''}`;
   }
 
