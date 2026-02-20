@@ -62,12 +62,9 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <head>
-        {/* Preconnect для домена CMS (медиа-файлы) */}
+        {/* DNS prefetch для CMS (preconnect убран — Lighthouse: unused на первой загрузке) */}
         {STRAPI_ORIGIN ? (
-          <>
-            <link rel="preconnect" href={STRAPI_ORIGIN} crossOrigin="anonymous" />
-            <link rel="dns-prefetch" href={STRAPI_ORIGIN} />
-          </>
+          <link rel="dns-prefetch" href={STRAPI_ORIGIN} />
         ) : null}
 
         {/* Критические шрифты с высоким приоритетом */}

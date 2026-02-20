@@ -11,8 +11,8 @@ export default async function Home() {
 
   return (
     <div className="main text-[#000] overflow-hidden relative leading-page">
-      {/* Критический контент - рендерится сразу */}
-      <AppMainIntro />
+      {/* LCP: секция и h1 рендерятся на сервере без ожидания JS */}
+      <AppMainIntro locale={locale} />
 
       {/* Документы - ленивая загрузка */}
       <Suspense fallback={<DocumentsSkeleton />}>

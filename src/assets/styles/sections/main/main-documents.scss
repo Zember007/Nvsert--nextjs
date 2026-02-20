@@ -157,6 +157,11 @@
 
   &__small-img {
     @apply overflow-hidden border border-solid border-[#93969D] rounded-[3px] transition-all duration-100 z-[2] absolute top-1/2 -translate-y-1/2 left-[6px] xl:left-[23px];
+    /* Резерв места под миниатюру 41×58 — снижает CLS при загрузке изображений */
+    width: 41px;
+    min-width: 41px;
+    height: 58px;
+    min-height: 58px;
 
     &.active {
       @apply translate-y-[100%];

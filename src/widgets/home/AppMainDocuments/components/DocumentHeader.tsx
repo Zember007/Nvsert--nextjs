@@ -23,16 +23,17 @@ export const DocumentHeader: FC<DocumentHeaderProps> = memo(
       onClick={onClick}
       className={`${mainDocumentsStyles['document__navigation']} group/window ${!active ? '' : mainDocumentsStyles.active} `}
     >
-      <div className={`${active && mainDocumentsStyles.active} ${mainDocumentsStyles['document__small-img']} `}>
+      <div className={`${active && mainDocumentsStyles.active} ${mainDocumentsStyles['document__small-img']}`} style={{ width: 41, height: 58 }}>
         <Image
           decoding="async"
           alt="document"
           src={getStrapiImageApiPath(imageUrls.thumbnail) || imageUrls.thumbnail}
           width={41}
           height={58}
-          priority={index < 2 ? true : false}
-          loading={index < 2 ? "eager" : "lazy"}
+          priority={index < 2}
+          loading={index < 2 ? 'eager' : 'lazy'}
           sizes="41px"
+          style={{ width: 41, height: 58, objectFit: 'cover' }}
         />
       </div>
 
