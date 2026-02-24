@@ -10,6 +10,7 @@ import { usePathname } from 'next/navigation';
 import { getLocaleFromPathname, withLocalePrefix } from 'shared/i18n/client-locale';
 import { getStrapiImageApiPath } from '../../shared/lib/strapi-image';
 
+
 const ServiceCard = dynamic(() => import('widgets/services').then((m) => m.ServiceCard), {
   ssr: false,
 });

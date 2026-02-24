@@ -301,11 +301,11 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
                         </g>
                         <defs>
                           <linearGradient id="paint0_linear_15508_15332" x1="28.1239" y1="29.0992" x2="8.6397" y2="42.7351" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#0A1E53" />
+                            <stop offset="0" stop-color="#0A1E53" />
                             <stop offset="0.375754" stop-color="#34446D" />
                           </linearGradient>
                           <linearGradient id="paint1_linear_15508_15332" x1="28.7498" y1="0" x2="28.7498" y2="32.4" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#00103A" />
+                            <stop offset="0" stop-color="#00103A" />
                             <stop offset="0.531505" stop-color="#34446D" />
                           </linearGradient>
                         </defs>
@@ -341,9 +341,16 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
           <div className="flex flex-col gap-[20px]">
             <div className="flex items-center justify-between">
               <span className={textSize.headerH2}>{data.requisitesSection.heading}</span>
-              <a href={pdfHref} download rel="noopener noreferrer" className='no-underline'>
-                <Button label={data.requisitesSection.downloadButtonLabel} />
-              </a>
+              <Button
+                label={data.requisitesSection.downloadButtonLabel}
+                onClick={() => {
+                  const link = document.createElement('a');
+                  link.href = pdfHref;
+                  link.download = '';
+                  link.rel = 'noopener noreferrer';
+                  link.click();
+                }}
+              />
             </div>
             <div className={textSize.text3}>{processContent(data.requisitesSection.description)}</div>
           </div>

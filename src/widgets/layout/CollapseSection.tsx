@@ -29,9 +29,9 @@ const CollapseSection: React.FC<CollapseSectionProps> = ({ title, isOpen, onTogg
                 className={`flex justify-center group items-center gap-[10px] pb-[10px] border-b border-[#93969d80] cursor-pointer ${stylesBtn.lineAfter}`}
                 onClick={onToggle}
             >
-                <h4 className={`${textSize.headerH4} -my-[0.6%] group-active:scale-[0.98] transition-all duration-100  group-hover:text-[#34446D] text-[#000] flex-1`}>
+                <h2 className={`${textSize.headerH4} -my-[0.6%] group-active:scale-[0.98] transition-all duration-100  group-hover:text-[#34446D] text-[#000] flex-1`}>
                     {title}
-                </h4>
+                </h2>
 
 
                 <ChevronIcon open={isOpen} />

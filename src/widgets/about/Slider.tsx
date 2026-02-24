@@ -159,7 +159,7 @@ const Slider = () => {
                             </svg>
                             <div className="flex flex-col gap-[15px] w-full">
 
-                                <h2 className="!text-[48px] text-[#34446D]">
+                                <span className="!text-[48px] text-[#34446D] block" role="presentation">
                                     {(() => {
                                         const { value, suffix } = parseProcent(block.procent);
                                         return (
@@ -173,11 +173,11 @@ const Slider = () => {
                                             </>
                                         );
                                     })()}
-                                </h2>
+                                </span>
 
-                                <h6 className={`${textSize.headerH6} leading-[1.3] text-black !font-normal`}>
+                                <p className={`${textSize.headerH6} leading-[1.3] text-black !font-normal`}>
                                     {block.title}
-                                </h6>
+                                </p>
                                 <div>
                                     {block.description}
                                 </div>
