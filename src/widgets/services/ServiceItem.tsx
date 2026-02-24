@@ -6,10 +6,9 @@ import { motion, useAnimation } from "framer-motion";
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/base/base.module.scss';
 import dynamic from 'next/dynamic';
-import { STRAPI_PUBLIC_URL } from 'shared/config/env';
 import { usePathname } from 'next/navigation';
 import { getLocaleFromPathname, withLocalePrefix } from 'shared/i18n/client-locale';
-import { getStrapiImageApiPath } from '@/shared/lib/strapi-image';
+import { getStrapiImageApiPath } from '../../shared/lib/strapi-image';
 
 const ServiceCard = dynamic(() => import('widgets/services').then((m) => m.ServiceCard), {
   ssr: false,
