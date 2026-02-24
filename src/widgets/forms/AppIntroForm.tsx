@@ -19,12 +19,24 @@ import stylesBtn from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/base/base.module.scss';
 import formStyles from '@/assets/styles/base/base.module.scss';
 
+const INTRO_ANIMATION_SETTINGS = {
+    duration: 0.3,
+    ease: [0.34, 1.56, 0.64, 1] as const,
+    times: [0, 0.2, 0.5, 0.8, 1],
+    openY: [-30, 0, -10, 0, 0],
+};
+
 
 const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrapper?: () => void }) => {
     const { setButtonRef, setWrapperRef } = useButton();
     const { t } = useTranslation();
 
     const onSubmit = async (e: any) => {
+        const phoneRegex = /^(?:\+7|8)?[\s(-]*\d[\s(-]*\d{2}[\s)-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}$/;
+        if (!phoneRegex.test((e.Contact || '').trim())) {
+            setContactError(true);
+            return;
+        }
 
 
         const formData = new FormData();
@@ -64,11 +76,12 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
             Contact: ''
         }
     });
-    
 
-    const { reset } = methods;
+
+    const { reset, watch } = methods;
 
     const [successMessageVisible, setSuccessMessageVisible] = useState(false);
+    const [focusContact, setFocusContact] = useState(false);
 
     const validContact = (value: string) => {
         const phoneRegex = /^(?:\+7|8)?[\s(-]*\d[\s(-]*\d{2}[\s)-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}$/;
@@ -82,26 +95,29 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
 
 
     const [contactError, setContactError] = useState(false);
+    const contactValue = watch("Contact") || "";
     const { defaultModalActive, defaultModalCount } = useHeaderContext();
 
+    useEffect(() => {
+        if (!contactError) return;
+        // Скрываем ошибку только в процессе редактирования, а не сразу после blur
+        if (focusContact) {
+            setContactError(false);
+        }
+    }, [focusContact, contactValue, contactError]);
+
     const controls = useAnimation();
-    const defaultSettings = {
-        duration: 0.3,
-        ease: [0.34, 1.56, 0.64, 1],
-        times: [0, 0.2, 0.5, 0.8, 1],
-        openY: [-30, 0, -10, 0, 0],
-    };
 
     const animation = useCallback(() => {
         controls.start({
-            y: defaultSettings.openY,
+            y: INTRO_ANIMATION_SETTINGS.openY,
             transition: {
-                duration: defaultSettings.duration,
+                duration: INTRO_ANIMATION_SETTINGS.duration,
                 ease: [0.34, 1.56, 0.64, 1] as const,
-                times: defaultSettings.times
+                times: INTRO_ANIMATION_SETTINGS.times
             }
         });
-    }, [controls, defaultSettings.duration, defaultSettings.openY, defaultSettings.times])
+    }, [controls])
 
     useEffect(() => {
         if (!defaultModalActive) return
@@ -111,25 +127,30 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
         <motion.div
             animate={controls}
             initial={{ x: 0 }}
-            className='s:h-[590px] h-[475px] border border-solid border-[#93969d] rounded-[6px] flex flex-col s:gap-[20px] s:justify-start justify-between py-[30px] px-[20px] s:p-[40px] relative'>
+            className={`${formStyles['main-form']} s:h-[590px] h-[475px] border border-solid border-[#93969d] rounded-[6px] flex flex-col s:gap-[20px] s:justify-start justify-between py-[30px] px-[20px] s:p-[40px] relative`}>
 
-            <div className={`${successMessageVisible && 'opacity-0'} flex flex-col s:gap-[44px] gap-[20px]`}>
-                <span className={`${textSize.headerH3} ${formStyles.form__title}`}>{t("navigation.order")}</span>
-
-                <div className="w-full s:h-[113px] h-[120px] overflow-hidden pointer-events-none rounded-[4px] border border-solid border-[#93969D]">
-                    <Image className="w-full s:hidden" src={ImgCallMob} alt='order-call'></Image>
-                    <Image className="w-full hidden s:block" src={ImgCall} alt='order-call'></Image>
-                </div>
-            </div>
-
-            {successMessageVisible && (
+            {successMessageVisible ? (
                 <FlightSuccess
                     small={true}
                     closeIcon={false}
                     text={t("modals.flightSuccess.thankYou")}
                     close={() => { setSuccessMessageVisible(false) }}
                 />
-            )}
+            ) : (
+                <div className={`${successMessageVisible && 'opacity-0'} flex flex-col s:gap-[44px] gap-[20px]`}>
+                    <span className={`${textSize.headerH3} text-black ${formStyles.form__title}`}>{t("navigation.order")}</span>
+
+                    <div className="w-full s:h-[113px] h-[120px] overflow-hidden pointer-events-none rounded-[4px] border border-solid border-[#93969D]">
+                        <Image className="w-full s:hidden" src={ImgCallMob} alt='order-call'></Image>
+                        <Image className="w-full hidden s:block" src={ImgCall} alt='order-call'></Image>
+                    </div>
+                </div>
+
+            )
+            }
+
+
+
 
             <AppValidationObserver methods={methods} onSubmit={onSubmit}>
                 {({ register, errors }) => (
@@ -146,8 +167,15 @@ const AppIntroForm = ({ close, BounceWrapper }: { close?: () => void; BounceWrap
                             mask={"phone"}
                             type={"tel"}
                             required={true}
-                            fail={contactError}
-                            onBlur={(value) => { validContact(value) }}
+                            fail={contactError && !focusContact}
+                            onFocus={() => {
+                                setFocusContact(true);
+                                setContactError(false);
+                            }}
+                            onBlur={(value) => {
+                                setFocusContact(false);
+                                validContact(value);
+                            }}
                         />
 
 
