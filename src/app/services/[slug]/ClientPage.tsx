@@ -121,7 +121,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
         />
       )}
 
-     {/*  {showGallery && (
+      {showGallery && (
         <ServiceGallery
           navigation={navigation}
           onChange={(index: number) => {
@@ -132,10 +132,11 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
             }
           }}
         />
-      )} */}
+      )}
 
       {currentService && (
         <ServiceDetailLayout
+          index={currentServiceIndex ?? 0}
           currentService={currentService}
           recomendedServices={recomendedServices}
           expandedSections={expandedSections}

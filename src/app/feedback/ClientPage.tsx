@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { CollapseSection, StandardPageLayout } from 'widgets/layout';
 import { useButton } from 'shared/hooks';
 import stylesBtn from '@/assets/styles/base/base.module.scss';
@@ -39,12 +39,11 @@ const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ 
     }, [initialCategories]);
 
     const [photoIndexToOpen, setPhotoIndexToOpen] = React.useState<number | null>(null);
-    const triggerRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     useEffect(() => {
         if (photoIndexToOpen == null || photoIndexToOpen < 0 || photoIndexToOpen >= photosFlat.length) return;
         const id = setTimeout(() => {
-            triggerRefs.current[photoIndexToOpen]?.click();
+            document.getElementById(`feedback-photo-${photoIndexToOpen}`)?.click();
             setPhotoIndexToOpen(null);
         }, 0);
         return () => clearTimeout(id);
@@ -127,8 +126,8 @@ const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ 
                 {photosFlat.map((src, index) => (
                     <AsyncPhotoView key={index} src={src}>
                         <div
-                            ref={el => { triggerRefs.current[index] = el; }}
-                            style={{ position: 'absolute', left: -9999, width: 1, height: 1, overflow: 'hidden' }}
+                            id={`feedback-photo-${index}`}
+                            style={{ position: 'absolute', left: -9999, width: 1, height: 1 }}
                             aria-hidden
                         />
                     </AsyncPhotoView>

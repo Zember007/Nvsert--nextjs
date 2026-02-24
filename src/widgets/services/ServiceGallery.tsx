@@ -15,7 +15,7 @@ const ServiceGallery: React.FC<ServiceGalleryProps> = ({ navigation, onChange })
         return null;
     }
 
-    
+
 
     return (
         <AsyncPhotoProvider
@@ -40,7 +40,11 @@ const ServiceGallery: React.FC<ServiceGalleryProps> = ({ navigation, onChange })
                     width={250}
                     height={37}
                 >
-                    <div id={'service-' + index} />
+                    <div
+                        id={'service-' + index}
+                        style={{ position: 'absolute', left: -9999, width: 1, height: 1 }}
+                        aria-hidden
+                    />
 
                 </AsyncPhotoView>
             ))}

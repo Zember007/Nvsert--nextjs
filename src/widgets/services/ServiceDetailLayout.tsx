@@ -22,6 +22,7 @@ const DotNavList = dynamic(() => import('widgets/layout').then((m) => m.DotNavLi
 });
 
 interface ServiceDetailLayoutProps {
+    index: number;
     currentService: NavigationItem;
     recomendedServices: NavigationItem[];
     expandedSections: number[];
@@ -34,6 +35,7 @@ interface ServiceDetailLayoutProps {
 }
 
 const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
+    index,
     currentService,
     recomendedServices,
     expandedSections,
@@ -71,8 +73,8 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
                                 <div className="flex  gap-[20px] flex-col-reverse">
                                     <div className="w-[250px] mx-auto">
                                         <ServiceCard
-                                            onClick={() => {
-                                                document.getElementById('service-' + currentService?.id)?.click();
+                                            onClick={() => {console.log(document.getElementById('service-' + index));
+                                                document.getElementById('service-' + index)?.click();
                                             }}
                                             serviceName={currentService?.category?.name || ''}
                                             certificate={{

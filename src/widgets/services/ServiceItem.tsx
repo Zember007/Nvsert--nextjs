@@ -9,6 +9,7 @@ import dynamic from 'next/dynamic';
 import { STRAPI_PUBLIC_URL } from 'shared/config/env';
 import { usePathname } from 'next/navigation';
 import { getLocaleFromPathname, withLocalePrefix } from 'shared/i18n/client-locale';
+import { getStrapiImageApiPath } from '@/shared/lib/strapi-image';
 
 const ServiceCard = dynamic(() => import('widgets/services').then((m) => m.ServiceCard), {
   ssr: false,
@@ -126,7 +127,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                                 classNameText='m:!whitespace-pre-line !whitespace-normal'
                                 key={itemIndex}
                                 title={item.title}
-                                img={(item.img?.formats?.thumbnail?.url || '')}
+                                img={(item.img?.formats?.thumbnail?.url ? getStrapiImageApiPath(item.img.formats.thumbnail.url) : '')}   
                                 link={item.slug}
                                 localizePath={localizePath}
                             />
