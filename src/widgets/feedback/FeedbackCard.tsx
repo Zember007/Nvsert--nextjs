@@ -43,8 +43,7 @@ function LazyFeedbackImage({
             role={onPhotoClick && photoIndex !== undefined ? 'button' : undefined}
             tabIndex={onPhotoClick && photoIndex !== undefined ? 0 : undefined}
             onClick={onPhotoClick && photoIndex !== undefined ? (e) => { e.stopPropagation(); onPhotoClick(photoIndex); } : undefined}
-            className={`relative shrink-0 w-[190px] h-[267px] min-h-[267px] rounded-[6px] overflow-hidden border border-[#93969D] xxs:mx-0 mx-auto bg-[#e8e8e6] ${onPhotoClick && photoIndex !== undefined ? 'cursor-zoom-in' : ''}`}
-            style={{ width: IMG_WIDTH, height: IMG_HEIGHT, minHeight: IMG_HEIGHT }}
+            className={`relative shrink-0 w-[190px] rounded-[6px] overflow-hidden border border-[#93969D] xxs:mx-0 mx-auto bg-[#e8e8e6] ${onPhotoClick && photoIndex !== undefined ? 'cursor-zoom-in' : ''}`}
         >
             {inView ? (
                 <Image

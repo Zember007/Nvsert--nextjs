@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Button } from 'shared/ui';
 import { useHeaderContext } from 'shared/contexts/contexts/HeaderContext';
 import CountUp from '../../layout/countUp';
+import { filterPrepositions } from '../../../shared/lib';
 
 const AppMainIntroBadge = ({
   title,
@@ -40,7 +41,7 @@ const AppMainIntroBadge = ({
           );
         })()}
       </span>
-      <span className="text-[16px] max-w-[170px] -my-[2%]">{description}</span>
+      <span className="text-[16px] max-w-[170px] -my-[2%] text-black">{filterPrepositions(description)}</span>
     </div>
   );
 };
