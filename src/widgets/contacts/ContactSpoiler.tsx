@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useId, useRef, useState } from 'react';
-import styles from '@/assets/styles/base/base.module.scss';
+import styles from '@/assets/styles/base/contacts-base.module.scss';
 
 
 const ContactSpoiler = ({ isExpanded, onToggle, title, children }: { isExpanded: boolean, onToggle: () => void, title: string, children: React.ReactNode }) => {

@@ -1,9 +1,9 @@
 'use client';
 
 import { AppBreadcrumbs } from 'widgets/layout';
-import { Button } from 'shared/ui';
 import { useHeaderContext } from 'shared/contexts';
-import textSize from '@/assets/styles/base/base.module.scss';
+import { useButton } from 'shared/hooks';
+import textSize from '@/assets/styles/base/contacts-base.module.scss';
 import Image, { StaticImageData } from 'next/image';
 import Moscow from '@/assets/images/contacts/towns/moscow.jpg';
 import SaintPetersburg from '@/assets/images/contacts/towns/spb.jpg';
@@ -101,12 +101,68 @@ function encodeDownloadHref(url: string): string {
   return url.startsWith('/') ? encodeURI(url) : url;
 }
 
+const ContactsButton = ({
+  label,
+  onClick,
+  type = 'button',
+}: {
+  label: string;
+  onClick?: () => void;
+  type?: 'button' | 'submit';
+}) => {
+  const { setButtonRef, setWrapperRef } = useButton();
+
+  return (
+    <div className={`${textSize.mainButtonWrap} ${textSize.tariffWrap}`} ref={setWrapperRef}>
+      <button
+        ref={setButtonRef}
+        type={type}
+        className={`${textSize.mainButton} ${textSize.btnIconAn} ${textSize.tariff}`}
+        onClick={onClick}
+      >
+        <span className={textSize.sendText}>{label}</span>
+        <span className={textSize.sendIconLeft}>
+          <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M3 9.48438V7.48438H0V9.48438H3ZM8.96767 1.48438L7.52908 2.91514L12.1092 7.47151H6V9.49623H12.1092L7.52908 14.0526L8.96767 15.4844L16 8.48438L15.2822 7.76899L14.5634 7.0526L8.96767 1.48438Z"
+              fill="white"
+            />
+          </svg>
+        </span>
+      </button>
+    </div>
+  );
+};
+
+const ContactsButtonLink = ({ label, href }: { label: string; href: string }) => {
+  return (
+    <div className={`${textSize.mainButtonWrap} ${textSize.tariffWrap}`}>
+      <a
+        href={href}
+        download
+        rel="noopener noreferrer"
+        className={`${textSize.mainButton} ${textSize.btnIconAn} ${textSize.tariff}`}
+      >
+        <span className={textSize.sendText}>{label}</span>
+        <span className={textSize.sendIconLeft}>
+          <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M3 9.48438V7.48438H0V9.48438H3ZM8.96767 1.48438L7.52908 2.91514L12.1092 7.47151H6V9.49623H12.1092L7.52908 14.0526L8.96767 15.4844L16 8.48438L15.2822 7.76899L14.5634 7.0526L8.96767 1.48438Z"
+              fill="white"
+            />
+          </svg>
+        </span>
+      </a>
+    </div>
+  );
+};
+
 const ClientPage = ({ data }: { data: ContactsPageData }) => {
   const { openDefaultModal } = useHeaderContext();
   const { processContent } = useRichTextRenderer();
   const { t } = useTranslation();
 
-  const [isExpandeds, setIsExpandeds] = useState([true, true]);
+  const [isExpandeds, setIsExpandeds] = useState([true, false]);
 
   const offices = data.offices ?? [];
 
@@ -144,7 +200,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
               <h1 className="m:text-left text-center m:!m-0">{data.title || t('navigation.contacts')}</h1>
 
               <div className="xl:hidden">
-                <Button
+                <ContactsButton
                   onClick={() => {
                     openDefaultModal('orderForm');
                   }}
@@ -157,12 +213,13 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
               <div className={textSize.textBasePost}>{processContent(data.intro)}</div>
 
               <div className="flex xl:gap-[26px] gap-[20px] xl:flex-row flex-col">
-                {offices.map((office) => {
+                {offices.map((office, index) => {
                   const phoneList = normalizePhones(office.phones);
                   const imageUrl = office.image?.url;
                   const imgSrc = (imageUrl && getStrapiImageApiPath(imageUrl)) || fallbackImageByCity.get(office.city);
                   const imgW = office.image?.width ?? 1200;
                   const imgH = office.image?.height ?? 800;
+                  const isLcpCandidate = index === 0;
 
                   return (
                     <div
@@ -176,6 +233,11 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
                           width={typeof imgSrc === 'string' ? imgW : undefined}
                           height={typeof imgSrc === 'string' ? imgH : undefined}
                           alt={office.city}
+                          sizes="(min-width: 1280px) 388px, (min-width: 768px) 50vw, 100vw"
+                          quality={68}
+                          priority={isLcpCandidate}
+                          fetchPriority={isLcpCandidate ? 'high' : 'auto'}
+                          loading={isLcpCandidate ? 'eager' : 'lazy'}
                         />
                         <span
                           style={{
@@ -237,7 +299,7 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
           {/* Right column */}
           <div className="hidden xl:block w-[250px] relative">
             <div className="sticky top-[104px] flex flex-col gap-[50px] overflow-y-auto pb-[60px] max-h-[calc(100vh-104px)]">
-              <Button
+              <ContactsButton
                 onClick={() => {
                   openDefaultModal('orderForm');
                 }}
@@ -269,14 +331,21 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
                   {processContent(data.connectSection.consultationText)}
                 </div>
 
-                <Button
+                <ContactsButton
                   onClick={() => {
                     openDefaultModal('orderForm');
                   }}
                   label={data.connectSection.consultationButtonLabel}
                 />
               </div>
-              <ImageAnimated src={consultationImageSrc} width={consultationW} height={consultationH} alt={data.connectSection.consultationImage?.alternativeText || 'Consultation'} />
+              <ImageAnimated
+                src={consultationImageSrc}
+                width={consultationW}
+                height={consultationH}
+                alt={data.connectSection.consultationImage?.alternativeText || 'Consultation'}
+                sizes="(min-width: 768px) 368px, 100vw"
+                quality={70}
+              />
             </div>
 
             <div className="flex m:gap-[30px] gap-[20px] xl:flex-row flex-col">
@@ -337,76 +406,76 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
         }}
         title={data.requisitesSection.spoilerTitle}
       >
-        <div className="flex flex-col gap-[50px]">
-          <div className="flex flex-col gap-[20px]">
-            <div className="flex items-center justify-between">
-              <span className={textSize.headerH2}>{data.requisitesSection.heading}</span>
-              <Button
-                label={data.requisitesSection.downloadButtonLabel}
-                onClick={() => {
-                  const link = document.createElement('a');
-                  link.href = pdfHref;
-                  link.download = '';
-                  link.rel = 'noopener noreferrer';
-                  link.click();
-                }}
-              />
-            </div>
-            <div className={textSize.text3}>{processContent(data.requisitesSection.description)}</div>
-          </div>
-
-          <div className="p-[40px] bg-[#93969d26] rounded-[8px] border border-[#93969d] flex justify-between m:flex-row flex-col-reverse gap-[30px] items-center">
-            <div className="flex flex-col gap-[16px]">
-              <div className="flex  gap-[10px] m:flex-row flex-col">
-                <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
-                  {t('contacts.requisites.labels.fullName')}:
-                </span>
-                <span className={textSize.text3}>{data.requisitesSection.legal.fullName}</span>
+        {isExpandeds[1] ? (
+          <div className="flex flex-col gap-[50px]">
+            <div className="flex flex-col gap-[20px]">
+              <div className="flex items-center justify-between">
+                <span className={textSize.headerH2}>{data.requisitesSection.heading}</span>
+                <ContactsButtonLink label={data.requisitesSection.downloadButtonLabel} href={pdfHref} />
               </div>
-              {data.requisitesSection.legal.legalAddress && (
+              <div className={textSize.text3}>{processContent(data.requisitesSection.description)}</div>
+            </div>
+
+            <div className="p-[40px] bg-[#93969d26] rounded-[8px] border border-[#93969d] flex justify-between m:flex-row flex-col-reverse gap-[30px] items-center">
+              <div className="flex flex-col gap-[16px]">
                 <div className="flex  gap-[10px] m:flex-row flex-col">
                   <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
-                    {t('contacts.requisites.labels.legalAddress')}:
+                    {t('contacts.requisites.labels.fullName')}:
                   </span>
-                  <span className={textSize.text3}>{data.requisitesSection.legal.legalAddress}</span>
+                  <span className={textSize.text3}>{data.requisitesSection.legal.fullName}</span>
                 </div>
-              )}
-              {data.requisitesSection.legal.inn && (
-                <div className="flex gap-[10px] m:flex-row flex-col">
-                  <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
-                    {t('contacts.requisites.labels.inn')}:
-                  </span>
-                  <span className={textSize.text3}>{data.requisitesSection.legal.inn}</span>
-                </div>
-              )}
-              {data.requisitesSection.legal.ogrn && (
-                <div className="flex gap-[10px] m:flex-row flex-col">
-                  <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
-                    {t('contacts.requisites.labels.ogrn')}:
-                  </span>
-                  <span className={textSize.text3}>{data.requisitesSection.legal.ogrn}</span>
-                </div>
-              )}
-              {data.requisitesSection.legal.director && (
-                <div className="flex gap-[10px] m:flex-row flex-col">
-                  <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
-                    {t('contacts.requisites.labels.director')}:
-                  </span>
-                  <span className={textSize.text3}>{data.requisitesSection.legal.director}</span>
-                </div>
-              )}
-              {data.requisitesSection.legal.email && (
-                <div className="flex gap-[10px] m:flex-row flex-col">
-                  <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
-                    {t('contacts.requisites.labels.email')}:
-                  </span>
-                  <span className={textSize.text3}>{data.requisitesSection.legal.email}</span>
-                </div>
-              )}
+                {data.requisitesSection.legal.legalAddress && (
+                  <div className="flex  gap-[10px] m:flex-row flex-col">
+                    <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
+                      {t('contacts.requisites.labels.legalAddress')}:
+                    </span>
+                    <span className={textSize.text3}>{data.requisitesSection.legal.legalAddress}</span>
+                  </div>
+                )}
+                {data.requisitesSection.legal.inn && (
+                  <div className="flex gap-[10px] m:flex-row flex-col">
+                    <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
+                      {t('contacts.requisites.labels.inn')}:
+                    </span>
+                    <span className={textSize.text3}>{data.requisitesSection.legal.inn}</span>
+                  </div>
+                )}
+                {data.requisitesSection.legal.ogrn && (
+                  <div className="flex gap-[10px] m:flex-row flex-col">
+                    <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
+                      {t('contacts.requisites.labels.ogrn')}:
+                    </span>
+                    <span className={textSize.text3}>{data.requisitesSection.legal.ogrn}</span>
+                  </div>
+                )}
+                {data.requisitesSection.legal.director && (
+                  <div className="flex gap-[10px] m:flex-row flex-col">
+                    <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
+                      {t('contacts.requisites.labels.director')}:
+                    </span>
+                    <span className={textSize.text3}>{data.requisitesSection.legal.director}</span>
+                  </div>
+                )}
+                {data.requisitesSection.legal.email && (
+                  <div className="flex gap-[10px] m:flex-row flex-col">
+                    <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
+                      {t('contacts.requisites.labels.email')}:
+                    </span>
+                    <span className={textSize.text3}>{data.requisitesSection.legal.email}</span>
+                  </div>
+                )}
+              </div>
+              <ImageAnimated
+                src={financeImageSrc}
+                width={financeW}
+                height={financeH}
+                alt={data.requisitesSection.image?.alternativeText || 'FinanceIcon'}
+                sizes="(min-width: 768px) 368px, 100vw"
+                quality={70}
+              />
             </div>
-            <ImageAnimated src={financeImageSrc} width={financeW} height={financeH} alt={data.requisitesSection.image?.alternativeText || 'FinanceIcon'} />
           </div>
-        </div>
+        ) : null}
       </ContactSpoiler>
     </div>
   );
@@ -415,7 +484,21 @@ const ClientPage = ({ data }: { data: ContactsPageData }) => {
 export default ClientPage;
 
 
-const ImageAnimated = ({ src, width, height, alt }: { src: string | StaticImageData; width: number; height: number; alt: string }) => {
+const ImageAnimated = ({
+  src,
+  width,
+  height,
+  alt,
+  sizes,
+  quality,
+}: {
+  src: string | StaticImageData;
+  width: number;
+  height: number;
+  alt: string;
+  sizes?: string;
+  quality?: number;
+}) => {
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [shouldAnimateIn, setShouldAnimateIn] = useState(false);
   useEffect(() => {
@@ -444,6 +527,8 @@ const ImageAnimated = ({ src, width, height, alt }: { src: string | StaticImageD
         width={width}
         height={height}
         alt={alt}
+        sizes={sizes}
+        quality={quality}
       />
     </div>
   );

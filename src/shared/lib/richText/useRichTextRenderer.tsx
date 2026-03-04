@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import textSize from '@/assets/styles/base/base.module.scss';
+import textSize from '@/assets/styles/base/text-size.module.scss';
 import { filterPrepositions } from 'shared/lib';
 
 /** Парсит инлайн-разметку в строке: **жирный**, _курсив_, <u>подчёркивание</u>, ~~зачёркивание~~, [текст](url) */
