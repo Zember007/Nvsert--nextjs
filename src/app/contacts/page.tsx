@@ -1,4 +1,5 @@
-import ClientPage, { type ContactsPageData } from './ClientPage';
+import ContactsPageView from './ContactsPageView';
+import type { ContactsPageData } from './ClientPage';
 import type { Metadata } from 'next';
 import { BASE_URL, STRAPI_API_URL } from 'shared/config/env';
 import { getRequestLocale } from 'shared/i18n/server-locale';
@@ -69,8 +70,16 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const Page = async () => {
+  const locale = await getRequestLocale();
   const data = await getContactsPageData();
-  return <ClientPage data={data} />;
+  return (
+    <ContactsPageView
+      data={data}
+      submitLabel={tStatic(locale, 'form.buttons.submitApplication')}
+      homeLabel={tStatic(locale, 'navigation.main')}
+      contactsLabel={tStatic(locale, 'navigation.contacts')}
+    />
+  );
 };
 
 export default Page;
