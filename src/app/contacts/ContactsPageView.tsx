@@ -79,15 +79,30 @@ const ContactsPageView = ({
                   const imgW = office.image?.width ?? 1200;
                   const imgH = office.image?.height ?? 800;
                   const isLcpCandidate = index === 0;
+                  const hoverVariant = index % 3;
+
+                  const imageClassByVariant =
+                    hoverVariant === 0
+                      ? 'w-full h-full object-cover will-change-transform transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.12] group-hover:rotate-[0.6deg]'
+                      : hoverVariant === 1
+                        ? 'w-full h-full object-cover will-change-transform transition-[transform,filter] duration-700 ease-out group-hover:scale-[1.06] group-hover:saturate-[1.35] group-hover:contrast-[1.15] group-hover:hue-rotate-[8deg] group-hover:brightness-[1.08]'
+                        : 'w-full h-full object-cover will-change-transform transition-[transform,filter] duration-700 ease-out group-hover:scale-[1.08] group-hover:translate-y-[-4px] group-hover:brightness-[1.12] group-hover:contrast-[1.2] group-hover:sepia-[0.12]';
+
+                  const imageOverlayByVariant =
+                    hoverVariant === 0
+                      ? 'absolute inset-0 pointer-events-none bg-gradient-to-tr from-black/35 via-black/10 to-transparent opacity-55 transition-opacity duration-700 group-hover:opacity-25'
+                      : hoverVariant === 1
+                        ? 'absolute inset-0 pointer-events-none bg-gradient-to-r from-fuchsia-400/0 via-cyan-300/0 to-amber-200/0 opacity-0 transition-all duration-700 group-hover:opacity-100 group-hover:from-fuchsia-400/20 group-hover:via-cyan-300/20 group-hover:to-amber-200/15'
+                        : 'absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_18%_20%,rgba(255,255,255,0.42),transparent_43%)] opacity-45 transition-transform duration-700 ease-out group-hover:translate-x-[8%] group-hover:translate-y-[4%]';
 
                   return (
                     <div
                       className="p-[30px] flex xl:flex-col m:flex-row flex-col gap-[20px] w-full bg-[#93969d26] rounded-[6px] border border-[#93969d]"
                       key={office.city}
                     >
-                      <div className="relative overflow-hidden rounded-[6px]">
+                      <div className="group relative overflow-hidden rounded-[6px]">
                         <Image
-                          className="w-full h-full object-cover"
+                          className={imageClassByVariant}
                           src={imgSrc}
                           width={typeof imgSrc === 'string' ? imgW : undefined}
                           height={typeof imgSrc === 'string' ? imgH : undefined}
@@ -98,6 +113,7 @@ const ContactsPageView = ({
                           fetchPriority={isLcpCandidate ? 'high' : 'auto'}
                           loading={isLcpCandidate ? 'eager' : 'lazy'}
                         />
+                        <span className={imageOverlayByVariant} />
                         <span
                           style={{
                             backdropFilter: 'blur(4px)',
@@ -107,7 +123,8 @@ const ContactsPageView = ({
                             padding: '10px',
                           }}
                           className={
-                            textSize.headerH5 + ' rounded-[4px] absolute bottom-[10px] left-[10px] text-white'
+                            textSize.headerH5 +
+                            ' rounded-[4px] absolute bottom-[10px] left-[10px] text-white transition-all duration-500 group-hover:translate-y-[-3px] group-hover:shadow-[0_10px_22px_rgba(0,0,0,0.35)]'
                           }
                         >
                           {office.city}
