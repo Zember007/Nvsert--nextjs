@@ -85,15 +85,15 @@ const ContactsPageView = ({
                     hoverVariant === 0
                       ? 'w-full h-full object-cover will-change-transform transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.12] group-hover:rotate-[0.6deg]'
                       : hoverVariant === 1
-                        ? 'w-full h-full object-cover will-change-transform transition-[transform,filter] duration-700 ease-out group-hover:scale-[1.06] group-hover:saturate-[1.35] group-hover:contrast-[1.15] group-hover:hue-rotate-[8deg] group-hover:brightness-[1.08]'
-                        : 'w-full h-full object-cover will-change-transform transition-[transform,filter] duration-700 ease-out group-hover:scale-[1.08] group-hover:translate-y-[-4px] group-hover:brightness-[1.12] group-hover:contrast-[1.2] group-hover:sepia-[0.12]';
+                        ? 'w-full h-full object-cover will-change-transform transition-[transform,filter] duration-700 ease-out group-hover:translate-x-[3%] group-hover:saturate-[1.35] group-hover:contrast-[1.18] group-hover:hue-rotate-[10deg] group-hover:brightness-[1.08]'
+                        : 'w-full h-full object-cover will-change-transform transition-[transform,filter] duration-700 ease-out group-hover:translate-y-[-6px] group-hover:rotate-[1.8deg] group-hover:skew-x-[1deg] group-hover:contrast-[1.34] group-hover:saturate-[1.28] group-hover:brightness-[0.96]';
 
                   const imageOverlayByVariant =
                     hoverVariant === 0
                       ? 'absolute inset-0 pointer-events-none bg-gradient-to-tr from-black/35 via-black/10 to-transparent opacity-55 transition-opacity duration-700 group-hover:opacity-25'
                       : hoverVariant === 1
                         ? 'absolute inset-0 pointer-events-none bg-gradient-to-r from-fuchsia-400/0 via-cyan-300/0 to-amber-200/0 opacity-0 transition-all duration-700 group-hover:opacity-100 group-hover:from-fuchsia-400/20 group-hover:via-cyan-300/20 group-hover:to-amber-200/15'
-                        : 'absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_18%_20%,rgba(255,255,255,0.42),transparent_43%)] opacity-45 transition-transform duration-700 ease-out group-hover:translate-x-[8%] group-hover:translate-y-[4%]';
+                        : 'absolute inset-0 pointer-events-none bg-[repeating-linear-gradient(115deg,rgba(255,255,255,0)_0px,rgba(255,255,255,0)_16px,rgba(255,255,255,0.2)_20px,rgba(255,255,255,0)_26px)] opacity-0 transition-[opacity,transform] duration-700 ease-out group-hover:opacity-100 group-hover:translate-x-[12%]';
 
                   return (
                     <div
