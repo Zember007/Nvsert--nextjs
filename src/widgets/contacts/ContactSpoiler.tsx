@@ -36,14 +36,14 @@ const ContactSpoiler = ({ isExpanded, onToggle, title, children }: { isExpanded:
                             </defs>
                         </svg>
 
-                        <h2 className={`${styles.headerH4} ${styles.lineAfter} after:!bottom-[-5px] !m-0    transition-all duration-200 translate-y-[1px]`}>{title}</h2>
+                        <h2 className={`${styles.headerH4} ${styles.lineAfter} after:!bottom-[-5px] !m-0 leading-[0.8]   transition-all duration-200 translate-y-[1px]`}>{title}</h2>
                     </div>
 
 
                 </div>
             </div>
 
-            <div className={`${!isExpanded ? 'max-h-[0px]' : `max-h-[2370px] m:pt-[100px] pt-[50px] m:pr-[290px]`} transition-all duration-200 overflow-hidden  `}>
+            <div className={`${!isExpanded ? 'max-h-[0px]' : `max-h-[2370px] m:pt-[100px] pt-[50px] m:pr-[290px] pb-[1px]`} transition-all duration-200 overflow-hidden  `}>
                 <div
            
                     className={`wrapper transition-all duration-500 ease-out ${isExpanded ? 'will-change-transform' : ''} `}

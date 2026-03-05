@@ -136,7 +136,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                 </div>
             </div>
 
-            <div className={`${!isExpanded ? 'max-h-[0px]' : `max-h-[2370px] m:pb-[100px]  ${last ? 'pb-0' : 'pb-[80px]'}`} transition-all duration-200 overflow-hidden  `}>
+            <div className={`${!isExpanded ? 'max-h-[0px]' : `max-h-[2370px] m:pb-[100px]  ${last ? 'pb-[1px]' : 'pb-[80px]'}`} transition-all duration-200 overflow-hidden  `}>
                 {/* Описание услуги */}
                 <div className="wrapper">
 
