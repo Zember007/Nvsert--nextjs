@@ -65,6 +65,15 @@ export type ContactsSeo = {
   shareImage?: StrapiMedia;
 };
 
+export type ContactsRequisitesLabels = {
+  fullName: string;
+  legalAddress: string;
+  inn: string;
+  ogrn: string;
+  director: string;
+  email: string;
+};
+
 export type ContactsPageData = {
   title: string;
   intro: string;

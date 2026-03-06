@@ -9,13 +9,19 @@ import ConsultationFallback from '@/assets/images/contacts/docs_icon.png';
 import FinanceIconFallback from '@/assets/images/contacts/finance_icon.png';
 import { useRichTextRenderer } from 'shared/lib';
 import { getStrapiImageApiPath } from 'shared/lib/strapi-image';
-import { useTranslation } from 'react-i18next';
-import type { ContactsPageData } from './ClientPage';
+import type { ContactsPageData, ContactsRequisitesLabels } from './ClientPage';
 
-const ContactsSpoilersClient = ({ data, pdfHref }: { data: ContactsPageData; pdfHref: string }) => {
+const ContactsSpoilersClient = ({
+  data,
+  pdfHref,
+  requisitesLabels,
+}: {
+  data: ContactsPageData;
+  pdfHref: string;
+  requisitesLabels: ContactsRequisitesLabels;
+}) => {
   const { processContent } = useRichTextRenderer();
-  const { t } = useTranslation();
-  const [isExpandeds, setIsExpandeds] = useState([true, false]);
+  const [isExpandeds, setIsExpandeds] = useState([true, true]);
 
   const consultationImageSrc =
     (data.connectSection.consultationImage?.url && getStrapiImageApiPath(data.connectSection.consultationImage.url)) ||
@@ -137,14 +143,14 @@ const ContactsSpoilersClient = ({ data, pdfHref }: { data: ContactsPageData; pdf
               <div className="flex flex-col gap-[16px]">
                 <div className="flex  gap-[10px] m:flex-row flex-col">
                   <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
-                    {t('contacts.requisites.labels.fullName')}:
+                    {requisitesLabels.fullName}:
                   </span>
                   <span className={textSize.text3}>{data.requisitesSection.legal.fullName}</span>
                 </div>
                 {data.requisitesSection.legal.legalAddress && (
                   <div className="flex  gap-[10px] m:flex-row flex-col">
                     <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
-                      {t('contacts.requisites.labels.legalAddress')}:
+                      {requisitesLabels.legalAddress}:
                     </span>
                     <span className={textSize.text3}>{data.requisitesSection.legal.legalAddress}</span>
                   </div>
@@ -152,7 +158,7 @@ const ContactsSpoilersClient = ({ data, pdfHref }: { data: ContactsPageData; pdf
                 {data.requisitesSection.legal.inn && (
                   <div className="flex gap-[10px] m:flex-row flex-col">
                     <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
-                      {t('contacts.requisites.labels.inn')}:
+                      {requisitesLabels.inn}:
                     </span>
                     <span className={textSize.text3}>{data.requisitesSection.legal.inn}</span>
                   </div>
@@ -160,7 +166,7 @@ const ContactsSpoilersClient = ({ data, pdfHref }: { data: ContactsPageData; pdf
                 {data.requisitesSection.legal.ogrn && (
                   <div className="flex gap-[10px] m:flex-row flex-col">
                     <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
-                      {t('contacts.requisites.labels.ogrn')}:
+                      {requisitesLabels.ogrn}:
                     </span>
                     <span className={textSize.text3}>{data.requisitesSection.legal.ogrn}</span>
                   </div>
@@ -168,7 +174,7 @@ const ContactsSpoilersClient = ({ data, pdfHref }: { data: ContactsPageData; pdf
                 {data.requisitesSection.legal.director && (
                   <div className="flex gap-[10px] m:flex-row flex-col">
                     <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
-                      {t('contacts.requisites.labels.director')}:
+                      {requisitesLabels.director}:
                     </span>
                     <span className={textSize.text3}>{data.requisitesSection.legal.director}</span>
                   </div>
@@ -176,7 +182,7 @@ const ContactsSpoilersClient = ({ data, pdfHref }: { data: ContactsPageData; pdf
                 {data.requisitesSection.legal.email && (
                   <div className="flex gap-[10px] m:flex-row flex-col">
                     <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>
-                      {t('contacts.requisites.labels.email')}:
+                      {requisitesLabels.email}:
                     </span>
                     <span className={textSize.text3}>{data.requisitesSection.legal.email}</span>
                   </div>

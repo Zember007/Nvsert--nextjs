@@ -2,13 +2,21 @@
 
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
-import type { ContactsPageData } from './ClientPage';
+import type { ContactsPageData, ContactsRequisitesLabels } from './ClientPage';
 
 const ContactsSpoilersClient = dynamic(() => import('./ContactsSpoilersClient'), {
   ssr: false,
 });
 
-const ContactsSpoilersDeferred = ({ data, pdfHref }: { data: ContactsPageData; pdfHref: string }) => {
+const ContactsSpoilersDeferred = ({
+  data,
+  pdfHref,
+  requisitesLabels,
+}: {
+  data: ContactsPageData;
+  pdfHref: string;
+  requisitesLabels: ContactsRequisitesLabels;
+}) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [shouldLoad, setShouldLoad] = useState(false);
 
@@ -55,7 +63,11 @@ const ContactsSpoilersDeferred = ({ data, pdfHref }: { data: ContactsPageData; p
     };
   }, [shouldLoad]);
 
-  return <div ref={containerRef}>{shouldLoad ? <ContactsSpoilersClient data={data} pdfHref={pdfHref} /> : null}</div>;
+  return (
+    <div ref={containerRef}>
+      {shouldLoad ? <ContactsSpoilersClient data={data} pdfHref={pdfHref} requisitesLabels={requisitesLabels} /> : null}
+    </div>
+  );
 };
 
 export default ContactsSpoilersDeferred;

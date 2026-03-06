@@ -9,7 +9,7 @@ import ContactsButton from './ContactsButton';
 import ContactsSpoilersDeferred from './ContactsSpoilersDeferred';
 import { renderRichTextContent } from 'shared/lib';
 import { getStrapiImageApiPath } from 'shared/lib/strapi-image';
-import type { ContactsPageData } from './ClientPage';
+import type { ContactsPageData, ContactsRequisitesLabels } from './ClientPage';
 
 function normalizePhones(phones?: Array<{ value: string }> | string[]): string[] {
   if (!phones) return [];
@@ -27,11 +27,13 @@ const ContactsPageView = ({
   submitLabel,
   homeLabel,
   contactsLabel,
+  requisitesLabels,
 }: {
   data: ContactsPageData;
   submitLabel: string;
   homeLabel: string;
   contactsLabel: string;
+  requisitesLabels: ContactsRequisitesLabels;
 }) => {
   const offices = data.offices ?? [];
   const fallbackImageByCity = new Map<string, any>([
@@ -187,7 +189,7 @@ const ContactsPageView = ({
         </div>
       </div>
 
-      <ContactsSpoilersDeferred data={data} pdfHref={pdfHref} />
+      <ContactsSpoilersDeferred data={data} pdfHref={pdfHref} requisitesLabels={requisitesLabels} />
     </div>
   );
 };

@@ -1,13 +1,13 @@
 import ContactsPageView from './ContactsPageView';
 import type { ContactsPageData } from './ClientPage';
 import type { Metadata } from 'next';
-import { BASE_URL, STRAPI_API_URL } from 'shared/config/env';
+import { cache } from 'react';
+import { BASE_URL, STRAPI_API_URL, normalizeLocale, type SupportedLocale } from 'shared/config/env';
 import { getRequestLocale } from 'shared/i18n/server-locale';
 import { tStatic } from 'shared/i18n/static';
 
-async function getContactsPageData(): Promise<ContactsPageData> {
+const getContactsPageData = cache(async (locale: SupportedLocale): Promise<ContactsPageData> => {
   try {
-    const locale = await getRequestLocale();
     const res = await fetch(`${STRAPI_API_URL}/contacts-page?locale=${locale}`, {
       next: { revalidate: 3600 },
     });
@@ -17,7 +17,6 @@ async function getContactsPageData(): Promise<ContactsPageData> {
     return json.data as ContactsPageData;
   } catch (e) {
     // Fallback контент, чтобы страница не ломалась до заполнения в Strapi
-    const locale = await getRequestLocale();
     return {
       title: tStatic(locale, 'pages.contacts.fallback.title'),
       intro:
@@ -51,11 +50,11 @@ async function getContactsPageData(): Promise<ContactsPageData> {
       },
     };
   }
-}
+});
 
 export async function generateMetadata(): Promise<Metadata> {
-  const data = await getContactsPageData();
-  const locale = await getRequestLocale();
+  const locale = normalizeLocale(await getRequestLocale());
+  const data = await getContactsPageData(locale);
   const title = data.seo?.metaTitle || data.title || tStatic(locale, 'meta.pages.contacts.title');
   const description =
     data.seo?.metaDescription || tStatic(locale, 'meta.pages.contacts.description');
@@ -70,14 +69,22 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const Page = async () => {
-  const locale = await getRequestLocale();
-  const data = await getContactsPageData();
+  const locale = normalizeLocale(await getRequestLocale());
+  const data = await getContactsPageData(locale);
   return (
     <ContactsPageView
       data={data}
       submitLabel={tStatic(locale, 'form.buttons.submitApplication')}
       homeLabel={tStatic(locale, 'navigation.main')}
       contactsLabel={tStatic(locale, 'navigation.contacts')}
+      requisitesLabels={{
+        fullName: tStatic(locale, 'contacts.requisites.labels.fullName'),
+        legalAddress: tStatic(locale, 'contacts.requisites.labels.legalAddress'),
+        inn: tStatic(locale, 'contacts.requisites.labels.inn'),
+        ogrn: tStatic(locale, 'contacts.requisites.labels.ogrn'),
+        director: tStatic(locale, 'contacts.requisites.labels.director'),
+        email: tStatic(locale, 'contacts.requisites.labels.email'),
+      }}
     />
   );
 };
