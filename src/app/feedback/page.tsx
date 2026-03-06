@@ -1,7 +1,15 @@
 import ClientPage from './ClientPage';
 import { STRAPI_API_URL } from 'shared/config/env';
+import StandardPageLayout from 'widgets/layout/StandardPageLayout';
 import { getRequestLocale } from 'shared/i18n/server-locale';
 import { tStatic } from 'shared/i18n/static';
+
+type DotNavItemProps = {
+    id: number | string;
+    title: string;
+    active?: boolean;
+    href?: string;
+};
 
 // Оптимизация: кеширование данных на более длительный срок для ускорения навигации
 
@@ -86,10 +94,26 @@ function groupByCategory(items: FeedbackItem[], uncategorizedTitle: string): Fee
 }
 
 const Page = async () => {
-    const items = await getFeedbacks();
     const locale = await getRequestLocale();
+    const items = await getFeedbacks();
     const categories = groupByCategory(items, tStatic(locale, 'feedback.uncategorized'));
-    return <ClientPage initialCategories={categories} />;
+    const dotNavItems: DotNavItemProps[] = categories.map(cat => ({
+        id: cat.id,
+        title: cat.title,
+        href: `#block-${cat.id}`,
+    }));
+
+    return (
+        <StandardPageLayout
+            title={tStatic(locale, 'feedback.page.title')}
+            breadcrumbs={[{ id: 2, title: tStatic(locale, 'navigation.reviews'), full_slug: '/feedback' }]}
+            dotNavItems={dotNavItems}
+            showButton={true}
+            orderButtonLabel={tStatic(locale, 'form.buttons.submitApplication')}
+        >
+            <ClientPage initialCategories={categories} />
+        </StandardPageLayout>
+    );
 };
 
 export default Page;

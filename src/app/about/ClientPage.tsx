@@ -10,7 +10,6 @@ import { useTranslation } from 'react-i18next';
 import {
     AppCtaBanner,
     CollapseSection,
-    StandardPageLayout,
     StrapiResponsiveImage,
 } from 'widgets/layout';
 import { AboutData } from './page';
@@ -140,37 +139,16 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
         return processContent(richText);
     };
 
-    const dotNavItems = aboutData?.content?.map((block, index) => ({
-        id: index,
-        title: block.heading,
-        active: sectionsOpen.includes(index),
-        href: `#block-${index}`
-    })) || [];
-
-
-
     if (!aboutData) {
         return (
-            <StandardPageLayout
-                title={t('navigation.about')}
-                breadcrumbs={[{ id: 1, title: t('navigation.about'), full_slug: '/about' }]}
-                dotNavItems={[]}
-                showButton={true}
-            >
-                <div className="w-full text-center py-[50px]">
-                    <span className="text-[16px] text-gray-500">{t('common.dataNotFound')}</span>
-                </div>
-            </StandardPageLayout>
+            <div className="w-full text-center py-[50px]">
+                <span className="text-[16px] text-gray-500">{t('common.dataNotFound')}</span>
+            </div>
         );
     }
 
     return (
-        <StandardPageLayout
-            title={aboutData.title || t('navigation.about')}
-            breadcrumbs={[{ id: 1, title: t('navigation.about'), full_slug: '/about' }]}
-            dotNavItems={dotNavItems}
-            showButton={true}
-        >
+        <>
             {aboutData.content?.map((block, index) => {
                 return (
                     (
@@ -216,7 +194,7 @@ const AboutCompanyClient: React.FC<AboutCompanyClientProps> = ({ aboutData }) =>
                 description={aboutData.cta?.description || ''}
                 onButtonClick={() => openDefaultModal('introForm')}
             />
-        </StandardPageLayout>
+        </>
     );
 };
 

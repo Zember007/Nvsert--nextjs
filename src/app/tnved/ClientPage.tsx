@@ -1,21 +1,16 @@
 'use client';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { StandardPageLayout } from 'widgets/layout';
 import { useHeaderContext } from 'shared/contexts';
-import FilesList from 'widgets/tnved/FilesList';
 import { TnvedQuickSearchSection } from 'widgets/tnved/TnvedQuickSearchSection';
 import { TnvedClassifierSection } from 'widgets/tnved/TnvedClassifierSection';
 import type { TnvedItem } from 'widgets/tnved/TnvedHierarchy';
 import type { TnvedPageData } from 'widgets/tnved/types';
-import { useTnvedSections } from 'widgets/tnved/useTnvedSections';
 import { TnvedInfoSections } from 'widgets/tnved/TnvedInfoSections';
 import { STRAPI_PUBLIC_URL } from 'shared/config/env';
 
 const ClientPage = ({ initialItems, pageData }: { initialItems: TnvedItem[]; pageData: TnvedPageData | null }) => {
     const { openDefaultModal } = useHeaderContext();
-    const { t } = useTranslation();
-    const { sectionsOpen, toggleSection, dotNavItems } = useTnvedSections(pageData);
+    const [sectionsOpen, setSectionsOpen] = React.useState<number[]>([]);
 
     const [hierarchyItems, setHierarchyItems] = React.useState<TnvedItem[]>(() => initialItems || []);
 
@@ -89,16 +84,12 @@ const ClientPage = ({ initialItems, pageData }: { initialItems: TnvedItem[]; pag
 
     const isSectionLoaded = React.useCallback((section: string) => loadedSections.has(section), [loadedSections]);
     const isSectionLoading = React.useCallback((section: string) => loadingSections.has(section), [loadingSections]);
+    const toggleSection = React.useCallback((id: number) => {
+        setSectionsOpen(prev => (prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]));
+    }, []);
 
     return (
-
-        <StandardPageLayout
-            title={pageData?.title || t('tnved.page.title')}
-            breadcrumbs={[{ id: 2, title: t('tnved.page.title'), full_slug: '/tnved' }]}
-            dotNavItems={dotNavItems}
-            contentColumn={<FilesList />}
-            showButton={true}
-        >
+        <>
             <TnvedQuickSearchSection />
             <TnvedClassifierSection
                 items={hierarchyItems}
@@ -113,9 +104,7 @@ const ClientPage = ({ initialItems, pageData }: { initialItems: TnvedItem[]; pag
                 onToggleSection={toggleSection}
                 onCtaClick={() => openDefaultModal('introForm')}
             />
-            
-        </StandardPageLayout>
-
+        </>
     );
 };
 

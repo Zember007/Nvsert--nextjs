@@ -1,16 +1,37 @@
 'use client';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { StandardPageLayout } from 'widgets/layout';
+import dynamic from 'next/dynamic';
 import { useHeaderContext } from 'shared/contexts';
-import FilesList from 'widgets/okpd/FilesList';
 import { OkpdQuickSearchSection } from 'widgets/okpd/OkpdQuickSearchSection';
-import { OkpdClassifierSection } from 'widgets/okpd/OkpdClassifierSection';
 import type { Okpd2Item } from 'widgets/okpd/OkpdHierarchy';
 import type { OkpdPageData } from 'widgets/okpd/types';
-import { useOkpdSections } from 'widgets/okpd/useOkpdSections';
-import { OkpdInfoSections } from 'widgets/okpd/OkpdInfoSections';
 import { STRAPI_PUBLIC_URL } from 'shared/config/env';
+
+const OkpdClassifierSection = dynamic(
+    () => import('widgets/okpd/OkpdClassifierSection').then(m => m.OkpdClassifierSection),
+    {
+        ssr: false,
+        loading: () => (
+            <div className="w-full">
+                <div className="h-8 w-1/3 bg-[#93969d26] rounded mb-[20px]" />
+                <div className="h-[420px] bg-[#93969d1a] rounded" />
+            </div>
+        ),
+    },
+);
+
+const OkpdInfoSections = dynamic(
+    () => import('widgets/okpd/OkpdInfoSections').then(m => m.OkpdInfoSections),
+    {
+        ssr: false,
+        loading: () => (
+            <div className="w-full flex flex-col gap-[30px]">
+                <div className="h-[180px] bg-[#93969d1a] rounded" />
+                <div className="h-[180px] bg-[#93969d1a] rounded" />
+            </div>
+        ),
+    },
+);
 
 const ClientPage = ({
     initialItems,
@@ -22,8 +43,8 @@ const ClientPage = ({
     preloadedSections?: string[];
 }) => {
     const { openDefaultModal } = useHeaderContext();
-    const { t } = useTranslation();
-    const { sectionsOpen, toggleSection, dotNavItems } = useOkpdSections(pageData);
+    const [sectionsOpen, setSectionsOpen] = React.useState<number[]>([]);
+    const [isDeferredUiReady, setIsDeferredUiReady] = React.useState(false);
 
     const [hierarchyItems, setHierarchyItems] = React.useState<Okpd2Item[]>(() => initialItems || []);
 
@@ -97,33 +118,44 @@ const ClientPage = ({
 
     const isSectionLoaded = React.useCallback((section: string) => loadedSections.has(section), [loadedSections]);
     const isSectionLoading = React.useCallback((section: string) => loadingSections.has(section), [loadingSections]);
+    const toggleSection = React.useCallback((id: number) => {
+        setSectionsOpen(prev => (prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]));
+    }, []);
+
+    React.useEffect(() => {
+        const requestIdle = window.requestIdleCallback;
+        const cancelIdle = window.cancelIdleCallback;
+
+        if (requestIdle) {
+            const id = requestIdle(() => setIsDeferredUiReady(true), { timeout: 1200 });
+            return () => cancelIdle(id);
+        }
+
+        const timer = window.setTimeout(() => setIsDeferredUiReady(true), 250);
+        return () => window.clearTimeout(timer);
+    }, []);
 
     return (
-
-        <StandardPageLayout
-            title={pageData?.title || t('okpd.page.title')}
-            breadcrumbs={[{ id: 2, title: t('okpd.page.title'), full_slug: '/okpd' }]}
-            dotNavItems={dotNavItems}
-            contentColumn={<FilesList />}
-            showButton={true}
-        >
+        <>
             <OkpdQuickSearchSection />
-            <OkpdClassifierSection
-                items={hierarchyItems}
-                onSectionVisible={onSectionVisible}
-                isSectionLoaded={isSectionLoaded}
-                isSectionLoading={isSectionLoading}
-            />
+            {isDeferredUiReady && (
+                <>
+                    <OkpdClassifierSection
+                        items={hierarchyItems}
+                        onSectionVisible={onSectionVisible}
+                        isSectionLoaded={isSectionLoaded}
+                        isSectionLoading={isSectionLoading}
+                    />
 
-            <OkpdInfoSections
-                pageData={pageData}
-                sectionsOpen={sectionsOpen}
-                onToggleSection={toggleSection}
-                onCtaClick={() => openDefaultModal('introForm')}
-            />
-            
-        </StandardPageLayout>
-
+                    <OkpdInfoSections
+                        pageData={pageData}
+                        sectionsOpen={sectionsOpen}
+                        onToggleSection={toggleSection}
+                        onCtaClick={() => openDefaultModal('introForm')}
+                    />
+                </>
+            )}
+        </>
     );
 };
 

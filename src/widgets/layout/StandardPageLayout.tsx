@@ -1,11 +1,8 @@
-'use client';
 import React from 'react';
-
-import { Button } from 'shared/ui';
-import { useHeaderContext } from 'shared/contexts';
-import { AppBreadcrumbs, DotNavList, SidebarNavButtons } from 'widgets/layout';
-import type { DotNavItemProps } from 'widgets/layout';
-import { useTranslation } from 'react-i18next';
+import AppBreadcrumbs from './AppBreadcrumbs';
+import DotNavList, { DotNavItemProps } from './DotNavList';
+import SidebarNavButtons from './SidebarNavButtons';
+import OrderFormButton from './OrderFormButton';
 
 type BreadcrumbItem = {
     id: number;
@@ -29,6 +26,8 @@ type StandardPageLayoutProps = {
     className?: string;
     /** Дополнительный контент для левой колонки */
     contentColumn?: React.ReactNode;
+    /** Подпись CTA-кнопки */
+    orderButtonLabel: string;
 };
 
 const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
@@ -40,10 +39,8 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
     showButton = true,
     className = '',
     contentColumn,
+    orderButtonLabel,
 }) => {
-    const { openDefaultModal } = useHeaderContext();
-    const { t } = useTranslation();
-
     return (
         <div className={`main text-[#000] mb-[100px] ${className}`}>
             <AppBreadcrumbs root={'/'} breadcrumbs={breadcrumbs} />
@@ -56,12 +53,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
                             </h1>
 
                             <div className="xl:hidden">
-                                <Button
-                                    onClick={() => {
-                                        openDefaultModal('orderForm');
-                                    }}
-                                    label={t('form.buttons.submitApplication')}
-                                />
+                                <OrderFormButton label={orderButtonLabel} />
                             </div>
 
                         </div>
@@ -92,12 +84,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
                     <div className="hidden xl:block w-[250px] relative">
                         <div className="sticky top-[104px] flex flex-col gap-[50px] overflow-y-auto no-scrollbar pb-[60px] max-h-[calc(100vh-104px)]">
                             {showButton && (
-                                <Button
-                                    onClick={() => {
-                                        openDefaultModal('orderForm');
-                                    }}
-                                    label={t('form.buttons.submitApplication')}
-                                />
+                                <OrderFormButton label={orderButtonLabel} />
                             )}
                             {dotNavItems && dotNavItems.length > 0 && (
                                 <DotNavList items={dotNavItems} />

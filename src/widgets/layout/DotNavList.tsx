@@ -16,13 +16,41 @@ const DotNavList: React.FC<{
     position?: 'right' | 'left' | null;
 }> = ({ items, position }) => {
     const { t } = useTranslation();
+    const containerRef = React.useRef<HTMLDivElement>(null);
+    const [isInViewport, setIsInViewport] = React.useState(false);
 
     const [activeBlockId, setActiveBlockId] = React.useState<number | string | null>(
         items?.[0]?.id ?? null
     );
 
     React.useEffect(() => {
-        if (!items) return;
+        if (typeof IntersectionObserver === 'undefined') {
+            setIsInViewport(true);
+            return;
+        }
+
+        const el = containerRef.current;
+        if (!el) return;
+
+        const io = new IntersectionObserver(
+            entries => {
+                for (const entry of entries) {
+                    if (entry.isIntersecting) {
+                        setIsInViewport(true);
+                        io.disconnect();
+                        break;
+                    }
+                }
+            },
+            { root: null, rootMargin: '200px 0px', threshold: 0.01 },
+        );
+
+        io.observe(el);
+        return () => io.disconnect();
+    }, []);
+
+    React.useEffect(() => {
+        if (!items || !isInViewport) return;
         const sections = items
             .map(block => document.getElementById('block-' + block.id))
             .filter((el): el is HTMLElement => Boolean(el));
@@ -70,7 +98,7 @@ const DotNavList: React.FC<{
             sections.forEach(section => observer.unobserve(section));
             observer.disconnect();
         };
-    }, [items]);
+    }, [items, isInViewport]);
     
 
     const navigationItems = useMemo(() => {
@@ -84,8 +112,7 @@ const DotNavList: React.FC<{
     const scrollToElement = (item: DotNavItemProps, event: React.MouseEvent<HTMLAnchorElement>) => {
         event.preventDefault();
 
-        const target = event.target as HTMLAnchorElement;
-        const href = target.href;
+        const href = event.currentTarget.href;
         const id = href.split('#')[1];
         const element = document.getElementById(id);
         if (!element) return;
@@ -96,16 +123,18 @@ const DotNavList: React.FC<{
         });
     };
     return (
-        <AppCollapsibleList
-            position={position}
-            title={t('common.serviceNavigation')}
-            items={navigationItems}
-            defaultOpen={true}
-            listClassName='flex flex-col gap-[20px]'
-            renderItem={(item, index) => (
-              <DotNavItem item={item} index={index} onClick={scrollToElement} />
-            )}
-        />
+        <div ref={containerRef}>
+            <AppCollapsibleList
+                position={position}
+                title={t('common.serviceNavigation')}
+                items={navigationItems}
+                defaultOpen={true}
+                listClassName='flex flex-col gap-[20px]'
+                renderItem={(item, index) => (
+                  <DotNavItem item={item} index={index} onClick={scrollToElement} />
+                )}
+            />
+        </div>
     );
 };
 

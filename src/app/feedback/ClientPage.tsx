@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useMemo } from 'react';
-import { CollapseSection, StandardPageLayout } from 'widgets/layout';
+import { CollapseSection } from 'widgets/layout';
 import { useButton } from 'shared/hooks';
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 import { FeedbackCategoryGroup } from '@/types/feedback';
@@ -49,24 +49,8 @@ const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ 
         return () => clearTimeout(id);
     }, [photoIndexToOpen, photosFlat.length]);
 
-    // Элементы для правой навигации
-    const dotNavItems = initialCategories.map(cat => ({
-        id: cat.id,
-        title: cat.title,
-        active: !openGroups.includes(cat.id),
-        href: '#block-' + cat.id
-    }));
-
-
-
     return (
-
-        <StandardPageLayout
-            title={t('feedback.page.title')}
-            breadcrumbs={[{ id: 2, title: t('navigation.reviews'), full_slug: '/feedback' }]}
-            dotNavItems={dotNavItems}
-            showButton={true}
-        >
+        <>
             <CollapseSection
                 title={t('feedback.page.introTitle')}
                 isOpen={mainOpen}
@@ -160,7 +144,7 @@ const ClientPage: React.FC<{ initialCategories: FeedbackCategoryGroup[] }> = ({ 
                     );
                 });
             })()}
-        </StandardPageLayout>
+        </>
 
     );
 };

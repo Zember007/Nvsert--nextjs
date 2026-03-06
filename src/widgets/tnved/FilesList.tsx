@@ -1,4 +1,6 @@
-import { AppCollapsibleList } from '../layout';
+'use client';
+
+import AppCollapsibleList from 'widgets/layout/AppCollapsibleList';
 import WordImg from '@/assets/images/svg/Word.svg';
 import Image from 'next/image';
 import Link from 'next/link';

@@ -1,8 +1,16 @@
 import ClientPage from './ClientPage';
 import { Metadata } from 'next';
 import { BASE_URL, STRAPI_API_URL, STRAPI_PUBLIC_URL } from 'shared/config/env';
+import StandardPageLayout from 'widgets/layout/StandardPageLayout';
 import { getRequestLocale } from 'shared/i18n/server-locale';
 import { tStatic } from 'shared/i18n/static';
+
+type DotNavItemProps = {
+    id: number | string;
+    title: string;
+    active?: boolean;
+    href?: string;
+};
 
 // Оптимизация: кеширование данных на более длительный срок для ускорения навигации
 
@@ -115,9 +123,26 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const AboutCompany = async () => {
+    const locale = await getRequestLocale();
     const aboutData = await getAboutData();
+    const dotNavItems: DotNavItemProps[] =
+        aboutData?.content?.map((block, index) => ({
+            id: index,
+            title: block.heading,
+            href: `#block-${index}`,
+        })) || [];
 
-    return <ClientPage aboutData={aboutData} />;
+    return (
+        <StandardPageLayout
+            title={aboutData?.title || tStatic(locale, 'navigation.about')}
+            breadcrumbs={[{ id: 1, title: tStatic(locale, 'navigation.about'), full_slug: '/about' }]}
+            dotNavItems={dotNavItems}
+            showButton={true}
+            orderButtonLabel={tStatic(locale, 'form.buttons.submitApplication')}
+        >
+            <ClientPage aboutData={aboutData} />
+        </StandardPageLayout>
+    );
 };
 
 export default AboutCompany;

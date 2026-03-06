@@ -1,9 +1,18 @@
 import ClientPage from './ClientPage';
 import { Metadata } from 'next';
 import type { TnvedPageData } from 'widgets/tnved/types';
+import FilesList from 'widgets/tnved/FilesList';
+import StandardPageLayout from 'widgets/layout/StandardPageLayout';
 import { BASE_URL, STRAPI_API_URL } from 'shared/config/env';
 import { getRequestLocale } from 'shared/i18n/server-locale';
 import { tStatic } from 'shared/i18n/static';
+
+type DotNavItemProps = {
+    id: number | string;
+    title: string;
+    active?: boolean;
+    href?: string;
+};
 
 type TnvedItem = {
     id: number;
@@ -65,8 +74,32 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
+    const locale = await getRequestLocale();
     const { items, pageData } = await fetchTnvedData();
-    return <ClientPage initialItems={items} pageData={pageData} />;
+    const dotNavItems: DotNavItemProps[] = [
+        { id: 1, title: tStatic(locale, 'tnved.sections.search'), href: '#block-search' },
+        { id: 2, title: tStatic(locale, 'tnved.sections.classifier'), href: '#block-classifier' },
+        ...(
+            pageData?.content?.map(block => ({
+                id: block.id,
+                title: block.heading,
+                href: `#block-${block.id}`,
+            })) || []
+        ),
+    ];
+
+    return (
+        <StandardPageLayout
+            title={pageData?.title || tStatic(locale, 'tnved.page.title')}
+            breadcrumbs={[{ id: 2, title: tStatic(locale, 'tnved.page.title'), full_slug: '/tnved' }]}
+            dotNavItems={dotNavItems}
+            contentColumn={<FilesList />}
+            showButton={true}
+            orderButtonLabel={tStatic(locale, 'form.buttons.submitApplication')}
+        >
+            <ClientPage initialItems={items} pageData={pageData} />
+        </StandardPageLayout>
+    );
 }
 
 
