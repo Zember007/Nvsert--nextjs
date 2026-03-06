@@ -74,11 +74,11 @@ const AppNavigationItem = ({ img, title, controls, link, dark, className, onClic
     const { setButtonRef, setWrapperRef } = useButton()
     const resolvePath = localizePath ?? ((path: string) => path);
 
-    const active = typeof window !== 'undefined' && window.location.pathname.includes(`/services/${link}`);
+   /*  const active = typeof window !== 'undefined' && window.location.pathname.includes(`/services/${link}`); */
 
     const hoverStyle = dark ? 'hover:border-[#34446D] hover:bg-[#F5F5F2] ' : ' hover:border-[#fff] hover:bg-[#34446d33]'
 
-    const activeStyle = dark ? 'border-[#34446D] bg-[#F5F5F2] ' : ' border-[#fff] bg-[#34446d33]'
+    /* const activeStyle = dark ? 'border-[#34446D] bg-[#F5F5F2] ' : ' border-[#fff] bg-[#34446d33]' */
 
     return (
         <>
@@ -88,7 +88,7 @@ const AppNavigationItem = ({ img, title, controls, link, dark, className, onClic
                     href={resolvePath(`/services/${link}`)}
                     prefetch={false}
                     onClick={onClick}
-                    className={` ${stylesBtn.tariff} ${stylesBtn.noTransitions} text-left overflow-hidden ${stylesBtn.notBackdrop} flex  gap-[10px] group/img  rounded-[3px] items-center    border-solid  border border-[transparent] h-[72px] p-[5px] ${active ? activeStyle : ''} ${hoverStyle}`}>
+                    className={` ${stylesBtn.tariff} ${stylesBtn.noTransitions} text-left overflow-hidden ${stylesBtn.notBackdrop} flex  gap-[10px] group/img  rounded-[3px] items-center    border-solid  border border-[transparent] h-[72px] p-[5px]  ${hoverStyle}`}>
                     <motion.div
                         className={` overflow-hidden h-[60px] rounded-[3px] min-w-[43px] w-[43px] border-solid border border-[#93969D] bg-[#f0f0f0] `}
                         animate={controls}>
