@@ -6,34 +6,68 @@ import { BASE_URL, STRAPI_API_URL } from 'shared/config/env';
 import { getRequestLocale } from 'shared/i18n/server-locale';
 import { tStatic } from 'shared/i18n/static';
 
-async function fetchOkpdPageData(): Promise<{ pageData: OkpdPageData | null }> {
+type Okpd2Item = {
+    id: number;
+    documentId: string | null;
+    code: string;
+    name: string;
+    level: number;
+    hasChildren: boolean;
+    parentCode: string | null;
+    createdAt: string | null;
+    updatedAt: string | null;
+    publishedAt: string | null;
+};
+
+function detectPreloadedSections(items: Okpd2Item[]): string[] {
+    const sections = new Set<string>();
+
+    for (const item of items || []) {
+        const code = (item?.code ?? '').trim();
+        if (!code) continue;
+
+        const section = code.slice(0, 2);
+        if (!/^\d{2}$/.test(section)) continue;
+
+        // Root nodes are always present; consider section preloaded only if we have deeper nodes.
+        if (code.length > 2) {
+            sections.add(section);
+        }
+    }
+
+    return [...sections];
+}
+
+async function fetchOkpd2Data(): Promise<{ items: Okpd2Item[]; pageData: OkpdPageData | null }> {
     const locale = await getRequestLocale();
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 15000);
 
     try {
         const res = await fetch(
-            `${STRAPI_API_URL}/okpd2s/with-page?pagination[pageSize]=1&locale=${locale}`,
+            `${STRAPI_API_URL}/okpd2s/with-page?locale=${locale}&includeInitialSection=false`,
             {
-                cache: 'force-cache',
+                next: { revalidate: 3600 },
                 signal: controller.signal,
             },
         );
 
         if (!res.ok) {
-            console.error('Failed to fetch OKPD page data:', res.status, res.statusText);
-            return { pageData: null };
+            console.error('Failed to fetch OKPD2 data:', res.status, res.statusText);
+            return { items: [], pageData: null };
         }
 
         const json = await res.json();
+        const data = Array.isArray(json?.data) ? json.data : Array.isArray(json) ? json : [];
         const pageData = json?.page || null;
 
         return {
+            items: data as Okpd2Item[],
             pageData: pageData as OkpdPageData | null,
         };
     } catch (error) {
-        console.error('Error fetching OKPD page data:', error);
-        return { pageData: null };
+        console.error('Error fetching OKPD2 data:', error);
+        return { items: [], pageData: null };
     } finally {
         clearTimeout(timeoutId);
     }
@@ -55,8 +89,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-    const { pageData } = await fetchOkpdPageData();
-    return <ClientPage initialItems={[]} pageData={pageData} />;
+    const { items, pageData } = await fetchOkpd2Data();
+    const preloadedSections = detectPreloadedSections(items);
+    return <ClientPage initialItems={items} pageData={pageData} preloadedSections={preloadedSections} />;
 }
 
 
