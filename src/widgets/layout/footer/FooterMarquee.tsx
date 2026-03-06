@@ -133,7 +133,7 @@ const FooterMarquee: React.FC = () => {
   return (
     <div
       ref={ref}
-      className={`${footerStyles.footer__dark} m:justify-start justify-center gap-[16px] xl:h-auto m:h-[135px] h-[96px] !p-0`}
+      className={`${footerStyles.footer__dark} m:justify-start justify-center gap-[16px] xl:h-auto m:h-[135px] h-[96px] !p-0 !pl-[27px]`}
     >
       <Image
         src={AudioLogo}
