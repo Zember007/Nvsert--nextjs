@@ -45,7 +45,7 @@ const ContactsSpoilersClient = ({ data, pdfHref }: { data: ContactsPageData; pdf
           </div>
 
           <div className="flex flex-col m:gap-[30px] gap-[20px]">
-            <div className="p-[40px] bg-[#93969d26] rounded-[8px] border border-[#93969d] flex justify-between m:flex-row flex-col-reverse gap-[30px] items-center">
+            <div className="xxs:p-[40px] s:p-[30px] p-[20px] bg-[#93969d26] rounded-[8px] border border-[#93969d] flex justify-between m:flex-row flex-col-reverse gap-[30px] items-center">
               <div className="flex flex-col gap-[30px]">
                 <span className={textSize.headerH3}>{data.connectSection.consultationTitle}</span>
                 <div className={textSize.text3 + ' max-w-[660px]'}>
@@ -67,9 +67,9 @@ const ContactsSpoilersClient = ({ data, pdfHref }: { data: ContactsPageData; pdf
               {(data.connectSection.featureCards || []).map((card, index) => (
                 <div
                   key={card.title}
-                  className="relative p-[40px] bg-[#93969d26] w-full rounded-[8px] border border-[#93969d] flex flex-col gap-[20px]"
+                  className="relative xl:p-[40px] p-[30px] xl:pb-[40px] xss:pb-[30px] pb-[86px] bg-[#93969d26] w-full rounded-[8px] border border-[#93969d] flex flex-col gap-[20px]"
                 >
-                  <div className="absolute top-[10px] right-[10px]">
+                  <div className="absolute xl:top-[10px] bottom-[10px] right-[10px]">
                     {index === 0 && (
                       <svg width="66" height="45" viewBox="0 0 66 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" clipRule="evenodd" d="M23.6613 0L0 22.5L20.9099 42.3836L26.4128 37.1509L11.0057 22.5L23.6613 10.4655L36.317 22.5L33 25.6542L26.9316 19.8836L21.4287 25.1164L42.3387 45L66 22.5L42.3387 0L33 8.88029L23.6613 0ZM38.5029 14.1131L47.3227 22.5L38.5028 30.8869L42.3387 34.5345L54.9943 22.5L42.3387 10.4655L38.5029 14.1131Z" fill="#34446D" fillOpacity="0.2" />
@@ -125,12 +125,15 @@ const ContactsSpoilersClient = ({ data, pdfHref }: { data: ContactsPageData; pdf
             <div className="flex flex-col gap-[20px]">
               <div className="flex items-center justify-between">
                 <span className={textSize.headerH2}>{data.requisitesSection.heading}</span>
-                <ContactsButton label={data.requisitesSection.downloadButtonLabel} href={pdfHref} />
+                <ContactsButton className="m:block hidden" label={data.requisitesSection.downloadButtonLabel} href={pdfHref} />
               </div>
               <div className={textSize.text3}>{processContent(data.requisitesSection.description)}</div>
             </div>
 
-            <div className="p-[40px] bg-[#93969d26] rounded-[8px] border border-[#93969d] flex justify-between m:flex-row flex-col-reverse gap-[30px] items-center">
+            <ContactsButton className="block m:hidden xxs:!mx-0" label={data.requisitesSection.downloadButtonLabel} href={pdfHref} />
+
+
+            <div className="xxs:p-[40px] s:p-[30px] p-[20px] bg-[#93969d26] rounded-[8px] border border-[#93969d] flex justify-between m:flex-row flex-col-reverse gap-[30px] items-center">
               <div className="flex flex-col gap-[16px]">
                 <div className="flex  gap-[10px] m:flex-row flex-col">
                   <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>

@@ -7,9 +7,10 @@ import styles from '@/assets/styles/base/contacts-base.module.scss';
 type ContactsButtonProps = {
   label: string;
   href?: string;
+  className?: string;
 };
 
-const ContactsButton = ({ label, href }: ContactsButtonProps) => {
+const ContactsButton = ({ label, href, className }: ContactsButtonProps) => {
   const { openDefaultModal } = useHeaderContext();
   const { setButtonRef, setWrapperRef } = useButton();
 
@@ -28,7 +29,7 @@ const ContactsButton = ({ label, href }: ContactsButtonProps) => {
   );
 
   return (
-    <div className={`${styles.mainButtonWrap} ${styles.tariffWrap}`} ref={setWrapperRef}>
+    <div className={`${styles.mainButtonWrap} ${styles.tariffWrap} ${className}`} ref={setWrapperRef}>
       {href ? (
         <a
           href={href}
