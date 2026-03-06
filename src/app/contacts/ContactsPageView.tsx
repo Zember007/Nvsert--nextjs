@@ -97,7 +97,7 @@ const ContactsPageView = ({
 
                   return (
                     <div
-                      className="group p-[30px] flex xl:flex-col m:flex-row flex-col gap-[20px] w-full bg-[#F1F1ED] rounded-[6px] border border-[#93969d] hover:bg-[#93969d26] hover:border-[#34446D]"
+                      className="group xxxl:p-[30px] s:p-[20px] flex xl:flex-col m:flex-row flex-col m:max-w-full max-w-[430px] mx-auto m:mx-0 gap-[20px] w-full bg-[#F1F1ED] rounded-[6px] border border-[#93969d] hover:bg-[#93969d26] hover:border-[#34446D]"
                       key={office.city}
                     >
                       <div className=" relative overflow-hidden rounded-[6px]">
@@ -130,7 +130,7 @@ const ContactsPageView = ({
                           {office.city}
                         </span>
                       </div>
-                      <div className="flex flex-col gap-[10px]">
+                      <div className="flex flex-col gap-[10px] s:p-0 p-[20px] pt-0">
                         <div className="flex items-center gap-[10px]">
                           <svg
                               className="min-w-[16px] group-hover:text-[#34446D] text-[#93969D] transition-all duration-100"
