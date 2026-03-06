@@ -1,13 +1,31 @@
 import { Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import { getFaqs } from 'entities/faq';
-import { AppMainContent, AppMainIntro, AppMainSkills } from 'widgets/home';
-import HomeDocumentsClient from './_components/HomeDocumentsClient';
-import { DocumentsSkeleton } from 'shared/common/SectionSkeleton';
+import { AppMainContent, AppMainIntro } from 'widgets/home';
+import { DocumentsSkeleton, FeedbackSkeleton, SliderSkeleton } from 'shared/common/SectionSkeleton';
+import type { SupportedLocale } from 'shared/config/env';
 import { getRequestLocale } from 'shared/i18n/server-locale';
+
+const HomeDocumentsClient = dynamic(() => import('./_components/HomeDocumentsClient'), {
+  loading: () => <DocumentsSkeleton />,
+});
+
+const AppMainSkills = dynamic(() => import('widgets/home/AppMainSkills'), {
+  loading: () => (
+    <section className="section wrapper">
+      <div className="h-8 bg-gray-200 rounded w-1/3 mb-8" />
+      <div className="h-[420px] bg-gray-100 rounded" />
+    </section>
+  ),
+});
+
+async function DeferredHomeContent({ locale }: { locale: SupportedLocale }) {
+  const faqs = await getFaqs(locale);
+  return <AppMainContent faqs={faqs} />;
+}
 
 export default async function Home() {
   const locale = await getRequestLocale();
-  const [faqs] = await Promise.all([getFaqs(locale)]);
 
   return (
     <div className="main text-[#000] overflow-hidden relative leading-page">
@@ -20,10 +38,28 @@ export default async function Home() {
       </Suspense>
 
       {/* Навыки - важный контент */}
-      <AppMainSkills />
+      <Suspense
+        fallback={
+          <section className="section wrapper">
+            <div className="h-8 bg-gray-200 rounded w-1/3 mb-8" />
+            <div className="h-[420px] bg-gray-100 rounded" />
+          </section>
+        }
+      >
+        <AppMainSkills />
+      </Suspense>
 
-      {/* Остальной контент - ленивая загрузка */}
-      <AppMainContent faqs={faqs} />
+      {/* Остальной контент + FAQ загружаются после первого экрана */}
+      <Suspense
+        fallback={
+          <>
+            <SliderSkeleton />
+            <FeedbackSkeleton />
+          </>
+        }
+      >
+        <DeferredHomeContent locale={locale} />
+      </Suspense>
     </div>
   );
 }

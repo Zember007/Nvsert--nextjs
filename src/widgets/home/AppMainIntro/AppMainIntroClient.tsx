@@ -1,29 +1,36 @@
 'use client';
 
+import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from 'shared/ui';
 import { useHeaderContext } from 'shared/contexts/contexts/HeaderContext';
-import CountUp from '../../layout/countUp';
 import { filterPrepositions } from '../../../shared/lib';
+
+const CountUp = dynamic(() => import('../../layout/countUp'), {
+  ssr: false,
+});
 
 const AppMainIntroBadge = ({
   title,
   description,
   side,
+  enableAnimation,
 }: {
   title: string;
   description: string;
   side: 'left' | 'right';
+  enableAnimation: boolean;
 }) => {
-  const parseProcent = (procent: string): { value: number; suffix: string } => {
-    const match = procent.match(/(\d+(?:\.\d+)?)([+%]?)/);
-    if (match) {
-      return {
-        value: parseFloat(match[1]),
-        suffix: match[2] || '',
-      };
-    }
-    return { value: 0, suffix: '' };
+  const parseCounter = (rawValue: string): { value: number; suffix: string } => {
+    const normalized = rawValue.replace(/\s/g, '');
+    const match = normalized.match(/(\d+(?:\.\d+)?)([+%]?)/);
+    if (!match) return { value: 0, suffix: '' };
+
+    return {
+      value: parseFloat(match[1]),
+      suffix: match[2] || '',
+    };
   };
 
   return (
@@ -32,7 +39,11 @@ const AppMainIntroBadge = ({
     >
       <span className="text-[40px] -my-[2%]">
         {(() => {
-          const { value, suffix } = parseProcent(title);
+          const { value, suffix } = parseCounter(title);
+          if (!enableAnimation) {
+            return <span>{title}</span>;
+          }
+
           return (
             <>
               <CountUp to={value} duration={0.5} className="inline-block" />
@@ -49,6 +60,20 @@ const AppMainIntroBadge = ({
 export default function AppMainIntroClient() {
   const { t } = useTranslation();
   const { openDefaultModal } = useHeaderContext();
+  const [enableBadgeAnimations, setEnableBadgeAnimations] = useState(false);
+
+  useEffect(() => {
+    const requestIdle = window.requestIdleCallback;
+    const cancelIdle = window.cancelIdleCallback;
+
+    if (requestIdle) {
+      const idleId = requestIdle(() => setEnableBadgeAnimations(true), { timeout: 1500 });
+      return () => cancelIdle(idleId);
+    }
+
+    const timer = window.setTimeout(() => setEnableBadgeAnimations(true), 400);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   return (
     <>
@@ -58,11 +83,13 @@ export default function AppMainIntroClient() {
             title="15+"
             description="Лет на рынке сертификации"
             side="left"
+            enableAnimation={enableBadgeAnimations}
           />
           <AppMainIntroBadge
             title="75+"
             description="Опытных экспертов в команде"
             side="left"
+            enableAnimation={enableBadgeAnimations}
           />
         </div>
         <div className="h-[400px]" />
@@ -71,11 +98,13 @@ export default function AppMainIntroClient() {
             title="99%"
             description="Заказов выполняем раньше срока"
             side="right"
+            enableAnimation={enableBadgeAnimations}
           />
           <AppMainIntroBadge
             title="10 000+"
             description="Компаний доверяют нам работу"
             side="right"
+            enableAnimation={enableBadgeAnimations}
           />
         </div>
       </div>
