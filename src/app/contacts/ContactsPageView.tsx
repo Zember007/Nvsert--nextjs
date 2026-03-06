@@ -107,8 +107,9 @@ const ContactsPageView = ({
                           width={typeof imgSrc === 'string' ? imgW : undefined}
                           height={typeof imgSrc === 'string' ? imgH : undefined}
                           alt={office.city}
-                          sizes="(min-width: 1280px) 388px, (min-width: 768px) 50vw, 100vw"
-                          quality={68}
+                          sizes="(min-width: 1536px) 388px, (min-width: 1280px) 31vw, (min-width: 768px) 46vw, 92vw"
+                          quality={isLcpCandidate ? 64 : 58}
+                          placeholder={typeof imgSrc === 'string' ? 'empty' : 'blur'}
                           priority={isLcpCandidate}
                           fetchPriority={isLcpCandidate ? 'high' : 'auto'}
                           loading={isLcpCandidate ? 'eager' : 'lazy'}

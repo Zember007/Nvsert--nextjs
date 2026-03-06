@@ -15,7 +15,7 @@ import type { ContactsPageData } from './ClientPage';
 const ContactsSpoilersClient = ({ data, pdfHref }: { data: ContactsPageData; pdfHref: string }) => {
   const { processContent } = useRichTextRenderer();
   const { t } = useTranslation();
-  const [isExpandeds, setIsExpandeds] = useState([true, true]);
+  const [isExpandeds, setIsExpandeds] = useState([true, false]);
 
   const consultationImageSrc =
     (data.connectSection.consultationImage?.url && getStrapiImageApiPath(data.connectSection.consultationImage.url)) ||

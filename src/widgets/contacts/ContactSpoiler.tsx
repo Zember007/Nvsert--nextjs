@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useRef, useState } from 'react';
+import { useId } from 'react';
 import styles from '@/assets/styles/base/contacts-base.module.scss';
 
 
