@@ -7,7 +7,7 @@ import ContactsButton from './ContactsButton';
 import textSize from '@/assets/styles/base/contacts-base.module.scss';
 import ConsultationFallback from '@/assets/images/contacts/docs_icon.png';
 import FinanceIconFallback from '@/assets/images/contacts/finance_icon.png';
-import { useRichTextRenderer } from 'shared/lib';
+import { getShimmerBlurDataURL, useRichTextRenderer } from 'shared/lib';
 import { getStrapiImageApiPath } from 'shared/lib/strapi-image';
 import type { ContactsPageData, ContactsRequisitesLabels } from './ClientPage';
 
@@ -223,6 +223,7 @@ const ImageAnimated = ({
 }) => {
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [shouldAnimateIn, setShouldAnimateIn] = useState(false);
+  const blurDataURL = getShimmerBlurDataURL(width, height);
 
   useEffect(() => {
     const el = contentRef.current;
@@ -258,6 +259,9 @@ const ImageAnimated = ({
         alt={alt}
         sizes={sizes}
         quality={quality}
+        placeholder="blur"
+        blurDataURL={typeof src === 'string' ? blurDataURL : undefined}
+        loading="lazy"
       />
     </div>
   );

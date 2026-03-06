@@ -7,7 +7,7 @@ import textSize from '@/assets/styles/base/contacts-base.module.scss';
 import breadcrumbsStyles from '@/assets/styles/blocks/breadcrumbs.module.scss';
 import ContactsButton from './ContactsButton';
 import ContactsSpoilersDeferred from './ContactsSpoilersDeferred';
-import { renderRichTextContent } from 'shared/lib';
+import { getShimmerBlurDataURL, renderRichTextContent } from 'shared/lib';
 import { getStrapiImageApiPath } from 'shared/lib/strapi-image';
 import type { ContactsPageData, ContactsRequisitesLabels } from './ClientPage';
 
@@ -80,6 +80,7 @@ const ContactsPageView = ({
                   const imgSrc = (imageUrl && getStrapiImageApiPath(imageUrl)) || fallbackImageByCity.get(office.city);
                   const imgW = office.image?.width ?? 1200;
                   const imgH = office.image?.height ?? 800;
+                  const blurDataURL = getShimmerBlurDataURL(imgW, imgH);
                   const isLcpCandidate = index === 0;
                   const hoverVariant = index % 3;
 
@@ -111,7 +112,8 @@ const ContactsPageView = ({
                           alt={office.city}
                           sizes="(min-width: 1536px) 388px, (min-width: 1280px) 31vw, (min-width: 768px) 46vw, 92vw"
                           quality={isLcpCandidate ? 64 : 58}
-                          placeholder={typeof imgSrc === 'string' ? 'empty' : 'blur'}
+                          placeholder="blur"
+                          blurDataURL={typeof imgSrc === 'string' ? blurDataURL : undefined}
                           priority={isLcpCandidate}
                           fetchPriority={isLcpCandidate ? 'high' : 'auto'}
                           loading={isLcpCandidate ? 'eager' : 'lazy'}
