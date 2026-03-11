@@ -3,7 +3,7 @@
 import AppCollapsibleList from 'widgets/layout/AppCollapsibleList';
 import WordImg from '@/assets/images/svg/Word.svg';
 import PdfImg from '@/assets/images/svg/PDF.svg';
-import Image from 'next/image';
+import Image from 'shared/ui/OptimizedImage';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import textSize from '@/assets/styles/base/base.module.scss';

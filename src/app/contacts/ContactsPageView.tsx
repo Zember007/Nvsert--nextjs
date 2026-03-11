@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'shared/ui/OptimizedImage';
 import Moscow from '@/assets/images/contacts/towns/moscow.jpg';
 import SaintPetersburg from '@/assets/images/contacts/towns/spb.jpg';
 import Pskov from '@/assets/images/contacts/towns/pskov.jpg';

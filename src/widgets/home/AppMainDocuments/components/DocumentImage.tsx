@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "shared/ui/OptimizedImage";
 import { FC, memo } from "react";
 import type { AnimationControls } from "framer-motion";
 import { motion } from "framer-motion";

@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useHeaderContext } from "shared/contexts";
 import MessageImg from '@/assets/images/svg/Phone.svg'
-import Image from "next/image";
+import Image from "shared/ui/OptimizedImage";
 
 const AppMainFormSecondary = () => {
 

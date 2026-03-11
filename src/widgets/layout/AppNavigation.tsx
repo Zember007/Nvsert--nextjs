@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { filterPrepositions } from 'shared/lib';
 import { useButton } from 'shared/hooks';
 import { NavigationItem, Services } from "@/types/navigation";
-import Image from "next/image";
+import Image from "shared/ui/OptimizedImage";
 import stylesBtn from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/base/base.module.scss';
 import { usePathname } from "next/navigation";

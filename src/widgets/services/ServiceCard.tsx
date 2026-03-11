@@ -1,5 +1,5 @@
 'use client';
-import Image from 'next/image';
+import Image from 'shared/ui/OptimizedImage';
 import Link from 'next/link';
 import React from 'react';
 import { NavigationItem } from '@/types/navigation';

@@ -2,7 +2,7 @@
 
 import type React from 'react';
 import { memo } from 'react';
-import Image from 'next/image';
+import Image from 'shared/ui/OptimizedImage';
 
 import { slides } from '../utils';
 import stylesMainSkills from '@/assets/styles/main.module.scss';

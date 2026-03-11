@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "shared/ui/OptimizedImage";
 import { AsyncPhotoProvider, AsyncPhotoView } from 'shared/common/AsyncPhotoView';
 
 interface MediaItem {

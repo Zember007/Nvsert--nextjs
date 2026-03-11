@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from 'shared/ui/OptimizedImage';
 import { FC, memo } from 'react';
 import mainDocumentsStyles from '@/assets/styles/main.module.scss';
 import { filterPrepositions } from 'shared/lib';

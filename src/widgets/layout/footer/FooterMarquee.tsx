@@ -4,7 +4,7 @@ import { useIntersectionObserver } from 'shared/hooks';
 import footerStyles from "@/assets/styles/base/base.module.scss";
 import stylesSlider from "@/assets/styles/base/base.module.scss";
 import textSize from "@/assets/styles/base/base.module.scss";
-import Image from "next/image";
+import Image from "shared/ui/OptimizedImage";
 import { useTranslation } from "react-i18next";
 
 const FooterMarquee: React.FC = () => {

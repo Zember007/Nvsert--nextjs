@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import Image from 'next/image';
+import Image from 'shared/ui/OptimizedImage';
 import IconAbout1 from '@/assets/images/about/1.svg';
 import IconAbout2 from '@/assets/images/about/2.svg';
 import IconAbout3 from '@/assets/images/about/3.svg';

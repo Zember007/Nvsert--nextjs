@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
-import Image, { StaticImageData } from 'next/image';
+import type { StaticImageData } from 'next/image';
 import { filterPrepositions } from 'shared/lib';
+import Image from 'shared/ui/OptimizedImage';
 import textSize from '@/assets/styles/main.module.scss';
 import stylesSafeguards from '@/assets/styles/main.module.scss';
 

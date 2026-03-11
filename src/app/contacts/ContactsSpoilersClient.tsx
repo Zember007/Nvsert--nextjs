@@ -1,13 +1,14 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import Image, { StaticImageData } from 'next/image';
+import type { StaticImageData } from 'next/image';
 import ContactSpoiler from 'widgets/contacts/ContactSpoiler';
 import ContactsButton from './ContactsButton';
 import textSize from '@/assets/styles/base/contacts-base.module.scss';
 import ConsultationFallback from '@/assets/images/contacts/docs_icon.png';
 import FinanceIconFallback from '@/assets/images/contacts/finance_icon.png';
 import { getShimmerBlurDataURL, useRichTextRenderer } from 'shared/lib';
+import Image from 'shared/ui/OptimizedImage';
 import { getStrapiImageApiPath } from 'shared/lib/strapi-image';
 import type { ContactsPageData, ContactsRequisitesLabels } from './ClientPage';
 

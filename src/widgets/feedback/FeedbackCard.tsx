@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { FeedbackItem } from '@/types/feedback';
-import Image from 'next/image';
+import Image from 'shared/ui/OptimizedImage';
 import FeedbackList from './FeedbackList';
 import { getStrapiImageApiPath } from '../../shared/lib/strapi-image';
 

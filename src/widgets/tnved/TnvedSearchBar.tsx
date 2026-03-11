@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import Image from 'next/image';
+import Image from 'shared/ui/OptimizedImage';
 import SearchIcon from '@/assets/images/svg/search.svg';
 import { useTranslation } from 'react-i18next';
 import textSize from '@/assets/styles/base/base.module.scss';

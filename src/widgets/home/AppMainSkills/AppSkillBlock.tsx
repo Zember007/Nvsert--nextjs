@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Image, { StaticImageData } from 'next/image';
+import type { StaticImageData } from 'next/image';
 import { filterPrepositions } from 'shared/lib';
 import { useWindowSize } from 'shared/hooks';
+import Image from 'shared/ui/OptimizedImage';
 import textSize from '@/assets/styles/main.module.scss';
 import stylesMainSkills from '@/assets/styles/main.module.scss';
 

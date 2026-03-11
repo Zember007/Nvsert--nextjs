@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
+import Image from 'shared/ui/OptimizedImage';
 import styles from '@/assets/styles/blocks/map.module.scss';
 import { useWindowSize } from 'shared/hooks';
 import textSize from '@/assets/styles/base/base.module.scss';

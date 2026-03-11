@@ -2,7 +2,7 @@
 
 import { AsyncPhotoProvider, AsyncPhotoView } from 'shared/common/AsyncPhotoView';
 import { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
+import Image from 'shared/ui/OptimizedImage';
 import { useTranslation } from 'react-i18next';
 import { useWindowSize } from 'shared/hooks';
 import stylesMainFeedback from '@/assets/styles/main.module.scss';

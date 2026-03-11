@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import ArrowIcon from '@/assets/images/svg/menu/arrow.svg'
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
+import Image from 'shared/ui/OptimizedImage';
 import { Services } from '@/types/navigation';
 import { useHeaderContext } from 'shared/contexts';
 import { filterPrepositions } from 'shared/lib';
