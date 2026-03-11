@@ -73,9 +73,6 @@ const AppMainDocuments = () => {
 
             return (
               <>
-                {index === 0 && (
-                  <hr className='w-full h-[1px] bg-[#93969D] m-0' />
-                )}
                 <MainDocumentItem
                   link={item.slug}
                   key={item.slug || globalIndex}
@@ -91,7 +88,6 @@ const AppMainDocuments = () => {
                   totalItems={totalItems}
                   index={globalIndex + 1}
                 />
-                <hr className='w-full h-[1px] bg-[#93969D] m-0' />
               </>
             );
           })}
@@ -123,7 +119,6 @@ const AppMainDocuments = () => {
                       totalItems={totalItems}
                       index={globalIndex + 1}
                     />
-                    <hr className='w-full h-[1px] bg-[#93969D] m-0' />
                   </>
                 );
               }}

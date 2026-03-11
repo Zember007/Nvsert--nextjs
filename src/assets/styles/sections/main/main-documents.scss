@@ -2,7 +2,7 @@
 @use '../../base/mixins' as *;
 
 .documents-container {
-  @apply flex flex-col;
+  @apply flex flex-col gap-[5px];
 } 
 
 .document-wrapper-border {
@@ -98,11 +98,17 @@
 
 .document {
   &__box {
-    @apply xl:mx-[-23px] mx-[-5px] flex flex-col rounded-[6px] relative;
+    @apply border-b border-solid border-[#93969D] flex flex-col items-center relative;
     z-index: 1;
+    width: 100%;
 
     &.active {
-      @apply hover:bg-[#34446D33] bg-[transparent] ;
+      @apply bg-[transparent];
+      border-color: transparent;
+    }
+
+    &:hover {
+      border-color: transparent;
     }
   }
 
@@ -117,25 +123,41 @@
   }
 
   &__navigation {
-    @apply rounded-[6px] overflow-hidden h-[68px] text-left box-scale transition-scale active:bg-[#5B6788] xl:px-[23px] relative z-[0];
+    @apply xl:mx-[-23px] mx-[-5px]  rounded-[6px] overflow-hidden h-[72px] text-left box-scale transition-scale xl:px-[23px] relative z-[0];
+    border: 1px solid transparent;
+    background: transparent;
+    transition: none;
+    z-index: 2;
+
+    @media (min-width: $media-xl) {
+      width: calc(100% + 23px);
+    }    
+
+    @media (max-width: $media-xl) {
+      width: calc(100% + 5px);
+    }
 
     &:active {
       box-shadow: 2px 2px 4px 0px #000000CC inset, -2px -2px 4px 0px #000000CC inset;
     }
 
-    &-bg.active {
-      background-image: url('../../../images/150.webp');
-      background-repeat: repeat;
+    &:hover {
+      background: #F5F5F2;
+      border-color: #34446D;
+
+     
     }
 
     &.active {
-      @apply bg-[#5B6788];
-      border-color: #000 !important;
-      box-shadow: 2px 2px 4px 0px #000000CC inset, -2px -2px 4px 0px #000000CC inset;
+      background: rgba(52, 68, 109, 0.2);
+      border-color: #34446D !important;
+      backdrop-filter: blur(4px);
+      box-shadow: none;
+
     }
 
     &-wrap {
-      @apply w-full relative z-[2] gap-[10px] flex items-center justify-between h-full  m:py-[23px] relative;
+      @apply w-full relative z-[2] gap-[10px]  flex items-center justify-between h-full  m:py-[23px] relative;
 
       &.active {
         @apply text-[#FFF];
@@ -144,7 +166,8 @@
   }
 
   &__desc {
-    @apply  translate-y-[-1px] transition-all duration-200 ;
+    @apply  translate-y-[-1px];
+    transition: none;
 
     &-wrap {
       @apply xl:w-[485px] m:w-[310px] w-full hidden will-change-transform *:will-change-transform  m:flex justify-between xl:grid xl:grid-cols-[0.76fr_1fr_auto] items-center justify-between justify-items-start  xl:pr-0 l:pr-[18px] pr-[20px];
@@ -152,11 +175,13 @@
   }
 
   &__title {
-    @apply m:translate-y-[-1px] transition-all duration-200  will-change-transform  pl-[63px] flex-1;
+    @apply m:translate-y-[-1px] will-change-transform  pl-[63px] flex-1;
+    transition: none;
   }
 
   &__small-img {
-    @apply overflow-hidden border border-solid border-[#93969D] rounded-[3px] transition-all duration-100 z-[2] absolute top-1/2 -translate-y-1/2 left-[6px] xl:left-[23px];
+    @apply overflow-hidden border border-solid border-[#93969D] rounded-[3px] z-[2] absolute top-1/2 -translate-y-1/2 left-[6px] xl:left-[23px];
+    transition: none;
     /* Резерв места под миниатюру 41×58 — снижает CLS при загрузке изображений */
     width: 41px;
     min-width: 41px;
@@ -213,17 +238,32 @@
   }
 
   &__hidden {
-    @apply transition-all ease-in duration-200 overflow-hidden max-h-0  rounded-b-[6px];
+    @apply overflow-hidden max-h-0 rounded-[6px];
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    position: relative;
+    transition: max-height .2s ease-in, margin-top .2s ease-in, padding-top .2s ease-in, border-color .2s ease-in;
+    z-index: 1;
+    border: 1px solid transparent;
+    margin-top: -72px;
+    padding-top: 72px;
+
 
     &.active {
       max-height: 1400px !important;
+      border-color: #34446D;
     }
   }
 
   &__item {
-    @apply flex flex-col items-center m:items-stretch m:flex-row m:gap-[30px] gap-[20px]  p-[23px] ;
+    @apply flex flex-col items-center m:items-stretch m:flex-row m:gap-[30px] gap-[20px]  p-[21px] ;
     /* m:p-[30px] */
   }
+}
+
+.document-wrapper-border-active .document__navigation {
+  z-index: 3;
 }
 
 .document-content-wrapper {

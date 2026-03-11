@@ -48,16 +48,14 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
 
     return (
         <div
-            className={`${stylesQuestions['document-wrapper-border']} group/main`}
+            className={`${stylesQuestions['document-wrapper-border']} ${active ? stylesQuestions['document-wrapper-border-active'] : ''} group/main`}
         >
-            <div className={`${stylesQuestions['document__box']}   ${!active ? stylesQuestions.active : ''}`}>
-
-                <div className={`pointer-events-none absolute -top-[1px] -bottom-[1px] right-0 left-0 z-[3] rounded-[6px]  ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border border-solid border-[transparent]`}></div>
+            <div className={`${stylesQuestions['document__box']} ${active ? stylesQuestions.active : ''}`}>
                 <div
                     onClick={() => {
                         setActive(!active)
                     }}
-                    className={`${active ? ' active !bg-[#5B6788] !shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset] ' : ' '} document__navigation-bg  bg-[transparent]   h-[70px] relative  active:bg-[#5B6788]  active:shadow-[2px_2px_4px_0px_#000000CC_inset,-2px_-2px_4px_0px_#000000CC_inset]   group cursor-pointer  rounded-[6px]  flex items-center gap-[9px] xl:gap-[40px] l:pr-[23px]  transition-scale`}>
+                    className={`${stylesQuestions['document__navigation']} ${active ? stylesQuestions.active : ''} document__navigation-bg group/window cursor-pointer flex items-center gap-[9px] xl:gap-[40px] l:pr-[23px]`}>
 
                     <div className={`${stylesQuestions['questions-number-container']} ${active ? stylesQuestions.active : ''} ${stylesQuestions['transition-scale']} group-active:scale-[0.9]`}>
                         <p className={`${stylesQuestions['questions-number-text']} ${active ? stylesQuestions.active : ''} l:group-hover:text-[50px] group-active:duration-[0] group-active:text-[#FFF]`}>{number}</p>
@@ -77,7 +75,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
 
                     </div>
                 </div>
-                <div className={`${stylesQuestions['questions-content-wrapper']} ${active ? stylesQuestions.active : ''}`}>
+                <div className={`${stylesQuestions['document__hidden']} ${stylesQuestions['questions-content-wrapper']} ${active ? stylesQuestions.active : ''}`}>
                     <div className={stylesQuestions['questions-inner-content']}>
                         <div
                         >{processContent(text, true)}</div>

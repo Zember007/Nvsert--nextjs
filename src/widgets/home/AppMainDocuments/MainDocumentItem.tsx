@@ -131,11 +131,7 @@ const MainDocumentItem = memo(({
 
             <div
                 ref={wrapperRef}
-                className={` ${mainDocumentsStyles['document__box']} ${!active ? mainDocumentsStyles.active : ''}`}>
-
-                <div
-                    className={`pointer-events-none absolute -top-[1px] -bottom-[1px] right-0 left-0 z-[3] rounded-[6px]  ${!active ? 'group-hover/main:border-[#34446D]' : '!border-[#34446D]'} border border-solid border-[transparent]`}
-                />
+                className={` ${mainDocumentsStyles['document__box']} ${active ? mainDocumentsStyles.active : ''}`}>
 
                 <DocumentHeader
                     index={index || 0}
@@ -147,7 +143,7 @@ const MainDocumentItem = memo(({
                     onClick={handleItemClick}
                 />
 
-                <div className={`${mainDocumentsStyles['document__hidden']} ${active && `${mainDocumentsStyles.active} bg-[#FFFFFF26]`}`}>
+                <div className={`${mainDocumentsStyles['document__hidden']} ${active ? mainDocumentsStyles.active : ''}`}>
                     <div className={`${mainDocumentsStyles['document__item']}  `}>
                         <div className={`${mainDocumentsStyles['document__list-photo']} `}>
                             {isMobile && (

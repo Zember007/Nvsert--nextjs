@@ -2,11 +2,12 @@
 @use '../../base/mixins' as mixins;
 
 .questions-container {
-  @apply flex flex-col;
+  @apply flex flex-col gap-[5px];
 } 
 
 .questions-number-container {
-  @apply xl:w-[70px] xl:min-w-[70px] w-[44px] min-w-[44px] h-[68px] flex items-center justify-center;
+  @apply xl:w-[70px] xl:min-w-[70px] w-[44px] min-w-[44px] h-[68px]  flex items-center justify-center;
+  transition: none;
   
   &.active {
     transform: scale(0.9);
@@ -18,7 +19,8 @@
 }
 
 .questions-number-text {
-  @apply font-light s:text-[24px] text-[22px] transition-all duration-100;
+  @apply font-light s:text-[24px] text-[22px];
+  transition: none;
   
   &.active {
     @apply m:text-[48px] text-[#FFF];
@@ -26,7 +28,8 @@
 }
 
 .questions-content-container {
-  @apply grow will-change-transform transition-all duration-100 flex items-center gap-[40px];
+  @apply grow will-change-transform flex items-center gap-[40px];
+  transition: none;
   
   &.active {
     transform: scale(0.99);
@@ -34,7 +37,8 @@
 }
 
 .questions-title {
-  @apply  grow  ease-in-out transition-all duration-200 ;
+  @apply  grow  ease-in-out;
+  transition: none;
 
   
   &.active {
@@ -43,7 +47,8 @@
 }
 
 .questions-arrow-icon {
-  @apply hidden xl:block transition-all duration-200;
+  @apply hidden xl:block;
+  transition: none;
 
   color: #93969D;
   &.active {

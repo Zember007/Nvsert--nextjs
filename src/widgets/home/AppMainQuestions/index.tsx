@@ -43,9 +43,7 @@ const AppMainQuestions = ({ faqs }: AppMainQuestionsProps) => {
 
           return (
             <React.Fragment key={item.id}>
-              {index === 0 && (
-                <hr className="w-full h-[1px] bg-[#93969D] m-0" />
-              )}
+           
               <QuestionsBlock
                 number={globalIndex + 1}
                 title={item.heading}
@@ -55,7 +53,6 @@ const AppMainQuestions = ({ faqs }: AppMainQuestionsProps) => {
                   setActiveIndex(value ? globalIndex : null);
                 }}
               />
-              <hr className="w-full h-[1px] bg-[#93969D] m-0" />
             </React.Fragment>
           );
         })}
@@ -79,7 +76,6 @@ const AppMainQuestions = ({ faqs }: AppMainQuestionsProps) => {
                       setActiveIndex(value ? globalIndex : null);
                     }}
                   />
-                  <hr className="w-full h-[1px] bg-[#93969D] m-0" />
                 </React.Fragment>
               );
             }}
