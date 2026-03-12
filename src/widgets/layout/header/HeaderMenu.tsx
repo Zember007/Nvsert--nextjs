@@ -220,6 +220,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
                                 <Link
                                     onClick={() => closeMenu()}
                                     href={localizePath('/services')}
+                                    prefetch={false}
                                     className={`${headerStyles["header__menu-mob-item"]} text-[#93969D] before:hidden`}
                                 >
                                     <span className='text-[20px] font-light'>{t('navigation.fullServicesList')}</span>

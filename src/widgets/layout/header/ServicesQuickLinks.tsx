@@ -40,6 +40,7 @@ const ServicesQuickLinks: React.FC<ServicesQuickLinksProps> = ({
                 <Link
                   onClick={onLinkClick}
                   href={localizePath(`/services#${item.name}`)}
+                  prefetch={false}
                   ref={setButtonRef}
                   className={`text-[#FFF] ${stylesBtn.lineAfterBox} xxl:pl-[5px] h-full text-center ${stylesBtn.btnIconAn} transition-all duration-100 active:scale-95 flex !gap-[9px]`}
                 >
