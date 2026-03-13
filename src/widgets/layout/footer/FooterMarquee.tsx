@@ -1,13 +1,16 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import AudioLogo from "@/assets/images/svg/audio-selector.svg";
 import { useIntersectionObserver } from 'shared/hooks';
-import footerStyles from "@/assets/styles/base/base.module.scss";
 import stylesSlider from "@/assets/styles/base/base.module.scss";
 import textSize from "@/assets/styles/base/base.module.scss";
 import Image from "shared/ui/OptimizedImage";
 import { useTranslation } from "react-i18next";
 
-const FooterMarquee: React.FC = () => {
+type FooterMarqueeProps = {
+  className?: string;
+};
+
+const FooterMarquee: React.FC<FooterMarqueeProps> = ({ className = "" }) => {
   const { t } = useTranslation();
   const slides = React.useMemo(() => t("footer.marquee.slides", { returnObjects: true }) as string[], [t]);
   const { ref, isVisible } = useIntersectionObserver();
@@ -133,28 +136,28 @@ const FooterMarquee: React.FC = () => {
   return (
     <div
       ref={ref}
-      className={`${footerStyles.footer__dark} m:justify-start justify-center gap-[16px] xl:h-auto m:h-[135px] h-[96px] max-s:!p-0 max-s:!pl-[27px]`}
+      className={`flex items-center gap-[20px] ${className}`}
     >
       <Image
         src={AudioLogo}
         unoptimized={true}
         alt="audio-logo"
-        className="xl:ml-[35px]"
+        className="w-[245px] h-[32px]"
       />
-      <div className="pl-[16px] border-l border-[#FFF] border-solid flex flex-col gap-[4px]">
-        <div className="xxs:h-[23px] h-[60px] overflow-hidden text-[#FFF]">
+      <div className="pl-[11px] border-l border-[#35353500] border-solid flex flex-col gap-[4px]">
+        <div className="h-[23px] overflow-hidden text-black">
           <div ref={stepsRef}>
             {slides.map((item, i) => (
               <p
                 key={i}
-                className={`font-light ${textSize.text2} font-light xxs:h-[23px] h-[60px] flex items-center`}
+                className={`${textSize.text2} font-light h-[23px] flex items-center whitespace-nowrap`}
               >
                 {item}
               </p>
             ))}
           </div>
         </div>
-        <div className="flex gap-[7px] py-[4px]">
+        <div className="flex justify-end gap-[7px] py-[4px]">
           {slides.map((_, i) => (
             <div
               onClick={() => handleDotClick(i)}

@@ -1,22 +1,17 @@
 import { memo } from "react";
-import dynamic from "next/dynamic";
 import FooterTopMenu from "./footer/FooterTopMenu";
 import FooterContacts from "./footer/FooterContacts";
 import FooterBottomLegal from "./footer/FooterBottomLegal";
 import footerStyles from "@/assets/styles/base/base.module.scss";
 
-const DynamicFooterMarquee = dynamic(
-  () => import("./footer/FooterMarquee"),
-  { ssr: false }
-);
-
 const AppFooter = () => {
   return (
-    <footer className={`${footerStyles.footer} grid xl:grid-cols-2 gap-[2px]`}>
-      <FooterTopMenu />
+    <footer className={`${footerStyles.footer} grid gap-[2px]`}>
+      <div className="grid gap-[2px] xl:grid-cols-[586px_1fr]">
+        <FooterBottomLegal />
+        <FooterTopMenu />
+      </div>
       <FooterContacts />
-      <FooterBottomLegal />
-      <DynamicFooterMarquee />
     </footer>
   );
 };

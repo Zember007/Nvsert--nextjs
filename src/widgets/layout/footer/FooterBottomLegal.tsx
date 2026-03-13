@@ -1,6 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import AppMenuItem from "../AppMenuItem";
 import footerStyles from "@/assets/styles/base/base.module.scss";
 import textSize from "@/assets/styles/base/base.module.scss";
 
@@ -11,30 +10,19 @@ const FooterBottomLegal: React.FC = () => {
   return (
     <>
       <div
-        className={`xl:!flex m:!grid ${footerStyles.footer__dark} bottom-top m:justify-between  m:grid-cols-2 m:gap-[10px]  xl:gap-[0px] xl:h-auto m:h-[135px]`}
+        className={`${footerStyles.footer__white} !items-stretch !justify-between !rounded-[2px] xl:!px-[25px] xl:!py-[25px]`}
       >
-        <div className="m:flex hidden text-[16px] items-start  flex-col gap-[18px] font-ligh whitespace-nowrap">
-          <span>{t("footer.inn")}</span>
-          <span>{t("footer.company")}</span>
-        </div>
-
-        <div className="m:max-w-full m:w-full m:mx-0 mx-auto max-w-[280px]  flex xl:gap-[8px] gap-[10px] flex-col xl:items-end items-start">
-          <AppMenuItem
-            className="xl:!h-[35px] !h-auto !text-left"
-            item={{
-              href: "#",
-              label: t("footer.policy"),
-            }}
-            isActive={false}
-          />
-          <AppMenuItem
-            className="xl:!h-[35px] !h-auto !text-left"
-            item={{
-              href: "#",
-              label: t("footer.personalDataProcessing"),
-            }}
-            isActive={false}
-          />
+        <div className="flex h-full min-h-[248px] w-full flex-col justify-between">
+          <div className="text-[52px] leading-[1] tracking-[-1px] font-semibold text-black">
+            NVSERT
+          </div>
+          <div className={`flex flex-col gap-[8px] text-black ${textSize.text2}`}>
+            <span className="font-light">{t("footer.inn")}</span>
+            <span className="font-normal">{t("footer.company")}</span>
+            <span className="font-light">{t("footer.copyright", { year })}</span>
+            <span className="font-light">Аттестат аккредитации RA.RU.21OE31</span>
+            <span className="font-light">Аттестат аккредитации RA.RU.21HO96</span>
+          </div>
         </div>
       </div>
 

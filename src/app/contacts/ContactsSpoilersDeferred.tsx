@@ -64,7 +64,7 @@ const ContactsSpoilersDeferred = ({
   }, [shouldLoad]);
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className="flex flex-col gap-[150px]">
       {shouldLoad ? <ContactsSpoilersClient data={data} pdfHref={pdfHref} requisitesLabels={requisitesLabels} /> : null}
     </div>
   );
