@@ -136,21 +136,21 @@ const FooterMarquee: React.FC<FooterMarqueeProps> = ({ className = "" }) => {
   return (
     <div
       ref={ref}
-      className={`flex items-center gap-[20px] ${className}`}
+      className={`flex min-w-0 items-center justify-between gap-[12px] m:gap-[20px] flex-wrap m:flex-nowrap ${className}`}
     >
       <Image
         src={AudioLogo}
         unoptimized={true}
         alt="audio-logo"
-        className="w-[245px] h-[32px]"
+        className="w-[180px] m:w-[245px] h-[32px] shrink-0"
       />
-      <div className="pl-[11px] border-l border-[#35353500] border-solid flex flex-col gap-[4px]">
+      <div className="min-w-0 pl-[11px] border-l border-[#35353500] border-solid flex flex-col gap-[4px]">
         <div className="h-[23px] overflow-hidden text-black">
           <div ref={stepsRef}>
             {slides.map((item, i) => (
               <p
                 key={i}
-                className={`${textSize.text2} font-light h-[23px] flex items-center whitespace-nowrap`}
+                className={`${textSize.text2} font-light h-[23px] flex items-center whitespace-nowrap truncate`}
               >
                 {item}
               </p>

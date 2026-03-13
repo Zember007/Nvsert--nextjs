@@ -47,25 +47,25 @@ const FooterContacts: React.FC = () => {
       className={`${footerStyles.footer__white} !rounded-[2px] !justify-between !px-[9px] !py-[25px] xl:!px-[15px]`}
     >
       <div className="hidden xl:flex w-full items-center justify-between gap-[20px]">
-        <div className="flex items-center gap-[20px]">
+        <div className={`flex items-center gap-[20px] ${footerStyles.lineAfterBox}`}>
           <button
             type="button"
             onClick={(e) => handleCopy("info@nvsert.ru", e)}
-            className="h-[35px] text-[18px] leading-[1.2] font-light text-black"
+            className={`h-[35px] text-[18px] leading-[1.2] font-light text-black ${footerStyles.lineAfter}`}
           >
             info@nvsert.ru
           </button>
           <button
             type="button"
             onClick={(e) => handleCopy("@nvsert", e)}
-            className="h-[35px] text-[18px] leading-[1.2] font-light text-black"
+            className={`h-[35px] text-[18px] leading-[1.2] font-light text-black ${footerStyles.lineAfter}`}
           >
             Telegram
           </button>
           <button
             type="button"
             onClick={(e) => handleCopy("@nvsert", e)}
-            className="h-[35px] text-[18px] leading-[1.2] font-light text-black"
+            className={`h-[35px] text-[18px] leading-[1.2] font-light text-black ${footerStyles.lineAfter}`}
           >
             Max
           </button>
@@ -73,12 +73,12 @@ const FooterContacts: React.FC = () => {
         <FooterMarquee className="shrink-0" />
       </div>
 
-      <div className="xl:hidden m:grid grid-cols-2 place-items-center flex gap-[10px] m:flex-row flex-col w-full">
+      <div className="xl:hidden relative m:grid grid-cols-2 place-items-center flex gap-[10px] m:flex-row flex-col w-full">
         <button
           onClick={() => {
             openDefaultModal("introForm");
           }}
-          className="border border-solid text-[18px] flex items-center justify-between px-[15px] text-[#FFF] border-[#93969D] h-[50px] xss:w-[280px] w-[260px] mx-auto rounded-[3px] bg-[#34446D]"
+          className={`border border-solid text-[18px] flex items-center justify-between px-[15px] text-[#FFF] border-[#93969D] h-[50px] xss:w-[280px] w-[260px] mx-auto rounded-[3px] bg-[#34446D] ${footerStyles.lineAfter} ${footerStyles.stopColor}`}
         >
           <span>{t("navigation.order")}</span>
           <svg
@@ -111,28 +111,31 @@ const FooterContacts: React.FC = () => {
         <button
           type="button"
           onClick={(e) => handleCopy("info@nvsert.ru", e)}
-          className="h-[50px] xss:w-[280px] w-[260px] text-[18px] leading-[1.2] font-light text-black"
+          className={`h-[50px] xss:w-[280px] w-[260px] text-[18px] leading-[1.2] font-light text-black ${footerStyles.lineAfter}`}
         >
           info@nvsert.ru
         </button>
         <button
           type="button"
           onClick={(e) => handleCopy("@nvsert", e)}
-          className="h-[50px] xss:w-[280px] w-[260px] text-[18px] leading-[1.2] font-light text-black"
+          className={`h-[50px] xss:w-[280px] w-[260px] text-[18px] leading-[1.2] font-light text-black ${footerStyles.lineAfter}`}
         >
           Telegram
         </button>
         <button
           type="button"
           onClick={(e) => handleCopy("@nvsert", e)}
-          className="h-[50px] xss:w-[280px] w-[260px] text-[18px] leading-[1.2] font-light text-black"
+          className={`h-[50px] xss:w-[280px] w-[260px] text-[18px] leading-[1.2] font-light text-black ${footerStyles.lineAfter}`}
         >
           Max
         </button>
+        <div className="col-span-2 mt-[4px] w-full flex justify-center overflow-hidden">
+          <FooterMarquee className="w-full justify-center" />
+        </div>
         <button
           type="button"
           onClick={handleLangClick}
-          className="absolute m:bottom-[-53px] m:right-[34px] bottom-[-80px] right-1/2 m:translate-x-0 translate-x-[140px] btn-lang m:!h-[35px] !h-[50px] cursor-pointer"
+          className={`absolute m:bottom-[-53px] m:right-[34px] bottom-[-80px] right-1/2 m:translate-x-0 translate-x-[140px] btn-lang m:!h-[35px] !h-[50px] cursor-pointer ${footerStyles.lineAfter}`}
         >
           {langLabel}
         </button>

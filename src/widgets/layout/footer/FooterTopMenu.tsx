@@ -50,10 +50,13 @@ const FooterTopMenu: React.FC = () => {
     <div
       className={`${footerStyles.footer__white} !rounded-[2px] !items-start !relative !px-[20px] !py-[20px] xl:!px-[25px] xl:!py-[25px]`}
     >
-      <div className="flex w-full flex-col gap-[20px] xl:flex-row xl:gap-[32px]">
+      <div className="flex w-full flex-col gap-[20px] xl:flex-row xl:flex-wrap xl:gap-x-[32px] xl:gap-y-[20px]">
         {columns.map((column) => (
-          <div key={column.title} className="flex min-w-0 flex-1 flex-col items-start gap-[8px]">
-            <p className="text-[24px] leading-[1.1] tracking-[-1px] font-normal text-black px-[15px] pb-[6px] border-b border-[#93969D]">
+          <div
+            key={column.title}
+            className="flex w-full min-w-0 flex-1 flex-col items-start gap-[8px] xl:min-w-[260px] xl:flex-[1_1_260px]"
+          >
+            <p className="w-full text-[24px] leading-[1.1] tracking-[-1px] font-normal text-black px-[15px] pb-[6px] border-b border-[#93969D]">
               {column.title}
             </p>
             {column.items.map((item) => (
@@ -61,7 +64,7 @@ const FooterTopMenu: React.FC = () => {
                 <button
                   key={`${column.title}-${item.label}`}
                   type="button"
-                  className="h-[35px] px-[15px] text-[18px] leading-[1.2] font-light text-black whitespace-nowrap text-left"
+                  className={`h-[35px] px-[15px] text-[18px] leading-[1.2] font-light text-black whitespace-nowrap text-left ${footerStyles.lineAfter}`}
                 >
                   {item.label}
                 </button>
@@ -70,7 +73,7 @@ const FooterTopMenu: React.FC = () => {
                   key={`${column.title}-${item.label}`}
                   href={item.href}
                   prefetch={false}
-                  className="h-[35px] px-[15px] text-[18px] leading-[1.2] font-light text-black whitespace-nowrap text-left"
+                  className={`h-[35px] px-[15px] text-[18px] leading-[1.2] font-light text-black whitespace-nowrap text-left ${footerStyles.lineAfter}`}
                 >
                   {item.label}
                 </Link>
