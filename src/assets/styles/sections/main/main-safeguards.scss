@@ -68,10 +68,12 @@
 }
 
 .safeguard-card-border {
-  @apply absolute top-[2px] left-0 right-0 bottom-0 border-[#93969d] z-[-1] pointer-events-none border border-solid rounded-[6px];
-  
+  @apply absolute top-[2px] left-0 right-0 bottom-0 border-[#93969d]  pointer-events-none border border-solid rounded-[6px];
+  z-index: -1;
   .safeguard-card-wrapper:hover & {
     border-color: #34446D;
+  z-index: 1;
+
   }
 }
 

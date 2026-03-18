@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import AudioLogo from "@/assets/images/svg/audio-selector.svg";
+import AudioLogo from "@/assets/images/svg/AudioLogo.svg";
 import { useIntersectionObserver } from 'shared/hooks';
-import stylesSlider from "@/assets/styles/base/base.module.scss";
 import textSize from "@/assets/styles/base/base.module.scss";
 import Image from "shared/ui/OptimizedImage";
 import { useTranslation } from "react-i18next";
@@ -142,7 +141,7 @@ const FooterMarquee: React.FC<FooterMarqueeProps> = ({ className = "" }) => {
         src={AudioLogo}
         unoptimized={true}
         alt="audio-logo"
-        className="w-[180px] m:w-[245px] h-[32px] shrink-0"
+        className="w-[180px] m:w-[235px] h-[32px] shrink-0"
       />
       <div className="min-w-0 pl-[11px] border-l border-[#35353500] border-solid flex flex-col gap-[4px]">
         <div className="h-[23px] overflow-hidden text-black">
@@ -150,7 +149,7 @@ const FooterMarquee: React.FC<FooterMarqueeProps> = ({ className = "" }) => {
             {slides.map((item, i) => (
               <p
                 key={i}
-                className={`${textSize.text2} font-light h-[23px] flex items-center whitespace-nowrap truncate`}
+                className={`${textSize.text3} font-light h-[23px] flex items-center whitespace-nowrap truncate`}
               >
                 {item}
               </p>
@@ -159,11 +158,15 @@ const FooterMarquee: React.FC<FooterMarqueeProps> = ({ className = "" }) => {
         </div>
         <div className="flex justify-end gap-[7px] py-[4px]">
           {slides.map((_, i) => (
-            <div
-              onClick={() => handleDotClick(i)}
-              key={i}
-              className={`${currentIndex === i ? stylesSlider.activeDots : ""} ${stylesSlider.slideDots}`}
-            ></div>
+           
+            <svg
+            onClick={() => handleDotClick(i)}
+            key={i}
+            className={`${currentIndex === i ? '*:fill-[#34446D] *:stroke-[#34446D]' : ""} cursor-pointer`}
+            width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M6.5 0.5V1.5H7.5V6.5H6.5V7.5H1.5V6.5H0.5V1.5H1.5V0.5H6.5Z" stroke="#93969D"/>
+</svg>
+
           ))}
         </div>
       </div>

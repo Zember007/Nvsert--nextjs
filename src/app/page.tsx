@@ -10,6 +10,7 @@ async function DeferredHomeContent({ locale }: { locale: SupportedLocale }) {
   return <AppMainContent faqs={faqs} />;
 }
 
+
 export async function HomePage({ locale }: { locale: SupportedLocale }) {
   return (
     <div className="main text-[#000] overflow-hidden relative leading-page">

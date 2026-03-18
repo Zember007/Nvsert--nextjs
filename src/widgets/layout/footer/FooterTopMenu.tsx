@@ -1,14 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import footerStyles from "@/assets/styles/base/base.module.scss";
-import { usePathname } from "next/navigation";
-import { getLocaleFromPathname, withLocalePrefix } from "shared/i18n/client-locale";
+import { usePathname, useRouter } from "next/navigation";
+import { SupportedLocale } from "shared/config/env";
+import {
+  getLocaleFromI18n,
+  getLocaleFromPathname,
+  stripLocalePrefix,
+  withLocalePrefix,
+} from "shared/i18n/client-locale";
 import Link from "next/link";
 
+const LOCALE_COOKIE = "nvsert_locale";
+
 const FooterTopMenu: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const pathname = usePathname();
-  const locale = getLocaleFromPathname(pathname);
+  const router = useRouter();
+  const i18nLocale = getLocaleFromI18n(i18n.language);
+  const [currentLang, setCurrentLang] = useState<SupportedLocale>(() =>
+    getLocaleFromPathname(pathname, i18nLocale)
+  );
+
+  useEffect(() => {
+    setCurrentLang(getLocaleFromPathname(pathname, i18nLocale));
+  }, [pathname, i18nLocale]);
+
+  const switchLang: SupportedLocale = currentLang === "ru" ? "en" : "ru";
+  const langLabel = switchLang.toUpperCase();
+
+  const handleLangClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setCurrentLang(switchLang);
+    document.cookie = `${LOCALE_COOKIE}=${switchLang}; path=/; sameSite=lax; max-age=31536000`;
+    i18n.changeLanguage(switchLang);
+
+    const pathWithoutLocale = stripLocalePrefix(pathname);
+    const newPath = withLocalePrefix(pathWithoutLocale, switchLang);
+    router.push(newPath);
+  };
+
+  const locale = getLocaleFromPathname(pathname, i18nLocale);
   const localizePath = (path: string) => withLocalePrefix(path, locale);
 
   const columns = [
@@ -21,7 +53,7 @@ const FooterTopMenu: React.FC = () => {
         { label: "Свидетельство о гос. регистрации (СГР)", href: "#" },
         { label: "Экспертное заключение (ЭЗ)", href: "#" },
         { label: "Технические условия", href: "#" },
-        { label: "ГОСТ Р ИСО 9001–2015 из облака", href: "#" },
+        { label: "ГОСТ Р ИСО 9001–2015", href: "#" },
         { label: "Информационное отказное письмо", href: "#" },
       ],
     },
@@ -64,27 +96,33 @@ const FooterTopMenu: React.FC = () => {
                 <button
                   key={`${column.title}-${item.label}`}
                   type="button"
-                  className={`h-[35px] px-[15px] text-[18px] leading-[1.2] font-light text-black whitespace-nowrap text-left ${footerStyles.lineAfter}`}
+                  className={`h-[35px] px-[15px] text-[18px] leading-[1.2] font-light text-black whitespace-nowrap text-left ${footerStyles.lineAfterBox}`}
                 >
-                  {item.label}
+                  <span
+                  className={`${footerStyles.lineAfter}`}
+                  >{item.label}</span>
                 </button>
               ) : (
                 <Link
                   key={`${column.title}-${item.label}`}
                   href={item.href}
                   prefetch={false}
-                  className={`h-[35px] px-[15px] text-[18px] leading-[1.2] font-light text-black whitespace-nowrap text-left ${footerStyles.lineAfter}`}
+                  className={`h-[35px] px-[15px] text-[18px] leading-[1.2] font-light text-black whitespace-nowrap text-left ${footerStyles.lineAfterBox}`}
                 >
-                  {item.label}
+                  <span className={`${footerStyles.lineAfter}`}>{item.label}</span>
                 </Link>
               )
             ))}
           </div>
         ))}
       </div>
-      <span className="hidden xl:block absolute bottom-[20px] right-[20px] text-[18px] leading-[1.2] font-light text-black">
-        RU
-      </span>
+      <button
+        type="button"
+        onClick={handleLangClick}
+        className="hidden xl:block absolute bottom-[20px] right-[20px] text-[18px] leading-[1.2] font-light text-black cursor-pointer"
+      >
+        {langLabel}
+      </button>
     </div>
   );
 };

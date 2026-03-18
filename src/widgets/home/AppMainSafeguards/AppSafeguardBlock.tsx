@@ -70,9 +70,9 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
 
                   <svg
                     className={`${stylesSafeguards['safeguard-arrow-icon']} ${activeBlock === index ? stylesSafeguards.active : ''}`}
-                    width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1.0459 1.0459L3.16722 3.16722M15.753 15.753L5.28854 5.28854" stroke="currentColor" strokeWidth="2" />
-                    <path d="M15.7529 7.75293V14.4707L14.4717 15.7529H7.75293" stroke="currentColor" strokeWidth="2" />
+                    width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 8V7H8V6H7V5H6V6H5V7H6V8H7V9H8V10H9V11H10V12H11V13H12V14H13V15H14V16H7V18H16L18 16V7H16V14H15V13H14V12H13V11H12V10H11V9H10V8H9Z" fill="currentColor" />
+                    <path d="M3 4H4V3V2H3V1H2V0H1V1H0V2H1V3H2V4H3Z" fill="currentColor" />
                   </svg>
 
 

@@ -47,27 +47,33 @@ const FooterContacts: React.FC = () => {
       className={`${footerStyles.footer__white} !rounded-[2px] !justify-between !px-[9px] !py-[25px] xl:!px-[15px]`}
     >
       <div className="hidden xl:flex w-full items-center justify-between gap-[20px]">
-        <div className={`flex items-center gap-[20px] ${footerStyles.lineAfterBox}`}>
+        <div className={`flex items-center gap-[20px]`}>
           <button
             type="button"
             onClick={(e) => handleCopy("info@nvsert.ru", e)}
-            className={`h-[35px] text-[18px] leading-[1.2] font-light text-black ${footerStyles.lineAfter}`}
+            className={`h-[35px] text-[18px] leading-[1.2] font-light text-black ${footerStyles.lineAfterBox}`}
           >
-            info@nvsert.ru
+            <span className={`${footerStyles.lineAfter}`}>
+              info@nvsert.ru
+            </span>
           </button>
           <button
             type="button"
             onClick={(e) => handleCopy("@nvsert", e)}
-            className={`h-[35px] text-[18px] leading-[1.2] font-light text-black ${footerStyles.lineAfter}`}
+            className={`h-[35px] text-[18px] leading-[1.2] font-light text-black ${footerStyles.lineAfterBox}`}
           >
-            Telegram
+            <span className={`${footerStyles.lineAfter}`}>
+              Telegram
+            </span>
           </button>
           <button
             type="button"
             onClick={(e) => handleCopy("@nvsert", e)}
-            className={`h-[35px] text-[18px] leading-[1.2] font-light text-black ${footerStyles.lineAfter}`}
+            className={`h-[35px] text-[18px] leading-[1.2] font-light text-black ${footerStyles.lineAfterBox}`}
           >
-            Max
+            <span className={`${footerStyles.lineAfter}`}>
+              Max
+            </span>
           </button>
         </div>
         <FooterMarquee className="shrink-0" />
