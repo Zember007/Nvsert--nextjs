@@ -76,20 +76,6 @@ export default async function RootLayout({
           crossOrigin="anonymous"
           fetchPriority="high"
         />
-        <link
-          rel="preload"
-          href="/fonts/Roboto-Medium.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/Roboto-Bold.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
       </head>
       <body>
         <ClientProvider initialNavigation={initialNavigation as NavigationItem[]}>

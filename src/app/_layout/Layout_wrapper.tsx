@@ -1,10 +1,9 @@
 'use client';
 
-import { AppFooter, AppHeader } from 'widgets/layout';
-import { ReactNode, Suspense, useEffect } from 'react';
+import { AppHeader } from 'widgets/layout';
+import { ReactNode, Suspense } from 'react';
 import { useHeaderContext } from 'shared/contexts';
 import dynamic from 'next/dynamic';
-import CopyNotification from 'widgets/layout/elements/CopyNotification';
 import { NavigationItem } from '@/types/navigation';
 import { groupServices } from '@/assets/lib/navigation';
 import '@/assets/styles/base.scss';
@@ -13,6 +12,17 @@ import '@/assets/styles/base.scss';
 const AppModalWrapper = dynamic(() => import('widgets/layout').then((m) => m.AppModalWrapper), {
   ssr: false,
 });
+
+const AppFooterDeferred = dynamic(() => import('widgets/layout').then((m) => m.AppFooter), {
+  ssr: false,
+});
+
+const CopyNotificationDeferred = dynamic(
+  () => import('widgets/layout/elements/CopyNotification'),
+  {
+    ssr: false,
+  },
+);
 
 
 const LayoutContent = ({ children, initialNavigation }: { children: ReactNode; initialNavigation?: NavigationItem[]; }) => {
@@ -40,11 +50,11 @@ const LayoutContent = ({ children, initialNavigation }: { children: ReactNode; i
                 {children}
 
             </main>
-            <AppFooter />
+            <AppFooterDeferred />
 
             {/* <CustomScrollbar target="window" /> */}
 
-            <CopyNotification
+            <CopyNotificationDeferred
                 isVisible={showCopyNotification}
                 onHide={hideNotification}
                 duration={3000}

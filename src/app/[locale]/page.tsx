@@ -1,6 +1,10 @@
 import { normalizeLocale } from 'shared/config/env';
 import { HomePage } from '../page';
 
+export async function generateStaticParams() {
+  return [{ locale: 'ru' }, { locale: 'en' }];
+}
+
 export default async function LocalizedHomePage({
   params,
 }: {

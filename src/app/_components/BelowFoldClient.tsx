@@ -53,15 +53,7 @@ export default function BelowFoldClient() {
   }, [shouldLoad]);
 
   if (!shouldLoad) {
-    return (
-      <>
-        <DocumentsSkeleton />
-        <section className="section wrapper">
-          <div className="h-8 bg-gray-200 rounded w-1/3 mb-8 animate-pulse" />
-          <div className="h-[420px] bg-gray-100 rounded animate-pulse" />
-        </section>
-      </>
-    );
+    return null;
   }
 
   return (

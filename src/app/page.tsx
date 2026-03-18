@@ -2,7 +2,6 @@ import { Suspense } from 'react';
 import { getFaqs } from 'entities/faq';
 import AppMainIntro from 'widgets/home/AppMainIntro';
 import BelowFoldClient from './_components/BelowFoldClient';
-import { FeedbackSkeleton, SliderSkeleton } from 'shared/common/SectionSkeleton';
 import { DEFAULT_LOCALE, type SupportedLocale } from 'shared/config/env';
 
 async function DeferredHomeContent({ locale }: { locale: SupportedLocale }) {
@@ -20,14 +19,7 @@ export async function HomePage({ locale }: { locale: SupportedLocale }) {
       <BelowFoldClient />
 
       {/* Остальной контент + FAQ загружаются после первого экрана */}
-      <Suspense
-        fallback={
-          <>
-            <SliderSkeleton />
-            <FeedbackSkeleton />
-          </>
-        }
-      >
+      <Suspense fallback={null}>
         <DeferredHomeContent locale={locale} />
       </Suspense>
     </div>
