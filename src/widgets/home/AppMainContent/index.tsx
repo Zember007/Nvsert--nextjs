@@ -3,7 +3,6 @@
 import { Suspense } from 'react';
 import { FaqItem } from '@/types/faq';
 import dynamic from 'next/dynamic';
-import AppMainQuestions from '../AppMainQuestions';
 import { 
   SliderSkeleton, 
   SafeguardsSkeleton, 
@@ -24,6 +23,16 @@ const AppMainSafeguards = dynamic(() => import('../AppMainSafeguards'), {
 const AppMainFeedback = dynamic(() => import('../AppMainFeedback'), {
   ssr: false,
   loading: () => <FeedbackSkeleton />,
+});
+
+const AppMainQuestions = dynamic(() => import('../AppMainQuestions'), {
+  ssr: false,
+  loading: () => (
+    <section className="section wrapper">
+      <div className="h-8 bg-gray-200 rounded w-1/3 mb-8" />
+      <div className="h-[320px] bg-gray-100 rounded" />
+    </section>
+  ),
 });
 
 type AppMainContentProps = {
@@ -48,7 +57,7 @@ const AppMainContent = ({ faqs }: AppMainContentProps) => {
         <AppMainFeedback />
       </Suspense>
       
-      {/* FAQ - легкий контент, загружается сразу */}
+      {/* FAQ - отложенная клиентская инициализация после первого экрана */}
       <AppMainQuestions faqs={faqs} />
     </>
   );

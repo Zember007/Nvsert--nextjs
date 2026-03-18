@@ -7,8 +7,8 @@ import { useTranslation } from 'react-i18next';
 import { useIntersectionObserver, useWindowSize } from 'shared/hooks';
 import { filterPrepositions } from 'shared/lib';
 import stylesSlider from '@/assets/styles/base/base.module.scss';
-import textSize from '@/assets/styles/main.module.scss';
-import stylesMainSkills from '@/assets/styles/main.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
+import stylesMainSkills from '@/assets/styles/sections/main/main-skills.module.scss';
 import LinkButtonTitle from '../utils/ButtonTitle';
 
 const AppMainSkills = () => {

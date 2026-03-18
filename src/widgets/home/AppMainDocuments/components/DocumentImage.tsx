@@ -4,7 +4,7 @@ import type { AnimationControls } from "framer-motion";
 import { motion } from "framer-motion";
 
 import { AsyncPhotoView } from "shared/common/AsyncPhotoView";
-import mainDocumentsStyles from "@/assets/styles/main.module.scss";
+import mainDocumentsStyles from "@/assets/styles/sections/main/main-documents.module.scss";
 import { getStrapiImageApiPath } from "../../../../shared/lib/strapi-image";
 
 export interface DocumentImageProps {
@@ -44,6 +44,7 @@ export const DocumentImage: FC<DocumentImageProps> = memo(
           src={getStrapiImageApiPath(imageUrls.full) || imageUrls.full}
           width={250}
           height={349}
+          sizes="(max-width: 639px) 190px, (max-width: 1279px) 220px, 250px"
           loading={isPriority ? "eager" : "lazy"}
           fetchPriority={isPriority ? "high" : "auto"}
         />

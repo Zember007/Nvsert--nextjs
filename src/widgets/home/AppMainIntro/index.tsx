@@ -1,5 +1,5 @@
 import type { SupportedLocale } from 'shared/config/env';
-import stylesMainBanner from '@/assets/styles/main.module.scss';
+import stylesMainBanner from '@/assets/styles/sections/main/intro.module.scss';
 import { HeroTitle } from './HeroTitle';
 import AppMainIntroClient from './AppMainIntroClient';
 

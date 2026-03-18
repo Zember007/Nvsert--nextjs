@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next';
 import QuestionsBlock from './QuestionsBlock';
 import { useState } from 'react';
 import type { FaqItem } from '@/types/faq';
-import stylesQuestions from '@/assets/styles/main.module.scss';
-import textSize from '@/assets/styles/main.module.scss';
+import stylesQuestions from '@/assets/styles/sections/main/main-questions.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 import { VirtualizedList } from '../utils/VirtualizedList';
 import LinkButtonTitle from '../utils/ButtonTitle';
 

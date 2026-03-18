@@ -4,9 +4,9 @@ import { FC, memo, useId } from 'react';
 
 import { filterPrepositions } from 'shared/lib';
 import { MainDocumentItemProps } from '@/types/documents';
-import stylesBtn from '@/assets/styles/main.module.scss';
-import textSize from '@/assets/styles/main.module.scss';
-import mainDocumentsStyles from '@/assets/styles/main.module.scss';
+import stylesBtn from '@/assets/styles/base/base.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
+import mainDocumentsStyles from '@/assets/styles/sections/main/main-documents.module.scss';
 import { useTranslation } from 'react-i18next';
 
 

@@ -1,7 +1,7 @@
 import { getLocaleFromPathname, withLocalePrefix } from 'shared/i18n/client-locale';
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import stylesBtn from '@/assets/styles/main.module.scss';
+import stylesBtn from '@/assets/styles/base/base.module.scss';
 
 
 const LinkButtonTitle = ({ title, link }: { title: string, link: string }) => {

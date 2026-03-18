@@ -58,7 +58,7 @@ const AppKnowCostForm = () => {
 
                     <div className={formStyles.policy}>
                         {t('form.policy.prefix', { button: t('form.buttons.contact') })}{' '}
-                        <Link href="#" target="_blank">{t('form.policy.privacyPolicy')}</Link>
+                        <Link href="#" prefetch={false} target="_blank">{t('form.policy.privacyPolicy')}</Link>
                     </div>
                 </>
             )}

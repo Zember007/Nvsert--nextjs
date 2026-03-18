@@ -4,7 +4,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { AsyncPhotoProvider } from 'shared/common/AsyncPhotoView';
 import { useTranslation } from 'react-i18next';
 import { useHeaderContext } from 'shared/contexts';
-import mainDocumentsStyles from '@/assets/styles/main.module.scss';
+import mainDocumentsStyles from '@/assets/styles/sections/main/main-documents.module.scss';
 import MainDocumentItem from './MainDocumentItem';
 import { VirtualizedList } from '../utils/VirtualizedList';
 import LinkButtonTitle from '../utils/ButtonTitle';

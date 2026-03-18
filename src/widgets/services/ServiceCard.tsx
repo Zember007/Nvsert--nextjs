@@ -49,6 +49,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ serviceName, certificate, cla
         href ? (
             <Link
                 href={href}
+                prefetch={false}
                 className={` transition-transform will-change-transform duration-100 active:scale-[.95] ${padding ? 'xss:px-[30px] xss:py-[30px] px-[15px] py-[20px] xss:w-[312px] w-[282px] hover:bg-[#F5F5F2] border border-[transparent] hover:border-[#34446D]' : 'p-0 w-full'} flex flex-col gap-[20px] text-left  rounded-[8px]  ${className || ''}`}
             >
                 {title && <p className={`${textSize.headerH6} flex items-center xss:h-[38px] h-[34px] max-w-[230px] whitespace-pre-line !font-normal`}>{replaceValue(certificate.title)}</p>}

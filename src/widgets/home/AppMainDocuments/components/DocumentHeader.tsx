@@ -1,8 +1,8 @@
 import Image from 'shared/ui/OptimizedImage';
 import { FC, memo } from 'react';
-import mainDocumentsStyles from '@/assets/styles/main.module.scss';
+import mainDocumentsStyles from '@/assets/styles/sections/main/main-documents.module.scss';
 import { filterPrepositions } from 'shared/lib';
-import textSize from '@/assets/styles/main.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 import { getStrapiImageApiPath } from '../../../../shared/lib/strapi-image';
 
 export interface DocumentHeaderProps {

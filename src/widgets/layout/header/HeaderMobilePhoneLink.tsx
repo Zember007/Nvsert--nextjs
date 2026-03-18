@@ -13,6 +13,7 @@ const HeaderMobilePhoneLink: React.FC<HeaderMobilePhoneLinkProps> = ({
   return (
     <Link
       href={filterPhone("8 495 777-11-97")}
+      prefetch={false}
       className={` ${headerStyles.header__bg} w-[50px] justify-center !p-0  xl:!hidden !backdrop-filter-none ${
         burgerMenuActive ? "active" : "mix-blend-difference"
       } fixed h-[50px] top-[2px] right-[58px] z-[51] `}

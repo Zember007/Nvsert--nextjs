@@ -5,7 +5,7 @@ import { memo } from 'react';
 import Image from 'shared/ui/OptimizedImage';
 
 import { slides } from '../utils';
-import stylesMainSkills from '@/assets/styles/main.module.scss';
+import stylesMainSkills from '@/assets/styles/sections/main/main-slider.module.scss';
 
 export interface SliderImageListProps {
   widthWindow: number | null | undefined;
@@ -39,6 +39,7 @@ const SliderImageListComponent: React.FC<SliderImageListProps> = ({
               src={item.img}
               alt="slide"
               fill
+              sizes="(max-width: 479px) 280px, (max-width: 767px) 320px, (max-width: 1279px) 336px, 336px"
               style={{ objectFit: 'cover' }}
               loading="lazy"
             />

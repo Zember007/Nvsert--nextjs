@@ -2,9 +2,10 @@ import { useButton } from 'shared/hooks';
 import React, { useEffect } from 'react';
 import { useAnimation, motion } from "framer-motion";
 import { useRichTextRenderer } from 'shared/lib';
-import stylesBtn from '@/assets/styles/main.module.scss';
-import textSize from '@/assets/styles/main.module.scss';
-import stylesQuestions from '@/assets/styles/main.module.scss';
+import stylesBtn from '@/assets/styles/base/base.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
+import stylesQuestions from '@/assets/styles/sections/main/main-questions.module.scss';
+import stylesDocuments from '@/assets/styles/sections/main/main-documents.module.scss';
 import { useTranslation } from 'react-i18next';
 
 const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive: (value: boolean) => void, active: boolean, number: number, title: string, text: string }) => {
@@ -48,14 +49,14 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
 
     return (
         <div
-            className={`${stylesQuestions['document-wrapper-border']} ${active ? stylesQuestions['document-wrapper-border-active'] : ''} group/main`}
+            className={`${stylesDocuments['document-wrapper-border']} ${active ? stylesDocuments['document-wrapper-border-active'] : ''} group/main`}
         >
-            <div className={`${stylesQuestions['document__box']} ${active ? stylesQuestions.active : ''}`}>
+            <div className={`${stylesDocuments['document__box']} ${active ? stylesDocuments.active : ''}`}>
                 <div
                     onClick={() => {
                         setActive(!active)
                     }}
-                    className={`${stylesQuestions['document__navigation']} ${active ? stylesQuestions.active : ''} document__navigation-bg group/window cursor-pointer flex items-center gap-[9px] xl:gap-[40px] l:pr-[23px]`}>
+                    className={`${stylesDocuments['document__navigation']} ${active ? stylesDocuments.active : ''} document__navigation-bg group/window cursor-pointer flex items-center gap-[9px] xl:gap-[40px] l:pr-[23px]`}>
 
                     <div className={`${stylesQuestions['questions-number-container']} ${active ? stylesQuestions.active : ''} ${stylesQuestions['transition-scale']} group-active:scale-[0.9]`}>
                         <p className={`${stylesQuestions['questions-number-text']} ${active ? stylesQuestions.active : ''} l:group-hover:text-[50px] group-active:duration-[0] group-active:text-[#FFF]`}>{number}</p>
@@ -75,7 +76,7 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
 
                     </div>
                 </div>
-                <div className={`${stylesQuestions['document__hidden']} ${stylesQuestions['questions-content-wrapper']} ${active ? stylesQuestions.active : ''}`}>
+                <div className={`${stylesDocuments['document__hidden']} ${stylesQuestions['questions-content-wrapper']} ${active ? stylesDocuments.active : ''}`}>
                     <div className={stylesQuestions['questions-inner-content']}>
                         <div
                         >{processContent(text, true)}</div>

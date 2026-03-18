@@ -48,12 +48,12 @@ const ContactsPageView = ({
     <div className="main text-[#000] mb-[100px] flex flex-col gap-[150px]">
       <ul className={breadcrumbsStyles.breadcrumbs}>
         <li className={breadcrumbsStyles.breadcrumbs__item}>
-          <Link className={breadcrumbsStyles.breadcrumbs__link} href="/">
+          <Link className={breadcrumbsStyles.breadcrumbs__link} href="/" prefetch={false}>
             {homeLabel}
           </Link>
         </li>
         <li className={breadcrumbsStyles.breadcrumbs__item}>
-          <Link className={breadcrumbsStyles.breadcrumbs__link} href="/contacts">
+          <Link className={breadcrumbsStyles.breadcrumbs__link} href="/contacts" prefetch={false}>
             {data.title || contactsLabel}
           </Link>
         </li>

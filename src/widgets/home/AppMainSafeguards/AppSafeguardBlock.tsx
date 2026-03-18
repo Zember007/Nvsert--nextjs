@@ -2,8 +2,8 @@ import React, { useRef, useState } from 'react';
 import type { StaticImageData } from 'next/image';
 import { filterPrepositions } from 'shared/lib';
 import Image from 'shared/ui/OptimizedImage';
-import textSize from '@/assets/styles/main.module.scss';
-import stylesSafeguards from '@/assets/styles/main.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
+import stylesSafeguards from '@/assets/styles/sections/main/main-safeguards.module.scss';
 
 interface GuaranteeCardProps {
   img: StaticImageData;
@@ -41,9 +41,9 @@ const GuaranteeCard: React.FC<GuaranteeCardProps> = ({ title, items, isVisible, 
             <Image
               className={stylesSafeguards['safeguard-image']}
               alt='document' src={img}
-              width="0"
-              height="0"
-              sizes="100vw"
+              width={320}
+              height={200}
+              sizes="(max-width: 479px) 280px, (max-width: 767px) 320px, 310px"
               loading="lazy"
             />
           </div>

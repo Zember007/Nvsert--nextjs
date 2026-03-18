@@ -60,7 +60,7 @@ const AppDefaultForm = ({ btnText }:{ btnText:string }) => {
                             <input className={formStyles['field-check__input']} type="checkbox" required />
                             <span className={formStyles['field-check__name']}>
                                 {t('form.policy.prefix', { button: btnText })}
-                                <Link href="#" target="_blank">
+                                <Link href="#" prefetch={false} target="_blank">
                                     {t('form.policy.privacyPolicy')}
                                 </Link>
                             </span>

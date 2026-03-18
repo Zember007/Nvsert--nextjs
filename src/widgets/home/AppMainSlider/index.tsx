@@ -5,14 +5,14 @@ import { useEffect, useRef, useState, useMemo, useCallback, memo } from 'react';
 import dynamic from 'next/dynamic';
 import { slides } from '../utils';
 import { filterPrepositions } from 'shared/lib';
-import stylesMainSlider from '@/assets/styles/main.module.scss';
+import stylesMainSlider from '@/assets/styles/sections/main/main-slider.module.scss';
 import { useButton } from 'shared/hooks';
 import { useHeaderContext } from 'shared/contexts';
 import { useTranslation } from 'react-i18next';
 import { useIntersectionObserver, useWindowSize } from 'shared/hooks';
-import stylesBtn from '@/assets/styles/main.module.scss';
+import stylesBtn from '@/assets/styles/base/base.module.scss';
 import stylesSlider from '@/assets/styles/base/base.module.scss';
-import textSize from '@/assets/styles/main.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 import LinkButtonTitle from '../utils/ButtonTitle';
 
 interface SlideItem {

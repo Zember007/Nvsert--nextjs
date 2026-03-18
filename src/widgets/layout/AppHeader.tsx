@@ -9,9 +9,12 @@ import HeaderTopContacts from "./header/HeaderTopContacts";
 import HeaderLeftLogo from "./header/HeaderLeftLogo";
 import HeaderMobilePhoneLink from "./header/HeaderMobilePhoneLink";
 import HeaderMainBar from "./header/HeaderMainBar";
-import ServicesQuickLinks from "./header/ServicesQuickLinks";
 
 const DynamicHeaderMenu = dynamic(() => import("./header/HeaderMenu"), {
+  ssr: false,
+});
+
+const DynamicServicesQuickLinks = dynamic(() => import("./header/ServicesQuickLinks"), {
   ssr: false,
 });
 
@@ -94,19 +97,25 @@ const AppHeader: React.FC<AppHeaderProps> = ({ services }) => {
         onBurgerToggle={burgerHandler}
       />
 
-      <DynamicHeaderMenu
-        services={services}
-        active={burgerMenuActive}
-        closeMenu={closeNavMenues}
-      />
+      {burgerMenuActive && (
+        <DynamicHeaderMenu
+          services={services}
+          active={burgerMenuActive}
+          closeMenu={closeNavMenues}
+        />
+      )}
 
-      <ServicesQuickLinks
-        services={services}
-        active={servicesMenuActive}
-        onLinkClick={handleNavMenu}
-      />
+      {servicesMenuActive && (
+        <DynamicServicesQuickLinks
+          services={services}
+          active={servicesMenuActive}
+          onLinkClick={handleNavMenu}
+        />
+      )}
 
-      <DynamicServicesDropdown services={services} active={servicesMenuActive} />
+      {servicesMenuActive && (
+        <DynamicServicesDropdown services={services} active={servicesMenuActive} />
+      )}
     </>
   );
 };

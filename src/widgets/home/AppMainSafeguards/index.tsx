@@ -4,14 +4,14 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import SafeguardBlock from './AppSafeguardBlock';
-import stylesSafeguards from '@/assets/styles/main.module.scss';
+import stylesSafeguards from '@/assets/styles/sections/main/main-safeguards.module.scss';
 import Img1 from '@/assets/images/safeguard/1.webp';
 import Img2 from '@/assets/images/safeguard/2.webp';
 import Img3 from '@/assets/images/safeguard/3.webp';
 import Img4 from '@/assets/images/safeguard/4.webp';
 import { useWindowSize } from 'shared/hooks';
 import stylesSlider from '@/assets/styles/base/base.module.scss';
-import textSize from '@/assets/styles/main.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 import { Button } from 'shared/ui';
 import { useHeaderContext } from 'shared/contexts/contexts/HeaderContext';
 

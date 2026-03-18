@@ -382,7 +382,7 @@ const AppMainForm = ({ btnText, bg = true, BounceWrapper, active, countTrigger }
 
                             <span className={formStyles.form__desc}>
                                 {t('form.policy.prefix', { button: t('form.buttons.submitApplication') })}{' '}
-                                <Link href="#" className={`${stylesBtn.lineAfter} no-drag`} target="_blank">
+                                <Link href="#" prefetch={false} className={`${stylesBtn.lineAfter} no-drag`} target="_blank">
                                     {t('form.policy.privacyPolicy')}
                                 </Link>
                             </span>

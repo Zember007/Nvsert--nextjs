@@ -3,8 +3,8 @@ import type { StaticImageData } from 'next/image';
 import { filterPrepositions } from 'shared/lib';
 import { useWindowSize } from 'shared/hooks';
 import Image from 'shared/ui/OptimizedImage';
-import textSize from '@/assets/styles/main.module.scss';
-import stylesMainSkills from '@/assets/styles/main.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
+import stylesMainSkills from '@/assets/styles/sections/main/main-skills.module.scss';
 
 interface AppSkillBlockProps {
   text: string[] | string;

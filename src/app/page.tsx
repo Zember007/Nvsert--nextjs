@@ -1,11 +1,9 @@
 import { Suspense } from 'react';
-import dynamic from 'next/dynamic';
 import { getFaqs } from 'entities/faq';
 import AppMainIntro from 'widgets/home/AppMainIntro';
 import BelowFoldClient from './_components/BelowFoldClient';
 import { FeedbackSkeleton, SliderSkeleton } from 'shared/common/SectionSkeleton';
-import type { SupportedLocale } from 'shared/config/env';
-import { getRequestLocale } from 'shared/i18n/server-locale';
+import { DEFAULT_LOCALE, type SupportedLocale } from 'shared/config/env';
 
 async function DeferredHomeContent({ locale }: { locale: SupportedLocale }) {
   const faqs = await getFaqs(locale);
@@ -13,9 +11,7 @@ async function DeferredHomeContent({ locale }: { locale: SupportedLocale }) {
   return <AppMainContent faqs={faqs} />;
 }
 
-export default async function Home() {
-  const locale = await getRequestLocale();
-
+export async function HomePage({ locale }: { locale: SupportedLocale }) {
   return (
     <div className="main text-[#000] overflow-hidden relative leading-page">
       {/* LCP: секция и h1 рендерятся на сервере без ожидания JS */}
@@ -36,4 +32,8 @@ export default async function Home() {
       </Suspense>
     </div>
   );
+}
+
+export default async function Home() {
+  return <HomePage locale={DEFAULT_LOCALE} />;
 }

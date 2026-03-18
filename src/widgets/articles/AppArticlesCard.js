@@ -4,7 +4,7 @@ const AppArticlesCard = ({ card }) => {
     return (
         <div className="mtp__news-item">
             <div className="mtp__news-head">
-                <Link href={`/${card.full_slug}/`} className="mtp__news-link">
+                <Link href={`/${card.full_slug}/`} prefetch={false} className="mtp__news-link">
                     {card.title &&
                         <h5 className="mtp__news-title"
                         dangerouslySetInnerHTML={{ __html: card.title }}

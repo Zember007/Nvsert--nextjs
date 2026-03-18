@@ -1,6 +1,6 @@
 import { FC, memo } from 'react';
 import stylesBtn from '@/assets/styles/base/base.module.scss';
-import mainDocumentsStyles from '@/assets/styles/main.module.scss';
+import mainDocumentsStyles from '@/assets/styles/sections/main/main-documents.module.scss';
 
 // Локальная иконка стрелки
 const ArrowRightIcon: FC = memo(() => (

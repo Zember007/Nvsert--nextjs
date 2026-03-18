@@ -35,6 +35,7 @@ const AppBreadcrumbs = ({ root, title = '', breadcrumbs = [] }: AppBreadcrumbsPr
           <Link
             className={stylesBreadcrumbs.breadcrumbs__link}
             href={localizePath('/')}
+            prefetch={false}
           >{t('navigation.main')}</Link>
         </li>
 
@@ -42,6 +43,7 @@ const AppBreadcrumbs = ({ root, title = '', breadcrumbs = [] }: AppBreadcrumbsPr
           <li className={stylesBreadcrumbs.breadcrumbs__item} key={item.id}>
             <Link
               href={localizePath(item.full_slug ? `${item.full_slug}/` : `/${item.id}`)}
+              prefetch={false}
               className={stylesBreadcrumbs.breadcrumbs__link}
             >
               {crumbTitle(item)}

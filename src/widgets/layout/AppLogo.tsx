@@ -17,6 +17,7 @@ const AppLogo = ({ inverted = false, className }: AppLogoProps) => {
   return (
     <Link
       href={withLocalePrefix("/", locale)}
+      prefetch={false}
       className={`${headerStyles.logo} active:scale-[.9] ${className} ${
         inverted ? headerStyles.invert : ""
       }`}

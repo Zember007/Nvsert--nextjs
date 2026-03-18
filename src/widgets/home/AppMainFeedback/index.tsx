@@ -5,9 +5,9 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'shared/ui/OptimizedImage';
 import { useTranslation } from 'react-i18next';
 import { useWindowSize } from 'shared/hooks';
-import stylesMainFeedback from '@/assets/styles/main.module.scss';
+import stylesMainFeedback from '@/assets/styles/sections/main/main-feedback.module.scss';
 import stylesSlider from '@/assets/styles/base/base.module.scss';
-import textSize from '@/assets/styles/main.module.scss';
+import textSize from '@/assets/styles/base/base.module.scss';
 import LinkButtonTitle from '../utils/ButtonTitle';
 
 type FeedbackSliderProps = {
@@ -38,6 +38,7 @@ const FeedbackSliderSection = ({
               alt="feedback"
               width={190}
               height={267}
+              sizes="190px"
               loading="lazy"
             />
           </AsyncPhotoView>

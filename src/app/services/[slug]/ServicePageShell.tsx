@@ -32,6 +32,7 @@ export default function ServicePageShell({ title, slug, locale, children }: Serv
           <Link
             className={stylesBreadcrumbs.breadcrumbs__link}
             href={localePrefix('/', locale)}
+            prefetch={false}
           >
             {mainLabel}
           </Link>
@@ -39,6 +40,7 @@ export default function ServicePageShell({ title, slug, locale, children }: Serv
         <li className={stylesBreadcrumbs.breadcrumbs__item}>
           <Link
             href={localePrefix('/services', locale)}
+            prefetch={false}
             className={stylesBreadcrumbs.breadcrumbs__link}
           >
             {allServicesLabel}
@@ -47,6 +49,7 @@ export default function ServicePageShell({ title, slug, locale, children }: Serv
         <li className={stylesBreadcrumbs.breadcrumbs__item}>
           <Link
             href={localePrefix(`/services/${slug}`, locale)}
+            prefetch={false}
             className={stylesBreadcrumbs.breadcrumbs__link}
           >
             {title}

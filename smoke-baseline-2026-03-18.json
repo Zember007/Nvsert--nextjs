@@ -1,0 +1,10 @@
+{
+  "url": "http://localhost:3000/ru",
+  "ok": true,
+  "status": 200,
+  "mainVisible": true,
+  "primaryVisible": true,
+  "primaryClickable": true,
+  "consoleErrors": [],
+  "elapsedMs": 2692
+}

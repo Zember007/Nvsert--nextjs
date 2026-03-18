@@ -57,7 +57,7 @@ const AppMainFormSecondary = () => {
 
                     <span className=" mt-[10px] text-[#A4A4A4] text-[13px]">
                         {t('form.policy.prefix', { button: t('navigation.order') })}{' '}
-                        <Link href="#" target="_blank">{t('form.policy.privacyPolicy')}</Link>
+                        <Link href="#" prefetch={false} target="_blank">{t('form.policy.privacyPolicy')}</Link>
                     </span>
 
                 </div>
