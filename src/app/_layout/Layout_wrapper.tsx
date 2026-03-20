@@ -1,10 +1,16 @@
 'use client';
 
 import { ReactNode, Suspense } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useHeaderContext } from 'shared/contexts';
 import dynamic from 'next/dynamic';
 import { NavigationItem } from '@/types/navigation';
 import { groupServices } from '@/assets/lib/navigation';
+import { getLocaleFromPathname, withLocalePrefix } from 'shared/i18n/client-locale';
+import AppLogo from 'widgets/layout/AppLogo';
+import headerStyles from '@/assets/styles/base/base.module.scss';
+import headerMenuStyles from 'widgets/layout/Header.module.scss';
 
 
 const AppModalWrapper = dynamic(() => import('widgets/layout').then((m) => m.AppModalWrapper), {
@@ -13,7 +19,7 @@ const AppModalWrapper = dynamic(() => import('widgets/layout').then((m) => m.App
 
 const AppHeaderDeferred = dynamic(() => import('widgets/layout').then((m) => m.AppHeader), {
   ssr: false,
-  loading: () => <header style={{ minHeight: 88 }} />,
+  loading: () => null,
 });
 
 const AppFooterDeferred = dynamic(() => import('widgets/layout').then((m) => m.AppFooter), {
@@ -26,6 +32,54 @@ const CopyNotificationDeferred = dynamic(
     ssr: false,
   },
 );
+
+const HeaderFallback = () => {
+    const pathname = usePathname();
+    const locale = getLocaleFromPathname(pathname);
+    const t = locale === 'en'
+        ? { services: 'Services', contacts: 'Contacts', order: 'Order' }
+        : { services: 'Услуги', contacts: 'Контакты', order: 'Заявка' };
+
+    return (
+        <header className={headerStyles.header}>
+            <div className={`${headerStyles.header__bg} min-w-[192px] xss:!px-[20px] !px-[14px]`}>
+                <AppLogo className="xl:mx-auto" />
+            </div>
+
+            <div className={`${headerStyles.header__menu} ${headerStyles.header__bg}`}>
+                <nav className="flex items-center gap-[8px]">
+                    <Link
+                        prefetch={false}
+                        href={withLocalePrefix('/services/', locale)}
+                        className={headerMenuStyles['menu-item']}
+                    >
+                        <span>{t.services}</span>
+                    </Link>
+                    <Link
+                        prefetch={false}
+                        href={withLocalePrefix('/contacts/', locale)}
+                        className={`${headerMenuStyles['menu-item']} hidden xss:flex`}
+                    >
+                        <span>{t.contacts}</span>
+                    </Link>
+                </nav>
+            </div>
+
+            <div className="hidden xl:flex gap-[2px]">
+                <div className="w-[368px]"></div>
+                <div className={`${headerStyles.header__bg} w-[192px] !backdrop-filter-none mix-blend-difference h-full`}>
+                    <Link
+                        prefetch={false}
+                        href={withLocalePrefix('/contacts/', locale)}
+                        className={`${headerMenuStyles['menu-item']} mx-auto w-[170px]`}
+                    >
+                        <span>{t.order}</span>
+                    </Link>
+                </div>
+            </div>
+        </header>
+    );
+};
 
 
 const LayoutContent = ({ children, initialNavigation }: { children: ReactNode; initialNavigation?: NavigationItem[]; }) => {
@@ -44,7 +98,7 @@ const LayoutContent = ({ children, initialNavigation }: { children: ReactNode; i
 
             {/* Next.js canary treats routing data (used by AppHeader via usePathname) as dynamic.
                 Keep it under Suspense to avoid blocking-route prerender errors. */}
-            <Suspense fallback={<header style={{ minHeight: 88 }} />}>
+            <Suspense fallback={<HeaderFallback />}>
                 <AppHeaderDeferred services={(initialNavigation && initialNavigation.length > 0) ? groupServices(initialNavigation) : []} />
             </Suspense>
 
