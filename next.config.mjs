@@ -58,6 +58,7 @@ const nextConfig = {
   swcMinify: true,
   experimental: {
     legacyBrowsers: false,
+    optimizeCss: true,
   },
 };
 

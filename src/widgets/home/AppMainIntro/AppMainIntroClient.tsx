@@ -2,7 +2,6 @@
 
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Button } from 'shared/ui';
 import { useHeaderContext } from 'shared/contexts/contexts/HeaderContext';
 import { filterPrepositions } from '../../../shared/lib';
@@ -57,8 +56,7 @@ const AppMainIntroBadge = ({
   );
 };
 
-export default function AppMainIntroClient() {
-  const { t } = useTranslation();
+export default function AppMainIntroClient({ submitLabel }: { submitLabel: string }) {
   const { openDefaultModal } = useHeaderContext();
   const [enableBadgeAnimations, setEnableBadgeAnimations] = useState(false);
 
@@ -112,7 +110,7 @@ export default function AppMainIntroClient() {
       <Button
         wrapperClassName="mx-auto"
         onClick={() => openDefaultModal('orderForm')}
-        label={t('form.buttons.submitApplication')}
+        label={submitLabel}
       />
     </>
   );

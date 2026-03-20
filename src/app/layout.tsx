@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import type { Metadata, Viewport } from "next";
+import "@/assets/styles/base.scss";
 
 import initialNavigation from "@/assets/lib/navigation.json";
 import { NavigationItem } from "@/types/navigation";

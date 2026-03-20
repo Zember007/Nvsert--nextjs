@@ -1,16 +1,19 @@
 'use client';
 
-import { AppHeader } from 'widgets/layout';
 import { ReactNode, Suspense } from 'react';
 import { useHeaderContext } from 'shared/contexts';
 import dynamic from 'next/dynamic';
 import { NavigationItem } from '@/types/navigation';
 import { groupServices } from '@/assets/lib/navigation';
-import '@/assets/styles/base.scss';
 
 
 const AppModalWrapper = dynamic(() => import('widgets/layout').then((m) => m.AppModalWrapper), {
   ssr: false,
+});
+
+const AppHeaderDeferred = dynamic(() => import('widgets/layout').then((m) => m.AppHeader), {
+  ssr: false,
+  loading: () => null,
 });
 
 const AppFooterDeferred = dynamic(() => import('widgets/layout').then((m) => m.AppFooter), {
@@ -42,7 +45,7 @@ const LayoutContent = ({ children, initialNavigation }: { children: ReactNode; i
             {/* Next.js canary treats routing data (used by AppHeader via usePathname) as dynamic.
                 Keep it under Suspense to avoid blocking-route prerender errors. */}
             <Suspense fallback={null}>
-                <AppHeader services={(initialNavigation && initialNavigation.length > 0) ? groupServices(initialNavigation) : []} />
+                <AppHeaderDeferred services={(initialNavigation && initialNavigation.length > 0) ? groupServices(initialNavigation) : []} />
             </Suspense>
 
             <main >
