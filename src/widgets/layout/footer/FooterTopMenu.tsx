@@ -47,14 +47,38 @@ const FooterTopMenu: React.FC = () => {
     {
       title: "Документы",
       items: [
-        { label: "Сертификат соответствия ГОСТ Р", href: "#" },
-        { label: "Декларация Таможенного союза", href: "#" },
-        { label: "Сертификат Таможенного союза", href: "#" },
-        { label: "Свидетельство о гос. регистрации (СГР)", href: "#" },
-        { label: "Экспертное заключение (ЭЗ)", href: "#" },
-        { label: "Технические условия", href: "#" },
-        { label: "ГОСТ Р ИСО 9001–2015", href: "#" },
-        { label: "Информационное отказное письмо", href: "#" },
+        {
+          label: "Сертификат соответствия ГОСТ Р",
+          href: localizePath("/services/certificate-gost-r"),
+        },
+        {
+          label: "Декларация Таможенного союза",
+          href: localizePath("/services/customs-union-declaration"),
+        },
+        {
+          label: "Сертификат Таможенного союза",
+          href: localizePath("/services/customs-union-certificate"),
+        },
+        {
+          label: "Свидетельство о гос. регистрации (СГР)",
+          href: localizePath("/services/state-registration-certificate"),
+        },
+        {
+          label: "Экспертное заключение (ЭЗ)",
+          href: localizePath("/services/expert-opinion"),
+        },
+        {
+          label: "Технические условия",
+          href: localizePath("/services/technical-conditions"),
+        },
+        {
+          label: "ГОСТ Р ИСО 9001–2015",
+          href: localizePath("/services/gost-r-iso-9001-2015-standart-organizaczii"),
+        },
+        {
+          label: "Информационное отказное письмо",
+          href: localizePath("/services/informational-refusal-letter"),
+        },
       ],
     },
     {
@@ -70,8 +94,8 @@ const FooterTopMenu: React.FC = () => {
     {
       title: "Компания",
       items: [
-        { label: "О компании", href: "#" },
-        { label: t("navigation.contacts"), href: "#" },
+        { label: "О компании", href: localizePath("/about/") },
+        { label: t("navigation.contacts"), href: localizePath("/contacts/") },
         { label: "Политика", href: "#" },
         { label: "Оферта", href: "#" },
       ],

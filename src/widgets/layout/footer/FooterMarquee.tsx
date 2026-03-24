@@ -143,33 +143,60 @@ const FooterMarquee: React.FC<FooterMarqueeProps> = ({ className = "" }) => {
         alt="audio-logo"
         className="w-[180px] m:w-[235px] h-[32px] shrink-0"
       />
-      <div className="min-w-0 pl-[11px] border-l border-[#35353500] border-solid flex flex-col gap-[4px]">
-        <div className="h-[23px] overflow-hidden text-black">
-          <div ref={stepsRef}>
-            {slides.map((item, i) => (
-              <p
-                key={i}
-                className={`${textSize.text3} font-light h-[23px] flex items-center whitespace-nowrap truncate`}
+
+        <div className="min-w-0 pl-[11px]  flex gap-[9px] gap-[4px]">
+
+          <svg
+            className="shrink-0"
+            width="1"
+            height="42"
+            viewBox="0 0 1 42"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden
+          >
+            <defs>
+              <linearGradient
+                id="footerMarqueeDividerGradient"
+                x1="0.5"
+                y1="0"
+                x2="0.5"
+                y2="42"
+                gradientUnits="userSpaceOnUse"
               >
-                {item}
-              </p>
+                <stop stopColor="#353535" stopOpacity="0" />
+                <stop offset="0.5" stopColor="#353535" />
+                <stop offset="1" stopColor="#353535" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <rect width="1" height="42" fill="url(#footerMarqueeDividerGradient)" />
+          </svg>
+          <div className="h-[42px] overflow-hidden m:w-[235px] text-black">
+            <div ref={stepsRef}>
+              {slides.map((item, i) => (
+                <p
+                  key={i}
+                  className={`${textSize.text3} font-light h-[42px] flex items-center`}
+                >
+                  {item}
+                </p>
+              ))}
+            </div>
+          </div>
+          <div className="flex justify-end gap-[7px] py-[4px] self-end">
+            {slides.map((_, i) => (
+
+              <svg
+                onClick={() => handleDotClick(i)}
+                key={i}
+                className={`${currentIndex === i ? '*:fill-[#34446D] *:stroke-[#34446D]' : ""} cursor-pointer`}
+                width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.5 0.5V1.5H7.5V6.5H6.5V7.5H1.5V6.5H0.5V1.5H1.5V0.5H6.5Z" stroke="#93969D" />
+              </svg>
+
             ))}
           </div>
         </div>
-        <div className="flex justify-end gap-[7px] py-[4px]">
-          {slides.map((_, i) => (
-           
-            <svg
-            onClick={() => handleDotClick(i)}
-            key={i}
-            className={`${currentIndex === i ? '*:fill-[#34446D] *:stroke-[#34446D]' : ""} cursor-pointer`}
-            width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M6.5 0.5V1.5H7.5V6.5H6.5V7.5H1.5V6.5H0.5V1.5H1.5V0.5H6.5Z" stroke="#93969D"/>
-</svg>
-
-          ))}
-        </div>
-      </div>
     </div>
   );
 };
