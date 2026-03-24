@@ -108,7 +108,7 @@ export default function AppMainIntroClient({ submitLabel }: { submitLabel: strin
       </div>
 
       <Button
-        wrapperClassName="mx-auto"
+        wrapperClassName="!mx-auto"
         onClick={() => openDefaultModal('orderForm')}
         label={submitLabel}
       />

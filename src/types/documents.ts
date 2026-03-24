@@ -8,6 +8,7 @@ export interface documentsList {
 }
 
 export interface MainDocumentItemProps {
+    isVirtualized?: boolean;
     navigationList: DotNavItemProps[];
     img?: any;
     title: string;

@@ -53,7 +53,7 @@ export const DocumentHeader: FC<DocumentHeaderProps> = memo(
             className={`${
               !active
                 ? 'group-hover/window:*:fill-black'
-                : '*:fill-[#FFF] rotate-[180deg]'
+                : '*:fill-black rotate-[180deg]'
             }  hidden xl:block transition-all duration-200`}
             width="18"
             height="18"

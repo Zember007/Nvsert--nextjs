@@ -59,7 +59,8 @@ const MainDocumentItem = memo(({
     active,
     setActive,
     totalItems = 0,
-    index = 0
+    index = 0,
+    isVirtualized = false
 }: MainDocumentItemProps) => {
     const { t } = useTranslation();
     const { processContent } = useRichTextRenderer();
@@ -124,7 +125,7 @@ const MainDocumentItem = memo(({
 
     return (
         <div
-            className={`${mainDocumentsStyles['document-wrapper-border']} ${active ? mainDocumentsStyles['document-wrapper-border-active'] : ''} group/main`}
+            className={` ${mainDocumentsStyles['document-wrapper-border']} ${active ? mainDocumentsStyles['document-wrapper-border-active'] : ''} group/main`}
         >
 
            

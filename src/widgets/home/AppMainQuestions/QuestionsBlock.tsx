@@ -59,15 +59,15 @@ const QuestionsBlock = ({ setActive, active, number, title, text }: { setActive:
                     className={`${stylesDocuments['document__navigation']} ${active ? stylesDocuments.active : ''} document__navigation-bg group/window cursor-pointer flex items-center gap-[9px] xl:gap-[40px] l:pr-[23px]`}>
 
                     <div className={`${stylesQuestions['questions-number-container']} ${active ? stylesQuestions.active : ''} ${stylesQuestions['transition-scale']} group-active:scale-[0.9]`}>
-                        <p className={`${stylesQuestions['questions-number-text']} ${active ? stylesQuestions.active : ''} l:group-hover:text-[50px] group-active:duration-[0] group-active:text-[#FFF]`}>{number}</p>
+                        <p className={`${stylesQuestions['questions-number-text']} ${active ? stylesQuestions.active : ''} l:group-hover:text-[50px] group-active:duration-[0] group-active:text-[#000]`}>{number}</p>
                     </div>
                     <div className={`${stylesQuestions['questions-content-container']} ${active ? stylesQuestions.active : ''} ${stylesQuestions['transition-scale']} group-active:scale-[0.99]`}>
-                        <p className={`${textSize.headerH6} ${stylesQuestions['questions-title']} ${active ? stylesQuestions.active : ''} group-active:duration-[0] group-active:text-[#FFF]`}>{title}</p>
+                        <p className={`${textSize.headerH6} ${stylesQuestions['questions-title']} ${active ? stylesQuestions.active : ''} group-active:duration-[0] group-active:text-[#000]`}>{title}</p>
 
                      
 
                         <svg
-                            className={`${stylesQuestions['questions-arrow-icon']}  ${active ? stylesQuestions.active : 'group-hover:text-[#000]'}`}
+                            className={`${stylesQuestions['questions-arrow-icon']}  ${active ? stylesQuestions.active : 'group-hover:text-[#000]'} transition-all duration-200`}
                             width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 8V7H8V6H7V5H6V6H5V7H6V8H7V9H8V10H9V11H10V12H11V13H12V14H13V15H14V16H7V18H16L18 16V7H16V14H15V13H14V12H13V11H12V10H11V9H10V8H9Z" fill="currentColor" />
                             <path d="M3 4H4V3V2H3V1H2V0H1V1H0V2H1V3H2V4H3Z" fill="currentColor" />

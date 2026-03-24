@@ -2,7 +2,7 @@
 @use '../../base/mixins' as mixins;
 
 .questions-container {
-  @apply flex flex-col gap-[5px];
+  @apply flex flex-col;
 } 
 
 .questions-number-container {
@@ -23,7 +23,7 @@
   transition: none;
   
   &.active {
-    @apply m:text-[48px] text-[#FFF];
+    @apply m:text-[48px] text-[#000];
   }
 }
 
@@ -42,18 +42,17 @@
 
   
   &.active {
-    color: #FFF;
+    color: #000;
   }
 }
 
 .questions-arrow-icon {
   @apply hidden xl:block;
-  transition: none;
 
   color: #93969D;
   &.active {
     transform: rotate(180deg);
-    color: #FFF;
+    color: #000;
   }
 }
 
