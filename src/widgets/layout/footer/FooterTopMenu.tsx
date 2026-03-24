@@ -121,7 +121,7 @@ const FooterTopMenu: React.FC = () => {
                 <button
                   key={`${column.title}-${item.label}`}
                   type="button"
-                  className={`h-[35px] px-[15px] text-[18px] leading-[1.2] font-light text-black whitespace-nowrap text-left ${footerStyles.lineAfterBox}`}
+                  className={`h-[35px] px-[15px] flex items-center text-[18px] leading-[1.2] font-light text-black whitespace-nowrap text-left ${footerStyles.lineAfterBox}`}
                 >
                   <span
                   className={`${footerStyles.lineAfter}`}
@@ -132,7 +132,7 @@ const FooterTopMenu: React.FC = () => {
                   key={`${column.title}-${item.label}`}
                   href={item.href}
                   prefetch={false}
-                  className={`h-[35px] px-[15px] text-[18px] leading-[1.2] font-light text-black whitespace-nowrap text-left ${footerStyles.lineAfterBox}`}
+                  className={`h-[35px] px-[15px] flex items-center text-[18px] leading-[1.2] font-light text-black whitespace-nowrap text-left ${footerStyles.lineAfterBox}`}
                 >
                   <span className={`${footerStyles.lineAfter}`}>{item.label}</span>
                 </Link>
