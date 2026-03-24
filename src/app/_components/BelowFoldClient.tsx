@@ -23,34 +23,16 @@ export default function BelowFoldClient() {
   const [shouldLoad, setShouldLoad] = useState(false);
 
   useEffect(() => {
-    if (shouldLoad) return;
+    const onPageLoad = () => setShouldLoad(true);
 
-    const load = () => setShouldLoad(true);
-    const onScroll = () => {
-      if (window.scrollY > window.innerHeight * 0.5) {
-        load();
-      }
-    };
+    if (document.readyState === 'complete') {
+      onPageLoad();
+      return;
+    }
 
-    const interactionEvents: Array<keyof WindowEventMap> = [
-      'wheel',
-      'touchstart',
-      'keydown',
-      'mousedown',
-    ];
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    interactionEvents.forEach((eventName) =>
-      window.addEventListener(eventName, load, { passive: true }),
-    );
-
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      interactionEvents.forEach((eventName) =>
-        window.removeEventListener(eventName, load),
-      );
-    };
-  }, [shouldLoad]);
+    window.addEventListener('load', onPageLoad);
+    return () => window.removeEventListener('load', onPageLoad);
+  }, []);
 
   if (!shouldLoad) {
     return null;
