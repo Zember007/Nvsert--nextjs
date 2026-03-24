@@ -28,6 +28,7 @@ const FooterTopMenu: React.FC = () => {
 
   const switchLang: SupportedLocale = currentLang === "ru" ? "en" : "ru";
   const langLabel = switchLang.toUpperCase();
+  const isEn = switchLang === "en";
 
   const handleLangClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -143,9 +144,34 @@ const FooterTopMenu: React.FC = () => {
       <button
         type="button"
         onClick={handleLangClick}
-        className="hidden xl:block absolute bottom-[20px] right-[20px] text-[18px] leading-[1.2] font-light text-black cursor-pointer"
+        className={`hidden xl:block !absolute bottom-[20px] right-[20px] text-[18px] leading-[1.2] font-light text-black cursor-pointer ${footerStyles.lineAfter}`}
       >
-        {langLabel}
+        <span className="inline-flex items-center gap-[4px]">
+          <span
+            aria-hidden
+            className="inline-flex h-[14px] w-[20px]"
+          >
+            {isEn ? (
+              <svg viewBox="0 0 20 14" className="h-full w-full">
+                <rect width="20" height="14" fill="#B22234" />
+                <rect y="1" width="20" height="1" fill="#FFFFFF" />
+                <rect y="3" width="20" height="1" fill="#FFFFFF" />
+                <rect y="5" width="20" height="1" fill="#FFFFFF" />
+                <rect y="7" width="20" height="1" fill="#FFFFFF" />
+                <rect y="9" width="20" height="1" fill="#FFFFFF" />
+                <rect y="11" width="20" height="1" fill="#FFFFFF" />
+                <rect width="9" height="7" fill="#3C3B6E" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 20 14" className="h-full w-full">
+                <rect width="20" height="14" fill="#FFFFFF" />
+                <rect y="4.67" width="20" height="4.67" fill="#224C9C" />
+                <rect y="9.34" width="20" height="4.66" fill="#D52B1E" />
+              </svg>
+            )}
+          </span>
+          <span>{langLabel}</span>
+        </span>
       </button>
     </div>
   );
