@@ -2,7 +2,6 @@
 
 import type React from 'react';
 import { useEffect, useRef, useState, useMemo, useCallback, memo } from 'react';
-import dynamic from 'next/dynamic';
 import { slides } from '../utils';
 import { filterPrepositions } from 'shared/lib';
 import stylesMainSlider from '@/assets/styles/sections/main/main-slider.module.scss';
@@ -14,6 +13,7 @@ import stylesBtn from '@/assets/styles/base/base.module.scss';
 import stylesSlider from '@/assets/styles/base/base.module.scss';
 import textSize from '@/assets/styles/base/base.module.scss';
 import LinkButtonTitle from '../utils/ButtonTitle';
+import SliderImageList from './SliderImageList';
 
 interface SlideItem {
   title: string;
@@ -304,11 +304,6 @@ const SliderBlur: React.FC<SliderBlurProps> = memo(({ whiteBgBlur }) => {
 
 SliderBlur.displayName = 'SliderBlur';
 
-const SliderImageList = dynamic(
-  () => import('./SliderImageList').then((mod) => mod.default),
-  { ssr: false },
-);
-
 interface SliderDotsProps {
   count: number;
   activeIndex: number;
@@ -329,11 +324,14 @@ const SliderDots: React.FC<SliderDotsProps> = memo(
       <div className={containerClassName}>
         <div className={boxClassName}>
           {Array.from({ length: count }).map((_, i) => (
-            <div
+            <button
               key={i}
+              type="button"
               onClick={() => handleDotClick(i)}
+              aria-label={`Слайд ${i + 1}`}
+              aria-current={activeIndex === i ? 'true' : undefined}
               className={`${activeIndex === i ? stylesSlider.activeDots : ''} ${stylesSlider.slideDots}`}
-            ></div>
+            />
           ))}
         </div>
       </div>

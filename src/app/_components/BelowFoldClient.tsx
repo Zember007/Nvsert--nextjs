@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { DocumentsSkeleton } from 'shared/common/SectionSkeleton';
 
@@ -21,27 +21,28 @@ const AppMainSkills = dynamic(() => import('widgets/home/AppMainSkills'), {
 
 export default function BelowFoldClient() {
   const [shouldLoad, setShouldLoad] = useState(false);
+  const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const onPageLoad = () => setShouldLoad(true);
+    const sentinel = sentinelRef.current;
+    if (!sentinel) return;
 
-    if (document.readyState === 'complete') {
-      onPageLoad();
-      return;
-    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setShouldLoad(true);
+      },
+      { rootMargin: '400px' }
+    );
 
-    window.addEventListener('load', onPageLoad);
-    return () => window.removeEventListener('load', onPageLoad);
+    observer.observe(sentinel);
+    return () => observer.disconnect();
   }, []);
-
-  if (!shouldLoad) {
-    return null;
-  }
 
   return (
     <>
+      <div ref={sentinelRef} />
       <HomeDocumentsClient />
-      <AppMainSkills />
+      {shouldLoad && <AppMainSkills />}
     </>
   );
 }

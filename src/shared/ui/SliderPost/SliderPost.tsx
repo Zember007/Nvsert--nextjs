@@ -1,9 +1,7 @@
 'use client';
 
 import { useWindowSize } from 'shared/hooks';
-import { horizontalLoop } from '@/scripts/slider';
 import React, { useEffect, useId, useRef, useState } from 'react';
-import gsap from 'gsap';
 import styles from '@/assets/styles/base/base.module.scss';
 
 type SliderPostProps<ItemType> = {
@@ -41,80 +39,88 @@ function SliderPost<ItemType = unknown>({
         const currentRef = sliderRef.current;
         if (!currentRef) return;
 
-        const slides = gsap.utils.toArray(`[data-slider="${DataSlider}"]`);
-        if (slides.length === 0) return;
-
-        function updateOpacity() {
-            const rectContainer = sliderRef.current?.getBoundingClientRect();
-            if (!rectContainer) return;
-
-            slides.forEach((item) => {
-                if (!(item instanceof HTMLElement)) return;
-                const rect = item.getBoundingClientRect();
-
-                // Насколько блок находится ВНЕ слева и справа
-                const outLeft = Math.max(0, rectContainer.left - rect.left);
-                const outRight = Math.max(0, rect.right - rectContainer.right);
-
-                // Сколько всего блока вне контейнера по горизонтали
-                const totalOutside = outLeft + outRight;
-
-                // Если больше половины элемента находится за пределами контейнера
-                if (totalOutside >= rect.width / 2) {
-                    item.style.opacity = '0';
-                } else {
-                    item.style.opacity = '1';
-                }
-            });
-        }
-
+        let observer: IntersectionObserver | null = null;
         let timeoutIdBg: NodeJS.Timeout | null = null;
 
-        timeLine.current = horizontalLoop(slides, {
-            paused: true,
-            draggable: true,
-            mobile: widthWindow && widthWindow < 1280,
-            snap: true,
-            gap: widthWindow && widthWindow < 640 ? (widthWindow - 300) / 2 : 20,
-            center: widthWindow && (widthWindow < 640 || widthWindow >= 1280) ? true : false,
-            onChange: (index: number) => {
-                setActiveIndex(index);
-            },
-            onDragFunction: () => {
+        void (async () => {
+            const [{ default: gsap }, { horizontalLoop }] = await Promise.all([
+                import('gsap'),
+                import('@/scripts/slider'),
+            ]);
+
+            const slides = gsap.utils.toArray(`[data-slider="${DataSlider}"]`);
+            if (slides.length === 0) return;
+
+            function updateOpacity() {
+                const rectContainer = sliderRef.current?.getBoundingClientRect();
+                if (!rectContainer) return;
+
                 slides.forEach((item) => {
                     if (!(item instanceof HTMLElement)) return;
-                    item.style.opacity = '1';
-                });
+                    const rect = item.getBoundingClientRect();
 
-                if (timeoutIdBg) {
-                    clearTimeout(timeoutIdBg);
-                }
+                    // Насколько блок находится ВНЕ слева и справа
+                    const outLeft = Math.max(0, rectContainer.left - rect.left);
+                    const outRight = Math.max(0, rect.right - rectContainer.right);
 
-                timeoutIdBg = setTimeout(() => {
-                    updateOpacity();
-                }, 100);
-            },
-        });
+                    // Сколько всего блока вне контейнера по горизонтали
+                    const totalOutside = outLeft + outRight;
 
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    timeLine.current?.next({ ease: 'power3', duration: 0.725 });
-
-                    if (currentRef) {
-                        observer.unobserve(currentRef);
+                    // Если больше половины элемента находится за пределами контейнера
+                    if (totalOutside >= rect.width / 2) {
+                        item.style.opacity = '0';
+                    } else {
+                        item.style.opacity = '1';
                     }
-                }
-            },
-            { threshold: 0.5 }
-        );
+                });
+            }
 
-        observer.observe(currentRef);
+            timeLine.current = horizontalLoop(slides, {
+                paused: true,
+                draggable: true,
+                mobile: widthWindow && widthWindow < 1280,
+                snap: true,
+                gap: widthWindow && widthWindow < 640 ? (widthWindow - 300) / 2 : 20,
+                center: widthWindow && (widthWindow < 640 || widthWindow >= 1280) ? true : false,
+                onChange: (index: number) => {
+                    setActiveIndex(index);
+                },
+                onDragFunction: () => {
+                    slides.forEach((item) => {
+                        if (!(item instanceof HTMLElement)) return;
+                        item.style.opacity = '1';
+                    });
+
+                    if (timeoutIdBg) {
+                        clearTimeout(timeoutIdBg);
+                    }
+
+                    timeoutIdBg = setTimeout(() => {
+                        updateOpacity();
+                    }, 100);
+                },
+            });
+
+            observer = new IntersectionObserver(
+                ([entry]) => {
+                    if (entry.isIntersecting) {
+                        timeLine.current?.next({ ease: 'power3', duration: 0.725 });
+
+                        if (currentRef) {
+                            observer?.unobserve(currentRef);
+                        }
+                    }
+                },
+                { threshold: 0.5 }
+            );
+
+            observer.observe(currentRef);
+        })();
 
         return () => {
             timeLine.current?.destroy();
             timeLine.current = null;
-            observer.unobserve(currentRef);
+            observer?.unobserve(currentRef);
             if (timeoutIdBg) {
                 clearTimeout(timeoutIdBg);
             }
@@ -184,11 +190,14 @@ function SliderPost<ItemType = unknown>({
                 <div className={`${styles.slideDotsBoxContainer} !flex my-[20px] ${dotsClassName || ''}`}>
                     <div className={`${styles.slideDotsBox} !flex`}>
                         {items.map((_, i) => (
-                            <div
+                            <button
+                                type="button"
                                 onClick={() => handleDotClick(i)}
                                 key={i}
+                                aria-label={`Слайд ${i + 1}`}
+                                aria-current={activeIndex === i ? 'true' : undefined}
                                 className={`${activeIndex === i ? styles.activeDots : ''} ${styles.slideDots}`}
-                            ></div>
+                            />
                         ))}
                     </div>
                 </div>

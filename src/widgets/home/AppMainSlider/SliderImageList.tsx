@@ -41,7 +41,8 @@ const SliderImageListComponent: React.FC<SliderImageListProps> = ({
               fill
               sizes="(max-width: 479px) 280px, (max-width: 767px) 320px, (max-width: 1279px) 336px, 336px"
               style={{ objectFit: 'cover' }}
-              loading="lazy"
+              loading={index === 0 ? undefined : 'lazy'}
+              priority={index === 0}
             />
             <div className={stylesMainSkills['slide-overlay-blend']}></div>
           </div>

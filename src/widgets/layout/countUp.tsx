@@ -1,4 +1,4 @@
-import {useEffect, useRef} from "react";
+import {useEffect, useMemo, useRef} from "react";
 import {useInView, useMotionValue, useSpring} from "framer-motion";
 
 interface CountUpProps {
@@ -96,28 +96,26 @@ export default function CountUp({
         duration,
     ]);
 
+    const formatter = useMemo(
+        () =>
+            new Intl.NumberFormat("ru-RU", {
+                useGrouping: true,
+                minimumFractionDigits: maxDecimals > 0 ? maxDecimals : 0,
+                maximumFractionDigits: maxDecimals > 0 ? maxDecimals : 0,
+            }),
+        [maxDecimals]
+    );
+
     useEffect(() => {
         const unsubscribe = springValue.on("change", (latest) => {
             if (ref.current) {
-                const hasDecimals = maxDecimals > 0;
-
-                const options: Intl.NumberFormatOptions = {
-                    useGrouping: true,
-                    minimumFractionDigits: hasDecimals ? maxDecimals : 0,
-                    maximumFractionDigits: hasDecimals ? maxDecimals : 0,
-                };
-
-                const formattedNumber = Intl.NumberFormat("ru-RU", options).format(
-                    latest
-                );
-
                 const finalSeparator = separator || " ";
-                ref.current.textContent = formattedNumber.replace(/\s/g, finalSeparator);
+                ref.current.textContent = formatter.format(latest).replace(/\s/g, finalSeparator);
             }
         });
 
         return () => unsubscribe();
-    }, [springValue, separator, maxDecimals]);
+    }, [springValue, separator, formatter]);
 
     return <span className={className} ref={ref}/>;
 }

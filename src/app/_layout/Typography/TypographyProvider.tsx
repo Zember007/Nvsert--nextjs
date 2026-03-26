@@ -161,7 +161,11 @@ export function TypographyProvider({
     });
     
     resizeObserverRef.current = new ResizeObserver(() => {
-      processElementsBatched(container, actualThreshold, smallWeight, largeWeight, appliedWeights);
+      if (rafIdRef.current !== null) return;
+      rafIdRef.current = requestAnimationFrame(() => {
+        processElementsBatched(container, actualThreshold, smallWeight, largeWeight, appliedWeights);
+        rafIdRef.current = null;
+      }) as unknown as number;
     });
     
     resizeObserverRef.current.observe(container);
