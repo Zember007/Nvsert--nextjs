@@ -13,6 +13,9 @@ type SliderBlock = {
   description: string;
 };
 
+const VECTOR_START_MARKER = '[start_vector]';
+const VECTOR_END_MARKER = '[end_vector]';
+
 export function OkpdInfoSections({
   pageData,
   sectionsOpen,
@@ -54,6 +57,42 @@ export function OkpdInfoSections({
             {parts[1] && <div>{renderRichText(parts[1])}</div>}
           </>
         );
+      }
+
+      if (richText.includes(VECTOR_START_MARKER) && richText.includes(VECTOR_END_MARKER)) {
+        const vectorStartIndex = richText.indexOf(VECTOR_START_MARKER);
+        const vectorEndIndex = richText.indexOf(VECTOR_END_MARKER);
+
+        if (vectorStartIndex !== -1 && vectorEndIndex > vectorStartIndex) {
+          const beforeVectorText = richText.slice(0, vectorStartIndex);
+          const vectorText = richText
+            .slice(vectorStartIndex + VECTOR_START_MARKER.length, vectorEndIndex)
+            .trim();
+          const afterVectorText = richText.slice(vectorEndIndex + VECTOR_END_MARKER.length);
+
+          return (
+            <>
+              {beforeVectorText && <div className="mb-[20px]">{renderRichText(beforeVectorText)}</div>}
+              <div className="flex items-start gap-[10px]">
+                <svg
+                  width="6"
+                  height="35"
+                  viewBox="0 0 6 35"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="shrink-0"
+                >
+                  <path
+                    d="M2.26415 24.7612L0.283019 0.679105L5.09434 0L5.43396 0.156718L3.62264 24.7612H2.26415ZM3 35C1.4717 35 0 34.0597 0 32.597C0 31.4478 0.622642 30.7687 1.18868 30.4552C1.58491 30.2463 2.66038 29.7761 3 29.7761C4.58491 29.7761 6 30.7164 6 32.2313C6 33.3284 5.37736 34.0075 4.81132 34.3209C4.41509 34.5299 3.33962 35 3 35Z"
+                    fill="#FF0000"
+                  />
+                </svg>
+                <div className="flex-1">{processContent(vectorText)}</div>
+              </div>
+              {afterVectorText && <div>{renderRichText(afterVectorText)}</div>}
+            </>
+          );
+        }
       }
       return processContent(richText);
     },
