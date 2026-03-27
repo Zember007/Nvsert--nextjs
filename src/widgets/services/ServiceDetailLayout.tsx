@@ -92,7 +92,6 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
                         <div className="w-[250px] mx-auto">
                             <ServiceCard
                                 onClick={() => {
-                                    console.log(document.getElementById('service-' + index));
                                     document.getElementById('service-' + index)?.click();
                                 }}
                                 serviceName={currentService?.category?.name || ''}

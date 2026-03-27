@@ -88,9 +88,6 @@ export default function OkpdUnderlineText({
     }, [measureLines]);
 
     const isMultiline = lineRects.length > 1;
-    const totalLines = lineRects.length;
-    // Шаг задержки между линиями (в мс)
-    const delayStep = 50;
 
     return (
         <span
@@ -106,9 +103,6 @@ export default function OkpdUnderlineText({
             {text}
             {/* Отдельные линии для каждой строки текста (только в многострочном режиме) */}
             {isMultiline && lineRects.map((line, idx) => {
-                // Задержка: нижняя линия (последняя) начинает первой (delay=0),
-                // верхняя линия (первая) начинает последней
-                const delay = (totalLines - 1 - idx) * delayStep;
                 return (
                     <span
                         key={idx}
@@ -122,7 +116,6 @@ export default function OkpdUnderlineText({
                             height: '0',
                             borderBottom: '1px solid #34446D',
                             pointerEvents: 'none',
-                            transitionDelay: `${delay}ms`,
                         }}
                     />
                 );

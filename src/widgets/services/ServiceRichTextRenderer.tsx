@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useRichTextRenderer } from 'shared/lib';
 
 interface ServiceRichTextRendererProps {
@@ -11,11 +11,14 @@ interface ServiceRichTextRendererProps {
 const ServiceRichTextRenderer: React.FC<ServiceRichTextRendererProps> = ({ content }) => {
     const { processContent } = useRichTextRenderer();
 
-    const preparedContent = content
-        .replace(/📞/g, '\n')
-        .replace('-', '\n');
+    const rendered = useMemo(() => {
+        const prepared = content
+            .replace(/📞/g, '\n')
+            .replace('-', '\n');
+        return processContent(prepared);
+    }, [content, processContent]);
 
-    return <>{processContent(preparedContent)}</>;
+    return <>{rendered}</>;
 };
 
 export default ServiceRichTextRenderer;
