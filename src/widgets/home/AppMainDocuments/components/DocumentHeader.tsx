@@ -40,7 +40,7 @@ export const DocumentHeader: FC<DocumentHeaderProps> = memo(
       <div
         className={`${mainDocumentsStyles['document__navigation-bg']} ${mainDocumentsStyles['document__navigation-wrap']} ${mainDocumentsStyles['container-scale']} ${mainDocumentsStyles['transition-scale']} ${mainDocumentsStyles['backface-hidden']} ${
           active ? mainDocumentsStyles.active : 'text-[#000]'
-        } group-active/window:text-[#FFF]   `}
+        } group-active/window:text-[#000]   `}
       >
         <h3 className={`${textSize.headerH6} ${mainDocumentsStyles['document__title']} `}>
           {filterPrepositions(title)}
