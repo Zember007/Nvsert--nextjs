@@ -30,7 +30,7 @@ export function TnvedInfoSections({
 
   const renderSliderItem = React.useCallback((block: SliderBlock, index: number) => {
     return (
-      <div className="p-[20px] l:w-[300px] l:min-w-[300px] xxs:w-[280px] xxs:min-w-[280px] xss:w-[300px] xss:min-w-[300px] w-[280px] min-w-[280px] l:min-h-[350px] min-h-[270px] relative border border-[#93969D] bg-[#93969d26] rounded-[4px] flex flex-col justify-between">
+      <div className="p-[20px] l:w-[300px] l:min-w-[300px] xxs:w-[280px] xxs:min-w-[280px] xss:w-[300px] xss:min-w-[300px] w-[280px] min-w-[280px] l:min-h-[350px] min-h-[270px] relative border border-[#93969D] bg-[#93969d26] rounded-[4px] flex flex-col gap-[20px]">
         <span className={`text-[80px] font-light leading-[0.8] text-[#93969D] opacity-15 self-end`}>
           0{index + 1}
         </span>
