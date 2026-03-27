@@ -32,6 +32,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
   const [expandedSections, setExpandedSections] = useState<number[]>([]);
   const [currentServiceIndex, setCurrentServiceIndex] = useState<number | null>(null);
   const [showGallery, setShowGallery] = useState(false);
+  const [galleryVisible, setGalleryVisible] = useState(false);
 
   const currentService = useMemo(() => {
     if (currentServiceIndex === null || !navigation) return initialNavigation;
@@ -131,6 +132,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
               window.history.replaceState({}, '', withLocalePrefix(newUrl, locale));
             }
           }}
+          onVisibleChange={(visible: boolean) => setGalleryVisible(visible)}
         />
       )}
 
@@ -145,6 +147,7 @@ const ServiceDetailContent: React.FC<ClientPageProps> = ({ initialNavigation, in
           onOpenOrderForm={() => openDefaultModal('orderForm')}
           onOpenIntroForm={() => openDefaultModal('introForm')}
           contentOnly={insideShell}
+          galleryVisible={galleryVisible}
         />
       )}
     </>

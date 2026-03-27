@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Button } from 'shared/ui';
 import { AppCtaBanner } from 'widgets/layout';
 import ServiceCard from 'widgets/services/ServiceCard';
@@ -32,6 +33,8 @@ interface ServiceDetailLayoutProps {
     onOpenIntroForm: () => void;
     /** Когда true: не рендерить обёртку и h1 (LCP уже в серверном shell) */
     contentOnly?: boolean;
+    /** Галерея открыта — показать кнопку поверх overlay */
+    galleryVisible?: boolean;
 }
 
 const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
@@ -44,9 +47,24 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
     onOpenOrderForm,
     onOpenIntroForm,
     contentOnly = false,
+    galleryVisible = false,
 }) => {
     const [showSecondaryUI, setShowSecondaryUI] = useState(false);
     const { t } = useTranslation();
+    const sidebarBtnRef = useRef<HTMLDivElement>(null);
+    const [btnRect, setBtnRect] = useState<DOMRect | null>(null);
+
+    const captureBtnPosition = useCallback(() => {
+        if (sidebarBtnRef.current) {
+            setBtnRect(sidebarBtnRef.current.getBoundingClientRect());
+        }
+    }, []);
+
+    useEffect(() => {
+        if (galleryVisible) {
+            captureBtnPosition();
+        }
+    }, [galleryVisible, captureBtnPosition]);
 
     // Откладываем отрисовку второстепенных блоков (списки с анимациями),
     // чтобы не нагружать первый рендер
@@ -177,10 +195,12 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
     const sidebar = (
         <div className="w-[250px] relative xl:block hidden">
             <div className=" sticky top-[104px] flex flex-col gap-[50px] no-scrollbar overflow-y-auto max-h-[calc(100vh-104px)]">
-                <Button
-                    onClick={onOpenOrderForm}
-                    label={t('form.buttons.submitApplication')}
-                />
+                <div ref={sidebarBtnRef}>
+                    <Button
+                        onClick={onOpenOrderForm}
+                        label={t('form.buttons.submitApplication')}
+                    />
+                </div>
 
                 {showSecondaryUI && (
                     <DotNavList
@@ -195,27 +215,53 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
         </div>
     );
 
+    const floatingButton = galleryVisible && btnRect && createPortal(
+        <div
+            style={{
+                position: 'fixed',
+                top: btnRect.top,
+                left: btnRect.left,
+                width: btnRect.width,
+                zIndex: 2100,
+                pointerEvents: 'auto',
+            }}
+        >
+            <Button
+                buttonClassName="!bg-[#FFF] !text-[#000] !border-[#000] *:*:*:fill-[#000]"
+                onClick={onOpenOrderForm}
+                label={t('form.buttons.submitApplication')}
+            />
+        </div>,
+        document.body,
+    );
+
     if (contentOnly) {
         return (
-            <div className="flex gap-[40px]">
-                {twoColumnContent}
-                {sidebar}
-            </div>
+            <>
+                <div className="flex gap-[40px]">
+                    {twoColumnContent}
+                    {sidebar}
+                </div>
+                {floatingButton}
+            </>
         );
     }
 
     return (
-        <div className="wrapper pt-[50px] ">
-            <div className="flex gap-[40px]">
-                <div className="flex flex-col m:gap-[50px] gap-[40px] flex-1">
-                    <h1 className="!m-0  m:text-left text-center">
-                        {filterPrepositions(currentService?.title || '')}
-                    </h1>
-                    {twoColumnContent}
-                    {sidebar}
+        <>
+            <div className="wrapper pt-[50px] ">
+                <div className="flex gap-[40px]">
+                    <div className="flex flex-col m:gap-[50px] gap-[40px] flex-1">
+                        <h1 className="!m-0  m:text-left text-center">
+                            {filterPrepositions(currentService?.title || '')}
+                        </h1>
+                        {twoColumnContent}
+                        {sidebar}
+                    </div>
                 </div>
             </div>
-        </div>
+            {floatingButton}
+        </>
     );
 };
 

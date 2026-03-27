@@ -8,14 +8,13 @@ import { getStrapiImageApiPath } from 'shared/lib/strapi-image';
 interface ServiceGalleryProps {
     navigation?: NavigationItem[] | null;
     onChange: (index: number) => void;
+    onVisibleChange?: (visible: boolean) => void;
 }
 
-const ServiceGallery: React.FC<ServiceGalleryProps> = ({ navigation, onChange }) => {
+const ServiceGallery: React.FC<ServiceGalleryProps> = ({ navigation, onChange, onVisibleChange }) => {
     if (!navigation || navigation.length === 0) {
         return null;
     }
-
-
 
     return (
         <AsyncPhotoProvider
@@ -25,6 +24,7 @@ const ServiceGallery: React.FC<ServiceGalleryProps> = ({ navigation, onChange })
             loop={true}
             onIndexChange={onChange}
             maskClosable={false}
+            onVisibleChange={onVisibleChange}
         >
             {navigation.map((item, index) => (
                 <AsyncPhotoView
