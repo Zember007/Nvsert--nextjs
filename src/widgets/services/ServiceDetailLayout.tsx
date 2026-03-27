@@ -227,7 +227,7 @@ const ServiceDetailLayout: React.FC<ServiceDetailLayoutProps> = ({
             }}
         >
             <Button
-                buttonClassName="!bg-[#FFF] !text-[#000] !border-[#000] *:*:*:fill-[#000]"
+                buttonClassName="!bg-[#F5F5F2] !text-[#000] !border-[#000] *:*:*:fill-[#000]"
                 onClick={onOpenOrderForm}
                 label={t('form.buttons.submitApplication')}
             />
