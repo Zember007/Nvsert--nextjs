@@ -52,7 +52,7 @@ const ContactsSpoilersClient = ({
           </div>
 
           <div className="flex flex-col m:gap-[30px] gap-[20px]">
-            <div className="xxs:p-[40px] s:p-[30px] p-[20px] bg-[#93969d26] rounded-[8px] border border-[#93969d] flex justify-between m:flex-row flex-col-reverse gap-[30px] items-center">
+            <div className="xxs:p-[40px] s:p-[30px] p-[20px] bg-[#F5F5F2] rounded-[8px] border border-[#93969d] flex justify-between m:flex-row flex-col-reverse gap-[30px] items-center">
               <div className="flex flex-col gap-[30px]">
                 <span className={textSize.headerH3}>{data.connectSection.consultationTitle}</span>
                 <div className={textSize.text3 + ' max-w-[660px]'}>
@@ -74,7 +74,7 @@ const ContactsSpoilersClient = ({
               {(data.connectSection.featureCards || []).map((card, index) => (
                 <div
                   key={card.title}
-                  className="relative xl:p-[40px] p-[30px] xl:pb-[40px] xss:pb-[30px] pb-[86px] bg-[#93969d26] w-full rounded-[8px] border border-[#93969d] flex flex-col gap-[20px]"
+                  className="relative xl:p-[40px] p-[30px] xl:pb-[40px] xss:pb-[30px] pb-[86px] bg-[#F5F5F2] w-full rounded-[8px] border border-[#93969d] flex flex-col gap-[20px]"
                 >
                   <div className="absolute xl:top-[10px] bottom-[10px] right-[10px]">
                     {index === 0 && (
@@ -140,7 +140,7 @@ const ContactsSpoilersClient = ({
             <ContactsButton className="block m:hidden xxs:!mx-0" label={data.requisitesSection.downloadButtonLabel} href={pdfHref} />
 
 
-            <div className="xxs:p-[40px] s:p-[30px] p-[20px] bg-[#93969d26] rounded-[8px] border border-[#93969d] flex justify-between m:flex-row flex-col-reverse gap-[30px] items-center">
+            <div className="xxs:p-[40px] s:p-[30px] p-[20px] bg-[#F5F5F2] rounded-[8px] border border-[#93969d] flex justify-between m:flex-row flex-col-reverse gap-[30px] items-center">
               <div className="flex flex-col gap-[16px]">
                 <div className="flex  gap-[10px] m:flex-row flex-col">
                   <span className={textSize.text1 + ' font-normal text-[#000] whitespace-nowrap'}>

@@ -1,6 +1,6 @@
 export const fontFamilies = {
   system: '"Segoe UI", Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif',
-  mac: 'var(--font-roboto), -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif',
+  mac: 'Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif',
   windows: '"Segoe UI", Roboto, Arial, sans-serif',
 };
 

@@ -11,6 +11,7 @@ import { getLocaleFromPathname, withLocalePrefix } from 'shared/i18n/client-loca
 import AppLogo from 'widgets/layout/AppLogo';
 import headerStyles from '@/assets/styles/base/base.module.scss';
 import headerMenuStyles from 'widgets/layout/Header.module.scss';
+import CustomScrollbar from 'widgets/layout/CustomScrollbar';
 
 
 const AppModalWrapper = dynamic(() => import('widgets/layout').then((m) => m.AppModalWrapper), {
@@ -108,7 +109,7 @@ const LayoutContent = ({ children, initialNavigation }: { children: ReactNode; i
             </main>
             <AppFooterDeferred />
 
-            {/* <CustomScrollbar target="window" /> */}
+            <CustomScrollbar target="window" />
 
             <CopyNotificationDeferred
                 isVisible={showCopyNotification}
