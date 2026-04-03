@@ -97,8 +97,8 @@ const FooterTopMenu: React.FC = () => {
       items: [
         { label: "О компании", href: localizePath("/about/") },
         { label: t("navigation.contacts"), href: localizePath("/contacts/") },
-        { label: "Политика", href: "#" },
-        { label: "Оферта", href: "#" },
+        { label: "Политика", href: localizePath("/privacy-policy/") },
+        { label: "Оферта", href: localizePath("/personal-data-processing/") },
       ],
     },
   ];
