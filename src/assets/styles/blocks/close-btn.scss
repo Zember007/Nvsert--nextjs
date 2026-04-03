@@ -44,7 +44,7 @@
     height: 30px;
     transform-origin: bottom center;
     background: var(--close-color);
-    transition: all ease-out 280ms;
+    transition: all ease-out 200ms;
 }
 
 .close-button-block:last-of-type {
@@ -52,12 +52,12 @@
 }
 
 .close .in .close-button-block:before {
-    transition-delay: 280ms;
+    transition-delay: 200ms;
     transform: translateX(14px) translateY(-14px) rotate(45deg);
 }
 
 .close .in .close-button-block:after {
-    transition-delay: 280ms;
+    transition-delay: 200ms;
     transform: translateX(-14px) translateY(-14px) rotate(-45deg);
 }
 
@@ -68,12 +68,12 @@
 }
 
 .close .in .close-button-block:before {
-    transition-delay: 280ms;
+    transition-delay: 200ms;
     transform: translateX(20px) translateY(-20px) rotate(45deg);
 }
 
 .close .in .close-button-block:after {
-    transition-delay: 280ms;
+    transition-delay: 200ms;
     transform: translateX(-22px) translateY(-22px) rotate(-45deg);
 }
 
