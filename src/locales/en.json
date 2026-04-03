@@ -414,7 +414,9 @@
       "content1": [
         {
           "title": "Documents required for issuance",
-          "list": ["Application form (we provide the template)"]
+          "list": [
+            "Application form (we provide the template)"
+          ]
         }
       ],
       "price": "from 10,000 ₽",
@@ -563,7 +565,9 @@
       "content1": [
         {
           "title": "Documents required for issuance",
-          "list": ["Application form (we provide the template)"]
+          "list": [
+            "Application form (we provide the template)"
+          ]
         },
         {
           "title": "Below is the mandatory documentation list to be provided. We can help prepare each item as part of issuing ST-1; the cost depends on the completeness of the provided documentation:",
@@ -879,28 +883,20 @@
     "info": {
       "sliderBlocks": [
         {
-          "title": "Customs clearance",
-          "description": "The TN VED code is used to classify goods and calculate customs duties."
+          "title": "Определяются таможенные платежи",
+          "description": "Код ТН ВЭД напрямую определяет ставки ввозных и вывозных таможенных пошлин и акцизов."
         },
         {
-          "title": "Certification and permits",
-          "description": "The TN VED code is often used to determine whether declarations, certificates or other documents are required."
+          "title": "Меры нетарифного регулирования",
+          "description": "По коду определяется, подлежат ли товары специальным ограничениям или они требуют разрешительные документы."
         },
         {
-          "title": "Foreign trade statistics",
-          "description": "Used to collect and analyze import/export data."
+          "title": "Ведётся статистика данных",
+          "description": "Коды используются для сбора и анализа данных по внешней торговле стран ЕАЭС."
         },
         {
-          "title": "Customs clearance",
-          "description": "The TN VED code is used to classify goods and calculate customs duties."
-        },
-        {
-          "title": "Certification and permits",
-          "description": "The TN VED code is often used to determine whether declarations, certificates or other documents are required."
-        },
-        {
-          "title": "Foreign trade statistics",
-          "description": "Used to collect and analyze import/export data."
+          "title": "Обеспечивается контроль",
+          "description": "Таможенные органы используют код для контроля заявленной стоимости, происхождения и соответствия товара."
         }
       ]
     },
@@ -976,27 +972,111 @@
       "noData": "No OKPD 2 data",
       "sectionLabel": "SECTION {{letter}} — {{name}}",
       "sections": [
-        { "letter": "A", "name": "AGRICULTURE, FORESTRY AND FISHING PRODUCTS", "codePrefix": "01" },
-        { "letter": "B", "name": "MINING PRODUCTS", "codePrefix": "05" },
-        { "letter": "C", "name": "MANUFACTURED PRODUCTS", "codePrefix": "10" },
-        { "letter": "D", "name": "ELECTRICITY, GAS, STEAM AND AIR CONDITIONING", "codePrefix": "35" },
-        { "letter": "E", "name": "WATER SUPPLY; SEWERAGE, WASTE MANAGEMENT AND REMEDIATION SERVICES", "codePrefix": "36" },
-        { "letter": "F", "name": "CONSTRUCTIONS AND CONSTRUCTION WORKS", "codePrefix": "41" },
-        { "letter": "G", "name": "WHOLESALE AND RETAIL TRADE; REPAIR OF MOTOR VEHICLES AND MOTORCYCLES", "codePrefix": "45" },
-        { "letter": "H", "name": "TRANSPORTATION AND STORAGE SERVICES", "codePrefix": "49" },
-        { "letter": "I", "name": "ACCOMMODATION AND FOOD SERVICE ACTIVITIES", "codePrefix": "55" },
-        { "letter": "J", "name": "INFORMATION AND COMMUNICATION SERVICES", "codePrefix": "58" },
-        { "letter": "K", "name": "FINANCIAL AND INSURANCE SERVICES", "codePrefix": "64" },
-        { "letter": "L", "name": "REAL ESTATE SERVICES", "codePrefix": "68" },
-        { "letter": "M", "name": "PROFESSIONAL, SCIENTIFIC AND TECHNICAL SERVICES", "codePrefix": "69" },
-        { "letter": "N", "name": "ADMINISTRATIVE AND SUPPORT SERVICES", "codePrefix": "77" },
-        { "letter": "O", "name": "PUBLIC ADMINISTRATION AND DEFENCE; COMPULSORY SOCIAL SECURITY", "codePrefix": "84" },
-        { "letter": "P", "name": "EDUCATION SERVICES", "codePrefix": "85" },
-        { "letter": "Q", "name": "HUMAN HEALTH AND SOCIAL WORK ACTIVITIES", "codePrefix": "86" },
-        { "letter": "R", "name": "ARTS, ENTERTAINMENT AND RECREATION SERVICES", "codePrefix": "90" },
-        { "letter": "S", "name": "OTHER SERVICES", "codePrefix": "94" },
-        { "letter": "T", "name": "HOUSEHOLD GOODS AND SERVICES FOR OWN USE, INCLUDING EMPLOYER SERVICES FOR DOMESTIC STAFF", "codePrefix": "97" },
-        { "letter": "U", "name": "SERVICES PROVIDED BY EXTRATERRITORIAL ORGANIZATIONS AND BODIES", "codePrefix": "99" }
+        {
+          "letter": "A",
+          "name": "AGRICULTURE, FORESTRY AND FISHING PRODUCTS",
+          "codePrefix": "01"
+        },
+        {
+          "letter": "B",
+          "name": "MINING PRODUCTS",
+          "codePrefix": "05"
+        },
+        {
+          "letter": "C",
+          "name": "MANUFACTURED PRODUCTS",
+          "codePrefix": "10"
+        },
+        {
+          "letter": "D",
+          "name": "ELECTRICITY, GAS, STEAM AND AIR CONDITIONING",
+          "codePrefix": "35"
+        },
+        {
+          "letter": "E",
+          "name": "WATER SUPPLY; SEWERAGE, WASTE MANAGEMENT AND REMEDIATION SERVICES",
+          "codePrefix": "36"
+        },
+        {
+          "letter": "F",
+          "name": "CONSTRUCTIONS AND CONSTRUCTION WORKS",
+          "codePrefix": "41"
+        },
+        {
+          "letter": "G",
+          "name": "WHOLESALE AND RETAIL TRADE; REPAIR OF MOTOR VEHICLES AND MOTORCYCLES",
+          "codePrefix": "45"
+        },
+        {
+          "letter": "H",
+          "name": "TRANSPORTATION AND STORAGE SERVICES",
+          "codePrefix": "49"
+        },
+        {
+          "letter": "I",
+          "name": "ACCOMMODATION AND FOOD SERVICE ACTIVITIES",
+          "codePrefix": "55"
+        },
+        {
+          "letter": "J",
+          "name": "INFORMATION AND COMMUNICATION SERVICES",
+          "codePrefix": "58"
+        },
+        {
+          "letter": "K",
+          "name": "FINANCIAL AND INSURANCE SERVICES",
+          "codePrefix": "64"
+        },
+        {
+          "letter": "L",
+          "name": "REAL ESTATE SERVICES",
+          "codePrefix": "68"
+        },
+        {
+          "letter": "M",
+          "name": "PROFESSIONAL, SCIENTIFIC AND TECHNICAL SERVICES",
+          "codePrefix": "69"
+        },
+        {
+          "letter": "N",
+          "name": "ADMINISTRATIVE AND SUPPORT SERVICES",
+          "codePrefix": "77"
+        },
+        {
+          "letter": "O",
+          "name": "PUBLIC ADMINISTRATION AND DEFENCE; COMPULSORY SOCIAL SECURITY",
+          "codePrefix": "84"
+        },
+        {
+          "letter": "P",
+          "name": "EDUCATION SERVICES",
+          "codePrefix": "85"
+        },
+        {
+          "letter": "Q",
+          "name": "HUMAN HEALTH AND SOCIAL WORK ACTIVITIES",
+          "codePrefix": "86"
+        },
+        {
+          "letter": "R",
+          "name": "ARTS, ENTERTAINMENT AND RECREATION SERVICES",
+          "codePrefix": "90"
+        },
+        {
+          "letter": "S",
+          "name": "OTHER SERVICES",
+          "codePrefix": "94"
+        },
+        {
+          "letter": "T",
+          "name": "HOUSEHOLD GOODS AND SERVICES FOR OWN USE, INCLUDING EMPLOYER SERVICES FOR DOMESTIC STAFF",
+          "codePrefix": "97"
+        },
+        {
+          "letter": "U",
+          "name": "SERVICES PROVIDED BY EXTRATERRITORIAL ORGANIZATIONS AND BODIES",
+          "codePrefix": "99"
+        }
       ]
     },
     "page": {
@@ -1204,4 +1284,3 @@
     "toMain": "Go to home"
   }
 }
-
