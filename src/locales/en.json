@@ -683,6 +683,9 @@
     "order": "Request a call",
     "blog": "Blog",
     "reviews": "Reviews",
+    "privacyPolicy": "Privacy Policy",
+    "privacyPolicyBtn": "Policy",
+    "personalData": "Personal Data",
     "gostR": {
       "title": "GOST R",
       "gostR1": "GOST R Certificate of Conformity",
@@ -1136,6 +1139,18 @@
       "tnved": {
         "title": "TN VED",
         "description": "TN VED classifier"
+      },
+      "privacyPolicy": {
+        "title": "Privacy Policy - NVSERT",
+        "description": "Privacy policy and terms of user agreement for the NVSERT website.",
+        "ogTitle": "Privacy Policy - NVSERT",
+        "ogDescription": "How we protect and process information on the NVSERT Certification Center website."
+      },
+      "personalData": {
+        "title": "Personal Data Processing - NVSERT",
+        "description": "NVSERT company policy for processing and protecting users' personal data.",
+        "ogTitle": "Personal Data Processing - NVSERT",
+        "ogDescription": "Terms and principles of personal data processing at NVSERT."
       }
     }
   },

@@ -10,12 +10,17 @@ import { getLocaleFromPathname, withLocalePrefix } from 'shared/i18n/client-loca
 export type SidebarItem = {
     id: string;
     label: string;
+    href?: string;
     icon?: React.ReactNode;
     active?: boolean;
     onClick?: () => void;
 };
 
-const SidebarNavButtons = () => {
+type SidebarNavButtonsProps = {
+    items?: SidebarItem[];
+};
+
+const SidebarNavButtons = ({ items: externalItems }: SidebarNavButtonsProps) => {
     const { t } = useTranslation();
     const pathname = usePathname();
     const locale = getLocaleFromPathname(pathname);
@@ -24,6 +29,32 @@ const SidebarNavButtons = () => {
     const isFeedback = pathname.includes('/feedback');
     const isOkpd = pathname.includes('/okpd');
     const isTnved = pathname.includes('/tnved');
+    if (externalItems) {
+        return (
+            <div className={`m:flex xxs:grid xxs:grid-cols-2 xxs:gap-[20px] m:gap-[10px] gap-[10px] flex flex-col h-full`}>
+                {externalItems.map((item) => {
+                    const localizedHref = item.href ? localizePath(item.href) : '#';
+                    const isActive = item.href ? pathname.includes(item.href) : false;
+                    return (
+                        <Link
+                            key={item.id}
+                            className={`${stylesBtn.borderButton} px-[15px] active:scale-[.98] transition-transform will-change-transform duration-100 group ${isActive ? stylesBtn.active : ''}`}
+                            prefetch={false}
+                            href={localizedHref}
+                        >
+                            <span className={`${textSize.headerH6} font-light`}>{item.label}</span>
+                            {item.icon && (
+                                <div className="group-active:scale-[.9] transition-transform will-change-transform duration-100">
+                                    {item.icon}
+                                </div>
+                            )}
+                        </Link>
+                    );
+                })}
+            </div>
+        );
+    }
+
     const items = [
         {
             id: 'about',

@@ -1,7 +1,7 @@
 import React from 'react';
 import AppBreadcrumbs from './AppBreadcrumbs';
 import DotNavList, { DotNavItemProps } from './DotNavList';
-import SidebarNavButtons from './SidebarNavButtons';
+import SidebarNavButtons, { SidebarItem } from './SidebarNavButtons';
 import OrderFormButton from './OrderFormButton';
 
 type BreadcrumbItem = {
@@ -28,6 +28,8 @@ type StandardPageLayoutProps = {
     contentColumn?: React.ReactNode;
     /** Подпись CTA-кнопки */
     orderButtonLabel: string;
+    /** Кастомные кнопки сайдбара; если не передано — используется стандартная навигация */
+    sidebarItems?: SidebarItem[];
 };
 
 const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
@@ -40,6 +42,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
     className = '',
     contentColumn,
     orderButtonLabel,
+    sidebarItems,
 }) => {
     return (
         <div className={`main text-[#000] mb-[100px] ${className}`}>
@@ -61,7 +64,7 @@ const StandardPageLayout: React.FC<StandardPageLayoutProps> = ({
                             {/* Left sidebar */}
                             <div className="m:w-[250px] w-full relative">
                                 <div className="sticky top-[104px] flex flex-col gap-[40px]">
-                                    <SidebarNavButtons />
+                                    <SidebarNavButtons items={sidebarItems} />
 
                                     <div className="xl:hidden flex flex-col gap-[20px]">
                                         {dotNavItems && dotNavItems.length > 0 && (
