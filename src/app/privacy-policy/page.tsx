@@ -87,7 +87,7 @@ const legalSidebarItems = (locale: 'ru' | 'en'): SidebarItem[] => [
     },
 ];
 
-const PrivacyPolicyPage = async () => {
+const Page = async () => {
     const locale = await getRequestLocale();
     const pageData = await getPrivacyPolicyData();
 
@@ -113,4 +113,4 @@ const PrivacyPolicyPage = async () => {
     );
 };
 
-export default PrivacyPolicyPage;
+export default Page;

@@ -87,7 +87,7 @@ const legalSidebarItems = (locale: 'ru' | 'en'): SidebarItem[] => [
     },
 ];
 
-const PersonalDataProcessingPage = async () => {
+const Page = async () => {
     const locale = await getRequestLocale();
     const pageData = await getPersonalDataProcessingData();
 
@@ -113,4 +113,4 @@ const PersonalDataProcessingPage = async () => {
     );
 };
 
-export default PersonalDataProcessingPage;
+export default Page;
