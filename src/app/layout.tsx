@@ -63,6 +63,13 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <head>
+        {/* Устанавливаем --font-family ДО первого paint, чтобы избежать repaint после гидрации TypographyProvider */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var m=/Mac|iPhone|iPad/.test(navigator.platform||'');document.documentElement.style.setProperty('--font-family',m?'Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif':'"Segoe UI",Roboto,Arial,sans-serif')})()`,
+          }}
+        />
+
         {/* DNS prefetch для CMS (preconnect убран — Lighthouse: unused на первой загрузке) */}
         {STRAPI_ORIGIN ? (
           <link rel="dns-prefetch" href={STRAPI_ORIGIN} />

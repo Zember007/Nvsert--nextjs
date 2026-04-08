@@ -21,7 +21,19 @@ const AppMainSkills = dynamic(() => import('widgets/home/AppMainSkills'), {
 
 export default function BelowFoldClient() {
   const [shouldLoad, setShouldLoad] = useState(false);
+  const [docsReady, setDocsReady] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
+
+  // Defer heavy documents bundle (framer-motion + cards) until browser is idle
+  useEffect(() => {
+    const load = () => setDocsReady(true);
+    if (window.requestIdleCallback) {
+      const id = window.requestIdleCallback(load, { timeout: 2500 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const id = setTimeout(load, 300);
+    return () => clearTimeout(id);
+  }, []);
 
   useEffect(() => {
     const sentinel = sentinelRef.current;
@@ -41,7 +53,7 @@ export default function BelowFoldClient() {
   return (
     <>
       <div ref={sentinelRef} />
-      <HomeDocumentsClient />
+      {docsReady ? <HomeDocumentsClient /> : <DocumentsSkeleton />}
       {shouldLoad && <AppMainSkills />}
     </>
   );

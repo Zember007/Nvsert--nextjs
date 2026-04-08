@@ -168,11 +168,11 @@ export function processElementsBatched(
     index += chunkSize;
     
     if (index < elements.length) {
-      requestIdleCallbackPolyfill(processChunk, { timeout: 100 });
+      requestIdleCallbackPolyfill(processChunk, { timeout: 3000 });
     }
   }
   
-  requestIdleCallbackPolyfill(processChunk, { timeout: 100 });
+  requestIdleCallbackPolyfill(processChunk, { timeout: 3000 });
 }
 
 export function processAddedNodes(
