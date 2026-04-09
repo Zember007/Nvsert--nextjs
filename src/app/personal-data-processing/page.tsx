@@ -24,6 +24,10 @@ export interface PersonalDataProcessingData {
         metaTitle: string;
         metaDescription: string;
     };
+    cta?: {
+        text: string;
+        description: string;
+    };
 }
 
 async function getPersonalDataProcessingData(): Promise<PersonalDataProcessingData | null> {

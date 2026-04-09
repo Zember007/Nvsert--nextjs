@@ -24,6 +24,10 @@ export interface PrivacyPolicyData {
         metaTitle: string;
         metaDescription: string;
     };
+    cta?: {
+        text: string;
+        description: string;
+    };
 }
 
 async function getPrivacyPolicyData(): Promise<PrivacyPolicyData | null> {

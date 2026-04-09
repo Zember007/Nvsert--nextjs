@@ -1,7 +1,8 @@
 'use client';
 import React from 'react';
 import { useRichTextRenderer } from 'shared/lib';
-import { CollapseSection } from 'widgets/layout';
+import { useHeaderContext } from 'shared/contexts';
+import { AppCtaBanner, CollapseSection } from 'widgets/layout';
 import { PersonalDataProcessingData } from './page';
 import { useTranslation } from 'react-i18next';
 
@@ -12,6 +13,7 @@ interface PersonalDataClientProps {
 const PersonalDataClient: React.FC<PersonalDataClientProps> = ({ pageData }) => {
     const [sectionsOpen, setSectionsOpen] = React.useState<number[]>([]);
     const { processContent } = useRichTextRenderer();
+    const { openDefaultModal } = useHeaderContext();
     const { t } = useTranslation();
 
     const toggleSection = (id: number) => {
@@ -55,6 +57,13 @@ const PersonalDataClient: React.FC<PersonalDataClientProps> = ({ pageData }) => 
                     </div>
                 );
             })}
+
+            <AppCtaBanner
+                text={pageData.cta?.text || ''}
+                descriptionClassName="max-w-full"
+                description={pageData.cta?.description || ''}
+                onButtonClick={() => openDefaultModal('introForm')}
+            />
         </>
     );
 };
