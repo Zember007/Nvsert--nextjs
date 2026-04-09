@@ -16,7 +16,9 @@
   }
 
   @media (min-width: 1407px) {
-    perspective: 1200px;
+    isolation: auto;
+    perspective: 850px;
+    perspective-origin: 50% 40%;
     transform-style: preserve-3d;
   }
 }
@@ -111,9 +113,8 @@
 
     @media (min-width: 1407px) {
       transform-style: preserve-3d;
+      transform-origin: 50% 45%;
       backface-visibility: hidden;
-      transition: transform 0.3s ease-out;
-      will-change: transform;
     }
 
     &.active {
