@@ -15,6 +15,10 @@
     z-index: 5;
   }
 
+  @media (min-width: 1407px) {
+    perspective: 1200px;
+    transform-style: preserve-3d;
+  }
 }
 
 .document-wrapper-border-active {
@@ -104,6 +108,13 @@
     @apply border-b border-solid border-[#93969D] flex flex-col items-center relative;
     z-index: 1;
     width: 100%;
+
+    @media (min-width: 1407px) {
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      transition: transform 0.3s ease-out;
+      will-change: transform;
+    }
 
     &.active {
       @apply bg-[transparent];

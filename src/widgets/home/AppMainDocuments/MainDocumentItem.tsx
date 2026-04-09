@@ -1,10 +1,8 @@
 import { useRef, useState, memo, useMemo, useCallback } from 'react';
-
-import { useButton } from 'shared/hooks';
+import { useButton, useWindowSize } from 'shared/hooks';
 import { motion } from 'framer-motion';
 import { useHeaderContext } from 'shared/contexts';
 import { MainDocumentItemProps } from '@/types/documents';
-import { useWindowSize } from 'shared/hooks';
 import { useRouter } from 'next/navigation';
 import { useRichTextRenderer } from 'shared/lib';
 import stylesBtn from '@/assets/styles/base/base.module.scss';
@@ -16,6 +14,10 @@ import mainDocumentsStyles from '@/assets/styles/sections/main/main-documents.mo
 import { useTranslation } from 'react-i18next';
 import { usePathname } from 'next/navigation';
 import { getLocaleFromPathname, withLocalePrefix } from 'shared/i18n/client-locale';
+
+/** Только вертикаль курсора внутри карточки, симметрично вверх/вниз (как Skills, без rotateY) */
+const DOCUMENT_TILT_MIN_WIDTH = 1407;
+const HOVER_ROTATE_X_MAX = 10;
 
 const DocumentList = dynamic(
     () => import('./components/DocumentList').then((mod) => mod.DocumentList),
@@ -74,6 +76,7 @@ const MainDocumentItem = memo(({
     const locale = getLocaleFromPathname(pathname);
 
     const wrapperRef = useRef<DivRef>(null);
+    const [tiltRotateXdeg, setTiltRotateXdeg] = useState<number | null>(null);
 
     // Мемоизация вычисляемых значений
     const hiddenList = useMemo(() => {
@@ -83,6 +86,34 @@ const MainDocumentItem = memo(({
     const isMobile = useMemo(() => {
         return windowWidth && windowWidth < 960;
     }, [windowWidth]);
+
+    const isTiltInteractionEnabled = useMemo(
+        () => Boolean(windowWidth && windowWidth >= DOCUMENT_TILT_MIN_WIDTH),
+        [windowWidth],
+    );
+
+    const updateDocumentTilt = useCallback(
+        (e: React.MouseEvent<HTMLDivElement>) => {
+            if (!isTiltInteractionEnabled) return;
+            const el = wrapperRef.current;
+            if (!el) return;
+
+            const rect = el.getBoundingClientRect();
+            const halfH = rect.height / 2;
+            const mouseY = e.clientY - rect.top - halfH;
+            const mousePY = halfH > 0 ? mouseY / halfH : 0;
+            const clampedPY = Math.max(-1, Math.min(1, mousePY));
+            // Верх карточки (−1) и низ (+1) дают противоположные знаки, одинаковая величина
+            const rotateX = clampedPY * -HOVER_ROTATE_X_MAX;
+
+            setTiltRotateXdeg(rotateX);
+        },
+        [isTiltInteractionEnabled],
+    );
+
+    const clearDocumentTilt = useCallback(() => {
+        setTiltRotateXdeg(null);
+    }, []);
 
     const commonButtonClasses = ``;
 
@@ -132,6 +163,13 @@ const MainDocumentItem = memo(({
 
             <div
                 ref={wrapperRef}
+                onMouseMove={isTiltInteractionEnabled ? updateDocumentTilt : undefined}
+                onMouseLeave={isTiltInteractionEnabled ? clearDocumentTilt : undefined}
+                style={
+                    tiltRotateXdeg !== null && isTiltInteractionEnabled
+                        ? { transform: `rotateX(${tiltRotateXdeg}deg)` }
+                        : undefined
+                }
                 className={` ${mainDocumentsStyles['document__box']} ${active ? mainDocumentsStyles.active : ''}`}>
 
                 <DocumentHeader
