@@ -1,5 +1,5 @@
 import { useRef, useState, memo, useMemo, useCallback } from 'react';
-import { useButton, useWindowSize } from 'shared/hooks';
+import { useButton, useMediaMinWidth, useWindowSize } from 'shared/hooks';
 import { motion } from 'framer-motion';
 import { useHeaderContext } from 'shared/contexts';
 import { MainDocumentItemProps } from '@/types/documents';
@@ -16,9 +16,9 @@ import { usePathname } from 'next/navigation';
 import { getLocaleFromPathname, withLocalePrefix } from 'shared/i18n/client-locale';
 import { useDocumentLayoutTilt } from './useDocumentLayoutTilt';
 
-/** Наклон списка документов — см. useDocumentLayoutTilt (без GSAP на скролле) */
+/** Наклон списка документов — обычный JS + CSS transition, см. useDocumentLayoutTilt */
 const DOCUMENT_TILT_MIN_WIDTH = 1407;
-const LAYOUT_TILT_MAX_DEG = 8;
+const LAYOUT_TILT_MAX_DEG = 16;
 
 const DocumentList = dynamic(
     () => import('./components/DocumentList').then((mod) => mod.DocumentList),
@@ -77,6 +77,7 @@ const MainDocumentItem = memo(({
     const locale = getLocaleFromPathname(pathname);
 
     const wrapperRef = useRef<DivRef>(null);
+    const documentTiltLayerRef = useRef<DivRef>(null);
 
     // Мемоизация вычисляемых значений
     const hiddenList = useMemo(() => {
@@ -87,14 +88,14 @@ const MainDocumentItem = memo(({
         return windowWidth && windowWidth < 960;
     }, [windowWidth]);
 
-    const isTiltInteractionEnabled = useMemo(
-        () => Boolean(windowWidth && windowWidth >= DOCUMENT_TILT_MIN_WIDTH),
-        [windowWidth],
-    );
+    const isTiltDesktop = useMediaMinWidth(DOCUMENT_TILT_MIN_WIDTH);
 
-    useDocumentLayoutTilt(wrapperRef, isTiltInteractionEnabled, {
-        maxDeg: LAYOUT_TILT_MAX_DEG,
-    });
+    const documentTiltHandlers = useDocumentLayoutTilt(
+        wrapperRef,
+        documentTiltLayerRef,
+        isTiltDesktop,
+        { maxDeg: LAYOUT_TILT_MAX_DEG },
+    );
 
     const commonButtonClasses = ``;
 
@@ -144,7 +145,13 @@ const MainDocumentItem = memo(({
 
             <div
                 ref={wrapperRef}
-                className={` ${mainDocumentsStyles['document__box']} ${active ? mainDocumentsStyles.active : ''}`}>
+                className={` ${mainDocumentsStyles['document__box']} ${active ? mainDocumentsStyles.active : ''}`}
+                {...documentTiltHandlers}
+            >
+                <div
+                    ref={documentTiltLayerRef}
+                    className={mainDocumentsStyles['document__box-tilt']}
+                >
 
                 <DocumentHeader
                     index={index || 0}
@@ -240,6 +247,7 @@ const MainDocumentItem = memo(({
                             )}
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         </div>

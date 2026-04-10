@@ -11,14 +11,13 @@
   z-index: 0;
   isolation: isolate;
 
-  &:hover {
+  &:hover,
+  &:has(.document__box:hover) {
     z-index: 5;
   }
 
   @media (min-width: 1407px) {
     isolation: auto;
-    perspective: 850px;
-    perspective-origin: 50% 40%;
     transform-style: preserve-3d;
   }
 }
@@ -113,8 +112,6 @@
 
     @media (min-width: 1407px) {
       transform-style: preserve-3d;
-      transform-origin: 50% 45%;
-      backface-visibility: hidden;
     }
 
     &.active {
@@ -125,6 +122,23 @@
     &:hover {
       border-color: transparent;
     }
+  }
+
+  /* Внутренний слой с transform — внешний .document__box не двигается, нет мерцания :hover */
+  &__box-tilt {
+    @apply flex flex-col items-center w-full min-w-0;
+
+    @media (min-width: 1407px) {
+      transform-style: preserve-3d;
+      transform-origin: 50% 45%;
+      backface-visibility: hidden;
+      transition: transform 0.2s ease-out;
+    }
+  }
+
+  &__box:hover &__navigation:not(.active) {
+    background: #F5F5F2;
+    border-color: #34446D;
   }
 
   &__border {
@@ -141,7 +155,11 @@
     @apply xl:mx-[-23px] mx-[-5px] rounded-[6px] overflow-hidden h-[72px] text-left box-scale transition-scale xl:px-[23px] relative z-[0];
     border: 1px solid transparent;
     background: transparent;
-    transition: none;
+    transition:
+      border-color 0.06s ease-out,
+      background-color 0.06s ease-out,
+      box-shadow 0.06s ease-out,
+      transform 0.06s ease-out;
     z-index: 2;
 
     @media (min-width: $media-xl) {
@@ -154,13 +172,6 @@
 
     &:active {
       box-shadow: 2px 2px 4px 0px #000000CC inset, -2px -2px 4px 0px #000000CC inset;
-    }
-
-    &:hover {
-      background: #F5F5F2;
-      border-color: #34446D;
-
-
     }
 
     &.active {
