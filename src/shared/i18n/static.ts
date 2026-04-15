@@ -1,3 +1,16 @@
+/**
+ * Серверно-безопасный геттер переводов (без глобального состояния i18next).
+ *
+ * ЗАЧЕМ: generateMetadata() — async server function без React-контекста.
+ * i18next инициализируется в ClientProvider только на клиенте. Вызов i18next.t() из
+ * Server Component/generateMetadata ненадёжен — порядок инициализации не гарантирован.
+ *
+ * tStatic() читает JSON-файлы переводов напрямую и делает dot-path lookup +
+ * {{var}}-интерполяцию без зависимости от singleton i18next.
+ *
+ * ОГРАНИЧЕНИЯ: нет поддержки plurals, context, count и других i18next-фич.
+ * Для компонентов с богатой логикой локализации — используйте useTranslation() на клиенте.
+ */
 import ru from '@/locales/ru.json';
 import en from '@/locales/en.json';
 import type { SupportedLocale } from 'shared/config/env';

@@ -1,3 +1,20 @@
+/**
+ * Route handler: прокси медиафайлов Strapi.
+ *
+ * ЗАЧЕМ: Next.js Image Optimization не умеет проксировать произвольные источники
+ * без явного перечисления доменов. Этот handler унифицирует два источника:
+ * - локальный FS (UPLOADS_DIR = абсолютный путь) — читает файл с диска через fs
+ * - удалённый URL (UPLOADS_DIR = https://…) — делает fetch с force-cache
+ *
+ * Кеш-заголовок: public, max-age=31536000, immutable (1 год) — файлы в uploads
+ * никогда не изменяются, только добавляются новые.
+ *
+ * БЕЗОПАСНОСТЬ: `..` в параметре `file` возвращает 403; локальный путь
+ * дополнительно проверяется через path.resolve + startsWith (path traversal guard).
+ *
+ * MIME определяется по расширению файла, а не по Content-Type от upstream — это
+ * работает и при прямом чтении с диска, где нет HTTP-заголовков.
+ */
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';

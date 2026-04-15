@@ -1,3 +1,17 @@
+/**
+ * Root layout — единственное место для глобальных <head>-элементов.
+ *
+ * INLINE SCRIPT: TypographyProvider определяет платформу в useEffect, но к этому
+ * моменту первый paint уже случился. Инлайн-скрипт в <head> ставит CSS-переменную
+ * --font-family ДО первого paint → предотвращает CLS от смены шрифта после гидрации.
+ *
+ * generateMetadata(): нельзя использовать cookies()/headers() — это переводит страницу
+ * с static в dynamic и роняет продакшн-сборку ("Page changed from static to dynamic at
+ * runtime"). Локаль в метаданных зафиксирована как DEFAULT_LOCALE намеренно.
+ *
+ * dns-prefetch вместо preconnect: Lighthouse фиксировал "unused preconnect" для Strapi
+ * на первой загрузке (Strapi не участвует в LCP страницы).
+ */
 import React, { ReactNode } from "react";
 import type { Metadata, Viewport } from "next";
 import "@/assets/styles/base.scss";

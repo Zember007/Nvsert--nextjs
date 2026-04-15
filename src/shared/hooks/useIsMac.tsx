@@ -1,3 +1,14 @@
+/**
+ * Определение платформы Mac/не-Mac для адаптации рендеринга шрифтов.
+ *
+ * Возвращает: true (Mac/iOS), false (Windows/Android/Linux), null (SSR/первый кадр).
+ * null — нейтральное состояние до гидрации, TypographyProvider использует Windows-веса
+ * как fallback чтобы избежать layout shift.
+ *
+ * iPad corner case: iPad с "Desktop mode" имеет navigator.platform = "MacIntel",
+ * но это touch-устройство → maxTouchPoints > 1 → определяется как Mac (корректно:
+ * у него то же сглаживание шрифтов, что у настоящего Mac).
+ */
 'use client';
 
 import { useState, useEffect } from 'react';

@@ -1,3 +1,18 @@
+/**
+ * Единственный источник истины для переменных окружения.
+ *
+ * ЗАЧЕМ: разбросанные process.env по компонентам невозможно отследить и тестировать.
+ * Все env-переменные читаются здесь, нормализуются и экспортируются как константы.
+ *
+ * STRAPI_PUBLIC_URL vs STRAPI_API_URL:
+ * - STRAPI_PUBLIC_URL — публичный URL для медиафайлов (через nginx /cp)
+ * - STRAPI_API_URL — внутренний URL REST API (API_TARGET/apiTarget, напрямую на порт Strapi)
+ *   Эти адреса могут (и должны) отличаться в продакшне.
+ *
+ * Файл безопасен для импорта в Server Components, Client Components и Edge Runtime.
+ * Не добавляйте сюда server-only импорты (fs, next/headers и т.п.).
+ * NEXT_PUBLIC_* переменные видны браузеру; остальные — только серверу/сборке.
+ */
 const trimTrailingSlash = (value: string) => value.replace(/\/$/, '');
 
 /**

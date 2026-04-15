@@ -1,3 +1,18 @@
+/**
+ * Edge middleware — две независимые ответственности.
+ *
+ * 1. LOCALE REDIRECT: все URL без /ru или /en перенаправляются на /ru (DEFAULT_LOCALE).
+ *    Локаль сохраняется в cookie `nvsert_locale` и пробрасывается через заголовок
+ *    `x-nvsert-locale` — Next.js не передаёт middleware params в RSC напрямую.
+ *
+ * 2. API PROXY: /api/* (кроме /api/image) перезаписывается на Strapi через rewrite.
+ *    API_TARGET/apiTarget — внутренний адрес Strapi (не публичный, не через nginx).
+ *    /api/image обрабатывается собственным route handler (src/app/api/image/route.ts).
+ *
+ * ВАЖНО: /cp никогда не попадает в middleware — nginx перехватывает его раньше.
+ * При добавлении новых route handlers (/api/…) исключайте их из блока проксирования
+ * аналогично /api/image.
+ */
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 

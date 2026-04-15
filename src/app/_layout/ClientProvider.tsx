@@ -1,3 +1,17 @@
+/**
+ * Клиентская обёртка root layout — граница Server/Client Components.
+ *
+ * ЗАЧЕМ: App Router — Server Components по умолчанию. Контекстные провайдеры
+ * (HeaderContext, TypographyProvider) требуют "use client". ClientProvider —
+ * тонкая граница, которая держит серверную часть layout.tsx чистой от клиентского кода.
+ *
+ * i18n-синхронизация: i18next инициализируется с 'ru' по умолчанию. useEffect
+ * синхронизирует его с lang-атрибутом <html>, который сервер выставляет через middleware.
+ * Без этого i18next не знал бы о языке текущего URL после первичной гидрации.
+ *
+ * initialNavigation: передаётся из серверного layout.tsx (navigation.json, сгенерированный
+ * при сборке) → пробрасывается в HeaderContext и Layout_wrapper, минуя prop drilling.
+ */
 "use client";
 
 import "shared/config/i18n";

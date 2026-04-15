@@ -1,3 +1,12 @@
+/**
+ * Реактивная проверка медиа-брейкпоинта без «нулевого кадра».
+ *
+ * ЗАЧЕМ useSyncExternalStore вместо useEffect+useState: паттерн с useEffect даёт
+ * false → true при mount, вызывая мерцание на SSR+hydration (hydration mismatch).
+ * useSyncExternalStore принимает serverSnapshot (() => false) — сервер и первый
+ * клиентский кадр возвращают одинаковое значение, hydration проходит без ошибок.
+ * Реальное значение matchMedia применяется только после гидрации.
+ */
 import { useSyncExternalStore } from 'react';
 
 /**

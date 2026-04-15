@@ -1,3 +1,13 @@
+/**
+ * Серверный fetcher FAQ с ISR-кешированием.
+ *
+ * next.revalidate: 3600 — FAQ меняется редко, но должен обновляться без ре-деплоя.
+ * Это встроенный механизм ISR в Next.js App Router: результат кешируется на уровне
+ * Next.js Data Cache и обновляется не чаще раза в час.
+ *
+ * При ошибке возвращает [] вместо throw — страница рендерится без FAQ,
+ * а не падает с 500. Ошибка логируется в console.error для мониторинга.
+ */
 import type { FaqItem } from '@/types/faq';
 import { STRAPI_API_URL } from 'shared/config/env';
 

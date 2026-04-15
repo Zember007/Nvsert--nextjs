@@ -1,3 +1,15 @@
+/**
+ * Клиентские утилиты для работы с локалью без React-контекста.
+ *
+ * ЗАЧЕМ: App Router не предоставляет хук "текущая локаль". Локаль кодируется
+ * в первом сегменте pathname: /ru/services → 'ru', /en/about → 'en'.
+ *
+ * withLocalePrefix() — идемпотентна: если prefix уже есть, не добавляет второй.
+ * Пропускает без изменений: http/https URL, mailto:, tel:, # якоря.
+ *
+ * Используются в HeaderFallback, навигационных компонентах и везде, где нужна
+ * локаль без доступа к серверному request-контексту.
+ */
 import { DEFAULT_LOCALE, SUPPORTED_LOCALES, SupportedLocale, normalizeLocale } from 'shared/config/env';
 
 export function getLocaleFromPathname(

@@ -1,3 +1,13 @@
+/**
+ * Чтение текущей локали в Server Components и Route Handlers.
+ *
+ * GUARD на NEXT_PHASE: во время `next build` / статического prerender нет
+ * request-контекста — cookies() представлен как "hanging promise" или бросает.
+ * Guard возвращает DEFAULT_LOCALE на этапе сборки, не ломая SSG-страницы.
+ *
+ * Локаль попадает в cookie `nvsert_locale` через middleware (см. middleware.ts).
+ * Используйте getRequestLocale() в Server Components вместо прямого вызова cookies().
+ */
 import 'server-only';
 
 import { cookies } from 'next/headers';

@@ -1,3 +1,23 @@
+/**
+ * Адаптивные font-weight для Mac и Windows.
+ *
+ * ПРОБЛЕМА: Roboto на macOS рендерится с системным сглаживанием и визуально темнее.
+ * Чтобы дизайн выглядел одинаково на обеих платформах, применяются разные веса:
+ * Mac: small=300/large=400, Windows: small=350/large=400. Порог — 16px (FONT_SIZE_THRESHOLD).
+ *
+ * МЕХАНИЗМ:
+ * 1. useIsMac() — платформа (null = SSR/первый кадр, нейтральный вариант до гидрации)
+ * 2. CSS-переменные на body — каскадируют без prop drilling во все элементы
+ * 3. MutationObserver — применяет веса к новым DOM-узлам (ленивые компоненты, модали)
+ * 4. ResizeObserver — пересчитывает при resize (шрифт может пересекать порог 16px)
+ *
+ * WeakMap appliedWeightsRef — дедупликация: каждый элемент обрабатывается один раз.
+ * Без него каждый MutationObserver-вызов перебирал бы весь DOM заново → performance hit.
+ * WeakMap вместо Set<HTMLElement>: автоматический GC при удалении узлов → нет утечек.
+ *
+ * RAF-батчинг pending узлов — группирует обработку добавленных узлов в один кадр,
+ * избегает N вызовов processAddedNodes при пакетном рендере.
+ */
 'use client';
 
 import React, { useEffect, useRef } from 'react';

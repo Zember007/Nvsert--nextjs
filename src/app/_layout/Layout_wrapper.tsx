@@ -1,3 +1,18 @@
+/**
+ * Компоновка layout: Header, Footer, Modal, Scrollbar, CopyNotification.
+ *
+ * СТРАТЕГИЯ ЗАГРУЗКИ:
+ * - AppHeaderDeferred: ssr:true — шапка нужна поисковикам и LCP. Пока бандл грузится,
+ *   показывается HeaderFallback — статичный HTML-скелет с базовыми ссылками (избегает CLS).
+ * - AppModalWrapper, AppFooterDeferred, CopyNotificationDeferred: ssr:false — не влияют
+ *   на LCP и не нужны поисковикам; откладываем загрузку до interactive.
+ *
+ * Suspense вокруг AppHeaderDeferred: Next.js 16 canary считает usePathname() "динамическим"
+ * и бросает ошибку prerender без Suspense-границы.
+ *
+ * HeaderFallback содержит захардкоженные ссылки на основные страницы. При изменении
+ * структуры навигации — обновляйте и его.
+ */
 'use client';
 
 import { ReactNode, Suspense } from 'react';

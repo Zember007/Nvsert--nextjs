@@ -1,3 +1,21 @@
+/**
+ * Кастомный скроллбар с плавным скроллом и поддержкой перетаскивания.
+ *
+ * ЗАЧЕМ: нативный scrollbar нельзя стилизовать кросс-браузерно (особенно Firefox).
+ * Hook рендерит один div (.scrollbarRef) и управляет его позицией через CSS-переменные
+ * --scrollY и --scrollbarHeight.
+ *
+ * priorityScroll: если курсор над containerRef — скроллится контейнер; иначе — window.
+ * Используется в сайдбаре ТНВЭД/ОКПД2, где нужно скроллить вложенный список,
+ * не задевая основной скролл страницы.
+ *
+ * useLayoutEffect вместо useEffect: подписки на wheel требуют {passive: false}
+ * для preventDefault(). Синхронная регистрация до paint обязательна — браузер игнорирует
+ * вызов preventDefault() у passive-слушателей, зарегистрированных в useEffect.
+ *
+ * minWidth: 960 по умолчанию — отключает hook на мобильных. Не убирайте этот guard:
+ * на touch-устройствах preventDefault на wheel ломает нативный скролл.
+ */
 import { useLayoutEffect, useRef } from 'react';
 
 export interface CustomScrollOptions {
