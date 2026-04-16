@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { groupServices } from '@/assets/lib/navigation';
 import type { NavigationItem, Services } from '@/types/navigation';
 import { useHeaderContext } from 'shared/contexts';
-import { ServicesBreadcrumbs, ServicesHeader, ServicesList } from 'widgets/services';
+import { ServicesBreadcrumbs, ServicesExpertAdvantages, ServicesHeader, ServicesList } from 'widgets/services';
 import { useTranslation } from 'react-i18next';
 
 const ServicesContent = () => {
@@ -83,6 +83,8 @@ const ServicesContent = () => {
         active={active}
         onToggleService={toggleService}
       />
+
+      <ServicesExpertAdvantages />
     </div>
   );
 };

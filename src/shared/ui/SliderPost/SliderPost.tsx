@@ -13,6 +13,8 @@ type SliderPostProps<ItemType> = {
     itemClassName?: string;
     showDots?: boolean;
     dotsClassName?: string;
+    /** Called when the active slide index changes (GSAP loop). */
+    onSlideChange?: (index: number) => void;
 };
 
 function SliderPost<ItemType = unknown>({
@@ -24,6 +26,7 @@ function SliderPost<ItemType = unknown>({
     itemClassName,
     showDots = true,
     dotsClassName,
+    onSlideChange,
 }: SliderPostProps<ItemType>) {
     const { width: widthWindow } = useWindowSize();
     const sliderRef = useRef<HTMLDivElement>(null);
@@ -84,6 +87,7 @@ function SliderPost<ItemType = unknown>({
                 center: widthWindow && (widthWindow < 640 || widthWindow >= 1280) ? true : false,
                 onChange: (index: number) => {
                     setActiveIndex(index);
+                    onSlideChange?.(index);
                 },
                 onDragFunction: () => {
                     slides.forEach((item) => {
@@ -125,7 +129,7 @@ function SliderPost<ItemType = unknown>({
                 clearTimeout(timeoutIdBg);
             }
         };
-    }, [widthWindow, items, DataSlider]);
+    }, [widthWindow, items, DataSlider, onSlideChange]);
 
     if (!items || items.length === 0) {
         return null;
