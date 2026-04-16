@@ -47,7 +47,7 @@ function BulletList({ items }: { items: string[] }) {
 function TextCard({ title, bullets, className = '' }: { title: string; bullets: string[]; className?: string }) {
     return (
         <div
-            className={`flex min-h-0 flex-1 flex-col justify-center gap-[20px] rounded-[4px] border border-solid border-[#93969d] p-[31px] text-black not-italic max-m:gap-[10px] max-m:p-0 max-m:[border:none] ${className}`}
+            className={`flex h-full flex-1 flex-col justify-center gap-[20px] rounded-[4px] border border-solid border-[#93969d] p-[31px] text-black not-italic max-m:gap-[10px] max-m:p-0 max-m:[border:none] ${className}`}
         >
             <p className="w-full text-[20px] leading-[1.1] s:text-[24px] s:tracking-[-1px]">
                 {title}
@@ -59,22 +59,30 @@ function TextCard({ title, bullets, className = '' }: { title: string; bullets: 
 
 function NumberCol({ index }: { index: number }) {
     return (
-        <div className="relative h-[131px] w-[102px] shrink-0 l:h-[206px] l:w-[160px]">
-            <div className="absolute left-1/2 top-0 h-full w-[63px] -translate-x-1/2 l:w-[100px]">
-                <div className="relative h-full w-full overflow-hidden">
-                    <Image
-                        src={NUMBERS[index]}
-                        alt=""
-                        fill
-                        className="object-contain object-center"
-                        sizes="160px"
-                    />
-                    <div
-                        className={`pointer-events-none absolute inset-0 ${styles.numberTint}`}
-                        style={{ backgroundColor: NUMBER_TINTS[index] }}
-                        aria-hidden
-                    />
-                </div>
+        <div className="relative flex h-full w-[102px] shrink-0 items-center justify-center overflow-visible l:w-[160px]">
+            {/* h-full + w-auto: scale by row height, natural aspect ratio; may extend past column width, centered */}
+            <div className="relative isolate h-full w-max max-w-none">
+                <Image
+                    src={NUMBERS[index]}
+                    alt=""
+                    width={240}
+                    height={360}
+                    className="block h-full w-auto max-w-none"
+                    sizes="(min-width: 1024px) 160px, 102px"
+                    loading="eager"
+                    priority={index === 0}
+                />
+                <div
+                    className={`pointer-events-none absolute inset-0 ${styles.numberTint}`}
+                    style={
+                        {
+                            backgroundColor: NUMBER_TINTS[index],
+                            // Same asset as <Image>: tint exists only on opaque pixels, no colored rectangle
+                            ['--number-mask' as string]: `url("${NUMBERS[index]}")`,
+                        } as React.CSSProperties
+                    }
+                    aria-hidden
+                />
             </div>
         </div>
     );
@@ -125,7 +133,7 @@ export default function ServicesExpertAdvantages() {
                     className={`relative w-full shrink-0 overflow-hidden rounded-tl-[4px] rounded-tr-[4px] ${styles.slidePhoto}`}
                     style={{ aspectRatio: '566 / 324' }}
                 >
-                    <Image src={PHOTOS[index]} alt="" fill className="object-cover" sizes="(max-width: 640px) 280px, 566px" />
+                    <Image src={PHOTOS[index]} alt="" fill className="object-cover" sizes="(max-width: 640px) 280px, min(566px, calc(100vw - 74px))" loading="eager" />
                 </div>
                 <div className={`px-[21px] pb-[21px] ${styles.slideText}`}>
                     <TextCard title={block.title} bullets={block.bullets} className="!border-none !p-0" />
@@ -159,10 +167,11 @@ export default function ServicesExpertAdvantages() {
                 {blocks.map((block, index) => {
                     const photoOnRight = index % 2 === 0;
                     const photoClass = photoOnRight ? styles.photoAnimRtl : styles.photoAnim;
+                    const isFirst = index < 2;
                     return (
                         <div
                             key={block.title}
-                            className="flex w-full items-center gap-[40px]"
+                            className="flex w-full gap-[40px]"
                             style={{ '--r': index } as React.CSSProperties}
                         >
                             {photoOnRight ? (
@@ -174,13 +183,13 @@ export default function ServicesExpertAdvantages() {
                                         <TextCard title={block.title} bullets={block.bullets} />
                                     </div>
                                     <div className={`relative h-[226px] w-[395px] shrink-0 overflow-hidden rounded-[4px] ${photoClass}`}>
-                                        <Image src={PHOTOS[index]} alt="" fill className="object-cover" sizes="395px" />
+                                        <Image src={PHOTOS[index]} alt="" fill className="object-cover" sizes="395px" priority={isFirst} />
                                     </div>
                                 </>
                             ) : (
                                 <>
                                     <div className={`relative h-[226px] w-[395px] shrink-0 overflow-hidden rounded-[4px] ${photoClass}`}>
-                                        <Image src={PHOTOS[index]} alt="" fill className="object-cover" sizes="395px" />
+                                        <Image src={PHOTOS[index]} alt="" fill className="object-cover" sizes="395px" priority={isFirst} />
                                     </div>
                                     <div className={`min-w-0 flex-1 ${styles.textAnim}`}>
                                         <TextCard title={block.title} bullets={block.bullets} />
@@ -202,6 +211,7 @@ export default function ServicesExpertAdvantages() {
                 {blocks.map((block, index) => {
                     const imageRight = index % 2 === 0;
                     const photoClass = imageRight ? styles.photoAnimRtl : styles.photoAnim;
+                    const isFirst = index < 2;
                     return (
                         <div
                             key={`tab-${block.title}`}
@@ -215,25 +225,27 @@ export default function ServicesExpertAdvantages() {
                                     <div className={`min-w-0 flex-1 py-[21px] ${styles.textAnim}`}>
                                         <TextCard title={block.title} bullets={block.bullets} className="!border-none !p-0" />
                                     </div>
-                                    <div className={`relative h-full w-[395px] shrink-0 ${photoClass}`}>
+                                    <div className={`relative h-full w-[395px] shrink-0 overflow-hidden ${photoClass}`}>
                                         <Image
                                             src={PHOTOS[index]}
                                             alt=""
                                             fill
                                             className={`object-cover ${imageRight ? 'rounded-br-[4px] rounded-tr-[4px]' : ''}`}
                                             sizes="395px"
+                                            priority={isFirst}
                                         />
                                     </div>
                                 </>
                             ) : (
                                 <>
-                                    <div className={`relative h-full w-[395px] shrink-0 ${photoClass}`}>
+                                    <div className={`relative h-full w-[395px] shrink-0 overflow-hidden ${photoClass}`}>
                                         <Image
                                             src={PHOTOS[index]}
                                             alt=""
                                             fill
                                             className="object-cover rounded-bl-[4px] rounded-tl-[4px]"
                                             sizes="395px"
+                                            priority={isFirst}
                                         />
                                     </div>
                                     <div className={`min-w-0 flex-1 py-[21px] ${styles.textAnim}`}>

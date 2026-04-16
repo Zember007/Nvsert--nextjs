@@ -69,9 +69,9 @@
 
 .section {
   /* Delay between rows so each row finishes image → text → number before the next */
-  --row-stagger: 1.05s;
-  --phase-text: 0.22s;
-  --phase-num: 0.44s;
+  --row-stagger: 0.42s;
+  --phase-text: 0.09s;
+  --phase-num: 0.18s;
 }
 
 .photoAnim,
@@ -89,22 +89,22 @@
 
 .inView {
   .photoAnim {
-    animation: slideInStat 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: slideInStat 0.36s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     animation-delay: calc(var(--r, 0) * var(--row-stagger));
   }
 
   .photoAnimRtl {
-    animation: slideInStatRtl 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: slideInStatRtl 0.36s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     animation-delay: calc(var(--r, 0) * var(--row-stagger));
   }
 
   .textAnim {
-    animation: raiseFade 0.48s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: raiseFade 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     animation-delay: calc(var(--r, 0) * var(--row-stagger) + var(--phase-text));
   }
 
   .numberAnim {
-    animation: raiseFadeNumber 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: raiseFadeNumber 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     animation-delay: calc(var(--r, 0) * var(--row-stagger) + var(--phase-num));
   }
 }
@@ -132,13 +132,14 @@
 
 .slideAnimating {
   .slidePhoto {
-    animation: slideInStat 0.52s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    animation-delay: 0s;
+    opacity: 0;
+    animation: slideInStat 0.34s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   }
 
   .slideText {
-    animation: raiseFade 0.48s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    animation-delay: 0.24s;
+    opacity: 0;
+    animation: raiseFade 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation-delay: 0.07s;
   }
 }
 
@@ -153,6 +154,15 @@
   }
 }
 
+/* Recolors raster pixels only: mask clips fill to the PNG shape (no tint in transparent areas) */
 .numberTint {
-  mix-blend-mode: hue;
+  mix-blend-mode: color;
+  -webkit-mask-image: var(--number-mask);
+  mask-image: var(--number-mask);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
 }
