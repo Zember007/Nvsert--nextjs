@@ -846,7 +846,45 @@
     "breadcrumbs": {
       "allServices": "All services"
     },
-    "notFound": "Service not found"
+    "notFound": "Service not found",
+    "expertAdvantages": {
+      "title": "NVSERT’s expert advantages",
+      "moreAbout": "More about the company",
+      "blocks": [
+        {
+          "title": "Over 15 years of continuous practice",
+          "bullets": [
+            "For more than 15 years we have been solving certification tasks successfully.",
+            "In that time we have cleared thousands of customs checkpoints without issues.",
+            "We take on non‑standard insurance cases that others refuse."
+          ]
+        },
+        {
+          "title": "We work for results and the long term",
+          "bullets": [
+            "We build long‑term relationships with businesses, with no hidden conditions.",
+            "You delegate certification to us and stop treating it as a problem.",
+            "We handle all heavy paperwork and communication with government bodies."
+          ]
+        },
+        {
+          "title": "Impeccable legal compliance",
+          "bullets": [
+            "We guarantee correct registration of every issued document.",
+            "This approach reliably protects your business from fines and downtime.",
+            "We ensure full transparency of every process at every stage."
+          ]
+        },
+        {
+          "title": "We work across all industries",
+          "bullets": [
+            "The team knows the unique specifics of each industry in depth.",
+            "Our expertise covers every existing set of regulations.",
+            "We professionally prepare permits for any category of goods."
+          ]
+        }
+      ]
+    }
   },
   "common": {
     "moreDetails": "Learn more",

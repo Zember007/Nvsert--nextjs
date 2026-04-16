@@ -10,5 +10,6 @@ export { default as ServicesBreadcrumbs } from './ServicesBreadcrumbs';
 export { default as ServicesHeader } from './ServicesHeader';
 export { default as ServicesList } from './ServicesList';
 export { default as ServicesToggleButton } from './ServicesToggleButton';
+export { default as ServicesExpertAdvantages } from './ServicesExpertAdvantages/ServicesExpertAdvantages';
 
 

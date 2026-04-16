@@ -1,0 +1,158 @@
+/* Image motion aligned with statsSlider (slide-in + blur) */
+@keyframes slideInStat {
+  0% {
+    transform: translateX(-100vw) scaleX(1.5) scaleY(0.8);
+    filter: blur(24px);
+    opacity: 0;
+  }
+  30% {
+    transform: translateX(-40vw) scaleX(1.25) scaleY(0.88);
+    filter: blur(14px);
+    opacity: 0.9;
+  }
+  70% {
+    transform: translateX(-6vw) scaleX(1.06) scaleY(0.98);
+    filter: blur(3px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0) scaleX(1) scaleY(1);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInStatRtl {
+  0% {
+    transform: translateX(100vw) scaleX(1.5) scaleY(0.8);
+    filter: blur(24px);
+    opacity: 0;
+  }
+  30% {
+    transform: translateX(40vw) scaleX(1.25) scaleY(0.88);
+    filter: blur(14px);
+    opacity: 0.9;
+  }
+  70% {
+    transform: translateX(6vw) scaleX(1.06) scaleY(0.98);
+    filter: blur(3px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0) scaleX(1) scaleY(1);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+@keyframes raiseFade {
+  0% {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes raiseFadeNumber {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.section {
+  /* Delay between rows so each row finishes image → text → number before the next */
+  --row-stagger: 1.05s;
+  --phase-text: 0.22s;
+  --phase-num: 0.44s;
+}
+
+.photoAnim,
+.photoAnimRtl {
+  opacity: 0;
+}
+
+.textAnim {
+  opacity: 0;
+}
+
+.numberAnim {
+  opacity: 0;
+}
+
+.inView {
+  .photoAnim {
+    animation: slideInStat 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation-delay: calc(var(--r, 0) * var(--row-stagger));
+  }
+
+  .photoAnimRtl {
+    animation: slideInStatRtl 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation-delay: calc(var(--r, 0) * var(--row-stagger));
+  }
+
+  .textAnim {
+    animation: raiseFade 0.48s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation-delay: calc(var(--r, 0) * var(--row-stagger) + var(--phase-text));
+  }
+
+  .numberAnim {
+    animation: raiseFadeNumber 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation-delay: calc(var(--r, 0) * var(--row-stagger) + var(--phase-num));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photoAnim,
+  .photoAnimRtl,
+  .textAnim,
+  .numberAnim {
+    opacity: 1 !important;
+  }
+
+  .inView {
+    .photoAnim,
+    .photoAnimRtl,
+    .textAnim,
+    .numberAnim {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+    }
+  }
+}
+
+.slideAnimating {
+  .slidePhoto {
+    animation: slideInStat 0.52s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation-delay: 0s;
+  }
+
+  .slideText {
+    animation: raiseFade 0.48s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation-delay: 0.24s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slideAnimating {
+    .slidePhoto,
+    .slideText {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+}
+
+.numberTint {
+  mix-blend-mode: hue;
+}
