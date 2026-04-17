@@ -31,6 +31,8 @@ function SliderPost<ItemType = unknown>({
     const { width: widthWindow } = useWindowSize();
     const sliderRef = useRef<HTMLDivElement>(null);
     const timeLine = useRef<any>(null);
+    const onSlideChangeRef = useRef(onSlideChange);
+    onSlideChangeRef.current = onSlideChange;
     const [activeIndex, setActiveIndex] = useState<number>(0);
     const DataSlider = useId();
     const gap = widthWindow && widthWindow < 640 ? (widthWindow - 300) / 2 : 20;
@@ -87,7 +89,7 @@ function SliderPost<ItemType = unknown>({
                 center: widthWindow && (widthWindow < 640 || widthWindow >= 1280) ? true : false,
                 onChange: (index: number) => {
                     setActiveIndex(index);
-                    onSlideChange?.(index);
+                    onSlideChangeRef.current?.(index);
                 },
                 onDragFunction: () => {
                     slides.forEach((item) => {
@@ -129,7 +131,7 @@ function SliderPost<ItemType = unknown>({
                 clearTimeout(timeoutIdBg);
             }
         };
-    }, [widthWindow, items, DataSlider, onSlideChange]);
+    }, [widthWindow, items, DataSlider]);
 
     if (!items || items.length === 0) {
         return null;

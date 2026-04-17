@@ -28,7 +28,7 @@ const NUMBERS = [
     '/services/expert-advantages/num-4.png',
 ] as const;
 
-const NUMBER_TINTS = ['#0048ff', '#00c8ff', '#ffe100', '#28412f'] as const;
+const NUMBER_TINTS = ['transparent', '#00C8FF', '#FFE100', '#28412F'] as const;
 
 const ARROW_SRC = '/services/expert-advantages/arrow.svg';
 
@@ -59,31 +59,28 @@ function TextCard({ title, bullets, className = '' }: { title: string; bullets: 
 
 function NumberCol({ index }: { index: number }) {
     return (
-        <div className="relative flex h-full w-[102px] shrink-0 items-center justify-center overflow-visible l:w-[160px]">
-            {/* h-full + w-auto: scale by row height, natural aspect ratio; may extend past column width, centered */}
-            <div className="relative isolate h-full w-max max-w-none">
-                <Image
-                    src={NUMBERS[index]}
-                    alt=""
-                    width={240}
-                    height={360}
-                    className="block h-full w-auto max-w-none"
-                    sizes="(min-width: 1024px) 160px, 102px"
-                    loading="eager"
-                    priority={index === 0}
-                />
-                <div
-                    className={`pointer-events-none absolute inset-0 ${styles.numberTint}`}
-                    style={
-                        {
-                            backgroundColor: NUMBER_TINTS[index],
-                            // Same asset as <Image>: tint exists only on opaque pixels, no colored rectangle
-                            ['--number-mask' as string]: `url("${NUMBERS[index]}")`,
-                        } as React.CSSProperties
-                    }
-                    aria-hidden
-                />
-            </div>
+        <div className="relative isolate flex h-full w-[102px] h-[131px] xl:h-[206px] shrink-0 items-center justify-center overflow-visible xl:w-[160px]">
+            <Image
+                src={NUMBERS[index]}
+                alt=""
+                width={160}
+                height={206}
+                className="block h-full w-auto"
+                sizes="(min-width: 1024px) 160px, 102px"
+                loading="eager"
+                priority={index === 0}
+            />
+            <div
+                className={`pointer-events-none absolute inset-0 opacity-30 ${styles.numberTint}`}
+                style={
+                    {
+                        backgroundColor: NUMBER_TINTS[index],
+                        // Same asset as <Image>: tint exists only on opaque pixels, no colored rectangle
+                        ['--number-mask' as string]: `url("${NUMBERS[index]}")`,
+                    } as React.CSSProperties
+                }
+                aria-hidden
+            />
         </div>
     );
 }
@@ -176,7 +173,7 @@ export default function ServicesExpertAdvantages() {
                         >
                             {photoOnRight ? (
                                 <>
-                                    <div className={`shrink-0 ${styles.numberAnim}`}>
+                                    <div className={`shrink-0 flex items-center justify-center ${styles.numberAnim}`}>
                                         <NumberCol index={index} />
                                     </div>
                                     <div className={`min-w-0 flex-1 ${styles.textAnim}`}>
@@ -194,7 +191,7 @@ export default function ServicesExpertAdvantages() {
                                     <div className={`min-w-0 flex-1 ${styles.textAnim}`}>
                                         <TextCard title={block.title} bullets={block.bullets} />
                                     </div>
-                                    <div className={`shrink-0 ${styles.numberAnim}`}>
+                                    <div className={`shrink-0 flex items-center justify-center ${styles.numberAnim}`}>
                                         <NumberCol index={index} />
                                     </div>
                                 </>
@@ -215,9 +212,8 @@ export default function ServicesExpertAdvantages() {
                     return (
                         <div
                             key={`tab-${block.title}`}
-                            className={`flex h-[226px] w-full items-center gap-[30px] overflow-hidden rounded-[4px] border border-solid border-[#93969d] ${
-                                imageRight ? 'pl-[21px]' : 'pr-[21px]'
-                            }`}
+                            className={`flex h-[226px] w-full items-center gap-[30px] overflow-hidden rounded-[4px] border border-solid border-[#93969d] ${imageRight ? 'pl-[21px]' : 'pr-[21px]'
+                                }`}
                             style={{ '--r': index } as React.CSSProperties}
                         >
                             {imageRight ? (
