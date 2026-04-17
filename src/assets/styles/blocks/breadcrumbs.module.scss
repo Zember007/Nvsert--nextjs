@@ -11,9 +11,9 @@
 			&::after {
 				content: '';
 				display: block;
-				margin: 0 9px;
-				width: 6px;
-				height: 10px;
+				margin: 0 8px;
+				width: 8px;
+				height: 11px;
 				background-image: url('../../../assets/images/svg/functional/breadcrumbs-arrow.svg');
 				background-size: contain;
 				background-repeat: no-repeat;
@@ -22,7 +22,7 @@
 		}
 
 		&:last-child {
-			@apply text-[#34446D];
+			@apply text-[#000];
 		}
 	}
 

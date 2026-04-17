@@ -1,5 +1,6 @@
 import React from 'react';
 import ServicesToggleButton from 'widgets/services/ServicesToggleButton';
+import styles from '@/assets/styles/base/text-size.module.scss';
 
 interface ServicesHeaderProps {
     title: string;
@@ -21,10 +22,15 @@ const ServicesHeader: React.FC<ServicesHeaderProps> = ({
     setActive,
 }) => {
     return (
-        <div className="flex items-center m:justify-between justify-center wrapper overflow-hidden gap-[20px] m:flex-row flex-col pt-[50px] pb-[50px]">
-            <h1 className="text-center -translate-x-[4px] translate-y-[1px]">
-                {title}
-            </h1>
+        <div className="flex m:justify-between justify-center items-center m:items-start wrapper overflow-hidden gap-[20px] m:flex-row flex-col pt-[50px] pb-[50px]">
+            <div className="flex flex-col gap-[15px] m:items-start items-center text-center m:text-left">
+                <h1 className=" -translate-x-[4px] translate-y-[1px]">
+                    {title}
+                </h1>
+                <p className={styles.headerH4}>
+                    Наша компания предоставляет широкий спектр услуг
+                </p>
+            </div>
 
             <ServicesToggleButton
                 isExpanded={isExpanded}

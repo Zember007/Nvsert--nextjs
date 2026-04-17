@@ -8,6 +8,8 @@ import { usePathname } from 'next/navigation';
 import { getLocaleFromI18n, getLocaleFromPathname, withLocalePrefix } from 'shared/i18n/client-locale';
 import { SliderPost } from 'shared/ui';
 import styles from './ServicesExpertAdvantages.module.scss';
+import LinkButtonTitle from '../../home/utils/ButtonTitle';
+
 
 type Block = {
     title: string;
@@ -148,15 +150,8 @@ export default function ServicesExpertAdvantages() {
                 <h2 className="w-full text-center text-[26px] leading-[1.1] tracking-[-1px] text-black xxs:text-[36px] xxs:tracking-[-2px] l:text-left l:text-[40px]">
                     {t('services.expertAdvantages.title')}
                 </h2>
-                <Link
-                    href={aboutHref}
-                    className="flex shrink-0 items-start gap-[15px] border-b border-solid border-[#93969d] pb-[4px] pt-[15px] l:pt-[30px]"
-                >
-                    <span className="whitespace-nowrap text-[16px] leading-[1.2] text-black">{t('services.expertAdvantages.moreAbout')}</span>
-                    <span className="relative h-[21px] w-[16px] shrink-0">
-                        <Image src={ARROW_SRC} alt="" fill className="object-contain" />
-                    </span>
-                </Link>
+                <LinkButtonTitle title={t('services.expertAdvantages.moreAbout')} link={aboutHref} />
+
             </div>
 
             {/* Desktop: full rows with numbers — l: (1024+) */}

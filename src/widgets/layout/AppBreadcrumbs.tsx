@@ -33,10 +33,13 @@ const AppBreadcrumbs = ({ root, title = '', breadcrumbs = [] }: AppBreadcrumbsPr
       <ul className={stylesBreadcrumbs.breadcrumbs}>
         <li className={stylesBreadcrumbs.breadcrumbs__item}>
           <Link
-            className={stylesBreadcrumbs.breadcrumbs__link}
             href={localizePath('/')}
             prefetch={false}
-          >{t('navigation.main')}</Link>
+          >
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M6 6V10H9V9V5H10V4H9V3H8V2H7V1H6V0L4 0V1H3V2H2V3H1V4H0V5H1V10H4V6H6Z" fill="#93969D" />
+            </svg>
+          </Link>
         </li>
 
         {breadcrumbs.map(item => (
