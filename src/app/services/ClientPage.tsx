@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 
 import { groupServices } from '@/assets/lib/navigation';
 import type { NavigationItem, Services } from '@/types/navigation';
@@ -34,8 +34,7 @@ const ServicesContent = () => {
     }
   };
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
+  useLayoutEffect(() => {
     if (services.length === 0) return;
 
     const id = window.location.hash.substring(1);
@@ -50,12 +49,20 @@ const ServicesContent = () => {
         }
         return [matchingIndex];
       });
+    }
+  }, [services]);
 
+  useEffect(() => {
+    if (services.length === 0) return;
+
+    const id = window.location.hash.substring(1);
+    if (!id) return;
+
+    const matchingIndex = services.findIndex((service) => service.name === id);
+    if (matchingIndex !== -1) {
       requestAnimationFrame(() => {
-        setTimeout(() => {
-          const element = document.getElementById(id);
-          element?.scrollIntoView({ behavior: 'smooth' });
-        }, 200);
+        const element = document.getElementById(id);
+        element?.scrollIntoView({ behavior: 'smooth' });
       });
     }
   }, [services]);

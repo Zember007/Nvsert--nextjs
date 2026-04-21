@@ -11,9 +11,7 @@ import { getLocaleFromPathname, withLocalePrefix } from 'shared/i18n/client-loca
 import { getStrapiImageApiPath } from '../../shared/lib/strapi-image';
 
 
-const ServiceCard = dynamic(() => import('widgets/services').then((m) => m.ServiceCard), {
-  ssr: false,
-});
+const ServiceCard = dynamic(() => import('widgets/services').then((m) => m.ServiceCard));
 
 interface ServiceItemProps {
     service: {
@@ -155,6 +153,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service, index, isExpanded, o
                                     <ServiceCard
                                         serviceName={service.name}
                                         certificate={certificate}
+                                        priority={certIndex < 2}
                                     />
                             </motion.div>
                         ))}
