@@ -69,8 +69,7 @@ function NumberCol({ index }: { index: number }) {
                 height={206}
                 className="block h-full w-auto"
                 sizes="(min-width: 1024px) 160px, 102px"
-                loading="eager"
-                priority={index === 0}
+                loading="lazy"
             />
             <div
                 className={`pointer-events-none absolute inset-0 opacity-30 ${styles.numberTint}`}
@@ -132,7 +131,7 @@ export default function ServicesExpertAdvantages() {
                     className={`relative w-full shrink-0 overflow-hidden rounded-tl-[4px] rounded-tr-[4px] ${styles.slidePhoto}`}
                     style={{ aspectRatio: '566 / 324' }}
                 >
-                    <Image src={PHOTOS[index]} alt="" fill className="object-cover" sizes="(max-width: 640px) 280px, min(566px, calc(100vw - 74px))" loading="eager" />
+                    <Image src={PHOTOS[index]} alt="" fill className="object-cover" sizes="(max-width: 640px) 280px, min(566px, calc(100vw - 74px))" loading={index === 0 ? 'eager' : 'lazy'} />
                 </div>
                 <div className={`px-[21px] pb-[21px] ${styles.slideText}`}>
                     <TextCard title={block.title} bullets={block.bullets} className="!border-none !p-0" />
@@ -175,13 +174,13 @@ export default function ServicesExpertAdvantages() {
                                         <TextCard title={block.title} bullets={block.bullets} />
                                     </div>
                                     <div className={`relative h-[226px] w-[395px] shrink-0 overflow-hidden rounded-[4px] ${photoClass}`}>
-                                        <Image src={PHOTOS[index]} alt="" fill className="object-cover" sizes="395px" priority={isFirst} />
+                                        <Image src={PHOTOS[index]} alt="" fill className="object-cover" sizes="395px" loading="lazy" />
                                     </div>
                                 </>
                             ) : (
                                 <>
                                     <div className={`relative h-[226px] w-[395px] shrink-0 overflow-hidden rounded-[4px] ${photoClass}`}>
-                                        <Image src={PHOTOS[index]} alt="" fill className="object-cover" sizes="395px" priority={isFirst} />
+                                        <Image src={PHOTOS[index]} alt="" fill className="object-cover" sizes="395px" loading="lazy" />
                                     </div>
                                     <div className={`min-w-0 flex-1 ${styles.textAnim}`}>
                                         <TextCard title={block.title} bullets={block.bullets} />
@@ -223,7 +222,7 @@ export default function ServicesExpertAdvantages() {
                                             fill
                                             className={`object-cover ${imageRight ? 'rounded-br-[4px] rounded-tr-[4px]' : ''}`}
                                             sizes="395px"
-                                            priority={isFirst}
+                                            loading="lazy"
                                         />
                                     </div>
                                 </>
@@ -236,7 +235,7 @@ export default function ServicesExpertAdvantages() {
                                             fill
                                             className="object-cover rounded-bl-[4px] rounded-tl-[4px]"
                                             sizes="395px"
-                                            priority={isFirst}
+                                            loading="lazy"
                                         />
                                     </div>
                                     <div className={`min-w-0 flex-1 py-[21px] ${styles.textAnim}`}>
