@@ -30,9 +30,8 @@ const NUMBERS = [
     '/services/expert-advantages/num-4.png',
 ] as const;
 
-const NUMBER_TINTS = ['transparent', '#00C8FF', '#FFE100', '#28412F'] as const;
+const NUMBER_TINTS = ['#FF4400', '#00C8FF', '#FFE100', '#28412F'] as const;
 
-const ARROW_SRC = '/services/expert-advantages/arrow.svg';
 
 function BulletList({ items }: { items: string[] }) {
     return (
@@ -72,7 +71,7 @@ function NumberCol({ index }: { index: number }) {
                 loading="lazy"
             />
             <div
-                className={`pointer-events-none absolute inset-0 opacity-30 ${styles.numberTint}`}
+                className={`pointer-events-none absolute inset-0 ${index === 3 ? '' : 'opacity-30'} ${styles.numberTint}`}
                 style={
                     {
                         backgroundColor: NUMBER_TINTS[index],
