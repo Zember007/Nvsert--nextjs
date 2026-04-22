@@ -22,7 +22,7 @@ const ServicesHeader: React.FC<ServicesHeaderProps> = ({
     setActive,
 }) => {
     return (
-        <div className="flex m:justify-between justify-center items-center m:items-start wrapper overflow-hidden gap-[20px] m:flex-row flex-col pt-[50px] pb-[50px]">
+        <div className="flex m:justify-between justify-center items-center m:items-start wrapper overflow-hidden gap-[20px] m:flex-row flex-col pt-[50px] pb-[16px]">
             <div className="flex flex-col gap-[15px] m:items-start items-center text-center m:text-left">
                 <h1 className=" -translate-x-[4px] translate-y-[1px]">
                     {title}

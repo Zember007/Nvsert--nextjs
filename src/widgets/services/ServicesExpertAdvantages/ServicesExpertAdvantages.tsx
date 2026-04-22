@@ -113,7 +113,7 @@ export default function ServicesExpertAdvantages() {
                     setInView(true);
                 }
             },
-            { threshold: 0.12 },
+            { threshold: 0.32, rootMargin: '0px 0px -10% 0px' },
         );
         obs.observe(el);
         return () => obs.disconnect();
@@ -121,14 +121,14 @@ export default function ServicesExpertAdvantages() {
 
     const renderSliderSlide = (block: Block, index: number) => (
         <div
-            className={`flex h-full min-h-[420px] w-[280px] min-w-[280px] flex-col overflow-hidden rounded-[4px] border border-solid border-[#93969d] s:min-h-0 s:w-[min(566px,calc(100vw-74px))] s:min-w-[min(566px,calc(100vw-74px))]`}
+            className={`flex h-full min-h-[420px] w-[280px] min-w-[280px] flex-col overflow-visible rounded-[4px] border border-solid border-[#93969d] s:min-h-0 s:w-[min(566px,calc(100vw-74px))] s:min-w-[min(566px,calc(100vw-74px))]`}
         >
             <div
                 key={index === activeSlide ? `go-${mobileAnimSeed}` : `idle-${index}`}
                 className={`flex flex-col gap-[30px] ${index === activeSlide ? styles.slideAnimating : ''}`}
             >
                 <div
-                    className={`relative w-full shrink-0 overflow-hidden rounded-tl-[4px] rounded-tr-[4px] ${styles.slidePhoto}`}
+                    className={`relative w-full shrink-0 overflow-visible rounded-tl-[4px] rounded-tr-[4px] ${styles.slidePhoto} ${styles.photoTrail}`}
                     style={{ aspectRatio: '566 / 324' }}
                 >
                     <Image src={PHOTOS[index]} alt="" fill className="object-cover" sizes="(max-width: 640px) 280px, min(566px, calc(100vw - 74px))" loading={index === 0 ? 'eager' : 'lazy'} />
@@ -143,7 +143,7 @@ export default function ServicesExpertAdvantages() {
     return (
         <section
             ref={sectionRef}
-            className={`${styles.section} mt-[80px] flex w-full flex-col gap-[30px] px-[26px] xss:px-[37px] xxxl:px-[110px] m:gap-[40px]`}
+            className={`${styles.section} xl:mt-[160px] xss:mt-[100px] mt-[80px] flex w-full flex-col gap-[30px] px-[26px] xss:px-[37px] xxxl:px-[110px] m:gap-[40px]`}
         >
             <div className="flex flex-col items-center gap-[20px] l:flex-row l:items-end l:justify-between l:gap-0">
                 <h2 className="w-full text-center text-[26px] leading-[1.1] tracking-[-1px] text-black xxs:text-[36px] xxs:tracking-[-2px] l:text-left l:text-[40px]">
@@ -158,34 +158,33 @@ export default function ServicesExpertAdvantages() {
                 {blocks.map((block, index) => {
                     const photoOnRight = index % 2 === 0;
                     const photoClass = photoOnRight ? styles.photoAnimRtl : styles.photoAnim;
-                    const isFirst = index < 2;
                     return (
                         <div
                             key={block.title}
-                            className="flex w-full gap-[40px]"
+                            className={`flex w-full gap-[40px] ${styles.rowTrail}`}
                             style={{ '--r': index } as React.CSSProperties}
                         >
                             {photoOnRight ? (
                                 <>
-                                    <div className={`shrink-0 flex items-center justify-center ${styles.numberAnim}`}>
+                                    <div className={`shrink-0 flex items-center justify-center ${styles.numberAnimFromLeft}`}>
                                         <NumberCol index={index} />
                                     </div>
                                     <div className={`min-w-0 flex-1 ${styles.textAnim}`}>
                                         <TextCard title={block.title} bullets={block.bullets} />
                                     </div>
-                                    <div className={`relative h-[226px] w-[395px] shrink-0 overflow-hidden rounded-[4px] ${photoClass}`}>
-                                        <Image src={PHOTOS[index]} alt="" fill className="object-cover" sizes="395px" loading="lazy" />
+                                    <div className={`relative h-[226px] w-[395px] shrink-0 ${styles.photoTrail} ${photoClass}`}>
+                                        <Image src={PHOTOS[index]} alt="" fill className="object-cover rounded-[4px]" sizes="395px" loading="lazy" />
                                     </div>
                                 </>
                             ) : (
                                 <>
-                                    <div className={`relative h-[226px] w-[395px] shrink-0 overflow-hidden rounded-[4px] ${photoClass}`}>
-                                        <Image src={PHOTOS[index]} alt="" fill className="object-cover" sizes="395px" loading="lazy" />
+                                    <div className={`relative h-[226px] w-[395px] shrink-0 ${styles.photoTrail} ${photoClass}`}>
+                                        <Image src={PHOTOS[index]} alt="" fill className="object-cover rounded-[4px]" sizes="395px" loading="lazy" />
                                     </div>
                                     <div className={`min-w-0 flex-1 ${styles.textAnim}`}>
                                         <TextCard title={block.title} bullets={block.bullets} />
                                     </div>
-                                    <div className={`shrink-0 flex items-center justify-center ${styles.numberAnim}`}>
+                                    <div className={`shrink-0 flex items-center justify-center ${styles.numberAnimFromRight}`}>
                                         <NumberCol index={index} />
                                     </div>
                                 </>
@@ -202,11 +201,10 @@ export default function ServicesExpertAdvantages() {
                 {blocks.map((block, index) => {
                     const imageRight = index % 2 === 0;
                     const photoClass = imageRight ? styles.photoAnimRtl : styles.photoAnim;
-                    const isFirst = index < 2;
                     return (
                         <div
                             key={`tab-${block.title}`}
-                            className={`flex h-[226px] w-full items-center gap-[30px] overflow-hidden rounded-[4px] border border-solid border-[#93969d] ${imageRight ? 'pl-[21px]' : 'pr-[21px]'
+                            className={`flex h-[226px] w-full items-center gap-[30px] rounded-[4px] border border-solid border-[#93969d] ${styles.rowTrail} ${imageRight ? 'pl-[21px]' : 'pr-[21px]'
                                 }`}
                             style={{ '--r': index } as React.CSSProperties}
                         >
@@ -215,7 +213,7 @@ export default function ServicesExpertAdvantages() {
                                     <div className={`min-w-0 flex-1 py-[21px] ${styles.textAnim}`}>
                                         <TextCard title={block.title} bullets={block.bullets} className="!border-none !p-0" />
                                     </div>
-                                    <div className={`relative h-full w-[395px] shrink-0 overflow-hidden ${photoClass}`}>
+                                    <div className={`relative h-full w-[395px] shrink-0 ${styles.photoTrail} ${photoClass}`}>
                                         <Image
                                             src={PHOTOS[index]}
                                             alt=""
@@ -228,7 +226,7 @@ export default function ServicesExpertAdvantages() {
                                 </>
                             ) : (
                                 <>
-                                    <div className={`relative h-full w-[395px] shrink-0 overflow-hidden ${photoClass}`}>
+                                    <div className={`relative h-full w-[395px] shrink-0 ${styles.photoTrail} ${photoClass}`}>
                                         <Image
                                             src={PHOTOS[index]}
                                             alt=""

@@ -56,22 +56,14 @@
   }
 }
 
-@keyframes raiseFadeNumber {
-  0% {
-    opacity: 0;
-    transform: translateY(28px) scale(0.92);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
 .section {
   /* Delay between rows so each row finishes image → text → number before the next */
-  --row-stagger: 0.42s;
-  --phase-text: 0.09s;
-  --phase-num: 0.18s;
+  --row-stagger: 0.28s;
+  --phase-text: 0.05s;
+  --phase-num: 0.1s;
+  --photo-duration: 0.22s;
+  --text-duration: 0.18s;
+  --num-duration: 0.22s;
 }
 
 .photoAnim,
@@ -83,28 +75,35 @@
   opacity: 0;
 }
 
-.numberAnim {
+.numberAnimFromLeft,
+.numberAnimFromRight {
   opacity: 0;
 }
 
 .inView {
   .photoAnim {
-    animation: slideInStat 0.36s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: slideInStat var(--photo-duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     animation-delay: calc(var(--r, 0) * var(--row-stagger));
   }
 
   .photoAnimRtl {
-    animation: slideInStatRtl 0.36s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: slideInStatRtl var(--photo-duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     animation-delay: calc(var(--r, 0) * var(--row-stagger));
   }
 
   .textAnim {
-    animation: raiseFade 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: raiseFade var(--text-duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     animation-delay: calc(var(--r, 0) * var(--row-stagger) + var(--phase-text));
   }
 
-  .numberAnim {
-    animation: raiseFadeNumber 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  /* Same lateral motion + blur as photos (statsSlider-style), not from below */
+  .numberAnimFromLeft {
+    animation: slideInStat var(--num-duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation-delay: calc(var(--r, 0) * var(--row-stagger) + var(--phase-num));
+  }
+
+  .numberAnimFromRight {
+    animation: slideInStatRtl var(--num-duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     animation-delay: calc(var(--r, 0) * var(--row-stagger) + var(--phase-num));
   }
 }
@@ -113,7 +112,8 @@
   .photoAnim,
   .photoAnimRtl,
   .textAnim,
-  .numberAnim {
+  .numberAnimFromLeft,
+  .numberAnimFromRight {
     opacity: 1 !important;
   }
 
@@ -121,7 +121,8 @@
     .photoAnim,
     .photoAnimRtl,
     .textAnim,
-    .numberAnim {
+    .numberAnimFromLeft,
+    .numberAnimFromRight {
       animation: none !important;
       opacity: 1 !important;
       transform: none !important;
@@ -130,16 +131,27 @@
   }
 }
 
+/* Let blurred/scaled frame extend past the box — statsSlider-style “tail” */
+.photoTrail {
+  overflow: visible;
+  transform-origin: center center;
+  border-radius: 4px;
+}
+
+.rowTrail {
+  overflow: visible;
+}
+
 .slideAnimating {
   .slidePhoto {
     opacity: 0;
-    animation: slideInStat 0.34s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: slideInStat var(--photo-duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   }
 
   .slideText {
     opacity: 0;
-    animation: raiseFade 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    animation-delay: 0.07s;
+    animation: raiseFade var(--text-duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation-delay: 0.04s;
   }
 }
 
