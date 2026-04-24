@@ -1,6 +1,6 @@
 'use client';
 
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { useHeaderContext } from "shared/contexts";
@@ -9,18 +9,16 @@ import HeaderTopContacts from "./header/HeaderTopContacts";
 import HeaderLeftLogo from "./header/HeaderLeftLogo";
 import HeaderMobilePhoneLink from "./header/HeaderMobilePhoneLink";
 import HeaderMainBar from "./header/HeaderMainBar";
+import ServicesQuickLinks from "./header/ServicesQuickLinks";
+import ServicesDropdown from "./header/ServicesDropdown";
 
+// Mobile menu stays lazy: most desktop sessions never open it.
 const DynamicHeaderMenu = dynamic(() => import("./header/HeaderMenu"), {
   ssr: false,
 });
 
-const DynamicServicesQuickLinks = dynamic(() => import("./header/ServicesQuickLinks"), {
-  ssr: false,
-});
-
-const DynamicServicesDropdown = dynamic(() => import("./header/ServicesDropdown"), {
-  ssr: false,
-});
+/** After removing `.active`, panels slide with max ~0.2s (0.1s delay + 0.1s on .menu-headers). */
+const SERVICES_MENU_UNMOUNT_MS = 280;
 
 interface AppHeaderProps {
   services: Services[];
@@ -30,13 +28,46 @@ const AppHeader: React.FC<AppHeaderProps> = ({ services }) => {
   const { openDefaultModal, handleCopy } = useHeaderContext();
   const pathname = usePathname();
 
-  const [servicesMenuActive, setServicesMenuActive] = useState(false);
+  const [servicesMenuOpen, setServicesMenuOpen] = useState(false);
+  /** Keeps service panels in the DOM while the close transition runs. */
+  const [servicesMenuMounted, setServicesMenuMounted] = useState(false);
+  const servicesCloseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null
+  );
   const [burgerMenuActive, setBurgerMenuActive] = useState(false);
 
   let scrollY = 0;
 
+  function clearServicesCloseTimer() {
+    if (servicesCloseTimeoutRef.current) {
+      clearTimeout(servicesCloseTimeoutRef.current);
+      servicesCloseTimeoutRef.current = null;
+    }
+  }
+
+  useEffect(
+    () => () => {
+      clearServicesCloseTimer();
+    },
+    []
+  );
+
   function handleNavMenu() {
-    setServicesMenuActive((prev) => !prev);
+    if (servicesMenuOpen) {
+      setServicesMenuOpen(false);
+      clearServicesCloseTimer();
+      servicesCloseTimeoutRef.current = setTimeout(() => {
+        setServicesMenuMounted(false);
+        servicesCloseTimeoutRef.current = null;
+      }, SERVICES_MENU_UNMOUNT_MS);
+      return;
+    }
+    if (servicesMenuMounted && !servicesMenuOpen) {
+      // Exit transition in progress — ignore (avoids second click reopening)
+      return;
+    }
+    setServicesMenuMounted(true);
+    setServicesMenuOpen(true);
   }
 
   function lockScroll() {
@@ -59,7 +90,9 @@ const AppHeader: React.FC<AppHeaderProps> = ({ services }) => {
   }
 
   function closeNavMenues() {
-    setServicesMenuActive(false);
+    clearServicesCloseTimer();
+    setServicesMenuOpen(false);
+    setServicesMenuMounted(false);
     setBurgerMenuActive(false);
     document.body.style.overflow = "";
     unlockScroll();
@@ -90,7 +123,8 @@ const AppHeader: React.FC<AppHeaderProps> = ({ services }) => {
 
       <HeaderMainBar
         pathname={pathname}
-        servicesMenuActive={servicesMenuActive}
+        servicesMenuStaged={servicesMenuMounted}
+        servicesMenuOpen={servicesMenuOpen}
         burgerMenuActive={burgerMenuActive}
         onServicesToggle={handleNavMenu}
         onOpenOrder={() => openDefaultModal("introForm")}
@@ -105,16 +139,16 @@ const AppHeader: React.FC<AppHeaderProps> = ({ services }) => {
         />
       )}
 
-      {servicesMenuActive && (
-        <DynamicServicesQuickLinks
+      {servicesMenuMounted && (
+        <ServicesQuickLinks
           services={services}
-          active={servicesMenuActive}
+          active={servicesMenuOpen}
           onLinkClick={handleNavMenu}
         />
       )}
 
-      {servicesMenuActive && (
-        <DynamicServicesDropdown services={services} active={servicesMenuActive} />
+      {servicesMenuMounted && (
+        <ServicesDropdown services={services} active={servicesMenuOpen} />
       )}
     </>
   );

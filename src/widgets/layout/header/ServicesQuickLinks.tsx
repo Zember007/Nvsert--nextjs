@@ -7,6 +7,7 @@ import stylesBtn from '@/assets/styles/base/base.module.scss';
 import textSize from "@/assets/styles/base/base.module.scss";
 import { usePathname } from "next/navigation";
 import { getLocaleFromPathname, withLocalePrefix } from "shared/i18n/client-locale";
+import { useMenuRevealAnimation } from "shared/hooks";
 
 interface ServicesQuickLinksProps {
   services: Services[];
@@ -19,6 +20,8 @@ const ServicesQuickLinks: React.FC<ServicesQuickLinksProps> = ({
   active,
   onLinkClick,
 }) => {
+  const menuRevealed = useMenuRevealAnimation(active);
+  const panelOpen = active && menuRevealed;
   const { setButtonRef, setWrapperRef } = useButton();
   const pathname = usePathname();
   const locale = getLocaleFromPathname(pathname);
@@ -27,7 +30,7 @@ const ServicesQuickLinks: React.FC<ServicesQuickLinksProps> = ({
   return (
     <div
       className={`${headerStyles["services-menu-box"]} ${headerStyles["menu-headers"]}  ${
-        active ? headerStyles.active : ""
+        panelOpen ? headerStyles.active : ""
       }`}
     >
       <div

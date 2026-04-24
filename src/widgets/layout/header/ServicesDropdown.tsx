@@ -3,6 +3,7 @@ import { useAnimation, motion } from "framer-motion";
 import { AppNavigation } from "../AppNavigation";
 import { Services } from "@/types/navigation";
 import headerStyles from "@/assets/styles/base/base.module.scss";
+import { useMenuRevealAnimation } from "shared/hooks";
 
 interface ServicesDropdownProps {
   services: Services[];
@@ -13,10 +14,12 @@ const ServicesDropdown: React.FC<ServicesDropdownProps> = ({
   services,
   active,
 }) => {
+  const menuRevealed = useMenuRevealAnimation(active);
+  const panelOpen = active && menuRevealed;
   const controls = useAnimation();
 
   useEffect(() => {
-    if (active) {
+    if (panelOpen) {
       controls.start({
         y: [-50, 0, -20, 0, 0],
         transition: {
@@ -27,22 +30,22 @@ const ServicesDropdown: React.FC<ServicesDropdownProps> = ({
         },
       });
     }
-  }, [active, controls]);
+  }, [panelOpen, controls]);
 
   return (
     <div
       className={`${headerStyles["services-menu-box"]} ${
-        active ? headerStyles.active : ""
+        panelOpen ? headerStyles.active : ""
       }`}
     >
       <motion.div animate={controls} className=" relative">
         <div
           className={`${headerStyles["services-menu"]} !backdrop-blur-[20px] py-[20px]  js-services-menu relative ${
-            active ? headerStyles.active : ""
+            panelOpen ? headerStyles.active : ""
           }`}
         >
           <div className={headerStyles["services-menu__wrapper"]}>
-            <AppNavigation active={active} services={services} />
+            <AppNavigation active={panelOpen} services={services} />
           </div>
         </div>
       </motion.div>

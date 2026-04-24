@@ -7,7 +7,8 @@ import { getLocaleFromPathname, stripLocalePrefix, withLocalePrefix } from "shar
 
 interface HeaderMainBarProps {
   pathname: string;
-  servicesMenuActive: boolean;
+  servicesMenuStaged: boolean;
+  servicesMenuOpen: boolean;
   burgerMenuActive: boolean;
   onServicesToggle: () => void;
   onOpenOrder: () => void;
@@ -16,7 +17,8 @@ interface HeaderMainBarProps {
 
 const HeaderMainBar: React.FC<HeaderMainBarProps> = ({
   pathname,
-  servicesMenuActive,
+  servicesMenuStaged,
+  servicesMenuOpen,
   burgerMenuActive,
   onServicesToggle,
   onOpenOrder,
@@ -25,7 +27,7 @@ const HeaderMainBar: React.FC<HeaderMainBarProps> = ({
   return (
     <header
       className={`${headerStyles.header} ${
-        servicesMenuActive || burgerMenuActive ? headerStyles.active : ""
+        servicesMenuStaged || burgerMenuActive ? headerStyles.active : ""
       }`}
     >
       <InlineLogo burgerMenuActive={burgerMenuActive} />
@@ -35,7 +37,7 @@ const HeaderMainBar: React.FC<HeaderMainBarProps> = ({
       >
         <HeaderNav
           pathname={pathname}
-          servicesMenuActive={servicesMenuActive}
+          servicesMenuOpen={servicesMenuOpen}
           onServicesToggle={onServicesToggle}
         />
       </div>
@@ -70,13 +72,13 @@ const InlineLogo: React.FC<InlineLogoProps> = ({ burgerMenuActive }) => {
 
 interface HeaderNavProps {
   pathname: string;
-  servicesMenuActive: boolean;
+  servicesMenuOpen: boolean;
   onServicesToggle: () => void;
 }
 
 const HeaderNav: React.FC<HeaderNavProps> = ({
   pathname,
-  servicesMenuActive,
+  servicesMenuOpen,
   onServicesToggle,
 }) => {
   const { t } = useTranslation();
@@ -95,7 +97,7 @@ const HeaderNav: React.FC<HeaderNavProps> = ({
         </li>
         <li className="group">
           <AppMenuItem
-            isActive={servicesMenuActive}
+            isActive={servicesMenuOpen}
             onClick={(e) => {
               e.preventDefault();
               onServicesToggle();
@@ -108,7 +110,7 @@ const HeaderNav: React.FC<HeaderNavProps> = ({
 
                   <svg
                     className={`transition-all duration-300 ${
-                      servicesMenuActive ? " rotate-[180deg]" : ""
+                      servicesMenuOpen ? " rotate-[180deg]" : ""
                     }`}
                     width="12"
                     height="7"

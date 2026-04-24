@@ -12,6 +12,7 @@ import textSize from '@/assets/styles/base/base.module.scss';
 import { usePathname } from 'next/navigation';
 import { getLocaleFromPathname, withLocalePrefix } from 'shared/i18n/client-locale';
 import { getStrapiImageApiPath } from '../../../shared/lib/strapi-image';
+import { useMenuRevealAnimation } from 'shared/hooks';
 
 
 export interface Navigation {
@@ -33,6 +34,8 @@ interface navigationStackItem {
 
 
 const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMenu: () => void, services: Services[] }) => {
+    const menuRevealed = useMenuRevealAnimation(active);
+    const menuOpen = active && menuRevealed;
 
     const { t, i18n } = useTranslation();
     const pathname = usePathname();
@@ -123,7 +126,7 @@ const HeaderMenu = ({ active, closeMenu, services }: { active: boolean, closeMen
 
 
     return (
-        <div className={`${headerStyles["header__menu-mob"]} ${active ? headerStyles.active : ''}`}>
+        <div className={`${headerStyles["header__menu-mob"]} ${menuOpen ? headerStyles.active : ''}`}>
             <div className={headerStyles["header__menu-mob-inner"]}>
                 <nav className={`${headerStyles["header-nav"]} flex flex-col  relative overflow-hidden w-full`}>
                     <div className={`${headerStyles["header-nav__list"]} !grid grid-cols-3 h-[50px] !items-center `}>

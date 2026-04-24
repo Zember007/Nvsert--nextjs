@@ -7,5 +7,5 @@ export { useIntersectionObserver } from './useIntersectionObserver';
 export { useIsMac } from './useIsMac';
 export { default as useWindowSize } from './useWindowSize';
 export { useMediaMinWidth } from './useMediaMinWidth';
-
+export { useMenuRevealAnimation } from './useMenuRevealAnimation';
 
